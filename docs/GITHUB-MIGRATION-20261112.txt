@@ -1,0 +1,26 @@
+GITHUB ACCOUNT MIGRATION - 2026-11-12
+
+Active account: Shaugno (verified GitHub user id 348273530).
+Private destination: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
+Checkpoint branch: codex/checkpoint-3576-20261112
+Approved source base: c639a7bbaad9231632091bdad96e1e6b8bff887e
+
+The user requested moving future saves from Shaugn46 back to Shaugno.
+The migration preserves the approved source and its commit history. The new
+migration commit changes account/progress documentation only. That source
+checkpoint passed 87 CTest tests and the observer AddressSanitizer tests.
+
+The later real capture backend remains local and is not approved for upload.
+Its latest review passed 89 CTest tests but reproduced a P1 exception during
+second-hook creation: the receive hook remains installed while stop reports
+Idle. That failure still needs a fix and another review before publication.
+The local report is docs/probe-3576/PACKET-CAPTURE-FIXES-REVIEW-20261112.txt
+in the active NativeServer checkout; it is not part of the approved base.
+
+Active development stays on grok/compat-guard in the NativeServer checkout.
+The original origin remote remains ByJunter's repository. The shaugno remote
+is the active backup destination. Earlier Shaugn46 checkpoints and dated
+local backups remain historical recovery copies.
+
+The production ASI guard still accepts only 1.0.0.2976. Full 3576 co-op is
+unfinished. No game deployment or live capture is part of this migration.
