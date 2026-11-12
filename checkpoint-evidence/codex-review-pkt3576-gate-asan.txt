@@ -1,0 +1,9 @@
+Codex validation: 2026-11-12
+MSVC x64, AddressSanitizer enabled; game-free tests only.
+Command after vcvars64.bat initialization:
+cl /nologo /std:c++20 /EHsc /O2 /Zi /MD /fsanitize=address /I tools tests\pkt3576_tests.cpp tools\pkt3576\observer.cpp tools\pkt3576\admission_gate.cpp /Fo:build\ /Fd:build\review_pkt3576_gate_asan.pdb /Fe:build\review_pkt3576_gate_asan.exe
+build\review_pkt3576_gate_asan.exe
+Observed exit code: 0
+Observed stdout: pkt3576 tests ok
+No game attachment or deployment was performed.
+A later edit corrected only the admission_gate.h CAS-retry comment.

@@ -7,6 +7,7 @@
 #include <atomic>
 #include <cstdint>
 
+#include "pkt3576/admission_gate.h"
 #include "pkt3576/candidates.h"
 
 namespace pkt3576 {
@@ -62,15 +63,21 @@ struct EntryArgs {
     uint64_t rsp = 0;
 };
 
-// The HookSink must outlive an Observer that still has a site installed.
-// When shutdown() returns Retained, the owner keeps this object alive: the
-// queue and the callback stay in use.
+// Heap only. create() allocates. release_owner() deletes the object when no
+// hook remains. When removal fails, release_owner() leaves the object, the
+// queue, the reader, and the callback code in place and returns false.
+// The ring needs at least two slots. One slot cannot tell full from empty.
 class Observer {
 public:
-    explicit Observer(uint32_t capacity);
+    using ConsumerHold = void (*)(void* user);
+
+    static Observer* create(uint32_t capacity);
+    // Returns true if `observer` was deleted. Returns false if a site is
+    // still installed; `observer` is unchanged and still accepts callbacks.
+    static bool release_owner(Observer*& observer);
+
     Observer(const Observer&) = delete;
     Observer& operator=(const Observer&) = delete;
-    ~Observer();
 
     struct Deps {
         ReadFn read = nullptr;
@@ -95,12 +102,18 @@ public:
     InstallResult install(const Deps& deps);
     ShutdownResult shutdown();
 
+    // Called on the consumer thread inside try_pop, before the queue is read,
+    // while shutdown is not allowed to free the queue. Null unless a test
+    // installs one. Callbacks do not call it.
+    void set_consumer_hold(ConsumerHold hold, void* user);
+
     // Callback bodies. They do not wait, allocate, perform file I/O, modify
     // game state, or call either packet function.
     void on_send(const EntryArgs& args);
     void on_recv(const EntryArgs& args);
 
-    // Single consumer. Producers are the callbacks and may run together.
+    // Single consumer. Producers and this pop share one admission gate.
+    // Shutdown frees the queue only after every admitted caller has left.
     bool try_pop(Record& out);
     uint64_t dropped() const;
     uint64_t unread() const;
@@ -114,12 +127,14 @@ public:
 private:
     struct Ring;
 
-    bool enter();
-    void leave();
+    explicit Observer(uint32_t capacity);
+    ~Observer();
+
     void observe(Direction direction, const EntryArgs& args, bool send_slots);
     bool read_at(uint64_t address, void* destination, size_t size) const;
-    void drain_callbacks();
+    void retire_queue();
     void free_queue();
+    bool site_installed() const;
 
     uint32_t capacity_ = 0;
     Ring* ring_ = nullptr;
@@ -131,10 +146,13 @@ private:
     bool send_installed_ = false;
     bool recv_installed_ = false;
     bool callback_released_ = false;
-    std::atomic<bool> open_{false};
-    std::atomic<uint32_t> inflight_{0};
+    AdmissionGate gate_{};
     std::atomic<uint64_t> dropped_{0};
     std::atomic<uint64_t> unread_{0};
+    std::atomic<ConsumerHold> consumer_hold_{nullptr};
+    std::atomic<void*> consumer_hold_user_{nullptr};
 };
+
+inline constexpr uint32_t kMinQueueCapacity = 2;
 
 }  // namespace pkt3576

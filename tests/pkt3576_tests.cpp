@@ -12,6 +12,7 @@
 
 #include <windows.h>
 
+#include "pkt3576/admission_gate.h"
 #include "pkt3576/observer.h"
 
 namespace {
@@ -205,13 +206,22 @@ bool saw_address(const Image& image, uint64_t address) {
     return false;
 }
 
+// Deletes the observer when the hook no longer owns it. A failed removal
+// keeps the heap object alive for the sink.
+struct Obs {
+    pkt3576::Observer* p = nullptr;
+    explicit Obs(uint32_t capacity) : p(pkt3576::Observer::create(capacity)) {}
+    ~Obs() { pkt3576::Observer::release_owner(p); }
+    pkt3576::Observer* operator->() const { return p; }
+};
+
 void test_refuses_without_installing() {
     Sink sink;
     Image image = make_image();
     bool read_called = false;
     // Wrong mapped base is refused before any read or hook.
     {
-        pkt3576::Observer observer(4);
+        Obs observer(4);
         pkt3576::Observer::Deps deps = deps_for(image, sink);
         deps.image_base = 0x150000000;
         deps.read = [](uint64_t, void*, size_t, void* user) {
@@ -219,46 +229,183 @@ void test_refuses_without_installing() {
             return false;
         };
         deps.read_user = &read_called;
-        CHECK(observer.install(deps) == pkt3576::Observer::InstallResult::Refused);
+        CHECK(observer->install(deps) == pkt3576::Observer::InstallResult::Refused);
         CHECK(!read_called);
         CHECK(sink.install_calls == 0);
-        CHECK(!observer.queue_allocated());
-        CHECK(!observer.callback_code_released());
+        CHECK(!observer->queue_allocated());
+        CHECK(!observer->callback_code_released());
     }
     // 2976 timestamp, even with the 3576 entry bytes planted, installs nothing.
     {
         Image production = make_image();
         plant_pe(production, pkt3576::kImageBase, pkt3576::kTimestamp2976);
         plant_entries(production, pkt3576::kImageBase);
-        pkt3576::Observer observer(4);
-        CHECK(observer.install(deps_for(production, sink)) == pkt3576::Observer::InstallResult::Refused);
+        Obs observer(4);
+        CHECK(observer->install(deps_for(production, sink)) == pkt3576::Observer::InstallResult::Refused);
         CHECK(sink.install_calls == 0);
-        CHECK(!observer.queue_allocated());
+        CHECK(!observer->queue_allocated());
     }
     // A one-byte entry mismatch installs neither site and does not allocate the ring.
     {
         Image mismatch = make_image();
         poke_u8(mismatch, pkt3576::kImageBase + pkt3576::kSendRva, 0x00);
-        pkt3576::Observer observer(4);
-        CHECK(observer.install(deps_for(mismatch, sink)) == pkt3576::Observer::InstallResult::Refused);
+        Obs observer(4);
+        CHECK(observer->install(deps_for(mismatch, sink)) == pkt3576::Observer::InstallResult::Refused);
         CHECK(sink.install_calls == 0);
-        CHECK(!observer.queue_allocated());
+        CHECK(!observer->queue_allocated());
     }
     // Unreadable receive entry.
     {
         Image missing = make_image();
         missing.bytes.erase(pkt3576::kImageBase + pkt3576::kRecvRva);
-        pkt3576::Observer observer(4);
-        CHECK(observer.install(deps_for(missing, sink)) == pkt3576::Observer::InstallResult::Refused);
+        Obs observer(4);
+        CHECK(observer->install(deps_for(missing, sink)) == pkt3576::Observer::InstallResult::Refused);
         CHECK(sink.install_calls == 0);
-        CHECK(!observer.queue_allocated());
+        CHECK(!observer->queue_allocated());
     }
-    // Capacity zero and a null sink refuse before hooks.
+    // Capacity 0 and 1 are refused before any hook or ring allocation.
     {
-        pkt3576::Observer observer(0);
-        CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Refused);
+        Obs zero(0);
+        Obs one(1);
+        CHECK(zero->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Refused);
+        CHECK(one->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Refused);
         CHECK(sink.install_calls == 0);
+        CHECK(!zero->queue_allocated());
+        CHECK(!one->queue_allocated());
     }
+}
+
+void test_capacity_two_keeps_both_records() {
+    Image image = make_image();
+    Sink sink;
+    plant_stack(image, 0, 1, 2);
+    Obs observer(2);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    observer->on_send(args_for(0x11, 0, 0));
+    observer->on_send(args_for(0x22, 0, 0));
+    observer->on_send(args_for(0x33, 0, 0));
+    CHECK(observer->dropped() == 1);
+    pkt3576::Record first;
+    pkt3576::Record second;
+    pkt3576::Record extra;
+    CHECK(observer->try_pop(first));
+    CHECK(observer->try_pop(second));
+    CHECK(!observer->try_pop(extra));
+    CHECK(first.rcx == 0x11);
+    CHECK(second.rcx == 0x22);
+}
+
+void test_consumer_shutdown_waits_for_pop() {
+    Image image = make_image();
+    Sink sink;
+    plant_stack(image, 0, 1, 2);
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    observer->on_send(args_for(0xA11, 0, 0));
+
+    std::atomic<int> phase{0};
+    observer->set_consumer_hold(
+        [](void* user) {
+            auto* gate = static_cast<std::atomic<int>*>(user);
+            gate->store(1, std::memory_order_release);
+            while (gate->load(std::memory_order_acquire) != 2) YieldProcessor();
+        },
+        &phase);
+
+    pkt3576::Record popped{};
+    std::atomic<bool> pop_ok{false};
+    std::thread consumer([&] { pop_ok.store(observer->try_pop(popped), std::memory_order_release); });
+    while (phase.load(std::memory_order_acquire) != 1) YieldProcessor();
+
+    std::atomic<bool> started{false};
+    std::atomic<bool> done{false};
+    pkt3576::Observer::ShutdownResult shutdown_result = pkt3576::Observer::ShutdownResult::Idle;
+    std::thread stopper([&] {
+        started.store(true, std::memory_order_release);
+        shutdown_result = observer->shutdown();
+        done.store(true, std::memory_order_release);
+    });
+    while (!started.load(std::memory_order_acquire)) YieldProcessor();
+
+    bool finished_early = false;
+    for (int i = 0; i < 1000000; ++i) {
+        if (done.load(std::memory_order_acquire)) {
+            finished_early = true;
+            break;
+        }
+        YieldProcessor();
+    }
+    CHECK(!finished_early);
+    CHECK(observer->queue_allocated());
+    phase.store(2, std::memory_order_release);
+    consumer.join();
+    stopper.join();
+    CHECK(pop_ok.load());
+    CHECK(popped.rcx == 0xA11);
+    CHECK(shutdown_result == pkt3576::Observer::ShutdownResult::Removed);
+    CHECK(!observer->queue_allocated());
+    CHECK(observer->callback_code_released());
+    CHECK(sink.release_calls == 1);
+    pkt3576::Record late;
+    CHECK(!observer->try_pop(late));
+}
+
+void test_failed_removal_keeps_ownership() {
+    Image image = make_image();
+    Sink sink;
+    sink.fail_remove_recv = true;
+    sink.fail_remove_send = true;
+    plant_stack(image, 1, 0x7, 0x8);
+    const uint8_t packet[1] = {0x5C};
+    plant_packet(image, packet, sizeof packet);
+
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    const void* queue = observer->queue_address();
+    CHECK(observer->shutdown() == pkt3576::Observer::ShutdownResult::Retained);
+
+    pkt3576::Observer* kept = observer.p;
+    CHECK(!pkt3576::Observer::release_owner(observer.p));
+    CHECK(observer.p == kept);
+    CHECK(kept->queue_address() == queue);
+    CHECK(kept->queue_allocated());
+    CHECK(kept->accepting());
+    CHECK(kept->recv_installed());
+    CHECK(kept->send_installed());
+    CHECK(!kept->callback_code_released());
+    CHECK(sink.release_calls == 0);
+    CHECK(sink.recv_on);
+    CHECK(sink.send_on);
+
+    kept->on_send(args_for(0x42, 0, 0));
+    pkt3576::Record record;
+    CHECK(kept->try_pop(record));
+    CHECK(record.rcx == 0x42);
+    CHECK(record.prefix_len == 1);
+    CHECK(record.prefix[0] == 0x5C);
+    CHECK(record.has_stack_u8_30);
+    CHECK(record.stack_u8_30 == 0x7);
+    CHECK(kept->queue_address() == queue);
+
+    std::atomic<bool> run{true};
+    std::thread producer([&] {
+        while (run.load(std::memory_order_acquire)) kept->on_recv(args_for(0x99, 0, 0));
+    });
+    CHECK(!pkt3576::Observer::release_owner(observer.p));
+    CHECK(observer.p == kept);
+    CHECK(kept->queue_address() == queue);
+    CHECK(kept->accepting());
+    CHECK(!kept->callback_code_released());
+    run.store(false, std::memory_order_release);
+    producer.join();
+    pkt3576::Record extra;
+    while (kept->try_pop(extra)) {
+        CHECK(extra.direction == pkt3576::Direction::Receive);
+        CHECK(extra.prefix_len == 1);
+        CHECK(!extra.has_stack_u8_30);
+    }
+    CHECK(kept->unread() == 0);
+    CHECK(sink.release_calls == 0);
 }
 
 void test_partial_install_rolls_back() {
@@ -273,8 +420,8 @@ void test_partial_install_rolls_back() {
     plant_packet(image, packet, sizeof packet);
     sink.fire_args = args_for(0x111, 0x222, 0x4);
 
-    pkt3576::Observer observer(4);
-    const auto result = observer.install(deps_for(image, sink));
+    Obs observer(4);
+    const auto result = observer->install(deps_for(image, sink));
     CHECK(result == pkt3576::Observer::InstallResult::RolledBack);
     CHECK(sink.install_calls == 2);
     CHECK(sink.installed_at.size() == 2);
@@ -283,10 +430,10 @@ void test_partial_install_rolls_back() {
     CHECK(!sink.recv_on);
     CHECK(!sink.send_on);
     CHECK(sink.release_calls == 1);
-    CHECK(observer.callback_code_released());
-    CHECK(!observer.queue_allocated());
-    CHECK(!observer.recv_installed());
-    CHECK(!observer.send_installed());
+    CHECK(observer->callback_code_released());
+    CHECK(!observer->queue_allocated());
+    CHECK(!observer->recv_installed());
+    CHECK(!observer->send_installed());
     CHECK(sink.fired);
     CHECK(sink.fired_popped);
     CHECK(sink.fired_record.direction == pkt3576::Direction::Receive);
@@ -307,21 +454,21 @@ void test_partial_install_retains_on_failed_removal() {
     const uint8_t packet[2] = {0xAB, 0xCD};
     plant_packet(image, packet, sizeof packet);
 
-    pkt3576::Observer observer(4);
-    const void* none = observer.queue_address();
+    Obs observer(4);
+    const void* none = observer->queue_address();
     CHECK(none == nullptr);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Retained);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Retained);
     CHECK(sink.recv_on);
     CHECK(!sink.send_on);
     CHECK(sink.release_calls == 0);
-    CHECK(!observer.callback_code_released());
-    CHECK(observer.queue_allocated());
-    const void* kept = observer.queue_address();
+    CHECK(!observer->callback_code_released());
+    CHECK(observer->queue_allocated());
+    const void* kept = observer->queue_address();
     CHECK(kept != nullptr);
 
-    observer.on_recv(args_for(0x55, 0x66, 0x77));
+    observer->on_recv(args_for(0x55, 0x66, 0x77));
     pkt3576::Record record;
-    CHECK(observer.try_pop(record));
+    CHECK(observer->try_pop(record));
     CHECK(record.direction == pkt3576::Direction::Receive);
     CHECK(record.r8 == 0x77);
     CHECK(record.stack_u16_28 == 2);
@@ -330,22 +477,22 @@ void test_partial_install_retains_on_failed_removal() {
     CHECK(record.prefix[1] == 0xCD);
     CHECK(!record.has_stack_u8_30);
     CHECK(!record.has_stack_u16_38);
-    CHECK(observer.queue_address() == kept);
-    CHECK(observer.unread() == 0);
+    CHECK(observer->queue_address() == kept);
+    CHECK(observer->unread() == 0);
 }
 
 void test_first_install_failure_frees() {
     Image image = make_image();
     Sink sink;
     sink.fail_install_recv = true;
-    pkt3576::Observer observer(4);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Refused);
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Refused);
     CHECK(sink.install_calls == 1);
     CHECK(sink.installed_at[0] == pkt3576::kImageBase + pkt3576::kRecvRva);
     CHECK(!sink.recv_on);
     CHECK(!sink.send_on);
     CHECK(sink.release_calls == 0);
-    CHECK(!observer.queue_allocated());
+    CHECK(!observer->queue_allocated());
     CHECK(sink.remove_at.empty());
 }
 
@@ -360,35 +507,35 @@ void test_failed_removal_retains_resources() {
     sink.fire_args = args_for(1, 2, 3);
     sink.fail_remove_recv = true;
 
-    pkt3576::Observer observer(4);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
     CHECK(sink.release_calls == 0);
-    const void* queue = observer.queue_address();
+    const void* queue = observer->queue_address();
 
-    CHECK(observer.shutdown() == pkt3576::Observer::ShutdownResult::Retained);
+    CHECK(observer->shutdown() == pkt3576::Observer::ShutdownResult::Retained);
     CHECK(sink.recv_on);
     CHECK(!sink.send_on);
-    CHECK(observer.recv_installed());
-    CHECK(!observer.send_installed());
+    CHECK(observer->recv_installed());
+    CHECK(!observer->send_installed());
     CHECK(sink.release_calls == 0);
-    CHECK(!observer.callback_code_released());
-    CHECK(observer.queue_address() == queue);
-    CHECK(observer.accepting());
+    CHECK(!observer->callback_code_released());
+    CHECK(observer->queue_address() == queue);
+    CHECK(observer->accepting());
     sink.join_worker();
 
     pkt3576::Record during;
-    CHECK(observer.try_pop(during));
+    CHECK(observer->try_pop(during));
     CHECK(during.direction == pkt3576::Direction::Receive);
     CHECK(during.prefix_len == 1);
     CHECK(during.prefix[0] == 0xEE);
     CHECK(!during.has_stack_u8_30);
 
-    observer.on_recv(args_for(9, 8, 7));
+    observer->on_recv(args_for(9, 8, 7));
     pkt3576::Record later;
-    CHECK(observer.try_pop(later));
+    CHECK(observer->try_pop(later));
     CHECK(later.rcx == 9);
     CHECK(later.prefix_len == 1);
-    CHECK(observer.queue_address() == queue);
+    CHECK(observer->queue_address() == queue);
 }
 
 void test_one_removal_fails_other_stays_removed() {
@@ -396,20 +543,20 @@ void test_one_removal_fails_other_stays_removed() {
     Sink sink;
     plant_stack(image, 0, 1, 2);
     sink.fail_remove_send = true;
-    pkt3576::Observer observer(2);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
-    const void* queue = observer.queue_address();
-    CHECK(observer.shutdown() == pkt3576::Observer::ShutdownResult::Retained);
+    Obs observer(2);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    const void* queue = observer->queue_address();
+    CHECK(observer->shutdown() == pkt3576::Observer::ShutdownResult::Retained);
     CHECK(!sink.recv_on);
     CHECK(sink.send_on);
-    CHECK(!observer.recv_installed());
-    CHECK(observer.send_installed());
+    CHECK(!observer->recv_installed());
+    CHECK(observer->send_installed());
     CHECK(sink.release_calls == 0);
-    CHECK(observer.queue_address() == queue);
+    CHECK(observer->queue_address() == queue);
 
-    observer.on_send(args_for(3, 4, 5));
+    observer->on_send(args_for(3, 4, 5));
     pkt3576::Record record;
-    CHECK(observer.try_pop(record));
+    CHECK(observer->try_pop(record));
     CHECK(record.direction == pkt3576::Direction::Send);
     CHECK(record.prefix_len == 0);
     CHECK(record.has_stack_u16_28);
@@ -431,10 +578,10 @@ void test_callback_during_shutdown_then_free() {
     sink.pop_during_fire = true;
     sink.fire_args = args_for(0x10, 0x20, 0x30);
 
-    pkt3576::Observer observer(4);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
-    const uint64_t dropped_before = observer.dropped();
-    CHECK(observer.shutdown() == pkt3576::Observer::ShutdownResult::Removed);
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    const uint64_t dropped_before = observer->dropped();
+    CHECK(observer->shutdown() == pkt3576::Observer::ShutdownResult::Removed);
     sink.join_worker();
     CHECK(sink.fired_popped);
     CHECK(sink.fired_record.direction == pkt3576::Direction::Send);
@@ -445,18 +592,18 @@ void test_callback_during_shutdown_then_free() {
     CHECK(sink.fired_record.stack_u16_38 == 0x5555);
     CHECK(sink.fired_record.prefix_len == 3);
     CHECK(sink.fired_record.prefix[2] == 3);
-    CHECK(!observer.queue_allocated());
-    CHECK(observer.queue_address() == nullptr);
+    CHECK(!observer->queue_allocated());
+    CHECK(observer->queue_address() == nullptr);
     CHECK(sink.release_calls == 1);
-    CHECK(observer.callback_code_released());
-    CHECK(!observer.accepting());
+    CHECK(observer->callback_code_released());
+    CHECK(!observer->accepting());
     CHECK(!sink.send_on);
     CHECK(!sink.recv_on);
 
-    observer.on_send(sink.fire_args);
-    CHECK(observer.dropped() == dropped_before + 1);
+    observer->on_send(sink.fire_args);
+    CHECK(observer->dropped() == dropped_before + 1);
     pkt3576::Record ignored;
-    CHECK(!observer.try_pop(ignored));
+    CHECK(!observer->try_pop(ignored));
 }
 
 void test_inflight_callback_drained_before_free() {
@@ -477,20 +624,20 @@ void test_inflight_callback_drained_before_free() {
     sink.block_phase = &phase;
     sink.remove_reached_callback = &remove_reached;
 
-    pkt3576::Observer observer(4);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
 
     std::thread releaser([&] {
         while (!remove_reached.load(std::memory_order_acquire)) YieldProcessor();
         phase.store(2, std::memory_order_release);
     });
-    CHECK(observer.shutdown() == pkt3576::Observer::ShutdownResult::Removed);
+    CHECK(observer->shutdown() == pkt3576::Observer::ShutdownResult::Removed);
     releaser.join();
     sink.join_worker();
     CHECK(remove_reached.load());
-    CHECK(observer.dropped() == 0);
-    CHECK(observer.unread() == 0);
-    CHECK(!observer.queue_allocated());
+    CHECK(observer->dropped() == 0);
+    CHECK(observer->unread() == 0);
+    CHECK(!observer->queue_allocated());
     CHECK(sink.release_calls == 1);
 }
 
@@ -500,23 +647,23 @@ void test_full_queue() {
     plant_stack(image, 1, 2, 3);
     const uint8_t packet[1] = {0x01};
     plant_packet(image, packet, sizeof packet);
-    pkt3576::Observer observer(2);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    Obs observer(2);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
 
-    observer.on_send(args_for(1, 0, 0));
-    observer.on_recv(args_for(2, 0, 0));
-    observer.on_send(args_for(3, 0, 0));
-    observer.on_send(args_for(4, 0, 0));
-    observer.on_recv(args_for(5, 0, 0));
-    CHECK(observer.dropped() == 3);
-    CHECK(observer.unread() == 0);
+    observer->on_send(args_for(1, 0, 0));
+    observer->on_recv(args_for(2, 0, 0));
+    observer->on_send(args_for(3, 0, 0));
+    observer->on_send(args_for(4, 0, 0));
+    observer->on_recv(args_for(5, 0, 0));
+    CHECK(observer->dropped() == 3);
+    CHECK(observer->unread() == 0);
 
     pkt3576::Record first;
     pkt3576::Record second;
     pkt3576::Record extra;
-    CHECK(observer.try_pop(first));
-    CHECK(observer.try_pop(second));
-    CHECK(!observer.try_pop(extra));
+    CHECK(observer->try_pop(first));
+    CHECK(observer->try_pop(second));
+    CHECK(!observer->try_pop(extra));
     CHECK(first.rcx == 1);
     CHECK(first.direction == pkt3576::Direction::Send);
     CHECK(second.rcx == 2);
@@ -524,11 +671,11 @@ void test_full_queue() {
     CHECK(!second.has_stack_u8_30);
     CHECK(first.has_stack_u8_30);
 
-    observer.on_send(args_for(6, 0, 0));
+    observer->on_send(args_for(6, 0, 0));
     pkt3576::Record third;
-    CHECK(observer.try_pop(third));
+    CHECK(observer->try_pop(third));
     CHECK(third.rcx == 6);
-    CHECK(observer.dropped() == 3);
+    CHECK(observer->dropped() == 3);
 }
 
 void test_concurrent_producers() {
@@ -541,22 +688,22 @@ void test_concurrent_producers() {
     constexpr int kThreads = 4;
     constexpr int kEach = 250;
     constexpr int kTotal = kThreads * kEach;
-    pkt3576::Observer observer(1024);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    Obs observer(1024);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
 
     std::atomic<bool> producers_done{false};
     std::atomic<int> popped{0};
     std::thread consumer([&] {
         pkt3576::Record record;
         while (!producers_done.load(std::memory_order_acquire)) {
-            if (observer.try_pop(record)) {
+            if (observer->try_pop(record)) {
                 if (record.direction == pkt3576::Direction::Receive) {
                     if (record.has_stack_u8_30 || record.has_stack_u16_38) popped.store(-1000000);
                 }
                 popped.fetch_add(1, std::memory_order_relaxed);
             }
         }
-        while (observer.try_pop(record)) {
+        while (observer->try_pop(record)) {
             if (record.direction == pkt3576::Direction::Receive &&
                 (record.has_stack_u8_30 || record.has_stack_u16_38)) {
                 popped.store(-1000000);
@@ -570,8 +717,8 @@ void test_concurrent_producers() {
         producers.emplace_back([&, thread] {
             for (int i = 0; i < kEach; ++i) {
                 const auto args = args_for(static_cast<uint64_t>(thread), static_cast<uint64_t>(i), 4);
-                if ((thread + i) % 2 == 0) observer.on_send(args);
-                else observer.on_recv(args);
+                if ((thread + i) % 2 == 0) observer->on_send(args);
+                else observer->on_recv(args);
             }
         });
     }
@@ -579,8 +726,8 @@ void test_concurrent_producers() {
     producers_done.store(true, std::memory_order_release);
     consumer.join();
 
-    CHECK(observer.unread() == 0);
-    CHECK(observer.dropped() == 0);
+    CHECK(observer->unread() == 0);
+    CHECK(observer->dropped() == 0);
     CHECK(popped.load() == kTotal);
 }
 
@@ -594,14 +741,14 @@ void test_concurrent_full_queue() {
     constexpr int kThreads = 4;
     constexpr int kEach = 50;
     constexpr int kTotal = kThreads * kEach;
-    pkt3576::Observer observer(4);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
 
     std::vector<std::thread> producers;
     for (int thread = 0; thread < kThreads; ++thread) {
         producers.emplace_back([&, thread] {
             for (int i = 0; i < kEach; ++i) {
-                observer.on_send(args_for(static_cast<uint64_t>(thread), static_cast<uint64_t>(i), 4));
+                observer->on_send(args_for(static_cast<uint64_t>(thread), static_cast<uint64_t>(i), 4));
             }
         });
     }
@@ -609,16 +756,16 @@ void test_concurrent_full_queue() {
 
     int popped = 0;
     pkt3576::Record record;
-    while (observer.try_pop(record)) {
+    while (observer->try_pop(record)) {
         CHECK(record.prefix_len == 1);
         CHECK(record.prefix[0] == 0x7F);
         CHECK(record.r8 == 4);
         ++popped;
     }
     CHECK(popped == 4);
-    CHECK(observer.dropped() == static_cast<uint64_t>(kTotal - popped));
-    CHECK(observer.unread() == 0);
-    CHECK(popped + static_cast<int>(observer.dropped()) == kTotal);
+    CHECK(observer->dropped() == static_cast<uint64_t>(kTotal - popped));
+    CHECK(observer->unread() == 0);
+    CHECK(popped + static_cast<int>(observer->dropped()) == kTotal);
 }
 
 void test_short_prefix_and_raw_slots() {
@@ -627,15 +774,15 @@ void test_short_prefix_and_raw_slots() {
     uint8_t packet[32];
     for (uint8_t i = 0; i < 32; ++i) packet[i] = static_cast<uint8_t>(0xA0 + i);
     plant_packet(image, packet, sizeof packet);
-    pkt3576::Observer observer(8);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    Obs observer(8);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
 
     image.record = true;
     plant_stack(image, 0, 0x3C, 0x0A11);
-    observer.on_send(args_for(10, 20, 4));
+    observer->on_send(args_for(10, 20, 4));
     CHECK(!saw_address(image, kPacket));
     pkt3576::Record zero;
-    CHECK(observer.try_pop(zero));
+    CHECK(observer->try_pop(zero));
     CHECK(zero.prefix_len == 0);
     CHECK(zero.stack_u16_28 == 0);
     CHECK(zero.stack_u8_30 == 0x3C);
@@ -645,18 +792,18 @@ void test_short_prefix_and_raw_slots() {
 
     image.reads.clear();
     plant_stack(image, 1, 0x01, 0x0002);
-    observer.on_send(args_for(1, 2, 3));
+    observer->on_send(args_for(1, 2, 3));
     CHECK(saw_read(image, kPacket, 1));
     CHECK(!saw_read(image, kPacket, 2));
     pkt3576::Record one;
-    CHECK(observer.try_pop(one));
+    CHECK(observer->try_pop(one));
     CHECK(one.prefix_len == 1);
     CHECK(one.prefix[0] == 0xA0);
     CHECK(one.prefix[1] == 0);
 
     image.reads.clear();
     plant_stack(image, 100, 0x02, 0x0003);
-    observer.on_recv(args_for(8, 9, 10));
+    observer->on_recv(args_for(8, 9, 10));
     CHECK(saw_read(image, kPacket, pkt3576::kPrefixCap));
     CHECK(!saw_read(image, kPacket, 100));
     CHECK(!saw_read(image, kPacket, 2));
@@ -664,7 +811,7 @@ void test_short_prefix_and_raw_slots() {
     CHECK(!saw_address(image, kStack + pkt3576::kStackSlot38));
     CHECK(saw_read(image, kStack + pkt3576::kStackSlot28, 2));
     pkt3576::Record capped;
-    CHECK(observer.try_pop(capped));
+    CHECK(observer->try_pop(capped));
     CHECK(capped.direction == pkt3576::Direction::Receive);
     CHECK(capped.prefix_len == pkt3576::kPrefixCap);
     CHECK(capped.prefix[0] == 0xA0);
@@ -672,43 +819,43 @@ void test_short_prefix_and_raw_slots() {
     CHECK(!capped.has_stack_u8_30);
     CHECK(!capped.has_stack_u16_38);
     CHECK(capped.stack_u16_28 == 100);
-    CHECK(observer.unread() == 0);
-    CHECK(observer.dropped() == 0);
+    CHECK(observer->unread() == 0);
+    CHECK(observer->dropped() == 0);
 }
 
 void test_unreadable_buffers() {
     Image image = make_image();
     Sink sink;
-    pkt3576::Observer observer(4);
-    CHECK(observer.install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
     image.record = true;
 
     plant_stack(image, 8, 1, 2);
-    observer.on_send(args_for(1, 2, 3));
-    CHECK(observer.unread() == 1);
+    observer->on_send(args_for(1, 2, 3));
+    CHECK(observer->unread() == 1);
     CHECK(saw_read(image, kPacket, 8));
     pkt3576::Record none;
-    CHECK(!observer.try_pop(none));
+    CHECK(!observer->try_pop(none));
 
     image.reads.clear();
     image.bytes.erase(kStack + pkt3576::kStackSlot28);
     image.bytes.erase(kStack + pkt3576::kStackSlot28 + 1);
-    observer.on_recv(args_for(1, 2, 3));
-    CHECK(observer.unread() == 2);
+    observer->on_recv(args_for(1, 2, 3));
+    CHECK(observer->unread() == 2);
     CHECK(!saw_address(image, kPacket));
     CHECK(!saw_address(image, kStack + pkt3576::kStackSlot30));
-    CHECK(!observer.try_pop(none));
+    CHECK(!observer->try_pop(none));
 
     image.reads.clear();
     plant_stack(image, 4, 1, 2);
     image.bytes.erase(kStack + pkt3576::kStackSlot30);
     const uint8_t packet[4] = {1, 2, 3, 4};
     plant_packet(image, packet, sizeof packet);
-    observer.on_send(args_for(1, 2, 3));
-    CHECK(observer.unread() == 3);
+    observer->on_send(args_for(1, 2, 3));
+    CHECK(observer->unread() == 3);
     CHECK(!saw_address(image, kPacket));
-    CHECK(!observer.try_pop(none));
-    CHECK(observer.dropped() == 0);
+    CHECK(!observer->try_pop(none));
+    CHECK(observer->dropped() == 0);
 
     uint8_t local[4] = {4, 5, 6, 7};
     uint8_t copied[4] = {};
@@ -722,6 +869,97 @@ void test_unreadable_buffers() {
     uint8_t one = 0xFF;
     CHECK(!pkt3576::guarded_read(1, &one, 1));
     CHECK(one == 0xFF);
+}
+
+void test_gate_entry_races_close() {
+    for (int round = 0; round < 8; ++round) {
+        pkt3576::AdmissionGate gate;
+        CHECK(gate.closed());
+        CHECK(!gate.admit());
+        CHECK(gate.open());
+        CHECK(!gate.closed());
+
+        std::atomic<int> inside{0};
+        std::atomic<bool> run{true};
+        std::atomic<int> admits{0};
+        std::vector<std::thread> threads;
+        for (int t = 0; t < 4; ++t) {
+            threads.emplace_back([&] {
+                while (run.load(std::memory_order_relaxed)) {
+                    if (!gate.admit()) continue;
+                    inside.fetch_add(1, std::memory_order_acq_rel);
+                    for (int spin = 0; spin < 32; ++spin) YieldProcessor();
+                    inside.fetch_sub(1, std::memory_order_acq_rel);
+                    gate.leave();
+                    admits.fetch_add(1, std::memory_order_relaxed);
+                }
+            });
+        }
+        while (admits.load(std::memory_order_relaxed) < 200) YieldProcessor();
+        gate.close_and_wait();
+        CHECK(inside.load(std::memory_order_acquire) == 0);
+        CHECK(gate.admitted() == 0);
+        CHECK(gate.closed());
+        CHECK(!gate.admit());
+        run.store(false, std::memory_order_release);
+        for (auto& thread : threads) thread.join();
+        CHECK(inside.load() == 0);
+        CHECK(!gate.admit());
+    }
+}
+
+void test_observer_entry_races_shutdown() {
+    Image image = make_image();
+    Sink sink;
+    plant_stack(image, 1, 2, 3);
+    const uint8_t packet[1] = {0xAB};
+    plant_packet(image, packet, sizeof packet);
+    Obs observer(8);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+
+    std::atomic<bool> run{true};
+    std::atomic<int> popped{0};
+    std::atomic<int> bad{0};
+    std::vector<std::thread> producers;
+    for (int t = 0; t < 4; ++t) {
+        producers.emplace_back([&] {
+            while (run.load(std::memory_order_acquire)) observer->on_send(args_for(0x5151, 0, 0));
+        });
+    }
+    std::thread consumer([&] {
+        pkt3576::Record record;
+        while (run.load(std::memory_order_acquire)) {
+            if (!observer->try_pop(record)) continue;
+            if (record.rcx != 0x5151 || record.prefix_len != 1 || record.prefix[0] != 0xAB) {
+                bad.fetch_add(1, std::memory_order_relaxed);
+            } else {
+                popped.fetch_add(1, std::memory_order_relaxed);
+            }
+        }
+        while (observer->try_pop(record)) {
+            if (record.rcx != 0x5151 || record.prefix_len != 1 || record.prefix[0] != 0xAB) {
+                bad.fetch_add(1, std::memory_order_relaxed);
+            } else {
+                popped.fetch_add(1, std::memory_order_relaxed);
+            }
+        }
+    });
+
+    while (popped.load(std::memory_order_acquire) == 0) YieldProcessor();
+    CHECK(observer->shutdown() == pkt3576::Observer::ShutdownResult::Removed);
+    run.store(false, std::memory_order_release);
+    for (auto& producer : producers) producer.join();
+    consumer.join();
+    CHECK(bad.load() == 0);
+    CHECK(popped.load() > 0);
+    CHECK(!observer->queue_allocated());
+    CHECK(observer->callback_code_released());
+    CHECK(!observer->accepting());
+    const uint64_t dropped_before = observer->dropped();
+    observer->on_send(args_for(0x5151, 0, 0));
+    CHECK(observer->dropped() == dropped_before + 1);
+    pkt3576::Record late;
+    CHECK(!observer->try_pop(late));
 }
 
 }  // namespace
@@ -740,6 +978,11 @@ int main() {
     test_concurrent_full_queue();
     test_short_prefix_and_raw_slots();
     test_unreadable_buffers();
+    test_capacity_two_keeps_both_records();
+    test_consumer_shutdown_waits_for_pop();
+    test_failed_removal_keeps_ownership();
+    test_gate_entry_races_close();
+    test_observer_entry_races_shutdown();
     if (g_failures) {
         std::printf("%d failure(s)\n", g_failures);
         return 1;

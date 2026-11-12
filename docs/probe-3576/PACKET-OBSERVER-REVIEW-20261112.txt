@@ -1,0 +1,83 @@
+Codex review of Grok's passive observer fixes - 2026-11-12
+
+FOLLOW-UP: RESOLVED, 2026-11-12
+The earlier review below is historical. Grok replaced separate flags/counters
+with AdmissionGate: one atomic word contains a closed bit and the active count.
+Admission and closure now have a single atomic modification order. Successful
+entry registers before closure, or loses to closure and cannot use the queue.
+Closing waits for admitted producers and the consumer before freeing the ring.
+Capacity rejection and retained-object behavior remain intact.
+
+Codex's fresh scripts/build.ps1 run: all 87 tests passed (46.69 seconds).
+Log: build/codex-review-pkt3576-gate.log.
+Codex also compiled and ran the observer tests with MSVC /fsanitize=address:
+exit 0, stdout "pkt3576 tests ok". New tests exercise gate entry racing close
+and observer producers/consumer racing shutdown. A stale gate-header comment
+was corrected to describe CAS retries; executable behavior was not changed.
+
+Disposition: approved as a game-free experimental observer checkpoint, with no
+blocking findings in this fix. The earlier publication hold is lifted for this
+revision. This does not approve live hooks or full build-3576 mod compatibility.
+
+For the future runtime backend, owners must stop/join consumer threads and
+ensure hook callbacks can no longer enter before destroying the Observer,
+its reader dependencies, the hook sink, or callback code. The gate protects
+queue use; it does not grant arbitrary raw-pointer callers object ownership.
+
+HISTORICAL REVIEW (superseded for the current revision)
+
+Disposition: request one further fix. Do not upload this revision under the
+user's "if everything looks good" condition. No game attach or deployment.
+
+Validation
+- scripts/build.ps1 completed successfully; all 87 CTest tests passed.
+- Log: build/codex-review-pkt3576-fixes.log.
+- A 100,000-cycle consumer/shutdown stress run under MSVC AddressSanitizer
+  passed. This run did not reproduce a full observer memory error.
+- A separate reduced test of the actual acquire/release admission protocol
+  reproduced the unsafe ordering twice, on iteration 4 of each run:
+  admission race observed=yes iteration=4 retire_count=0 reader_admitted=1
+  This is a protocol counterexample, not a reproduced game crash.
+
+Resolved findings
+- Capacity 0/1 is rejected before hooks or queue allocation; capacity 2 has
+  record preservation and full/drop coverage.
+- Observer construction/destruction is private. release_owner refuses to
+  delete an observer if hook removal fails. Retained object behavior is tested.
+- An already registered consumer pop now delays queue retirement.
+
+Remaining P1 finding: admission is not synchronized with retirement
+tools/pkt3576/observer.cpp, consumer_enter lines 135-142 and retire_queue
+lines 151-155; producer_enter lines 123-130 uses the same pattern.
+
+open_ and the inflight counters are separate atomics. A release store closing
+open_ followed by acquire loads of the counters is not an atomic close-and-drain
+operation. Retirement can observe zero while a concurrent entrant increments
+its counter and still sees open_ == true. The queue can then be freed while
+that entrant is admitted. The reduced test uses the same initial open load,
+counter fetch_add(acq_rel), second open load(acquire), and retirement's release
+store followed by acquire counter loads. It reproduces on this x64 machine.
+
+The new consumer-hold test pauses after consumer_enter has registered the pop,
+so it checks draining a known reader but misses this admission race.
+
+Requested fix
+Use a proven admission/retirement protocol, such as a single atomic state with
+a closed bit and active count, so acquiring admission and closing admission
+have one defined order. Cover both producers and the consumer. Add coverage
+for racing admission with shutdown, not only a pause inside an admitted pop.
+Keep callback operations nonblocking and keep the existing identity, bounded
+read, failed-removal, and capacity checks. State the owner/thread lifetime
+requirements before release_owner can delete an object. Re-run the suite.
+
+Durable local evidence (relative to the parent COOP MOD folder)
+backups/NativeServer/20261112-observer-admission-review/
+  review_pkt3576_admission_litmus.cpp
+  admission-result.txt
+  codex-review-pkt3576-fixes.log
+
+Reviewed observer.cpp SHA256:
+80842BE644A7F3A77A374A1C88B84F2461752B9C16929A8C25B51E9156B9E84E
+
+GitHub remains at the previous checkpoint f7e73032cf5c5ac69dd5e949cac464d4cb4c2c5a
+on codex/checkpoint-3576-20261112 in the user's private Shaugn46 repository.

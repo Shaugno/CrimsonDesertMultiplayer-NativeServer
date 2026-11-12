@@ -284,7 +284,7 @@ target_link_libraries(cdmp_tests_diag3576 PRIVATE cdmp_diag3576_lib)
 add_test(NAME diag3576 COMMAND cdmp_tests_diag3576)
 # Experimental 3576 passive packet observer. Not linked into the ASI.
 # Addresses stay in tools/pkt3576. The compatibility guard stays closed.
-add_library(cdmp_pkt3576_lib STATIC tools/pkt3576/observer.cpp)
+add_library(cdmp_pkt3576_lib STATIC tools/pkt3576/observer.cpp tools/pkt3576/admission_gate.cpp)
 cdmp_strict(cdmp_pkt3576_lib)
 target_include_directories(cdmp_pkt3576_lib PUBLIC tools)
 add_executable(cdmp_tests_pkt3576 tests/pkt3576_tests.cpp)

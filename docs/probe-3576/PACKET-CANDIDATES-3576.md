@@ -247,7 +247,7 @@ No full-packet archive. No write to the game buffer. No call to `exe+0x3A6310` o
 
 1. Keep this outside `build_guard`. Require mapped base `0x140000000` and timestamp `0x6AED2E85`, both checked before any hook. The timestamp is read from the image. Refuse the supported 2976 timestamp `0x6AB28F00`. Do not mark 3576 as `Supported`.
 2. Re-read the 16 entry bytes above at both addresses. Any mismatch or unreadable entry fails closed. Install neither observer, and do not allocate the ring.
-3. Allocate the capture ring only after both byte checks pass. The ring is fixed-capacity and safe for concurrent producers. The callback path does not allocate it.
+3. Allocate the capture ring only after both byte checks pass. The ring is fixed-capacity, at least two slots, and safe for concurrent producers. One slot is refused: that size cannot tell a full ring from an empty one. The callback path does not allocate the ring.
 4. Install the receive observer, then the send observer. If the second install fails, remove the first. When that removal succeeds, free the ring and allow the callback code to be released. When that removal fails, keep the ring, the callback code, and the observer that is still installed.
 5. Do not start a writer from the callback. A consumer may pop on some other thread. The callback must not wait, allocate, perform file I/O, modify game state, or call either packet function.
 6. Do not call `sniffer_install`. That function requires timestamp `0x6AB28F00`, hooks the 2976 RVAs, and the current `on_post_packet` / `on_recv_packet` paths call the game functions to inject. `troc_sniffer.h` has no removal function. The 2976 sniffer is not a 3576 observer.
@@ -263,8 +263,8 @@ No full-packet archive. No write to the game buffer. No call to `exe+0x3A6310` o
 ### Shutdown
 
 1. Remove the receive observer, then the send observer. A callback may run while removal is in progress. The queue stays allocated through that call, and the callback does not wait.
-2. When both removals succeed, stop new records, wait outside the callback until in-flight callbacks have left, free the ring, and then allow the callback code to be released.
-3. When either removal fails, do not free the ring and do not release the callback code. Keep each observer whose removal failed. A removal that succeeded stays removed. The shared ring stays because the surviving observer can still fire.
+2. When both removals succeed, close admission with one atomic word that holds the closed bit and the active count. Callbacks and the consumer either publish themselves in that word or return without touching the ring. Wait outside the callback until the count is zero, free the ring, and then allow the callback code to be released.
+3. When either removal fails, do not free the ring and do not release the callback code. The observer object stays alive with its reader and callback state. Releasing the caller's ownership does not delete it. Keep each observer whose removal failed. A removal that succeeded stays removed. The shared ring stays because the surviving observer can still fire.
 
 ## What this note does not do
 

@@ -61,6 +61,8 @@ struct Observer::Ring {
     Ring& operator=(const Ring&) = delete;
 
     // Lock-free. A full ring returns false immediately.
+    // Capacity must be at least 2. With one slot, sequence pos+1 is also the
+    // value the next push waits for, so a full ring looks empty and is overwritten.
     bool try_push(const Record& record) {
         if (cells == nullptr || capacity == 0) return false;
         uint64_t pos = head.load(std::memory_order_relaxed);
@@ -101,32 +103,31 @@ struct Observer::Ring {
     std::atomic<uint64_t> tail{0};
 };
 
-Observer::Observer(uint32_t capacity) : capacity_(capacity) {}
+Observer* Observer::create(uint32_t capacity) { return new (std::nothrow) Observer(capacity); }
 
-Observer::~Observer() {
-    if (recv_installed_ || send_installed_) shutdown();
-    if (recv_installed_ || send_installed_) {
-        // A live callback still needs the queue and this callback code.
-        ring_ = nullptr;
-        return;
-    }
-    free_queue();
-}
-
-bool Observer::enter() {
-    if (!open_.load(std::memory_order_acquire)) return false;
-    inflight_.fetch_add(1, std::memory_order_acq_rel);
-    if (!open_.load(std::memory_order_acquire) || ring_ == nullptr) {
-        inflight_.fetch_sub(1, std::memory_order_acq_rel);
-        return false;
-    }
+bool Observer::release_owner(Observer*& observer) {
+    if (observer == nullptr) return true;
+    if (observer->site_installed()) observer->shutdown();
+    if (observer->site_installed()) return false;
+    delete observer;
+    observer = nullptr;
     return true;
 }
 
-void Observer::leave() { inflight_.fetch_sub(1, std::memory_order_acq_rel); }
+Observer::Observer(uint32_t capacity) : capacity_(capacity) {}
 
-void Observer::drain_callbacks() {
-    while (inflight_.load(std::memory_order_acquire) != 0) YieldProcessor();
+Observer::~Observer() { retire_queue(); }
+
+bool Observer::site_installed() const { return recv_installed_ || send_installed_; }
+
+void Observer::retire_queue() {
+    gate_.close_and_wait();
+    free_queue();
+}
+
+void Observer::set_consumer_hold(ConsumerHold hold, void* user) {
+    consumer_hold_user_.store(user, std::memory_order_release);
+    consumer_hold_.store(hold, std::memory_order_release);
 }
 
 void Observer::free_queue() {
@@ -185,26 +186,30 @@ void Observer::observe(Direction direction, const EntryArgs& args, bool send_slo
 }
 
 void Observer::on_send(const EntryArgs& args) {
-    if (!enter()) {
+    if (!gate_.admit()) {
         dropped_.fetch_add(1, std::memory_order_relaxed);
         return;
     }
     observe(Direction::Send, args, true);
-    leave();
+    gate_.leave();
 }
 
 void Observer::on_recv(const EntryArgs& args) {
-    if (!enter()) {
+    if (!gate_.admit()) {
         dropped_.fetch_add(1, std::memory_order_relaxed);
         return;
     }
     observe(Direction::Receive, args, false);
-    leave();
+    gate_.leave();
 }
 
 bool Observer::try_pop(Record& out) {
-    if (ring_ == nullptr) return false;
-    return ring_->try_pop(out);
+    if (!gate_.admit()) return false;
+    const ConsumerHold hold = consumer_hold_.load(std::memory_order_acquire);
+    if (hold != nullptr) hold(consumer_hold_user_.load(std::memory_order_acquire));
+    const bool ok = ring_ != nullptr && ring_->try_pop(out);
+    gate_.leave();
+    return ok;
 }
 
 uint64_t Observer::dropped() const { return dropped_.load(std::memory_order_relaxed); }
@@ -215,7 +220,7 @@ bool Observer::queue_allocated() const { return ring_ != nullptr; }
 
 const void* Observer::queue_address() const { return ring_; }
 
-bool Observer::accepting() const { return open_.load(std::memory_order_acquire); }
+bool Observer::accepting() const { return !gate_.closed(); }
 
 bool Observer::send_installed() const { return send_installed_; }
 
@@ -225,7 +230,9 @@ bool Observer::callback_code_released() const { return callback_released_; }
 
 Observer::InstallResult Observer::install(const Deps& deps) {
     if (ring_ != nullptr || send_installed_ || recv_installed_) return InstallResult::Refused;
-    if (deps.read == nullptr || deps.hooks == nullptr || capacity_ == 0) return InstallResult::Refused;
+    if (deps.read == nullptr || deps.hooks == nullptr || capacity_ < kMinQueueCapacity) {
+        return InstallResult::Refused;
+    }
     if (deps.image_base != kImageBase) return InstallResult::Refused;
 
     uint32_t timestamp = 0;
@@ -252,12 +259,15 @@ Observer::InstallResult Observer::install(const Deps& deps) {
     send_address_ = send_address;
     recv_address_ = recv_address;
     callback_released_ = false;
-    open_.store(true, std::memory_order_release);
+    if (!gate_.open()) {
+        free_queue();
+        hooks_ = nullptr;
+        read_ = nullptr;
+        return InstallResult::Refused;
+    }
 
     if (!hooks_->install(recv_address_, this)) {
-        open_.store(false, std::memory_order_release);
-        drain_callbacks();
-        free_queue();
+        retire_queue();
         hooks_ = nullptr;
         read_ = nullptr;
         return InstallResult::Refused;
@@ -267,9 +277,7 @@ Observer::InstallResult Observer::install(const Deps& deps) {
     if (!hooks_->install(send_address_, this)) {
         if (hooks_->remove(recv_address_)) {
             recv_installed_ = false;
-            open_.store(false, std::memory_order_release);
-            drain_callbacks();
-            free_queue();
+            retire_queue();
             hooks_->release_callback_code();
             callback_released_ = true;
             hooks_ = nullptr;
@@ -296,9 +304,7 @@ Observer::ShutdownResult Observer::shutdown() {
     }
     if (failed || recv_installed_ || send_installed_) return ShutdownResult::Retained;
 
-    open_.store(false, std::memory_order_release);
-    drain_callbacks();
-    free_queue();
+    retire_queue();
     if (hooks_ != nullptr && !callback_released_) {
         hooks_->release_callback_code();
         callback_released_ = true;
