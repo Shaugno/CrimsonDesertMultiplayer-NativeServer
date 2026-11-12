@@ -73,7 +73,8 @@ KEY EVIDENCE
 
 GITHUB / RECOVERY
 Verified active account: Shaugno
-Private repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
+Public repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
+Visibility: public at the user's request (2026-11-12).
 Checkpoint branch: codex/checkpoint-3576-20261112
 Approved backend publication: 1638ca250b3ea2334cbfd274af161b0e5dcc2d9d
 The user requested continuing this project under Shaugno. Project identity,
