@@ -4,7 +4,7 @@ Date: 2026-11-12. Checkout: `CrimsonDesertMultiplayer-NativeServer` on `grok/com
 
 These are file candidates for Codex review. No address is adopted. `src/mod/game/offsets.h`, `src/mod/session2/offsets_s2.h`, and `src/mod/game/build_guard.h` were not edited. The ASI guard stays closed. Nothing was installed, hooked, or deployed. The game was not launched.
 
-An experimental game-free observer for the plan below lives in `tools/pkt3576`. It is not linked into the ASI and it was not attached to the game.
+An experimental game-free observer for the plan below lives in `tools/pkt3576`. It is not linked into the ASI and it was not attached to the game. A game-free SafetyHook capture backend for that observer also lives in `tools/pkt3576`. It is not linked into the ASI and it was not attached to the game.
 
 Raw scanner output: `docs/probe-3576/packet-scan-3576.txt`.
 Reproduce with `powershell -NoProfile -File tools\probe-3576\run_packet_scan.ps1`.

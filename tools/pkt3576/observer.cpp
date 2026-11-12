@@ -120,6 +120,36 @@ Observer::~Observer() { retire_queue(); }
 
 bool Observer::site_installed() const { return recv_installed_ || send_installed_; }
 
+bool Observer::arm(ReadFn read, void* user) {
+    if (ring_ != nullptr || send_installed_ || recv_installed_) return false;
+    if (read == nullptr || capacity_ < kMinQueueCapacity) return false;
+
+    Ring* ring = new (std::nothrow) Ring(capacity_);
+    if (ring == nullptr || ring->cells == nullptr) {
+        delete ring;
+        return false;
+    }
+
+    ring_ = ring;
+    read_ = read;
+    read_user_ = user;
+    if (!gate_.open()) {
+        free_queue();
+        read_ = nullptr;
+        read_user_ = nullptr;
+        return false;
+    }
+    return true;
+}
+
+bool Observer::disarm() {
+    if (site_installed()) return false;
+    retire_queue();
+    read_ = nullptr;
+    read_user_ = nullptr;
+    return true;
+}
+
 void Observer::retire_queue() {
     gate_.close_and_wait();
     free_queue();

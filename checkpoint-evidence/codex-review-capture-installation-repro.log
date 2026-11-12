@@ -1,0 +1,4 @@
+review_capture_hook_allocation.cpp
+pkt3576_capture_targets.cpp
+Generating Code...
+hook allocation injected=1 size=8 escaped=0 receive_still_patched=0 stop_idle=1

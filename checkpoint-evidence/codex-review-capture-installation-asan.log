@@ -1,0 +1,31 @@
+CMake is re-running because C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/build/asan/CMakeFiles/generate.stamp is out-of-date.
+  the file 'C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/CMakeLists.txt'
+  is newer than 'C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/build/asan/CMakeFiles/generate.stamp.depend'
+  result='-1'
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26300.
+-- Fetching Zydis (v4.1.0)...
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+-- Configuring done (0.5s)
+-- Generating done (2.1s)
+-- Build files have been written to: C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/build/asan
+MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
+
+  1>Checking Build System
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/CMakeLists.txt
+  cdmp_pkt3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\RelWithDebInfo\cdmp_pkt3576_lib.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/CMakeLists.txt
+  cdmp_tests_pkt3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\bin\RelWithDebInfo\cdmp_tests_pkt3576.exe
+MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
+
+  Zycore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\_deps\zydis-build\zycore\RelWithDebInfo\Zycore.lib
+  cdmp_pkt3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\RelWithDebInfo\cdmp_pkt3576_lib.lib
+  Zydis.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\_deps\zydis-build\RelWithDebInfo\Zydis.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/build/_deps/safetyhook-src/CMakeLists.txt
+  Scanning sources for module dependencies...
+  safetyhook.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\_deps\safetyhook-build\RelWithDebInfo\safetyhook.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/CMakeLists.txt
+  capture.cpp
+  cdmp_pkt3576_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\RelWithDebInfo\cdmp_pkt3576_capture.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/CMakeLists.txt
+LINK : warning LNK4044: unrecognized option '/fsanitize=address'; ignored [C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\cdmp_tests_pkt3576_capture.vcxproj]
+  cdmp_tests_pkt3576_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\asan\bin\RelWithDebInfo\cdmp_tests_pkt3576_capture.exe

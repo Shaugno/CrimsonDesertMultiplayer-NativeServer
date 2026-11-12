@@ -1,0 +1,76 @@
+Codex review: real SafetyHook capture backend, 2026-11-12
+
+RESOLVED FOLLOW-UP: the initial findings below and the subsequent hook-creation
+exception finding are resolved for the current game-free checkpoint. See
+PACKET-CAPTURE-APPROVAL-20261112.txt. This earlier review is historical.
+
+Disposition: request changes. Do not publish this backend revision under
+the user's "if everything looks good" condition. No game was started or
+attached, and no deployment was performed.
+
+Independent validation
+- scripts/build.ps1 completed successfully: 88/88 CTest tests passed.
+- CTest total time: 50.55 seconds.
+- Log: build/codex-review-capture.log.
+- Real hooks on dummy functions are exercised by pkt3576_capture.
+- Two additional fault-injection reproductions fail as described below.
+  These are game-free harnesses; they do not reproduce a game crash.
+
+P1: a vanished thread can make enumeration loop forever
+File: tools/pkt3576/capture.cpp, lines 189-198.
+When OpenThread returns null with ERROR_INVALID_PARAMETER, continue skips
+the Thread32Next call at the bottom of the loop. The same snapshot entry is
+processed again indefinitely. This can occur naturally if a thread exits
+after the snapshot. The outer quiesce deadline cannot interrupt this loop,
+so stop/rollback can hang rather than return Removed or Retained.
+
+Reproduction: review_capture_dead_thread.cpp includes the actual capture.cpp
+and substitutes OpenThread with a shim returning ERROR_INVALID_PARAMETER
+for one enumerated worker. The second attempt to open that same id reports
+the loop and terminates the test child with exit 91 (a watchdog verdict).
+Observed: FAIL: the same vanished-thread entry was retried instead of
+advancing; attempts=2
+
+Requested fix: ensure every skipped dead entry advances enumeration. Check
+enumeration errors distinctly from normal completion and fail closed when
+the scan cannot be completed. Add deterministic coverage for disappearing
+threads and scan errors; verify handles and suspended threads are cleaned up.
+
+P2: allocation failure leaves global capture ownership stuck
+File: tools/pkt3576/capture.cpp, lines 562-576.
+start claims g_active and may open/truncate the output file before
+records.reserve. reserve can throw, but this operation has no rollback.
+After the caller catches the exception and releases the failed Capture,
+g_active still references its deleted State. A fresh Capture then fails the
+global ownership CAS and returns Refused. Capture cannot recover in-process.
+
+Reproduction: review_capture_allocation.cpp links the real capture backend
+and injects std::bad_alloc for the records.reserve allocation (including the
+MSVC aligned-allocation overhead). No huge allocation is requested.
+Observed: injected reserve failure escaped=1; subsequent fresh start refused=1
+Exit 92 denotes reproduction of both symptoms.
+
+Requested fix: allocate fallible storage before claiming global ownership,
+or add a transactional cleanup guard that resets g_active and closes the file
+on all pre-hook failures/exceptions. Return Refused for expected allocation
+failure. Add an injected-failure test proving that a subsequent start works.
+
+Local evidence, relative to the parent COOP MOD directory
+backups/NativeServer/20261112-capture-backend-review/
+  review_capture_dead_thread.cpp
+  dead-thread-result.txt
+  review_capture_allocation.cpp
+  allocation-result.txt
+  codex-review-capture.log
+The reproduction cpp files expect to be copied to the repository build/
+directory before compilation, since they use repository-relative includes.
+They use the existing MSVC x64 environment, static CRT, /std:c++latest,
+/INCREMENTAL:NO, and the built observer/capture/SafetyHook/Zydis/Zycore libs.
+
+Reviewed capture.cpp SHA256:
+8C965BBA54B94528D9BD62D115002C424F956882F51F4DDBFBF43553334858D1
+
+Next task: fix both findings, add regressions, rerun game-free validation,
+and request another Codex review. Keep the production guard closed and
+deployment/game attachment separate. The earlier approved observer remains
+saved in Shaugn46's private GitHub repository at c639a7b.

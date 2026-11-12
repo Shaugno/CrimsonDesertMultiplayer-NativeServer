@@ -291,6 +291,31 @@ add_executable(cdmp_tests_pkt3576 tests/pkt3576_tests.cpp)
 cdmp_strict(cdmp_tests_pkt3576)
 target_link_libraries(cdmp_tests_pkt3576 PRIVATE cdmp_pkt3576_lib)
 add_test(NAME pkt3576 COMMAND cdmp_tests_pkt3576)
+# Real SafetyHook capture backend. Still not linked into the ASI.
+add_library(cdmp_pkt3576_capture STATIC tools/pkt3576/capture.cpp)
+cdmp_strict(cdmp_pkt3576_capture)
+target_include_directories(cdmp_pkt3576_capture PUBLIC tools)
+target_link_libraries(cdmp_pkt3576_capture PUBLIC cdmp_pkt3576_lib safetyhook::safetyhook)
+add_executable(cdmp_tests_pkt3576_capture
+               tests/pkt3576_capture_tests.cpp
+               tests/pkt3576_capture_targets.cpp)
+cdmp_strict(cdmp_tests_pkt3576_capture)
+target_link_libraries(cdmp_tests_pkt3576_capture PRIVATE cdmp_pkt3576_capture)
+# RelWithDebInfo defaults to incremental linking. An incremental thunk would
+# hide the real callback body from the unwind-data range scanned at teardown.
+target_link_options(cdmp_tests_pkt3576_capture PRIVATE /INCREMENTAL:NO)
+add_test(NAME pkt3576_capture COMMAND cdmp_tests_pkt3576_capture)
+# Fault injection for thread-snapshot advancement and pre-hook allocation
+# rollback. Compiles capture.cpp itself so the Win32 calls can be substituted.
+# Not linked into the ASI.
+add_executable(cdmp_tests_pkt3576_capture_faults
+               tests/pkt3576_capture_faults.cpp
+               tests/pkt3576_capture_targets.cpp)
+cdmp_strict(cdmp_tests_pkt3576_capture_faults)
+target_include_directories(cdmp_tests_pkt3576_capture_faults PRIVATE tools)
+target_link_libraries(cdmp_tests_pkt3576_capture_faults PRIVATE cdmp_pkt3576_lib safetyhook::safetyhook)
+target_link_options(cdmp_tests_pkt3576_capture_faults PRIVATE /INCREMENTAL:NO)
+add_test(NAME pkt3576_capture_faults COMMAND cdmp_tests_pkt3576_capture_faults)
 # Option D (docs/OPCION-D-EMULADOR.md): the parts that do not need the game.
 add_executable(cdmp_tests_optd tests/optd_tests.cpp)
 cdmp_strict(cdmp_tests_optd)

@@ -1,0 +1,60 @@
+Codex approval: game-free capture backend, 2026-11-12
+
+Disposition: approved as an experimental game-free source checkpoint. No
+blocking findings remain in the reviewed hook-installation fix. The user's
+conditional authorization to publish to Shaugno is satisfied for this revision.
+This does not approve deployment, game attachment, or full 3576 compatibility.
+
+What was reviewed
+- Real SafetyHook mid-hook backend, dummy send/receive targets, consumer/writer,
+  bounded prefix and output handling, partial installation, and teardown.
+- The previously reported vanished-thread loop, output-reserve failure, and
+  exception after the receive hook becomes live are now addressed.
+- Both factory calls are guarded. Cleanup disables and quiesces installed
+  hooks before disarming the observer or clearing global ownership. Unknown
+  ranges or unsafe cleanup preserve Retained ownership instead of deleting it.
+- Tests cover allocation exceptions in first/second hook creation, restored
+  target bytes, and a successful retry on the same Capture instance.
+- Production mod guard/offsets remain unchanged from the approved checkpoint.
+  The capture backend is not linked into cdmp.asi.
+
+Independent validation
+1. scripts/build.ps1: exit 0, 89/89 CTest tests passed, 54.73 seconds.
+   Log: build/codex-review-capture-installation.log.
+2. Rebuilt ASan observer/capture targets in build/asan. Ran them after
+   vcvars64.bat initialized the Visual Studio runtime environment:
+   pkt3576 tests ok
+   pkt3576 capture tests ok
+   Exit 0. Log: build/codex-review-capture-installation-asan-run.log.
+   The cached build has an ignored linker /fsanitize=address flag warning;
+   instrumentation comes from the compiler /fsanitize=address flags. The
+   initial direct invocation without the runtime environment did not complete.
+   Windows ASan does not provide a leak report. Fault injection ran in the
+   normal suite, not under ASan's allocator.
+3. Recompiled Codex's original second-hook allocation reproduction against the
+   normal capture library, without the test-only hook-scope macro:
+   hook allocation injected=1 size=8 escaped=0 receive_still_patched=0 stop_idle=1
+   Exit 0. The entry is restored before stop returns Idle after rollback.
+   Log: build/codex-review-capture-installation-repro.log.
+
+What remains unverified
+All hooks in this review target functions in the dedicated test executable.
+No Crimson Desert process was launched or attached. Game packet semantics,
+world/player readiness, loading, health, and full two-player behavior remain
+unfinished. Passing this milestone does not adopt experimental offsets.
+
+Next task
+Design and review a separate live-capture runner before any in-game test.
+Its pre-hook gate must verify the loaded executable's base, timestamp, and
+both candidate entry signatures. Keep the normal ASI guard closed. Address
+module pinning, callback/reader lifetime, bounded output, save backup, and
+safe retained failure behavior explicitly. Deployment and live testing are
+separate tasks and require the user's instruction.
+
+Recovery / publication
+Active account: Shaugno
+Private repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
+Branch: codex/checkpoint-3576-20261112
+Previous publication: 86ed5129d26274ce663fd10794d8205f2d10d88c
+The new checkpoint preserves current source and validation evidence under
+checkpoint-evidence/. The active development checkout/index is left intact.

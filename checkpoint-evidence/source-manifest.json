@@ -1,10 +1,11 @@
 {
-  "created": "2026-11-12T14:42:00.1208332-05:00",
+  "created": "2026-11-12T17:18:07.0472623-05:00",
   "repository": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\COOP MOD\\CrimsonDesertMultiplayer-NativeServer",
   "branch": "grok/compat-guard",
   "source_head": "3cbb03c5e0840db92d690a05eaf2693d0c4a1bf7",
-  "previous_github_checkpoint": "f7e73032cf5c5ac69dd5e949cac464d4cb4c2c5a",
-  "review": "Approved game-free experimental observer; 87/87 tests and AddressSanitizer observer tests passed. Not approved for live deployment.",
+  "previous_publication": "86ed5129d26274ce663fd10794d8205f2d10d88c",
+  "destination": "Shaugno/CrimsonDesertMultiplayer-NativeServer",
+  "review": "Approved experimental game-free capture backend. 89/89 tests, ASan observer/capture tests, and original allocation reproduction passed. No live deployment approval.",
   "excluded_generated_file": "vc140.pdb",
   "files": [
     {
@@ -28,9 +29,14 @@
       "sha256": "215C7D55911365B5BB33634332D4EAB155F879D002BD96C1760301447E3FB7FC"
     },
     {
+      "path": "docs/GITHUB-MIGRATION-20261112.txt",
+      "bytes": 1562,
+      "sha256": "99C432818D2C65CF4F8C68D5CE24E8A14AEE523BD6A857929067D10F45EAEBC4"
+    },
+    {
       "path": "docs/PROGRESS.txt",
-      "bytes": 4397,
-      "sha256": "2CC4BE33C874EEA42724E051096AD157EA616718A3BF6B4584648D71BD8B591A"
+      "bytes": 4966,
+      "sha256": "FF49EA507E9C3D588F6C0E0DD83AF4677EF40332E13BC2845B2B19F51BF11139"
     },
     {
       "path": "docs/probe-3576/CAPTURE.md",
@@ -64,8 +70,23 @@
     },
     {
       "path": "docs/probe-3576/PACKET-CANDIDATES-3576.md",
-      "bytes": 17794,
-      "sha256": "8A876984F71D020BE163BFBE00571C96D6807B48D5562473911569B84CE1C379"
+      "bytes": 17949,
+      "sha256": "E5CEAA03813D40D1427A41EBAE37C86B0C9FEC683B301DACE875A3B5F164E6C3"
+    },
+    {
+      "path": "docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt",
+      "bytes": 3441,
+      "sha256": "7630A4D7AF5148CBB7CA1D24C42BEE85E8410A4C4B9BABB808B76A1E6A8DE1CE"
+    },
+    {
+      "path": "docs/probe-3576/PACKET-CAPTURE-FIXES-REVIEW-20261112.txt",
+      "bytes": 4086,
+      "sha256": "A870FEC3924B8E07E2A148E84A921FDB3474726B393DAC2D2BFBB54902822BE4"
+    },
+    {
+      "path": "docs/probe-3576/PACKET-CAPTURE-REVIEW-20261112.txt",
+      "bytes": 4066,
+      "sha256": "CAC4CF76C04FB3FB5FB6EC7A8AE6891742448801B6D2883C52D4D9FF18D7080F"
     },
     {
       "path": "docs/probe-3576/PACKET-OBSERVER-REVIEW-20261112.txt",
@@ -96,6 +117,26 @@
       "path": "tests/diag3576_tests.cpp",
       "bytes": 11916,
       "sha256": "8CBC25A3B6AD601829EF267017A666303465C799DFBFD042C5F15F61B75C617B"
+    },
+    {
+      "path": "tests/pkt3576_capture_faults.cpp",
+      "bytes": 13472,
+      "sha256": "3433ECA50A2A8DBB6D109407555C5963F1C1504155E4BCE94C17260AC520BFBC"
+    },
+    {
+      "path": "tests/pkt3576_capture_targets.cpp",
+      "bytes": 2024,
+      "sha256": "E50B5DBB6ADA037BDAF98E24CBE4EC949832241AACD2ECF8971C08862BF67F70"
+    },
+    {
+      "path": "tests/pkt3576_capture_targets.h",
+      "bytes": 1443,
+      "sha256": "B987C885F50B6D2D69A003C6BDD21B537C873FB2608B9695E28F202A078BA4EF"
+    },
+    {
+      "path": "tests/pkt3576_capture_tests.cpp",
+      "bytes": 18996,
+      "sha256": "1B4CE593098628737253193D10C42A51786787B4FBBF8308A1A003CD62EA0E69"
     },
     {
       "path": "tests/pkt3576_tests.cpp",
@@ -129,13 +170,13 @@
     },
     {
       "path": "tools/pkt3576/admission_gate.cpp",
-      "bytes": 1557,
-      "sha256": "539B31E55218CEEC666C6B819CEE58CFE77E70D501A80C73E7434B2D73FC63AC"
+      "bytes": 1614,
+      "sha256": "6450F57EA0C1F7BB9E149ACCCA74EDC5622F1904153CC207DF2254611C97AD9B"
     },
     {
       "path": "tools/pkt3576/admission_gate.h",
-      "bytes": 1072,
-      "sha256": "A6E67FE7ADADF74D390D0855F1796F00DA208D2536720F34F839DAF7D2440717"
+      "bytes": 1165,
+      "sha256": "690CA56E88E69A7C491E767B0B48883D04AFE41B9B096CF65973F2F9EBA7EB12"
     },
     {
       "path": "tools/pkt3576/candidates.h",
@@ -143,14 +184,24 @@
       "sha256": "3568DC8B93966B34DD44912EA766872DAFB1766F009A37476F6F1314946A7E60"
     },
     {
+      "path": "tools/pkt3576/capture.cpp",
+      "bytes": 29017,
+      "sha256": "461D4F0BAB0C48BE94DEF25FA16A456C0CA27764FD350117543A7158E4D91114"
+    },
+    {
+      "path": "tools/pkt3576/capture.h",
+      "bytes": 2225,
+      "sha256": "7E028614A45157520BD5F223660BA3627E8EB8FD8883A2DE273676414087659C"
+    },
+    {
       "path": "tools/pkt3576/observer.cpp",
-      "bytes": 10692,
-      "sha256": "E77DE69BC50F0C677442BFAC08719C6A7ABDEA8365AE1AAEB40ACA4785B3ACC4"
+      "bytes": 11407,
+      "sha256": "39FB6F509E4FF852B7337C687F816A64D31D5C546F8F5E765FF0975938FF6421"
     },
     {
       "path": "tools/pkt3576/observer.h",
-      "bytes": 5203,
-      "sha256": "0CC306D2ECE7D5F2C426AFD0231800B43794B2505EE3818DA7EE043D1D936474"
+      "bytes": 5641,
+      "sha256": "97480ED590F70007C8678F38F2AF1EF923361880700157DFEF596418EEA20459"
     },
     {
       "path": "tools/probe-3576/burst.ps1",
@@ -194,8 +245,8 @@
     },
     {
       "path": "CMakeLists.txt",
-      "bytes": 58328,
-      "sha256": "DFA288D356D9D5B1A0990096A0A2117453C80E4F13F17D224011EA0B6A2F5511"
+      "bytes": 59938,
+      "sha256": "C9CFA2D2E20628D0086F7F4E0383927EFB41751834D2041CB55DCB01DB16E956"
     },
     {
       "path": "LICENSE",

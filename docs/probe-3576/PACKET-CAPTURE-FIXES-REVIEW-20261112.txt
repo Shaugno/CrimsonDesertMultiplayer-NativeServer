@@ -1,0 +1,73 @@
+Codex follow-up review: capture startup/teardown fixes, 2026-11-12
+
+RESOLVED FOLLOW-UP: Codex reviewed the new exception-safe installation path.
+The original second-hook failure reproduction now exits 0 with no escaping
+exception and no patched receive entry. All 89 tests and the ASan observer/
+real-hook tests pass. See PACKET-CAPTURE-APPROVAL-20261112.txt for the current
+approval scope and evidence. The request-changes review below is historical.
+
+Disposition: request one further fix. No GitHub upload under the user's
+"if everything looks good" condition. No game launch, attach, or deployment.
+
+Original findings resolved
+- The vanished-thread harness now prints "enumeration advanced" and exits 0.
+- The original reserve-failure harness now prints:
+  injected reserve failure escaped=0; subsequent fresh start refused=0
+  and exits 0. Storage is reserved before claiming g_active.
+- New regression tests cover vanished threads, enumeration errors, suspension
+  failure cleanup, and reserve failure followed by a successful fresh capture.
+- Codex independently ran scripts/build.ps1: 89/89 tests passed, 47.90 seconds.
+  Log: build/codex-review-capture-fixes.log.
+
+Remaining P1: an exception during second-hook creation bypasses hook cleanup
+File: tools/pkt3576/capture.cpp, lines 630-631, and PreHookRollback at 591-602.
+
+SafetyHook::MidHook::create is not noexcept. Its inline-hook setup constructs
+vectors (for example desired_addresses) and can throw std::bad_alloc rather
+than return an expected error. Both install_slot calls are outside a catch.
+
+When send-hook creation throws after receive-hook installation, PreHookRollback
+disarms the observer, closes the file, and clears g_active, but does not disable
+and quiesce the receive hook. running is still false, so stop returns Idle and
+release_owner can delete the State without the backend's quiescence protocol.
+The receive entry is still patched until that deletion. With active callers,
+hook/callback storage may be freed before they have finished.
+
+Reproduction
+build/review_capture_hook_allocation.cpp links the real capture backend and
+dummy target functions. A replacement operator new injects one bad_alloc only
+after the dummy receive entry is patched. This fails an 8-byte allocation in
+the subsequent hook setup, not the initial output-buffer reserve.
+Observed:
+hook allocation injected=1 size=8 escaped=1 receive_still_patched=1 stop_idle=1
+Exit 93 is the harness's failure verdict. No concurrent callback crash or game
+crash is claimed; the escaped exception and untracked installed hook were
+directly reproduced in the game-free test executable.
+
+Requested fix
+Make all fallible installation stages exception-safe, including both SafetyHook
+factory/enable calls. Before disarming/freeing state or clearing g_active,
+disable and quiesce every live hook using the existing cleanup protocol.
+If that cannot be completed, return Retained and preserve all required state
+and code. An allocation exception must not leave a live hook with stop==Idle.
+Add tests for allocation failure during the first and second hook setup and
+for recovery/retry, beyond the existing records.reserve test. Re-run the suite.
+
+Durable evidence, relative to the parent COOP MOD directory
+backups/NativeServer/20261112-capture-fixes-review/
+  review_capture_hook_allocation.cpp
+  hook-allocation-result.txt
+  review_capture_dead_thread.cpp and dead-thread-result.txt
+  review_capture_allocation.cpp and reserve-result.txt
+  codex-review-capture-fixes.log
+Copy reproduction cpp files into the repository build/ directory before
+compiling, since they use relative includes. Use the existing MSVC x64 setup,
+/std:c++latest /EHsc /O2 /MT /INCREMENTAL:NO and the built capture, observer,
+SafetyHook, Zydis, and Zycore libraries. The dummy targets source is
+tests/pkt3576_capture_targets.cpp.
+
+Reviewed capture.cpp SHA256:
+EECB4ADB70D738F28F494C5ED1C4FCCF1BD82DD28E156C498E19EA73DE2CDDD7
+
+Last approved GitHub checkpoint remains c639a7b. The production guard stays
+closed for 3576; this review does not authorize any live hook deployment.

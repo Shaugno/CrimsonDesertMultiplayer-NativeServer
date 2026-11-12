@@ -24,15 +24,19 @@ bool AdmissionGate::admit() noexcept {
 
 void AdmissionGate::leave() noexcept { state_.fetch_sub(1, std::memory_order_release); }
 
-void AdmissionGate::close_and_wait() noexcept {
+void AdmissionGate::close() noexcept {
     uint32_t cur = state_.load(std::memory_order_relaxed);
     for (;;) {
-        if ((cur & kClosed) != 0) break;
+        if ((cur & kClosed) != 0) return;
         if (state_.compare_exchange_strong(cur, cur | kClosed, std::memory_order_acq_rel,
                                             std::memory_order_acquire)) {
-            break;
+            return;
         }
     }
+}
+
+void AdmissionGate::close_and_wait() noexcept {
+    close();
     while ((state_.load(std::memory_order_acquire) & ~kClosed) != 0) YieldProcessor();
 }
 

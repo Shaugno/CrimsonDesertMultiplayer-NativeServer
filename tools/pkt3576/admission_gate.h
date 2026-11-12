@@ -21,6 +21,8 @@ public:
     // True when this caller may use the resource. False means it must not.
     bool admit() noexcept;
     void leave() noexcept;
+    // Stop new admissions. Admitted callers still have to leave.
+    void close() noexcept;
     // Stop new admissions and wait until every admitted caller has left.
     void close_and_wait() noexcept;
 

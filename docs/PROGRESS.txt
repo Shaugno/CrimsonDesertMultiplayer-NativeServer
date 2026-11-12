@@ -1,50 +1,56 @@
 CO-OP DEVELOPMENT PROGRESS
-Updated: 2026-11-12, after Codex's shutdown-gate review.
+Updated: 2026-11-12, after Codex approved the game-free capture backend.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
 1.0.0.3576 so two players can play co-op. Working co-op on this build has
 not yet been demonstrated.
 
-LATEST RESULT
-The game-free experimental passive packet observer is approved as a source
-checkpoint. The previous shutdown race is resolved by one atomic admission
-gate shared by producers and the consumer. Capacity 0/1 is rejected, failed
-hook removal preserves the observer, and reads remain bounded and guarded.
-No blocking findings remain in this fix. This is not approval to deploy hooks.
+LATEST CODEX REVIEW
+Approved as an experimental game-free source checkpoint. No blocking findings
+remain in the reviewed hook-installation fix. The vanished-thread loop,
+reserve-allocation failure, and exception after receive-hook installation
+are resolved. Unsafe cleanup retains required state/code instead of freeing it.
+See docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt.
+This approval does not authorize live deployment or full mod compatibility.
 
-VALIDATION
-Codex ran scripts/build.ps1: 87/87 CTest tests passed, 46.69 seconds.
-Log: build/codex-review-pkt3576-gate.log.
-Codex separately compiled/reran the observer tests with MSVC AddressSanitizer:
-exit 0, "pkt3576 tests ok". The tests include gate/close races, concurrent
-producers and consumer during shutdown, failed-removal ownership, packet
-bounds, and minimum queue capacity. Passing tests are not in-game validation.
-Published checkpoints also keep the validation evidence under checkpoint-evidence/.
+INDEPENDENT VALIDATION
+Codex ran scripts/build.ps1: exit 0, 89/89 CTest tests passed, 54.73 seconds.
+Log: build/codex-review-capture-installation.log.
+Codex rebuilt and ran observer and real-hook tests with AddressSanitizer,
+after initializing the Visual Studio runtime environment: both passed, exit 0.
+Log: build/codex-review-capture-installation-asan-run.log.
+Codex's original second-hook allocation reproduction now exits 0:
+hook allocation injected=1 size=8 escaped=0 receive_still_patched=0 stop_idle=1
+Log: build/codex-review-capture-installation-repro.log.
+Fault-injection tests run in the normal suite; Windows ASan has no leak report.
+No game was launched, attached, or modified. Build outputs stay under build/.
 
 COMPLETED MILESTONES
-1. Visual Studio C++ tools and game-free build/test workflow are available.
-2. Unsupported game builds are blocked from normal mod operation. The ASI
+1. Visual Studio C++ tools and the game-free build/test workflow are ready.
+2. Unsupported game builds remain blocked from normal mod operation. The ASI
    production guard still accepts only 1.0.0.2976.
-3. An external read-only 3576 position diagnostic was built and live tested.
-   The experimental local-position chain tracks walking. Local plus origin
-   gives world position; the static Y residual is kept as measured.
+3. The external read-only 3576 position diagnostic was built and live tested.
+   Local position tracks walking; local plus origin gives world position.
+   The static candidate's Y residual stays as measured.
 4. File evidence identifies send-like RVA 0x3A6310 and receive-like RVA
-   0x3A66A0 as credible experimental candidates, without adopting offsets.
-5. The passive observer library is implemented and tested with a fake hook
-   backend. It does not call packet functions, inject packets, or modify data.
+   0x3A66A0 as credible experimental candidates; no offsets were adopted.
+5. The passive observer has one atomic admission gate, bounded reads, queue
+   capacity checks, concurrent producers, and retained ownership on failure.
+6. A separate SafetyHook backend captures real hooks on dummy functions in
+   a test executable. Its writer/output bounds, partial install, repeated
+   install/removal, concurrent calls, and injected failure paths are tested.
+   It is not linked into cdmp.asi and has not been attached to the game.
 
 NEXT TASK
-Implement and review an isolated runtime capture backend and controlled live
-test procedure. First validate hook mechanics and teardown in a game-free
-test host. Preserve registers/flags, use a bounded nonblocking callback path,
-write logs from a separate consumer, and verify exact executable identity
-and entry bytes. Preserve callback/reader/module lifetime on detach failure.
-Stop/join consumers and ensure no callbacks can enter before owner deletion.
-Keep deployment and game attachment separate until that backend is reviewed.
+Design and review a separate live-capture runner and controlled test procedure.
+Before hooks, verify the loaded executable base, timestamp, and both candidate
+entry signatures. Preserve the production guard. Specify module pinning,
+callback/reader lifetime, bounded output, save backup, and retained failure
+behavior. Keep game deployment/attachment separate until explicitly requested.
 
 REMAINING WORK TOWARD CO-OP
-Observe/verify packet roles; implement compatibility incrementally; demonstrate
+Verify packet roles and implement compatibility incrementally; demonstrate
 peer representation and movement; validate loading, reconnects, and two-player
 behavior. Permanent manager root, health, and player readiness/loading signals
 remain unresolved. Readability/coherence alone does not establish readiness.
@@ -55,28 +61,31 @@ KEY EVIDENCE
  docs/probe-3576/LOCAL-TO-WORLD.md
  docs/probe-3576/DIAG3576-LIVE.md
  docs/probe-3576/PACKET-CANDIDATES-3576.md
- docs/probe-3576/PACKET-OBSERVER-REVIEW-20261112.txt
- tools/pkt3576/admission_gate.h and admission_gate.cpp
+ docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt
+ tools/pkt3576/capture.h and capture.cpp
  tools/pkt3576/observer.h and observer.cpp
+ tools/pkt3576/admission_gate.h and admission_gate.cpp
+ tests/pkt3576_capture_tests.cpp
+ tests/pkt3576_capture_faults.cpp
  tests/pkt3576_tests.cpp
 
 GITHUB / RECOVERY
-Verified account: Shaugno
+Verified active account: Shaugno
 Private repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
 Checkpoint branch: codex/checkpoint-3576-20261112
-Approved source checkpoint: c639a7bbaad9231632091bdad96e1e6b8bff887e
-The user requested migration to Shaugno. The migration changes account notes
-only; approved source and test evidence are preserved. See docs/GITHUB-MIGRATION-20261112.txt.
-Local dated backups live in the parent COOP MOD/backups/NativeServer folder.
-GitHub saves reviewed checkpoints; new edits are not automatically uploaded.
+Previous publication: 86ed5129d26274ce663fd10794d8205f2d10d88c
+User authorized saving this revision after successful review. The next commit
+contains the approved backend, review, and test evidence. New edits are not
+automatically uploaded. Local dated backups are under COOP MOD/backups/NativeServer.
+Earlier Shaugn46 checkpoints are historical; future saves use Shaugno.
 
 WORKING AGREEMENT / BOUNDARIES
 Grok implements; Codex reviews. Read AGENTS.md and CLAUDE.md when resuming.
-Active development remains on grok/compat-guard; original source HEAD is
+Active development stays on grok/compat-guard; its original source HEAD is
 3cbb03c5e0840db92d690a05eaf2693d0c4a1bf7 plus uncommitted development work.
 Publishing uses an isolated checkout so the active branch/index stays intact.
-The original origin remote remains ByJunter's repository; shaugno is the
-user's separate backup remote. The sibling original mod stays untouched.
-Do not open the 3576 guard, adopt candidates, deploy cdmp.asi, launch the
-game, or attach hooks as part of routine review. Follow save-backup rules
-in CLAUDE.md when in-game testing is separately requested.
+The original origin remote remains ByJunter's repository. shaugno is the
+active backup remote/default push destination. The sibling original mod stays
+untouched. Do not open the 3576 guard, adopt candidates, deploy cdmp.asi,
+launch the game, or attach hooks as part of routine review. Follow CLAUDE.md
+save-backup requirements when in-game testing is separately requested.

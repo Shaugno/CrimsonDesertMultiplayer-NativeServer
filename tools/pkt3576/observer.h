@@ -102,6 +102,14 @@ public:
     InstallResult install(const Deps& deps);
     ShutdownResult shutdown();
 
+    // Open the ring for an external hook backend. This does not read an image,
+    // install a hook, or consult the compatibility guard. Capacity below
+    // kMinQueueCapacity is refused. The caller delivers on_send / on_recv.
+    bool arm(ReadFn read, void* user);
+    // Close admission and free the ring. Refuses while a hook site remains.
+    // The caller joins producers and the consumer before this returns.
+    bool disarm();
+
     // Called on the consumer thread inside try_pop, before the queue is read,
     // while shutdown is not allowed to free the queue. Null unless a test
     // installs one. Callbacks do not call it.
