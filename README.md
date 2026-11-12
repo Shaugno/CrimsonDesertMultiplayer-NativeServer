@@ -18,6 +18,8 @@ The native-server approach connects the guest to the host's world through the ga
 
 [Join our Discord](https://discord.gg/fE5GYxrv9V) to follow development, share ideas, and discuss the co-op project.
 
+[Join the Heaven server](https://haven.rmsportalhosting.com/?invite=70f53638).
+
 ## Current progress
 
 - A read-only 3576 position diagnostic has been live tested.
