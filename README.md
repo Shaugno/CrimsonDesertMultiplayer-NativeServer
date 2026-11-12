@@ -1,34 +1,52 @@
-# Crimson Desert Multiplayer: Native Server Version (cdmp)
+# Crimson Desert Multiplayer — Shaugno Continuation
 
-An experimental co-op mod for **Crimson Desert** (PC, Steam build 1.0.0.2976), written from scratch in
-C++20. It is loaded into the game as `cdmp.asi` by Ultimate ASI Loader.
+An independent continuation of the experimental **Crimson Desert** co-op mod, maintained by
+**Shaugno**. Our goal is reliable two-player co-op on newer game builds, starting with **1.0.0.3576**.
+The C++ project keeps the `cdmp` name and `cdmp.asi` binary used by the original implementation.
 
-This is the successor to [CrimsonDesertMultiplayer](https://github.com/ByJunter/CrimsonDesertMultiplayer).
-Instead of copying characters between two separate games, the guest joins the host's world through the
-game's own internal server.
+Project home: [Shaugno/CrimsonDesertMultiplayer-NativeServer](https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer).
+Built on [ByJunter's original native-server implementation](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer),
+which succeeded [CrimsonDesertMultiplayer](https://github.com/ByJunter/CrimsonDesertMultiplayer).
+The native-server approach connects the guest to the host's world through the game's internal server.
 
-> **Status: alpha, not maintained.** This is a research project published as-is. It only works with game
-> build 1.0.0.2976 (PE timestamp `0x6AB28F00`); every address and signature in the code is specific to that
-> build. Expect crashes, and back up your saves before trying it.
+> **Status: active continuation, experimental.** Build **1.0.0.3576 compatibility is in development**;
+> working co-op on that build has not been demonstrated. The production mod still accepts only
+> **1.0.0.2976** (PE timestamp `0x6AB28F00`). The 3576 diagnostics and capture backend are development
+> tools, not a compatible gameplay release.
+
+## Current progress
+
+- A read-only 3576 position diagnostic has been live tested.
+- A passive packet observer and real SafetyHook capture backend have passed game-free tests.
+- The latest approved backend passed **89 tests**, the observer/capture AddressSanitizer tests, and
+  the original hook-installation failure reproduction. Its real hooks were tested on dummy functions.
+- Next: implement and review the version-checked live-capture runner, gather controlled evidence,
+  and port the verified pieces toward a two-player test.
+
+See [progress](docs/PROGRESS.txt), the [latest capture review](docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt),
+and the [continuation roadmap](docs/ROADMAP.md). Experimental candidate addresses stay isolated until
+their intended use is verified. The production compatibility guard remains in place.
 
 ## Requirements
 
-- A legitimately purchased copy of **Crimson Desert** on Steam, build 1.0.0.2976. The mod does not work
+- A legitimately purchased copy of **Crimson Desert** on Steam. The original gameplay implementation
+  targets **1.0.0.2976**; our current compatibility research targets **1.0.0.3576**. The mod does not work
   without the original game, and this repository contains **no game code, assets or data**.
 - Windows 10/11 x64.
-- Visual Studio 2022 or the VS 2022 Build Tools with the "Desktop development with C++" workload (MSVC
-  x64, CMake). The build downloads Dear ImGui and safetyhook with CMake `FetchContent`.
+- Visual Studio 2022 or 2026, or the corresponding Build Tools, with the "Desktop development with C++"
+  workload (MSVC x64, CMake). The build downloads Dear ImGui and safetyhook with CMake `FetchContent`.
 - [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4 to install the mod
   (see [third_party/ultimate-asi-loader/README.md](third_party/ultimate-asi-loader/README.md)).
 
-## What works
+## Upstream co-op behavior on 1.0.0.2976
 
 The game keeps the client/server architecture of an MMO internally: the client talks to an in-process
 server through ~1,100 internal "Troc" messages. The current approach ("option D") lets the **host's
 internal server accept a second player**: the guest's game client connects to the host's server through a
 Steam (or UDP) tunnel.
 
-Validated live (two game copies on one PC, and partly between two PCs over Steam):
+ByJunter reported live validation with two game copies on one PC, and partly between two PCs over
+Steam, on the original supported build. These results have not been reproduced on 3576:
 
 - the guest logs in to the host's world and plays alongside the host's character;
 - movement, actions, climbing, gliding, mounts (mount, ride and dismount in both directions), pets;
@@ -52,6 +70,10 @@ The output goes to `build\bin\<Config>\` (`cdmp.asi`, `cdmp_peer.exe`, `cdmp_hos
 and the tests).
 
 ## Installing
+
+The commands below are the original mod installation workflow for its supported build. This
+continuation has no 3576 gameplay release yet. Keep experimental live-capture deployment separate
+from ordinary build and review work.
 
 ```powershell
 .\scripts\deploy.ps1                                  # copies cdmp.asi and the loader (as winmm.dll) to bin64
@@ -86,4 +108,7 @@ names and short byte signatures of the game executable, as needed to hook it.
 
 GPL v3: see [LICENSE](LICENSE). `third_party/safetyhook-patch` keeps its own license (BSL-1.0).
 
-Author: **ByJunter**.
+Original implementation and research: **ByJunter**.
+
+Continuation maintainer: **Shaugno**. Original attribution, source history, and GPL v3 licensing are
+preserved. Third-party components retain their existing licenses.

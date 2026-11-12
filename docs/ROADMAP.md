@@ -1,5 +1,31 @@
 # Roadmap
 
+## Shaugno continuation: current priorities
+
+This repository is now Shaugno's independent continuation of ByJunter's work.
+The goal is reliable two-player co-op on **1.0.0.3576**, then a repeatable way to
+assess later builds. Full co-op on 3576 has not yet been demonstrated.
+
+Completed in this continuation: the live-tested read-only position diagnostic,
+the passive observer, and the real capture backend validated against dummy
+functions. The latest approved game-free suite has 89 passing tests.
+
+1. Build and review the version-checked live-capture runner, including module
+   lifetime, bounded output, rollback, and retained failure handling.
+2. Run controlled passive captures after a separate live-test instruction;
+   verify packet roles against observed actions.
+3. Port the verified player and networking pieces without bypassing build guards.
+4. Demonstrate a connected peer and movement on 3576.
+5. Validate loading, reconnects, combat, save handling, and two-PC play before
+   describing the result as a gameplay release.
+
+Current evidence and limitations: [PROGRESS.txt](PROGRESS.txt).
+
+## Original upstream roadmap and research history
+
+The milestones below preserve ByJunter's original notes and build-2976 results.
+Their completed markers do not establish compatibility with 3576.
+
 Todo se desarrolla y prueba con **un solo PC**. El segundo jugador lo hace
 `cdmp_peer.exe` hasta el hito 5.
 

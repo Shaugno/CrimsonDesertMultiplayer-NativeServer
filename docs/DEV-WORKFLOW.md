@@ -1,9 +1,14 @@
 # Local development: Visual Studio, Grok Build, and Codex
 
-Source: https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer
+Project home: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
 
-This NativeServer checkout is the development target. Upstream marks the project
-as an unmaintained alpha pinned to game build 1.0.0.2976. The original mod lives
+Original source: https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer
+
+This NativeServer checkout is Shaugno's independent continuation. ByJunter's
+upstream alpha targets game build 1.0.0.2976; this continuation is developing
+compatibility for 1.0.0.3576. The production guard still accepts only 2976.
+`origin` points to Shaugno and `upstream` retains the original repository.
+The `shaugno` remote is also kept as a publishing alias. The original mod lives
 in the sibling folder `CrimsonDesertMultiplayer` and must stay untouched. The
 parent `COOP MOD\Start-Grok.ps1` still opens that original checkout; leave the
 launcher alone unless the user asks to retarget it. Point Codex at this

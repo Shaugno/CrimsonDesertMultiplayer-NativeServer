@@ -19,8 +19,11 @@ The local report is docs/probe-3576/PACKET-CAPTURE-FIXES-REVIEW-20261112.txt
 in the active NativeServer checkout; it is not part of the approved base.
 
 Active development stays on grok/compat-guard in the NativeServer checkout.
-The original origin remote remains ByJunter's repository. The shaugno remote
-is the active backup destination. Earlier Shaugn46 checkpoints and dated
+At migration time, origin remained ByJunter's repository and shaugno was the
+active backup destination. The user subsequently established this as an
+independent continuation: origin now points to Shaugno, upstream retains
+ByJunter's repository, and shaugno remains a publishing alias.
+Earlier Shaugn46 checkpoints and dated
 local backups remain historical recovery copies.
 
 The production ASI guard still accepts only 1.0.0.2976. Full 3576 co-op is

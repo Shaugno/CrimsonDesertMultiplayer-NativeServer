@@ -4,7 +4,12 @@ Read CLAUDE.md before changing code. It defines the memory, hook, networking,
 game-build, and licensing rules for this NativeServer checkout. Read the relevant
 docs/research notes before changing a reverse-engineered behavior.
 
-This checkout is the development target. The sibling folder
+This checkout is Shaugno's independent continuation and the development target.
+Project home: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer.
+`origin` is this continuation; `upstream` preserves ByJunter's original source.
+Preserve original attribution, history, and the GPL v3 license. Do not describe
+the original implementation as newly authored by this continuation.
+The sibling folder
 `CrimsonDesertMultiplayer` is the original mod and stays untouched, including
 its local setup files. The parent `Start-Grok.ps1` still opens that original
 checkout; do not retarget it unless the user asks.
@@ -18,7 +23,8 @@ checkout; do not retarget it unless the user asks.
 - Preserve unrelated changes. Report the files changed, commands run, results,
   remaining uncertainties, and a short manual test plan at handoff.
 - Do not claim a runtime issue is fixed based only on compilation or unit tests.
-- Keep patches local for review; publish changes when the user requests it.
+- Keep patches local for review; publish changes to Shaugno when the user requests
+  it. The working agreement remains Grok implementation followed by Codex review.
 
 ## Validation
 

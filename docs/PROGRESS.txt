@@ -1,5 +1,7 @@
 CO-OP DEVELOPMENT PROGRESS
-Updated: 2026-11-12, after Codex approved the game-free capture backend.
+Project: Crimson Desert Multiplayer — Shaugno Continuation
+Maintainer: Shaugno; original implementation and research by ByJunter.
+Updated: 2026-11-12, establishing this independent continuation.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
@@ -73,10 +75,11 @@ GITHUB / RECOVERY
 Verified active account: Shaugno
 Private repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
 Checkpoint branch: codex/checkpoint-3576-20261112
-Previous publication: 86ed5129d26274ce663fd10794d8205f2d10d88c
-User authorized saving this revision after successful review. The next commit
-contains the approved backend, review, and test evidence. New edits are not
-automatically uploaded. Local dated backups are under COOP MOD/backups/NativeServer.
+Approved backend publication: 1638ca250b3ea2334cbfd274af161b0e5dcc2d9d
+The user requested continuing this project under Shaugno. Project identity,
+attribution, and roadmap updates are documentation only; runtime code remains
+at the approved checkpoint. New implementation changes require review before
+publication. Local dated backups are under COOP MOD/backups/NativeServer.
 Earlier Shaugn46 checkpoints are historical; future saves use Shaugno.
 
 WORKING AGREEMENT / BOUNDARIES
@@ -84,8 +87,8 @@ Grok implements; Codex reviews. Read AGENTS.md and CLAUDE.md when resuming.
 Active development stays on grok/compat-guard; its original source HEAD is
 3cbb03c5e0840db92d690a05eaf2693d0c4a1bf7 plus uncommitted development work.
 Publishing uses an isolated checkout so the active branch/index stays intact.
-The original origin remote remains ByJunter's repository. shaugno is the
-active backup remote/default push destination. The sibling original mod stays
+origin is Shaugno's project; upstream preserves ByJunter's original repository.
+shaugno remains a publishing alias/default push destination. The sibling original mod stays
 untouched. Do not open the 3576 guard, adopt candidates, deploy cdmp.asi,
 launch the game, or attach hooks as part of routine review. Follow CLAUDE.md
 save-backup requirements when in-game testing is separately requested.
