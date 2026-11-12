@@ -14,6 +14,10 @@ The native-server approach connects the guest to the host's world through the ga
 > **1.0.0.2976** (PE timestamp `0x6AB28F00`). The 3576 diagnostics and capture backend are development
 > tools, not a compatible gameplay release.
 
+## Community
+
+[Join our Discord](https://discord.gg/fE5GYxrv9V) to follow development, share ideas, and discuss the co-op project.
+
 ## Current progress
 
 - A read-only 3576 position diagnostic has been live tested.
