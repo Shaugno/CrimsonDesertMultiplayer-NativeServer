@@ -18,6 +18,7 @@
 #include "common/udp.h"
 #include "mod/config.h"
 #include "mod/game/game_errors.h"
+#include "mod/game/build_guard.h"
 #include "mod/game/offsets.h"
 #include "mod/game/player_reader.h"
 #include "mod/game/safe_memory.h"
@@ -130,24 +131,44 @@ std::string file_version(const std::wstring& path) {
 
 // Facts that identify the exact game build. Every offset/signature we find
 // later is only valid for one build, so the log must always say which one.
-bool log_process_info() {
-    const std::wstring exe = module_path(nullptr);
+// The PE headers are copied through safe_read; a bad e_lfanew is an unreadable
+// identity and is not followed.
+game::build_guard::ImageIdentity current_image_identity() {
     const auto base = reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
-    const auto* dos = reinterpret_cast<const IMAGE_DOS_HEADER*>(base);
-    const auto* nt = reinterpret_cast<const IMAGE_NT_HEADERS*>(base + dos->e_lfanew);
+    return game::build_guard::identify_mapped(
+        base, [](uintptr_t addr, void* out, size_t size) { return game::safe_read(addr, out, size); });
+}
+
+struct ProcessFacts {
+    bool in_game = false;
+    game::build_guard::ImageIdentity identity{};
+};
+
+ProcessFacts log_process_info() {
+    const std::wstring exe = module_path(nullptr);
+    const auto identity = current_image_identity();
+    const bool in_game = exe.ends_with(L"\\CrimsonDesert.exe");
 
     log::info("Host process: {} (PID {})", narrow(exe), GetCurrentProcessId());
-    log::info("Host version: {}  image base: 0x{:X}  image size: 0x{:X}  PE timestamp: 0x{:08X}",
-              file_version(exe), base, nt->OptionalHeader.SizeOfImage, nt->FileHeader.TimeDateStamp);
-
-    const bool in_game = exe.ends_with(L"\\CrimsonDesert.exe");
+    if (identity.timestamp_known && identity.size_known) {
+        log::info("Host version: {}  image base: 0x{:X}  image size: 0x{:X}  PE timestamp: 0x{:08X}",
+                  file_version(exe), identity.mapped_base, identity.size_of_image, identity.timestamp);
+    } else {
+        log::info("Host version: {}  image base: 0x{:X}  PE headers: unreadable", file_version(exe),
+                  identity.mapped_base);
+    }
     log::info("{}", in_game ? "Running inside CrimsonDesert.exe"
                             : "Not running inside the game (test host); game features stay off");
+    if (in_game && identity.kind != game::build_guard::IdentityKind::Supported) {
+        log::error("{}", game::build_guard::diagnostic(identity));
+    } else if (in_game) {
+        log::info("{}", game::build_guard::diagnostic(identity));
+    }
 
     if (HMODULE winmm = GetModuleHandleW(L"winmm.dll")) {
         log::info("winmm.dll loaded from: {}", narrow(module_path(winmm)));
     }
-    return in_game;
+    return {in_game, identity};
 }
 
 // CDMP_ROLE (role_logic.h): the role, and whether this process is the first of it. Read by the worker before the log
@@ -805,6 +826,20 @@ void mirror_hotkey_loop(uint32_t delay_ms) {
 DWORD WINAPI late_init(LPVOID param) {
     std::unique_ptr<LateInit> init(static_cast<LateInit*>(param));
     if (init->in_game) {
+        game::build_guard::StartupRequest guard_req;
+        guard_req.in_game = true;
+        guard_req.identity = current_image_identity();
+        const auto guard_decision = game::build_guard::decide_startup(guard_req);
+        bool allow_reads = false;
+        bool allow_hooks = false;
+        game::build_guard::apply_startup(
+            guard_decision, [&] { allow_reads = true; }, [&] { allow_hooks = true; }, [] {});
+        if (!allow_reads || !allow_hooks) {
+            log::error("{}", game::build_guard::diagnostic(guard_req.identity));
+            log::error("Late init: executable identity is not supported; no game address is read and no hook "
+                       "is installed");
+            return 0;
+        }
         log::info("Late init: waiting for the game to finish starting up");
         const auto world_slot = reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr)) +
                                 game::build_2976::kWorldSystemSlot;
@@ -940,14 +975,37 @@ DWORD WINAPI worker(LPVOID) {
     log::info("Mod file: {}", narrow(module_path(g_self)));
 
     try {
-        const bool in_game = log_process_info();
+        const ProcessFacts proc = log_process_info();
+        const bool in_game = proc.in_game;
         if (!rs.valid) return 0;
         if (rs.role != role::Role::None) log_parent();
+        game::build_guard::StartupRequest guard_req;
+        guard_req.in_game = in_game;
+        guard_req.test_overlay = GetEnvironmentVariableW(L"CDMP_TEST_OVERLAY", nullptr, 0) > 0;
+        guard_req.guest_role = rs.role == role::Role::Guest;
+        guard_req.identity = proc.identity;
+        const auto startup = game::build_guard::decide_startup(guard_req);
+        bool allow_reads = false;
+        bool allow_hooks = false;
+        bool allow_test_overlay = false;
+        game::build_guard::apply_startup(
+            startup, [&] { allow_reads = true; }, [&] { allow_hooks = true; }, [&] { allow_test_overlay = true; });
+        // Both permissions come from the same decision. A rejected identity sets neither.
+        const bool game_build_ok = allow_reads && allow_hooks;
         // The guest's saves: before anything else (the game reads its save list early), in every guest-role process
         // (the later ones too). Never on the real folder: a failure ends the game here, before it touched a save.
         // Not in a test host (cdmp_host unloads the mod: KernelBase hooks would be left pointing into it).
+        // An unsupported or unreadable game image does not get those hooks either; the process still ends so the
+        // shared save folder is not written.
         if (rs.role == role::Role::Guest && !in_game) {
             log::info("Role guest: not inside the game (test host): the save redirect is not installed");
+        } else if (startup.end_guest_process) {
+            log::error("{}", game::build_guard::diagnostic(proc.identity));
+            log::error("Role guest: the save redirect is NOT installed; the game is ended now so that it never "
+                       "writes the real save folder");
+            log::flush(2000);
+            TerminateProcess(GetCurrentProcess(), 0xCD60);
+            return 0;
         } else if (rs.role == role::Role::Guest && !session2::save_hooks_install_guest_role()) {
             log::error("Role guest: the save redirect is NOT installed; the game is ended now so that it never "
                        "writes the real save folder");
@@ -982,7 +1040,7 @@ DWORD WINAPI worker(LPVOID) {
         }
         // Two copies on one PC: the copy in the background keeps its GPU share (bg_speed_logic.h). Right after the
         // config, before the first frame: no hook, its own thread.
-        bgspeed::start(bgspeed::gate(cfg.background_full_speed, rs.role != role::Role::None, in_game),
+        bgspeed::start(bgspeed::gate(cfg.background_full_speed, rs.role != role::Role::None, game_build_ok),
                        role::name_a(rs.role));
         log::info("Config: player '{}', peer {}:{}, {} Hz, net {}, co-op {}", cfg.player_name,
                   cfg.peer_host, cfg.peer_port, cfg.send_rate_hz, cfg.net_enabled ? "on" : "off",
@@ -1093,29 +1151,26 @@ DWORD WINAPI worker(LPVOID) {
                   cfg.s2_docked_gimmicks, cfg.s2_docked_gimmicks_other, cfg.s2_gimmick_event_dedup);
         // P8 session 10 (pendientes/p8-impl-freeze-watchdog.md): before ANY module installs a hook, so that every
         // mid hook installed through p8_install_mid gets its thread mark. Both roles; its own thread.
-        session2::freeze_watchdog_start(in_game && cfg.s2_enabled && cfg.s2_freeze_watchdog, cfg.s2_guest);
+        session2::freeze_watchdog_start(game_build_ok && cfg.s2_enabled && cfg.s2_freeze_watchdog, cfg.s2_guest);
 
         if (cfg.startup_delay_ms > 0 && stop_requested(cfg.startup_delay_ms)) return 0;
 
-        LocalSource local(in_game);
-
-        // The overlay only makes sense inside the game; a test host would
+        // The overlay only makes sense inside the supported game; a test host would
         // otherwise keep patched DXGI vtables pointing into an unloaded DLL.
-        // cdmp_dx12_test opts in explicitly (and never unloads the mod).
-        const bool overlay_allowed =
-            in_game || GetEnvironmentVariableW(L"CDMP_TEST_OVERLAY", nullptr, 0) > 0;
-        const bool overlay = overlay_allowed && cfg.overlay_enabled;
-        const bool sniffer = in_game && cfg.sniffer_enabled;
-        if (in_game && !cfg.overlay_enabled) log::info("Overlay disabled in cdmp.ini");
-        if (in_game && !cfg.sniffer_enabled) log::info("Sniffer disabled in cdmp.ini");
+        // cdmp_dx12_test opts in explicitly (and never unloads the mod). That opt-in
+        // is allow_test_overlay and does not authorize game addresses or hooks.
+        const bool overlay = (game_build_ok || allow_test_overlay) && cfg.overlay_enabled;
+        const bool sniffer = game_build_ok && cfg.sniffer_enabled;
+        if (game_build_ok && !cfg.overlay_enabled) log::info("Overlay disabled in cdmp.ini");
+        if (game_build_ok && !cfg.sniffer_enabled) log::info("Sniffer disabled in cdmp.ini");
         // Option D never runs with the copies model.
-        bool session2 = in_game && cfg.s2_enabled && !cfg.coop_enabled;
-        if (in_game && cfg.s2_enabled && cfg.coop_enabled) {
+        bool session2 = game_build_ok && cfg.s2_enabled && !cfg.coop_enabled;
+        if (game_build_ok && cfg.s2_enabled && cfg.coop_enabled) {
             log::warn("Session2 (option D) needs [coop] enabled=0; staying off");
         }
         // On the P8 guest the dev tools that inject packets stay off (they would
         // reach a client that plays on the host's server).
-        const bool p8_guest = in_game && cfg.s2_enabled && !cfg.coop_enabled && cfg.s2_guest;
+        const bool p8_guest = game_build_ok && cfg.s2_enabled && !cfg.coop_enabled && cfg.s2_guest;
         // P8, the guest's side: as early as possible (the client connects to its
         // own server seconds after start), and never with the host-side stages.
         if (session2) {
@@ -1243,20 +1298,20 @@ DWORD WINAPI worker(LPVOID) {
         }
         if (overlay || sniffer || session2) {
             if (overlay) render::hud_configure({cfg.overlay_self_marker});
-            auto* init = new LateInit{in_game, overlay, sniffer,
-                                                      in_game && !p8_guest && cfg.dev_clone_hotkeys,
+            auto* init = new LateInit{game_build_ok, overlay, sniffer,
+                                                      game_build_ok && !p8_guest && cfg.dev_clone_hotkeys,
                                                       cfg.dev_mirror_delay_ms, cfg.dev_mirror_offset_m,
-                                                      in_game && cfg.coop_enabled, cfg.coop_offset_m,
+                                                      game_build_ok && cfg.coop_enabled, cfg.coop_offset_m,
                                                       cfg.coop_horse, cfg.coop_equip, cfg.coop_damage,
-                                                      in_game && !p8_guest && cfg.dev_combat_tests, cfg.sniffer_record,
+                                                      game_build_ok && !p8_guest && cfg.dev_combat_tests, cfg.sniffer_record,
                                                       dir, cfg.coop_minimap_icon, cfg.dev_minimap_cycle,
-                                                      in_game && !p8_guest && cfg.dev_aggro_test,
+                                                      game_build_ok && !p8_guest && cfg.dev_aggro_test,
                                                       cfg.coop_enemies_target_copy,
-                                                      in_game && !p8_guest && cfg.dev_enemy_relay,
-                                                      in_game && !p8_guest && cfg.dev_piece4_test,
+                                                      game_build_ok && !p8_guest && cfg.dev_enemy_relay,
+                                                      game_build_ok && !p8_guest && cfg.dev_piece4_test,
                                                       cfg.coop_guest_hits, cfg.coop_guest_hit_stagger,
                                                       cfg.coop_player_hit_react, cfg.coop_player_hit_lethal,
-                                                      in_game && !p8_guest && cfg.dev_attack_probe, cfg.coop_copy_attack_slots,
+                                                      game_build_ok && !p8_guest && cfg.dev_attack_probe, cfg.coop_copy_attack_slots,
                                                       cfg.coop_map_pin_shape, cfg.coop_map_pin_colour};
             init->session2 = session2;
             init->session2_opt = {cfg.s2_probe, cfg.s2_save_guard, cfg.s2_block_save_trocs, cfg.s2_finder_log,
@@ -1268,7 +1323,13 @@ DWORD WINAPI worker(LPVOID) {
             g_late_thread = CreateThread(nullptr, 0, late_init, init, 0, nullptr);
         }
 
-        if (cfg.net_enabled) run_network(cfg, local);
+        // Rejected in-game identities do not construct a player source and do not
+        // enter run_network, so no synthetic state is sampled. The test host is
+        // the synthetic feed and still networks when [net] is on.
+        std::optional<LocalSource> local;
+        game::build_guard::start_multiplayer(
+            startup, cfg.net_enabled, [&] { local.emplace(true); }, [&] { local.emplace(false); },
+            [&] { run_network(cfg, *local); });
     } catch (const std::exception& e) {
         log::error("Unhandled exception in worker: {}", e.what());
     } catch (...) {

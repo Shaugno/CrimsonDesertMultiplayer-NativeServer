@@ -33,6 +33,9 @@ param(
     [switch]$SteamRunningOk
 )
 $ErrorActionPreference = 'Stop'
+# Get-FileHash is in this module. The tests start this script with powershell -NoProfile,
+# where autoload does not provide it. Load it before Get-Sha and every backup check.
+Import-Module Microsoft.PowerShell.Utility
 
 $kHeader = 'cdmp host save generation (P8 S35 phase E)'
 $kBuild = '1.0.0.2976'

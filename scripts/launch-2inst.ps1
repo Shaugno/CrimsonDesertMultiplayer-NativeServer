@@ -37,6 +37,9 @@ param(
     [switch]$NoLaunch
 )
 $ErrorActionPreference = 'Stop'
+# Get-FileHash is in this module. The tests start this script with powershell -NoProfile,
+# where autoload does not provide it. Load it before any backup or copy check.
+Import-Module Microsoft.PowerShell.Utility
 $kAppId = '3321460'
 
 function Refuse([string]$why) {

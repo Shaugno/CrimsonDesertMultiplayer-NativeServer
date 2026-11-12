@@ -1,0 +1,93 @@
+CO-OP DEVELOPMENT CHECKPOINT
+Updated: 2026-11-12, after Codex's first passive-observer implementation review.
+
+GOAL
+Get CrimsonDesertMultiplayer-NativeServer working with the user's Crimson
+Desert 1.0.0.3576 so two players can play co-op together. Working co-op on
+3576 has not yet been demonstrated.
+
+WORKING AGREEMENT
+Grok implements focused tasks. Codex reviews code and evidence and runs
+game-free validation. Publish only when requested by the user. The sibling original mod checkout
+is not the development target. Read AGENTS.md and CLAUDE.md when resuming.
+
+SOURCE STATE
+Repository: CrimsonDesertMultiplayer-NativeServer
+Branch at checkpoint: grok/compat-guard
+HEAD: 3cbb03c5e0840db92d690a05eaf2693d0c4a1bf7
+Snapshot base: the HEAD above is the original source revision. This development
+branch additionally saves the compatibility investigation and diagnostic tools.
+These are experimental work in progress, not a supported release.
+
+VERIFIED PROGRESS
+1. Visual Studio C++ build environment is set up.
+2. Unsupported game builds remain blocked from normal mod operation.
+   The production ASI guard still accepts only 1.0.0.2976.
+3. A read-only external 3576 position diagnostic was built and live tested.
+   The player chain tracks movement. Local position plus the experimental
+   origin gives world position; the static candidate's Y residual is retained.
+   Readable/coherent does not mean player-ready or loading-complete.
+4. File evidence identifies credible send/receive function candidates:
+   send RVA 0x3A6310; receive RVA 0x3A66A0. These remain experimental.
+5. A game-free passive observer library now exists in tools/pkt3576.
+   Prefix reads are bounded by min(raw length, 16). Receive does not read
+   the send-only sixth/seventh stack arguments. No packet meanings adopted.
+6. Codex rebuilt the project and ran all 87 CTest tests successfully.
+   Build log: build/codex-review-pkt3576-full.log (ignored build output).
+   Passing tests do not resolve the review findings below.
+
+CURRENT TASK / REVIEW FINDINGS
+The user is passing these findings to Grok. Fix completion is not yet reviewed.
+1. Consumer shutdown: try_pop is not protected by callback inflight tracking.
+   Do not free the queue while a consumer can still access it.
+2. Failed-removal ownership: a surviving hook still references the Observer.
+   Leaking the queue in the destructor does not preserve the Observer object.
+   Enforce retained object/callback-state lifetime before real hooks exist.
+3. Capacity one: installation accepts it, but the sequence-number queue loses
+   records without counting drops. Codex reproduced two pushes followed by
+   no readable record and zero drops. Reject capacity < 2 or implement it.
+
+NEXT STEPS
+1. Grok fixes these findings and adds regression tests.
+2. Codex reviews the fixes and reruns relevant validation.
+3. Develop/review an isolated real capture backend and controlled live-test
+   procedure. Current observer library uses an injected test hook sink;
+   it is not yet a deployed live capture tool.
+4. Use capture evidence to establish packet roles needed for co-op, then
+   implement and validate compatibility incrementally.
+5. Demonstrate peer representation and movement, then test loading,
+   reconnecting, and two-player behavior. Full 3576 support remains unfinished.
+
+REMAINING UNKNOWNS
+Permanent manager root; reliable player readiness/loading detection; health;
+packet semantics and safe integration; complete co-op behavior on 3576.
+
+BOUNDARIES
+Do not open the production guard, adopt candidate offsets, deploy cdmp.asi,
+launch the game, or attach experimental hooks as part of a routine review.
+In-game testing is a separate task. Follow CLAUDE.md backup requirements.
+
+KEY EVIDENCE
+docs/COMPATIBILITY-3576.md
+docs/probe-3576/CAPTURE.md
+docs/probe-3576/LOCAL-TO-WORLD.md
+docs/probe-3576/DIAG3576.md
+docs/probe-3576/DIAG3576-LIVE.md
+docs/probe-3576/PACKET-CANDIDATES-3576.md
+docs/probe-3576/packet-scan-3576.txt
+tools/pkt3576/observer.h and observer.cpp
+tests/pkt3576_tests.cpp
+
+CHECKPOINT PRACTICE
+Save another dated source snapshot and refresh this progress file after
+reviewed milestones. A snapshot made while Grok is editing is a recovery
+copy of files as read, not an atomic or newly approved code revision.
+Snapshots are local backups, not Git commits or published releases.
+
+GITHUB BACKUP
+User requested this checkpoint be saved under Shaugn46.
+Target: private repository Shaugn46/CrimsonDesertMultiplayer-NativeServer.
+Branch: codex/checkpoint-3576-20261112.
+Snapshot source: local recovery backup 20261112-140058.
+Grok may have newer fixes in the active checkout; this snapshot does not
+claim they were reviewed. The active checkout and branch are unchanged.

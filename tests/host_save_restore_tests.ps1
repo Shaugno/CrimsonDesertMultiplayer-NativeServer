@@ -7,6 +7,8 @@
 # Run by ctest (host_save_restore_script); exit 0 = all passed.
 
 $ErrorActionPreference = 'Stop'
+# Get-FileHash is in this module. Load it before Sha; do not rely on autoload.
+Import-Module Microsoft.PowerShell.Utility
 $repo = Split-Path $PSScriptRoot -Parent
 $restore = Join-Path $repo 'scripts\host_save_restore.ps1'
 $root = Join-Path ([IO.Path]::GetTempPath()) "cdmp_restore_test_$PID"

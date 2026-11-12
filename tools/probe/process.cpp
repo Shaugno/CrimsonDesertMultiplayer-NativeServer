@@ -37,6 +37,13 @@ bool Process::attach_by_pid(uint32_t pid) {
     return load_main_module();
 }
 
+bool Process::alive() const {
+    if (!handle_) return false;
+    DWORD code = 0;
+    if (!GetExitCodeProcess(static_cast<HANDLE>(handle_), &code)) return false;
+    return code == STILL_ACTIVE;
+}
+
 bool Process::load_main_module() {
     HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid_);
     if (snap == INVALID_HANDLE_VALUE) return false;

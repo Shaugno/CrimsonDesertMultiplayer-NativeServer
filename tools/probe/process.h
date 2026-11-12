@@ -17,6 +17,8 @@ public:
 
     bool attach_by_name(const std::wstring& exe_name);
     bool attach_by_pid(uint32_t pid);
+    // False when the handle is gone or the process has exited. Read-only.
+    bool alive() const;
 
     uint32_t pid() const { return pid_; }
     uint64_t module_base() const { return base_; }

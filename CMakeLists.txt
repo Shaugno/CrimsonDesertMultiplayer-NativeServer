@@ -256,12 +256,41 @@ cdmp_strict(cdmp_probe)
 target_include_directories(cdmp_probe PRIVATE tools)
 target_link_libraries(cdmp_probe PRIVATE cdmp_common)
 
+# External read-only 3576 position diagnostic. Not linked into the ASI.
+# Experimental addresses stay in tools/diag3576 and are not production offsets.
+add_library(cdmp_diag3576_lib STATIC tools/diag3576/reader.cpp)
+cdmp_strict(cdmp_diag3576_lib)
+target_include_directories(cdmp_diag3576_lib PUBLIC tools)
+
+add_executable(cdmp_diag3576 tools/diag3576/main.cpp tools/probe/process.cpp)
+cdmp_strict(cdmp_diag3576)
+target_link_libraries(cdmp_diag3576 PRIVATE cdmp_diag3576_lib cdmp_common)
+
 # Tests.
 enable_testing()
 add_executable(cdmp_tests tests/tests.cpp)
 cdmp_strict(cdmp_tests)
 target_link_libraries(cdmp_tests PRIVATE cdmp_common)
 add_test(NAME unit COMMAND cdmp_tests)
+# Executable identity gate: supported, unsupported, and unreadable images, plus the test-host path.
+add_executable(cdmp_tests_build_guard tests/build_guard_tests.cpp)
+cdmp_strict(cdmp_tests_build_guard)
+target_include_directories(cdmp_tests_build_guard PRIVATE src)
+add_test(NAME build_guard COMMAND cdmp_tests_build_guard)
+# 3576 diagnostic sampler. Fake memory only; it does not open the ASI guard.
+add_executable(cdmp_tests_diag3576 tests/diag3576_tests.cpp)
+cdmp_strict(cdmp_tests_diag3576)
+target_link_libraries(cdmp_tests_diag3576 PRIVATE cdmp_diag3576_lib)
+add_test(NAME diag3576 COMMAND cdmp_tests_diag3576)
+# Experimental 3576 passive packet observer. Not linked into the ASI.
+# Addresses stay in tools/pkt3576. The compatibility guard stays closed.
+add_library(cdmp_pkt3576_lib STATIC tools/pkt3576/observer.cpp)
+cdmp_strict(cdmp_pkt3576_lib)
+target_include_directories(cdmp_pkt3576_lib PUBLIC tools)
+add_executable(cdmp_tests_pkt3576 tests/pkt3576_tests.cpp)
+cdmp_strict(cdmp_tests_pkt3576)
+target_link_libraries(cdmp_tests_pkt3576 PRIVATE cdmp_pkt3576_lib)
+add_test(NAME pkt3576 COMMAND cdmp_tests_pkt3576)
 # Option D (docs/OPCION-D-EMULADOR.md): the parts that do not need the game.
 add_executable(cdmp_tests_optd tests/optd_tests.cpp)
 cdmp_strict(cdmp_tests_optd)

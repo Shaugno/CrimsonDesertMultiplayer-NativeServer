@@ -705,7 +705,11 @@ void test_slots() {
     CHECK(!gsw::offer_slot_ok(3) && !gsw::offer_slot_ok(206) && !gsw::offer_slot_ok(204));
 
     using D = gsw::DirKind;
-    CHECK(gsw::parse_slot_dir(L"slot1")->slot == 1 && gsw::parse_slot_dir(L"slot1")->kind == D::Plain);
+    // Keep the slot and kind expectations on one named result. Two temporary
+    // optionals in a single && are miscompiled by this RelWithDebInfo toolset:
+    // the parser still returns slot 1, Plain, and the check still fails.
+    const auto slot1 = gsw::parse_slot_dir(L"slot1");
+    CHECK(slot1.has_value() && slot1->slot == 1 && slot1->kind == D::Plain);
     CHECK(gsw::parse_slot_dir(L"slot108")->slot == 108);
     CHECK(gsw::parse_slot_dir(L"slot0")->slot == 0);
     CHECK(gsw::parse_slot_dir(L"slot2_new")->kind == D::New);

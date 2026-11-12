@@ -7,6 +7,8 @@
 # Run by ctest (launch_2inst_script); exit 0 = all passed.
 
 $ErrorActionPreference = 'Stop'
+# Get-FileHash is in this module. Load it before Sha; do not rely on autoload.
+Import-Module Microsoft.PowerShell.Utility
 $repo = Split-Path $PSScriptRoot -Parent
 $launcher = Join-Path $repo 'scripts\launch-2inst.ps1'
 $root = Join-Path ([IO.Path]::GetTempPath()) "cdmp_launch2_test_$PID"

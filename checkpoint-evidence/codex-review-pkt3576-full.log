@@ -1,0 +1,286 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26300.
+-- Fetching Zydis (v4.1.0)...
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+-- Configuring done (4.4s)
+-- Generating done (3.9s)
+-- Build files have been written to: C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/build
+MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
+
+  cdmp_common.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\RelWithDebInfo\cdmp_common.lib
+  Zycore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\_deps\zydis-build\zycore\RelWithDebInfo\Zycore.lib
+  cdmp_tests_optd_host_save.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_host_save.exe
+  cdmp_dx12_test.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_dx12_test.exe
+  cdmp_pkt3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\RelWithDebInfo\cdmp_pkt3576_lib.lib
+  cdmp_tests_optd_guest_stage.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_stage.exe
+  imgui.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\RelWithDebInfo\imgui.lib
+  cdmp_tests_optd_guest_save_b.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_save_b.exe
+  cdmp_tests_optd_c4.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_c4.exe
+  cdmp_host.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_host.exe
+  cdmp_tests_optd_guest_save.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_save.exe
+  cdmp_diag3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\RelWithDebInfo\cdmp_diag3576_lib.lib
+  cdmp_tests_optd_freeze_watchdog.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_freeze_watchdog.exe
+  cdmp_tests_optd_guest_inbound.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_inbound.exe
+  cdmp_tests_optd_bg_speed.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_bg_speed.exe
+  cdmp_tests_optd_hold_scene_order.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_hold_scene_order.exe
+  cdmp_tests_optd_npc_activation.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_activation.exe
+  cdmp_tests_optd_enemy_damage_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_enemy_damage_probe.exe
+  cdmp_tests_optd_npc_family_vehicles.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_family_vehicles.exe
+  cdmp_tests_optd_npc_probe_client.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_probe_client.exe
+  cdmp_tests_optd_observer_milestone.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_observer_milestone.exe
+  cdmp_tests_optd_docked_gimmicks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_docked_gimmicks.exe
+  cdmp_tests_optd_observer_stage.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_observer_stage.exe
+  cdmp_tests_optd_gimmick_event_dedup.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_gimmick_event_dedup.exe
+  cdmp_tests_optd_fast_rearm.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_fast_rearm.exe
+  cdmp_tests_optd_fast_travel.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_fast_travel.exe
+  cdmp_tests_optd_publication_gate.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_publication_gate.exe
+  cdmp_tests_optd_reload_wait.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_reload_wait.exe
+  cdmp_tests_optd_rejoin.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_rejoin.exe
+  cdmp_tests_optd_rope_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_rope_probe.exe
+  cdmp_tests_optd_remote_rope.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_rope.exe
+  cdmp_tests_optd_owner_fanout.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_owner_fanout.exe
+  cdmp_tests_optd_p8_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_p8_probe.exe
+  cdmp_tests_optd_inject.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_inject.exe
+  cdmp_tests_optd_s9.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_s9.exe
+  cdmp_tests_optd_remote_motion.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_motion.exe
+  cdmp_peer.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_peer.exe
+  Zydis.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\_deps\zydis-build\RelWithDebInfo\Zydis.lib
+  cdmp_tests_optd_scene_diag.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_diag.exe
+  cdmp_tests_build_guard.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_build_guard.exe
+  cdmp_tests_optd_replay.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_replay.exe
+  cdmp_tests_optd_log_ring.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_log_ring.exe
+  cdmp_tests_optd_scene_acks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_acks.exe
+  cdmp_tests_optd_scene_level_share.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_level_share.exe
+  cdmp_tests_optd_mount_sync.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_mount_sync.exe
+  cdmp_tests_optd_sched_load.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_sched_load.exe
+  cdmp_tests.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests.exe
+  cdmp_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_probe.exe
+  cdmp_tests_optd_remote_interp.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_interp.exe
+  cdmp_tests_optd_seq_foreign.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_foreign.exe
+  cdmp_tests_optd.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd.exe
+  cdmp_tests_optd_seq_bodyanim.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_bodyanim.exe
+  cdmp_tests_optd_shop_c1.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_c1.exe
+  cdmp_tests_optd_seq_copy.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_copy.exe
+  cdmp_tests_optd_seq_play.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_play.exe
+  cdmp_tests_optd_seq_restore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_restore.exe
+  cdmp_tests_optd_seq_present.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_present.exe
+  cdmp_tests_optd_door_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_door_trace.exe
+  cdmp_tests_optd_shop_troc.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_troc.exe
+  cdmp_tests_optd_shop_trade.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_trade.exe
+  cdmp_tests_optd_tree_bend.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_tree_bend.exe
+  cdmp_tests_optd_two_inst.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_two_inst.exe
+  cdmp_tests_optd_slot_refresh.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_slot_refresh.exe
+  Scanning sources for module dependencies...
+  cdmp_tests_optd_user2_road.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_road.exe
+  cdmp_tests_optd_user2_funnels.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_funnels.exe
+  cdmp_tests_optd_user2_stages.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_stages.exe
+  cdmp_tests_optd_combat.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_combat.exe
+  cdmp_tests_optd_npc_family.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_family.exe
+  cdmp_tests_optd_world_anchor.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_world_anchor.exe
+  cdmp_tests_optd_catch_seq.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_catch_seq.exe
+  cdmp_tests_optd_user2_shops.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_shops.exe
+  cdmp_tests_optd_ui_pause.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_ui_pause.exe
+  cdmp_tests_optd_guest_actor.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_actor.exe
+  cdmp_tests_optd_clock_push.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_clock_push.exe
+  cdmp_tests_optd_weather_sync.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_weather_sync.exe
+  cdmp_tests_optd_x_veto.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_x_veto.exe
+  cdmp_diag3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_diag3576.exe
+  safetyhook.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\_deps\safetyhook-build\RelWithDebInfo\safetyhook.lib
+  cdmp_tests_pkt3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_pkt3576.exe
+  cdmp_tests_diag3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_diag3576.exe
+  cdmp_tests_optd_hook_traps.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_hook_traps.exe
+  cdmp_tests_optd_pets.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_pets.exe
+  cdmp_tests_optd_report.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_report.exe
+  cdmp_tests_optd_hooks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks.exe
+  cdmp_tests_optd_hooks_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks_trace.exe
+  cdmp_tests_optd_identity.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_identity.exe
+  cdmp_tests_optd_identity_fix.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_identity_fix.exe
+  cdmp_tests_optd_hook_near.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_hook_near.exe
+  cdmp_tests_optd_s3.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_s3.exe
+  cdmp_tests_optd_guest_role.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_role.exe
+  cdmp_tests_optd_character_hold.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_character_hold.exe
+  cdmp_tests_optd_field.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_field.exe
+  cdmp_tests_optd_companion.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_companion.exe
+  cdmp_tests_optd_hooks_redirect.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks_redirect.exe
+  cdmp_tests_optd_child_hold.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_child_hold.exe
+  cdmp_tests_optd_clock.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp_tests_optd_clock.exe
+  cdmp_mod.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo\cdmp.asi
+Test project C:/Users/shaug/OneDrive/Documents/ChatGPT/COOP MOD/CrimsonDesertMultiplayer-NativeServer/build
+      Start  1: unit
+ 1/87 Test  #1: unit .............................   Passed    1.02 sec
+      Start  2: build_guard
+ 2/87 Test  #2: build_guard ......................   Passed    0.01 sec
+      Start  3: diag3576
+ 3/87 Test  #3: diag3576 .........................   Passed    0.01 sec
+      Start  4: pkt3576
+ 4/87 Test  #4: pkt3576 ..........................   Passed    0.01 sec
+      Start  5: optd
+ 5/87 Test  #5: optd .............................   Passed    0.12 sec
+      Start  6: optd_hooks
+ 6/87 Test  #6: optd_hooks .......................   Passed    0.03 sec
+      Start  7: optd_hooks_trace
+ 7/87 Test  #7: optd_hooks_trace .................   Passed    0.19 sec
+      Start  8: optd_hooks_redirect
+ 8/87 Test  #8: optd_hooks_redirect ..............   Passed    0.58 sec
+      Start  9: optd_guest_role
+ 9/87 Test  #9: optd_guest_role ..................   Passed    0.19 sec
+      Start 10: optd_two_inst
+10/87 Test #10: optd_two_inst ....................   Passed    0.09 sec
+      Start 11: launch_2inst_script
+11/87 Test #11: launch_2inst_script ..............   Passed   10.98 sec
+      Start 12: optd_bg_speed
+12/87 Test #12: optd_bg_speed ....................   Passed    0.01 sec
+      Start 13: optd_host_save
+13/87 Test #13: optd_host_save ...................   Passed    1.64 sec
+      Start 14: host_save_restore_script
+14/87 Test #14: host_save_restore_script .........   Passed   25.44 sec
+      Start 15: optd_hook_traps
+15/87 Test #15: optd_hook_traps ..................   Passed    0.01 sec
+      Start 16: optd_hook_near
+16/87 Test #16: optd_hook_near ...................   Passed    0.01 sec
+      Start 17: optd_report
+17/87 Test #17: optd_report ......................   Passed    0.05 sec
+      Start 18: optd_field
+18/87 Test #18: optd_field .......................   Passed    0.01 sec
+      Start 19: optd_clock
+19/87 Test #19: optd_clock .......................   Passed    0.01 sec
+      Start 20: optd_clock_push
+20/87 Test #20: optd_clock_push ..................   Passed    0.01 sec
+      Start 21: optd_weather_sync
+21/87 Test #21: optd_weather_sync ................   Passed    0.04 sec
+      Start 22: optd_catch_seq
+22/87 Test #22: optd_catch_seq ...................   Passed    0.01 sec
+      Start 23: optd_remote_rope
+23/87 Test #23: optd_remote_rope .................   Passed    0.02 sec
+      Start 24: optd_rope_probe
+24/87 Test #24: optd_rope_probe ..................   Passed    0.01 sec
+      Start 25: optd_tree_bend
+25/87 Test #25: optd_tree_bend ...................   Passed    0.01 sec
+      Start 26: optd_docked_gimmicks
+26/87 Test #26: optd_docked_gimmicks .............   Passed    0.01 sec
+      Start 27: optd_gimmick_event_dedup
+27/87 Test #27: optd_gimmick_event_dedup .........   Passed    0.01 sec
+      Start 28: optd_c4
+28/87 Test #28: optd_c4 ..........................   Passed    0.09 sec
+      Start 29: optd_rejoin
+29/87 Test #29: optd_rejoin ......................   Passed    0.01 sec
+      Start 30: optd_identity
+30/87 Test #30: optd_identity ....................   Passed    0.01 sec
+      Start 31: optd_identity_fix
+31/87 Test #31: optd_identity_fix ................   Passed    0.01 sec
+      Start 32: optd_companion
+32/87 Test #32: optd_companion ...................   Passed    0.01 sec
+      Start 33: optd_child_hold
+33/87 Test #33: optd_child_hold ..................   Passed    0.01 sec
+      Start 34: optd_s3
+34/87 Test #34: optd_s3 ..........................   Passed    0.08 sec
+      Start 35: optd_character_hold
+35/87 Test #35: optd_character_hold ..............   Passed    0.01 sec
+      Start 36: optd_slot_refresh
+36/87 Test #36: optd_slot_refresh ................   Passed    0.01 sec
+      Start 37: optd_guest_save
+37/87 Test #37: optd_guest_save ..................   Passed    0.01 sec
+      Start 38: optd_guest_save_b
+38/87 Test #38: optd_guest_save_b ................   Passed    0.02 sec
+      Start 39: optd_guest_actor
+39/87 Test #39: optd_guest_actor .................   Passed    0.01 sec
+      Start 40: optd_reload_wait
+40/87 Test #40: optd_reload_wait .................   Passed    0.01 sec
+      Start 41: optd_p8_probe
+41/87 Test #41: optd_p8_probe ....................   Passed    0.02 sec
+      Start 42: optd_observer_stage
+42/87 Test #42: optd_observer_stage ..............   Passed    0.01 sec
+      Start 43: optd_guest_stage
+43/87 Test #43: optd_guest_stage .................   Passed    0.01 sec
+      Start 44: optd_observer_milestone
+44/87 Test #44: optd_observer_milestone ..........   Passed    0.01 sec
+      Start 45: optd_inject
+45/87 Test #45: optd_inject ......................   Passed    0.01 sec
+      Start 46: optd_scene_acks
+46/87 Test #46: optd_scene_acks ..................   Passed    0.01 sec
+      Start 47: optd_seq_copy
+47/87 Test #47: optd_seq_copy ....................   Passed    0.01 sec
+      Start 48: optd_seq_play
+48/87 Test #48: optd_seq_play ....................   Passed    0.01 sec
+      Start 49: optd_x_veto
+49/87 Test #49: optd_x_veto ......................   Passed    0.01 sec
+      Start 50: optd_mount_sync
+50/87 Test #50: optd_mount_sync ..................   Passed    0.01 sec
+      Start 51: optd_shop_c1
+51/87 Test #51: optd_shop_c1 .....................   Passed    0.01 sec
+      Start 52: optd_user2_stages
+52/87 Test #52: optd_user2_stages ................   Passed    0.01 sec
+      Start 53: optd_fast_rearm
+53/87 Test #53: optd_fast_rearm ..................   Passed    0.01 sec
+      Start 54: optd_user2_shops
+54/87 Test #54: optd_user2_shops .................   Passed    0.01 sec
+      Start 55: optd_shop_troc
+55/87 Test #55: optd_shop_troc ...................   Passed    0.01 sec
+      Start 56: optd_shop_trade
+56/87 Test #56: optd_shop_trade ..................   Passed    0.15 sec
+      Start 57: optd_hold_scene_order
+57/87 Test #57: optd_hold_scene_order ............   Passed    0.01 sec
+      Start 58: optd_sched_load
+58/87 Test #58: optd_sched_load ..................   Passed    0.01 sec
+      Start 59: optd_owner_fanout
+59/87 Test #59: optd_owner_fanout ................   Passed    0.01 sec
+      Start 60: optd_seq_restore
+60/87 Test #60: optd_seq_restore .................   Passed    0.03 sec
+      Start 61: optd_seq_bodyanim
+61/87 Test #61: optd_seq_bodyanim ................   Passed    0.01 sec
+      Start 62: optd_guest_inbound
+62/87 Test #62: optd_guest_inbound ...............   Passed    0.02 sec
+      Start 63: optd_ui_pause
+63/87 Test #63: optd_ui_pause ....................   Passed    0.01 sec
+      Start 64: optd_user2_funnels
+64/87 Test #64: optd_user2_funnels ...............   Passed    0.01 sec
+      Start 65: optd_world_anchor
+65/87 Test #65: optd_world_anchor ................   Passed    0.01 sec
+      Start 66: optd_fast_travel
+66/87 Test #66: optd_fast_travel .................   Passed    0.01 sec
+      Start 67: optd_remote_motion
+67/87 Test #67: optd_remote_motion ...............   Passed    0.01 sec
+      Start 68: optd_remote_interp
+68/87 Test #68: optd_remote_interp ...............   Passed    0.01 sec
+      Start 69: optd_pets
+69/87 Test #69: optd_pets ........................   Passed    0.01 sec
+      Start 70: optd_s9
+70/87 Test #70: optd_s9 ..........................   Passed    0.01 sec
+      Start 71: optd_combat
+71/87 Test #71: optd_combat ......................   Passed    0.02 sec
+      Start 72: optd_scene_diag
+72/87 Test #72: optd_scene_diag ..................   Passed    0.01 sec
+      Start 73: optd_freeze_watchdog
+73/87 Test #73: optd_freeze_watchdog .............   Passed    0.01 sec
+      Start 74: optd_log_ring
+74/87 Test #74: optd_log_ring ....................   Passed    1.18 sec
+      Start 75: optd_replay
+75/87 Test #75: optd_replay ......................   Passed    3.63 sec
+      Start 76: optd_scripts
+76/87 Test #76: optd_scripts .....................   Passed    0.47 sec
+      Start 77: optd_npc_activation
+77/87 Test #77: optd_npc_activation ..............   Passed    0.01 sec
+      Start 78: optd_npc_probe_client
+78/87 Test #78: optd_npc_probe_client ............   Passed    0.01 sec
+      Start 79: optd_publication_gate
+79/87 Test #79: optd_publication_gate ............   Passed    0.01 sec
+      Start 80: optd_npc_family
+80/87 Test #80: optd_npc_family ..................   Passed    0.02 sec
+      Start 81: optd_npc_family_vehicles
+81/87 Test #81: optd_npc_family_vehicles .........   Passed    0.01 sec
+      Start 82: optd_enemy_damage_probe
+82/87 Test #82: optd_enemy_damage_probe ..........   Passed    0.01 sec
+      Start 83: optd_door_trace
+83/87 Test #83: optd_door_trace ..................   Passed    0.01 sec
+      Start 84: optd_scene_level_share
+84/87 Test #84: optd_scene_level_share ...........   Passed    0.02 sec
+      Start 85: optd_seq_foreign
+85/87 Test #85: optd_seq_foreign .................   Passed    0.01 sec
+      Start 86: optd_seq_present
+86/87 Test #86: optd_seq_present .................   Passed    0.01 sec
+      Start 87: optd_user2_road
+87/87 Test #87: optd_user2_road ..................   Passed    0.02 sec
+
+100% tests passed, 0 tests failed out of 87
+
+Total Test time (real) =  46.65 sec
+Build OK: C:\Users\shaug\OneDrive\Documents\ChatGPT\COOP MOD\CrimsonDesertMultiplayer-NativeServer\build\bin\RelWithDebInfo
