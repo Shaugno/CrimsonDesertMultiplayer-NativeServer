@@ -3,27 +3,27 @@
 ## Shaugno continuation: current priorities
 
 This repository is now Shaugno's independent continuation of ByJunter's work.
-The goal is reliable two-player co-op on **1.0.0.3576**, then a repeatable way to
-assess later builds. Full co-op on 3576 has not yet been demonstrated.
+The goal is reliable two-player co-op on the installed build, then a repeatable
+way to assess later builds. The installed game is now **1.0.0.3663**. Full co-op
+has not been demonstrated. The 3576 capture is blocked because Steam updated
+the installation.
 
 Completed in this continuation: the live-tested read-only position diagnostic,
 the passive observer, the real capture backend, and the version-checked module
 validated against dummy hosts. The external loading/controller tool is also
 reviewed, including control after hooks are installed and strict PID parsing.
-The latest game-free suite has 93 passing tests.
+The latest game-free suite passed 94/94, including the file-only 3663 scanner.
 The first controlled 3576 capture was reviewed, and the current movement/action
 and actor-message IDs were independently verified on disk. Full payload layouts
 and native-session compatibility still need evidence.
 
-1. Codex approved docs/probe-3576/PLAN-3576-READY.md and the 3576 identity
-   gate on 2026-11-13. No blocking findings. The complete game-free suite
-   passed 93/93. The gate recognizes the 3576 file and leaves gameplay off.
-   Codex verifies the local commit and publishes it to Shaugno. The collector
-   commit 26a0e1a is not re-reviewed.
-2. After that publication, and only in a session the user starts from Steam, capture
-   complete stand, walk, and turn packets. Name the movement fields offline.
-   Capture spawn, visibility, and removal in a later session. Keep the
-   4096-byte cap. Do not install the ASI.
+1. The 3576 capture is blocked. Steam updated the installation to 1.0.0.3663.
+   The aborted session is docs/probe-3576/PHASE1-CAPTURE-20261113.md. The 3576
+   gate still rejects that file. Do not broaden it or load its collector.
+2. Codex reviews the offline 3663 assessment in docs/probe-3663/PLAN-3663-READY.md.
+   Names and opcodes were re-read from the 3663 file. They are not adopted, and
+   the 3576 RVAs are not reused. A later capture waits for that review and a
+   separate 3663 tool. Do not install the ASI.
 3. Spawn and move a second visible actor from those verified fields. Do not
    invent a spawn call or reuse 2976 packet sizes.
 4. Validate loading, reconnects, combat, save handling, and two-PC play before

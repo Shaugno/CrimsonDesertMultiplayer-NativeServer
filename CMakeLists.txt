@@ -387,6 +387,17 @@ add_dependencies(cdmp_tests_pkt3576_live_ctl cdmp_pkt3576_live_ctl cdmp_pkt3576_
                  cdmp_pkt3576_live_dummy cdmp_pkt3576_live cdmp_pkt3576_live_fixture)
 add_test(NAME pkt3576_live_ctl COMMAND cdmp_tests_pkt3576_live_ctl)
 set_tests_properties(pkt3576_live_ctl PROPERTIES TIMEOUT 120)
+# Offline 3663 file assessment. Not linked into the ASI and not accepted by the 3576 controller.
+add_library(cdmp_pkt3663_lib STATIC tools/pkt3663/assess.cpp)
+cdmp_strict(cdmp_pkt3663_lib)
+target_include_directories(cdmp_pkt3663_lib PUBLIC tools)
+add_executable(cdmp_tests_pkt3663 tests/pkt3663_tests.cpp)
+cdmp_strict(cdmp_tests_pkt3663)
+target_link_libraries(cdmp_tests_pkt3663 PRIVATE cdmp_pkt3663_lib)
+add_test(NAME pkt3663 COMMAND cdmp_tests_pkt3663)
+add_executable(pkt3663_scan tools/pkt3663/main.cpp)
+cdmp_strict(pkt3663_scan)
+target_link_libraries(pkt3663_scan PRIVATE cdmp_pkt3663_lib)
 # Option D (docs/OPCION-D-EMULADOR.md): the parts that do not need the game.
 add_executable(cdmp_tests_optd tests/optd_tests.cpp)
 cdmp_strict(cdmp_tests_optd)

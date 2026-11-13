@@ -1,14 +1,17 @@
 CO-OP DEVELOPMENT PROGRESS
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
-Updated: 2026-11-13. Current plan is docs/probe-3576/PLAN-3576-READY.md.
-Codex approved that plan and the Phase 4 identity gate. No blocking findings.
-The complete game-free suite passed 93/93. Commit 26a0e1a is not re-reviewed.
+Updated: 2026-11-13. The 3576 capture is blocked. Steam updated the
+installation to Crimson Desert 1.0.0.3663. The aborted session is
+docs/probe-3576/PHASE1-CAPTURE-20261113.md. The offline 3663 assessment is
+docs/probe-3663/PLAN-3663-READY.md. Codex approved the 3576 identity gate.
+Commit 26a0e1a is not re-reviewed. The 3576 gate was not broadened.
 
 GOAL
-Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
-1.0.0.3576 so two players can play co-op. Working co-op on this build has
-not yet been demonstrated.
+Get CrimsonDesertMultiplayer-NativeServer working on the installed Crimson
+Desert build so two players can play co-op. The installed build is now
+1.0.0.3663. The 3576 capture is blocked because Steam updated the
+installation. Working co-op has not been demonstrated.
 
 LATEST CODEX REVIEW
 Codex reviewed docs/probe-3576/PLAN-3576-READY.md and the Phase 4 identity gate
@@ -152,18 +155,21 @@ COMPLETED MILESTONES
     game-free suite passed 93/93. Collector AddressSanitizer was not re-run
     for this gate. The ASI was not installed. Codex approved the gate. No
     blocking findings.
+12. Phase 1 on 3576 was aborted. The installed file is 1.0.0.3663, timestamp
+    0x6AF5D198, SizeOfImage 0x144E9000. Read-only status on PID 35896 returned
+    wrong-timestamp, ctl_modified=0, ctl_exit=4. The 3576 collector was not
+    loaded. See docs/probe-3576/PHASE1-CAPTURE-20261113.md. This commit adds
+    a file-only scanner under tools/pkt3663. ctest -C RelWithDebInfo passed
+    94/94 in 59.10 seconds. The scan is not adopted.
 
 NEXT TASK
-Codex verifies this local commit and publishes it to Shaugno. Do not push it
-from the implementation step. Phase 1 stays prepared and unrun: after
-publication, and only when the user launches from Steam, back up saves,
-confirm the ASI and winmm are absent, and capture complete stand, walk, and
-turn packets with the existing controller. Then name movement fields offline
-and capture spawn, visibility, and removal. No packet sending, replay,
-production-offset adoption, or ASI enablement is authorized. Keep the
-4096-byte and 256-record bounds. A 3576 identity must not fall through into
-a 2976 read. Actor-load and visibility acknowledgements were not in the first
-walking sample.
+Codex reviews the local 3663 offline-assessment commit. Do not push it from
+this step. The 3576 capture stays blocked while the installed game is 3663.
+Do not load cdmp_pkt3576_live.dll into that installation, broaden the 3576
+gate, reuse its RVAs, or install the ASI. The offline file assessment is
+docs/probe-3663/PACKET-SCAN-3663.md. Its opcodes and the function around the
+8030h immediate are not adopted. No packet sending, replay, or live attach is
+authorized. A 3576 identity must not fall through into a 2976 read.
 
 OPERATIONAL LIMITS
 The first successful log directory stays bound for the module lifetime. Fixed
@@ -184,6 +190,10 @@ save handling, and two-PC play. Permanent manager root, health, and reliable
 player readiness/loading signals remain unresolved.
 
 KEY EVIDENCE
+ docs/probe-3576/PHASE1-CAPTURE-20261113.md
+ docs/COMPATIBILITY-3663.md
+ docs/probe-3663/PLAN-3663-READY.md
+ docs/probe-3663/PACKET-SCAN-3663.md
  docs/probe-3576/PLAN-3576-READY.md
  docs/probe-3576/FULL-PACKET-COLLECTOR-REVIEW-20261113.txt
  docs/probe-3576/PACKET-MAP-3576.md
