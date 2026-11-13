@@ -1,12 +1,12 @@
 {
-  "created": "2026-11-12T19:15:54.1382341-05:00",
+  "created": "2026-11-12T20:45:49.8260593-05:00",
   "repository": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\COOP MOD\\CrimsonDesertMultiplayer-NativeServer",
   "branch": "grok/compat-guard",
   "source_head": "3cbb03c5e0840db92d690a05eaf2693d0c4a1bf7",
-  "previous_publication": "7be2824928f41ee58bc0950987c09cfbf3a54741",
+  "previous_publication": "40b3600d134f3592921e4476a3fab7117c18a540",
   "destination": "Shaugno/CrimsonDesertMultiplayer-NativeServer",
   "visibility": "public",
-  "review": "Approved experimental game-free version-checked capture module: 92/92 tests, four ASan test programs, and original fault reproductions passed. No game launch or attachment; no live deployment approval.",
+  "review": "Approved loading/controller tool and both fixes. 93/93 CTest, independent real-hook regression, and ASan policy/PID/private-hook cases passed. No game launch, open, or attach; no deployment approval.",
   "excluded_generated_file": "vc140.pdb",
   "files": [
     {
@@ -36,8 +36,8 @@
     },
     {
       "path": "docs/PROGRESS.txt",
-      "bytes": 5375,
-      "sha256": "DE10D15417C08FCC9D4781A74E6E5DF61079ED920B5F59270F916E21F8AB9FAC"
+      "bytes": 6642,
+      "sha256": "553ABA01369472F2EB4DF3178F643A470FCD5DA44B6CE651A16455F11F76545F"
     },
     {
       "path": "docs/probe-3576/CAPTURE.md",
@@ -65,9 +65,24 @@
       "sha256": "FBA31121D05CEF524B840ECD824DEED1BF0A87431EE6920B048F2F2BB718AA93"
     },
     {
+      "path": "docs/probe-3576/LIVE-CAPTURE-CONTROL.md",
+      "bytes": 6585,
+      "sha256": "5140698AA31009FF8B371AAE6D82C560EC82B30394E0D8FAFAA28F4CC867EA07"
+    },
+    {
       "path": "docs/probe-3576/LIVE-CAPTURE-RUNNER.md",
-      "bytes": 4269,
-      "sha256": "BB2EC6A6962E2FA5AE61B2A1D5A67D88DB574B224EE93B16C2EC7198629F06D9"
+      "bytes": 5173,
+      "sha256": "DD39473AF1B788A87C02E305FB94E3D6CCA751A57363B7A28E113882CCC926CA"
+    },
+    {
+      "path": "docs/probe-3576/LIVE-CONTROLLER-APPROVAL-20261112.txt",
+      "bytes": 4226,
+      "sha256": "BADDE73D71FB4573FAD3DC1B1BA137D548EEB4AA150057255F63379B18E00351"
+    },
+    {
+      "path": "docs/probe-3576/LIVE-CONTROLLER-REVIEW-20261112.txt",
+      "bytes": 4502,
+      "sha256": "8E6A8F7D2C2DF214B7360D5284A5EDDCF4C01F41A9ABB92D09B2C3FD13D04990"
     },
     {
       "path": "docs/probe-3576/LIVE-RUNNER-APPROVAL-20261112.txt",
@@ -155,6 +170,16 @@
       "sha256": "1B4CE593098628737253193D10C42A51786787B4FBBF8308A1A003CD62EA0E69"
     },
     {
+      "path": "tests/pkt3576_live_ctl_tests.cpp",
+      "bytes": 35731,
+      "sha256": "7AA622B200776F93882B15AAE0A87C3730F0DE0C8F499EB6A01E2FF84FC7A50F"
+    },
+    {
+      "path": "tests/pkt3576_live_dummy.cpp",
+      "bytes": 1879,
+      "sha256": "53A612207AC89A72304D653F9848AA885103693019921E5D5EF7576B874216E8"
+    },
+    {
       "path": "tests/pkt3576_live_faults.cpp",
       "bytes": 8268,
       "sha256": "A448A1C502181580342B3BF02AE72EB9A532ADA8863FE008A8C5E22AA089B8B5"
@@ -166,8 +191,8 @@
     },
     {
       "path": "tests/pkt3576_live_tests.cpp",
-      "bytes": 15551,
-      "sha256": "1ABBE5F4B9750CEE6DF91EEB1908A2583D8C58EB5453D85EA3733EAB04F17BDB"
+      "bytes": 16017,
+      "sha256": "2B595AAA4C759EBB140C8CE99A59F0E82712CF8CA421CFDFB88FB2E61A5F0A6A"
     },
     {
       "path": "tests/pkt3576_tests.cpp",
@@ -226,13 +251,28 @@
     },
     {
       "path": "tools/pkt3576/live_api.h",
-      "bytes": 1552,
-      "sha256": "EC45917C368E4F8AABCADADB2B526255FE568D1ED9C9FA4FEA9034AD90171F7F"
+      "bytes": 2815,
+      "sha256": "9FAA53B1084E36BE25A339266E24DCA2B8AC0897D54B8572748AADE5B7917719"
+    },
+    {
+      "path": "tools/pkt3576/live_control.cpp",
+      "bytes": 32277,
+      "sha256": "A26071A8A43D6D3B3B705186308A2AF02FE23A112196A0882242EFB167E99795"
+    },
+    {
+      "path": "tools/pkt3576/live_control.h",
+      "bytes": 4361,
+      "sha256": "9C29FC33093D6FF6F306D49960DBF4C69BEB13A34C0350E3A887CF72C9A79B65"
+    },
+    {
+      "path": "tools/pkt3576/live_ctl.cpp",
+      "bytes": 741,
+      "sha256": "C5C852815BAC626EA9C16E5C212398D1E5865B77A7D1E963164AEEE5A5C152F7"
     },
     {
       "path": "tools/pkt3576/live_dll.cpp",
-      "bytes": 1554,
-      "sha256": "16519E7CFBEFCD7709236ED2E0CE8ED46126862BA2249F8D27FA0DCD5966AEE6"
+      "bytes": 2238,
+      "sha256": "CAE6BA0EC86949CAC8A9AE57779CABE0789A1CF3455C9C20D6B25DC616FA263B"
     },
     {
       "path": "tools/pkt3576/live_identity.cpp",
@@ -306,8 +346,8 @@
     },
     {
       "path": "CMakeLists.txt",
-      "bytes": 63198,
-      "sha256": "1EA28982A69FF867EAFB6B839327D236642C1E8AC99F025C00D823F8B09FA267"
+      "bytes": 65010,
+      "sha256": "5459B7654052B3E228054C3E34F51CE83AD27370D2C884CF0A134E838D95A2D7"
     },
     {
       "path": "LICENSE",
@@ -356,8 +396,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "bytes": 10465,
-      "sha256": "54FA8D4E8B867FF4031CD6146E4AC67BFC5726D1B7A8632B9B228FA76BA341C8"
+      "bytes": 10426,
+      "sha256": "834EEE8DC2BF26A6C53FFEAFAD0A4F6EF7285A00C5C5617B56D36CD52C7FDB2B"
     },
     {
       "path": "docs/research/apariencia-estado-coop.md",
@@ -5648,6 +5688,33 @@
       "path": "tools/scripts/rtti_dump.py",
       "bytes": 19033,
       "sha256": "BAD1188B21DDB3704274837DB1FFB58CD7CB396ED2B851256410A363679CB9AB"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "checkpoint-evidence/live-controller/codex-review-live-controller-fixes.log",
+      "bytes": 31216,
+      "sha256": "94CF252DBBF17B0B3F2B7EFB34B2399C6FF867A6BEAD35C0FE90BAF33EDD6BF8"
+    },
+    {
+      "path": "checkpoint-evidence/live-controller/codex-review-live-controller-fixes-repro.log",
+      "bytes": 310,
+      "sha256": "0EE6A149FE86390D71127766EFFA552AFDF2A11A37E81DAE7C1FC694A51E15AB"
+    },
+    {
+      "path": "checkpoint-evidence/live-controller/codex-review-live-controller-fixes-asan-build.log",
+      "bytes": 4360,
+      "sha256": "3DB96E7C96034FFCEF7691314BBBFCBDFD7EBDE8F6F60C4E746AA4FAFA47FAB6"
+    },
+    {
+      "path": "checkpoint-evidence/live-controller/codex-review-live-controller-fixes-asan-run.log",
+      "bytes": 4468,
+      "sha256": "C9764D8414AB3B54F84666493BA90A6F760F1B3F5BAF967E186EBFA647143279"
+    },
+    {
+      "path": "checkpoint-evidence/live-controller/review_live_controller_fixes.cpp",
+      "bytes": 5258,
+      "sha256": "2A32C596FF203043BB3EE8F793C6535F9AEE8D2C4E374D79D141CD7E00751657"
     }
   ]
 }

@@ -1,7 +1,7 @@
 CO-OP DEVELOPMENT PROGRESS
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
-Updated: 2026-11-12, after Codex approved the game-free version-checked module.
+Updated: 2026-11-12, after Codex approval of the loading/controller tool.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
@@ -9,56 +9,71 @@ Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
 not yet been demonstrated.
 
 LATEST CODEX REVIEW
-Approved as an experimental game-free source checkpoint. No blocking findings
-remain in the reviewed runner fixes. Stop/release exceptions preserve Held/
-Retained ownership and truthful status, and failed initial log binding allows
-a valid retry. See docs/probe-3576/LIVE-RUNNER-APPROVAL-20261112.txt.
-This does not authorize loading into the game or establish gameplay compatibility.
+Approved as an experimental game-free source checkpoint. Both controller
+findings are resolved: installed hooks no longer prevent validated status/stop,
+and oversized decimal PIDs are rejected before opening a process. Load/start
+still require pristine entry signatures and the documented executable identity.
+No blocking findings remain in the reviewed controller changes.
+See docs/probe-3576/LIVE-CONTROLLER-APPROVAL-20261112.txt.
+This is not a live-game result or proof of gameplay compatibility.
 
 INDEPENDENT VALIDATION
-Codex ran scripts/build.ps1: exit 0, 92/92 CTest tests passed, 52.67 seconds.
-Log: build/codex-review-live-runner-fixes.log.
-Codex rebuilt/reran the observer, capture, identity/production-DLL, and
-fixture-host tests under AddressSanitizer with vcvars64.bat initialized.
-All four printed ok, combined exit 0.
-Log: build/codex-review-live-runner-fixes-asan-run.log.
-Original fault harness modes now both exit 0:
-stop_exception_escaped=0 allocation_size=96 receive_still_patched=1 next_stop=3 retained=1
-bad_path_code=6 retry_good_path_code=0 capture_attempts=1
-Log: build/codex-review-live-runner-fixes-repro.log.
-The stop fault retains hooks intentionally because cleanup is uncertain.
-Allocator fault tests run in the normal suite; Windows ASan has no leak report.
-No game was launched or attached. Test hooks target self-owned dummy functions.
+scripts/build.ps1: exit 0; 93/93 CTest tests passed; 52.66 seconds.
+Log: build/codex-review-live-controller-fixes.log.
+The normal suite covers remote load/start/status/stop and Retained on a
+self-owned dummy host. The production DLL refuses the non-game test executable.
+The independent private-page reproduction now passes, exit 0:
+before=match active=signature-mismatch production_status_allowed=1 production_stop_allowed=1 after=match
+patched_load_allowed=0 patched_start_allowed=0 absent_module_stop_allowed=0 old_build_stop_allowed=0
+overflow_pid_accepted=0 resulting_pid=0
+review_regressions=passed
+Source: build/review_live_controller_fixes.cpp.
+Log: build/codex-review-live-controller-fixes-repro.log.
+Codex rebuilt the controller test with compiler AddressSanitizer and ran its
+policy, PID, and private-hook regressions with vcvars64 initialized. Exit 0:
+pkt3576 live ctl policy ok.
+Logs: build/codex-review-live-controller-fixes-asan-build.log and
+build/codex-review-live-controller-fixes-asan-run.log.
+The cross-process flow ran in the normal suite, not under ASan. Compiler
+instrumentation was enabled; the redundant linker flag was ignored (LNK4044).
+Windows ASan has no leak report. Allocator-fault tests use the normal build.
+No game was launched, opened, or attached. No game files or saves were changed.
 
 COMPLETED MILESTONES
-1. Visual Studio C++ tools and game-free build/test workflow are ready.
-2. Production game-build guard remains closed for 3576 and accepts only 2976.
-3. External read-only 3576 position diagnostic was built and live tested.
+1. Visual Studio C++ tools and the game-free build/test workflow are ready.
+2. The normal ASI guard stays closed for 3576 and accepts only 2976.
+3. The external read-only 3576 position diagnostic was built and live tested.
    Local position tracks walking; local plus origin gives world position.
 4. Send-like RVA 0x3A6310 and receive-like RVA 0x3A66A0 remain experimental
-   candidates, isolated from production offset headers.
-5. The passive observer and real SafetyHook capture backend are game-free tested,
-   including concurrency, rollback, queue bounds, and retained failure handling.
-6. A separate diagnostic module gates hooks on the documented loaded executable
-   name/base/timestamp/image size and both entry signatures. It exposes explicit
-   in-process start/stop/status, performs no work in DllMain beyond disabling
-   thread notifications, and pins before exposing callbacks. Production exports
-   have no fixture entry. The fixture build and dummy hosts are separate.
-7. Stop exceptions and initial log-binding failures have deterministic regression
-   coverage. Fixture success is never logged as game identity acceptance.
+   candidates, isolated from the production offset headers.
+5. The passive observer and real capture backend are game-free tested,
+   including concurrency, rollback, bounded queues, and retained ownership.
+6. The separate diagnostic module checks loaded executable identity and both
+   entry signatures before hooks. It exposes explicit start/stop/report, pins
+   callback code, and does no capture work in DllMain. Production exports have
+   no fixture arm/start entry. Stop exceptions retain uncertain owners.
+7. The external controller is reviewed and game-free tested. It requires an
+   explicit checked PID and separates pristine load/start checks from control
+   of an existing module with installed hooks. Wrong immutable identity stays
+   rejected. No force flag, process launch, or target termination was added.
+8. src/mod/game/build_guard.h, both production offset headers, and LICENSE
+   match the preceding approved source manifest byte for byte.
 
 NEXT TASK
-Select, implement, and review a concrete game-loading/controller route for the
-approved in-process module. There is no remote injector in this checkpoint.
-Specify ownership, bounded evidence collection, and what happens on Retained.
-Keep actual game deployment/attachment separate until explicitly requested;
-follow CLAUDE.md save-backup requirements. Keep the normal ASI guard closed.
+A separately requested controlled passive live capture is the next milestone.
+Use the production load/start/status/stop commands in
+ docs/probe-3576/LIVE-CAPTURE-CONTROL.md, after copying
+%LOCALAPPDATA%\Pearl Abyss\CD\save. Preserve raw output and packet logs and
+compare them with deliberate standing/walking/turning actions. This approval
+does not launch the game or authorize a live test. Keep the ASI guard closed.
 
 OPERATIONAL LIMITS
 The first successful log directory stays bound for the module lifetime. Fixed
 log filenames are reused; preserve evidence before another session. The module
-pin lasts until process exit, including after clean stop. Retained state keeps
+pin lasts until process exit, including after clean stop. Retained keeps
 resources/code alive and rejects another start; never force unloading.
+Remote-thread timeouts leave scratch memory because the thread may still use
+it. Game-specific load/start/status/stop behavior remains untested.
 
 REMAINING WORK TOWARD CO-OP
 Gather controlled packet evidence; verify roles and port compatibility pieces;
@@ -72,25 +87,29 @@ KEY EVIDENCE
  docs/probe-3576/PACKET-CANDIDATES-3576.md
  docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt
  docs/probe-3576/LIVE-RUNNER-APPROVAL-20261112.txt
+ docs/probe-3576/LIVE-CONTROLLER-APPROVAL-20261112.txt
+ docs/probe-3576/LIVE-CONTROLLER-REVIEW-20261112.txt (historical, resolved)
  docs/probe-3576/LIVE-CAPTURE-RUNNER.md
- tools/pkt3576/live_api.h, live_identity.cpp, live_runner.cpp, live_dll.cpp
- tests/pkt3576_live_tests.cpp, pkt3576_live_host.cpp, pkt3576_live_faults.cpp
+ docs/probe-3576/LIVE-CAPTURE-CONTROL.md
+ tools/pkt3576/live_api.h, live_identity.cpp, live_runner.cpp, live_dll.cpp, live_control.cpp
+ tests/pkt3576_live_tests.cpp, pkt3576_live_host.cpp, pkt3576_live_faults.cpp, pkt3576_live_ctl_tests.cpp
 
 GITHUB / RECOVERY
-Account: Shaugno
+Account and push permission verified: Shaugno, user id 348273530.
 Public repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
 Checkpoint branch: codex/checkpoint-3576-20261112
-Previous publication: 7be2824928f41ee58bc0950987c09cfbf3a54741
-The user authorized saving this revision after review. The next checkpoint
-contains current source, this approval, and evidence under checkpoint-evidence/.
-New changes are not automatically uploaded. Dated backups live under the
-parent COOP MOD/backups/NativeServer folder. Shaugn46 copies are historical.
+Preceding approved publication: 40b3600d134f3592921e4476a3fab7117c18a540.
+The user authorized saving this reviewed controller checkpoint. Its commit
+contains this approval and validation evidence under checkpoint-evidence/.
+The exact commit receipt and a hash-verified source archive are saved under
+the parent COOP MOD/backups/NativeServer folder. Shaugn46 copies are historical.
+New work is not automatically approved or uploaded.
 
 WORKING AGREEMENT / BOUNDARIES
 Grok implements; Codex reviews. Read AGENTS.md and CLAUDE.md when resuming.
-Active branch remains grok/compat-guard with original source HEAD 3cbb03c plus
-uncommitted development files. Publishing uses an isolated checkout.
-origin is Shaugno; upstream preserves ByJunter; shaugno is a publishing alias.
-Original attribution and GPL licensing are preserved. The sibling original
-mod stays untouched. Do not open the guard, adopt offsets, launch the game,
-or attach hooks as part of routine review.
+The active branch stays grok/compat-guard with source HEAD 3cbb03c and local
+development files. Publishing uses an isolated checkout and preserves that
+working tree. origin is Shaugno; upstream preserves ByJunter. Original
+attribution and GPL licensing are preserved. The sibling original mod stays
+untouched. Do not open the guard, adopt offsets, launch the game, or attach
+hooks as part of routine review.

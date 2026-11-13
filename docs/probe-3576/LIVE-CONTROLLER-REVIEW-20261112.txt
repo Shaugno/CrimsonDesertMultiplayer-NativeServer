@@ -1,0 +1,78 @@
+CODEX REVIEW: LOADING / CONTROLLER TOOL
+Date: 2026-11-12
+Historical failed review. Both findings were subsequently fixed and verified.
+See LIVE-CONTROLLER-APPROVAL-20261112.txt for the current approval and evidence.
+The original findings and reproduction below are retained as review history.
+Result: NOT APPROVED for publication or live use. Two findings remain.
+Reviewed against approved checkpoint 40b3600d134f3592921e4476a3fab7117c18a540.
+
+Scope
+Reviewed the new live_control.cpp/.h and live_ctl.cpp, the report/fixture-arm
+C ABI in live_api.h and live_dll.cpp, controller/dummy tests, CMake wiring,
+and controller documentation. No Crimson Desert process was opened, launched,
+or attached. Hooks in the independent reproduction target private dummy pages.
+No game files, saves, offsets, or build guards were changed by this review.
+
+P1: Active capture prevents production status and stop
+File: tools/pkt3576/live_control.cpp, lines 567-575.
+execute() applies identify_image() and modification_allowed() to every command
+before finding or calling the already-loaded diagnostic module. identify_image
+requires the pristine 16-byte send and receive entries. Capture::start installs
+SafetyHook patches at exactly those entries, so a successful production start
+makes the next status or stop reject with signature-mismatch / exit 4. The
+operator cannot inspect or stop that capture through the advertised commands;
+hooks and the writer remain active. The fixture controller flow misses this
+because its fixture gate accepts a non-game executable without those signatures.
+
+Independent reproduction: build/review_live_controller.cpp uses synthetic PE
+headers with the documented identity and real SafetyHook mid hooks on private
+executable pages containing the candidate entry bytes. No process is opened.
+Output:
+before=match active=signature-mismatch production_status_stop_allowed=0 after=match
+
+Required correction: separate immutable executable identity from the pristine
+entry check required before a new arm. Preserve the full version/signature gate
+for loading/arming. Provide a validated way to query and stop the existing
+approved module while its own hooks are installed. Do not broadly accept a
+signature mismatch or introduce a force flag. Add game-free regression coverage
+that exercises production control policy with patched entries; fixture-only
+start/status/stop success does not cover this case. Wrong name/build/base/size,
+including 2976, must still be rejected without modification.
+
+P2: PID parser accepts overflow as another PID
+File: tools/pkt3576/live_control.cpp, lines 136-139.
+Windows unsigned long is 32 bits. The check tests value > UINT32_MAX/10 before
+multiplying, but omits the final-digit limit when value equals that quotient.
+Values above 4294967295 can wrap before the later range check. The controller
+then opens the wrapped PID rather than rejecting the supplied PID as usage.
+Independent reproduction calls the actual parser in the same translation unit:
+overflow_pid_accepted=1 resulting_pid=1
+Input was 4294967297. No OpenProcess call is made by this reproduction.
+
+Required correction: reject when value > (UINT32_MAX - digit)/10 before
+accumulating, or use an equally strict checked conversion. Add boundary tests
+for 0, UINT32_MAX, UINT32_MAX+1 through +9, huge decimal strings, and ordinary
+valid PIDs. Invalid inputs must return usage without opening a process.
+
+Independent validation
+scripts/build.ps1: exit 0; 93/93 CTest tests passed; 54.30 seconds.
+Log: build/codex-review-live-controller.log.
+Review reproduction: built with MSVC /std:c++latest /EHsc /O2 /MT, linked to
+the current identity and SafetyHook libraries, exit 0 (both findings confirmed).
+Log: build/codex-review-live-controller-repro.log.
+The reproduction's exit 0 means defects reproduced, not approval.
+No additional sanitizer run was needed to establish these behavior failures.
+
+Unchanged from the approved source manifest:
+ src/mod/game/build_guard.h
+ src/mod/game/offsets.h
+ src/mod/session2/offsets_s2.h
+ LICENSE
+The ASI still supports only 1.0.0.2976. No 3576 offsets were adopted.
+
+Publication / next action
+No new commit or push was made. The last approved publication remains
+40b3600d134f3592921e4476a3fab7117c18a540 on Shaugno's continuation.
+Fix both findings, run the game-free suite and the new regression cases, then
+request another Codex review. Keep the game closed for that work. A later
+controlled live capture remains a separate task after approval and save backup.

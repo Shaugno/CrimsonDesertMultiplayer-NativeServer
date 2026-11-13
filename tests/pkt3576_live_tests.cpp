@@ -308,6 +308,10 @@ void test_production_dll_refuses_before_hooks() {
     CHECK(stop != nullptr);
     CHECK(status != nullptr);
     CHECK(GetProcAddress(module, "pkt3576_live_fixture_start") == nullptr);
+    CHECK(GetProcAddress(module, "pkt3576_live_fixture_arm") == nullptr);
+    auto report_fn =
+        reinterpret_cast<int (*)(Pkt3576LiveReport*)>(GetProcAddress(module, "pkt3576_live_report"));
+    CHECK(report_fn != nullptr);
 
     const std::wstring relative = L"pkt3576-live-relative-must-not-exist";
     CHECK(start(relative.c_str()) == kPkt3576LiveBadLog);
@@ -326,6 +330,13 @@ void test_production_dll_refuses_before_hooks() {
     unsigned attempts = 1;
     CHECK(status(&start_code, &stop_code, &retained, &stored, &omitted, &attempts) == 0);
     CHECK(attempts == 0);
+    if (report_fn != nullptr) {
+        Pkt3576LiveReport report{};
+        CHECK(report_fn(nullptr) == 1);
+        CHECK(report_fn(&report) == 0);
+        CHECK(report.capture_attempts == 0);
+        CHECK(report.retained == 0);
+    }
 
     const std::wstring directory = temp_dir();
     const std::wstring session = directory + L"\\pkt3576-live-session.txt";

@@ -8,15 +8,15 @@ assess later builds. Full co-op on 3576 has not yet been demonstrated.
 
 Completed in this continuation: the live-tested read-only position diagnostic,
 the passive observer, the real capture backend, and the version-checked module
-validated against dummy hosts. The latest game-free suite has 92 passing tests.
+validated against dummy hosts. The external loading/controller tool is also
+reviewed, including control after hooks are installed and strict PID parsing.
+The latest game-free suite has 93 passing tests.
 
-1. Select and review the explicit game-loading/controller route for the approved
-   in-process capture module, including ownership and retained failure handling.
-2. Run controlled passive captures after a separate live-test instruction;
+1. Run controlled passive captures after a separate live-test instruction;
    verify packet roles against observed actions.
-3. Port the verified player and networking pieces without bypassing build guards.
-4. Demonstrate a connected peer and movement on 3576.
-5. Validate loading, reconnects, combat, save handling, and two-PC play before
+2. Port the verified player and networking pieces without bypassing build guards.
+3. Demonstrate a connected peer and movement on 3576.
+4. Validate loading, reconnects, combat, save handling, and two-PC play before
    describing the result as a gameplay release.
 
 Current evidence and limitations: [PROGRESS.txt](PROGRESS.txt).

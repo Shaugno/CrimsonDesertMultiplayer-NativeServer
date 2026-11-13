@@ -31,8 +31,9 @@ process id or another process's addresses.
 
 ## Diagnostic module
 
-`cdmp_pkt3576_live.dll` exports `pkt3576_live_start`, `pkt3576_live_stop`, and
-`pkt3576_live_status`. `DllMain` only calls `DisableThreadLibraryCalls`. It
+`cdmp_pkt3576_live.dll` exports `pkt3576_live_start`, `pkt3576_live_stop`,
+`pkt3576_live_status`, and the one-pointer `pkt3576_live_report`. `DllMain`
+only calls `DisableThreadLibraryCalls`. It
 does not install hooks, open a log, or start a thread. Nothing launches the
 game or picks a process. The caller passes an absolute log directory.
 
@@ -65,11 +66,26 @@ and module pin stay in place, and status reports retained. A later start does
 not replace that capture, and a later stop does not retry removal. The C
 export returns 3 if an exception still reaches it.
 
+## Controller
+
+`cdmp_pkt3576_live_ctl.exe` loads this DLL, calls `pkt3576_live_start`,
+`pkt3576_live_report`, and `pkt3576_live_stop`, and prints the result. It
+checks the documented identity before any remote allocation, write, or thread.
+`load` and `start` require the pristine entry signatures. `status` and `stop`
+of an already loaded production module still run after that module's hooks
+change those bytes. Name, timestamp, base, and size are still required. The
+DLL repeats the full check inside `pkt3576_live_start`. Commands, Retained
+behavior, and limits are in `docs/probe-3576/LIVE-CAPTURE-CONTROL.md`. The
+controller was not run against Crimson Desert.
+
+`pkt3576_live_report` is the one-pointer form of status. It does not skip the
+identity check inside `pkt3576_live_start`. The production DLL does not export
+a fixture entry.
+
 ## Future authorized live test (not run)
 
-This tree does not contain a remote injector. Do not attach
-`cdmp_pkt3576_live.dll` to `CrimsonDesert.exe` until that test is requested.
-A crash during capture can be sent, so copy the save first:
+Do not attach `cdmp_pkt3576_live.dll` to `CrimsonDesert.exe` until that test
+is requested. A crash during capture can be sent, so copy the save first:
 
 `%LOCALAPPDATA%\Pearl Abyss\CD\save`
 
@@ -78,12 +94,12 @@ Proposed sequence, not executed here:
 1. Copy the save folder.
 2. Start Crimson Desert 1.0.0.3576 from the Steam client. This runner does not
    launch it.
-3. From a controller that is already inside that process, load
-   `cdmp_pkt3576_live.dll` and call:
-   `pkt3576_live_start(<absolute directory outside bin64>)`
-   `pkt3576_live_stop()`
-4. If `pkt3576_live_stop` returns `3`, leave the DLL loaded.
+3. Run the four production commands in `LIVE-CAPTURE-CONTROL.md` against that
+   PID. Those commands were not run for this change.
+4. If stop reports Retained (`ctl_exit=3`), leave the DLL loaded. Do not
+   terminate the game.
 
-No `steam://` launch is part of this procedure. The only load exercised by
-the current tests is `LoadLibrary` of the production DLL into the identity
-test and of the fixture DLL into `cdmp_tests_pkt3576_live_host`.
+No `steam://` launch is part of this procedure. The control flow exercised by
+the current tests is `cdmp_pkt3576_live_dummy.exe` plus in-process `LoadLibrary`
+of the production DLL in the identity test and of the fixture DLL in
+`cdmp_tests_pkt3576_live_host`. Fixture success is not 3576 compatibility.

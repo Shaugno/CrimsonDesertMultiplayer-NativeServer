@@ -1,0 +1,74 @@
+CODEX APPROVAL: LOADING / CONTROLLER TOOL AND REVIEW FIXES
+Date: 2026-11-12
+Result: APPROVED as an experimental game-free source checkpoint.
+No blocking findings remain in the reviewed controller and its two fixes.
+This is not a live-game result or proof of 3576 gameplay compatibility.
+
+Review scope
+Reviewed the controller, report/fixture-arm C ABI, CMake targets, dedicated
+dummy host, tests, and operator docs against checkpoint 40b3600d134f3592921e4476a3fab7117c18a540.
+Reviewed both fixes against the preceding failed-review source snapshot.
+Grok implemented; Codex performed this independent review.
+
+Resolved P1: status and stop after hook installation
+Load/start still require the documented executable name, timestamp, base,
+image size, and both pristine entry signatures. Only status/stop may use
+ctl_gate=installed when the production module is already present and the
+immutable identity matches while entry signatures differ. This does not load
+a missing module, authorize another arm, accept 2976, or add a force option.
+The diagnostic DLL's independent start guard remains intact.
+Regression tests use real SafetyHook mid hooks on private executable pages
+with synthetic PE headers. They cover patched entries with/without a module,
+new-arm refusal, and wrong name/timestamp/base/size rejection.
+
+Resolved P2: PID overflow
+Conversion checks value > (UINT32_MAX - digit)/10 before accumulating.
+Oversized inputs return usage before opening a process and leave the output
+PID unchanged. Tests cover zero, UINT32_MAX, the following nine values, huge
+decimal strings, non-digits, and ordinary valid PIDs.
+
+Independent verification
+1. scripts/build.ps1: exit 0; 93/93 CTest tests passed; 52.66 seconds.
+   build/codex-review-live-controller-fixes.log
+   Includes complete cross-process controller flow with the dedicated
+   cdmp_pkt3576_live_dummy.exe and fixture module, including Retained.
+2. Rebuilt the independent preceding reproduction as a fixed-behavior check,
+   using MSVC /std:c++latest /EHsc /O2 /MT and current identity/SafetyHook libs.
+   build/review_live_controller_fixes.cpp
+   build/codex-review-live-controller-fixes-repro.log
+   Exit 0, with:
+   before=match active=signature-mismatch production_status_allowed=1 production_stop_allowed=1 after=match
+   patched_load_allowed=0 patched_start_allowed=0 absent_module_stop_allowed=0 old_build_stop_allowed=0
+   overflow_pid_accepted=0 resulting_pid=0
+   review_regressions=passed
+   This program does not open any process.
+3. Rebuilt cdmp_tests_pkt3576_live_ctl with compiler /fsanitize=address, then
+   ran policy/PID/private-hook regressions with vcvars64 initialized and
+   PKT3576_CTL_POLICY_ONLY=1. Exit 0: pkt3576 live ctl policy ok.
+   build/codex-review-live-controller-fixes-asan-build.log
+   build/codex-review-live-controller-fixes-asan-run.log
+   Compiler instrumentation was enabled. The redundant linker flag was
+   ignored (LNK4044). The cross-process flow ran in the normal suite, not
+   under ASan. Windows ASan has no leak report.
+
+Boundaries checked
+No Crimson Desert process was launched, opened, or attached. Test hooks only
+target dummy code/private pages. No game installation, saves, or offsets were
+modified. These match the prior approved source manifest byte for byte:
+ src/mod/game/build_guard.h
+ src/mod/game/offsets.h
+ src/mod/session2/offsets_s2.h
+ LICENSE
+The normal ASI still supports only 1.0.0.2976. Experimental 3576 candidates
+remain in tools. Production exports contain no fixture arm/start entry.
+Retained and successful pins persist until the target exits; the controller
+does not terminate or force-unload it. Preserve each session's fixed log files.
+
+Publication and next step
+The user authorized saving after a clean review. Publish the reviewed source,
+this approval, and validation evidence to Shaugno's existing checkpoint branch
+using the isolated checkout. Preserve upstream attribution and GPL licensing.
+The next milestone is a separately requested controlled passive live capture
+using the documented load/start/status/stop commands, after backing up saves.
+Preserve raw output and compare observations with deliberate player actions.
+Do not open the ASI guard or adopt offsets from this approval.
