@@ -1,9 +1,11 @@
 #pragma once
-// Central executable-identity gate. Startup may read a build-specific game
-// address or install a hook only after this classifies the mapped image as
-// Crimson Desert 1.0.0.2976. Copying the PE headers to classify the image is
-// not a gameplay RVA read. A test host (anything that is not CrimsonDesert.exe,
-// including cdmp_host with CDMP_TEST_HOST) never takes the in-game path.
+// Central executable-identity gate. Startup may read a 2976 game address or
+// install a 2976 hook only after this classifies the mapped image as Crimson
+// Desert 1.0.0.2976. Build 1.0.0.3576 is recognized from its own file facts
+// and does not take that 2976 path. Copying the PE headers to classify the
+// image is not a gameplay RVA read. A test host (anything that is not
+// CrimsonDesert.exe, including cdmp_host with CDMP_TEST_HOST) never takes the
+// in-game path.
 
 #include <cstddef>
 #include <cstdint>
@@ -13,6 +15,7 @@
 #include <string>
 #include <vector>
 
+#include "mod/game/build_3576.h"
 #include "mod/game/offsets.h"
 
 namespace cdmp::game::build_guard {
@@ -25,8 +28,17 @@ inline constexpr uint16_t kPe32PlusMagic = 0x020B;
 
 enum class IdentityKind {
     Supported,    // mapped base and PE timestamp match build 1.0.0.2976
+    Build3576,    // 1.0.0.3576 file identity. The 2976 path stays closed.
     Unsupported,  // headers are readable, but the image is a different build
     Unreadable,   // headers are missing, truncated, or not a PE32+ image we can trust
+};
+
+// Which build's code a later phase may call. None means no gameplay path.
+// Build3576 is recorded without turning on the 2976 callbacks.
+enum class GameBuild {
+    None,
+    Build2976,
+    Build3576,
 };
 
 struct ImageIdentity {
@@ -54,11 +66,15 @@ enum class PlayerFeed {
 };
 
 // What the worker is allowed to do. read_game_addresses and install_hooks are
-// both true only for a supported in-game image. install_test_overlay is the
-// explicit test-host overlay and does not authorize game addresses or hooks.
-// run_network is true for a supported in-game image and for a test host.
-// A rejected in-game image leaves networking off and player_feed Off.
+// both true only for a 2976 in-game image. Build 3576 sets `build` and leaves
+// those flags false, so the 2976 callbacks cannot run. install_test_overlay is
+// the explicit test-host overlay and does not authorize game addresses or hooks.
+// run_network is true for a 2976 in-game image and for a test host.
+// A rejected in-game image, including a recognized 3576 image, leaves
+// networking off and player_feed Off. A 3576 guest still ends: the save
+// redirect is a 2976 install and must not run.
 struct StartupDecision {
+    GameBuild build = GameBuild::None;
     bool read_game_addresses = false;
     bool install_hooks = false;
     bool install_test_overlay = false;
@@ -113,9 +129,20 @@ inline ImageIdentity identify_image(std::span<const uint8_t> headers, uintptr_t 
 
     id.size_known = true;
     id.size_of_image = read_u32(headers, size_at);
-    const bool base_ok = mapped_base == build_2976::kImageBase;
-    const bool time_ok = id.timestamp == build_2976::kPeTimestamp;
-    id.kind = (base_ok && time_ok) ? IdentityKind::Supported : IdentityKind::Unsupported;
+    // 2976 is base plus timestamp only. Its historical check does not use
+    // SizeOfImage, and this function does not read packet entry bytes.
+    if (mapped_base == build_2976::kImageBase && id.timestamp == build_2976::kPeTimestamp) {
+        id.kind = IdentityKind::Supported;
+        return id;
+    }
+    // 3576 also requires SizeOfImage. A matching timestamp with the wrong size
+    // stays unsupported. Packet entry signatures are not read here.
+    if (mapped_base == build_3576::kImageBase && id.timestamp == build_3576::kPeTimestamp &&
+        id.size_of_image == build_3576::kSizeOfImage) {
+        id.kind = IdentityKind::Build3576;
+        return id;
+    }
+    id.kind = IdentityKind::Unsupported;
     return id;
 }
 
@@ -150,6 +177,12 @@ inline std::string diagnostic(const ImageIdentity& id) {
     if (id.kind == IdentityKind::Supported) {
         return std::format("Supported game build {}.", expected);
     }
+    if (id.kind == IdentityKind::Build3576) {
+        return std::format(
+            "Recognized game build Crimson Desert 1.0.0.3576 (PE timestamp 0x{:08X}, image base 0x{:X}, "
+            "image size 0x{:X}). The 2976 addresses stay unused. The 3576 gameplay path is not armed.",
+            build_3576::kPeTimestamp, build_3576::kImageBase, build_3576::kSizeOfImage);
+    }
     if (id.kind == IdentityKind::Unreadable) {
         return std::format(
             "Executable identity is unreadable. Expected {}. Game addresses, hooks, and networking stay off.",
@@ -171,12 +204,20 @@ inline StartupDecision decide_startup(const StartupRequest& req) {
         decision.player_feed = PlayerFeed::Synthetic;
         return decision;
     }
-    const bool supported = req.identity.kind == IdentityKind::Supported;
-    decision.read_game_addresses = supported;
-    decision.install_hooks = supported;
-    decision.run_network = supported;
-    decision.player_feed = supported ? PlayerFeed::Game : PlayerFeed::Off;
-    decision.end_guest_process = !supported && req.guest_role;
+    if (req.identity.kind == IdentityKind::Supported) {
+        decision.build = GameBuild::Build2976;
+        decision.read_game_addresses = true;
+        decision.install_hooks = true;
+        decision.run_network = true;
+        decision.player_feed = PlayerFeed::Game;
+        return decision;
+    }
+    if (req.identity.kind == IdentityKind::Build3576) {
+        decision.build = GameBuild::Build3576;
+        decision.end_guest_process = req.guest_role;
+        return decision;
+    }
+    decision.end_guest_process = req.guest_role;
     return decision;
 }
 

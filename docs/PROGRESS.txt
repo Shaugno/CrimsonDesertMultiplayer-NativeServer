@@ -1,7 +1,9 @@
 CO-OP DEVELOPMENT PROGRESS
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
-Updated: 2026-11-13, after the three collector-review fixes. Codex has not re-reviewed them.
+Updated: 2026-11-13. Current plan is docs/probe-3576/PLAN-3576-READY.md.
+Codex approved that plan and the Phase 4 identity gate. No blocking findings.
+The complete game-free suite passed 93/93. Commit 26a0e1a is not re-reviewed.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
@@ -9,6 +11,16 @@ Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
 not yet been demonstrated.
 
 LATEST CODEX REVIEW
+Codex reviewed docs/probe-3576/PLAN-3576-READY.md and the Phase 4 identity gate
+on 2026-11-13 and found no blocking findings. A 3576 identity cannot reach a
+2976 RVA. 2976 startup behavior is unchanged. Unproved packet fields stay
+unresolved. The complete game-free suite passed 93/93. Gameplay reads, hooks,
+networking, and the player feed stay off. The ASI was not installed. No game
+was launched. This approval does not re-review commit 26a0e1a and does not
+authorize a live capture. Codex verifies the local commit and publishes it to
+Shaugno.
+
+Previously reviewed collector:
 Codex reviewed the unfixed targeted collector on 2026-11-13 and did not approve
 that revision. The review found three defects: mark could use a Capture that
 stop had freed, a complete record could store a header that disagreed with its
@@ -104,7 +116,9 @@ No game was launched, opened, or attached. No game files or saves were changed.
 
 COMPLETED MILESTONES
 1. Visual Studio C++ tools and the game-free build/test workflow are ready.
-2. The normal ASI guard stays closed for 3576 and accepts only 2976.
+2. Commit 26a0e1a accepts only 2976. This commit recognizes 3576 file identity
+   and leaves reads, hooks, networking, and the player feed off. Codex approved
+   that gate. See docs/probe-3576/PLAN-3576-READY.md.
 3. The external read-only 3576 position diagnostic was built and live tested.
    Local position tracks walking; local plus origin gives world position.
 4. Send-like RVA 0x3A6310 and receive-like RVA 0x3A66A0 remain experimental
@@ -119,8 +133,10 @@ COMPLETED MILESTONES
    explicit checked PID and separates pristine load/start checks from control
    of an existing module with installed hooks. Wrong immutable identity stays
    rejected. No force flag, process launch, or target termination was added.
-8. src/mod/game/build_guard.h, both production offset headers, and LICENSE
-   match the preceding approved source manifest byte for byte.
+8. At the earlier approved checkpoint, src/mod/game/build_guard.h, both
+   production offset headers, and LICENSE matched that source manifest byte
+   for byte. build_guard.h changes in this commit's Phase 4 gate, milestone 11.
+   offsets.h and offsets_s2.h have not.
 9. Production diagnostic hooks were exercised in a controlled 3576 session.
    Both recorded stops returned Removed; the DLL stayed mapped as designed.
    Codex reviewed the raw evidence offline without opening the game process.
@@ -129,14 +145,25 @@ COMPLETED MILESTONES
     lengths separate, and classifies records from the copied header. The three
     review findings are fixed and covered by the game-free suite. Layouts
     remain unproved. The collector has not been run against the game.
+11. This commit adds src/mod/game/build_3576.h and classifies base 0x140000000,
+    timestamp 0x6AED2E85, and SizeOfImage 0x13CC4000 as Build3576. late_init
+    returns before any 2976 address. Packet RVAs are not in that header.
+    scripts/build.ps1 passed 93/93 in 71.50 seconds, and Codex's complete
+    game-free suite passed 93/93. Collector AddressSanitizer was not re-run
+    for this gate. The ASI was not installed. Codex approved the gate. No
+    blocking findings.
 
 NEXT TASK
-Review this collector-fix commit before another controlled capture. Then verify
-complete payload fields against player actions and obtain actor spawn,
-visibility, and removal evidence. Do not launch the game for a routine review.
-No packet sending, replay, production-offset adoption, or ASI enablement is
-authorized. Keep the 4096-byte and 256-record bounds and all guard checks.
-Actor-load and visibility acknowledgements were not in the first walking sample.
+Codex verifies this local commit and publishes it to Shaugno. Do not push it
+from the implementation step. Phase 1 stays prepared and unrun: after
+publication, and only when the user launches from Steam, back up saves,
+confirm the ASI and winmm are absent, and capture complete stand, walk, and
+turn packets with the existing controller. Then name movement fields offline
+and capture spawn, visibility, and removal. No packet sending, replay,
+production-offset adoption, or ASI enablement is authorized. Keep the
+4096-byte and 256-record bounds. A 3576 identity must not fall through into
+a 2976 read. Actor-load and visibility acknowledgements were not in the first
+walking sample.
 
 OPERATIONAL LIMITS
 The first successful log directory stays bound for the module lifetime. Fixed
@@ -157,6 +184,7 @@ save handling, and two-PC play. Permanent manager root, health, and reliable
 player readiness/loading signals remain unresolved.
 
 KEY EVIDENCE
+ docs/probe-3576/PLAN-3576-READY.md
  docs/probe-3576/FULL-PACKET-COLLECTOR-REVIEW-20261113.txt
  docs/probe-3576/PACKET-MAP-3576.md
  docs/probe-3576/PACKET-MAP-REVIEW-20261112.txt

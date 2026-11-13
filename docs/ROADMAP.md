@@ -15,12 +15,17 @@ The first controlled 3576 capture was reviewed, and the current movement/action
 and actor-message IDs were independently verified on disk. Full payload layouts
 and native-session compatibility still need evidence.
 
-1. Review the collector fixes, then run another controlled capture. Ownership,
-   copied-header consistency, and exclusive file creation are fixed and covered
-   by the 93-test game-free suite. Verify complete payload fields against
-   player actions and obtain actor spawn, visibility, and removal evidence.
-2. Port the verified player and networking pieces without bypassing build guards.
-3. Demonstrate a connected peer and movement on 3576.
+1. Codex approved docs/probe-3576/PLAN-3576-READY.md and the 3576 identity
+   gate on 2026-11-13. No blocking findings. The complete game-free suite
+   passed 93/93. The gate recognizes the 3576 file and leaves gameplay off.
+   Codex verifies the local commit and publishes it to Shaugno. The collector
+   commit 26a0e1a is not re-reviewed.
+2. After that publication, and only in a session the user starts from Steam, capture
+   complete stand, walk, and turn packets. Name the movement fields offline.
+   Capture spawn, visibility, and removal in a later session. Keep the
+   4096-byte cap. Do not install the ASI.
+3. Spawn and move a second visible actor from those verified fields. Do not
+   invent a spawn call or reuse 2976 packet sizes.
 4. Validate loading, reconnects, combat, save handling, and two-PC play before
    describing the result as a gameplay release.
 

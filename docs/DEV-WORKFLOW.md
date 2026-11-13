@@ -6,7 +6,10 @@ Original source: https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServ
 
 This NativeServer checkout is Shaugno's independent continuation. ByJunter's
 upstream alpha targets game build 1.0.0.2976; this continuation is developing
-compatibility for 1.0.0.3576. The production guard still accepts only 2976.
+compatibility for 1.0.0.3576. Commit 26a0e1a accepts only 2976. The Phase 4
+gate recognizes 3576 file identity and leaves its gameplay path unarmed.
+Codex approved that gate and docs/probe-3576/PLAN-3576-READY.md on 2026-11-13.
+No blocking findings. The complete game-free suite passed 93/93.
 `origin` points to Shaugno and `upstream` retains the original repository.
 The `shaugno` remote is also kept as a publishing alias. The original mod lives
 in the sibling folder `CrimsonDesertMultiplayer` and must stay untouched. The

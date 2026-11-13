@@ -37,14 +37,14 @@ void write_u32(std::vector<uint8_t>& bytes, size_t offset, uint32_t value) {
 
 // Minimal PE32+ header. e_lfanew sits past the first 0x40 bytes so the mapped
 // reader has to copy twice, the way the live path does.
-std::vector<uint8_t> make_image(uint32_t timestamp, uint32_t e_lfanew = 0x80) {
+std::vector<uint8_t> make_image(uint32_t timestamp, uint32_t e_lfanew = 0x80, uint32_t size_of_image = 0x100000) {
     std::vector<uint8_t> bytes(static_cast<size_t>(e_lfanew) + 24 + 60, 0);
     write_u16(bytes, 0, 0x5A4D);
     write_u32(bytes, 0x3C, e_lfanew);
     write_u32(bytes, e_lfanew, 0x00004550);
     write_u32(bytes, static_cast<size_t>(e_lfanew) + 8, timestamp);
     write_u16(bytes, static_cast<size_t>(e_lfanew) + 24, 0x020B);
-    write_u32(bytes, static_cast<size_t>(e_lfanew) + 24 + 56, 0x100000);
+    write_u32(bytes, static_cast<size_t>(e_lfanew) + 24 + 56, size_of_image);
     return bytes;
 }
 
@@ -120,6 +120,7 @@ void test_supported() {
         CHECK(!decision.install_test_overlay);
         CHECK(decision.run_network);
         CHECK(decision.player_feed == guard::PlayerFeed::Game);
+        CHECK(decision.build == guard::GameBuild::Build2976);
         CHECK(!decision.end_guest_process);
         const Counts quiet = drive(decision, false);
         CHECK(quiet.game_sources == 1);
@@ -130,7 +131,7 @@ void test_supported() {
 }
 
 void test_unsupported() {
-    const uint32_t installed = 0x6AED2E85;  // 1.0.0.3576, readable and not supported
+    const uint32_t installed = 0x6AED2E85;  // 3576 timestamp, but SizeOfImage is not 0x13CC4000
     const auto wrong_time = guard::identify_image(make_image(installed), kImageBase);
     CHECK(wrong_time.kind == guard::IdentityKind::Unsupported);
     CHECK(wrong_time.timestamp == installed);
@@ -271,6 +272,74 @@ void test_host_keeps_explicit_paths() {
     std::printf("Test host: OK\n");
 }
 
+void test_build_3576_stays_off_the_2976_path() {
+    using cdmp::game::build_3576::kImageBase;
+    using cdmp::game::build_3576::kPeTimestamp;
+    using cdmp::game::build_3576::kSizeOfImage;
+    // The unadopted send candidate. This test fails if classification reads it.
+    constexpr uintptr_t kSendRva = 0x3A6310;
+
+    const auto wrong_size = guard::identify_image(make_image(kPeTimestamp), kImageBase);
+    CHECK(wrong_size.kind == guard::IdentityKind::Unsupported);
+    CHECK(wrong_size.size_of_image == 0x100000);
+
+    const auto image = make_image(kPeTimestamp, 0x80, kSizeOfImage);
+    const auto identity = guard::identify_image(image, kImageBase);
+    CHECK(identity.kind == guard::IdentityKind::Build3576);
+    CHECK(identity.timestamp == kPeTimestamp);
+    CHECK(identity.size_of_image == kSizeOfImage);
+    const std::string text = guard::diagnostic(identity);
+    CHECK(text.find("1.0.0.3576") != std::string::npos);
+    CHECK(text.find("6AED2E85") != std::string::npos);
+    CHECK(text.find("not armed") != std::string::npos);
+
+    // The 2976 timestamp is classified from the header alone, including when
+    // the synthetic image carries the 3576 size. No entry signature is read.
+    const auto old_build = guard::identify_image(make_image(0x6AB28F00, 0x80, kSizeOfImage), kImageBase);
+    CHECK(old_build.kind == guard::IdentityKind::Supported);
+    CHECK(old_build.kind != guard::IdentityKind::Build3576);
+
+    int entry_reads = 0;
+    auto read_headers = [&](uintptr_t addr, void* out, size_t size) {
+        if (addr == kImageBase + kSendRva) {
+            ++entry_reads;
+            return false;
+        }
+        if (addr != kImageBase || size > image.size()) return false;
+        std::memcpy(out, image.data(), size);
+        return true;
+    };
+    CHECK(guard::identify_mapped(kImageBase, read_headers).kind == guard::IdentityKind::Build3576);
+    const auto old_bytes = make_image(0x6AB28F00);
+    auto read_old = [&](uintptr_t addr, void* out, size_t size) {
+        if (addr == kImageBase + kSendRva) {
+            ++entry_reads;
+            return false;
+        }
+        if (addr != kImageBase || size > old_bytes.size()) return false;
+        std::memcpy(out, old_bytes.data(), size);
+        return true;
+    };
+    CHECK(guard::identify_mapped(kImageBase, read_old).kind == guard::IdentityKind::Supported);
+    CHECK(entry_reads == 0);
+
+    const auto host = guard::decide_startup(request(true, false, false, identity));
+    check_blocked(host);
+    CHECK(host.build == guard::GameBuild::Build3576);
+    CHECK(!host.end_guest_process);
+    int rva_calls = 0;
+    guard::apply_startup(
+        host, [&] { rva_calls += static_cast<int>(cdmp::game::build_2976::kWorldSystemSlot); },
+        [&] { rva_calls += static_cast<int>(cdmp::game::build_2976::kStaticPlayerPos); }, [] {});
+    CHECK(rva_calls == 0);
+
+    const auto guest = guard::decide_startup(request(true, true, false, identity));
+    check_blocked(guest);
+    CHECK(guest.build == guard::GameBuild::Build3576);
+    CHECK(guest.end_guest_process);
+    std::printf("Build 3576 identity: OK\n");
+}
+
 }  // namespace
 
 int main() {
@@ -279,6 +348,7 @@ int main() {
     test_unreadable();
     test_mapped_reader();
     test_host_keeps_explicit_paths();
+    test_build_3576_stays_off_the_2976_path();
     if (g_failures == 0) std::printf("All build guard tests passed\n");
     return g_failures == 0 ? 0 : 1;
 }

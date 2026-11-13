@@ -159,10 +159,11 @@ ProcessFacts log_process_info() {
     }
     log::info("{}", in_game ? "Running inside CrimsonDesert.exe"
                             : "Not running inside the game (test host); game features stay off");
-    if (in_game && identity.kind != game::build_guard::IdentityKind::Supported) {
-        log::error("{}", game::build_guard::diagnostic(identity));
-    } else if (in_game) {
+    if (in_game && (identity.kind == game::build_guard::IdentityKind::Supported ||
+                    identity.kind == game::build_guard::IdentityKind::Build3576)) {
         log::info("{}", game::build_guard::diagnostic(identity));
+    } else if (in_game) {
+        log::error("{}", game::build_guard::diagnostic(identity));
     }
 
     if (HMODULE winmm = GetModuleHandleW(L"winmm.dll")) {
@@ -836,8 +837,12 @@ DWORD WINAPI late_init(LPVOID param) {
             guard_decision, [&] { allow_reads = true; }, [&] { allow_hooks = true; }, [] {});
         if (!allow_reads || !allow_hooks) {
             log::error("{}", game::build_guard::diagnostic(guard_req.identity));
-            log::error("Late init: executable identity is not supported; no game address is read and no hook "
-                       "is installed");
+            if (guard_req.identity.kind == game::build_guard::IdentityKind::Build3576) {
+                log::error("Late init: 1.0.0.3576 is recognized; no 2976 address is read and no hook is installed");
+            } else {
+                log::error("Late init: executable identity is not supported; no game address is read and no hook "
+                           "is installed");
+            }
             return 0;
         }
         log::info("Late init: waiting for the game to finish starting up");
