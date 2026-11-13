@@ -36,23 +36,51 @@ bool guarded_read(uint64_t address, void* destination, size_t size);
 
 enum class Direction : uint8_t { Send = 1, Receive = 2 };
 
-// Raw entry values. Stack slots are present only when that read was part of
-// the direction. prefix_len is the number of raw bytes copied from r9.
+// Complete and Truncated are decided from the copied header, not from an
+// earlier sample of that address. The copied opcode must be one of the nine
+// and its payload length must match the claim. Bytes after that header are
+// not one atomic snapshot of the source. Truncated also means the claim
+// exceeds kCopyCap, so only kCopyCap bytes were copied. Malformed: the claim
+// is below five bytes, the copied header disagrees with the claim, or the
+// copied opcode is outside the nine. Filtered and unreadable observations
+// are counters, not records.
+enum class CopyStatus : uint8_t { Complete = 1, Truncated = 2, Malformed = 3 };
+
+// Labels for one arm/stop window. The hook does not infer a phase.
+enum class Phase : uint8_t { Unlabeled = 0, Stand = 1, Walk = 2, Turn = 3 };
+
+// One selected packet. claimed_length is the stack u16. copied_length is the
+// number of initialized bytes in `bytes`. The tail past copied_length stays
+// zero. qpc_ticks is QueryPerformanceCounter at the copy. phase is the label
+// installed by the caller; 0 is unlabeled.
 struct Record {
-    Direction direction = Direction::Send;
     uint64_t rcx = 0;
     uint64_t rdx = 0;
     uint64_t r8 = 0;
     uint64_t r9 = 0;
-    bool has_stack_u16_28 = false;
+    uint64_t qpc_ticks = 0;
+    uint32_t claimed_length = 0;
+    uint32_t copied_length = 0;
     uint16_t stack_u16_28 = 0;
-    bool has_stack_u8_30 = false;
-    uint8_t stack_u8_30 = 0;
-    bool has_stack_u16_38 = false;
     uint16_t stack_u16_38 = 0;
-    uint8_t prefix[kPrefixCap] = {};
-    uint8_t prefix_len = 0;
+    uint16_t opcode = 0;
+    uint16_t header_payload = 0;
+    Direction direction = Direction::Send;
+    CopyStatus status = CopyStatus::Malformed;
+    uint8_t stack_u8_30 = 0;
+    uint8_t phase = 0;
+    bool has_stack_u16_28 = false;
+    bool has_stack_u8_30 = false;
+    bool has_stack_u16_38 = false;
+    bool header_checked = false;
+    uint8_t bytes[kCopyCap] = {};
 };
+
+// 256 queue slots plus 256 retained records, each holding a 4096-byte array.
+// The atomic sequence word sits beside the record in the ring cell.
+static_assert(sizeof(Record) >= kCopyCap);
+static_assert(sizeof(Record) <= kCopyCap + 256);
+static_assert(256ull * sizeof(Record) * 2ull < 3ull * 1024ull * 1024ull);
 
 // Registers at the candidate entry. rsp is the stack pointer before the prologue.
 struct EntryArgs {
@@ -115,6 +143,10 @@ public:
     // installs one. Callbacks do not call it.
     void set_consumer_hold(ConsumerHold hold, void* user);
 
+    // Label copied onto later records. Values outside Phase are unlabeled.
+    // The store is atomic. Callbacks do not take a lock to read it.
+    void set_phase(uint8_t phase);
+
     // Callback bodies. They do not wait, allocate, perform file I/O, modify
     // game state, or call either packet function.
     void on_send(const EntryArgs& args);
@@ -125,6 +157,9 @@ public:
     bool try_pop(Record& out);
     uint64_t dropped() const;
     uint64_t unread() const;
+    uint64_t filtered() const;
+    uint64_t malformed() const;
+    uint64_t truncated() const;
     bool queue_allocated() const;
     const void* queue_address() const;
     bool accepting() const;
@@ -157,6 +192,10 @@ private:
     AdmissionGate gate_{};
     std::atomic<uint64_t> dropped_{0};
     std::atomic<uint64_t> unread_{0};
+    std::atomic<uint64_t> filtered_{0};
+    std::atomic<uint64_t> malformed_{0};
+    std::atomic<uint64_t> truncated_{0};
+    std::atomic<uint8_t> phase_{0};
     std::atomic<ConsumerHold> consumer_hold_{nullptr};
     std::atomic<void*> consumer_hold_user_{nullptr};
 };

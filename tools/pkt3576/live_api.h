@@ -44,9 +44,22 @@ typedef struct Pkt3576LiveReport {
     uint32_t stored;
     uint32_t omitted;
     uint32_t capture_attempts;
+    uint32_t filtered;
+    uint32_t malformed;
+    uint32_t truncated;
+    uint32_t phase;
+    uint64_t qpc_frequency;
 } Pkt3576LiveReport;
 
 PKT3576_LIVE_EXPORT_API int pkt3576_live_report(Pkt3576LiveReport* report);
+
+// phase is "stand", "walk", "turn", or "unlabeled". Returns 0 when the label
+// is stored. Record ticks and this mark use QueryPerformanceCounter. The
+// frequency is qpc_frequency in the session log. A labeled arm writes
+// pkt3576-live-records-<phase>.txt with an exclusive open. An existing file
+// is not truncated. 256 stored records do not mean the whole phase interval
+// was captured.
+PKT3576_LIVE_EXPORT_API int pkt3576_live_mark(const char* phase);
 
 // Layout for the test-only fixture arm export. The production DLL does not
 // export a function that reads this.
@@ -70,6 +83,13 @@ PKT3576_LIVE_EXPORT_API int pkt3576_live_fixture_start(const wchar_t* log_direct
 // One-pointer form so a test controller can pass every fixture argument
 // without a remote code stub. Production builds do not export this.
 PKT3576_LIVE_EXPORT_API int pkt3576_live_fixture_arm(const Pkt3576LiveFixtureArm* request);
+
+typedef void (*Pkt3576LiveFixtureHook)(void* user);
+
+// Scheduling seams for game-free tests. Production builds do not export these.
+// A hook must not call start, stop, mark, status, or report.
+PKT3576_LIVE_EXPORT_API void pkt3576_live_fixture_set_records_open_hook(Pkt3576LiveFixtureHook hook, void* user);
+PKT3576_LIVE_EXPORT_API void pkt3576_live_fixture_set_phase_hold(Pkt3576LiveFixtureHook hold, void* user);
 #endif
 
 #ifdef __cplusplus

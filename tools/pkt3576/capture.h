@@ -14,6 +14,9 @@ struct CaptureLimits {
     uint32_t queue_capacity = 256;
     // Records kept in memory and written by the consumer thread.
     uint32_t output_records = 256;
+    // Labeled phase archives fail the open when the path already exists.
+    // The unlabeled records file still truncates.
+    bool exclusive_create = false;
 };
 
 // One capture at a time. create() allocates. release_owner() deletes the
@@ -49,10 +52,25 @@ public:
     // The writer spins while blocked. Callbacks do not look at this flag.
     void set_writer_blocked(bool blocked);
 
+    // Copied onto records taken after this call. 0 is unlabeled, 1 stand,
+    // 2 walk, 3 turn. The hook does not choose a phase.
+    void set_phase(uint8_t phase);
+
+    // Game-free scheduling. Production leaves both null. The open hook runs
+    // on the start thread immediately before the records file is opened.
+    // The phase hold runs on the set_phase caller before that object is used.
+    // Packet callbacks do not run either hook. A hook must not call start,
+    // stop, mark, status, or report.
+    static void set_records_open_hook(void (*hook)(void*), void* user);
+    static void set_phase_hold(void (*hold)(void*), void* user);
+
     uint32_t stored() const;
     uint32_t omitted() const;
     uint64_t dropped() const;
     uint64_t unread() const;
+    uint64_t filtered() const;
+    uint64_t malformed() const;
+    uint64_t truncated() const;
     bool queue_allocated() const;
     bool accepting() const;
     // Valid after stop() returns Removed. The writer is the only producer.

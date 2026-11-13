@@ -1,0 +1,122 @@
+CODEX REVIEW: PACKET-MAP-3576
+Date: 2026-11-12
+Result: The message-name/opcode mapping is independently corroborated.
+Proceed to implement and game-free test the targeted full-packet collector.
+This review does not approve game deployment, packet replay, or co-op support.
+
+Scope and method
+Reviewed PACKET-MAP-3576.md and its proposed capture changes against the
+installed executable AS A DATA FILE, the saved standing/walking records,
+and the current observer/backend/runner code. No game process was launched,
+opened, or attached. No production code, offsets, or build guard was changed.
+Only local review documentation and an ignored offline verifier were added.
+
+Independent evidence
+Installed file SHA-256 matched C94AD6C3EA54970A6D2DA7A2719753210A7728A91698ED3405DD9125470ED98F.
+The independent MSVC/Zydis verifier maps the file PAGE_READONLY, checks the PE
+identity, and follows initializer LEA/store pairs to static instances and
+derived vtables. It validates each RTTI COL signature/self-RVA before reading
+the type name. It does not LoadLibrary the game image or call its functions.
+
+Verified:
+ - PE timestamp 0x6AED2E85, base 0x140000000, SizeOfImage 0x13CC4000,
+   file size 326872984, and 248753 exception-directory entries.
+ - 1175 initializer-linked TrocTr instances and 1175 unique opcodes.
+   Kind/suffix totals: 496 Req/kind4, 554 Ack/kind1, 21 Nak/kind1.
+ - All nine critical instances, names, opcodes, kinds, derived vtables,
+   initializer addresses, common vtable slots, flags, min/max values,
+   instance bytes, and handler unwind begin/end claims.
+ - All fifteen captured-opcode rows have the stated 3576 names and kinds.
+   The nine targets overlap three captured rows, giving 21 unique verified
+   message-map entries. No old numeric-name catalog was used to assign them.
+ - DeserializerMemory RTTI/read slot +0x28 resolves to exe+0x1602F60. Its
+   disassembly supports the described source/cursor/limit fields.
+ - The quoted frame-check sites and first read-call sites are present.
+ - ActorLoadDataAck's stub jumps to exe+0xA0B04E0 in .tls$; its layout remains
+   unresolved. An unconditional jump is not evidence for the following bytes
+   in a linear disassembly; no layout is inferred from them.
+
+Verified critical mapping, for this file only:
+ MoveActorReq             2833      MoveActorAck              3094
+ RotateActorReq           2852      RotateActorAck            3078
+ StartActionReq           2202      StartActionAck            2552
+ ActorLoadDataAck         2005
+ UpdateVisiblePlayerAck   2555
+ RemoveActorAck           3067
+
+Cross-check of all 70 saved records:
+ - All resolve to names/kinds in the independent map.
+ - All S records have kind4; all R records have kind1.
+ - All 70 have header payload length + 5 == sampled stack length.
+ - The stored requests include MoveActorReq x15 (523 total bytes),
+   RotateActorReq x1 (181), and StartActionReq x6 (734).
+ - None of the six critical Ack messages occurs in the stored sample.
+   Omitted records remain unknown; this is not a claim those messages never ran.
+
+Artifacts
+ build/review_packet_map3576.cpp
+ build/codex-review-packet-map3576-build.log
+ build/codex-review-packet-map3576-evidence.txt (verification_failures=0)
+ build/codex-review-packet-map3576-capture-crosscheck.json
+The offline verifier compiled and exited 0. No full CTest suite was rerun:
+there is no production-code change, and this is file/data verification.
+The approved observer/backend/runner, CMake, production guards/offsets,
+2976 catalog, and LICENSE were checked against the prior source manifest
+and remain unchanged.
+
+What remains unproved
+Names and IDs do not establish payload field offsets or cross-PC identity.
+The partial handler walks do not prove complete Req/Ack layouts, cursor
+consumption on every successful path, or that all packet sizes are fixed.
+The 16-byte samples cannot establish complete transforms or replayable data.
+The map appropriately marks these limits. The proposed collector is still
+unimplemented and has not been validated by this review.
+
+Next Grok task: implement the proposed bounded collector, with these details
+1. Keep the nine-message selection in experimental 3576 code only. Filter
+   before expensive copying, using a guarded opcode read when length >= 2.
+   For selected ordinary messages, require at least five claimed bytes,
+   read the guarded five-byte header, and validate header_payload_length+5
+   against the stack length. Unselected internal three-byte messages are
+   filtered, not mislabeled as malformed ordinary frames. Distinguish
+   filtered-out, malformed, unreadable,
+   truncated, queue-dropped, and output-omitted records/counters.
+2. Preserve claimed length and copied length separately. Use a 4096-byte
+   copy cap and a wide enough length field. A record is complete only if
+   its frame is consistent and the entire claimed packet was copied.
+   Failed/partial reads must not expose uninitialized bytes or be labeled
+   complete. A truncated 4096-byte actor-load sample is not a usable spawn
+   packet. Its unknown maximum must stay explicit, not silently increased.
+3. Preallocate the queue/output storage. A 256-slot ring plus 256 retained
+   records with 4096-byte arrays costs roughly 2 MiB before overhead; check
+   the actual sizes. Keep callback copying bounded with no allocation, file
+   I/O, blocking lock, or retained pointers into game buffers. Size the writer
+   for 8192 hex characters plus metadata, or use another bounded encoding.
+4. Add per-record QPC ticks and session QueryPerformanceFrequency metadata.
+   Use separate labeled stand/walk/turn arm-stop windows with archived files,
+   or marks using a documented matching time base. Preserve the first-bound
+   directory rule and fixed-file overwrite precautions. Keep the record cap
+   explicit; 256 does not guarantee a whole action interval is captured.
+5. Preserve admission/drain/quiescence and Retained ownership. Keep both
+   loaded-file/signature guards, production/fixture separation, and stop
+   behavior. Do not open the normal ASI guard or add packet sending/replay.
+6. Add meaningful game-free tests for selected and unselected opcodes,
+   malformed/short frames, unreadable/page-boundary buffers, exact-cap and
+   over-cap packets, complete/truncated flags, QPC metadata/phase labeling,
+   queue/output limits and counters, packet immutability, concurrent stop,
+   and retained failures. Run the existing suite and appropriate sanitizer
+   checks, then return for Codex review before requesting another live run.
+
+How this leads to co-op
+After collector approval, obtain complete movement/rotation/action packets
+and correlate fields with controlled actions. Spawn/visibility/removal Acks
+will need an appropriate later load/actor-creation observation; ordinary
+walking does not establish that those messages were captured. Then port the
+existing actor and native-session/transport integration in explicit 3576
+compatibility code, verifying remaining native entry points separately.
+First gameplay milestone: two visible player actors whose movement agrees
+across a connected session. Loading, reconnects, combat, and save behavior
+still require validation before a gameplay release.
+
+This turn did not publish to GitHub or touch game saves. Keep the new code
+local for review; preserve original attribution and the 2976 implementation.

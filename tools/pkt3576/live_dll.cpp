@@ -29,16 +29,11 @@ int pkt3576_live_status(int* start_code, int* stop_code, int* retained, unsigned
 
 int pkt3576_live_report(Pkt3576LiveReport* report) {
     if (report == nullptr) return 1;
-    unsigned stored = 0;
-    unsigned omitted = 0;
-    unsigned attempts = 0;
-    const int code = pkt3576::live::status(&report->start_code, &report->stop_code, &report->retained, &stored,
-                                           &omitted, &attempts);
-    report->stored = stored;
-    report->omitted = omitted;
-    report->capture_attempts = attempts;
-    return code;
+    pkt3576::live::write_report(report);
+    return 0;
 }
+
+int pkt3576_live_mark(const char* phase) { return pkt3576::live::mark(phase); }
 
 #ifdef PKT3576_LIVE_FIXTURE
 int pkt3576_live_fixture_start(const wchar_t* log_directory, void* send_entry, void* recv_entry,
@@ -52,5 +47,13 @@ int pkt3576_live_fixture_arm(const Pkt3576LiveFixtureArm* request) {
     return pkt3576::live::fixture_start(request->log_directory, reinterpret_cast<void*>(request->send_entry),
                                         reinterpret_cast<void*>(request->recv_entry), request->queue_capacity,
                                         request->output_records);
+}
+
+void pkt3576_live_fixture_set_records_open_hook(Pkt3576LiveFixtureHook hook, void* user) {
+    pkt3576::live::set_records_open_hook(hook, user);
+}
+
+void pkt3576_live_fixture_set_phase_hold(Pkt3576LiveFixtureHook hold, void* user) {
+    pkt3576::live::set_phase_hold(hold, user);
 }
 #endif

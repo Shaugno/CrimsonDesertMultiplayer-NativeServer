@@ -22,8 +22,8 @@ constexpr uint32_t kPhaseBusy = 1;
 constexpr uint32_t kPhaseActive = 2;
 constexpr uint32_t kPhaseHeld = 3;
 
-constexpr uint32_t kProductionQueue = 64;
-constexpr uint32_t kProductionRecords = 64;
+constexpr uint32_t kProductionQueue = 256;
+constexpr uint32_t kProductionRecords = 256;
 constexpr uint32_t kMinQueue = 2;
 constexpr uint32_t kMaxQueue = 256;
 constexpr uint32_t kMinRecords = 1;
@@ -34,6 +34,18 @@ constexpr size_t kCapturePathCap = 260;
 
 const wchar_t kSessionFile[] = L"pkt3576-live-session.txt";
 const wchar_t kRecordsFile[] = L"pkt3576-live-records.txt";
+
+// Serializes start, stop, mark, status, and report. Packet callbacks do not
+// take it, so stop can wait for hook threads without deadlocking them.
+// mark holds it across set_phase, so stop cannot delete that Capture first.
+SRWLOCK g_control = SRWLOCK_INIT;
+
+struct ControlLock {
+    ControlLock() { AcquireSRWLockExclusive(&g_control); }
+    ~ControlLock() { ReleaseSRWLockExclusive(&g_control); }
+    ControlLock(const ControlLock&) = delete;
+    ControlLock& operator=(const ControlLock&) = delete;
+};
 
 std::atomic<uint32_t> g_phase{kPhaseIdle};
 std::atomic<int> g_start_code{-1};
@@ -46,6 +58,14 @@ std::atomic<unsigned> g_attempts{0};
 Capture* g_capture = nullptr;
 uint64_t g_dropped = 0;
 uint64_t g_unread = 0;
+uint64_t g_filtered = 0;
+uint64_t g_malformed = 0;
+uint64_t g_truncated = 0;
+uint64_t g_qpc_frequency = 0;
+uint32_t g_phase_changes = 0;
+std::atomic<uint8_t> g_label{static_cast<uint8_t>(Phase::Unlabeled)};
+wchar_t g_records_path[kCapturePathCap] = {};
+char g_archive[16] = "none";
 int g_session_fixture = 0;
 int g_game_match = 0;
 uint32_t g_queue = 0;
@@ -175,6 +195,8 @@ void append_hex_field(const char* label, bool known, uint32_t value) {
     log_append(line);
 }
 
+const char* phase_name(uint8_t phase);
+
 void write_block(const char* mode, int fixture, int game_match, const Identity& identity, const char* startup,
                  const char* shutdown, uint32_t queue, uint32_t records, const wchar_t* exe_name) {
     // Fixture output is never acceptance of the host as build 3576.
@@ -197,7 +219,71 @@ void write_block(const char* mode, int fixture, int game_match, const Identity& 
                   static_cast<unsigned long long>(g_unread), g_attempts.load(std::memory_order_relaxed),
                   GetCurrentProcessId(), static_cast<unsigned long long>(GetTickCount64()), queue, records);
     log_append(line);
+    if (g_qpc_frequency == 0) {
+        LARGE_INTEGER frequency{};
+        if (QueryPerformanceFrequency(&frequency)) g_qpc_frequency = static_cast<uint64_t>(frequency.QuadPart);
+    }
+    std::snprintf(line, sizeof line,
+                  "filtered=%llu\nmalformed=%llu\ntruncated=%llu\nqpc_frequency=%llu\n"
+                  "qpc_timebase=QueryPerformanceCounter\nphase=%s\nphase_changes=%u\narchive=%s\n"
+                  "copy_cap=%u\nactor_load_max=unknown\ninterval_guaranteed=0\n",
+                  static_cast<unsigned long long>(g_filtered), static_cast<unsigned long long>(g_malformed),
+                  static_cast<unsigned long long>(g_truncated), static_cast<unsigned long long>(g_qpc_frequency),
+                  phase_name(g_label.load(std::memory_order_relaxed)), g_phase_changes, g_archive, kCopyCap);
+    log_append(line);
     log_flush();
+}
+
+const wchar_t* records_name_for(uint8_t phase) {
+    switch (phase) {
+    case static_cast<uint8_t>(Phase::Stand):
+        return L"pkt3576-live-records-stand.txt";
+    case static_cast<uint8_t>(Phase::Walk):
+        return L"pkt3576-live-records-walk.txt";
+    case static_cast<uint8_t>(Phase::Turn):
+        return L"pkt3576-live-records-turn.txt";
+    default:
+        return kRecordsFile;
+    }
+}
+
+const char* phase_name(uint8_t phase) {
+    switch (phase) {
+    case static_cast<uint8_t>(Phase::Stand):
+        return "stand";
+    case static_cast<uint8_t>(Phase::Walk):
+        return "walk";
+    case static_cast<uint8_t>(Phase::Turn):
+        return "turn";
+    default:
+        return "unlabeled";
+    }
+}
+
+bool parse_phase_text(const char* text, uint8_t& phase) {
+    if (text == nullptr) return false;
+    if (std::strcmp(text, "unlabeled") == 0) {
+        phase = static_cast<uint8_t>(Phase::Unlabeled);
+        return true;
+    }
+    if (std::strcmp(text, "stand") == 0) {
+        phase = static_cast<uint8_t>(Phase::Stand);
+        return true;
+    }
+    if (std::strcmp(text, "walk") == 0) {
+        phase = static_cast<uint8_t>(Phase::Walk);
+        return true;
+    }
+    if (std::strcmp(text, "turn") == 0) {
+        phase = static_cast<uint8_t>(Phase::Turn);
+        return true;
+    }
+    return false;
+}
+
+bool file_exists(const wchar_t* path) {
+    if (path == nullptr || path[0] == L'\0') return false;
+    return GetFileAttributesW(path) != INVALID_FILE_ATTRIBUTES;
 }
 
 const wchar_t* file_name_of(const wchar_t* path) {
@@ -295,6 +381,34 @@ void remember_counters() {
     g_omitted.store(g_capture->omitted(), std::memory_order_relaxed);
     g_dropped = g_capture->dropped();
     g_unread = g_capture->unread();
+    g_filtered = g_capture->filtered();
+    g_malformed = g_capture->malformed();
+    g_truncated = g_capture->truncated();
+}
+
+// Copies a closed records file onto the phase archive when the capture used
+// the fixed name. An existing archive is left untouched. A capture that
+// already opened the phase file needs no second copy.
+void archive_records() {
+    const uint8_t phase = g_label.load(std::memory_order_relaxed);
+    if (phase == static_cast<uint8_t>(Phase::Unlabeled) || g_records_path[0] == L'\0') {
+        std::snprintf(g_archive, sizeof g_archive, "unlabeled");
+        return;
+    }
+    wchar_t dest[kCapturePathCap] = {};
+    if (!join_file(dest, kCapturePathCap, g_log_dir, records_name_for(phase))) {
+        std::snprintf(g_archive, sizeof g_archive, "skip");
+        return;
+    }
+    if (_wcsicmp(dest, g_records_path) == 0) {
+        std::snprintf(g_archive, sizeof g_archive, "records");
+        return;
+    }
+    if (file_exists(dest) || !file_exists(g_records_path) || !CopyFileW(g_records_path, dest, TRUE)) {
+        std::snprintf(g_archive, sizeof g_archive, "exists");
+        return;
+    }
+    std::snprintf(g_archive, sizeof g_archive, "%s", phase_name(phase));
 }
 
 // Deletes the capture only when the backend no longer needs it.
@@ -318,6 +432,7 @@ const char* mode_name();
 
 // Held is committed before the log write. A throw from the log cannot publish Idle.
 void note_retained(Slot& slot, const wchar_t* exe_name, const char* startup) {
+    std::snprintf(g_archive, sizeof g_archive, "retained");
     g_retained.store(1, std::memory_order_release);
     g_stop_code.store(kPkt3576LiveRetained, std::memory_order_relaxed);
     slot.finish(kPhaseHeld);
@@ -343,13 +458,29 @@ int arm(Slot& slot, void* module, void* send_entry, void* recv_entry, uint32_t q
         return kPkt3576LiveRefused;
     }
 
+    const uint8_t phase = g_label.load(std::memory_order_relaxed);
     wchar_t records_path[kCapturePathCap] = {};
-    if (!join_file(records_path, kCapturePathCap, g_log_dir, kRecordsFile)) {
+    if (!join_file(records_path, kCapturePathCap, g_log_dir, records_name_for(phase))) {
         g_start_code.store(kPkt3576LiveBadLog, std::memory_order_relaxed);
         return kPkt3576LiveBadLog;
     }
+    // A labeled window opens its own file. An existing archive is not truncated.
+    // The unlabeled file keeps the previous overwrite behavior.
+    if (phase != static_cast<uint8_t>(Phase::Unlabeled) && file_exists(records_path)) {
+        std::snprintf(g_archive, sizeof g_archive, "exists");
+        g_start_code.store(kPkt3576LiveBadLog, std::memory_order_relaxed);
+        write_block(mode_name(), g_session_fixture, game_match, g_identity, "bad-log", "idle", queue, records,
+                    exe_name);
+        return kPkt3576LiveBadLog;
+    }
+    wcsncpy_s(g_records_path, records_path, _TRUNCATE);
 
-    g_capture = Capture::create(CaptureLimits{queue, records}, records_path);
+    CaptureLimits limits;
+    limits.queue_capacity = queue;
+    limits.output_records = records;
+    limits.exclusive_create = phase != static_cast<uint8_t>(Phase::Unlabeled);
+    g_capture = Capture::create(limits, records_path);
+    if (g_capture != nullptr) g_capture->set_phase(phase);
     if (g_capture == nullptr) {
         g_start_code.store(kPkt3576LiveRefused, std::memory_order_relaxed);
         write_block(mode_name(), g_session_fixture, game_match, g_identity, "refused", "idle", queue, records, exe_name);
@@ -423,6 +554,7 @@ void remember_session(int fixture, int game_match, const Identity& identity) {
 }  // namespace
 
 int start(const wchar_t* log_directory) {
+    ControlLock control;
     int denied = 0;
     if (!enter(denied)) return denied;
     Slot slot;
@@ -447,6 +579,9 @@ int start(const wchar_t* log_directory) {
         g_omitted.store(0, std::memory_order_relaxed);
         g_dropped = 0;
         g_unread = 0;
+        g_filtered = 0;
+        g_malformed = 0;
+        g_truncated = 0;
         g_start_code.store(kPkt3576LiveRefused, std::memory_order_relaxed);
         write_block("process", 0, 0, identity, "refused", "idle", kProductionQueue, kProductionRecords, exe_name);
         return kPkt3576LiveRefused;
@@ -467,6 +602,7 @@ int start(const wchar_t* log_directory) {
 }
 
 int stop() {
+    ControlLock control;
     uint32_t seen = g_phase.load(std::memory_order_acquire);
     if (seen == kPhaseHeld) return kPkt3576LiveRetained;
     if (seen == kPhaseIdle) return kPkt3576LiveIdle;
@@ -512,6 +648,7 @@ int stop() {
         g_stop_code.store(kPkt3576LiveRemoved, std::memory_order_relaxed);
         slot.finish(kPhaseIdle);
         try {
+            archive_records();
             write_block(mode_name(), g_session_fixture, g_game_match, g_identity, startup, "removed", g_queue,
                         g_records, exe_name);
         } catch (...) {
@@ -530,6 +667,7 @@ int stop() {
 
 int status(int* start_code, int* stop_code, int* retained, unsigned* stored, unsigned* omitted,
            unsigned* capture_attempts) {
+    ControlLock control;
     if (start_code != nullptr) *start_code = g_start_code.load(std::memory_order_acquire);
     if (stop_code != nullptr) *stop_code = g_stop_code.load(std::memory_order_acquire);
     if (retained != nullptr) *retained = g_retained.load(std::memory_order_acquire);
@@ -539,9 +677,51 @@ int status(int* start_code, int* stop_code, int* retained, unsigned* stored, uns
     return 0;
 }
 
+int mark(const char* phase_text) {
+    uint8_t phase = 0;
+    if (!parse_phase_text(phase_text, phase)) return kPkt3576LiveBadLog;
+    ControlLock control;
+    const uint8_t previous = g_label.exchange(phase, std::memory_order_acq_rel);
+    if (previous != phase) ++g_phase_changes;
+    if (g_capture != nullptr) g_capture->set_phase(phase);
+    LARGE_INTEGER now{};
+    QueryPerformanceCounter(&now);
+    if (g_qpc_frequency == 0) {
+        LARGE_INTEGER frequency{};
+        if (QueryPerformanceFrequency(&frequency)) g_qpc_frequency = static_cast<uint64_t>(frequency.QuadPart);
+    }
+    if (g_log_bound) {
+        char line[128] = {};
+        std::snprintf(line, sizeof line, "mark phase=%s qpc=%llu\n", phase_name(phase),
+                      static_cast<unsigned long long>(now.QuadPart));
+        log_append(line);
+        log_flush();
+    }
+    return 0;
+}
+
+void write_report(Pkt3576LiveReport* report) {
+    if (report == nullptr) return;
+    // Same fields as status(), inlined. status() takes this lock too, and an
+    // SRWLOCK exclusive acquire is not recursive.
+    ControlLock control;
+    report->start_code = g_start_code.load(std::memory_order_acquire);
+    report->stop_code = g_stop_code.load(std::memory_order_acquire);
+    report->retained = g_retained.load(std::memory_order_acquire);
+    report->stored = g_stored.load(std::memory_order_acquire);
+    report->omitted = g_omitted.load(std::memory_order_acquire);
+    report->capture_attempts = g_attempts.load(std::memory_order_acquire);
+    report->filtered = g_filtered > 0xFFFFFFFFull ? 0xFFFFFFFFu : static_cast<uint32_t>(g_filtered);
+    report->malformed = g_malformed > 0xFFFFFFFFull ? 0xFFFFFFFFu : static_cast<uint32_t>(g_malformed);
+    report->truncated = g_truncated > 0xFFFFFFFFull ? 0xFFFFFFFFu : static_cast<uint32_t>(g_truncated);
+    report->phase = g_label.load(std::memory_order_relaxed);
+    report->qpc_frequency = g_qpc_frequency;
+}
+
 #ifdef PKT3576_LIVE_FIXTURE
 int fixture_start(const wchar_t* log_directory, void* send_entry, void* recv_entry, unsigned queue_capacity,
                   unsigned output_records) {
+    ControlLock control;
     int denied = 0;
     if (!enter(denied)) return denied;
     Slot slot;
@@ -564,6 +744,10 @@ int fixture_start(const wchar_t* log_directory, void* send_entry, void* recv_ent
     return arm(slot, GetModuleHandleW(nullptr), send_entry, recv_entry, queue_capacity, output_records,
                file_name_of(host));
 }
+
+void set_records_open_hook(void (*hook)(void*), void* user) { Capture::set_records_open_hook(hook, user); }
+
+void set_phase_hold(void (*hold)(void*), void* user) { Capture::set_phase_hold(hold, user); }
 #endif
 
 }  // namespace pkt3576::live

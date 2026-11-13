@@ -24,6 +24,33 @@ bool same_entry(const uint8_t* found, const uint8_t* expect) {
     return std::memcmp(found, expect, 16) == 0;
 }
 
+bool opcode_selected(uint16_t opcode) {
+    switch (opcode) {
+    case kMoveActorReq:
+    case kRotateActorReq:
+    case kStartActionReq:
+    case kMoveActorAck:
+    case kRotateActorAck:
+    case kStartActionAck:
+    case kActorLoadDataAck:
+    case kUpdateVisiblePlayerAck:
+    case kRemoveActorAck:
+        return true;
+    default:
+        return false;
+    }
+}
+
+uint16_t load_u16(const uint8_t* bytes) {
+    return static_cast<uint16_t>(bytes[0] | (static_cast<uint16_t>(bytes[1]) << 8));
+}
+
+uint64_t qpc_now() {
+    LARGE_INTEGER now{};
+    if (!QueryPerformanceCounter(&now)) return 0;
+    return static_cast<uint64_t>(now.QuadPart);
+}
+
 }  // namespace
 
 bool guarded_read(uint64_t address, void* destination, size_t size) {
@@ -160,6 +187,11 @@ void Observer::set_consumer_hold(ConsumerHold hold, void* user) {
     consumer_hold_.store(hold, std::memory_order_release);
 }
 
+void Observer::set_phase(uint8_t phase) {
+    if (phase > static_cast<uint8_t>(Phase::Turn)) phase = static_cast<uint8_t>(Phase::Unlabeled);
+    phase_.store(phase, std::memory_order_relaxed);
+}
+
 void Observer::free_queue() {
     delete ring_;
     ring_ = nullptr;
@@ -171,44 +203,99 @@ bool Observer::read_at(uint64_t address, void* destination, size_t size) const {
 }
 
 void Observer::observe(Direction direction, const EntryArgs& args, bool send_slots) {
+    // Order: stack length, then a 2-byte opcode when the claim can hold one.
+    // Anything outside the nine ids is filtered, including a 3-byte internal
+    // message. A selected id then probes the five-byte header so a failed
+    // read stays unreadable. The bulk copy runs only after that probe and
+    // after the send-only stack slots succeed. Complete and Truncated are
+    // decided from the copied bytes. The earlier probe is not that header.
+    uint16_t claimed = 0;
+    if (!read_at(args.rsp + kStackSlot28, &claimed, sizeof claimed)) {
+        unread_.fetch_add(1, std::memory_order_relaxed);
+        return;
+    }
+    if (claimed < kOpcodeBytes) {
+        filtered_.fetch_add(1, std::memory_order_relaxed);
+        return;
+    }
+
+    uint8_t opcode_bytes[kOpcodeBytes] = {};
+    if (!read_at(args.r9, opcode_bytes, sizeof opcode_bytes)) {
+        unread_.fetch_add(1, std::memory_order_relaxed);
+        return;
+    }
+    const uint16_t opcode = load_u16(opcode_bytes);
+    if (!opcode_selected(opcode)) {
+        filtered_.fetch_add(1, std::memory_order_relaxed);
+        return;
+    }
+
+    const bool short_frame = claimed < kHeaderBytes;
+    if (!short_frame) {
+        uint8_t header[kHeaderBytes] = {};
+        if (!read_at(args.r9, header, sizeof header)) {
+            unread_.fetch_add(1, std::memory_order_relaxed);
+            return;
+        }
+    }
+
+    uint8_t stack30 = 0;
+    uint16_t stack38 = 0;
+    if (send_slots) {
+        if (!read_at(args.rsp + kStackSlot30, &stack30, sizeof stack30) ||
+            !read_at(args.rsp + kStackSlot38, &stack38, sizeof stack38)) {
+            unread_.fetch_add(1, std::memory_order_relaxed);
+            return;
+        }
+    }
+
+    const uint32_t copy_len = claimed > kCopyCap ? kCopyCap : static_cast<uint32_t>(claimed);
     Record record{};
     record.direction = direction;
     record.rcx = args.rcx;
     record.rdx = args.rdx;
     record.r8 = args.r8;
     record.r9 = args.r9;
-
-    uint16_t claimed = 0;
-    if (!read_at(args.rsp + kStackSlot28, &claimed, sizeof claimed)) {
-        unread_.fetch_add(1, std::memory_order_relaxed);
-        return;
-    }
     record.has_stack_u16_28 = true;
     record.stack_u16_28 = claimed;
-
+    record.claimed_length = claimed;
+    record.phase = phase_.load(std::memory_order_relaxed);
     if (send_slots) {
-        uint8_t stack30 = 0;
-        uint16_t stack38 = 0;
-        if (!read_at(args.rsp + kStackSlot30, &stack30, sizeof stack30) ||
-            !read_at(args.rsp + kStackSlot38, &stack38, sizeof stack38)) {
-            unread_.fetch_add(1, std::memory_order_relaxed);
-            return;
-        }
         record.has_stack_u8_30 = true;
         record.stack_u8_30 = stack30;
         record.has_stack_u16_38 = true;
         record.stack_u16_38 = stack38;
     }
-
-    uint32_t prefix_len = claimed;
-    if (prefix_len > kPrefixCap) prefix_len = kPrefixCap;
-    if (prefix_len > 0) {
-        if (!read_at(args.r9, record.prefix, prefix_len)) {
-            unread_.fetch_add(1, std::memory_order_relaxed);
-            return;
-        }
+    if (!read_at(args.r9, record.bytes, copy_len)) {
+        unread_.fetch_add(1, std::memory_order_relaxed);
+        return;
     }
-    record.prefix_len = static_cast<uint8_t>(prefix_len);
+    record.copied_length = copy_len;
+    record.qpc_ticks = qpc_now();
+
+    // Status follows the stored header. A source that changes between the
+    // probe and this copy must not stay Complete or Truncated under the old
+    // opcode or length. An unselected opcode in the copy is malformed.
+    uint16_t copied_opcode = 0;
+    if (copy_len >= kOpcodeBytes) copied_opcode = load_u16(record.bytes);
+    record.opcode = copied_opcode;
+    bool copied_consistent = false;
+    if (!short_frame && copy_len >= kHeaderBytes) {
+        const uint16_t copied_payload = load_u16(record.bytes + 3);
+        record.header_checked = true;
+        record.header_payload = copied_payload;
+        copied_consistent = opcode_selected(copied_opcode) &&
+                            static_cast<uint32_t>(copied_payload) + kHeaderBytes == claimed;
+    }
+    if (!copied_consistent) {
+        record.status = CopyStatus::Malformed;
+        malformed_.fetch_add(1, std::memory_order_relaxed);
+    } else if (claimed > kCopyCap) {
+        record.status = CopyStatus::Truncated;
+        truncated_.fetch_add(1, std::memory_order_relaxed);
+    } else {
+        record.status = CopyStatus::Complete;
+    }
 
     if (ring_ == nullptr || !ring_->try_push(record)) {
         dropped_.fetch_add(1, std::memory_order_relaxed);
@@ -245,6 +332,12 @@ bool Observer::try_pop(Record& out) {
 uint64_t Observer::dropped() const { return dropped_.load(std::memory_order_relaxed); }
 
 uint64_t Observer::unread() const { return unread_.load(std::memory_order_relaxed); }
+
+uint64_t Observer::filtered() const { return filtered_.load(std::memory_order_relaxed); }
+
+uint64_t Observer::malformed() const { return malformed_.load(std::memory_order_relaxed); }
+
+uint64_t Observer::truncated() const { return truncated_.load(std::memory_order_relaxed); }
 
 bool Observer::queue_allocated() const { return ring_ != nullptr; }
 

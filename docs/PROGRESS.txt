@@ -1,7 +1,7 @@
 CO-OP DEVELOPMENT PROGRESS
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
-Updated: 2026-11-12, after Codex approval of the loading/controller tool.
+Updated: 2026-11-13, after the three collector-review fixes. Codex has not re-reviewed them.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
@@ -9,6 +9,40 @@ Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
 not yet been demonstrated.
 
 LATEST CODEX REVIEW
+Codex reviewed the unfixed targeted collector on 2026-11-13 and did not approve
+that revision. The review found three defects: mark could use a Capture that
+stop had freed, a complete record could store a header that disagreed with its
+metadata, and a labeled archive created after the existence check could be
+truncated. The review text is
+docs/probe-3576/FULL-PACKET-COLLECTOR-REVIEW-20261113.txt and describes the
+unfixed code. The three fixes are in the following commit, with game-free
+regressions. scripts/build.ps1 then passed 93/93 in 53.29 seconds.
+AddressSanitizer of the collector tests exited 0. Codex has not repeated the
+review. This commit does not authorize a live capture, packet replay, offset
+adoption, or the ASI. No game was launched for the fixes.
+
+Previously reviewed packet map:
+The packet-name/opcode map is independently corroborated against the exact
+3576 executable file. All nine target messages and fifteen captured rows
+match initializer-linked instance fields and derived-vtable RTTI. The scan
+found 1175 distinct instances/opcodes. The saved records include MoveActorReq
+x15, RotateActorReq x1, and StartActionReq x6. Complete layouts remain unproved.
+See docs/probe-3576/PACKET-MAP-REVIEW-20261112.txt for the evidence and the
+targeted full-packet collector implementation task. No game was launched or
+attached for this review. Keep the normal ASI guard closed.
+
+Previously reviewed live capture:
+The first live diagnostic milestone is supported by the raw evidence: two
+captures started and stopped cleanly in recorded PID 39068, no Retained result,
+and the target was alive at both final checks. The standing log has 6 R records;
+the walking log has 50 S/14 R records and 3422 omitted observations. All 70
+stored headers have consistent packet/payload lengths. The four archived log
+hashes, two binary hashes, and all 23 save-backup files match their manifests.
+See docs/probe-3576/LIVE-CAPTURE-REVIEW-20261112.txt.
+This confirms diagnostic capture/stop behavior in that session. Message names,
+complete payload layouts, native session compatibility, and co-op are unverified.
+
+Previously approved controller source:
 Approved as an experimental game-free source checkpoint. Both controller
 findings are resolved: installed hooks no longer prevent validated status/stop,
 and oversized decimal PIDs are rejected before opening a process. Load/start
@@ -18,6 +52,35 @@ See docs/probe-3576/LIVE-CONTROLLER-APPROVAL-20261112.txt.
 This is not a live-game result or proof of gameplay compatibility.
 
 INDEPENDENT VALIDATION
+After the three fixes: ctest -C RelWithDebInfo passed 93/93 in 53.29 seconds.
+AddressSanitizer printed pkt3576 tests ok, pkt3576 capture tests ok, pkt3576
+live tests ok, and pkt3576 live host tests ok, combined exit 0. The
+fault-injection executables were not sanitized. Linker LNK4044 on
+/fsanitize=address was ignored. Windows ASan has no leak report. No game
+process was opened.
+
+Unfixed collector, before those fixes: scripts/build.ps1 exit 0; 93/93 tests
+passed; 52.99 seconds. Log: build/codex-review-full-collector-20261113.log.
+Independent ASan/synthetic-reader/file-creation probes confirm the three defects.
+Script: build/review_full_collector_run.ps1. Its exit 0 confirms defects and
+does not mean approval. The phase-race child exits 1 with heap-use-after-free.
+Logs: build/codex-review-full-collector-headers.log,
+build/codex-review-full-collector-archive-race.log, and
+build/codex-review-full-collector-phase-race.log.
+Only ignored review copies have scheduling instrumentation; production code
+was not changed. Tests used owned dummy targets; no game process was opened.
+
+Previously: an independent MSVC/Zydis OFFLINE verifier read the game as a data file,
+checked its SHA-256/PE identity, initializer/instance/RTTI mapping, handler bounds,
+and selected deserializer/frame sites. Exit 0: verification_failures=0.
+All 70 captured records were cross-referenced to that map; their frame lengths
+and direction/kind relationships agree. The six target Acks were not stored.
+Artifacts: build/review_packet_map3576.cpp,
+build/codex-review-packet-map3576-evidence.txt, and
+build/codex-review-packet-map3576-capture-crosscheck.json.
+No full suite rerun was needed for this documentation/data-only review.
+
+Previously approved controller verification:
 scripts/build.ps1: exit 0; 93/93 CTest tests passed; 52.66 seconds.
 Log: build/codex-review-live-controller-fixes.log.
 The normal suite covers remote load/start/status/stop and Retained on a
@@ -58,14 +121,22 @@ COMPLETED MILESTONES
    rejected. No force flag, process launch, or target termination was added.
 8. src/mod/game/build_guard.h, both production offset headers, and LICENSE
    match the preceding approved source manifest byte for byte.
+9. Production diagnostic hooks were exercised in a controlled 3576 session.
+   Both recorded stops returned Removed; the DLL stayed mapped as designed.
+   Codex reviewed the raw evidence offline without opening the game process.
+10. The nine-message compatibility map is verified on disk. The experimental
+    collector copies those messages up to 4096 bytes, keeps claimed and copied
+    lengths separate, and classifies records from the copied header. The three
+    review findings are fixed and covered by the game-free suite. Layouts
+    remain unproved. The collector has not been run against the game.
 
 NEXT TASK
-A separately requested controlled passive live capture is the next milestone.
-Use the production load/start/status/stop commands in
- docs/probe-3576/LIVE-CAPTURE-CONTROL.md, after copying
-%LOCALAPPDATA%\Pearl Abyss\CD\save. Preserve raw output and packet logs and
-compare them with deliberate standing/walking/turning actions. This approval
-does not launch the game or authorize a live test. Keep the ASI guard closed.
+Review this collector-fix commit before another controlled capture. Then verify
+complete payload fields against player actions and obtain actor spawn,
+visibility, and removal evidence. Do not launch the game for a routine review.
+No packet sending, replay, production-offset adoption, or ASI enablement is
+authorized. Keep the 4096-byte and 256-record bounds and all guard checks.
+Actor-load and visibility acknowledgements were not in the first walking sample.
 
 OPERATIONAL LIMITS
 The first successful log directory stays bound for the module lifetime. Fixed
@@ -73,7 +144,11 @@ log filenames are reused; preserve evidence before another session. The module
 pin lasts until process exit, including after clean stop. Retained keeps
 resources/code alive and rejects another start; never force unloading.
 Remote-thread timeouts leave scratch memory because the thread may still use
-it. Game-specific load/start/status/stop behavior remains untested.
+it. Load/start/status/stop were recorded successfully in one 3576 session;
+this does not establish lifecycle behavior across loads or gameplay compatibility.
+The historical PID 39068 capture stored 16-byte prefixes and 64 records. The
+experimental collector stores up to 4096 bytes and 256 records. Neither archive
+is replay input. Final stop counters are authoritative.
 
 REMAINING WORK TOWARD CO-OP
 Gather controlled packet evidence; verify roles and port compatibility pieces;
@@ -82,6 +157,11 @@ save handling, and two-PC play. Permanent manager root, health, and reliable
 player readiness/loading signals remain unresolved.
 
 KEY EVIDENCE
+ docs/probe-3576/FULL-PACKET-COLLECTOR-REVIEW-20261113.txt
+ docs/probe-3576/PACKET-MAP-3576.md
+ docs/probe-3576/PACKET-MAP-REVIEW-20261112.txt
+ docs/probe-3576/LIVE-CAPTURE-3576.md
+ docs/probe-3576/LIVE-CAPTURE-REVIEW-20261112.txt
  docs/COMPATIBILITY-3576.md
  docs/probe-3576/DIAG3576-LIVE.md
  docs/probe-3576/PACKET-CANDIDATES-3576.md
@@ -99,6 +179,10 @@ Account and push permission verified: Shaugno, user id 348273530.
 Public repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
 Checkpoint branch: codex/checkpoint-3576-20261112
 Preceding approved publication: 40b3600d134f3592921e4476a3fab7117c18a540.
+Published controller checkpoint: 03ce15ecca76c7fc54b17bc04f77d9f3cb8c5828.
+The following commit adds the live capture record, packet map, experimental
+collector, the 2026-11-13 review, and the three fixes. Codex approved 03ce15e
+and has not approved the later commit. Save backups remain outside the repository.
 The user authorized saving this reviewed controller checkpoint. Its commit
 contains this approval and validation evidence under checkpoint-evidence/.
 The exact commit receipt and a hash-verified source archive are saved under
@@ -107,9 +191,8 @@ New work is not automatically approved or uploaded.
 
 WORKING AGREEMENT / BOUNDARIES
 Grok implements; Codex reviews. Read AGENTS.md and CLAUDE.md when resuming.
-The active branch stays grok/compat-guard with source HEAD 3cbb03c and local
-development files. Publishing uses an isolated checkout and preserves that
-working tree. origin is Shaugno; upstream preserves ByJunter. Original
+The published continuation is codex/checkpoint-3576-20261112. origin is
+Shaugno; upstream preserves ByJunter. Original
 attribution and GPL licensing are preserved. The sibling original mod stays
 untouched. Do not open the guard, adopt offsets, launch the game, or attach
 hooks as part of routine review.

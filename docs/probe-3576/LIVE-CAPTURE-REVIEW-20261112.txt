@@ -1,0 +1,102 @@
+CODEX REVIEW OF THE FIRST 3576 LIVE CAPTURE
+Date: 2026-11-12
+Result: The recorded diagnostic capture and clean-stop milestone is supported.
+It does not demonstrate co-op or establish movement-message identities.
+
+Reviewed evidence
+ docs/probe-3576/LIVE-CAPTURE-3576.md
+ backups/NativeServer/20261112-215320-pkt3576-live-evidence (under parent COOP MOD)
+ backups/NativeServer/20261112-215320-cd-save-before-pkt3576-live
+
+Independent checks (offline only; no process was opened or attached)
+1. All four archived phase session/record files match the report's SHA-256s.
+2. All 23 files in the successful save backup match their recorded hashes and
+   sizes. The manifest records a closed-game backup and result PASS. The
+   earlier failed copy is not the verified backup. Current live saves were
+   not compared or modified during this review.
+3. The current controller/DLL hashes match the report. All 1136 source files
+   matched the approved manifest before this review's documentation updates.
+   The new live report is additional evidence, not a code change.
+4. Raw stdout supports pristine identity acceptance, successful starts, the
+   installed-hook status/stop path, two Removed stops (ctl_stop=4, ctl_exit=0),
+   retained=0, and target_alive=1 at the recorded checks in PID 39068. The DLL
+   remained mapped as designed. This is recorded state, not a current PID check.
+5. The raw records contain 6 standing R lines and 64 walking lines (50 S/14 R).
+   The walking counter is omitted=3422. Both final counters have dropped=0 and
+   unread=0. Omitted records were not saved and cannot be analyzed.
+
+Additional packet-header analysis
+Using the existing common/troc_frame parser's five-byte layout as a hypothesis:
+ u16 little-endian opcode | signed slot byte | u16 little-endian payload length
+All 70 records satisfy payload_length + 5 == raw stack-u16 packet length.
+All prefix lengths equal min(packet_length, 16). These checks support that
+the candidate hooks see framed packet buffers and the sampled length is
+consistent. They do not validate unrecorded payload bytes or message meaning.
+Stored send slots are 0; receive slots are -1.
+
+Observed IDs and sizes (names deliberately unresolved for build 3576):
+ phase     direction  opcode  count  packet bytes
+ standing  R          2272    2      10
+ standing  R          2360    2      3532
+ standing  R          2366    1      10
+ standing  R          2779    1      25
+ walking   R          3143    14     123
+ walking   S          2155    3      251
+ walking   S          2202    6      734
+ walking   S          2276    1      166
+ walking   S          2394    1      677
+ walking   S          2410    6      9
+ walking   S          2606    15     125
+ walking   S          2787    1      249
+ walking   S          2833    15     523
+ walking   S          2852    1      181
+ walking   S          3061    1      60
+
+Do not assign names from troc_messages_2976.csv to these IDs. For example,
+that table labels 2360 as ConfirmHousingPlacementReq despite its occurrence
+on the receive path here; 3143 has no row. The historical notes explicitly
+state IDs change between builds. Neither matching numbers nor approximate
+packet sizes prove that the old message names or layouts survived.
+
+Limits / observations
+The walking log retains just the first 64 records; it is not representative
+of all 3486 counted observations or their order across the entire window.
+Only up to 16 prefix bytes were saved. There are no per-record timestamps,
+so action timing, actor identity, coordinates, and complete payload layouts
+cannot be established from these files. Other actors/background activity can
+also contribute traffic. No movement name is adopted from frequency alone.
+The pre-stop status counters of zero are cached snapshots in live_runner;
+status() does not refresh them from the active capture. Final stop counters
+and archived records agree. This does not invalidate the captured records;
+do not use an active zero counter to conclude that no traffic was observed.
+
+Next implementation task for Grok: a version-specific packet map
+Use the installed 3576 executable ON DISK, with the documented file identity,
+and the existing RTTI/registration research to resolve current message IDs.
+Start with MoveActorReq/Ack, RotateActorReq/Ack, StartActionReq/Ack,
+ActorLoadDataAck, UpdateVisiblePlayerAck, and RemoveActorAck. Cross-reference
+the observed IDs above. Record name, ID, direction, registration/RTTI evidence,
+size/serializer evidence, and unresolved fields. Preserve the 2976 catalog.
+Save the evidence in docs/probe-3576/PACKET-MAP-3576.md. Do not guess names
+from the old catalog, packet size, or walking frequency. A focused map of the
+co-op-critical messages is sufficient; no unrelated tooling rewrite is needed.
+
+Then, after review, collect bounded complete packets for the identified
+messages with per-record timing and controlled stand/walk/turn phases. Keep
+copying/queues/output bounded and preserve the existing lifetime guarantees.
+Implement and game-free test any capture changes before a new live request.
+The present prefix-only files cannot be replayed as complete packets.
+
+Route from evidence to co-op
+Port the existing 2976 actor spawn/visibility, movement/rotation, and native
+session/transport integration into explicit 3576 compatibility code, using
+verified IDs/layouts and independently verified remaining native entry points.
+Do not enable the whole ASI by accepting one new timestamp. First demonstrate
+actor creation and movement in a controlled local test, then a connected
+two-player session; validate loading, reconnects, combat, and saves afterward.
+Keep the ASI guard and production offsets unchanged during the mapping task.
+No packet injection/replay or new game session was authorized by this review.
+
+Publication
+This review and the progress update are local. No GitHub push was requested
+for this evidence-review turn. The saved game files remain outside the repo.

@@ -307,8 +307,11 @@ void test_production_dll_refuses_before_hooks() {
     CHECK(start != nullptr);
     CHECK(stop != nullptr);
     CHECK(status != nullptr);
+    CHECK(GetProcAddress(module, "pkt3576_live_mark") != nullptr);
     CHECK(GetProcAddress(module, "pkt3576_live_fixture_start") == nullptr);
     CHECK(GetProcAddress(module, "pkt3576_live_fixture_arm") == nullptr);
+    CHECK(GetProcAddress(module, "pkt3576_live_fixture_set_records_open_hook") == nullptr);
+    CHECK(GetProcAddress(module, "pkt3576_live_fixture_set_phase_hold") == nullptr);
     auto report_fn =
         reinterpret_cast<int (*)(Pkt3576LiveReport*)>(GetProcAddress(module, "pkt3576_live_report"));
     CHECK(report_fn != nullptr);
@@ -351,9 +354,17 @@ void test_production_dll_refuses_before_hooks() {
     const std::string log = read_file(session);
     if (log.find("startup=refused") == std::string::npos || log.find("kind=wrong-name") == std::string::npos ||
         log.find("capture_attempts=0") == std::string::npos || log.find("fixture=0") == std::string::npos ||
-        log.find("game_match=0") == std::string::npos || log.find("game_match=1") != std::string::npos) {
+        log.find("game_match=0") == std::string::npos || log.find("game_match=1") != std::string::npos ||
+        log.find("qpc_timebase=QueryPerformanceCounter") == std::string::npos ||
+        log.find("actor_load_max=unknown") == std::string::npos || log.find("copy_cap=4096") == std::string::npos) {
         std::printf("FAIL session log:\n%s\n", log.c_str());
         ++g_failures;
+    }
+    if (report_fn != nullptr) {
+        Pkt3576LiveReport after{};
+        CHECK(report_fn(&after) == 0);
+        CHECK(after.qpc_frequency != 0);
+        CHECK(after.capture_attempts == 0);
     }
     CHECK(stop() == kPkt3576LiveIdle);
     CHECK(live_probe() == 0x3576);

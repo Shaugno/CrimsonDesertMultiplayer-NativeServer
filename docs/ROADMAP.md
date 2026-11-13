@@ -11,9 +11,14 @@ the passive observer, the real capture backend, and the version-checked module
 validated against dummy hosts. The external loading/controller tool is also
 reviewed, including control after hooks are installed and strict PID parsing.
 The latest game-free suite has 93 passing tests.
+The first controlled 3576 capture was reviewed, and the current movement/action
+and actor-message IDs were independently verified on disk. Full payload layouts
+and native-session compatibility still need evidence.
 
-1. Run controlled passive captures after a separate live-test instruction;
-   verify packet roles against observed actions.
+1. Review the collector fixes, then run another controlled capture. Ownership,
+   copied-header consistency, and exclusive file creation are fixed and covered
+   by the 93-test game-free suite. Verify complete payload fields against
+   player actions and obtain actor spawn, visibility, and removal evidence.
 2. Port the verified player and networking pieces without bypassing build guards.
 3. Demonstrate a connected peer and movement on 3576.
 4. Validate loading, reconnects, combat, save handling, and two-PC play before

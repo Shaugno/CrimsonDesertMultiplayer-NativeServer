@@ -48,13 +48,15 @@ inline bool installed_module_control_allowed(IdentityKind kind, bool module_load
     return module_loaded && kind == IdentityKind::SignatureMismatch;
 }
 
-enum class ControlAction { Load, Start, Status, Stop };
+enum class ControlAction { Load, Start, Status, Stop, Mark };
 
 inline bool control_allowed(bool fixture_build, bool fixture_requested, IdentityKind kind, bool game_name,
                             ControlAction action, bool module_loaded) {
     if (modification_allowed(fixture_build, fixture_requested, kind, game_name)) return true;
     if (fixture_requested) return false;
-    if (action != ControlAction::Status && action != ControlAction::Stop) return false;
+    if (action != ControlAction::Status && action != ControlAction::Stop && action != ControlAction::Mark) {
+        return false;
+    }
     return installed_module_control_allowed(kind, module_loaded);
 }
 

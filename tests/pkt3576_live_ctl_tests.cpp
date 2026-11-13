@@ -579,6 +579,44 @@ void test_usage_parser() {
                        const_cast<wchar_t*>(L"0"), const_cast<wchar_t*>(L"--dll"),
                        const_cast<wchar_t*>(L"C:\\cdmp_pkt3576_live.dll")};
     CHECK(pkt3576::control::run_command(6, zero, false, nullptr) == pkt3576::control::kExitUsage);
+    wchar_t* mark_missing[] = {const_cast<wchar_t*>(L"ctl"),
+                               const_cast<wchar_t*>(L"mark"),
+                               const_cast<wchar_t*>(L"--pid"),
+                               const_cast<wchar_t*>(L"1234"),
+                               const_cast<wchar_t*>(L"--dll"),
+                               const_cast<wchar_t*>(L"C:\\cdmp_pkt3576_live.dll")};
+    CHECK(pkt3576::control::run_command(6, mark_missing, false, nullptr) == pkt3576::control::kExitUsage);
+    wchar_t* mark_bad[] = {const_cast<wchar_t*>(L"ctl"),
+                           const_cast<wchar_t*>(L"mark"),
+                           const_cast<wchar_t*>(L"--pid"),
+                           const_cast<wchar_t*>(L"1234"),
+                           const_cast<wchar_t*>(L"--dll"),
+                           const_cast<wchar_t*>(L"C:\\cdmp_pkt3576_live.dll"),
+                           const_cast<wchar_t*>(L"--phase"),
+                           const_cast<wchar_t*>(L"nope")};
+    CHECK(pkt3576::control::run_command(8, mark_bad, false, nullptr) == pkt3576::control::kExitUsage);
+    wchar_t* mark_log[] = {const_cast<wchar_t*>(L"ctl"),
+                           const_cast<wchar_t*>(L"mark"),
+                           const_cast<wchar_t*>(L"--pid"),
+                           const_cast<wchar_t*>(L"1234"),
+                           const_cast<wchar_t*>(L"--dll"),
+                           const_cast<wchar_t*>(L"C:\\cdmp_pkt3576_live.dll"),
+                           const_cast<wchar_t*>(L"--phase"),
+                           const_cast<wchar_t*>(L"stand"),
+                           const_cast<wchar_t*>(L"--log-dir"),
+                           const_cast<wchar_t*>(L"C:\\outside")};
+    CHECK(pkt3576::control::run_command(10, mark_log, false, nullptr) == pkt3576::control::kExitUsage);
+    wchar_t* phase_on_start[] = {const_cast<wchar_t*>(L"ctl"),
+                                 const_cast<wchar_t*>(L"start"),
+                                 const_cast<wchar_t*>(L"--pid"),
+                                 const_cast<wchar_t*>(L"1234"),
+                                 const_cast<wchar_t*>(L"--dll"),
+                                 const_cast<wchar_t*>(L"C:\\cdmp_pkt3576_live.dll"),
+                                 const_cast<wchar_t*>(L"--log-dir"),
+                                 const_cast<wchar_t*>(L"C:\\outside"),
+                                 const_cast<wchar_t*>(L"--phase"),
+                                 const_cast<wchar_t*>(L"stand")};
+    CHECK(pkt3576::control::run_command(10, phase_on_start, false, nullptr) == pkt3576::control::kExitUsage);
 }
 
 bool policy_only() {
@@ -595,6 +633,7 @@ void test_exports() {
     CHECK(GetProcAddress(module, "pkt3576_live_fixture_arm") != nullptr);
     CHECK(GetProcAddress(module, "pkt3576_live_fixture_start") != nullptr);
     CHECK(GetProcAddress(module, "pkt3576_live_report") != nullptr);
+    CHECK(GetProcAddress(module, "pkt3576_live_mark") != nullptr);
     CHECK(FreeLibrary(module));
 }
 
@@ -669,6 +708,13 @@ void test_flow() {
     expect(stop_missing, "ctl_exit", "5");
     expect(stop_missing, "ctl_note", "not-loaded");
     expect(stop_missing, "ctl_modified", "0");
+    Captured mark_missing = run_exe(fixture_ctl, L"mark --fixture --pid " + pid + L" --dll " + quote(fixture_dll) +
+                                                   L" --phase stand");
+    expect(mark_missing, "ctl_exit", "5");
+    expect(mark_missing, "ctl_note", "not-loaded");
+    expect(mark_missing, "ctl_modified", "0");
+    expect(mark_missing, "ctl_loaded", "0");
+    CHECK(!module_mapped(dummy.pid, L"cdmp_pkt3576_live_fixture.dll"));
 
     Captured loaded = run_exe(fixture_ctl, L"load --fixture --pid " + pid + L" --dll " + quote(fixture_dll));
     expect(loaded, "ctl_exit", "0");
@@ -705,6 +751,20 @@ void test_flow() {
         std::printf("FAIL fixture session:\n%s\n", session.c_str());
         ++g_failures;
     }
+
+    Captured marked = run_exe(fixture_ctl, L"mark --fixture --pid " + pid + L" --dll " + quote(fixture_dll) +
+                                               L" --phase stand");
+    expect(marked, "ctl_exit", "0");
+    expect(marked, "ctl_note", "marked");
+    expect(marked, "ctl_phase", "1");
+    expect(marked, "ctl_modified", "1");
+    expect(marked, "ctl_loaded", "1");
+    expect(marked, "ctl_capture_attempts", "1");
+    CHECK(marked.exit_code == 0);
+    const std::string marked_session = read_file(log_dir + L"\\pkt3576-live-session.txt");
+    CHECK(marked_session.find("mark phase=stand qpc=") != std::string::npos);
+    CHECK(marked_session.find("fixture=1") != std::string::npos);
+    CHECK(marked_session.find("game_match=0") != std::string::npos);
 
     Captured status = run_exe(fixture_ctl, L"status --fixture --pid " + pid + L" --dll " + quote(fixture_dll));
     expect(status, "ctl_exit", "0");

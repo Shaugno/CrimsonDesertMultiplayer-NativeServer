@@ -32,16 +32,28 @@ process id or another process's addresses.
 ## Diagnostic module
 
 `cdmp_pkt3576_live.dll` exports `pkt3576_live_start`, `pkt3576_live_stop`,
-`pkt3576_live_status`, and the one-pointer `pkt3576_live_report`. `DllMain`
+`pkt3576_live_status`, `pkt3576_live_mark`, and the one-pointer
+`pkt3576_live_report`. `DllMain`
 only calls `DisableThreadLibraryCalls`. It
 does not install hooks, open a log, or start a thread. Nothing launches the
 game or picks a process. The caller passes an absolute log directory.
 
 The test-only build `cdmp_pkt3576_live_fixture.dll` also exports
 `pkt3576_live_fixture_start`. The production DLL does not. Fixture limits are
-capped (queue 2..256, records 1..256). Production uses a fixed queue of 64 and
-64 output records. Packet bytes stay on the existing raw capture path, including
-the 16-byte prefix bound.
+capped (queue 2..256, records 1..256). Production uses a fixed queue of 256
+and 256 output records. Selected messages are copied up to 4096 bytes, and
+`claimed` stays separate from `copied`. The earlier PID 39068 capture used 64
+records and a 16-byte prefix. That archive is `LIVE-CAPTURE-3576.md` and is
+not replay input.
+
+A labeled records file is created with exclusive mode `wbx`. The runner still
+returns BadLog without incrementing attempts when that file already exists
+before startup. If the file appears after that check, the open fails, the
+existing bytes stay unchanged, and the attempt counts. The unlabeled records
+file still uses truncating `wb`. `start`, `stop`, `mark`, `status`, and
+`report` share one control lock. Packet callbacks do not take it. `mark`
+holds that lock across the phase update, so stop cannot release the capture
+while the update is in progress. A retained capture stays allocated.
 
 Before `Capture::start`, the runner pins itself with
 `GET_MODULE_HANDLE_EX_FLAG_PIN`. That pin lasts until process exit, so a
@@ -75,8 +87,10 @@ checks the documented identity before any remote allocation, write, or thread.
 of an already loaded production module still run after that module's hooks
 change those bytes. Name, timestamp, base, and size are still required. The
 DLL repeats the full check inside `pkt3576_live_start`. Commands, Retained
-behavior, and limits are in `docs/probe-3576/LIVE-CAPTURE-CONTROL.md`. The
-controller was not run against Crimson Desert.
+behavior, and limits are in `docs/probe-3576/LIVE-CAPTURE-CONTROL.md`. An
+earlier load, start, and stop is recorded in `LIVE-CAPTURE-3576.md`. The
+`mark` command and the 256-record collector have not been run against the
+game.
 
 `pkt3576_live_report` is the one-pointer form of status. It does not skip the
 identity check inside `pkt3576_live_start`. The production DLL does not export

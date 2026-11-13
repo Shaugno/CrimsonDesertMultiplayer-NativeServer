@@ -36,9 +36,15 @@ struct Image {
 
     bool read(uint64_t address, void* destination, size_t size) {
         if (record) reads.push_back({address, size});
+        // One shot. observe() reads a selected packet three times at the same
+        // address (opcode, header, body). Re-arming this wait would leave the
+        // callback admitted forever and stall close_and_wait. The first read
+        // still holds admission through the later reads.
         if (block_phase != nullptr && address == block_address) {
-            block_phase->store(1, std::memory_order_release);
-            while (block_phase->load(std::memory_order_acquire) != 2) YieldProcessor();
+            std::atomic<int>* phase = block_phase;
+            block_phase = nullptr;
+            phase->store(1, std::memory_order_release);
+            while (phase->load(std::memory_order_acquire) != 2) YieldProcessor();
         }
         auto* out = static_cast<uint8_t*>(destination);
         for (size_t i = 0; i < size; ++i) {
@@ -94,6 +100,22 @@ void plant_stack(Image& image, uint16_t slot28, uint8_t slot30, uint16_t slot38)
 }
 
 void plant_packet(Image& image, const uint8_t* bytes, size_t size) { poke(image, kPacket, bytes, size); }
+
+// Ordinary 3576 frame: opcode, one header byte, payload length at offset 3.
+// claimed >= 5 makes payload_length + 5 equal the claim.
+void plant_frame(Image& image, uint16_t opcode, uint16_t claimed, uint8_t fill) {
+    if (claimed == 0) return;
+    std::vector<uint8_t> bytes(claimed, fill);
+    bytes[0] = static_cast<uint8_t>(opcode & 0xFF);
+    if (claimed >= 2) bytes[1] = static_cast<uint8_t>((opcode >> 8) & 0xFF);
+    if (claimed >= 5) {
+        const uint16_t payload = static_cast<uint16_t>(claimed - 5);
+        bytes[2] = 0x5A;
+        bytes[3] = static_cast<uint8_t>(payload & 0xFF);
+        bytes[4] = static_cast<uint8_t>((payload >> 8) & 0xFF);
+    }
+    plant_packet(image, bytes.data(), bytes.size());
+}
 
 pkt3576::EntryArgs args_for(uint64_t rcx, uint64_t rdx, uint64_t r8) {
     pkt3576::EntryArgs args;
@@ -278,7 +300,8 @@ void test_refuses_without_installing() {
 void test_capacity_two_keeps_both_records() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 0, 1, 2);
+    plant_stack(image, 5, 1, 2);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     Obs observer(2);
     CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
     observer->on_send(args_for(0x11, 0, 0));
@@ -298,7 +321,8 @@ void test_capacity_two_keeps_both_records() {
 void test_consumer_shutdown_waits_for_pop() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 0, 1, 2);
+    plant_stack(image, 5, 1, 2);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     Obs observer(4);
     CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
     observer->on_send(args_for(0xA11, 0, 0));
@@ -355,9 +379,8 @@ void test_failed_removal_keeps_ownership() {
     Sink sink;
     sink.fail_remove_recv = true;
     sink.fail_remove_send = true;
-    plant_stack(image, 1, 0x7, 0x8);
-    const uint8_t packet[1] = {0x5C};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 0x7, 0x8);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
 
     Obs observer(4);
     CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
@@ -381,8 +404,12 @@ void test_failed_removal_keeps_ownership() {
     pkt3576::Record record;
     CHECK(kept->try_pop(record));
     CHECK(record.rcx == 0x42);
-    CHECK(record.prefix_len == 1);
-    CHECK(record.prefix[0] == 0x5C);
+    CHECK(record.copied_length == 5);
+    CHECK(record.claimed_length == 5);
+    CHECK(record.status == pkt3576::CopyStatus::Complete);
+    CHECK(record.bytes[0] == 0x11);
+    CHECK(record.bytes[1] == 0x0B);
+    CHECK(record.bytes[2] == 0x5A);
     CHECK(record.has_stack_u8_30);
     CHECK(record.stack_u8_30 == 0x7);
     CHECK(kept->queue_address() == queue);
@@ -401,7 +428,8 @@ void test_failed_removal_keeps_ownership() {
     pkt3576::Record extra;
     while (kept->try_pop(extra)) {
         CHECK(extra.direction == pkt3576::Direction::Receive);
-        CHECK(extra.prefix_len == 1);
+        CHECK(extra.copied_length == 5);
+        CHECK(extra.status == pkt3576::CopyStatus::Complete);
         CHECK(!extra.has_stack_u8_30);
     }
     CHECK(kept->unread() == 0);
@@ -415,9 +443,8 @@ void test_partial_install_rolls_back() {
     sink.fire_address = pkt3576::kImageBase + pkt3576::kRecvRva;
     sink.fire_send = false;
     sink.pop_during_fire = true;
-    plant_stack(image, 4, 0x11, 0x22);
-    const uint8_t packet[4] = {0x10, 0x20, 0x30, 0x40};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 0x11, 0x22);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     sink.fire_args = args_for(0x111, 0x222, 0x4);
 
     Obs observer(4);
@@ -438,8 +465,9 @@ void test_partial_install_rolls_back() {
     CHECK(sink.fired_popped);
     CHECK(sink.fired_record.direction == pkt3576::Direction::Receive);
     CHECK(sink.fired_record.rcx == 0x111);
-    CHECK(sink.fired_record.prefix_len == 4);
-    CHECK(sink.fired_record.prefix[0] == 0x10);
+    CHECK(sink.fired_record.copied_length == 5);
+    CHECK(sink.fired_record.status == pkt3576::CopyStatus::Complete);
+    CHECK(sink.fired_record.bytes[0] == 0x11);
     CHECK(!sink.fired_record.has_stack_u8_30);
     CHECK(!sink.fired_record.has_stack_u16_38);
     sink.join_worker();
@@ -450,9 +478,8 @@ void test_partial_install_retains_on_failed_removal() {
     Sink sink;
     sink.fail_install_send = true;
     sink.fail_remove_recv = true;
-    plant_stack(image, 2, 0, 0);
-    const uint8_t packet[2] = {0xAB, 0xCD};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 0, 0);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
 
     Obs observer(4);
     const void* none = observer->queue_address();
@@ -471,10 +498,11 @@ void test_partial_install_retains_on_failed_removal() {
     CHECK(observer->try_pop(record));
     CHECK(record.direction == pkt3576::Direction::Receive);
     CHECK(record.r8 == 0x77);
-    CHECK(record.stack_u16_28 == 2);
-    CHECK(record.prefix_len == 2);
-    CHECK(record.prefix[0] == 0xAB);
-    CHECK(record.prefix[1] == 0xCD);
+    CHECK(record.stack_u16_28 == 5);
+    CHECK(record.copied_length == 5);
+    CHECK(record.opcode == pkt3576::kMoveActorReq);
+    CHECK(record.bytes[0] == 0x11);
+    CHECK(record.bytes[1] == 0x0B);
     CHECK(!record.has_stack_u8_30);
     CHECK(!record.has_stack_u16_38);
     CHECK(observer->queue_address() == kept);
@@ -499,9 +527,8 @@ void test_first_install_failure_frees() {
 void test_failed_removal_retains_resources() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 1, 0x5A, 0x1234);
-    const uint8_t packet[1] = {0xEE};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 0x5A, 0x1234);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     sink.fire_address = pkt3576::kImageBase + pkt3576::kRecvRva;
     sink.fire_send = false;
     sink.fire_args = args_for(1, 2, 3);
@@ -526,22 +553,24 @@ void test_failed_removal_retains_resources() {
     pkt3576::Record during;
     CHECK(observer->try_pop(during));
     CHECK(during.direction == pkt3576::Direction::Receive);
-    CHECK(during.prefix_len == 1);
-    CHECK(during.prefix[0] == 0xEE);
+    CHECK(during.copied_length == 5);
+    CHECK(during.status == pkt3576::CopyStatus::Complete);
+    CHECK(during.bytes[0] == 0x11);
     CHECK(!during.has_stack_u8_30);
 
     observer->on_recv(args_for(9, 8, 7));
     pkt3576::Record later;
     CHECK(observer->try_pop(later));
     CHECK(later.rcx == 9);
-    CHECK(later.prefix_len == 1);
+    CHECK(later.copied_length == 5);
     CHECK(observer->queue_address() == queue);
 }
 
 void test_one_removal_fails_other_stays_removed() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 0, 1, 2);
+    plant_stack(image, 5, 1, 2);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     sink.fail_remove_send = true;
     Obs observer(2);
     CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
@@ -558,21 +587,27 @@ void test_one_removal_fails_other_stays_removed() {
     pkt3576::Record record;
     CHECK(observer->try_pop(record));
     CHECK(record.direction == pkt3576::Direction::Send);
-    CHECK(record.prefix_len == 0);
+    CHECK(record.copied_length == 5);
+    CHECK(record.status == pkt3576::CopyStatus::Complete);
     CHECK(record.has_stack_u16_28);
-    CHECK(record.stack_u16_28 == 0);
+    CHECK(record.stack_u16_28 == 5);
     CHECK(record.has_stack_u8_30);
     CHECK(record.stack_u8_30 == 1);
     CHECK(record.has_stack_u16_38);
     CHECK(record.stack_u16_38 == 2);
+    plant_stack(image, 0, 9, 9);
+    const uint64_t filtered_before = observer->filtered();
+    observer->on_send(args_for(3, 4, 5));
+    CHECK(observer->filtered() == filtered_before + 1);
+    CHECK(!observer->try_pop(record));
+    CHECK(observer->queue_address() == queue);
 }
 
 void test_callback_during_shutdown_then_free() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 3, 0x44, 0x5555);
-    const uint8_t packet[3] = {1, 2, 3};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 0x44, 0x5555);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     sink.fire_address = pkt3576::kImageBase + pkt3576::kSendRva;
     sink.fire_send = true;
     sink.pop_during_fire = true;
@@ -587,11 +622,13 @@ void test_callback_during_shutdown_then_free() {
     CHECK(sink.fired_record.direction == pkt3576::Direction::Send);
     CHECK(sink.fired_record.rcx == 0x10);
     CHECK(sink.fired_record.r8 == 0x30);
-    CHECK(sink.fired_record.stack_u16_28 == 3);
+    CHECK(sink.fired_record.stack_u16_28 == 5);
     CHECK(sink.fired_record.stack_u8_30 == 0x44);
     CHECK(sink.fired_record.stack_u16_38 == 0x5555);
-    CHECK(sink.fired_record.prefix_len == 3);
-    CHECK(sink.fired_record.prefix[2] == 3);
+    CHECK(sink.fired_record.copied_length == 5);
+    CHECK(sink.fired_record.status == pkt3576::CopyStatus::Complete);
+    CHECK(sink.fired_record.bytes[2] == 0x5A);
+    CHECK(sink.fired_record.qpc_ticks != 0);
     CHECK(!observer->queue_allocated());
     CHECK(observer->queue_address() == nullptr);
     CHECK(sink.release_calls == 1);
@@ -608,9 +645,8 @@ void test_callback_during_shutdown_then_free() {
 
 void test_inflight_callback_drained_before_free() {
     Image image = make_image();
-    plant_stack(image, 4, 9, 8);
-    const uint8_t packet[4] = {9, 8, 7, 6};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 8, 9, 8);
+    plant_frame(image, pkt3576::kMoveActorReq, 8, 0x40);
 
     std::atomic<int> phase{0};
     std::atomic<bool> remove_reached{false};
@@ -644,9 +680,8 @@ void test_inflight_callback_drained_before_free() {
 void test_full_queue() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 1, 2, 3);
-    const uint8_t packet[1] = {0x01};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 2, 3);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     Obs observer(2);
     CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
 
@@ -657,6 +692,7 @@ void test_full_queue() {
     observer->on_recv(args_for(5, 0, 0));
     CHECK(observer->dropped() == 3);
     CHECK(observer->unread() == 0);
+    CHECK(observer->filtered() == 0);
 
     pkt3576::Record first;
     pkt3576::Record second;
@@ -681,9 +717,8 @@ void test_full_queue() {
 void test_concurrent_producers() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 4, 0xAB, 0xCDEF);
-    const uint8_t packet[4] = {0x01, 0x02, 0x03, 0x04};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 0xAB, 0xCDEF);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
 
     constexpr int kThreads = 4;
     constexpr int kEach = 250;
@@ -734,9 +769,8 @@ void test_concurrent_producers() {
 void test_concurrent_full_queue() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 1, 1, 1);
-    const uint8_t packet[1] = {0x7F};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 1, 1);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
 
     constexpr int kThreads = 4;
     constexpr int kEach = 50;
@@ -757,68 +791,133 @@ void test_concurrent_full_queue() {
     int popped = 0;
     pkt3576::Record record;
     while (observer->try_pop(record)) {
-        CHECK(record.prefix_len == 1);
-        CHECK(record.prefix[0] == 0x7F);
+        CHECK(record.copied_length == 5);
+        CHECK(record.status == pkt3576::CopyStatus::Complete);
+        CHECK(record.bytes[0] == 0x11);
         CHECK(record.r8 == 4);
         ++popped;
     }
     CHECK(popped == 4);
     CHECK(observer->dropped() == static_cast<uint64_t>(kTotal - popped));
     CHECK(observer->unread() == 0);
+    CHECK(observer->filtered() == 0);
+    CHECK(observer->malformed() == 0);
+    CHECK(observer->truncated() == 0);
     CHECK(popped + static_cast<int>(observer->dropped()) == kTotal);
 }
 
-void test_short_prefix_and_raw_slots() {
+void test_filter_before_copy() {
+    const uint64_t queue_budget = 256ull * (sizeof(pkt3576::Record) + sizeof(uint64_t));
+    const uint64_t output_budget = 256ull * sizeof(pkt3576::Record);
+    std::printf("record_bytes=%zu queue_budget=%llu output_budget=%llu\n", sizeof(pkt3576::Record),
+                static_cast<unsigned long long>(queue_budget), static_cast<unsigned long long>(output_budget));
+    CHECK(sizeof(pkt3576::Record) >= pkt3576::kCopyCap);
+    CHECK(queue_budget + output_budget < 3ull * 1024ull * 1024ull);
+    CHECK(pkt3576::kCopyCap == 4096);
+    CHECK(pkt3576::kActorLoadDataAckMax == 0);
+
     Image image = make_image();
     Sink sink;
-    uint8_t packet[32];
-    for (uint8_t i = 0; i < 32; ++i) packet[i] = static_cast<uint8_t>(0xA0 + i);
-    plant_packet(image, packet, sizeof packet);
     Obs observer(8);
     CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
-
     image.record = true;
+    observer->set_phase(static_cast<uint8_t>(pkt3576::Phase::Stand));
+
     plant_stack(image, 0, 0x3C, 0x0A11);
     observer->on_send(args_for(10, 20, 4));
     CHECK(!saw_address(image, kPacket));
-    pkt3576::Record zero;
-    CHECK(observer->try_pop(zero));
-    CHECK(zero.prefix_len == 0);
-    CHECK(zero.stack_u16_28 == 0);
-    CHECK(zero.stack_u8_30 == 0x3C);
-    CHECK(zero.stack_u16_38 == 0x0A11);
-    CHECK(zero.r8 == 4);
-    CHECK(zero.r9 == kPacket);
+    CHECK(!saw_address(image, kStack + pkt3576::kStackSlot30));
+    pkt3576::Record none;
+    CHECK(!observer->try_pop(none));
+    CHECK(observer->filtered() == 1);
+    CHECK(observer->malformed() == 0);
 
     image.reads.clear();
     plant_stack(image, 1, 0x01, 0x0002);
     observer->on_send(args_for(1, 2, 3));
-    CHECK(saw_read(image, kPacket, 1));
-    CHECK(!saw_read(image, kPacket, 2));
-    pkt3576::Record one;
-    CHECK(observer->try_pop(one));
-    CHECK(one.prefix_len == 1);
-    CHECK(one.prefix[0] == 0xA0);
-    CHECK(one.prefix[1] == 0);
+    CHECK(!saw_address(image, kPacket));
+    CHECK(observer->filtered() == 2);
 
     image.reads.clear();
+    const uint8_t internal_message[3] = {0xD1, 0x07, 0xFF};
+    plant_packet(image, internal_message, sizeof internal_message);
+    plant_stack(image, 3, 0x11, 0x22);
+    observer->on_send(args_for(4, 5, 6));
+    CHECK(saw_read(image, kPacket, pkt3576::kOpcodeBytes));
+    CHECK(!saw_read(image, kPacket, 3));
+    CHECK(!saw_read(image, kPacket, pkt3576::kHeaderBytes));
+    CHECK(observer->filtered() == 3);
+    CHECK(observer->malformed() == 0);
+    CHECK(!observer->try_pop(none));
+
+    image.reads.clear();
+    uint8_t other[16] = {};
+    other[0] = 0xE0;
+    other[1] = 0x08;
+    plant_packet(image, other, sizeof other);
     plant_stack(image, 100, 0x02, 0x0003);
     observer->on_recv(args_for(8, 9, 10));
-    CHECK(saw_read(image, kPacket, pkt3576::kPrefixCap));
+    CHECK(saw_read(image, kPacket, pkt3576::kOpcodeBytes));
     CHECK(!saw_read(image, kPacket, 100));
-    CHECK(!saw_read(image, kPacket, 2));
+    CHECK(!saw_read(image, kPacket, pkt3576::kCopyCap));
     CHECK(!saw_address(image, kStack + pkt3576::kStackSlot30));
-    CHECK(!saw_address(image, kStack + pkt3576::kStackSlot38));
-    CHECK(saw_read(image, kStack + pkt3576::kStackSlot28, 2));
-    pkt3576::Record capped;
-    CHECK(observer->try_pop(capped));
-    CHECK(capped.direction == pkt3576::Direction::Receive);
-    CHECK(capped.prefix_len == pkt3576::kPrefixCap);
-    CHECK(capped.prefix[0] == 0xA0);
-    CHECK(capped.prefix[15] == static_cast<uint8_t>(0xA0 + 15));
-    CHECK(!capped.has_stack_u8_30);
-    CHECK(!capped.has_stack_u16_38);
-    CHECK(capped.stack_u16_28 == 100);
+    CHECK(observer->filtered() == 4);
+
+    image.reads.clear();
+    const uint8_t short_selected[4] = {0x11, 0x0B, 0x00, 0x00};
+    plant_packet(image, short_selected, sizeof short_selected);
+    plant_stack(image, 4, 0x3C, 0x0A11);
+    observer->on_send(args_for(11, 12, 13));
+    pkt3576::Record malformed;
+    CHECK(observer->try_pop(malformed));
+    CHECK(malformed.status == pkt3576::CopyStatus::Malformed);
+    CHECK(malformed.copied_length == 4);
+    CHECK(malformed.claimed_length == 4);
+    CHECK(!malformed.header_checked);
+    CHECK(malformed.bytes[0] == 0x11);
+    CHECK(malformed.bytes[4] == 0);
+    CHECK(malformed.has_stack_u8_30);
+    CHECK(malformed.stack_u8_30 == 0x3C);
+    CHECK(malformed.phase == static_cast<uint8_t>(pkt3576::Phase::Stand));
+    CHECK(malformed.qpc_ticks != 0);
+    CHECK(observer->malformed() == 1);
+    CHECK(observer->filtered() == 4);
+
+    image.reads.clear();
+    plant_frame(image, pkt3576::kMoveActorReq, 8, 0x40);
+    poke_u8(image, kPacket + 3, 0x01);
+    plant_stack(image, 8, 0x44, 0x5555);
+    observer->on_send(args_for(21, 22, 23));
+    pkt3576::Record mismatch;
+    CHECK(observer->try_pop(mismatch));
+    CHECK(mismatch.status == pkt3576::CopyStatus::Malformed);
+    CHECK(mismatch.header_checked);
+    CHECK(mismatch.header_payload == 1);
+    CHECK(mismatch.copied_length == 8);
+    CHECK(mismatch.claimed_length == 8);
+    CHECK(mismatch.bytes[8] == 0);
+    CHECK(observer->malformed() == 2);
+
+    image.bytes[kPacket + 5] = 0x00;
+    CHECK(mismatch.bytes[5] == 0x40);
+
+    plant_frame(image, pkt3576::kStartActionAck, 5, 0x40);
+    plant_stack(image, 5, 1, 2);
+    observer->set_phase(static_cast<uint8_t>(pkt3576::Phase::Walk));
+    observer->on_recv(args_for(30, 31, 32));
+    pkt3576::Record complete;
+    CHECK(observer->try_pop(complete));
+    CHECK(complete.direction == pkt3576::Direction::Receive);
+    CHECK(complete.status == pkt3576::CopyStatus::Complete);
+    CHECK(complete.opcode == pkt3576::kStartActionAck);
+    CHECK(complete.copied_length == 5);
+    CHECK(complete.claimed_length == 5);
+    CHECK(complete.header_payload == 0);
+    CHECK(!complete.has_stack_u8_30);
+    CHECK(!complete.has_stack_u16_38);
+    CHECK(complete.phase == static_cast<uint8_t>(pkt3576::Phase::Walk));
+    CHECK(complete.qpc_ticks >= mismatch.qpc_ticks);
+    CHECK(observer->truncated() == 0);
     CHECK(observer->unread() == 0);
     CHECK(observer->dropped() == 0);
 }
@@ -833,9 +932,12 @@ void test_unreadable_buffers() {
     plant_stack(image, 8, 1, 2);
     observer->on_send(args_for(1, 2, 3));
     CHECK(observer->unread() == 1);
-    CHECK(saw_read(image, kPacket, 8));
+    CHECK(saw_read(image, kPacket, pkt3576::kOpcodeBytes));
+    CHECK(!saw_read(image, kPacket, pkt3576::kHeaderBytes));
+    CHECK(!saw_read(image, kPacket, 8));
     pkt3576::Record none;
     CHECK(!observer->try_pop(none));
+    CHECK(observer->filtered() == 0);
 
     image.reads.clear();
     image.bytes.erase(kStack + pkt3576::kStackSlot28);
@@ -847,15 +949,30 @@ void test_unreadable_buffers() {
     CHECK(!observer->try_pop(none));
 
     image.reads.clear();
-    plant_stack(image, 4, 1, 2);
+    plant_frame(image, pkt3576::kMoveActorReq, 8, 0x40);
+    plant_stack(image, 8, 1, 2);
     image.bytes.erase(kStack + pkt3576::kStackSlot30);
-    const uint8_t packet[4] = {1, 2, 3, 4};
-    plant_packet(image, packet, sizeof packet);
     observer->on_send(args_for(1, 2, 3));
     CHECK(observer->unread() == 3);
-    CHECK(!saw_address(image, kPacket));
+    CHECK(saw_read(image, kPacket, pkt3576::kOpcodeBytes));
+    CHECK(saw_read(image, kPacket, pkt3576::kHeaderBytes));
+    CHECK(!saw_read(image, kPacket, 8));
+    CHECK(observer->malformed() == 0);
+    CHECK(observer->filtered() == 0);
     CHECK(!observer->try_pop(none));
     CHECK(observer->dropped() == 0);
+
+    image.reads.clear();
+    const uint8_t other[2] = {0xE0, 0x08};
+    plant_packet(image, other, sizeof other);
+    plant_stack(image, 8, 1, 2);
+    image.bytes.erase(kStack + pkt3576::kStackSlot30);
+    observer->on_recv(args_for(4, 5, 6));
+    CHECK(observer->filtered() == 1);
+    CHECK(observer->unread() == 3);
+    CHECK(saw_read(image, kPacket, pkt3576::kOpcodeBytes));
+    CHECK(!saw_read(image, kPacket, pkt3576::kHeaderBytes));
+    CHECK(!saw_address(image, kStack + pkt3576::kStackSlot30));
 
     uint8_t local[4] = {4, 5, 6, 7};
     uint8_t copied[4] = {};
@@ -869,6 +986,142 @@ void test_unreadable_buffers() {
     uint8_t one = 0xFF;
     CHECK(!pkt3576::guarded_read(1, &one, 1));
     CHECK(one == 0xFF);
+}
+
+bool wrap_guard(uint64_t address, void* destination, size_t size, void*) {
+    return pkt3576::guarded_read(address, destination, size);
+}
+
+void test_copy_cap_and_truncation() {
+    Image image = make_image();
+    Sink sink;
+    Obs observer(4);
+    CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
+
+    plant_frame(image, pkt3576::kMoveActorReq, 4096, 0x40);
+    plant_stack(image, 4096, 1, 2);
+    observer->on_send(args_for(1, 0, 0));
+    pkt3576::Record exact;
+    CHECK(observer->try_pop(exact));
+    CHECK(exact.status == pkt3576::CopyStatus::Complete);
+    CHECK(exact.claimed_length == 4096);
+    CHECK(exact.copied_length == 4096);
+    CHECK(exact.header_payload == 4091);
+    CHECK(exact.bytes[2] == 0x5A);
+    CHECK(exact.bytes[4095] == 0x40);
+    CHECK(exact.qpc_ticks != 0);
+    CHECK(observer->truncated() == 0);
+
+    plant_frame(image, pkt3576::kMoveActorReq, 4097, 0x41);
+    plant_stack(image, 4097, 1, 2);
+    observer->on_send(args_for(2, 0, 0));
+    pkt3576::Record over;
+    CHECK(observer->try_pop(over));
+    CHECK(over.status == pkt3576::CopyStatus::Truncated);
+    CHECK(over.claimed_length == 4097);
+    CHECK(over.copied_length == 4096);
+    CHECK(over.bytes[4095] == 0x41);
+    CHECK(over.qpc_ticks >= exact.qpc_ticks);
+    CHECK(observer->truncated() == 1);
+
+    plant_frame(image, pkt3576::kActorLoadDataAck, 4097, 0x42);
+    plant_stack(image, 4097, 3, 4);
+    observer->on_send(args_for(3, 0, 0));
+    pkt3576::Record actor;
+    CHECK(observer->try_pop(actor));
+    CHECK(actor.opcode == pkt3576::kActorLoadDataAck);
+    CHECK(actor.status == pkt3576::CopyStatus::Truncated);
+    CHECK(actor.status != pkt3576::CopyStatus::Complete);
+    CHECK(actor.claimed_length == 4097);
+    CHECK(actor.copied_length == pkt3576::kCopyCap);
+    CHECK(pkt3576::kCopyCap == 4096);
+    CHECK(pkt3576::kActorLoadDataAckMax == 0);
+    CHECK(observer->truncated() == 2);
+    CHECK(observer->malformed() == 0);
+    CHECK(observer->unread() == 0);
+    CHECK(observer->filtered() == 0);
+    CHECK(observer->dropped() == 0);
+}
+
+void test_page_boundary() {
+    SYSTEM_INFO info{};
+    GetSystemInfo(&info);
+    const size_t page = info.dwPageSize == 0 ? 4096 : info.dwPageSize;
+    uint8_t* block = static_cast<uint8_t*>(VirtualAlloc(nullptr, page * 2, MEM_RESERVE, PAGE_NOACCESS));
+    CHECK(block != nullptr);
+    if (block == nullptr) return;
+    uint8_t* committed = static_cast<uint8_t*>(VirtualAlloc(block, page, MEM_COMMIT, PAGE_READWRITE));
+    CHECK(committed == block);
+    if (committed != block) {
+        VirtualFree(block, 0, MEM_RELEASE);
+        return;
+    }
+
+    Obs observer(4);
+    CHECK(observer->arm(wrap_guard, nullptr));
+    const uint64_t stack = reinterpret_cast<uint64_t>(block);
+    auto* stack_bytes = block;
+    auto plant_slots = [&](uint16_t claimed) {
+        *reinterpret_cast<uint16_t*>(stack_bytes + pkt3576::kStackSlot28) = claimed;
+        stack_bytes[pkt3576::kStackSlot30] = 0x3C;
+        *reinterpret_cast<uint16_t*>(stack_bytes + pkt3576::kStackSlot38) = 0x0A11;
+    };
+    pkt3576::EntryArgs args;
+    args.rcx = 9;
+    args.rdx = 8;
+    args.r8 = 7;
+    args.rsp = stack;
+
+    uint8_t* inside = block + 0x200;
+    inside[0] = 0x11;
+    inside[1] = 0x0B;
+    inside[2] = 0x5A;
+    inside[3] = 0x03;
+    inside[4] = 0x00;
+    inside[5] = 0x40;
+    inside[6] = 0x41;
+    inside[7] = 0x42;
+    plant_slots(8);
+    args.r9 = reinterpret_cast<uint64_t>(inside);
+    observer->on_send(args);
+    pkt3576::Record complete;
+    CHECK(observer->try_pop(complete));
+    CHECK(complete.status == pkt3576::CopyStatus::Complete);
+    CHECK(complete.copied_length == 8);
+    CHECK(complete.bytes[5] == 0x40);
+    inside[5] = 0x00;
+    CHECK(complete.bytes[5] == 0x40);
+
+    uint8_t* edge = block + page - 2;
+    edge[0] = 0x11;
+    edge[1] = 0x0B;
+    plant_slots(8);
+    args.r9 = reinterpret_cast<uint64_t>(edge);
+    observer->on_send(args);
+    pkt3576::Record none;
+    CHECK(observer->unread() == 1);
+    CHECK(!observer->try_pop(none));
+
+    edge[0] = 0xD1;
+    edge[1] = 0x07;
+    plant_slots(3);
+    observer->on_send(args);
+    CHECK(observer->filtered() == 1);
+    CHECK(observer->unread() == 1);
+    CHECK(observer->malformed() == 0);
+    CHECK(!observer->try_pop(none));
+
+    uint8_t* split = block + page - 1;
+    split[0] = 0x11;
+    plant_slots(2);
+    args.r9 = reinterpret_cast<uint64_t>(split);
+    observer->on_send(args);
+    CHECK(observer->unread() == 2);
+    CHECK(observer->filtered() == 1);
+    CHECK(!observer->try_pop(none));
+
+    CHECK(observer->disarm());
+    VirtualFree(block, 0, MEM_RELEASE);
 }
 
 void test_gate_entry_races_close() {
@@ -911,9 +1164,8 @@ void test_gate_entry_races_close() {
 void test_observer_entry_races_shutdown() {
     Image image = make_image();
     Sink sink;
-    plant_stack(image, 1, 2, 3);
-    const uint8_t packet[1] = {0xAB};
-    plant_packet(image, packet, sizeof packet);
+    plant_stack(image, 5, 2, 3);
+    plant_frame(image, pkt3576::kMoveActorReq, 5, 0x40);
     Obs observer(8);
     CHECK(observer->install(deps_for(image, sink)) == pkt3576::Observer::InstallResult::Installed);
 
@@ -930,14 +1182,16 @@ void test_observer_entry_races_shutdown() {
         pkt3576::Record record;
         while (run.load(std::memory_order_acquire)) {
             if (!observer->try_pop(record)) continue;
-            if (record.rcx != 0x5151 || record.prefix_len != 1 || record.prefix[0] != 0xAB) {
+            if (record.rcx != 0x5151 || record.copied_length != 5 || record.bytes[0] != 0x11 ||
+                record.status != pkt3576::CopyStatus::Complete) {
                 bad.fetch_add(1, std::memory_order_relaxed);
             } else {
                 popped.fetch_add(1, std::memory_order_relaxed);
             }
         }
         while (observer->try_pop(record)) {
-            if (record.rcx != 0x5151 || record.prefix_len != 1 || record.prefix[0] != 0xAB) {
+            if (record.rcx != 0x5151 || record.copied_length != 5 || record.bytes[0] != 0x11 ||
+                record.status != pkt3576::CopyStatus::Complete) {
                 bad.fetch_add(1, std::memory_order_relaxed);
             } else {
                 popped.fetch_add(1, std::memory_order_relaxed);
@@ -962,6 +1216,130 @@ void test_observer_entry_races_shutdown() {
     CHECK(!observer->try_pop(late));
 }
 
+struct MutatingSource {
+    Image image;
+    int packet_reads = 0;
+    void (*mutate)(Image&) = nullptr;
+};
+
+bool mutating_read(uint64_t address, void* destination, size_t size, void* user) {
+    auto* source = static_cast<MutatingSource*>(user);
+    if (address == kPacket) {
+        if (source->packet_reads == 2 && source->mutate != nullptr) source->mutate(source->image);
+        ++source->packet_reads;
+    }
+    return source->image.read(address, destination, size);
+}
+
+void mutate_payload_ffff(Image& image) { poke_u16(image, kPacket + 3, 0xFFFF); }
+
+void mutate_opcode_unselected(Image& image) { poke_u16(image, kPacket, 0x1234); }
+
+void mutate_opcode_rotate(Image& image) { poke_u16(image, kPacket, pkt3576::kRotateActorReq); }
+
+void mutate_payload_one(Image& image) { poke_u16(image, kPacket + 3, 1); }
+
+// The third packet read is the bulk copy. The opcode and header probes are the
+// first two. A change at the copy must not stay Complete or Truncated.
+void test_copied_header_follows_the_stored_bytes() {
+    auto run = [](void (*mutate)(Image&), uint16_t claimed, pkt3576::Record& record, uint64_t& malformed,
+                  uint64_t& truncated) {
+        MutatingSource source;
+        source.image = make_image();
+        source.mutate = mutate;
+        plant_frame(source.image, pkt3576::kMoveActorReq, claimed, 0x40);
+        plant_stack(source.image, claimed, 0x30, 0x38);
+        Sink sink;
+        Obs observer(4);
+        pkt3576::Observer::Deps deps;
+        deps.read = mutating_read;
+        deps.read_user = &source;
+        deps.hooks = &sink;
+        deps.image_base = pkt3576::kImageBase;
+        CHECK(observer->install(deps) == pkt3576::Observer::InstallResult::Installed);
+        observer->on_send(args_for(1, 2, 3));
+        CHECK(source.packet_reads == 3);
+        CHECK(observer->try_pop(record));
+        CHECK(observer->filtered() == 0);
+        CHECK(observer->unread() == 0);
+        CHECK(observer->dropped() == 0);
+        malformed = observer->malformed();
+        truncated = observer->truncated();
+    };
+
+    pkt3576::Record stable;
+    uint64_t malformed = 99;
+    uint64_t truncated = 99;
+    run(nullptr, 8, stable, malformed, truncated);
+    CHECK(stable.status == pkt3576::CopyStatus::Complete);
+    CHECK(stable.opcode == pkt3576::kMoveActorReq);
+    CHECK(stable.header_checked);
+    CHECK(stable.header_payload == 3);
+    CHECK(stable.copied_length == 8);
+    CHECK(stable.claimed_length == 8);
+    CHECK(malformed == 0);
+    CHECK(truncated == 0);
+
+    pkt3576::Record length_changed;
+    run(mutate_payload_ffff, 8, length_changed, malformed, truncated);
+    CHECK(length_changed.status == pkt3576::CopyStatus::Malformed);
+    CHECK(length_changed.status != pkt3576::CopyStatus::Complete);
+    CHECK(length_changed.status != pkt3576::CopyStatus::Truncated);
+    CHECK(length_changed.header_checked);
+    CHECK(length_changed.header_payload == 65535);
+    CHECK(length_changed.opcode == pkt3576::kMoveActorReq);
+    CHECK(length_changed.bytes[3] == 0xFF);
+    CHECK(length_changed.bytes[4] == 0xFF);
+    CHECK(length_changed.copied_length == 8);
+    CHECK(length_changed.claimed_length == 8);
+    CHECK(malformed == 1);
+    CHECK(truncated == 0);
+
+    pkt3576::Record opcode_changed;
+    run(mutate_opcode_unselected, 8, opcode_changed, malformed, truncated);
+    CHECK(opcode_changed.status == pkt3576::CopyStatus::Malformed);
+    CHECK(opcode_changed.status != pkt3576::CopyStatus::Complete);
+    CHECK(opcode_changed.opcode == 0x1234);
+    CHECK(opcode_changed.bytes[0] == 0x34);
+    CHECK(opcode_changed.bytes[1] == 0x12);
+    CHECK(opcode_changed.header_checked);
+    CHECK(opcode_changed.header_payload == 3);
+    CHECK(malformed == 1);
+    CHECK(truncated == 0);
+
+    pkt3576::Record selected_swap;
+    run(mutate_opcode_rotate, 8, selected_swap, malformed, truncated);
+    CHECK(selected_swap.status == pkt3576::CopyStatus::Complete);
+    CHECK(selected_swap.opcode == pkt3576::kRotateActorReq);
+    CHECK(selected_swap.bytes[0] == 0x24);
+    CHECK(selected_swap.bytes[1] == 0x0B);
+    CHECK(selected_swap.header_payload == 3);
+    CHECK(malformed == 0);
+    CHECK(truncated == 0);
+
+    pkt3576::Record over;
+    run(nullptr, 4097, over, malformed, truncated);
+    CHECK(over.status == pkt3576::CopyStatus::Truncated);
+    CHECK(over.copied_length == 4096);
+    CHECK(over.claimed_length == 4097);
+    CHECK(over.header_payload == 4092);
+    CHECK(malformed == 0);
+    CHECK(truncated == 1);
+
+    pkt3576::Record over_changed;
+    run(mutate_payload_one, 4097, over_changed, malformed, truncated);
+    CHECK(over_changed.status == pkt3576::CopyStatus::Malformed);
+    CHECK(over_changed.status != pkt3576::CopyStatus::Truncated);
+    CHECK(over_changed.copied_length == 4096);
+    CHECK(over_changed.claimed_length == 4097);
+    CHECK(over_changed.header_checked);
+    CHECK(over_changed.header_payload == 1);
+    CHECK(over_changed.bytes[3] == 1);
+    CHECK(over_changed.bytes[4] == 0);
+    CHECK(malformed == 1);
+    CHECK(truncated == 0);
+}
+
 }  // namespace
 
 int main() {
@@ -976,8 +1354,11 @@ int main() {
     test_full_queue();
     test_concurrent_producers();
     test_concurrent_full_queue();
-    test_short_prefix_and_raw_slots();
+    test_filter_before_copy();
     test_unreadable_buffers();
+    test_copy_cap_and_truncation();
+    test_copied_header_follows_the_stored_bytes();
+    test_page_boundary();
     test_capacity_two_keeps_both_records();
     test_consumer_shutdown_waits_for_pop();
     test_failed_removal_keeps_ownership();

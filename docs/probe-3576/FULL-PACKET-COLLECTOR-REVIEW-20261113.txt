@@ -1,0 +1,108 @@
+CODEX REVIEW: TARGETED FULL-PACKET COLLECTOR
+Date: 2026-11-13
+Result: NOT APPROVED for publication or live use. Three findings remain.
+Publishing base: 03ce15ecca76c7fc54b17bc04f77d9f3cb8c5828.
+No Git commit or push was made for this revision.
+
+Scope
+Reviewed experimental candidates/observer/capture, runner/report/mark exports,
+controller changes, tests, and documentation. The implementation includes the
+nine verified IDs, 4096-byte copy cap, 256-record production limits, guarded
+frame reads, timestamps/frequency, phase labels, and expanded output buffers.
+Those additions do not resolve the three failures below.
+No game was launched, opened, or attached. No saves or game installation files
+were changed. Tests use synthetic packet memory and self-owned dummy functions.
+
+P1: mark can use a Capture after stop deletes it
+ tools/pkt3576/live_runner.cpp:661-678, especially line 666.
+mark() reads g_capture and invokes set_phase() without participating in the
+start/stop ownership synchronization. stop() can concurrently remove hooks and
+release_owner() can delete the Capture. The pointer check does not protect the
+subsequent call. New mark logging/state mutations and non-atomic report fields
+also need a shared synchronization policy with lifecycle operations.
+
+Independent reproduction: actual runner and backend code, dummy hook targets,
+with one review-only scheduling pause inserted at Capture::set_phase entry.
+Pause mark there, execute the real stop/release, then resume mark:
+ fixture_start=0
+ mark_suspended=1 stop_result=4 capture_deleted_while_mark_inflight=1
+ AddressSanitizer: heap-use-after-free
+ASan reports the freed Capture access from live::mark, with the freeing stack
+through Capture::release_owner -> release_capture -> live::stop.
+
+Required fix: coordinate all mark access to the owner and mutable phase/log
+state with start/stop/release; provide race-free report snapshots. Synchronize
+control threads without putting blocking locks in packet callbacks. Retained
+must keep its ownership guarantees. Add a deterministic mark/stop regression
+that proves the owner cannot be freed while a phase operation uses it, and
+stress overlapping control/report calls. A zero active-hook callback count
+alone does not account for the new mark control thread.
+
+P2: complete status describes an earlier header, not the copied packet
+ tools/pkt3576/observer.cpp:277-290.
+observe() separately reads the opcode, reads/validates a five-byte header, and
+then copies the frame. Complete/truncated status and metadata use the earlier
+reads; the copied bytes are never revalidated. A changing buffer can therefore
+produce a complete record whose own header has a different opcode or length.
+
+Independent synthetic ReadFn reproductions, each with claimed/copied=8:
+ length-changed: status=1 (Complete), metadata payload=3, copied payload=65535.
+ opcode-changed: status=1, metadata opcode=3094, copied opcode=4660 (0x1234).
+Both used exactly three reads of the packet address. No game memory was used.
+
+Required fix: validate the actual copied header and maintain agreement between
+its opcode/length and the record metadata/claim before declaring Complete or
+Truncated. Reject or explicitly classify inconsistent snapshots; an unselected
+opcode must not appear as a complete selected message. Do not claim an atomic
+snapshot of the entire game payload merely because header checks pass. Add
+reader-mutation regressions for both header and opcode changes, alongside the
+existing short, malformed, unreadable, cap, and partial-read cases.
+
+P2: phase-file preservation is a check-then-overwrite race
+ tools/pkt3576/capture.cpp:718-720; runner precheck at live_runner.cpp:453-461.
+The runner checks file_exists(), but the backend later opens the path with
+_wfopen_s(..., L"wb"), which truncates an existing file. A phase archive created
+between those operations is overwritten despite the no-overwrite contract.
+
+Independent reproduction: a review-only scheduling point immediately before
+the records open creates the phase file with a known previous-capture marker,
+after the real runner precheck has succeeded. Then actual start/stop run:
+ phase_file_created_after_precheck=1 start_result=0 stop_result=4 prior_archive_preserved=0
+
+Required fix: atomically create labeled phase files exclusively and refuse an
+existing destination. Keep overwrite behavior only for the explicitly unlabeled
+path. Add a regression that creates the destination between preflight and open
+and verifies unchanged original bytes plus refused/rolled-back startup with no
+live hooks. Do not rely on another existence check to close this race.
+
+Independent validation
+scripts/build.ps1: exit 0, 93/93 CTest tests passed, 52.99 seconds.
+ build/codex-review-full-collector-20261113.log
+Existing tests pass but do not cover the three interleavings above.
+Independent sanitized reproduction build uses current runner, observer,
+admission gate, dummy targets, and a copy of current capture.cpp with only two
+scheduling hooks: phase-entry pause and destination creation before open.
+The matching ASan-built dependencies were linked. No production source was
+patched to obtain these results.
+ build/review_full_collector.cpp
+ build/review_capture_phase_pause.cpp
+ build/review_full_collector_run.ps1
+ build/codex-review-full-collector-repro-build.log
+ build/codex-review-full-collector-headers.log
+ build/codex-review-full-collector-archive-race.log
+ build/codex-review-full-collector-phase-race.log
+The phase-race child exits 1 with an ASan report. Header/archive modes exit 0
+when they CONFIRM the defects. The script's exit 0 and
+independent_review_defects_confirmed=3 are reproduction success, not approval.
+After a fix, replace these defect expectations with regression expectations
+for safe serialization, consistent copied frames, and preserved archives.
+
+Boundaries and next action
+Reviewed code hashes were unchanged during this review. The normal build guard,
+both production offset headers, and LICENSE match the prior approved manifest.
+No 3576 ASI enablement or production offset adoption occurred.
+Grok: fix all three findings, add the missing game-free regression coverage,
+rerun the full suite and appropriate sanitizer checks, then request another
+Codex review. Keep the game closed for that work. Publish to Shaugno only after
+a clean review. The later controlled full-packet capture remains a separate
+task; existing prefix-only logs are not replay input.

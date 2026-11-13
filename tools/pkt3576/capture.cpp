@@ -24,6 +24,25 @@ namespace {
 // Removal here disables first, then frees only after every other thread is
 // suspended outside the callback, the stub, and the trampoline.
 
+struct SchedHook {
+    std::atomic<uintptr_t> function{0};
+    std::atomic<uintptr_t> user{0};
+
+    void set(void (*next)(void*), void* next_user) {
+        user.store(reinterpret_cast<uintptr_t>(next_user), std::memory_order_relaxed);
+        function.store(reinterpret_cast<uintptr_t>(next), std::memory_order_release);
+    }
+
+    void run() const {
+        const auto callback = reinterpret_cast<void (*)(void*)>(function.load(std::memory_order_acquire));
+        if (callback == nullptr) return;
+        callback(reinterpret_cast<void*>(user.load(std::memory_order_relaxed)));
+    }
+};
+
+SchedHook g_records_open_hook;
+SchedHook g_phase_hold;
+
 constexpr uint32_t kQuiesceMs = 2000;
 constexpr size_t kMaxHookRegion = 1024 * 1024;
 constexpr size_t kMaxCallbackSpan = 65536;
@@ -284,6 +303,36 @@ void append_text(char* destination, size_t capacity, size_t& used, const char* t
     used += length;
 }
 
+// 8192 hex characters for a full kCopyCap copy, plus the fixed metadata.
+constexpr size_t kLineCap = static_cast<size_t>(kCopyCap) * 2 + 1024;
+static_assert(kLineCap >= 8192 + 512);
+
+const char* status_name(CopyStatus status) {
+    switch (status) {
+    case CopyStatus::Complete:
+        return "complete";
+    case CopyStatus::Truncated:
+        return "truncated";
+    case CopyStatus::Malformed:
+        return "malformed";
+    default:
+        return "malformed";
+    }
+}
+
+const char* phase_name(uint8_t phase) {
+    switch (phase) {
+    case static_cast<uint8_t>(Phase::Stand):
+        return "stand";
+    case static_cast<uint8_t>(Phase::Walk):
+        return "walk";
+    case static_cast<uint8_t>(Phase::Turn):
+        return "turn";
+    default:
+        return "unlabeled";
+    }
+}
+
 }  // namespace
 
 struct Capture::State {
@@ -307,6 +356,7 @@ struct Capture::State {
     bool send_extra = false;
     bool recv_extra = false;
     std::vector<Record> records;
+    char* line = nullptr;
     std::thread writer;
     std::atomic<uint32_t> stored{0};
     std::atomic<uint32_t> omitted{0};
@@ -339,41 +389,50 @@ struct Capture::State {
     }
 
     void write_line(const Record& record) {
-        if (file == nullptr) return;
-        char line[384] = {};
+        if (file == nullptr || line == nullptr) return;
         size_t used = 0;
-        append_text(line, sizeof line, used, record.direction == Direction::Send ? "S " : "R ");
-        append_hex(line, sizeof line, used, record.rcx, 16);
-        append_text(line, sizeof line, used, " ");
-        append_hex(line, sizeof line, used, record.rdx, 16);
-        append_text(line, sizeof line, used, " ");
-        append_hex(line, sizeof line, used, record.r8, 16);
-        append_text(line, sizeof line, used, " ");
-        append_hex(line, sizeof line, used, record.r9, 16);
-        append_text(line, sizeof line, used, " ");
-        append_hex(line, sizeof line, used, record.stack_u16_28, 4);
+        append_text(line, kLineCap, used, record.direction == Direction::Send ? "S " : "R ");
+        append_hex(line, kLineCap, used, record.rcx, 16);
+        append_text(line, kLineCap, used, " ");
+        append_hex(line, kLineCap, used, record.rdx, 16);
+        append_text(line, kLineCap, used, " ");
+        append_hex(line, kLineCap, used, record.r8, 16);
+        append_text(line, kLineCap, used, " ");
+        append_hex(line, kLineCap, used, record.r9, 16);
+        append_text(line, kLineCap, used, " ");
+        append_hex(line, kLineCap, used, record.stack_u16_28, 4);
         if (record.direction == Direction::Send) {
-            append_text(line, sizeof line, used, " ");
-            append_hex(line, sizeof line, used, record.stack_u8_30, 2);
-            append_text(line, sizeof line, used, " ");
-            append_hex(line, sizeof line, used, record.stack_u16_38, 4);
+            append_text(line, kLineCap, used, " ");
+            append_hex(line, kLineCap, used, record.stack_u8_30, 2);
+            append_text(line, kLineCap, used, " ");
+            append_hex(line, kLineCap, used, record.stack_u16_38, 4);
         }
-        append_text(line, sizeof line, used, " ");
-        for (uint8_t index = 0; index < record.prefix_len; ++index) {
-            append_hex(line, sizeof line, used, record.prefix[index], 2);
+        char meta[160] = {};
+        std::snprintf(meta, sizeof meta,
+                      " claimed=%u copied=%u status=%s opcode=%04X qpc=%llu phase=%s ",
+                      record.claimed_length, record.copied_length, status_name(record.status), record.opcode,
+                      static_cast<unsigned long long>(record.qpc_ticks), phase_name(record.phase));
+        append_text(line, kLineCap, used, meta);
+        const uint32_t count = record.copied_length <= kCopyCap ? record.copied_length : kCopyCap;
+        for (uint32_t index = 0; index < count; ++index) {
+            append_hex(line, kLineCap, used, record.bytes[index], 2);
         }
-        append_text(line, sizeof line, used, "\n");
-        if (used < sizeof line) line[used] = '\0';
+        append_text(line, kLineCap, used, "\n");
+        if (used < kLineCap) line[used] = '\0';
         std::fputs(line, file);
     }
 
     void write_summary() {
         if (file == nullptr || observer == nullptr) return;
-        std::fprintf(file, "counters dropped=%llu unread=%llu stored=%u omitted=%u\n",
+        std::fprintf(file,
+                     "counters dropped=%llu unread=%llu filtered=%llu malformed=%llu truncated=%llu "
+                     "stored=%u omitted=%u\n",
                      static_cast<unsigned long long>(observer->dropped()),
                      static_cast<unsigned long long>(observer->unread()),
-                     stored.load(std::memory_order_relaxed),
-                     omitted.load(std::memory_order_relaxed));
+                     static_cast<unsigned long long>(observer->filtered()),
+                     static_cast<unsigned long long>(observer->malformed()),
+                     static_cast<unsigned long long>(observer->truncated()),
+                     stored.load(std::memory_order_relaxed), omitted.load(std::memory_order_relaxed));
     }
 };
 
@@ -521,6 +580,8 @@ Capture::Capture(State* state) : state_(state) {}
 Capture::~Capture() {
     if (state_ == nullptr) return;
     close_file(*state_);
+    delete[] state_->line;
+    state_->line = nullptr;
     if (!state_->release_blocked) Observer::release_owner(state_->observer);
     delete state_;
     state_ = nullptr;
@@ -564,6 +625,16 @@ void Capture::set_writer_blocked(bool blocked) {
     state_->writer_blocked.store(blocked, std::memory_order_release);
 }
 
+void Capture::set_records_open_hook(void (*hook)(void*), void* user) { g_records_open_hook.set(hook, user); }
+
+void Capture::set_phase_hold(void (*hold)(void*), void* user) { g_phase_hold.set(hold, user); }
+
+void Capture::set_phase(uint8_t phase) {
+    g_phase_hold.run();
+    if (state_ == nullptr || state_->observer == nullptr) return;
+    state_->observer->set_phase(phase);
+}
+
 uint32_t Capture::stored() const {
     return state_ == nullptr ? 0 : state_->stored.load(std::memory_order_acquire);
 }
@@ -578,6 +649,18 @@ uint64_t Capture::dropped() const {
 
 uint64_t Capture::unread() const {
     return state_ == nullptr || state_->observer == nullptr ? 0 : state_->observer->unread();
+}
+
+uint64_t Capture::filtered() const {
+    return state_ == nullptr || state_->observer == nullptr ? 0 : state_->observer->filtered();
+}
+
+uint64_t Capture::malformed() const {
+    return state_ == nullptr || state_->observer == nullptr ? 0 : state_->observer->malformed();
+}
+
+uint64_t Capture::truncated() const {
+    return state_ == nullptr || state_->observer == nullptr ? 0 : state_->observer->truncated();
 }
 
 bool Capture::queue_allocated() const {
@@ -622,6 +705,10 @@ Capture::StartResult Capture::start(void* module, void* send_entry, void* recv_e
     } catch (const std::bad_alloc&) {
         return StartResult::Refused;
     }
+    if (state_->line == nullptr) {
+        state_->line = new (std::nothrow) char[kLineCap];
+        if (state_->line == nullptr) return StartResult::Refused;
+    }
 
     Capture::State* expected = nullptr;
     if (!g_active.compare_exchange_strong(expected, state_, std::memory_order_acq_rel, std::memory_order_acquire)) {
@@ -653,9 +740,20 @@ Capture::StartResult Capture::start(void* module, void* send_entry, void* recv_e
     } rollback{state_};
 
     if (state_->have_path) {
+        g_records_open_hook.run();
         FILE* file = nullptr;
-        if (_wfopen_s(&file, state_->path, L"wb") != 0 || file == nullptr) return StartResult::Refused;
+        // Exclusive create is the labeled-archive guard. A check before this
+        // open cannot close the race. "wbx" fails when the file exists and
+        // does not truncate it. Unlabeled captures still use "wb".
+        const wchar_t* mode = state_->limits.exclusive_create ? L"wbx" : L"wb";
+        if (_wfopen_s(&file, state_->path, mode) != 0 || file == nullptr) return StartResult::Refused;
         state_->file = file;
+        LARGE_INTEGER frequency{};
+        QueryPerformanceFrequency(&frequency);
+        std::fprintf(file,
+                     "qpc_frequency=%llu\nqpc_timebase=QueryPerformanceCounter\ncopy_cap=%u\n"
+                     "actor_load_max=unknown\noutput_records=%u\ninterval_guaranteed=0\n",
+                     static_cast<unsigned long long>(frequency.QuadPart), kCopyCap, state_->limits.output_records);
     }
 
     state_->records.clear();

@@ -25,8 +25,36 @@ static_assert(kTimestamp3576 != kTimestamp2976);
 inline constexpr uint64_t kSendRva = 0x3A6310;
 inline constexpr uint64_t kRecvRva = 0x3A66A0;
 
-// Copy bound for the bytes at r9. This is not a packet-format field.
+// Retired 16-byte sample bound from the first diagnostic. It is not the
+// collector copy cap and it is not a packet-format field.
 inline constexpr uint32_t kPrefixCap = 16;
+
+// Bytes copied from r9 for one selected message. This is a copy bound.
+// ActorLoadDataAck's maximum is unknown (kActorLoadDataAckMax). A 4096-byte
+// sample of that message is truncated and is not a spawn packet. Do not raise
+// kCopyCap to invent a maximum for it.
+inline constexpr uint32_t kCopyCap = 4096;
+inline constexpr uint32_t kActorLoadDataAckMax = 0;
+static_assert(kCopyCap == 4096);
+static_assert(kActorLoadDataAckMax == 0);
+static_assert(kCopyCap != kPrefixCap);
+
+// Ordinary frame: u16 opcode, one header byte, u16 payload length at offset 3.
+// A consistent frame has payload_length + 5 == the stack length at [rsp+28h].
+inline constexpr uint32_t kOpcodeBytes = 2;
+inline constexpr uint32_t kHeaderBytes = 5;
+
+// Message ids verified for this file only. Experimental collector allow-list.
+// Not production offsets and not the 2976 catalog.
+inline constexpr uint16_t kMoveActorReq = 2833;
+inline constexpr uint16_t kRotateActorReq = 2852;
+inline constexpr uint16_t kStartActionReq = 2202;
+inline constexpr uint16_t kMoveActorAck = 3094;
+inline constexpr uint16_t kRotateActorAck = 3078;
+inline constexpr uint16_t kStartActionAck = 2552;
+inline constexpr uint16_t kActorLoadDataAck = 2005;
+inline constexpr uint16_t kUpdateVisiblePlayerAck = 2555;
+inline constexpr uint16_t kRemoveActorAck = 3067;
 
 // Entry [rsp+28h] is evidenced on both candidates.
 // Entry [rsp+30h] and [rsp+38h] are evidenced on the send candidate only.

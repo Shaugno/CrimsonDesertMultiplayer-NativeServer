@@ -35,6 +35,10 @@ struct Outcome {
     unsigned stored = 0;
     unsigned omitted = 0;
     unsigned attempts = 0;
+    unsigned filtered = 0;
+    unsigned malformed = 0;
+    unsigned truncated = 0;
+    unsigned phase = 0;
     int unloaded = 0;
     int alive = -1;
     const char* note = "";
@@ -78,6 +82,7 @@ struct Command {
     DWORD pid = 0;
     const wchar_t* dll = nullptr;
     const wchar_t* log_dir = nullptr;
+    const wchar_t* phase = nullptr;
     bool fixture = false;
 };
 
@@ -94,6 +99,10 @@ void print_outcome(const Outcome& out) {
     std::printf("ctl_retained=%d\n", out.retained);
     std::printf("ctl_stored=%u\n", out.stored);
     std::printf("ctl_omitted=%u\n", out.omitted);
+    std::printf("ctl_filtered=%u\n", out.filtered);
+    std::printf("ctl_malformed=%u\n", out.malformed);
+    std::printf("ctl_truncated=%u\n", out.truncated);
+    std::printf("ctl_phase=%u\n", out.phase);
     std::printf("ctl_capture_attempts=%u\n", out.attempts);
     std::printf("ctl_unloaded=%d\n", out.unloaded);
     std::printf("ctl_target_alive=%d\n", out.alive);
@@ -166,6 +175,7 @@ bool parse_command(int argc, wchar_t** argv, bool fixture_build, const char* fix
     else if (same_text(argv[1], L"start")) out.action = "start";
     else if (same_text(argv[1], L"status")) out.action = "status";
     else if (same_text(argv[1], L"stop")) out.action = "stop";
+    else if (same_text(argv[1], L"mark")) out.action = "mark";
     else return false;
 
     const wchar_t* pid_text = nullptr;
@@ -173,6 +183,7 @@ bool parse_command(int argc, wchar_t** argv, bool fixture_build, const char* fix
     bool saw_dll = false;
     bool saw_log = false;
     bool saw_fixture = false;
+    bool saw_phase = false;
     for (int index = 2; index < argc; ++index) {
         const wchar_t* arg = argv[index];
         if (arg == nullptr) return false;
@@ -185,6 +196,9 @@ bool parse_command(int argc, wchar_t** argv, bool fixture_build, const char* fix
         } else if (same_text(arg, L"--log-dir")) {
             if (saw_log || !take_value(argc, argv, index, command.log_dir)) return false;
             saw_log = true;
+        } else if (same_text(arg, L"--phase")) {
+            if (saw_phase || !take_value(argc, argv, index, command.phase)) return false;
+            saw_phase = true;
         } else if (same_text(arg, L"--fixture")) {
             if (saw_fixture) return false;
             saw_fixture = true;
@@ -210,7 +224,18 @@ bool parse_command(int argc, wchar_t** argv, bool fixture_build, const char* fix
         return false;
     }
     const bool starting = same_text(argv[1], L"start");
-    if (starting == saw_log) {
+    const bool marking = same_text(argv[1], L"mark");
+    if (marking) {
+        if (!saw_phase || command.phase == nullptr || saw_log) return false;
+        const bool known = same_text(command.phase, L"stand") || same_text(command.phase, L"walk") ||
+                           same_text(command.phase, L"turn") || same_text(command.phase, L"unlabeled");
+        if (!known) {
+            note = "bad-phase";
+            return false;
+        }
+    } else if (saw_phase) {
+        return false;
+    } else if (starting == saw_log) {
         if (starting && wcslen(command.log_dir) >= 1024) {
             note = "bad-log";
             out.start = kPkt3576LiveBadLog;
@@ -512,6 +537,10 @@ void apply_report(Outcome& out, const Pkt3576LiveReport& report) {
     out.stored = report.stored;
     out.omitted = report.omitted;
     out.attempts = report.capture_attempts;
+    out.filtered = report.filtered;
+    out.malformed = report.malformed;
+    out.truncated = report.truncated;
+    out.phase = report.phase;
 }
 
 int unload_module(Session& session, DWORD pid, HANDLE process, uintptr_t free_library, uintptr_t base,
@@ -558,11 +587,14 @@ int execute(Session& session, const Command& command, bool fixture_build, const 
     uintptr_t dll_base = 0;
     const bool present = find_named(modules, file_name_of_copy(command.dll), dll_base);
     const bool starting = std::strcmp(session.out.action, "start") == 0;
-    const bool querying = std::strcmp(session.out.action, "status") == 0 || std::strcmp(session.out.action, "stop") == 0;
+    const bool marking = std::strcmp(session.out.action, "mark") == 0;
+    const bool querying = std::strcmp(session.out.action, "status") == 0 ||
+                          std::strcmp(session.out.action, "stop") == 0 || marking;
     ControlAction action = ControlAction::Load;
     if (starting) action = ControlAction::Start;
     else if (std::strcmp(session.out.action, "status") == 0) action = ControlAction::Status;
     else if (std::strcmp(session.out.action, "stop") == 0) action = ControlAction::Stop;
+    else if (marking) action = ControlAction::Mark;
     // Load and start still require a full match, including pristine entries.
     // Status and stop of the already loaded production module stay available
     // after that module's hooks replace those bytes. No other mismatch is
@@ -675,6 +707,54 @@ int execute(Session& session, const Command& command, bool fixture_build, const 
         if (session.out.stop == kPkt3576LiveRemoved || session.out.stop == kPkt3576LiveIdle) {
             return finish(session, kExitOk);
         }
+        return finish(session, kExitFailed);
+    }
+
+    if (std::strcmp(session.out.action, "mark") == 0) {
+        uintptr_t mark_export = 0;
+        if (!find_export(session.read, dll_base, "pkt3576_live_mark", mark_export)) {
+            session.out.note = "missing-export";
+            return finish(session, kExitFailed);
+        }
+        const char* phase_text = nullptr;
+        if (same_text(command.phase, L"stand")) phase_text = "stand";
+        else if (same_text(command.phase, L"walk")) phase_text = "walk";
+        else if (same_text(command.phase, L"turn")) phase_text = "turn";
+        else if (same_text(command.phase, L"unlabeled")) phase_text = "unlabeled";
+        if (phase_text == nullptr) {
+            session.out.note = "bad-phase";
+            return finish(session, kExitUsage);
+        }
+        const size_t bytes = std::strlen(phase_text) + 1;
+        RemoteAlloc argument;
+        argument.process = session.write;
+        argument.remote = VirtualAllocEx(session.write, nullptr, bytes, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+        if (argument.remote == nullptr) {
+            session.out.note = "remote-alloc";
+            return finish(session, kExitFailed);
+        }
+        session.out.modified = 1;
+        if (!write_bytes(session, session.write, argument.remote, phase_text, bytes)) {
+            session.out.note = "remote-write";
+            return finish(session, kExitFailed);
+        }
+        const Call call = call_remote(session, session.write, mark_export, argument.remote);
+        if (call.wait == Wait::Timeout) {
+            argument.keep = true;
+            session.out.note = "remote-timeout";
+            return finish(session, kExitFailed);
+        }
+        if (call.wait != Wait::Ok) {
+            session.out.note = "failed";
+            return finish(session, kExitFailed);
+        }
+        Pkt3576LiveReport report{};
+        if (read_report(session, session.write, report_export, report)) apply_report(session.out, report);
+        if (call.code == 0) {
+            session.out.note = "marked";
+            return finish(session, kExitOk);
+        }
+        session.out.note = note_for_code(call.code);
         return finish(session, kExitFailed);
     }
 
