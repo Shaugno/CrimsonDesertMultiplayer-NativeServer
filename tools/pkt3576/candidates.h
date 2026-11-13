@@ -9,8 +9,12 @@
 namespace pkt3576 {
 
 // Installed Crimson Desert 1.0.0.3576. Identity for this experiment only.
+// SizeOfImage and the file name are from docs/COMPATIBILITY-3576.md and the
+// live probe logs. They are not hook addresses and are not adopted offsets.
 inline constexpr uint32_t kTimestamp3576 = 0x6AED2E85;
 inline constexpr uint64_t kImageBase = 0x140000000;
+inline constexpr uint32_t kImageSize = 0x13CC4000;
+inline constexpr wchar_t kExeName[] = L"CrimsonDesert.exe";
 
 // Production build 1.0.0.2976. This observer must refuse it.
 inline constexpr uint32_t kTimestamp2976 = 0x6AB28F00;

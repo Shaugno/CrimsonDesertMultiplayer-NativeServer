@@ -24,12 +24,13 @@ The native-server approach connects the guest to the host's world through the ga
 
 - A read-only 3576 position diagnostic has been live tested.
 - A passive packet observer and real SafetyHook capture backend have passed game-free tests.
-- The latest approved backend passed **89 tests**, the observer/capture AddressSanitizer tests, and
-  the original hook-installation failure reproduction. Its real hooks were tested on dummy functions.
-- Next: implement and review the version-checked live-capture runner, gather controlled evidence,
-  and port the verified pieces toward a two-player test.
+- A version-checked diagnostic module now exposes explicit in-process start/stop/status control.
+- The latest approved runner passed **92 tests**, four AddressSanitizer test programs, and the
+  original stop/log-recovery reproductions. Real hooks were tested on dummy functions only.
+- Next: select and review the game-loading/controller route, then gather controlled live evidence
+  after a separate test instruction. The module does not include a remote injector.
 
-See [progress](docs/PROGRESS.txt), the [latest capture review](docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt),
+See [progress](docs/PROGRESS.txt), the [latest runner review](docs/probe-3576/LIVE-RUNNER-APPROVAL-20261112.txt),
 and the [continuation roadmap](docs/ROADMAP.md). Experimental candidate addresses stay isolated until
 their intended use is verified. The production compatibility guard remains in place.
 

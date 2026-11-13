@@ -1,0 +1,64 @@
+Codex approval: version-checked capture module, 2026-11-12
+
+Disposition: approved as an experimental game-free source checkpoint. No
+blocking findings remain in the reviewed stop/log-binding fixes. The user's
+conditional authorization to publish to Shaugno is satisfied for this revision.
+This is not approval to load the module into the game or a 3576 gameplay release.
+
+Reviewed behavior
+- Production start identifies the loaded process executable and requires the
+  documented CrimsonDesert.exe name, mapped base, timestamp, image size, and
+  both candidate entry signatures before Capture::start.
+- Unsupported/unreadable identities and build 2976 are rejected. The production
+  DLL has no fixture export; fixture authorization remains a separate test build.
+- DllMain performs no capture, log, or worker startup. Explicit arming pins the
+  diagnostic module before exposing callbacks. The pin lasts until process exit.
+- Stop/release exceptions preserve Held/Retained ownership and truthful status.
+  A later start cannot overwrite that capture; no cleanup is retried as Idle.
+- Failed initial log binding restores its previous state. Existing files are
+  rejected as directories, and a failed session-file open permits a good retry.
+- Production ASI guard/offsets are unchanged. No process launcher or remote
+  injector is included, and the diagnostic module is not linked into cdmp.asi.
+
+Independent validation
+1. scripts/build.ps1: exit 0, 92/92 CTest tests passed, 52.67 seconds.
+   Log: build/codex-review-live-runner-fixes.log.
+2. Rebuilt ASan targets in build/asan, then ran with vcvars64.bat initialized:
+   pkt3576 tests ok
+   pkt3576 capture tests ok
+   pkt3576 live tests ok
+   pkt3576 live host tests ok
+   Combined exit 0. Log: build/codex-review-live-runner-fixes-asan-run.log.
+   The host test loads the test DLL and validates pinning/retained behavior.
+   Windows ASan does not report leaks. Allocator fault injection runs in the
+   normal suite, not under ASan's allocator. Compiler /fsanitize=address flags
+   provide instrumentation; the cached linker has an ignored flag warning.
+3. Recompiled Codex's original fault harness against the new fixture-runner and
+   capture libraries. Both modes exit 0:
+   stop_exception_escaped=0 allocation_size=96 receive_still_patched=1 next_stop=3 retained=1
+   bad_path_code=6 retry_good_path_code=0 capture_attempts=1
+   The first result intentionally retains installed hooks after uncertain stop
+   cleanup; it does not falsely claim that those hooks were removed.
+   Log: build/codex-review-live-runner-fixes-repro.log.
+
+Limits and next task
+All validation used dummy functions, fake identity data, and self-owned test
+processes. No game was launched, attached, or modified. Fixture logs are marked
+fixture=1/game_match=0 and do not establish game compatibility.
+
+The module exports an in-process start/stop/status API. A real-game loading and
+controller route is still to be selected, implemented, and reviewed. Keep that
+separate from deployment. Future live tests require the user's instruction and
+save backup under CLAUDE.md. Keep the normal ASI guard closed.
+
+The first successful log directory stays bound for the module lifetime. Logs
+have fixed filenames and bounded output; preserve each session's evidence
+before rearming. A pin is permanent even after clean stop. Held state keeps
+resources until process exit and is not a request to force-unload the DLL.
+
+Publication
+Public project: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
+Branch: codex/checkpoint-3576-20261112
+Previous publication: 7be2824928f41ee58bc0950987c09cfbf3a54741
+The new checkpoint contains the approved module, fixture tests, review, and
+validation evidence. Active development files/index remain in place.

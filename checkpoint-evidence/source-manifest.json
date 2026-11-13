@@ -1,11 +1,12 @@
 {
-  "created": "2026-11-12T17:18:07.0472623-05:00",
+  "created": "2026-11-12T19:15:54.1382341-05:00",
   "repository": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\COOP MOD\\CrimsonDesertMultiplayer-NativeServer",
   "branch": "grok/compat-guard",
   "source_head": "3cbb03c5e0840db92d690a05eaf2693d0c4a1bf7",
-  "previous_publication": "86ed5129d26274ce663fd10794d8205f2d10d88c",
+  "previous_publication": "7be2824928f41ee58bc0950987c09cfbf3a54741",
   "destination": "Shaugno/CrimsonDesertMultiplayer-NativeServer",
-  "review": "Approved experimental game-free capture backend. 89/89 tests, ASan observer/capture tests, and original allocation reproduction passed. No live deployment approval.",
+  "visibility": "public",
+  "review": "Approved experimental game-free version-checked capture module: 92/92 tests, four ASan test programs, and original fault reproductions passed. No game launch or attachment; no live deployment approval.",
   "excluded_generated_file": "vc140.pdb",
   "files": [
     {
@@ -15,8 +16,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2503,
-      "sha256": "586A4F6D0DCB8693D6F81887C2844A3F78EDCFB7187816DABD4E23AD7BABEB0F"
+      "bytes": 2939,
+      "sha256": "0F9B617D79AAB9CAA912AD3388808D30ED4E61D32F1116944CF41C0E7E48BD1C"
     },
     {
       "path": "docs/COMPATIBILITY-3576.md",
@@ -25,18 +26,18 @@
     },
     {
       "path": "docs/DEV-WORKFLOW.md",
-      "bytes": 3051,
-      "sha256": "215C7D55911365B5BB33634332D4EAB155F879D002BD96C1760301447E3FB7FC"
+      "bytes": 3364,
+      "sha256": "6A8F12335CC6DF3A829D86BF43227A906F7FC558F1E4443248F3C591636FFB9F"
     },
     {
       "path": "docs/GITHUB-MIGRATION-20261112.txt",
-      "bytes": 1562,
-      "sha256": "99C432818D2C65CF4F8C68D5CE24E8A14AEE523BD6A857929067D10F45EAEBC4"
+      "bytes": 1736,
+      "sha256": "306CCCE67FCFEF82384FE07D3FEC4903B406088D91B49121670496837576A2EC"
     },
     {
       "path": "docs/PROGRESS.txt",
-      "bytes": 4966,
-      "sha256": "FF49EA507E9C3D588F6C0E0DD83AF4677EF40332E13BC2845B2B19F51BF11139"
+      "bytes": 5375,
+      "sha256": "DE10D15417C08FCC9D4781A74E6E5DF61079ED920B5F59270F916E21F8AB9FAC"
     },
     {
       "path": "docs/probe-3576/CAPTURE.md",
@@ -62,6 +63,21 @@
       "path": "docs/probe-3576/DIAG3576.md",
       "bytes": 6352,
       "sha256": "FBA31121D05CEF524B840ECD824DEED1BF0A87431EE6920B048F2F2BB718AA93"
+    },
+    {
+      "path": "docs/probe-3576/LIVE-CAPTURE-RUNNER.md",
+      "bytes": 4269,
+      "sha256": "BB2EC6A6962E2FA5AE61B2A1D5A67D88DB574B224EE93B16C2EC7198629F06D9"
+    },
+    {
+      "path": "docs/probe-3576/LIVE-RUNNER-APPROVAL-20261112.txt",
+      "bytes": 3774,
+      "sha256": "C0E2D3800E07A8BCDA476BFAA165AF02CA381634D4E304894C1D7A9237269EC8"
+    },
+    {
+      "path": "docs/probe-3576/LIVE-RUNNER-REVIEW-20261112.txt",
+      "bytes": 4758,
+      "sha256": "C77E09FE11C6083DCEF4334CEE6655BB2B879FA849C87B7CA7B3588BF32660E8"
     },
     {
       "path": "docs/probe-3576/LOCAL-TO-WORLD.md",
@@ -139,6 +155,21 @@
       "sha256": "1B4CE593098628737253193D10C42A51786787B4FBBF8308A1A003CD62EA0E69"
     },
     {
+      "path": "tests/pkt3576_live_faults.cpp",
+      "bytes": 8268,
+      "sha256": "A448A1C502181580342B3BF02AE72EB9A532ADA8863FE008A8C5E22AA089B8B5"
+    },
+    {
+      "path": "tests/pkt3576_live_host.cpp",
+      "bytes": 9858,
+      "sha256": "4832E2F2F4112CB134BF8FDF3E53B6D904A3F544FD4ACCC2B52FF7198FAD9911"
+    },
+    {
+      "path": "tests/pkt3576_live_tests.cpp",
+      "bytes": 15551,
+      "sha256": "1ABBE5F4B9750CEE6DF91EEB1908A2583D8C58EB5453D85EA3733EAB04F17BDB"
+    },
+    {
       "path": "tests/pkt3576_tests.cpp",
       "bytes": 35676,
       "sha256": "6B88E6FFF157A1E85D2FB974F0E4E0873022E6DE91C2F428A2F5DBFA26681109"
@@ -180,8 +211,8 @@
     },
     {
       "path": "tools/pkt3576/candidates.h",
-      "bytes": 1642,
-      "sha256": "3568DC8B93966B34DD44912EA766872DAFB1766F009A37476F6F1314946A7E60"
+      "bytes": 1907,
+      "sha256": "4EF06D08221A5BC6F444333CF384CECF1EB7A3B5F2C2A7A83E558F2419E3F03B"
     },
     {
       "path": "tools/pkt3576/capture.cpp",
@@ -192,6 +223,36 @@
       "path": "tools/pkt3576/capture.h",
       "bytes": 2225,
       "sha256": "7E028614A45157520BD5F223660BA3627E8EB8FD8883A2DE273676414087659C"
+    },
+    {
+      "path": "tools/pkt3576/live_api.h",
+      "bytes": 1552,
+      "sha256": "EC45917C368E4F8AABCADADB2B526255FE568D1ED9C9FA4FEA9034AD90171F7F"
+    },
+    {
+      "path": "tools/pkt3576/live_dll.cpp",
+      "bytes": 1554,
+      "sha256": "16519E7CFBEFCD7709236ED2E0CE8ED46126862BA2249F8D27FA0DCD5966AEE6"
+    },
+    {
+      "path": "tools/pkt3576/live_identity.cpp",
+      "bytes": 11254,
+      "sha256": "CBECB194804A46F13BC537ED3E0B0980BD7310DCE791144C0D6A9E6964C3D915"
+    },
+    {
+      "path": "tools/pkt3576/live_identity.h",
+      "bytes": 1838,
+      "sha256": "4E259F61412DD0F2C1E31230D8B0560D2636C11EE11A9C42302D154ACA8CB25C"
+    },
+    {
+      "path": "tools/pkt3576/live_runner.cpp",
+      "bytes": 23171,
+      "sha256": "2673899AF40D6BBEE948E938274EE90322800C2B46BAA76A44B9CA15688586F6"
+    },
+    {
+      "path": "tools/pkt3576/live_runner.h",
+      "bytes": 610,
+      "sha256": "10A7E182DC09D7774AF1868227B6289ADAAA27D3CBA57BD1B1F745609049B5C4"
     },
     {
       "path": "tools/pkt3576/observer.cpp",
@@ -245,8 +306,8 @@
     },
     {
       "path": "CMakeLists.txt",
-      "bytes": 59938,
-      "sha256": "C9CFA2D2E20628D0086F7F4E0383927EFB41751834D2041CB55DCB01DB16E956"
+      "bytes": 63198,
+      "sha256": "1EA28982A69FF867EAFB6B839327D236642C1E8AC99F025C00D823F8B09FA267"
     },
     {
       "path": "LICENSE",
@@ -255,8 +316,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4750,
-      "sha256": "8B9B3B606747F18DF4E1E0719372432B61A2C5402E8F4963AE6BE710EE176394"
+      "bytes": 7011,
+      "sha256": "49F0AC17DF383E211B7A3246014AF604FA501F52512224880A95DF58B66D02A1"
     },
     {
       "path": "cmake/build_id.h.in",
@@ -295,8 +356,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "bytes": 9110,
-      "sha256": "726CD0D0E94D65957EA732E7B9166D7C3261451E1F3D4786E24DF920A5D22D3F"
+      "bytes": 10465,
+      "sha256": "54FA8D4E8B867FF4031CD6146E4AC67BFC5726D1B7A8632B9B228FA76BA341C8"
     },
     {
       "path": "docs/research/apariencia-estado-coop.md",

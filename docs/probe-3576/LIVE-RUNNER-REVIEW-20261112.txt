@@ -1,0 +1,85 @@
+Codex review: version-checked live-capture runner, 2026-11-12
+
+RESOLVED FOLLOW-UP: stop now preserves Held/Retained state on exceptions, and
+failed initial log bindings permit a good retry. Codex reran both original
+reproductions, the 92-test suite, and the four ASan test programs successfully.
+See LIVE-RUNNER-APPROVAL-20261112.txt for current scope and evidence. The
+request-changes review below is historical.
+
+Disposition: request changes. Do not upload this runner revision under the
+user's "if everything looks good" condition. No game was launched or attached.
+
+Independent validation
+- scripts/build.ps1 completed with exit 0: all 91 CTest tests passed.
+- Total CTest time: 50.85 seconds. Log: build/codex-review-live-runner.log.
+- The new tests load production/fixture DLLs only into their own test processes.
+  The production DLL rejects its non-game host before Capture::start.
+- Pure identity tests cover the required name/base/timestamp/image-size tuple,
+  signature mismatch, unreadable data, and explicit 2976 rejection.
+- Two additional fault tests against the actual fixture runner and capture
+  libraries reproduced the failures below. These are not game-crash results.
+
+P1: stop exceptions reopen Idle while hooks remain installed
+File: tools/pkt3576/live_runner.cpp, lines 424-435, plus Slot's default phase.
+
+Capture::stop is not noexcept. SafetyHook's disable path can allocate while
+adding a trap to its std::map. An exception from g_capture->stop has no handler
+in live::stop or the C export. During unwinding, Slot defaults to kPhaseIdle.
+The hook can remain patched, but another stop immediately returns Idle and
+status still says retained=0. This loses the runner's active/retained lifecycle
+state and can let a later start overwrite the pointer to a still-live capture.
+
+Reproduction uses one injected std::bad_alloc on the next allocation after
+fixture startup succeeds. Observed with a 96-byte allocation:
+stop_exception_escaped=1 allocation_size=96 receive_still_patched=1 next_stop=5 retained=0
+Here next_stop=5 means Idle. The child exits 94 as a failure verdict.
+
+Requested fix: contain teardown exceptions at the runner/C-ABI boundary. Keep
+Held/Retained state, the capture owner, writer, and module pin whenever cleanup
+cannot be proved complete. Do not reset Idle with installed hooks. Ensure the
+exception paths of release_capture are contained too. Add regression coverage
+for allocation failure during backend stop and for truthful follow-up status.
+
+P2: a failed initial log binding blocks a valid destination
+File: tools/pkt3576/live_runner.cpp, lines 245-253.
+
+CreateDirectory's ERROR_ALREADY_EXISTS is accepted without checking that the
+existing object is a directory. More generally, g_log_bound and both path
+globals are committed before log_flush succeeds. If the initial log cannot
+be opened, start returns BadLog but keeps that failed binding. A retry with
+a different valid absolute directory is then rejected by the bound-dir check,
+even though no capture has been attempted and no session was established.
+
+Reproduction supplies a temporary regular file as the first directory, then
+a fresh valid absolute directory. Observed:
+bad_path_code=6 retry_good_path_code=6 capture_attempts=0
+Both calls return BadLog; the second should be able to start the fixture.
+The child exits 95 as a failure verdict.
+
+Requested fix: validate existing destinations as directories and commit the
+initial binding only after the session log is successfully opened/written.
+Roll back failed initial binding state. Test a regular-file destination and
+a session-file open failure followed by a successful start in a good folder.
+
+Evidence, relative to the parent COOP MOD directory
+backups/NativeServer/20261112-live-runner-review/
+  review_live_runner_failures.cpp
+  stop-exception-result.txt
+  bad-log-result.txt
+  codex-review-live-runner.log
+
+Copy the cpp to the repository build/ directory before compilation. It uses
+PKT3576_LIVE_FIXTURE, dummy target functions, and the real fixture-runner,
+identity, capture, observer, SafetyHook, Zydis, and Zycore static libraries.
+Build in MSVC x64 with /std:c++latest /EHsc /O2 /MT /INCREMENTAL:NO.
+Run once without arguments for the stop fault, and with "bad-log" for log
+recovery. Only self-owned test functions and temporary output paths are used.
+
+Reviewed live_runner.cpp SHA256:
+A06245419A66AEB0065DA249269E7ECE79BE2CD2CE7761BA328FC595D58282AF
+Reviewed live_identity.cpp SHA256:
+CBECB194804A46F13BC537ED3E0B0980BD7310DCE791144C0D6A9E6964C3D915
+
+The published repository was not changed by this review. Last publication is
+7be2824; last approved runtime checkpoint is 1638ca2. Fix both findings, rerun
+game-free validation, and request another review. Keep the ASI guard closed.

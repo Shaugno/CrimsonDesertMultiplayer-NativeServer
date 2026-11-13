@@ -7,11 +7,11 @@ The goal is reliable two-player co-op on **1.0.0.3576**, then a repeatable way t
 assess later builds. Full co-op on 3576 has not yet been demonstrated.
 
 Completed in this continuation: the live-tested read-only position diagnostic,
-the passive observer, and the real capture backend validated against dummy
-functions. The latest approved game-free suite has 89 passing tests.
+the passive observer, the real capture backend, and the version-checked module
+validated against dummy hosts. The latest game-free suite has 92 passing tests.
 
-1. Build and review the version-checked live-capture runner, including module
-   lifetime, bounded output, rollback, and retained failure handling.
+1. Select and review the explicit game-loading/controller route for the approved
+   in-process capture module, including ownership and retained failure handling.
 2. Run controlled passive captures after a separate live-test instruction;
    verify packet roles against observed actions.
 3. Port the verified player and networking pieces without bypassing build guards.

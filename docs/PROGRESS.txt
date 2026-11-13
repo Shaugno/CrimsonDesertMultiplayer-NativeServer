@@ -1,7 +1,7 @@
 CO-OP DEVELOPMENT PROGRESS
-Project: Crimson Desert Multiplayer — Shaugno Continuation
+Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
-Updated: 2026-11-12, establishing this independent continuation.
+Updated: 2026-11-12, after Codex approved the game-free version-checked module.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working with Crimson Desert
@@ -10,86 +10,87 @@ not yet been demonstrated.
 
 LATEST CODEX REVIEW
 Approved as an experimental game-free source checkpoint. No blocking findings
-remain in the reviewed hook-installation fix. The vanished-thread loop,
-reserve-allocation failure, and exception after receive-hook installation
-are resolved. Unsafe cleanup retains required state/code instead of freeing it.
-See docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt.
-This approval does not authorize live deployment or full mod compatibility.
+remain in the reviewed runner fixes. Stop/release exceptions preserve Held/
+Retained ownership and truthful status, and failed initial log binding allows
+a valid retry. See docs/probe-3576/LIVE-RUNNER-APPROVAL-20261112.txt.
+This does not authorize loading into the game or establish gameplay compatibility.
 
 INDEPENDENT VALIDATION
-Codex ran scripts/build.ps1: exit 0, 89/89 CTest tests passed, 54.73 seconds.
-Log: build/codex-review-capture-installation.log.
-Codex rebuilt and ran observer and real-hook tests with AddressSanitizer,
-after initializing the Visual Studio runtime environment: both passed, exit 0.
-Log: build/codex-review-capture-installation-asan-run.log.
-Codex's original second-hook allocation reproduction now exits 0:
-hook allocation injected=1 size=8 escaped=0 receive_still_patched=0 stop_idle=1
-Log: build/codex-review-capture-installation-repro.log.
-Fault-injection tests run in the normal suite; Windows ASan has no leak report.
-No game was launched, attached, or modified. Build outputs stay under build/.
+Codex ran scripts/build.ps1: exit 0, 92/92 CTest tests passed, 52.67 seconds.
+Log: build/codex-review-live-runner-fixes.log.
+Codex rebuilt/reran the observer, capture, identity/production-DLL, and
+fixture-host tests under AddressSanitizer with vcvars64.bat initialized.
+All four printed ok, combined exit 0.
+Log: build/codex-review-live-runner-fixes-asan-run.log.
+Original fault harness modes now both exit 0:
+stop_exception_escaped=0 allocation_size=96 receive_still_patched=1 next_stop=3 retained=1
+bad_path_code=6 retry_good_path_code=0 capture_attempts=1
+Log: build/codex-review-live-runner-fixes-repro.log.
+The stop fault retains hooks intentionally because cleanup is uncertain.
+Allocator fault tests run in the normal suite; Windows ASan has no leak report.
+No game was launched or attached. Test hooks target self-owned dummy functions.
 
 COMPLETED MILESTONES
-1. Visual Studio C++ tools and the game-free build/test workflow are ready.
-2. Unsupported game builds remain blocked from normal mod operation. The ASI
-   production guard still accepts only 1.0.0.2976.
-3. The external read-only 3576 position diagnostic was built and live tested.
+1. Visual Studio C++ tools and game-free build/test workflow are ready.
+2. Production game-build guard remains closed for 3576 and accepts only 2976.
+3. External read-only 3576 position diagnostic was built and live tested.
    Local position tracks walking; local plus origin gives world position.
-   The static candidate's Y residual stays as measured.
-4. File evidence identifies send-like RVA 0x3A6310 and receive-like RVA
-   0x3A66A0 as credible experimental candidates; no offsets were adopted.
-5. The passive observer has one atomic admission gate, bounded reads, queue
-   capacity checks, concurrent producers, and retained ownership on failure.
-6. A separate SafetyHook backend captures real hooks on dummy functions in
-   a test executable. Its writer/output bounds, partial install, repeated
-   install/removal, concurrent calls, and injected failure paths are tested.
-   It is not linked into cdmp.asi and has not been attached to the game.
+4. Send-like RVA 0x3A6310 and receive-like RVA 0x3A66A0 remain experimental
+   candidates, isolated from production offset headers.
+5. The passive observer and real SafetyHook capture backend are game-free tested,
+   including concurrency, rollback, queue bounds, and retained failure handling.
+6. A separate diagnostic module gates hooks on the documented loaded executable
+   name/base/timestamp/image size and both entry signatures. It exposes explicit
+   in-process start/stop/status, performs no work in DllMain beyond disabling
+   thread notifications, and pins before exposing callbacks. Production exports
+   have no fixture entry. The fixture build and dummy hosts are separate.
+7. Stop exceptions and initial log-binding failures have deterministic regression
+   coverage. Fixture success is never logged as game identity acceptance.
 
 NEXT TASK
-Design and review a separate live-capture runner and controlled test procedure.
-Before hooks, verify the loaded executable base, timestamp, and both candidate
-entry signatures. Preserve the production guard. Specify module pinning,
-callback/reader lifetime, bounded output, save backup, and retained failure
-behavior. Keep game deployment/attachment separate until explicitly requested.
+Select, implement, and review a concrete game-loading/controller route for the
+approved in-process module. There is no remote injector in this checkpoint.
+Specify ownership, bounded evidence collection, and what happens on Retained.
+Keep actual game deployment/attachment separate until explicitly requested;
+follow CLAUDE.md save-backup requirements. Keep the normal ASI guard closed.
+
+OPERATIONAL LIMITS
+The first successful log directory stays bound for the module lifetime. Fixed
+log filenames are reused; preserve evidence before another session. The module
+pin lasts until process exit, including after clean stop. Retained state keeps
+resources/code alive and rejects another start; never force unloading.
 
 REMAINING WORK TOWARD CO-OP
-Verify packet roles and implement compatibility incrementally; demonstrate
-peer representation and movement; validate loading, reconnects, and two-player
-behavior. Permanent manager root, health, and player readiness/loading signals
-remain unresolved. Readability/coherence alone does not establish readiness.
+Gather controlled packet evidence; verify roles and port compatibility pieces;
+demonstrate connected-peer movement; validate loading, reconnects, combat,
+save handling, and two-PC play. Permanent manager root, health, and reliable
+player readiness/loading signals remain unresolved.
 
 KEY EVIDENCE
  docs/COMPATIBILITY-3576.md
- docs/probe-3576/CAPTURE.md
- docs/probe-3576/LOCAL-TO-WORLD.md
  docs/probe-3576/DIAG3576-LIVE.md
  docs/probe-3576/PACKET-CANDIDATES-3576.md
  docs/probe-3576/PACKET-CAPTURE-APPROVAL-20261112.txt
- tools/pkt3576/capture.h and capture.cpp
- tools/pkt3576/observer.h and observer.cpp
- tools/pkt3576/admission_gate.h and admission_gate.cpp
- tests/pkt3576_capture_tests.cpp
- tests/pkt3576_capture_faults.cpp
- tests/pkt3576_tests.cpp
+ docs/probe-3576/LIVE-RUNNER-APPROVAL-20261112.txt
+ docs/probe-3576/LIVE-CAPTURE-RUNNER.md
+ tools/pkt3576/live_api.h, live_identity.cpp, live_runner.cpp, live_dll.cpp
+ tests/pkt3576_live_tests.cpp, pkt3576_live_host.cpp, pkt3576_live_faults.cpp
 
 GITHUB / RECOVERY
-Verified active account: Shaugno
+Account: Shaugno
 Public repository: https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer
-Visibility: public at the user's request (2026-11-12).
 Checkpoint branch: codex/checkpoint-3576-20261112
-Approved backend publication: 1638ca250b3ea2334cbfd274af161b0e5dcc2d9d
-The user requested continuing this project under Shaugno. Project identity,
-attribution, and roadmap updates are documentation only; runtime code remains
-at the approved checkpoint. New implementation changes require review before
-publication. Local dated backups are under COOP MOD/backups/NativeServer.
-Earlier Shaugn46 checkpoints are historical; future saves use Shaugno.
+Previous publication: 7be2824928f41ee58bc0950987c09cfbf3a54741
+The user authorized saving this revision after review. The next checkpoint
+contains current source, this approval, and evidence under checkpoint-evidence/.
+New changes are not automatically uploaded. Dated backups live under the
+parent COOP MOD/backups/NativeServer folder. Shaugn46 copies are historical.
 
 WORKING AGREEMENT / BOUNDARIES
 Grok implements; Codex reviews. Read AGENTS.md and CLAUDE.md when resuming.
-Active development stays on grok/compat-guard; its original source HEAD is
-3cbb03c5e0840db92d690a05eaf2693d0c4a1bf7 plus uncommitted development work.
-Publishing uses an isolated checkout so the active branch/index stays intact.
-origin is Shaugno's project; upstream preserves ByJunter's original repository.
-shaugno remains a publishing alias/default push destination. The sibling original mod stays
-untouched. Do not open the 3576 guard, adopt candidates, deploy cdmp.asi,
-launch the game, or attach hooks as part of routine review. Follow CLAUDE.md
-save-backup requirements when in-game testing is separately requested.
+Active branch remains grok/compat-guard with original source HEAD 3cbb03c plus
+uncommitted development files. Publishing uses an isolated checkout.
+origin is Shaugno; upstream preserves ByJunter; shaugno is a publishing alias.
+Original attribution and GPL licensing are preserved. The sibling original
+mod stays untouched. Do not open the guard, adopt offsets, launch the game,
+or attach hooks as part of routine review.
