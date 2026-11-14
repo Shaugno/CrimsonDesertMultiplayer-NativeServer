@@ -1,130 +1,177 @@
-# Handoff: Package A incomplete
+# Handoff: 3663 acknowledgement findings fixed; walk prototype blocked
 
-Current direction after this evidence review:
-[Co-op prototype plan](../COOP-3663-PROTOTYPE-PLAN.md). Repeated captures are
-paused while the independent state/transport/actor-path work proceeds.
-The experiment below was proposed but not performed; it is not the immediate
-next assignment. The archived observations and hashes remain unchanged.
+User-requested transfer to Claude: [implementation handoff](../CLAUDE-HANDOFF.md).
+Continue offline; preserve any newer local changes. The user requested this
+progress checkpoint be committed and pushed to Shaugno before Claude takes over.
+Earlier references to uncommitted work describe its pre-publication status.
 
-Date: 2026-11-14. Checkout `grok/compat-guard` at published commit `3e950a7`
-(`Gate capture on durable readiness and preserve attempt logs`). Newer local
-files kept: `docs/PROGRESS.txt`, `docs/ROADMAP.md`, and
-`docs/GROK-3663-EXECUTION-PLAN.md`. This handoff adds no runtime change.
-The reviewed diagnostic, compatibility guards, production offsets, and the
-4096-byte copy cap are unchanged. No actor was spawned and no packet was
-replayed.
+## Latest checkpoint: concrete character-control component reader
 
-Packages A and B are not complete. There is no usable post-ready movement
-evidence, so offline field analysis was not started.
+See [COMPONENT-READERS-20261114.md](COMPONENT-READERS-20261114.md).
+Resolved character-control and transform-sync class vtables through file RTTI.
+Added an offline structural character-control decoder for its conditional
+fields, variable bytes, resource IDs and variable entries. Nested reads are
+accounted for; native object stride is not used as wire length. Focused tests
+pass. Full offline suite passed 101/101 in 90.26 seconds, including the prior
+controller fixture isolation fix. git diff --check passed. Native character creation is still
+unimplemented; component inventory, transform structures, resource validity,
+and ownership remain unresolved. No game use or deployment. Changes local.
 
-## This attempt
+Earlier checkpoints below retain their historical scope.
 
-Directory, left unchanged:
+## Current Codex checkpoint: component initialization and cleanup
 
-`C:\Users\shaug\.codex\visualizations\2026\11\12\01a1cf3e-5728-7633-99ba-7c7ac1473b17\NativeServer-work2\backups\pkt3663-live-20261114-postready`
+See [COMPONENT-LIFECYCLE-20261114.md](COMPONENT-LIFECYCLE-20261114.md).
+New file evidence establishes the compact component list's initialization
+order, shared-reader deserialization, reverse cleanup order, and a deferred
+cleanup callback. The concrete factory and component schemas remain unknown;
+these native list entries are not wire layouts. Failed-initialization rollback
+and deferred completion ownership are still unresolved.
 
-PID 51032 was
-`D:\SteamLibrary\steamapps\common\Crimson Desert\bin64\CrimsonDesert.exe`,
-started 2026-11-14 11:25:31 -05:00 by `steam.exe` with
-`PlatformServiceType=Steam`. Status before load was `identity=match`,
-`loaded=0`, `modified=0`. Load used
-`cdmp_pkt3663_live.dll`
-`D44705E057693B20B505F69335DE8C8980243AAF1EA899484D0A3E65D90FD18F`
-at `0x7ff940090000`. The operator was standing before the arm.
+An offline decoder now checks the body relation tail only when its start is
+independently known. It never guesses where opaque components end. Focused
+tests passed. Full suite: 100/101 passed in 89.65 seconds. The controller
+fixture hit a stale directory from a recycled dummy PID. Its test-only log
+naming now includes the test process identity/creation time; the rebuilt
+controller test passed in 49.03 seconds (CTest total 49.38). No failure was
+suppressed and old evidence was preserved. The other 100 tests were not
+rerun after this isolated fixture change. No game launch,
+attachment, native calls, deployment, or push; changes remain local.
 
-| Command | Result |
-| --- | --- |
-| `start` stand | exit 0, `ctl_start=0`, `note=started`, remote wait 18404 ms, `stored=0` |
-| `stop` stand | exit 0, `ctl_stop=4`, `note=removed`, `retained=0`, `target_alive=1`, `stored=0` |
+Next dependency: resolve the descriptor factory and each required component
+reader, initialization phase and cleanup contract before native actor work.
+The earlier checkpoint sections below retain their historical validation.
 
-Start returned at 11:29:34.655. Stop was issued at 11:29:34.679, about 24 ms
-later. That is the gap between the two controller commands. Readiness was
-already durable inside `start` before that return, so the archive does not
-give a separate ready-to-stop duration. `ctl_identity=anchor-mismatch` and
-`ctl_gate=installed` on stop match the documented state after this
-diagnostic's own hooks are installed. They are not a wrong-build acceptance.
+## Current Codex checkpoint: spawn/rotation/removal offline parsers
 
-`pkt3663-live-session-1.txt` is a complete non-fixture 3663 session:
-timestamp `6AF5D198`, base `140000000`, size `144E9000`, `kind=match`,
-`recording_ready=1`, `capture_ready_qpc=1785584313182`,
-`qpc_frequency=10000000`, `session_history_truncated=0`,
-`session_write_failed=0`, `startup=started`, `shutdown=removed`. Durable
-readiness is 18.384489 seconds after export entry. Final counters are
-`stored=0`, `omitted=0`, `dropped=0`, `unread=0`, `truncated=0`,
-`pre_ready=88`. The records file is 12 lines: the 11-line header and that
-same counter trailer. It has no data row. Walk and turn files were not
-created. There is no attempt 2.
+Latest evidence and implementation:
+[SPAWN-HEADING-REMOVAL-20261114.md](SPAWN-HEADING-REMOVAL-20261114.md).
+The bounded offline library now parses spawn record envelopes, the
+file-traced four-component rotation, and the removal layout (including
+its leading byte). A labeled synthetic test composes decoded fields through
+fake actor create/move/remove and verifies late samples are refused.
+Native actor creation/removal is still not implemented: component-specific
+spawn bodies, native ownership/thread contracts, and live conventions remain
+unresolved. Nothing was deployed, no game process was opened, and guards
+are unchanged. Current implementation is local and uncommitted.
 
-The 88 pre-ready counts happened before admission. They have no direction,
-length, or bytes. None of them is a post-ready sample.
+Validation: full suite 101/101 in 90.26 seconds; the final composed fixture
+was added during that run and then separately rebuilt and passed. See the
+new report for exact scope, evidence hash, and remaining dependencies.
 
-SHA-256, matching the review and recomputed without editing the files:
+The paragraphs below retain earlier checkpoints and their historical limits.
 
-```text
-commands.txt
-646F165AAA2852810E757E80AD112A2AD53D90CFEC9FB01B275A454B8E307B45
-pkt3663-live-records-stand.txt
-1F0FD3ECA497E4BDAE06BD31B5C998E4C6D1661D905B7C94CE4BFEF5D923B799
-pkt3663-live-session-1.txt
-7CA03FBC49EBFC42E373482C457DB49BDB9C60985D95D349E8D839239F6D7B6C
-pkt3663-live-session.txt
-7CA03FBC49EBFC42E373482C457DB49BDB9C60985D95D349E8D839239F6D7B6C
-prep.txt
-64F06B1A0A60C5A10BCB7558472DADE1CF6605E88D1CEC84894CACA77E55F42B
-verifier.txt
-3C2CC3F401F87DB1DF4590F402DC4ED91E7243C66794B0C7B6846B1B203906EC
-```
+Latest offline implementation: `decode_move_ack_spatial_fields` now extracts
+only the file-proven raw word and three finite spatial floats from the
+239-byte full-parse MoveActorAck layout. It checks header, file-descriptor
+opcode, exact frame length, and retained byte coverage. It does not provide
+heading, coordinate-space classification, or live readiness and is not
+connected to a game backend. New regression coverage and the full independent
+suite passed: 101/101 in 98.97 seconds. Later tracer-only extensions rebuilt
+and ran successfully. See the updated movement-consumer note for lifecycle
+types and the remaining work. Nothing has been deployed or pushed.
 
-## Why this is not a movement sample
+Codex takeover update, 2026-11-14: the user assigned implementation and
+investigation to Codex. New file-only results are in
+[MOVEMENT-CONSUMERS-20261114.md](MOVEMENT-CONSUMERS-20261114.md) and
+ack-trace-consumers-20261114.txt. The three floats at payload offsets
+196/200/204 reach a conversion using 1000-unit spatial cells. Coordinate
+space and live meaning remain unverified. The earlier blocker description
+below is historical; independent investigation is continuing.
 
-The accepted window is empty. A phase label and a ready session do not
-identify a coordinate, heading, actor, or opcode. Package B does not start
-on this archive.
+Date: 2026-11-14. Branch `grok/compat-guard`, HEAD `502577a`, local
+diff uncommitted. This is a blocker handoff. Two installations have not
+been shown walking or turning. No actor was spawned, no packet was
+replayed, and no diagnostic was deployed. Production guards, protocol
+`kVersion`, and the installed game file were not changed.
 
-The empty window does not show that the hooked entries ignore local
-movement. Two existing observations point the other way, without proving a
-layout:
+## Findings from ACK-HANDLER-REVIEW-20261114
 
-- This process called the hooked entries 88 times before the cutoff while
-  the operator was standing. Those calls were counted and discarded.
-- The 2026-11-13 stand archive, under the older diagnostic, retained 249
-  post-ready send rows of 181 bytes (`raw_word0=08F8`) during a stand. That
-  file is a different build of the diagnostic and is not reused as a field
-  table.
+1. The 17-byte MoveActorAck decoder is removed. `exe+0x26A8CE0` consumes
+   the same reader between the first 4-byte read and the later reads.
+2. The flat ActorLoad u16 decoder is removed. Slot 2's start is a runtime
+   subtraction. `exe+0x9D68E0` receives the reader and reads further bytes
+   itself; the caller's u16 is not its integer argument.
+3. The literal header bound matches `cmp ax, cx` / `jb` at
+   `exe+0xCA8B01`. Declared length `0x7FC1` passes. Only a greater length
+   fails when `bound_flag` is 0. ActorLoad slot 2 uses a different bound
+   and is not accepted by this gate.
 
-The static verifier finds request descriptors for `MoveActorReq` and
-`RotateActorReq` constructed before calls to the send candidate. That is a
-file correlation. It is not a live message ID, and it is not evidence from
-the empty post-ready file.
+## What the success path consumes
 
-No repeated capture was run.
+File-only `SEC_IMAGE` trace. The tool printed
+`identity=build-3663 timestamp=0x6AF5D198 adopted=0` and
+`move-reader-vtable=0x5B3BE18 slot28=0x141643CD0`. Listings:
+`ack-trace-20261114.txt`, `ack-trace-helpers-20261114.txt`,
+`ack-trace-nested-20261114.txt`.
 
-## Next experiment, not started
+MoveActorAck builds its reader at `rbp-0x80` with vtable `exe+0x5B3BE18`,
+base `bytes+5` at reader `+0x20`, declared length at reader `+0x28`, and
+cursor 0 at reader `+0x2C`. Slot `+0x28` is `exe+0x1643CD0`. That function
+copies exactly `r8d` bytes and advances the cursor by the same count. The
+handler fails the later reads when the slot is `exe+0x3A6E20`.
 
-Use the same reviewed DLL and controller. Do not change guards or offsets.
-Use a new process and a new directory so this archive stays intact. The
-loaded module from PID 51032 must not be reused for another attempt.
+`exe+0x16436F0` only grows the pointer array at reader `+0x10` and
+increments reader `+0x18`. It does not call slot `+0x28`.
 
-After an observed `ctl_start=0` and a durable ready block:
+On the success path the cursor therefore advances by:
 
-1. Leave the game in the foreground.
-2. Log the wall-clock time of the successful start return.
-3. Keep the requested character action going for 15 seconds. Stand means
-   still, with no character turn and no camera turn. Walk means the
-   character walks in a straight line. Turn means the character's body
-   rotates in place.
-4. Log the stop time, then use the reviewed stop. Do not unload if
-   ownership is uncertain. Do not retry a timeout, Retained, or failed log.
+| Step | Bytes | Running cursor |
+| --- | ---: | ---: |
+| first read into `rbp+0x148` | 4 | 4 |
+| `exe+0x14CB240` | 136 | 140 |
+| `exe+0x1644720` into object `+0x88` | 40 | 180 |
+| `exe+0x1644640` into object `+0xB0` | 16 | 196 |
+| object `+0xC0`, `+0xCC`, `+0xD0`, `+0xD8`, `+0xDC`, `+0xDD` | 12+4+8+4+1+1 | 226 |
+| one byte, then 8, then 4 | 1+8+4 | 239 |
 
-Audit that window before any later phase: nonempty rows at or after
-`capture_ready_qpc`, copied length consistent with the hex, `raw_word0`
-matching the first little-endian word, the phase label matching the file,
-and a numbered session with `session_history_truncated=0` and
-`session_write_failed=0`. If that 15-second window is still empty, stop.
-The next step is a reviewed diagnostic or read-only player-state
-investigation, not another blind capture.
+`exe+0xCA8D63` requires that cursor to equal the declared length. A
+successful return has consumed 239 payload bytes. The 136-byte prefix is
+`exe+0x14CB150` twice (64 each) plus one 8-byte read. Each 64 is
+`exe+0x1644720` (12 + 16 + 12) plus two 12-byte reads. This is the
+handler's own success path, not a captured message.
+
+For the object-kind branch `[type+1] == 1`, `exe+0x55EF60` copies:
+
+| Source | Payload offset | Store |
+| --- | ---: | --- |
+| 16 bytes at object `+0xB0` | 180 | `[A+0x55C]` |
+| 8 bytes at object `+0xC0` | 196 | `[A+0x550]` |
+| 4 bytes at object `+0xC8` | 204 | `[A+0x558]` |
+| 8 bytes at `rbp-0x40` | 227 | `[D+0x90]` |
+
+With S=qword[r14], A=qword[qword[qword[S+8]+0x68]+0x1A0], whereas
+D=qword[S+0xE8]. These are different pointer paths; aliasing is unproved.
+
+Those are byte copies. The instructions do not show a world position or a
+heading. No decoder maps them to movement.
+
+`exe+0x9D68E0` reads 1 byte, then 4, masks that dword with `0x30000000`,
+and compares it with `0x10000000`. The matching arm calls
+`[result+0x130]` with the reader. Allocation/removal through downstream
+callees has not been established or ruled out.
 
 ## Tests
 
-No suite was rerun for this handoff. The last full suite cited by the
-admission review is historical and is not a new result.
+`ack_header_ok` checks the span, the declared-length equality, and the
+inclusive `0x7FC1` bound. The movement and actor-load field decoders are
+gone. The regression covers `0x7FC0`, `0x7FC1`, and `0x7FC2` with flag 0,
+`0x7FC2` with flag 1, a short span, and a length mismatch.
+
+Game was closed. Sibling RelWithDebInfo build, MSVC 19.52, then CTest:
+101/101 passed, 0 failed, 124.67 s. The tracer changes after that run do
+not link into a tested binary. No game process was launched or stopped.
+
+## Blocker
+
+Two-player walking is not demonstrated. The missing fact is the meaning
+of the four stores above and a 3663 create/remove operation. The 239-byte
+cursor map does not identify a player position, a heading, or an actor
+lifetime, so neither a position reader nor a packet relay is selected.
+
+Smallest next experiment: file-only, find one later read of
+`[inner+0x550]` or `[inner+0x90]` that uses the value in a demonstrated
+world-coordinate operation, or show that those slots are not coordinates.
+Do not deploy a decoder and do not repeat the empty post-ready capture
+for this question. A second installation cannot show the other player
+until that fact exists.

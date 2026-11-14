@@ -1,5 +1,10 @@
 # Grok execution plan: from usable 3663 captures to a co-op prototype
 
+Current workflow: [Cursor end-to-end handoff](CURSOR-END-TO-END-HANDOFF.md).
+Cursor/Grok now owns implementation and validation through the prototype;
+Codex performs final review. Older intermediate review requirements below
+are historical and do not require relaying every fix to Codex.
+
 Current direction, updated 2026-11-14:
 [Co-op prototype plan](COOP-3663-PROTOTYPE-PLAN.md) supersedes the requirement
 to repeat Packages A/B as the immediate next work. Preserve this plan as

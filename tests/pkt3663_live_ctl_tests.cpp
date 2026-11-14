@@ -279,7 +279,16 @@ bool spawn_at(Dummy &dummy, const std::wstring &exe, bool sleepers) {
 std::wstring log_directory(DWORD pid, const wchar_t *suffix) {
   wchar_t temp[MAX_PATH] = {};
   GetTempPathW(MAX_PATH, temp);
-  return std::wstring(temp) + L"pkt3663-live-ctl-" + std::to_wstring(pid) + L"-" + suffix;
+  // Child PIDs are reused across runs. Old sealed evidence must not be
+  // deleted or mistaken for a new fixture's exclusive session file.
+  static const std::wstring run = [] {
+    FILETIME created = {}, exited = {}, kernel = {}, user = {};
+    if (!GetProcessTimes(GetCurrentProcess(), &created, &exited, &kernel, &user))
+      GetSystemTimeAsFileTime(&created);
+    const uint64_t ticks = (uint64_t{created.dwHighDateTime} << 32) | created.dwLowDateTime;
+    return std::to_wstring(GetCurrentProcessId()) + L"-" + std::to_wstring(ticks);
+  }();
+  return std::wstring(temp) + L"pkt3663-live-ctl-" + run + L"-" + std::to_wstring(pid) + L"-" + suffix;
 }
 
 std::string read_file(const std::wstring &path) {

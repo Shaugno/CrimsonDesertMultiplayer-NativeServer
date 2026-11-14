@@ -1,7 +1,10 @@
 # Current direction: first two-player walk-around on 3663
 
 Updated 2026-11-14 after the user requested an end to the repeated capture
-and review loop. Grok implements; Codex reviews completed milestones.
+and review loop. Current workflow:
+[Cursor end-to-end handoff](CURSOR-END-TO-END-HANDOFF.md). Cursor/Grok owns
+implementation and validation through the prototype; Codex performs the final
+review. That handoff supersedes intermediate Codex review gates in older notes.
 
 This direction supersedes the requirement to keep repeating Packages A/B
 in `GROK-3663-EXECUTION-PLAN.md` before any independent work can proceed.
@@ -82,8 +85,9 @@ Do not ask the user to relay every small fix.
 Every proposed live experiment must state the single question, exact
 identity, expected observation, bounded duration, acceptance condition,
 and stop condition. Request the user's in-game actions only when ready to
-perform that experiment. Before a new runtime implementation is deployed,
-obtain one milestone review. Preserve backups and ownership/timeout rules.
+perform that experiment. Self-review and test runtime changes before use;
+follow the current end-to-end handoff for coordinated live phases.
+Preserve backups and ownership/timeout rules.
 An empty capture is a measured result, not a reason to repeat it unchanged.
 
 ## Subsequent acceptance milestones

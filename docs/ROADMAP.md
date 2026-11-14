@@ -9,6 +9,11 @@ has not been demonstrated. The 3576 capture is blocked because Steam updated
 the installation.
 
 Current execution plan (2026-11-14):
+[Cursor end-to-end handoff](CURSOR-END-TO-END-HANDOFF.md): Cursor/Grok owns
+implementation, self-review, tests, and fixes through the prototype. Codex
+performs final review; intermediate Codex checks are optional at the user's
+request. The user is still needed for game actions and concrete blockers.
+
 [Co-op prototype plan](COOP-3663-PROTOTYPE-PLAN.md). The immediate target is
 two players seeing each other walk and turn. Pause repeated captures; finish
 the independent state/transport/actor-path work and tests as one Grok package,

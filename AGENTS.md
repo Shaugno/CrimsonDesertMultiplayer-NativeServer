@@ -16,15 +16,30 @@ checkout; do not retarget it unless the user asks.
 
 ## Working agreement
 
-- Grok is the primary implementer. Codex reviews the diff and validation results.
-  The user can explicitly assign either assistant additional work.
+Latest handoff (2026-11-14): the user requested transfer to Claude. Read
+docs/CLAUDE-HANDOFF.md for the current checkout, offline-only implementation
+scope, evidence and next package. Preserve all uncommitted work. The earlier
+ownership arrangements below describe previous phases.
+
+Current reassignment (2026-11-14): the user asked Codex to take over active
+implementation and investigation from Grok. Continue offline movement and
+actor creation/removal work without launching or attaching to the game.
+Preserve the existing local work. The earlier ownership arrangement below
+describes the previous workflow.
+
+- Current user direction (2026-11-14): Cursor/Grok owns end-to-end
+  implementation, self-review, testing, and fixes through the two-player
+  prototype. Codex performs the final review, rather than a mandatory review
+  after each intermediate fix. Read docs/CURSOR-END-TO-END-HANDOFF.md for
+  the current workflow. The user can assign either assistant additional work.
 - Work on a task branch. Keep each change focused on a reproducible issue and
   describe expected behavior and reproduction steps before implementing a fix.
 - Preserve unrelated changes. Report the files changed, commands run, results,
   remaining uncertainties, and a short manual test plan at handoff.
 - Do not claim a runtime issue is fixed based only on compilation or unit tests.
 - Keep patches local for review; publish changes to Shaugno when the user requests
-  it. The working agreement remains Grok implementation followed by Codex review.
+  it. The working agreement is Cursor/Grok implementation and validation,
+  followed by Codex final review.
 
 ## Validation
 

@@ -1,4 +1,32 @@
 CO-OP DEVELOPMENT PROGRESS
+Publication checkpoint: user requested saving the offline implementation,
+tests, research traces and Claude handoff to Shaugno/grok/compat-guard.
+Earlier local/uncommitted notes describe pre-publication status. Ignored build
+outputs, save backups and live capture archives are not part of this commit.
+Latest reader checkpoint (2026-11-14): RTTI-resolved character-control reader
+now has an offline bounded structural decoder, including conditional fields
+and variable entries. Full offline suite passed 101/101 in 90.26 seconds.
+Transform reader identified, not
+fully decoded. Actual actor component inventory/resource validity unresolved.
+See docs/probe-3663/COMPONENT-READERS-20261114.md and HANDOFF-CURRENT.md.
+Game closed; no native calls, deployment, commit or push.
+Latest component checkpoint (2026-11-14): traced descriptor-driven component
+initialization, compact-list deserialization, reverse component cleanup and
+deferred cleanup callback. Added bounded isolated body-relation-tail decoder
+and regression tests; component schemas and native lifetime remain unresolved.
+Validation: full suite 100/101; fixed recycled-PID log-directory collision in
+the controller fixture, then that test passed separately. No production
+controller or overwrite-policy changes. See the handoff for exact run scope.
+See docs/probe-3663/COMPONENT-LIFECYCLE-20261114.md and HANDOFF-CURRENT.md.
+No game launch, attachment, deployment or push. Local work is uncommitted.
+Latest local Codex checkpoint (2026-11-14): bounded offline parsers now cover
+file-traced movement/rotation, spawn record envelopes, and removal fields.
+The full game-free suite passed 101/101 in 90.26 seconds; a subsequently
+added composed fake-lifecycle fixture separately passed. Native actor
+creation/removal remains unimplemented; spawn components and live conventions
+still require evidence. Game untouched, no deployment or push. Details:
+docs/probe-3663/SPAWN-HEADING-REMOVAL-20261114.md.
+Earlier status paragraphs below preserve previous checkpoints.
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
 Updated: 2026-11-14. Target build is Crimson Desert 1.0.0.3663. Approved
@@ -6,13 +34,17 @@ published checkpoint 3e950a7 on grok/compat-guard includes the controller,
 startup timing, post-ready admission, and sealed per-attempt session logs.
 The last independent game-free suite passed 100/100. The Nov 14 live windows
 saved zero post-ready rows, so movement layouts and co-op remain unproved.
-Current direction: docs/COOP-3663-PROTOTYPE-PLAN.md. Pause repeated captures.
+Current workflow: docs/CURSOR-END-TO-END-HANDOFF.md. Cursor/Grok owns
+implementation, self-review, tests, and fixes through the prototype; Codex
+performs final review. Do not relay every intermediate fix for approval.
+Prototype scope: docs/COOP-3663-PROTOTYPE-PLAN.md. Pause repeated captures.
 Next work package: trace the state/transport/actor path, resolve file-evidence
 dependencies, and implement/test independent pieces toward a two-player
 walk-around. A read-only state feed alone cannot create a remote actor.
-Grok should self-review and fix tests within a package, then provide
-docs/probe-3663/HANDOFF-CURRENT.md for one consolidated Codex review with
-the exact remaining live experiment or blocker. Earlier reviews are historical.
+Grok should continue across ordinary research/test/fix steps and maintain
+docs/probe-3663/HANDOFF-CURRENT.md for final review or a concrete blocker.
+Earlier review reports retain their technical findings; intermediate review
+gates are superseded by the current workflow.
 Production offsets and guards remain unchanged. Work from the recovered
 checkout outside OneDrive.
 
