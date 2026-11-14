@@ -1,4 +1,5 @@
 #include "coop3663/ack_decode.h"
+#include "coop3663/rotation.h"
 
 #include <cstring>
 #include <bit>
@@ -40,7 +41,7 @@ std::optional<MoveSpatialFields> decode_move_ack_spatial_fields(const AckBytes &
   if (!ack_header_ok(frame) || frame.complete_length != 244)
     return std::nullopt;
   const auto bytes = frame.bytes;
-  if ((uint32_t{bytes[0]} | (uint32_t{bytes[1]} << 8)) != 3008)
+  if (!opcode_is(frame, 3008))
     return std::nullopt;
   const auto word = [&](size_t at) {
     return uint32_t{bytes[at]} | (uint32_t{bytes[at + 1]} << 8) |
@@ -61,20 +62,15 @@ std::optional<MoveTransformFields> decode_move_ack_transform_fields(const AckByt
   if (!movement)
     return std::nullopt;
   MoveTransformFields out{*movement, {}};
-  double squared = 0;
   for (size_t i = 0; i < 4; ++i) {
     const float value = std::bit_cast<float>(little_word(frame.bytes, 5 + 180 + 4 * i));
     if (!std::isfinite(value))
       return std::nullopt;
     out.rotation[i] = value;
-    squared += static_cast<double>(value) * value;
   }
-  const double norm = std::sqrt(squared);
-  // Diagnostic acceptance policy; never turn invalid rotation into identity.
-  if (norm < 0.5 || norm > 2.0)
-    return std::nullopt;
-  for (float &value : out.rotation)
-    value = static_cast<float>(value / norm);
+  const auto rotation = normalized_rotation(out.rotation);
+  if (!rotation) return std::nullopt;
+  out.rotation = *rotation;
   return out;
 }
 

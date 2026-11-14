@@ -1,0 +1,992 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26300.
+-- The C compiler identification is MSVC 19.52.37029.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.52.37025/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Fetching Zydis (v4.1.0)...
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE)
+-- Found Python3: C:/Users/shaug/source/repos/beamng-earth-s3-review/python312/python.exe (found version "3.12.10") found components: Interpreter
+-- Configuring done (25.4s)
+-- Generating done (2.6s)
+-- Build files have been written to: C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build
+MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
+
+  1>Checking Build System
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/_deps/zydis-src/dependencies/zycore/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  pattern.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  observer.cpp
+  main.cpp
+  Memory.c
+  pkt3663_live_ctl_stub.cpp
+  pkt3663_live_dummy.cpp
+  live_identity.cpp
+  reader.cpp
+  imgui.cpp
+  Process.c
+  build_guard_tests.cpp
+  live_identity.cpp
+  assess.cpp
+  optd_bg_speed_tests.cpp
+  main.cpp
+  observer.cpp
+  pkt3576_live_dummy.cpp
+  optd_freeze_watchdog_tests.cpp
+  feed.cpp
+  optd_log_ring_tests.cpp
+  Synchronization.c
+  protocol.cpp
+  admission_gate.cpp
+  Terminal.c
+  pkt3663_capture_targets.cpp
+  pkt3576_capture_targets.cpp
+  admission_gate.cpp
+  Thread.c
+  Generating Code...
+  cdmp_pkt3576_live_identity.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_identity.lib
+  Generating Code...
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live_ctl_stub.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live_ctl_stub.exp
+  Allocator.c
+  Generating Code...
+  ArgParse.c
+  cdmp_host.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_host.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Bitset.c
+  Format.c
+  ack_decode.cpp
+  imgui_draw.cpp
+  List.c
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live_dummy.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live_dummy.exp
+  Generating Code...
+  String.c
+  cdmp_pkt3663_live_ctl_stub.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_ctl_stub.dll
+  live_control.cpp
+  Vector.c
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3576_live_dummy.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3576_live_dummy.exp
+  Zycore.c
+  Generating Code...
+  cdmp_pkt3663_observer.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_observer.lib
+  cdmp_pkt3663_live_dummy.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_dummy.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_pkt3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_lib.lib
+  cdmp_pkt3576_live_dummy.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_dummy.exe
+  imgui_tables.cpp
+  pkt3663_observer_tests.cpp
+  cdmp_dx12_test.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_dx12_test.exe
+  Generating Code...
+  Zycore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\zydis-build\zycore\RelWithDebInfo\Zycore.lib
+  udp.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_pkt3663_live_identity.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_identity.lib
+  imgui_widgets.cpp
+  cdmp_pkt3663_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_lib.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/_deps/zydis-src/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  pkt3576_tests.cpp
+  cdmp_tests_optd_bg_speed.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_bg_speed.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_tests_optd_freeze_watchdog.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_freeze_watchdog.exe
+  cdmp_coop3663.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_coop3663.lib
+  MetaInfo.c
+  Mnemonic.c
+  imgui_impl_dx12.cpp
+  Register.c
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Segment.c
+  cdmp_pkt3576_live_control.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_control.lib
+  SharedData.c
+  pkt3663_live_tests.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  entry_verify.cpp
+  pkt3663_tests.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  live_control.cpp
+  coop3663_tests.cpp
+  live_ctl.cpp
+  live_ctl.cpp
+  client_session.cpp
+  cdmp_diag3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_diag3576_lib.lib
+  String.c
+  Utils.c
+  Generating Code...
+  Zydis.c
+  Decoder.c
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  DecoderData.c
+  Encoder.c
+  diag3576_tests.cpp
+  EncoderData.c
+  cdmp_tests_build_guard.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_build_guard.exe
+  cdmp_tests_pkt3663_observer.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_observer.exe
+  Disassembler.c
+  Formatter.c
+  cdmp_pkt3663_entry_verify.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_entry_verify.lib
+  FormatterBuffer.c
+  FormatterATT.c
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_pkt3576_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_ctl.exe
+  log.cpp
+  FormatterBase.c
+  cdmp_pkt3576_live_ctl_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_ctl_fixture.exe
+  FormatterIntel.c
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Generating Code...
+  main.cpp
+  cdmp_tests_pkt3663.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663.exe
+  pkt3663_entry_tests.cpp
+  cdmp_pkt3663_live_control.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_control.lib
+  cdmp_tests_pkt3663_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_live.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_tests_pkt3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  live_ctl.cpp
+  cdmp_tests_coop3663.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_coop3663.exe
+  live_ctl.cpp
+  reliable.cpp
+  Zydis.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\zydis-build\RelWithDebInfo\Zydis.lib
+  cdmp_tests_diag3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_diag3576.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/_deps/safetyhook-src/CMakeLists.txt
+  cdmp_tests_pkt3663_entries.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_entries.exe
+  Scanning sources for module dependencies...
+  cdmp_pkt3663_live_ctl_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_ctl_fixture.exe
+  ack_trace.cpp
+  cdmp_pkt3663_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_ctl.exe
+  vmt_hook.cpp
+  os.windows.cpp
+  utility.cpp
+  inline_hook.cpp
+  mid_hook.cpp
+  os.linux.cpp
+  allocator.cpp
+  easy.cpp
+  pkt3663_scan.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\pkt3663_scan.exe
+  Compiling...
+  os.linux.cpp
+  Generating Code...
+  mid_hook.cpp
+  os.windows.cpp
+  utility.cpp
+  vmt_hook.cpp
+  allocator.cpp
+  inline_hook.cpp
+  easy.cpp
+  pkt3663_ack_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\pkt3663_ack_trace.exe
+  send_gate.cpp
+C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\third_party\safetyhook-patch\os.windows.cpp(30,9): warning C4005: 'NOMINMAX': macro redefinition [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\safetyhook-build\safetyhook.vcxproj]
+      C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\third_party\safetyhook-patch\os.windows.cpp(30,9):
+      'NOMINMAX' previously declared on the command line
+
+  troc_frame.cpp
+  imgui.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\imgui.lib
+  safetyhook.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\safetyhook-build\RelWithDebInfo\safetyhook.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  capture.cpp
+  capture.cpp
+  pkt3576_capture_faults.cpp
+  optd_hook_trap_tests.cpp
+  lz_block.cpp
+  pkt3576_capture_targets.cpp
+  capture_file.cpp
+  Generating Code...
+  cdmp_pkt3576_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_capture.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_pkt3663_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_capture.lib
+  live_runner.cpp
+  pkt3576_capture_tests.cpp
+  live_runner.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_tests_optd_hook_traps.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hook_traps.exe
+  pkt3663_capture_tests.cpp
+  save_guard.cpp
+  cdmp_tests_pkt3576_capture_faults.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_capture_faults.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  live_runner.cpp
+  live_runner.cpp
+  cdmp_pkt3576_live_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_lib.lib
+  cdmp_pkt3576_live_fixture_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_fixture_lib.lib
+  cdmp_tests_optd_log_ring.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_log_ring.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  pkt3576_capture_targets.cpp
+  live_dll.cpp
+  pkt3576_live_faults.cpp
+  Generating Code...
+  pkt3663_capture_targets.cpp
+  cdmp_pkt3663_live_fixture_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_fixture_lib.lib
+  live_dll.cpp
+  Generating Code...
+  cdmp_pkt3663_live_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_lib.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3576_live.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3576_live.exp
+  live_dll.cpp
+  live_dll.cpp
+  cdmp_pkt3576_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live.dll
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3576_live_fixture.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3576_live_fixture.exp
+  pkt3576_capture_targets.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_tests_pkt3576_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_capture.exe
+  troc_script.cpp
+  cdmp_tests_pkt3663_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_capture.exe
+  Generating Code...
+  cdmp_pkt3576_live_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_fixture.dll
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live_fixture.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live_fixture.exp
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp_pkt3663_live.exp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_pkt3663_live_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_fixture.dll
+  cdmp_pkt3663_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live.dll
+  pkt3576_live_ctl_tests.cpp
+  pkt3576_live_tests.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  pkt3576_live_host.cpp
+  pkt3663_live_host.cpp
+  cdmp_tests_pkt3576_live_faults.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live_faults.exe
+  pkt3663_live_ctl_tests.cpp
+  pkt3576_capture_targets.cpp
+  pkt3663_capture_targets.cpp
+  Generating Code...
+  Generating Code...
+  cdmp_tests_pkt3576_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live.exe
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\optional(105,17): warning C4244: 'initializing': conversion from '_Ty' to 'unsigned char', possible loss of data [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_common.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\optional(105,17): warning C4244:         with [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_common.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\optional(105,17): warning C4244:         [ [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_common.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\optional(105,17): warning C4244:             _Ty=int [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_common.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\optional(105,17): warning C4244:         ] [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_common.vcxproj]
+  (compiling source file '../src/common/troc_script.cpp')
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\optional(105,17):
+      the template instantiation context (the oldest one first) is
+          C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\src\common\troc_script.cpp(47,20):
+          see reference to function template instantiation or specialization 'std::optional<uint8_t>::optional<int,0>(_Ty2 &&) noexcept' being compiled
+          with
+          [
+              _Ty2=int
+          ]
+              C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\src\common\troc_script.cpp(47,20):
+              see the first reference to 'std::optional<uint8_t>::optional' in 'cdmp::troc::`anonymous-namespace'::type_size'
+          C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\optional(329,18):
+          see reference to function template instantiation or specialization 'std::_Optional_construct_base<_Ty>::_Optional_construct_base<int>(std::in_place_t,int &&)' being compiled
+          with
+          [
+              _Ty=uint8_t
+          ]
+          C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\src\common\troc_script.cpp(609,1):
+          see reference to function template instantiation or specialization 'std::_Optional_destruct_base<_Ty,true>::_Optional_destruct_base<int>(std::in_place_t,int &&) noexcept' being compiled
+          with
+          [
+              _Ty=uint8_t
+          ]
+
+  troc_link.cpp
+  cdmp_tests_pkt3576_live_host.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live_host.exe
+  cdmp_tests_pkt3663_live_host.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_live_host.exe
+  cdmp_tests_pkt3576_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live_ctl.exe
+  Generating Code...
+  cdmp_tests_pkt3663_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_live_ctl.exe
+  cdmp_common.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_common.lib
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  optd_shop_troc_tests.cpp
+  optd_clock_push_tests.cpp
+  optd_docked_gimmicks_tests.cpp
+  optd_inject_tests.cpp
+  optd_weather_sync_tests.cpp
+  optd_fast_travel_tests.cpp
+  optd_world_anchor_tests.cpp
+  optd_tests.cpp
+  main.cpp
+  main.cpp
+  optd_door_trace_tests.cpp
+  optd_character_hold_tests.cpp
+  optd_user2_stages_tests.cpp
+  optd_npc_activation_tests.cpp
+  optd_catch_seq_tests.cpp
+  optd_companion_tests.cpp
+  optd_guest_role_tests.cpp
+  optd_guest_save_b_tests.cpp
+  optd_fast_rearm_tests.cpp
+  optd_s9_tests.cpp
+  optd_rope_probe_tests.cpp
+  optd_guest_save_tests.cpp
+  dllmain.cpp
+  optd_hold_scene_order_tests.cpp
+  optd_hook_tests.cpp
+  optd_seq_copy_tests.cpp
+  optd_slot_refresh_tests.cpp
+  optd_identity_fix_tests.cpp
+  main.cpp
+  optd_combat_tests.cpp
+  optd_enemy_damage_probe_tests.cpp
+  optd_guest_stage_tests.cpp
+  optd_remote_motion_tests.cpp
+  optd_clock_tests.cpp
+  identity_fix.cpp
+  slot_refresh.cpp
+  clock_gate.cpp
+  companion_probe.cpp
+  optd_reload_wait_tests.cpp
+  optd_c4_tests.cpp
+  optd_owner_fanout_tests.cpp
+  process.cpp
+  child_hold.cpp
+  optd_ui_pause_tests.cpp
+  mod.cpp
+  optd_gimmick_event_dedup_tests.cpp
+  optd_guest_actor_tests.cpp
+  process.cpp
+  Generating Code...
+  optd_scene_diag_tests.cpp
+  guest_lifecycle.cpp
+  optd_hook_redirect_tests.cpp
+  save_hooks.cpp
+C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tests\optd_tests.cpp(1433,38): warning C4996: 'std::filesystem::u8path': warning STL4021: The std::filesystem::u8path() overloads are deprecated in C++20. The constructors of std::filesystem::path provide equivalent functionality via construction from u8string, u8string_view, or iterators with value_type char8_t. You can define _SILENCE_CXX20_U8PATH_DEPRECATION_WARNING or _SILENCE_ALL_CXX20_DEPRECATION_WARNINGS to suppress this warning. [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests_optd.vcxproj]
+C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tests\optd_tests.cpp(1505,26): warning C4996: 'std::filesystem::u8path': warning STL4021: The std::filesystem::u8path() overloads are deprecated in C++20. The constructors of std::filesystem::path provide equivalent functionality via construction from u8string, u8string_view, or iterators with value_type char8_t. You can define _SILENCE_CXX20_U8PATH_DEPRECATION_WARNING or _SILENCE_ALL_CXX20_DEPRECATION_WARNINGS to suppress this warning. [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests_optd.vcxproj]
+C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tests\optd_tests.cpp(1591,26): warning C4996: 'std::filesystem::u8path': warning STL4021: The std::filesystem::u8path() overloads are deprecated in C++20. The constructors of std::filesystem::path provide equivalent functionality via construction from u8string, u8string_view, or iterators with value_type char8_t. You can define _SILENCE_CXX20_U8PATH_DEPRECATION_WARNING or _SILENCE_ALL_CXX20_DEPRECATION_WARNINGS to suppress this warning. [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests_optd.vcxproj]
+C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tests\optd_tests.cpp(1743,42): warning C4996: 'std::filesystem::u8path': warning STL4021: The std::filesystem::u8path() overloads are deprecated in C++20. The constructors of std::filesystem::path provide equivalent functionality via construction from u8string, u8string_view, or iterators with value_type char8_t. You can define _SILENCE_CXX20_U8PATH_DEPRECATION_WARNING or _SILENCE_ALL_CXX20_DEPRECATION_WARNINGS to suppress this warning. [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests_optd.vcxproj]
+  optd_scene_acks_tests.cpp
+  cdmp_tests_optd_world_anchor.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_world_anchor.exe
+  replay.cpp
+  safe_memory.cpp
+  identity_probe.cpp
+  save_hooks.cpp
+  safe_memory.cpp
+  optd_two_inst_tests.cpp
+  optd_hook_trace_tests.cpp
+  Generating Code...
+  Generating Code...
+  cdmp_tests_optd_user2_stages.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_stages.exe
+  log.cpp
+  safe_memory.cpp
+  optd_scene_level_share_tests.cpp
+  optd_mount_sync_tests.cpp
+  log.cpp
+  optd_user2_road_tests.cpp
+  Generating Code...
+  optd_seq_play_tests.cpp
+  optd_pets_tests.cpp
+  cdmp_tests_optd_weather_sync.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_weather_sync.exe
+  cdmp_tests_optd_clock_push.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_clock_push.exe
+  host_save_export.cpp
+  save_hooks.cpp
+  Generating Code...
+  safe_memory.cpp
+  save_hooks.cpp
+  log.cpp
+  Generating Code...
+  log.cpp
+  log.cpp
+  child_hold.cpp
+  cdmp_tests_optd_npc_activation.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_activation.exe
+  host_save_export.cpp
+  save_sim.cpp
+  cdmp_tests_optd_guest_save.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_save.exe
+  observer_hold_acks.cpp
+  optd_seq_present_tests.cpp
+  optd_remote_rope_tests.cpp
+  cdmp_tests_optd_fast_travel.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_fast_travel.exe
+  optd_observer_milestone_tests.cpp
+  Generating Code...
+  cdmp_tests_optd_gimmick_event_dedup.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_gimmick_event_dedup.exe
+  cdmp_tests_optd_catch_seq.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_catch_seq.exe
+  optd_tree_bend_tests.cpp
+  cdmp_tests_optd_enemy_damage_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_enemy_damage_probe.exe
+  optd_s3_tests.cpp
+  Generating Code...
+  cdmp_tests_optd_hold_scene_order.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hold_scene_order.exe
+  log.cpp
+  cdmp_tests_optd_guest_stage.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_stage.exe
+  config.cpp
+  optd_hook_near_tests.cpp
+  cdmp_tests_optd_combat.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_combat.exe
+  cdmp_tests_optd_remote_motion.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_motion.exe
+  cdmp_tests_optd_ui_pause.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_ui_pause.exe
+  cdmp_tests_optd_slot_refresh.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_slot_refresh.exe
+  cdmp_tests_optd_scene_acks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_acks.exe
+  cdmp_tests_optd_rope_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_rope_probe.exe
+  cdmp_tests_optd_door_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_door_trace.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  optd_replay_tests.cpp
+  cdmp_tests_optd_shop_troc.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_troc.exe
+  host_save_export.cpp
+  tests.cpp
+  optd_x_veto_tests.cpp
+  cdmp_tests_optd_seq_present.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_present.exe
+  optd_seq_restore_tests.cpp
+  host_save_export.cpp
+  optd_npc_family_tests.cpp
+  cdmp_tests_optd_s9.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_s9.exe
+  cdmp_tests_optd_fast_rearm.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_fast_rearm.exe
+  cdmp_tests_optd_owner_fanout.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_owner_fanout.exe
+  bg_speed.cpp
+  hook_prepare.cpp
+  Generating Code...
+  optd_seq_foreign_tests.cpp
+  optd_user2_shops_tests.cpp
+  guest_lifecycle.cpp
+  optd_remote_interp_tests.cpp
+  log.cpp
+  optd_report_tests.cpp
+  Generating Code...
+  cdmp_tests_optd_inject.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_inject.exe
+  optd_shop_trade_tests.cpp
+  cdmp_tests_optd_x_veto.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_x_veto.exe
+  cdmp_tests_optd_docked_gimmicks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_docked_gimmicks.exe
+  optd_npc_family_vehicles_tests.cpp
+  cdmp_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_probe.exe
+  cdmp_tests_optd_companion.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_companion.exe
+  optd_observer_stage_tests.cpp
+  safe_memory.cpp
+  optd_host_save_tests.cpp
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:         with [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:         [ [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:             _Ty=int [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:         ] [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:         and [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:         [ [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:             _Ty2=uint16_t [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54): warning C4244:         ] [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests.vcxproj]
+  (compiling source file '../tests/tests.cpp')
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.52.37025\include\utility(277,54):
+      the template instantiation context (the oldest one first) is
+          C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tests\tests.cpp(736,5):
+          see reference to function template instantiation or specialization 'std::pair<uint32_t,uint16_t>::pair<int,int,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+          with
+          [
+              _Other1=int,
+              _Other2=int
+          ]
+              C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tests\tests.cpp(736,5):
+              see the first reference to 'std::pair<uint32_t,uint16_t>::pair' in '`anonymous-namespace'::test_equip_state'
+
+  optd_rejoin_tests.cpp
+  optd_user2_funnels_tests.cpp
+  cdmp_tests_optd.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd.exe
+  cdmp_tests_optd_seq_copy.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_copy.exe
+  replay.cpp
+  optd_sched_load_tests.cpp
+  safe_memory.cpp
+  cdmp_tests_optd_scene_level_share.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_level_share.exe
+  safe_memory.cpp
+  Generating Code...
+  log.cpp
+  cdmp_tests_optd_mount_sync.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_mount_sync.exe
+  cdmp_tests_optd_clock.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_clock.exe
+  player_reader.cpp
+  observer_hold_acks.cpp
+  log.cpp
+  cdmp_tests_optd_guest_actor.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_actor.exe
+  cdmp_tests_optd_remote_rope.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_rope.exe
+  cdmp_tests_optd_c4.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_c4.exe
+  cdmp_tests_optd_user2_shops.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_shops.exe
+  cdmp_tests_optd_seq_restore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_restore.exe
+  cdmp_tests_optd_guest_save_b.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_save_b.exe
+  report_guard.cpp
+  cdmp_tests_optd_scene_diag.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_diag.exe
+  cdmp_tests_optd_npc_family_vehicles.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_family_vehicles.exe
+  log.cpp
+  child_hold.cpp
+  log.cpp
+  optd_publication_gate_tests.cpp
+  optd_seq_bodyanim_tests.cpp
+  optd_identity_tests.cpp
+  camera_reader.cpp
+  optd_shop_c1_tests.cpp
+  identity_probe.cpp
+  cdmp_tests_optd_two_inst.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_two_inst.exe
+  cdmp_tests_optd_observer_stage.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_observer_stage.exe
+  optd_npc_probe_client_tests.cpp
+  Generating Code...
+  rtti.cpp
+  host_save_export.cpp
+  safe_memory.cpp
+  Generating Code...
+  Generating Code...
+  Generating Code...
+  troc_sniffer.cpp
+  log.cpp
+  guest_lifecycle.cpp
+  cdmp_tests_optd_seq_play.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_play.exe
+  save_sim.cpp
+  cdmp_tests_optd_seq_bodyanim.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_bodyanim.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_peer.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_peer.exe
+  safe_memory.cpp
+  cdmp_tests_optd_user2_road.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_road.exe
+  cdmp_tests_optd_tree_bend.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_tree_bend.exe
+  cdmp_diag3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_diag3576.exe
+  optd_guest_inbound_tests.cpp
+  cdmp_tests_optd_seq_foreign.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_foreign.exe
+  optd_p8_probe_tests.cpp
+  cdmp_tests_optd_shop_trade.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_trade.exe
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  cdmp_tests_optd_npc_probe_client.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_probe_client.exe
+  cdmp_tests_optd_npc_family.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_family.exe
+  cdmp_tests_optd_user2_funnels.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_funnels.exe
+  cdmp_tests_optd_reload_wait.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_reload_wait.exe
+  cdmp_tests_optd_publication_gate.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_publication_gate.exe
+  optd_child_hold_tests.cpp
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+  log.cpp
+  cdmp_tests_optd_identity_fix.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_identity_fix.exe
+  optd_field_tests.cpp
+  Generating Code...
+  safe_memory.cpp
+  log.cpp
+  child_hold.cpp
+  field_share.cpp
+  observer_hold_acks.cpp
+  Generating Code...
+  log.cpp
+  local_capture.cpp
+  Generating Code...
+  Generating Code...
+  Generating Code...
+  safe_memory.cpp
+  cdmp_tests_optd_guest_inbound.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_inbound.exe
+  cdmp_tests_optd_remote_interp.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_interp.exe
+  cdmp_tests_optd_rejoin.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_rejoin.exe
+  cdmp_tests_optd_p8_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_p8_probe.exe
+  cdmp_tests_optd_shop_c1.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_c1.exe
+  log.cpp
+  guest_lifecycle.cpp
+  cdmp_tests_optd_hooks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks.exe
+  cdmp_tests.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests.exe
+  remote_puppet.cpp
+  cdmp_tests_optd_sched_load.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_sched_load.exe
+  cdmp_tests_optd_report.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_report.exe
+  cdmp_tests_optd_hook_near.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hook_near.exe
+  Generating Code...
+  cdmp_tests_optd_identity.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_identity.exe
+  safe_memory.cpp
+  cdmp_tests_optd_guest_role.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_role.exe
+  observer_hold_acks.cpp
+  log.cpp
+  cdmp_tests_optd_observer_milestone.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_observer_milestone.exe
+  cdmp_tests_optd_character_hold.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_character_hold.exe
+  cdmp_tests_optd_hooks_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks_trace.exe
+  cdmp_tests_optd_field.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_field.exe
+  puppet_minimap.cpp
+  Generating Code...
+  cdmp_tests_optd_replay.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_replay.exe
+  guest_lifecycle.cpp
+  cdmp_tests_optd_hooks_redirect.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks_redirect.exe
+  cdmp_tests_optd_pets.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_pets.exe
+  horse_diag.cpp
+  safe_memory.cpp
+  log.cpp
+  aggro_test.cpp
+  Generating Code...
+  cdmp_tests_optd_host_save.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_host_save.exe
+  cdmp_tests_optd_s3.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_s3.exe
+  enemy_relay.cpp
+  player_hits.cpp
+  cdmp_tests_optd_child_hold.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_child_hold.exe
+  piece4_test.cpp
+  guest_hits.cpp
+  attack_probe.cpp
+  Generating Code...
+  Compiling...
+  coop.cpp
+  actor_lookup.cpp
+  game_errors.cpp
+  game_fault.cpp
+  hook_prepare.cpp
+  steam_transport.cpp
+  dx12_hook.cpp
+  hud.cpp
+  child_hold.cpp
+  clock_gate.cpp
+  clock_push.cpp
+  weather_sync.cpp
+  catch_seq.cpp
+  remote_rope.cpp
+  rope_probe.cpp
+  tree_bend.cpp
+  docked_gimmicks.cpp
+  companion_probe.cpp
+  field_share.cpp
+  guest_lifecycle.cpp
+  Generating Code...
+  Compiling...
+  identity_fix.cpp
+  identity_probe.cpp
+  report_guard.cpp
+  save_hooks.cpp
+  host_save_export.cpp
+  session2.cpp
+  server.cpp
+  guest.cpp
+  guest_actor_diag.cpp
+  guest_reload_wait.cpp
+  guest_diag_worker.cpp
+  guest_s3.cpp
+  guest_stage_diag.cpp
+  p8_probes.cpp
+  observer_stage.cpp
+  observer_milestone.cpp
+  observer_scene_copy.cpp
+  observer_hold_acks.cpp
+  load_trip.cpp
+  slot_refresh.cpp
+  Generating Code...
+  Compiling...
+  ui_pause.cpp
+  user2_funnels.cpp
+  fast_travel.cpp
+  travel_probe.cpp
+  remote_motion.cpp
+  remote_interp.cpp
+  horse_follow.cpp
+  attach_follow.cpp
+  ride_filter.cpp
+  mount_sync.cpp
+  combat_follow.cpp
+  host_scene_diag.cpp
+  guest_scene_diag.cpp
+  observer_seq_copy.cpp
+  guest_seq_route.cpp
+  guest_seq_foreign.cpp
+  guest_seq_present.cpp
+  guest_bodyanim_diag.cpp
+  guest_sched_bind.cpp
+  guest_seq_play.cpp
+  Generating Code...
+  Compiling...
+  guest_sched_load.cpp
+  owner_fanout.cpp
+  guest_seq_restore.cpp
+  guest_x_veto.cpp
+  guest_x_interaction.cpp
+  shop_probe.cpp
+  shop_trade_probe.cpp
+  observer_hold_scene_order.cpp
+  npc_action_probe.cpp
+  npc_probe_client.cpp
+  enemy_damage_probe.cpp
+  door_trace.cpp
+  scene_level_share.cpp
+  user2_stages.cpp
+  user2_shops.cpp
+  freeze_watchdog.cpp
+  guest_save_host.cpp
+  guest_save_tunnel.cpp
+  guest_save_guest.cpp
+  world_anchor.cpp
+  Generating Code...
+     Creating library C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp.lib and object C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/RelWithDebInfo/cdmp.exp
+  cdmp_mod.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp.asi
+  Building Custom Rule C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/CMakeLists.txt
+Test project C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build
+        Start   1: unit
+  1/101 Test   #1: unit .............................   Passed    1.60 sec
+        Start   2: build_guard
+  2/101 Test   #2: build_guard ......................   Passed    0.10 sec
+        Start   3: diag3576
+  3/101 Test   #3: diag3576 .........................   Passed    0.27 sec
+        Start   4: pkt3576
+  4/101 Test   #4: pkt3576 ..........................   Passed    0.18 sec
+        Start   5: pkt3576_capture
+  5/101 Test   #5: pkt3576_capture ..................   Passed    1.76 sec
+        Start   6: pkt3576_capture_faults
+  6/101 Test   #6: pkt3576_capture_faults ...........   Passed    0.78 sec
+        Start   7: pkt3576_live
+  7/101 Test   #7: pkt3576_live .....................   Passed    0.26 sec
+        Start   8: pkt3576_live_host
+  8/101 Test   #8: pkt3576_live_host ................   Passed    3.70 sec
+        Start   9: pkt3576_live_faults
+  9/101 Test   #9: pkt3576_live_faults ..............   Passed    0.17 sec
+        Start  10: pkt3576_live_ctl
+ 10/101 Test  #10: pkt3576_live_ctl .................   Passed    3.22 sec
+        Start  11: pkt3663
+ 11/101 Test  #11: pkt3663 ..........................   Passed    0.13 sec
+        Start  12: pkt3663_entries
+ 12/101 Test  #12: pkt3663_entries ..................   Passed    0.18 sec
+        Start  13: pkt3663_observer
+ 13/101 Test  #13: pkt3663_observer .................   Passed    0.53 sec
+        Start  14: pkt3663_capture
+ 14/101 Test  #14: pkt3663_capture ..................   Passed    1.11 sec
+        Start  15: pkt3663_live
+ 15/101 Test  #15: pkt3663_live .....................   Passed    0.81 sec
+        Start  16: coop3663
+ 16/101 Test  #16: coop3663 .........................   Passed    0.19 sec
+        Start  17: pkt3663_live_host
+ 17/101 Test  #17: pkt3663_live_host ................   Passed    4.78 sec
+        Start  18: pkt3663_live_ctl
+ 18/101 Test  #18: pkt3663_live_ctl .................   Passed   49.61 sec
+        Start  19: optd
+ 19/101 Test  #19: optd .............................   Passed    0.66 sec
+        Start  20: optd_hooks
+ 20/101 Test  #20: optd_hooks .......................   Passed    0.47 sec
+        Start  21: optd_hooks_trace
+ 21/101 Test  #21: optd_hooks_trace .................   Passed    0.94 sec
+        Start  22: optd_hooks_redirect
+ 22/101 Test  #22: optd_hooks_redirect ..............   Passed    1.47 sec
+        Start  23: optd_guest_role
+ 23/101 Test  #23: optd_guest_role ..................   Passed    0.29 sec
+        Start  24: optd_two_inst
+ 24/101 Test  #24: optd_two_inst ....................   Passed    0.34 sec
+        Start  25: launch_2inst_script
+ 25/101 Test  #25: launch_2inst_script ..............   Passed    5.27 sec
+        Start  26: optd_bg_speed
+ 26/101 Test  #26: optd_bg_speed ....................   Passed    0.14 sec
+        Start  27: optd_host_save
+ 27/101 Test  #27: optd_host_save ...................   Passed    2.50 sec
+        Start  28: host_save_restore_script
+ 28/101 Test  #28: host_save_restore_script .........   Passed   12.95 sec
+        Start  29: optd_hook_traps
+ 29/101 Test  #29: optd_hook_traps ..................   Passed    0.20 sec
+        Start  30: optd_hook_near
+ 30/101 Test  #30: optd_hook_near ...................   Passed    0.17 sec
+        Start  31: optd_report
+ 31/101 Test  #31: optd_report ......................   Passed    0.53 sec
+        Start  32: optd_field
+ 32/101 Test  #32: optd_field .......................   Passed    0.16 sec
+        Start  33: optd_clock
+ 33/101 Test  #33: optd_clock .......................   Passed    0.15 sec
+        Start  34: optd_clock_push
+ 34/101 Test  #34: optd_clock_push ..................   Passed    0.09 sec
+        Start  35: optd_weather_sync
+ 35/101 Test  #35: optd_weather_sync ................   Passed    0.65 sec
+        Start  36: optd_catch_seq
+ 36/101 Test  #36: optd_catch_seq ...................   Passed    0.13 sec
+        Start  37: optd_remote_rope
+ 37/101 Test  #37: optd_remote_rope .................   Passed    0.23 sec
+        Start  38: optd_rope_probe
+ 38/101 Test  #38: optd_rope_probe ..................   Passed    0.11 sec
+        Start  39: optd_tree_bend
+ 39/101 Test  #39: optd_tree_bend ...................   Passed    0.17 sec
+        Start  40: optd_docked_gimmicks
+ 40/101 Test  #40: optd_docked_gimmicks .............   Passed    0.18 sec
+        Start  41: optd_gimmick_event_dedup
+ 41/101 Test  #41: optd_gimmick_event_dedup .........   Passed    0.10 sec
+        Start  42: optd_c4
+ 42/101 Test  #42: optd_c4 ..........................   Passed    0.28 sec
+        Start  43: optd_rejoin
+ 43/101 Test  #43: optd_rejoin ......................   Passed    0.19 sec
+        Start  44: optd_identity
+ 44/101 Test  #44: optd_identity ....................   Passed    0.13 sec
+        Start  45: optd_identity_fix
+ 45/101 Test  #45: optd_identity_fix ................   Passed    0.17 sec
+        Start  46: optd_companion
+ 46/101 Test  #46: optd_companion ...................   Passed    0.14 sec
+        Start  47: optd_child_hold
+ 47/101 Test  #47: optd_child_hold ..................   Passed    0.21 sec
+        Start  48: optd_s3
+ 48/101 Test  #48: optd_s3 ..........................   Passed    1.19 sec
+        Start  49: optd_character_hold
+ 49/101 Test  #49: optd_character_hold ..............   Passed    0.57 sec
+        Start  50: optd_slot_refresh
+ 50/101 Test  #50: optd_slot_refresh ................   Passed    0.15 sec
+        Start  51: optd_guest_save
+ 51/101 Test  #51: optd_guest_save ..................   Passed    0.29 sec
+        Start  52: optd_guest_save_b
+ 52/101 Test  #52: optd_guest_save_b ................   Passed    0.32 sec
+        Start  53: optd_guest_actor
+ 53/101 Test  #53: optd_guest_actor .................   Passed    0.14 sec
+        Start  54: optd_reload_wait
+ 54/101 Test  #54: optd_reload_wait .................   Passed    0.42 sec
+        Start  55: optd_p8_probe
+ 55/101 Test  #55: optd_p8_probe ....................   Passed    0.51 sec
+        Start  56: optd_observer_stage
+ 56/101 Test  #56: optd_observer_stage ..............   Passed    0.13 sec
+        Start  57: optd_guest_stage
+ 57/101 Test  #57: optd_guest_stage .................   Passed    0.16 sec
+        Start  58: optd_observer_milestone
+ 58/101 Test  #58: optd_observer_milestone ..........   Passed    0.29 sec
+        Start  59: optd_inject
+ 59/101 Test  #59: optd_inject ......................   Passed    0.22 sec
+        Start  60: optd_scene_acks
+ 60/101 Test  #60: optd_scene_acks ..................   Passed    0.22 sec
+        Start  61: optd_seq_copy
+ 61/101 Test  #61: optd_seq_copy ....................   Passed    0.39 sec
+        Start  62: optd_seq_play
+ 62/101 Test  #62: optd_seq_play ....................   Passed    0.28 sec
+        Start  63: optd_x_veto
+ 63/101 Test  #63: optd_x_veto ......................   Passed    0.13 sec
+        Start  64: optd_mount_sync
+ 64/101 Test  #64: optd_mount_sync ..................   Passed    0.49 sec
+        Start  65: optd_shop_c1
+ 65/101 Test  #65: optd_shop_c1 .....................   Passed    0.19 sec
+        Start  66: optd_user2_stages
+ 66/101 Test  #66: optd_user2_stages ................   Passed    0.17 sec
+        Start  67: optd_fast_rearm
+ 67/101 Test  #67: optd_fast_rearm ..................   Passed    0.11 sec
+        Start  68: optd_user2_shops
+ 68/101 Test  #68: optd_user2_shops .................   Passed    0.17 sec
+        Start  69: optd_shop_troc
+ 69/101 Test  #69: optd_shop_troc ...................   Passed    0.11 sec
+        Start  70: optd_shop_trade
+ 70/101 Test  #70: optd_shop_trade ..................   Passed    0.64 sec
+        Start  71: optd_hold_scene_order
+ 71/101 Test  #71: optd_hold_scene_order ............   Passed    0.26 sec
+        Start  72: optd_sched_load
+ 72/101 Test  #72: optd_sched_load ..................   Passed    0.41 sec
+        Start  73: optd_owner_fanout
+ 73/101 Test  #73: optd_owner_fanout ................   Passed    0.21 sec
+        Start  74: optd_seq_restore
+ 74/101 Test  #74: optd_seq_restore .................   Passed    0.44 sec
+        Start  75: optd_seq_bodyanim
+ 75/101 Test  #75: optd_seq_bodyanim ................   Passed    0.12 sec
+        Start  76: optd_guest_inbound
+ 76/101 Test  #76: optd_guest_inbound ...............   Passed    0.10 sec
+        Start  77: optd_ui_pause
+ 77/101 Test  #77: optd_ui_pause ....................   Passed    0.16 sec
+        Start  78: optd_user2_funnels
+ 78/101 Test  #78: optd_user2_funnels ...............   Passed    0.14 sec
+        Start  79: optd_world_anchor
+ 79/101 Test  #79: optd_world_anchor ................   Passed    0.11 sec
+        Start  80: optd_fast_travel
+ 80/101 Test  #80: optd_fast_travel .................   Passed    0.13 sec
+        Start  81: optd_remote_motion
+ 81/101 Test  #81: optd_remote_motion ...............   Passed    0.21 sec
+        Start  82: optd_remote_interp
+ 82/101 Test  #82: optd_remote_interp ...............   Passed    0.12 sec
+        Start  83: optd_pets
+ 83/101 Test  #83: optd_pets ........................   Passed    0.40 sec
+        Start  84: optd_s9
+ 84/101 Test  #84: optd_s9 ..........................   Passed    0.17 sec
+        Start  85: optd_combat
+ 85/101 Test  #85: optd_combat ......................   Passed    0.20 sec
+        Start  86: optd_scene_diag
+ 86/101 Test  #86: optd_scene_diag ..................   Passed    0.15 sec
+        Start  87: optd_freeze_watchdog
+ 87/101 Test  #87: optd_freeze_watchdog .............   Passed    0.15 sec
+        Start  88: optd_log_ring
+ 88/101 Test  #88: optd_log_ring ....................   Passed    1.62 sec
+        Start  89: optd_replay
+ 89/101 Test  #89: optd_replay ......................   Passed    3.80 sec
+        Start  90: optd_scripts
+ 90/101 Test  #90: optd_scripts .....................   Passed    0.84 sec
+        Start  91: optd_npc_activation
+ 91/101 Test  #91: optd_npc_activation ..............   Passed    0.20 sec
+        Start  92: optd_npc_probe_client
+ 92/101 Test  #92: optd_npc_probe_client ............   Passed    0.13 sec
+        Start  93: optd_publication_gate
+ 93/101 Test  #93: optd_publication_gate ............   Passed    0.14 sec
+        Start  94: optd_npc_family
+ 94/101 Test  #94: optd_npc_family ..................   Passed    0.57 sec
+        Start  95: optd_npc_family_vehicles
+ 95/101 Test  #95: optd_npc_family_vehicles .........   Passed    0.12 sec
+        Start  96: optd_enemy_damage_probe
+ 96/101 Test  #96: optd_enemy_damage_probe ..........   Passed    0.12 sec
+        Start  97: optd_door_trace
+ 97/101 Test  #97: optd_door_trace ..................   Passed    0.11 sec
+        Start  98: optd_scene_level_share
+ 98/101 Test  #98: optd_scene_level_share ...........   Passed    0.41 sec
+        Start  99: optd_seq_foreign
+ 99/101 Test  #99: optd_seq_foreign .................   Passed    0.17 sec
+        Start 100: optd_seq_present
+100/101 Test #100: optd_seq_present .................   Passed    0.16 sec
+        Start 101: optd_user2_road
+101/101 Test #101: optd_user2_road ..................   Passed    0.59 sec
+
+100% tests passed, 0 tests failed out of 101
+
+Total Test time (real) = 139.68 sec
+Build OK: C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo

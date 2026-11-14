@@ -1,3 +1,17 @@
+# 3663 port run — Phase 0 complete, later phases in progress
+
+Branch: gpt/3663-port, based on a8656e87a0c43db400bdf863193c1afb353d6de0.
+The user's current request and docs/GPT-3663-PORT-PLAN.md supersede the historical
+review/offline-only cadence below. Live work remains limited to Phases 6–8 and
+the plan's prerequisites; no live work has started.
+
+Phase 0: all five review findings fixed, focused regressions pass, baseline
+101/101 (139.68 s), post-fix full suite 101/101 (93.77 s). See PHASE0-PORT.md
+and port-evidence/phase0-{baseline,fixed}.txt for full commands/output.
+The production 3663 path is still blocked. No two-player result is claimed.
+
+The following sections are preserved historical checkpoints.
+
 # Handoff: 3663 acknowledgement findings fixed; walk prototype blocked
 
 User-requested transfer to Claude: [implementation handoff](../CLAUDE-HANDOFF.md).

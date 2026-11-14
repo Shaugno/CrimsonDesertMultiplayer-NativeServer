@@ -4,30 +4,32 @@
 // A sample is not a live player. Unknown readiness never reaches the backend.
 // Position and heading are present only when the caller sets those flags and
 // the numbers are finite. A heading must also be a usable rotation: its
-// quaternion norm is computed in a scaled form, norms below 1e-4 or above
-// 1e8 are rejected, and a norm from 0.5 through 2 is normalized to length 1.
+// quaternion norm must be from 0.5 through 2, inclusive, and is normalized
+// to length 1 using the same policy as the offline movement decoder.
 // An identity quaternion does not set the heading flag by itself.
 //
 // Sessions are explicit. publish accepts a sample only for the generation
 // last admitted by begin_session for that peer. Timestamps are ordered inside
 // that generation. A new begin_session retires the previous generation, fences
 // it, and resets the clock so a restarted session may use a smaller timestamp.
-// A retired generation cannot be selected by a sample and cannot be admitted
-// again while it remains in the fence. disconnect fences the active generation
-// too, so late samples after disconnect are refused until a different
-// generation is admitted.
+// begin_session accepts only a strictly higher generation than any previously
+// admitted for that peer. History is never evicted, including on disconnect.
+// Generation wrap requires a new Feed lifetime, not an older generation.
 //
 // At most kMaxPeers active sessions are stored. Empty slots are reused.
-// The retirement fence keeps the newest kMaxRetired generations.
+// At most kMaxKnownPeers histories are stored; new peers are refused when full.
+// Known peers can still reconnect with a higher generation.
+// Single-threaded; caller serializes all operations, including backend calls.
 
 #include <cstdint>
 #include <optional>
+#include <unordered_map>
 #include <vector>
 
 namespace cdmp::coop3663 {
 
 inline constexpr uint32_t kMaxPeers = 8;
-inline constexpr uint32_t kMaxRetired = 32;
+inline constexpr uint32_t kMaxKnownPeers = 4096;
 
 enum class Readiness : uint8_t {
   Unknown = 0,
@@ -99,10 +101,11 @@ public:
   bool begin_session(uint64_t peer, uint32_t generation);
   bool publish(const PlayerSample &sample);
   bool disconnect(uint64_t peer);
-  void disconnect_all();
+  // Returns the number of sessions whose actors could not be removed.
+  uint32_t disconnect_all();
 
   uint32_t active_count() const;
-  uint32_t retired_count() const;
+  uint32_t known_peer_count() const;
 
 private:
   struct Slot {
@@ -113,23 +116,13 @@ private:
     bool placed = false;
     bool has_clock = false;
   };
-  struct Retired {
-    uint64_t peer = 0;
-    uint32_t generation = 0;
-    bool used = false;
-  };
-
   Slot *find_active(uint64_t peer);
   Slot *free_slot();
-  bool retired(uint64_t peer, uint32_t generation) const;
-  void fence(uint64_t peer, uint32_t generation);
   bool retire_active(Slot &slot);
 
   ActorBackend &backend_;
   Slot slots_[kMaxPeers]{};
-  Retired retired_[kMaxRetired]{};
-  uint32_t retired_next_ = 0;
-  uint32_t retired_used_ = 0;
+  std::unordered_map<uint64_t, uint32_t> highest_generation_;
 };
 
 }  // namespace cdmp::coop3663

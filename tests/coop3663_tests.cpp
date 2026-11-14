@@ -6,6 +6,8 @@
 #include <cstring>
 #include <vector>
 #include <bit>
+#include <cstddef>
+#include <limits>
 
 namespace {
 
@@ -147,8 +149,8 @@ void test_session_fence_clock_and_capacity() {
     CHECK(limited.begin_session(99, static_cast<uint32_t>(1000 + repeat)));
   }
   CHECK(limited.active_count() == cdmp::coop3663::kMaxPeers);
-  CHECK(limited.retired_count() == cdmp::coop3663::kMaxRetired);
-  limited.disconnect_all();
+  CHECK(limited.known_peer_count() == cdmp::coop3663::kMaxPeers + 1);
+  CHECK(limited.disconnect_all() == 0);
   CHECK(limited.active_count() == 0);
 }
 
@@ -178,6 +180,69 @@ void test_literal_header_bound_includes_equality() {
   bad.bytes = mismatch;
   bad.bound_flag = 1;
   CHECK(!cdmp::coop3663::ack_header_ok(bad));
+}
+
+void test_generation_history_survives_churn() {
+  using namespace cdmp::coop3663;
+  FakeActorBackend backend;
+  Feed feed(backend);
+  CHECK(feed.begin_session(1, 10));
+  CHECK(!feed.begin_session(1, 10));
+  CHECK(feed.publish(synthetic(1, 10, 1)));
+  CHECK(!feed.begin_session(1, 9));
+  CHECK(backend.alive({1, 10}));
+  CHECK(feed.disconnect(1));
+  for (uint64_t peer = 2; peer <= 41; ++peer) {
+    CHECK(feed.begin_session(peer, 1));
+    CHECK(feed.disconnect(peer));
+  }
+  CHECK(!feed.begin_session(1, 10));
+  CHECK(!feed.begin_session(1, 9));
+  CHECK(feed.begin_session(1, 20));
+  CHECK(feed.disconnect(1));
+  CHECK(!feed.begin_session(1, 19));
+  CHECK(!feed.publish(synthetic(1, 10, 999)));
+  for (uint64_t peer = 42; peer <= kMaxKnownPeers; ++peer) {
+    CHECK(feed.begin_session(peer, 0));
+    CHECK(feed.disconnect(peer));
+  }
+  CHECK(feed.known_peer_count() == kMaxKnownPeers);
+  CHECK(!feed.begin_session(kMaxKnownPeers + 1, 1));
+  CHECK(feed.begin_session(1, std::numeric_limits<uint32_t>::max()));
+  CHECK(feed.disconnect(1));
+  CHECK(!feed.begin_session(1, 0));
+  CHECK(!feed.begin_session(1, 20));
+}
+
+void test_failed_retirement_is_reported_and_retryable() {
+  using namespace cdmp::coop3663;
+  class RemovalFails final : public ActorBackend {
+  public:
+    FakeActorBackend inner;
+    bool fail = true;
+    bool create(const PeerId &id, const Pose &pose) override { return inner.create(id, pose); }
+    bool move(const PeerId &id, const Pose &pose) override { return inner.move(id, pose); }
+    bool remove(const PeerId &id) override { return !fail || id.value != 1 ? inner.remove(id) : false; }
+  } backend;
+  Feed feed(backend);
+  CHECK(feed.begin_session(1, 2));
+  CHECK(feed.publish(synthetic(1, 2, 10)));
+  CHECK(feed.begin_session(2, 1));
+  CHECK(feed.publish(synthetic(2, 1, 10)));
+  CHECK(!feed.begin_session(1, 3));
+  CHECK(feed.publish(synthetic(1, 2, 11)));
+  CHECK(feed.disconnect_all() == 1);
+  CHECK(feed.active_count() == 1);
+  CHECK(backend.inner.alive({1, 2}));
+  CHECK(!backend.inner.alive({2, 1}));
+  CHECK(!feed.begin_session(2, 1));
+  backend.fail = false;
+  CHECK(feed.begin_session(1, 3)); // Failed retirement did not consume generation 3.
+  CHECK(!backend.inner.alive({1, 2}));
+  CHECK(feed.publish(synthetic(1, 3, 0)));
+  CHECK(feed.disconnect_all() == 0);
+  CHECK(feed.disconnect_all() == 0);
+  CHECK(feed.active_count() == 0);
 }
 
 void test_file_proven_spatial_fields() {
@@ -248,7 +313,7 @@ void test_spawn_record_boundaries() {
   // Every incomplete prefix of the valid payload must fail, except the
   // exact first-record boundary, which is independently a complete list.
   for (size_t n = 1; n < payload.size(); ++n) {
-    auto shortened = frame_bytes(2005, {payload.begin(), payload.begin() + n});
+    auto shortened = frame_bytes(2005, {payload.begin(), payload.begin() + static_cast<std::ptrdiff_t>(n)});
     CHECK(split_actor_load_file_records(view(shortened)).has_value() == (n == 7));
   }
   bytes[5] = 0;
@@ -284,7 +349,7 @@ void test_remove_actor_layout() {
     CHECK(fields->raw_keys[1] == 0x55667788);
   }
   for (size_t n = 0; n < payload.size(); ++n) {
-    auto shortened = frame_bytes(3037, {payload.begin(), payload.begin() + n});
+    auto shortened = frame_bytes(3037, {payload.begin(), payload.begin() + static_cast<std::ptrdiff_t>(n)});
     CHECK(decode_remove_actor_fields(view(shortened)).has_value() == (n == 6 || n == 10));
   }
   bytes.pop_back();
@@ -318,6 +383,26 @@ void test_rotation_field_validation() {
   put(192, 1.0f);
   put(196, INFINITY);
   CHECK(!decode());
+}
+
+void test_feed_and_decoder_share_rotation_policy() {
+  using namespace cdmp::coop3663;
+  for (const float value : {0.0f, 0.499f, 0.5f, 1.0f, 2.0f, 2.001f,
+                            -0.5f, -2.0f, std::numeric_limits<float>::max(),
+                            std::numeric_limits<float>::infinity(),
+                            std::numeric_limits<float>::quiet_NaN()}) {
+    auto sample = synthetic(1, 1, 1);
+    sample.pose.qw = value;
+    auto bytes = frame_bytes(3008, std::vector<uint8_t>(239, 0));
+    const auto bits = std::bit_cast<uint32_t>(value);
+    for (size_t i = 0; i < 4; ++i) bytes[5 + 192 + i] = static_cast<uint8_t>(bits >> (8 * i));
+    const auto pose = accepted_pose(sample);
+    const auto decoded = decode_move_ack_transform_fields(view(bytes));
+    const bool expected = std::isfinite(value) && std::fabs(value) >= 0.5f && std::fabs(value) <= 2.0f;
+    CHECK(pose.has_value() == expected);
+    CHECK(decoded.has_value() == expected);
+    if (pose && decoded) CHECK(near(pose->qw, decoded->rotation[3]));
+  }
 }
 
 void test_offline_lifecycle_fixture() {
@@ -481,11 +566,14 @@ int main() {
   test_unknown_fields_and_rotations();
   test_initial_pose_and_failed_placement();
   test_session_fence_clock_and_capacity();
+  test_generation_history_survives_churn();
+  test_failed_retirement_is_reported_and_retryable();
   test_literal_header_bound_includes_equality();
   test_file_proven_spatial_fields();
   test_spawn_record_boundaries();
   test_remove_actor_layout();
   test_rotation_field_validation();
+  test_feed_and_decoder_share_rotation_policy();
   test_offline_lifecycle_fixture();
   test_body_relation_tail();
   test_character_control_fields();
