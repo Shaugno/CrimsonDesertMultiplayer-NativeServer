@@ -8,6 +8,17 @@ way to assess later builds. The installed game is now **1.0.0.3663**. Full co-op
 has not been demonstrated. The 3576 capture is blocked because Steam updated
 the installation.
 
+Current execution plan (2026-11-14):
+[Co-op prototype plan](COOP-3663-PROTOTYPE-PLAN.md). The immediate target is
+two players seeing each other walk and turn. Pause repeated captures; finish
+the independent state/transport/actor-path work and tests as one Grok package,
+then provide one consolidated handoff. The available post-ready stand attempt
+stored zero rows, so movement layouts remain unproved. Approved checkpoint
+`3e950a7` includes the controller, timing diagnostics, post-ready admission,
+and sealed attempt logs; its final independent suite passed 100/100.
+The older [capture plan](GROK-3663-EXECUTION-PLAN.md) remains available for
+specific experiments. The paragraphs below preserve historical milestones.
+
 Completed in this continuation: the live-tested read-only position diagnostic,
 the passive observer, the real capture backend, and the version-checked module
 validated against dummy hosts. The external loading/controller tool is also

@@ -1,13 +1,19 @@
 CO-OP DEVELOPMENT PROGRESS
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
-Updated: 2026-11-13. The installed build is Crimson Desert 1.0.0.3663. The
-offline packet-entry verifier and separate passive capture runner are reviewed
-and committed (bdf30f9, 4334e43). The 3663 controller and game-free tests are
-local on grok/compat-guard at 0b03641, pending Codex review. The local
-RelWithDebInfo suite passed 100/100 with MSVC 19.52.37029. The game stayed
-closed. Production offsets and guards were unchanged. The current handoff is
-docs/probe-3663/CONTROLLER-HANDOFF-20261113.md. Work from the recovered
+Updated: 2026-11-14. Target build is Crimson Desert 1.0.0.3663. Approved
+published checkpoint 3e950a7 on grok/compat-guard includes the controller,
+startup timing, post-ready admission, and sealed per-attempt session logs.
+The last independent game-free suite passed 100/100. The Nov 14 live windows
+saved zero post-ready rows, so movement layouts and co-op remain unproved.
+Current direction: docs/COOP-3663-PROTOTYPE-PLAN.md. Pause repeated captures.
+Next work package: trace the state/transport/actor path, resolve file-evidence
+dependencies, and implement/test independent pieces toward a two-player
+walk-around. A read-only state feed alone cannot create a remote actor.
+Grok should self-review and fix tests within a package, then provide
+docs/probe-3663/HANDOFF-CURRENT.md for one consolidated Codex review with
+the exact remaining live experiment or blocker. Earlier reviews are historical.
+Production offsets and guards remain unchanged. Work from the recovered
 checkout outside OneDrive.
 
 GOAL
