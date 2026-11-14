@@ -21,7 +21,10 @@ are corroborated static identities. The complete core table is not resolved.
 PORT-MATCHES.md lists every named row, the literal supplement, and five precise
 blocking groups, including the next file-only field-sharing experiment.
 Raw discovery confidence is not automatically promoted. No weak candidate is
-allowed into a runtime path. Phases 4–9 independent work is continuing.
+allowed into a runtime path. Phase 4 added the corroborated static-value header
+and strict recognized-but-unarmed 3663 identity. Guard regressions and the ASI
+build pass; the complete per-build module routing remains blocked. See
+PHASE4-IMPLEMENTATION.md. Phases 5–9 independent work is continuing.
 
 The following sections are preserved historical checkpoints.
 

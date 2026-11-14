@@ -340,6 +340,45 @@ void test_build_3576_stays_off_the_2976_path() {
     std::printf("Build 3576 identity: OK\n");
 }
 
+void test_build_3663_is_recognized_but_unarmed() {
+    namespace build = cdmp::game::build_3663;
+    const auto bytes = make_image(build::kPeTimestamp, 0x80, build::kSizeOfImage);
+    const auto identity = guard::identify_image(bytes, build::kImageBase);
+    CHECK(identity.kind == guard::IdentityKind::Build3663);
+    const auto text = guard::diagnostic(identity);
+    CHECK(text.find("1.0.0.3663") != std::string::npos);
+    CHECK(text.find("not armed") != std::string::npos);
+    for (const bool guest : {false, true}) {
+        const auto decision = guard::decide_startup(request(true, guest, true, identity));
+        check_blocked(decision);
+        CHECK(decision.build == guard::GameBuild::Build3663);
+        CHECK(decision.end_guest_process == guest);
+    }
+    for (const auto& rejected : {
+            guard::identify_image(make_image(build::kPeTimestamp, 0x80, build::kSizeOfImage - 0x1000), build::kImageBase),
+            guard::identify_image(make_image(build::kPeTimestamp + 1, 0x80, build::kSizeOfImage), build::kImageBase),
+            guard::identify_image(bytes, build::kImageBase + 0x1000)}) {
+        CHECK(rejected.kind == guard::IdentityKind::Unsupported);
+        check_blocked(guard::decide_startup(request(true, false, false, rejected)));
+    }
+    // Classification can copy headers only. No adopted gameplay RVA may be read.
+    auto read_headers_only = [&](uintptr_t address, void* out, size_t size) {
+        CHECK(address == build::kImageBase);
+        CHECK(size <= bytes.size());
+        if (address != build::kImageBase || size > bytes.size()) return false;
+        std::memcpy(out, bytes.data(), size);
+        return true;
+    };
+    CHECK(guard::identify_mapped(build::kImageBase, read_headers_only).kind == guard::IdentityKind::Build3663);
+    // Test-host permissions remain independent of the game's recognized identity.
+    const auto host = guard::decide_startup(request(false, true, true, identity));
+    const auto counts = drive(host);
+    CHECK(counts.reads == 0 && counts.hooks == 0 && counts.game_sources == 0);
+    CHECK(counts.synthetic == 1 && counts.networks == 1 && counts.overlays == 1);
+    CHECK(!host.end_guest_process);
+    std::printf("Build 3663 recognized and unarmed: OK\n");
+}
+
 }  // namespace
 
 int main() {
@@ -349,6 +388,7 @@ int main() {
     test_mapped_reader();
     test_host_keeps_explicit_paths();
     test_build_3576_stays_off_the_2976_path();
+    test_build_3663_is_recognized_but_unarmed();
     if (g_failures == 0) std::printf("All build guard tests passed\n");
     return g_failures == 0 ? 0 : 1;
 }

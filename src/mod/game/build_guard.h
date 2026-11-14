@@ -1,8 +1,8 @@
 #pragma once
 // Central executable-identity gate. Startup may read a 2976 game address or
 // install a 2976 hook only after this classifies the mapped image as Crimson
-// Desert 1.0.0.2976. Build 1.0.0.3576 is recognized from its own file facts
-// and does not take that 2976 path. Copying the PE headers to classify the
+// Desert 1.0.0.2976. Builds 1.0.0.3576 and 1.0.0.3663 are recognized from file facts
+// and do not take that 2976 path. Copying the PE headers to classify the
 // image is not a gameplay RVA read. A test host (anything that is not
 // CrimsonDesert.exe, including cdmp_host with CDMP_TEST_HOST) never takes the
 // in-game path.
@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "mod/game/build_3576.h"
+#include "mod/game/build_3663.h"
 #include "mod/game/offsets.h"
 
 namespace cdmp::game::build_guard {
@@ -29,16 +30,18 @@ inline constexpr uint16_t kPe32PlusMagic = 0x020B;
 enum class IdentityKind {
     Supported,    // mapped base and PE timestamp match build 1.0.0.2976
     Build3576,    // 1.0.0.3576 file identity. The 2976 path stays closed.
+    Build3663,    // 1.0.0.3663 file identity; incomplete port remains unarmed.
     Unsupported,  // headers are readable, but the image is a different build
     Unreadable,   // headers are missing, truncated, or not a PE32+ image we can trust
 };
 
 // Which build's code a later phase may call. None means no gameplay path.
-// Build3576 is recorded without turning on the 2976 callbacks.
+// Build3576/Build3663 are recorded without turning on the 2976 callbacks.
 enum class GameBuild {
     None,
     Build2976,
     Build3576,
+    Build3663,
 };
 
 struct ImageIdentity {
@@ -66,11 +69,11 @@ enum class PlayerFeed {
 };
 
 // What the worker is allowed to do. read_game_addresses and install_hooks are
-// both true only for a 2976 in-game image. Build 3576 sets `build` and leaves
+// both true only for a 2976 in-game image. Builds 3576/3663 set `build` and leave
 // those flags false, so the 2976 callbacks cannot run. install_test_overlay is
 // the explicit test-host overlay and does not authorize game addresses or hooks.
 // run_network is true for a 2976 in-game image and for a test host.
-// A rejected in-game image, including a recognized 3576 image, leaves
+// A rejected in-game image, including a recognized 3576/3663 image, leaves
 // networking off and player_feed Off. A 3576 guest still ends: the save
 // redirect is a 2976 install and must not run.
 struct StartupDecision {
@@ -142,6 +145,11 @@ inline ImageIdentity identify_image(std::span<const uint8_t> headers, uintptr_t 
         id.kind = IdentityKind::Build3576;
         return id;
     }
+    if (mapped_base == build_3663::kImageBase && id.timestamp == build_3663::kPeTimestamp &&
+        id.size_of_image == build_3663::kSizeOfImage) {
+        id.kind = IdentityKind::Build3663;
+        return id;
+    }
     id.kind = IdentityKind::Unsupported;
     return id;
 }
@@ -183,6 +191,13 @@ inline std::string diagnostic(const ImageIdentity& id) {
             "image size 0x{:X}). The 2976 addresses stay unused. The 3576 gameplay path is not armed.",
             build_3576::kPeTimestamp, build_3576::kImageBase, build_3576::kSizeOfImage);
     }
+    if (id.kind == IdentityKind::Build3663) {
+        return std::format(
+            "Recognized game build Crimson Desert 1.0.0.3663 (PE timestamp 0x{:08X}, image base 0x{:X}, "
+            "image size 0x{:X}). The 3663 core port is incomplete and not armed. "
+            "Game addresses, hooks, and networking stay off.",
+            build_3663::kPeTimestamp, build_3663::kImageBase, build_3663::kSizeOfImage);
+    }
     if (id.kind == IdentityKind::Unreadable) {
         return std::format(
             "Executable identity is unreadable. Expected {}. Game addresses, hooks, and networking stay off.",
@@ -214,6 +229,13 @@ inline StartupDecision decide_startup(const StartupRequest& req) {
     }
     if (req.identity.kind == IdentityKind::Build3576) {
         decision.build = GameBuild::Build3576;
+        decision.end_guest_process = req.guest_role;
+        return decision;
+    }
+    if (req.identity.kind == IdentityKind::Build3663) {
+        // Recognition is not permission to reuse the legacy readers, hooks or
+        // early guest save redirect. Unresolved core rows stay inaccessible.
+        decision.build = GameBuild::Build3663;
         decision.end_guest_process = req.guest_role;
         return decision;
     }

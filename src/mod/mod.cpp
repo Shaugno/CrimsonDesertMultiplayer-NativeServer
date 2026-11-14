@@ -160,7 +160,8 @@ ProcessFacts log_process_info() {
     log::info("{}", in_game ? "Running inside CrimsonDesert.exe"
                             : "Not running inside the game (test host); game features stay off");
     if (in_game && (identity.kind == game::build_guard::IdentityKind::Supported ||
-                    identity.kind == game::build_guard::IdentityKind::Build3576)) {
+                    identity.kind == game::build_guard::IdentityKind::Build3576 ||
+                    identity.kind == game::build_guard::IdentityKind::Build3663)) {
         log::info("{}", game::build_guard::diagnostic(identity));
     } else if (in_game) {
         log::error("{}", game::build_guard::diagnostic(identity));
