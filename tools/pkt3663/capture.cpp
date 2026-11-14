@@ -481,6 +481,9 @@ struct Capture::State {
   std::thread writer;
   std::atomic<uint32_t> stored{0};
   std::atomic<uint32_t> omitted{0};
+  std::atomic<uint64_t> pre_ready{0};
+  std::atomic<uint64_t> ready_qpc{0};
+  std::atomic<bool> admission_closed{false};
   std::atomic<bool> writer_blocked{false};
   std::atomic<bool> writer_stop{false};
   volatile long entries = 0;
@@ -491,6 +494,13 @@ struct Capture::State {
   void on_hook(bool send, const safetyhook::Context &context) {
     if (observer == nullptr)
       return;
+    // Readiness is one release store. Until it is visible, and after stop
+    // closes admission, this callback must not take a queue slot.
+    if (admission_closed.load(std::memory_order_acquire) ||
+        ready_qpc.load(std::memory_order_acquire) == 0) {
+      pre_ready.fetch_add(1, std::memory_order_relaxed);
+      return;
+    }
     EntryArgs args;
     args.rcx = context.rcx;
     args.rdx = context.rdx;
@@ -574,12 +584,14 @@ struct Capture::State {
       return;
     std::fprintf(file,
                  "counters dropped=%llu unread=%llu truncated=%llu stored=%u "
-                 "omitted=%u\n",
+                 "omitted=%u pre_ready=%llu\n",
                  static_cast<unsigned long long>(observer->dropped()),
                  static_cast<unsigned long long>(observer->unread()),
                  static_cast<unsigned long long>(observer->truncated()),
                  stored.load(std::memory_order_relaxed),
-                 omitted.load(std::memory_order_relaxed));
+                 omitted.load(std::memory_order_relaxed),
+                 static_cast<unsigned long long>(
+                     pre_ready.load(std::memory_order_relaxed)));
   }
 };
 
@@ -836,6 +848,9 @@ Capture::StartResult Capture::start(void *module, void *send_entry,
   state_->records.clear();
   state_->stored.store(0, std::memory_order_relaxed);
   state_->omitted.store(0, std::memory_order_relaxed);
+  state_->pre_ready.store(0, std::memory_order_relaxed);
+  state_->ready_qpc.store(0, std::memory_order_relaxed);
+  state_->admission_closed.store(false, std::memory_order_relaxed);
   state_->writer_stop.store(false, std::memory_order_relaxed);
   state_->entries = 0;
 
@@ -958,9 +973,31 @@ Capture::StartResult Capture::start(void *module, void *send_entry,
   return StartResult::Started;
 }
 
+bool Capture::publish_ready(uint64_t qpc) {
+  if (state_ == nullptr || !state_->running || qpc == 0 ||
+      state_->admission_closed.load(std::memory_order_acquire)) {
+    return false;
+  }
+  uint64_t expected = 0;
+  return state_->ready_qpc.compare_exchange_strong(expected, qpc,
+                                                   std::memory_order_release,
+                                                   std::memory_order_acquire);
+}
+
+uint64_t Capture::pre_ready() const {
+  return state_ == nullptr ? 0
+                           : state_->pre_ready.load(std::memory_order_acquire);
+}
+
+bool Capture::enqueue_for_test(const Record &record) {
+  return state_ != nullptr && state_->observer != nullptr &&
+         state_->observer->push_for_test(record);
+}
+
 Capture::StopResult Capture::stop() {
   if (state_ == nullptr)
     return StopResult::Idle;
+  state_->admission_closed.store(true, std::memory_order_release);
   if (state_->release_blocked)
     return StopResult::Retained;
   if (!state_->running)
@@ -993,6 +1030,14 @@ void Capture::writer_main() {
     }
     Record record;
     if (state_->observer != nullptr && state_->observer->try_pop(record)) {
+      const uint64_t cutoff =
+          state_->ready_qpc.load(std::memory_order_acquire);
+      // A row queued across publication stays out of the 256-record budget.
+      // Equality with the published cutoff is inside the accepted window.
+      if (cutoff == 0 || record.qpc_ticks < cutoff) {
+        state_->pre_ready.fetch_add(1, std::memory_order_relaxed);
+        continue;
+      }
       state_->publish_record(record);
       continue;
     }

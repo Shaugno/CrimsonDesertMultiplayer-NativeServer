@@ -243,6 +243,11 @@ void Observer::on_recv(const EntryArgs& args) noexcept {
     gate_.leave();
 }
 
+bool Observer::push_for_test(const Record& record) {
+    if (ring_ == nullptr) return false;
+    return ring_->try_push(record);
+}
+
 bool Observer::try_pop(Record& out) noexcept {
     if (!gate_.admit()) return false;
     bool result = false;

@@ -83,6 +83,13 @@ public:
   // integrity proof. Game-free tests only; production leaves it null.
   static void set_pre_send_hook(void (*hook)(void *), void *user);
 
+  // Publishes the readiness cutoff. Callbacks stay out of the accepted
+  // queue until this release store, and a zero or second publication fails.
+  bool publish_ready(uint64_t qpc);
+  uint64_t pre_ready() const;
+  // Game-free seam for a row that is already queued when readiness publishes.
+  bool enqueue_for_test(const Record &record);
+
   uint32_t stored() const;
   uint32_t omitted() const;
   uint64_t dropped() const;

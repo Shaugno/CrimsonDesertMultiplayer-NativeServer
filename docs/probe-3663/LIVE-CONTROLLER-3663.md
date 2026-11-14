@@ -90,8 +90,11 @@ Phase files are exclusive creates:
 - `pkt3663-live-records-walk.txt`
 - `pkt3663-live-records-turn.txt`
 
-`unlabeled` uses `pkt3663-live-records.txt`. The session file is
-`pkt3663-live-session.txt`. An existing labeled file makes that start return
+`unlabeled` uses `pkt3663-live-records.txt`. Each start exclusive-creates
+`pkt3663-live-session-<n>.txt` and does not rewrite an earlier attempt.
+`pkt3663-live-session.txt` mirrors the latest flush. Idle marks that exceed
+the bounded buffer truncate only `pkt3663-live-session-pending.txt` and that
+mirror. An existing labeled file makes that start return
 BadLog. A start that fails before the runner pins the module unloads the DLL
 only when this command was the load. A DLL that was already mapped stays
 mapped so a later phase can be marked and started. `capture_attempts` stays

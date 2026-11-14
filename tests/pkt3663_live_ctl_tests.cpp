@@ -1305,7 +1305,14 @@ void test_delayed_start(const std::wstring &fixture_ctl, const std::wstring &stu
   expect(started, "ctl_thread_created", "1");
   expect(started, "ctl_remote_wait", "timeout");
   const int wait_ms = std::atoi(started.fields["ctl_remote_wait_ms"].c_str());
-  CHECK(wait_ms >= 20000 && wait_ms < 30000);
+  // ctl_remote_wait_ms floors QPC elapsed time to whole milliseconds, and
+  // WaitForSingleObject can return slightly before its nominal 20000 ms.
+  // Fifty milliseconds still separates that timeout from an early return.
+  // The controller's own wait is unchanged.
+  constexpr int kDelayWaitSlackMs = 50;
+  if (wait_ms < 20000 - kDelayWaitSlackMs || wait_ms >= 30000)
+    std::printf("FAIL delayed-start wait_ms=%d\n", wait_ms);
+  CHECK(wait_ms >= 20000 - kDelayWaitSlackMs && wait_ms < 30000);
   CHECK(module_mapped_once(dummy.pid, L"cdmp_pkt3663_live_fixture.dll"));
   DWORD alive = 0;
   CHECK(GetExitCodeProcess(dummy.process, &alive) && alive == STILL_ACTIVE);
@@ -1338,8 +1345,9 @@ void test_delayed_start(const std::wstring &fixture_ctl, const std::wstring &stu
   expect(unload, "ctl_loaded", "1");
   CHECK(module_mapped_once(dummy.pid, L"cdmp_pkt3663_live_fixture.dll"));
   CHECK(GetExitCodeProcess(dummy.process, &alive) && alive == STILL_ACTIVE);
-  std::printf("observed delayed-start exit=%s wait=%s witness=0x%lx\n", started.fields["ctl_exit"].c_str(),
-              started.fields["ctl_remote_wait"].c_str(), witness);
+  std::printf("observed delayed-start exit=%s wait=%s wait_ms=%d witness=0x%lx\n",
+              started.fields["ctl_exit"].c_str(), started.fields["ctl_remote_wait"].c_str(), wait_ms,
+              witness);
   dummy.close();
   remove_staged(staged);
 }

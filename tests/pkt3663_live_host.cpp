@@ -127,6 +127,8 @@ void test_production_refuses_dummy_host() {
 
   CHECK(api.stop() == kPkt3663LiveIdle);
   CHECK(api.start(directory.c_str()) == kPkt3663LiveRefused);
+  const std::string sealed_refusal =
+      read_file(directory + L"\\pkt3663-live-session-1.txt");
   CHECK(GetProcAddress(api.module,
                        "pkt3663_live_fixture_fail_session_short_write_containing") ==
         nullptr);
@@ -135,6 +137,7 @@ void test_production_refuses_dummy_host() {
   CHECK(report.retained == 0);
   const std::string session =
       read_file(directory + L"\\pkt3663-live-session.txt");
+  CHECK(session == sealed_refusal);
   CHECK(session.find("fixture=0") != std::string::npos);
   CHECK(session.find("game_match=0") != std::string::npos);
   CHECK(session.find("kind=wrong-name") != std::string::npos);
@@ -149,6 +152,28 @@ void test_production_refuses_dummy_host() {
   CHECK(session.find("capture_mode=raw-all") != std::string::npos);
   CHECK(session.find("allowlist_count=0") != std::string::npos);
   CHECK(session.find("adopted=0") != std::string::npos);
+
+  CHECK(api.mark("walk") == 0);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-1.txt") == sealed_refusal);
+  const std::string pending =
+      read_file(directory + L"\\pkt3663-live-session-pending.txt");
+  CHECK(pending.find("mark phase=walk qpc=") != std::string::npos);
+  const int retried = api.start(directory.c_str());
+  CHECK(retried == kPkt3663LiveRefused);
+  const Pkt3663LiveReport retried_report = report_of(api);
+  CHECK(retried_report.start_code == kPkt3663LiveRefused);
+  CHECK(retried_report.capture_attempts == 0);
+  CHECK(retried_report.retained == 0);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-1.txt") == sealed_refusal);
+  const std::string second =
+      read_file(directory + L"\\pkt3663-live-session-2.txt");
+  CHECK(second.find("startup=refused") != std::string::npos);
+  CHECK(second.find("stage=identity qpc=") != std::string::npos);
+  CHECK(second.find("recording_ready=0") != std::string::npos);
+  std::printf("observed refusal-retry start=%d session1_bytes=%zu pending_bytes=%zu "
+              "session2_bytes=%zu\n",
+              retried, sealed_refusal.size(), pending.size(), second.size());
+
   CHECK(FreeLibrary(api.module) != FALSE);
   CHECK(GetModuleHandleW(L"cdmp_pkt3663_live.dll") == nullptr);
 }
@@ -237,6 +262,10 @@ void test_fixture_raw_capture() {
   CHECK(session.find("capture_ready_qpc=0") == std::string::npos);
   CHECK(session.find("evidence_cutoff=records-qpc-at-or-after-ready") !=
         std::string::npos);
+  const std::string sealed_stand =
+      read_file(directory + L"\\pkt3663-live-session-1.txt");
+  CHECK(sealed_stand == session);
+  CHECK(sealed_stand.find("stage=ready-durable qpc=") != std::string::npos);
 
   // The phase file is exclusive and must not be overwritten.
   CHECK(api.fixture(directory.c_str(),
@@ -257,6 +286,9 @@ void test_fixture_raw_capture() {
     CHECK(api.mark("walk") == 0);
   CHECK(read_file(directory + L"\\pkt3663-live-session.txt")
             .find("session_history_truncated=1") != std::string::npos);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-pending.txt")
+            .find("session_history_truncated=1") != std::string::npos);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-1.txt") == sealed_stand);
   CHECK(api.fixture(directory.c_str(),
                     reinterpret_cast<void *>(&pkt3663_dummy_send),
                     reinterpret_cast<void *>(&pkt3663_dummy_receive), 8,
@@ -268,8 +300,28 @@ void test_fixture_raw_capture() {
   CHECK(second_attempt.omitted == 0);
   CHECK(read_file(directory + L"\\pkt3663-live-records-walk.txt")
             .find("capture_mode=raw-all") != std::string::npos);
-  CHECK(read_file(directory + L"\\pkt3663-live-session.txt")
-            .find("session_history_truncated=1") != std::string::npos);
+  const std::string sealed_walk =
+      read_file(directory + L"\\pkt3663-live-session-3.txt");
+  CHECK(sealed_walk.find("recording_ready=1") != std::string::npos);
+  CHECK(sealed_walk.find("stage=ready-durable qpc=") != std::string::npos);
+  CHECK(sealed_walk.find("phase=walk") != std::string::npos);
+  CHECK(sealed_walk.find("session_history_truncated=0") != std::string::npos);
+  CHECK(sealed_walk.find("session_history_truncated=1") == std::string::npos);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-1.txt") == sealed_stand);
+
+  CHECK(api.mark("unlabeled") == 0);
+  CHECK(api.fixture(directory.c_str(),
+                    reinterpret_cast<void *>(&pkt3663_dummy_send),
+                    reinterpret_cast<void *>(&pkt3663_dummy_receive), 8,
+                    2) == kPkt3663LiveStarted);
+  CHECK(api.stop() == kPkt3663LiveRemoved);
+  const std::string sealed_third =
+      read_file(directory + L"\\pkt3663-live-session-4.txt");
+  CHECK(sealed_third.find("recording_ready=1") != std::string::npos);
+  CHECK(sealed_third.find("stage=ready-durable qpc=") != std::string::npos);
+  CHECK(sealed_third.find("phase=unlabeled") != std::string::npos);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-1.txt") == sealed_stand);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-3.txt") == sealed_walk);
 
   // The recording-ready block is part of the evidence boundary. A failure to
   // persist it removes the just-installed hooks, returns BadLog, and leaves a
@@ -293,6 +345,9 @@ void test_fixture_raw_capture() {
   CHECK(failed_session.find("startup=bad-log") != std::string::npos);
   CHECK(failed_session.find("shutdown=removed") != std::string::npos);
   CHECK(failed_session.find("recording_ready=0") != std::string::npos);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-1.txt") == sealed_stand);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-3.txt") == sealed_walk);
+  CHECK(read_file(directory + L"\\pkt3663-live-session-4.txt") == sealed_third);
 
   // Idle phase marking reports its own durable write failure and restores the
   // previous label instead of silently selecting an unlogged phase.

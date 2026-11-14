@@ -145,6 +145,13 @@ pkt3663::Capture *make_capture(uint32_t queue, uint32_t output,
                                   path.empty() ? nullptr : path.c_str());
 }
 
+bool admit(pkt3663::Capture *capture) {
+  LARGE_INTEGER now{};
+  if (capture == nullptr || !QueryPerformanceCounter(&now) || now.QuadPart <= 0)
+    return false;
+  return capture->publish_ready(static_cast<uint64_t>(now.QuadPart));
+}
+
 void test_refusal_and_install_checks() {
   const std::wstring path = temp_path(L"pkt3663-capture-check.log");
   DeleteFileW(path.c_str());
@@ -224,6 +231,7 @@ void test_raw_records_and_log_metadata() {
                        reinterpret_cast<void *>(&pkt3663_dummy_receive),
                        &install_check,
                        &checks) == pkt3663::Capture::StartResult::Started);
+  CHECK(admit(capture.raw));
   CHECK(checks.calls.load() == 3);
   CHECK(checks.order.load() == 7);
   CHECK(pkt3663_dummy_send(0x1111111111111111ull, 0x2222222222222222ull,
@@ -288,6 +296,7 @@ void test_cap_and_queue_pressure() {
                        reinterpret_cast<void *>(&pkt3663_dummy_send),
                        reinterpret_cast<void *>(&pkt3663_dummy_receive)) ==
         pkt3663::Capture::StartResult::Started);
+  CHECK(admit(capture.raw));
   capture->set_writer_blocked(true);
   for (int index = 0; index < 20; ++index) {
     CHECK(pkt3663_dummy_send(static_cast<uint64_t>(index), 0, 0, bytes.data(),
@@ -315,6 +324,7 @@ void test_cap_and_queue_pressure() {
                       reinterpret_cast<void *>(&pkt3663_dummy_send),
                       reinterpret_cast<void *>(&pkt3663_dummy_receive)) ==
         pkt3663::Capture::StartResult::Started);
+  CHECK(admit(output.raw));
   for (int index = 0; index < 10; ++index) {
     CHECK(pkt3663_dummy_send(static_cast<uint64_t>(index), 0, 0, bytes.data(),
                              8, 1, 2) == pkt3663fix::kSendReturn);
@@ -323,6 +333,90 @@ void test_cap_and_queue_pressure() {
   CHECK(output->stored() == 2);
   CHECK(output->omitted() == 8);
   CHECK(output->dropped() == 0);
+}
+
+void test_pre_ready_flood_and_cutoff() {
+  uint8_t frame[4] = {0x11, 0x22, 0x33, 0x44};
+  const std::wstring path = temp_path(L"pkt3663-capture-preready.log");
+  DeleteFileW(path.c_str());
+  Owned capture{make_capture(32, 4, path)};
+  CHECK(capture.raw != nullptr);
+  CHECK(capture->start(GetModuleHandleW(nullptr),
+                       reinterpret_cast<void *>(&pkt3663_dummy_send),
+                       reinterpret_cast<void *>(&pkt3663_dummy_receive)) ==
+        pkt3663::Capture::StartResult::Started);
+  for (int index = 0; index < 40; ++index) {
+    CHECK(pkt3663_dummy_receive(static_cast<uint64_t>(index), 0, 0, frame, 4, 0,
+                                0) == pkt3663fix::kReceiveReturn);
+  }
+  CHECK(capture->stored() == 0);
+  CHECK(capture->omitted() == 0);
+  CHECK(capture->dropped() == 0);
+  CHECK(capture->pre_ready() == 40);
+  CHECK(!capture->publish_ready(0));
+
+  capture->set_writer_blocked(true);
+  CHECK(capture->publish_ready(1000000));
+  CHECK(!capture->publish_ready(1000001));
+  pkt3663::Record early{};
+  early.direction = pkt3663::Direction::Receive;
+  early.qpc_ticks = 999999;
+  early.claimed_length = 4;
+  early.copied_length = 4;
+  early.phase = static_cast<uint8_t>(pkt3663::Phase::Stand);
+  pkt3663::Record exact = early;
+  exact.qpc_ticks = 1000000;
+  exact.direction = pkt3663::Direction::Send;
+  CHECK(capture->enqueue_for_test(early));
+  CHECK(capture->enqueue_for_test(exact));
+  for (int index = 0; index < 6; ++index) {
+    CHECK(pkt3663_dummy_send(static_cast<uint64_t>(index), 0, 0, frame, 4, 1,
+                             2) == pkt3663fix::kSendReturn);
+  }
+  capture->set_writer_blocked(false);
+  CHECK(wait_until([&] { return capture->stored() == 4; }));
+  CHECK(capture->stop() == pkt3663::Capture::StopResult::Removed);
+  CHECK(capture->stored() == 4);
+  CHECK(capture->omitted() == 3);
+  CHECK(capture->dropped() == 0);
+  CHECK(capture->pre_ready() >= 41);
+  int sends = 0;
+  int receives = 0;
+  for (uint32_t index = 0; index < capture->stored(); ++index) {
+    pkt3663::Record row{};
+    CHECK(capture->copy_record(index, row));
+    CHECK(row.qpc_ticks >= 1000000);
+    if (row.direction == pkt3663::Direction::Send)
+      ++sends;
+    if (row.direction == pkt3663::Direction::Receive)
+      ++receives;
+  }
+  CHECK(sends >= 1);
+  CHECK(receives == 0);
+
+  const std::wstring race_path = temp_path(L"pkt3663-capture-stop-flood.log");
+  DeleteFileW(race_path.c_str());
+  Owned racing{make_capture(32, 8, race_path)};
+  CHECK(racing.raw != nullptr);
+  CHECK(racing->start(GetModuleHandleW(nullptr),
+                      reinterpret_cast<void *>(&pkt3663_dummy_send),
+                      reinterpret_cast<void *>(&pkt3663_dummy_receive)) ==
+        pkt3663::Capture::StartResult::Started);
+  std::atomic<bool> run{true};
+  std::thread producer([&] {
+    while (run.load(std::memory_order_acquire)) {
+      pkt3663_dummy_receive(1, 2, 3, frame, 4, 0, 0);
+    }
+  });
+  CHECK(wait_until([&] { return racing->pre_ready() > 0; }));
+  CHECK(racing->stop() == pkt3663::Capture::StopResult::Removed);
+  run.store(false, std::memory_order_release);
+  producer.join();
+  CHECK(racing->stored() == 0);
+  CHECK(racing->omitted() == 0);
+  CHECK(racing->pre_ready() > 0);
+  CHECK(!racing->queue_allocated());
+  CHECK(!racing->publish_ready(1000000));
 }
 
 void test_concurrent_teardown_and_partial_install() {
@@ -335,6 +429,7 @@ void test_concurrent_teardown_and_partial_install() {
                        reinterpret_cast<void *>(&pkt3663_dummy_send),
                        reinterpret_cast<void *>(&pkt3663_dummy_receive)) ==
         pkt3663::Capture::StartResult::Started);
+  CHECK(admit(capture.raw));
   std::atomic<bool> run{true};
   std::atomic<int> bad{0};
   std::thread producer([&] {
@@ -566,6 +661,7 @@ int main(int argc, char **argv) {
   test_refusal_and_install_checks();
   test_raw_records_and_log_metadata();
   test_cap_and_queue_pressure();
+  test_pre_ready_flood_and_cutoff();
   test_concurrent_teardown_and_partial_install();
   CHECK(run_child(L"--pre-send-damage"));
   CHECK(run_child(L"--send-check-damage"));

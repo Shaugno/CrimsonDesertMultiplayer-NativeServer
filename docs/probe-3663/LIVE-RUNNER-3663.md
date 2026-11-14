@@ -93,8 +93,10 @@ capture is not overwritten:
 - `pkt3663-live-records-walk.txt`;
 - `pkt3663-live-records-turn.txt`.
 
-The session file is `pkt3663-live-session.txt`. Stored, omitted, dropped,
-unread, and truncated counters are reset for every start attempt;
+Each start exclusive-creates `pkt3663-live-session-<n>.txt`. The legacy
+`pkt3663-live-session.txt` mirrors the latest flush and is not the only copy.
+Stored, omitted, pre-ready, dropped, unread, and truncated counters are reset
+for every start attempt;
 `capture_attempts` is intentionally cumulative for the module lifetime. An
 active report refreshes the live counters. A successful start writes
 `recording_ready=1` and a `capture_ready_qpc`; only records whose QPC is at or

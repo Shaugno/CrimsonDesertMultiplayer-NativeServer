@@ -33,6 +33,7 @@ constexpr size_t kLogCap = 8192;
 constexpr size_t kLogBlockReserve = 3072;
 
 constexpr wchar_t kSessionFile[] = L"pkt3663-live-session.txt";
+constexpr wchar_t kPendingFile[] = L"pkt3663-live-session-pending.txt";
 constexpr wchar_t kRecordsFile[] = L"pkt3663-live-records.txt";
 
 SRWLOCK g_control = SRWLOCK_INIT;
@@ -58,6 +59,7 @@ Identity g_identity{};
 uint64_t g_dropped = 0;
 uint64_t g_unread = 0;
 uint64_t g_truncated = 0;
+uint64_t g_pre_ready = 0;
 uint64_t g_qpc_frequency = 0;
 uint64_t g_ready_qpc = 0;
 uint32_t g_queue = 0;
@@ -77,7 +79,12 @@ bool g_force_short_write = false;
 #endif
 wchar_t g_log_dir[kPathCap] = {};
 wchar_t g_session_path[kCapturePathCap] = {};
+wchar_t g_attempt_path[kCapturePathCap] = {};
+wchar_t g_pending_path[kCapturePathCap] = {};
 wchar_t g_records_path[kCapturePathCap] = {};
+uint32_t g_attempt_seq = 0;
+bool g_attempt_open = false;
+char g_last_mark[160] = {};
 
 struct StateSlot {
   bool active = false;
@@ -188,25 +195,27 @@ void log_append(const char *text) {
   g_log[g_log_used] = '\0';
 }
 
-bool log_flush_file() {
-  if (!g_log_bound || g_session_path[0] == L'\0') {
+bool write_log_file(const wchar_t *path, bool fault_here) {
+  if (path == nullptr || path[0] == L'\0') {
     g_log_write_failed = true;
     return false;
   }
   FILE *file = nullptr;
-  if (_wfopen_s(&file, g_session_path, L"wb") != 0 || file == nullptr) {
+  if (_wfopen_s(&file, path, L"wb") != 0 || file == nullptr) {
     g_log_write_failed = true;
     return false;
   }
 #ifdef PKT3663_LIVE_FIXTURE
   // The file is already truncated by "wb". This one-shot fault is only armed
   // for the ready-durable timing rewrite.
-  if (g_force_short_write) {
+  if (fault_here && g_force_short_write) {
     g_force_short_write = false;
     std::fclose(file);
     g_log_write_failed = true;
     return false;
   }
+#else
+  (void)fault_here;
 #endif
   const size_t written =
       g_log_used == 0 ? 0 : std::fwrite(g_log, 1, g_log_used, file);
@@ -216,6 +225,36 @@ bool log_flush_file() {
     return false;
   }
   return true;
+}
+
+void seal_attempt() noexcept { g_attempt_open = false; }
+
+// Seals the attempt opened by this start unless the capture stays active.
+// Destruction covers early returns and exceptions; Started sets keep.
+struct AttemptSeal {
+  bool keep = false;
+  AttemptSeal() = default;
+  ~AttemptSeal() {
+    if (!keep)
+      seal_attempt();
+  }
+  AttemptSeal(const AttemptSeal &) = delete;
+  AttemptSeal &operator=(const AttemptSeal &) = delete;
+};
+
+bool log_flush_file() {
+  if (!g_log_bound || g_session_path[0] == L'\0') {
+    g_log_write_failed = true;
+    return false;
+  }
+  const wchar_t *primary = g_attempt_open ? g_attempt_path : g_pending_path;
+  // The fault applies to the attempt or pending file. The legacy mirror is a
+  // copy of that same bounded buffer and is not a second evidence source.
+  if (!write_log_file(primary, true))
+    return false;
+  if (wcscmp(primary, g_session_path) == 0)
+    return true;
+  return write_log_file(g_session_path, false);
 }
 
 bool log_flush() {
@@ -308,6 +347,49 @@ void capture_stage(uint8_t stage) noexcept {
   note_stage(name, qpc_now());
 }
 
+bool exclusive_create(const wchar_t *path) {
+  HANDLE created = CreateFileW(path, GENERIC_WRITE, 0, nullptr, CREATE_NEW,
+                               FILE_ATTRIBUTE_NORMAL, nullptr);
+  if (created == INVALID_HANDLE_VALUE)
+    return false;
+  CloseHandle(created);
+  return true;
+}
+
+// Each start owns one exclusive file. Later starts and idle marks must not
+// reopen it. The in-memory buffer stays capped at kLogCap.
+bool open_attempt_log() {
+  if (!g_log_bound || g_attempt_open || g_log_dir[0] == L'\0')
+    return false;
+  const uint32_t seq = g_attempt_seq + 1;
+  wchar_t name[40] = {};
+  if (_snwprintf_s(name, _TRUNCATE, L"pkt3663-live-session-%u.txt", seq) < 0)
+    return false;
+  wchar_t path[kCapturePathCap] = {};
+  if (!join_file(path, kCapturePathCap, g_log_dir, name))
+    return false;
+  if (!exclusive_create(path))
+    return false;
+  g_attempt_seq = seq;
+  wcsncpy_s(g_attempt_path, path, _TRUNCATE);
+  g_attempt_open = true;
+  g_log_used = 0;
+  g_log[0] = '\0';
+  g_log_truncated = false;
+  log_append("pkt3663-live\n");
+  if (g_last_mark[0] != '\0') {
+    log_append(g_last_mark);
+    g_last_mark[0] = '\0';
+  }
+  // This is the attempt's first counted flush. A test can then fail the later
+  // ready block without losing the exclusive file that holds the failure.
+  if (!log_flush()) {
+    seal_attempt();
+    return false;
+  }
+  return true;
+}
+
 int bind_log(const wchar_t *directory, const wchar_t *host) {
   if (!log_directory_allowed(host, directory))
     return kPkt3663LiveBadLog;
@@ -317,27 +399,19 @@ int bind_log(const wchar_t *directory, const wchar_t *host) {
   if (length == 0 || length >= kPathCap)
     return kPkt3663LiveBadLog;
   wchar_t session[kCapturePathCap] = {};
-  if (!join_file(session, kCapturePathCap, full, kSessionFile))
+  wchar_t pending[kCapturePathCap] = {};
+  if (!join_file(session, kCapturePathCap, full, kSessionFile) ||
+      !join_file(pending, kCapturePathCap, full, kPendingFile))
     return kPkt3663LiveBadLog;
   if (g_log_bound && _wcsicmp(g_log_dir, full) != 0)
     return kPkt3663LiveBadLog;
   if (!directory_ready(full))
     return kPkt3663LiveBadLog;
-  if (g_log_bound)
-    return log_flush() ? kPkt3663LiveStarted : kPkt3663LiveBadLog;
-
-  wcsncpy_s(g_log_dir, full, _TRUNCATE);
-  wcsncpy_s(g_session_path, session, _TRUNCATE);
-  g_log_bound = true;
-  log_append("pkt3663-live\n");
-  if (!log_flush()) {
-    g_log_bound = false;
-    g_log_dir[0] = L'\0';
-    g_session_path[0] = L'\0';
-    g_log_used = 0;
-    g_log[0] = '\0';
-    g_log_write_failed = false;
-    return kPkt3663LiveBadLog;
+  if (!g_log_bound) {
+    wcsncpy_s(g_log_dir, full, _TRUNCATE);
+    wcsncpy_s(g_session_path, session, _TRUNCATE);
+    wcsncpy_s(g_pending_path, pending, _TRUNCATE);
+    g_log_bound = true;
   }
   return kPkt3663LiveStarted;
 }
@@ -394,6 +468,7 @@ void remember_counters() {
     return;
   g_stored.store(g_capture->stored(), std::memory_order_relaxed);
   g_omitted.store(g_capture->omitted(), std::memory_order_relaxed);
+  g_pre_ready = g_capture->pre_ready();
   g_dropped = g_capture->dropped();
   g_unread = g_capture->unread();
   g_truncated = g_capture->truncated();
@@ -408,6 +483,7 @@ void reset_attempt_observations(bool fixture) {
   g_dropped = 0;
   g_unread = 0;
   g_truncated = 0;
+  g_pre_ready = 0;
   g_ready_qpc = 0;
   g_queue = 0;
   g_records = 0;
@@ -471,7 +547,7 @@ bool write_block(const wchar_t *exe_name, const char *startup,
   }
   if (name[0] == '\0')
     std::memcpy(name, "unknown", 8);
-  char line[768] = {};
+  char line[1024] = {};
   std::snprintf(line, sizeof line,
                 "---\nmode=%s\nfixture=%d\ngame_match=%d\nname=%s\n",
                 g_fixture != 0 ? "fixture" : "process", g_fixture != 0 ? 1 : 0,
@@ -489,7 +565,7 @@ bool write_block(const wchar_t *exe_name, const char *startup,
   }
   std::snprintf(line, sizeof line,
                 "gate=%s\nstartup=%s\nshutdown=%s\nstored=%u\nomitted=%"
-                "u\ndropped=%llu\nunread=%llu\n"
+                "u\npre_ready=%llu\ndropped=%llu\nunread=%llu\n"
                 "truncated=%llu\ncapture_attempts=%u\nlimits=%u/"
                 "%u\nphase=%s\nqpc_frequency=%llu\n"
                 "qpc_timebase=QueryPerformanceCounter\ncapture_mode=raw-"
@@ -502,6 +578,7 @@ bool write_block(const wchar_t *exe_name, const char *startup,
                 g_fixture != 0 ? "fixture" : "identity", startup, shutdown,
                 g_stored.load(std::memory_order_relaxed),
                 g_omitted.load(std::memory_order_relaxed),
+                static_cast<unsigned long long>(g_pre_ready),
                 static_cast<unsigned long long>(g_dropped),
                 static_cast<unsigned long long>(g_unread),
                 static_cast<unsigned long long>(g_truncated),
@@ -634,6 +711,7 @@ void note_retained(StateSlot &slot, const wchar_t *exe_name,
     write_block(exe_name, startup, "retained");
   } catch (...) {
   }
+  seal_attempt();
 }
 
 int arm(StateSlot &slot, void *module, void *send_entry, void *receive_entry,
@@ -711,8 +789,15 @@ int arm(StateSlot &slot, void *module, void *send_entry, void *receive_entry,
       g_ready_qpc = static_cast<uint64_t>(ready.QuadPart);
     g_start_code.store(kPkt3663LiveStarted, std::memory_order_relaxed);
     g_stop_code.store(-1, std::memory_order_relaxed);
-    if (!write_block(exe_name, "started", "pending") || g_stage_write_failed ||
-        !note_stage("ready-durable", qpc_now())) {
+    const bool ready_logged =
+        write_block(exe_name, "started", "pending") && !g_stage_write_failed &&
+        note_stage("ready-durable", qpc_now());
+    // Publication is the admission store. It runs only after the ready block
+    // and its timing line have reached this attempt's file.
+    const bool published =
+        ready_logged && g_ready_qpc != 0 && g_capture != nullptr &&
+        g_capture->publish_ready(g_ready_qpc);
+    if (!published) {
       // The QPC cutoff is evidence only after it reaches the session file.
       // Refuse the attempt and remove the newly installed hooks while their
       // ownership is still known instead of recording unanchored raw rows.
@@ -776,6 +861,11 @@ int start(const wchar_t *log_directory) {
     g_start_code.store(bound, std::memory_order_relaxed);
     return bound;
   }
+  if (!open_attempt_log()) {
+    g_start_code.store(kPkt3663LiveBadLog, std::memory_order_relaxed);
+    return kPkt3663LiveBadLog;
+  }
+  AttemptSeal attempt;
   note_stage("export-entry", entered);
 
   const Identity identity = identify_process();
@@ -804,8 +894,11 @@ int start(const wchar_t *log_directory) {
       reinterpret_cast<void *>(base + static_cast<uintptr_t>(kSendRva));
   void *receive =
       reinterpret_cast<void *>(base + static_cast<uintptr_t>(kReceiveRva));
-  return arm(slot, module, send, receive, kProductionQueue, kProductionRecords,
-             file_name_of(host), &reverify_before_hook, &verification);
+  const int code =
+      arm(slot, module, send, receive, kProductionQueue, kProductionRecords,
+          file_name_of(host), &reverify_before_hook, &verification);
+  attempt.keep = code == kPkt3663LiveStarted;
+  return code;
 }
 
 int stop() {
@@ -831,6 +924,7 @@ int stop() {
       host_path(host, kPathCap) ? file_name_of(host) : L"";
   if (g_capture == nullptr) {
     g_stop_code.store(kPkt3663LiveIdle, std::memory_order_relaxed);
+    seal_attempt();
     return kPkt3663LiveIdle;
   }
 
@@ -852,11 +946,15 @@ int stop() {
     g_stop_code.store(kPkt3663LiveRemoved, std::memory_order_relaxed);
     slot.finish(kStateIdle);
     try {
-      if (!write_block(exe_name, "started", "removed"))
+      if (!write_block(exe_name, "started", "removed")) {
+        seal_attempt();
         return kPkt3663LiveBadLog;
+      }
     } catch (...) {
+      seal_attempt();
       return kPkt3663LiveBadLog;
     }
+    seal_attempt();
     return kPkt3663LiveRemoved;
   }
   if (result == Capture::StopResult::Retained || !release_capture()) {
@@ -865,6 +963,7 @@ int stop() {
   }
   g_stop_code.store(kPkt3663LiveIdle, std::memory_order_relaxed);
   slot.finish(kStateIdle);
+  seal_attempt();
   return kPkt3663LiveIdle;
 }
 
@@ -884,9 +983,11 @@ int mark(const char *phase_text) {
     std::snprintf(line, sizeof line, "mark phase=%s qpc=%llu\n",
                   phase_name(phase),
                   static_cast<unsigned long long>(now.QuadPart));
+    std::snprintf(g_last_mark, sizeof g_last_mark, "%s", line);
     reserve_log(sizeof line);
     log_append(line);
     if (!log_flush()) {
+      g_last_mark[0] = '\0';
       g_label.store(previous, std::memory_order_release);
       log_append("session_write_failed=1\nmark_log_write_failed=1\n");
       log_flush();
@@ -944,13 +1045,20 @@ int fixture_start(const wchar_t *log_directory, void *send_entry,
     g_start_code.store(bound, std::memory_order_relaxed);
     return bound;
   }
+  if (!open_attempt_log()) {
+    g_start_code.store(kPkt3663LiveBadLog, std::memory_order_relaxed);
+    return kPkt3663LiveBadLog;
+  }
+  AttemptSeal attempt;
   note_stage("export-entry", entered);
   const Identity observed = identify_process();
   note_stage("identity", qpc_now());
   remember_session(true, false, observed);
-  return arm(slot, GetModuleHandleW(nullptr), send_entry, recv_entry,
-             queue_capacity, output_records, file_name_of(host), nullptr,
-             nullptr);
+  const int code = arm(slot, GetModuleHandleW(nullptr), send_entry, recv_entry,
+                       queue_capacity, output_records, file_name_of(host),
+                       nullptr, nullptr);
+  attempt.keep = code == kPkt3663LiveStarted;
+  return code;
 }
 
 void set_records_open_hook(void (*hook)(void *), void *user) {

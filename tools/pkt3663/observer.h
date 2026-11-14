@@ -95,6 +95,9 @@ public:
 
     // Single consumer. Producers may be concurrent.
     bool try_pop(Record& out) noexcept;
+    // Game-free seam. Pushes without the readiness check so a test can place
+    // a row across the publication boundary. Production never calls it.
+    bool push_for_test(const Record& record);
     uint64_t dropped() const;
     uint64_t unread() const;
     uint64_t truncated() const;
