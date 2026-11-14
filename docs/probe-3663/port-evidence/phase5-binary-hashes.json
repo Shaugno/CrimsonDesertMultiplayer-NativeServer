@@ -1,0 +1,32 @@
+[
+  {
+    "file": "cdmp.asi",
+    "sha256": "5E2FC9BEF6D8802150936FC381F23AE89C061AB53A78F5E3DEEA9592D67C9FEE",
+    "bytes": 15933952
+  },
+  {
+    "file": "cdmp_host.exe",
+    "sha256": "B64AFF7BD423ADF4B344CD1CC05CD594BB7AAD7CA3BC594122F6BF7B9121E53E",
+    "bytes": 737280
+  },
+  {
+    "file": "cdmp_peer.exe",
+    "sha256": "730B43D1D0F3D41A6CEFE5E4B798F41C4A796C0ECC9DE8289F8642B1F309FC1F",
+    "bytes": 2723328
+  },
+  {
+    "file": "cdmp_tests_build_guard.exe",
+    "sha256": "EC88E06B71E9FD53C186E3F4FD1A903E84E4F3534791D8AD140159261BD344D0",
+    "bytes": 1963520
+  },
+  {
+    "file": "cdmp_tests_coop3663.exe",
+    "sha256": "AC8001D48A520B94CAD823F0FB344AB05F46404099DF7F1CF3F0C54EAC9509EE",
+    "bytes": 871424
+  },
+  {
+    "file": "port3663_fingerprints.exe",
+    "sha256": "70F78F771BB04F71CB13087382F458EB86408FC43C1614366777E2719EE23B5A",
+    "bytes": 2204160
+  }
+]

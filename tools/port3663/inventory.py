@@ -6,11 +6,16 @@ Extras reached through headers are deliberately retained as an audit superset.
 This lexical inventory is not a proof of runtime reachability or RE semantics.
 """
 from pathlib import Path
+import argparse
+import io
 import json
 import re
+import subprocess
+import tarfile
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'docs/probe-3663'
+SOURCES = {}
 SEEDS = '''mod/mod.cpp mod/config.cpp mod/dllmain.cpp
 mod/game/player_reader.cpp mod/game/safe_memory.cpp mod/game/rtti.cpp
 mod/game/actor_lookup.cpp mod/game/hook_prepare.cpp mod/game/game_fault.cpp
@@ -40,12 +45,13 @@ def collect():
     files = set()
     while pending:
         path = pending.pop()
-        if path in files or not path.is_file():
+        key = path.relative_to(ROOT).as_posix()
+        if path in files or key not in SOURCES:
             continue
         files.add(path)
-        for inc in re.findall(r'^\s*#include "([^"]+)"', path.read_text(encoding='utf-8'), re.M):
+        for inc in re.findall(r'^\s*#include "([^"]+)"', SOURCES[key], re.M):
             candidate = ROOT / 'src' / inc
-            if candidate.is_file():
+            if candidate.relative_to(ROOT).as_posix() in SOURCES:
                 pending.append(candidate)
     return sorted(files)
 
@@ -55,10 +61,20 @@ def esc(value):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--revision', default='a8656e87a0c43db400bdf863193c1afb353d6de0',
+                        help='2976 source baseline, pinned so later port edits cannot renumber reviewed rows')
+    args = parser.parse_args()
+    revision = subprocess.check_output(['git', 'rev-parse', '--verify', args.revision], cwd=ROOT, text=True).strip()
+    archive = subprocess.check_output(['git', 'archive', revision, 'src'], cwd=ROOT)
+    with tarfile.open(fileobj=io.BytesIO(archive)) as tree:
+        for member in tree.getmembers():
+            if member.isfile() and member.name.endswith(('.h', '.cpp')):
+                SOURCES[member.name] = tree.extractfile(member).read().decode('utf-8')
     rows, literals = [], []
     files = collect()
     for path in files:
-        text = path.read_text(encoding='utf-8')
+        text = SOURCES[path.relative_to(ROOT).as_posix()]
         code = masked(text)
         rel = path.relative_to(ROOT).as_posix()
         # Semicolon-terminated constexpr definitions, including byte signatures.
@@ -100,12 +116,13 @@ def main():
                                      symbol=symbol, kind='inline literal (semantic audit required)', value=number[0],
                                      use=text.splitlines()[line_no - 1].strip()))
     OUT.mkdir(parents=True, exist_ok=True)
-    data = dict(scope='Conservative lexical superset, not a completed semantic port map',
+    data = dict(scope='Conservative lexical superset, not a completed semantic port map', source_commit=revision,
                 files=[p.relative_to(ROOT).as_posix() for p in files], named=rows, literals=literals)
     (OUT / 'PORT-INVENTORY.json').write_text(json.dumps(data, indent=2) + '\n', encoding='utf-8')
     header = '''# 2976 core-path port inventory
 
-Generated with `python tools/port3663/inventory.py` from the explicitly listed
+Generated with `python tools/port3663/inventory.py` from the pinned 2976 source
+baseline a8656e87a0c43db400bdf863193c1afb353d6de0 and the explicitly listed
 core implementation seeds and their recursive project-header includes.
 The validated walk-around uses option D (`session2`); `remote_puppet` supplies
 shared helpers. Sources: README "Upstream co-op behavior", ROADMAP,

@@ -5,6 +5,16 @@ stay outside the repository. `build/` projects/results are ignored. The reviewed
 decisions live in `docs/probe-3663/PORT-REVIEWED.json`; discovery scripts always
 emit `adopted=0` and cannot arm the ASI.
 
+The inventory defaults to source commit a8656e87a0c43db400bdf863193c1afb353d6de0,
+read through a memory-only `git archive`. This keeps the 2976 row identifiers
+stable after 3663 headers are added. `--revision` selects a different source
+baseline intentionally; changing it also requires reviewing the match map.
+
+Synthetic validation: `tools/port3663/smoke.ps1` copies the built tools to
+`build/e2e`, uses an unused loopback UDP port, disables all native features,
+checks remote-state receipt and clean worker shutdown, and stops only its own
+newly started peer. This is never two-player evidence.
+
 Tools used: VS 18 / MSVC 14.52.37025, pinned Zydis 4.1.0, Python 3.12.10,
 Ghidra 12.1.4 PUBLIC and Temurin JDK 21.0.13+9. Ghidra and Java were installed
 only under the task's visualization directory, with no system PATH changes.

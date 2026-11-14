@@ -1,6 +1,7 @@
 # 2976 core-path port inventory
 
-Generated with `python tools/port3663/inventory.py` from the explicitly listed
+Generated with `python tools/port3663/inventory.py` from the pinned 2976 source
+baseline a8656e87a0c43db400bdf863193c1afb353d6de0 and the explicitly listed
 core implementation seeds and their recursive project-header includes.
 The validated walk-around uses option D (`session2`); `remote_puppet` supplies
 shared helpers. Sources: README "Upstream co-op behavior", ROADMAP,
