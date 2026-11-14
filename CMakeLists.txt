@@ -388,16 +388,26 @@ add_dependencies(cdmp_tests_pkt3576_live_ctl cdmp_pkt3576_live_ctl cdmp_pkt3576_
 add_test(NAME pkt3576_live_ctl COMMAND cdmp_tests_pkt3576_live_ctl)
 set_tests_properties(pkt3576_live_ctl PROPERTIES TIMEOUT 120)
 # Offline 3663 file assessment. Not linked into the ASI and not accepted by the 3576 controller.
-add_library(cdmp_pkt3663_lib STATIC tools/pkt3663/assess.cpp)
+add_library(cdmp_pkt3663_lib STATIC
+  tools/pkt3663/assess.cpp
+)
 cdmp_strict(cdmp_pkt3663_lib)
 target_include_directories(cdmp_pkt3663_lib PUBLIC tools)
+add_library(cdmp_pkt3663_entry_verify STATIC tools/pkt3663/entry_verify.cpp)
+cdmp_strict(cdmp_pkt3663_entry_verify)
+target_include_directories(cdmp_pkt3663_entry_verify PUBLIC tools)
+target_link_libraries(cdmp_pkt3663_entry_verify PUBLIC cdmp_pkt3663_lib)
 add_executable(cdmp_tests_pkt3663 tests/pkt3663_tests.cpp)
 cdmp_strict(cdmp_tests_pkt3663)
 target_link_libraries(cdmp_tests_pkt3663 PRIVATE cdmp_pkt3663_lib)
 add_test(NAME pkt3663 COMMAND cdmp_tests_pkt3663)
+add_executable(cdmp_tests_pkt3663_entries tests/pkt3663_entry_tests.cpp)
+cdmp_strict(cdmp_tests_pkt3663_entries)
+target_link_libraries(cdmp_tests_pkt3663_entries PRIVATE cdmp_pkt3663_entry_verify)
+add_test(NAME pkt3663_entries COMMAND cdmp_tests_pkt3663_entries)
 add_executable(pkt3663_scan tools/pkt3663/main.cpp)
 cdmp_strict(pkt3663_scan)
-target_link_libraries(pkt3663_scan PRIVATE cdmp_pkt3663_lib)
+target_link_libraries(pkt3663_scan PRIVATE cdmp_pkt3663_lib cdmp_pkt3663_entry_verify)
 # Option D (docs/OPCION-D-EMULADOR.md): the parts that do not need the game.
 add_executable(cdmp_tests_optd tests/optd_tests.cpp)
 cdmp_strict(cdmp_tests_optd)

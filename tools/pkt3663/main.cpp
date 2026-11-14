@@ -6,6 +6,8 @@
 #include <vector>
 
 #include "pkt3663/assess.h"
+#include "pkt3663/candidates.h"
+#include "pkt3663/entry_verify.h"
 
 namespace {
 
@@ -56,6 +58,7 @@ int main(int argc, char** argv) {
     }
     const pkt3663::ImageView image = pkt3663::parse_image(bytes);
     const pkt3663::Assessment result = pkt3663::assess(bytes);
+    const pkt3663::EntryVerification entries = pkt3663::verify_entries(bytes);
     std::printf("file_bytes=%zu\n", bytes.size());
     std::printf("timestamp=0x%08X\n", image.timestamp);
     std::printf("image_base=0x%llX\n", static_cast<unsigned long long>(image.image_base));
@@ -80,5 +83,15 @@ int main(int argc, char** argv) {
     for (const pkt3663::FormerSampleHit& hit : result.former_samples) {
         std::printf("former_sample label=%s rva=0x%X adopted=0\n", hit.label, hit.rva);
     }
-    return 0;
+    std::printf(
+        "entry_status=%s identity_ok=%d send_range=%d receive_range=%d pump_range=%d send_anchors=%d "
+        "receive_anchors=%d pump_anchors=%d role_calls=%d capture_ready=%d adopted=%d failed_anchor=0x%X\n",
+        pkt3663::entry_status_name(entries.status), entries.identity_ok ? 1 : 0, entries.send_range_ok ? 1 : 0,
+        entries.receive_range_ok ? 1 : 0, entries.pump_range_ok ? 1 : 0, entries.send_anchors_ok ? 1 : 0,
+        entries.receive_anchors_ok ? 1 : 0, entries.pump_anchors_ok ? 1 : 0, entries.role_calls_ok ? 1 : 0,
+        entries.passive_capture_ready ? 1 : 0, entries.adopted ? 1 : 0, entries.failed_anchor_rva);
+    std::printf("entry_candidates pump=0x%X-0x%X send=0x%X-0x%X receive=0x%X-0x%X\n", pkt3663::kPumpRva,
+                pkt3663::kPumpEndRva, pkt3663::kSendRva, pkt3663::kSendEndRva, pkt3663::kReceiveRva,
+                pkt3663::kReceiveEndRva);
+    return entries.passive_capture_ready ? 0 : 3;
 }

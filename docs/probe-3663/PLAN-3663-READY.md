@@ -39,14 +39,28 @@ Game-free coverage is `tests/pkt3663_tests.cpp`. The fixture opcodes are not
 the numbers read from the installed file. The installed-file result is
 `docs/probe-3663/PACKET-SCAN-3663.md`. `adopted=0` in that run.
 
-## Later, only after review
+## Follow-up completed offline
+
+The later entry analysis is `docs/probe-3663/ENTRY-VERIFIER-3663.md`. It
+independently establishes strong static candidates for the client send entry,
+client receive entry, and their pump topology. A separate strict verifier and
+synthetic negative tests fail closed on old identities, changed or duplicated
+signatures, wrong pdata ranges, non-executable mappings, malformed sections,
+and redirected pump calls. The installed file reports
+`verified-file-candidates`, `capture_ready=1`, and `adopted=0`.
+
+That result authorizes only the next development step: a separate passive
+3663 capture runner and game-free dummy-host tests. It does not open the ASI
+guard or make the on-disk opcodes a live allow-list.
+
+## Next steps after offline review
 
 1. Codex reviews the scan. A partial type name is not the message it contains.
    `TrocTrManagementRemoveActorAck` is not `TrocTrRemoveActorAck`.
-2. If the review accepts the exact names, a new collector can be written under
-   `tools/pkt3663`. It must not be the 3576 DLL with a wider timestamp check.
-   Its allow-list is the opcodes re-read from this file, and only after a live
-   capture shows those values on the wire. The file read is not that capture.
+2. The exact names and packet entries have now passed offline review. A new
+   collector can be written under `tools/pkt3663`. It must not be the 3576 DLL
+   with a wider timestamp check. Its allow-list stays empty until a live
+   capture shows the file-read opcodes on the wire.
 3. The user launches from Steam. Saves are backed up first. `cdmp.asi` and
    `winmm.dll` stay absent. Identity is checked before `load`. `Retained`
    stops the session.

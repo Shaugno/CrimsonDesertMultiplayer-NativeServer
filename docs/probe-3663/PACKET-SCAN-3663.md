@@ -75,5 +75,8 @@ function that contains `mov ecx, 8030h`. Inside that function, the byte
 sequence `28 80 00 00` occurs at `exe+0x3A9A0B` and `exe+0x3A9A3D`. Those two
 sites were not decoded as displacements.
 
-`exe+0x3A9960` is a file candidate only. It is not adopted, and it is not
-declared to be the 3576 send function. No receive function was isolated.
+At the time of this first broad scan, `exe+0x3A9960` was only a file candidate
+and no receive function was isolated. The later independent disassembly and
+strict file verifier are in `ENTRY-VERIFIER-3663.md`. They establish the
+static send/receive roles without adopting either address or claiming a live
+packet observation.

@@ -1,11 +1,10 @@
 CO-OP DEVELOPMENT PROGRESS
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
-Updated: 2026-11-13. The 3576 capture is blocked. Steam updated the
-installation to Crimson Desert 1.0.0.3663. The aborted session is
-docs/probe-3576/PHASE1-CAPTURE-20261113.md. The offline 3663 assessment is
-docs/probe-3663/PLAN-3663-READY.md. Codex approved the 3576 identity gate.
-Commit 26a0e1a is not re-reviewed. The 3576 gate was not broadened.
+Updated: 2026-11-13. The installed build is Crimson Desert 1.0.0.3663. The
+offline 3663 packet-entry analysis and fail-closed verifier are complete; see
+docs/probe-3663/ENTRY-VERIFIER-3663.md. The game stayed closed. The 3576 gate
+was not broadened, and no production offset or guard was changed.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working on the installed Crimson
@@ -14,6 +13,16 @@ Desert build so two players can play co-op. The installed build is now
 installation. Working co-op has not been demonstrated.
 
 LATEST CODEX REVIEW
+Codex independently verified the 3663 client packet topology offline. The
+strong static candidates are send 0x3A9960, receive 0x3A9CF0, and pump
+0x3A8AC0. Exact pdata ranges, long unique signatures, direct-call topology,
+current request/ack descriptor kinds, and bounded frame handling agree. A
+strict file verifier rejects old identities and changed, ambiguous,
+non-executable, malformed, or redirected evidence. The installed file reports
+verified-file-candidates and adopted=0. No game process was opened. This is
+enough to build a separate 3663 passive capture runner, not to open the ASI
+guard or claim a payload layout.
+
 Codex reviewed docs/probe-3576/PLAN-3576-READY.md and the Phase 4 identity gate
 on 2026-11-13 and found no blocking findings. A 3576 identity cannot reach a
 2976 RVA. 2976 startup behavior is unchanged. Unproved packet fields stay
@@ -161,15 +170,24 @@ COMPLETED MILESTONES
     loaded. See docs/probe-3576/PHASE1-CAPTURE-20261113.md. This commit adds
     a file-only scanner under tools/pkt3663. ctest -C RelWithDebInfo passed
     94/94 in 59.10 seconds. The scan is not adopted.
+13. The 3663 client send, receive, and pump roles were independently derived
+    from the file. The strict verifier requires exact identity, executable
+    sections, pdata ranges, unique long signatures, semantic anchors, and
+    decoded pump call targets. Synthetic tests fail closed on old builds and
+    corrupted evidence. The production mod, production offset headers, and
+    tools/pkt3576 are unchanged. The final complete game-free suite passed
+    95/95 in 59.49 seconds; the ASan synthetic test and real-file scan both exited 0.
+    See ENTRY-VERIFIER-3663.md.
 
 NEXT TASK
-Codex reviews the local 3663 offline-assessment commit. Do not push it from
-this step. The 3576 capture stays blocked while the installed game is 3663.
-Do not load cdmp_pkt3576_live.dll into that installation, broaden the 3576
-gate, reuse its RVAs, or install the ASI. The offline file assessment is
-docs/probe-3663/PACKET-SCAN-3663.md. Its opcodes and the function around the
-8030h immediate are not adopted. No packet sending, replay, or live attach is
-authorized. A 3576 identity must not fall through into a 2976 read.
+Build a separate version-checked 3663 passive capture runner and validate it
+against dummy hosts without running the game. Reuse the proven capture
+lifetime/concurrency design, not the 3576 identity or candidate table. The
+runner must re-read the mapped 3663 identity and strict entry evidence before
+installing both observers, keep the opcode allow-list empty for the first
+diagnostic window, never inject or replay, and retain resources if removal is
+uncertain. Do not install the ASI. A live capture remains a later, separately
+authorized step with save backup and labeled stand/walk/turn windows.
 
 OPERATIONAL LIMITS
 The first successful log directory stays bound for the module lifetime. Fixed
