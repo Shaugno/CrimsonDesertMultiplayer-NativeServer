@@ -2,9 +2,11 @@ CO-OP DEVELOPMENT PROGRESS
 Project: Crimson Desert Multiplayer - Shaugno Continuation
 Maintainer: Shaugno; original implementation and research by ByJunter.
 Updated: 2026-11-13. The installed build is Crimson Desert 1.0.0.3663. The
-offline 3663 packet-entry analysis and fail-closed verifier are complete; see
-docs/probe-3663/ENTRY-VERIFIER-3663.md. The game stayed closed. The 3576 gate
-was not broadened, and no production offset or guard was changed.
+offline packet-entry verifier and separate passive capture runner are reviewed
+and committed (bdf30f9, 4334e43). The final full suite passed 99/99. The game
+stayed closed; production offsets and guards were unchanged. Grok's next task
+is the separate 3663 controller with game-free tests. The current handoff is
+docs/GROK-HANDOFF-20261113.md. Work from the recovered checkout outside OneDrive.
 
 GOAL
 Get CrimsonDesertMultiplayer-NativeServer working on the installed Crimson
