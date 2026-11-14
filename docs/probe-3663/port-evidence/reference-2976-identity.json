@@ -1,0 +1,107 @@
+{
+  "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\reference-bins\\2976\\CrimsonDesert.exe",
+  "sha256": "57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7",
+  "file_size": 384521624,
+  "timestamp": "0x6AB28F00",
+  "image_base": "0x140000000",
+  "image_size": "0x173AB000",
+  "pdata_entries": 244444,
+  "sections": [
+    {
+      "name": ".rsrc",
+      "rva": 4096,
+      "raw": 1024,
+      "size": 85893120,
+      "virtual_size": 85893120,
+      "flags": 1610612768
+    },
+    {
+      "name": ".xdata",
+      "rva": 85897216,
+      "raw": 85894144,
+      "size": 23756800,
+      "virtual_size": 23756800,
+      "flags": 1073741888
+    },
+    {
+      "name": ".rdata",
+      "rva": 109654016,
+      "raw": 109650944,
+      "size": 3524608,
+      "virtual_size": 8732672,
+      "flags": 3221225536
+    },
+    {
+      "name": ".00cfg",
+      "rva": 118386688,
+      "raw": 113175552,
+      "size": 2936832,
+      "virtual_size": 2936832,
+      "flags": 1073741888
+    },
+    {
+      "name": ".tls$",
+      "rva": 121323520,
+      "raw": 116112384,
+      "size": 12288,
+      "virtual_size": 12288,
+      "flags": 1073741888
+    },
+    {
+      "name": ".tls",
+      "rva": 121335808,
+      "raw": 116124672,
+      "size": 196608,
+      "virtual_size": 196608,
+      "flags": 1073741888
+    },
+    {
+      "name": ".xtext",
+      "rva": 121532416,
+      "raw": 116321280,
+      "size": 1974272,
+      "virtual_size": 1974272,
+      "flags": 1107296320
+    },
+    {
+      "name": ".xtls",
+      "rva": 123506688,
+      "raw": 118295552,
+      "size": 261384192,
+      "virtual_size": 261383906,
+      "flags": 3758096416
+    },
+    {
+      "name": ".text",
+      "rva": 384892928,
+      "raw": 379679744,
+      "size": 1849856,
+      "virtual_size": 1849734,
+      "flags": 1073741856
+    },
+    {
+      "name": ".shared",
+      "rva": 386744320,
+      "raw": 381529600,
+      "size": 1024,
+      "virtual_size": 584,
+      "flags": 3221225504
+    },
+    {
+      "name": ".impdata",
+      "rva": 386748416,
+      "raw": 381530624,
+      "size": 36352,
+      "virtual_size": 36316,
+      "flags": 1073741888
+    },
+    {
+      "name": ".trace",
+      "rva": 386785280,
+      "raw": 381566976,
+      "size": 2933760,
+      "virtual_size": 2933328,
+      "flags": 1073741888
+    }
+  ]
+}

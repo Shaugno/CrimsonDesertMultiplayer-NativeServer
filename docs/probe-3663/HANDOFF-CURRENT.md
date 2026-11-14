@@ -1,4 +1,4 @@
-# 3663 port run — Phase 0 complete, later phases in progress
+# 3663 port run — Phases 0–1 complete, later phases in progress
 
 Branch: gpt/3663-port, based on a8656e87a0c43db400bdf863193c1afb353d6de0.
 The user's current request and docs/GPT-3663-PORT-PLAN.md supersede the historical
@@ -8,6 +8,10 @@ the plan's prerequisites; no live work has started.
 Phase 0: all five review findings fixed, focused regressions pass, baseline
 101/101 (139.68 s), post-fix full suite 101/101 (93.77 s). See PHASE0-PORT.md
 and port-evidence/phase0-{baseline,fixed}.txt for full commands/output.
+Phase 1: the user completed the depot download; the copied 2976 reference
+matches SHA-256 57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7.
+Paths and target/reference identities are in PHASE1-REFERENCES.md and its
+referenced JSON files. Both executables are file-analysis inputs only.
 The production 3663 path is still blocked. No two-player result is claimed.
 
 The following sections are preserved historical checkpoints.
