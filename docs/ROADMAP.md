@@ -12,8 +12,11 @@ Completed in this continuation: the live-tested read-only position diagnostic,
 the passive observer, the real capture backend, and the version-checked module
 validated against dummy hosts. The external loading/controller tool is also
 reviewed, including control after hooks are installed and strict PID parsing.
-The latest game-free suite passed 95/95, including the file-only 3663 scanner
-and strict packet-entry verifier.
+The last published game-free suite passed 95/95, including the file-only 3663
+scanner and strict packet-entry verifier. The separate 3663 passive runner and
+its additional offline tests are implemented in the current work. Independent
+review fixes are applied, and the complete local suite passed 99/99 before any
+live session.
 The first controlled 3576 capture was reviewed, and the current movement/action
 and actor-message IDs were independently verified on disk. Full payload layouts
 and native-session compatibility still need evidence.
@@ -22,10 +25,13 @@ and native-session compatibility still need evidence.
    The aborted session is docs/probe-3576/PHASE1-CAPTURE-20261113.md. The 3576
    gate still rejects that file. Do not broaden it or load its collector.
 2. The offline 3663 packet-entry review is complete. Exact send, receive, and
-   pump roles now pass a strict file verifier; see
-   docs/probe-3663/ENTRY-VERIFIER-3663.md. They remain experimental and
-   unadopted. Next, build a separate 3663 passive capture runner and validate
-   it against dummy hosts before any live session. Do not install the ASI.
+   pump roles pass a strict file verifier; see
+   docs/probe-3663/ENTRY-VERIFIER-3663.md. The isolated passive runner is
+   implemented and independently game-free tested; see
+   docs/probe-3663/LIVE-RUNNER-3663.md. The candidates remain experimental and
+   unadopted. The complete local suite passed 99/99. The next step is a
+   separately authorized controlled passive live session. Do not install the
+   ASI.
 3. Spawn and move a second visible actor from those verified fields. Do not
    invent a spawn call or reuse 2976 packet sizes.
 4. Validate loading, reconnects, combat, save handling, and two-PC play before

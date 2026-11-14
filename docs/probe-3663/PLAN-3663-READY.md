@@ -49,18 +49,23 @@ signatures, wrong pdata ranges, non-executable mappings, malformed sections,
 and redirected pump calls. The installed file reports
 `verified-file-candidates`, `capture_ready=1`, and `adopted=0`.
 
-That result authorizes only the next development step: a separate passive
-3663 capture runner and game-free dummy-host tests. It does not open the ASI
-guard or make the on-disk opcodes a live allow-list.
+That result authorized only the next development step: a separate passive
+3663 capture runner and game-free dummy-host tests. That implementation is
+described in `docs/probe-3663/LIVE-RUNNER-3663.md`. It uses an empty allow-list,
+three-stage identity/installation admission, full SafetyHook target-span and
+route ownership, explicit retained teardown, and a recording-ready QPC cutoff.
+It still does not open the ASI guard or make an on-disk value a live opcode.
+The complete game-free build and 99-test suite passed after independent review;
+the game stayed closed. A controlled passive session remains a separate step.
 
 ## Next steps after offline review
 
 1. Codex reviews the scan. A partial type name is not the message it contains.
    `TrocTrManagementRemoveActorAck` is not `TrocTrRemoveActorAck`.
-2. The exact names and packet entries have now passed offline review. A new
-   collector can be written under `tools/pkt3663`. It must not be the 3576 DLL
-   with a wider timestamp check. Its allow-list stays empty until a live
-   capture shows the file-read opcodes on the wire.
+2. The exact names and packet entries have passed offline review. The separate
+   collector under `tools/pkt3663` is not the 3576 DLL with a wider timestamp
+   check. Its allow-list remains empty until a live capture establishes what
+   the first word means at each entry.
 3. The user launches from Steam. Saves are backed up first. `cdmp.asi` and
    `winmm.dll` stay absent. Identity is checked before `load`. `Retained`
    stops the session.

@@ -178,16 +178,25 @@ COMPLETED MILESTONES
     tools/pkt3576 are unchanged. The final complete game-free suite passed
     95/95 in 59.49 seconds; the ASan synthetic test and real-file scan both exited 0.
     See ENTRY-VERIFIER-3663.md.
+14. The current work adds a separate 3663 passive raw-capture runner and
+    fixture-only dummy-host path. Production derives its two candidates only
+    after strict mapped-image verification, then uses Receive, Send, and
+    Complete admission stages. The backend fingerprints the complete
+    SafetyHook overwrite span and exact relay/slot/stub/callback/continuation
+    route, and re-proves ownership before rollback or stop. Raw capture keeps
+    an empty allow-list, a 4096-byte copy cap, unproved field names, and a QPC
+    recording-ready cutoff. The full build succeeded and the complete suite
+    passed 99/99; the dedicated tests passed again after final review fixes.
+    The game stayed closed and the ASI was not installed. See
+    docs/probe-3663/LIVE-RUNNER-3663.md.
 
 NEXT TASK
-Build a separate version-checked 3663 passive capture runner and validate it
-against dummy hosts without running the game. Reuse the proven capture
-lifetime/concurrency design, not the 3576 identity or candidate table. The
-runner must re-read the mapped 3663 identity and strict entry evidence before
-installing both observers, keep the opcode allow-list empty for the first
-diagnostic window, never inject or replay, and retain resources if removal is
-uncertain. Do not install the ASI. A live capture remains a later, separately
-authorized step with save backup and labeled stand/walk/turn windows.
+Prepare a separately authorized controlled passive 3663 capture with a fresh
+save backup and labeled stand/walk/turn windows. Keep `cdmp.asi` and `winmm.dll`
+absent, stop on `Retained` or `BadLog`, and archive the raw session before
+interpreting it. The candidates remain experimental; this checkpoint does not
+authorize injection, replay, spawning, offset adoption, or opening the ASI
+guard.
 
 OPERATIONAL LIMITS
 The first successful log directory stays bound for the module lifetime. Fixed
@@ -212,6 +221,7 @@ KEY EVIDENCE
  docs/COMPATIBILITY-3663.md
  docs/probe-3663/PLAN-3663-READY.md
  docs/probe-3663/PACKET-SCAN-3663.md
+ docs/probe-3663/LIVE-RUNNER-3663.md
  docs/probe-3576/PLAN-3576-READY.md
  docs/probe-3576/FULL-PACKET-COLLECTOR-REVIEW-20261113.txt
  docs/probe-3576/PACKET-MAP-3576.md
