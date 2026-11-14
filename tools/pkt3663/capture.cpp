@@ -486,6 +486,7 @@ struct Capture::State {
   volatile long entries = 0;
   bool running = false;
   bool release_blocked = false;
+  void (*stage_mark)(uint8_t stage) noexcept = nullptr;
 
   void on_hook(bool send, const safetyhook::Context &context) {
     if (observer == nullptr)
@@ -671,6 +672,20 @@ void Capture::set_pre_send_hook(void (*hook)(void *), void *user) {
   g_pre_send_hook.set(hook, user);
 }
 
+void Capture::set_stage_mark(void (*mark)(uint8_t stage) noexcept) noexcept {
+  if (state_ != nullptr)
+    state_->stage_mark = mark;
+}
+
+void mark_capture_stage(Capture::State &state, uint8_t stage) noexcept {
+  if (state.stage_mark == nullptr)
+    return;
+  try {
+    state.stage_mark(stage);
+  } catch (...) {
+  }
+}
+
 void Capture::set_phase(uint8_t phase) {
   g_phase_hold.run();
   if (state_ != nullptr && state_->observer != nullptr)
@@ -847,6 +862,7 @@ Capture::StartResult Capture::start(void *module, void *send_entry,
         return retain();
       return StartResult::Refused;
     }
+    mark_capture_stage(*state_, 1);
 
     g_pre_send_hook.run();
     // The send-side verifier may substitute the original receive entry
@@ -887,6 +903,7 @@ Capture::StartResult Capture::start(void *module, void *send_entry,
         return retain();
       return StartResult::RolledBack;
     }
+    mark_capture_stage(*state_, 2);
     const auto &send_original = state_->send_hook.original_bytes();
     const InstallEvidence send_evidence{
         state_->send_patch, state_->send_patch_size, send_original.data(),
@@ -934,6 +951,7 @@ Capture::StartResult Capture::start(void *module, void *send_entry,
     }
     return StartResult::Refused;
   }
+  mark_capture_stage(*state_, 3);
 
   rollback.active = false;
   state_->running = true;

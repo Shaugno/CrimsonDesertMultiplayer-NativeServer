@@ -7,6 +7,7 @@
 
 #include "pkt3663/assess.h"
 
+#include <climits>
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
@@ -51,6 +52,9 @@ struct Outcome {
   unsigned long long qpc_frequency = 0;
   int unloaded = 0;
   int alive = -1;
+  int thread_created = 0;
+  int remote_wait_ms = -1;
+  const char *remote_wait = "none";
   const char *note = "";
   int exit_code = kExitFailed;
   bool have_base = false;
@@ -98,7 +102,37 @@ struct RemoteAlloc {
 struct Call {
   RemoteWait wait = RemoteWait::Failed;
   int code = -1;
+  int thread_created = 0;
+  int wait_ms = -1;
+  const char *wait_name = "none";
 };
+
+void remember_command_wait(Outcome &out, const Call &call) {
+  out.thread_created = call.thread_created;
+  out.remote_wait_ms = call.wait_ms;
+  out.remote_wait = call.wait_name;
+}
+
+uint64_t qpc_now() {
+  LARGE_INTEGER now{};
+  if (!QueryPerformanceCounter(&now) || now.QuadPart <= 0)
+    return 0;
+  return static_cast<uint64_t>(now.QuadPart);
+}
+
+int elapsed_ms(uint64_t began, uint64_t ended) {
+  LARGE_INTEGER frequency{};
+  if (began == 0 || ended < began || !QueryPerformanceFrequency(&frequency) ||
+      frequency.QuadPart <= 0) {
+    return 0;
+  }
+  const uint64_t delta = ended - began;
+  const uint64_t freq = static_cast<uint64_t>(frequency.QuadPart);
+  if (delta > UINT64_MAX / 1000ull)
+    return INT_MAX;
+  const uint64_t ms = (delta * 1000ull) / freq;
+  return ms > static_cast<uint64_t>(INT_MAX) ? INT_MAX : static_cast<int>(ms);
+}
 
 struct Command {
   DWORD pid = 0;
@@ -140,6 +174,9 @@ void print_outcome(const Outcome &out) {
   std::printf("ctl_unloaded=%d\n", out.unloaded);
   std::printf("ctl_target_alive=%d\n", out.alive);
   std::printf("ctl_note=%s\n", out.note);
+  std::printf("ctl_thread_created=%d\n", out.thread_created);
+  std::printf("ctl_remote_wait_ms=%d\n", out.remote_wait_ms);
+  std::printf("ctl_remote_wait=%s\n", out.remote_wait);
   if (out.have_base)
     std::printf("ctl_dll_base=0x%llx\n", out.dll_base);
   std::printf("ctl_exit=%d\n", out.exit_code);
@@ -584,22 +621,32 @@ Call call_remote(Session &session, HANDLE process, uintptr_t procedure, void *ar
   Call call;
   if (process == nullptr || procedure == 0 || !process_still_alive(process))
     return call;
+  const uint64_t began = qpc_now();
   HANDLE thread = CreateRemoteThread(process, nullptr, 0,
                                      reinterpret_cast<LPTHREAD_START_ROUTINE>(procedure),
                                      argument, 0, nullptr);
-  if (thread == nullptr)
+  if (thread == nullptr) {
+    call.thread_created = 0;
+    call.wait_ms = elapsed_ms(began, qpc_now());
+    call.wait_name = "failed";
     return call;
+  }
+  // The wait expiring does not cancel this thread. Its argument stays allocated.
+  call.thread_created = 1;
   session.out.modified = 1;
   const DWORD waited = WaitForSingleObject(thread, kRemoteWaitMs);
+  call.wait_ms = elapsed_ms(began, qpc_now());
   if (waited != WAIT_OBJECT_0) {
     CloseHandle(thread);
     call.wait = RemoteWait::Timeout;
+    call.wait_name = "timeout";
     return call;
   }
   DWORD code = 0;
   GetExitCodeThread(thread, &code);
   CloseHandle(thread);
   call.wait = RemoteWait::Ok;
+  call.wait_name = "ok";
   call.code = static_cast<int>(code);
   return call;
 }
@@ -663,6 +710,7 @@ bool load_module(Session &session, DWORD pid, HANDLE process, uintptr_t load_lib
   if (!write_bytes(session, process, memory.remote, dll_path, chars * sizeof(wchar_t)))
     return false;
   const Call call = call_remote(session, process, load_library, memory.remote);
+  remember_command_wait(session.out, call);
   if (keep_remote_allocation(call.wait)) {
     memory.keep = true;
     set_note(session.out, "remote-timeout");
@@ -745,6 +793,7 @@ int unload_mapped(Session &session, DWORD pid, HANDLE process, uintptr_t free_li
     return finish(session, kExitFailed);
   }
   const Call call = call_remote(session, process, free_library, reinterpret_cast<void *>(base));
+  remember_command_wait(session.out, call);
   if (keep_remote_allocation(call.wait)) {
     set_note(session.out, "remote-timeout");
     return finish(session, kExitFailed);
@@ -964,6 +1013,7 @@ int execute(Session &session, const Command &command, bool fixture_build,
       return finish(session, kExitFailed);
     }
     const Call call = call_remote(session, session.write, stop_export, nullptr);
+    remember_command_wait(session.out, call);
     if (keep_remote_allocation(call.wait)) {
       set_note(session.out, "remote-timeout");
       return finish(session, kExitFailed);
@@ -1025,6 +1075,7 @@ int execute(Session &session, const Command &command, bool fixture_build,
       return finish(session, kExitFailed);
     }
     const Call call = call_remote(session, session.write, mark_export, argument.remote);
+    remember_command_wait(session.out, call);
     if (keep_remote_allocation(call.wait)) {
       argument.keep = true;
       set_note(session.out, "remote-timeout");
@@ -1099,6 +1150,7 @@ int execute(Session &session, const Command &command, bool fixture_build,
   }
 
   const Call call = call_remote(session, session.write, start_export, argument_pointer);
+  remember_command_wait(session.out, call);
   if (keep_remote_allocation(call.wait)) {
     argument.keep = true;
     set_note(session.out, "remote-timeout");

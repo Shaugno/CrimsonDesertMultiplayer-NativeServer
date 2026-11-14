@@ -1,5 +1,6 @@
 // Game-free tests for the strict mapped-image 3663 live gate.
-// The fixture is synthetic memory; no process or game file is opened.
+// The fixture is synthetic memory. An optional timing read of the installed
+// executable does not open a process and does not attach to the game.
 
 #include <array>
 #include <cstdint>
@@ -7,6 +8,8 @@
 #include <cstring>
 #include <limits>
 #include <vector>
+
+#include <windows.h>
 
 #include "pkt3663/assess.h"
 #include "pkt3663/candidates.h"
@@ -435,9 +438,106 @@ void test_current_test_process_is_not_accepted() {
   CHECK(identity.kind != pkt3663::IdentityKind::Match);
 }
 
+uint64_t elapsed_us(const LARGE_INTEGER &began, const LARGE_INTEGER &ended) {
+  LARGE_INTEGER frequency{};
+  if (ended.QuadPart < began.QuadPart || !QueryPerformanceFrequency(&frequency) ||
+      frequency.QuadPart <= 0) {
+    return 0;
+  }
+  return static_cast<uint64_t>(ended.QuadPart - began.QuadPart) * 1000000ull /
+         static_cast<uint64_t>(frequency.QuadPart);
+}
+
+struct FileBytes {
+  const uint8_t *data = nullptr;
+  size_t size = 0;
+};
+
+void test_synthetic_identity_timing() {
+  Fixture fixture = make_fixture();
+  LARGE_INTEGER began{};
+  LARGE_INTEGER ended{};
+  QueryPerformanceCounter(&began);
+  const pkt3663::Identity synthetic = identify(fixture);
+  QueryPerformanceCounter(&ended);
+  CHECK(synthetic.kind == pkt3663::IdentityKind::Match);
+  std::printf("synthetic_identify_us=%llu\n",
+              static_cast<unsigned long long>(elapsed_us(began, ended)));
+}
+
+void benchmark_installed_identity(const char *path) {
+  if (path == nullptr || path[0] == '\0') {
+    std::printf("installed_benchmark_missing_path\n");
+    return;
+  }
+  wchar_t wide[1024] = {};
+  if (MultiByteToWideChar(CP_UTF8, 0, path, -1, wide, 1024) == 0) {
+    std::printf("installed_benchmark_bad_path\n");
+    return;
+  }
+  HANDLE image_file = CreateFileW(wide, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr,
+                                  OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+  if (image_file == INVALID_HANDLE_VALUE) {
+    std::printf("installed_file_absent error=%lu\n", GetLastError());
+    return;
+  }
+  LARGE_INTEGER file_size{};
+  if (!GetFileSizeEx(image_file, &file_size))
+    file_size.QuadPart = 0;
+  HANDLE mapping = CreateFileMappingW(image_file, nullptr, PAGE_READONLY | SEC_IMAGE, 0, 0, nullptr);
+  void *view = mapping == nullptr ? nullptr : MapViewOfFile(mapping, FILE_MAP_READ, 0, 0, 0);
+  if (view == nullptr) {
+    std::printf("installed_image_map_failed error=%lu\n", GetLastError());
+    if (mapping != nullptr)
+      CloseHandle(mapping);
+    CloseHandle(image_file);
+    return;
+  }
+  FileBytes mapped{static_cast<const uint8_t *>(view), pkt3663::kSizeOfImage3663};
+  auto file_reader = [](uintptr_t address, void *destination, size_t size, void *user) {
+    const auto *image = static_cast<const FileBytes *>(user);
+    if (image == nullptr || image->data == nullptr || destination == nullptr || size == 0 ||
+        address < pkt3663::kImageBase3663) {
+      return false;
+    }
+    const uint64_t offset = static_cast<uint64_t>(address - pkt3663::kImageBase3663);
+    if (offset > image->size || size > image->size - static_cast<size_t>(offset))
+      return false;
+    std::memcpy(destination, image->data + static_cast<size_t>(offset), size);
+    return true;
+  };
+  LARGE_INTEGER began{};
+  LARGE_INTEGER ended{};
+  QueryPerformanceCounter(&began);
+  const pkt3663::Identity once = pkt3663::identify_image(
+      L"CrimsonDesert.exe", pkt3663::kImageBase3663, file_reader, &mapped);
+  QueryPerformanceCounter(&ended);
+  const uint64_t once_us = elapsed_us(began, ended);
+  std::printf("installed_kind=%s\n", pkt3663::identity_kind_name(once.kind));
+  if (once.kind == pkt3663::IdentityKind::Match) {
+    QueryPerformanceCounter(&began);
+    for (int pass = 0; pass < 3; ++pass) {
+      const pkt3663::Identity again = pkt3663::identify_image(
+          L"CrimsonDesert.exe", pkt3663::kImageBase3663, file_reader, &mapped);
+      std::printf("installed_pass=%d kind=%s\n", pass, pkt3663::identity_kind_name(again.kind));
+    }
+    QueryPerformanceCounter(&ended);
+    std::printf("installed_identify_us=%llu installed_identify_x3_us=%llu file_bytes=%lld\n",
+                static_cast<unsigned long long>(once_us),
+                static_cast<unsigned long long>(elapsed_us(began, ended)),
+                static_cast<long long>(file_size.QuadPart));
+  } else {
+    std::printf("installed_identity_unsupported kind=%s file_bytes=%lld\n",
+                pkt3663::identity_kind_name(once.kind), static_cast<long long>(file_size.QuadPart));
+  }
+  UnmapViewOfFile(view);
+  CloseHandle(mapping);
+  CloseHandle(image_file);
+}
+
 } // namespace
 
-int main() {
+int main(int argc, char **argv) {
   test_exact_mapped_fixture_matches();
   test_old_builds_stop_before_candidates();
   test_other_identity_fields_stop_before_candidates();
@@ -448,10 +548,13 @@ int main() {
   test_second_verification_catches_a_change();
   test_send_site_recheck_masks_only_receive_patch_window();
   test_current_test_process_is_not_accepted();
+  test_synthetic_identity_timing();
   if (g_failures != 0) {
     std::printf("%d failures\n", g_failures);
     return 1;
   }
+  if (argc >= 2 && argv != nullptr && argv[1] != nullptr && argv[1][0] != '\0')
+    benchmark_installed_identity(argv[1]);
   std::printf("pkt3663 live identity tests ok\n");
   return 0;
 }

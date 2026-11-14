@@ -72,6 +72,9 @@ public:
 
   void set_writer_blocked(bool blocked);
   void set_phase(uint8_t phase);
+  // Optional same-thread marks. Production uses them for session timing.
+  // 1 receive hook installed, 2 send hook installed, 3 writer thread started.
+  void set_stage_mark(void (*mark)(uint8_t stage) noexcept) noexcept;
 
   // Game-free scheduling seams. Production leaves these null.
   static void set_records_open_hook(void (*hook)(void *), void *user);

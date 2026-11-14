@@ -17,6 +17,7 @@ int fixture_start(const wchar_t *log_directory, void *send_entry,
 void set_records_open_hook(void (*hook)(void *), void *user);
 void set_phase_hold(void (*hold)(void *), void *user);
 void fail_log_flush_after(unsigned successful_flushes);
+void fail_session_short_write_containing(const char *needle);
 #endif
 
 } // namespace pkt3663::live

@@ -10,6 +10,7 @@
 #include "pkt3663/live_identity.h"
 
 #include <atomic>
+#include <cstdint>
 #include <cstdio>
 #include <cstring>
 
@@ -71,6 +72,8 @@ bool g_log_bound = false;
 bool g_log_write_failed = false;
 #ifdef PKT3663_LIVE_FIXTURE
 int g_flushes_before_failure = -1;
+bool g_fail_ready_durable_flush = false;
+bool g_force_short_write = false;
 #endif
 wchar_t g_log_dir[kPathCap] = {};
 wchar_t g_session_path[kCapturePathCap] = {};
@@ -185,11 +188,37 @@ void log_append(const char *text) {
   g_log[g_log_used] = '\0';
 }
 
-bool log_flush() {
+bool log_flush_file() {
   if (!g_log_bound || g_session_path[0] == L'\0') {
     g_log_write_failed = true;
     return false;
   }
+  FILE *file = nullptr;
+  if (_wfopen_s(&file, g_session_path, L"wb") != 0 || file == nullptr) {
+    g_log_write_failed = true;
+    return false;
+  }
+#ifdef PKT3663_LIVE_FIXTURE
+  // The file is already truncated by "wb". This one-shot fault is only armed
+  // for the ready-durable timing rewrite.
+  if (g_force_short_write) {
+    g_force_short_write = false;
+    std::fclose(file);
+    g_log_write_failed = true;
+    return false;
+  }
+#endif
+  const size_t written =
+      g_log_used == 0 ? 0 : std::fwrite(g_log, 1, g_log_used, file);
+  const int closed = std::fclose(file);
+  if (closed != 0 || written != g_log_used) {
+    g_log_write_failed = true;
+    return false;
+  }
+  return true;
+}
+
+bool log_flush() {
 #ifdef PKT3663_LIVE_FIXTURE
   if (g_flushes_before_failure == 0) {
     g_flushes_before_failure = -1;
@@ -199,19 +228,84 @@ bool log_flush() {
   if (g_flushes_before_failure > 0)
     --g_flushes_before_failure;
 #endif
-  FILE *file = nullptr;
-  if (_wfopen_s(&file, g_session_path, L"wb") != 0 || file == nullptr) {
-    g_log_write_failed = true;
+  return log_flush_file();
+}
+
+uint64_t g_stage_origin = 0;
+bool g_stage_write_failed = false;
+
+uint64_t qpc_now() noexcept {
+  LARGE_INTEGER now{};
+  if (!QueryPerformanceCounter(&now) || now.QuadPart <= 0)
+    return 0;
+  return static_cast<uint64_t>(now.QuadPart);
+}
+
+void ensure_qpc_frequency() noexcept {
+  if (g_qpc_frequency != 0)
+    return;
+  LARGE_INTEGER frequency{};
+  if (QueryPerformanceFrequency(&frequency) && frequency.QuadPart > 0)
+    g_qpc_frequency = static_cast<uint64_t>(frequency.QuadPart);
+}
+
+void begin_stages(uint64_t origin) noexcept {
+  ensure_qpc_frequency();
+  g_stage_origin = origin;
+  g_stage_write_failed = false;
+}
+
+// elapsed_us is measured from begin_stages, not from the previous stage.
+// A failed timing rewrite is sticky. Callers must not report Started after it.
+bool note_stage(const char *name, uint64_t qpc) noexcept {
+  try {
+    if (name == nullptr || !g_log_bound)
+      return false;
+    uint64_t elapsed_us = 0;
+    if (g_qpc_frequency != 0 && qpc >= g_stage_origin) {
+      const uint64_t delta = qpc - g_stage_origin;
+      elapsed_us = delta > (UINT64_MAX / 1000000ull)
+                       ? UINT64_MAX
+                       : (delta * 1000000ull) / g_qpc_frequency;
+    }
+    char line[160] = {};
+    const int wrote = std::snprintf(
+        line, sizeof line, "stage=%s qpc=%llu elapsed_us=%llu\n", name,
+        static_cast<unsigned long long>(qpc),
+        static_cast<unsigned long long>(elapsed_us));
+    if (wrote <= 0) {
+      g_stage_write_failed = true;
+      return false;
+    }
+    log_append(line);
+#ifdef PKT3663_LIVE_FIXTURE
+    if (std::strcmp(name, "ready-durable") == 0 && g_fail_ready_durable_flush) {
+      g_fail_ready_durable_flush = false;
+      g_force_short_write = true;
+    }
+#endif
+    if (!log_flush_file()) {
+      g_stage_write_failed = true;
+      return false;
+    }
+    return true;
+  } catch (...) {
+    g_stage_write_failed = true;
     return false;
   }
-  const size_t written =
-      g_log_used == 0 ? 0 : std::fwrite(g_log, 1, g_log_used, file);
-  const int closed = std::fclose(file);
-  if (closed != 0 || written != g_log_used) {
-    g_log_write_failed = true;
-    return false;
-  }
-  return true;
+}
+
+void capture_stage(uint8_t stage) noexcept {
+  const char *name = nullptr;
+  if (stage == 1)
+    name = "receive-hook";
+  else if (stage == 2)
+    name = "send-hook";
+  else if (stage == 3)
+    name = "writer-start";
+  else
+    return;
+  note_stage(name, qpc_now());
 }
 
 int bind_log(const wchar_t *directory, const wchar_t *host) {
@@ -486,6 +580,7 @@ bool reverify_before_hook(InstallSite site, const InstallEvidence *evidence,
       if (evidence != nullptr)
         return false;
       identity = identify_process();
+      note_stage("receive-admission", qpc_now());
     } else if (site == InstallSite::Send) {
       if (!evidence_matches(evidence, kReceiveEntry, sizeof kReceiveEntry))
         return false;
@@ -499,13 +594,17 @@ bool reverify_before_hook(InstallSite site, const InstallEvidence *evidence,
       identity = identify_image_after_receive_patch(
           file_name_of(path), expected->base, reader, nullptr,
           evidence->target_patch, evidence->target_patch_size);
+      note_stage("send-admission", qpc_now());
     } else if (site == InstallSite::Complete) {
       // Receive was rechecked immediately before the Send factory. The
       // saved, instruction-aligned Send bytes close that final factory
       // window; Capture re-proves both exact live routes after return.
-      return evidence_matches(evidence, kSendEntry, sizeof kSendEntry) &&
-             reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr)) ==
-                 expected->base;
+      const bool matched =
+          evidence_matches(evidence, kSendEntry, sizeof kSendEntry) &&
+          reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr)) ==
+              expected->base;
+      note_stage("complete-admission", qpc_now());
+      return matched;
     } else {
       return false;
     }
@@ -574,6 +673,7 @@ int arm(StateSlot &slot, void *module, void *send_entry, void *receive_entry,
     return kPkt3663LiveRefused;
   }
   g_capture->set_phase(phase);
+  g_capture->set_stage_mark(&capture_stage);
 
   if (!pin_module()) {
     if (!release_capture()) {
@@ -611,7 +711,8 @@ int arm(StateSlot &slot, void *module, void *send_entry, void *receive_entry,
       g_ready_qpc = static_cast<uint64_t>(ready.QuadPart);
     g_start_code.store(kPkt3663LiveStarted, std::memory_order_relaxed);
     g_stop_code.store(-1, std::memory_order_relaxed);
-    if (!write_block(exe_name, "started", "pending")) {
+    if (!write_block(exe_name, "started", "pending") || g_stage_write_failed ||
+        !note_stage("ready-durable", qpc_now())) {
       // The QPC cutoff is evidence only after it reaches the session file.
       // Refuse the attempt and remove the newly installed hooks while their
       // ownership is still known instead of recording unanchored raw rows.
@@ -656,6 +757,8 @@ int arm(StateSlot &slot, void *module, void *send_entry, void *receive_entry,
 
 int start(const wchar_t *log_directory) {
   ControlLock control;
+  const uint64_t entered = qpc_now();
+  begin_stages(entered);
   int denied = 0;
   if (!enter_start(denied))
     return denied;
@@ -673,8 +776,10 @@ int start(const wchar_t *log_directory) {
     g_start_code.store(bound, std::memory_order_relaxed);
     return bound;
   }
+  note_stage("export-entry", entered);
 
   const Identity identity = identify_process();
+  note_stage("identity", qpc_now());
   remember_session(false, false, identity);
   if (!identity_allows_hooks(identity)) {
     g_start_code.store(kPkt3663LiveRefused, std::memory_order_relaxed);
@@ -820,6 +925,8 @@ int fixture_start(const wchar_t *log_directory, void *send_entry,
                   void *recv_entry, unsigned queue_capacity,
                   unsigned output_records) {
   ControlLock control;
+  const uint64_t entered = qpc_now();
+  begin_stages(entered);
   int denied = 0;
   if (!enter_start(denied))
     return denied;
@@ -837,7 +944,9 @@ int fixture_start(const wchar_t *log_directory, void *send_entry,
     g_start_code.store(bound, std::memory_order_relaxed);
     return bound;
   }
+  note_stage("export-entry", entered);
   const Identity observed = identify_process();
+  note_stage("identity", qpc_now());
   remember_session(true, false, observed);
   return arm(slot, GetModuleHandleW(nullptr), send_entry, recv_entry,
              queue_capacity, output_records, file_name_of(host), nullptr,
@@ -854,6 +963,12 @@ void fail_log_flush_after(unsigned successful_flushes) {
   ControlLock control;
   g_flushes_before_failure =
       successful_flushes > 1000000u ? -1 : static_cast<int>(successful_flushes);
+}
+
+void fail_session_short_write_containing(const char *needle) {
+  ControlLock control;
+  g_fail_ready_durable_flush =
+      needle != nullptr && std::strcmp(needle, "stage=ready-durable") == 0;
 }
 #endif
 

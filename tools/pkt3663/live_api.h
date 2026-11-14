@@ -82,6 +82,11 @@ pkt3663_live_fixture_set_phase_hold(Pkt3663LiveFixtureHook hold, void *user);
 // flushes; values above one million disable the injected failure.
 PKT3663_LIVE_EXPORT_API void
 pkt3663_live_fixture_fail_log_flush_after(unsigned successful_flushes);
+// The next session rewrite whose buffer contains this text opens "wb" and
+// then fails the write, so a timing line cannot erase a committed block
+// while start still reports success.
+PKT3663_LIVE_EXPORT_API void
+pkt3663_live_fixture_fail_session_short_write_containing(const char *needle);
 #endif
 
 #ifdef __cplusplus

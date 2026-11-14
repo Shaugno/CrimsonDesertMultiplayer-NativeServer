@@ -17,6 +17,10 @@ std::atomic<int> g_arm{0};
 std::atomic<int> g_stop{5};
 std::atomic<int> g_mark{0};
 std::atomic<int> g_report{1};
+std::atomic<int> g_arm_calls{0};
+std::atomic<unsigned> g_delay_result{0};
+
+constexpr int kStubDelayStart = 5;
 
 } // namespace
 
@@ -38,7 +42,30 @@ extern "C" int pkt3663_live_start(const wchar_t *) {
   return kPkt3663LiveRefused;
 }
 
-extern "C" __declspec(dllexport) int pkt3663_live_fixture_arm(const void *) {
+extern "C" __declspec(dllexport) unsigned pkt3663_stub_delayed_start_result(void) {
+  return g_delay_result.load(std::memory_order_acquire);
+}
+
+extern "C" __declspec(dllexport) int pkt3663_live_fixture_arm(const void *request) {
+  if (g_report.load(std::memory_order_acquire) == kStubDelayStart) {
+    g_arm_calls.fetch_add(1, std::memory_order_acq_rel);
+    Sleep(22000);
+    unsigned result = 1;
+    MEMORY_BASIC_INFORMATION info{};
+    if (request != nullptr &&
+        VirtualQuery(request, &info, sizeof info) == sizeof info &&
+        info.State == MEM_COMMIT &&
+        info.RegionSize >= sizeof(Pkt3663LiveFixtureArm)) {
+      const auto *arm = static_cast<const Pkt3663LiveFixtureArm *>(request);
+      if (arm->log_directory[0] != L'\0' && arm->log_directory[1023] == L'\0')
+        result |= 2u;
+    }
+    const unsigned calls =
+        static_cast<unsigned>(g_arm_calls.load(std::memory_order_acquire));
+    result |= (calls & 0xFFu) << 8;
+    g_delay_result.store(result, std::memory_order_release);
+    return kPkt3663LiveStarted;
+  }
   return g_arm.load(std::memory_order_acquire);
 }
 
@@ -75,6 +102,17 @@ extern "C" int pkt3663_live_report(Pkt3663LiveReport *report) {
     mild.raw_mode = 1;
     mild.qpc_frequency = 1;
     *report = mild;
+    return 0;
+  }
+  if (mode == kStubDelayStart) {
+    if (report == nullptr || (g_delay_result.load(std::memory_order_acquire) & 1u) == 0)
+      return kPkt3663LiveRefused;
+    Pkt3663LiveReport finished{};
+    finished.start_code = kPkt3663LiveStarted;
+    finished.stop_code = -1;
+    finished.raw_mode = 1;
+    finished.qpc_frequency = 1;
+    *report = finished;
     return 0;
   }
   return kPkt3663LiveRefused;

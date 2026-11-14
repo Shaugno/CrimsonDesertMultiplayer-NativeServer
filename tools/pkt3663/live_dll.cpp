@@ -93,4 +93,9 @@ extern "C" void
 pkt3663_live_fixture_fail_log_flush_after(unsigned successful_flushes) {
   pkt3663::live::fail_log_flush_after(successful_flushes);
 }
+
+extern "C" void pkt3663_live_fixture_fail_session_short_write_containing(
+    const char *needle) {
+  pkt3663::live::fail_session_short_write_containing(needle);
+}
 #endif

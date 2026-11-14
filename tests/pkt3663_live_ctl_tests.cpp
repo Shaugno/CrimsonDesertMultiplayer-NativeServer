@@ -137,6 +137,7 @@ void require_keys(const Captured &captured) {
                         "ctl_raw_mode",      "ctl_allowlist",     "ctl_adopted",
                         "ctl_phase",         "ctl_capture_attempts", "ctl_qpc_frequency",
                         "ctl_unloaded",      "ctl_target_alive",  "ctl_note",
+                        "ctl_thread_created", "ctl_remote_wait_ms", "ctl_remote_wait",
                         "ctl_exit"};
   for (const char *key : keys) {
     if (captured.fields.find(key) == captured.fields.end()) {
@@ -793,6 +794,7 @@ constexpr int kStubReportError = 1;
 constexpr int kStubReportUnreadable = 2;
 constexpr int kStubReportTimeout = 3;
 constexpr int kStubReportStale = 4;
+constexpr int kStubDelayStart = 5;
 constexpr DWORD kReportTimeoutWaitMs = 45000;
 
 struct StagedDll {
@@ -852,7 +854,7 @@ void remove_staged(StagedDll &staged) {
 }
 
 bool call_remote_export(HANDLE process, DWORD pid, const std::wstring &dll_path, const char *export_name,
-                        uintptr_t argument) {
+                        uintptr_t argument, DWORD *exit_code = nullptr) {
   HMODULE local = LoadLibraryW(dll_path.c_str());
   if (local == nullptr) {
     std::printf("FAIL LoadLibrary %ls %lu\n", dll_path.c_str(), GetLastError());
@@ -887,8 +889,12 @@ bool call_remote_export(HANDLE process, DWORD pid, const std::wstring &dll_path,
     ++g_failures;
     return false;
   }
-  const DWORD waited = WaitForSingleObject(thread, 5000);
+  const DWORD waited = WaitForSingleObject(thread, 15000);
+  DWORD code = 1;
+  GetExitCodeThread(thread, &code);
   CloseHandle(thread);
+  if (exit_code != nullptr)
+    *exit_code = code;
   if (waited != WAIT_OBJECT_0) {
     std::printf("FAIL remote export %s wait %lu\n", export_name, waited);
     ++g_failures;
@@ -1273,6 +1279,71 @@ void test_required_reports(const std::wstring &fixture_ctl, const std::wstring &
   remove_staged(timeout_dll);
 }
 
+void test_delayed_start(const std::wstring &fixture_ctl, const std::wstring &stub,
+                        const std::wstring &dummy_exe) {
+  StagedDll staged;
+  if (!stage_fixture_copy(staged, stub, L"delay")) {
+    std::printf("FAIL stage delayed stub\n");
+    ++g_failures;
+    return;
+  }
+  Dummy dummy;
+  if (!spawn_at(dummy, dummy_exe, false) ||
+      !load_and_configure(dummy, fixture_ctl, staged.path, 0, kPkt3663LiveIdle, 0, kStubDelayStart)) {
+    dummy.close();
+    remove_staged(staged);
+    return;
+  }
+  const std::wstring pid = std::to_wstring(dummy.pid);
+  const std::wstring log = make_log_dir(dummy.pid, L"delay");
+  Captured started =
+      run_exe(fixture_ctl,
+              L"start --fixture --pid " + pid + L" --dll " + quote(staged.path) + L" --log-dir " + quote(log),
+              40000);
+  expect_report_loss(started, 5, "remote-timeout");
+  expect(started, "ctl_start", "-1");
+  expect(started, "ctl_thread_created", "1");
+  expect(started, "ctl_remote_wait", "timeout");
+  const int wait_ms = std::atoi(started.fields["ctl_remote_wait_ms"].c_str());
+  CHECK(wait_ms >= 20000 && wait_ms < 30000);
+  CHECK(module_mapped_once(dummy.pid, L"cdmp_pkt3663_live_fixture.dll"));
+  DWORD alive = 0;
+  CHECK(GetExitCodeProcess(dummy.process, &alive) && alive == STILL_ACTIVE);
+
+  DWORD witness = 0;
+  bool finished = false;
+  for (int attempt = 0; attempt < 40 && !finished; ++attempt) {
+    DWORD code = 0;
+    if (call_remote_export(dummy.process, dummy.pid, staged.path, "pkt3663_stub_delayed_start_result", 0, &code) &&
+        (code & 1u) != 0) {
+      witness = code;
+      finished = true;
+      break;
+    }
+    Sleep(500);
+  }
+  CHECK(finished);
+  CHECK((witness & 2u) != 0);
+  CHECK(((witness >> 8) & 0xFFu) == 1u);
+  Captured stopped = run_exe(fixture_ctl, L"stop --fixture --pid " + pid + L" --dll " + quote(staged.path));
+  expect(stopped, "ctl_exit", "0");
+  expect(stopped, "ctl_stop", "5");
+  expect(stopped, "ctl_note", "idle");
+  expect(stopped, "ctl_unloaded", "0");
+  expect(stopped, "ctl_loaded", "1");
+  Captured unload = run_exe(fixture_ctl, L"unload --fixture --pid " + pid + L" --dll " + quote(staged.path));
+  expect(unload, "ctl_exit", "5");
+  expect(unload, "ctl_note", "pinned");
+  expect(unload, "ctl_unloaded", "0");
+  expect(unload, "ctl_loaded", "1");
+  CHECK(module_mapped_once(dummy.pid, L"cdmp_pkt3663_live_fixture.dll"));
+  CHECK(GetExitCodeProcess(dummy.process, &alive) && alive == STILL_ACTIVE);
+  std::printf("observed delayed-start exit=%s wait=%s witness=0x%lx\n", started.fields["ctl_exit"].c_str(),
+              started.fields["ctl_remote_wait"].c_str(), witness);
+  dummy.close();
+  remove_staged(staged);
+}
+
 void test_stale_report(const std::wstring &fixture_ctl, const std::wstring &stub, const std::wstring &dummy_exe) {
   StagedDll staged;
   if (!stage_fixture_copy(staged, stub, L"stale")) {
@@ -1649,6 +1720,7 @@ void test_controller_regressions() {
     return;
   test_stop_flush_failure(fixture_ctl, fixture_dll, dummy_exe);
   test_repeated_start(fixture_ctl, fixture_dll, dummy_exe);
+  test_delayed_start(fixture_ctl, stub, dummy_exe);
   test_required_reports(fixture_ctl, stub, dummy_exe);
   test_stale_report(fixture_ctl, stub, dummy_exe);
   CHECK(!real_game_running());

@@ -131,7 +131,14 @@ non-digits, a value that would wrap, and the controller's own PID are usage.
 `ctl_modified` becomes 1 only after a remote allocation, write, remote thread,
 or `FreeLibrary`. Opening the later write handle is not a modification.
 `ctl_target_alive=1` means the PID was still running when the tool exited.
-The tool never calls `TerminateProcess` or `TerminateThread`.
+The tool never calls `TerminateProcess` or `TerminateThread`. A remote wait
+that reaches 20 seconds is `ctl_remote_wait=timeout`. Closing the waited
+thread handle does not cancel that thread, and its argument allocation stays.
+`ctl_thread_created=1` means the thread was created. `ctl_remote_wait_ms` is
+the measured wait for the command thread, or `-1` when that command created
+none. The session log records `stage=` lines with a QPC and `elapsed_us`
+from the export entry. A missing stage does not mean an earlier stage was
+cancelled.
 
 ## Failure and cleanup
 

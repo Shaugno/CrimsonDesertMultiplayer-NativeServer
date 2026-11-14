@@ -127,6 +127,9 @@ void test_production_refuses_dummy_host() {
 
   CHECK(api.stop() == kPkt3663LiveIdle);
   CHECK(api.start(directory.c_str()) == kPkt3663LiveRefused);
+  CHECK(GetProcAddress(api.module,
+                       "pkt3663_live_fixture_fail_session_short_write_containing") ==
+        nullptr);
   const Pkt3663LiveReport report = report_of(api);
   CHECK(report.capture_attempts == 0);
   CHECK(report.retained == 0);
@@ -138,6 +141,10 @@ void test_production_refuses_dummy_host() {
   CHECK(session.find("startup=refused") != std::string::npos);
   CHECK(session.find("capture_attempts=0") != std::string::npos);
   CHECK(session.find("recording_ready=0") != std::string::npos);
+  CHECK(session.find("stage=export-entry qpc=") != std::string::npos);
+  CHECK(session.find("stage=identity qpc=") != std::string::npos);
+  CHECK(session.find("elapsed_us=") != std::string::npos);
+  CHECK(session.find("stage=ready-durable") == std::string::npos);
   CHECK(session.find("capture_ready_qpc=0") != std::string::npos);
   CHECK(session.find("capture_mode=raw-all") != std::string::npos);
   CHECK(session.find("allowlist_count=0") != std::string::npos);
@@ -221,6 +228,12 @@ void test_fixture_raw_capture() {
   CHECK(session.find("receive_transform=possible") != std::string::npos);
   CHECK(session.find("adopted=0") != std::string::npos);
   CHECK(session.find("recording_ready=1") != std::string::npos);
+  CHECK(session.find("stage=export-entry qpc=") != std::string::npos);
+  CHECK(session.find("stage=identity qpc=") != std::string::npos);
+  CHECK(session.find("stage=receive-hook qpc=") != std::string::npos);
+  CHECK(session.find("stage=send-hook qpc=") != std::string::npos);
+  CHECK(session.find("stage=writer-start qpc=") != std::string::npos);
+  CHECK(session.find("stage=ready-durable qpc=") != std::string::npos);
   CHECK(session.find("capture_ready_qpc=0") == std::string::npos);
   CHECK(session.find("evidence_cutoff=records-qpc-at-or-after-ready") !=
         std::string::npos);
@@ -294,6 +307,31 @@ void test_fixture_raw_capture() {
                     reinterpret_cast<void *>(&pkt3663_dummy_send),
                     reinterpret_cast<void *>(&pkt3663_dummy_receive), 8,
                     2) == kPkt3663LiveBadLog);
+
+  using ShortWriteFn = void (*)(const char *);
+  const auto arm_short_write = reinterpret_cast<ShortWriteFn>(GetProcAddress(
+      api.module, "pkt3663_live_fixture_fail_session_short_write_containing"));
+  CHECK(arm_short_write != nullptr);
+  if (arm_short_write != nullptr) {
+    CHECK(api.mark("unlabeled") == 0);
+    arm_short_write("stage=ready-durable");
+    const int ready_short =
+        api.fixture(directory.c_str(), reinterpret_cast<void *>(&pkt3663_dummy_send),
+                    reinterpret_cast<void *>(&pkt3663_dummy_receive), 8, 2);
+    CHECK(ready_short == kPkt3663LiveBadLog);
+    const Pkt3663LiveReport ready_report = report_of(api);
+    CHECK(ready_report.start_code == kPkt3663LiveBadLog);
+    CHECK(ready_report.stop_code == kPkt3663LiveRemoved);
+    CHECK(ready_report.retained == 0);
+    CHECK(api.stop() == kPkt3663LiveIdle);
+    const std::string ready_session = read_file(directory + L"\\pkt3663-live-session.txt");
+    CHECK(!ready_session.empty());
+    CHECK(ready_session.find("session_write_failed=1") != std::string::npos);
+    CHECK(ready_session.find("startup=bad-log") != std::string::npos);
+    CHECK(ready_session.find("shutdown=removed") != std::string::npos);
+    std::printf("observed ready-short-write start=%d session_bytes=%zu\n", ready_short,
+                ready_session.size());
+  }
 
   // The first successful arm pins the diagnostic DLL until process exit.
   CHECK(FreeLibrary(api.module) != FALSE);
