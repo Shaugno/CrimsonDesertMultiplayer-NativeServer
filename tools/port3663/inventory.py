@@ -18,6 +18,7 @@ mod/game/game_errors.cpp mod/net/steam_transport.cpp mod/net/troc_sniffer.cpp
 mod/net/remote_puppet.cpp mod/session2/session2.cpp mod/session2/server.cpp
 mod/session2/guest.cpp mod/session2/guest_lifecycle.cpp
 mod/session2/field_share.cpp mod/session2/identity_fix.cpp
+mod/session2/identity_probe.cpp
 mod/session2/report_guard.cpp mod/session2/save_hooks.cpp
 mod/session2/guest_save_guest.cpp mod/session2/guest_save_host.cpp
 mod/session2/guest_save_tunnel.cpp mod/session2/host_save_export.cpp

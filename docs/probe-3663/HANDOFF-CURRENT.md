@@ -14,6 +14,15 @@ Paths and target/reference identities are in PHASE1-REFERENCES.md and its
 referenced JSON files. Both executables are file-analysis inputs only.
 The production 3663 path is still blocked. No two-player result is claimed.
 
+Phase 2 is a conservative inventory with semantic/reachability audit remaining.
+Phase 3 performed paired Ghidra analysis, whole-pdata normalized matching,
+RTTI/slot and signature checks, and call-neighbour ranking. Seventeen values
+are corroborated static identities. The complete core table is not resolved.
+PORT-MATCHES.md lists every named row, the literal supplement, and five precise
+blocking groups, including the next file-only field-sharing experiment.
+Raw discovery confidence is not automatically promoted. No weak candidate is
+allowed into a runtime path. Phases 4–9 independent work is continuing.
+
 The following sections are preserved historical checkpoints.
 
 # Handoff: 3663 acknowledgement findings fixed; walk prototype blocked

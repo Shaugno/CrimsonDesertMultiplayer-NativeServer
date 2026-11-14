@@ -1,0 +1,270 @@
+{
+  "identity": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\reference-bins\\2976\\CrimsonDesert.exe",
+    "sha256": "57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7",
+    "file_size": 384521624,
+    "timestamp": "0x6AB28F00",
+    "image_base": "0x140000000",
+    "image_size": "0x173AB000",
+    "pdata_entries": 244444,
+    "tls_index_rva": "0x6C88C50",
+    "sections": [
+      {
+        "name": ".rsrc",
+        "rva": 4096,
+        "raw": 1024,
+        "size": 85893120,
+        "virtual_size": 85893120,
+        "flags": 1610612768
+      },
+      {
+        "name": ".xdata",
+        "rva": 85897216,
+        "raw": 85894144,
+        "size": 23756800,
+        "virtual_size": 23756800,
+        "flags": 1073741888
+      },
+      {
+        "name": ".rdata",
+        "rva": 109654016,
+        "raw": 109650944,
+        "size": 3524608,
+        "virtual_size": 8732672,
+        "flags": 3221225536
+      },
+      {
+        "name": ".00cfg",
+        "rva": 118386688,
+        "raw": 113175552,
+        "size": 2936832,
+        "virtual_size": 2936832,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls$",
+        "rva": 121323520,
+        "raw": 116112384,
+        "size": 12288,
+        "virtual_size": 12288,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls",
+        "rva": 121335808,
+        "raw": 116124672,
+        "size": 196608,
+        "virtual_size": 196608,
+        "flags": 1073741888
+      },
+      {
+        "name": ".xtext",
+        "rva": 121532416,
+        "raw": 116321280,
+        "size": 1974272,
+        "virtual_size": 1974272,
+        "flags": 1107296320
+      },
+      {
+        "name": ".xtls",
+        "rva": 123506688,
+        "raw": 118295552,
+        "size": 261384192,
+        "virtual_size": 261383906,
+        "flags": 3758096416
+      },
+      {
+        "name": ".text",
+        "rva": 384892928,
+        "raw": 379679744,
+        "size": 1849856,
+        "virtual_size": 1849734,
+        "flags": 1073741856
+      },
+      {
+        "name": ".shared",
+        "rva": 386744320,
+        "raw": 381529600,
+        "size": 1024,
+        "virtual_size": 584,
+        "flags": 3221225504
+      },
+      {
+        "name": ".impdata",
+        "rva": 386748416,
+        "raw": 381530624,
+        "size": 36352,
+        "virtual_size": 36316,
+        "flags": 1073741888
+      },
+      {
+        "name": ".trace",
+        "rva": 386785280,
+        "raw": 381566976,
+        "size": 2933760,
+        "virtual_size": 2933328,
+        "flags": 1073741888
+      }
+    ]
+  },
+  "adopted": 0,
+  "types": [
+    {
+      "name": ".?AVNwAsyncSession@pa@@",
+      "descriptor": "0x6AF83C0",
+      "locators": [
+        {
+          "rva": "0x5E34F18",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5726140",
+          "locator": "0x5E34F18",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x1437470",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1436EB0",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x1437510",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x359B50",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x35EA90",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x359B50",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x1436EC0",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x1436ED0",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x35EA90",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x1437570",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x359B50",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x35EA90",
+              "pdata_entry": false
+            },
+            {
+              "index": 12,
+              "rva": "0x359BA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x359B50",
+              "pdata_entry": false
+            },
+            {
+              "index": 14,
+              "rva": "0x359BA0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1437484",
+              "pdata_owner": "0x1437470",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14374E9",
+              "pdata_owner": "0x14374E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143759E",
+              "pdata_owner": "0x1437580",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x100B82CA",
+              "pdata_owner": "0x100B8230",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVNwSession@pa@@",
+      "descriptor": "0x6AF8418",
+      "locators": [
+        {
+          "rva": "0x5E34F90",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x57261C0",
+          "locator": "0x5E34F90",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x14372F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x359BA0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1436EFE",
+              "pdata_owner": "0x1436EE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143735D",
+              "pdata_owner": "0x1437350",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

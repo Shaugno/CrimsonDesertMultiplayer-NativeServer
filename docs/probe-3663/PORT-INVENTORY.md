@@ -35,7 +35,7 @@ default true on 2976, so they must not be reused as a 3663 preset.
 
 No existing 2976 path or config defaults are changed by this inventory.
 
-1261 rows; 192 scanned files.
+1292 rows; 193 scanned files.
 
 | Row | File:line | Symbol/context | Kind | 2976 value | Source use |
 |---|---|---|---|---|---|
@@ -834,469 +834,500 @@ No existing 2976 path or config defaults are changed by this inventory.
 | N0793 | src/mod/session2/identity_fix.h:61 | kMaxEntries | RVA / layout / policy (audit) | 64 | inline constexpr uint32_t kMaxEntries = 64;       // a lobby has a handful of characters |
 | N0794 | src/mod/session2/identity_fix.h:62 | kMaxActors | RVA / layout / policy (audit) | 0x4000 | inline constexpr uint32_t kMaxActors = 0x4000;    // logged-in list scanned for uniqueness |
 | N0795 | src/mod/session2/identity_fix.h:63 | kCharacterClass | RVA / layout / policy (audit) | 0xA | inline constexpr uint32_t kCharacterClass = 0xA;  // key >> 28 of characters (users 0x9, NPCs/children 0xB) |
-| N0796 | src/mod/session2/identity_probe.h:48 | kActorComponents | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kActorComponents = 0x68;   // actor -> component table (0x206A890, 0x2AE1037) |
-| N0797 | src/mod/session2/identity_probe.h:49 | kTableStatus | RVA / layout / policy (audit) | 0x20 | inline constexpr uint32_t kTableStatus = 0x20;       // table -> Status component (0x206A894) |
-| N0798 | src/mod/session2/identity_probe.h:50 | kStatusCharacterNo | RVA / layout / policy (audit) | 0x70 | inline constexpr uint32_t kStatusCharacterNo = 0x70; // Status -> u64* characterNo (0x206A8A5) |
-| N0799 | src/mod/session2/identity_probe.h:51 | kComponentOwner | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kComponentOwner = 0x08;    // component -> actor (0x2AE102A, 0x17919A5) |
-| N0800 | src/mod/session2/identity_probe.h:52 | kActorUser | RVA / layout / policy (audit) | 0xA0 | inline constexpr uint32_t kActorUser = 0xA0;         // character -> ServerUserActor (clock gate, P9 §2.2) |
-| N0801 | src/mod/session2/identity_probe.h:53 | kKey | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kKey = 0x60;               // actor/user -> u32 key (offsets_s2.h) |
-| N0802 | src/mod/session2/load_trip.cpp:22 | kMaxLines | RVA / layout / policy (audit) | 3000 | constexpr uint64_t kMaxLines = 3000; |
-| N0803 | src/mod/session2/load_trip_logic.h:32 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0804 | src/mod/session2/load_trip_logic.h:32 | kOpMoveFieldCompleteAck | Troc ID (audit) | 2144 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0805 | src/mod/session2/load_trip_logic.h:32 | kOpPostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0806 | src/mod/session2/load_trip_logic.h:32 | kOpMilestone | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0807 | src/mod/session2/load_trip_logic.h:32 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0808 | src/mod/session2/load_trip_logic.h:32 | kOpBundle | Troc ID (audit) | 2042 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0809 | src/mod/session2/load_trip_logic.h:32 | kOpMoveFieldCompleteReq | Troc ID (audit) | 2549 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0810 | src/mod/session2/load_trip_logic.h:32 | kOpLoadingCompleteReq | Troc ID (audit) | 2445 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
-| N0811 | src/mod/session2/load_trip_logic.h:46 | kSettleUs | RVA / layout / policy (audit) | 6'000'000 | inline constexpr uint64_t kSettleUs = 6'000'000; |
-| N0812 | src/mod/session2/load_trip_logic.h:48 | kMaxTrips | RVA / layout / policy (audit) | 8 | inline constexpr size_t kMaxTrips = 8; |
-| N0813 | src/mod/session2/mount_sync_logic.h:45 | kMaxSeats | RVA / layout / policy (audit) | 16 | inline constexpr uint8_t kMaxSeats = 16; |
-| N0814 | src/mod/session2/mount_sync_logic.h:49 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;     // troc_frame.h kControlOpcode |
-| N0815 | src/mod/session2/mount_sync_logic.h:50 | kControlMountSync | RVA / layout / policy (audit) | 5 | inline constexpr uint8_t kControlMountSync = 5;   // troc_frame.h: 1 ready, 2 dead, 3 reannounce, 4 host character |
-| N0816 | src/mod/session2/mount_sync_logic.h:51 | kVersion | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kVersion = 1; |
-| N0817 | src/mod/session2/mount_sync_logic.h:52 | kHeader | RVA / layout / policy (audit) | 5 | inline constexpr size_t kHeader = 5;              // u16 opcode &#124; i8 slot &#124; u16 len |
-| N0818 | src/mod/session2/mount_sync_logic.h:53 | kPayloadSize | RVA / layout / policy (audit) | 44 | inline constexpr size_t kPayloadSize = 44; |
-| N0819 | src/mod/session2/mount_sync_logic.h:69 | kFlagOk | RVA / layout / policy (audit) | 0x01 | inline constexpr uint8_t kFlagOk = 0x01;            // Commit/Detach: *result == 0 and the controller's postconditions held |
-| N0820 | src/mod/session2/mount_sync_logic.h:70 | kFlagRiderWasLinked | RVA / layout / policy (audit) | 0x02 | inline constexpr uint8_t kFlagRiderWasLinked = 0x02;  // Begin: the rider's Link+0x10 was not 0 |
-| N0821 | src/mod/session2/mount_sync_logic.h:71 | kFlagSeatWasTaken | RVA / layout / policy (audit) | 0x04 | inline constexpr uint8_t kFlagSeatWasTaken = 0x04;    // Begin: the seat's occupant was not 0 |
-| N0822 | src/mod/session2/mount_sync_logic.h:76 | kFlagObserved | RVA / layout / policy (audit) | 0x08 | inline constexpr uint8_t kFlagObserved = 0x08; |
-| N0823 | src/mod/session2/mount_sync_logic.h:80 | kClientDetachFlag | RVA / layout / policy (audit) | 12 | inline constexpr uint8_t kClientDetachFlag = 12; |
-| N0824 | src/mod/session2/mount_sync_logic.h:83 | kFlagNoPublish | RVA / layout / policy (audit) | 0x10 | inline constexpr uint8_t kFlagNoPublish = 0x10; |
-| N0825 | src/mod/session2/mount_sync_logic.h:168 | kStatusEveryMs | RVA / layout / policy (audit) | 15000 | inline constexpr uint64_t kStatusEveryMs = 15000; |
-| N0826 | src/mod/session2/mount_sync_logic.h:169 | kStatusShowMs | RVA / layout / policy (audit) | 45000 | inline constexpr uint64_t kStatusShowMs = 45000; |
-| N0827 | src/mod/session2/mount_sync_logic.h:224 | kDepRiderComps | RVA / layout / policy (audit) | 0x001 | inline constexpr uint32_t kDepRiderComps = 0x001;   // rider actor+0x68 |
-| N0828 | src/mod/session2/mount_sync_logic.h:225 | kDepRiderCC | RVA / layout / policy (audit) | 0x002 | inline constexpr uint32_t kDepRiderCC = 0x002;      // rider comps+0x40 (CC; +0xA8 read, line 261) |
-| N0829 | src/mod/session2/mount_sync_logic.h:226 | kDepRiderCCSlot | RVA / layout / policy (audit) | 0x004 | inline constexpr uint32_t kDepRiderCCSlot = 0x004;  // CC+0xA8 == 0: [CC+0x30]+0x1B and the pointer at CC+0x88+8*it |
-| N0830 | src/mod/session2/mount_sync_logic.h:227 | kDepRiderComps50 | RVA / layout / policy (audit) | 0x008 | inline constexpr uint32_t kDepRiderComps50 = 0x008; // rider comps+0x50 (writes +0x11C, line 282) |
-| N0831 | src/mod/session2/mount_sync_logic.h:228 | kDepHorseComps | RVA / layout / policy (audit) | 0x010 | inline constexpr uint32_t kDepHorseComps = 0x010;   // horse actor+0x68 |
-| N0832 | src/mod/session2/mount_sync_logic.h:229 | kDepHorseComps1A0 | RVA / layout / policy (audit) | 0x020 | inline constexpr uint32_t kDepHorseComps1A0 = 0x020;// horse comps+0x1A0 (+0x98, line 213) |
-| N0833 | src/mod/session2/mount_sync_logic.h:230 | kDepHorseComps90 | RVA / layout / policy (audit) | 0x040 | inline constexpr uint32_t kDepHorseComps90 = 0x040; // horse comps+0x90 (0x221C200, seat 0) |
-| N0834 | src/mod/session2/mount_sync_logic.h:231 | kDepHorse88 | RVA / layout / policy (audit) | 0x080 | inline constexpr uint32_t kDepHorse88 = 0x080;      // horse actor+0x88 (+1, the type switches) |
-| N0835 | src/mod/session2/mount_sync_logic.h:232 | kDepHorseCC | RVA / layout / policy (audit) | 0x100 | inline constexpr uint32_t kDepHorseCC = 0x100;      // horse comps+0x40 (CC->vf260) |
-| N0836 | src/mod/session2/mount_sync_logic.h:233 | kDepHorseCompsB0 | RVA / layout / policy (audit) | 0x200 | inline constexpr uint32_t kDepHorseCompsB0 = 0x200; // horse comps+0xB0 (+0x288 / +0x300, conditional) |
-| N0837 | src/mod/session2/mount_sync_logic.h:276 | kMethodRideOn | RVA / layout / policy (audit) | 6 | inline constexpr uint8_t kMethodRideOn = 6, kMethodRideOff = 7; |
-| N0838 | src/mod/session2/mount_sync_logic.h:276 | kMethodRideOff | RVA / layout / policy (audit) | 7 | inline constexpr uint8_t kMethodRideOn = 6, kMethodRideOff = 7; |
-| N0839 | src/mod/session2/mount_sync_logic.h:381 | kCtlGoneMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kCtlGoneMs = 1000; |
-| N0840 | src/mod/session2/mount_sync_logic.h:410 | kGeoSpeeds | RVA / layout / policy (audit) | 5 | inline constexpr size_t kGeoSpeeds = 5;  // horse speed m/s: <1, <3, <6, <10, >=10 |
-| N0841 | src/mod/session2/mount_sync_logic.h:411 | kGeoErrs | RVA / layout / policy (audit) | 6 | inline constexpr size_t kGeoErrs = 6;    // &#124;offset - seat&#124; m: <=0.25, <=0.5, <=1, <=2, <=5, >5 |
-| N0842 | src/mod/session2/mount_sync_logic.h:412 | kGeoEveryMs | RVA / layout / policy (audit) | 30 | inline constexpr uint64_t kGeoEveryMs = 30; |
-| N0843 | src/mod/session2/mount_sync_logic.h:434 | kGeoNotLinked | RVA / layout / policy (audit) | 0 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
-| N0844 | src/mod/session2/mount_sync_logic.h:434 | kGeoLinked | RVA / layout / policy (audit) | 1 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
-| N0845 | src/mod/session2/mount_sync_logic.h:434 | kGeoSeated | RVA / layout / policy (audit) | 2 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
-| N0846 | src/mod/session2/mount_sync_logic.h:434 | kGeoLinks | RVA / layout / policy (audit) | 3 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
-| N0847 | src/mod/session2/mount_sync_logic.h:438 | kAttachNone | RVA / layout / policy (audit) | 9 | inline constexpr uint8_t kAttachNone = 9, kAttachSeat = 4; |
-| N0848 | src/mod/session2/mount_sync_logic.h:438 | kAttachSeat | RVA / layout / policy (audit) | 4 | inline constexpr uint8_t kAttachNone = 9, kAttachSeat = 4; |
-| N0849 | src/mod/session2/mount_sync_logic.h:444 | kFrozenRiderM | RVA / layout / policy (audit) | 0.01f | inline constexpr float kFrozenRiderM = 0.01f, kFrozenHorseM = 0.5f; |
-| N0850 | src/mod/session2/mount_sync_logic.h:444 | kFrozenHorseM | RVA / layout / policy (audit) | 0.5f | inline constexpr float kFrozenRiderM = 0.01f, kFrozenHorseM = 0.5f; |
-| N0851 | src/mod/session2/mount_sync_logic.h:492 | kCommitWaitMs | RVA / layout / policy (audit) | 500 | inline constexpr uint64_t kCommitWaitMs = 500;     // a Begin holds the observed stream at most this long |
-| N0852 | src/mod/session2/mount_sync_logic.h:493 | kApplyWaitMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kApplyWaitMs = 3000;     // a Commit not applied by then is cancelled (fallback) |
-| N0853 | src/mod/session2/mount_sync_logic.h:494 | kDetachForceMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kDetachForceMs = 3000;   // a Detach without the observer's RideOff::Enter: applied anyway |
-| N0854 | src/mod/session2/mount_sync_logic.h:498 | kDetachObservedForceMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kDetachObservedForceMs = 1000; |
-| N0855 | src/mod/session2/mount_sync_logic.h:502 | kDetachNoEventMs | RVA / layout / policy (audit) | 6000 | inline constexpr uint64_t kDetachNoEventMs = 6000; |
-| N0856 | src/mod/session2/mount_sync_logic.h:505 | kClaimStuckMs | RVA / layout / policy (audit) | 2000 | inline constexpr uint64_t kClaimStuckMs = 2000; |
-| N0857 | src/mod/session2/mount_sync_logic.h:508 | kMaxAttempts | RVA / layout / policy (audit) | 20 | inline constexpr uint32_t kMaxAttempts = 20; |
-| N0858 | src/mod/session2/mount_sync_logic.h:509 | kHoldMaxPackets | RVA / layout / policy (audit) | 2048 | inline constexpr size_t kHoldMaxPackets = 2048;    // the guest's held stream |
-| N0859 | src/mod/session2/mount_sync_logic.h:510 | kHoldMaxBytes | RVA / layout / policy (audit) | 4u << 20 | inline constexpr size_t kHoldMaxBytes = 4u << 20; |
-| N0860 | src/mod/session2/mount_sync_logic.h:511 | kHoldMaxReq | RVA / layout / policy (audit) | 256 | inline constexpr size_t kHoldMaxReq = 256;         // the host's held user 2 Req (its own bound is 512) |
-| N0861 | src/mod/session2/mount_sync_logic.h:628 | kNativeFallbackMs | RVA / layout / policy (audit) | 2000 | inline constexpr uint64_t kNativeFallbackMs = 2000; |
-| N0862 | src/mod/session2/mount_sync_logic.h:630 | kNativeFallbackCapMs | RVA / layout / policy (audit) | 30000 | inline constexpr uint64_t kNativeFallbackCapMs = 30000; |
-| N0863 | src/mod/session2/mount_sync_logic.h:634 | kNativeUnreadableMs | RVA / layout / policy (audit) | 15000 | inline constexpr uint64_t kNativeUnreadableMs = 15000; |
-| N0864 | src/mod/session2/mount_sync_logic.h:635 | kNativeDetachFlag | RVA / layout / policy (audit) | 0 | inline constexpr uint8_t kNativeDetachFlag = 0; |
-| N0865 | src/mod/session2/mount_sync_logic.h:682 | kSlots | RVA / layout / policy (audit) | 4 | static constexpr size_t kSlots = 4; |
-| N0866 | src/mod/session2/mount_sync_logic.h:1098 | kGateEntrySize | RVA / layout / policy (audit) | 0x78 | inline constexpr uint32_t kGateEntrySize = 0x78; |
-| N0867 | src/mod/session2/mount_sync_logic.h:1099 | kGateEntries | RVA / layout / policy (audit) | 2 | inline constexpr uint32_t kGateEntries = 2; |
-| N0868 | src/mod/session2/mount_sync_logic.h:1100 | kGateBytes | RVA / layout / policy (audit) | kGateEntrySize * kGateEntries | inline constexpr uint32_t kGateBytes = kGateEntrySize * kGateEntries; |
-| N0869 | src/mod/session2/mount_sync_logic.h:1101 | kEntryHash | RVA / layout / policy (audit) | 0x00 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
-| N0870 | src/mod/session2/mount_sync_logic.h:1101 | kEntryDef | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
-| N0871 | src/mod/session2/mount_sync_logic.h:1101 | kEntryNet | RVA / layout / policy (audit) | 0x50 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
-| N0872 | src/mod/session2/mount_sync_logic.h:1101 | kEntryForce | RVA / layout / policy (audit) | 0x51 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
-| N0873 | src/mod/session2/mount_sync_logic.h:1101 | kEntryLocal | RVA / layout / policy (audit) | 0x52 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
-| N0874 | src/mod/session2/mount_sync_logic.h:1102 | kEntryNetBit | RVA / layout / policy (audit) | 0x02 | inline constexpr uint8_t kEntryNetBit = 0x02, kEntryForceBit = 0x08, kEntryLocalBit = 0x01; |
-| N0875 | src/mod/session2/mount_sync_logic.h:1102 | kEntryForceBit | RVA / layout / policy (audit) | 0x08 | inline constexpr uint8_t kEntryNetBit = 0x02, kEntryForceBit = 0x08, kEntryLocalBit = 0x01; |
-| N0876 | src/mod/session2/mount_sync_logic.h:1102 | kEntryLocalBit | RVA / layout / policy (audit) | 0x01 | inline constexpr uint8_t kEntryNetBit = 0x02, kEntryForceBit = 0x08, kEntryLocalBit = 0x01; |
-| N0877 | src/mod/session2/mount_sync_logic.h:1103 | kDefDismount | RVA / layout / policy (audit) | 0x40 | inline constexpr uint8_t kDefDismount = 0x40;  // def+0xA: "get off the vehicle" |
-| N0878 | src/mod/session2/mount_sync_logic.h:1104 | kDefFlags | RVA / layout / policy (audit) | 0x0A | inline constexpr uint32_t kDefFlags = 0x0A; |
-| N0879 | src/mod/session2/mount_sync_logic.h:1187 | kGateDegradeAfter | RVA / layout / policy (audit) | 8 | inline constexpr uint32_t kGateDegradeAfter = 8; |
-| N0880 | src/mod/session2/mount_sync_logic.h:1243 | kActorPlayer | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kActorPlayer = 1, kActorWorld = 7; |
-| N0881 | src/mod/session2/mount_sync_logic.h:1243 | kActorWorld | RVA / layout / policy (audit) | 7 | inline constexpr uint8_t kActorPlayer = 1, kActorWorld = 7; |
-| N0882 | src/mod/session2/mount_sync_logic.h:1270 | kVf178Actor | RVA / layout / policy (audit) | 0x4FE260 | inline constexpr uint32_t kVf178Actor = 0x4FE260, kVf178User = 0x8A67D0; |
-| N0883 | src/mod/session2/mount_sync_logic.h:1270 | kVf178User | RVA / layout / policy (audit) | 0x8A67D0 | inline constexpr uint32_t kVf178Actor = 0x4FE260, kVf178User = 0x8A67D0; |
-| N0884 | src/mod/session2/mount_sync_logic.h:1382 | kSeatReleaseMs | RVA / layout / policy (audit) | 1500 | inline constexpr uint64_t kSeatReleaseMs = 1500; |
-| N0885 | src/mod/session2/mount_sync_logic.h:1383 | kSeatRideCapMs | RVA / layout / policy (audit) | 6000 | inline constexpr uint64_t kSeatRideCapMs = 6000; |
-| N0886 | src/mod/session2/mount_sync_logic.h:1384 | kSeatLostMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kSeatLostMs = 3000;  // the rider unreadable this long: forgotten (its actor is gone) |
-| N0887 | src/mod/session2/mount_sync_logic.h:1499 | kMcEmptyFlag | RVA / layout / policy (audit) | 0x3D0 | inline constexpr uint32_t kMcEmptyFlag = 0x3D0; |
-| N0888 | src/mod/session2/mount_sync_logic.h:1529 | kOpStartActionReq | Troc ID (audit) | 2223 | inline constexpr uint16_t kOpStartActionReq = 2223; |
-| N0889 | src/mod/session2/observer_hold_acks_logic.h:41 | kOpAnnounce | Troc ID (audit) | 2005 | inline constexpr uint16_t kOpAnnounce = 2005;     // ActorLoadDataAck |
-| N0890 | src/mod/session2/observer_hold_acks_logic.h:42 | kOpScopeSender | Troc ID (audit) | 2042 | inline constexpr uint16_t kOpScopeSender = 2042;  // ScopeSenderAck: a native bundle (contents not parsed) |
-| N0891 | src/mod/session2/observer_hold_acks_logic.h:43 | kNpcKeyClass | RVA / layout / policy (audit) | 0xB | inline constexpr uint32_t kNpcKeyClass = 0xB;     // key >> 28 of NPCs and children |
-| N0892 | src/mod/session2/observer_hold_acks_logic.h:46 | kHeldOps | signature | { 2723, 2404, 2586, 2991, 2697, 2642, 2506, 2402, 2645, 2434, 2356, } | inline constexpr std::array<uint16_t, 11> kHeldOps = { |
-| N0893 | src/mod/session2/observer_hold_acks_logic.h:59 | kOpCount | Troc ID (audit) | kHeldOps.size() | inline constexpr size_t kOpCount = kHeldOps.size(); |
-| N0894 | src/mod/session2/observer_hold_acks_logic.h:86 | kCharKeyClass | RVA / layout / policy (audit) | 0xA | inline constexpr uint32_t kCharKeyClass = 0xA; |
-| N0895 | src/mod/session2/observer_milestone_logic.h:46 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174; |
-| N0896 | src/mod/session2/observer_milestone_logic.h:47 | kOpMoveFieldCompleteAck | Troc ID (audit) | 2144 | inline constexpr uint16_t kOpMoveFieldCompleteAck = 2144; |
-| N0897 | src/mod/session2/observer_milestone_logic.h:48 | kOpMoveFieldCompletePostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldCompletePostAck = 3066; |
-| N0898 | src/mod/session2/observer_milestone_logic.h:49 | kOpMilestone | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpMilestone = 2322; |
-| N0899 | src/mod/session2/observer_milestone_logic.h:50 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpLoadingCompleteAck = 2762; |
-| N0900 | src/mod/session2/observer_milestone_logic.h:51 | kOpScopeSenderAck | Troc ID (audit) | 2042 | inline constexpr uint16_t kOpScopeSenderAck = 2042;   // a native bundle (scope sender): contents not parsed |
-| N0901 | src/mod/session2/observer_milestone_logic.h:52 | kOpMoveFieldCompleteReq | Troc ID (audit) | 2549 | inline constexpr uint16_t kOpMoveFieldCompleteReq = 2549; |
-| N0902 | src/mod/session2/observer_milestone_logic.h:53 | kOpLoadingCompleteReq | Troc ID (audit) | 2445 | inline constexpr uint16_t kOpLoadingCompleteReq = 2445; |
-| N0903 | src/mod/session2/observer_milestone_reload_logic.h:57 | kOpPreLoadSequencerReq | Troc ID (audit) | 2873 | inline constexpr uint16_t kOpPreLoadSequencerReq = 2873; |
-| N0904 | src/mod/session2/observer_milestone_reload_logic.h:58 | kOpReloadStageStartReq | Troc ID (audit) | 2283 | inline constexpr uint16_t kOpReloadStageStartReq = 2283; |
-| N0905 | src/mod/session2/observer_milestone_reload_logic.h:59 | kOpGameLoadingStartReq | Troc ID (audit) | 2437 | inline constexpr uint16_t kOpGameLoadingStartReq = 2437; |
-| N0906 | src/mod/session2/observer_milestone_reload_logic.h:60 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174; |
-| N0907 | src/mod/session2/observer_milestone_reload_logic.h:61 | kOpLoadingFieldDataAck | Troc ID (audit) | 2643 | inline constexpr uint16_t kOpLoadingFieldDataAck = 2643; |
-| N0908 | src/mod/session2/observer_milestone_reload_logic.h:62 | kOpMoveFieldCompletePostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldCompletePostAck = 3066; |
-| N0909 | src/mod/session2/observer_milestone_reload_logic.h:63 | kOpMilestone | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpMilestone = 2322; |
-| N0910 | src/mod/session2/observer_milestone_reload_logic.h:64 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpLoadingCompleteAck = 2762; |
-| N0911 | src/mod/session2/observer_milestone_reload_logic.h:65 | kOpLogoutCharacterAck | Troc ID (audit) | 2679 | inline constexpr uint16_t kOpLogoutCharacterAck = 2679; |
-| N0912 | src/mod/session2/observer_milestone_reload_logic.h:66 | kOpReviveLoadingReq | Troc ID (audit) | 2362 | inline constexpr uint16_t kOpReviveLoadingReq = 2362;  // P8 S27: the revive's load request (C>S) |
-| N0913 | src/mod/session2/observer_milestone_reload_logic.h:68 | kMinDelayUs | RVA / layout / policy (audit) | 300'000 | inline constexpr uint64_t kMinDelayUs = 300'000;     // native: the 2322 leaves 460-501 ms after the 2873 |
-| N0914 | src/mod/session2/observer_milestone_reload_logic.h:69 | kTimeoutUs | RVA / layout / policy (audit) | 15'000'000 | inline constexpr uint64_t kTimeoutUs = 15'000'000;   // no fitting Req of user 2 within 15 s: given up (logged) |
-| N0915 | src/mod/session2/observer_milestone_reload_logic.h:70 | kAttemptGapUs | RVA / layout / policy (audit) | 50'000 | inline constexpr uint64_t kAttemptGapUs = 50'000;    // transient refusals count at most once per 50 ms |
-| N0916 | src/mod/session2/observer_milestone_reload_logic.h:71 | kMaxAttempts | RVA / layout / policy (audit) | 400 | inline constexpr uint32_t kMaxAttempts = 400;        // > kTimeoutUs / kAttemptGapUs: the timeout governs |
-| N0917 | src/mod/session2/observer_milestone_reload_logic.h:72 | kMaxAgeUs | RVA / layout / policy (audit) | 45'000'000 | inline constexpr uint64_t kMaxAgeUs = 45'000'000;    // a 2873 later than this after its trip's 2437 passes natively |
-| N0918 | src/mod/session2/observer_milestone_reload_logic.h:73 | kNativeInReloadLines | RVA / layout / policy (audit) | 16 | inline constexpr uint64_t kNativeInReloadLines = 16; // P8 S27: warnings for a 2873 handed during an unfinished reload |
-| N0919 | src/mod/session2/observer_milestone_reload_logic.h:293 | kNoteBase | RVA / layout / policy (audit) | 64 | inline constexpr uint16_t kNoteBase = 64; |
-| N0920 | src/mod/session2/offsets_s2.h:12 | kServerNetSlot | RVA / layout / policy (audit) | 0x6D69680 | inline constexpr uintptr_t kServerNetSlot = 0x6D69680;  // [exe+..] = ServerNet |
-| N0921 | src/mod/session2/offsets_s2.h:13 | kClientNetSlot | RVA / layout / policy (audit) | 0x6D69170 | inline constexpr uintptr_t kClientNetSlot = 0x6D69170;  // [exe+..] = ClientNet |
-| N0922 | src/mod/session2/offsets_s2.h:14 | kSamSlot | RVA / layout / policy (audit) | 0x6DA67D8 | inline constexpr uintptr_t kSamSlot = 0x6DA67D8;        // [exe+..] = ServerActorManager |
-| N0923 | src/mod/session2/offsets_s2.h:17 | kServerNet_Session | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kServerNet_Session = 0x18;  // the only NwVirtualAsyncSession |
-| N0924 | src/mod/session2/offsets_s2.h:18 | kServerNet_InQueue | RVA / layout / policy (audit) | 0x20 | inline constexpr uint32_t kServerNet_InQueue = 0x20;  // Q0: C->S buffers, popped by ServerRunThread |
-| N0925 | src/mod/session2/offsets_s2.h:19 | kServerNet_FreeC2S | RVA / layout / policy (audit) | 0x78 | inline constexpr uint32_t kServerNet_FreeC2S = 0x78;  // Q3: C->S buffers back to the client |
-| N0926 | src/mod/session2/offsets_s2.h:20 | kServerNet_FreeS2C | RVA / layout / policy (audit) | 0x80 | inline constexpr uint32_t kServerNet_FreeS2C = 0x80;  // Q2: S->C buffers back to the server |
-| N0927 | src/mod/session2/offsets_s2.h:22 | kClientNet_InQueue | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kClientNet_InQueue = 0x18;  // Q1 (== session+0xC8) |
-| N0928 | src/mod/session2/offsets_s2.h:24 | kSam_FreeKeys | RVA / layout / policy (audit) | 0xD0 | inline constexpr uint32_t kSam_FreeKeys = 0xD0;     // u32: keys left in the common queue (15501 at most) |
-| N0929 | src/mod/session2/offsets_s2.h:25 | kSam_ActorCount | RVA / layout / policy (audit) | 0x9C | inline constexpr uint32_t kSam_ActorCount = 0x9C;   // u32 |
-| N0930 | src/mod/session2/offsets_s2.h:28 | kNwVirtualAsyncSessionVtable | vtable | 0x57260C0 | inline constexpr uintptr_t kNwVirtualAsyncSessionVtable = 0x57260C0;  // 15 entries, COL at [-1] |
-| N0931 | src/mod/session2/offsets_s2.h:29 | kNwAsyncSessionVtable | vtable | 0x5726140 | inline constexpr uintptr_t kNwAsyncSessionVtable = 0x5726140; |
-| N0932 | src/mod/session2/offsets_s2.h:30 | kSessionVtableEntries | vtable | 15 | inline constexpr uint32_t kSessionVtableEntries = 15; |
-| N0933 | src/mod/session2/offsets_s2.h:31 | kSessionVfSend | RVA / layout / policy (audit) | 9 | inline constexpr uint32_t kSessionVfSend = 9; |
-| N0934 | src/mod/session2/offsets_s2.h:32 | kSessionSize | RVA / layout / policy (audit) | 0xD0 | inline constexpr uint32_t kSessionSize = 0xD0; |
-| N0935 | src/mod/session2/offsets_s2.h:33 | kSession_Name | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kSession_Name = 0x18;     // u16 short string: "1" for the host |
-| N0936 | src/mod/session2/offsets_s2.h:34 | kSession_IdPtr | RVA / layout / policy (audit) | 0x88 | inline constexpr uint32_t kSession_IdPtr = 0x88;    // u32*: key of the deferred queue until a user exists |
-| N0937 | src/mod/session2/offsets_s2.h:35 | kSession_User | RVA / layout / policy (audit) | 0x90 | inline constexpr uint32_t kSession_User = 0x90;     // ServerUserActor* |
-| N0938 | src/mod/session2/offsets_s2.h:36 | kSession_Crypto | RVA / layout / policy (audit) | 0x98 | inline constexpr uint32_t kSession_Crypto = 0x98;   // CryptogramAesGcm*; byte +0x24 = 0 (off) |
-| N0939 | src/mod/session2/offsets_s2.h:37 | kSession_B0 | RVA / layout / policy (audit) | 0xB0 | inline constexpr uint32_t kSession_B0 = 0xB0; |
-| N0940 | src/mod/session2/offsets_s2.h:38 | kSession_B8 | RVA / layout / policy (audit) | 0xB8 | inline constexpr uint32_t kSession_B8 = 0xB8; |
-| N0941 | src/mod/session2/offsets_s2.h:39 | kSession_C0 | RVA / layout / policy (audit) | 0xC0 | inline constexpr uint32_t kSession_C0 = 0xC0;       // u16 |
-| N0942 | src/mod/session2/offsets_s2.h:40 | kSession_OutQueue | RVA / layout / policy (audit) | 0xC8 | inline constexpr uint32_t kSession_OutQueue = 0xC8; |
-| N0943 | src/mod/session2/offsets_s2.h:43 | kServerUserActorVtable | vtable | 0x5B257A8 | inline constexpr uintptr_t kServerUserActorVtable = 0x5B257A8; |
-| N0944 | src/mod/session2/offsets_s2.h:44 | kUser_Key | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kUser_Key = 0x60; |
-| N0945 | src/mod/session2/offsets_s2.h:45 | kUser_Session | RVA / layout / policy (audit) | 0x1F8 | inline constexpr uint32_t kUser_Session = 0x1F8; |
-| N0946 | src/mod/session2/offsets_s2.h:47 | kServerActor_Controller | RVA / layout / policy (audit) | 0x90 | inline constexpr uint32_t kServerActor_Controller = 0x90; |
-| N0947 | src/mod/session2/offsets_s2.h:48 | kServerActor_Key | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kServerActor_Key = 0x60; |
-| N0948 | src/mod/session2/offsets_s2.h:51 | kServerOnRecvPacket | RVA / layout / policy (audit) | 0x2773C20 | inline constexpr uintptr_t kServerOnRecvPacket = 0x2773C20;  // (ServerNet*, int*, NwSession*, u8* pkt, u16 size, u8 channel) |
-| N0949 | src/mod/session2/offsets_s2.h:52 | kServerOnRecvPacketHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54} | inline constexpr uint8_t kServerOnRecvPacketHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, |
-| N0950 | src/mod/session2/offsets_s2.h:54 | kSessionSend | RVA / layout / policy (audit) | 0x1437740 | inline constexpr uintptr_t kSessionSend = 0x1437740;  // vf9 (this, int* res, AsyncRequestSend* rq) -> res |
-| N0951 | src/mod/session2/offsets_s2.h:55 | kSessionSendHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xC8, 0x00, 0x00, 0x00, 0x49, 0x8D, 0x40, 0x30} | inline constexpr uint8_t kSessionSendHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, |
-| N0952 | src/mod/session2/offsets_s2.h:57 | kNwSessionCtor | RVA / layout / policy (audit) | 0x1436EE0 | inline constexpr uintptr_t kNwSessionCtor = 0x1436EE0;  // (this, bool) -> this |
-| N0953 | src/mod/session2/offsets_s2.h:58 | kNwSessionCtorHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x6C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x56, 0x57, 0x41, 0x54, 0x41, 0x56} | inline constexpr uint8_t kNwSessionCtorHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x6C, 0x24, 0x20, |
-| N0954 | src/mod/session2/offsets_s2.h:60 | kQueuePush | RVA / layout / policy (audit) | 0x35DF50 | inline constexpr uintptr_t kQueuePush = 0x35DF50;  // (Queue*, void** item) |
-| N0955 | src/mod/session2/offsets_s2.h:61 | kQueuePushHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9} | inline constexpr uint8_t kQueuePushHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, |
-| N0956 | src/mod/session2/offsets_s2.h:71 | kAllocGlobal | RVA / layout / policy (audit) | 0x47EFA78 | inline constexpr uintptr_t kAllocGlobal = 0x47EFA78;  // (size, align) -> void*; global heap with a lock |
-| N0957 | src/mod/session2/offsets_s2.h:72 | kAllocGlobalHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9, 0x48, 0x8B, 0xDA} | inline constexpr uint8_t kAllocGlobalHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, |
-| N0958 | src/mod/session2/offsets_s2.h:74 | kAllocThread | RVA / layout / policy (audit) | 0x47EF9B0 | inline constexpr uintptr_t kAllocThread = 0x47EF9B0;  // (size, align) -> void*; the thread's own heap |
-| N0959 | src/mod/session2/offsets_s2.h:76 | kAllocThreadBytes | signature | { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xFA, 0x44, 0x8B, 0x05, 0x7E, 0x92, 0x49, 0x02, 0x48, 0x8B, 0xF1, 0x4A, 0x8B, 0x1C, 0xC0, 0xB8, 0x98, 0x00, 0x00, 0x00, 0x80, 0x3C, 0x18, 0x00, 0x75, 0x05, 0xE8, 0xDB, 0x59, 0x0A, 0x00, 0xB9, 0x90, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xD6, 0x48, 0x8B, 0x0C, 0x19, 0x48, 0x8B, 0x5C, 0x24, 0x30, 0x48, 0x8B, 0x74, 0x24, 0x38, 0x48, 0x83, 0xC4, 0x20, 0x5F, 0xE9, 0x3C, 0xFC, 0xFF, 0xFF} | inline constexpr uint8_t kAllocThreadBytes[] = { |
-| N0960 | src/mod/session2/offsets_s2.h:83 | kTlsIndexSlot | RVA / layout / policy (audit) | 0x6C88C50 | inline constexpr uintptr_t kTlsIndexSlot = 0x6C88C50;  // u32 _tls_index (0 in the dumps) |
-| N0961 | src/mod/session2/offsets_s2.h:84 | kTls_UseGlobalHeap | RVA / layout / policy (audit) | 0x1FD | inline constexpr uint32_t kTls_UseGlobalHeap = 0x1FD;  // u8: the allocator test above |
-| N0962 | src/mod/session2/offsets_s2.h:89 | kServerNet_Threads | RVA / layout / policy (audit) | 0xF8 | inline constexpr uint32_t kServerNet_Threads = 0xF8; |
-| N0963 | src/mod/session2/offsets_s2.h:90 | kServerNet_ThreadCount | RVA / layout / policy (audit) | 0x100 | inline constexpr uint32_t kServerNet_ThreadCount = 0x100; |
-| N0964 | src/mod/session2/offsets_s2.h:91 | kServerThreadEntry | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kServerThreadEntry = 0x10; |
-| N0965 | src/mod/session2/offsets_s2.h:95 | kToNearExceptOneControlVtable | vtable | 0x5B25358 | inline constexpr uintptr_t kToNearExceptOneControlVtable = 0x5B25358; |
-| N0966 | src/mod/session2/offsets_s2.h:96 | kToNearExceptOneSelfVtable | vtable | 0x5B25378 | inline constexpr uintptr_t kToNearExceptOneSelfVtable = 0x5B25378; |
-| N0967 | src/mod/session2/offsets_s2.h:97 | kToNearVtable | vtable | 0x5B25418 | inline constexpr uintptr_t kToNearVtable = 0x5B25418; |
-| N0968 | src/mod/session2/offsets_s2.h:98 | kExceptOneVf1 | RVA / layout / policy (audit) | 0x2A759B0 | inline constexpr uintptr_t kExceptOneVf1 = 0x2A759B0;      // control |
-| N0969 | src/mod/session2/offsets_s2.h:99 | kExceptOneSelfVf1 | RVA / layout / policy (audit) | 0x2A75880 | inline constexpr uintptr_t kExceptOneSelfVf1 = 0x2A75880;  // self |
-| N0970 | src/mod/session2/offsets_s2.h:100 | kToNearVf1 | RVA / layout / policy (audit) | 0x2A75860 | inline constexpr uintptr_t kToNearVf1 = 0x2A75860; |
-| N0971 | src/mod/session2/offsets_s2.h:101 | kExceptOneVf1Head | signature | {0x40, 0x53, 0x48, 0x83, 0xEC, 0x50, 0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x99, 0xA0, 0x01, 0x00, 0x00} | inline constexpr uint8_t kExceptOneVf1Head[] = {0x40, 0x53, 0x48, 0x83, 0xEC, 0x50, 0x48, 0x8B, 0x41, 0x10, 0x48, |
-| N0972 | src/mod/session2/offsets_s2.h:103 | kToNearVf1Head | signature | {0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x89, 0xA0, 0x01, 0x00, 0x00, 0xE9} | inline constexpr uint8_t kToNearVf1Head[] = {0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, |
-| N0973 | src/mod/session2/offsets_s2.h:105 | kFinder_Actor | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kFinder_Actor = 0x10; |
-| N0974 | src/mod/session2/offsets_s2.h:107 | kArray_Count | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kArray_Count = 0x08; |
-| N0975 | src/mod/session2/offsets_s2.h:108 | kArray_Capacity | RVA / layout / policy (audit) | 0x0C | inline constexpr uint32_t kArray_Capacity = 0x0C; |
-| N0976 | src/mod/session2/offsets_s2.h:111 | kPbSize | RVA / layout / policy (audit) | 0x8030 | inline constexpr uint32_t kPbSize = 0x8030; |
-| N0977 | src/mod/session2/offsets_s2.h:112 | kPb_FramePtr | RVA / layout / policy (audit) | 0x8000 | inline constexpr uint32_t kPb_FramePtr = 0x8000;  // u8*: the frame (= pb) |
-| N0978 | src/mod/session2/offsets_s2.h:113 | kPb_Len1 | RVA / layout / policy (audit) | 0x8008 | inline constexpr uint32_t kPb_Len1 = 0x8008;      // u16 frame length |
-| N0979 | src/mod/session2/offsets_s2.h:114 | kPb_Len2 | RVA / layout / policy (audit) | 0x800A | inline constexpr uint32_t kPb_Len2 = 0x800A;      // u16 frame length (the server reads this one) |
-| N0980 | src/mod/session2/offsets_s2.h:115 | kPb_Cap | RVA / layout / policy (audit) | 0x800C | inline constexpr uint32_t kPb_Cap = 0x800C;       // u16 |
-| N0981 | src/mod/session2/offsets_s2.h:116 | kPb_IsRequest | RVA / layout / policy (audit) | 0x800E | inline constexpr uint32_t kPb_IsRequest = 0x800E; // u8: 0 = packet |
-| N0982 | src/mod/session2/offsets_s2.h:117 | kPb_Tag | RVA / layout / policy (audit) | 0x8010 | inline constexpr uint32_t kPb_Tag = 0x8010;       // u32, not read for packets: our tag |
-| N0983 | src/mod/session2/offsets_s2.h:118 | kPb_Magic | RVA / layout / policy (audit) | 0x8018 | inline constexpr uint32_t kPb_Magic = 0x8018;     // u64, not read by the server: our magic |
-| N0984 | src/mod/session2/offsets_s2.h:119 | kPb_Base | RVA / layout / policy (audit) | 0x8028 | inline constexpr uint32_t kPb_Base = 0x8028;      // void*: what the client frees |
-| N0985 | src/mod/session2/offsets_s2.h:120 | kFrameOverhead | RVA / layout / policy (audit) | 0x1F | inline constexpr uint32_t kFrameOverhead = 0x1F;  // frame = u16 len &#124; u8 channel &#124; packet &#124; 12 IV + 16 tag |
-| N0986 | src/mod/session2/offsets_s2.h:121 | kFrameHeader | RVA / layout / policy (audit) | 3 | inline constexpr uint32_t kFrameHeader = 3; |
-| N0987 | src/mod/session2/offsets_s2.h:123 | kRq_Frame | RVA / layout / policy (audit) | 0x30 | inline constexpr uint32_t kRq_Frame = 0x30; |
-| N0988 | src/mod/session2/offsets_s2.h:127 | kTrocInstancesBegin | RVA / layout / policy (audit) | 0x6A51AE0 | inline constexpr uintptr_t kTrocInstancesBegin = 0x6A51AE0; |
-| N0989 | src/mod/session2/offsets_s2.h:128 | kTrocInstancesEnd | RVA / layout / policy (audit) | 0x6A82C80 | inline constexpr uintptr_t kTrocInstancesEnd = 0x6A82C80; |
-| N0990 | src/mod/session2/offsets_s2.h:129 | kTroc_Kind | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kTroc_Kind = 0x08; |
-| N0991 | src/mod/session2/offsets_s2.h:130 | kTroc_Opcode | RVA / layout / policy (audit) | 0x0C | inline constexpr uint32_t kTroc_Opcode = 0x0C; |
-| N0992 | src/mod/session2/offsets_s2.h:131 | kTroc_Channel | RVA / layout / policy (audit) | 0x14 | inline constexpr uint32_t kTroc_Channel = 0x14; |
-| N0993 | src/mod/session2/offsets_s2.h:132 | kTroc_Flags | RVA / layout / policy (audit) | 0x16 | inline constexpr uint32_t kTroc_Flags = 0x16; |
-| N0994 | src/mod/session2/offsets_s2.h:133 | kTrocKindServer | RVA / layout / policy (audit) | 4 | inline constexpr uint32_t kTrocKindServer = 4; |
-| N0995 | src/mod/session2/offsets_s2.h:136 | kClientNet_Session | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kClientNet_Session = 0x10;   // NwVirtualSyncSession (persistent) |
-| N0996 | src/mod/session2/offsets_s2.h:137 | kClientNet_FreeC2S | RVA / layout / policy (audit) | 0x28 | inline constexpr uint32_t kClientNet_FreeC2S = 0x28;   // Q3: C->S buffers the NetworkThread frees |
-| N0997 | src/mod/session2/offsets_s2.h:138 | kClientNet_Slot4 | RVA / layout / policy (audit) | 0x58 | inline constexpr uint32_t kClientNet_Slot4 = 0x58;     // != 0 once the client connected (1001) |
-| N0998 | src/mod/session2/offsets_s2.h:139 | kSyncSession_Epoch | RVA / layout / policy (audit) | 0xB0 | inline constexpr uint32_t kSyncSession_Epoch = 0xB0;   // new on every connection (OnConnect 0x8CAFF0) |
-| N0999 | src/mod/session2/offsets_s2.h:140 | kSyncSessionSend | RVA / layout / policy (audit) | 0x14380B0 | inline constexpr uintptr_t kSyncSessionSend = 0x14380B0;  // vf6 (this, int* res, PacketBuffer* pb) -> res |
-| N1000 | src/mod/session2/offsets_s2.h:141 | kSyncSessionSendHead | signature | {0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xDA} | inline constexpr uint8_t kSyncSessionSendHead[] = {0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, |
-| N1001 | src/mod/session2/offsets_s2.h:143 | kNetLoopPump | RVA / layout / policy (audit) | 0x35BAD4 | inline constexpr uintptr_t kNetLoopPump = 0x35BAD4;  // NetworkThread loop, each turn (<= 16 ms); r15 = ClientNet |
-| N1002 | src/mod/session2/offsets_s2.h:144 | kNetLoopPumpHead | signature | {0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7} | inline constexpr uint8_t kNetLoopPumpHead[] = {0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, |
-| N1003 | src/mod/session2/offsets_s2.h:153 | kNetLoopPumpPatch | RVA / layout / policy (audit) | 7 | inline constexpr uint32_t kNetLoopPumpPatch = 7; |
-| N1004 | src/mod/session2/offsets_s2.h:154 | kNetLoopPumpAob | signature | { 0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x08, 0x90, 0x8B, 0x5F, 0x58, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x10, 0x85, 0xDB, 0x74} | inline constexpr uint8_t kNetLoopPumpAob[] = { |
-| N1005 | src/mod/session2/offsets_s2.h:157 | kClientOnRecvPacket | RVA / layout / policy (audit) | 0x35CA00 | inline constexpr uintptr_t kClientOnRecvPacket = 0x35CA00;  // (ClientNet*, NwSession*, -, u8* pkt, u16 size) |
-| N1006 | src/mod/session2/offsets_s2.h:158 | kClientOnRecvPacketHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24} | inline constexpr uint8_t kClientOnRecvPacketHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, |
-| N1007 | src/mod/session2/offsets_s2.h:165 | kWorldSystemSlot | RVA / layout / policy (audit) | 0x6D69190 | inline constexpr uintptr_t kWorldSystemSlot = 0x6D69190;      // [exe+..] = WorldSystem |
-| N1008 | src/mod/session2/offsets_s2.h:166 | kWorldSystem_SaveManager | RVA / layout / policy (audit) | 0x88 | inline constexpr uint32_t kWorldSystem_SaveManager = 0x88;     // the save manager the title reads |
-| N1009 | src/mod/session2/offsets_s2.h:167 | kServerActorLookupSlot | RVA / layout / policy (audit) | 0x6D69698 | inline constexpr uintptr_t kServerActorLookupSlot = 0x6D69698;  // [exe+..]; +0x48 = the server's save manager |
-| N1010 | src/mod/session2/offsets_s2.h:168 | kServerActorLookup_SaveManager | RVA / layout / policy (audit) | 0x48 | inline constexpr uint32_t kServerActorLookup_SaveManager = 0x48; |
-| N1011 | src/mod/session2/offsets_s2.h:170 | kSaveMgr_Lock | RVA / layout / policy (audit) | 0x00 | inline constexpr uint32_t kSaveMgr_Lock = 0x00;     // pa::WindowsLock<3>* (= this + 8) |
-| N1012 | src/mod/session2/offsets_s2.h:171 | kSaveMgr_LockObj | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kSaveMgr_LockObj = 0x08;  // the lock itself (CRITICAL_SECTION inside) |
-| N1013 | src/mod/session2/offsets_s2.h:172 | kSaveMgr_Slots | RVA / layout / policy (audit) | 0x40 | inline constexpr uint32_t kSaveMgr_Slots = 0x40;    // entries of 0x68 bytes: u32 slot @0, i64 time @8 |
-| N1014 | src/mod/session2/offsets_s2.h:173 | kSaveMgr_Count | RVA / layout / policy (audit) | 0x48 | inline constexpr uint32_t kSaveMgr_Count = 0x48;    // u32 |
-| N1015 | src/mod/session2/offsets_s2.h:174 | kSaveMgr_Capacity | RVA / layout / policy (audit) | 0x4C | inline constexpr uint32_t kSaveMgr_Capacity = 0x4C; // u32 |
-| N1016 | src/mod/session2/offsets_s2.h:175 | kSaveMgr_Storage | RVA / layout / policy (audit) | 0x50 | inline constexpr uint32_t kSaveMgr_Storage = 0x50;  // SaveStorage*; +0x38 slot folders, +0x40 their count |
-| N1017 | src/mod/session2/offsets_s2.h:176 | kSaveMgr_Busy | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kSaveMgr_Busy = 0x60;     // u8: a refresh/login holds the table |
-| N1018 | src/mod/session2/offsets_s2.h:177 | kSaveMgr_EntrySize | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kSaveMgr_EntrySize = 0x68; |
-| N1019 | src/mod/session2/offsets_s2.h:178 | kSaveStorage_FolderCount | RVA / layout / policy (audit) | 0x40 | inline constexpr uint32_t kSaveStorage_FolderCount = 0x40; |
-| N1020 | src/mod/session2/offsets_s2.h:179 | kWindowsLock3Vtable | vtable | 0x557C120 | inline constexpr uintptr_t kWindowsLock3Vtable = 0x557C120;  // vf1 -> EnterCriticalSection, vf2 -> Leave |
-| N1021 | src/mod/session2/offsets_s2.h:180 | kWindowsLockVf1 | RVA / layout / policy (audit) | 0x1371340 | inline constexpr uintptr_t kWindowsLockVf1 = 0x1371340;      // mov rax,[rcx]; jmp [rax+0x18] |
-| N1022 | src/mod/session2/offsets_s2.h:181 | kWindowsLockVf2 | RVA / layout / policy (audit) | 0xCE4EF0 | inline constexpr uintptr_t kWindowsLockVf2 = 0xCE4EF0;       // mov rax,[rcx]; jmp [rax+0x20] |
-| N1023 | src/mod/session2/offsets_s2.h:182 | kWindowsLockVf1Head | signature | {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x18} | inline constexpr uint8_t kWindowsLockVf1Head[] = {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x18}; |
-| N1024 | src/mod/session2/offsets_s2.h:183 | kWindowsLockVf2Head | signature | {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x20} | inline constexpr uint8_t kWindowsLockVf2Head[] = {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x20}; |
-| N1025 | src/mod/session2/offsets_s2.h:185 | kSaveMgrRefreshSlots | RVA / layout / policy (audit) | 0x1870C20 | inline constexpr uintptr_t kSaveMgrRefreshSlots = 0x1870C20; |
-| N1026 | src/mod/session2/offsets_s2.h:186 | kSaveMgrRefreshSlotsHead | signature | {0xE9, 0xAB, 0x86, 0x36, 0x0B} | inline constexpr uint8_t kSaveMgrRefreshSlotsHead[] = {0xE9, 0xAB, 0x86, 0x36, 0x0B}; |
-| N1027 | src/mod/session2/offsets_s2.h:190 | kSlotRefreshReqSequence | RVA / layout / policy (audit) | 0x2A22475 | inline constexpr uintptr_t kSlotRefreshReqSequence = 0x2A22475; |
-| N1028 | src/mod/session2/offsets_s2.h:191 | kSlotRefreshReqSequenceBytes | signature | { 0x48, 0x8B, 0x05, 0x1C, 0x72, 0x34, 0x04, 0x4C, 0x8B, 0x78, 0x48, 0x4C, 0x89, 0x7D, 0x07, 0x45, 0x32, 0xF6, 0x44, 0x88, 0x75, 0x0F, 0x49, 0x8B, 0x1F, 0x48, 0x89, 0x5D, 0x77, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x08, 0x90, 0x45, 0x38, 0x77, 0x60, 0x75, 0x0C, 0x41, 0xC6, 0x47, 0x60, 0x01, 0x41, 0xB6, 0x01, 0x44, 0x88, 0x75, 0x0F, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x10, 0x90, 0x45, 0x84, 0xF6, 0x75, 0x05, 0xE9, 0x91, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x0D, 0xCF, 0x71, 0x34, 0x04, 0x48, 0x8B, 0x49, 0x48, 0xE8, 0x4E, 0xE7, 0xE4, 0xFE, 0x90, 0x49, 0x8B, 0x1F, 0x48, 0x89, 0x5D, 0x77, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x08, 0x90, 0x41, 0xC6, 0x47, 0x60, 0x00, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x10} | inline constexpr uint8_t kSlotRefreshReqSequenceBytes[] = { |
-| N1029 | src/mod/session2/offsets_s2.h:211 | kTitlePlayReadsSaveMgr | RVA / layout / policy (audit) | 0x65DC3E | inline constexpr uintptr_t kTitlePlayReadsSaveMgr = 0x65DC3E; |
-| N1030 | src/mod/session2/offsets_s2.h:212 | kTitlePlayReadsSaveMgrBytes | signature | {0x4C, 0x8B, 0x1D, 0x4B, 0xB5, 0x70, 0x06, 0x49, 0x8B, 0x83, 0x88, 0x00, 0x00, 0x00} | inline constexpr uint8_t kTitlePlayReadsSaveMgrBytes[] = {0x4C, 0x8B, 0x1D, 0x4B, 0xB5, 0x70, 0x06, |
-| N1031 | src/mod/session2/offsets_s2.h:215 | kImageBase | RVA / layout / policy (audit) | 0x140000000 | inline constexpr uintptr_t kImageBase = 0x140000000; |
-| N1032 | src/mod/session2/offsets_s2.h:216 | kPeTimestamp | RVA / layout / policy (audit) | 0x6AB28F00 | inline constexpr uint32_t kPeTimestamp = 0x6AB28F00; |
-| N1033 | src/mod/session2/p8_probe_logic.h:150 | kMaxProbe | RVA / layout / policy (audit) | 32 | static constexpr size_t kMaxProbe = 32; |
-| N1034 | src/mod/session2/p8_probe_logic.h:151 | kProbe | RVA / layout / policy (audit) | N < kMaxProbe ? N : kMaxProbe | static constexpr size_t kProbe = N < kMaxProbe ? N : kMaxProbe; |
-| N1035 | src/mod/session2/p8_probe_logic.h:152 | kMaxKeys | RVA / layout / policy (audit) | N / 2 | static constexpr size_t kMaxKeys = N / 2; |
-| N1036 | src/mod/session2/p8_probe_logic.h:245 | kTable | RVA / layout / policy (audit) | 0x18 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
-| N1037 | src/mod/session2/p8_probe_logic.h:245 | kCount | RVA / layout / policy (audit) | 0x20 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
-| N1038 | src/mod/session2/p8_probe_logic.h:245 | kTripleSize | RVA / layout / policy (audit) | 0x18 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
-| N1039 | src/mod/session2/p8_probe_logic.h:245 | kHashInThird | RVA / layout / policy (audit) | 0x18 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
-| N1040 | src/mod/session2/p8_probe_logic.h:355 | kHashSeqBodyAnim | RVA / layout / policy (audit) | 0x837487D4 | inline constexpr uint32_t kHashSeqBodyAnim = 0x837487D4; |
-| N1041 | src/mod/session2/p8_probe_logic.h:356 | kHashSeqBodyAnimLoop | RVA / layout / policy (audit) | 0x35DD392F | inline constexpr uint32_t kHashSeqBodyAnimLoop = 0x35DD392F; |
-| N1042 | src/mod/session2/reannounce_logic.h:40 | kControlReannounce | RVA / layout / policy (audit) | 3 | inline constexpr uint8_t kControlReannounce = 3;  // troc_frame.h: 1 host ready, 2 host dead (ToGuestClient) |
-| N1043 | src/mod/session2/reannounce_logic.h:41 | kPayloadSize | RVA / layout / policy (audit) | 10 | inline constexpr size_t kPayloadSize = 10; |
-| N1044 | src/mod/session2/reannounce_logic.h:42 | kMaxAttempts | RVA / layout / policy (audit) | 3 | inline constexpr uint8_t kMaxAttempts = 3; |
-| N1045 | src/mod/session2/reannounce_logic.h:43 | kMinGapMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kMinGapMs = 1000; |
-| N1046 | src/mod/session2/reannounce_logic.h:76 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;  // troc_frame.h kControlOpcode |
-| N1047 | src/mod/session2/reannounce_logic.h:77 | kFrameSize | RVA / layout / policy (audit) | 5 + kPayloadSize | inline constexpr size_t kFrameSize = 5 + kPayloadSize; |
-| N1048 | src/mod/session2/reannounce_logic.h:110 | kVerdicts | RVA / layout / policy (audit) | 6 | inline constexpr size_t kVerdicts = 6; |
-| N1049 | src/mod/session2/reannounce_logic.h:125 | kMaxPerEpoch | RVA / layout / policy (audit) | 16 | inline constexpr uint32_t kMaxPerEpoch = 16; |
-| N1050 | src/mod/session2/rejoin_logic.h:47 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;    // troc_frame.h kControlOpcode |
-| N1051 | src/mod/session2/rejoin_logic.h:48 | kControlRejoin | RVA / layout / policy (audit) | 13 | inline constexpr uint8_t kControlRejoin = 13;    // troc_frame.h kControlRejoin |
-| N1052 | src/mod/session2/rejoin_logic.h:49 | kControlEpoch | RVA / layout / policy (audit) | 14 | inline constexpr uint8_t kControlEpoch = 14;     // troc_frame.h kControlEpoch |
-| N1053 | src/mod/session2/rejoin_logic.h:50 | kCapsRejoin | RVA / layout / policy (audit) | 0x08 | inline constexpr uint8_t kCapsRejoin = 0x08;     // troc_frame.h kCapsRejoin |
-| N1054 | src/mod/session2/rejoin_logic.h:51 | kWireVersion | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kWireVersion = 1; |
-| N1055 | src/mod/session2/rejoin_logic.h:52 | kRejoinPayload | RVA / layout / policy (audit) | 11 | inline constexpr size_t kRejoinPayload = 11, kEpochPayload = 12; |
-| N1056 | src/mod/session2/rejoin_logic.h:52 | kEpochPayload | RVA / layout / policy (audit) | 12 | inline constexpr size_t kRejoinPayload = 11, kEpochPayload = 12; |
-| N1057 | src/mod/session2/rejoin_logic.h:53 | kRetryMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kRetryMs = 1000; |
-| N1058 | src/mod/session2/rejoin_logic.h:54 | kMaxAsks | RVA / layout / policy (audit) | 30 | inline constexpr uint32_t kMaxAsks = 30; |
-| N1059 | src/mod/session2/rejoin_logic.h:223 | kGrantUnusedMs | RVA / layout / policy (audit) | 60000 | inline constexpr uint64_t kGrantUnusedMs = 60000; |
-| N1060 | src/mod/session2/report_guard.cpp:19 | kReporter | RVA / layout / policy (audit) | 0x1317D40 | constexpr uintptr_t kReporter = 0x1317D40; |
-| N1061 | src/mod/session2/report_guard.cpp:20 | kReporterHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57} | constexpr uint8_t kReporterHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x55, 0x56, 0x57, |
-| N1062 | src/mod/session2/report_guard.cpp:22 | kMaxPaths | RVA / layout / policy (audit) | 8 | constexpr uint32_t kMaxPaths = 8; |
-| N1063 | src/mod/session2/report_guard.cpp:23 | kMaxText | RVA / layout / policy (audit) | 260 | constexpr size_t kMaxText = 260; |
-| N1064 | src/mod/session2/report_guard.cpp:24 | kMaxLogged | RVA / layout / policy (audit) | 16 | constexpr uint64_t kMaxLogged = 16;  // a broken loop must not flood the log |
-| N1065 | src/mod/session2/ride_filter_logic.h:50 | kOpStartActionAck | Troc ID (audit) | 2991 | inline constexpr uint16_t kOpStartActionAck = 2991; |
-| N1066 | src/mod/session2/ride_filter_logic.h:51 | kHeader | RVA / layout / policy (audit) | 5 | inline constexpr size_t kHeader = 5; |
-| N1067 | src/mod/session2/ride_filter_logic.h:52 | kAckSize | RVA / layout / policy (audit) | 725 | inline constexpr size_t kAckSize = 725; |
-| N1068 | src/mod/session2/ride_filter_logic.h:53 | kA0 | RVA / layout / policy (audit) | 0x004 | inline constexpr size_t kA0 = 0x004; |
-| N1069 | src/mod/session2/ride_filter_logic.h:54 | kA1 | RVA / layout / policy (audit) | 0x049 | inline constexpr size_t kA1 = 0x049; |
-| N1070 | src/mod/session2/ride_filter_logic.h:55 | kBlock | RVA / layout / policy (audit) | 69 | inline constexpr size_t kBlock = 69; |
-| N1071 | src/mod/session2/ride_filter_logic.h:56 | kBlockHash | RVA / layout / policy (audit) | 0x04 | inline constexpr size_t kBlockHash = 0x04; |
-| N1072 | src/mod/session2/ride_filter_logic.h:57 | kParent | RVA / layout / policy (audit) | 0x117 | inline constexpr size_t kParent = 0x117;  // u64, all ones = none |
-| N1073 | src/mod/session2/ride_filter_logic.h:58 | kTarget | RVA / layout / policy (audit) | 0x16D | inline constexpr size_t kTarget = 0x16D;  // u32 |
-| N1074 | src/mod/session2/ride_filter_logic.h:60 | kMountA0 | signature | {0x91605616u, 0x872A6750u} | inline constexpr uint32_t kMountA0[] = {0x91605616u, 0x872A6750u};  // the guest's / the host's (session 9) |
-| N1075 | src/mod/session2/ride_filter_logic.h:61 | kDismountA1 | RVA / layout / policy (audit) | 0x7B6AFF57u | inline constexpr uint32_t kDismountA1 = 0x7B6AFF57u;                // with A0 0x667E3B35 / 0xC9356CEB / 0x412C2C2B |
-| N1076 | src/mod/session2/ride_filter_logic.h:62 | kFootHash | RVA / layout / policy (audit) | 0x26107D3Cu | inline constexpr uint32_t kFootHash = 0x26107D3Cu; |
-| N1077 | src/mod/session2/ride_filter_logic.h:63 | kRidingHash | RVA / layout / policy (audit) | 0xF79C7424u | inline constexpr uint32_t kRidingHash = 0xF79C7424u; |
-| N1078 | src/mod/session2/ride_filter_logic.h:67 | kBlockFoot | signature | { 0x00, 0x00, 0x00, 0x00, 0x3C, 0x7D, 0x10, 0x26, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x89, 0x88, 0x08, 0xBD, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD7, 0xA3, 0x70, 0x3F, 0x57, 0x57, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} | inline constexpr std::array<uint8_t, kBlock> kBlockFoot = { |
-| N1079 | src/mod/session2/ride_filter_logic.h:72 | kBlockRiding | signature | { 0x00, 0x00, 0x00, 0x00, 0x24, 0x74, 0x9C, 0xF7, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x89, 0x88, 0x08, 0xBD, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD7, 0xA3, 0x70, 0x3F, 0x57, 0x57, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} | inline constexpr std::array<uint8_t, kBlock> kBlockRiding = { |
-| N1080 | src/mod/session2/ride_filter_logic.h:77 | kBlockEmpty | signature | { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x02, 0x00, 0x00, 0x80, 0xBF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x3F, 0x57, 0x57, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} | inline constexpr std::array<uint8_t, kBlock> kBlockEmpty = { |
-| N1081 | src/mod/session2/ride_filter_logic.h:121 | kKinds | RVA / layout / policy (audit) | 3 | inline constexpr size_t kKinds = 3; |
-| N1082 | src/mod/session2/ride_filter_logic.h:181 | kWindowMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kWindowMs = 3000; |
-| N1083 | src/mod/session2/ride_filter_logic.h:222 | kSlots | RVA / layout / policy (audit) | 64 | static constexpr size_t kSlots = 64; |
-| N1084 | src/mod/session2/ride_filter_logic.h:302 | kGateDismountA0 | signature | {0xC9356CEBu, 0x412C2C2Bu} | inline constexpr uint32_t kGateDismountA0[] = {0xC9356CEBu, 0x412C2C2Bu}; |
-| N1085 | src/mod/session2/ride_filter_logic.h:307 | kSlots | RVA / layout / policy (audit) | 8 | static constexpr size_t kSlots = 8; |
-| N1086 | src/mod/session2/save_hooks.cpp:142 | kTraceLines | RVA / layout / policy (audit) | 5000 | constexpr uint32_t kTraceLines = 5000; |
-| N1087 | src/mod/session2/save_hooks.cpp:143 | kTraceNonWriteLines | RVA / layout / policy (audit) | 2000 | constexpr uint32_t kTraceNonWriteLines = 2000; |
-| N1088 | src/mod/session2/save_hooks.cpp:259 | kName | RVA / layout / policy (audit) |  | static constexpr char kName[] = "pearl abyss"; |
-| N1089 | src/mod/session2/save_hooks.cpp:281 | kRedirectLines | RVA / layout / policy (audit) | 200 | constexpr uint64_t kRedirectLines = 200;  // "Session2 save redirect #N" lines, writes only |
-| N1090 | src/mod/session2/save_hooks.cpp:282 | kRedirectErrorLines | RVA / layout / policy (audit) | 20 | constexpr uint64_t kRedirectErrorLines = 20; |
-| N1091 | src/mod/session2/save_hooks.cpp:444 | kWrite | RVA / layout / policy (audit) | [](const auto& | constexpr auto kWrite = [](const auto&, auto, DWORD) { return Kind::Write; }; |
-| N1092 | src/mod/session2/save_hooks.cpp:445 | kQuery | RVA / layout / policy (audit) | [](const auto& | constexpr auto kQuery = [](const auto&, auto, DWORD) { return Kind::Query; }; |
-| N1093 | src/mod/session2/save_hooks.cpp:447 | kWriteIfSecond | RVA / layout / policy (audit) | [](const auto& m | constexpr auto kWriteIfSecond = [](const auto& m, auto, DWORD) { return m[1].hit ? Kind::Write : Kind::Read; }; |
-| N1094 | src/mod/session2/save_hooks.cpp:449 | kBoolText | RVA / layout / policy (audit) | [](BOOL ok | constexpr auto kBoolText = [](BOOL ok, DWORD error) { return bool_result(ok, error); }; |
-| N1095 | src/mod/session2/save_hooks.cpp:450 | kHandleText | RVA / layout / policy (audit) | [](HANDLE h | constexpr auto kHandleText = [](HANDLE h, DWORD error) { return handle_result(h, error); }; |
-| N1096 | src/mod/session2/save_hooks.cpp:451 | kNoText | RVA / layout / policy (audit) | [](auto | constexpr auto kNoText = [](auto, DWORD) { return std::string(); };  // queries get no line |
-| N1097 | src/mod/session2/server.cpp:68 | kMagic | RVA / layout / policy (audit) | 0x32534553'44504F43ull | constexpr uint64_t kMagic = 0x32534553'44504F43ull;  // "COPDSES2" |
-| N1098 | src/mod/session2/server.cpp:76 | kSessionId | RVA / layout / policy (audit) | 0 | constexpr uint32_t kSessionId = 0; |
-| N1099 | src/mod/session2/server.cpp:77 | kMaxOutgoingBytes | RVA / layout / policy (audit) | 32u << 20 | constexpr size_t kMaxOutgoingBytes = 32u << 20;      // a login burst is ~42,000 Acks |
-| N1100 | src/mod/session2/server.cpp:114 | kEpochSlots | RVA / layout / policy (audit) | kMaxGuestEpochs + 1 | constexpr size_t kEpochSlots = kMaxGuestEpochs + 1; |
-| N1101 | src/mod/session2/server.cpp:123 | kNotReq | RVA / layout / policy (audit) | 0xFF | constexpr uint8_t kNotReq = 0xFF, kBlocked = 0xFE; |
-| N1102 | src/mod/session2/server.cpp:123 | kBlocked | RVA / layout / policy (audit) | 0xFE | constexpr uint8_t kNotReq = 0xFF, kBlocked = 0xFE; |
-| N1103 | src/mod/session2/server.cpp:133 | kOpLoginCharacterToFieldServerReq | Troc ID (audit) | 3093 | constexpr uint16_t kOpLoginCharacterToFieldServerReq = 3093; |
-| N1104 | src/mod/session2/server.cpp:134 | kOpLoginUserToFieldServerReq | Troc ID (audit) | 2490 | constexpr uint16_t kOpLoginUserToFieldServerReq = 2490; |
-| N1105 | src/mod/session2/server.cpp:137 | kOpMoveActorReq | Troc ID (audit) | 2556 | constexpr uint16_t kOpMoveActorReq = 2556, kOpStartActionReq = 2223, kOpRotateActorReq = 2828; |
-| N1106 | src/mod/session2/server.cpp:137 | kOpStartActionReq | Troc ID (audit) | 2223 | constexpr uint16_t kOpMoveActorReq = 2556, kOpStartActionReq = 2223, kOpRotateActorReq = 2828; |
-| N1107 | src/mod/session2/server.cpp:137 | kOpRotateActorReq | Troc ID (audit) | 2828 | constexpr uint16_t kOpMoveActorReq = 2556, kOpStartActionReq = 2223, kOpRotateActorReq = 2828; |
-| N1108 | src/mod/session2/server.cpp:138 | kOpMainPlayerDataStartAck | Troc ID (audit) | 2756 | constexpr uint16_t kOpMainPlayerDataStartAck = 2756; |
-| N1109 | src/mod/session2/server.cpp:139 | kOpMainUserDataStartAck | Troc ID (audit) | 2646 | constexpr uint16_t kOpMainUserDataStartAck = 2646;  // u32 user key at +0 |
-| N1110 | src/mod/session2/server.cpp:140 | kOpMoveFieldAck | Troc ID (audit) | 2174 | constexpr uint16_t kOpMoveFieldAck = 2174;          // u8 &#124; u32 actor &#124; u32 &#124; u32 field owner @9 &#124; 0x30 * n |
-| N1111 | src/mod/session2/server.cpp:159 | kMaxMirrored | RVA / layout / policy (audit) | 4096 | constexpr size_t kMaxMirrored = 4096; |
-| N1112 | src/mod/session2/server.cpp:168 | kLogoutPendingMs | RVA / layout / policy (audit) | 60000 | constexpr uint64_t kLogoutPendingMs = 60000;    // give up handing it after this |
-| N1113 | src/mod/session2/server.cpp:181 | kOpNak | Troc ID (audit) | 1013 | constexpr uint16_t kOpNak = 1013; |
-| N1114 | src/mod/session2/server.cpp:182 | kOpRemoveActorAck2516 | Troc ID (audit) | 2516 | constexpr uint16_t kOpRemoveActorAck2516 = 2516;  // RemoveActorAck (world_anchor's probe) |
-| N1115 | src/mod/session2/server.cpp:207 | kMaxExceptionNotes | RVA / layout / policy (audit) | 8 | constexpr uint32_t kMaxExceptionNotes = 8; |
-| N1116 | src/mod/session2/server.h:152 | kMaxGuestEpochs | RVA / layout / policy (audit) | 32 | inline constexpr uint32_t kMaxGuestEpochs = 32; |
-| N1117 | src/mod/session2/session2.cpp:80 | kMaxEarly | RVA / layout / policy (audit) | 512 | constexpr size_t kMaxEarly = 512; |
-| N1118 | src/mod/session2/session2.cpp:82 | kHoldRetryMs | RVA / layout / policy (audit) | 20 | constexpr uint64_t kHoldRetryMs = 20; |
-| N1119 | src/mod/session2/session2.cpp:93 | kLinkLostMs | RVA / layout / policy (audit) | 15000 | constexpr uint32_t kLinkLostMs = 15000;  // longer than the session's own 5 s peer timeout |
-| N1120 | src/mod/session2/session2.cpp:109 | kSampleMs | RVA / layout / policy (audit) | 1000 | constexpr uint32_t kSampleMs = 1000, kBarrierMs = 250; |
-| N1121 | src/mod/session2/session2.cpp:109 | kBarrierMs | RVA / layout / policy (audit) | 250 | constexpr uint32_t kSampleMs = 1000, kBarrierMs = 250; |
-| N1122 | src/mod/session2/session2.cpp:120 | kRejoinLines | RVA / layout / policy (audit) | 64 | constexpr uint64_t kRejoinLines = 64; |
-| N1123 | src/mod/session2/session2.cpp:161 | kSlowTickUs | RVA / layout / policy (audit) | 50'000 | constexpr uint64_t kSlowTickUs = 50'000;  // a tick above this is logged with its parts |
-| N1124 | src/mod/session2/session2.cpp:162 | kSlowTickLines | RVA / layout / policy (audit) | 200 | constexpr uint64_t kSlowTickLines = 200; |
-| N1125 | src/mod/session2/session2.cpp:276 | kOpSetFieldTimeReq | Troc ID (audit) | 2125 | constexpr uint16_t kOpSetFieldTimeReq = 2125; |
-| N1126 | src/mod/session2/session2.cpp:1471 | kReanLines | RVA / layout / policy (audit) | 32 | constexpr uint64_t kReanLines = 32; |
-| N1127 | src/mod/session2/slot_refresh.h:75 | kEntrySize | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kEntrySize = 0x68; |
-| N1128 | src/mod/session2/slot_refresh.h:76 | kMaxEntriesRead | RVA / layout / policy (audit) | 64 | inline constexpr uint32_t kMaxEntriesRead = 64; |
-| N1129 | src/mod/session2/travel_probe.h:55 | kTravelContext | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
-| N1130 | src/mod/session2/travel_probe.h:55 | kTravelPrepared | RVA / layout / policy (audit) | 2 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
-| N1131 | src/mod/session2/travel_probe.h:55 | kTravelConsume | RVA / layout / policy (audit) | 3 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
-| N1132 | src/mod/session2/travel_probe.h:55 | kTravelRevive | RVA / layout / policy (audit) | 4 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
-| N1133 | src/mod/session2/travel_probe.h:59 | kTravelHead | RVA / layout / policy (audit) | 24 | inline constexpr size_t kTravelHead = 24; |
-| N1134 | src/mod/session2/travel_probe_logic.h:26 | kOpReloadStageStartReq | Troc ID (audit) | 2283 | inline constexpr uint16_t kOpReloadStageStartReq = 2283; |
-| N1135 | src/mod/session2/travel_probe_logic.h:27 | kOpGameLoadingStartReq | Troc ID (audit) | 2437 | inline constexpr uint16_t kOpGameLoadingStartReq = 2437; |
-| N1136 | src/mod/session2/travel_probe_logic.h:28 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174; |
-| N1137 | src/mod/session2/travel_probe_logic.h:29 | kOpLoadingFieldDataAck | Troc ID (audit) | 2643 | inline constexpr uint16_t kOpLoadingFieldDataAck = 2643; |
-| N1138 | src/mod/session2/travel_probe_logic.h:30 | kOpMoveFieldCompletePostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldCompletePostAck = 3066; |
-| N1139 | src/mod/session2/travel_probe_logic.h:31 | kOpMoveFieldCompleteAck | Troc ID (audit) | 2144 | inline constexpr uint16_t kOpMoveFieldCompleteAck = 2144; |
-| N1140 | src/mod/session2/travel_probe_logic.h:32 | kOpPlayAllPreLoadSequencerAck | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpPlayAllPreLoadSequencerAck = 2322; |
-| N1141 | src/mod/session2/travel_probe_logic.h:33 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpLoadingCompleteAck = 2762; |
-| N1142 | src/mod/session2/travel_probe_logic.h:34 | kOpLogoutCharacterAck | Troc ID (audit) | 2679 | inline constexpr uint16_t kOpLogoutCharacterAck = 2679; |
-| N1143 | src/mod/session2/travel_probe_logic.h:35 | kOpNak | Troc ID (audit) | 1013 | inline constexpr uint16_t kOpNak = 1013; |
-| N1144 | src/mod/session2/travel_probe_logic.h:38 | kOpReviveLoadingReq | Troc ID (audit) | 2362 | inline constexpr uint16_t kOpReviveLoadingReq = 2362; |
-| N1145 | src/mod/session2/travel_probe_logic.h:40 | kOwnerAt | RVA / layout / policy (audit) | 9 | inline constexpr size_t kOwnerAt = 9;           // u32 owner, both 2174 and 2643 (payload offset, no Troc header) |
-| N1146 | src/mod/session2/travel_probe_logic.h:41 | kMoveFieldHead | RVA / layout / policy (audit) | 17 | inline constexpr size_t kMoveFieldHead = 17;    // 2174: 17 + 48n |
-| N1147 | src/mod/session2/travel_probe_logic.h:42 | kLoadingFieldHead | RVA / layout / policy (audit) | 20 | inline constexpr size_t kLoadingFieldHead = 20; // 2643: 20 + 48n |
-| N1148 | src/mod/session2/travel_probe_logic.h:43 | kRecord | RVA / layout / policy (audit) | 0x30 | inline constexpr size_t kRecord = 0x30; |
-| N1149 | src/mod/session2/travel_probe_logic.h:157 | kErrInvalidFieldInfoKey | RVA / layout / policy (audit) | 0x8E19630A | inline constexpr uint32_t kErrInvalidFieldInfoKey = 0x8E19630A;  // hashlittle("eErrNoInvalidFieldInfoKey") |
-| N1150 | src/mod/session2/travel_probe_logic.h:287 | kMaxAcks | RVA / layout / policy (audit) | 24 | inline constexpr uint32_t kMaxAcks = 24; |
-| N1151 | src/mod/session2/travel_probe_logic.h:288 | kWindowMs | RVA / layout / policy (audit) | 20000 | inline constexpr uint64_t kWindowMs = 20000; |
-| N1152 | src/mod/session2/travel_probe_logic.h:289 | kAlwaysLines | RVA / layout / policy (audit) | 8 | inline constexpr uint32_t kAlwaysLines = 8; |
-| N1153 | src/mod/session2/travel_probe_logic.h:322 | kOpPreLoadSequencerReq | Troc ID (audit) | 2873 | inline constexpr uint16_t kOpPreLoadSequencerReq = 2873; |
-| N1154 | src/mod/session2/travel_probe_logic.h:323 | kOpPrepareSequencerAck | Troc ID (audit) | 2661 | inline constexpr uint16_t kOpPrepareSequencerAck = 2661; |
-| N1155 | src/mod/session2/travel_probe_logic.h:324 | kOpStageBranchStateAck | Troc ID (audit) | 2981 | inline constexpr uint16_t kOpStageBranchStateAck = 2981; |
-| N1156 | src/mod/session2/travel_probe_logic.h:325 | kHostBurstUs | RVA / layout / policy (audit) | 3'000'000 | inline constexpr uint64_t kHostBurstUs = 3'000'000; |
-| N1157 | src/mod/session2/travel_probe_logic.h:326 | kHostOwnBeforeUs | RVA / layout / policy (audit) | 1'000'000 | inline constexpr uint64_t kHostOwnBeforeUs = 1'000'000; |
-| N1158 | src/mod/session2/tree_bend_logic.h:45 | kVf2 | RVA / layout / policy (audit) | 0x117F7E0 | inline constexpr uintptr_t kVf2 = 0x117F7E0; |
-| N1159 | src/mod/session2/tree_bend_logic.h:48 | kVf2Patch | RVA / layout / policy (audit) | 5 | inline constexpr uint32_t kVf2Patch = 5;  // mov [rsp+8],rbx |
-| N1160 | src/mod/session2/tree_bend_logic.h:49 | kVf2Slot | RVA / layout / policy (audit) | 0x56FFB58 | inline constexpr uintptr_t kVf2Slot = 0x56FFB58; |
-| N1161 | src/mod/session2/tree_bend_logic.h:51 | kApply | RVA / layout / policy (audit) | 0x1190FD0 | inline constexpr uintptr_t kApply = 0x1190FD0; |
-| N1162 | src/mod/session2/tree_bend_logic.h:53 | kApplyPatch | RVA / layout / policy (audit) | 7 | inline constexpr uint32_t kApplyPatch = 7;  // mov rax,rsp &#124; mov [rax+0x10],rbx |
-| N1163 | src/mod/session2/tree_bend_logic.h:54 | kApplyCall | RVA / layout / policy (audit) | 0x117F911 | inline constexpr uintptr_t kApplyCall = 0x117F911;  // in 0x117F7E0: call 0x1190FD0 |
-| N1164 | src/mod/session2/tree_bend_logic.h:57 | kSetBend | RVA / layout / policy (audit) | 0x349EA10 | inline constexpr uintptr_t kSetBend = 0x349EA10; |
-| N1165 | src/mod/session2/tree_bend_logic.h:59 | kSetBendPatch | RVA / layout / policy (audit) | 5 | inline constexpr uint32_t kSetBendPatch = 5;  // mov [rsp+8],rbx |
-| N1166 | src/mod/session2/tree_bend_logic.h:60 | kSetBendCall | RVA / layout / policy (audit) | 0x1191532 | inline constexpr uintptr_t kSetBendCall = 0x1191532;  // in 0x1190FD0: call SetBend (rdx = state+0x380, xmm2 = state+0x378) |
-| N1167 | src/mod/session2/tree_bend_logic.h:65 | kTick | RVA / layout / policy (audit) | 0x59C0D0 | inline constexpr uintptr_t kTick = 0x59C0D0; |
-| N1168 | src/mod/session2/tree_bend_logic.h:67 | kTickBoundaries | signature | {2, 3, 4, 5, 7, 9} | inline constexpr uint32_t kTickBoundaries[] = {2, 3, 4, 5, 7, 9}; |
-| N1169 | src/mod/session2/tree_bend_logic.h:68 | kTickPatch | signature | {5} | inline constexpr uint32_t kTickPatch[] = {5};  // push rbp &#124; push rbx &#124; push rsi &#124; push rdi |
-| N1170 | src/mod/session2/tree_bend_logic.h:69 | kTickJump | RVA / layout / policy (audit) | 0x8A5DA0 | inline constexpr uintptr_t kTickJump = 0x8A5DA0; |
-| N1171 | src/mod/session2/tree_bend_logic.h:74 | kGetTarget | RVA / layout / policy (audit) | 0x5B1600 | inline constexpr uintptr_t kGetTarget = 0x5B1600; |
-| N1172 | src/mod/session2/tree_bend_logic.h:76 | kFindTree | RVA / layout / policy (audit) | 0x491AC0 | inline constexpr uintptr_t kFindTree = 0x491AC0; |
-| N1173 | src/mod/session2/tree_bend_logic.h:81 | kActor_Key | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kActor_Key = 0x60; |
-| N1174 | src/mod/session2/tree_bend_logic.h:82 | kActor_Control | RVA / layout / policy (audit) | 0xC8 | inline constexpr uint32_t kActor_Control = 0xC8;  // u8, != 0: controlled by this client |
-| N1175 | src/mod/session2/tree_bend_logic.h:83 | kActor_Comps | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kActor_Comps = 0x68; |
-| N1176 | src/mod/session2/tree_bend_logic.h:84 | kActor_LockObj | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kActor_LockObj = 0x08; |
-| N1177 | src/mod/session2/tree_bend_logic.h:85 | kComps_RemoteCatch | RVA / layout / policy (audit) | 0x78 | inline constexpr uint32_t kComps_RemoteCatch = 0x78; |
-| N1178 | src/mod/session2/tree_bend_logic.h:86 | kComps_Control | RVA / layout / policy (audit) | 0x40 | inline constexpr uint32_t kComps_Control = 0x40;  // f6 = [[[[actor+0x68]+0x40]+0x88]+0x10]+0xF6 (0x117F850..0x117F873) |
-| N1179 | src/mod/session2/tree_bend_logic.h:87 | kControl_F6a | RVA / layout / policy (audit) | 0x88 | inline constexpr uint32_t kControl_F6a = 0x88; |
-| N1180 | src/mod/session2/tree_bend_logic.h:88 | kControl_F6b | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kControl_F6b = 0x10; |
-| N1181 | src/mod/session2/tree_bend_logic.h:89 | kControl_F6 | RVA / layout / policy (audit) | 0xF6 | inline constexpr uint32_t kControl_F6 = 0xF6; |
-| N1182 | src/mod/session2/tree_bend_logic.h:90 | kComp_Owner | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kComp_Owner = 0x08; |
-| N1183 | src/mod/session2/tree_bend_logic.h:91 | kClientRemoteCatchVtbl | vtable | 0x55890D8 | inline constexpr uintptr_t kClientRemoteCatchVtbl = 0x55890D8;  // pa::ClientRemoteCatchActorComponent |
-| N1184 | src/mod/session2/tree_bend_logic.h:92 | kLockVf | signature | {0x18, 0x20, 0x30, 0x40} | inline constexpr uint32_t kLockVf[] = {0x18, 0x20, 0x30, 0x40}; |
-| N1185 | src/mod/session2/tree_bend_logic.h:93 | kSlotBase | RVA / layout / policy (audit) | 0x20 | inline constexpr uint32_t kSlotBase = 0x20; |
-| N1186 | src/mod/session2/tree_bend_logic.h:94 | kSlotStride | RVA / layout / policy (audit) | 0x58 | inline constexpr uint32_t kSlotStride = 0x58; |
-| N1187 | src/mod/session2/tree_bend_logic.h:95 | kSlot_Kind | RVA / layout / policy (audit) | 0x00 | inline constexpr uint32_t kSlot_Kind = 0x00;   // u8, 6 = empty |
-| N1188 | src/mod/session2/tree_bend_logic.h:96 | kSlot_Scene | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kSlot_Scene = 0x10;  // 16 bytes (u64 object id, u64 level id) |
-| N1189 | src/mod/session2/tree_bend_logic.h:97 | kSlotEmpty | RVA / layout / policy (audit) | 6 | inline constexpr uint8_t kSlotEmpty = 6; |
-| N1190 | src/mod/session2/tree_bend_logic.h:98 | kStateBase | RVA / layout / policy (audit) | 0x9BC | inline constexpr uint32_t kStateBase = 0x9BC;  // u8 per slot: 2 flight, 3 attached, 7 idle ... |
-| N1191 | src/mod/session2/tree_bend_logic.h:99 | kStateStride | RVA / layout / policy (audit) | 0x1A0 | inline constexpr uint32_t kStateStride = 0x1A0; |
-| N1192 | src/mod/session2/tree_bend_logic.h:100 | kStateAttached | RVA / layout / policy (audit) | 3 | inline constexpr uint8_t kStateAttached = 3; |
-| N1193 | src/mod/session2/tree_bend_logic.h:101 | kSlots | RVA / layout / policy (audit) | 2 | inline constexpr int kSlots = 2; |
-| N1194 | src/mod/session2/tree_bend_logic.h:105 | kState_Amount | RVA / layout / policy (audit) | 0x378 | inline constexpr uint32_t kState_Amount = 0x378; |
-| N1195 | src/mod/session2/tree_bend_logic.h:106 | kState_Dir | RVA / layout / policy (audit) | 0x380 | inline constexpr uint32_t kState_Dir = 0x380; |
-| N1196 | src/mod/session2/tree_bend_logic.h:108 | kTree_Amount | RVA / layout / policy (audit) | 0x2A4 | inline constexpr uint32_t kTree_Amount = 0x2A4; |
-| N1197 | src/mod/session2/tree_bend_logic.h:109 | kTree_Set | RVA / layout / policy (audit) | 0x2B4 | inline constexpr uint32_t kTree_Set = 0x2B4; |
-| N1198 | src/mod/session2/tree_bend_logic.h:110 | kTree_Flags | RVA / layout / policy (audit) | 0x59 | inline constexpr uint32_t kTree_Flags = 0x59; |
-| N1199 | src/mod/session2/tree_bend_logic.h:111 | kMainThreadId | RVA / layout / policy (audit) | 0x6A652D4 | inline constexpr uintptr_t kMainThreadId = 0x6A652D4;  // dword: the client's main thread |
-| N1200 | src/mod/session2/tree_bend_logic.h:122 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;  // troc_frame.h kControlOpcode |
-| N1201 | src/mod/session2/tree_bend_logic.h:123 | kControlTreeBend | RVA / layout / policy (audit) | 15 | inline constexpr uint8_t kControlTreeBend = 15;  // troc_frame.h: 1-14 taken (5 mount_sync, 12 weather, 13-14 rejoin) |
-| N1202 | src/mod/session2/tree_bend_logic.h:124 | kVersion | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kVersion = 1; |
-| N1203 | src/mod/session2/tree_bend_logic.h:125 | kHeader | RVA / layout / policy (audit) | 5 | inline constexpr size_t kHeader = 5;  // u16 opcode &#124; i8 slot &#124; u16 len |
-| N1204 | src/mod/session2/tree_bend_logic.h:126 | kPayloadSize | RVA / layout / policy (audit) | 52 | inline constexpr size_t kPayloadSize = 52; |
-| N1205 | src/mod/session2/tree_bend_logic.h:127 | kFrameSize | RVA / layout / policy (audit) | kHeader + kPayloadSize | inline constexpr size_t kFrameSize = kHeader + kPayloadSize; |
-| N1206 | src/mod/session2/tree_bend_logic.h:130 | kFlagApplyFlag | RVA / layout / policy (audit) | 0x01 | inline constexpr uint8_t kFlagApplyFlag = 0x01;  // 0x1190FD0's r8b (f6 == 1) on that call |
-| N1207 | src/mod/session2/tree_bend_logic.h:230 | kMinGapMs | RVA / layout / policy (audit) | 25 | inline constexpr uint32_t kMinGapMs = 25;      // never more than 40 Hz per channel |
-| N1208 | src/mod/session2/tree_bend_logic.h:231 | kPeriodMs | RVA / layout / policy (audit) | 50 | inline constexpr uint32_t kPeriodMs = 50;      // 20 Hz while it changes |
-| N1209 | src/mod/session2/tree_bend_logic.h:232 | kJump | RVA / layout / policy (audit) | 0.15f | inline constexpr float kJump = 0.15f;          // a change this big goes at once (after kMinGapMs) |
-| N1210 | src/mod/session2/tree_bend_logic.h:233 | kStill | RVA / layout / policy (audit) | 0.01f | inline constexpr float kStill = 0.01f;         // below this it counts as still |
-| N1211 | src/mod/session2/tree_bend_logic.h:234 | kKeepAliveMs | RVA / layout / policy (audit) | 250 | inline constexpr uint32_t kKeepAliveMs = 250;  // 4 Hz while still |
-| N1212 | src/mod/session2/tree_bend_logic.h:235 | kEndIdleMs | RVA / layout / policy (audit) | 150 | inline constexpr uint32_t kEndIdleMs = 150;    // no SetBend this long: the run ended (End sent) |
-| N1213 | src/mod/session2/tree_bend_logic.h:252 | kChannels | RVA / layout / policy (audit) | 4 | static constexpr size_t kChannels = 4; |
-| N1214 | src/mod/session2/tree_bend_logic.h:409 | kMax | RVA / layout / policy (audit) | 8 | static constexpr size_t kMax = 8; |
-| N1215 | src/mod/session2/tree_bend_logic.h:440 | kMaxAgeMs | RVA / layout / policy (audit) | 500 | inline constexpr uint32_t kMaxAgeMs = 500;     // an older sample is not applied (a lost End) |
-| N1216 | src/mod/session2/tree_bend_logic.h:441 | kRestartMs | RVA / layout / policy (audit) | 2000 | inline constexpr uint32_t kRestartMs = 2000;   // an older seq after this long of silence: the sender restarted |
-| N1217 | src/mod/session2/tree_bend_logic.h:442 | kDelayMs | RVA / layout / policy (audit) | 100 | inline constexpr uint32_t kDelayMs = 100;      // the observer renders this far behind the newest sample |
-| N1218 | src/mod/session2/tree_bend_logic.h:443 | kMaxSpanMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint32_t kMaxSpanMs = 1000;   // two samples further apart than this are not interpolated |
-| N1219 | src/mod/session2/tree_bend_logic.h:469 | kEntries | RVA / layout / policy (audit) | 4 | static constexpr size_t kEntries = 4; |
-| N1220 | src/mod/session2/tree_bend_logic.h:672 | kRunGapUs | RVA / layout / policy (audit) | 200000 | inline constexpr uint64_t kRunGapUs = 200000;  // M1: calls further apart than this start a new run |
-| N1221 | src/mod/session2/tree_bend_logic.h:821 | kOwnBendUs | RVA / layout / policy (audit) | kEndIdleMs * 1000ull | inline constexpr uint64_t kOwnBendUs = kEndIdleMs * 1000ull;  // this PC's own bend run counts as open this long |
-| N1222 | src/mod/session2/tree_bend_logic.h:848 | kReadTries | RVA / layout / policy (audit) | 4 | static constexpr int kReadTries = 4; |
-| N1223 | src/mod/session2/tree_bend_logic.h:887 | kDuringApplyUs | RVA / layout / policy (audit) | 200000 | inline constexpr uint64_t kDuringApplyUs = 200000; |
-| N1224 | src/mod/session2/tree_bend_logic.h:892 | kApplyLineUs | RVA / layout / policy (audit) | 1000000 | inline constexpr uint64_t kApplyLineUs = 1000000; |
-| N1225 | src/mod/session2/ui_pause_logic.h:107 | kPauseBelow | RVA / layout / policy (audit) | 0.05f | inline constexpr float kPauseBelow = 0.05f; |
-| N1226 | src/mod/session2/ui_pause_logic.h:186 | kWorldList | RVA / layout / policy (audit) | 0x38 | static constexpr uint32_t kWorldList = 0x38;   // world -> {entries*, u32 count} |
-| N1227 | src/mod/session2/ui_pause_logic.h:187 | kListCount | RVA / layout / policy (audit) | 0x08 | static constexpr uint32_t kListCount = 0x08; |
-| N1228 | src/mod/session2/ui_pause_logic.h:188 | kEntryHolder | RVA / layout / policy (audit) | 0xA0 | static constexpr uint32_t kEntryHolder = 0xA0; // entry -> holder (0 = none) |
-| N1229 | src/mod/session2/ui_pause_logic.h:189 | kHolderView | RVA / layout / policy (audit) | 0x10 | static constexpr uint32_t kHolderView = 0x10;  // holder -> view V |
-| N1230 | src/mod/session2/ui_pause_logic.h:190 | kViewState | RVA / layout / policy (audit) | 0x26F | static constexpr uint32_t kViewState = 0x26F;  // u8: 0/1 open, 2 hiding, 3 unloaded |
-| N1231 | src/mod/session2/ui_pause_logic.h:191 | kViewRoot | RVA / layout / policy (audit) | 0x118 | static constexpr uint32_t kViewRoot = 0x118;   // V -> UI root (UIGamePlayControl*) |
-| N1232 | src/mod/session2/ui_pause_logic.h:192 | kViewScale | RVA / layout / policy (audit) | 0x23C | static constexpr uint32_t kViewScale = 0x23C;  // f32: the layout's timeScale |
-| N1233 | src/mod/session2/ui_pause_logic.h:193 | kRootScaleSlot | RVA / layout / policy (audit) | 0x168 | static constexpr uint32_t kRootScaleSlot = 0x168;  // root vtable slot: 0x63DA70 `return 1.0f` in all of them |
-| N1234 | src/mod/session2/ui_pause_logic.h:194 | kMaxEntries | RVA / layout / policy (audit) | 4096 | static constexpr uint32_t kMaxEntries = 4096;  // more = garbage, the replay stops |
-| N1235 | src/mod/session2/ui_pause_logic.h:197 | kMaxHits | RVA / layout / policy (audit) | 3 | inline constexpr size_t kMaxHits = 3;  // what one ring event carries |
-| N1236 | src/mod/session2/user2_funnels_logic.h:93 | kRespawnVf40Ret | RVA / layout / policy (audit) | 0x2B03AA7 | inline constexpr uint32_t kRespawnVf40Ret = 0x2B03AA7, kTraceVf40Ret = 0x2C4A0AD, kTriggerVf40Ret = 0x2C4A36F; |
-| N1237 | src/mod/session2/user2_funnels_logic.h:93 | kTraceVf40Ret | RVA / layout / policy (audit) | 0x2C4A0AD | inline constexpr uint32_t kRespawnVf40Ret = 0x2B03AA7, kTraceVf40Ret = 0x2C4A0AD, kTriggerVf40Ret = 0x2C4A36F; |
-| N1238 | src/mod/session2/user2_funnels_logic.h:93 | kTriggerVf40Ret | RVA / layout / policy (audit) | 0x2C4A36F | inline constexpr uint32_t kRespawnVf40Ret = 0x2B03AA7, kTraceVf40Ret = 0x2C4A0AD, kTriggerVf40Ret = 0x2C4A36F; |
-| N1239 | src/mod/session2/user2_funnels_logic.h:94 | kQuestEventVf40Ret | RVA / layout / policy (audit) | 0x290DC0B | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
-| N1240 | src/mod/session2/user2_funnels_logic.h:94 | kMissionUiVf40Ret | RVA / layout / policy (audit) | 0x2A49183 | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
-| N1241 | src/mod/session2/user2_funnels_logic.h:94 | kMissionAlarmVf40Ret | RVA / layout / policy (audit) | 0x2A4A03B | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
-| N1242 | src/mod/session2/user2_funnels_logic.h:94 | kChallengeDiscoverVf40Ret | RVA / layout / policy (audit) | 0x104C4B3D | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
-| N1243 | src/mod/session2/user2_funnels_logic.h:94 | kChallengeTimerVf40Ret | RVA / layout / policy (audit) | 0x2C3409D | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
-| N1244 | src/mod/session2/user2_funnels_logic.h:94 | kChangeCharacterVf40Ret | RVA / layout / policy (audit) | 0x2A4A32B | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
-| N1245 | src/mod/session2/user2_funnels_logic.h:97 | kOpTraceMission | Troc ID (audit) | 2372 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
-| N1246 | src/mod/session2/user2_funnels_logic.h:97 | kOpMissionTrigger | Troc ID (audit) | 2112 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
-| N1247 | src/mod/session2/user2_funnels_logic.h:97 | kOpMissionUiState | Troc ID (audit) | 2477 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
-| N1248 | src/mod/session2/user2_funnels_logic.h:97 | kOpMissionNewAlarm | Troc ID (audit) | 2354 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
-| N1249 | src/mod/session2/user2_funnels_logic.h:97 | kOpChangePlayable | Troc ID (audit) | 2369 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
-| N1250 | src/mod/session2/user2_funnels_logic.h:100 | kOpQuestDialogEnd | Troc ID (audit) | 2342 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
-| N1251 | src/mod/session2/user2_funnels_logic.h:100 | kOpSetQuestDialog | Troc ID (audit) | 2857 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
-| N1252 | src/mod/session2/user2_funnels_logic.h:100 | kOpStageBranchState | Troc ID (audit) | 2436 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
-| N1253 | src/mod/session2/user2_funnels_logic.h:100 | kOpUpdateStageChartEvent | Troc ID (audit) | 2591 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
-| N1254 | src/mod/session2/user2_funnels_logic.h:254 | kQuestCompActor | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kQuestCompActor = 0x08, kEventType = 0x08, kEventActorKey = 0x68; |
-| N1255 | src/mod/session2/user2_funnels_logic.h:254 | kEventType | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kQuestCompActor = 0x08, kEventType = 0x08, kEventActorKey = 0x68; |
-| N1256 | src/mod/session2/user2_funnels_logic.h:254 | kEventActorKey | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kQuestCompActor = 0x08, kEventType = 0x08, kEventActorKey = 0x68; |
-| N1257 | src/mod/session2/user2_funnels_logic.h:263 | kAckHostQuest | signature | {3009, 3088, 2738, 2346} | inline constexpr uint16_t kAckHostQuest[] = {3009, 3088, 2738, 2346}; |
-| N1258 | src/mod/session2/user2_funnels_logic.h:482 | kActorComponents | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kActorComponents = 0x68; |
-| N1259 | src/mod/session2/user2_funnels_logic.h:483 | kComponentsQuest | RVA / layout / policy (audit) | 0x138 | inline constexpr uint32_t kComponentsQuest = 0x138;  // index 0x27 (0x2A7FDAE) |
-| N1260 | src/mod/session2/user2_funnels_logic.h:484 | kQuestComponentManager | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kQuestComponentManager = 0x18; |
-| N1261 | src/mod/session2/user2_funnels_logic.h:521 | kOpcodes | Troc ID (audit) | 4096 | inline constexpr size_t kOpcodes = 4096; |
+| N0796 | src/mod/session2/identity_probe.cpp:31 | kLoad | RVA / layout / policy (audit) | 0x20688A0 | constexpr uintptr_t kLoad = 0x20688A0;  // LoadComponentsFromFile(actor, res*, store, name, u32 slot) -> res |
+| N0797 | src/mod/session2/identity_probe.cpp:32 | kLoadHead | signature | {0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x68, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x98, 0x03, 0x00, 0x00, 0x49, 0x8B, 0xD9, 0x4D, 0x8B, 0xE8, 0x48, 0x8B, 0xF2, 0x4C, 0x8B, 0xF1} | constexpr uint8_t kLoadHead[] = {0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, |
+| N0798 | src/mod/session2/identity_probe.cpp:39 | kComponentSite | RVA / layout / policy (audit) | 0x20693CD | constexpr uintptr_t kComponentSite = 0x20693CD; |
+| N0799 | src/mod/session2/identity_probe.cpp:40 | kComponentSiteBytes | signature | {0x49, 0x8B, 0x07, 0x8B, 0x8D, 0x00, 0x03, 0x00, 0x00, 0x89, 0x4C, 0x24, 0x20, 0x4C, 0x8D, 0x4D, 0xC0, 0x44, 0x8B, 0xC6, 0x48, 0x8D, 0x55, 0x30, 0x49, 0x8B, 0xCF, 0xFF, 0x50, 0x50, 0x8B, 0x18, 0x85, 0xDB, 0x0F, 0x85, 0x8D, 0x00, 0x00, 0x00} | constexpr uint8_t kComponentSiteBytes[] = {0x49, 0x8B, 0x07, 0x8B, 0x8D, 0x00, 0x03, 0x00, 0x00, 0x89, |
+| N0800 | src/mod/session2/identity_probe.cpp:44 | kComponentHook | RVA / layout / policy (audit) | kComponentSite + 30 | constexpr uintptr_t kComponentHook = kComponentSite + 30;  // 0x20693EB |
+| N0801 | src/mod/session2/identity_probe.cpp:45 | kOwner | RVA / layout / policy (audit) | 0x2AE1010 | constexpr uintptr_t kOwner = 0x2AE1010;  // (component, u16* type, u64* no, u64* no2), void |
+| N0802 | src/mod/session2/identity_probe.cpp:46 | kOwnerHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x41, 0x56, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x59, 0x08, 0x49, 0x8B, 0xF9, 0x4D, 0x8B, 0xF0, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0x43, 0x68, 0x48, 0x8B, 0xA8, 0x18, 0x01, 0x00, 0x00} | constexpr uint8_t kOwnerHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, 0x24, 0x10, 0x48, 0x89, 0x74, |
+| N0803 | src/mod/session2/identity_probe.cpp:50 | kPhases | RVA / layout / policy (audit) | 0x2941020 | constexpr uintptr_t kPhases = 0x2941020;  // (obj, res*, ?, u32) -> res; actor = [obj+8] (0x2941049) |
+| N0804 | src/mod/session2/identity_probe.cpp:51 | kPhasesHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x08, 0x44, 0x89, 0x4C, 0x24, 0x20, 0x4C, 0x89, 0x44, 0x24, 0x18, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0x6C, 0x24, 0xD9, 0x48, 0x81, 0xEC, 0xC0, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xFA, 0x4C, 0x8B, 0x71, 0x08, 0x49, 0x8B, 0x7E, 0x78} | constexpr uint8_t kPhasesHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x44, 0x89, 0x4C, 0x24, 0x20, 0x4C, 0x89, 0x44, |
+| N0805 | src/mod/session2/identity_probe.cpp:55 | kAck | RVA / layout / policy (audit) | 0x28F31F0 | constexpr uintptr_t kAck = 0x28F31F0;  // (actor), void: the login path that writes CharacterStatAck 2358 |
+| N0806 | src/mod/session2/identity_probe.cpp:56 | kAckHead | signature | {0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0xC8, 0x75, 0xFF, 0xFF, 0xB8, 0x38, 0x8B, 0x00, 0x00, 0xE8, 0xAD, 0x30, 0xFA, 0x01, 0x48, 0x2B, 0xE0, 0xC5, 0xF8, 0x29, 0xB4, 0x24, 0x20, 0x8B, 0x00, 0x00, 0x4C, 0x8B, 0xF1} | constexpr uint8_t kAckHead[] = {0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, |
+| N0807 | src/mod/session2/identity_probe.cpp:60 | kPacker | RVA / layout / policy (audit) | 0x17908C0 | constexpr uintptr_t kPacker = 0x17908C0;  // (Status, archive), void: writes **(Status+0x70) |
+| N0808 | src/mod/session2/identity_probe.cpp:61 | kPackerHead | signature | {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x28, 0x4C, 0x8B, 0xF9, 0x48, 0x8B, 0xDA, 0x48, 0x83, 0xC1, 0x30, 0xE8, 0x8D, 0x8C, 0xBF, 0xFE, 0x41, 0xB8, 0x04, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xCB} | constexpr uint8_t kPackerHead[] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, |
+| N0809 | src/mod/session2/identity_probe.cpp:67 | kVersionThis | RVA / layout / policy (audit) | 0x179199C | constexpr uintptr_t kVersionThis = 0x179199C; |
+| N0810 | src/mod/session2/identity_probe.cpp:68 | kVersionThisBytes | signature | {0x49, 0x8B, 0xD9, 0x4C, 0x8B, 0xE2, 0x48, 0x8B, 0xE9, 0x48, 0x8B, 0x41, 0x08} | constexpr uint8_t kVersionThisBytes[] = {0x49, 0x8B, 0xD9, 0x4C, 0x8B, 0xE2, 0x48, 0x8B, 0xE9, 0x48, 0x8B, 0x41, 0x08}; |
+| N0811 | src/mod/session2/identity_probe.cpp:69 | kVersionSite | RVA / layout / policy (audit) | 0x1791B94 | constexpr uintptr_t kVersionSite = 0x1791B94; |
+| N0812 | src/mod/session2/identity_probe.cpp:70 | kVersionSiteBytes | signature | {0x41, 0x8B, 0x43, 0x60, 0x89, 0x05, 0xFA, 0xB1, 0x4F, 0x05, 0x4C, 0x8B, 0x1D, 0xA3, 0x7E, 0x5D, 0x05} | constexpr uint8_t kVersionSiteBytes[] = {0x41, 0x8B, 0x43, 0x60, 0x89, 0x05, 0xFA, 0xB1, 0x4F, |
+| N0813 | src/mod/session2/identity_probe.cpp:72 | kVersionHook | RVA / layout / policy (audit) | kVersionSite + 4 | constexpr uintptr_t kVersionHook = kVersionSite + 4;  // 0x1791B98 |
+| N0814 | src/mod/session2/identity_probe.cpp:75 | kClientStatus | RVA / layout / policy (audit) | 0xB742B0 | constexpr uintptr_t kClientStatus = 0xB742B0; |
+| N0815 | src/mod/session2/identity_probe.cpp:76 | kClientStatusBytes | signature | {0x48, 0x8B, 0x4B, 0x70, 0x48, 0x8B, 0x45, 0xC0, 0x48, 0x89, 0x01} | constexpr uint8_t kClientStatusBytes[] = {0x48, 0x8B, 0x4B, 0x70, 0x48, 0x8B, 0x45, 0xC0, 0x48, 0x89, 0x01}; |
+| N0816 | src/mod/session2/identity_probe.cpp:77 | kClientVersionSite | RVA / layout / policy (audit) | 0xB742F0 | constexpr uintptr_t kClientVersionSite = 0xB742F0; |
+| N0817 | src/mod/session2/identity_probe.cpp:78 | kClientVersionSiteBytes | signature | {0x48, 0x8B, 0x4B, 0x18, 0xE8, 0xB7, 0x69, 0xC3, 0x00, 0x48, 0x8B, 0x4B, 0x18, 0xE8, 0xCE, 0x75, 0xC3, 0x00, 0x44, 0x89, 0x35, 0x8F, 0x8A, 0x11, 0x06} | constexpr uint8_t kClientVersionSiteBytes[] = {0x48, 0x8B, 0x4B, 0x18, 0xE8, 0xB7, 0x69, 0xC3, 0x00, |
+| N0818 | src/mod/session2/identity_probe.cpp:81 | kClientVersionHook | RVA / layout / policy (audit) | kClientVersionSite + 18 | constexpr uintptr_t kClientVersionHook = kClientVersionSite + 18;  // 0xB74302 |
+| N0819 | src/mod/session2/identity_probe.cpp:82 | kRestoreVersion | RVA / layout / policy (audit) | 0x6C8CD98 | constexpr uintptr_t kRestoreVersion = 0x6C8CD98;  // u32 _currentRestoreCodeVersionXXX (0x187C490) |
+| N0820 | src/mod/session2/identity_probe.cpp:83 | kStatusVtable | vtable | 0x5B203F0 | constexpr uintptr_t kStatusVtable = 0x5B203F0;    // ServerStatusActorComponent (RTTI at its COL) |
+| N0821 | src/mod/session2/identity_probe.cpp:84 | kStatusLoad | RVA / layout / policy (audit) | 0x293FE70 | constexpr uintptr_t kStatusLoad = 0x293FE70;      // its +0x50: the 5-byte thunk to .xtls 0x10427500 |
+| N0822 | src/mod/session2/identity_probe.cpp:85 | kLoadStub | RVA / layout / policy (audit) | 0x35EA90 | constexpr uintptr_t kLoadStub = 0x35EA90;         // the shared vf50 stub (jmp .xtls 0x86F0570) |
+| N0823 | src/mod/session2/identity_probe.cpp:94 | kMaxHostLines | RVA / layout / policy (audit) | 2 | constexpr uint64_t kMaxHostLines = 2; |
+| N0824 | src/mod/session2/identity_probe.cpp:95 | kMaxLogged | RVA / layout / policy (audit) | 160 | constexpr uint64_t kMaxLogged = 160; |
+| N0825 | src/mod/session2/identity_probe.cpp:98 | kWindowMs | RVA / layout / policy (audit) | 60000 | constexpr uint64_t kWindowMs = 60000; |
+| N0826 | src/mod/session2/identity_probe.cpp:136 | kMaxDepth | RVA / layout / policy (audit) | 4 | constexpr int kMaxDepth = 4; |
+| N0827 | src/mod/session2/identity_probe.h:48 | kActorComponents | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kActorComponents = 0x68;   // actor -> component table (0x206A890, 0x2AE1037) |
+| N0828 | src/mod/session2/identity_probe.h:49 | kTableStatus | RVA / layout / policy (audit) | 0x20 | inline constexpr uint32_t kTableStatus = 0x20;       // table -> Status component (0x206A894) |
+| N0829 | src/mod/session2/identity_probe.h:50 | kStatusCharacterNo | RVA / layout / policy (audit) | 0x70 | inline constexpr uint32_t kStatusCharacterNo = 0x70; // Status -> u64* characterNo (0x206A8A5) |
+| N0830 | src/mod/session2/identity_probe.h:51 | kComponentOwner | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kComponentOwner = 0x08;    // component -> actor (0x2AE102A, 0x17919A5) |
+| N0831 | src/mod/session2/identity_probe.h:52 | kActorUser | RVA / layout / policy (audit) | 0xA0 | inline constexpr uint32_t kActorUser = 0xA0;         // character -> ServerUserActor (clock gate, P9 §2.2) |
+| N0832 | src/mod/session2/identity_probe.h:53 | kKey | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kKey = 0x60;               // actor/user -> u32 key (offsets_s2.h) |
+| N0833 | src/mod/session2/load_trip.cpp:22 | kMaxLines | RVA / layout / policy (audit) | 3000 | constexpr uint64_t kMaxLines = 3000; |
+| N0834 | src/mod/session2/load_trip_logic.h:32 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0835 | src/mod/session2/load_trip_logic.h:32 | kOpMoveFieldCompleteAck | Troc ID (audit) | 2144 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0836 | src/mod/session2/load_trip_logic.h:32 | kOpPostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0837 | src/mod/session2/load_trip_logic.h:32 | kOpMilestone | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0838 | src/mod/session2/load_trip_logic.h:32 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0839 | src/mod/session2/load_trip_logic.h:32 | kOpBundle | Troc ID (audit) | 2042 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0840 | src/mod/session2/load_trip_logic.h:32 | kOpMoveFieldCompleteReq | Troc ID (audit) | 2549 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0841 | src/mod/session2/load_trip_logic.h:32 | kOpLoadingCompleteReq | Troc ID (audit) | 2445 | inline constexpr uint16_t kOpMoveFieldAck = 2174, kOpMoveFieldCompleteAck = 2144, kOpPostAck = 3066, |
+| N0842 | src/mod/session2/load_trip_logic.h:46 | kSettleUs | RVA / layout / policy (audit) | 6'000'000 | inline constexpr uint64_t kSettleUs = 6'000'000; |
+| N0843 | src/mod/session2/load_trip_logic.h:48 | kMaxTrips | RVA / layout / policy (audit) | 8 | inline constexpr size_t kMaxTrips = 8; |
+| N0844 | src/mod/session2/mount_sync_logic.h:45 | kMaxSeats | RVA / layout / policy (audit) | 16 | inline constexpr uint8_t kMaxSeats = 16; |
+| N0845 | src/mod/session2/mount_sync_logic.h:49 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;     // troc_frame.h kControlOpcode |
+| N0846 | src/mod/session2/mount_sync_logic.h:50 | kControlMountSync | RVA / layout / policy (audit) | 5 | inline constexpr uint8_t kControlMountSync = 5;   // troc_frame.h: 1 ready, 2 dead, 3 reannounce, 4 host character |
+| N0847 | src/mod/session2/mount_sync_logic.h:51 | kVersion | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kVersion = 1; |
+| N0848 | src/mod/session2/mount_sync_logic.h:52 | kHeader | RVA / layout / policy (audit) | 5 | inline constexpr size_t kHeader = 5;              // u16 opcode &#124; i8 slot &#124; u16 len |
+| N0849 | src/mod/session2/mount_sync_logic.h:53 | kPayloadSize | RVA / layout / policy (audit) | 44 | inline constexpr size_t kPayloadSize = 44; |
+| N0850 | src/mod/session2/mount_sync_logic.h:69 | kFlagOk | RVA / layout / policy (audit) | 0x01 | inline constexpr uint8_t kFlagOk = 0x01;            // Commit/Detach: *result == 0 and the controller's postconditions held |
+| N0851 | src/mod/session2/mount_sync_logic.h:70 | kFlagRiderWasLinked | RVA / layout / policy (audit) | 0x02 | inline constexpr uint8_t kFlagRiderWasLinked = 0x02;  // Begin: the rider's Link+0x10 was not 0 |
+| N0852 | src/mod/session2/mount_sync_logic.h:71 | kFlagSeatWasTaken | RVA / layout / policy (audit) | 0x04 | inline constexpr uint8_t kFlagSeatWasTaken = 0x04;    // Begin: the seat's occupant was not 0 |
+| N0853 | src/mod/session2/mount_sync_logic.h:76 | kFlagObserved | RVA / layout / policy (audit) | 0x08 | inline constexpr uint8_t kFlagObserved = 0x08; |
+| N0854 | src/mod/session2/mount_sync_logic.h:80 | kClientDetachFlag | RVA / layout / policy (audit) | 12 | inline constexpr uint8_t kClientDetachFlag = 12; |
+| N0855 | src/mod/session2/mount_sync_logic.h:83 | kFlagNoPublish | RVA / layout / policy (audit) | 0x10 | inline constexpr uint8_t kFlagNoPublish = 0x10; |
+| N0856 | src/mod/session2/mount_sync_logic.h:168 | kStatusEveryMs | RVA / layout / policy (audit) | 15000 | inline constexpr uint64_t kStatusEveryMs = 15000; |
+| N0857 | src/mod/session2/mount_sync_logic.h:169 | kStatusShowMs | RVA / layout / policy (audit) | 45000 | inline constexpr uint64_t kStatusShowMs = 45000; |
+| N0858 | src/mod/session2/mount_sync_logic.h:224 | kDepRiderComps | RVA / layout / policy (audit) | 0x001 | inline constexpr uint32_t kDepRiderComps = 0x001;   // rider actor+0x68 |
+| N0859 | src/mod/session2/mount_sync_logic.h:225 | kDepRiderCC | RVA / layout / policy (audit) | 0x002 | inline constexpr uint32_t kDepRiderCC = 0x002;      // rider comps+0x40 (CC; +0xA8 read, line 261) |
+| N0860 | src/mod/session2/mount_sync_logic.h:226 | kDepRiderCCSlot | RVA / layout / policy (audit) | 0x004 | inline constexpr uint32_t kDepRiderCCSlot = 0x004;  // CC+0xA8 == 0: [CC+0x30]+0x1B and the pointer at CC+0x88+8*it |
+| N0861 | src/mod/session2/mount_sync_logic.h:227 | kDepRiderComps50 | RVA / layout / policy (audit) | 0x008 | inline constexpr uint32_t kDepRiderComps50 = 0x008; // rider comps+0x50 (writes +0x11C, line 282) |
+| N0862 | src/mod/session2/mount_sync_logic.h:228 | kDepHorseComps | RVA / layout / policy (audit) | 0x010 | inline constexpr uint32_t kDepHorseComps = 0x010;   // horse actor+0x68 |
+| N0863 | src/mod/session2/mount_sync_logic.h:229 | kDepHorseComps1A0 | RVA / layout / policy (audit) | 0x020 | inline constexpr uint32_t kDepHorseComps1A0 = 0x020;// horse comps+0x1A0 (+0x98, line 213) |
+| N0864 | src/mod/session2/mount_sync_logic.h:230 | kDepHorseComps90 | RVA / layout / policy (audit) | 0x040 | inline constexpr uint32_t kDepHorseComps90 = 0x040; // horse comps+0x90 (0x221C200, seat 0) |
+| N0865 | src/mod/session2/mount_sync_logic.h:231 | kDepHorse88 | RVA / layout / policy (audit) | 0x080 | inline constexpr uint32_t kDepHorse88 = 0x080;      // horse actor+0x88 (+1, the type switches) |
+| N0866 | src/mod/session2/mount_sync_logic.h:232 | kDepHorseCC | RVA / layout / policy (audit) | 0x100 | inline constexpr uint32_t kDepHorseCC = 0x100;      // horse comps+0x40 (CC->vf260) |
+| N0867 | src/mod/session2/mount_sync_logic.h:233 | kDepHorseCompsB0 | RVA / layout / policy (audit) | 0x200 | inline constexpr uint32_t kDepHorseCompsB0 = 0x200; // horse comps+0xB0 (+0x288 / +0x300, conditional) |
+| N0868 | src/mod/session2/mount_sync_logic.h:276 | kMethodRideOn | RVA / layout / policy (audit) | 6 | inline constexpr uint8_t kMethodRideOn = 6, kMethodRideOff = 7; |
+| N0869 | src/mod/session2/mount_sync_logic.h:276 | kMethodRideOff | RVA / layout / policy (audit) | 7 | inline constexpr uint8_t kMethodRideOn = 6, kMethodRideOff = 7; |
+| N0870 | src/mod/session2/mount_sync_logic.h:381 | kCtlGoneMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kCtlGoneMs = 1000; |
+| N0871 | src/mod/session2/mount_sync_logic.h:410 | kGeoSpeeds | RVA / layout / policy (audit) | 5 | inline constexpr size_t kGeoSpeeds = 5;  // horse speed m/s: <1, <3, <6, <10, >=10 |
+| N0872 | src/mod/session2/mount_sync_logic.h:411 | kGeoErrs | RVA / layout / policy (audit) | 6 | inline constexpr size_t kGeoErrs = 6;    // &#124;offset - seat&#124; m: <=0.25, <=0.5, <=1, <=2, <=5, >5 |
+| N0873 | src/mod/session2/mount_sync_logic.h:412 | kGeoEveryMs | RVA / layout / policy (audit) | 30 | inline constexpr uint64_t kGeoEveryMs = 30; |
+| N0874 | src/mod/session2/mount_sync_logic.h:434 | kGeoNotLinked | RVA / layout / policy (audit) | 0 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
+| N0875 | src/mod/session2/mount_sync_logic.h:434 | kGeoLinked | RVA / layout / policy (audit) | 1 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
+| N0876 | src/mod/session2/mount_sync_logic.h:434 | kGeoSeated | RVA / layout / policy (audit) | 2 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
+| N0877 | src/mod/session2/mount_sync_logic.h:434 | kGeoLinks | RVA / layout / policy (audit) | 3 | inline constexpr size_t kGeoNotLinked = 0, kGeoLinked = 1, kGeoSeated = 2, kGeoLinks = 3; |
+| N0878 | src/mod/session2/mount_sync_logic.h:438 | kAttachNone | RVA / layout / policy (audit) | 9 | inline constexpr uint8_t kAttachNone = 9, kAttachSeat = 4; |
+| N0879 | src/mod/session2/mount_sync_logic.h:438 | kAttachSeat | RVA / layout / policy (audit) | 4 | inline constexpr uint8_t kAttachNone = 9, kAttachSeat = 4; |
+| N0880 | src/mod/session2/mount_sync_logic.h:444 | kFrozenRiderM | RVA / layout / policy (audit) | 0.01f | inline constexpr float kFrozenRiderM = 0.01f, kFrozenHorseM = 0.5f; |
+| N0881 | src/mod/session2/mount_sync_logic.h:444 | kFrozenHorseM | RVA / layout / policy (audit) | 0.5f | inline constexpr float kFrozenRiderM = 0.01f, kFrozenHorseM = 0.5f; |
+| N0882 | src/mod/session2/mount_sync_logic.h:492 | kCommitWaitMs | RVA / layout / policy (audit) | 500 | inline constexpr uint64_t kCommitWaitMs = 500;     // a Begin holds the observed stream at most this long |
+| N0883 | src/mod/session2/mount_sync_logic.h:493 | kApplyWaitMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kApplyWaitMs = 3000;     // a Commit not applied by then is cancelled (fallback) |
+| N0884 | src/mod/session2/mount_sync_logic.h:494 | kDetachForceMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kDetachForceMs = 3000;   // a Detach without the observer's RideOff::Enter: applied anyway |
+| N0885 | src/mod/session2/mount_sync_logic.h:498 | kDetachObservedForceMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kDetachObservedForceMs = 1000; |
+| N0886 | src/mod/session2/mount_sync_logic.h:502 | kDetachNoEventMs | RVA / layout / policy (audit) | 6000 | inline constexpr uint64_t kDetachNoEventMs = 6000; |
+| N0887 | src/mod/session2/mount_sync_logic.h:505 | kClaimStuckMs | RVA / layout / policy (audit) | 2000 | inline constexpr uint64_t kClaimStuckMs = 2000; |
+| N0888 | src/mod/session2/mount_sync_logic.h:508 | kMaxAttempts | RVA / layout / policy (audit) | 20 | inline constexpr uint32_t kMaxAttempts = 20; |
+| N0889 | src/mod/session2/mount_sync_logic.h:509 | kHoldMaxPackets | RVA / layout / policy (audit) | 2048 | inline constexpr size_t kHoldMaxPackets = 2048;    // the guest's held stream |
+| N0890 | src/mod/session2/mount_sync_logic.h:510 | kHoldMaxBytes | RVA / layout / policy (audit) | 4u << 20 | inline constexpr size_t kHoldMaxBytes = 4u << 20; |
+| N0891 | src/mod/session2/mount_sync_logic.h:511 | kHoldMaxReq | RVA / layout / policy (audit) | 256 | inline constexpr size_t kHoldMaxReq = 256;         // the host's held user 2 Req (its own bound is 512) |
+| N0892 | src/mod/session2/mount_sync_logic.h:628 | kNativeFallbackMs | RVA / layout / policy (audit) | 2000 | inline constexpr uint64_t kNativeFallbackMs = 2000; |
+| N0893 | src/mod/session2/mount_sync_logic.h:630 | kNativeFallbackCapMs | RVA / layout / policy (audit) | 30000 | inline constexpr uint64_t kNativeFallbackCapMs = 30000; |
+| N0894 | src/mod/session2/mount_sync_logic.h:634 | kNativeUnreadableMs | RVA / layout / policy (audit) | 15000 | inline constexpr uint64_t kNativeUnreadableMs = 15000; |
+| N0895 | src/mod/session2/mount_sync_logic.h:635 | kNativeDetachFlag | RVA / layout / policy (audit) | 0 | inline constexpr uint8_t kNativeDetachFlag = 0; |
+| N0896 | src/mod/session2/mount_sync_logic.h:682 | kSlots | RVA / layout / policy (audit) | 4 | static constexpr size_t kSlots = 4; |
+| N0897 | src/mod/session2/mount_sync_logic.h:1098 | kGateEntrySize | RVA / layout / policy (audit) | 0x78 | inline constexpr uint32_t kGateEntrySize = 0x78; |
+| N0898 | src/mod/session2/mount_sync_logic.h:1099 | kGateEntries | RVA / layout / policy (audit) | 2 | inline constexpr uint32_t kGateEntries = 2; |
+| N0899 | src/mod/session2/mount_sync_logic.h:1100 | kGateBytes | RVA / layout / policy (audit) | kGateEntrySize * kGateEntries | inline constexpr uint32_t kGateBytes = kGateEntrySize * kGateEntries; |
+| N0900 | src/mod/session2/mount_sync_logic.h:1101 | kEntryHash | RVA / layout / policy (audit) | 0x00 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
+| N0901 | src/mod/session2/mount_sync_logic.h:1101 | kEntryDef | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
+| N0902 | src/mod/session2/mount_sync_logic.h:1101 | kEntryNet | RVA / layout / policy (audit) | 0x50 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
+| N0903 | src/mod/session2/mount_sync_logic.h:1101 | kEntryForce | RVA / layout / policy (audit) | 0x51 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
+| N0904 | src/mod/session2/mount_sync_logic.h:1101 | kEntryLocal | RVA / layout / policy (audit) | 0x52 | inline constexpr uint32_t kEntryHash = 0x00, kEntryDef = 0x18, kEntryNet = 0x50, kEntryForce = 0x51, kEntryLocal = 0x52; |
+| N0905 | src/mod/session2/mount_sync_logic.h:1102 | kEntryNetBit | RVA / layout / policy (audit) | 0x02 | inline constexpr uint8_t kEntryNetBit = 0x02, kEntryForceBit = 0x08, kEntryLocalBit = 0x01; |
+| N0906 | src/mod/session2/mount_sync_logic.h:1102 | kEntryForceBit | RVA / layout / policy (audit) | 0x08 | inline constexpr uint8_t kEntryNetBit = 0x02, kEntryForceBit = 0x08, kEntryLocalBit = 0x01; |
+| N0907 | src/mod/session2/mount_sync_logic.h:1102 | kEntryLocalBit | RVA / layout / policy (audit) | 0x01 | inline constexpr uint8_t kEntryNetBit = 0x02, kEntryForceBit = 0x08, kEntryLocalBit = 0x01; |
+| N0908 | src/mod/session2/mount_sync_logic.h:1103 | kDefDismount | RVA / layout / policy (audit) | 0x40 | inline constexpr uint8_t kDefDismount = 0x40;  // def+0xA: "get off the vehicle" |
+| N0909 | src/mod/session2/mount_sync_logic.h:1104 | kDefFlags | RVA / layout / policy (audit) | 0x0A | inline constexpr uint32_t kDefFlags = 0x0A; |
+| N0910 | src/mod/session2/mount_sync_logic.h:1187 | kGateDegradeAfter | RVA / layout / policy (audit) | 8 | inline constexpr uint32_t kGateDegradeAfter = 8; |
+| N0911 | src/mod/session2/mount_sync_logic.h:1243 | kActorPlayer | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kActorPlayer = 1, kActorWorld = 7; |
+| N0912 | src/mod/session2/mount_sync_logic.h:1243 | kActorWorld | RVA / layout / policy (audit) | 7 | inline constexpr uint8_t kActorPlayer = 1, kActorWorld = 7; |
+| N0913 | src/mod/session2/mount_sync_logic.h:1270 | kVf178Actor | RVA / layout / policy (audit) | 0x4FE260 | inline constexpr uint32_t kVf178Actor = 0x4FE260, kVf178User = 0x8A67D0; |
+| N0914 | src/mod/session2/mount_sync_logic.h:1270 | kVf178User | RVA / layout / policy (audit) | 0x8A67D0 | inline constexpr uint32_t kVf178Actor = 0x4FE260, kVf178User = 0x8A67D0; |
+| N0915 | src/mod/session2/mount_sync_logic.h:1382 | kSeatReleaseMs | RVA / layout / policy (audit) | 1500 | inline constexpr uint64_t kSeatReleaseMs = 1500; |
+| N0916 | src/mod/session2/mount_sync_logic.h:1383 | kSeatRideCapMs | RVA / layout / policy (audit) | 6000 | inline constexpr uint64_t kSeatRideCapMs = 6000; |
+| N0917 | src/mod/session2/mount_sync_logic.h:1384 | kSeatLostMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kSeatLostMs = 3000;  // the rider unreadable this long: forgotten (its actor is gone) |
+| N0918 | src/mod/session2/mount_sync_logic.h:1499 | kMcEmptyFlag | RVA / layout / policy (audit) | 0x3D0 | inline constexpr uint32_t kMcEmptyFlag = 0x3D0; |
+| N0919 | src/mod/session2/mount_sync_logic.h:1529 | kOpStartActionReq | Troc ID (audit) | 2223 | inline constexpr uint16_t kOpStartActionReq = 2223; |
+| N0920 | src/mod/session2/observer_hold_acks_logic.h:41 | kOpAnnounce | Troc ID (audit) | 2005 | inline constexpr uint16_t kOpAnnounce = 2005;     // ActorLoadDataAck |
+| N0921 | src/mod/session2/observer_hold_acks_logic.h:42 | kOpScopeSender | Troc ID (audit) | 2042 | inline constexpr uint16_t kOpScopeSender = 2042;  // ScopeSenderAck: a native bundle (contents not parsed) |
+| N0922 | src/mod/session2/observer_hold_acks_logic.h:43 | kNpcKeyClass | RVA / layout / policy (audit) | 0xB | inline constexpr uint32_t kNpcKeyClass = 0xB;     // key >> 28 of NPCs and children |
+| N0923 | src/mod/session2/observer_hold_acks_logic.h:46 | kHeldOps | signature | { 2723, 2404, 2586, 2991, 2697, 2642, 2506, 2402, 2645, 2434, 2356, } | inline constexpr std::array<uint16_t, 11> kHeldOps = { |
+| N0924 | src/mod/session2/observer_hold_acks_logic.h:59 | kOpCount | Troc ID (audit) | kHeldOps.size() | inline constexpr size_t kOpCount = kHeldOps.size(); |
+| N0925 | src/mod/session2/observer_hold_acks_logic.h:86 | kCharKeyClass | RVA / layout / policy (audit) | 0xA | inline constexpr uint32_t kCharKeyClass = 0xA; |
+| N0926 | src/mod/session2/observer_milestone_logic.h:46 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174; |
+| N0927 | src/mod/session2/observer_milestone_logic.h:47 | kOpMoveFieldCompleteAck | Troc ID (audit) | 2144 | inline constexpr uint16_t kOpMoveFieldCompleteAck = 2144; |
+| N0928 | src/mod/session2/observer_milestone_logic.h:48 | kOpMoveFieldCompletePostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldCompletePostAck = 3066; |
+| N0929 | src/mod/session2/observer_milestone_logic.h:49 | kOpMilestone | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpMilestone = 2322; |
+| N0930 | src/mod/session2/observer_milestone_logic.h:50 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpLoadingCompleteAck = 2762; |
+| N0931 | src/mod/session2/observer_milestone_logic.h:51 | kOpScopeSenderAck | Troc ID (audit) | 2042 | inline constexpr uint16_t kOpScopeSenderAck = 2042;   // a native bundle (scope sender): contents not parsed |
+| N0932 | src/mod/session2/observer_milestone_logic.h:52 | kOpMoveFieldCompleteReq | Troc ID (audit) | 2549 | inline constexpr uint16_t kOpMoveFieldCompleteReq = 2549; |
+| N0933 | src/mod/session2/observer_milestone_logic.h:53 | kOpLoadingCompleteReq | Troc ID (audit) | 2445 | inline constexpr uint16_t kOpLoadingCompleteReq = 2445; |
+| N0934 | src/mod/session2/observer_milestone_reload_logic.h:57 | kOpPreLoadSequencerReq | Troc ID (audit) | 2873 | inline constexpr uint16_t kOpPreLoadSequencerReq = 2873; |
+| N0935 | src/mod/session2/observer_milestone_reload_logic.h:58 | kOpReloadStageStartReq | Troc ID (audit) | 2283 | inline constexpr uint16_t kOpReloadStageStartReq = 2283; |
+| N0936 | src/mod/session2/observer_milestone_reload_logic.h:59 | kOpGameLoadingStartReq | Troc ID (audit) | 2437 | inline constexpr uint16_t kOpGameLoadingStartReq = 2437; |
+| N0937 | src/mod/session2/observer_milestone_reload_logic.h:60 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174; |
+| N0938 | src/mod/session2/observer_milestone_reload_logic.h:61 | kOpLoadingFieldDataAck | Troc ID (audit) | 2643 | inline constexpr uint16_t kOpLoadingFieldDataAck = 2643; |
+| N0939 | src/mod/session2/observer_milestone_reload_logic.h:62 | kOpMoveFieldCompletePostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldCompletePostAck = 3066; |
+| N0940 | src/mod/session2/observer_milestone_reload_logic.h:63 | kOpMilestone | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpMilestone = 2322; |
+| N0941 | src/mod/session2/observer_milestone_reload_logic.h:64 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpLoadingCompleteAck = 2762; |
+| N0942 | src/mod/session2/observer_milestone_reload_logic.h:65 | kOpLogoutCharacterAck | Troc ID (audit) | 2679 | inline constexpr uint16_t kOpLogoutCharacterAck = 2679; |
+| N0943 | src/mod/session2/observer_milestone_reload_logic.h:66 | kOpReviveLoadingReq | Troc ID (audit) | 2362 | inline constexpr uint16_t kOpReviveLoadingReq = 2362;  // P8 S27: the revive's load request (C>S) |
+| N0944 | src/mod/session2/observer_milestone_reload_logic.h:68 | kMinDelayUs | RVA / layout / policy (audit) | 300'000 | inline constexpr uint64_t kMinDelayUs = 300'000;     // native: the 2322 leaves 460-501 ms after the 2873 |
+| N0945 | src/mod/session2/observer_milestone_reload_logic.h:69 | kTimeoutUs | RVA / layout / policy (audit) | 15'000'000 | inline constexpr uint64_t kTimeoutUs = 15'000'000;   // no fitting Req of user 2 within 15 s: given up (logged) |
+| N0946 | src/mod/session2/observer_milestone_reload_logic.h:70 | kAttemptGapUs | RVA / layout / policy (audit) | 50'000 | inline constexpr uint64_t kAttemptGapUs = 50'000;    // transient refusals count at most once per 50 ms |
+| N0947 | src/mod/session2/observer_milestone_reload_logic.h:71 | kMaxAttempts | RVA / layout / policy (audit) | 400 | inline constexpr uint32_t kMaxAttempts = 400;        // > kTimeoutUs / kAttemptGapUs: the timeout governs |
+| N0948 | src/mod/session2/observer_milestone_reload_logic.h:72 | kMaxAgeUs | RVA / layout / policy (audit) | 45'000'000 | inline constexpr uint64_t kMaxAgeUs = 45'000'000;    // a 2873 later than this after its trip's 2437 passes natively |
+| N0949 | src/mod/session2/observer_milestone_reload_logic.h:73 | kNativeInReloadLines | RVA / layout / policy (audit) | 16 | inline constexpr uint64_t kNativeInReloadLines = 16; // P8 S27: warnings for a 2873 handed during an unfinished reload |
+| N0950 | src/mod/session2/observer_milestone_reload_logic.h:293 | kNoteBase | RVA / layout / policy (audit) | 64 | inline constexpr uint16_t kNoteBase = 64; |
+| N0951 | src/mod/session2/offsets_s2.h:12 | kServerNetSlot | RVA / layout / policy (audit) | 0x6D69680 | inline constexpr uintptr_t kServerNetSlot = 0x6D69680;  // [exe+..] = ServerNet |
+| N0952 | src/mod/session2/offsets_s2.h:13 | kClientNetSlot | RVA / layout / policy (audit) | 0x6D69170 | inline constexpr uintptr_t kClientNetSlot = 0x6D69170;  // [exe+..] = ClientNet |
+| N0953 | src/mod/session2/offsets_s2.h:14 | kSamSlot | RVA / layout / policy (audit) | 0x6DA67D8 | inline constexpr uintptr_t kSamSlot = 0x6DA67D8;        // [exe+..] = ServerActorManager |
+| N0954 | src/mod/session2/offsets_s2.h:17 | kServerNet_Session | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kServerNet_Session = 0x18;  // the only NwVirtualAsyncSession |
+| N0955 | src/mod/session2/offsets_s2.h:18 | kServerNet_InQueue | RVA / layout / policy (audit) | 0x20 | inline constexpr uint32_t kServerNet_InQueue = 0x20;  // Q0: C->S buffers, popped by ServerRunThread |
+| N0956 | src/mod/session2/offsets_s2.h:19 | kServerNet_FreeC2S | RVA / layout / policy (audit) | 0x78 | inline constexpr uint32_t kServerNet_FreeC2S = 0x78;  // Q3: C->S buffers back to the client |
+| N0957 | src/mod/session2/offsets_s2.h:20 | kServerNet_FreeS2C | RVA / layout / policy (audit) | 0x80 | inline constexpr uint32_t kServerNet_FreeS2C = 0x80;  // Q2: S->C buffers back to the server |
+| N0958 | src/mod/session2/offsets_s2.h:22 | kClientNet_InQueue | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kClientNet_InQueue = 0x18;  // Q1 (== session+0xC8) |
+| N0959 | src/mod/session2/offsets_s2.h:24 | kSam_FreeKeys | RVA / layout / policy (audit) | 0xD0 | inline constexpr uint32_t kSam_FreeKeys = 0xD0;     // u32: keys left in the common queue (15501 at most) |
+| N0960 | src/mod/session2/offsets_s2.h:25 | kSam_ActorCount | RVA / layout / policy (audit) | 0x9C | inline constexpr uint32_t kSam_ActorCount = 0x9C;   // u32 |
+| N0961 | src/mod/session2/offsets_s2.h:28 | kNwVirtualAsyncSessionVtable | vtable | 0x57260C0 | inline constexpr uintptr_t kNwVirtualAsyncSessionVtable = 0x57260C0;  // 15 entries, COL at [-1] |
+| N0962 | src/mod/session2/offsets_s2.h:29 | kNwAsyncSessionVtable | vtable | 0x5726140 | inline constexpr uintptr_t kNwAsyncSessionVtable = 0x5726140; |
+| N0963 | src/mod/session2/offsets_s2.h:30 | kSessionVtableEntries | vtable | 15 | inline constexpr uint32_t kSessionVtableEntries = 15; |
+| N0964 | src/mod/session2/offsets_s2.h:31 | kSessionVfSend | RVA / layout / policy (audit) | 9 | inline constexpr uint32_t kSessionVfSend = 9; |
+| N0965 | src/mod/session2/offsets_s2.h:32 | kSessionSize | RVA / layout / policy (audit) | 0xD0 | inline constexpr uint32_t kSessionSize = 0xD0; |
+| N0966 | src/mod/session2/offsets_s2.h:33 | kSession_Name | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kSession_Name = 0x18;     // u16 short string: "1" for the host |
+| N0967 | src/mod/session2/offsets_s2.h:34 | kSession_IdPtr | RVA / layout / policy (audit) | 0x88 | inline constexpr uint32_t kSession_IdPtr = 0x88;    // u32*: key of the deferred queue until a user exists |
+| N0968 | src/mod/session2/offsets_s2.h:35 | kSession_User | RVA / layout / policy (audit) | 0x90 | inline constexpr uint32_t kSession_User = 0x90;     // ServerUserActor* |
+| N0969 | src/mod/session2/offsets_s2.h:36 | kSession_Crypto | RVA / layout / policy (audit) | 0x98 | inline constexpr uint32_t kSession_Crypto = 0x98;   // CryptogramAesGcm*; byte +0x24 = 0 (off) |
+| N0970 | src/mod/session2/offsets_s2.h:37 | kSession_B0 | RVA / layout / policy (audit) | 0xB0 | inline constexpr uint32_t kSession_B0 = 0xB0; |
+| N0971 | src/mod/session2/offsets_s2.h:38 | kSession_B8 | RVA / layout / policy (audit) | 0xB8 | inline constexpr uint32_t kSession_B8 = 0xB8; |
+| N0972 | src/mod/session2/offsets_s2.h:39 | kSession_C0 | RVA / layout / policy (audit) | 0xC0 | inline constexpr uint32_t kSession_C0 = 0xC0;       // u16 |
+| N0973 | src/mod/session2/offsets_s2.h:40 | kSession_OutQueue | RVA / layout / policy (audit) | 0xC8 | inline constexpr uint32_t kSession_OutQueue = 0xC8; |
+| N0974 | src/mod/session2/offsets_s2.h:43 | kServerUserActorVtable | vtable | 0x5B257A8 | inline constexpr uintptr_t kServerUserActorVtable = 0x5B257A8; |
+| N0975 | src/mod/session2/offsets_s2.h:44 | kUser_Key | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kUser_Key = 0x60; |
+| N0976 | src/mod/session2/offsets_s2.h:45 | kUser_Session | RVA / layout / policy (audit) | 0x1F8 | inline constexpr uint32_t kUser_Session = 0x1F8; |
+| N0977 | src/mod/session2/offsets_s2.h:47 | kServerActor_Controller | RVA / layout / policy (audit) | 0x90 | inline constexpr uint32_t kServerActor_Controller = 0x90; |
+| N0978 | src/mod/session2/offsets_s2.h:48 | kServerActor_Key | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kServerActor_Key = 0x60; |
+| N0979 | src/mod/session2/offsets_s2.h:51 | kServerOnRecvPacket | RVA / layout / policy (audit) | 0x2773C20 | inline constexpr uintptr_t kServerOnRecvPacket = 0x2773C20;  // (ServerNet*, int*, NwSession*, u8* pkt, u16 size, u8 channel) |
+| N0980 | src/mod/session2/offsets_s2.h:52 | kServerOnRecvPacketHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54} | inline constexpr uint8_t kServerOnRecvPacketHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, |
+| N0981 | src/mod/session2/offsets_s2.h:54 | kSessionSend | RVA / layout / policy (audit) | 0x1437740 | inline constexpr uintptr_t kSessionSend = 0x1437740;  // vf9 (this, int* res, AsyncRequestSend* rq) -> res |
+| N0982 | src/mod/session2/offsets_s2.h:55 | kSessionSendHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xC8, 0x00, 0x00, 0x00, 0x49, 0x8D, 0x40, 0x30} | inline constexpr uint8_t kSessionSendHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, |
+| N0983 | src/mod/session2/offsets_s2.h:57 | kNwSessionCtor | RVA / layout / policy (audit) | 0x1436EE0 | inline constexpr uintptr_t kNwSessionCtor = 0x1436EE0;  // (this, bool) -> this |
+| N0984 | src/mod/session2/offsets_s2.h:58 | kNwSessionCtorHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x6C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x56, 0x57, 0x41, 0x54, 0x41, 0x56} | inline constexpr uint8_t kNwSessionCtorHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x6C, 0x24, 0x20, |
+| N0985 | src/mod/session2/offsets_s2.h:60 | kQueuePush | RVA / layout / policy (audit) | 0x35DF50 | inline constexpr uintptr_t kQueuePush = 0x35DF50;  // (Queue*, void** item) |
+| N0986 | src/mod/session2/offsets_s2.h:61 | kQueuePushHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9} | inline constexpr uint8_t kQueuePushHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, |
+| N0987 | src/mod/session2/offsets_s2.h:71 | kAllocGlobal | RVA / layout / policy (audit) | 0x47EFA78 | inline constexpr uintptr_t kAllocGlobal = 0x47EFA78;  // (size, align) -> void*; global heap with a lock |
+| N0988 | src/mod/session2/offsets_s2.h:72 | kAllocGlobalHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9, 0x48, 0x8B, 0xDA} | inline constexpr uint8_t kAllocGlobalHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, |
+| N0989 | src/mod/session2/offsets_s2.h:74 | kAllocThread | RVA / layout / policy (audit) | 0x47EF9B0 | inline constexpr uintptr_t kAllocThread = 0x47EF9B0;  // (size, align) -> void*; the thread's own heap |
+| N0990 | src/mod/session2/offsets_s2.h:76 | kAllocThreadBytes | signature | { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xFA, 0x44, 0x8B, 0x05, 0x7E, 0x92, 0x49, 0x02, 0x48, 0x8B, 0xF1, 0x4A, 0x8B, 0x1C, 0xC0, 0xB8, 0x98, 0x00, 0x00, 0x00, 0x80, 0x3C, 0x18, 0x00, 0x75, 0x05, 0xE8, 0xDB, 0x59, 0x0A, 0x00, 0xB9, 0x90, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xD6, 0x48, 0x8B, 0x0C, 0x19, 0x48, 0x8B, 0x5C, 0x24, 0x30, 0x48, 0x8B, 0x74, 0x24, 0x38, 0x48, 0x83, 0xC4, 0x20, 0x5F, 0xE9, 0x3C, 0xFC, 0xFF, 0xFF} | inline constexpr uint8_t kAllocThreadBytes[] = { |
+| N0991 | src/mod/session2/offsets_s2.h:83 | kTlsIndexSlot | RVA / layout / policy (audit) | 0x6C88C50 | inline constexpr uintptr_t kTlsIndexSlot = 0x6C88C50;  // u32 _tls_index (0 in the dumps) |
+| N0992 | src/mod/session2/offsets_s2.h:84 | kTls_UseGlobalHeap | RVA / layout / policy (audit) | 0x1FD | inline constexpr uint32_t kTls_UseGlobalHeap = 0x1FD;  // u8: the allocator test above |
+| N0993 | src/mod/session2/offsets_s2.h:89 | kServerNet_Threads | RVA / layout / policy (audit) | 0xF8 | inline constexpr uint32_t kServerNet_Threads = 0xF8; |
+| N0994 | src/mod/session2/offsets_s2.h:90 | kServerNet_ThreadCount | RVA / layout / policy (audit) | 0x100 | inline constexpr uint32_t kServerNet_ThreadCount = 0x100; |
+| N0995 | src/mod/session2/offsets_s2.h:91 | kServerThreadEntry | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kServerThreadEntry = 0x10; |
+| N0996 | src/mod/session2/offsets_s2.h:95 | kToNearExceptOneControlVtable | vtable | 0x5B25358 | inline constexpr uintptr_t kToNearExceptOneControlVtable = 0x5B25358; |
+| N0997 | src/mod/session2/offsets_s2.h:96 | kToNearExceptOneSelfVtable | vtable | 0x5B25378 | inline constexpr uintptr_t kToNearExceptOneSelfVtable = 0x5B25378; |
+| N0998 | src/mod/session2/offsets_s2.h:97 | kToNearVtable | vtable | 0x5B25418 | inline constexpr uintptr_t kToNearVtable = 0x5B25418; |
+| N0999 | src/mod/session2/offsets_s2.h:98 | kExceptOneVf1 | RVA / layout / policy (audit) | 0x2A759B0 | inline constexpr uintptr_t kExceptOneVf1 = 0x2A759B0;      // control |
+| N1000 | src/mod/session2/offsets_s2.h:99 | kExceptOneSelfVf1 | RVA / layout / policy (audit) | 0x2A75880 | inline constexpr uintptr_t kExceptOneSelfVf1 = 0x2A75880;  // self |
+| N1001 | src/mod/session2/offsets_s2.h:100 | kToNearVf1 | RVA / layout / policy (audit) | 0x2A75860 | inline constexpr uintptr_t kToNearVf1 = 0x2A75860; |
+| N1002 | src/mod/session2/offsets_s2.h:101 | kExceptOneVf1Head | signature | {0x40, 0x53, 0x48, 0x83, 0xEC, 0x50, 0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x99, 0xA0, 0x01, 0x00, 0x00} | inline constexpr uint8_t kExceptOneVf1Head[] = {0x40, 0x53, 0x48, 0x83, 0xEC, 0x50, 0x48, 0x8B, 0x41, 0x10, 0x48, |
+| N1003 | src/mod/session2/offsets_s2.h:103 | kToNearVf1Head | signature | {0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x89, 0xA0, 0x01, 0x00, 0x00, 0xE9} | inline constexpr uint8_t kToNearVf1Head[] = {0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, |
+| N1004 | src/mod/session2/offsets_s2.h:105 | kFinder_Actor | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kFinder_Actor = 0x10; |
+| N1005 | src/mod/session2/offsets_s2.h:107 | kArray_Count | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kArray_Count = 0x08; |
+| N1006 | src/mod/session2/offsets_s2.h:108 | kArray_Capacity | RVA / layout / policy (audit) | 0x0C | inline constexpr uint32_t kArray_Capacity = 0x0C; |
+| N1007 | src/mod/session2/offsets_s2.h:111 | kPbSize | RVA / layout / policy (audit) | 0x8030 | inline constexpr uint32_t kPbSize = 0x8030; |
+| N1008 | src/mod/session2/offsets_s2.h:112 | kPb_FramePtr | RVA / layout / policy (audit) | 0x8000 | inline constexpr uint32_t kPb_FramePtr = 0x8000;  // u8*: the frame (= pb) |
+| N1009 | src/mod/session2/offsets_s2.h:113 | kPb_Len1 | RVA / layout / policy (audit) | 0x8008 | inline constexpr uint32_t kPb_Len1 = 0x8008;      // u16 frame length |
+| N1010 | src/mod/session2/offsets_s2.h:114 | kPb_Len2 | RVA / layout / policy (audit) | 0x800A | inline constexpr uint32_t kPb_Len2 = 0x800A;      // u16 frame length (the server reads this one) |
+| N1011 | src/mod/session2/offsets_s2.h:115 | kPb_Cap | RVA / layout / policy (audit) | 0x800C | inline constexpr uint32_t kPb_Cap = 0x800C;       // u16 |
+| N1012 | src/mod/session2/offsets_s2.h:116 | kPb_IsRequest | RVA / layout / policy (audit) | 0x800E | inline constexpr uint32_t kPb_IsRequest = 0x800E; // u8: 0 = packet |
+| N1013 | src/mod/session2/offsets_s2.h:117 | kPb_Tag | RVA / layout / policy (audit) | 0x8010 | inline constexpr uint32_t kPb_Tag = 0x8010;       // u32, not read for packets: our tag |
+| N1014 | src/mod/session2/offsets_s2.h:118 | kPb_Magic | RVA / layout / policy (audit) | 0x8018 | inline constexpr uint32_t kPb_Magic = 0x8018;     // u64, not read by the server: our magic |
+| N1015 | src/mod/session2/offsets_s2.h:119 | kPb_Base | RVA / layout / policy (audit) | 0x8028 | inline constexpr uint32_t kPb_Base = 0x8028;      // void*: what the client frees |
+| N1016 | src/mod/session2/offsets_s2.h:120 | kFrameOverhead | RVA / layout / policy (audit) | 0x1F | inline constexpr uint32_t kFrameOverhead = 0x1F;  // frame = u16 len &#124; u8 channel &#124; packet &#124; 12 IV + 16 tag |
+| N1017 | src/mod/session2/offsets_s2.h:121 | kFrameHeader | RVA / layout / policy (audit) | 3 | inline constexpr uint32_t kFrameHeader = 3; |
+| N1018 | src/mod/session2/offsets_s2.h:123 | kRq_Frame | RVA / layout / policy (audit) | 0x30 | inline constexpr uint32_t kRq_Frame = 0x30; |
+| N1019 | src/mod/session2/offsets_s2.h:127 | kTrocInstancesBegin | RVA / layout / policy (audit) | 0x6A51AE0 | inline constexpr uintptr_t kTrocInstancesBegin = 0x6A51AE0; |
+| N1020 | src/mod/session2/offsets_s2.h:128 | kTrocInstancesEnd | RVA / layout / policy (audit) | 0x6A82C80 | inline constexpr uintptr_t kTrocInstancesEnd = 0x6A82C80; |
+| N1021 | src/mod/session2/offsets_s2.h:129 | kTroc_Kind | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kTroc_Kind = 0x08; |
+| N1022 | src/mod/session2/offsets_s2.h:130 | kTroc_Opcode | RVA / layout / policy (audit) | 0x0C | inline constexpr uint32_t kTroc_Opcode = 0x0C; |
+| N1023 | src/mod/session2/offsets_s2.h:131 | kTroc_Channel | RVA / layout / policy (audit) | 0x14 | inline constexpr uint32_t kTroc_Channel = 0x14; |
+| N1024 | src/mod/session2/offsets_s2.h:132 | kTroc_Flags | RVA / layout / policy (audit) | 0x16 | inline constexpr uint32_t kTroc_Flags = 0x16; |
+| N1025 | src/mod/session2/offsets_s2.h:133 | kTrocKindServer | RVA / layout / policy (audit) | 4 | inline constexpr uint32_t kTrocKindServer = 4; |
+| N1026 | src/mod/session2/offsets_s2.h:136 | kClientNet_Session | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kClientNet_Session = 0x10;   // NwVirtualSyncSession (persistent) |
+| N1027 | src/mod/session2/offsets_s2.h:137 | kClientNet_FreeC2S | RVA / layout / policy (audit) | 0x28 | inline constexpr uint32_t kClientNet_FreeC2S = 0x28;   // Q3: C->S buffers the NetworkThread frees |
+| N1028 | src/mod/session2/offsets_s2.h:138 | kClientNet_Slot4 | RVA / layout / policy (audit) | 0x58 | inline constexpr uint32_t kClientNet_Slot4 = 0x58;     // != 0 once the client connected (1001) |
+| N1029 | src/mod/session2/offsets_s2.h:139 | kSyncSession_Epoch | RVA / layout / policy (audit) | 0xB0 | inline constexpr uint32_t kSyncSession_Epoch = 0xB0;   // new on every connection (OnConnect 0x8CAFF0) |
+| N1030 | src/mod/session2/offsets_s2.h:140 | kSyncSessionSend | RVA / layout / policy (audit) | 0x14380B0 | inline constexpr uintptr_t kSyncSessionSend = 0x14380B0;  // vf6 (this, int* res, PacketBuffer* pb) -> res |
+| N1031 | src/mod/session2/offsets_s2.h:141 | kSyncSessionSendHead | signature | {0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xDA} | inline constexpr uint8_t kSyncSessionSendHead[] = {0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, |
+| N1032 | src/mod/session2/offsets_s2.h:143 | kNetLoopPump | RVA / layout / policy (audit) | 0x35BAD4 | inline constexpr uintptr_t kNetLoopPump = 0x35BAD4;  // NetworkThread loop, each turn (<= 16 ms); r15 = ClientNet |
+| N1033 | src/mod/session2/offsets_s2.h:144 | kNetLoopPumpHead | signature | {0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7} | inline constexpr uint8_t kNetLoopPumpHead[] = {0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, |
+| N1034 | src/mod/session2/offsets_s2.h:153 | kNetLoopPumpPatch | RVA / layout / policy (audit) | 7 | inline constexpr uint32_t kNetLoopPumpPatch = 7; |
+| N1035 | src/mod/session2/offsets_s2.h:154 | kNetLoopPumpAob | signature | { 0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x08, 0x90, 0x8B, 0x5F, 0x58, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x10, 0x85, 0xDB, 0x74} | inline constexpr uint8_t kNetLoopPumpAob[] = { |
+| N1036 | src/mod/session2/offsets_s2.h:157 | kClientOnRecvPacket | RVA / layout / policy (audit) | 0x35CA00 | inline constexpr uintptr_t kClientOnRecvPacket = 0x35CA00;  // (ClientNet*, NwSession*, -, u8* pkt, u16 size) |
+| N1037 | src/mod/session2/offsets_s2.h:158 | kClientOnRecvPacketHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24} | inline constexpr uint8_t kClientOnRecvPacketHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, |
+| N1038 | src/mod/session2/offsets_s2.h:165 | kWorldSystemSlot | RVA / layout / policy (audit) | 0x6D69190 | inline constexpr uintptr_t kWorldSystemSlot = 0x6D69190;      // [exe+..] = WorldSystem |
+| N1039 | src/mod/session2/offsets_s2.h:166 | kWorldSystem_SaveManager | RVA / layout / policy (audit) | 0x88 | inline constexpr uint32_t kWorldSystem_SaveManager = 0x88;     // the save manager the title reads |
+| N1040 | src/mod/session2/offsets_s2.h:167 | kServerActorLookupSlot | RVA / layout / policy (audit) | 0x6D69698 | inline constexpr uintptr_t kServerActorLookupSlot = 0x6D69698;  // [exe+..]; +0x48 = the server's save manager |
+| N1041 | src/mod/session2/offsets_s2.h:168 | kServerActorLookup_SaveManager | RVA / layout / policy (audit) | 0x48 | inline constexpr uint32_t kServerActorLookup_SaveManager = 0x48; |
+| N1042 | src/mod/session2/offsets_s2.h:170 | kSaveMgr_Lock | RVA / layout / policy (audit) | 0x00 | inline constexpr uint32_t kSaveMgr_Lock = 0x00;     // pa::WindowsLock<3>* (= this + 8) |
+| N1043 | src/mod/session2/offsets_s2.h:171 | kSaveMgr_LockObj | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kSaveMgr_LockObj = 0x08;  // the lock itself (CRITICAL_SECTION inside) |
+| N1044 | src/mod/session2/offsets_s2.h:172 | kSaveMgr_Slots | RVA / layout / policy (audit) | 0x40 | inline constexpr uint32_t kSaveMgr_Slots = 0x40;    // entries of 0x68 bytes: u32 slot @0, i64 time @8 |
+| N1045 | src/mod/session2/offsets_s2.h:173 | kSaveMgr_Count | RVA / layout / policy (audit) | 0x48 | inline constexpr uint32_t kSaveMgr_Count = 0x48;    // u32 |
+| N1046 | src/mod/session2/offsets_s2.h:174 | kSaveMgr_Capacity | RVA / layout / policy (audit) | 0x4C | inline constexpr uint32_t kSaveMgr_Capacity = 0x4C; // u32 |
+| N1047 | src/mod/session2/offsets_s2.h:175 | kSaveMgr_Storage | RVA / layout / policy (audit) | 0x50 | inline constexpr uint32_t kSaveMgr_Storage = 0x50;  // SaveStorage*; +0x38 slot folders, +0x40 their count |
+| N1048 | src/mod/session2/offsets_s2.h:176 | kSaveMgr_Busy | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kSaveMgr_Busy = 0x60;     // u8: a refresh/login holds the table |
+| N1049 | src/mod/session2/offsets_s2.h:177 | kSaveMgr_EntrySize | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kSaveMgr_EntrySize = 0x68; |
+| N1050 | src/mod/session2/offsets_s2.h:178 | kSaveStorage_FolderCount | RVA / layout / policy (audit) | 0x40 | inline constexpr uint32_t kSaveStorage_FolderCount = 0x40; |
+| N1051 | src/mod/session2/offsets_s2.h:179 | kWindowsLock3Vtable | vtable | 0x557C120 | inline constexpr uintptr_t kWindowsLock3Vtable = 0x557C120;  // vf1 -> EnterCriticalSection, vf2 -> Leave |
+| N1052 | src/mod/session2/offsets_s2.h:180 | kWindowsLockVf1 | RVA / layout / policy (audit) | 0x1371340 | inline constexpr uintptr_t kWindowsLockVf1 = 0x1371340;      // mov rax,[rcx]; jmp [rax+0x18] |
+| N1053 | src/mod/session2/offsets_s2.h:181 | kWindowsLockVf2 | RVA / layout / policy (audit) | 0xCE4EF0 | inline constexpr uintptr_t kWindowsLockVf2 = 0xCE4EF0;       // mov rax,[rcx]; jmp [rax+0x20] |
+| N1054 | src/mod/session2/offsets_s2.h:182 | kWindowsLockVf1Head | signature | {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x18} | inline constexpr uint8_t kWindowsLockVf1Head[] = {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x18}; |
+| N1055 | src/mod/session2/offsets_s2.h:183 | kWindowsLockVf2Head | signature | {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x20} | inline constexpr uint8_t kWindowsLockVf2Head[] = {0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x20}; |
+| N1056 | src/mod/session2/offsets_s2.h:185 | kSaveMgrRefreshSlots | RVA / layout / policy (audit) | 0x1870C20 | inline constexpr uintptr_t kSaveMgrRefreshSlots = 0x1870C20; |
+| N1057 | src/mod/session2/offsets_s2.h:186 | kSaveMgrRefreshSlotsHead | signature | {0xE9, 0xAB, 0x86, 0x36, 0x0B} | inline constexpr uint8_t kSaveMgrRefreshSlotsHead[] = {0xE9, 0xAB, 0x86, 0x36, 0x0B}; |
+| N1058 | src/mod/session2/offsets_s2.h:190 | kSlotRefreshReqSequence | RVA / layout / policy (audit) | 0x2A22475 | inline constexpr uintptr_t kSlotRefreshReqSequence = 0x2A22475; |
+| N1059 | src/mod/session2/offsets_s2.h:191 | kSlotRefreshReqSequenceBytes | signature | { 0x48, 0x8B, 0x05, 0x1C, 0x72, 0x34, 0x04, 0x4C, 0x8B, 0x78, 0x48, 0x4C, 0x89, 0x7D, 0x07, 0x45, 0x32, 0xF6, 0x44, 0x88, 0x75, 0x0F, 0x49, 0x8B, 0x1F, 0x48, 0x89, 0x5D, 0x77, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x08, 0x90, 0x45, 0x38, 0x77, 0x60, 0x75, 0x0C, 0x41, 0xC6, 0x47, 0x60, 0x01, 0x41, 0xB6, 0x01, 0x44, 0x88, 0x75, 0x0F, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x10, 0x90, 0x45, 0x84, 0xF6, 0x75, 0x05, 0xE9, 0x91, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x0D, 0xCF, 0x71, 0x34, 0x04, 0x48, 0x8B, 0x49, 0x48, 0xE8, 0x4E, 0xE7, 0xE4, 0xFE, 0x90, 0x49, 0x8B, 0x1F, 0x48, 0x89, 0x5D, 0x77, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x08, 0x90, 0x41, 0xC6, 0x47, 0x60, 0x00, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x10} | inline constexpr uint8_t kSlotRefreshReqSequenceBytes[] = { |
+| N1060 | src/mod/session2/offsets_s2.h:211 | kTitlePlayReadsSaveMgr | RVA / layout / policy (audit) | 0x65DC3E | inline constexpr uintptr_t kTitlePlayReadsSaveMgr = 0x65DC3E; |
+| N1061 | src/mod/session2/offsets_s2.h:212 | kTitlePlayReadsSaveMgrBytes | signature | {0x4C, 0x8B, 0x1D, 0x4B, 0xB5, 0x70, 0x06, 0x49, 0x8B, 0x83, 0x88, 0x00, 0x00, 0x00} | inline constexpr uint8_t kTitlePlayReadsSaveMgrBytes[] = {0x4C, 0x8B, 0x1D, 0x4B, 0xB5, 0x70, 0x06, |
+| N1062 | src/mod/session2/offsets_s2.h:215 | kImageBase | RVA / layout / policy (audit) | 0x140000000 | inline constexpr uintptr_t kImageBase = 0x140000000; |
+| N1063 | src/mod/session2/offsets_s2.h:216 | kPeTimestamp | RVA / layout / policy (audit) | 0x6AB28F00 | inline constexpr uint32_t kPeTimestamp = 0x6AB28F00; |
+| N1064 | src/mod/session2/p8_probe_logic.h:150 | kMaxProbe | RVA / layout / policy (audit) | 32 | static constexpr size_t kMaxProbe = 32; |
+| N1065 | src/mod/session2/p8_probe_logic.h:151 | kProbe | RVA / layout / policy (audit) | N < kMaxProbe ? N : kMaxProbe | static constexpr size_t kProbe = N < kMaxProbe ? N : kMaxProbe; |
+| N1066 | src/mod/session2/p8_probe_logic.h:152 | kMaxKeys | RVA / layout / policy (audit) | N / 2 | static constexpr size_t kMaxKeys = N / 2; |
+| N1067 | src/mod/session2/p8_probe_logic.h:245 | kTable | RVA / layout / policy (audit) | 0x18 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
+| N1068 | src/mod/session2/p8_probe_logic.h:245 | kCount | RVA / layout / policy (audit) | 0x20 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
+| N1069 | src/mod/session2/p8_probe_logic.h:245 | kTripleSize | RVA / layout / policy (audit) | 0x18 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
+| N1070 | src/mod/session2/p8_probe_logic.h:245 | kHashInThird | RVA / layout / policy (audit) | 0x18 | static constexpr uint32_t kTable = 0x18, kCount = 0x20, kTripleSize = 0x18, kHashInThird = 0x18; |
+| N1071 | src/mod/session2/p8_probe_logic.h:355 | kHashSeqBodyAnim | RVA / layout / policy (audit) | 0x837487D4 | inline constexpr uint32_t kHashSeqBodyAnim = 0x837487D4; |
+| N1072 | src/mod/session2/p8_probe_logic.h:356 | kHashSeqBodyAnimLoop | RVA / layout / policy (audit) | 0x35DD392F | inline constexpr uint32_t kHashSeqBodyAnimLoop = 0x35DD392F; |
+| N1073 | src/mod/session2/reannounce_logic.h:40 | kControlReannounce | RVA / layout / policy (audit) | 3 | inline constexpr uint8_t kControlReannounce = 3;  // troc_frame.h: 1 host ready, 2 host dead (ToGuestClient) |
+| N1074 | src/mod/session2/reannounce_logic.h:41 | kPayloadSize | RVA / layout / policy (audit) | 10 | inline constexpr size_t kPayloadSize = 10; |
+| N1075 | src/mod/session2/reannounce_logic.h:42 | kMaxAttempts | RVA / layout / policy (audit) | 3 | inline constexpr uint8_t kMaxAttempts = 3; |
+| N1076 | src/mod/session2/reannounce_logic.h:43 | kMinGapMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kMinGapMs = 1000; |
+| N1077 | src/mod/session2/reannounce_logic.h:76 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;  // troc_frame.h kControlOpcode |
+| N1078 | src/mod/session2/reannounce_logic.h:77 | kFrameSize | RVA / layout / policy (audit) | 5 + kPayloadSize | inline constexpr size_t kFrameSize = 5 + kPayloadSize; |
+| N1079 | src/mod/session2/reannounce_logic.h:110 | kVerdicts | RVA / layout / policy (audit) | 6 | inline constexpr size_t kVerdicts = 6; |
+| N1080 | src/mod/session2/reannounce_logic.h:125 | kMaxPerEpoch | RVA / layout / policy (audit) | 16 | inline constexpr uint32_t kMaxPerEpoch = 16; |
+| N1081 | src/mod/session2/rejoin_logic.h:47 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;    // troc_frame.h kControlOpcode |
+| N1082 | src/mod/session2/rejoin_logic.h:48 | kControlRejoin | RVA / layout / policy (audit) | 13 | inline constexpr uint8_t kControlRejoin = 13;    // troc_frame.h kControlRejoin |
+| N1083 | src/mod/session2/rejoin_logic.h:49 | kControlEpoch | RVA / layout / policy (audit) | 14 | inline constexpr uint8_t kControlEpoch = 14;     // troc_frame.h kControlEpoch |
+| N1084 | src/mod/session2/rejoin_logic.h:50 | kCapsRejoin | RVA / layout / policy (audit) | 0x08 | inline constexpr uint8_t kCapsRejoin = 0x08;     // troc_frame.h kCapsRejoin |
+| N1085 | src/mod/session2/rejoin_logic.h:51 | kWireVersion | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kWireVersion = 1; |
+| N1086 | src/mod/session2/rejoin_logic.h:52 | kRejoinPayload | RVA / layout / policy (audit) | 11 | inline constexpr size_t kRejoinPayload = 11, kEpochPayload = 12; |
+| N1087 | src/mod/session2/rejoin_logic.h:52 | kEpochPayload | RVA / layout / policy (audit) | 12 | inline constexpr size_t kRejoinPayload = 11, kEpochPayload = 12; |
+| N1088 | src/mod/session2/rejoin_logic.h:53 | kRetryMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint64_t kRetryMs = 1000; |
+| N1089 | src/mod/session2/rejoin_logic.h:54 | kMaxAsks | RVA / layout / policy (audit) | 30 | inline constexpr uint32_t kMaxAsks = 30; |
+| N1090 | src/mod/session2/rejoin_logic.h:223 | kGrantUnusedMs | RVA / layout / policy (audit) | 60000 | inline constexpr uint64_t kGrantUnusedMs = 60000; |
+| N1091 | src/mod/session2/report_guard.cpp:19 | kReporter | RVA / layout / policy (audit) | 0x1317D40 | constexpr uintptr_t kReporter = 0x1317D40; |
+| N1092 | src/mod/session2/report_guard.cpp:20 | kReporterHead | signature | {0x48, 0x89, 0x5C, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57} | constexpr uint8_t kReporterHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x55, 0x56, 0x57, |
+| N1093 | src/mod/session2/report_guard.cpp:22 | kMaxPaths | RVA / layout / policy (audit) | 8 | constexpr uint32_t kMaxPaths = 8; |
+| N1094 | src/mod/session2/report_guard.cpp:23 | kMaxText | RVA / layout / policy (audit) | 260 | constexpr size_t kMaxText = 260; |
+| N1095 | src/mod/session2/report_guard.cpp:24 | kMaxLogged | RVA / layout / policy (audit) | 16 | constexpr uint64_t kMaxLogged = 16;  // a broken loop must not flood the log |
+| N1096 | src/mod/session2/ride_filter_logic.h:50 | kOpStartActionAck | Troc ID (audit) | 2991 | inline constexpr uint16_t kOpStartActionAck = 2991; |
+| N1097 | src/mod/session2/ride_filter_logic.h:51 | kHeader | RVA / layout / policy (audit) | 5 | inline constexpr size_t kHeader = 5; |
+| N1098 | src/mod/session2/ride_filter_logic.h:52 | kAckSize | RVA / layout / policy (audit) | 725 | inline constexpr size_t kAckSize = 725; |
+| N1099 | src/mod/session2/ride_filter_logic.h:53 | kA0 | RVA / layout / policy (audit) | 0x004 | inline constexpr size_t kA0 = 0x004; |
+| N1100 | src/mod/session2/ride_filter_logic.h:54 | kA1 | RVA / layout / policy (audit) | 0x049 | inline constexpr size_t kA1 = 0x049; |
+| N1101 | src/mod/session2/ride_filter_logic.h:55 | kBlock | RVA / layout / policy (audit) | 69 | inline constexpr size_t kBlock = 69; |
+| N1102 | src/mod/session2/ride_filter_logic.h:56 | kBlockHash | RVA / layout / policy (audit) | 0x04 | inline constexpr size_t kBlockHash = 0x04; |
+| N1103 | src/mod/session2/ride_filter_logic.h:57 | kParent | RVA / layout / policy (audit) | 0x117 | inline constexpr size_t kParent = 0x117;  // u64, all ones = none |
+| N1104 | src/mod/session2/ride_filter_logic.h:58 | kTarget | RVA / layout / policy (audit) | 0x16D | inline constexpr size_t kTarget = 0x16D;  // u32 |
+| N1105 | src/mod/session2/ride_filter_logic.h:60 | kMountA0 | signature | {0x91605616u, 0x872A6750u} | inline constexpr uint32_t kMountA0[] = {0x91605616u, 0x872A6750u};  // the guest's / the host's (session 9) |
+| N1106 | src/mod/session2/ride_filter_logic.h:61 | kDismountA1 | RVA / layout / policy (audit) | 0x7B6AFF57u | inline constexpr uint32_t kDismountA1 = 0x7B6AFF57u;                // with A0 0x667E3B35 / 0xC9356CEB / 0x412C2C2B |
+| N1107 | src/mod/session2/ride_filter_logic.h:62 | kFootHash | RVA / layout / policy (audit) | 0x26107D3Cu | inline constexpr uint32_t kFootHash = 0x26107D3Cu; |
+| N1108 | src/mod/session2/ride_filter_logic.h:63 | kRidingHash | RVA / layout / policy (audit) | 0xF79C7424u | inline constexpr uint32_t kRidingHash = 0xF79C7424u; |
+| N1109 | src/mod/session2/ride_filter_logic.h:67 | kBlockFoot | signature | { 0x00, 0x00, 0x00, 0x00, 0x3C, 0x7D, 0x10, 0x26, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x89, 0x88, 0x08, 0xBD, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD7, 0xA3, 0x70, 0x3F, 0x57, 0x57, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} | inline constexpr std::array<uint8_t, kBlock> kBlockFoot = { |
+| N1110 | src/mod/session2/ride_filter_logic.h:72 | kBlockRiding | signature | { 0x00, 0x00, 0x00, 0x00, 0x24, 0x74, 0x9C, 0xF7, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x89, 0x88, 0x08, 0xBD, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD7, 0xA3, 0x70, 0x3F, 0x57, 0x57, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} | inline constexpr std::array<uint8_t, kBlock> kBlockRiding = { |
+| N1111 | src/mod/session2/ride_filter_logic.h:77 | kBlockEmpty | signature | { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x02, 0x00, 0x00, 0x80, 0xBF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x3F, 0x57, 0x57, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} | inline constexpr std::array<uint8_t, kBlock> kBlockEmpty = { |
+| N1112 | src/mod/session2/ride_filter_logic.h:121 | kKinds | RVA / layout / policy (audit) | 3 | inline constexpr size_t kKinds = 3; |
+| N1113 | src/mod/session2/ride_filter_logic.h:181 | kWindowMs | RVA / layout / policy (audit) | 3000 | inline constexpr uint64_t kWindowMs = 3000; |
+| N1114 | src/mod/session2/ride_filter_logic.h:222 | kSlots | RVA / layout / policy (audit) | 64 | static constexpr size_t kSlots = 64; |
+| N1115 | src/mod/session2/ride_filter_logic.h:302 | kGateDismountA0 | signature | {0xC9356CEBu, 0x412C2C2Bu} | inline constexpr uint32_t kGateDismountA0[] = {0xC9356CEBu, 0x412C2C2Bu}; |
+| N1116 | src/mod/session2/ride_filter_logic.h:307 | kSlots | RVA / layout / policy (audit) | 8 | static constexpr size_t kSlots = 8; |
+| N1117 | src/mod/session2/save_hooks.cpp:142 | kTraceLines | RVA / layout / policy (audit) | 5000 | constexpr uint32_t kTraceLines = 5000; |
+| N1118 | src/mod/session2/save_hooks.cpp:143 | kTraceNonWriteLines | RVA / layout / policy (audit) | 2000 | constexpr uint32_t kTraceNonWriteLines = 2000; |
+| N1119 | src/mod/session2/save_hooks.cpp:259 | kName | RVA / layout / policy (audit) |  | static constexpr char kName[] = "pearl abyss"; |
+| N1120 | src/mod/session2/save_hooks.cpp:281 | kRedirectLines | RVA / layout / policy (audit) | 200 | constexpr uint64_t kRedirectLines = 200;  // "Session2 save redirect #N" lines, writes only |
+| N1121 | src/mod/session2/save_hooks.cpp:282 | kRedirectErrorLines | RVA / layout / policy (audit) | 20 | constexpr uint64_t kRedirectErrorLines = 20; |
+| N1122 | src/mod/session2/save_hooks.cpp:444 | kWrite | RVA / layout / policy (audit) | [](const auto& | constexpr auto kWrite = [](const auto&, auto, DWORD) { return Kind::Write; }; |
+| N1123 | src/mod/session2/save_hooks.cpp:445 | kQuery | RVA / layout / policy (audit) | [](const auto& | constexpr auto kQuery = [](const auto&, auto, DWORD) { return Kind::Query; }; |
+| N1124 | src/mod/session2/save_hooks.cpp:447 | kWriteIfSecond | RVA / layout / policy (audit) | [](const auto& m | constexpr auto kWriteIfSecond = [](const auto& m, auto, DWORD) { return m[1].hit ? Kind::Write : Kind::Read; }; |
+| N1125 | src/mod/session2/save_hooks.cpp:449 | kBoolText | RVA / layout / policy (audit) | [](BOOL ok | constexpr auto kBoolText = [](BOOL ok, DWORD error) { return bool_result(ok, error); }; |
+| N1126 | src/mod/session2/save_hooks.cpp:450 | kHandleText | RVA / layout / policy (audit) | [](HANDLE h | constexpr auto kHandleText = [](HANDLE h, DWORD error) { return handle_result(h, error); }; |
+| N1127 | src/mod/session2/save_hooks.cpp:451 | kNoText | RVA / layout / policy (audit) | [](auto | constexpr auto kNoText = [](auto, DWORD) { return std::string(); };  // queries get no line |
+| N1128 | src/mod/session2/server.cpp:68 | kMagic | RVA / layout / policy (audit) | 0x32534553'44504F43ull | constexpr uint64_t kMagic = 0x32534553'44504F43ull;  // "COPDSES2" |
+| N1129 | src/mod/session2/server.cpp:76 | kSessionId | RVA / layout / policy (audit) | 0 | constexpr uint32_t kSessionId = 0; |
+| N1130 | src/mod/session2/server.cpp:77 | kMaxOutgoingBytes | RVA / layout / policy (audit) | 32u << 20 | constexpr size_t kMaxOutgoingBytes = 32u << 20;      // a login burst is ~42,000 Acks |
+| N1131 | src/mod/session2/server.cpp:114 | kEpochSlots | RVA / layout / policy (audit) | kMaxGuestEpochs + 1 | constexpr size_t kEpochSlots = kMaxGuestEpochs + 1; |
+| N1132 | src/mod/session2/server.cpp:123 | kNotReq | RVA / layout / policy (audit) | 0xFF | constexpr uint8_t kNotReq = 0xFF, kBlocked = 0xFE; |
+| N1133 | src/mod/session2/server.cpp:123 | kBlocked | RVA / layout / policy (audit) | 0xFE | constexpr uint8_t kNotReq = 0xFF, kBlocked = 0xFE; |
+| N1134 | src/mod/session2/server.cpp:133 | kOpLoginCharacterToFieldServerReq | Troc ID (audit) | 3093 | constexpr uint16_t kOpLoginCharacterToFieldServerReq = 3093; |
+| N1135 | src/mod/session2/server.cpp:134 | kOpLoginUserToFieldServerReq | Troc ID (audit) | 2490 | constexpr uint16_t kOpLoginUserToFieldServerReq = 2490; |
+| N1136 | src/mod/session2/server.cpp:137 | kOpMoveActorReq | Troc ID (audit) | 2556 | constexpr uint16_t kOpMoveActorReq = 2556, kOpStartActionReq = 2223, kOpRotateActorReq = 2828; |
+| N1137 | src/mod/session2/server.cpp:137 | kOpStartActionReq | Troc ID (audit) | 2223 | constexpr uint16_t kOpMoveActorReq = 2556, kOpStartActionReq = 2223, kOpRotateActorReq = 2828; |
+| N1138 | src/mod/session2/server.cpp:137 | kOpRotateActorReq | Troc ID (audit) | 2828 | constexpr uint16_t kOpMoveActorReq = 2556, kOpStartActionReq = 2223, kOpRotateActorReq = 2828; |
+| N1139 | src/mod/session2/server.cpp:138 | kOpMainPlayerDataStartAck | Troc ID (audit) | 2756 | constexpr uint16_t kOpMainPlayerDataStartAck = 2756; |
+| N1140 | src/mod/session2/server.cpp:139 | kOpMainUserDataStartAck | Troc ID (audit) | 2646 | constexpr uint16_t kOpMainUserDataStartAck = 2646;  // u32 user key at +0 |
+| N1141 | src/mod/session2/server.cpp:140 | kOpMoveFieldAck | Troc ID (audit) | 2174 | constexpr uint16_t kOpMoveFieldAck = 2174;          // u8 &#124; u32 actor &#124; u32 &#124; u32 field owner @9 &#124; 0x30 * n |
+| N1142 | src/mod/session2/server.cpp:159 | kMaxMirrored | RVA / layout / policy (audit) | 4096 | constexpr size_t kMaxMirrored = 4096; |
+| N1143 | src/mod/session2/server.cpp:168 | kLogoutPendingMs | RVA / layout / policy (audit) | 60000 | constexpr uint64_t kLogoutPendingMs = 60000;    // give up handing it after this |
+| N1144 | src/mod/session2/server.cpp:181 | kOpNak | Troc ID (audit) | 1013 | constexpr uint16_t kOpNak = 1013; |
+| N1145 | src/mod/session2/server.cpp:182 | kOpRemoveActorAck2516 | Troc ID (audit) | 2516 | constexpr uint16_t kOpRemoveActorAck2516 = 2516;  // RemoveActorAck (world_anchor's probe) |
+| N1146 | src/mod/session2/server.cpp:207 | kMaxExceptionNotes | RVA / layout / policy (audit) | 8 | constexpr uint32_t kMaxExceptionNotes = 8; |
+| N1147 | src/mod/session2/server.h:152 | kMaxGuestEpochs | RVA / layout / policy (audit) | 32 | inline constexpr uint32_t kMaxGuestEpochs = 32; |
+| N1148 | src/mod/session2/session2.cpp:80 | kMaxEarly | RVA / layout / policy (audit) | 512 | constexpr size_t kMaxEarly = 512; |
+| N1149 | src/mod/session2/session2.cpp:82 | kHoldRetryMs | RVA / layout / policy (audit) | 20 | constexpr uint64_t kHoldRetryMs = 20; |
+| N1150 | src/mod/session2/session2.cpp:93 | kLinkLostMs | RVA / layout / policy (audit) | 15000 | constexpr uint32_t kLinkLostMs = 15000;  // longer than the session's own 5 s peer timeout |
+| N1151 | src/mod/session2/session2.cpp:109 | kSampleMs | RVA / layout / policy (audit) | 1000 | constexpr uint32_t kSampleMs = 1000, kBarrierMs = 250; |
+| N1152 | src/mod/session2/session2.cpp:109 | kBarrierMs | RVA / layout / policy (audit) | 250 | constexpr uint32_t kSampleMs = 1000, kBarrierMs = 250; |
+| N1153 | src/mod/session2/session2.cpp:120 | kRejoinLines | RVA / layout / policy (audit) | 64 | constexpr uint64_t kRejoinLines = 64; |
+| N1154 | src/mod/session2/session2.cpp:161 | kSlowTickUs | RVA / layout / policy (audit) | 50'000 | constexpr uint64_t kSlowTickUs = 50'000;  // a tick above this is logged with its parts |
+| N1155 | src/mod/session2/session2.cpp:162 | kSlowTickLines | RVA / layout / policy (audit) | 200 | constexpr uint64_t kSlowTickLines = 200; |
+| N1156 | src/mod/session2/session2.cpp:276 | kOpSetFieldTimeReq | Troc ID (audit) | 2125 | constexpr uint16_t kOpSetFieldTimeReq = 2125; |
+| N1157 | src/mod/session2/session2.cpp:1471 | kReanLines | RVA / layout / policy (audit) | 32 | constexpr uint64_t kReanLines = 32; |
+| N1158 | src/mod/session2/slot_refresh.h:75 | kEntrySize | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kEntrySize = 0x68; |
+| N1159 | src/mod/session2/slot_refresh.h:76 | kMaxEntriesRead | RVA / layout / policy (audit) | 64 | inline constexpr uint32_t kMaxEntriesRead = 64; |
+| N1160 | src/mod/session2/travel_probe.h:55 | kTravelContext | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
+| N1161 | src/mod/session2/travel_probe.h:55 | kTravelPrepared | RVA / layout / policy (audit) | 2 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
+| N1162 | src/mod/session2/travel_probe.h:55 | kTravelConsume | RVA / layout / policy (audit) | 3 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
+| N1163 | src/mod/session2/travel_probe.h:55 | kTravelRevive | RVA / layout / policy (audit) | 4 | inline constexpr uint16_t kTravelContext = 1, kTravelPrepared = 2, kTravelConsume = 3, kTravelRevive = 4; |
+| N1164 | src/mod/session2/travel_probe.h:59 | kTravelHead | RVA / layout / policy (audit) | 24 | inline constexpr size_t kTravelHead = 24; |
+| N1165 | src/mod/session2/travel_probe_logic.h:26 | kOpReloadStageStartReq | Troc ID (audit) | 2283 | inline constexpr uint16_t kOpReloadStageStartReq = 2283; |
+| N1166 | src/mod/session2/travel_probe_logic.h:27 | kOpGameLoadingStartReq | Troc ID (audit) | 2437 | inline constexpr uint16_t kOpGameLoadingStartReq = 2437; |
+| N1167 | src/mod/session2/travel_probe_logic.h:28 | kOpMoveFieldAck | Troc ID (audit) | 2174 | inline constexpr uint16_t kOpMoveFieldAck = 2174; |
+| N1168 | src/mod/session2/travel_probe_logic.h:29 | kOpLoadingFieldDataAck | Troc ID (audit) | 2643 | inline constexpr uint16_t kOpLoadingFieldDataAck = 2643; |
+| N1169 | src/mod/session2/travel_probe_logic.h:30 | kOpMoveFieldCompletePostAck | Troc ID (audit) | 3066 | inline constexpr uint16_t kOpMoveFieldCompletePostAck = 3066; |
+| N1170 | src/mod/session2/travel_probe_logic.h:31 | kOpMoveFieldCompleteAck | Troc ID (audit) | 2144 | inline constexpr uint16_t kOpMoveFieldCompleteAck = 2144; |
+| N1171 | src/mod/session2/travel_probe_logic.h:32 | kOpPlayAllPreLoadSequencerAck | Troc ID (audit) | 2322 | inline constexpr uint16_t kOpPlayAllPreLoadSequencerAck = 2322; |
+| N1172 | src/mod/session2/travel_probe_logic.h:33 | kOpLoadingCompleteAck | Troc ID (audit) | 2762 | inline constexpr uint16_t kOpLoadingCompleteAck = 2762; |
+| N1173 | src/mod/session2/travel_probe_logic.h:34 | kOpLogoutCharacterAck | Troc ID (audit) | 2679 | inline constexpr uint16_t kOpLogoutCharacterAck = 2679; |
+| N1174 | src/mod/session2/travel_probe_logic.h:35 | kOpNak | Troc ID (audit) | 1013 | inline constexpr uint16_t kOpNak = 1013; |
+| N1175 | src/mod/session2/travel_probe_logic.h:38 | kOpReviveLoadingReq | Troc ID (audit) | 2362 | inline constexpr uint16_t kOpReviveLoadingReq = 2362; |
+| N1176 | src/mod/session2/travel_probe_logic.h:40 | kOwnerAt | RVA / layout / policy (audit) | 9 | inline constexpr size_t kOwnerAt = 9;           // u32 owner, both 2174 and 2643 (payload offset, no Troc header) |
+| N1177 | src/mod/session2/travel_probe_logic.h:41 | kMoveFieldHead | RVA / layout / policy (audit) | 17 | inline constexpr size_t kMoveFieldHead = 17;    // 2174: 17 + 48n |
+| N1178 | src/mod/session2/travel_probe_logic.h:42 | kLoadingFieldHead | RVA / layout / policy (audit) | 20 | inline constexpr size_t kLoadingFieldHead = 20; // 2643: 20 + 48n |
+| N1179 | src/mod/session2/travel_probe_logic.h:43 | kRecord | RVA / layout / policy (audit) | 0x30 | inline constexpr size_t kRecord = 0x30; |
+| N1180 | src/mod/session2/travel_probe_logic.h:157 | kErrInvalidFieldInfoKey | RVA / layout / policy (audit) | 0x8E19630A | inline constexpr uint32_t kErrInvalidFieldInfoKey = 0x8E19630A;  // hashlittle("eErrNoInvalidFieldInfoKey") |
+| N1181 | src/mod/session2/travel_probe_logic.h:287 | kMaxAcks | RVA / layout / policy (audit) | 24 | inline constexpr uint32_t kMaxAcks = 24; |
+| N1182 | src/mod/session2/travel_probe_logic.h:288 | kWindowMs | RVA / layout / policy (audit) | 20000 | inline constexpr uint64_t kWindowMs = 20000; |
+| N1183 | src/mod/session2/travel_probe_logic.h:289 | kAlwaysLines | RVA / layout / policy (audit) | 8 | inline constexpr uint32_t kAlwaysLines = 8; |
+| N1184 | src/mod/session2/travel_probe_logic.h:322 | kOpPreLoadSequencerReq | Troc ID (audit) | 2873 | inline constexpr uint16_t kOpPreLoadSequencerReq = 2873; |
+| N1185 | src/mod/session2/travel_probe_logic.h:323 | kOpPrepareSequencerAck | Troc ID (audit) | 2661 | inline constexpr uint16_t kOpPrepareSequencerAck = 2661; |
+| N1186 | src/mod/session2/travel_probe_logic.h:324 | kOpStageBranchStateAck | Troc ID (audit) | 2981 | inline constexpr uint16_t kOpStageBranchStateAck = 2981; |
+| N1187 | src/mod/session2/travel_probe_logic.h:325 | kHostBurstUs | RVA / layout / policy (audit) | 3'000'000 | inline constexpr uint64_t kHostBurstUs = 3'000'000; |
+| N1188 | src/mod/session2/travel_probe_logic.h:326 | kHostOwnBeforeUs | RVA / layout / policy (audit) | 1'000'000 | inline constexpr uint64_t kHostOwnBeforeUs = 1'000'000; |
+| N1189 | src/mod/session2/tree_bend_logic.h:45 | kVf2 | RVA / layout / policy (audit) | 0x117F7E0 | inline constexpr uintptr_t kVf2 = 0x117F7E0; |
+| N1190 | src/mod/session2/tree_bend_logic.h:48 | kVf2Patch | RVA / layout / policy (audit) | 5 | inline constexpr uint32_t kVf2Patch = 5;  // mov [rsp+8],rbx |
+| N1191 | src/mod/session2/tree_bend_logic.h:49 | kVf2Slot | RVA / layout / policy (audit) | 0x56FFB58 | inline constexpr uintptr_t kVf2Slot = 0x56FFB58; |
+| N1192 | src/mod/session2/tree_bend_logic.h:51 | kApply | RVA / layout / policy (audit) | 0x1190FD0 | inline constexpr uintptr_t kApply = 0x1190FD0; |
+| N1193 | src/mod/session2/tree_bend_logic.h:53 | kApplyPatch | RVA / layout / policy (audit) | 7 | inline constexpr uint32_t kApplyPatch = 7;  // mov rax,rsp &#124; mov [rax+0x10],rbx |
+| N1194 | src/mod/session2/tree_bend_logic.h:54 | kApplyCall | RVA / layout / policy (audit) | 0x117F911 | inline constexpr uintptr_t kApplyCall = 0x117F911;  // in 0x117F7E0: call 0x1190FD0 |
+| N1195 | src/mod/session2/tree_bend_logic.h:57 | kSetBend | RVA / layout / policy (audit) | 0x349EA10 | inline constexpr uintptr_t kSetBend = 0x349EA10; |
+| N1196 | src/mod/session2/tree_bend_logic.h:59 | kSetBendPatch | RVA / layout / policy (audit) | 5 | inline constexpr uint32_t kSetBendPatch = 5;  // mov [rsp+8],rbx |
+| N1197 | src/mod/session2/tree_bend_logic.h:60 | kSetBendCall | RVA / layout / policy (audit) | 0x1191532 | inline constexpr uintptr_t kSetBendCall = 0x1191532;  // in 0x1190FD0: call SetBend (rdx = state+0x380, xmm2 = state+0x378) |
+| N1198 | src/mod/session2/tree_bend_logic.h:65 | kTick | RVA / layout / policy (audit) | 0x59C0D0 | inline constexpr uintptr_t kTick = 0x59C0D0; |
+| N1199 | src/mod/session2/tree_bend_logic.h:67 | kTickBoundaries | signature | {2, 3, 4, 5, 7, 9} | inline constexpr uint32_t kTickBoundaries[] = {2, 3, 4, 5, 7, 9}; |
+| N1200 | src/mod/session2/tree_bend_logic.h:68 | kTickPatch | signature | {5} | inline constexpr uint32_t kTickPatch[] = {5};  // push rbp &#124; push rbx &#124; push rsi &#124; push rdi |
+| N1201 | src/mod/session2/tree_bend_logic.h:69 | kTickJump | RVA / layout / policy (audit) | 0x8A5DA0 | inline constexpr uintptr_t kTickJump = 0x8A5DA0; |
+| N1202 | src/mod/session2/tree_bend_logic.h:74 | kGetTarget | RVA / layout / policy (audit) | 0x5B1600 | inline constexpr uintptr_t kGetTarget = 0x5B1600; |
+| N1203 | src/mod/session2/tree_bend_logic.h:76 | kFindTree | RVA / layout / policy (audit) | 0x491AC0 | inline constexpr uintptr_t kFindTree = 0x491AC0; |
+| N1204 | src/mod/session2/tree_bend_logic.h:81 | kActor_Key | RVA / layout / policy (audit) | 0x60 | inline constexpr uint32_t kActor_Key = 0x60; |
+| N1205 | src/mod/session2/tree_bend_logic.h:82 | kActor_Control | RVA / layout / policy (audit) | 0xC8 | inline constexpr uint32_t kActor_Control = 0xC8;  // u8, != 0: controlled by this client |
+| N1206 | src/mod/session2/tree_bend_logic.h:83 | kActor_Comps | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kActor_Comps = 0x68; |
+| N1207 | src/mod/session2/tree_bend_logic.h:84 | kActor_LockObj | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kActor_LockObj = 0x08; |
+| N1208 | src/mod/session2/tree_bend_logic.h:85 | kComps_RemoteCatch | RVA / layout / policy (audit) | 0x78 | inline constexpr uint32_t kComps_RemoteCatch = 0x78; |
+| N1209 | src/mod/session2/tree_bend_logic.h:86 | kComps_Control | RVA / layout / policy (audit) | 0x40 | inline constexpr uint32_t kComps_Control = 0x40;  // f6 = [[[[actor+0x68]+0x40]+0x88]+0x10]+0xF6 (0x117F850..0x117F873) |
+| N1210 | src/mod/session2/tree_bend_logic.h:87 | kControl_F6a | RVA / layout / policy (audit) | 0x88 | inline constexpr uint32_t kControl_F6a = 0x88; |
+| N1211 | src/mod/session2/tree_bend_logic.h:88 | kControl_F6b | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kControl_F6b = 0x10; |
+| N1212 | src/mod/session2/tree_bend_logic.h:89 | kControl_F6 | RVA / layout / policy (audit) | 0xF6 | inline constexpr uint32_t kControl_F6 = 0xF6; |
+| N1213 | src/mod/session2/tree_bend_logic.h:90 | kComp_Owner | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kComp_Owner = 0x08; |
+| N1214 | src/mod/session2/tree_bend_logic.h:91 | kClientRemoteCatchVtbl | vtable | 0x55890D8 | inline constexpr uintptr_t kClientRemoteCatchVtbl = 0x55890D8;  // pa::ClientRemoteCatchActorComponent |
+| N1215 | src/mod/session2/tree_bend_logic.h:92 | kLockVf | signature | {0x18, 0x20, 0x30, 0x40} | inline constexpr uint32_t kLockVf[] = {0x18, 0x20, 0x30, 0x40}; |
+| N1216 | src/mod/session2/tree_bend_logic.h:93 | kSlotBase | RVA / layout / policy (audit) | 0x20 | inline constexpr uint32_t kSlotBase = 0x20; |
+| N1217 | src/mod/session2/tree_bend_logic.h:94 | kSlotStride | RVA / layout / policy (audit) | 0x58 | inline constexpr uint32_t kSlotStride = 0x58; |
+| N1218 | src/mod/session2/tree_bend_logic.h:95 | kSlot_Kind | RVA / layout / policy (audit) | 0x00 | inline constexpr uint32_t kSlot_Kind = 0x00;   // u8, 6 = empty |
+| N1219 | src/mod/session2/tree_bend_logic.h:96 | kSlot_Scene | RVA / layout / policy (audit) | 0x10 | inline constexpr uint32_t kSlot_Scene = 0x10;  // 16 bytes (u64 object id, u64 level id) |
+| N1220 | src/mod/session2/tree_bend_logic.h:97 | kSlotEmpty | RVA / layout / policy (audit) | 6 | inline constexpr uint8_t kSlotEmpty = 6; |
+| N1221 | src/mod/session2/tree_bend_logic.h:98 | kStateBase | RVA / layout / policy (audit) | 0x9BC | inline constexpr uint32_t kStateBase = 0x9BC;  // u8 per slot: 2 flight, 3 attached, 7 idle ... |
+| N1222 | src/mod/session2/tree_bend_logic.h:99 | kStateStride | RVA / layout / policy (audit) | 0x1A0 | inline constexpr uint32_t kStateStride = 0x1A0; |
+| N1223 | src/mod/session2/tree_bend_logic.h:100 | kStateAttached | RVA / layout / policy (audit) | 3 | inline constexpr uint8_t kStateAttached = 3; |
+| N1224 | src/mod/session2/tree_bend_logic.h:101 | kSlots | RVA / layout / policy (audit) | 2 | inline constexpr int kSlots = 2; |
+| N1225 | src/mod/session2/tree_bend_logic.h:105 | kState_Amount | RVA / layout / policy (audit) | 0x378 | inline constexpr uint32_t kState_Amount = 0x378; |
+| N1226 | src/mod/session2/tree_bend_logic.h:106 | kState_Dir | RVA / layout / policy (audit) | 0x380 | inline constexpr uint32_t kState_Dir = 0x380; |
+| N1227 | src/mod/session2/tree_bend_logic.h:108 | kTree_Amount | RVA / layout / policy (audit) | 0x2A4 | inline constexpr uint32_t kTree_Amount = 0x2A4; |
+| N1228 | src/mod/session2/tree_bend_logic.h:109 | kTree_Set | RVA / layout / policy (audit) | 0x2B4 | inline constexpr uint32_t kTree_Set = 0x2B4; |
+| N1229 | src/mod/session2/tree_bend_logic.h:110 | kTree_Flags | RVA / layout / policy (audit) | 0x59 | inline constexpr uint32_t kTree_Flags = 0x59; |
+| N1230 | src/mod/session2/tree_bend_logic.h:111 | kMainThreadId | RVA / layout / policy (audit) | 0x6A652D4 | inline constexpr uintptr_t kMainThreadId = 0x6A652D4;  // dword: the client's main thread |
+| N1231 | src/mod/session2/tree_bend_logic.h:122 | kControlOpcode | RVA / layout / policy (audit) | 1 | inline constexpr uint16_t kControlOpcode = 1;  // troc_frame.h kControlOpcode |
+| N1232 | src/mod/session2/tree_bend_logic.h:123 | kControlTreeBend | RVA / layout / policy (audit) | 15 | inline constexpr uint8_t kControlTreeBend = 15;  // troc_frame.h: 1-14 taken (5 mount_sync, 12 weather, 13-14 rejoin) |
+| N1233 | src/mod/session2/tree_bend_logic.h:124 | kVersion | RVA / layout / policy (audit) | 1 | inline constexpr uint8_t kVersion = 1; |
+| N1234 | src/mod/session2/tree_bend_logic.h:125 | kHeader | RVA / layout / policy (audit) | 5 | inline constexpr size_t kHeader = 5;  // u16 opcode &#124; i8 slot &#124; u16 len |
+| N1235 | src/mod/session2/tree_bend_logic.h:126 | kPayloadSize | RVA / layout / policy (audit) | 52 | inline constexpr size_t kPayloadSize = 52; |
+| N1236 | src/mod/session2/tree_bend_logic.h:127 | kFrameSize | RVA / layout / policy (audit) | kHeader + kPayloadSize | inline constexpr size_t kFrameSize = kHeader + kPayloadSize; |
+| N1237 | src/mod/session2/tree_bend_logic.h:130 | kFlagApplyFlag | RVA / layout / policy (audit) | 0x01 | inline constexpr uint8_t kFlagApplyFlag = 0x01;  // 0x1190FD0's r8b (f6 == 1) on that call |
+| N1238 | src/mod/session2/tree_bend_logic.h:230 | kMinGapMs | RVA / layout / policy (audit) | 25 | inline constexpr uint32_t kMinGapMs = 25;      // never more than 40 Hz per channel |
+| N1239 | src/mod/session2/tree_bend_logic.h:231 | kPeriodMs | RVA / layout / policy (audit) | 50 | inline constexpr uint32_t kPeriodMs = 50;      // 20 Hz while it changes |
+| N1240 | src/mod/session2/tree_bend_logic.h:232 | kJump | RVA / layout / policy (audit) | 0.15f | inline constexpr float kJump = 0.15f;          // a change this big goes at once (after kMinGapMs) |
+| N1241 | src/mod/session2/tree_bend_logic.h:233 | kStill | RVA / layout / policy (audit) | 0.01f | inline constexpr float kStill = 0.01f;         // below this it counts as still |
+| N1242 | src/mod/session2/tree_bend_logic.h:234 | kKeepAliveMs | RVA / layout / policy (audit) | 250 | inline constexpr uint32_t kKeepAliveMs = 250;  // 4 Hz while still |
+| N1243 | src/mod/session2/tree_bend_logic.h:235 | kEndIdleMs | RVA / layout / policy (audit) | 150 | inline constexpr uint32_t kEndIdleMs = 150;    // no SetBend this long: the run ended (End sent) |
+| N1244 | src/mod/session2/tree_bend_logic.h:252 | kChannels | RVA / layout / policy (audit) | 4 | static constexpr size_t kChannels = 4; |
+| N1245 | src/mod/session2/tree_bend_logic.h:409 | kMax | RVA / layout / policy (audit) | 8 | static constexpr size_t kMax = 8; |
+| N1246 | src/mod/session2/tree_bend_logic.h:440 | kMaxAgeMs | RVA / layout / policy (audit) | 500 | inline constexpr uint32_t kMaxAgeMs = 500;     // an older sample is not applied (a lost End) |
+| N1247 | src/mod/session2/tree_bend_logic.h:441 | kRestartMs | RVA / layout / policy (audit) | 2000 | inline constexpr uint32_t kRestartMs = 2000;   // an older seq after this long of silence: the sender restarted |
+| N1248 | src/mod/session2/tree_bend_logic.h:442 | kDelayMs | RVA / layout / policy (audit) | 100 | inline constexpr uint32_t kDelayMs = 100;      // the observer renders this far behind the newest sample |
+| N1249 | src/mod/session2/tree_bend_logic.h:443 | kMaxSpanMs | RVA / layout / policy (audit) | 1000 | inline constexpr uint32_t kMaxSpanMs = 1000;   // two samples further apart than this are not interpolated |
+| N1250 | src/mod/session2/tree_bend_logic.h:469 | kEntries | RVA / layout / policy (audit) | 4 | static constexpr size_t kEntries = 4; |
+| N1251 | src/mod/session2/tree_bend_logic.h:672 | kRunGapUs | RVA / layout / policy (audit) | 200000 | inline constexpr uint64_t kRunGapUs = 200000;  // M1: calls further apart than this start a new run |
+| N1252 | src/mod/session2/tree_bend_logic.h:821 | kOwnBendUs | RVA / layout / policy (audit) | kEndIdleMs * 1000ull | inline constexpr uint64_t kOwnBendUs = kEndIdleMs * 1000ull;  // this PC's own bend run counts as open this long |
+| N1253 | src/mod/session2/tree_bend_logic.h:848 | kReadTries | RVA / layout / policy (audit) | 4 | static constexpr int kReadTries = 4; |
+| N1254 | src/mod/session2/tree_bend_logic.h:887 | kDuringApplyUs | RVA / layout / policy (audit) | 200000 | inline constexpr uint64_t kDuringApplyUs = 200000; |
+| N1255 | src/mod/session2/tree_bend_logic.h:892 | kApplyLineUs | RVA / layout / policy (audit) | 1000000 | inline constexpr uint64_t kApplyLineUs = 1000000; |
+| N1256 | src/mod/session2/ui_pause_logic.h:107 | kPauseBelow | RVA / layout / policy (audit) | 0.05f | inline constexpr float kPauseBelow = 0.05f; |
+| N1257 | src/mod/session2/ui_pause_logic.h:186 | kWorldList | RVA / layout / policy (audit) | 0x38 | static constexpr uint32_t kWorldList = 0x38;   // world -> {entries*, u32 count} |
+| N1258 | src/mod/session2/ui_pause_logic.h:187 | kListCount | RVA / layout / policy (audit) | 0x08 | static constexpr uint32_t kListCount = 0x08; |
+| N1259 | src/mod/session2/ui_pause_logic.h:188 | kEntryHolder | RVA / layout / policy (audit) | 0xA0 | static constexpr uint32_t kEntryHolder = 0xA0; // entry -> holder (0 = none) |
+| N1260 | src/mod/session2/ui_pause_logic.h:189 | kHolderView | RVA / layout / policy (audit) | 0x10 | static constexpr uint32_t kHolderView = 0x10;  // holder -> view V |
+| N1261 | src/mod/session2/ui_pause_logic.h:190 | kViewState | RVA / layout / policy (audit) | 0x26F | static constexpr uint32_t kViewState = 0x26F;  // u8: 0/1 open, 2 hiding, 3 unloaded |
+| N1262 | src/mod/session2/ui_pause_logic.h:191 | kViewRoot | RVA / layout / policy (audit) | 0x118 | static constexpr uint32_t kViewRoot = 0x118;   // V -> UI root (UIGamePlayControl*) |
+| N1263 | src/mod/session2/ui_pause_logic.h:192 | kViewScale | RVA / layout / policy (audit) | 0x23C | static constexpr uint32_t kViewScale = 0x23C;  // f32: the layout's timeScale |
+| N1264 | src/mod/session2/ui_pause_logic.h:193 | kRootScaleSlot | RVA / layout / policy (audit) | 0x168 | static constexpr uint32_t kRootScaleSlot = 0x168;  // root vtable slot: 0x63DA70 `return 1.0f` in all of them |
+| N1265 | src/mod/session2/ui_pause_logic.h:194 | kMaxEntries | RVA / layout / policy (audit) | 4096 | static constexpr uint32_t kMaxEntries = 4096;  // more = garbage, the replay stops |
+| N1266 | src/mod/session2/ui_pause_logic.h:197 | kMaxHits | RVA / layout / policy (audit) | 3 | inline constexpr size_t kMaxHits = 3;  // what one ring event carries |
+| N1267 | src/mod/session2/user2_funnels_logic.h:93 | kRespawnVf40Ret | RVA / layout / policy (audit) | 0x2B03AA7 | inline constexpr uint32_t kRespawnVf40Ret = 0x2B03AA7, kTraceVf40Ret = 0x2C4A0AD, kTriggerVf40Ret = 0x2C4A36F; |
+| N1268 | src/mod/session2/user2_funnels_logic.h:93 | kTraceVf40Ret | RVA / layout / policy (audit) | 0x2C4A0AD | inline constexpr uint32_t kRespawnVf40Ret = 0x2B03AA7, kTraceVf40Ret = 0x2C4A0AD, kTriggerVf40Ret = 0x2C4A36F; |
+| N1269 | src/mod/session2/user2_funnels_logic.h:93 | kTriggerVf40Ret | RVA / layout / policy (audit) | 0x2C4A36F | inline constexpr uint32_t kRespawnVf40Ret = 0x2B03AA7, kTraceVf40Ret = 0x2C4A0AD, kTriggerVf40Ret = 0x2C4A36F; |
+| N1270 | src/mod/session2/user2_funnels_logic.h:94 | kQuestEventVf40Ret | RVA / layout / policy (audit) | 0x290DC0B | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
+| N1271 | src/mod/session2/user2_funnels_logic.h:94 | kMissionUiVf40Ret | RVA / layout / policy (audit) | 0x2A49183 | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
+| N1272 | src/mod/session2/user2_funnels_logic.h:94 | kMissionAlarmVf40Ret | RVA / layout / policy (audit) | 0x2A4A03B | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
+| N1273 | src/mod/session2/user2_funnels_logic.h:94 | kChallengeDiscoverVf40Ret | RVA / layout / policy (audit) | 0x104C4B3D | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
+| N1274 | src/mod/session2/user2_funnels_logic.h:94 | kChallengeTimerVf40Ret | RVA / layout / policy (audit) | 0x2C3409D | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
+| N1275 | src/mod/session2/user2_funnels_logic.h:94 | kChangeCharacterVf40Ret | RVA / layout / policy (audit) | 0x2A4A32B | inline constexpr uint32_t kQuestEventVf40Ret = 0x290DC0B, kMissionUiVf40Ret = 0x2A49183, |
+| N1276 | src/mod/session2/user2_funnels_logic.h:97 | kOpTraceMission | Troc ID (audit) | 2372 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
+| N1277 | src/mod/session2/user2_funnels_logic.h:97 | kOpMissionTrigger | Troc ID (audit) | 2112 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
+| N1278 | src/mod/session2/user2_funnels_logic.h:97 | kOpMissionUiState | Troc ID (audit) | 2477 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
+| N1279 | src/mod/session2/user2_funnels_logic.h:97 | kOpMissionNewAlarm | Troc ID (audit) | 2354 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
+| N1280 | src/mod/session2/user2_funnels_logic.h:97 | kOpChangePlayable | Troc ID (audit) | 2369 | inline constexpr uint16_t kOpTraceMission = 2372, kOpMissionTrigger = 2112, kOpMissionUiState = 2477, |
+| N1281 | src/mod/session2/user2_funnels_logic.h:100 | kOpQuestDialogEnd | Troc ID (audit) | 2342 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
+| N1282 | src/mod/session2/user2_funnels_logic.h:100 | kOpSetQuestDialog | Troc ID (audit) | 2857 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
+| N1283 | src/mod/session2/user2_funnels_logic.h:100 | kOpStageBranchState | Troc ID (audit) | 2436 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
+| N1284 | src/mod/session2/user2_funnels_logic.h:100 | kOpUpdateStageChartEvent | Troc ID (audit) | 2591 | inline constexpr uint16_t kOpQuestDialogEnd = 2342, kOpSetQuestDialog = 2857, kOpStageBranchState = 2436, |
+| N1285 | src/mod/session2/user2_funnels_logic.h:254 | kQuestCompActor | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kQuestCompActor = 0x08, kEventType = 0x08, kEventActorKey = 0x68; |
+| N1286 | src/mod/session2/user2_funnels_logic.h:254 | kEventType | RVA / layout / policy (audit) | 0x08 | inline constexpr uint32_t kQuestCompActor = 0x08, kEventType = 0x08, kEventActorKey = 0x68; |
+| N1287 | src/mod/session2/user2_funnels_logic.h:254 | kEventActorKey | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kQuestCompActor = 0x08, kEventType = 0x08, kEventActorKey = 0x68; |
+| N1288 | src/mod/session2/user2_funnels_logic.h:263 | kAckHostQuest | signature | {3009, 3088, 2738, 2346} | inline constexpr uint16_t kAckHostQuest[] = {3009, 3088, 2738, 2346}; |
+| N1289 | src/mod/session2/user2_funnels_logic.h:482 | kActorComponents | RVA / layout / policy (audit) | 0x68 | inline constexpr uint32_t kActorComponents = 0x68; |
+| N1290 | src/mod/session2/user2_funnels_logic.h:483 | kComponentsQuest | RVA / layout / policy (audit) | 0x138 | inline constexpr uint32_t kComponentsQuest = 0x138;  // index 0x27 (0x2A7FDAE) |
+| N1291 | src/mod/session2/user2_funnels_logic.h:484 | kQuestComponentManager | RVA / layout / policy (audit) | 0x18 | inline constexpr uint32_t kQuestComponentManager = 0x18; |
+| N1292 | src/mod/session2/user2_funnels_logic.h:521 | kOpcodes | Troc ID (audit) | 4096 | inline constexpr size_t kOpcodes = 4096; |

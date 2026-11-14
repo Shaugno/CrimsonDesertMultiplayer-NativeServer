@@ -1,0 +1,84 @@
+file_bytes=335440280
+timestamp=0x6AF5D198
+image_base=0x140000000
+size_of_image=0x144E9000
+identity=build-3663
+scanned=1
+adopted=0
+section_count=12
+section name=.reloc va=0x1000 vsize=0x5612000 raw=0x400 raw_size=0x5612000 flags=0x60000020
+section name=.00cfg va=0x5613000 vsize=0x1743000 raw=0x5612400 raw_size=0x1743000 flags=0x40000040
+section name=.sxdata va=0x6D56000 vsize=0x871000 raw=0x6D55400 raw_size=0x36CC00 flags=0xC0000040
+section name=.debug$P va=0x75C7000 vsize=0x2DC000 raw=0x70C2000 raw_size=0x2DC000 flags=0x40000040
+section name=.tls$ va=0x78A3000 vsize=0x3000 raw=0x739E000 raw_size=0x3000 flags=0x40000040
+section name=.srdata va=0x78A6000 vsize=0x30000 raw=0x73A1000 raw_size=0x30000 flags=0x40000040
+section name=.ecode va=0x78D6000 vsize=0x1EE000 raw=0x73D1000 raw_size=0x1EE000 flags=0x42000040
+section name=.data1 va=0x7AC4000 vsize=0xC581064 raw=0x75BF000 raw_size=0xC581200 flags=0xE0000020
+section name=.sbss va=0x14046000 vsize=0x1BCE3E raw=0x13B40200 raw_size=0x1BD000 flags=0x40000020
+section name=.xcode va=0x14203000 vsize=0x230 raw=0x13CFD200 raw_size=0x400 flags=0xC0000020
+section name=.trace va=0x14204000 vsize=0x8DDC raw=0x13CFD600 raw_size=0x8E00 flags=0x40000040
+section name=.rodata va=0x1420D000 vsize=0x2DB358 raw=0x13D06400 raw_size=0x2DB400 flags=0x40000040
+message key=MoveActorReq found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrMoveActorReq@pa@@ td_rva=0x70BA628 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x63F4AB0
+  vtable rva=0x5F67F18 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0x2C52CD0
+  instance rva=0x6F34560 first_qword=0x145B405E8 kind_u32=4 opcode_u16=2790 flag_u32=0x100000 min_u16=5 max_u16=32710
+message key=MoveActorAck found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrMoveActorAck@pa@@ td_rva=0x6F9FB60 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x624E768
+  vtable rva=0x5A17678 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0xCA8AB0
+  instance rva=0x6F161C0 first_qword=0x145B405E8 kind_u32=1 opcode_u16=3008 flag_u32=0x2000000 min_u16=5 max_u16=32710
+message key=RotateActorReq found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrRotateActorReq@pa@@ td_rva=0x70BA658 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x63F4AD8
+  vtable rva=0x5F67F38 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0x2C53270
+  instance rva=0x6F345F0 first_qword=0x145B405E8 kind_u32=4 opcode_u16=2296 flag_u32=0x100000 min_u16=5 max_u16=32710
+message key=RotateActorAck found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrRotateActorAck@pa@@ td_rva=0x6F9FAD0 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x624E790
+  vtable rva=0x5A17698 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0xCA8FB0
+  instance rva=0x6F16250 first_qword=0x145B405E8 kind_u32=1 opcode_u16=2664 flag_u32=0x2000000 min_u16=5 max_u16=32710
+message key=StartActionReq found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrStartActionReq@pa@@ td_rva=0x70BB4C0 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x63F5258
+  vtable rva=0x5F682B8 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0x2C46FA0
+  instance rva=0x6F33870 first_qword=0x145B405E8 kind_u32=4 opcode_u16=2431 flag_u32=0x100000 min_u16=5 max_u16=32710
+message key=StartActionAck found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrStartActionAck@pa@@ td_rva=0x6F9FFC8 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x624E970
+  vtable rva=0x5A177F8 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0xC9CA10
+  instance rva=0x6F14E10 first_qword=0x145B405E8 kind_u32=1 opcode_u16=2800 flag_u32=0x2000000 min_u16=5 max_u16=32710
+message key=ActorLoadDataAck found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrActorLoadDataAck@pa@@ td_rva=0x6FAAF58 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x625E670
+  vtable rva=0x5A55270 slot0=1:0xC995F0 slot1=1:0xE22130 slot2=1:0xE22330
+  instance rva=0x6F29110 first_qword=0x145B405E8 kind_u32=1 opcode_u16=2005 flag_u32=0x2000000 min_u16=5 max_u16=32710
+message key=UpdateVisiblePlayerAck found=1 class_count=1
+  class exact=1 mangled=.?AVTrocTrUpdateVisiblePlayerAck@pa@@ td_rva=0x6F98F70 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x6249AB0
+  vtable rva=0x5A13EB8 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0xD6D2C0
+  instance rva=0x6F25F70 first_qword=0x145B405E8 kind_u32=1 opcode_u16=2913 flag_u32=0x2000000 min_u16=5 max_u16=32710
+message key=RemoveActorAck found=1 class_count=2
+  class exact=0 mangled=.?AVTrocTrManagementRemoveActorAck@pa@@ td_rva=0x6F9CDA8 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x624C2D8
+  vtable rva=0x5A15E98 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0xCFD2A0
+  instance rva=0x6F1CD30 first_qword=0x145B405E8 kind_u32=1 opcode_u16=2636 flag_u32=0x2000000 min_u16=5 max_u16=32710
+  class exact=1 mangled=.?AVTrocTrRemoveActorAck@pa@@ td_rva=0x6F9FB00 col_count=1 vtable_count=1 instance_count=1
+  col rva=0x624E6C8
+  vtable rva=0x5A176B8 slot0=1:0xC995F0 slot1=1:0xC99580 slot2=1:0xCA9660
+  instance rva=0x6F162E0 first_qword=0x145B405E8 kind_u32=1 opcode_u16=3037 flag_u32=0x2000000 min_u16=5 max_u16=32710
+alloc_site_count=3 truncated=0
+alloc rva=0x3A999D encoding=mov_ecx in_function=1 begin=0x3A9960 end=0x3A9B7F
+alloc rva=0x9A9878B encoding=mov_edx in_function=0 begin=0x0 end=0x0
+alloc rva=0x11FCF835 encoding=mov_edx in_function=0 begin=0x0 end=0x0
+former_sample_count=1355 send_count=387 recv_count=968 truncated=1 adopted=0
+former_sample label=former_3576_send_sample rva=0x3A9960 adopted=0
+former_sample label=former_3576_send_sample rva=0x40A230 adopted=0
+former_sample label=former_3576_send_sample rva=0x4D0D30 adopted=0
+former_sample label=former_3576_send_sample rva=0x4D16F0 adopted=0
+former_sample label=former_3576_send_sample rva=0x502AA0 adopted=0
+former_sample label=former_3576_send_sample rva=0x502DB0 adopted=0
+former_sample label=former_3576_send_sample rva=0x536A30 adopted=0
+former_sample label=former_3576_send_sample rva=0x53B970 adopted=0
+entry_status=verified-file-candidates identity_ok=1 send_range=1 receive_range=1 pump_range=1 send_anchors=1 receive_anchors=1 pump_anchors=1 role_calls=1 capture_ready=1 adopted=0 failed_anchor=0x0
+entry_candidates pump=0x3A8AC0-0x3A9165 send=0x3A9960-0x3A9B7F receive=0x3A9CF0-0x3AA03C

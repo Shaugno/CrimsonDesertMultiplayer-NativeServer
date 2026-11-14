@@ -1,0 +1,1238 @@
+{
+  "rows": [
+    {
+      "source": "src/mod/game/offsets.h:71",
+      "symbol": "kClientPostPacket",
+      "old_rva": "0x35C670",
+      "mapped_callees": [
+        "0x165F330",
+        "0x4B7E0C0",
+        "0x4B7E188",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x3A9960",
+          "shared_calls": 5,
+          "score": 19.93,
+          "instruction_count": 127
+        },
+        {
+          "rva": "0x3AA460",
+          "shared_calls": 3,
+          "score": 14.25,
+          "instruction_count": 128
+        },
+        {
+          "rva": "0x3AA0A0",
+          "shared_calls": 5,
+          "score": 9.661,
+          "instruction_count": 262
+        },
+        {
+          "rva": "0x6F89C0",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 125
+        },
+        {
+          "rva": "0xB5A6D0",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 125
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:72",
+      "symbol": "kClientOnRecvPacket",
+      "old_rva": "0x35CA00",
+      "mapped_callees": [
+        "0x165F330",
+        "0x165FAC0",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x3A9CF0",
+          "shared_calls": 4,
+          "score": 20.613,
+          "instruction_count": 209
+        },
+        {
+          "rva": "0x3AA0A0",
+          "shared_calls": 3,
+          "score": 10.471,
+          "instruction_count": 262
+        },
+        {
+          "rva": "0xEB06510",
+          "shared_calls": 3,
+          "score": 10.459,
+          "instruction_count": 160
+        },
+        {
+          "rva": "0x3AA460",
+          "shared_calls": 3,
+          "score": 9.935,
+          "instruction_count": 128
+        },
+        {
+          "rva": "0x2E45140",
+          "shared_calls": 3,
+          "score": 9.871,
+          "instruction_count": 151
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:119",
+      "symbol": "kMinimapIconDecide",
+      "old_rva": "0x9E89C0",
+      "mapped_callees": [
+        "0x3E5370",
+        "0x9CDC00",
+        "0x9CDC90",
+        "0x1659380",
+        "0x19A55B0"
+      ],
+      "candidates": [
+        {
+          "rva": "0xB24A10",
+          "shared_calls": 5,
+          "score": 29.176,
+          "instruction_count": 228
+        },
+        {
+          "rva": "0x7594E0",
+          "shared_calls": 4,
+          "score": 19.582,
+          "instruction_count": 214
+        },
+        {
+          "rva": "0x759850",
+          "shared_calls": 4,
+          "score": 19.405,
+          "instruction_count": 220
+        },
+        {
+          "rva": "0x7671C0",
+          "shared_calls": 4,
+          "score": 19.231,
+          "instruction_count": 222
+        },
+        {
+          "rva": "0x75D030",
+          "shared_calls": 4,
+          "score": 19.033,
+          "instruction_count": 208
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:135",
+      "symbol": "kServerOtherEquipWriter",
+      "old_rva": "0x29ED1F0",
+      "mapped_callees": [
+        "0x2C3BDE0",
+        "0x2C3BF20",
+        "0x2C3BFD0",
+        "0x2C3C360",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x2C67A50",
+          "shared_calls": 6,
+          "score": 28.385,
+          "instruction_count": 354
+        },
+        {
+          "rva": "0x2C81B70",
+          "shared_calls": 6,
+          "score": 28.385,
+          "instruction_count": 356
+        },
+        {
+          "rva": "0x2C90CE0",
+          "shared_calls": 6,
+          "score": 28.385,
+          "instruction_count": 356
+        },
+        {
+          "rva": "0x2D07D90",
+          "shared_calls": 6,
+          "score": 28.385,
+          "instruction_count": 356
+        },
+        {
+          "rva": "0x2C9E640",
+          "shared_calls": 6,
+          "score": 28.385,
+          "instruction_count": 356
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:176",
+      "symbol": "kServerDockingWriter",
+      "old_rva": "0x2969BC0",
+      "mapped_callees": [
+        "0x1643E10",
+        "0x2C3BDE0",
+        "0x2C3BF20",
+        "0x2C3BFD0",
+        "0x2C3C360",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x2C40000",
+          "shared_calls": 7,
+          "score": 34.114,
+          "instruction_count": 259
+        },
+        {
+          "rva": "0x2C528B0",
+          "shared_calls": 7,
+          "score": 34.114,
+          "instruction_count": 259
+        },
+        {
+          "rva": "0x2CD60E0",
+          "shared_calls": 7,
+          "score": 34.114,
+          "instruction_count": 259
+        },
+        {
+          "rva": "0x2D2C100",
+          "shared_calls": 7,
+          "score": 34.114,
+          "instruction_count": 259
+        },
+        {
+          "rva": "0x2D2B1A0",
+          "shared_calls": 7,
+          "score": 34.114,
+          "instruction_count": 259
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:194",
+      "symbol": "kPointClimbEnter",
+      "old_rva": "0x691400",
+      "mapped_callees": [
+        "0x3E4C30",
+        "0x3E5370",
+        "0x464460",
+        "0x53F5F0",
+        "0x5D8540",
+        "0x808030",
+        "0x4B7E0C0",
+        "0x4B7E188"
+      ],
+      "candidates": [
+        {
+          "rva": "0x78D520",
+          "shared_calls": 8,
+          "score": 45.035,
+          "instruction_count": 238
+        },
+        {
+          "rva": "0x7902D0",
+          "shared_calls": 3,
+          "score": 18.314,
+          "instruction_count": 223
+        },
+        {
+          "rva": "0x78ECA0",
+          "shared_calls": 3,
+          "score": 18.019,
+          "instruction_count": 256
+        },
+        {
+          "rva": "0x78E5F0",
+          "shared_calls": 3,
+          "score": 16.672,
+          "instruction_count": 203
+        },
+        {
+          "rva": "0xB87810",
+          "shared_calls": 3,
+          "score": 16.42,
+          "instruction_count": 234
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:218",
+      "symbol": "kActionLayersAdvance",
+      "old_rva": "0x2329700",
+      "mapped_callees": [],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:224",
+      "symbol": "kRideOnEnter",
+      "old_rva": "0x681C80",
+      "mapped_callees": [
+        "0x3E4BA0",
+        "0x3E5CF0",
+        "0x464230",
+        "0x5D8540",
+        "0x1659380"
+      ],
+      "candidates": [
+        {
+          "rva": "0x77C3A0",
+          "shared_calls": 5,
+          "score": 25.882,
+          "instruction_count": 357
+        },
+        {
+          "rva": "0xB397F0",
+          "shared_calls": 5,
+          "score": 22.854,
+          "instruction_count": 303
+        },
+        {
+          "rva": "0xDC41B0",
+          "shared_calls": 4,
+          "score": 21.945,
+          "instruction_count": 347
+        },
+        {
+          "rva": "0x9369C0",
+          "shared_calls": 4,
+          "score": 20.77,
+          "instruction_count": 373
+        },
+        {
+          "rva": "0xA0D3F0",
+          "shared_calls": 5,
+          "score": 20.717,
+          "instruction_count": 446
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/clock_gate.cpp:21",
+      "symbol": "kTravel",
+      "old_rva": "0x2BC0A30",
+      "mapped_callees": [
+        "0x3E4BA0"
+      ],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/clock_gate.cpp:29",
+      "symbol": "kLoading",
+      "old_rva": "0x219D7F0",
+      "mapped_callees": [
+        "0x3E4BA0",
+        "0x3E5160",
+        "0x3E5370",
+        "0x17F8010"
+      ],
+      "candidates": [
+        {
+          "rva": "0x23DC630",
+          "shared_calls": 4,
+          "score": 24.919,
+          "instruction_count": 244
+        },
+        {
+          "rva": "0xB4E7B0",
+          "shared_calls": 3,
+          "score": 16.586,
+          "instruction_count": 258
+        },
+        {
+          "rva": "0x18F0A10",
+          "shared_calls": 3,
+          "score": 15.265,
+          "instruction_count": 242
+        },
+        {
+          "rva": "0x235DAC0",
+          "shared_calls": 3,
+          "score": 14.519,
+          "instruction_count": 202
+        },
+        {
+          "rva": "0x2BFC890",
+          "shared_calls": 3,
+          "score": 14.444,
+          "instruction_count": 260
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/clock_gate.cpp:36",
+      "symbol": "kGetter",
+      "old_rva": "0x20E55A0",
+      "mapped_callees": [],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:20",
+      "symbol": "kAcquireField",
+      "old_rva": "0x2B07790",
+      "mapped_callees": [
+        "0x1659380"
+      ],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:24",
+      "symbol": "kEnterField",
+      "old_rva": "0x2BC04F0",
+      "mapped_callees": [
+        "0x1659380"
+      ],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:28",
+      "symbol": "kTryAddRef",
+      "old_rva": "0x14343A0",
+      "mapped_callees": [
+        "0x1658F60"
+      ],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:31",
+      "symbol": "kVecPush",
+      "old_rva": "0x40B5B0",
+      "mapped_callees": [],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:42",
+      "symbol": "kLoadSlot",
+      "old_rva": "0x186F570",
+      "mapped_callees": [
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x2323A70",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 219
+        },
+        {
+          "rva": "0xCA4E50",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 219
+        },
+        {
+          "rva": "0x2DC5130",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 219
+        },
+        {
+          "rva": "0x3445910",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 219
+        },
+        {
+          "rva": "0x1205C90",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 219
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:47",
+      "symbol": "kSave",
+      "old_rva": "0x186E450",
+      "mapped_callees": [
+        "0x40A5E0",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x3A6AB30",
+          "shared_calls": 3,
+          "score": 9.015,
+          "instruction_count": 755
+        },
+        {
+          "rva": "0x27C0D70",
+          "shared_calls": 3,
+          "score": 8.803,
+          "instruction_count": 641
+        },
+        {
+          "rva": "0x2AD51C0",
+          "shared_calls": 3,
+          "score": 8.715,
+          "instruction_count": 781
+        },
+        {
+          "rva": "0x1A15930",
+          "shared_calls": 3,
+          "score": 8.424,
+          "instruction_count": 808
+        },
+        {
+          "rva": "0x7E27E0",
+          "shared_calls": 3,
+          "score": 8.405,
+          "instruction_count": 612
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:53",
+      "symbol": "kFlush",
+      "old_rva": "0x1871930",
+      "mapped_callees": [
+        "0x40A5E0",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x1526070",
+          "shared_calls": 3,
+          "score": 9.597,
+          "instruction_count": 267
+        },
+        {
+          "rva": "0x346F5D0",
+          "shared_calls": 3,
+          "score": 9.597,
+          "instruction_count": 271
+        },
+        {
+          "rva": "0x295EFC0",
+          "shared_calls": 3,
+          "score": 9.597,
+          "instruction_count": 267
+        },
+        {
+          "rva": "0x19F6780",
+          "shared_calls": 3,
+          "score": 9.597,
+          "instruction_count": 271
+        },
+        {
+          "rva": "0x8597B0",
+          "shared_calls": 3,
+          "score": 9.527,
+          "instruction_count": 273
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:61",
+      "symbol": "kAddFile",
+      "old_rva": "0x235B100",
+      "mapped_callees": [
+        "0x4B7E0C0",
+        "0x4B7E188",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x3410220",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 207
+        },
+        {
+          "rva": "0x31A9500",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 207
+        },
+        {
+          "rva": "0x3C21EC0",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 207
+        },
+        {
+          "rva": "0x9DA1D0",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 207
+        },
+        {
+          "rva": "0x3C7A4E0",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 207
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_fix.cpp:215",
+      "symbol": "kLobbyLoad",
+      "old_rva": "0x2B7F4D0",
+      "mapped_callees": [
+        "0x3E4BA0",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x5A0490",
+          "shared_calls": 3,
+          "score": 8.23,
+          "instruction_count": 236
+        },
+        {
+          "rva": "0xD4E970",
+          "shared_calls": 3,
+          "score": 8.23,
+          "instruction_count": 236
+        },
+        {
+          "rva": "0x2F1D040",
+          "shared_calls": 3,
+          "score": 8.23,
+          "instruction_count": 236
+        },
+        {
+          "rva": "0x4F17A0",
+          "shared_calls": 3,
+          "score": 8.23,
+          "instruction_count": 236
+        },
+        {
+          "rva": "0x4F5A30",
+          "shared_calls": 3,
+          "score": 8.23,
+          "instruction_count": 236
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:31",
+      "symbol": "kLoad",
+      "old_rva": "0x20688A0",
+      "mapped_callees": [
+        "0x40A5E0",
+        "0x14B3C90",
+        "0x1A1C5F0",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x22951B0",
+          "shared_calls": 5,
+          "score": 25.228,
+          "instruction_count": 876
+        },
+        {
+          "rva": "0x2B674D0",
+          "shared_calls": 4,
+          "score": 20.318,
+          "instruction_count": 835
+        },
+        {
+          "rva": "0x1A17040",
+          "shared_calls": 5,
+          "score": 19.856,
+          "instruction_count": 1113
+        },
+        {
+          "rva": "0x1A19720",
+          "shared_calls": 5,
+          "score": 18.161,
+          "instruction_count": 584
+        },
+        {
+          "rva": "0x27C3B70",
+          "shared_calls": 4,
+          "score": 17.467,
+          "instruction_count": 990
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:45",
+      "symbol": "kOwner",
+      "old_rva": "0x2AE1010",
+      "mapped_callees": [],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:50",
+      "symbol": "kPhases",
+      "old_rva": "0x2941020",
+      "mapped_callees": [
+        "0x3E4BA0",
+        "0x3E5370",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x2335050",
+          "shared_calls": 4,
+          "score": 11.945,
+          "instruction_count": 395
+        },
+        {
+          "rva": "0x18C1D70",
+          "shared_calls": 4,
+          "score": 11.945,
+          "instruction_count": 393
+        },
+        {
+          "rva": "0x18B2060",
+          "shared_calls": 4,
+          "score": 11.915,
+          "instruction_count": 396
+        },
+        {
+          "rva": "0x22B8140",
+          "shared_calls": 4,
+          "score": 11.915,
+          "instruction_count": 396
+        },
+        {
+          "rva": "0x5595B0",
+          "shared_calls": 4,
+          "score": 11.885,
+          "instruction_count": 397
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:55",
+      "symbol": "kAck",
+      "old_rva": "0x28F31F0",
+      "mapped_callees": [
+        "0x3ADAC0",
+        "0x3D66A0",
+        "0x3D8C40",
+        "0x3DA100",
+        "0x3DA290",
+        "0x3E5370",
+        "0x5D8540",
+        "0x66D270",
+        "0x198D660",
+        "0x2173670",
+        "0x2362170",
+        "0x237DDB0",
+        "0x26B0440",
+        "0x26B16B0",
+        "0x2BBB6E0",
+        "0x2BBC290",
+        "0x2BCEB70",
+        "0x2BCF230",
+        "0x2D6C0C0",
+        "0x2D6C150",
+        "0x2D787E0",
+        "0x4B7E0C0",
+        "0x4B7E188",
+        "0x4B7E9CC",
+        "0x4B7EACC",
+        "0x4C249D0"
+      ],
+      "candidates": [
+        {
+          "rva": "0x2BC3600",
+          "shared_calls": 23,
+          "score": 186.732,
+          "instruction_count": 4586
+        },
+        {
+          "rva": "0x2B7B4D0",
+          "shared_calls": 7,
+          "score": 34.896,
+          "instruction_count": 4476
+        },
+        {
+          "rva": "0x2E751E0",
+          "shared_calls": 7,
+          "score": 32.267,
+          "instruction_count": 4440
+        },
+        {
+          "rva": "0x2D83C00",
+          "shared_calls": 8,
+          "score": 23.245,
+          "instruction_count": 3491
+        },
+        {
+          "rva": "0x2E80BA0",
+          "shared_calls": 8,
+          "score": 17.277,
+          "instruction_count": 1842
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:60",
+      "symbol": "kPacker",
+      "old_rva": "0x17908C0",
+      "mapped_callees": [
+        "0x1798BB0",
+        "0x192AEE0",
+        "0x1949400"
+      ],
+      "candidates": [
+        {
+          "rva": "0x192D9B0",
+          "shared_calls": 3,
+          "score": 31.169,
+          "instruction_count": 518
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:51",
+      "symbol": "kServerOnRecvPacket",
+      "old_rva": "0x2773C20",
+      "mapped_callees": [
+        "0x1659380",
+        "0x165EDA0",
+        "0x165FAC0",
+        "0x2A0FA80",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x2A0EA70",
+          "shared_calls": 6,
+          "score": 37.388,
+          "instruction_count": 586
+        },
+        {
+          "rva": "0x2E84BB0",
+          "shared_calls": 4,
+          "score": 14.918,
+          "instruction_count": 534
+        },
+        {
+          "rva": "0x2A0D390",
+          "shared_calls": 3,
+          "score": 13.962,
+          "instruction_count": 602
+        },
+        {
+          "rva": "0x2D9FD70",
+          "shared_calls": 4,
+          "score": 13.875,
+          "instruction_count": 668
+        },
+        {
+          "rva": "0x2D9F240",
+          "shared_calls": 4,
+          "score": 13.813,
+          "instruction_count": 671
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:57",
+      "symbol": "kNwSessionCtor",
+      "old_rva": "0x1436EE0",
+      "mapped_callees": [
+        "0x14D0C20",
+        "0x4B7E0C0",
+        "0x4B7E188",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x165B9D0",
+          "shared_calls": 3,
+          "score": 17.318,
+          "instruction_count": 269
+        },
+        {
+          "rva": "0x46A9BA",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 270
+        },
+        {
+          "rva": "0x42AFAD0",
+          "shared_calls": 4,
+          "score": 9.623,
+          "instruction_count": 270
+        },
+        {
+          "rva": "0x3550340",
+          "shared_calls": 4,
+          "score": 9.587,
+          "instruction_count": 269
+        },
+        {
+          "rva": "0xA38B10",
+          "shared_calls": 4,
+          "score": 9.587,
+          "instruction_count": 269
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:98",
+      "symbol": "kExceptOneVf1",
+      "old_rva": "0x2A759B0",
+      "mapped_callees": [
+        "0x3E5370",
+        "0x1659380"
+      ],
+      "candidates": [
+        {
+          "rva": "0x24EB2B0",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x24335C0",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x23DBA30",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x2D6C230",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x2D6C360",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:99",
+      "symbol": "kExceptOneSelfVf1",
+      "old_rva": "0x2A75880",
+      "mapped_callees": [
+        "0x3E5370",
+        "0x1659380"
+      ],
+      "candidates": [
+        {
+          "rva": "0x24EB2B0",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x24335C0",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x23DBA30",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x2D6C230",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        },
+        {
+          "rva": "0x2D6C360",
+          "shared_calls": 2,
+          "score": 7.547,
+          "instruction_count": 73
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:157",
+      "symbol": "kClientOnRecvPacket",
+      "old_rva": "0x35CA00",
+      "mapped_callees": [
+        "0x165F330",
+        "0x165FAC0",
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x3A9CF0",
+          "shared_calls": 4,
+          "score": 20.613,
+          "instruction_count": 209
+        },
+        {
+          "rva": "0x3AA0A0",
+          "shared_calls": 3,
+          "score": 10.471,
+          "instruction_count": 262
+        },
+        {
+          "rva": "0xEB06510",
+          "shared_calls": 3,
+          "score": 10.459,
+          "instruction_count": 160
+        },
+        {
+          "rva": "0x3AA460",
+          "shared_calls": 3,
+          "score": 9.935,
+          "instruction_count": 128
+        },
+        {
+          "rva": "0x2E45140",
+          "shared_calls": 3,
+          "score": 9.871,
+          "instruction_count": 151
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/report_guard.cpp:19",
+      "symbol": "kReporter",
+      "old_rva": "0x1317D40",
+      "mapped_callees": [
+        "0x4B7E9CC",
+        "0x4B7EACC"
+      ],
+      "candidates": [
+        {
+          "rva": "0x31E0910",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 114
+        },
+        {
+          "rva": "0x2FA1100",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 114
+        },
+        {
+          "rva": "0x502050",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 114
+        },
+        {
+          "rva": "0x2103870",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 114
+        },
+        {
+          "rva": "0x3D83CB0",
+          "shared_calls": 2,
+          "score": 3.965,
+          "instruction_count": 114
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:45",
+      "symbol": "kVf2",
+      "old_rva": "0x117F7E0",
+      "mapped_callees": [
+        "0x3E5370",
+        "0x699130"
+      ],
+      "candidates": [
+        {
+          "rva": "0x138B170",
+          "shared_calls": 2,
+          "score": 14.218,
+          "instruction_count": 92
+        },
+        {
+          "rva": "0x138D0C0",
+          "shared_calls": 2,
+          "score": 7.786,
+          "instruction_count": 168
+        },
+        {
+          "rva": "0x699A60",
+          "shared_calls": 2,
+          "score": 6.606,
+          "instruction_count": 198
+        },
+        {
+          "rva": "0x139F550",
+          "shared_calls": 2,
+          "score": 4.303,
+          "instruction_count": 304
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:51",
+      "symbol": "kApply",
+      "old_rva": "0x1190FD0",
+      "mapped_callees": [
+        "0x3E4EB0",
+        "0x3E5370",
+        "0x5D8540",
+        "0x68CC50",
+        "0x699130",
+        "0x1595050",
+        "0x29657F0"
+      ],
+      "candidates": [
+        {
+          "rva": "0x139F550",
+          "shared_calls": 7,
+          "score": 52.249,
+          "instruction_count": 304
+        },
+        {
+          "rva": "0x699A60",
+          "shared_calls": 5,
+          "score": 23.831,
+          "instruction_count": 198
+        },
+        {
+          "rva": "0x138C070",
+          "shared_calls": 4,
+          "score": 23.629,
+          "instruction_count": 336
+        },
+        {
+          "rva": "0x138B2D0",
+          "shared_calls": 3,
+          "score": 15.675,
+          "instruction_count": 237
+        },
+        {
+          "rva": "0x13A44D0",
+          "shared_calls": 4,
+          "score": 15.629,
+          "instruction_count": 508
+        }
+      ],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:57",
+      "symbol": "kSetBend",
+      "old_rva": "0x349EA10",
+      "mapped_callees": [
+        "0x3E4EB0"
+      ],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:65",
+      "symbol": "kTick",
+      "old_rva": "0x59C0D0",
+      "mapped_callees": [
+        "0x3E5370"
+      ],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:76",
+      "symbol": "kFindTree",
+      "old_rva": "0x491AC0",
+      "mapped_callees": [],
+      "candidates": [],
+      "confidence": "weak",
+      "adopted": false
+    }
+  ],
+  "adopted": 0
+}

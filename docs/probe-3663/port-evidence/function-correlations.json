@@ -1,0 +1,890 @@
+{
+  "unique_normalized_functions": 57160,
+  "selected": [
+    {
+      "source": "src/mod/game/offsets.h:71",
+      "symbol": "kClientPostPacket",
+      "old_rva": "0x35C670",
+      "fingerprint_target": null,
+      "old_instruction_count": 125,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x47EFA78,0x47EF9B0,0x1318E70,0x4898E1E,0x47F03BC,0x47F02BC,0x143AB10",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:72",
+      "symbol": "kClientOnRecvPacket",
+      "old_rva": "0x35CA00",
+      "fingerprint_target": null,
+      "old_instruction_count": 188,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x143B260,0x143B2C0,0x35DD30,0x1439060,0x4898E1E,0x143AB10,0x1438E70,0x47F02BC,0x47F03BC,0x143AB10,0x1438E70,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:119",
+      "symbol": "kMinimapIconDecide",
+      "old_rva": "0x9E89C0",
+      "fingerprint_target": null,
+      "old_instruction_count": 216,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x8B4570,0x8B44E0,0x9E8D10,0x393DF0,0x18004D0,0x393DF0,0x18004D0,0x389570,0x389570,0x1434880",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:135",
+      "symbol": "kServerOtherEquipWriter",
+      "old_rva": "0x29ED1F0",
+      "fingerprint_target": null,
+      "old_instruction_count": 355,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x2961CA0,0x2961DE0,0x35D8D0,0x2961E90,0x2962220,0x2771B30,0x2773870,0x2771A60,0x35D8D0,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:176",
+      "symbol": "kServerDockingWriter",
+      "old_rva": "0x2969BC0",
+      "fingerprint_target": null,
+      "old_instruction_count": 258,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x2961CA0,0x2961DE0,0x35D8D0,0x1F78DE0,0x2961E90,0x2962220,0x2771B30,0x35D8D0,0x141F3B0,0x1F78DE0,0x2773870,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:194",
+      "symbol": "kPointClimbEnter",
+      "old_rva": "0x691400",
+      "fingerprint_target": null,
+      "old_instruction_count": 237,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x393DF0,0x695950,0x26D3940,0x692A30,0x41F760,0x47EFA78,0x47EF9B0,0x1318E70,0x4898E24,0x46DE90,0x420E90,0x3D6170,0x693910,0x696EF0,0x693F90,0x69BD00,0x702960,0x702DC0,0x3936E0,0x3936E0,0x698910,0x393DF0,0x4F8220",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:207",
+      "symbol": "kActionLayerAdvance",
+      "old_rva": "0x1F63F70",
+      "fingerprint_target": "0x21BD690",
+      "old_instruction_count": 14,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "",
+      "new_calls": "",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:218",
+      "symbol": "kActionLayersAdvance",
+      "old_rva": "0x2329700",
+      "fingerprint_target": null,
+      "old_instruction_count": 5,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/game/offsets.h:224",
+      "symbol": "kRideOnEnter",
+      "old_rva": "0x681C80",
+      "fingerprint_target": null,
+      "old_instruction_count": 350,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x393650,0x17FE700,0x88E520,0x24360A0,0x4F8220,0x17EE200,0x1434880,0x1434880,0xA453F0,0x1434880,0x3D5970,0x394790,0x50EA00,0x50EA00,0x50EA00,0x877F90,0x1434880,0x1434880",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/clock_gate.cpp:21",
+      "symbol": "kTravel",
+      "old_rva": "0x2BC0A30",
+      "fingerprint_target": null,
+      "old_instruction_count": 177,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x393650,0x4A2010,0x4A2010,0x4A2010,0x1416B80,0x4A2010,0x2BD3170,0x20D3460,0x20D3360,0x20E55A0,0x21A1CC0",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/clock_gate.cpp:29",
+      "symbol": "kLoading",
+      "old_rva": "0x219D7F0",
+      "fingerprint_target": null,
+      "old_instruction_count": 244,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x393650,0x393650,0x393650,0x156FF30,0x1572430,0x393650,0x393DF0,0x9D9760,0x393650,0x393C10",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/clock_gate.cpp:36",
+      "symbol": "kGetter",
+      "old_rva": "0x20E55A0",
+      "fingerprint_target": null,
+      "old_instruction_count": 71,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x4A2010,0x4A2010,0x1416B80,0x20D3460,0x20D3360",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:20",
+      "symbol": "kAcquireField",
+      "old_rva": "0x2B07790",
+      "fingerprint_target": null,
+      "old_instruction_count": 195,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x2A75580,0x4A2010,0x2B08CB0,0x1434880,0x1434880,0x2AF7820,0x1434880,0x2AF7C20,0x14343A0,0x1434880",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:24",
+      "symbol": "kEnterField",
+      "old_rva": "0x2BC04F0",
+      "fingerprint_target": null,
+      "old_instruction_count": 357,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x2BBE900,0x2AFF1E0,0x1434880,0x1434880,0x2BBE610,0x2B9B100,0x2AFF1E0,0x2068340,0x2BBE900,0x2068340,0x2BD2690",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:28",
+      "symbol": "kTryAddRef",
+      "old_rva": "0x14343A0",
+      "fingerprint_target": null,
+      "old_instruction_count": 59,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x48953C4,0x48953C4,0x1434470",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/field_share.cpp:31",
+      "symbol": "kVecPush",
+      "old_rva": "0x40B5B0",
+      "fingerprint_target": null,
+      "old_instruction_count": 9,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_reload_wait.cpp:54",
+      "symbol": "kFind",
+      "old_rva": "0x464290",
+      "fingerprint_target": "0x5357E0",
+      "old_instruction_count": 38,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "",
+      "new_calls": "",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:42",
+      "symbol": "kLoadSlot",
+      "old_rva": "0x186F570",
+      "fingerprint_target": null,
+      "old_instruction_count": 219,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x35DAE0,0x1292EF0,0x35D8D0,0x66EFB0,0x20688A0,0x1872900,0x47F03BC,0x47F02BC,0x1871040,0x35DAE0,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:47",
+      "symbol": "kSave",
+      "old_rva": "0x186E450",
+      "fingerprint_target": null,
+      "old_instruction_count": 704,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x66EFB0,0x1364780,0x612620,0x2355EC0,0x2069640,0x1292EF0,0x2069640,0x1292EF0,0x1364780,0x612620,0x1874090,0x13739B0,0x394DB0,0x394DB0,0x235BF10,0x235C7A0,0x3D5F80,0x47F03BC,0x47F02BC,0x35D8D0,0x47F03BC,0x47F02BC,0x13739B0,0x394DB0,0x394DB0,0x47F03BC,0x47F02BC,0x35D8D0,0x47F03BC,0x47F02BC,0x13739B0,0x394DB0,0x394DB0,0x47F03BC,0x47F02BC,0x47F03BC,0x2144690,0x3D5F80,0x394DB0,0x3D5F80,0x394DB0,0x3D5F80,0x15AC100,0x394DB0,0x394DB0,0x394DB0,0x394DB0,0x394DB0,0x394DB0,0x394DB0,0x13739B0,0x394DB0,0x394DB0,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x1870DF0,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:53",
+      "symbol": "kFlush",
+      "old_rva": "0x1871930",
+      "fingerprint_target": null,
+      "old_instruction_count": 269,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x66EFB0,0x1364780,0x612620,0x2355700,0x1351AB0,0x47F03BC,0x47F02BC,0x1870DF0,0x47F03BC,0x47F02BC,0x1351AB0,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/guest_save_host.cpp:61",
+      "symbol": "kAddFile",
+      "old_rva": "0x235B100",
+      "fingerprint_target": null,
+      "old_instruction_count": 207,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x47EFA78,0x47EF9B0,0x1318E70,0x235CDD0,0x235CF10,0x14203F0,0x1364780,0x235D2E0,0x1420360,0x47F03BC,0x47F02BC,0x13739B0,0x73A040,0x47F03BC,0x47F02BC,0x35E3F0",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_fix.cpp:215",
+      "symbol": "kLobbyLoad",
+      "old_rva": "0x2B7F4D0",
+      "fingerprint_target": null,
+      "old_instruction_count": 236,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x19582F0,0x389570,0x44FD30,0x393650,0x2143E70,0x44FF20,0x47F03BC,0x47F02BC,0x44FF20,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:31",
+      "symbol": "kLoad",
+      "old_rva": "0x20688A0",
+      "fingerprint_target": null,
+      "old_instruction_count": 843,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x1364780,0x612620,0x1364780,0x612620,0x1364780,0x612620,0x235B620,0x2355700,0x35D8D0,0x235BF10,0x1874850,0x1294A70,0x43E7E0,0x1296C80,0x43E7E0,0x12A3A70,0x47F03BC,0x47F02BC,0x393F50,0x1364780,0x612620,0x1364780,0x612620,0x235B620,0x47F03BC,0x47F02BC,0x2355700,0x35D8D0,0x393F50,0x1364780,0x612620,0x235BF10,0x1874850,0x1294A70,0x43E7E0,0x1296C80,0x43E7E0,0x12A3A70,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x50D2D0,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:45",
+      "symbol": "kOwner",
+      "old_rva": "0x2AE1010",
+      "fingerprint_target": null,
+      "old_instruction_count": 52,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:50",
+      "symbol": "kPhases",
+      "old_rva": "0x2941020",
+      "fingerprint_target": null,
+      "old_instruction_count": 394,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x1303DE0,0x13037B0,0x1303DE0,0x13037B0,0x50D2D0,0x2BC2D00,0x393650,0x1439540,0x1439540,0x50D2D0,0x29415E0,0x2BCBC00,0x393DF0,0x2BD2F60,0x2BBF630,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:55",
+      "symbol": "kAck",
+      "old_rva": "0x28F31F0",
+      "fingerprint_target": null,
+      "old_instruction_count": 4716,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x48962C0,0x393E80,0x28FDDB0,0x3944D0,0x2A757A0,0x2A1BD40,0xC23580,0x2445010,0x393E80,0x389570,0x6365E0,0xC20C00,0x17B2B90,0x6365E0,0xC20DA0,0xC20D90,0x17B29F0,0x178E640,0x1795A00,0x178E950,0x3D8C70,0x3944D0,0x206A890,0x17E91D0,0x13AC660,0x389570,0x2A757A0,0x2990270,0x44FFA0,0x2A757A0,0x2990920,0x2A757A0,0x2990E30,0x2A757A0,0x298A3A0,0x2945810,0x35E2E0,0x35E2E0,0x206A890,0x584630,0x393E80,0x9D6F50,0x11F9AC0,0x244C370,0x66FFF0,0x11F9AE0,0x11F9AC0,0x38AB60,0x1F1F850,0x3944D0,0x2A757A0,0x2A66990,0x2A757A0,0x2A67D90,0x38A130,0x35E2E0,0x393E80,0x21381F0,0x3944D0,0x38A310,0x24097A0,0x393E80,0x4649E0,0x20C32E0,0x240B450,0x20CEB00,0x2449610,0x5D4A80,0x20CAA50,0x3944D0,0x2A757A0,0x29EEA50,0x20C0E10,0x244A5E0,0x20C17A0,0x388780,0x2A757A0,0x29F7850,0x240A090,0x38AB60,0x45FFC0,0x240F4E0,0x1ECDB40,0x17FBC30,0x35E2E0,0x240AF60,0x240AF60,0x27BA6F0,0x35E2E0,0x393E80,0x38A180,0x28D6350,0x5D2D90,0xC21DD0,0x17E1D90,0x635FE0,0xE00A50,0x2444240,0x4A2630,0x96F7C0,0x4A2AF0,0x40B890,0x28D4AB0,0x388F30,0x6F54A0,0x17E3500,0x17E3500,0x38A130,0x3944D0,0x2A757A0,0x29FA080,0x2A757A0,0x2976BE0,0x2A757A0,0x29FB3D0,0x2A757A0,0x29AB4C0,0x2A757A0,0x29AAF60,0x40B0E0,0x2A757A0,0x29B49C0,0x2A757A0,0x29B2700,0x2A757A0,0x29B2700,0x35E2E0,0x35E2E0,0x35E2E0,0x35E2E0,0x35E2E0,0x35E2E0,0x35E2E0,0x393E80,0x212A8B0,0x2408900,0x240B450,0x4A2500,0x2449610,0x5D4A80,0x1AB1250,0x212DE20,0x9D6F50,0x11F9AC0,0x5D2D90,0x4A2500,0x28FDF40,0x4A2500,0x28EC740,0x28ED130,0x423920,0x35E2E0,0x11F9AE0,0x11F9AC0,0x9D6F50,0x11F9AC0,0x2449330,0x6362B0,0x11F9AE0,0x11F9AC0,0x2135330,0x3944D0,0x1AB1250,0x389570,0x1F3E9F0,0x4A2500,0x1AB1250,0x4A2500,0x2A757A0,0x29EC810,0x3D0BF0,0x2A757A0,0x29EDBE0,0x5D2D90,0x29FD5B0,0x29FE5C0,0x2A01A30,0x393DF0,0x3885B0,0x47EFA78,0x47EF9B0,0x1318E70,0x47F03BC,0x47F02BC,0x2A757A0,0x29FDB00,0x393DF0,0x2A757A0,0x29FFB30,0x393DF0,0x2135720,0x388B80,0xD42110,0x2A757A0,0x29FFB30,0x393E80,0x2134820,0x3944D0,0x2139A20,0x29FF010,0x393DF0,0x2A00070,0x393DF0,0x4A8520,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x2129C60,0x2B571F0,0x9CB1D0,0x2A757A0,0x29FF680,0x423920,0x410420,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x423920,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x38A180,0x2C0A990,0x28FE150,0x21F1D10,0x66F7B0,0x29F7D30,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x393DF0,0x14203F0,0x1420360,0x47F03BC,0x47F02BC,0x13AC640,0x2A75710,0x2A69020,0x393DF0,0xA1AEB0,0x47EFA78,0x47EF9B0,0x1318E70,0x47F03BC,0x47F02BC,0x2A827B0,0x27A7E50,0x2A82150,0x2804D70,0x360940,0x3608F0,0x3608F0,0x2BF35A0,0x3608F0,0x3608F0,0x2A757A0,0x2A62AF0,0x393E80,0x3880A0,0x3D2AF0,0x2A64250,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x393DF0,0xD86B40,0x3A1400,0xDE44D0,0x96F7C0,0x3896A0,0x96F7C0,0x2B97D20,0x3891B0,0x47EFA78,0x47EF9B0,0x1318E70,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x2A757A0,0x2A29720,0x2A757A0,0x2A23CE0,0x47EFA78,0x47EF9B0,0x1318E70,0xC23DC0,0xBE56D0,0x47F03BC,0x47F02BC,0x28FE160,0x28FE330,0x808DF0,0xBE55C0,0x389570,0x389570,0x28FDFF0,0x1ECCFE0,0x430020,0x2157B90,0x178E950,0x28FE050,0x2449610,0x5D4990,0x5D5790,0x38AB60,0x2416360,0x4A2500,0x2449610,0x584190,0x5D4A80,0x584190,0x2A2DD80,0xBE56D0,0x387EF0,0x17F5A30,0x385820,0x387EF0,0x17F5A30,0x430150,0x389570,0x2A757A0,0x2A28CB0,0x385820,0x2A757A0,0x2A23320,0x2B9BEE0,0x584190,0x2A757A0,0x29F1DF0,0x584190,0x2A757A0,0x29F2340,0x2A757A0,0x2A29150,0x2A757A0,0x2A25960,0x2A757A0,0x2A25F80,0x2A757A0,0x2A2AD70,0x21562B0,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x423920,0x47F03BC,0x47F02BC,0xBE56D0,0x47F03BC,0x47F02BC,0x393DF0,0x2A246C0,0x393DF0,0xC23C50,0x1382510,0x2A757A0,0x2A6F810,0x47F03BC,0x47F02BC,0x290FF30,0x393DF0,0x47EFA78,0x47EF9B0,0x1318E70,0xC22C50,0x1ECD630,0x9D6F50,0x47EFA78,0x47EF9B0,0x1318E70,0x47F03BC,0x47F02BC,0x1ECD630,0x29D5E50,0x47F03BC,0x47F02BC,0x393DF0,0x47EFA78,0x47EF9B0,0x1318E70,0xC23450,0x244AAA0,0x28FDD10,0x1ECD7E0,0x1ECDB00,0x3944D0,0x2A757A0,0x2A11A20,0x35E2E0,0x47EFA78,0x47EF9B0,0x1318E70,0x393DF0,0xA4ED30,0x4D9200,0x9D6CA0,0x433650,0x28FE490,0x1805F50,0x9D6F50,0x9D8040,0x392380,0x2143170,0x410660,0xDE3F10,0x433650,0x3924F0,0x66FFF0,0x433650,0x66FFF0,0x2A757A0,0x2A12B20,0x2A757A0,0x2A137B0,0x2A757A0,0x2A16BE0,0x2A757A0,0x2A17730,0x2A757A0,0x2A18120,0x9D6F50,0x9D8040,0x47EFA78,0x47EF9B0,0x1318E70,0x47F03BC,0x47F02BC,0x2A14FA0,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x3955E0,0x3955E0,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x47F03BC,0x47F02BC,0x28C1270,0x393DF0,0x5B4800,0x5B49D0,0x29B3140,0x47F03BC,0x47F02BC,0x2904A40,0x283E760,0x2BCBC00,0x393DF0,0x4F8220,0x4A2010,0x17E9170,0x393DF0,0x2975C10,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:60",
+      "symbol": "kPacker",
+      "old_rva": "0x17908C0",
+      "fingerprint_target": null,
+      "old_instruction_count": 459,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x389570,0x430150,0x141F440,0x178E270,0x1527E90,0x1522FE0,0x430020,0x151E900,0x14EFED0,0x151FFD0,0x151FFD0,0x141F440,0x17AA4C0,0x17A1A80,0x18D49A0,0x18D49A0",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/identity_probe.cpp:85",
+      "symbol": "kLoadStub",
+      "old_rva": "0x35EA90",
+      "fingerprint_target": null,
+      "old_instruction_count": null,
+      "rtti_slot_candidates": [
+        {
+          "name": ".?AVClientChildOnlyInGameActor@pa@@",
+          "slot": 10,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 8,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 9,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 10,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 13,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 14,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 20,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 21,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 23,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVClientCharacterControlActorComponent@pa@@",
+          "slot": 26,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 6,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 7,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 8,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 9,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 10,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 13,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 14,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 15,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 18,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 19,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 20,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 21,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 22,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 23,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 24,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+          "slot": 26,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVNwVirtualSyncSession@pa@@",
+          "slot": 2,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVNwVirtualSyncSession@pa@@",
+          "slot": 5,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVNwVirtualSyncSession@pa@@",
+          "slot": 7,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVNwVirtualAsyncSession@pa@@",
+          "slot": 2,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVNwVirtualAsyncSession@pa@@",
+          "slot": 4,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVNwVirtualAsyncSession@pa@@",
+          "slot": 8,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVNwVirtualAsyncSession@pa@@",
+          "slot": 11,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVConditionData_IsEnterToFieldLoadingComplete@pa@@",
+          "slot": 11,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVConditionData_IsEnterToFieldLoadingComplete@pa@@",
+          "slot": 14,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVMoveInventoryItemToFieldBehavior@pa@@",
+          "slot": 2,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVMoveInventoryItemToFieldBehavior@pa@@",
+          "slot": 6,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 6,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 7,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 8,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 9,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 10,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 14,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 15,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 18,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 21,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 22,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 23,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 24,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AVServerCharacterControlActorComponent@pa@@",
+          "slot": 26,
+          "target": "0x3ABEE0"
+        },
+        {
+          "name": ".?AV?$Pool@VServerCharacterControlActorComponent@pa@@@pa@@",
+          "slot": 1,
+          "target": "0x3ABEE0"
+        }
+      ],
+      "independent_slot_agreement": false,
+      "old_calls": null,
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:51",
+      "symbol": "kServerOnRecvPacket",
+      "old_rva": "0x2773C20",
+      "fingerprint_target": null,
+      "old_instruction_count": 576,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x143B260,0x143B2C0,0x1439060,0x4898E1E,0x143A580,0x1439540,0x1438E70,0x47F03BC,0x47F02BC,0x1434880,0x14343A0,0x2774B20,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:54",
+      "symbol": "kSessionSend",
+      "old_rva": "0x1437740",
+      "fingerprint_target": "0x165C1F0",
+      "old_instruction_count": 18,
+      "rtti_slot_candidates": [
+        {
+          "name": ".?AVNwVirtualAsyncSession@pa@@",
+          "slot": 9,
+          "target": "0x165C1F0"
+        }
+      ],
+      "independent_slot_agreement": true,
+      "old_calls": "0x35DF50",
+      "new_calls": "0x3AB4C0",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:57",
+      "symbol": "kNwSessionCtor",
+      "old_rva": "0x1436EE0",
+      "fingerprint_target": null,
+      "old_instruction_count": 270,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x47EFA78,0x47EF9B0,0x1318E70,0x1371610,0x47EFA78,0x47EF9B0,0x1318E70,0x47EFA78,0x47EF9B0,0x1318E70,0x47F03BC,0x47F02BC,0x1438120,0x1438120,0x47EFA78,0x47EF9B0,0x1318E70,0x47F03BC,0x47F02BC,0x47EFA78,0x47EF9B0,0x1318E70,0x12B2F70,0x47EFA78,0x47EF9B0,0x1318E70,0x14381E0,0x14381E0",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:60",
+      "symbol": "kQueuePush",
+      "old_rva": "0x35DF50",
+      "fingerprint_target": "0x3AB4C0",
+      "old_instruction_count": 59,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x35FB00,0x35FB00,0x35FBF0",
+      "new_calls": "0x3ACFB0,0x3ACFB0,0x3AD0A0",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:71",
+      "symbol": "kAllocGlobal",
+      "old_rva": "0x47EFA78",
+      "fingerprint_target": "0x4B7E188",
+      "old_instruction_count": 24,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x47F19A8,0x47EF648",
+      "new_calls": "0x4B800B8,0x4B7DD58",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:74",
+      "symbol": "kAllocThread",
+      "old_rva": "0x47EF9B0",
+      "fingerprint_target": "0x4B7E0C0",
+      "old_instruction_count": 22,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x48953C4",
+      "new_calls": "0x4C23AD4",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:98",
+      "symbol": "kExceptOneVf1",
+      "old_rva": "0x2A759B0",
+      "fingerprint_target": null,
+      "old_instruction_count": 73,
+      "rtti_slot_candidates": [
+        {
+          "name": ".?AVToNearExceptOneControlSendTargetFinder@pa@@",
+          "slot": 1,
+          "target": "0x2D6C360"
+        }
+      ],
+      "independent_slot_agreement": false,
+      "old_calls": "0x2BBF340,0x393DF0,0x4A2010,0x1434880",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:99",
+      "symbol": "kExceptOneSelfVf1",
+      "old_rva": "0x2A75880",
+      "fingerprint_target": null,
+      "old_instruction_count": 73,
+      "rtti_slot_candidates": [
+        {
+          "name": ".?AVToNearExceptOneSelfSendTargetFinder@pa@@",
+          "slot": 1,
+          "target": "0x2D6C230"
+        }
+      ],
+      "independent_slot_agreement": false,
+      "old_calls": "0x2BBF340,0x393DF0,0x4A2010,0x1434880",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:100",
+      "symbol": "kToNearVf1",
+      "old_rva": "0x2A75860",
+      "fingerprint_target": null,
+      "old_instruction_count": null,
+      "rtti_slot_candidates": [
+        {
+          "name": ".?AVToNearSendTargetFinder@pa@@",
+          "slot": 1,
+          "target": "0x2D6C210"
+        }
+      ],
+      "independent_slot_agreement": false,
+      "old_calls": null,
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:140",
+      "symbol": "kSyncSessionSend",
+      "old_rva": "0x14380B0",
+      "fingerprint_target": "0x165CB60",
+      "old_instruction_count": 12,
+      "rtti_slot_candidates": [
+        {
+          "name": ".?AVNwVirtualSyncSession@pa@@",
+          "slot": 6,
+          "target": "0x165CB60"
+        }
+      ],
+      "independent_slot_agreement": true,
+      "old_calls": "0x35DF50",
+      "new_calls": "0x3AB4C0",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/offsets_s2.h:157",
+      "symbol": "kClientOnRecvPacket",
+      "old_rva": "0x35CA00",
+      "fingerprint_target": null,
+      "old_instruction_count": 188,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x143B260,0x143B2C0,0x35DD30,0x1439060,0x4898E1E,0x143AB10,0x1438E70,0x47F02BC,0x47F03BC,0x143AB10,0x1438E70,0x47F03BC,0x47F02BC",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/report_guard.cpp:19",
+      "symbol": "kReporter",
+      "old_rva": "0x1317D40",
+      "fingerprint_target": null,
+      "old_instruction_count": 114,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x3D5EA0,0x44FD30,0x44FF20,0x47F03BC,0x47F02BC,0x35D8D0",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:45",
+      "symbol": "kVf2",
+      "old_rva": "0x117F7E0",
+      "fingerprint_target": null,
+      "old_instruction_count": 92,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x117F940,0x393DF0,0x5B1600,0x491AC0,0x1180EA0,0x5A7A10,0x117FDA0,0x1190FD0",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:51",
+      "symbol": "kApply",
+      "old_rva": "0x1190FD0",
+      "fingerprint_target": null,
+      "old_instruction_count": 304,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x5B1600,0x491AC0,0x5A4760,0x26D3840,0x4898F6E,0x393DF0,0x4F8220,0x26D3840,0x393960,0x5B1800,0x4898FB6,0x2E03370,0x2E03370,0x4898FD4,0x1373040,0x349EA10",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:57",
+      "symbol": "kSetBend",
+      "old_rva": "0x349EA10",
+      "fingerprint_target": null,
+      "old_instruction_count": 36,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x393960",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:65",
+      "symbol": "kTick",
+      "old_rva": "0x59C0D0",
+      "fingerprint_target": null,
+      "old_instruction_count": 167,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x4FFFC0,0x59D470,0x393DF0,0x18082A0,0x59B490,0x1806C00",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:74",
+      "symbol": "kGetTarget",
+      "old_rva": "0x5B1600",
+      "fingerprint_target": "0x699130",
+      "old_instruction_count": 69,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x1806B20,0x393DF0,0x18082A0,0x1851010,0x1434880",
+      "new_calls": "0x19AC6E0,0x3E5370,0x19ADE70,0x19F84A0,0x1659380",
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    },
+    {
+      "source": "src/mod/session2/tree_bend_logic.h:76",
+      "symbol": "kFindTree",
+      "old_rva": "0x491AC0",
+      "fingerprint_target": null,
+      "old_instruction_count": 47,
+      "rtti_slot_candidates": [],
+      "independent_slot_agreement": false,
+      "old_calls": "0x48D680",
+      "new_calls": null,
+      "confidence": "weak; semantic audit pending",
+      "adopted": false
+    }
+  ],
+  "adopted": 0
+}

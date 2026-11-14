@@ -2,7 +2,7 @@
 
 See PORT-INVENTORY.md for scope and evidence limits. These rows need semantic review.
 
-8166 rows; 192 scanned files.
+8261 rows; 193 scanned files.
 
 | Row | File:line | Symbol/context | Kind | 2976 value | Source use |
 |---|---|---|---|---|---|
@@ -5501,2674 +5501,2769 @@ See PORT-INVENTORY.md for scope and evidence limits. These rows need semantic re
 | L05493 | src/mod/session2/identity_fix.h:75:22 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t index = 0;        // the one to write (Write) or that holds it (Already) |
 | L05494 | src/mod/session2/identity_fix.h:76:23 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t native = 0;       // entries with the constant |
 | L05495 | src/mod/session2/identity_fix.h:77:25 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t assigned = 0;     // entries with the assigned number |
-| L05496 | src/mod/session2/identity_probe.h:60:22 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
-| L05497 | src/mod/session2/identity_probe.h:61:25 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t host_key = 0; |
-| L05498 | src/mod/session2/identity_probe.h:62:23 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t user2 = 0; |
-| L05499 | src/mod/session2/inject_logic.h:95:23 | disposition | inline literal (semantic audit required) | 0 | uint8_t channel = 0; |
-| L05500 | src/mod/session2/inject_logic.h:96:20 | disposition | inline literal (semantic audit required) | 0 | uint32_t tag = 0;    // pb_tag(epoch), written at +0x8010 |
-| L05501 | src/mod/session2/inject_logic.h:97:22 | disposition | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
-| L05502 | src/mod/session2/inject_logic.h:98:23 | disposition | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
-| L05503 | src/mod/session2/inject_logic.h:99:26 | disposition | inline literal (semantic audit required) | 0 | uint64_t queued_ms = 0; |
-| L05504 | src/mod/session2/inject_logic.h:103:26 | disposition | inline literal (semantic audit required) | 65536 | size_t max_packets = 65536;          // ~10 min of a guest's ~100 Req/s while the host is paused |
-| L05505 | src/mod/session2/inject_logic.h:104:24 | disposition | inline literal (semantic audit required) | 32u | size_t max_bytes = 32u << 20; |
-| L05506 | src/mod/session2/inject_logic.h:104:31 | disposition | inline literal (semantic audit required) | 20 | size_t max_bytes = 32u << 20; |
-| L05507 | src/mod/session2/inject_logic.h:105:30 | disposition | inline literal (semantic audit required) | 8 | size_t control_reserve = 8;          // room kept for the logout sequence (2549 / 2001) |
-| L05508 | src/mod/session2/inject_logic.h:106:30 | disposition | inline literal (semantic audit required) | 512 | uint64_t in_flight_max = 512;        // our buffers in Q0 not yet seen by the server |
-| L05509 | src/mod/session2/inject_logic.h:107:26 | disposition | inline literal (semantic audit required) | 256 | size_t pump_budget = 256;            // buffers handed per NetworkThread turn |
-| L05510 | src/mod/session2/inject_logic.h:117:63 | has_room | inline literal (semantic audit required) | 0 | const size_t extra = control ? lim_.control_reserve : 0; |
-| L05511 | src/mod/session2/inject_logic.h:118:98 | has_room | inline literal (semantic audit required) | 0x8000 | return q_.size() < lim_.max_packets + extra && bytes_ + size <= lim_.max_bytes + extra * 0x8000; |
-| L05512 | src/mod/session2/inject_logic.h:142:20 | drop_other_epochs | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L05513 | src/mod/session2/inject_logic.h:157:18 | clear | inline literal (semantic audit required) | 0 | bytes_ = 0; |
-| L05514 | src/mod/session2/inject_logic.h:165:97 | oldest_age | inline literal (semantic audit required) | 0 | uint64_t oldest_age(uint64_t now) const { return q_.empty() &#124;&#124; now < q_.front().queued_ms ? 0 : now - q_.front().queued_ms; } |
-| L05515 | src/mod/session2/inject_logic.h:171:21 | limits | inline literal (semantic audit required) | 0 | size_t bytes_ = 0, peak_ = 0; |
-| L05516 | src/mod/session2/inject_logic.h:171:32 | limits | inline literal (semantic audit required) | 0 | size_t bytes_ = 0, peak_ = 0; |
-| L05517 | src/mod/session2/inject_logic.h:172:24 | limits | inline literal (semantic audit required) | 0 | uint64_t queued_ = 0, full_ = 0; |
-| L05518 | src/mod/session2/inject_logic.h:172:35 | limits | inline literal (semantic audit required) | 0 | uint64_t queued_ = 0, full_ = 0; |
-| L05519 | src/mod/session2/inject_logic.h:178:64 | may_hand | inline literal (semantic audit required) | 0 | const uint64_t in_flight = pushed > seen ? pushed - seen : 0; |
-| L05520 | src/mod/session2/inject_logic.h:179:46 | may_hand | inline literal (semantic audit required) | 0 | if (in_flight >= l.in_flight_max) return 0; |
-| L05521 | src/mod/session2/inject_logic.h:191:39 | may_hand | inline literal (semantic audit required) | 250 | RetryPacer(uint32_t interval_ms = 250, uint32_t max_attempts = 240, uint32_t log_ms = 5000) |
-| L05522 | src/mod/session2/inject_logic.h:191:68 | may_hand | inline literal (semantic audit required) | 240 | RetryPacer(uint32_t interval_ms = 250, uint32_t max_attempts = 240, uint32_t log_ms = 5000) |
-| L05523 | src/mod/session2/inject_logic.h:191:91 | may_hand | inline literal (semantic audit required) | 5000 | RetryPacer(uint32_t interval_ms = 250, uint32_t max_attempts = 240, uint32_t log_ms = 5000) |
-| L05524 | src/mod/session2/inject_logic.h:194:21 | reset | inline literal (semantic audit required) | 0 | attempts_ = 0; |
-| L05525 | src/mod/session2/inject_logic.h:195:17 | reset | inline literal (semantic audit required) | 0 | last_ = 0; |
-| L05526 | src/mod/session2/inject_logic.h:197:21 | reset | inline literal (semantic audit required) | 0 | last_log_ = 0; |
-| L05527 | src/mod/session2/inject_logic.h:199:22 | reset | inline literal (semantic audit required) | 0 | since_log_ = 0; |
-| L05528 | src/mod/session2/inject_logic.h:213:22 | failed_should_log | inline literal (semantic audit required) | 0 | since_log_ = 0; |
-| L05529 | src/mod/session2/inject_logic.h:222:26 | attempts | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, since_log_ = 0; |
-| L05530 | src/mod/session2/inject_logic.h:222:42 | attempts | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, since_log_ = 0; |
-| L05531 | src/mod/session2/inject_logic.h:223:22 | attempts | inline literal (semantic audit required) | 0 | uint64_t last_ = 0, last_log_ = 0; |
-| L05532 | src/mod/session2/inject_logic.h:223:37 | attempts | inline literal (semantic audit required) | 0 | uint64_t last_ = 0, last_log_ = 0; |
-| L05533 | src/mod/session2/inject_logic.h:234:49 | attempts | inline literal (semantic audit required) | 1000 | explicit StallWatch(uint64_t threshold_ms = 1000, uint64_t repeat_ms = 5000) |
-| L05534 | src/mod/session2/inject_logic.h:234:76 | attempts | inline literal (semantic audit required) | 5000 | explicit StallWatch(uint64_t threshold_ms = 1000, uint64_t repeat_ms = 5000) |
-| L05535 | src/mod/session2/inject_logic.h:239:49 | update | inline literal (semantic audit required) | 0 | stalled_for_ = was ? now - since_ : 0; |
-| L05536 | src/mod/session2/inject_logic.h:265:31 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
-| L05537 | src/mod/session2/inject_logic.h:265:43 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
-| L05538 | src/mod/session2/inject_logic.h:265:61 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
-| L05539 | src/mod/session2/inject_logic.h:265:79 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
-| L05540 | src/mod/session2/inject_logic.h:309:21 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t code = 0; |
-| L05541 | src/mod/session2/inject_logic.h:310:24 | step_is_ours | inline literal (semantic audit required) | 0 | uint64_t address = 0; |
-| L05542 | src/mod/session2/inject_logic.h:311:20 | step_is_ours | inline literal (semantic audit required) | 0 | uint64_t rva = 0;        // address - exe base, if inside the exe (else 0) |
-| L05543 | src/mod/session2/inject_logic.h:313:24 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t nparams = 0; |
-| L05544 | src/mod/session2/inject_logic.h:314:21 | step_is_ours | inline literal (semantic audit required) | 2 | uint64_t params[2] = {};  // for an access violation: read/write flag and the address |
-| L05545 | src/mod/session2/inject_logic.h:315:23 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t thread = 0; |
-| L05546 | src/mod/session2/inject_logic.h:317:23 | step_is_ours | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
-| L05547 | src/mod/session2/inject_logic.h:318:22 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
-| L05548 | src/mod/session2/inject_logic.h:319:24 | step_is_ours | inline literal (semantic audit required) | 0 | uint64_t when_ms = 0; |
-| L05549 | src/mod/session2/inject_logic.h:327:19 | describe | inline literal (semantic audit required) | 0xC0000005u | if (e.code == 0xC0000005u && e.nparams >= 2) { |
-| L05550 | src/mod/session2/inject_logic.h:327:47 | describe | inline literal (semantic audit required) | 2 | if (e.code == 0xC0000005u && e.nparams >= 2) { |
-| L05551 | src/mod/session2/inject_logic.h:328:54 | describe | inline literal (semantic audit required) | 0 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
-| L05552 | src/mod/session2/inject_logic.h:328:60 | describe | inline literal (semantic audit required) | 0 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
-| L05553 | src/mod/session2/inject_logic.h:328:82 | describe | inline literal (semantic audit required) | 0 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
-| L05554 | src/mod/session2/inject_logic.h:328:88 | describe | inline literal (semantic audit required) | 1 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
-| L05555 | src/mod/session2/inject_logic.h:329:35 | describe | inline literal (semantic audit required) | 1 | e.params[1]); |
-| L05556 | src/mod/session2/load_trip.cpp:19:16 | (file scope) | inline literal (semantic audit required) | 2048 | p8p::EventRing<2048> g_ring; |
-| L05557 | src/mod/session2/load_trip.cpp:20:30 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_lost{0}, g_events{0}; |
-| L05558 | src/mod/session2/load_trip.cpp:20:43 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_lost{0}, g_events{0}; |
-| L05559 | src/mod/session2/load_trip.cpp:21:20 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_lines = 0;  // diagnostics thread only |
-| L05560 | src/mod/session2/load_trip.cpp:29:65 | op_of | inline literal (semantic audit required) | 2 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
-| L05561 | src/mod/session2/load_trip.cpp:29:93 | op_of | inline literal (semantic audit required) | 0 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
-| L05562 | src/mod/session2/load_trip.cpp:29:101 | op_of | inline literal (semantic audit required) | 1 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
-| L05563 | src/mod/session2/load_trip.cpp:29:107 | op_of | inline literal (semantic audit required) | 8 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
-| L05564 | src/mod/session2/load_trip.cpp:29:113 | op_of | inline literal (semantic audit required) | 0 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
-| L05565 | src/mod/session2/load_trip.cpp:32:25 | u32_at | inline literal (semantic audit required) | 4 | if (b.size() < at + 4) return 0; |
-| L05566 | src/mod/session2/load_trip.cpp:32:35 | u32_at | inline literal (semantic audit required) | 0 | if (b.size() < at + 4) return 0; |
-| L05567 | src/mod/session2/load_trip.cpp:33:72 | u32_at | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(b[at]) &#124; static_cast<uint32_t>(b[at + 1]) << 8 &#124; |
-| L05568 | src/mod/session2/load_trip.cpp:33:79 | u32_at | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(b[at]) &#124; static_cast<uint32_t>(b[at + 1]) << 8 &#124; |
-| L05569 | src/mod/session2/load_trip.cpp:34:41 | u32_at | inline literal (semantic audit required) | 2 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
-| L05570 | src/mod/session2/load_trip.cpp:34:48 | u32_at | inline literal (semantic audit required) | 16 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
-| L05571 | src/mod/session2/load_trip.cpp:34:82 | u32_at | inline literal (semantic audit required) | 3 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
-| L05572 | src/mod/session2/load_trip.cpp:34:89 | u32_at | inline literal (semantic audit required) | 24 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
-| L05573 | src/mod/session2/load_trip.cpp:42:9 | push | inline literal (semantic audit required) | 0 | e.v[0] = v0; |
-| L05574 | src/mod/session2/load_trip.cpp:43:9 | push | inline literal (semantic audit required) | 1 | e.v[1] = v1; |
-| L05575 | src/mod/session2/load_trip.cpp:44:9 | push | inline literal (semantic audit required) | 2 | e.v[2] = guest_connection_epoch(); |
-| L05576 | src/mod/session2/load_trip.cpp:45:24 | push | inline literal (semantic audit required) | 1 | g_events.fetch_add(1, std::memory_order_relaxed); |
-| L05577 | src/mod/session2/load_trip.cpp:46:43 | push | inline literal (semantic audit required) | 1 | if (!g_ring.push(e)) g_lost.fetch_add(1, std::memory_order_relaxed); |
-| L05578 | src/mod/session2/load_trip.cpp:51:60 | value_of | inline literal (semantic audit required) | 9 | if (op == ltr::kOpMoveFieldAck) return u32_at(payload, 9); |
-| L05579 | src/mod/session2/load_trip.cpp:52:57 | value_of | inline literal (semantic audit required) | 0 | if (op == ltr::kOpMilestone) return u32_at(payload, 0); |
-| L05580 | src/mod/session2/load_trip.cpp:53:12 | value_of | inline literal (semantic audit required) | 0 | return 0; |
-| L05581 | src/mod/session2/load_trip.cpp:78:52 | load_trip_on_delivered | inline literal (semantic audit required) | 5 | if (op == ltr::kOpMilestone && packet.size() > 5 && guest_seq_route_other_character(op, packet.subspan(5))) return; |
-| L05582 | src/mod/session2/load_trip.cpp:78:108 | load_trip_on_delivered | inline literal (semantic audit required) | 5 | if (op == ltr::kOpMilestone && packet.size() > 5 && guest_seq_route_other_character(op, packet.subspan(5))) return; |
-| L05583 | src/mod/session2/load_trip.cpp:79:31 | load_trip_on_delivered | inline literal (semantic audit required) | 0 | push(ltr::kDelivered, op, 0); |
-| L05584 | src/mod/session2/load_trip.cpp:85:25 | load_trip_on_out | inline literal (semantic audit required) | 0 | push(ltr::kOut, op, 0); |
-| L05585 | src/mod/session2/load_trip.cpp:93:9 | load_trip_on_state | inline literal (semantic audit required) | 0 | e.v[0] = static_cast<uint64_t>(static_cast<int64_t>(old_state)); |
-| L05586 | src/mod/session2/load_trip.cpp:94:9 | load_trip_on_state | inline literal (semantic audit required) | 1 | e.v[1] = static_cast<uint64_t>(new_state & 0xFF); |
-| L05587 | src/mod/session2/load_trip.cpp:94:48 | load_trip_on_state | inline literal (semantic audit required) | 0xFF | e.v[1] = static_cast<uint64_t>(new_state & 0xFF); |
-| L05588 | src/mod/session2/load_trip.cpp:95:9 | load_trip_on_state | inline literal (semantic audit required) | 2 | e.v[2] = guest_connection_epoch(); |
-| L05589 | src/mod/session2/load_trip.cpp:96:43 | load_trip_on_state | inline literal (semantic audit required) | 1 | if (!g_ring.push(e)) g_lost.fetch_add(1, std::memory_order_relaxed); |
-| L05590 | src/mod/session2/load_trip.cpp:109:39 | load_trip_tick | inline literal (semantic audit required) | 0 | static uint64_t lost_logged = 0; |
-| L05591 | src/mod/session2/load_trip_logic.h:43:28 | followed_out | inline literal (semantic audit required) | 0 | enum Ev : uint16_t { kIn = 0, kDelivered, kOut, kState, kEvCount }; |
-| L05592 | src/mod/session2/load_trip_logic.h:47:36 | followed_out | inline literal (semantic audit required) | 3 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
-| L05593 | src/mod/session2/load_trip_logic.h:47:42 | followed_out | inline literal (semantic audit required) | 10 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
-| L05594 | src/mod/session2/load_trip_logic.h:47:46 | followed_out | inline literal (semantic audit required) | 60 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
-| L05595 | src/mod/session2/load_trip_logic.h:47:50 | followed_out | inline literal (semantic audit required) | 300 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
-| L05596 | src/mod/session2/load_trip_logic.h:51:18 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n = 0; |
-| L05597 | src/mod/session2/load_trip_logic.h:52:21 | followed_out | inline literal (semantic audit required) | 0 | uint64_t conn = 0; |
-| L05598 | src/mod/session2/load_trip_logic.h:53:22 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05599 | src/mod/session2/load_trip_logic.h:53:33 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05600 | src/mod/session2/load_trip_logic.h:53:44 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05601 | src/mod/session2/load_trip_logic.h:53:55 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05602 | src/mod/session2/load_trip_logic.h:53:66 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05603 | src/mod/session2/load_trip_logic.h:53:81 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05604 | src/mod/session2/load_trip_logic.h:53:92 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05605 | src/mod/session2/load_trip_logic.h:53:103 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
-| L05606 | src/mod/session2/load_trip_logic.h:54:23 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t_next = 0;  // the next trip's 2174 (0 = still the current one) |
-| L05607 | src/mod/session2/load_trip_logic.h:55:22 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
-| L05608 | src/mod/session2/load_trip_logic.h:55:33 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
-| L05609 | src/mod/session2/load_trip_logic.h:55:44 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
-| L05610 | src/mod/session2/load_trip_logic.h:55:55 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
-| L05611 | src/mod/session2/load_trip_logic.h:55:66 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
-| L05612 | src/mod/session2/load_trip_logic.h:55:77 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
-| L05613 | src/mod/session2/load_trip_logic.h:55:91 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
-| L05614 | src/mod/session2/load_trip_logic.h:56:22 | followed_out | inline literal (semantic audit required) | 0 | uint32_t owner = 0, actor2322 = 0; |
-| L05615 | src/mod/session2/load_trip_logic.h:56:37 | followed_out | inline literal (semantic audit required) | 0 | uint32_t owner = 0, actor2322 = 0; |
-| L05616 | src/mod/session2/load_trip_logic.h:58:24 | followed_out | inline literal (semantic audit required) | 1 | int first_state = -1, last_state = -1; |
-| L05617 | src/mod/session2/load_trip_logic.h:58:41 | followed_out | inline literal (semantic audit required) | 1 | int first_state = -1, last_state = -1; |
-| L05618 | src/mod/session2/load_trip_logic.h:59:23 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t_in11 = 0, t_out11 = 0; |
-| L05619 | src/mod/session2/load_trip_logic.h:59:36 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t_in11 = 0, t_out11 = 0; |
-| L05620 | src/mod/session2/load_trip_logic.h:60:21 | followed_out | inline literal (semantic audit required) | 1 | int out11_to = -1; |
-| L05621 | src/mod/session2/load_trip_logic.h:61:23 | followed_out | inline literal (semantic audit required) | 0 | uint32_t states = 0; |
-| L05622 | src/mod/session2/load_trip_logic.h:63:24 | followed_out | inline literal (semantic audit required) | 0 | uint8_t reported = 0; |
-| L05623 | src/mod/session2/load_trip_logic.h:66:51 | state_text | inline literal (semantic audit required) | 0 | inline std::string state_text(int s) { return s < 0 ? std::string("?") : std::format("0x{:02X}", s); } |
-| L05624 | src/mod/session2/load_trip_logic.h:70:61 | dt | inline literal (semantic audit required) | 1000.0 | const double ms = b >= a ? static_cast<double>(b - a) / 1000.0 : -static_cast<double>(a - b) / 1000.0; |
-| L05625 | src/mod/session2/load_trip_logic.h:70:100 | dt | inline literal (semantic audit required) | 1000.0 | const double ms = b >= a ? static_cast<double>(b - a) / 1000.0 : -static_cast<double>(a - b) / 1000.0; |
-| L05626 | src/mod/session2/load_trip_logic.h:80:26 | verdict | inline literal (semantic audit required) | 1 | } else if (t.n2322 > 1) { |
-| L05627 | src/mod/session2/load_trip_logic.h:89:27 | verdict | inline literal (semantic audit required) | 0x12 | if (t.out11_to == 0x12) { |
-| L05628 | src/mod/session2/load_trip_logic.h:98:28 | verdict | inline literal (semantic audit required) | 0x12 | v += t.out11_to == 0x12 ? " &#124; 2445 and 2762: normal load completion" : " &#124; 2762 seen"; |
-| L05629 | src/mod/session2/load_trip_logic.h:116:51 | on_event | inline literal (semantic audit required) | 0 | const auto op = static_cast<uint16_t>(e.v[0]); |
-| L05630 | src/mod/session2/load_trip_logic.h:117:54 | on_event | inline literal (semantic audit required) | 1 | const auto value = static_cast<uint32_t>(e.v[1]); |
-| L05631 | src/mod/session2/load_trip_logic.h:118:35 | on_event | inline literal (semantic audit required) | 2 | const uint64_t conn = e.v[2]; |
-| L05632 | src/mod/session2/load_trip_logic.h:175:32 | on_event | inline literal (semantic audit required) | 1 | t->n2322 > 1 ? " &#124; DUPLICATE in this trip" : (!t->t2144 ? " &#124; BEFORE any 2144 of this trip" : ""))); |
-| L05633 | src/mod/session2/load_trip_logic.h:201:26 | tick | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
-| L05634 | src/mod/session2/load_trip_logic.h:201:33 | tick | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
-| L05635 | src/mod/session2/load_trip_logic.h:202:35 | tick | inline literal (semantic audit required) | 1u | if (t.reported & (1u << i)) continue; |
-| L05636 | src/mod/session2/load_trip_logic.h:203:77 | tick | inline literal (semantic audit required) | 1'000'000 | if (now_us < t.t2322 + static_cast<uint64_t>(kReportS[i]) * 1'000'000) break; |
-| L05637 | src/mod/session2/load_trip_logic.h:204:52 | tick | inline literal (semantic audit required) | 1u | t.reported &#124;= static_cast<uint8_t>(1u << i); |
-| L05638 | src/mod/session2/load_trip_logic.h:211:50 | states_known | inline literal (semantic audit required) | 0 | bool states_known() const { return states_ > 0; } |
-| L05639 | src/mod/session2/load_trip_logic.h:223:77 | on_state | inline literal (semantic audit required) | 0 | const StateEv s{e.qpc_us, static_cast<int>(static_cast<int64_t>(e.v[0])), static_cast<int>(e.v[1] & 0xFF)}; |
-| L05640 | src/mod/session2/load_trip_logic.h:223:104 | on_state | inline literal (semantic audit required) | 1 | const StateEv s{e.qpc_us, static_cast<int>(static_cast<int64_t>(e.v[0])), static_cast<int>(e.v[1] & 0xFF)}; |
-| L05641 | src/mod/session2/load_trip_logic.h:223:109 | on_state | inline literal (semantic audit required) | 0xFF | const StateEv s{e.qpc_us, static_cast<int>(static_cast<int64_t>(e.v[0])), static_cast<int>(e.v[1] & 0xFF)}; |
-| L05642 | src/mod/session2/load_trip_logic.h:225:36 | on_state | inline literal (semantic audit required) | 256 | while (state_log_.size() > 256) state_log_.pop_front(); |
-| L05643 | src/mod/session2/load_trip_logic.h:240:30 | apply | inline literal (semantic audit required) | 0 | if (t->first_state < 0) t->first_state = s.to; |
-| L05644 | src/mod/session2/load_trip_logic.h:242:21 | apply | inline literal (semantic audit required) | 0x11 | if (s.to == 0x11 && !t->t_in11) t->t_in11 = s.t; |
-| L05645 | src/mod/session2/load_trip_logic.h:243:23 | apply | inline literal (semantic audit required) | 0x11 | if (s.from == 0x11 && !t->t_out11) { |
-| L05646 | src/mod/session2/load_trip_logic.h:253:45 | reattribute | inline literal (semantic audit required) | 1 | t.first_state = t.last_state = -1; |
-| L05647 | src/mod/session2/load_trip_logic.h:254:36 | reattribute | inline literal (semantic audit required) | 0 | t.t_in11 = t.t_out11 = 0; |
-| L05648 | src/mod/session2/load_trip_logic.h:255:27 | reattribute | inline literal (semantic audit required) | 1 | t.out11_to = -1; |
-| L05649 | src/mod/session2/load_trip_logic.h:256:24 | reattribute | inline literal (semantic audit required) | 0 | t.states = 0; |
-| L05650 | src/mod/session2/load_trip_logic.h:269:68 | summary | inline literal (semantic audit required) | 0 | dt(t.t2174, t.t2762), t.n_bundle, verdict(t, states_ > 0)); |
-| L05651 | src/mod/session2/load_trip_logic.h:275:23 | summary | inline literal (semantic audit required) | 0 | uint32_t count_ = 0; |
-| L05652 | src/mod/session2/load_trip_logic.h:276:24 | summary | inline literal (semantic audit required) | 0 | uint64_t states_ = 0; |
-| L05653 | src/mod/session2/mount_sync_logic.h:41:52 | is_char | inline literal (semantic audit required) | 28 | inline bool is_char(uint32_t key) { return (key >> 28) == 0xA; } |
-| L05654 | src/mod/session2/mount_sync_logic.h:41:59 | is_char | inline literal (semantic audit required) | 0xA | inline bool is_char(uint32_t key) { return (key >> 28) == 0xA; } |
-| L05655 | src/mod/session2/mount_sync_logic.h:42:49 | is_b | inline literal (semantic audit required) | 28 | inline bool is_b(uint32_t key) { return (key >> 28) == 0xB; } |
-| L05656 | src/mod/session2/mount_sync_logic.h:42:56 | is_b | inline literal (semantic audit required) | 0xB | inline bool is_b(uint32_t key) { return (key >> 28) == 0xB; } |
-| L05657 | src/mod/session2/mount_sync_logic.h:58:39 | is_b | inline literal (semantic audit required) | 1 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
-| L05658 | src/mod/session2/mount_sync_logic.h:58:51 | is_b | inline literal (semantic audit required) | 2 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
-| L05659 | src/mod/session2/mount_sync_logic.h:58:63 | is_b | inline literal (semantic audit required) | 3 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
-| L05660 | src/mod/session2/mount_sync_logic.h:58:75 | is_b | inline literal (semantic audit required) | 4 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
-| L05661 | src/mod/session2/mount_sync_logic.h:87:20 | ev_name | inline literal (semantic audit required) | 0 | uint8_t seat = 0;        // R9b of vf53 (indexes the seats; Link+0x14) |
-| L05662 | src/mod/session2/mount_sync_logic.h:88:21 | ev_name | inline literal (semantic audit required) | 0 | uint8_t fifth = 0;       // the byte at [entry rsp+0x28] |
-| L05663 | src/mod/session2/mount_sync_logic.h:89:21 | ev_name | inline literal (semantic audit required) | 0 | uint8_t flags = 0; |
-| L05664 | src/mod/session2/mount_sync_logic.h:90:22 | ev_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0;      // 0xA... key |
-| L05665 | src/mod/session2/mount_sync_logic.h:91:22 | ev_name | inline literal (semantic audit required) | 0 | uint32_t horse = 0;      // 0xB... key ([vc+8]+0x60) |
-| L05666 | src/mod/session2/mount_sync_logic.h:92:27 | ev_name | inline literal (semantic audit required) | 0 | uint32_t transition = 0; // monotonic per controller process (nonce) |
-| L05667 | src/mod/session2/mount_sync_logic.h:93:23 | ev_name | inline literal (semantic audit required) | 0 | uint32_t result = 0;     // *result after (Commit / Detach) |
-| L05668 | src/mod/session2/mount_sync_logic.h:94:22 | ev_name | inline literal (semantic audit required) | 0 | uint32_t nonce = 0;      // the controller process' random id: a new one forgets the old transitions |
-| L05669 | src/mod/session2/mount_sync_logic.h:95:27 | ev_name | inline literal (semantic audit required) | 0 | uint32_t caller_rva = 0; // the vtable call site of the client vf53 (or of 0x2228E40) |
-| L05670 | src/mod/session2/mount_sync_logic.h:96:20 | ev_name | inline literal (semantic audit required) | 0 | uint32_t aux = 0;        // Commit: occupant count after; Detach: 0x2228E40's 4th argument (low 32 bits) |
-| L05671 | src/mod/session2/mount_sync_logic.h:97:24 | ev_name | inline literal (semantic audit required) | 0 | uint64_t tick_ms = 0;    // the controller's GetTickCount64 |
-| L05672 | src/mod/session2/mount_sync_logic.h:101:18 | put32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L05673 | src/mod/session2/mount_sync_logic.h:101:25 | put32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L05674 | src/mod/session2/mount_sync_logic.h:101:67 | put32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L05675 | src/mod/session2/mount_sync_logic.h:104:36 | get32 | inline literal (semantic audit required) | 0 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L05676 | src/mod/session2/mount_sync_logic.h:104:67 | get32 | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L05677 | src/mod/session2/mount_sync_logic.h:104:74 | get32 | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L05678 | src/mod/session2/mount_sync_logic.h:104:104 | get32 | inline literal (semantic audit required) | 2 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L05679 | src/mod/session2/mount_sync_logic.h:104:111 | get32 | inline literal (semantic audit required) | 16 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L05680 | src/mod/session2/mount_sync_logic.h:105:37 | get32 | inline literal (semantic audit required) | 3 | (static_cast<uint32_t>(p[3]) << 24); |
-| L05681 | src/mod/session2/mount_sync_logic.h:105:44 | get32 | inline literal (semantic audit required) | 24 | (static_cast<uint32_t>(p[3]) << 24); |
-| L05682 | src/mod/session2/mount_sync_logic.h:112:7 | encode | inline literal (semantic audit required) | 0 | p[0] = kControlMountSync; |
-| L05683 | src/mod/session2/mount_sync_logic.h:113:7 | encode | inline literal (semantic audit required) | 1 | p[1] = kVersion; |
-| L05684 | src/mod/session2/mount_sync_logic.h:114:7 | encode | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(e.kind); |
-| L05685 | src/mod/session2/mount_sync_logic.h:115:7 | encode | inline literal (semantic audit required) | 3 | p[3] = e.seat; |
-| L05686 | src/mod/session2/mount_sync_logic.h:116:7 | encode | inline literal (semantic audit required) | 4 | p[4] = e.fifth; |
-| L05687 | src/mod/session2/mount_sync_logic.h:117:7 | encode | inline literal (semantic audit required) | 5 | p[5] = e.flags; |
-| L05688 | src/mod/session2/mount_sync_logic.h:118:14 | encode | inline literal (semantic audit required) | 8 | put32(&p[8], e.rider); |
-| L05689 | src/mod/session2/mount_sync_logic.h:119:14 | encode | inline literal (semantic audit required) | 12 | put32(&p[12], e.horse); |
-| L05690 | src/mod/session2/mount_sync_logic.h:120:14 | encode | inline literal (semantic audit required) | 16 | put32(&p[16], e.transition); |
-| L05691 | src/mod/session2/mount_sync_logic.h:121:14 | encode | inline literal (semantic audit required) | 20 | put32(&p[20], e.result); |
-| L05692 | src/mod/session2/mount_sync_logic.h:122:14 | encode | inline literal (semantic audit required) | 24 | put32(&p[24], e.nonce); |
-| L05693 | src/mod/session2/mount_sync_logic.h:123:14 | encode | inline literal (semantic audit required) | 28 | put32(&p[28], e.caller_rva); |
-| L05694 | src/mod/session2/mount_sync_logic.h:124:14 | encode | inline literal (semantic audit required) | 32 | put32(&p[32], e.aux); |
-| L05695 | src/mod/session2/mount_sync_logic.h:125:14 | encode | inline literal (semantic audit required) | 36 | put32(&p[36], static_cast<uint32_t>(e.tick_ms)); |
-| L05696 | src/mod/session2/mount_sync_logic.h:126:14 | encode | inline literal (semantic audit required) | 40 | put32(&p[40], static_cast<uint32_t>(e.tick_ms >> 32)); |
-| L05697 | src/mod/session2/mount_sync_logic.h:126:54 | encode | inline literal (semantic audit required) | 32 | put32(&p[40], static_cast<uint32_t>(e.tick_ms >> 32)); |
-| L05698 | src/mod/session2/mount_sync_logic.h:133:39 | decode | inline literal (semantic audit required) | 0 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlMountSync &#124;&#124; p[1] != kVersion) return std::nullopt; |
-| L05699 | src/mod/session2/mount_sync_logic.h:133:68 | decode | inline literal (semantic audit required) | 1 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlMountSync &#124;&#124; p[1] != kVersion) return std::nullopt; |
-| L05700 | src/mod/session2/mount_sync_logic.h:134:11 | decode | inline literal (semantic audit required) | 2 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05701 | src/mod/session2/mount_sync_logic.h:134:16 | decode | inline literal (semantic audit required) | 1 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05702 | src/mod/session2/mount_sync_logic.h:134:23 | decode | inline literal (semantic audit required) | 2 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05703 | src/mod/session2/mount_sync_logic.h:134:28 | decode | inline literal (semantic audit required) | 4 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05704 | src/mod/session2/mount_sync_logic.h:134:35 | decode | inline literal (semantic audit required) | 6 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05705 | src/mod/session2/mount_sync_logic.h:134:41 | decode | inline literal (semantic audit required) | 0 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05706 | src/mod/session2/mount_sync_logic.h:134:48 | decode | inline literal (semantic audit required) | 7 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05707 | src/mod/session2/mount_sync_logic.h:134:54 | decode | inline literal (semantic audit required) | 0 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L05708 | src/mod/session2/mount_sync_logic.h:136:36 | decode | inline literal (semantic audit required) | 2 | e.kind = static_cast<EvKind>(p[2]); |
-| L05709 | src/mod/session2/mount_sync_logic.h:137:16 | decode | inline literal (semantic audit required) | 3 | e.seat = p[3]; |
-| L05710 | src/mod/session2/mount_sync_logic.h:138:17 | decode | inline literal (semantic audit required) | 4 | e.fifth = p[4]; |
-| L05711 | src/mod/session2/mount_sync_logic.h:139:17 | decode | inline literal (semantic audit required) | 5 | e.flags = p[5]; |
-| L05712 | src/mod/session2/mount_sync_logic.h:140:24 | decode | inline literal (semantic audit required) | 8 | e.rider = get32(&p[8]); |
-| L05713 | src/mod/session2/mount_sync_logic.h:141:24 | decode | inline literal (semantic audit required) | 12 | e.horse = get32(&p[12]); |
-| L05714 | src/mod/session2/mount_sync_logic.h:142:29 | decode | inline literal (semantic audit required) | 16 | e.transition = get32(&p[16]); |
-| L05715 | src/mod/session2/mount_sync_logic.h:143:25 | decode | inline literal (semantic audit required) | 20 | e.result = get32(&p[20]); |
-| L05716 | src/mod/session2/mount_sync_logic.h:144:24 | decode | inline literal (semantic audit required) | 24 | e.nonce = get32(&p[24]); |
-| L05717 | src/mod/session2/mount_sync_logic.h:145:29 | decode | inline literal (semantic audit required) | 28 | e.caller_rva = get32(&p[28]); |
-| L05718 | src/mod/session2/mount_sync_logic.h:146:22 | decode | inline literal (semantic audit required) | 32 | e.aux = get32(&p[32]); |
-| L05719 | src/mod/session2/mount_sync_logic.h:147:26 | decode | inline literal (semantic audit required) | 36 | e.tick_ms = get32(&p[36]) &#124; (static_cast<uint64_t>(get32(&p[40])) << 32); |
-| L05720 | src/mod/session2/mount_sync_logic.h:147:65 | decode | inline literal (semantic audit required) | 40 | e.tick_ms = get32(&p[36]) &#124; (static_cast<uint64_t>(get32(&p[40])) << 32); |
-| L05721 | src/mod/session2/mount_sync_logic.h:147:74 | decode | inline literal (semantic audit required) | 32 | e.tick_ms = get32(&p[36]) &#124; (static_cast<uint64_t>(get32(&p[40])) << 32); |
-| L05722 | src/mod/session2/mount_sync_logic.h:149:25 | decode | inline literal (semantic audit required) | 0 | if ((e.rider != 0 && !is_char(e.rider)) &#124;&#124; e.horse != 0 &#124;&#124; e.seat != 0) return std::nullopt; |
-| L05723 | src/mod/session2/mount_sync_logic.h:149:63 | decode | inline literal (semantic audit required) | 0 | if ((e.rider != 0 && !is_char(e.rider)) &#124;&#124; e.horse != 0 &#124;&#124; e.seat != 0) return std::nullopt; |
-| L05724 | src/mod/session2/mount_sync_logic.h:149:78 | decode | inline literal (semantic audit required) | 0 | if ((e.rider != 0 && !is_char(e.rider)) &#124;&#124; e.horse != 0 &#124;&#124; e.seat != 0) return std::nullopt; |
-| L05725 | src/mod/session2/mount_sync_logic.h:152:87 | decode | inline literal (semantic audit required) | 0 | if (!is_char(e.rider) &#124;&#124; !is_b(e.horse) &#124;&#124; e.seat >= kMaxSeats &#124;&#124; e.transition == 0) return std::nullopt; |
-| L05726 | src/mod/session2/mount_sync_logic.h:160:48 | status_event | inline literal (semantic audit required) | 0 | e.rider = is_char(local_key) ? local_key : 0; |
-| L05727 | src/mod/session2/mount_sync_logic.h:162:49 | status_event | inline literal (semantic audit required) | 0 | e.flags = cannot_publish ? kFlagNoPublish : 0; |
-| L05728 | src/mod/session2/mount_sync_logic.h:175:7 | frame | inline literal (semantic audit required) | 0 | f[0] = kControlOpcode & 0xFF; |
-| L05729 | src/mod/session2/mount_sync_logic.h:175:29 | frame | inline literal (semantic audit required) | 0xFF | f[0] = kControlOpcode & 0xFF; |
-| L05730 | src/mod/session2/mount_sync_logic.h:176:7 | frame | inline literal (semantic audit required) | 1 | f[1] = kControlOpcode >> 8; |
-| L05731 | src/mod/session2/mount_sync_logic.h:176:30 | frame | inline literal (semantic audit required) | 8 | f[1] = kControlOpcode >> 8; |
-| L05732 | src/mod/session2/mount_sync_logic.h:177:7 | frame | inline literal (semantic audit required) | 2 | f[2] = 0xFF; |
-| L05733 | src/mod/session2/mount_sync_logic.h:177:12 | frame | inline literal (semantic audit required) | 0xFF | f[2] = 0xFF; |
-| L05734 | src/mod/session2/mount_sync_logic.h:178:7 | frame | inline literal (semantic audit required) | 3 | f[3] = kPayloadSize & 0xFF; |
-| L05735 | src/mod/session2/mount_sync_logic.h:178:27 | frame | inline literal (semantic audit required) | 0xFF | f[3] = kPayloadSize & 0xFF; |
-| L05736 | src/mod/session2/mount_sync_logic.h:179:7 | frame | inline literal (semantic audit required) | 4 | f[4] = kPayloadSize >> 8; |
-| L05737 | src/mod/session2/mount_sync_logic.h:179:28 | frame | inline literal (semantic audit required) | 8 | f[4] = kPayloadSize >> 8; |
-| L05738 | src/mod/session2/mount_sync_logic.h:180:21 | frame | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kPayloadSize; ++i) f[kHeader + i] = p[i]; |
-| L05739 | src/mod/session2/mount_sync_logic.h:187:52 | is_frame | inline literal (semantic audit required) | 0 | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L05740 | src/mod/session2/mount_sync_logic.h:187:76 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L05741 | src/mod/session2/mount_sync_logic.h:187:87 | is_frame | inline literal (semantic audit required) | 1 | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L05742 | src/mod/session2/mount_sync_logic.h:187:112 | is_frame | inline literal (semantic audit required) | 8 | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L05743 | src/mod/session2/mount_sync_logic.h:188:14 | is_frame | inline literal (semantic audit required) | 2 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
-| L05744 | src/mod/session2/mount_sync_logic.h:188:20 | is_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
-| L05745 | src/mod/session2/mount_sync_logic.h:188:30 | is_frame | inline literal (semantic audit required) | 3 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
-| L05746 | src/mod/session2/mount_sync_logic.h:188:52 | is_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
-| L05747 | src/mod/session2/mount_sync_logic.h:188:63 | is_frame | inline literal (semantic audit required) | 4 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
-| L05748 | src/mod/session2/mount_sync_logic.h:188:86 | is_frame | inline literal (semantic audit required) | 8 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
-| L05749 | src/mod/session2/mount_sync_logic.h:194:25 | publishable | inline literal (semantic audit required) | 0 | return local_key != 0 && rider == local_key && is_char(rider) && is_b(horse) && seat < kMaxSeats; |
-| L05750 | src/mod/session2/mount_sync_logic.h:205:31 | publishable | inline literal (semantic audit required) | 0 | uint8_t horse_has_seats = 0;                    // horse vc+0xEB |
-| L05751 | src/mod/session2/mount_sync_logic.h:206:28 | publishable | inline literal (semantic audit required) | 0 | uint32_t cur_vehicle = 0;                       // Link+0x10 |
-| L05752 | src/mod/session2/mount_sync_logic.h:207:24 | publishable | inline literal (semantic audit required) | 1 | int8_t cur_seat = -1;                           // Link+0x14 |
-| L05753 | src/mod/session2/mount_sync_logic.h:208:28 | publishable | inline literal (semantic audit required) | 0 | uint32_t res_vehicle = 0;                       // Link+0x08 |
-| L05754 | src/mod/session2/mount_sync_logic.h:209:24 | publishable | inline literal (semantic audit required) | 1 | int8_t res_seat = -1;                           // Link+0x0C |
-| L05755 | src/mod/session2/mount_sync_logic.h:210:25 | publishable | inline literal (semantic audit required) | 0 | uint32_t occupant = 0;                          // horse vc+0x48+4*seat |
-| L05756 | src/mod/session2/mount_sync_logic.h:211:24 | publishable | inline literal (semantic audit required) | 0 | uint32_t reserve = 0;                           // horse vc+0x88+4*seat |
-| L05757 | src/mod/session2/mount_sync_logic.h:212:21 | publishable | inline literal (semantic audit required) | 0 | uint8_t count = 0;                              // horse vc+0xC8 |
-| L05758 | src/mod/session2/mount_sync_logic.h:213:27 | publishable | inline literal (semantic audit required) | 0 | uint32_t rider_ctrl = 0, horse_ctrl = 0;        // actor+0x90 (controlling user key) |
-| L05759 | src/mod/session2/mount_sync_logic.h:213:43 | publishable | inline literal (semantic audit required) | 0 | uint32_t rider_ctrl = 0, horse_ctrl = 0;        // actor+0x90 (controlling user key) |
-| L05760 | src/mod/session2/mount_sync_logic.h:214:24 | publishable | inline literal (semantic audit required) | 0 | uint8_t rider_c8 = 0, horse_c8 = 0;             // actor+0xC8 (ClientActor vf188, 0x4FA620) |
-| L05761 | src/mod/session2/mount_sync_logic.h:214:38 | publishable | inline literal (semantic audit required) | 0 | uint8_t rider_c8 = 0, horse_c8 = 0;             // actor+0xC8 (ClientActor vf188, 0x4FA620) |
-| L05762 | src/mod/session2/mount_sync_logic.h:217:29 | publishable | inline literal (semantic audit required) | 0 | uint32_t deps_missing = 0; |
-| L05763 | src/mod/session2/mount_sync_logic.h:220:28 | publishable | inline literal (semantic audit required) | 0xFF | uint8_t rider_method = 0xFF; |
-| L05764 | src/mod/session2/mount_sync_logic.h:221:28 | publishable | inline literal (semantic audit required) | 0 | uint32_t rideoff_key = 0; |
-| L05765 | src/mod/session2/mount_sync_logic.h:281:50 | ride_method | inline literal (semantic audit required) | 0 | uint32_t linked_here = 0) { |
-| L05766 | src/mod/session2/mount_sync_logic.h:291:62 | ride_method | inline literal (semantic audit required) | 0 | if (s.rider_method == kMethodRideOff && s.rideoff_key != 0) return Judge::StuckInRideOff; |
-| L05767 | src/mod/session2/mount_sync_logic.h:292:23 | ride_method | inline literal (semantic audit required) | 0 | if (s.occupant != 0 && s.occupant != rider) return Judge::SeatTaken; |
-| L05768 | src/mod/session2/mount_sync_logic.h:293:26 | ride_method | inline literal (semantic audit required) | 0 | if (s.cur_vehicle != 0 && s.cur_vehicle != horse) { |
-| L05769 | src/mod/session2/mount_sync_logic.h:296:25 | ride_method | inline literal (semantic audit required) | 0 | if (s.rider_ctrl == 0 &#124;&#124; s.rider_ctrl != s.horse_ctrl) return Judge::ControllerMismatch; |
-| L05770 | src/mod/session2/mount_sync_logic.h:297:23 | ride_method | inline literal (semantic audit required) | 1 | if (s.rider_c8 == 1) return Judge::RiderLocal; |
-| L05771 | src/mod/session2/mount_sync_logic.h:298:17 | ride_method | inline literal (semantic audit required) | 0 | if (seat == 0 && fifth != 1 && s.horse_c8 != 0) return Judge::HorseActionBranch; |
-| L05772 | src/mod/session2/mount_sync_logic.h:298:31 | ride_method | inline literal (semantic audit required) | 1 | if (seat == 0 && fifth != 1 && s.horse_c8 != 0) return Judge::HorseActionBranch; |
-| L05773 | src/mod/session2/mount_sync_logic.h:298:50 | ride_method | inline literal (semantic audit required) | 0 | if (seat == 0 && fifth != 1 && s.horse_c8 != 0) return Judge::HorseActionBranch; |
-| L05774 | src/mod/session2/mount_sync_logic.h:321:19 | post_name | inline literal (semantic audit required) | 0 | if (result != 0) return Post::Result; |
-| L05775 | src/mod/session2/mount_sync_logic.h:324:82 | post_name | inline literal (semantic audit required) | 0 | const uint8_t want = static_cast<uint8_t>(before.count + (before.occupant == 0 ? 1 : 0)); |
-| L05776 | src/mod/session2/mount_sync_logic.h:324:86 | post_name | inline literal (semantic audit required) | 1 | const uint8_t want = static_cast<uint8_t>(before.count + (before.occupant == 0 ? 1 : 0)); |
-| L05777 | src/mod/session2/mount_sync_logic.h:324:90 | post_name | inline literal (semantic audit required) | 0 | const uint8_t want = static_cast<uint8_t>(before.count + (before.occupant == 0 ? 1 : 0)); |
-| L05778 | src/mod/session2/mount_sync_logic.h:326:30 | post_name | inline literal (semantic audit required) | 0 | if (after.res_vehicle != 0) return Post::Reserve; |
-| L05779 | src/mod/session2/mount_sync_logic.h:335:19 | post_name | inline literal (semantic audit required) | 0 | if (result != 0) return Post::Result; |
-| L05780 | src/mod/session2/mount_sync_logic.h:338:51 | post_name | inline literal (semantic audit required) | 1 | if (before.occupant == rider && after.count + 1 != before.count) return Post::Count; |
-| L05781 | src/mod/session2/mount_sync_logic.h:352:78 | detach_decide | inline literal (semantic audit required) | 0 | if (!s.horse_found &#124;&#124; !s.horse_vc &#124;&#124; !s.horse_has_seats &#124;&#124; s.horse_c8 != 0) return DetachCall::Refused; |
-| L05782 | src/mod/session2/mount_sync_logic.h:361:23 | detach_decide | inline literal (semantic audit required) | 0 | (result == 0 && after.cur_vehicle == horse && after.cur_seat == static_cast<int8_t>(seat) && |
-| L05783 | src/mod/session2/mount_sync_logic.h:370:50 | arm_pack | inline literal (semantic audit required) | 32 | return (static_cast<uint64_t>(transition) << 32) &#124; horse; |
-| L05784 | src/mod/session2/mount_sync_logic.h:373:90 | arm_transition | inline literal (semantic audit required) | 32 | inline constexpr uint32_t arm_transition(uint64_t a) { return static_cast<uint32_t>(a >> 32); } |
-| L05785 | src/mod/session2/mount_sync_logic.h:383:62 | ctl_link | inline literal (semantic audit required) | 0 | if (!s.rider_found &#124;&#124; !s.rider_vc &#124;&#124; !s.link &#124;&#124; horse == 0) return CtlLink::Unknown; |
-| L05786 | src/mod/session2/mount_sync_logic.h:394:16 | observed_detach | inline literal (semantic audit required) | 0 | e.result = 0; |
-| L05787 | src/mod/session2/mount_sync_logic.h:396:13 | observed_detach | inline literal (semantic audit required) | 0 | e.aux = 0; |
-| L05788 | src/mod/session2/mount_sync_logic.h:409:33 | observed_detach | inline literal (semantic audit required) | 3 | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
-| L05789 | src/mod/session2/mount_sync_logic.h:409:39 | observed_detach | inline literal (semantic audit required) | 0.05f | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
-| L05790 | src/mod/session2/mount_sync_logic.h:409:46 | observed_detach | inline literal (semantic audit required) | 1.56f | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
-| L05791 | src/mod/session2/mount_sync_logic.h:409:53 | observed_detach | inline literal (semantic audit required) | 0.55f | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
-| L05792 | src/mod/session2/mount_sync_logic.h:414:24 | geo_speed_bucket | inline literal (semantic audit required) | 0 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
-| L05793 | src/mod/session2/mount_sync_logic.h:414:40 | geo_speed_bucket | inline literal (semantic audit required) | 1 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
-| L05794 | src/mod/session2/mount_sync_logic.h:414:56 | geo_speed_bucket | inline literal (semantic audit required) | 2 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
-| L05795 | src/mod/session2/mount_sync_logic.h:414:73 | geo_speed_bucket | inline literal (semantic audit required) | 3 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
-| L05796 | src/mod/session2/mount_sync_logic.h:414:77 | geo_speed_bucket | inline literal (semantic audit required) | 4 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
-| L05797 | src/mod/session2/mount_sync_logic.h:417:17 | geo_err_bucket | inline literal (semantic audit required) | 0.25f | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05798 | src/mod/session2/mount_sync_logic.h:417:25 | geo_err_bucket | inline literal (semantic audit required) | 0 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05799 | src/mod/session2/mount_sync_logic.h:417:34 | geo_err_bucket | inline literal (semantic audit required) | 0.5f | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05800 | src/mod/session2/mount_sync_logic.h:417:41 | geo_err_bucket | inline literal (semantic audit required) | 1 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05801 | src/mod/session2/mount_sync_logic.h:417:56 | geo_err_bucket | inline literal (semantic audit required) | 2 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05802 | src/mod/session2/mount_sync_logic.h:417:71 | geo_err_bucket | inline literal (semantic audit required) | 3 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05803 | src/mod/session2/mount_sync_logic.h:417:86 | geo_err_bucket | inline literal (semantic audit required) | 4 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05804 | src/mod/session2/mount_sync_logic.h:417:90 | geo_err_bucket | inline literal (semantic audit required) | 5 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
-| L05805 | src/mod/session2/mount_sync_logic.h:420:38 | rotate_inv | inline literal (semantic audit required) | 4 | inline void rotate_inv(const float q[4], const float v[3], float out[3]) { |
-| L05806 | src/mod/session2/mount_sync_logic.h:420:56 | rotate_inv | inline literal (semantic audit required) | 3 | inline void rotate_inv(const float q[4], const float v[3], float out[3]) { |
-| L05807 | src/mod/session2/mount_sync_logic.h:420:70 | rotate_inv | inline literal (semantic audit required) | 3 | inline void rotate_inv(const float q[4], const float v[3], float out[3]) { |
-| L05808 | src/mod/session2/mount_sync_logic.h:421:24 | rotate_inv | inline literal (semantic audit required) | 0 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
-| L05809 | src/mod/session2/mount_sync_logic.h:421:35 | rotate_inv | inline literal (semantic audit required) | 1 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
-| L05810 | src/mod/session2/mount_sync_logic.h:421:46 | rotate_inv | inline literal (semantic audit required) | 2 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
-| L05811 | src/mod/session2/mount_sync_logic.h:421:56 | rotate_inv | inline literal (semantic audit required) | 3 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
-| L05812 | src/mod/session2/mount_sync_logic.h:422:22 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05813 | src/mod/session2/mount_sync_logic.h:422:33 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05814 | src/mod/session2/mount_sync_logic.h:422:44 | rotate_inv | inline literal (semantic audit required) | 1 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05815 | src/mod/session2/mount_sync_logic.h:422:54 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05816 | src/mod/session2/mount_sync_logic.h:422:65 | rotate_inv | inline literal (semantic audit required) | 0 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05817 | src/mod/session2/mount_sync_logic.h:422:76 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05818 | src/mod/session2/mount_sync_logic.h:422:86 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05819 | src/mod/session2/mount_sync_logic.h:422:97 | rotate_inv | inline literal (semantic audit required) | 1 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05820 | src/mod/session2/mount_sync_logic.h:422:108 | rotate_inv | inline literal (semantic audit required) | 0 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
-| L05821 | src/mod/session2/mount_sync_logic.h:423:9 | rotate_inv | inline literal (semantic audit required) | 0 | out[0] = v[0] + w * tx + (y * tz - z * ty); |
-| L05822 | src/mod/session2/mount_sync_logic.h:423:16 | rotate_inv | inline literal (semantic audit required) | 0 | out[0] = v[0] + w * tx + (y * tz - z * ty); |
-| L05823 | src/mod/session2/mount_sync_logic.h:424:9 | rotate_inv | inline literal (semantic audit required) | 1 | out[1] = v[1] + w * ty + (z * tx - x * tz); |
-| L05824 | src/mod/session2/mount_sync_logic.h:424:16 | rotate_inv | inline literal (semantic audit required) | 1 | out[1] = v[1] + w * ty + (z * tx - x * tz); |
-| L05825 | src/mod/session2/mount_sync_logic.h:425:9 | rotate_inv | inline literal (semantic audit required) | 2 | out[2] = v[2] + w * tz + (x * ty - y * tx); |
-| L05826 | src/mod/session2/mount_sync_logic.h:425:16 | rotate_inv | inline literal (semantic audit required) | 2 | out[2] = v[2] + w * tz + (x * ty - y * tx); |
-| L05827 | src/mod/session2/mount_sync_logic.h:427:37 | unit_quat | inline literal (semantic audit required) | 4 | inline bool unit_quat(const float q[4]) { |
-| L05828 | src/mod/session2/mount_sync_logic.h:428:23 | unit_quat | inline literal (semantic audit required) | 0 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05829 | src/mod/session2/mount_sync_logic.h:428:30 | unit_quat | inline literal (semantic audit required) | 0 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05830 | src/mod/session2/mount_sync_logic.h:428:37 | unit_quat | inline literal (semantic audit required) | 1 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05831 | src/mod/session2/mount_sync_logic.h:428:44 | unit_quat | inline literal (semantic audit required) | 1 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05832 | src/mod/session2/mount_sync_logic.h:428:51 | unit_quat | inline literal (semantic audit required) | 2 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05833 | src/mod/session2/mount_sync_logic.h:428:58 | unit_quat | inline literal (semantic audit required) | 2 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05834 | src/mod/session2/mount_sync_logic.h:428:65 | unit_quat | inline literal (semantic audit required) | 3 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05835 | src/mod/session2/mount_sync_logic.h:428:72 | unit_quat | inline literal (semantic audit required) | 3 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
-| L05836 | src/mod/session2/mount_sync_logic.h:429:16 | unit_quat | inline literal (semantic audit required) | 0.81f | return l > 0.81f && l < 1.21f; |
-| L05837 | src/mod/session2/mount_sync_logic.h:429:29 | unit_quat | inline literal (semantic audit required) | 1.21f | return l > 0.81f && l < 1.21f; |
-| L05838 | src/mod/session2/mount_sync_logic.h:445:47 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
-| L05839 | src/mod/session2/mount_sync_logic.h:445:69 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
-| L05840 | src/mod/session2/mount_sync_logic.h:445:96 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
-| L05841 | src/mod/session2/mount_sync_logic.h:445:118 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
-| L05842 | src/mod/session2/mount_sync_logic.h:446:15 | geo_frozen | inline literal (semantic audit required) | 0 | float r = 0, h = 0; |
-| L05843 | src/mod/session2/mount_sync_logic.h:446:22 | geo_frozen | inline literal (semantic audit required) | 0 | float r = 0, h = 0; |
-| L05844 | src/mod/session2/mount_sync_logic.h:447:18 | geo_frozen | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
-| L05845 | src/mod/session2/mount_sync_logic.h:447:25 | geo_frozen | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
-| L05846 | src/mod/session2/mount_sync_logic.h:458:60 | geo_frozen | inline literal (semantic audit required) | 3 | std::array<std::array<std::array<std::atomic<int64_t>, 3>, kGeoSpeeds>, kGeoLinks> sum_mm{};       // local offset sums |
-| L05847 | src/mod/session2/mount_sync_logic.h:460:38 | geo_frozen | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0}, off_far{0}, frozen{0}; |
-| L05848 | src/mod/session2/mount_sync_logic.h:460:50 | geo_frozen | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0}, off_far{0}, frozen{0}; |
-| L05849 | src/mod/session2/mount_sync_logic.h:460:61 | geo_frozen | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0}, off_far{0}, frozen{0}; |
-| L05850 | src/mod/session2/mount_sync_logic.h:464:45 | add | inline literal (semantic audit required) | 3 | bool add(size_t link, const float rider[3], const float horse[3], const float hq[4], float speed) { |
-| L05851 | src/mod/session2/mount_sync_logic.h:464:67 | add | inline literal (semantic audit required) | 3 | bool add(size_t link, const float rider[3], const float horse[3], const float hq[4], float speed) { |
-| L05852 | src/mod/session2/mount_sync_logic.h:464:86 | add | inline literal (semantic audit required) | 4 | bool add(size_t link, const float rider[3], const float horse[3], const float hq[4], float speed) { |
-| L05853 | src/mod/session2/mount_sync_logic.h:466:34 | add | inline literal (semantic audit required) | 1 | unreadable.fetch_add(1, std::memory_order_relaxed); |
-| L05854 | src/mod/session2/mount_sync_logic.h:469:23 | add | inline literal (semantic audit required) | 3 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
-| L05855 | src/mod/session2/mount_sync_logic.h:469:35 | add | inline literal (semantic audit required) | 0 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
-| L05856 | src/mod/session2/mount_sync_logic.h:469:46 | add | inline literal (semantic audit required) | 0 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
-| L05857 | src/mod/session2/mount_sync_logic.h:469:56 | add | inline literal (semantic audit required) | 1 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
-| L05858 | src/mod/session2/mount_sync_logic.h:469:67 | add | inline literal (semantic audit required) | 1 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
-| L05859 | src/mod/session2/mount_sync_logic.h:469:77 | add | inline literal (semantic audit required) | 2 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
-| L05860 | src/mod/session2/mount_sync_logic.h:469:88 | add | inline literal (semantic audit required) | 2 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
-| L05861 | src/mod/session2/mount_sync_logic.h:470:21 | add | inline literal (semantic audit required) | 3 | float local[3]; |
-| L05862 | src/mod/session2/mount_sync_logic.h:472:32 | add | inline literal (semantic audit required) | 0 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
-| L05863 | src/mod/session2/mount_sync_logic.h:472:46 | add | inline literal (semantic audit required) | 0 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
-| L05864 | src/mod/session2/mount_sync_logic.h:472:61 | add | inline literal (semantic audit required) | 1 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
-| L05865 | src/mod/session2/mount_sync_logic.h:472:75 | add | inline literal (semantic audit required) | 1 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
-| L05866 | src/mod/session2/mount_sync_logic.h:472:90 | add | inline literal (semantic audit required) | 2 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
-| L05867 | src/mod/session2/mount_sync_logic.h:472:104 | add | inline literal (semantic audit required) | 2 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
-| L05868 | src/mod/session2/mount_sync_logic.h:475:31 | add | inline literal (semantic audit required) | 1 | off_far.fetch_add(1, std::memory_order_relaxed); |
-| L05869 | src/mod/session2/mount_sync_logic.h:479:27 | add | inline literal (semantic audit required) | 1 | n[l][s].fetch_add(1, std::memory_order_relaxed); |
-| L05870 | src/mod/session2/mount_sync_logic.h:480:48 | add | inline literal (semantic audit required) | 1 | err[l][s][geo_err_bucket(e)].fetch_add(1, std::memory_order_relaxed); |
-| L05871 | src/mod/session2/mount_sync_logic.h:481:22 | add | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
-| L05872 | src/mod/session2/mount_sync_logic.h:481:29 | add | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
-| L05873 | src/mod/session2/mount_sync_logic.h:544:22 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
-| L05874 | src/mod/session2/mount_sync_logic.h:544:33 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
-| L05875 | src/mod/session2/mount_sync_logic.h:544:49 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
-| L05876 | src/mod/session2/mount_sync_logic.h:544:60 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
-| L05877 | src/mod/session2/mount_sync_logic.h:545:20 | phase_name | inline literal (semantic audit required) | 0 | uint8_t seat = 0, fifth = 0; |
-| L05878 | src/mod/session2/mount_sync_logic.h:545:31 | phase_name | inline literal (semantic audit required) | 0 | uint8_t seat = 0, fifth = 0; |
-| L05879 | src/mod/session2/mount_sync_logic.h:547:25 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
-| L05880 | src/mod/session2/mount_sync_logic.h:547:43 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
-| L05881 | src/mod/session2/mount_sync_logic.h:547:58 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
-| L05882 | src/mod/session2/mount_sync_logic.h:547:72 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
-| L05883 | src/mod/session2/mount_sync_logic.h:548:27 | phase_name | inline literal (semantic audit required) | 0 | uint32_t detach_aux = 0;     // 0x2228E40's 4th argument on the controller |
-| L05884 | src/mod/session2/mount_sync_logic.h:549:27 | phase_name | inline literal (semantic audit required) | 0 | uint8_t detach_flag = 0;     // its 5th |
-| L05885 | src/mod/session2/mount_sync_logic.h:560:24 | phase_name | inline literal (semantic audit required) | 0 | uint32_t relinks = 0; |
-| L05886 | src/mod/session2/mount_sync_logic.h:566:25 | phase_name | inline literal (semantic audit required) | 0 | uint32_t attempts = 0; |
-| L05887 | src/mod/session2/mount_sync_logic.h:568:27 | phase_name | inline literal (semantic audit required) | 0 | uint64_t on_foot_ms = 0;     // since when the rider's actions are on foot here (0: mounted / not yet) |
-| L05888 | src/mod/session2/mount_sync_logic.h:573:28 | phase_name | inline literal (semantic audit required) | 0 | uint32_t linked_here = 0; |
-| L05889 | src/mod/session2/mount_sync_logic.h:579:30 | phase_name | inline literal (semantic audit required) | 0 | uint64_t unreadable_ms = 0;   // since when the rider could not be read (DetachPolicy::Native), 0 = readable |
-| L05890 | src/mod/session2/mount_sync_logic.h:638:22 | accept_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0; |
-| L05891 | src/mod/session2/mount_sync_logic.h:640:29 | accept_name | inline literal (semantic audit required) | 0 | uint32_t link_vehicle = 0;  // Link+0x10 |
-| L05892 | src/mod/session2/mount_sync_logic.h:641:22 | accept_name | inline literal (semantic audit required) | 0xFF | uint8_t method = 0xFF;      // mc+0xF0 |
-| L05893 | src/mod/session2/mount_sync_logic.h:649:24 | accept_name | inline literal (semantic audit required) | 0ull | uint64_t parent = ~0ull; |
-| L05894 | src/mod/session2/mount_sync_logic.h:650:23 | accept_name | inline literal (semantic audit required) | 0 | uint32_t target = 0; |
-| L05895 | src/mod/session2/mount_sync_logic.h:655:21 | premount_names_horse | inline literal (semantic audit required) | 0 | return horse != 0 && a.parent == ~0ull && a.target == horse; |
-| L05896 | src/mod/session2/mount_sync_logic.h:655:39 | premount_names_horse | inline literal (semantic audit required) | 0ull | return horse != 0 && a.parent == ~0ull && a.target == horse; |
-| L05897 | src/mod/session2/mount_sync_logic.h:671:43 | relink_due | inline literal (semantic audit required) | 0 | rn.known && rn.link_vehicle == 0 && t.attempts < kMaxAttempts && t.committed_ms && |
-| L05898 | src/mod/session2/mount_sync_logic.h:686:25 | reset | inline literal (semantic audit required) | 0 | quarantine_n_ = 0; |
-| L05899 | src/mod/session2/mount_sync_logic.h:697:27 | on_event | inline literal (semantic audit required) | 0 | if (remote_key == 0 &#124;&#124; e.rider != remote_key) return Accept::NotRemote; |
-| L05900 | src/mod/session2/mount_sync_logic.h:704:43 | on_event | inline literal (semantic audit required) | 0 | if (t && t->transition != 0 && t->nonce == e.nonce && e.transition <= t->transition) { |
-| L05901 | src/mod/session2/mount_sync_logic.h:719:49 | on_event | inline literal (semantic audit required) | 1 | t->begun_ms = now_ms ? now_ms : 1; |
-| L05902 | src/mod/session2/mount_sync_logic.h:724:67 | on_event | inline literal (semantic audit required) | 0 | if (!t &#124;&#124; t->nonce != e.nonce &#124;&#124; t->transition == 0) return Accept::NoTxn; |
-| L05903 | src/mod/session2/mount_sync_logic.h:729:33 | on_event | inline literal (semantic audit required) | 0 | if (e.result != 0 &#124;&#124; !(e.flags & kFlagOk)) { |
-| L05904 | src/mod/session2/mount_sync_logic.h:734:53 | on_event | inline literal (semantic audit required) | 1 | t->committed_ms = now_ms ? now_ms : 1; |
-| L05905 | src/mod/session2/mount_sync_logic.h:738:67 | on_event | inline literal (semantic audit required) | 0 | if (!t &#124;&#124; t->nonce != e.nonce &#124;&#124; t->transition == 0) return Accept::NoTxn; |
-| L05906 | src/mod/session2/mount_sync_logic.h:741:33 | on_event | inline literal (semantic audit required) | 0 | if (e.result != 0 &#124;&#124; !(e.flags & kFlagOk)) return Accept::DetachFailed; |
-| L05907 | src/mod/session2/mount_sync_logic.h:783:20 | expire | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L05908 | src/mod/session2/mount_sync_logic.h:802:20 | cancel_holds | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L05909 | src/mod/session2/mount_sync_logic.h:841:50 | plan | inline literal (semantic audit required) | 1 | const uint64_t stamp = now_ms ? now_ms : 1; |
-| L05910 | src/mod/session2/mount_sync_logic.h:870:39 | plan | inline literal (semantic audit required) | 0 | t.unreadable_ms = 0; |
-| L05911 | src/mod/session2/mount_sync_logic.h:876:36 | plan | inline literal (semantic audit required) | 0 | t.detach_aux = 0; |
-| L05912 | src/mod/session2/mount_sync_logic.h:889:40 | plan | inline literal (semantic audit required) | 0 | t.detach_aux = 0; |
-| L05913 | src/mod/session2/mount_sync_logic.h:900:32 | plan | inline literal (semantic audit required) | 0 | t.detach_aux = 0; |
-| L05914 | src/mod/session2/mount_sync_logic.h:930:41 | note_rider_parent | inline literal (semantic audit required) | 32 | const bool mounted = (parent >> 32) == 0 && is_b(static_cast<uint32_t>(parent)); |
-| L05915 | src/mod/session2/mount_sync_logic.h:930:48 | note_rider_parent | inline literal (semantic audit required) | 0 | const bool mounted = (parent >> 32) == 0 && is_b(static_cast<uint32_t>(parent)); |
-| L05916 | src/mod/session2/mount_sync_logic.h:932:29 | note_rider_parent | inline literal (semantic audit required) | 0 | t->on_foot_ms = 0; |
-| L05917 | src/mod/session2/mount_sync_logic.h:933:31 | note_rider_parent | inline literal (semantic audit required) | 0ull | } else if (parent == ~0ull && target != t->horse && !t->on_foot_ms) { |
-| L05918 | src/mod/session2/mount_sync_logic.h:934:47 | note_rider_parent | inline literal (semantic audit required) | 1 | t->on_foot_ms = now_ms ? now_ms : 1; |
-| L05919 | src/mod/session2/mount_sync_logic.h:942:43 | finish_commit | inline literal (semantic audit required) | 0 | if (retired_old) t->linked_here = 0; |
-| L05920 | src/mod/session2/mount_sync_logic.h:976:89 | finish_detach | inline literal (semantic audit required) | 0 | if (o == Outcome::Applied &#124;&#124; o == Outcome::AlreadyApplied) t->linked_here = 0; |
-| L05921 | src/mod/session2/mount_sync_logic.h:998:46 | find | inline literal (semantic audit required) | 0 | if (t.rider == rider && rider != 0) return &t; |
-| L05922 | src/mod/session2/mount_sync_logic.h:1003:25 | quarantined | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < quarantine_n_; ++i) { |
-| L05923 | src/mod/session2/mount_sync_logic.h:1004:32 | quarantined | inline literal (semantic audit required) | 0 | if (quarantine_[i][0] == rider && quarantine_[i][1] == horse) return true; |
-| L05924 | src/mod/session2/mount_sync_logic.h:1004:62 | quarantined | inline literal (semantic audit required) | 1 | if (quarantine_[i][0] == rider && quarantine_[i][1] == horse) return true; |
-| L05925 | src/mod/session2/mount_sync_logic.h:1018:41 | take_detach | inline literal (semantic audit required) | 1 | t.detach_ms = now_ms ? now_ms : 1; |
-| L05926 | src/mod/session2/mount_sync_logic.h:1021:58 | take_detach | inline literal (semantic audit required) | 0 | t.detach_observed = (e.flags & kFlagObserved) != 0; |
-| L05927 | src/mod/session2/mount_sync_logic.h:1026:61 | take_detach | inline literal (semantic audit required) | 0 | if (policy_ == DetachPolicy::Native) t.on_foot_ms = 0; |
-| L05928 | src/mod/session2/mount_sync_logic.h:1057:46 | slot_of | inline literal (semantic audit required) | 0 | if (t.rider == rider && rider != 0) return &t; |
-| L05929 | src/mod/session2/mount_sync_logic.h:1063:28 | alloc | inline literal (semantic audit required) | 0 | if (t.rider == 0) return &t; |
-| L05930 | src/mod/session2/mount_sync_logic.h:1066:28 | alloc | inline literal (semantic audit required) | 0 | Txn* best = &slot_[0]; |
-| L05931 | src/mod/session2/mount_sync_logic.h:1079:46 | add_quarantine | inline literal (semantic audit required) | 1 | quarantine_[quarantine_.size() - 1] = {rider, horse}; |
-| L05932 | src/mod/session2/mount_sync_logic.h:1083:37 | add_quarantine | inline literal (semantic audit required) | 2 | std::array<std::array<uint32_t, 2>, 8> quarantine_{}; |
-| L05933 | src/mod/session2/mount_sync_logic.h:1083:41 | add_quarantine | inline literal (semantic audit required) | 8 | std::array<std::array<uint32_t, 2>, 8> quarantine_{}; |
-| L05934 | src/mod/session2/mount_sync_logic.h:1084:28 | add_quarantine | inline literal (semantic audit required) | 0 | size_t quarantine_n_ = 0; |
-| L05935 | src/mod/session2/mount_sync_logic.h:1109:18 | add_quarantine | inline literal (semantic audit required) | 0xFF | uint8_t c8 = 0xFF;          // its actor+0xC8 (0 = a remote copy here) |
-| L05936 | src/mod/session2/mount_sync_logic.h:1111:22 | add_quarantine | inline literal (semantic audit required) | 0xFF | uint8_t method = 0xFF;      // mc+0xF0 |
-| L05937 | src/mod/session2/mount_sync_logic.h:1123:21 | add_quarantine | inline literal (semantic audit required) | 0xFF | uint8_t chart = 0xFF; |
-| L05938 | src/mod/session2/mount_sync_logic.h:1164:62 | gate_stuck | inline literal (semantic audit required) | 0 | if (v.cur40 && (v.method == kMethodRideOff &#124;&#124; v.chart == 0)) return true; |
-| L05939 | src/mod/session2/mount_sync_logic.h:1169:36 | gate_decide | inline literal (semantic audit required) | 0 | if (!v.remote_rider &#124;&#124; v.c8 != 0) return GateVerdict::NotRider; |
-| L05940 | src/mod/session2/mount_sync_logic.h:1189:22 | gate_decide | inline literal (semantic audit required) | 0 | uint32_t drops = 0; |
-| L05941 | src/mod/session2/mount_sync_logic.h:1194:21 | on | inline literal (semantic audit required) | 0 | drops = 0; |
-| L05942 | src/mod/session2/mount_sync_logic.h:1208:23 | gate_clear_bits | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < kGateEntries; ++i) { |
-| L05943 | src/mod/session2/mount_sync_logic.h:1244:54 | seat_horse_type | inline literal (semantic audit required) | 1 | inline bool seat_horse_type(uint8_t t) { return t == 1 &#124;&#124; (t >= 3 && t <= 9 && t != kActorWorld); } |
-| L05944 | src/mod/session2/mount_sync_logic.h:1244:65 | seat_horse_type | inline literal (semantic audit required) | 3 | inline bool seat_horse_type(uint8_t t) { return t == 1 &#124;&#124; (t >= 3 && t <= 9 && t != kActorWorld); } |
-| L05945 | src/mod/session2/mount_sync_logic.h:1244:75 | seat_horse_type | inline literal (semantic audit required) | 9 | inline bool seat_horse_type(uint8_t t) { return t == 1 &#124;&#124; (t >= 3 && t <= 9 && t != kActorWorld); } |
-| L05946 | src/mod/session2/mount_sync_logic.h:1251:27 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t attach_type = 0xFF;  // [[CC+0x100]+8] (0xFF unreadable) |
-| L05947 | src/mod/session2/mount_sync_logic.h:1253:27 | seat_horse_type | inline literal (semantic audit required) | 0 | uint32_t parent_key = 0;     // [[[actor+0x68]+0x1B8]+0x1C] |
-| L05948 | src/mod/session2/mount_sync_logic.h:1254:21 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t cc228 = 0xFF;        // CC+0x228: 1 once CC vf19 (0x85E2B0) ran (component initialised); vf42 detaches only then |
-| L05949 | src/mod/session2/mount_sync_logic.h:1255:26 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t rider_type = 0xFF;   // [[rider+0x88]+1] (1 player) |
-| L05950 | src/mod/session2/mount_sync_logic.h:1256:26 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t horse_type = 0xFF;   // [[horse+0x88]+1] |
-| L05951 | src/mod/session2/mount_sync_logic.h:1257:27 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t parent_type = 0xFF;  // [[[actor+0x68]+0x1B8]+0x18]: the hierarchy's attach type (0x15ECA10 writes it with the key) |
-| L05952 | src/mod/session2/mount_sync_logic.h:1259:27 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t rider_local = 0xFF;  // byte rider+0x94 (one half of vf178 0x4FE260; 1 on both players' characters) |
-| L05953 | src/mod/session2/mount_sync_logic.h:1260:22 | seat_horse_type | inline literal (semantic audit required) | 0 | uint32_t vf178 = 0;          // RVA of the rider's vtable slot +0x178 (0x4FE260 every client in-game actor) |
-| L05954 | src/mod/session2/mount_sync_logic.h:1261:27 | seat_horse_type | inline literal (semantic audit required) | 0 | uint64_t rider_user = 0;     // [rider+0xA0] (its user object) |
-| L05955 | src/mod/session2/mount_sync_logic.h:1262:27 | seat_horse_type | inline literal (semantic audit required) | 0 | uint64_t local_user = 0;     // [[WorldSystem+0x30]+0x58] (this client's user object) |
-| L05956 | src/mod/session2/mount_sync_logic.h:1263:24 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t rider_c8 = 0xFF;     // rider +0xC8 (0 a remote copy here, 1 / 2 controlled here; 0xFF unreadable) |
-| L05957 | src/mod/session2/mount_sync_logic.h:1264:24 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t horse_c8 = 0xFF;     // horse +0xC8 |
-| L05958 | src/mod/session2/mount_sync_logic.h:1273:32 | seat_local_user | inline literal (semantic audit required) | 0 | return s.local_user == 0 &#124;&#124; s.rider_user == 0 &#124;&#124; (s.rider_user == s.local_user && s.rider_local != 0); |
-| L05959 | src/mod/session2/mount_sync_logic.h:1273:53 | seat_local_user | inline literal (semantic audit required) | 0 | return s.local_user == 0 &#124;&#124; s.rider_user == 0 &#124;&#124; (s.rider_user == s.local_user && s.rider_local != 0); |
-| L05960 | src/mod/session2/mount_sync_logic.h:1273:108 | seat_local_user | inline literal (semantic audit required) | 0 | return s.local_user == 0 &#124;&#124; s.rider_user == 0 &#124;&#124; (s.rider_user == s.local_user && s.rider_local != 0); |
-| L05961 | src/mod/session2/mount_sync_logic.h:1275:56 | seat_local_user | inline literal (semantic audit required) | 0 | if (s.vf178 == kVf178User) return s.rider_local != 0; |
-| L05962 | src/mod/session2/mount_sync_logic.h:1328:50 | seat_why_name | inline literal (semantic audit required) | 0 | uint32_t rider_key = 0, uint32_t local_key = 0) { |
-| L05963 | src/mod/session2/mount_sync_logic.h:1328:74 | seat_why_name | inline literal (semantic audit required) | 0 | uint32_t rider_key = 0, uint32_t local_key = 0) { |
-| L05964 | src/mod/session2/mount_sync_logic.h:1331:22 | seat_why_name | inline literal (semantic audit required) | 0 | if (rider_key == 0 &#124;&#124; local_key == 0 &#124;&#124; rider_key == local_key) return {SeatVerdict::Refused, SeatWhy::Local}; |
-| L05965 | src/mod/session2/mount_sync_logic.h:1331:40 | seat_why_name | inline literal (semantic audit required) | 0 | if (rider_key == 0 &#124;&#124; local_key == 0 &#124;&#124; rider_key == local_key) return {SeatVerdict::Refused, SeatWhy::Local}; |
-| L05966 | src/mod/session2/mount_sync_logic.h:1332:47 | seat_why_name | inline literal (semantic audit required) | 0 | if (!p.rider_found &#124;&#124; !p.link &#124;&#124; horse == 0 &#124;&#124; p.cur_vehicle != horse &#124;&#124; p.cur_seat != static_cast<int8_t>(seat)) { |
-| L05967 | src/mod/session2/mount_sync_logic.h:1335:17 | seat_why_name | inline literal (semantic audit required) | 0 | if (seat != 0) return {SeatVerdict::Refused, SeatWhy::NotSeat0}; |
-| L05968 | src/mod/session2/mount_sync_logic.h:1337:42 | seat_why_name | inline literal (semantic audit required) | 0xFF | if (!s.has_cc100 &#124;&#124; s.attach_type == 0xFF) return {SeatVerdict::Refused, SeatWhy::NoAttach}; |
-| L05969 | src/mod/session2/mount_sync_logic.h:1340:42 | seat_why_name | inline literal (semantic audit required) | 0 | if (!s.has_parent &#124;&#124; s.parent_key != 0) return {SeatVerdict::Refused, SeatWhy::ParentSet}; |
-| L05970 | src/mod/session2/mount_sync_logic.h:1341:20 | seat_why_name | inline literal (semantic audit required) | 1 | if (s.cc228 != 1) return {SeatVerdict::Refused, SeatWhy::NotInit}; |
-| L05971 | src/mod/session2/mount_sync_logic.h:1345:23 | seat_why_name | inline literal (semantic audit required) | 0 | if (s.rider_c8 != 0 &#124;&#124; s.horse_c8 != 0) return {SeatVerdict::Refused, SeatWhy::Controlled}; |
-| L05972 | src/mod/session2/mount_sync_logic.h:1345:42 | seat_why_name | inline literal (semantic audit required) | 0 | if (s.rider_c8 != 0 &#124;&#124; s.horse_c8 != 0) return {SeatVerdict::Refused, SeatWhy::Controlled}; |
-| L05973 | src/mod/session2/mount_sync_logic.h:1368:16 | seat_verify | inline literal (semantic audit required) | 0 | if (res != 0) return SeatPost::Result; |
-| L05974 | src/mod/session2/mount_sync_logic.h:1369:48 | seat_verify | inline literal (semantic audit required) | 0xFF | if (!post.has_cc100 &#124;&#124; post.attach_type == 0xFF) return SeatPost::Unreadable; |
-| L05975 | src/mod/session2/mount_sync_logic.h:1401:26 | seat_cause_name | inline literal (semantic audit required) | 0ull | uint64_t after_ms = ~0ull;  // since the expectation (~0: none) |
-| L05976 | src/mod/session2/mount_sync_logic.h:1402:26 | seat_cause_name | inline literal (semantic audit required) | 0 | uint64_t seated_ms = 0;     // since the seat |
-| L05977 | src/mod/session2/mount_sync_logic.h:1403:20 | seat_cause_name | inline literal (semantic audit required) | 0xFF | uint8_t type = 0xFF;        // the attach type now |
-| L05978 | src/mod/session2/mount_sync_logic.h:1420:51 | expecting | inline literal (semantic audit required) | 0 | bool expecting() const { return expect_ms_ != 0; } |
-| L05979 | src/mod/session2/mount_sync_logic.h:1427:40 | expect | inline literal (semantic audit required) | 1 | expect_ms_ = now_ms ? now_ms : 1; |
-| L05980 | src/mod/session2/mount_sync_logic.h:1433:26 | mounted | inline literal (semantic audit required) | 0 | expect_ms_ = 0; |
-| L05981 | src/mod/session2/mount_sync_logic.h:1443:83 | step | inline literal (semantic audit required) | 0ull | st.after_ms = expect_ms_ && now_ms >= expect_ms_ ? now_ms - expect_ms_ : ~0ull; |
-| L05982 | src/mod/session2/mount_sync_logic.h:1444:65 | step | inline literal (semantic audit required) | 0 | st.seated_ms = now_ms >= seat_ms_ ? now_ms - seat_ms_ : 0; |
-| L05983 | src/mod/session2/mount_sync_logic.h:1445:21 | step | inline literal (semantic audit required) | 0xFF | if (type == 0xFF) { |
-| L05984 | src/mod/session2/mount_sync_logic.h:1447:46 | step | inline literal (semantic audit required) | 1 | lost_ms_ = now_ms ? now_ms : 1; |
-| L05985 | src/mod/session2/mount_sync_logic.h:1454:20 | step | inline literal (semantic audit required) | 0 | lost_ms_ = 0; |
-| L05986 | src/mod/session2/mount_sync_logic.h:1467:44 | step | inline literal (semantic audit required) | 1 | expect_ms_ = now_ms ? now_ms : 1;  // the retirement gets its own wait |
-| L05987 | src/mod/session2/mount_sync_logic.h:1481:23 | set_retire | inline literal (semantic audit required) | 0 | uint32_t rider_ = 0, horse_ = 0; |
-| L05988 | src/mod/session2/mount_sync_logic.h:1481:35 | set_retire | inline literal (semantic audit required) | 0 | uint32_t rider_ = 0, horse_ = 0; |
-| L05989 | src/mod/session2/mount_sync_logic.h:1482:25 | set_retire | inline literal (semantic audit required) | 0 | uint64_t seat_ms_ = 0, expect_ms_ = 0, lost_ms_ = 0; |
-| L05990 | src/mod/session2/mount_sync_logic.h:1482:41 | set_retire | inline literal (semantic audit required) | 0 | uint64_t seat_ms_ = 0, expect_ms_ = 0, lost_ms_ = 0; |
-| L05991 | src/mod/session2/mount_sync_logic.h:1482:55 | set_retire | inline literal (semantic audit required) | 0 | uint64_t seat_ms_ = 0, expect_ms_ = 0, lost_ms_ = 0; |
-| L05992 | src/mod/session2/mount_sync_logic.h:1503:26 | hold_who | inline literal (semantic audit required) | 0 | if (!early &#124;&#124; key == 0 &#124;&#124; key == local) return HoldWho::None; |
-| L05993 | src/mod/session2/mount_sync_logic.h:1504:19 | hold_who | inline literal (semantic audit required) | 0 | if (remote != 0 && key == remote) return HoldWho::Remote; |
-| L05994 | src/mod/session2/mount_sync_logic.h:1508:42 | hold_pose_ok | inline literal (semantic audit required) | 3 | inline bool hold_pose_ok(const float pos[3], int16_t sector_x, int16_t sector_z) { |
-| L05995 | src/mod/session2/mount_sync_logic.h:1509:15 | hold_pose_ok | inline literal (semantic audit required) | 0 | float l = 0; |
-| L05996 | src/mod/session2/mount_sync_logic.h:1510:18 | hold_pose_ok | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
-| L05997 | src/mod/session2/mount_sync_logic.h:1510:25 | hold_pose_ok | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
-| L05998 | src/mod/session2/mount_sync_logic.h:1514:26 | hold_pose_ok | inline literal (semantic audit required) | 0 | return !(sector_x == 0 && sector_z == 0 && l < 1.f); |
-| L05999 | src/mod/session2/mount_sync_logic.h:1514:43 | hold_pose_ok | inline literal (semantic audit required) | 0 | return !(sector_x == 0 && sector_z == 0 && l < 1.f); |
-| L06000 | src/mod/session2/mount_sync_logic.h:1518:81 | hold_decide | inline literal (semantic audit required) | 3 | inline HoldAct hold_decide(Mode m, HoldWho who, bool pose_read, const float pos[3], int16_t sector_x, int16_t sector_z) { |
-| L06001 | src/mod/session2/mount_sync_logic.h:1531:37 | self_check_hit | inline literal (semantic audit required) | 4 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
-| L06002 | src/mod/session2/mount_sync_logic.h:1531:50 | self_check_hit | inline literal (semantic audit required) | 0 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
-| L06003 | src/mod/session2/mount_sync_logic.h:1531:63 | self_check_hit | inline literal (semantic audit required) | 1 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
-| L06004 | src/mod/session2/mount_sync_logic.h:1531:69 | self_check_hit | inline literal (semantic audit required) | 8 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
-| L06005 | src/mod/session2/mount_sync_logic.h:1531:102 | self_check_hit | inline literal (semantic audit required) | 0 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
-| L06006 | src/mod/session2/mount_sync_logic.h:1533:39 | self_check_hit | inline literal (semantic audit required) | 1 | if (rider && key == rider) return 1; |
-| L06007 | src/mod/session2/mount_sync_logic.h:1534:39 | self_check_hit | inline literal (semantic audit required) | 2 | if (horse && key == horse) return 2; |
-| L06008 | src/mod/session2/mount_sync_logic.h:1535:12 | self_check_hit | inline literal (semantic audit required) | 0 | return 0; |
-| L06009 | src/mod/session2/mount_sync_logic.h:1556:29 | drain | inline literal (semantic audit required) | 1 | busy_.fetch_add(1, std::memory_order_relaxed); |
-| L06010 | src/mod/session2/mount_sync_logic.h:1557:20 | drain | inline literal (semantic audit required) | 0 | return 0; |
-| L06011 | src/mod/session2/mount_sync_logic.h:1559:20 | drain | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L06012 | src/mod/session2/mount_sync_logic.h:1562:35 | drain | inline literal (semantic audit required) | 1 | failed_.fetch_add(1, std::memory_order_relaxed); |
-| L06013 | src/mod/session2/mount_sync_logic.h:1563:24 | drain | inline literal (semantic audit required) | 0 | return 0; |
-| L06014 | src/mod/session2/mount_sync_logic.h:1574:35 | drain | inline literal (semantic audit required) | 1 | failed_.fetch_add(1, std::memory_order_relaxed); |
-| L06015 | src/mod/session2/mount_sync_logic.h:1592:35 | discard | inline literal (semantic audit required) | 1 | size_t n = has_pending_ ? 1 : 0; |
-| L06016 | src/mod/session2/mount_sync_logic.h:1592:39 | discard | inline literal (semantic audit required) | 0 | size_t n = has_pending_ ? 1 : 0; |
-| L06017 | src/mod/session2/mount_sync_logic.h:1611:35 | pending | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> failed_{0}, busy_{0}, pushed_{0}; |
-| L06018 | src/mod/session2/mount_sync_logic.h:1611:45 | pending | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> failed_{0}, busy_{0}, pushed_{0}; |
-| L06019 | src/mod/session2/mount_sync_logic.h:1611:57 | pending | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> failed_{0}, busy_{0}, pushed_{0}; |
-| L06020 | src/mod/session2/observer_hold_acks.h:87:29 | active | inline literal (semantic audit required) | 0 | uint32_t extra_pushed = 0; // Pushed: packets queued after/with it (released or spilled) |
-| L06021 | src/mod/session2/observer_hold_acks.h:88:29 | active | inline literal (semantic audit required) | 0 | uint32_t extra_failed = 0; // ... of which the queue refused |
-| L06022 | src/mod/session2/observer_hold_acks_logic.h:62:21 | op_index | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kHeldOps.size(); ++i) { |
-| L06023 | src/mod/session2/observer_hold_acks_logic.h:65:13 | op_index | inline literal (semantic audit required) | 1 | return -1; |
-| L06024 | src/mod/session2/observer_hold_acks_logic.h:69:18 | le32 | inline literal (semantic audit required) | 0 | uint32_t v = 0; |
-| L06025 | src/mod/session2/observer_hold_acks_logic.h:70:24 | le32 | inline literal (semantic audit required) | 4 | std::memcpy(&v, p, 4); |
-| L06026 | src/mod/session2/observer_hold_acks_logic.h:76:28 | npc_key_of | inline literal (semantic audit required) | 0 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
-| L06027 | src/mod/session2/observer_hold_acks_logic.h:76:50 | npc_key_of | inline literal (semantic audit required) | 4 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
-| L06028 | src/mod/session2/observer_hold_acks_logic.h:78:17 | npc_key_of | inline literal (semantic audit required) | 28 | if ((key >> 28) != kNpcKeyClass) return std::nullopt; |
-| L06029 | src/mod/session2/observer_hold_acks_logic.h:88:28 | held_key_of | inline literal (semantic audit required) | 0 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
-| L06030 | src/mod/session2/observer_hold_acks_logic.h:88:50 | held_key_of | inline literal (semantic audit required) | 4 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
-| L06031 | src/mod/session2/observer_hold_acks_logic.h:90:17 | held_key_of | inline literal (semantic audit required) | 28 | if ((key >> 28) != kNpcKeyClass && (key >> 28) != kCharKeyClass) return std::nullopt; |
-| L06032 | src/mod/session2/observer_hold_acks_logic.h:90:48 | held_key_of | inline literal (semantic audit required) | 28 | if ((key >> 28) != kNpcKeyClass && (key >> 28) != kCharKeyClass) return std::nullopt; |
-| L06033 | src/mod/session2/observer_hold_acks_logic.h:97:104 | announce_keys | inline literal (semantic audit required) | 4096 | inline size_t announce_keys(std::span<const uint8_t> payload, std::vector<uint32_t>& out, size_t max = 4096) { |
-| L06034 | src/mod/session2/observer_hold_acks_logic.h:98:16 | announce_keys | inline literal (semantic audit required) | 0 | size_t n = 0, p = 0; |
-| L06035 | src/mod/session2/observer_hold_acks_logic.h:98:23 | announce_keys | inline literal (semantic audit required) | 0 | size_t n = 0, p = 0; |
-| L06036 | src/mod/session2/observer_hold_acks_logic.h:99:27 | announce_keys | inline literal (semantic audit required) | 2 | while (n < max && p + 2 <= payload.size()) { |
-| L06037 | src/mod/session2/observer_hold_acks_logic.h:100:24 | announce_keys | inline literal (semantic audit required) | 0 | uint16_t len = 0; |
-| L06038 | src/mod/session2/observer_hold_acks_logic.h:101:47 | announce_keys | inline literal (semantic audit required) | 2 | std::memcpy(&len, payload.data() + p, 2); |
-| L06039 | src/mod/session2/observer_hold_acks_logic.h:102:20 | announce_keys | inline literal (semantic audit required) | 0 | if (len == 0 &#124;&#124; p + 2 + len > payload.size()) break; |
-| L06040 | src/mod/session2/observer_hold_acks_logic.h:102:29 | announce_keys | inline literal (semantic audit required) | 2 | if (len == 0 &#124;&#124; p + 2 + len > payload.size()) break; |
-| L06041 | src/mod/session2/observer_hold_acks_logic.h:103:20 | announce_keys | inline literal (semantic audit required) | 5 | if (len >= 5 && payload[p + 2] != 0) { |
-| L06042 | src/mod/session2/observer_hold_acks_logic.h:103:37 | announce_keys | inline literal (semantic audit required) | 2 | if (len >= 5 && payload[p + 2] != 0) { |
-| L06043 | src/mod/session2/observer_hold_acks_logic.h:103:43 | announce_keys | inline literal (semantic audit required) | 0 | if (len >= 5 && payload[p + 2] != 0) { |
-| L06044 | src/mod/session2/observer_hold_acks_logic.h:104:53 | announce_keys | inline literal (semantic audit required) | 3 | out.push_back(le32(payload.data() + p + 3)); |
-| L06045 | src/mod/session2/observer_hold_acks_logic.h:107:14 | announce_keys | inline literal (semantic audit required) | 2 | p += 2 + len; |
-| L06046 | src/mod/session2/observer_hold_acks_logic.h:113:23 | announce_keys | inline literal (semantic audit required) | 1024 | size_t max_keys = 1024;                // = observer_hold's NPC table (hold::kNpcTableCapacity) |
-| L06047 | src/mod/session2/observer_hold_acks_logic.h:114:34 | announce_keys | inline literal (semantic audit required) | 32 | size_t max_packets_per_key = 32;       // session 6B: at most 5 per key (3 x 2404 + 2 x 2586... + 2723) |
-| L06048 | src/mod/session2/observer_hold_acks_logic.h:115:32 | announce_keys | inline literal (semantic audit required) | 32 | size_t max_bytes_per_key = 32 * 1024;  // session 6B: at most 3437 bytes per key |
-| L06049 | src/mod/session2/observer_hold_acks_logic.h:115:37 | announce_keys | inline literal (semantic audit required) | 1024 | size_t max_bytes_per_key = 32 * 1024;  // session 6B: at most 3437 bytes per key |
-| L06050 | src/mod/session2/observer_hold_acks_logic.h:116:30 | announce_keys | inline literal (semantic audit required) | 4u | size_t max_bytes_total = 4u << 20; |
-| L06051 | src/mod/session2/observer_hold_acks_logic.h:116:36 | announce_keys | inline literal (semantic audit required) | 20 | size_t max_bytes_total = 4u << 20; |
-| L06052 | src/mod/session2/observer_hold_acks_logic.h:119:28 | announce_keys | inline literal (semantic audit required) | 100000 | uint64_t max_hold_ms = 100000; |
-| L06053 | src/mod/session2/observer_hold_acks_logic.h:120:26 | announce_keys | inline literal (semantic audit required) | 2000 | uint64_t orphan_ms = 2000;     // a release whose 2005 was not seen: its packets wait this long |
-| L06054 | src/mod/session2/observer_hold_acks_logic.h:139:20 | discard_name | inline literal (semantic audit required) | 0 | uint64_t seq = 0;  // one order across keys |
-| L06055 | src/mod/session2/observer_hold_acks_logic.h:140:23 | discard_name | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
-| L06056 | src/mod/session2/observer_hold_acks_logic.h:141:20 | discard_name | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L06057 | src/mod/session2/observer_hold_acks_logic.h:142:21 | discard_name | inline literal (semantic audit required) | 0 | uint64_t t_ms = 0; |
-| L06058 | src/mod/session2/observer_hold_acks_logic.h:147:22 | discard_name | inline literal (semantic audit required) | 0 | uint64_t begun = 0, again = 0, full = 0; |
-| L06059 | src/mod/session2/observer_hold_acks_logic.h:147:33 | discard_name | inline literal (semantic audit required) | 0 | uint64_t begun = 0, again = 0, full = 0; |
-| L06060 | src/mod/session2/observer_hold_acks_logic.h:147:43 | discard_name | inline literal (semantic audit required) | 0 | uint64_t begun = 0, again = 0, full = 0; |
-| L06061 | src/mod/session2/observer_hold_acks_logic.h:148:21 | discard_name | inline literal (semantic audit required) | 0 | uint64_t held = 0; |
-| L06062 | src/mod/session2/observer_hold_acks_logic.h:150:30 | discard_name | inline literal (semantic audit required) | 0 | uint64_t released_pkts = 0, released_keys = 0, announced_empty = 0; |
-| L06063 | src/mod/session2/observer_hold_acks_logic.h:150:49 | discard_name | inline literal (semantic audit required) | 0 | uint64_t released_pkts = 0, released_keys = 0, announced_empty = 0; |
-| L06064 | src/mod/session2/observer_hold_acks_logic.h:150:70 | discard_name | inline literal (semantic audit required) | 0 | uint64_t released_pkts = 0, released_keys = 0, announced_empty = 0; |
-| L06065 | src/mod/session2/observer_hold_acks_logic.h:151:28 | discard_name | inline literal (semantic audit required) | 0 | uint64_t wait_sum_ms = 0, wait_max_ms = 0;  // first held packet -> its 2005 |
-| L06066 | src/mod/session2/observer_hold_acks_logic.h:151:45 | discard_name | inline literal (semantic audit required) | 0 | uint64_t wait_sum_ms = 0, wait_max_ms = 0;  // first held packet -> its 2005 |
-| L06067 | src/mod/session2/observer_hold_acks_logic.h:152:28 | discard_name | inline literal (semantic audit required) | 0 | uint64_t per_key_max = 0; |
-| L06068 | src/mod/session2/observer_hold_acks_logic.h:154:29 | discard_name | inline literal (semantic audit required) | 0 | uint64_t spilled_keys = 0, spilled_pkts = 0, spilled_closed = 0; |
-| L06069 | src/mod/session2/observer_hold_acks_logic.h:154:47 | discard_name | inline literal (semantic audit required) | 0 | uint64_t spilled_keys = 0, spilled_pkts = 0, spilled_closed = 0; |
-| L06070 | src/mod/session2/observer_hold_acks_logic.h:154:67 | discard_name | inline literal (semantic audit required) | 0 | uint64_t spilled_keys = 0, spilled_pkts = 0, spilled_closed = 0; |
-| L06071 | src/mod/session2/observer_hold_acks_logic.h:155:26 | discard_name | inline literal (semantic audit required) | 0 | uint64_t keys_peak = 0, bytes_peak = 0; |
-| L06072 | src/mod/session2/observer_hold_acks_logic.h:155:42 | discard_name | inline literal (semantic audit required) | 0 | uint64_t keys_peak = 0, bytes_peak = 0; |
-| L06073 | src/mod/session2/observer_hold_acks_logic.h:160:20 | discard_name | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L06074 | src/mod/session2/observer_hold_acks_logic.h:161:22 | discard_name | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
-| L06075 | src/mod/session2/observer_hold_acks_logic.h:162:24 | discard_name | inline literal (semantic audit required) | 0 | uint64_t wait_ms = 0; |
-| L06076 | src/mod/session2/observer_hold_acks_logic.h:163:25 | discard_name | inline literal (semantic audit required) | 0 | uint16_t first_op = 0, last_op = 0; |
-| L06077 | src/mod/session2/observer_hold_acks_logic.h:163:38 | discard_name | inline literal (semantic audit required) | 0 | uint16_t first_op = 0, last_op = 0; |
-| L06078 | src/mod/session2/observer_hold_acks_logic.h:187:29 | begin | inline literal (semantic audit required) | 0 | e.deadline_ms = 0; |
-| L06079 | src/mod/session2/observer_hold_acks_logic.h:215:26 | begin | inline literal (semantic audit required) | 1 | if (e.q.size() + 1 > l_.max_packets_per_key &#124;&#124; e.bytes + size > l_.max_bytes_per_key &#124;&#124; |
-| L06080 | src/mod/session2/observer_hold_acks_logic.h:218:45 | begin | inline literal (semantic audit required) | 1 | c_.spilled_pkts += e.q.size() + 1; |
-| L06081 | src/mod/session2/observer_hold_acks_logic.h:224:23 | begin | inline literal (semantic audit required) | 0 | e.bytes = 0; |
-| L06082 | src/mod/session2/observer_hold_acks_logic.h:243:50 | begin | inline literal (semantic audit required) | 0 | if (const int i = op_index(opcode); i >= 0) ++c_.held_by_op[static_cast<size_t>(i)]; |
-| L06083 | src/mod/session2/observer_hold_acks_logic.h:255:33 | begin | inline literal (semantic audit required) | 0 | if (matched) *matched = 0; |
-| L06084 | src/mod/session2/observer_hold_acks_logic.h:266:84 | begin | inline literal (semantic audit required) | 0 | const uint64_t wait = now_ms >= e.first_ms ? now_ms - e.first_ms : 0; |
-| L06085 | src/mod/session2/observer_hold_acks_logic.h:288:36 | drop | inline literal (semantic audit required) | 0 | if (it == m_.end()) return 0; |
-| L06086 | src/mod/session2/observer_hold_acks_logic.h:308:20 | clear | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L06087 | src/mod/session2/observer_hold_acks_logic.h:314:18 | clear | inline literal (semantic audit required) | 0 | bytes_ = 0; |
-| L06088 | src/mod/session2/observer_hold_acks_logic.h:320:24 | clear | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L06089 | src/mod/session2/observer_hold_acks_logic.h:322:26 | clear | inline literal (semantic audit required) | 0 | size_t packets = 0; |
-| L06090 | src/mod/session2/observer_hold_acks_logic.h:325:20 | expire | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L06091 | src/mod/session2/observer_hold_acks_logic.h:361:20 | packets | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L06092 | src/mod/session2/observer_hold_acks_logic.h:371:26 | limits | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
-| L06093 | src/mod/session2/observer_hold_acks_logic.h:373:29 | limits | inline literal (semantic audit required) | 0 | uint64_t since_ms = 0, first_ms = 0, deadline_ms = 0; |
-| L06094 | src/mod/session2/observer_hold_acks_logic.h:373:43 | limits | inline literal (semantic audit required) | 0 | uint64_t since_ms = 0, first_ms = 0, deadline_ms = 0; |
-| L06095 | src/mod/session2/observer_hold_acks_logic.h:373:60 | limits | inline literal (semantic audit required) | 0 | uint64_t since_ms = 0, first_ms = 0, deadline_ms = 0; |
-| L06096 | src/mod/session2/observer_hold_acks_logic.h:374:24 | limits | inline literal (semantic audit required) | 0 | size_t bytes = 0; |
-| L06097 | src/mod/session2/observer_hold_acks_logic.h:385:19 | discard | inline literal (semantic audit required) | 0 | e.bytes = 0; |
-| L06098 | src/mod/session2/observer_hold_acks_logic.h:391:21 | discard | inline literal (semantic audit required) | 0 | size_t bytes_ = 0; |
-| L06099 | src/mod/session2/observer_hold_acks_logic.h:392:21 | discard | inline literal (semantic audit required) | 0 | uint64_t seq_ = 0; |
-| L06100 | src/mod/session2/observer_milestone_logic.h:72:12 | mode_name | inline literal (semantic audit required) | 0 | None = 0, |
-| L06101 | src/mod/session2/observer_milestone_logic.h:136:20 | why_name | inline literal (semantic audit required) | 0 | uint32_t tid = 0; |
-| L06102 | src/mod/session2/observer_milestone_logic.h:137:21 | why_name | inline literal (semantic audit required) | 0 | uint64_t t_us = 0; |
-| L06103 | src/mod/session2/observer_milestone_logic.h:138:22 | why_name | inline literal (semantic audit required) | 0 | uint32_t epoch = 0;          // server_epoch() |
-| L06104 | src/mod/session2/observer_milestone_logic.h:143:23 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
-| L06105 | src/mod/session2/observer_milestone_logic.h:143:34 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
-| L06106 | src/mod/session2/observer_milestone_logic.h:143:44 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
-| L06107 | src/mod/session2/observer_milestone_logic.h:143:62 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
-| L06108 | src/mod/session2/observer_milestone_logic.h:143:82 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
-| L06109 | src/mod/session2/observer_milestone_logic.h:143:96 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
-| L06110 | src/mod/session2/observer_milestone_logic.h:144:28 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
-| L06111 | src/mod/session2/observer_milestone_logic.h:144:43 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
-| L06112 | src/mod/session2/observer_milestone_logic.h:144:57 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
-| L06113 | src/mod/session2/observer_milestone_logic.h:144:72 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
-| L06114 | src/mod/session2/observer_milestone_logic.h:146:30 | why_name | inline literal (semantic audit required) | 0 | uintptr_t live_session = 0;  // the live session 2 of `epoch` (0 = none) |
-| L06115 | src/mod/session2/observer_milestone_logic.h:147:31 | why_name | inline literal (semantic audit required) | 0 | uint32_t user2_user_key = 0, user2_actor_key = 0, host_user_key = 0; |
-| L06116 | src/mod/session2/observer_milestone_logic.h:147:52 | why_name | inline literal (semantic audit required) | 0 | uint32_t user2_user_key = 0, user2_actor_key = 0, host_user_key = 0; |
-| L06117 | src/mod/session2/observer_milestone_logic.h:147:71 | why_name | inline literal (semantic audit required) | 0 | uint32_t user2_user_key = 0, user2_actor_key = 0, host_user_key = 0; |
-| L06118 | src/mod/session2/observer_milestone_logic.h:148:28 | why_name | inline literal (semantic audit required) | 0 | uintptr_t host_field = 0;    // the host's current field (0 = unknown) |
-| L06119 | src/mod/session2/observer_milestone_logic.h:152:26 | why_name | inline literal (semantic audit required) | 0 | uintptr_t send_ctx = 0; |
-| L06120 | src/mod/session2/observer_milestone_logic.h:153:26 | why_name | inline literal (semantic audit required) | 0 | uint8_t scope_flag = 0; |
-| L06121 | src/mod/session2/observer_milestone_logic.h:154:28 | why_name | inline literal (semantic audit required) | 0 | uint32_t scope_count = 0; |
-| L06122 | src/mod/session2/observer_milestone_logic.h:155:30 | why_name | inline literal (semantic audit required) | 1 | int32_t scope_current = -1; |
-| L06123 | src/mod/session2/observer_milestone_logic.h:162:20 | why_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0; |
-| L06124 | src/mod/session2/observer_milestone_logic.h:180:19 | call_name | inline literal (semantic audit required) | 0 | kNTripStart = 0,  // v0 gen, v1 epoch, v2 owner (2174, original), v3 pushed, v4 superseded gen |
-| L06125 | src/mod/session2/observer_milestone_logic.h:218:46 | outcome_name | inline literal (semantic audit required) | 0 | virtual void note(const p8p::Event& e) = 0; |
-| L06126 | src/mod/session2/observer_milestone_logic.h:225:20 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
-| L06127 | src/mod/session2/observer_milestone_logic.h:225:31 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
-| L06128 | src/mod/session2/observer_milestone_logic.h:226:22 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t owner = 0;  // the owner the server wrote in this trip's 2174 (0 = unknown layout) |
-| L06129 | src/mod/session2/observer_milestone_logic.h:227:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2174 = 0; |
-| L06130 | src/mod/session2/observer_milestone_logic.h:230:23 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2144 = 0, tid_2144 = 0; |
-| L06131 | src/mod/session2/observer_milestone_logic.h:230:37 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2144 = 0, tid_2144 = 0; |
-| L06132 | src/mod/session2/observer_milestone_logic.h:231:25 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t seq_2144 = 0, t_2144 = 0; |
-| L06133 | src/mod/session2/observer_milestone_logic.h:231:37 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t seq_2144 = 0, t_2144 = 0; |
-| L06134 | src/mod/session2/observer_milestone_logic.h:232:31 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t seq_3066_after = 0;  // the seq of the 2144 a pushed 3066 followed on tid_2144 |
-| L06135 | src/mod/session2/observer_milestone_logic.h:236:24 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t entries = 0;  // observer entries of user 2 seen in the trip |
-| L06136 | src/mod/session2/observer_milestone_logic.h:241:27 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t ours_count = 0; |
-| L06137 | src/mod/session2/observer_milestone_logic.h:242:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_ours = 0; |
-| L06138 | src/mod/session2/observer_milestone_logic.h:243:28 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t native_2322 = 0; |
-| L06139 | src/mod/session2/observer_milestone_logic.h:245:23 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2549 = 0, n_2445 = 0, n_2762 = 0; |
-| L06140 | src/mod/session2/observer_milestone_logic.h:245:35 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2549 = 0, n_2445 = 0, n_2762 = 0; |
-| L06141 | src/mod/session2/observer_milestone_logic.h:245:47 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2549 = 0, n_2445 = 0, n_2762 = 0; |
-| L06142 | src/mod/session2/observer_milestone_logic.h:246:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2445 = 0, t_2762 = 0; |
-| L06143 | src/mod/session2/observer_milestone_logic.h:246:35 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2445 = 0, t_2762 = 0; |
-| L06144 | src/mod/session2/observer_milestone_logic.h:247:24 | outcome_name | inline literal (semantic audit required) | 0 | uint8_t reported = 0;  // follow-ups written (bit i: kFollowUpS[i]) |
-| L06145 | src/mod/session2/observer_milestone_logic.h:251:38 | outcome_name | inline literal (semantic audit required) | 3 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
-| L06146 | src/mod/session2/observer_milestone_logic.h:251:44 | outcome_name | inline literal (semantic audit required) | 10 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
-| L06147 | src/mod/session2/observer_milestone_logic.h:251:48 | outcome_name | inline literal (semantic audit required) | 60 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
-| L06148 | src/mod/session2/observer_milestone_logic.h:251:52 | outcome_name | inline literal (semantic audit required) | 300 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
-| L06149 | src/mod/session2/observer_milestone_logic.h:254:24 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
-| L06150 | src/mod/session2/observer_milestone_logic.h:254:46 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
-| L06151 | src/mod/session2/observer_milestone_logic.h:254:65 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
-| L06152 | src/mod/session2/observer_milestone_logic.h:254:83 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
-| L06153 | src/mod/session2/observer_milestone_logic.h:254:99 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
-| L06154 | src/mod/session2/observer_milestone_logic.h:255:22 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
-| L06155 | src/mod/session2/observer_milestone_logic.h:255:37 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
-| L06156 | src/mod/session2/observer_milestone_logic.h:255:48 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
-| L06157 | src/mod/session2/observer_milestone_logic.h:255:63 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
-| L06158 | src/mod/session2/observer_milestone_logic.h:255:74 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
-| L06159 | src/mod/session2/observer_milestone_logic.h:255:88 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
-| L06160 | src/mod/session2/observer_milestone_logic.h:255:104 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
-| L06161 | src/mod/session2/observer_milestone_logic.h:256:25 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
-| L06162 | src/mod/session2/observer_milestone_logic.h:256:42 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
-| L06163 | src/mod/session2/observer_milestone_logic.h:256:59 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
-| L06164 | src/mod/session2/observer_milestone_logic.h:256:82 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
-| L06165 | src/mod/session2/observer_milestone_logic.h:256:95 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
-| L06166 | src/mod/session2/observer_milestone_logic.h:256:110 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
-| L06167 | src/mod/session2/observer_milestone_logic.h:257:35 | outcome_name | inline literal (semantic audit required) | 0 | duplicates_avoided = 0; |
-| L06168 | src/mod/session2/observer_milestone_logic.h:283:65 | on_out | inline literal (semantic audit required) | 1u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06169 | src/mod/session2/observer_milestone_logic.h:283:70 | on_out | inline literal (semantic audit required) | 0u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06170 | src/mod/session2/observer_milestone_logic.h:283:88 | on_out | inline literal (semantic audit required) | 1u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06171 | src/mod/session2/observer_milestone_logic.h:283:93 | on_out | inline literal (semantic audit required) | 0u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06172 | src/mod/session2/observer_milestone_logic.h:297:81 | on_out | inline literal (semantic audit required) | 1u | note(s, kNTripStart, t_us, tid, {trip_.gen, epoch_, value, pushed ? 1u : 0u, old}); |
-| L06173 | src/mod/session2/observer_milestone_logic.h:297:86 | on_out | inline literal (semantic audit required) | 0u | note(s, kNTripStart, t_us, tid, {trip_.gen, epoch_, value, pushed ? 1u : 0u, old}); |
-| L06174 | src/mod/session2/observer_milestone_logic.h:308:65 | on_out | inline literal (semantic audit required) | 1u | note(s, kN2144, t_us, tid, {trip_.gen, pushed ? 1u : 0u, trip_.seq_2144, trip_.n_2144}); |
-| L06175 | src/mod/session2/observer_milestone_logic.h:308:70 | on_out | inline literal (semantic audit required) | 0u | note(s, kN2144, t_us, tid, {trip_.gen, pushed ? 1u : 0u, trip_.seq_2144, trip_.n_2144}); |
-| L06176 | src/mod/session2/observer_milestone_logic.h:315:65 | on_out | inline literal (semantic audit required) | 1u | note(s, kN3066, t_us, tid, {trip_.gen, pushed ? 1u : 0u, follows ? trip_.seq_2144 : 0}); |
-| L06177 | src/mod/session2/observer_milestone_logic.h:315:70 | on_out | inline literal (semantic audit required) | 0u | note(s, kN3066, t_us, tid, {trip_.gen, pushed ? 1u : 0u, follows ? trip_.seq_2144 : 0}); |
-| L06178 | src/mod/session2/observer_milestone_logic.h:315:101 | on_out | inline literal (semantic audit required) | 0 | note(s, kN3066, t_us, tid, {trip_.gen, pushed ? 1u : 0u, follows ? trip_.seq_2144 : 0}); |
-| L06179 | src/mod/session2/observer_milestone_logic.h:322:71 | on_out | inline literal (semantic audit required) | 1u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
-| L06180 | src/mod/session2/observer_milestone_logic.h:322:76 | on_out | inline literal (semantic audit required) | 0u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
-| L06181 | src/mod/session2/observer_milestone_logic.h:322:87 | on_out | inline literal (semantic audit required) | 1 | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
-| L06182 | src/mod/session2/observer_milestone_logic.h:322:108 | on_out | inline literal (semantic audit required) | 1u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
-| L06183 | src/mod/session2/observer_milestone_logic.h:322:113 | on_out | inline literal (semantic audit required) | 0u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
-| L06184 | src/mod/session2/observer_milestone_logic.h:328:43 | on_out | inline literal (semantic audit required) | 1u | {trip_.gen, pushed ? 1u : 0u, trip_.t_ours ? t_us - trip_.t_ours : 0, |
-| L06185 | src/mod/session2/observer_milestone_logic.h:328:48 | on_out | inline literal (semantic audit required) | 0u | {trip_.gen, pushed ? 1u : 0u, trip_.t_ours ? t_us - trip_.t_ours : 0, |
-| L06186 | src/mod/session2/observer_milestone_logic.h:328:89 | on_out | inline literal (semantic audit required) | 0 | {trip_.gen, pushed ? 1u : 0u, trip_.t_ours ? t_us - trip_.t_ours : 0, |
-| L06187 | src/mod/session2/observer_milestone_logic.h:329:60 | on_out | inline literal (semantic audit required) | 0 | trip_.t_2445 ? t_us - trip_.t_2445 : 0}); |
-| L06188 | src/mod/session2/observer_milestone_logic.h:333:35 | on_out | inline literal (semantic audit required) | 16 | if (c_.bundles <= 16) note(s, kNBundle, t_us, tid, {trip_.gen, pushed ? 1u : 0u, c_.bundles}); |
-| L06189 | src/mod/session2/observer_milestone_logic.h:333:89 | on_out | inline literal (semantic audit required) | 1u | if (c_.bundles <= 16) note(s, kNBundle, t_us, tid, {trip_.gen, pushed ? 1u : 0u, c_.bundles}); |
-| L06190 | src/mod/session2/observer_milestone_logic.h:333:94 | on_out | inline literal (semantic audit required) | 0u | if (c_.bundles <= 16) note(s, kNBundle, t_us, tid, {trip_.gen, pushed ? 1u : 0u, c_.bundles}); |
-| L06191 | src/mod/session2/observer_milestone_logic.h:342:22 | on_in | inline literal (semantic audit required) | 0 | uint32_t n = 0; |
-| L06192 | src/mod/session2/observer_milestone_logic.h:348:29 | on_in | inline literal (semantic audit required) | 0 | note(s, kNIn, t_us, 0, {trip_.gen, op, n, trip_.t_ours ? t_us - trip_.t_ours : 0}); |
-| L06193 | src/mod/session2/observer_milestone_logic.h:348:88 | on_in | inline literal (semantic audit required) | 0 | note(s, kNIn, t_us, 0, {trip_.gen, op, n, trip_.t_ours ? t_us - trip_.t_ours : 0}); |
-| L06194 | src/mod/session2/observer_milestone_logic.h:360:27 | on_epoch | inline literal (semantic audit required) | 0 | end_trip(s, t_us, 0); |
-| L06195 | src/mod/session2/observer_milestone_logic.h:364:32 | on_epoch | inline literal (semantic audit required) | 0 | note(s, kNEpoch, t_us, 0, {epoch, g, decided ? 1u : 0u}); |
-| L06196 | src/mod/session2/observer_milestone_logic.h:364:56 | on_epoch | inline literal (semantic audit required) | 1u | note(s, kNEpoch, t_us, 0, {epoch, g, decided ? 1u : 0u}); |
-| L06197 | src/mod/session2/observer_milestone_logic.h:364:61 | on_epoch | inline literal (semantic audit required) | 0u | note(s, kNEpoch, t_us, 0, {epoch, g, decided ? 1u : 0u}); |
-| L06198 | src/mod/session2/observer_milestone_logic.h:377:33 | on_logout | inline literal (semantic audit required) | 0 | note(s, kNLogout, t_us, 0, {trip_.gen, before ? 1u : 0u}); |
-| L06199 | src/mod/session2/observer_milestone_logic.h:377:57 | on_logout | inline literal (semantic audit required) | 1u | note(s, kNLogout, t_us, 0, {trip_.gen, before ? 1u : 0u}); |
-| L06200 | src/mod/session2/observer_milestone_logic.h:377:62 | on_logout | inline literal (semantic audit required) | 0u | note(s, kNLogout, t_us, 0, {trip_.gen, before ? 1u : 0u}); |
-| L06201 | src/mod/session2/observer_milestone_logic.h:388:34 | decide | inline literal (semantic audit required) | 16 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
-| L06202 | src/mod/session2/observer_milestone_logic.h:388:100 | decide | inline literal (semantic audit required) | 0 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
-| L06203 | src/mod/session2/observer_milestone_logic.h:388:103 | decide | inline literal (semantic audit required) | 0 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
-| L06204 | src/mod/session2/observer_milestone_logic.h:388:106 | decide | inline literal (semantic audit required) | 0 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
-| L06205 | src/mod/session2/observer_milestone_logic.h:424:31 | decide | inline literal (semantic audit required) | 0 | emit_count_ = 0; |
-| L06206 | src/mod/session2/observer_milestone_logic.h:429:101 | decide | inline literal (semantic audit required) | 16 | if (d.why != Why::AlreadyDecided &#124;&#124; c_.refused[static_cast<size_t>(Why::AlreadyDecided)] <= 16) { |
-| L06207 | src/mod/session2/observer_milestone_logic.h:431:65 | decide | inline literal (semantic audit required) | 1u | {d.gen, static_cast<uint64_t>(d.why), d.emit ? 1u : 0u, static_cast<uint64_t>(mode_), f.epoch, |
-| L06208 | src/mod/session2/observer_milestone_logic.h:431:70 | decide | inline literal (semantic audit required) | 0u | {d.gen, static_cast<uint64_t>(d.why), d.emit ? 1u : 0u, static_cast<uint64_t>(mode_), f.epoch, |
-| L06209 | src/mod/session2/observer_milestone_logic.h:432:70 | decide | inline literal (semantic audit required) | 32 | f.actor_key &#124; static_cast<uint64_t>(f.user_key) << 32, f.field, |
-| L06210 | src/mod/session2/observer_milestone_logic.h:433:73 | decide | inline literal (semantic audit required) | 32 | f.field_owner &#124; static_cast<uint64_t>(f.field_key) << 32, f.live_session, f.user_session, |
-| L06211 | src/mod/session2/observer_milestone_logic.h:434:97 | decide | inline literal (semantic audit required) | 8 | static_cast<uint64_t>(f.scope_flag) &#124; static_cast<uint64_t>(f.scope_count) << 8 &#124; |
-| L06212 | src/mod/session2/observer_milestone_logic.h:435:88 | decide | inline literal (semantic audit required) | 40 | static_cast<uint64_t>(static_cast<uint32_t>(f.scope_current)) << 40, |
-| L06213 | src/mod/session2/observer_milestone_logic.h:436:30 | decide | inline literal (semantic audit required) | 1u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
-| L06214 | src/mod/session2/observer_milestone_logic.h:436:35 | decide | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
-| L06215 | src/mod/session2/observer_milestone_logic.h:436:55 | decide | inline literal (semantic audit required) | 2u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
-| L06216 | src/mod/session2/observer_milestone_logic.h:436:60 | decide | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
-| L06217 | src/mod/session2/observer_milestone_logic.h:436:91 | decide | inline literal (semantic audit required) | 4u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
-| L06218 | src/mod/session2/observer_milestone_logic.h:436:96 | decide | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
-| L06219 | src/mod/session2/observer_milestone_logic.h:453:42 | decide | inline literal (semantic audit required) | 0 | trip_.t_ours = seen ? t_us : 0; |
-| L06220 | src/mod/session2/observer_milestone_logic.h:466:53 | decide | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06221 | src/mod/session2/observer_milestone_logic.h:466:58 | decide | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06222 | src/mod/session2/observer_milestone_logic.h:466:71 | decide | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06223 | src/mod/session2/observer_milestone_logic.h:466:76 | decide | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06224 | src/mod/session2/observer_milestone_logic.h:467:37 | decide | inline literal (semantic audit required) | 1u | emit_wrong_session_ ? 1u : 0u}); |
-| L06225 | src/mod/session2/observer_milestone_logic.h:467:42 | decide | inline literal (semantic audit required) | 0u | emit_wrong_session_ ? 1u : 0u}); |
-| L06226 | src/mod/session2/observer_milestone_logic.h:474:22 | follow_ups | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
-| L06227 | src/mod/session2/observer_milestone_logic.h:474:29 | follow_ups | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
-| L06228 | src/mod/session2/observer_milestone_logic.h:475:35 | follow_ups | inline literal (semantic audit required) | 1u | if (trip_.reported & (1u << i)) continue; |
-| L06229 | src/mod/session2/observer_milestone_logic.h:476:80 | follow_ups | inline literal (semantic audit required) | 1'000'000 | if (now_us < trip_.t_ours + static_cast<uint64_t>(kFollowUpS[i]) * 1'000'000) break; |
-| L06230 | src/mod/session2/observer_milestone_logic.h:477:52 | follow_ups | inline literal (semantic audit required) | 1u | trip_.reported &#124;= static_cast<uint8_t>(1u << i); |
-| L06231 | src/mod/session2/observer_milestone_logic.h:479:41 | follow_ups | inline literal (semantic audit required) | 0 | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
-| L06232 | src/mod/session2/observer_milestone_logic.h:479:86 | follow_ups | inline literal (semantic audit required) | 1u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
-| L06233 | src/mod/session2/observer_milestone_logic.h:479:91 | follow_ups | inline literal (semantic audit required) | 0u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
-| L06234 | src/mod/session2/observer_milestone_logic.h:479:110 | follow_ups | inline literal (semantic audit required) | 1u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
-| L06235 | src/mod/session2/observer_milestone_logic.h:479:115 | follow_ups | inline literal (semantic audit required) | 0u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
-| L06236 | src/mod/session2/observer_milestone_logic.h:534:33 | clear_emit | inline literal (semantic audit required) | 0 | emit_tid_ = emit_gen_ = 0; |
-| L06237 | src/mod/session2/observer_milestone_logic.h:536:23 | clear_emit | inline literal (semantic audit required) | 0 | emit_count_ = 0; |
-| L06238 | src/mod/session2/observer_milestone_logic.h:544:20 | note | inline literal (semantic audit required) | 0 | size_t i = 0; |
-| L06239 | src/mod/session2/observer_milestone_logic.h:546:21 | note | inline literal (semantic audit required) | 12 | if (i < 12) e.v[i++] = x; |
-| L06240 | src/mod/session2/observer_milestone_logic.h:552:23 | note | inline literal (semantic audit required) | 1 | uint32_t epoch_ = 1, gen_ = 0; |
-| L06241 | src/mod/session2/observer_milestone_logic.h:552:33 | note | inline literal (semantic audit required) | 0 | uint32_t epoch_ = 1, gen_ = 0; |
-| L06242 | src/mod/session2/observer_milestone_logic.h:553:21 | note | inline literal (semantic audit required) | 0 | uint64_t seq_ = 0; |
-| L06243 | src/mod/session2/observer_milestone_logic.h:556:26 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_gen_ = 0, emit_count_ = 0; |
-| L06244 | src/mod/session2/observer_milestone_logic.h:556:41 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_gen_ = 0, emit_count_ = 0; |
-| L06245 | src/mod/session2/observer_milestone_logic.h:556:58 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_gen_ = 0, emit_count_ = 0; |
-| L06246 | src/mod/session2/observer_milestone_reload_logic.h:87:83 | parse_mode | inline literal (semantic audit required) | 1 | while (!v.empty() && (v.front() == ' ' &#124;&#124; v.front() == '\t')) v.remove_prefix(1); |
-| L06247 | src/mod/session2/observer_milestone_reload_logic.h:88:81 | parse_mode | inline literal (semantic audit required) | 1 | while (!v.empty() && (v.back() == ' ' &#124;&#124; v.back() == '\t')) v.remove_suffix(1); |
-| L06248 | src/mod/session2/observer_milestone_reload_logic.h:140:14 | load_req_name | inline literal (semantic audit required) | 0 | case 0: return "no 2283 / 2362 of user 2 seen before it"; |
-| L06249 | src/mod/session2/observer_milestone_reload_logic.h:180:21 | drops | inline literal (semantic audit required) | 0 | uint64_t t_us = 0;                       // now (p8_now_us), for the age bound |
-| L06250 | src/mod/session2/observer_milestone_reload_logic.h:185:12 | drops | inline literal (semantic audit required) | 0 | None = 0, |
-| L06251 | src/mod/session2/observer_milestone_reload_logic.h:318:20 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
-| L06252 | src/mod/session2/observer_milestone_reload_logic.h:318:31 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
-| L06253 | src/mod/session2/observer_milestone_reload_logic.h:320:21 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_f3 = 0, t_2437 = 0, t_reply = 0; |
-| L06254 | src/mod/session2/observer_milestone_reload_logic.h:320:33 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_f3 = 0, t_2437 = 0, t_reply = 0; |
-| L06255 | src/mod/session2/observer_milestone_reload_logic.h:320:46 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_f3 = 0, t_2437 = 0, t_reply = 0; |
-| L06256 | src/mod/session2/observer_milestone_reload_logic.h:321:22 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2643 = 0, n3066 = 0; |
-| L06257 | src/mod/session2/observer_milestone_reload_logic.h:321:33 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2643 = 0, n3066 = 0; |
-| L06258 | src/mod/session2/observer_milestone_reload_logic.h:322:22 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2873 = 0, dropped = 0, passed = 0; |
-| L06259 | src/mod/session2/observer_milestone_reload_logic.h:322:35 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2873 = 0, dropped = 0, passed = 0; |
-| L06260 | src/mod/session2/observer_milestone_reload_logic.h:322:47 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2873 = 0, dropped = 0, passed = 0; |
-| L06261 | src/mod/session2/observer_milestone_reload_logic.h:323:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2873 = 0; |
-| L06262 | src/mod/session2/observer_milestone_reload_logic.h:327:25 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t attempts = 0; |
-| L06263 | src/mod/session2/observer_milestone_reload_logic.h:328:26 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_attempt = 0;  // the last counted transient refusal |
-| L06264 | src/mod/session2/observer_milestone_reload_logic.h:332:27 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t ours_count = 0; |
-| L06265 | src/mod/session2/observer_milestone_reload_logic.h:333:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_ours = 0, t_2762 = 0; |
-| L06266 | src/mod/session2/observer_milestone_reload_logic.h:333:35 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_ours = 0, t_2762 = 0; |
-| L06267 | src/mod/session2/observer_milestone_reload_logic.h:334:28 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t native_2322 = 0;  // for user 2's character, after its 2437 |
-| L06268 | src/mod/session2/observer_milestone_reload_logic.h:340:24 | outcome_name | inline literal (semantic audit required) | 0 | uint16_t load_op = 0; |
-| L06269 | src/mod/session2/observer_milestone_reload_logic.h:345:18 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t = 0; |
-| L06270 | src/mod/session2/observer_milestone_reload_logic.h:353:22 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
-| L06271 | src/mod/session2/observer_milestone_reload_logic.h:353:35 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
-| L06272 | src/mod/session2/observer_milestone_reload_logic.h:353:54 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
-| L06273 | src/mod/session2/observer_milestone_reload_logic.h:353:72 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
-| L06274 | src/mod/session2/observer_milestone_reload_logic.h:354:30 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips_at_2437 = 0, reloads_at_2437 = 0, nested_2437 = 0;  // P8 S27 (observer_milestone_reload_any) |
-| L06275 | src/mod/session2/observer_milestone_reload_logic.h:354:51 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips_at_2437 = 0, reloads_at_2437 = 0, nested_2437 = 0;  // P8 S27 (observer_milestone_reload_any) |
-| L06276 | src/mod/session2/observer_milestone_reload_logic.h:354:68 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips_at_2437 = 0, reloads_at_2437 = 0, nested_2437 = 0;  // P8 S27 (observer_milestone_reload_any) |
-| L06277 | src/mod/session2/observer_milestone_reload_logic.h:355:29 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t stale_closed = 0;  // P8 S27 review: live trips older than kMaxAgeUs closed by a new 2437 |
-| L06278 | src/mod/session2/observer_milestone_reload_logic.h:356:33 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native_in_reload = 0;  // P8 S27: 2873s handed to the server during an unfinished reload (warnings) |
-| L06279 | src/mod/session2/observer_milestone_reload_logic.h:357:26 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
-| L06280 | src/mod/session2/observer_milestone_reload_logic.h:357:39 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
-| L06281 | src/mod/session2/observer_milestone_reload_logic.h:357:55 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
-| L06282 | src/mod/session2/observer_milestone_reload_logic.h:357:67 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
-| L06283 | src/mod/session2/observer_milestone_reload_logic.h:358:26 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06284 | src/mod/session2/observer_milestone_reload_logic.h:358:37 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06285 | src/mod/session2/observer_milestone_reload_logic.h:358:52 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06286 | src/mod/session2/observer_milestone_reload_logic.h:358:63 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06287 | src/mod/session2/observer_milestone_reload_logic.h:358:77 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06288 | src/mod/session2/observer_milestone_reload_logic.h:358:87 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06289 | src/mod/session2/observer_milestone_reload_logic.h:358:101 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06290 | src/mod/session2/observer_milestone_reload_logic.h:358:113 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
-| L06291 | src/mod/session2/observer_milestone_reload_logic.h:359:23 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native = 0, transient = 0, cancelled = 0; |
-| L06292 | src/mod/session2/observer_milestone_reload_logic.h:359:38 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native = 0, transient = 0, cancelled = 0; |
-| L06293 | src/mod/session2/observer_milestone_reload_logic.h:359:53 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native = 0, transient = 0, cancelled = 0; |
-| L06294 | src/mod/session2/observer_milestone_reload_logic.h:369:20 | unfinished_reload | inline literal (semantic audit required) | 0 | uint32_t gen = 0; |
-| L06295 | src/mod/session2/observer_milestone_reload_logic.h:397:31 | on_f3_accepted | inline literal (semantic audit required) | 0 | note(s, kNTrip, t_us, 0, {trip_.gen, epoch_, prev}); |
-| L06296 | src/mod/session2/observer_milestone_reload_logic.h:405:32 | on_2437 | inline literal (semantic audit required) | 0 | note(s, kNPhase, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), kOpGameLoadingStartReq, 0, 1}); |
-| L06297 | src/mod/session2/observer_milestone_reload_logic.h:405:107 | on_2437 | inline literal (semantic audit required) | 0 | note(s, kNPhase, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), kOpGameLoadingStartReq, 0, 1}); |
-| L06298 | src/mod/session2/observer_milestone_reload_logic.h:405:110 | on_2437 | inline literal (semantic audit required) | 1 | note(s, kNPhase, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), kOpGameLoadingStartReq, 0, 1}); |
-| L06299 | src/mod/session2/observer_milestone_reload_logic.h:426:37 | on_2437_any | inline literal (semantic audit required) | 0 | note(s, kNNested, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), load_op}); |
-| L06300 | src/mod/session2/observer_milestone_reload_logic.h:442:35 | on_2437_any | inline literal (semantic audit required) | 0 | note(s, kNTrip2437, t_us, 0, |
-| L06301 | src/mod/session2/observer_milestone_reload_logic.h:443:88 | on_2437_any | inline literal (semantic audit required) | 1u | {trip_.gen, epoch_, prev, load_op, load_age_us, ts_packed, trip_.shadow ? 1u : 0u, |
-| L06302 | src/mod/session2/observer_milestone_reload_logic.h:443:93 | on_2437_any | inline literal (semantic audit required) | 0u | {trip_.gen, epoch_, prev, load_op, load_age_us, ts_packed, trip_.shadow ? 1u : 0u, |
-| L06303 | src/mod/session2/observer_milestone_reload_logic.h:457:61 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06304 | src/mod/session2/observer_milestone_reload_logic.h:457:66 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06305 | src/mod/session2/observer_milestone_reload_logic.h:457:84 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06306 | src/mod/session2/observer_milestone_reload_logic.h:457:89 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
-| L06307 | src/mod/session2/observer_milestone_reload_logic.h:463:93 | on_2437_any | inline literal (semantic audit required) | 0 | const uint64_t since = trip_.t_2437 && t_us >= trip_.t_2437 ? t_us - trip_.t_2437 : 0; |
-| L06308 | src/mod/session2/observer_milestone_reload_logic.h:469:113 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
-| L06309 | src/mod/session2/observer_milestone_reload_logic.h:469:118 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
-| L06310 | src/mod/session2/observer_milestone_reload_logic.h:475:113 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
-| L06311 | src/mod/session2/observer_milestone_reload_logic.h:475:118 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
-| L06312 | src/mod/session2/observer_milestone_reload_logic.h:487:94 | on_2437_any | inline literal (semantic audit required) | 1u | {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
-| L06313 | src/mod/session2/observer_milestone_reload_logic.h:487:99 | on_2437_any | inline literal (semantic audit required) | 0u | {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
-| L06314 | src/mod/session2/observer_milestone_reload_logic.h:494:74 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNNative, t_us, tid, {trip_.gen, value, pushed ? 1u : 0u, 1}); |
-| L06315 | src/mod/session2/observer_milestone_reload_logic.h:494:79 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNNative, t_us, tid, {trip_.gen, value, pushed ? 1u : 0u, 1}); |
-| L06316 | src/mod/session2/observer_milestone_reload_logic.h:494:83 | on_2437_any | inline literal (semantic audit required) | 1 | note(s, kNNative, t_us, tid, {trip_.gen, value, pushed ? 1u : 0u, 1}); |
-| L06317 | src/mod/session2/observer_milestone_reload_logic.h:500:95 | on_2437_any | inline literal (semantic audit required) | 0 | note(s, kNLoaded, t_us, tid, {trip_.gen, trip_.t_ours ? t_us - trip_.t_ours : 0, pushed ? 1u : 0u}); |
-| L06318 | src/mod/session2/observer_milestone_reload_logic.h:500:107 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNLoaded, t_us, tid, {trip_.gen, trip_.t_ours ? t_us - trip_.t_ours : 0, pushed ? 1u : 0u}); |
-| L06319 | src/mod/session2/observer_milestone_reload_logic.h:500:112 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNLoaded, t_us, tid, {trip_.gen, trip_.t_ours ? t_us - trip_.t_ours : 0, pushed ? 1u : 0u}); |
-| L06320 | src/mod/session2/observer_milestone_reload_logic.h:543:30 | record_offer | inline literal (semantic audit required) | 0 | trip_.attempts = 0; |
-| L06321 | src/mod/session2/observer_milestone_reload_logic.h:545:29 | record_offer | inline literal (semantic audit required) | 32 | if (c_.seen_2873 <= 32) { |
-| L06322 | src/mod/session2/observer_milestone_reload_logic.h:546:36 | record_offer | inline literal (semantic audit required) | 0 | note(s, kNOffer, t_us, 0, |
-| L06323 | src/mod/session2/observer_milestone_reload_logic.h:547:38 | record_offer | inline literal (semantic audit required) | 0 | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), handed ? 1u : 0u, trip_.n2873, |
-| L06324 | src/mod/session2/observer_milestone_reload_logic.h:547:76 | record_offer | inline literal (semantic audit required) | 1u | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), handed ? 1u : 0u, trip_.n2873, |
-| L06325 | src/mod/session2/observer_milestone_reload_logic.h:547:81 | record_offer | inline literal (semantic audit required) | 0u | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), handed ? 1u : 0u, trip_.n2873, |
-| L06326 | src/mod/session2/observer_milestone_reload_logic.h:555:49 | record_offer | inline literal (semantic audit required) | 0 | note(s, kNNativeInReload, t_us, 0, |
-| L06327 | src/mod/session2/observer_milestone_reload_logic.h:556:42 | record_offer | inline literal (semantic audit required) | 0 | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), c_.seen_2873, |
-| L06328 | src/mod/session2/observer_milestone_reload_logic.h:557:60 | record_offer | inline literal (semantic audit required) | 0 | t_us >= l2437_.t ? t_us - l2437_.t : 0, static_cast<uint64_t>(where), |
-| L06329 | src/mod/session2/observer_milestone_reload_logic.h:597:39 | at_exit | inline literal (semantic audit required) | 4 | if (trip_.attempts <= 4) note(s, kNTransient, f.t_us, f.tid, {trip_.gen, static_cast<uint64_t>(why), trip_.attempts}); |
-| L06330 | src/mod/session2/observer_milestone_reload_logic.h:617:31 | at_exit | inline literal (semantic audit required) | 0 | emit_count_ = 0; |
-| L06331 | src/mod/session2/observer_milestone_reload_logic.h:621:63 | at_exit | inline literal (semantic audit required) | 1u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
-| L06332 | src/mod/session2/observer_milestone_reload_logic.h:621:68 | at_exit | inline literal (semantic audit required) | 0u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
-| L06333 | src/mod/session2/observer_milestone_reload_logic.h:621:80 | at_exit | inline literal (semantic audit required) | 1u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
-| L06334 | src/mod/session2/observer_milestone_reload_logic.h:621:85 | at_exit | inline literal (semantic audit required) | 0u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
-| L06335 | src/mod/session2/observer_milestone_reload_logic.h:622:89 | at_exit | inline literal (semantic audit required) | 32 | f.t_us - trip_.t_2873, f.actor_key &#124; static_cast<uint64_t>(f.user_key) << 32, |
-| L06336 | src/mod/session2/observer_milestone_reload_logic.h:623:73 | at_exit | inline literal (semantic audit required) | 32 | f.field_owner &#124; static_cast<uint64_t>(f.host_user_key) << 32, f.live_session, f.user_session, f.tid, |
-| L06337 | src/mod/session2/observer_milestone_reload_logic.h:624:26 | at_exit | inline literal (semantic audit required) | 1u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
-| L06338 | src/mod/session2/observer_milestone_reload_logic.h:624:31 | at_exit | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
-| L06339 | src/mod/session2/observer_milestone_reload_logic.h:624:51 | at_exit | inline literal (semantic audit required) | 2u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
-| L06340 | src/mod/session2/observer_milestone_reload_logic.h:624:56 | at_exit | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
-| L06341 | src/mod/session2/observer_milestone_reload_logic.h:640:42 | at_exit | inline literal (semantic audit required) | 0 | trip_.t_ours = seen ? t_us : 0; |
-| L06342 | src/mod/session2/observer_milestone_reload_logic.h:652:53 | at_exit | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06343 | src/mod/session2/observer_milestone_reload_logic.h:652:58 | at_exit | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06344 | src/mod/session2/observer_milestone_reload_logic.h:652:71 | at_exit | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06345 | src/mod/session2/observer_milestone_reload_logic.h:652:76 | at_exit | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
-| L06346 | src/mod/session2/observer_milestone_reload_logic.h:653:37 | at_exit | inline literal (semantic audit required) | 1u | emit_wrong_session_ ? 1u : 0u}); |
-| L06347 | src/mod/session2/observer_milestone_reload_logic.h:653:42 | at_exit | inline literal (semantic audit required) | 0u | emit_wrong_session_ ? 1u : 0u}); |
-| L06348 | src/mod/session2/observer_milestone_reload_logic.h:670:22 | on_logout | inline literal (semantic audit required) | 0 | cancel(t_us, 0, s); |
-| L06349 | src/mod/session2/observer_milestone_reload_logic.h:695:34 | end_trip | inline literal (semantic audit required) | 0 | note(s, kNTripEnd, t_us, 0, |
-| L06350 | src/mod/session2/observer_milestone_reload_logic.h:697:91 | end_trip | inline literal (semantic audit required) | 0 | trip_.dropped, trip_.t_2437 && trip_.t_2873 ? trip_.t_2873 - trip_.t_2437 : 0, |
-| L06351 | src/mod/session2/observer_milestone_reload_logic.h:698:76 | end_trip | inline literal (semantic audit required) | 0 | trip_.t_ours && trip_.t_2873 ? trip_.t_ours - trip_.t_2873 : 0, |
-| L06352 | src/mod/session2/observer_milestone_reload_logic.h:699:108 | end_trip | inline literal (semantic audit required) | 0 | trip_.t_ours && trip_.t_2762 && trip_.t_2762 >= trip_.t_ours ? trip_.t_2762 - trip_.t_ours : 0, |
-| L06353 | src/mod/session2/observer_milestone_reload_logic.h:701:69 | end_trip | inline literal (semantic audit required) | 1ull | static_cast<uint64_t>(trip_.origin) &#124; (trip_.shadow ? 1ull << 8 : 0) &#124; |
-| L06354 | src/mod/session2/observer_milestone_reload_logic.h:701:77 | end_trip | inline literal (semantic audit required) | 8 | static_cast<uint64_t>(trip_.origin) &#124; (trip_.shadow ? 1ull << 8 : 0) &#124; |
-| L06355 | src/mod/session2/observer_milestone_reload_logic.h:701:81 | end_trip | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(trip_.origin) &#124; (trip_.shadow ? 1ull << 8 : 0) &#124; |
-| L06356 | src/mod/session2/observer_milestone_reload_logic.h:702:59 | end_trip | inline literal (semantic audit required) | 16 | static_cast<uint64_t>(trip_.load_op) << 16}); |
-| L06357 | src/mod/session2/observer_milestone_reload_logic.h:720:33 | cancel | inline literal (semantic audit required) | 0 | note(s, kNCancel, t_us, 0, {trip_.gen, epoch, before ? 1u : 0u}); |
-| L06358 | src/mod/session2/observer_milestone_reload_logic.h:720:64 | cancel | inline literal (semantic audit required) | 1u | note(s, kNCancel, t_us, 0, {trip_.gen, epoch, before ? 1u : 0u}); |
-| L06359 | src/mod/session2/observer_milestone_reload_logic.h:720:69 | cancel | inline literal (semantic audit required) | 0u | note(s, kNCancel, t_us, 0, {trip_.gen, epoch, before ? 1u : 0u}); |
-| L06360 | src/mod/session2/observer_milestone_reload_logic.h:738:35 | clear_emit | inline literal (semantic audit required) | 0 | emit_tid_ = emit_count_ = 0; |
-| L06361 | src/mod/session2/observer_milestone_reload_logic.h:747:20 | note | inline literal (semantic audit required) | 0 | size_t i = 0; |
-| L06362 | src/mod/session2/observer_milestone_reload_logic.h:749:21 | note | inline literal (semantic audit required) | 12 | if (i < 12) e.v[i++] = x; |
-| L06363 | src/mod/session2/observer_milestone_reload_logic.h:756:23 | note | inline literal (semantic audit required) | 1 | uint32_t epoch_ = 1, gen_ = 0; |
-| L06364 | src/mod/session2/observer_milestone_reload_logic.h:756:33 | note | inline literal (semantic audit required) | 0 | uint32_t epoch_ = 1, gen_ = 0; |
-| L06365 | src/mod/session2/observer_milestone_reload_logic.h:760:26 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_count_ = 0; |
-| L06366 | src/mod/session2/observer_milestone_reload_logic.h:760:43 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_count_ = 0; |
-| L06367 | src/mod/session2/p8_probe_logic.h:25:23 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t qpc_us = 0;  // QueryPerformanceCounter in microseconds (the sniffer's t_us clock) |
-| L06368 | src/mod/session2/p8_probe_logic.h:26:20 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t tid = 0; |
-| L06369 | src/mod/session2/p8_probe_logic.h:27:21 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t kind = 0; |
-| L06370 | src/mod/session2/p8_probe_logic.h:28:22 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t flags = 0; |
-| L06371 | src/mod/session2/p8_probe_logic.h:29:16 | (file scope) | inline literal (semantic audit required) | 12 | uint64_t v[12] = {}; |
-| L06372 | src/mod/session2/p8_probe_logic.h:39:21 | copy_event | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < 12; ++i) dst.v[i] = src.v[i]; |
-| L06373 | src/mod/session2/p8_probe_logic.h:39:28 | copy_event | inline literal (semantic audit required) | 12 | for (size_t i = 0; i < 12; ++i) dst.v[i] = src.v[i]; |
-| L06374 | src/mod/session2/p8_probe_logic.h:47:24 | copy_event | inline literal (semantic audit required) | 2 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L06375 | src/mod/session2/p8_probe_logic.h:47:39 | copy_event | inline literal (semantic audit required) | 1 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L06376 | src/mod/session2/p8_probe_logic.h:47:46 | copy_event | inline literal (semantic audit required) | 0 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L06377 | src/mod/session2/p8_probe_logic.h:51:25 | EventRing | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) cells_[i].seq.store(i, std::memory_order_relaxed); |
-| L06378 | src/mod/session2/p8_probe_logic.h:59:41 | push | inline literal (semantic audit required) | 1 | Cell& c = cells_[pos & (N - 1)]; |
-| L06379 | src/mod/session2/p8_probe_logic.h:62:24 | push | inline literal (semantic audit required) | 0 | if (dif == 0) { |
-| L06380 | src/mod/session2/p8_probe_logic.h:63:59 | push | inline literal (semantic audit required) | 1 | if (enq_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) { |
-| L06381 | src/mod/session2/p8_probe_logic.h:65:39 | push | inline literal (semantic audit required) | 1 | c.seq.store(pos + 1, std::memory_order_release); |
-| L06382 | src/mod/session2/p8_probe_logic.h:68:30 | push | inline literal (semantic audit required) | 0 | } else if (dif < 0) { |
-| L06383 | src/mod/session2/p8_probe_logic.h:69:36 | push | inline literal (semantic audit required) | 1 | dropped_.fetch_add(1, std::memory_order_relaxed); |
-| L06384 | src/mod/session2/p8_probe_logic.h:80:41 | pop | inline literal (semantic audit required) | 1 | Cell& c = cells_[pos & (N - 1)]; |
-| L06385 | src/mod/session2/p8_probe_logic.h:82:91 | pop | inline literal (semantic audit required) | 1 | const intptr_t dif = static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos + 1); |
-| L06386 | src/mod/session2/p8_probe_logic.h:83:24 | pop | inline literal (semantic audit required) | 0 | if (dif == 0) { |
-| L06387 | src/mod/session2/p8_probe_logic.h:84:59 | pop | inline literal (semantic audit required) | 1 | if (deq_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) { |
-| L06388 | src/mod/session2/p8_probe_logic.h:89:30 | pop | inline literal (semantic audit required) | 0 | } else if (dif < 0) { |
-| L06389 | src/mod/session2/p8_probe_logic.h:102:33 | capacity | inline literal (semantic audit required) | 0 | std::atomic<size_t> seq{0}; |
-| L06390 | src/mod/session2/p8_probe_logic.h:106:30 | capacity | inline literal (semantic audit required) | 0 | std::atomic<size_t> enq_{0}; |
-| L06391 | src/mod/session2/p8_probe_logic.h:107:30 | capacity | inline literal (semantic audit required) | 0 | std::atomic<size_t> deq_{0}; |
-| L06392 | src/mod/session2/p8_probe_logic.h:108:36 | capacity | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> dropped_{0}; |
-| L06393 | src/mod/session2/p8_probe_logic.h:120:63 | take | inline literal (semantic audit required) | 0 | const uint64_t w = window_us_ ? now_us / window_us_ : 0; |
-| L06394 | src/mod/session2/p8_probe_logic.h:123:26 | take | inline literal (semantic audit required) | 0 | count_.store(0, std::memory_order_relaxed); |
-| L06395 | src/mod/session2/p8_probe_logic.h:125:30 | take | inline literal (semantic audit required) | 1 | if (count_.fetch_add(1, std::memory_order_relaxed) < per_) return true; |
-| L06396 | src/mod/session2/p8_probe_logic.h:126:28 | take | inline literal (semantic audit required) | 1 | refused_.fetch_add(1, std::memory_order_relaxed); |
-| L06397 | src/mod/session2/p8_probe_logic.h:134:36 | refused | inline literal (semantic audit required) | 0ull | std::atomic<uint64_t> window_{~0ull}; |
-| L06398 | src/mod/session2/p8_probe_logic.h:135:34 | refused | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> count_{0}; |
-| L06399 | src/mod/session2/p8_probe_logic.h:136:36 | refused | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> refused_{0}; |
-| L06400 | src/mod/session2/p8_probe_logic.h:147:24 | refused | inline literal (semantic audit required) | 4 | static_assert(N >= 4 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L06401 | src/mod/session2/p8_probe_logic.h:147:39 | refused | inline literal (semantic audit required) | 1 | static_assert(N >= 4 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L06402 | src/mod/session2/p8_probe_logic.h:147:46 | refused | inline literal (semantic audit required) | 0 | static_assert(N >= 4 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L06403 | src/mod/session2/p8_probe_logic.h:154:26 | bump | inline literal (semantic audit required) | 0 | if (!key) return 0; |
-| L06404 | src/mod/session2/p8_probe_logic.h:157:29 | bump | inline literal (semantic audit required) | 0 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
-| L06405 | src/mod/session2/p8_probe_logic.h:157:66 | bump | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
-| L06406 | src/mod/session2/p8_probe_logic.h:157:76 | bump | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
-| L06407 | src/mod/session2/p8_probe_logic.h:159:24 | bump | inline literal (semantic audit required) | 0 | if (cur == 0) { |
-| L06408 | src/mod/session2/p8_probe_logic.h:166:37 | bump | inline literal (semantic audit required) | 1 | size_.fetch_add(1, std::memory_order_relaxed); |
-| L06409 | src/mod/session2/p8_probe_logic.h:170:57 | bump | inline literal (semantic audit required) | 1 | if (cur == key) return counts_[i].fetch_add(1, std::memory_order_relaxed) + 1; |
-| L06410 | src/mod/session2/p8_probe_logic.h:170:89 | bump | inline literal (semantic audit required) | 1 | if (cur == key) return counts_[i].fetch_add(1, std::memory_order_relaxed) + 1; |
-| L06411 | src/mod/session2/p8_probe_logic.h:172:25 | bump | inline literal (semantic audit required) | 1 | full_.fetch_add(1, std::memory_order_relaxed); |
-| L06412 | src/mod/session2/p8_probe_logic.h:173:16 | bump | inline literal (semantic audit required) | 0 | return 0; |
-| L06413 | src/mod/session2/p8_probe_logic.h:177:26 | count | inline literal (semantic audit required) | 0 | if (!key) return 0; |
-| L06414 | src/mod/session2/p8_probe_logic.h:179:29 | count | inline literal (semantic audit required) | 0 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
-| L06415 | src/mod/session2/p8_probe_logic.h:179:66 | count | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
-| L06416 | src/mod/session2/p8_probe_logic.h:179:76 | count | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
-| L06417 | src/mod/session2/p8_probe_logic.h:182:24 | count | inline literal (semantic audit required) | 0 | if (cur == 0) return 0; |
-| L06418 | src/mod/session2/p8_probe_logic.h:182:34 | count | inline literal (semantic audit required) | 0 | if (cur == 0) return 0; |
-| L06419 | src/mod/session2/p8_probe_logic.h:184:16 | count | inline literal (semantic audit required) | 0 | return 0; |
-| L06420 | src/mod/session2/p8_probe_logic.h:190:75 | hash | inline literal (semantic audit required) | 0x9E3779B1u | static size_t hash(uint32_t key) { return (static_cast<size_t>(key) * 0x9E3779B1u) & (N - 1); } |
-| L06421 | src/mod/session2/p8_probe_logic.h:190:95 | hash | inline literal (semantic audit required) | 1 | static size_t hash(uint32_t key) { return (static_cast<size_t>(key) * 0x9E3779B1u) & (N - 1); } |
-| L06422 | src/mod/session2/p8_probe_logic.h:193:31 | hash | inline literal (semantic audit required) | 0 | std::atomic<size_t> size_{0}; |
-| L06423 | src/mod/session2/p8_probe_logic.h:195:33 | hash | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> full_{0}; |
-| L06424 | src/mod/session2/p8_probe_logic.h:200:80 | within_key_budget | inline literal (semantic audit required) | 0 | constexpr bool within_key_budget(uint32_t nth, uint32_t first) { return nth != 0 && nth <= first; } |
-| L06425 | src/mod/session2/p8_probe_logic.h:214:33 | last | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> last_{0}; |
-| L06426 | src/mod/session2/p8_probe_logic.h:220:29 | mix | inline literal (semantic audit required) | 0x9E3779B97F4A7C15ull | uint64_t z = acc ^ (v + 0x9E3779B97F4A7C15ull + (acc << 6) + (acc >> 2)); |
-| L06427 | src/mod/session2/p8_probe_logic.h:220:61 | mix | inline literal (semantic audit required) | 6 | uint64_t z = acc ^ (v + 0x9E3779B97F4A7C15ull + (acc << 6) + (acc >> 2)); |
-| L06428 | src/mod/session2/p8_probe_logic.h:220:74 | mix | inline literal (semantic audit required) | 2 | uint64_t z = acc ^ (v + 0x9E3779B97F4A7C15ull + (acc << 6) + (acc >> 2)); |
-| L06429 | src/mod/session2/p8_probe_logic.h:221:20 | mix | inline literal (semantic audit required) | 30 | z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ull; |
-| L06430 | src/mod/session2/p8_probe_logic.h:221:27 | mix | inline literal (semantic audit required) | 0xBF58476D1CE4E5B9ull | z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ull; |
-| L06431 | src/mod/session2/p8_probe_logic.h:222:20 | mix | inline literal (semantic audit required) | 27 | z = (z ^ (z >> 27)) * 0x94D049BB133111EBull; |
-| L06432 | src/mod/session2/p8_probe_logic.h:222:27 | mix | inline literal (semantic audit required) | 0x94D049BB133111EBull | z = (z ^ (z >> 27)) * 0x94D049BB133111EBull; |
-| L06433 | src/mod/session2/p8_probe_logic.h:223:22 | mix | inline literal (semantic audit required) | 31 | return z ^ (z >> 31); |
-| L06434 | src/mod/session2/p8_probe_logic.h:229:34 | qpc_to_us | inline literal (semantic audit required) | 1000000ull | return freq ? ticks / freq * 1000000ull + ticks % freq * 1000000ull / freq : 0; |
-| L06435 | src/mod/session2/p8_probe_logic.h:229:62 | qpc_to_us | inline literal (semantic audit required) | 1000000ull | return freq ? ticks / freq * 1000000ull + ticks % freq * 1000000ull / freq : 0; |
-| L06436 | src/mod/session2/p8_probe_logic.h:229:82 | qpc_to_us | inline literal (semantic audit required) | 0 | return freq ? ticks / freq * 1000000ull + ticks % freq * 1000000ull / freq : 0; |
-| L06437 | src/mod/session2/p8_probe_logic.h:251:22 | qpc_to_us | inline literal (semantic audit required) | 1 | int32_t index = -1; |
-| L06438 | src/mod/session2/p8_probe_logic.h:252:22 | qpc_to_us | inline literal (semantic audit required) | 0 | uint32_t count = 0, iterations = 0; |
-| L06439 | src/mod/session2/p8_probe_logic.h:252:38 | qpc_to_us | inline literal (semantic audit required) | 0 | uint32_t count = 0, iterations = 0; |
-| L06440 | src/mod/session2/p8_probe_logic.h:253:23 | qpc_to_us | inline literal (semantic audit required) | 0 | uintptr_t table = 0; |
-| L06441 | src/mod/session2/p8_probe_logic.h:254:22 | qpc_to_us | inline literal (semantic audit required) | 3 | uintptr_t triple[3] = {}; |
-| L06442 | src/mod/session2/p8_probe_logic.h:260:89 | graph_find | inline literal (semantic audit required) | 40 | FindResult graph_find(const Mem& m, uintptr_t graph, uint32_t hash, uint32_t max_iter = 40) { |
-| L06443 | src/mod/session2/p8_probe_logic.h:264:20 | graph_find | inline literal (semantic audit required) | 0 | if (r.count == 0) { |
-| L06444 | src/mod/session2/p8_probe_logic.h:268:49 | graph_find | inline literal (semantic audit required) | 1 | int32_t hi = static_cast<int32_t>(r.count - 1), lo = 0; |
-| L06445 | src/mod/session2/p8_probe_logic.h:268:58 | graph_find | inline literal (semantic audit required) | 0 | int32_t hi = static_cast<int32_t>(r.count - 1), lo = 0; |
-| L06446 | src/mod/session2/p8_probe_logic.h:269:14 | graph_find | inline literal (semantic audit required) | 0 | if (hi < 0) { |
-| L06447 | src/mod/session2/p8_probe_logic.h:277:17 | graph_find | inline literal (semantic audit required) | 0 | if (d < 0) ++d; |
-| L06448 | src/mod/session2/p8_probe_logic.h:278:35 | graph_find | inline literal (semantic audit required) | 1 | const int32_t mid = (d >> 1) + lo; |
-| L06449 | src/mod/session2/p8_probe_logic.h:280:24 | graph_find | inline literal (semantic audit required) | 0 | uintptr_t p0 = 0, p1 = 0, p2 = 0; |
-| L06450 | src/mod/session2/p8_probe_logic.h:280:32 | graph_find | inline literal (semantic audit required) | 0 | uintptr_t p0 = 0, p1 = 0, p2 = 0; |
-| L06451 | src/mod/session2/p8_probe_logic.h:280:40 | graph_find | inline literal (semantic audit required) | 0 | uintptr_t p0 = 0, p1 = 0, p2 = 0; |
-| L06452 | src/mod/session2/p8_probe_logic.h:283:22 | graph_find | inline literal (semantic audit required) | 0 | uint32_t k = 0; |
-| L06453 | src/mod/session2/p8_probe_logic.h:285:28 | graph_find | inline literal (semantic audit required) | 8 | if (!m.ptr(e + 8, p1)) return r; |
-| L06454 | src/mod/session2/p8_probe_logic.h:287:32 | graph_find | inline literal (semantic audit required) | 0x10 | if (!m.ptr(e + 0x10, p2)) return r; |
-| L06455 | src/mod/session2/p8_probe_logic.h:295:24 | graph_find | inline literal (semantic audit required) | 1 | hi = mid - 1; |
-| L06456 | src/mod/session2/p8_probe_logic.h:298:36 | graph_find | inline literal (semantic audit required) | 0 | if (!(p0 && p1 && p2)) k = 0; |
-| L06457 | src/mod/session2/p8_probe_logic.h:301:23 | graph_find | inline literal (semantic audit required) | 0 | if (mid < 0) return r; |
-| L06458 | src/mod/session2/p8_probe_logic.h:304:22 | graph_find | inline literal (semantic audit required) | 0 | r.triple[0] = p0; |
-| L06459 | src/mod/session2/p8_probe_logic.h:305:22 | graph_find | inline literal (semantic audit required) | 1 | r.triple[1] = p1; |
-| L06460 | src/mod/session2/p8_probe_logic.h:306:22 | graph_find | inline literal (semantic audit required) | 2 | r.triple[2] = p2; |
-| L06461 | src/mod/session2/p8_probe_logic.h:309:20 | graph_find | inline literal (semantic audit required) | 1 | lo = mid + 1; |
-| L06462 | src/mod/session2/p8_probe_logic.h:328:17 | graph_find | inline literal (semantic audit required) | 0 | if (hash == 0) return RestartPath::HashZero; |
-| L06463 | src/mod/session2/p8_probe_logic.h:351:53 | triple_complete | inline literal (semantic audit required) | 3 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
-| L06464 | src/mod/session2/p8_probe_logic.h:351:68 | triple_complete | inline literal (semantic audit required) | 0 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
-| L06465 | src/mod/session2/p8_probe_logic.h:351:76 | triple_complete | inline literal (semantic audit required) | 1 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
-| L06466 | src/mod/session2/p8_probe_logic.h:351:84 | triple_complete | inline literal (semantic audit required) | 2 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
-| L06467 | src/mod/session2/p8_probe_logic.h:374:15 | s1_hash | inline literal (semantic audit required) | 6 | float box[6];  // min x,y,z then max x,y,z |
-| L06468 | src/mod/session2/p8_probe_logic.h:379:20 | s1_hash | inline literal (semantic audit required) | 0 | uint8_t b231 = 0; |
-| L06469 | src/mod/session2/p8_probe_logic.h:380:20 | s1_hash | inline literal (semantic audit required) | 0 | int32_t i174 = 0; |
-| L06470 | src/mod/session2/p8_probe_logic.h:381:20 | s1_hash | inline literal (semantic audit required) | 0 | uint8_t b2d4 = 0; |
-| L06471 | src/mod/session2/p8_probe_logic.h:382:18 | s1_hash | inline literal (semantic audit required) | 0.0f | float f2d0 = 0.0f, threshold = 0.0f;  // threshold: the float at exe+0x6CC8898 |
-| L06472 | src/mod/session2/p8_probe_logic.h:382:36 | s1_hash | inline literal (semantic audit required) | 0.0f | float f2d0 = 0.0f, threshold = 0.0f;  // threshold: the float at exe+0x6CC8898 |
-| L06473 | src/mod/session2/p8_probe_logic.h:383:15 | s1_hash | inline literal (semantic audit required) | 3 | float pos[3] = {}; |
-| L06474 | src/mod/session2/p8_probe_logic.h:384:28 | s1_hash | inline literal (semantic audit required) | 0 | uint32_t list1_count = 0, list2_count = 0; |
-| L06475 | src/mod/session2/p8_probe_logic.h:384:45 | s1_hash | inline literal (semantic audit required) | 0 | uint32_t list1_count = 0, list2_count = 0; |
-| L06476 | src/mod/session2/p8_probe_logic.h:402:22 | s1_hash | inline literal (semantic audit required) | 1 | int32_t index = -1;          // the list-1 entry, for the List1* blockers |
-| L06477 | src/mod/session2/p8_probe_logic.h:403:31 | s1_hash | inline literal (semantic audit required) | 0 | uint32_t unknown_before = 0;  // list-1 entries before it whose 0x1AC2830 we cannot know |
-| L06478 | src/mod/session2/p8_probe_logic.h:407:40 | in_box | inline literal (semantic audit required) | 6 | constexpr bool in_box(const float (&b)[6], const float (&p)[3]) { |
-| L06479 | src/mod/session2/p8_probe_logic.h:407:61 | in_box | inline literal (semantic audit required) | 3 | constexpr bool in_box(const float (&b)[6], const float (&p)[3]) { |
-| L06480 | src/mod/session2/p8_probe_logic.h:408:14 | in_box | inline literal (semantic audit required) | 0 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06481 | src/mod/session2/p8_probe_logic.h:408:22 | in_box | inline literal (semantic audit required) | 0 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06482 | src/mod/session2/p8_probe_logic.h:408:30 | in_box | inline literal (semantic audit required) | 1 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06483 | src/mod/session2/p8_probe_logic.h:408:38 | in_box | inline literal (semantic audit required) | 1 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06484 | src/mod/session2/p8_probe_logic.h:408:46 | in_box | inline literal (semantic audit required) | 2 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06485 | src/mod/session2/p8_probe_logic.h:408:54 | in_box | inline literal (semantic audit required) | 2 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06486 | src/mod/session2/p8_probe_logic.h:408:62 | in_box | inline literal (semantic audit required) | 0 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06487 | src/mod/session2/p8_probe_logic.h:408:70 | in_box | inline literal (semantic audit required) | 3 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06488 | src/mod/session2/p8_probe_logic.h:408:78 | in_box | inline literal (semantic audit required) | 1 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06489 | src/mod/session2/p8_probe_logic.h:408:86 | in_box | inline literal (semantic audit required) | 4 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06490 | src/mod/session2/p8_probe_logic.h:408:94 | in_box | inline literal (semantic audit required) | 2 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06491 | src/mod/session2/p8_probe_logic.h:408:102 | in_box | inline literal (semantic audit required) | 5 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
-| L06492 | src/mod/session2/p8_probe_logic.h:422:18 | attribute_a97d60 | inline literal (semantic audit required) | 2 | if (s.b231 < 2) { |
-| L06493 | src/mod/session2/p8_probe_logic.h:426:19 | attribute_a97d60 | inline literal (semantic audit required) | 0 | if (s.i174 != 0) { |
-| L06494 | src/mod/session2/p8_probe_logic.h:430:19 | attribute_a97d60 | inline literal (semantic audit required) | 0 | if (s.b2d4 != 0 && s.f2d0 < s.threshold) { |
-| L06495 | src/mod/session2/p8_probe_logic.h:435:21 | attribute_a97d60 | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < s.list1.size(); ++i) { |
-| L06496 | src/mod/session2/p8_probe_logic.h:443:26 | attribute_a97d60 | inline literal (semantic audit required) | 0 | if (e.flag28c == 0) { |
-| L06497 | src/mod/session2/p8_probe_logic.h:445:33 | attribute_a97d60 | inline literal (semantic audit required) | 5 | } else if (e.state61 == 5) { |
-| L06498 | src/mod/session2/p8_probe_logic.h:447:33 | attribute_a97d60 | inline literal (semantic audit required) | 0 | } else if ((e.mode60 == 0 &#124;&#124; e.mode60 == 1) && in_box(e.box, s.pos)) { |
-| L06499 | src/mod/session2/p8_probe_logic.h:447:50 | attribute_a97d60 | inline literal (semantic audit required) | 1 | } else if ((e.mode60 == 0 &#124;&#124; e.mode60 == 1) && in_box(e.box, s.pos)) { |
-| L06500 | src/mod/session2/reannounce_logic.h:47:20 | backoff_ms | inline literal (semantic audit required) | 1 | if (attempt <= 1) return 2000; |
-| L06501 | src/mod/session2/reannounce_logic.h:47:30 | backoff_ms | inline literal (semantic audit required) | 2000 | if (attempt <= 1) return 2000; |
-| L06502 | src/mod/session2/reannounce_logic.h:48:20 | backoff_ms | inline literal (semantic audit required) | 2 | if (attempt == 2) return 4000; |
-| L06503 | src/mod/session2/reannounce_logic.h:48:30 | backoff_ms | inline literal (semantic audit required) | 4000 | if (attempt == 2) return 4000; |
-| L06504 | src/mod/session2/reannounce_logic.h:49:12 | backoff_ms | inline literal (semantic audit required) | 8000 | return 8000; |
-| L06505 | src/mod/session2/reannounce_logic.h:54:20 | backoff_ms | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L06506 | src/mod/session2/reannounce_logic.h:55:22 | backoff_ms | inline literal (semantic audit required) | 0 | uint32_t owner = 0; |
-| L06507 | src/mod/session2/reannounce_logic.h:59:51 | split_failure | inline literal (semantic audit required) | 32 | const auto owner = static_cast<uint32_t>(v >> 32); |
-| L06508 | src/mod/session2/reannounce_logic.h:60:17 | split_failure | inline literal (semantic audit required) | 28 | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
-| L06509 | src/mod/session2/reannounce_logic.h:60:24 | split_failure | inline literal (semantic audit required) | 0xB | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
-| L06510 | src/mod/session2/reannounce_logic.h:60:41 | split_failure | inline literal (semantic audit required) | 28 | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
-| L06511 | src/mod/session2/reannounce_logic.h:60:48 | split_failure | inline literal (semantic audit required) | 0x9 | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
-| L06512 | src/mod/session2/reannounce_logic.h:66:7 | encode | inline literal (semantic audit required) | 0 | p[0] = kControlReannounce; |
-| L06513 | src/mod/session2/reannounce_logic.h:67:18 | encode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
-| L06514 | src/mod/session2/reannounce_logic.h:67:25 | encode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
-| L06515 | src/mod/session2/reannounce_logic.h:67:35 | encode | inline literal (semantic audit required) | 1 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
-| L06516 | src/mod/session2/reannounce_logic.h:67:73 | encode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
-| L06517 | src/mod/session2/reannounce_logic.h:68:18 | encode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
-| L06518 | src/mod/session2/reannounce_logic.h:68:25 | encode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
-| L06519 | src/mod/session2/reannounce_logic.h:68:35 | encode | inline literal (semantic audit required) | 5 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
-| L06520 | src/mod/session2/reannounce_logic.h:68:75 | encode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
-| L06521 | src/mod/session2/reannounce_logic.h:69:7 | encode | inline literal (semantic audit required) | 9 | p[9] = attempt; |
-| L06522 | src/mod/session2/reannounce_logic.h:79:40 | is_reannounce_frame | inline literal (semantic audit required) | 0 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06523 | src/mod/session2/reannounce_logic.h:79:64 | is_reannounce_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06524 | src/mod/session2/reannounce_logic.h:79:75 | is_reannounce_frame | inline literal (semantic audit required) | 1 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06525 | src/mod/session2/reannounce_logic.h:79:100 | is_reannounce_frame | inline literal (semantic audit required) | 8 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06526 | src/mod/session2/reannounce_logic.h:80:14 | is_reannounce_frame | inline literal (semantic audit required) | 2 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
-| L06527 | src/mod/session2/reannounce_logic.h:80:20 | is_reannounce_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
-| L06528 | src/mod/session2/reannounce_logic.h:80:30 | is_reannounce_frame | inline literal (semantic audit required) | 3 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
-| L06529 | src/mod/session2/reannounce_logic.h:80:54 | is_reannounce_frame | inline literal (semantic audit required) | 4 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
-| L06530 | src/mod/session2/reannounce_logic.h:80:60 | is_reannounce_frame | inline literal (semantic audit required) | 0 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
-| L06531 | src/mod/session2/reannounce_logic.h:80:67 | is_reannounce_frame | inline literal (semantic audit required) | 5 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
-| L06532 | src/mod/session2/reannounce_logic.h:84:20 | is_reannounce_frame | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L06533 | src/mod/session2/reannounce_logic.h:85:22 | is_reannounce_frame | inline literal (semantic audit required) | 0 | uint32_t owner = 0; |
-| L06534 | src/mod/session2/reannounce_logic.h:86:23 | is_reannounce_frame | inline literal (semantic audit required) | 0 | uint8_t attempt = 0; |
-| L06535 | src/mod/session2/reannounce_logic.h:89:51 | decode | inline literal (semantic audit required) | 0 | if (payload.size() != kPayloadSize &#124;&#124; payload[0] != kControlReannounce) return std::nullopt; |
-| L06536 | src/mod/session2/reannounce_logic.h:91:18 | decode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
-| L06537 | src/mod/session2/reannounce_logic.h:91:25 | decode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
-| L06538 | src/mod/session2/reannounce_logic.h:91:72 | decode | inline literal (semantic audit required) | 1 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
-| L06539 | src/mod/session2/reannounce_logic.h:91:84 | decode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
-| L06540 | src/mod/session2/reannounce_logic.h:92:18 | decode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
-| L06541 | src/mod/session2/reannounce_logic.h:92:25 | decode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
-| L06542 | src/mod/session2/reannounce_logic.h:92:74 | decode | inline literal (semantic audit required) | 5 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
-| L06543 | src/mod/session2/reannounce_logic.h:92:86 | decode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
-| L06544 | src/mod/session2/reannounce_logic.h:93:25 | decode | inline literal (semantic audit required) | 9 | r.attempt = payload[9]; |
-| L06545 | src/mod/session2/reannounce_logic.h:94:19 | decode | inline literal (semantic audit required) | 28 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
-| L06546 | src/mod/session2/reannounce_logic.h:94:26 | decode | inline literal (semantic audit required) | 0xB | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
-| L06547 | src/mod/session2/reannounce_logic.h:94:45 | decode | inline literal (semantic audit required) | 28 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
-| L06548 | src/mod/session2/reannounce_logic.h:94:52 | decode | inline literal (semantic audit required) | 0x9 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
-| L06549 | src/mod/session2/reannounce_logic.h:94:72 | decode | inline literal (semantic audit required) | 0 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
-| L06550 | src/mod/session2/reannounce_logic.h:135:19 | peek | inline literal (semantic audit required) | 0 | attempt = 0; |
-| L06551 | src/mod/session2/reannounce_logic.h:136:21 | peek | inline literal (semantic audit required) | 28 | if ((key >> 28) != 0xB) return Verdict::NotAChild; |
-| L06552 | src/mod/session2/reannounce_logic.h:136:28 | peek | inline literal (semantic audit required) | 0xB | if ((key >> 28) != 0xB) return Verdict::NotAChild; |
-| L06553 | src/mod/session2/reannounce_logic.h:141:23 | peek | inline literal (semantic audit required) | 1 | attempt = 1; |
-| L06554 | src/mod/session2/reannounce_logic.h:146:47 | peek | inline literal (semantic audit required) | 1 | attempt = static_cast<uint8_t>(s->n + 1); |
-| L06555 | src/mod/session2/reannounce_logic.h:155:28 | commit | inline literal (semantic audit required) | 0 | *s = Slot{key, 0, 0}; |
-| L06556 | src/mod/session2/reannounce_logic.h:155:31 | commit | inline literal (semantic audit required) | 0 | *s = Slot{key, 0, 0}; |
-| L06557 | src/mod/session2/reannounce_logic.h:158:40 | commit | inline literal (semantic audit required) | 1 | s->last_ms = now_ms ? now_ms : 1; |
-| L06558 | src/mod/session2/reannounce_logic.h:178:16 | count | inline literal (semantic audit required) | 0 | return 0; |
-| L06559 | src/mod/session2/reannounce_logic.h:183:18 | reset | inline literal (semantic audit required) | 0 | total_ = 0; |
-| L06560 | src/mod/session2/reannounce_logic.h:188:24 | reset | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L06561 | src/mod/session2/reannounce_logic.h:189:21 | reset | inline literal (semantic audit required) | 0 | uint8_t n = 0; |
-| L06562 | src/mod/session2/reannounce_logic.h:190:28 | reset | inline literal (semantic audit required) | 0 | uint64_t last_ms = 0; |
-| L06563 | src/mod/session2/reannounce_logic.h:217:23 | free_slot | inline literal (semantic audit required) | 0 | uint32_t total_ = 0; |
-| L06564 | src/mod/session2/rejoin_logic.h:56:36 | (file scope) | inline literal (semantic audit required) | 1 | enum class Kind : uint8_t { Real = 1, Probe = 2 }; |
-| L06565 | src/mod/session2/rejoin_logic.h:56:47 | (file scope) | inline literal (semantic audit required) | 2 | enum class Kind : uint8_t { Real = 1, Probe = 2 }; |
-| L06566 | src/mod/session2/rejoin_logic.h:57:43 | (file scope) | inline literal (semantic audit required) | 0 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
-| L06567 | src/mod/session2/rejoin_logic.h:57:57 | (file scope) | inline literal (semantic audit required) | 1 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
-| L06568 | src/mod/session2/rejoin_logic.h:57:68 | (file scope) | inline literal (semantic audit required) | 2 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
-| L06569 | src/mod/session2/rejoin_logic.h:57:79 | (file scope) | inline literal (semantic audit required) | 3 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
-| L06570 | src/mod/session2/rejoin_logic.h:57:96 | (file scope) | inline literal (semantic audit required) | 4 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
-| L06571 | src/mod/session2/rejoin_logic.h:58:43 | (file scope) | inline literal (semantic audit required) | 0 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
-| L06572 | src/mod/session2/rejoin_logic.h:58:60 | (file scope) | inline literal (semantic audit required) | 1 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
-| L06573 | src/mod/session2/rejoin_logic.h:58:81 | (file scope) | inline literal (semantic audit required) | 2 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
-| L06574 | src/mod/session2/rejoin_logic.h:58:97 | (file scope) | inline literal (semantic audit required) | 3 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
-| L06575 | src/mod/session2/rejoin_logic.h:58:110 | (file scope) | inline literal (semantic audit required) | 4 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
-| L06576 | src/mod/session2/rejoin_logic.h:83:29 | reason_name | inline literal (semantic audit required) | 0 | uint32_t conversation = 0; |
-| L06577 | src/mod/session2/rejoin_logic.h:84:27 | reason_name | inline literal (semantic audit required) | 0 | uint32_t last_epoch = 0; |
-| L06578 | src/mod/session2/rejoin_logic.h:89:22 | reason_name | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
-| L06579 | src/mod/session2/rejoin_logic.h:90:29 | reason_name | inline literal (semantic audit required) | 0 | uint32_t conversation = 0; |
-| L06580 | src/mod/session2/rejoin_logic.h:95:18 | put32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L06581 | src/mod/session2/rejoin_logic.h:95:25 | put32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L06582 | src/mod/session2/rejoin_logic.h:95:67 | put32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L06583 | src/mod/session2/rejoin_logic.h:98:18 | get32 | inline literal (semantic audit required) | 0 | uint32_t v = 0; |
-| L06584 | src/mod/session2/rejoin_logic.h:99:18 | get32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) v &#124;= static_cast<uint32_t>(p[i]) << (8 * i); |
-| L06585 | src/mod/session2/rejoin_logic.h:99:25 | get32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) v &#124;= static_cast<uint32_t>(p[i]) << (8 * i); |
-| L06586 | src/mod/session2/rejoin_logic.h:99:70 | get32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) v &#124;= static_cast<uint32_t>(p[i]) << (8 * i); |
-| L06587 | src/mod/session2/rejoin_logic.h:103:28 | frame_of | inline literal (semantic audit required) | 5 | inline std::array<uint8_t, 5 + N> frame_of(const std::array<uint8_t, N>& payload) { |
-| L06588 | src/mod/session2/rejoin_logic.h:104:25 | frame_of | inline literal (semantic audit required) | 5 | std::array<uint8_t, 5 + N> f{}; |
-| L06589 | src/mod/session2/rejoin_logic.h:105:7 | frame_of | inline literal (semantic audit required) | 0 | f[0] = kControlOpcode & 0xFF; |
-| L06590 | src/mod/session2/rejoin_logic.h:105:29 | frame_of | inline literal (semantic audit required) | 0xFF | f[0] = kControlOpcode & 0xFF; |
-| L06591 | src/mod/session2/rejoin_logic.h:106:7 | frame_of | inline literal (semantic audit required) | 1 | f[1] = kControlOpcode >> 8; |
-| L06592 | src/mod/session2/rejoin_logic.h:106:30 | frame_of | inline literal (semantic audit required) | 8 | f[1] = kControlOpcode >> 8; |
-| L06593 | src/mod/session2/rejoin_logic.h:107:7 | frame_of | inline literal (semantic audit required) | 2 | f[2] = 0xFF;  // slot -1 |
-| L06594 | src/mod/session2/rejoin_logic.h:107:12 | frame_of | inline literal (semantic audit required) | 0xFF | f[2] = 0xFF;  // slot -1 |
-| L06595 | src/mod/session2/rejoin_logic.h:108:7 | frame_of | inline literal (semantic audit required) | 3 | f[3] = static_cast<uint8_t>(N); |
-| L06596 | src/mod/session2/rejoin_logic.h:109:7 | frame_of | inline literal (semantic audit required) | 4 | f[4] = 0; |
-| L06597 | src/mod/session2/rejoin_logic.h:109:12 | frame_of | inline literal (semantic audit required) | 0 | f[4] = 0; |
-| L06598 | src/mod/session2/rejoin_logic.h:110:21 | frame_of | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) f[5 + i] = payload[i]; |
-| L06599 | src/mod/session2/rejoin_logic.h:110:38 | frame_of | inline literal (semantic audit required) | 5 | for (size_t i = 0; i < N; ++i) f[5 + i] = payload[i]; |
-| L06600 | src/mod/session2/rejoin_logic.h:114:24 | is_frame | inline literal (semantic audit required) | 5 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06601 | src/mod/session2/rejoin_logic.h:114:41 | is_frame | inline literal (semantic audit required) | 0 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06602 | src/mod/session2/rejoin_logic.h:114:65 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06603 | src/mod/session2/rejoin_logic.h:114:76 | is_frame | inline literal (semantic audit required) | 1 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06604 | src/mod/session2/rejoin_logic.h:114:101 | is_frame | inline literal (semantic audit required) | 8 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
-| L06605 | src/mod/session2/rejoin_logic.h:115:14 | is_frame | inline literal (semantic audit required) | 2 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
-| L06606 | src/mod/session2/rejoin_logic.h:115:20 | is_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
-| L06607 | src/mod/session2/rejoin_logic.h:115:30 | is_frame | inline literal (semantic audit required) | 3 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
-| L06608 | src/mod/session2/rejoin_logic.h:115:49 | is_frame | inline literal (semantic audit required) | 4 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
-| L06609 | src/mod/session2/rejoin_logic.h:115:55 | is_frame | inline literal (semantic audit required) | 0 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
-| L06610 | src/mod/session2/rejoin_logic.h:115:62 | is_frame | inline literal (semantic audit required) | 5 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
-| L06611 | src/mod/session2/rejoin_logic.h:115:79 | is_frame | inline literal (semantic audit required) | 6 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
-| L06612 | src/mod/session2/rejoin_logic.h:121:7 | encode_rejoin | inline literal (semantic audit required) | 0 | p[0] = kControlRejoin; |
-| L06613 | src/mod/session2/rejoin_logic.h:122:7 | encode_rejoin | inline literal (semantic audit required) | 1 | p[1] = kWireVersion; |
-| L06614 | src/mod/session2/rejoin_logic.h:123:7 | encode_rejoin | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(r.kind); |
-| L06615 | src/mod/session2/rejoin_logic.h:124:30 | encode_rejoin | inline literal (semantic audit required) | 3 | detail::put32(p.data() + 3, r.conversation); |
-| L06616 | src/mod/session2/rejoin_logic.h:125:30 | encode_rejoin | inline literal (semantic audit required) | 7 | detail::put32(p.data() + 7, r.last_epoch); |
-| L06617 | src/mod/session2/rejoin_logic.h:129:41 | decode_rejoin | inline literal (semantic audit required) | 0 | if (p.size() != kRejoinPayload &#124;&#124; p[0] != kControlRejoin &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
-| L06618 | src/mod/session2/rejoin_logic.h:129:67 | decode_rejoin | inline literal (semantic audit required) | 1 | if (p.size() != kRejoinPayload &#124;&#124; p[0] != kControlRejoin &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
-| L06619 | src/mod/session2/rejoin_logic.h:130:11 | decode_rejoin | inline literal (semantic audit required) | 2 | if (p[2] != static_cast<uint8_t>(Kind::Real) && p[2] != static_cast<uint8_t>(Kind::Probe)) return std::nullopt; |
-| L06620 | src/mod/session2/rejoin_logic.h:130:55 | decode_rejoin | inline literal (semantic audit required) | 2 | if (p[2] != static_cast<uint8_t>(Kind::Real) && p[2] != static_cast<uint8_t>(Kind::Probe)) return std::nullopt; |
-| L06621 | src/mod/session2/rejoin_logic.h:132:34 | decode_rejoin | inline literal (semantic audit required) | 2 | r.kind = static_cast<Kind>(p[2]); |
-| L06622 | src/mod/session2/rejoin_logic.h:133:47 | decode_rejoin | inline literal (semantic audit required) | 3 | r.conversation = detail::get32(p.data() + 3); |
-| L06623 | src/mod/session2/rejoin_logic.h:134:45 | decode_rejoin | inline literal (semantic audit required) | 7 | r.last_epoch = detail::get32(p.data() + 7); |
-| L06624 | src/mod/session2/rejoin_logic.h:135:26 | decode_rejoin | inline literal (semantic audit required) | 2 | if (r.conversation < 2) return std::nullopt;  // the first conversation is never asked for |
-| L06625 | src/mod/session2/rejoin_logic.h:140:7 | encode_epoch | inline literal (semantic audit required) | 0 | p[0] = kControlEpoch; |
-| L06626 | src/mod/session2/rejoin_logic.h:141:7 | encode_epoch | inline literal (semantic audit required) | 1 | p[1] = kWireVersion; |
-| L06627 | src/mod/session2/rejoin_logic.h:142:7 | encode_epoch | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(e.state); |
-| L06628 | src/mod/session2/rejoin_logic.h:143:7 | encode_epoch | inline literal (semantic audit required) | 3 | p[3] = static_cast<uint8_t>(e.reason); |
-| L06629 | src/mod/session2/rejoin_logic.h:144:30 | encode_epoch | inline literal (semantic audit required) | 4 | detail::put32(p.data() + 4, e.epoch); |
-| L06630 | src/mod/session2/rejoin_logic.h:145:30 | encode_epoch | inline literal (semantic audit required) | 8 | detail::put32(p.data() + 8, e.conversation); |
-| L06631 | src/mod/session2/rejoin_logic.h:149:40 | decode_epoch | inline literal (semantic audit required) | 0 | if (p.size() != kEpochPayload &#124;&#124; p[0] != kControlEpoch &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
-| L06632 | src/mod/session2/rejoin_logic.h:149:65 | decode_epoch | inline literal (semantic audit required) | 1 | if (p.size() != kEpochPayload &#124;&#124; p[0] != kControlEpoch &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
-| L06633 | src/mod/session2/rejoin_logic.h:150:11 | decode_epoch | inline literal (semantic audit required) | 2 | if (p[2] > static_cast<uint8_t>(HostState::Quarantined) &#124;&#124; p[3] > static_cast<uint8_t>(Reason::Ignored)) { |
-| L06634 | src/mod/session2/rejoin_logic.h:150:66 | decode_epoch | inline literal (semantic audit required) | 3 | if (p[2] > static_cast<uint8_t>(HostState::Quarantined) &#124;&#124; p[3] > static_cast<uint8_t>(Reason::Ignored)) { |
-| L06635 | src/mod/session2/rejoin_logic.h:154:40 | decode_epoch | inline literal (semantic audit required) | 2 | e.state = static_cast<HostState>(p[2]); |
-| L06636 | src/mod/session2/rejoin_logic.h:155:38 | decode_epoch | inline literal (semantic audit required) | 3 | e.reason = static_cast<Reason>(p[3]); |
-| L06637 | src/mod/session2/rejoin_logic.h:156:40 | decode_epoch | inline literal (semantic audit required) | 4 | e.epoch = detail::get32(p.data() + 4); |
-| L06638 | src/mod/session2/rejoin_logic.h:157:47 | decode_epoch | inline literal (semantic audit required) | 8 | e.conversation = detail::get32(p.data() + 8); |
-| L06639 | src/mod/session2/rejoin_logic.h:160:28 | rejoin_frame | inline literal (semantic audit required) | 5 | inline std::array<uint8_t, 5 + kRejoinPayload> rejoin_frame(const Rejoin& r) { return detail::frame_of(encode_rejoin(r)); } |
-| L06640 | src/mod/session2/rejoin_logic.h:161:28 | epoch_frame | inline literal (semantic audit required) | 5 | inline std::array<uint8_t, 5 + kEpochPayload> epoch_frame(const Epoch& e) { return detail::frame_of(encode_epoch(e)); } |
-| L06641 | src/mod/session2/rejoin_logic.h:166:57 | parse_rejoin_frame | inline literal (semantic audit required) | 5 | return is_rejoin_frame(f) ? decode_rejoin(f.subspan(5)) : std::nullopt; |
-| L06642 | src/mod/session2/rejoin_logic.h:169:55 | parse_epoch_frame | inline literal (semantic audit required) | 5 | return is_epoch_frame(f) ? decode_epoch(f.subspan(5)) : std::nullopt; |
-| L06643 | src/mod/session2/rejoin_logic.h:195:28 | host_action_name | inline literal (semantic audit required) | 0 | uint32_t started_for = 0;      // the guest conversation the current epoch was started for in-band (0 = none) |
-| L06644 | src/mod/session2/rejoin_logic.h:207:28 | host_decide | inline literal (semantic audit required) | 0 | (in.started_for == 0 &#124;&#124; in.started_for == in.request.conversation)) { |
-| L06645 | src/mod/session2/rejoin_logic.h:217:33 | heartbeat_conversation | inline literal (semantic audit required) | 0 | return conversation_bound ? 0 : started_for; |
-| L06646 | src/mod/session2/rejoin_logic.h:226:80 | heartbeat_conversation | inline literal (semantic audit required) | 0 | return state == HostState::Active && !conversation_bound && started_for != 0 && now_ms >= started_ms && |
-| L06647 | src/mod/session2/rejoin_logic.h:232:82 | reentry_conversation | inline literal (semantic audit required) | 2 | inline bool reentry_conversation(uint32_t conversation) { return conversation >= 2; } |
-| L06648 | src/mod/session2/rejoin_logic.h:291:19 | on_epoch | inline literal (semantic audit required) | 0 | silent_ = 0;  // the host answers: not silence (review of c4367f8, 5) |
-| L06649 | src/mod/session2/rejoin_logic.h:299:87 | on_epoch | inline literal (semantic audit required) | 0 | if (phase_ == Phase::Asking && e.conversation == asking_ && e.conversation != 0) { |
-| L06650 | src/mod/session2/rejoin_logic.h:302:42 | on_epoch | inline literal (semantic audit required) | 1 | probe_epoch_ = e.epoch + 1; |
-| L06651 | src/mod/session2/rejoin_logic.h:322:17 | on_remote_begin | inline literal (semantic audit required) | 0 | asks_ = 0; |
-| L06652 | src/mod/session2/rejoin_logic.h:336:35 | on_remote_over | inline literal (semantic audit required) | 1 | asking_ = conversation_ + 1; |
-| L06653 | src/mod/session2/rejoin_logic.h:338:17 | on_remote_over | inline literal (semantic audit required) | 0 | asks_ = 0; |
-| L06654 | src/mod/session2/rejoin_logic.h:339:19 | on_remote_over | inline literal (semantic audit required) | 0 | silent_ = 0; |
-| L06655 | src/mod/session2/rejoin_logic.h:417:92 | judge | inline literal (semantic audit required) | 0 | asking_, now_ms > granted_ms_ ? now_ms - granted_ms_ : 0, |
-| L06656 | src/mod/session2/rejoin_logic.h:478:28 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
-| L06657 | src/mod/session2/rejoin_logic.h:478:47 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
-| L06658 | src/mod/session2/rejoin_logic.h:478:67 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
-| L06659 | src/mod/session2/rejoin_logic.h:478:85 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
-| L06660 | src/mod/session2/rejoin_logic.h:479:30 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
-| L06661 | src/mod/session2/rejoin_logic.h:479:43 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
-| L06662 | src/mod/session2/rejoin_logic.h:479:54 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
-| L06663 | src/mod/session2/rejoin_logic.h:479:67 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
-| L06664 | src/mod/session2/rejoin_logic.h:480:29 | refuse | inline literal (semantic audit required) | 0 | uint64_t next_ask_ms_ = 0, granted_ms_ = 0, began_ms_ = 0; |
-| L06665 | src/mod/session2/rejoin_logic.h:480:46 | refuse | inline literal (semantic audit required) | 0 | uint64_t next_ask_ms_ = 0, granted_ms_ = 0, began_ms_ = 0; |
-| L06666 | src/mod/session2/rejoin_logic.h:480:61 | refuse | inline literal (semantic audit required) | 0 | uint64_t next_ask_ms_ = 0, granted_ms_ = 0, began_ms_ = 0; |
-| L06667 | src/mod/session2/rejoin_logic.h:481:29 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
-| L06668 | src/mod/session2/rejoin_logic.h:481:49 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
-| L06669 | src/mod/session2/rejoin_logic.h:481:66 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
-| L06670 | src/mod/session2/rejoin_logic.h:481:84 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
-| L06671 | src/mod/session2/remote_interp.h:50:86 | (file scope) | inline literal (semantic audit required) | 0 | void remote_interp_start(const std::string& raw, bool guest, uint32_t owned_cap_ms = 0, bool pair = false, |
-| L06672 | src/mod/session2/report_guard.cpp:28:33 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_dropped{0}; |
-| L06673 | src/mod/session2/report_guard.cpp:29:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_dropped_live{0}; |
-| L06674 | src/mod/session2/report_guard.cpp:35:14 | read_text | inline literal (semantic audit required) | 0 | char c = 0; |
-| L06675 | src/mod/session2/report_guard.cpp:37:48 | read_text | inline literal (semantic audit required) | 1 | if (!game::safe_read(p + s.size(), &c, 1)) return s + "(unreadable)"; |
-| L06676 | src/mod/session2/report_guard.cpp:47:20 | reporter_detour | inline literal (semantic audit required) | 0 | uint8_t live = 0; |
-| L06677 | src/mod/session2/report_guard.cpp:48:94 | reporter_detour | inline literal (semantic audit required) | 1 | const bool known = active && game::safe_read(reinterpret_cast<uintptr_t>(active), &live, 1); |
-| L06678 | src/mod/session2/report_guard.cpp:49:44 | reporter_detour | inline literal (semantic audit required) | 1 | const uint64_t n = g_dropped.fetch_add(1) + 1; |
-| L06679 | src/mod/session2/report_guard.cpp:49:49 | reporter_detour | inline literal (semantic audit required) | 1 | const uint64_t n = g_dropped.fetch_add(1) + 1; |
-| L06680 | src/mod/session2/report_guard.cpp:50:40 | reporter_detour | inline literal (semantic audit required) | 1 | if (live) g_dropped_live.fetch_add(1); |
-| L06681 | src/mod/session2/report_guard.cpp:68:57 | report_describe | inline literal (semantic audit required) | 1 | s += std::format(", {} file{}", v.count, v.count == 1 ? "" : "s"); |
-| L06682 | src/mod/session2/report_guard.cpp:69:23 | report_describe | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < v.count && i < kMaxPaths; ++i) { |
-| L06683 | src/mod/session2/report_guard.cpp:82:20 | report_guard_install_at | inline literal (semantic audit required) | 32 | uint8_t actual[32] = {}; |
-| L06684 | src/mod/session2/report_guard.cpp:85:49 | std::memcmp | inline literal (semantic audit required) | 0 | std::memcmp(actual, head, head_size) != 0) { |
-| L06685 | src/mod/session2/ride_filter_logic.h:85:36 | rd32 | inline literal (semantic audit required) | 0 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L06686 | src/mod/session2/ride_filter_logic.h:85:67 | rd32 | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L06687 | src/mod/session2/ride_filter_logic.h:85:74 | rd32 | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L06688 | src/mod/session2/ride_filter_logic.h:85:104 | rd32 | inline literal (semantic audit required) | 2 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L06689 | src/mod/session2/ride_filter_logic.h:85:111 | rd32 | inline literal (semantic audit required) | 16 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L06690 | src/mod/session2/ride_filter_logic.h:86:37 | rd32 | inline literal (semantic audit required) | 3 | (static_cast<uint32_t>(p[3]) << 24); |
-| L06691 | src/mod/session2/ride_filter_logic.h:86:44 | rd32 | inline literal (semantic audit required) | 24 | (static_cast<uint32_t>(p[3]) << 24); |
-| L06692 | src/mod/session2/ride_filter_logic.h:88:91 | rd64 | inline literal (semantic audit required) | 4 | inline uint64_t rd64(const uint8_t* p) { return rd32(p) &#124; (static_cast<uint64_t>(rd32(p + 4)) << 32); } |
-| L06693 | src/mod/session2/ride_filter_logic.h:88:98 | rd64 | inline literal (semantic audit required) | 32 | inline uint64_t rd64(const uint8_t* p) { return rd32(p) &#124; (static_cast<uint64_t>(rd32(p + 4)) << 32); } |
-| L06694 | src/mod/session2/ride_filter_logic.h:94:20 | rd64 | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L06695 | src/mod/session2/ride_filter_logic.h:95:19 | rd64 | inline literal (semantic audit required) | 0 | uint32_t a0 = 0, a1 = 0; |
-| L06696 | src/mod/session2/ride_filter_logic.h:95:27 | rd64 | inline literal (semantic audit required) | 0 | uint32_t a0 = 0, a1 = 0; |
-| L06697 | src/mod/session2/ride_filter_logic.h:96:24 | rd64 | inline literal (semantic audit required) | 0ull | uint64_t parent = ~0ull; |
-| L06698 | src/mod/session2/ride_filter_logic.h:97:23 | rd64 | inline literal (semantic audit required) | 0 | uint32_t target = 0; |
-| L06699 | src/mod/session2/ride_filter_logic.h:112:57 | is_character | inline literal (semantic audit required) | 28 | inline bool is_character(uint32_t key) { return (key >> 28) == 0xA; } |
-| L06700 | src/mod/session2/ride_filter_logic.h:112:64 | is_character | inline literal (semantic audit required) | 0xA | inline bool is_character(uint32_t key) { return (key >> 28) == 0xA; } |
-| L06701 | src/mod/session2/ride_filter_logic.h:113:49 | is_b_key | inline literal (semantic audit required) | 32 | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
-| L06702 | src/mod/session2/ride_filter_logic.h:113:56 | is_b_key | inline literal (semantic audit required) | 0 | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
-| L06703 | src/mod/session2/ride_filter_logic.h:113:90 | is_b_key | inline literal (semantic audit required) | 28 | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
-| L06704 | src/mod/session2/ride_filter_logic.h:113:97 | is_b_key | inline literal (semantic audit required) | 0xB | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
-| L06705 | src/mod/session2/ride_filter_logic.h:114:62 | has_b_parent | inline literal (semantic audit required) | 0ull | inline bool has_b_parent(const Ack& a) { return a.parent != ~0ull && is_b_key(a.parent); } |
-| L06706 | src/mod/session2/ride_filter_logic.h:145:47 | is_remote_player | inline literal (semantic audit required) | 0 | return is_character(key) && remote_key != 0 && key == remote_key && key != local_key; |
-| L06707 | src/mod/session2/ride_filter_logic.h:150:29 | host_character_from_control | inline literal (semantic audit required) | 5 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
-| L06708 | src/mod/session2/ride_filter_logic.h:150:42 | host_character_from_control | inline literal (semantic audit required) | 0 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
-| L06709 | src/mod/session2/ride_filter_logic.h:150:48 | host_character_from_control | inline literal (semantic audit required) | 4 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
-| L06710 | src/mod/session2/ride_filter_logic.h:150:58 | host_character_from_control | inline literal (semantic audit required) | 0 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
-| L06711 | src/mod/session2/ride_filter_logic.h:151:39 | host_character_from_control | inline literal (semantic audit required) | 1 | const uint32_t k = rd32(payload + 1); |
-| L06712 | src/mod/session2/ride_filter_logic.h:152:34 | host_character_from_control | inline literal (semantic audit required) | 0 | return is_character(k) ? k : 0; |
-| L06713 | src/mod/session2/ride_filter_logic.h:157:21 | put_block | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kBlock; ++i) d[i] = src[i]; |
-| L06714 | src/mod/session2/ride_filter_logic.h:190:31 | rewrite | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> key{0}; |
-| L06715 | src/mod/session2/ride_filter_logic.h:191:35 | rewrite | inline literal (semantic audit required) | 0ull | std::atomic<uint64_t> parent{~0ull}; |
-| L06716 | src/mod/session2/ride_filter_logic.h:192:38 | rewrite | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> changed_ms{0}; |
-| L06717 | src/mod/session2/ride_filter_logic.h:197:30 | note | inline literal (semantic audit required) | 0 | changed_ms.store(0, std::memory_order_relaxed); |
-| L06718 | src/mod/session2/ride_filter_logic.h:200:48 | note | inline literal (semantic audit required) | 1 | changed_ms.store(now_ms ? now_ms : 1, std::memory_order_relaxed); |
-| L06719 | src/mod/session2/ride_filter_logic.h:204:31 | note | inline literal (semantic audit required) | 0 | w.after_change = c != 0 && now_ms >= c && now_ms - c <= kWindowMs; |
-| L06720 | src/mod/session2/ride_filter_logic.h:205:73 | note | inline literal (semantic audit required) | 0 | w.in_window = w.after_change &#124;&#124; has_b_parent(a) &#124;&#124; (a.target != 0 && is_b_key(a.target)); |
-| L06721 | src/mod/session2/ride_filter_logic.h:212:17 | pair_flags | inline literal (semantic audit required) | 0 | uint8_t f = 0; |
-| L06722 | src/mod/session2/ride_filter_logic.h:213:31 | pair_flags | inline literal (semantic audit required) | 1 | if (has_b_parent(a)) f &#124;= 1; |
-| L06723 | src/mod/session2/ride_filter_logic.h:214:21 | pair_flags | inline literal (semantic audit required) | 0 | if (a.target != 0 && is_b_key(a.target)) f &#124;= 2; |
-| L06724 | src/mod/session2/ride_filter_logic.h:214:51 | pair_flags | inline literal (semantic audit required) | 2 | if (a.target != 0 && is_b_key(a.target)) f &#124;= 2; |
-| L06725 | src/mod/session2/ride_filter_logic.h:215:28 | pair_flags | inline literal (semantic audit required) | 4 | if (after_change) f &#124;= 4; |
-| L06726 | src/mod/session2/ride_filter_logic.h:216:65 | pair_flags | inline literal (semantic audit required) | 4 | return static_cast<uint8_t>(f &#124; (static_cast<uint8_t>(k) << 4)); |
-| L06727 | src/mod/session2/ride_filter_logic.h:225:34 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> a0{0}, a1{0}; |
-| L06728 | src/mod/session2/ride_filter_logic.h:225:41 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> a0{0}, a1{0}; |
-| L06729 | src/mod/session2/ride_filter_logic.h:226:36 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint8_t> flags{0}; |
-| L06730 | src/mod/session2/ride_filter_logic.h:227:33 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> n{0}; |
-| L06731 | src/mod/session2/ride_filter_logic.h:230:36 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> overflow{0}, busy{0}; |
-| L06732 | src/mod/session2/ride_filter_logic.h:230:45 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> overflow{0}, busy{0}; |
-| L06733 | src/mod/session2/ride_filter_logic.h:234:28 | add | inline literal (semantic audit required) | 1 | busy.fetch_add(1, std::memory_order_relaxed); |
-| L06734 | src/mod/session2/ride_filter_logic.h:243:27 | add | inline literal (semantic audit required) | 1 | s.n.store(1, std::memory_order_relaxed); |
-| L06735 | src/mod/session2/ride_filter_logic.h:250:31 | load | inline literal (semantic audit required) | 1 | s.n.fetch_add(1, std::memory_order_relaxed); |
-| L06736 | src/mod/session2/ride_filter_logic.h:255:39 | load | inline literal (semantic audit required) | 1 | if (!done) overflow.fetch_add(1, std::memory_order_relaxed); |
-| L06737 | src/mod/session2/ride_filter_logic.h:259:20 | used | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L06738 | src/mod/session2/ride_filter_logic.h:260:82 | used | inline literal (semantic audit required) | 1 | for (const Slot& s : slot) n += s.used.load(std::memory_order_acquire) ? 1 : 0; |
-| L06739 | src/mod/session2/ride_filter_logic.h:260:86 | used | inline literal (semantic audit required) | 0 | for (const Slot& s : slot) n += s.used.load(std::memory_order_acquire) ? 1 : 0; |
-| L06740 | src/mod/session2/ride_filter_logic.h:278:43 | used | inline literal (semantic audit required) | 0 | enum class Dismount : uint8_t { Rewrite = 0, Partial = 1, Native = 2 }; |
-| L06741 | src/mod/session2/ride_filter_logic.h:278:56 | used | inline literal (semantic audit required) | 1 | enum class Dismount : uint8_t { Rewrite = 0, Partial = 1, Native = 2 }; |
-| L06742 | src/mod/session2/ride_filter_logic.h:278:68 | used | inline literal (semantic audit required) | 2 | enum class Dismount : uint8_t { Rewrite = 0, Partial = 1, Native = 2 }; |
-| L06743 | src/mod/session2/ride_filter_logic.h:292:91 | parse_dismount | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.front() == ' ' &#124;&#124; raw.front() == '\t')) raw.remove_prefix(1); |
-| L06744 | src/mod/session2/ride_filter_logic.h:293:89 | parse_dismount | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.back() == ' ' &#124;&#124; raw.back() == '\t')) raw.remove_suffix(1); |
-| L06745 | src/mod/session2/ride_filter_logic.h:309:32 | parse_dismount | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> full{0}; |
-| L06746 | src/mod/session2/ride_filter_logic.h:328:29 | learn | inline literal (semantic audit required) | 0 | uint32_t want = 0; |
-| L06747 | src/mod/session2/ride_filter_logic.h:332:24 | learn | inline literal (semantic audit required) | 1 | full.fetch_add(1, std::memory_order_relaxed); |
-| L06748 | src/mod/session2/ride_filter_logic.h:336:20 | learned | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L06749 | src/mod/session2/ride_filter_logic.h:337:74 | learned | inline literal (semantic audit required) | 1 | for (const auto& s : h) n += s.load(std::memory_order_relaxed) ? 1 : 0; |
-| L06750 | src/mod/session2/ride_filter_logic.h:337:78 | learned | inline literal (semantic audit required) | 0 | for (const auto& s : h) n += s.load(std::memory_order_relaxed) ? 1 : 0; |
-| L06751 | src/mod/session2/ride_filter_logic.h:395:54 | filter_packet | inline literal (semantic audit required) | 0 | const uint16_t op = static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)); |
-| L06752 | src/mod/session2/ride_filter_logic.h:395:67 | filter_packet | inline literal (semantic audit required) | 1 | const uint16_t op = static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)); |
-| L06753 | src/mod/session2/ride_filter_logic.h:395:73 | filter_packet | inline literal (semantic audit required) | 8 | const uint16_t op = static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)); |
-| L06754 | src/mod/session2/ride_filter_logic.h:396:55 | filter_packet | inline literal (semantic audit required) | 3 | const uint16_t len = static_cast<uint16_t>(packet[3] &#124; (packet[4] << 8)); |
-| L06755 | src/mod/session2/ride_filter_logic.h:396:68 | filter_packet | inline literal (semantic audit required) | 4 | const uint16_t len = static_cast<uint16_t>(packet[3] &#124; (packet[4] << 8)); |
-| L06756 | src/mod/session2/ride_filter_logic.h:396:74 | filter_packet | inline literal (semantic audit required) | 8 | const uint16_t len = static_cast<uint16_t>(packet[3] &#124; (packet[4] << 8)); |
-| L06757 | src/mod/session2/save_hooks.cpp:37:48 | narrow | inline literal (semantic audit required) | 0 | const int n = WideCharToMultiByte(CP_UTF8, 0, w.data(), static_cast<int>(w.size()), nullptr, 0, nullptr, nullptr); |
-| L06758 | src/mod/session2/save_hooks.cpp:37:98 | narrow | inline literal (semantic audit required) | 0 | const int n = WideCharToMultiByte(CP_UTF8, 0, w.data(), static_cast<int>(w.size()), nullptr, 0, nullptr, nullptr); |
-| L06759 | src/mod/session2/save_hooks.cpp:39:34 | narrow | inline literal (semantic audit required) | 0 | WideCharToMultiByte(CP_UTF8, 0, w.data(), static_cast<int>(w.size()), s.data(), n, nullptr, nullptr); |
-| L06760 | src/mod/session2/save_hooks.cpp:47:43 | widen | inline literal (semantic audit required) | 0 | const int n = MultiByteToWideChar(cp, 0, a, -1, nullptr, 0); |
-| L06761 | src/mod/session2/save_hooks.cpp:47:50 | widen | inline literal (semantic audit required) | 1 | const int n = MultiByteToWideChar(cp, 0, a, -1, nullptr, 0); |
-| L06762 | src/mod/session2/save_hooks.cpp:47:62 | widen | inline literal (semantic audit required) | 0 | const int n = MultiByteToWideChar(cp, 0, a, -1, nullptr, 0); |
-| L06763 | src/mod/session2/save_hooks.cpp:48:14 | widen | inline literal (semantic audit required) | 1 | if (n <= 1) return {}; |
-| L06764 | src/mod/session2/save_hooks.cpp:49:44 | widen | inline literal (semantic audit required) | 1 | std::wstring w(static_cast<size_t>(n - 1), L'\0'); |
-| L06765 | src/mod/session2/save_hooks.cpp:49:51 | widen | inline literal (semantic audit required) | 0' | std::wstring w(static_cast<size_t>(n - 1), L'\0'); |
-| L06766 | src/mod/session2/save_hooks.cpp:50:29 | widen | inline literal (semantic audit required) | 0 | MultiByteToWideChar(cp, 0, a, -1, w.data(), n); |
-| L06767 | src/mod/session2/save_hooks.cpp:50:36 | widen | inline literal (semantic audit required) | 1 | MultiByteToWideChar(cp, 0, a, -1, w.data(), n); |
-| L06768 | src/mod/session2/save_hooks.cpp:59:14 | full_path | inline literal (semantic audit required) | 0 | if (n == 0) return p; |
-| L06769 | src/mod/session2/save_hooks.cpp:61:34 | full_path | inline literal (semantic audit required) | 1 | std::vector<wchar_t> big(n + 1); |
-| L06770 | src/mod/session2/save_hooks.cpp:62:33 | full_path | inline literal (semantic audit required) | 1 | n = GetFullPathNameW(p, n + 1, big.data(), nullptr); |
-| L06771 | src/mod/session2/save_hooks.cpp:68:14 | report | inline literal (semantic audit required) | 50 | if (n <= 50 &#124;&#124; n % 100 == 0) { |
-| L06772 | src/mod/session2/save_hooks.cpp:68:24 | report | inline literal (semantic audit required) | 100 | if (n <= 50 &#124;&#124; n % 100 == 0) { |
-| L06773 | src/mod/session2/save_hooks.cpp:68:31 | report | inline literal (semantic audit required) | 0 | if (n <= 50 &#124;&#124; n % 100 == 0) { |
-| L06774 | src/mod/session2/save_hooks.cpp:199:21 | emit | inline literal (semantic audit required) | 0 | if (line.seq == 0) return; |
-| L06775 | src/mod/session2/save_hooks.cpp:256:32 | maybe_save | inline literal (semantic audit required) | 0 | const uint32_t first = u(p[0]) &#124; 0x20; |
-| L06776 | src/mod/session2/save_hooks.cpp:256:38 | maybe_save | inline literal (semantic audit required) | 0x20 | const uint32_t first = u(p[0]) &#124; 0x20; |
-| L06777 | src/mod/session2/save_hooks.cpp:257:58 | maybe_save | inline literal (semantic audit required) | 1 | const bool drive = first >= 'a' && first <= 'z' && p[1] == C(':') && (p[2] == C('\\') &#124;&#124; p[2] == C('/')); |
-| L06778 | src/mod/session2/save_hooks.cpp:257:77 | maybe_save | inline literal (semantic audit required) | 2 | const bool drive = first >= 'a' && first <= 'z' && p[1] == C(':') && (p[2] == C('\\') &#124;&#124; p[2] == C('/')); |
-| L06779 | src/mod/session2/save_hooks.cpp:257:96 | maybe_save | inline literal (semantic audit required) | 2 | const bool drive = first >= 'a' && first <= 'z' && p[1] == C(':') && (p[2] == C('\\') &#124;&#124; p[2] == C('/')); |
-| L06780 | src/mod/session2/save_hooks.cpp:258:13 | maybe_save | inline literal (semantic audit required) | 0 | if (!(p[0] == C('\\') &#124;&#124; p[0] == C('/') &#124;&#124; drive)) return true; |
-| L06781 | src/mod/session2/save_hooks.cpp:258:32 | maybe_save | inline literal (semantic audit required) | 0 | if (!(p[0] == C('\\') &#124;&#124; p[0] == C('/') &#124;&#124; drive)) return true; |
-| L06782 | src/mod/session2/save_hooks.cpp:261:20 | maybe_save | inline literal (semantic audit required) | 0 | size_t i = 0; |
-| L06783 | src/mod/session2/save_hooks.cpp:262:47 | maybe_save | inline literal (semantic audit required) | 0x80 | while (kName[i] && s[i] && (u(s[i]) < 0x80 ? u(s[i]) &#124; 0x20 : u(s[i])) == static_cast<uint32_t>(kName[i])) { |
-| L06784 | src/mod/session2/save_hooks.cpp:262:64 | maybe_save | inline literal (semantic audit required) | 0x20 | while (kName[i] && s[i] && (u(s[i]) < 0x80 ? u(s[i]) &#124; 0x20 : u(s[i])) == static_cast<uint32_t>(kName[i])) { |
-| L06785 | src/mod/session2/save_hooks.cpp:280:38 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
-| L06786 | src/mod/session2/save_hooks.cpp:280:56 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
-| L06787 | src/mod/session2/save_hooks.cpp:280:76 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
-| L06788 | src/mod/session2/save_hooks.cpp:280:95 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
-| L06789 | src/mod/session2/save_hooks.cpp:280:113 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
-| L06790 | src/mod/session2/save_hooks.cpp:291:17 | FullPath | inline literal (semantic audit required) | 0 | if (n > 0 && n < MAX_PATH) { |
-| L06791 | src/mod/session2/save_hooks.cpp:294:55 | FullPath | inline literal (semantic audit required) | 1 | big_.reset(new (std::nothrow) wchar_t[n + 1]); |
-| L06792 | src/mod/session2/save_hooks.cpp:295:60 | FullPath | inline literal (semantic audit required) | 1 | const DWORD m = big_ ? GetFullPathNameW(p, n + 1, big_.get(), nullptr) : 0; |
-| L06793 | src/mod/session2/save_hooks.cpp:295:86 | FullPath | inline literal (semantic audit required) | 0 | const DWORD m = big_ ? GetFullPathNameW(p, n + 1, big_.get(), nullptr) : 0; |
-| L06794 | src/mod/session2/save_hooks.cpp:296:21 | FullPath | inline literal (semantic audit required) | 0 | if (m > 0 && m <= n) { |
-| L06795 | src/mod/session2/save_hooks.cpp:335:15 | map_arg | inline literal (semantic audit required) | 0 | p[0] == L'\\' &#124;&#124; p[0] == L'/' &#124;&#124; (p[0] && p[1] == L':' && (p[2] == L'\\' &#124;&#124; p[2] == L'/')); |
-| L06796 | src/mod/session2/save_hooks.cpp:373:21 | redirect_arg_text | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) { |
-| L06797 | src/mod/session2/save_hooks.cpp:380:53 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_failed.fetch_add(1, std::memory_order_relaxed) + 1; |
-| L06798 | src/mod/session2/save_hooks.cpp:380:85 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_failed.fetch_add(1, std::memory_order_relaxed) + 1; |
-| L06799 | src/mod/session2/save_hooks.cpp:398:24 | redirect_arg_text | inline literal (semantic audit required) | 1 | .fetch_add(1, std::memory_order_relaxed); |
-| L06800 | src/mod/session2/save_hooks.cpp:400:56 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_lines.fetch_add(1, std::memory_order_relaxed) + 1; |
-| L06801 | src/mod/session2/save_hooks.cpp:400:88 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_lines.fetch_add(1, std::memory_order_relaxed) + 1; |
-| L06802 | src/mod/session2/save_hooks.cpp:403:33 | redirect_arg_text | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) text += (i ? ", " : "") + redirect_arg_text(labels[i], m[i]); |
-| L06803 | src/mod/session2/save_hooks.cpp:435:26 | redirect_arg_text | inline literal (semantic audit required) | 1 | return redirected<R, 1>( |
-| L06804 | src/mod/session2/save_hooks.cpp:437:46 | redirect_arg_text | inline literal (semantic audit required) | 1 | [&](const std::array<const wchar_t*, 1>& a) { return a[0] == given ? call_a() : call_w(a[0]); }, kind_of, |
-| L06805 | src/mod/session2/save_hooks.cpp:437:64 | redirect_arg_text | inline literal (semantic audit required) | 0 | [&](const std::array<const wchar_t*, 1>& a) { return a[0] == given ? call_a() : call_w(a[0]); }, kind_of, |
-| L06806 | src/mod/session2/save_hooks.cpp:437:98 | redirect_arg_text | inline literal (semantic audit required) | 0 | [&](const std::array<const wchar_t*, 1>& a) { return a[0] == given ? call_a() : call_w(a[0]); }, kind_of, |
-| L06807 | src/mod/session2/save_hooks.cpp:441:35 | redirect_arg_text | inline literal (semantic audit required) | 1 | constexpr std::array<const char*, 1> kOne{""}; |
-| L06808 | src/mod/session2/save_hooks.cpp:442:35 | redirect_arg_text | inline literal (semantic audit required) | 2 | constexpr std::array<const char*, 2> kFromTo{"from", "to"}; |
-| L06809 | src/mod/session2/save_hooks.cpp:460:37 | redirect_arg_text | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_watch_lobby{0}, g_watch_save{0}; |
-| L06810 | src/mod/session2/save_hooks.cpp:460:54 | redirect_arg_text | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_watch_lobby{0}, g_watch_save{0}; |
-| L06811 | src/mod/session2/save_hooks.cpp:468:37 | watch_note | inline literal (semantic audit required) | 1 | g_watch_lobby.fetch_add(1, std::memory_order_relaxed); |
-| L06812 | src/mod/session2/save_hooks.cpp:470:36 | watch_note | inline literal (semantic audit required) | 1 | g_watch_save.fetch_add(1, std::memory_order_relaxed); |
-| L06813 | src/mod/session2/save_hooks.cpp:480:75 | create_kind | inline literal (semantic audit required) | 0 | if (kind == Kind::Read && h != INVALID_HANDLE_VALUE) watch_note(m[0]); |
-| L06814 | src/mod/session2/save_hooks.cpp:489:22 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
-| L06815 | src/mod/session2/save_hooks.cpp:489:32 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
-| L06816 | src/mod/session2/save_hooks.cpp:489:43 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
-| L06817 | src/mod/session2/save_hooks.cpp:489:62 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
-| L06818 | src/mod/session2/save_hooks.cpp:492:43 | is_dots | inline literal (semantic audit required) | 0 | bool is_dots(const wchar_t* n) { return n[0] == L'.' && (n[1] == 0 &#124;&#124; (n[1] == L'.' && n[2] == 0)); } |
-| L06819 | src/mod/session2/save_hooks.cpp:492:90 | is_dots | inline literal (semantic audit required) | 2 | bool is_dots(const wchar_t* n) { return n[0] == L'.' && (n[1] == 0 &#124;&#124; (n[1] == L'.' && n[2] == 0)); } |
-| L06820 | src/mod/session2/save_hooks.cpp:492:96 | is_dots | inline literal (semantic audit required) | 0 | bool is_dots(const wchar_t* n) { return n[0] == L'.' && (n[1] == 0 &#124;&#124; (n[1] == L'.' && n[2] == 0)); } |
-| L06821 | src/mod/session2/save_hooks.cpp:517:112 | delete_tree | inline literal (semantic audit required) | 0 | HANDLE f = FindFirstFileExW((root + L"\\*").c_str(), FindExInfoBasic, &fd, FindExSearchNameMatch, nullptr, 0); |
-| L06822 | src/mod/session2/save_hooks.cpp:532:112 | copy_tree | inline literal (semantic audit required) | 0 | HANDLE f = FindFirstFileExW((from + L"\\*").c_str(), FindExInfoBasic, &fd, FindExSearchNameMatch, nullptr, 0); |
-| L06823 | src/mod/session2/save_hooks.cpp:561:69 | copy_tree | inline literal (semantic audit required) | 32 | st.bytes += (static_cast<uint64_t>(fd.nFileSizeHigh) << 32) &#124; fd.nFileSizeLow; |
-| L06824 | src/mod/session2/save_hooks.cpp:596:57 | prepare_sandbox | inline literal (semantic audit required) | 0 | : sandbox.substr(0, slash + 1) + archived.aside_name; |
-| L06825 | src/mod/session2/save_hooks.cpp:596:68 | prepare_sandbox | inline literal (semantic audit required) | 1 | : sandbox.substr(0, slash + 1) + archived.aside_name; |
-| L06826 | src/mod/session2/save_hooks.cpp:597:75 | prepare_sandbox | inline literal (semantic audit required) | 0 | if (aside.empty() &#124;&#124; !MoveFileExW(sandbox.c_str(), aside.c_str(), 0)) { |
-| L06827 | src/mod/session2/save_hooks.cpp:610:57 | prepare_sandbox | inline literal (semantic audit required) | 0 | if (!MoveFileExW(sandbox.c_str(), prev.c_str(), 0)) { |
-| L06828 | src/mod/session2/save_hooks.cpp:652:35 | prepare_sandbox | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
-| L06829 | src/mod/session2/save_hooks.cpp:655:60 | prepare_sandbox | inline literal (semantic audit required) | 0 | return g_create_w.unsafe_stdcall<HANDLE>(a[0], access, share, sa, disp, flags, tmpl); |
-| L06830 | src/mod/session2/save_hooks.cpp:686:74 | prepare_sandbox | inline literal (semantic audit required) | 0 | const DWORD flags = ext ? ext->dwFileFlags &#124; ext->dwFileAttributes : 0; |
-| L06831 | src/mod/session2/save_hooks.cpp:688:35 | prepare_sandbox | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
-| L06832 | src/mod/session2/save_hooks.cpp:690:77 | prepare_sandbox | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_create_2.unsafe_stdcall<HANDLE>(a[0], access, share, disp, ext); }, |
-| L06833 | src/mod/session2/save_hooks.cpp:701:33 | delete_file_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
-| L06834 | src/mod/session2/save_hooks.cpp:702:111 | delete_file_w | inline literal (semantic audit required) | 0 | "DeleteFileW", {name}, kOne, FALSE, [&](const auto& a) { return g_delete_w.unsafe_stdcall<BOOL>(a[0]); }, |
-| L06835 | src/mod/session2/save_hooks.cpp:731:33 | move_file_ex_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
-| L06836 | src/mod/session2/save_hooks.cpp:733:76 | move_file_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_move_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], flags); }, kWrite, kBoolText); |
-| L06837 | src/mod/session2/save_hooks.cpp:733:82 | move_file_ex_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_move_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], flags); }, kWrite, kBoolText); |
-| L06838 | src/mod/session2/save_hooks.cpp:745:33 | move_file_progress_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
-| L06839 | src/mod/session2/save_hooks.cpp:747:82 | move_file_progress_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_move_progress_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, flags); }, |
-| L06840 | src/mod/session2/save_hooks.cpp:747:88 | move_file_progress_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_move_progress_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, flags); }, |
-| L06841 | src/mod/session2/save_hooks.cpp:760:33 | copy_file_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
-| L06842 | src/mod/session2/save_hooks.cpp:762:73 | copy_file_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_copy_w.unsafe_stdcall<BOOL>(a[0], a[1], fail_if_exists); }, kWriteIfSecond, |
-| L06843 | src/mod/session2/save_hooks.cpp:762:79 | copy_file_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_copy_w.unsafe_stdcall<BOOL>(a[0], a[1], fail_if_exists); }, kWriteIfSecond, |
-| L06844 | src/mod/session2/save_hooks.cpp:777:33 | copy_file_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
-| L06845 | src/mod/session2/save_hooks.cpp:779:76 | copy_file_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_copy_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, cancel, flags); }, |
-| L06846 | src/mod/session2/save_hooks.cpp:779:82 | copy_file_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_copy_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, cancel, flags); }, |
-| L06847 | src/mod/session2/save_hooks.cpp:792:36 | copy_file_2 | inline literal (semantic audit required) | 2 | return redirected<HRESULT, 2>( |
-| L06848 | src/mod/session2/save_hooks.cpp:794:76 | copy_file_2 | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_copy_2.unsafe_stdcall<HRESULT>(a[0], a[1], ext); }, kWriteIfSecond, |
-| L06849 | src/mod/session2/save_hooks.cpp:794:82 | copy_file_2 | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_copy_2.unsafe_stdcall<HRESULT>(a[0], a[1], ext); }, kWriteIfSecond, |
-| L06850 | src/mod/session2/save_hooks.cpp:801:96 | copy_file_2 | inline literal (semantic audit required) | 0 | trace_two(d, false, from, to, std::format("flags 0x{:X}", ext ? ext->dwCopyFlags : 0), |
-| L06851 | src/mod/session2/save_hooks.cpp:808:33 | set_attributes_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
-| L06852 | src/mod/session2/save_hooks.cpp:810:73 | set_attributes_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_attr_w.unsafe_stdcall<BOOL>(a[0], attrs); }, kWrite, kBoolText); |
-| L06853 | src/mod/session2/save_hooks.cpp:839:33 | remove_directory_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
-| L06854 | src/mod/session2/save_hooks.cpp:841:74 | remove_directory_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_rmdir_w.unsafe_stdcall<BOOL>(a[0]); }, kWrite, kBoolText); |
-| L06855 | src/mod/session2/save_hooks.cpp:853:33 | create_directory_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
-| L06856 | src/mod/session2/save_hooks.cpp:855:74 | create_directory_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_mkdir_w.unsafe_stdcall<BOOL>(a[0], sa); }, kWrite, kBoolText); |
-| L06857 | src/mod/session2/save_hooks.cpp:879:33 | create_directory_ex_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
-| L06858 | src/mod/session2/save_hooks.cpp:881:77 | create_directory_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_mkdir_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], sa); }, kWriteIfSecond, |
-| L06859 | src/mod/session2/save_hooks.cpp:881:83 | create_directory_ex_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_mkdir_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], sa); }, kWriteIfSecond, |
-| L06860 | src/mod/session2/save_hooks.cpp:895:33 | create_directory_ex_w | inline literal (semantic audit required) | 3 | return redirected<BOOL, 3>( |
-| L06861 | src/mod/session2/save_hooks.cpp:897:76 | create_directory_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_replace_w.unsafe_stdcall<BOOL>(a[0], a[1], a[2], flags, e1, e2); }, kWrite, |
-| L06862 | src/mod/session2/save_hooks.cpp:897:82 | create_directory_ex_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_replace_w.unsafe_stdcall<BOOL>(a[0], a[1], a[2], flags, e1, e2); }, kWrite, |
-| L06863 | src/mod/session2/save_hooks.cpp:897:88 | create_directory_ex_w | inline literal (semantic audit required) | 2 | [&](const auto& a) { return g_replace_w.unsafe_stdcall<BOOL>(a[0], a[1], a[2], flags, e1, e2); }, kWrite, |
-| L06864 | src/mod/session2/save_hooks.cpp:925:35 | find_first_file_w | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
-| L06865 | src/mod/session2/save_hooks.cpp:927:81 | find_first_file_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_find_first_w.unsafe_stdcall<HANDLE>(a[0], data); }, kQuery, kNoText); |
-| L06866 | src/mod/session2/save_hooks.cpp:938:35 | find_first_file_w | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
-| L06867 | src/mod/session2/save_hooks.cpp:941:67 | find_first_file_w | inline literal (semantic audit required) | 0 | return g_find_first_ex_w.unsafe_stdcall<HANDLE>(a[0], level, data, op, filter, flags); |
-| L06868 | src/mod/session2/save_hooks.cpp:959:34 | get_attributes_w | inline literal (semantic audit required) | 1 | return redirected<DWORD, 1>( |
-| L06869 | src/mod/session2/save_hooks.cpp:961:78 | get_attributes_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_get_attr_w.unsafe_stdcall<DWORD>(a[0]); }, kQuery, kNoText); |
-| L06870 | src/mod/session2/save_hooks.cpp:975:33 | get_attributes_ex_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
-| L06871 | src/mod/session2/save_hooks.cpp:977:80 | get_attributes_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_get_attr_ex_w.unsafe_stdcall<BOOL>(a[0], level, info); }, kQuery, kNoText); |
-| L06872 | src/mod/session2/save_hooks.cpp:986:84 | get_attributes_ex_w | inline literal (semantic audit required) | 32 | (static_cast<uint64_t>(fa->nFileSizeHigh) << 32) &#124; fa->nFileSizeLow); |
-| L06873 | src/mod/session2/save_hooks.cpp:1061:14 | save_hooks_install_guest_role | inline literal (semantic audit required) | 0 | if (n == 0 &#124;&#124; n >= MAX_PATH) { |
-| L06874 | src/mod/session2/save_hooks.cpp:1081:104 | save_hooks_install_guest_role | inline literal (semantic audit required) | 1 | for (size_t at = target.find(L'\\', 3); at != std::wstring::npos; at = target.find(L'\\', at + 1)) { |
-| L06875 | src/mod/session2/save_hooks.cpp:1082:44 | save_hooks_install_guest_role | inline literal (semantic audit required) | 0 | CreateDirectoryW(target.substr(0, at).c_str(), nullptr); |
-| L06876 | src/mod/session2/save_hooks.cpp:1129:14 | save_hooks_install | inline literal (semantic audit required) | 0 | if (n == 0 &#124;&#124; n >= MAX_PATH) { |
-| L06877 | src/mod/session2/save_hooks.cpp:1197:71 | save_hooks_blocked | inline literal (semantic audit required) | 0 | uint64_t save_hooks_blocked() { return g_guard ? g_guard->blocked() : 0; } |
-| L06878 | src/mod/session2/save_hooks.cpp:1198:75 | save_hooks_reads | inline literal (semantic audit required) | 0 | uint64_t save_hooks_reads() { return g_guard ? g_guard->allowed_reads() : 0; } |
-| L06879 | src/mod/session2/server.cpp:79:20 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t g_base = 0; |
-| L06880 | src/mod/session2/server.cpp:99:35 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_session2{0}; |
-| L06881 | src/mod/session2/server.cpp:103:36 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_built_net{0}, g_built_s1{0}; |
-| L06882 | src/mod/session2/server.cpp:103:51 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_built_net{0}, g_built_s1{0}; |
-| L06883 | src/mod/session2/server.cpp:104:35 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_built_tid{0}; |
-| L06884 | src/mod/session2/server.cpp:105:33 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_rebuilt{0}; |
-| L06885 | src/mod/session2/server.cpp:116:36 | (file scope) | inline literal (semantic audit required) | 1 | std::atomic<uint32_t> g_want_epoch{1};     // network thread: the epoch whose session 2 should exist |
-| L06886 | src/mod/session2/server.cpp:117:39 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_session_epoch{0};  // server thread: the epoch g_session2 was built for |
-| L06887 | src/mod/session2/server.cpp:119:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_stale_routed{0}, g_untagged_routed{0}, g_late_out{0}; |
-| L06888 | src/mod/session2/server.cpp:119:60 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_stale_routed{0}, g_untagged_routed{0}, g_late_out{0}; |
-| L06889 | src/mod/session2/server.cpp:119:75 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_stale_routed{0}, g_untagged_routed{0}, g_late_out{0}; |
-| L06890 | src/mod/session2/server.cpp:124:21 | (file scope) | inline literal (semantic audit required) | 0x10000 | std::array<uint8_t, 0x10000> g_channel; |
-| L06891 | src/mod/session2/server.cpp:127:21 | (file scope) | inline literal (semantic audit required) | 0x10000 | std::array<uint8_t, 0x10000> g_blocked_channel; |
-| L06892 | src/mod/session2/server.cpp:132:35 | (file scope) | inline literal (semantic audit required) | 1 | std::atomic<int64_t> g_host_slot{-1}; |
-| L06893 | src/mod/session2/server.cpp:141:39 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_user2_userkey{0};           // from user 2's MainUserDataStartAck |
-| L06894 | src/mod/session2/server.cpp:142:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_host_userkey{0};            // the host's user key, read once (session 1's user +0x60) |
-| L06895 | src/mod/session2/server.cpp:143:40 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_owner_rewrites{0}, g_owner_unexpected{0}; |
-| L06896 | src/mod/session2/server.cpp:143:63 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_owner_rewrites{0}, g_owner_unexpected{0}; |
-| L06897 | src/mod/session2/server.cpp:146:45 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_load_owner_rewrites{0}, g_load_owner_unexpected{0}, g_load_owner_other{0}; |
-| L06898 | src/mod/session2/server.cpp:146:73 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_load_owner_rewrites{0}, g_load_owner_unexpected{0}, g_load_owner_other{0}; |
-| L06899 | src/mod/session2/server.cpp:146:96 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_load_owner_rewrites{0}, g_load_owner_unexpected{0}, g_load_owner_other{0}; |
-| L06900 | src/mod/session2/server.cpp:149:35 | (file scope) | inline literal (semantic audit required) | 4096 | std::array<std::atomic<uint32_t>, 4096> g_hostkey_ops{}; |
-| L06901 | src/mod/session2/server.cpp:151:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_user2_player{0}; |
-| L06902 | src/mod/session2/server.cpp:160:39 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_mirror_copied{0}, g_mirror_dropped{0}; |
-| L06903 | src/mod/session2/server.cpp:160:60 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_mirror_copied{0}, g_mirror_dropped{0}; |
-| L06904 | src/mod/session2/server.cpp:165:40 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_logout_handed{0};     // the session 2 the 2001 went to (0 = not yet) |
-| L06905 | src/mod/session2/server.cpp:166:41 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_logout_asked_ms{0}; |
-| L06906 | src/mod/session2/server.cpp:180:29 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t g_close_session = 0; |
-| L06907 | src/mod/session2/server.cpp:183:29 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_nak{0}, g_nak_after_logout{0};  // Nak 1013 written to session 2 (this epoch) |
-| L06908 | src/mod/session2/server.cpp:183:52 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_nak{0}, g_nak_after_logout{0};  // Nak 1013 written to session 2 (this epoch) |
-| L06909 | src/mod/session2/server.cpp:201:30 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<size_t> g_q_size{0};            // g_q.size(), read without the lock |
-| L06910 | src/mod/session2/server.cpp:202:31 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<size_t> g_in_hand{0};           // popped by the NetworkThread, not pushed (or dropped) yet |
-| L06911 | src/mod/session2/server.cpp:206:38 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_halted_epoch{0}; |
-| L06912 | src/mod/session2/server.cpp:210:35 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_exc_count{0}; |
-| L06913 | src/mod/session2/server.cpp:211:25 | phase_reset | inline literal (semantic audit required) | 0 | uint32_t g_exc_logged = 0;  // network thread only |
-| L06914 | src/mod/session2/server.cpp:214:36 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
-| L06915 | src/mod/session2/server.cpp:214:54 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
-| L06916 | src/mod/session2/server.cpp:214:71 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
-| L06917 | src/mod/session2/server.cpp:214:92 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
-| L06918 | src/mod/session2/server.cpp:214:113 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
-| L06919 | src/mod/session2/server.cpp:215:21 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
-| L06920 | src/mod/session2/server.cpp:215:41 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
-| L06921 | src/mod/session2/server.cpp:215:62 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
-| L06922 | src/mod/session2/server.cpp:215:86 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
-| L06923 | src/mod/session2/server.cpp:215:109 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
-| L06924 | src/mod/session2/server.cpp:215:125 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
-| L06925 | src/mod/session2/server.cpp:216:34 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_pump_tid{0}; |
-| L06926 | src/mod/session2/server.cpp:217:38 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_last_ms{0}; |
-| L06927 | src/mod/session2/server.cpp:218:40 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_held_not_ready{0}, g_held_full{0}; |
-| L06928 | src/mod/session2/server.cpp:218:56 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_held_not_ready{0}, g_held_full{0}; |
-| L06929 | src/mod/session2/server.cpp:222:32 | phase_reset | inline literal (semantic audit required) | 1000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
-| L06930 | src/mod/session2/server.cpp:222:38 | phase_reset | inline literal (semantic audit required) | 5000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
-| L06931 | src/mod/session2/server.cpp:222:58 | phase_reset | inline literal (semantic audit required) | 1000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
-| L06932 | src/mod/session2/server.cpp:222:64 | phase_reset | inline literal (semantic audit required) | 5000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
-| L06933 | src/mod/session2/server.cpp:223:29 | phase_reset | inline literal (semantic audit required) | 0 | uint64_t g_full_logged_at = 0, g_full_logged_count = 0; |
-| L06934 | src/mod/session2/server.cpp:223:54 | phase_reset | inline literal (semantic audit required) | 0 | uint64_t g_full_logged_at = 0, g_full_logged_count = 0; |
-| L06935 | src/mod/session2/server.cpp:241:46 | note_exception | inline literal (semantic audit required) | 1 | const uint32_t i = g_exc_count.fetch_add(1); |
-| L06936 | src/mod/session2/server.cpp:243:72 | note_exception | inline literal (semantic audit required) | 1 | if (!inj::step_is_ours(step)) g_halted_epoch.store(epoch ? epoch : 1); |
-| L06937 | src/mod/session2/server.cpp:249:64 | note_exception | inline literal (semantic audit required) | 0x20000000 | n.in_exe = n.address >= g_base && n.address < g_base + 0x20000000; |
-| L06938 | src/mod/session2/server.cpp:250:49 | note_exception | inline literal (semantic audit required) | 0 | n.rva = n.in_exe ? n.address - g_base : 0; |
-| L06939 | src/mod/session2/server.cpp:252:18 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
-| L06940 | src/mod/session2/server.cpp:252:45 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
-| L06941 | src/mod/session2/server.cpp:252:73 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
-| L06942 | src/mod/session2/server.cpp:252:78 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
-| L06943 | src/mod/session2/server.cpp:253:18 | note_exception | inline literal (semantic audit required) | 1 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
-| L06944 | src/mod/session2/server.cpp:253:45 | note_exception | inline literal (semantic audit required) | 1 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
-| L06945 | src/mod/session2/server.cpp:253:73 | note_exception | inline literal (semantic audit required) | 1 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
-| L06946 | src/mod/session2/server.cpp:253:78 | note_exception | inline literal (semantic audit required) | 0 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
-| L06947 | src/mod/session2/server.cpp:272:65 | game_alloc_raw | inline literal (semantic audit required) | 0x58 | const auto tls_array = static_cast<uintptr_t>(__readgsqword(0x58)); |
-| L06948 | src/mod/session2/server.cpp:274:75 | game_alloc_raw | inline literal (semantic audit required) | 8ull | const uintptr_t tls = *reinterpret_cast<const uintptr_t*>(tls_array + 8ull * index); |
-| L06949 | src/mod/session2/server.cpp:275:77 | game_alloc_raw | inline literal (semantic audit required) | 0 | if (*reinterpret_cast<const uint8_t*>(tls + off::kTls_UseGlobalHeap) != 0) { |
-| L06950 | src/mod/session2/server.cpp:276:38 | game_alloc_raw | inline literal (semantic audit required) | 1 | g_global_heap_flag.fetch_add(1, std::memory_order_relaxed); |
-| L06951 | src/mod/session2/server.cpp:278:37 | game_alloc_raw | inline literal (semantic audit required) | 0x10 | return g_alloc_global(size, 0x10); |
-| L06952 | src/mod/session2/server.cpp:280:33 | game_alloc_raw | inline literal (semantic audit required) | 0x10 | return g_alloc_thread(size, 0x10); |
-| L06953 | src/mod/session2/server.cpp:291:46 | __except | inline literal (semantic audit required) | 1 | g_halted_epoch.store(epoch ? epoch : 1);  // the game's heap may be damaged: nothing more |
-| L06954 | src/mod/session2/server.cpp:298:36 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
-| L06955 | src/mod/session2/server.cpp:298:55 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
-| L06956 | src/mod/session2/server.cpp:298:74 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
-| L06957 | src/mod/session2/server.cpp:298:92 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
-| L06958 | src/mod/session2/server.cpp:298:106 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
-| L06959 | src/mod/session2/server.cpp:299:36 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> sent_out{0}, sent_bad{0}, save_reqs{0}; |
-| L06960 | src/mod/session2/server.cpp:299:49 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> sent_out{0}, sent_bad{0}, save_reqs{0}; |
-| L06961 | src/mod/session2/server.cpp:299:63 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> sent_out{0}, sent_bad{0}, save_reqs{0}; |
-| L06962 | src/mod/session2/server.cpp:300:43 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> logout_injected{0}, logout_acks{0}, inject_after_logout{0};  // C4 |
-| L06963 | src/mod/session2/server.cpp:300:59 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> logout_injected{0}, logout_acks{0}, inject_after_logout{0};  // C4 |
-| L06964 | src/mod/session2/server.cpp:300:83 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> logout_injected{0}, logout_acks{0}, inject_after_logout{0};  // C4 |
-| L06965 | src/mod/session2/server.cpp:301:47 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> move_close_injected{0};  // MoveFieldCompleteReq 2549 handed before a 2001 |
-| L06966 | src/mod/session2/server.cpp:302:40 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
-| L06967 | src/mod/session2/server.cpp:302:62 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
-| L06968 | src/mod/session2/server.cpp:302:83 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
-| L06969 | src/mod/session2/server.cpp:302:103 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
-| L06970 | src/mod/session2/server.cpp:341:21 | same_server | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
-| L06971 | src/mod/session2/server.cpp:341:29 | same_server | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
-| L06972 | src/mod/session2/server.cpp:350:88 | live_session2 | inline literal (semantic audit required) | 0 | return s2 && g_session_epoch.load() == g_want_epoch.load() && same_server() ? s2 : 0; |
-| L06973 | src/mod/session2/server.cpp:355:21 | epoch_sessions | inline literal (semantic audit required) | 0 | for (size_t e = 0; e < kEpochSlots; ++e) out[e] = g_epoch_session[e].load(std::memory_order_acquire); |
-| L06974 | src/mod/session2/server.cpp:361:20 | session_user | inline literal (semantic audit required) | 0 | uintptr_t vt = 0, back = 0; |
-| L06975 | src/mod/session2/server.cpp:361:30 | session_user | inline literal (semantic audit required) | 0 | uintptr_t vt = 0, back = 0; |
-| L06976 | src/mod/session2/server.cpp:372:45 | build_session | inline literal (semantic audit required) | 0 | if (!game_alloc(off::kSessionSize, obj, 0, g_want_epoch.load())) return false; |
-| L06977 | src/mod/session2/server.cpp:375:26 | build_session | inline literal (semantic audit required) | 0 | std::memset(obj, 0, off::kSessionSize); |
-| L06978 | src/mod/session2/server.cpp:377:21 | build_session | inline literal (semantic audit required) | 0 | g_ctor(obj, 0); |
-| L06979 | src/mod/session2/server.cpp:381:62 | build_session | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint64_t*>(s + off::kSession_B0) = 0; |
-| L06980 | src/mod/session2/server.cpp:382:62 | build_session | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint64_t*>(s + off::kSession_B8) = 0; |
-| L06981 | src/mod/session2/server.cpp:383:62 | build_session | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint16_t*>(s + off::kSession_C0) = 0; |
-| L06982 | src/mod/session2/server.cpp:384:83 | build_session | inline literal (semantic audit required) | 1 | *reinterpret_cast<uintptr_t*>(s) = reinterpret_cast<uintptr_t>(g_vtable + 1); |
-| L06983 | src/mod/session2/server.cpp:398:65 | __except | inline literal (semantic audit required) | 0 | } __except (note_exception(GetExceptionInformation(), step, 0, g_want_epoch.load())) { |
-| L06984 | src/mod/session2/server.cpp:409:39 | __except | inline literal (semantic audit required) | 0 | thread_local int t_take_frame_depth = 0; |
-| L06985 | src/mod/session2/server.cpp:419:32 | push_outgoing | inline literal (semantic audit required) | 2 | if (ok && packet.size() >= 2 && attach_follow_active()) { |
-| L06986 | src/mod/session2/server.cpp:420:59 | push_outgoing | inline literal (semantic audit required) | 0 | attach_follow_on_out(static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)), packet, nullptr); |
-| L06987 | src/mod/session2/server.cpp:420:72 | push_outgoing | inline literal (semantic audit required) | 1 | attach_follow_on_out(static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)), packet, nullptr); |
-| L06988 | src/mod/session2/server.cpp:420:78 | push_outgoing | inline literal (semantic audit required) | 8 | attach_follow_on_out(static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)), packet, nullptr); |
-| L06989 | src/mod/session2/server.cpp:429:70 | push_outgoing_extra | inline literal (semantic audit required) | 2 | return g_outgoing.bytes() + packet.size() <= kMaxOutgoingBytes / 2 && g_outgoing.push(packet); |
-| L06990 | src/mod/session2/server.cpp:443:63 | Depth | inline literal (semantic audit required) | 1 | if (const uint32_t want = g_want_epoch.load(); want > 1) { |
-| L06991 | src/mod/session2/server.cpp:448:38 | Depth | inline literal (semantic audit required) | 1 | g_late_out.fetch_add(1, std::memory_order_relaxed); |
-| L06992 | src/mod/session2/server.cpp:453:25 | Depth | inline literal (semantic audit required) | 0 | uint16_t flen = 0; |
-| L06993 | src/mod/session2/server.cpp:454:100 | Depth | inline literal (semantic audit required) | 0x8000 | if (!peek(frame, flen) &#124;&#124; flen < off::kFrameOverhead + troc::kInternalHeaderSize &#124;&#124; flen > 0x8000) { |
-| L06994 | src/mod/session2/server.cpp:455:36 | Depth | inline literal (semantic audit required) | 1 | g_n.sent_bad.fetch_add(1, std::memory_order_relaxed);  // SendPacket wrote no frame |
-| L06995 | src/mod/session2/server.cpp:462:35 | Depth | inline literal (semantic audit required) | 2 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
-| L06996 | src/mod/session2/server.cpp:462:43 | Depth | inline literal (semantic audit required) | 0 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
-| L06997 | src/mod/session2/server.cpp:462:51 | Depth | inline literal (semantic audit required) | 1 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
-| L06998 | src/mod/session2/server.cpp:462:57 | Depth | inline literal (semantic audit required) | 8 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
-| L06999 | src/mod/session2/server.cpp:463:29 | Depth | inline literal (semantic audit required) | 1 | g_nak.fetch_add(1, std::memory_order_relaxed); |
-| L07000 | src/mod/session2/server.cpp:464:70 | Depth | inline literal (semantic audit required) | 1 | if (g_logout_handed.load()) g_nak_after_logout.fetch_add(1, std::memory_order_relaxed); |
-| L07001 | src/mod/session2/server.cpp:467:36 | Depth | inline literal (semantic audit required) | 1 | g_n.sent_bad.fetch_add(1, std::memory_order_relaxed); |
-| L07002 | src/mod/session2/server.cpp:477:39 | Depth | inline literal (semantic audit required) | 1 | g_n.logout_acks.fetch_add(1, std::memory_order_relaxed); |
-| L07003 | src/mod/session2/server.cpp:499:16 | LoadedAfterPush | inline literal (semantic audit required) | 0 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07004 | src/mod/session2/server.cpp:499:24 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07005 | src/mod/session2/server.cpp:499:30 | LoadedAfterPush | inline literal (semantic audit required) | 8 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07006 | src/mod/session2/server.cpp:499:98 | LoadedAfterPush | inline literal (semantic audit required) | 4 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07007 | src/mod/session2/server.cpp:500:28 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07008 | src/mod/session2/server.cpp:501:61 | LoadedAfterPush | inline literal (semantic audit required) | 4 | std::memcpy(&key, p.data() + troc::kHeaderSize, 4); |
-| L07009 | src/mod/session2/server.cpp:510:16 | LoadedAfterPush | inline literal (semantic audit required) | 0 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07010 | src/mod/session2/server.cpp:510:24 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07011 | src/mod/session2/server.cpp:510:30 | LoadedAfterPush | inline literal (semantic audit required) | 8 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07012 | src/mod/session2/server.cpp:510:96 | LoadedAfterPush | inline literal (semantic audit required) | 4 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
-| L07013 | src/mod/session2/server.cpp:511:28 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07014 | src/mod/session2/server.cpp:512:61 | LoadedAfterPush | inline literal (semantic audit required) | 4 | std::memcpy(&key, p.data() + troc::kHeaderSize, 4); |
-| L07015 | src/mod/session2/server.cpp:526:36 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t milestone_value = 0; |
-| L07016 | src/mod/session2/server.cpp:531:31 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t owner_orig = 0, owner_copy = 0; |
-| L07017 | src/mod/session2/server.cpp:531:47 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t owner_orig = 0, owner_copy = 0; |
-| L07018 | src/mod/session2/server.cpp:542:81 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((move ? g_owner_rewrites : g_load_owner_rewrites).fetch_add(1) < 8) { |
-| L07019 | src/mod/session2/server.cpp:542:86 | LoadedAfterPush | inline literal (semantic audit required) | 8 | if ((move ? g_owner_rewrites : g_load_owner_rewrites).fetch_add(1) < 8) { |
-| L07020 | src/mod/session2/server.cpp:548:85 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((move ? g_owner_unexpected : g_load_owner_unexpected).fetch_add(1) < 4) { |
-| L07021 | src/mod/session2/server.cpp:548:90 | LoadedAfterPush | inline literal (semantic audit required) | 4 | if ((move ? g_owner_unexpected : g_load_owner_unexpected).fetch_add(1) < 4) { |
-| L07022 | src/mod/session2/server.cpp:553:62 | LoadedAfterPush | inline literal (semantic audit required) | 1 | } else if (!move && g_load_owner_other.fetch_add(1) < 4) { |
-| L07023 | src/mod/session2/server.cpp:553:67 | LoadedAfterPush | inline literal (semantic audit required) | 4 | } else if (!move && g_load_owner_other.fetch_add(1) < 4) { |
-| L07024 | src/mod/session2/server.cpp:560:30 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
-| L07025 | src/mod/session2/server.cpp:561:26 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t k = 0; |
-| L07026 | src/mod/session2/server.cpp:562:55 | LoadedAfterPush | inline literal (semantic audit required) | 0x60 | if (server_host_user(host) && peek(host + 0x60, k) && k) g_host_userkey.store(k); |
-| L07027 | src/mod/session2/server.cpp:564:33 | size | inline literal (semantic audit required) | 0 | if (uint32_t host_key = 0; v->opcode < g_hostkey_ops.size() && (host_key = g_host_userkey.load()) != 0) { |
-| L07028 | src/mod/session2/server.cpp:564:110 | size | inline literal (semantic audit required) | 0 | if (uint32_t host_key = 0; v->opcode < g_hostkey_ops.size() && (host_key = g_host_userkey.load()) != 0) { |
-| L07029 | src/mod/session2/server.cpp:565:29 | size | inline literal (semantic audit required) | 4 | const uint8_t k[4] = {static_cast<uint8_t>(host_key), static_cast<uint8_t>(host_key >> 8), |
-| L07030 | src/mod/session2/server.cpp:565:100 | size | inline literal (semantic audit required) | 8 | const uint8_t k[4] = {static_cast<uint8_t>(host_key), static_cast<uint8_t>(host_key >> 8), |
-| L07031 | src/mod/session2/server.cpp:566:68 | size | inline literal (semantic audit required) | 16 | static_cast<uint8_t>(host_key >> 16), static_cast<uint8_t>(host_key >> 24)}; |
-| L07032 | src/mod/session2/server.cpp:566:106 | size | inline literal (semantic audit required) | 24 | static_cast<uint8_t>(host_key >> 16), static_cast<uint8_t>(host_key >> 24)}; |
-| L07033 | src/mod/session2/server.cpp:568:52 | size | inline literal (semantic audit required) | 1 | g_hostkey_ops[v->opcode].fetch_add(1, std::memory_order_relaxed); |
-| L07034 | src/mod/session2/server.cpp:571:68 | size | inline literal (semantic audit required) | 4 | if (v->opcode == oms::kOpMilestone && v->payload.size() >= 4) std::memcpy(&milestone_value, v->payload.data(), 4); |
-| L07035 | src/mod/session2/server.cpp:571:120 | size | inline literal (semantic audit required) | 4 | if (v->opcode == oms::kOpMilestone && v->payload.size() >= 4) std::memcpy(&milestone_value, v->payload.data(), 4); |
-| L07036 | src/mod/session2/server.cpp:582:32 | size | inline literal (semantic audit required) | 0 | size_t loading_ack_n = 0; |
-| L07037 | src/mod/session2/server.cpp:599:23 | size | inline literal (semantic audit required) | 2005 | if (opcode == 2005) v = troc::parse_wire(p, troc::Dir::ToGuestClient); |
-| L07038 | src/mod/session2/server.cpp:603:43 | size | inline literal (semantic audit required) | 1u | const uint64_t ok = (pushed ? 1u : 0u) + ar.extra_pushed - ar.extra_failed; |
-| L07039 | src/mod/session2/server.cpp:603:48 | size | inline literal (semantic audit required) | 0u | const uint64_t ok = (pushed ? 1u : 0u) + ar.extra_pushed - ar.extra_failed; |
-| L07040 | src/mod/session2/server.cpp:609:40 | size | inline literal (semantic audit required) | 1 | g_n.sent_out.fetch_add(1, std::memory_order_relaxed); |
-| L07041 | src/mod/session2/server.cpp:632:34 | size | inline literal (semantic audit required) | 2005 | if (pushed && (opcode == 2005 &#124;&#124; opcode == 2516 &#124;&#124; opcode == 2174) && self == live_session2()) { |
-| L07042 | src/mod/session2/server.cpp:632:52 | size | inline literal (semantic audit required) | 2516 | if (pushed && (opcode == 2005 &#124;&#124; opcode == 2516 &#124;&#124; opcode == 2174) && self == live_session2()) { |
-| L07043 | src/mod/session2/server.cpp:632:70 | size | inline literal (semantic audit required) | 2174 | if (pushed && (opcode == 2005 &#124;&#124; opcode == 2516 &#124;&#124; opcode == 2174) && self == live_session2()) { |
-| L07044 | src/mod/session2/server.cpp:642:121 | size | inline literal (semantic audit required) | 0 | if (to_live) observer_seq_copy_on_out(opcode, v->payload, pushed, opcode == kOpMoveFieldAck ? milestone_value : 0); |
-| L07045 | src/mod/session2/server.cpp:651:73 | size | inline literal (semantic audit required) | 0 | observer_seq_copy_on_out(sv->opcode, sv->payload, true, 0); |
-| L07046 | src/mod/session2/server.cpp:667:34 | size | inline literal (semantic audit required) | 2322 | if (pushed && (opcode == 2322 &#124;&#124; opcode == 2335 &#124;&#124; opcode == 2005)) { |
-| L07047 | src/mod/session2/server.cpp:667:52 | size | inline literal (semantic audit required) | 2335 | if (pushed && (opcode == 2322 &#124;&#124; opcode == 2335 &#124;&#124; opcode == 2005)) { |
-| L07048 | src/mod/session2/server.cpp:667:70 | size | inline literal (semantic audit required) | 2005 | if (pushed && (opcode == 2322 &#124;&#124; opcode == 2335 &#124;&#124; opcode == 2005)) { |
-| L07049 | src/mod/session2/server.cpp:676:116 | size | inline literal (semantic audit required) | 0 | observer_milestone_reload_on_out(opcode, self, pushed, opcode == omr::kOpMilestone ? milestone_value : 0); |
-| L07050 | src/mod/session2/server.cpp:686:18 | session2_send | inline literal (semantic audit required) | 0 | int result = 0; |
-| L07051 | src/mod/session2/server.cpp:693:32 | session2_send | inline literal (semantic audit required) | 0 | uintptr_t server_net = 0, q2 = 0; |
-| L07052 | src/mod/session2/server.cpp:693:40 | session2_send | inline literal (semantic audit required) | 0 | uintptr_t server_net = 0, q2 = 0; |
-| L07053 | src/mod/session2/server.cpp:696:22 | guarded_push | inline literal (semantic audit required) | 1 | result = 1; |
-| L07054 | src/mod/session2/server.cpp:719:25 | mirror_copy | inline literal (semantic audit required) | 0 | uint16_t size = 0; |
-| L07055 | src/mod/session2/server.cpp:720:24 | mirror_copy | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07056 | src/mod/session2/server.cpp:722:39 | mirror_copy | inline literal (semantic audit required) | 0x28 | if (!user2_key &#124;&#124; !peek(rsp + 0x28, size) &#124;&#124; size < troc::kHeaderSize + 4 &#124;&#124; size > 0x7F00 &#124;&#124; |
-| L07057 | src/mod/session2/server.cpp:722:81 | mirror_copy | inline literal (semantic audit required) | 4 | if (!user2_key &#124;&#124; !peek(rsp + 0x28, size) &#124;&#124; size < troc::kHeaderSize + 4 &#124;&#124; size > 0x7F00 &#124;&#124; |
-| L07058 | src/mod/session2/server.cpp:722:93 | mirror_copy | inline literal (semantic audit required) | 0x7F00 | if (!user2_key &#124;&#124; !peek(rsp + 0x28, size) &#124;&#124; size < troc::kHeaderSize + 4 &#124;&#124; size > 0x7F00 &#124;&#124; |
-| L07059 | src/mod/session2/server.cpp:723:60 | peek | inline literal (semantic audit required) | 28 | !peek(pkt + troc::kHeaderSize, key) &#124;&#124; (key >> 28) != 0xA &#124;&#124; key == user2_key) { |
-| L07060 | src/mod/session2/server.cpp:723:67 | peek | inline literal (semantic audit required) | 0xA | !peek(pkt + troc::kHeaderSize, key) &#124;&#124; (key >> 28) != 0xA &#124;&#124; key == user2_key) { |
-| L07061 | src/mod/session2/server.cpp:728:63 | peek | inline literal (semantic audit required) | 4 | std::memcpy(p.data() + troc::kHeaderSize, &user2_key, 4); |
-| L07062 | src/mod/session2/server.cpp:731:40 | peek | inline literal (semantic audit required) | 1 | g_mirror_dropped.fetch_add(1, std::memory_order_relaxed); |
-| L07063 | src/mod/session2/server.cpp:735:35 | peek | inline literal (semantic audit required) | 1 | g_mirror_copied.fetch_add(1, std::memory_order_relaxed); |
-| L07064 | src/mod/session2/server.cpp:737:36 | peek | inline literal (semantic audit required) | 1 | g_mirror_dropped.fetch_add(1, std::memory_order_relaxed); |
-| L07065 | src/mod/session2/server.cpp:752:35 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | if (g_n.injected.load() > 0) g_outgoing_lost.store(true); |
-| L07066 | src/mod/session2/server.cpp:753:26 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | g_session2.store(0, std::memory_order_release); |
-| L07067 | src/mod/session2/server.cpp:754:31 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | g_session_epoch.store(0); |
-| L07068 | src/mod/session2/server.cpp:755:30 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | g_user2_player.store(0); |
-| L07069 | src/mod/session2/server.cpp:756:36 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::puppet_guard_also_key(0); |
-| L07070 | src/mod/session2/server.cpp:757:34 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::horse_diag_also_key(0); |
-| L07071 | src/mod/session2/server.cpp:758:33 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::puppet_guard_owner(0); |
-| L07072 | src/mod/session2/server.cpp:759:31 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::horse_diag_owner(0); |
-| L07073 | src/mod/session2/server.cpp:760:29 | GetCurrentThreadId | inline literal (semantic audit required) | 1 | g_rebuilt.fetch_add(1); |
-| L07074 | src/mod/session2/server.cpp:775:23 | load | inline literal (semantic audit required) | 0 | uintptr_t s = 0; |
-| L07075 | src/mod/session2/server.cpp:782:39 | load | inline literal (semantic audit required) | 0 | g_logout_handed.store(0); |
-| L07076 | src/mod/session2/server.cpp:796:19 | load | inline literal (semantic audit required) | 0 | uint16_t op = 0; |
-| L07077 | src/mod/session2/server.cpp:800:27 | load | inline literal (semantic audit required) | 0 | uintptr_t frame = 0, base = 0; |
-| L07078 | src/mod/session2/server.cpp:800:37 | load | inline literal (semantic audit required) | 0 | uintptr_t frame = 0, base = 0; |
-| L07079 | src/mod/session2/server.cpp:801:26 | load | inline literal (semantic audit required) | 0 | uint64_t magic = 0; |
-| L07080 | src/mod/session2/server.cpp:807:28 | peek | inline literal (semantic audit required) | 0 | uint32_t tag = 0; |
-| L07081 | src/mod/session2/server.cpp:814:50 | peek | inline literal (semantic audit required) | 1 | g_pb_seen[route.epoch].fetch_add(1, std::memory_order_relaxed); |
-| L07082 | src/mod/session2/server.cpp:815:59 | peek | inline literal (semantic audit required) | 1 | if (route.stale) g_stale_routed.fetch_add(1, std::memory_order_relaxed); |
-| L07083 | src/mod/session2/server.cpp:818:45 | peek | inline literal (semantic audit required) | 1 | g_untagged_routed.fetch_add(1, std::memory_order_relaxed); |
-| L07084 | src/mod/session2/server.cpp:820:37 | peek | inline literal (semantic audit required) | 1 | g_n.recv_ours.fetch_add(1, std::memory_order_relaxed); |
-| L07085 | src/mod/session2/server.cpp:825:40 | peek | inline literal (semantic audit required) | 3037 | if (pkt && peek(pkt, op) && (op == 3037 &#124;&#124; op == 2910)) g_n.save_reqs.fetch_add(1, std::memory_order_relaxed); |
-| L07086 | src/mod/session2/server.cpp:825:54 | peek | inline literal (semantic audit required) | 2910 | if (pkt && peek(pkt, op) && (op == 3037 &#124;&#124; op == 2910)) g_n.save_reqs.fetch_add(1, std::memory_order_relaxed); |
-| L07087 | src/mod/session2/server.cpp:825:85 | peek | inline literal (semantic audit required) | 1 | if (pkt && peek(pkt, op) && (op == 3037 &#124;&#124; op == 2910)) g_n.save_reqs.fetch_add(1, std::memory_order_relaxed); |
-| L07088 | src/mod/session2/server.cpp:832:21 | peek | inline literal (semantic audit required) | 0 | uint32_t slot = 0; |
-| L07089 | src/mod/session2/server.cpp:833:99 | peek | inline literal (semantic audit required) | 9 | if (op == kOpLoginCharacterToFieldServerReq && ctx.r8 != s2 && peek(pkt + troc::kHeaderSize + 9, slot)) { |
-| L07090 | src/mod/session2/server.cpp:846:24 | peek | inline literal (semantic audit required) | 0 | uint16_t in_size = 0; |
-| L07091 | src/mod/session2/server.cpp:847:55 | peek | inline literal (semantic audit required) | 0x28 | const bool in_sized = pkt && op && peek(ctx.rsp + 0x28, in_size); |
-| L07092 | src/mod/session2/server.cpp:850:90 | peek | inline literal (semantic audit required) | 0 | if (from_user2) user2_stages_server_packet(op, from_user2, pkt, in_sized ? in_size : 0); |
-| L07093 | src/mod/session2/server.cpp:865:22 | session_user_key | inline literal (semantic audit required) | 0 | uintptr_t user = 0; |
-| L07094 | src/mod/session2/server.cpp:875:89 | actor_session | inline literal (semantic audit required) | 0xE8 | session = reinterpret_cast<GetSession>(*reinterpret_cast<const uintptr_t*>(vt + 0xE8))(actor); |
-| L07095 | src/mod/session2/server.cpp:887:27 | array_remove | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < count; ++i) { |
-| L07096 | src/mod/session2/server.cpp:889:35 | array_remove | inline literal (semantic audit required) | 1 | for (uint32_t j = i + 1; j < count; ++j) data[j - 1] = data[j]; |
-| L07097 | src/mod/session2/server.cpp:889:63 | array_remove | inline literal (semantic audit required) | 1 | for (uint32_t j = i + 1; j < count; ++j) data[j - 1] = data[j]; |
-| L07098 | src/mod/session2/server.cpp:921:39 | finder_common | inline literal (semantic audit required) | 1 | g_n.finder_calls[which].fetch_add(1, std::memory_order_relaxed); |
-| L07099 | src/mod/session2/server.cpp:923:22 | finder_common | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
-| L07100 | src/mod/session2/server.cpp:925:46 | finder_common | inline literal (semantic audit required) | 1 | g_n.finder_nonempty[which].fetch_add(1, std::memory_order_relaxed); |
-| L07101 | src/mod/session2/server.cpp:929:21 | finder_common | inline literal (semantic audit required) | 0 | uint32_t key2 = 0; |
-| L07102 | src/mod/session2/server.cpp:933:19 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
-| L07103 | src/mod/session2/server.cpp:933:26 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
-| L07104 | src/mod/session2/server.cpp:933:34 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
-| L07105 | src/mod/session2/server.cpp:933:45 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
-| L07106 | src/mod/session2/server.cpp:934:27 | finder_common | inline literal (semantic audit required) | 0 | uint32_t controller = 0, key1 = 0; |
-| L07107 | src/mod/session2/server.cpp:934:37 | finder_common | inline literal (semantic audit required) | 0 | uint32_t controller = 0, key1 = 0; |
-| L07108 | src/mod/session2/server.cpp:936:95 | finder_common | inline literal (semantic audit required) | 0x68 | if (!peek(reinterpret_cast<uintptr_t>(finder) + off::kFinder_Actor, a) &#124;&#124; !a &#124;&#124; !peek(a + 0x68, b) &#124;&#124; !b &#124;&#124; |
-| L07109 | src/mod/session2/server.cpp:937:19 | finder_common | inline literal (semantic audit required) | 0x1A0 | !peek(b + 0x1A0, ts) &#124;&#124; !ts &#124;&#124; !peek(ts + 8, actor) &#124;&#124; !actor &#124;&#124; |
-| L07110 | src/mod/session2/server.cpp:937:51 | finder_common | inline literal (semantic audit required) | 8 | !peek(b + 0x1A0, ts) &#124;&#124; !ts &#124;&#124; !peek(ts + 8, actor) &#124;&#124; !actor &#124;&#124; |
-| L07111 | src/mod/session2/server.cpp:941:25 | peek | inline literal (semantic audit required) | 0 | uintptr_t exclude = 0; |
-| L07112 | src/mod/session2/server.cpp:942:18 | peek | inline literal (semantic audit required) | 1 | if (which == 1) { |
-| L07113 | src/mod/session2/server.cpp:953:21 | peek | inline literal (semantic audit required) | 0 | uintptr_t ret = 0; |
-| L07114 | src/mod/session2/server.cpp:955:44 | peek | inline literal (semantic audit required) | 1 | g_n.finder_errors[which].fetch_add(1, std::memory_order_relaxed); |
-| L07115 | src/mod/session2/server.cpp:958:41 | peek | inline literal (semantic audit required) | 1 | g_n.finder_relayed[which].fetch_add(1, std::memory_order_relaxed); |
-| L07116 | src/mod/session2/server.cpp:962:89 | except_one_control | inline literal (semantic audit required) | 0 | uintptr_t __fastcall except_one_control(void* finder, void* out) { return finder_common(0, g_control_hook, finder, out); } |
-| L07117 | src/mod/session2/server.cpp:963:86 | except_one_self | inline literal (semantic audit required) | 1 | uintptr_t __fastcall except_one_self(void* finder, void* out) { return finder_common(1, g_self_hook, finder, out); } |
-| L07118 | src/mod/session2/server.cpp:969:103 | head_matches | inline literal (semantic audit required) | 0 | if (game::safe_read(g_base + rva, actual.data(), n) && std::memcmp(actual.data(), expected, n) == 0) return true; |
-| L07119 | src/mod/session2/server.cpp:977:16 | load_channels | inline literal (semantic audit required) | 0 | size_t n = 0, blocked = 0; |
-| L07120 | src/mod/session2/server.cpp:977:29 | load_channels | inline literal (semantic audit required) | 0 | size_t n = 0, blocked = 0; |
-| L07121 | src/mod/session2/server.cpp:978:101 | load_channels | inline literal (semantic audit required) | 8 | for (uintptr_t a = g_base + off::kTrocInstancesBegin; a < g_base + off::kTrocInstancesEnd; a += 8) { |
-| L07122 | src/mod/session2/server.cpp:980:52 | load_channels | inline literal (semantic audit required) | 0x10000000 | if (!vt &#124;&#124; *vt < g_base &#124;&#124; *vt >= g_base + 0x10000000) continue; |
-| L07123 | src/mod/session2/server.cpp:981:64 | load_channels | inline literal (semantic audit required) | 0 | if (game::rtti_name_of_vtable(*vt).rfind(".?AVTrocTr", 0) != 0) continue; |
-| L07124 | src/mod/session2/server.cpp:981:70 | load_channels | inline literal (semantic audit required) | 0 | if (game::rtti_name_of_vtable(*vt).rfind(".?AVTrocTr", 0) != 0) continue; |
-| L07125 | src/mod/session2/server.cpp:1002:45 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
-| L07126 | src/mod/session2/server.cpp:1002:51 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
-| L07127 | src/mod/session2/server.cpp:1002:81 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
-| L07128 | src/mod/session2/server.cpp:1002:87 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
-| L07129 | src/mod/session2/server.cpp:1003:56 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
-| L07130 | src/mod/session2/server.cpp:1003:62 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
-| L07131 | src/mod/session2/server.cpp:1003:98 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
-| L07132 | src/mod/session2/server.cpp:1003:104 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
-| L07133 | src/mod/session2/server.cpp:1012:14 | load_channels | inline literal (semantic audit required) | 0x80 | a += 0x80;  // the rest of this 0x90-byte instance |
-| L07134 | src/mod/session2/server.cpp:1024:31 | build_vtable | inline literal (semantic audit required) | 4096 | VirtualAlloc(nullptr, 4096, MEM_COMMIT &#124; MEM_RESERVE, PAGE_READWRITE)); |
-| L07135 | src/mod/session2/server.cpp:1027:71 | build_vtable | inline literal (semantic audit required) | 8 | if (!game::safe_read(g_base + off::kNwVirtualAsyncSessionVtable - 8, vt, |
-| L07136 | src/mod/session2/server.cpp:1028:56 | sizeof | inline literal (semantic audit required) | 1 | (off::kSessionVtableEntries + 1) * sizeof(uintptr_t))) { |
-| L07137 | src/mod/session2/server.cpp:1031:12 | sizeof | inline literal (semantic audit required) | 1 | if (vt[1 + off::kSessionVfSend] != g_base + off::kSessionSend) return false; |
-| L07138 | src/mod/session2/server.cpp:1032:8 | sizeof | inline literal (semantic audit required) | 1 | vt[1 + off::kSessionVfSend] = reinterpret_cast<uintptr_t>(&session2_send); |
-| L07139 | src/mod/session2/server.cpp:1033:17 | sizeof | inline literal (semantic audit required) | 0 | DWORD old = 0; |
-| L07140 | src/mod/session2/server.cpp:1034:24 | sizeof | inline literal (semantic audit required) | 4096 | VirtualProtect(vt, 4096, PAGE_READONLY, &old); |
-| L07141 | src/mod/session2/server.cpp:1040:58 | vtable_slot_is | inline literal (semantic audit required) | 8 | auto v = game::read<uintptr_t>(g_base + vtable_rva + 8 * slot); |
-| L07142 | src/mod/session2/server.cpp:1074:65 | server_install | inline literal (semantic audit required) | 1 | if (!vtable_slot_is(off::kToNearExceptOneControlVtable, 1, off::kExceptOneVf1) &#124;&#124; |
-| L07143 | src/mod/session2/server.cpp:1075:62 | server_install | inline literal (semantic audit required) | 1 | !vtable_slot_is(off::kToNearExceptOneSelfVtable, 1, off::kExceptOneSelfVf1) &#124;&#124; |
-| L07144 | src/mod/session2/server.cpp:1076:49 | vtable_slot_is | inline literal (semantic audit required) | 1 | !vtable_slot_is(off::kToNearVtable, 1, off::kToNearVf1)) { |
-| L07145 | src/mod/session2/server.cpp:1135:45 | head_matches | inline literal (semantic audit required) | 20 | g_q.limits().max_bytes >> 20, g_q.limits().in_flight_max); |
-| L07146 | src/mod/session2/server.cpp:1137:47 | head_matches | inline literal (semantic audit required) | 0 | CloseHandle(CreateThread(nullptr, 0, mirror_thread, nullptr, 0, nullptr)); |
-| L07147 | src/mod/session2/server.cpp:1137:74 | head_matches | inline literal (semantic audit required) | 0 | CloseHandle(CreateThread(nullptr, 0, mirror_thread, nullptr, 0, nullptr)); |
-| L07148 | src/mod/session2/server.cpp:1186:65 | server_probe_log | inline literal (semantic audit required) | 0x24 | const auto crypto_on = crypto ? read<uint8_t>(*crypto + 0x24) : std::nullopt; |
-| L07149 | src/mod/session2/server.cpp:1203:42 | server_probe_log | inline literal (semantic audit required) | 0x20 | const auto c20 = cn ? read_ptr(*cn + 0x20) : std::nullopt; |
-| L07150 | src/mod/session2/server.cpp:1204:42 | server_probe_log | inline literal (semantic audit required) | 0x28 | const auto c28 = cn ? read_ptr(*cn + 0x28) : std::nullopt; |
-| L07151 | src/mod/session2/server.cpp:1225:49 | server_probe_log | inline literal (semantic audit required) | 0xD0 | const auto pj = user ? read_ptr(*user + 0xD0) : std::nullopt; |
-| L07152 | src/mod/session2/server.cpp:1227:46 | server_probe_log | inline literal (semantic audit required) | 0x68 | const auto c68 = pj ? read_ptr(*pj + 0x68) : std::nullopt; |
-| L07153 | src/mod/session2/server.cpp:1228:47 | server_probe_log | inline literal (semantic audit required) | 0x1A0 | const auto ts = c68 ? read_ptr(*c68 + 0x1A0) : std::nullopt; |
-| L07154 | src/mod/session2/server.cpp:1229:49 | server_probe_log | inline literal (semantic audit required) | 0x540 | const auto sector = ts ? read_ptr(*ts + 0x540) : std::nullopt; |
-| L07155 | src/mod/session2/server.cpp:1233:48 | server_probe_log | inline literal (semantic audit required) | 0x500 | const auto field = ts ? read_ptr(*ts + 0x500) : std::nullopt; |
-| L07156 | src/mod/session2/server.cpp:1237:57 | server_probe_log | inline literal (semantic audit required) | 0x180 | hex(read<uint32_t>(*field + 0x180)), hex(read<uint32_t>(*field + 0x2A8)), |
-| L07157 | src/mod/session2/server.cpp:1237:94 | server_probe_log | inline literal (semantic audit required) | 0x2A8 | hex(read<uint32_t>(*field + 0x180)), hex(read<uint32_t>(*field + 0x2A8)), |
-| L07158 | src/mod/session2/server.cpp:1238:57 | server_probe_log | inline literal (semantic audit required) | 0x2B0 | hex(read<uint32_t>(*field + 0x2B0)), hex(read<uint32_t>(*field + 0x2C8))); |
-| L07159 | src/mod/session2/server.cpp:1238:94 | server_probe_log | inline literal (semantic audit required) | 0x2C8 | hex(read<uint32_t>(*field + 0x2B0)), hex(read<uint32_t>(*field + 0x2C8))); |
-| L07160 | src/mod/session2/server.cpp:1248:16 | server_probe_log | inline literal (semantic audit required) | 32 | uint8_t ft[32] = {}; |
-| L07161 | src/mod/session2/server.cpp:1249:34 | server_probe_log | inline literal (semantic audit required) | 0x6A6D238 | if (game::safe_read(g_base + 0x6A6D238, ft, sizeof ft)) { |
-| L07162 | src/mod/session2/server.cpp:1256:57 | server_session_ready | inline literal (semantic audit required) | 0 | bool server_session_ready() { return live_session2() != 0; } |
-| L07163 | src/mod/session2/server.cpp:1266:20 | server_user2_present | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07164 | src/mod/session2/server.cpp:1271:21 | server_users | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
-| L07165 | src/mod/session2/server.cpp:1271:29 | server_users | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
-| L07166 | src/mod/session2/server.cpp:1278:21 | server_host_user | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
-| L07167 | src/mod/session2/server.cpp:1278:29 | server_host_user | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
-| L07168 | src/mod/session2/server.cpp:1293:59 | server_in_take_frame | inline literal (semantic audit required) | 0 | bool server_in_take_frame() { return t_take_frame_depth > 0; } |
-| L07169 | src/mod/session2/server.cpp:1297:31 | server_user2_in_world | inline literal (semantic audit required) | 0 | return live_session2() != 0 && !g_logout_asked.load() && phase_snapshot().phase() == MovePhase::Stable; |
-| L07170 | src/mod/session2/server.cpp:1304:44 | server_push_extra | inline literal (semantic audit required) | 0 | const bool queued = live_session2() != 0 && push_outgoing_extra(packet); |
-| L07171 | src/mod/session2/server.cpp:1327:26 | server_push_extra | inline literal (semantic audit required) | 0 | std::memset(mem, 0, off::kFrameHeader + len + (off::kFrameOverhead - off::kFrameHeader)); |
-| L07172 | src/mod/session2/server.cpp:1329:42 | server_push_extra | inline literal (semantic audit required) | 2 | *reinterpret_cast<uint8_t*>(pb + 2) = channel; |
-| L07173 | src/mod/session2/server.cpp:1331:70 | server_push_extra | inline literal (semantic audit required) | 0 | std::memset(reinterpret_cast<void*>(pb + off::kPb_FramePtr), 0, off::kPbSize - off::kPb_FramePtr); |
-| L07174 | src/mod/session2/server.cpp:1336:64 | server_push_extra | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint8_t*>(pb + off::kPb_IsRequest) = 0; |
-| L07175 | src/mod/session2/server.cpp:1339:43 | server_push_extra | inline literal (semantic audit required) | 0x8020 | *reinterpret_cast<uint64_t*>(pb + 0x8020) = 0x7FFFFFFFFFFFFFFFull; |
-| L07176 | src/mod/session2/server.cpp:1339:53 | server_push_extra | inline literal (semantic audit required) | 0x7FFFFFFFFFFFFFFFull | *reinterpret_cast<uint64_t*>(pb + 0x8020) = 0x7FFFFFFFFFFFFFFFull; |
-| L07177 | src/mod/session2/server.cpp:1347:46 | __except | inline literal (semantic audit required) | 1 | g_halted_epoch.store(epoch ? epoch : 1); |
-| L07178 | src/mod/session2/server.cpp:1355:28 | pump_body | inline literal (semantic audit required) | 1 | g_pump_turns.fetch_add(1, std::memory_order_relaxed); |
-| L07179 | src/mod/session2/server.cpp:1359:20 | pump_body | inline literal (semantic audit required) | 0 | uintptr_t cn = 0, server_net = 0; |
-| L07180 | src/mod/session2/server.cpp:1359:36 | pump_body | inline literal (semantic audit required) | 0 | uintptr_t cn = 0, server_net = 0; |
-| L07181 | src/mod/session2/server.cpp:1362:36 | pump_body | inline literal (semantic audit required) | 1 | g_pump_other_net.fetch_add(1, std::memory_order_relaxed); |
-| L07182 | src/mod/session2/server.cpp:1377:36 | pump_body | inline literal (semantic audit required) | 1 | g_pump_not_ready.fetch_add(1, std::memory_order_relaxed); |
-| L07183 | src/mod/session2/server.cpp:1382:21 | pump_body | inline literal (semantic audit required) | 0 | size_t handed = 0; |
-| L07184 | src/mod/session2/server.cpp:1391:33 | pump_body | inline literal (semantic audit required) | 1 | g_in_hand.fetch_add(1);  // before the size goes down: the barrier never sees neither |
-| L07185 | src/mod/session2/server.cpp:1395:33 | pump_body | inline literal (semantic audit required) | 1 | g_in_hand.fetch_sub(1); |
-| L07186 | src/mod/session2/server.cpp:1396:36 | pump_body | inline literal (semantic audit required) | 1 | g_pump_stale.fetch_add(1, std::memory_order_relaxed); |
-| L07187 | src/mod/session2/server.cpp:1400:40 | pump_body | inline literal (semantic audit required) | 1 | g_pb_pushed[p.epoch].fetch_add(1); |
-| L07188 | src/mod/session2/server.cpp:1401:29 | pump_body | inline literal (semantic audit required) | 1 | g_in_hand.fetch_sub(1);  // now counted as pushed (taken back below if the push fails) |
-| L07189 | src/mod/session2/server.cpp:1403:44 | pump_body | inline literal (semantic audit required) | 1 | g_pb_pushed[p.epoch].fetch_sub(1); |
-| L07190 | src/mod/session2/server.cpp:1404:41 | pump_body | inline literal (semantic audit required) | 1 | g_n.inject_failed.fetch_add(1); |
-| L07191 | src/mod/session2/server.cpp:1405:82 | pump_body | inline literal (semantic audit required) | 1 | if (!g_halted_epoch.load()) g_halted_epoch.store(p.epoch ? p.epoch : 1);  // a null buffer: stop too |
-| L07192 | src/mod/session2/server.cpp:1408:32 | pump_body | inline literal (semantic audit required) | 1 | g_n.injected.fetch_add(1); |
-| L07193 | src/mod/session2/server.cpp:1410:72 | pump_body | inline literal (semantic audit required) | 0 | const uint64_t wait = now >= p.queued_ms ? now - p.queued_ms : 0; |
-| L07194 | src/mod/session2/server.cpp:1418:73 | pump_body | inline literal (semantic audit required) | 0 | atomic_max(g_pump_inflight_max, pushed > seen ? pushed - seen : 0); |
-| L07195 | src/mod/session2/server.cpp:1428:36 | on_client_pump | inline literal (semantic audit required) | 1 | g_pump_other_net.fetch_add(1, std::memory_order_relaxed); |
-| L07196 | src/mod/session2/server.cpp:1452:42 | inject | inline literal (semantic audit required) | 8 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
-| L07197 | src/mod/session2/server.cpp:1452:51 | inject | inline literal (semantic audit required) | 0 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
-| L07198 | src/mod/session2/server.cpp:1452:60 | inject | inline literal (semantic audit required) | 1 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
-| L07199 | src/mod/session2/server.cpp:1452:66 | inject | inline literal (semantic audit required) | 8 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
-| L07200 | src/mod/session2/server.cpp:1456:69 | inject | inline literal (semantic audit required) | 0ull | const uint64_t account = g_opt.account && g_opt.account != ~0ull ? g_opt.account : 1; |
-| L07201 | src/mod/session2/server.cpp:1456:92 | inject | inline literal (semantic audit required) | 1 | const uint64_t account = g_opt.account && g_opt.account != ~0ull ? g_opt.account : 1; |
-| L07202 | src/mod/session2/server.cpp:1457:64 | inject | inline literal (semantic audit required) | 8 | std::memcpy(copy.data() + troc::kHeaderSize, &account, 8); |
-| L07203 | src/mod/session2/server.cpp:1464:67 | inject | inline literal (semantic audit required) | 9 | if (identity_fix_active() && in.size() >= troc::kHeaderSize + 9 && |
-| L07204 | src/mod/session2/server.cpp:1465:13 | inject | inline literal (semantic audit required) | 0 | (in[0] &#124; (in[1] << 8)) == kOpLoginCharacterToFieldServerReq) { |
-| L07205 | src/mod/session2/server.cpp:1465:22 | inject | inline literal (semantic audit required) | 1 | (in[0] &#124; (in[1] << 8)) == kOpLoginCharacterToFieldServerReq) { |
-| L07206 | src/mod/session2/server.cpp:1465:28 | inject | inline literal (semantic audit required) | 8 | (in[0] &#124; (in[1] << 8)) == kOpLoginCharacterToFieldServerReq) { |
-| L07207 | src/mod/session2/server.cpp:1466:26 | inject | inline literal (semantic audit required) | 0 | uint64_t asked = 0; |
-| L07208 | src/mod/session2/server.cpp:1467:61 | inject | inline literal (semantic audit required) | 1 | std::memcpy(&asked, in.data() + troc::kHeaderSize + 1, sizeof asked); |
-| L07209 | src/mod/session2/server.cpp:1471:59 | inject | inline literal (semantic audit required) | 1 | std::memcpy(copy.data() + troc::kHeaderSize + 1, &own, sizeof own); |
-| L07210 | src/mod/session2/server.cpp:1479:53 | inject | inline literal (semantic audit required) | 0x8000 | if (!v &#124;&#124; packet.size() + off::kFrameOverhead > 0x8000) { |
-| L07211 | src/mod/session2/server.cpp:1480:38 | inject | inline literal (semantic audit required) | 1 | g_n.inject_refused.fetch_add(1); |
-| L07212 | src/mod/session2/server.cpp:1491:42 | inject | inline literal (semantic audit required) | 0 | const bool live = live_session2() != 0; |
-| L07213 | src/mod/session2/server.cpp:1493:36 | inject | inline literal (semantic audit required) | 1 | g_held_not_ready.fetch_add(1); |
-| L07214 | src/mod/session2/server.cpp:1501:43 | inject | inline literal (semantic audit required) | 1 | g_n.inject_after_logout.fetch_add(1); |
-| L07215 | src/mod/session2/server.cpp:1507:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
-| L07216 | src/mod/session2/server.cpp:1513:80 | identity_fix_admit | inline literal (semantic audit required) | 13 | if (v->opcode == kOpLoginCharacterToFieldServerReq && v->payload.size() >= 13) { |
-| L07217 | src/mod/session2/server.cpp:1514:25 | identity_fix_admit | inline literal (semantic audit required) | 0 | uint32_t slot = 0; |
-| L07218 | src/mod/session2/server.cpp:1515:48 | identity_fix_admit | inline literal (semantic audit required) | 9 | std::memcpy(&slot, v->payload.data() + 9, 4); |
-| L07219 | src/mod/session2/server.cpp:1515:51 | identity_fix_admit | inline literal (semantic audit required) | 4 | std::memcpy(&slot, v->payload.data() + 9, 4); |
-| L07220 | src/mod/session2/server.cpp:1516:21 | identity_fix_admit | inline literal (semantic audit required) | 3 | if (slot == 3 &#124;&#124; slot == 206) { |
-| L07221 | src/mod/session2/server.cpp:1516:34 | identity_fix_admit | inline literal (semantic audit required) | 206 | if (slot == 3 &#124;&#124; slot == 206) { |
-| L07222 | src/mod/session2/server.cpp:1517:42 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
-| L07223 | src/mod/session2/server.cpp:1528:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
-| L07224 | src/mod/session2/server.cpp:1535:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
-| L07225 | src/mod/session2/server.cpp:1539:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_refused.fetch_add(1); |
-| L07226 | src/mod/session2/server.cpp:1542:28 | identity_fix_admit | inline literal (semantic audit required) | 0 | uintptr_t server_net = 0; |
-| L07227 | src/mod/session2/server.cpp:1544:36 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_held_not_ready.fetch_add(1); |
-| L07228 | src/mod/session2/server.cpp:1551:35 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_held_full.fetch_add(1); |
-| L07229 | src/mod/session2/server.cpp:1567:35 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_held_full.fetch_add(1); |
-| L07230 | src/mod/session2/server.cpp:1580:34 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_pb_queued[epoch].fetch_add(1); |
-| L07231 | src/mod/session2/server.cpp:1592:15 | mirror_thread | inline literal (semantic audit required) | 5 | Sleep(5); |
-| L07232 | src/mod/session2/server.cpp:1607:44 | mirror_thread | inline literal (semantic audit required) | 1 | g_mirror_dropped.fetch_add(1, std::memory_order_relaxed); |
-| L07233 | src/mod/session2/server.cpp:1619:22 | user2_move_diag | inline literal (semantic audit required) | 0 | uintptr_t user = 0; |
-| L07234 | src/mod/session2/server.cpp:1645:26 | close_open_move | inline literal (semantic audit required) | 0 | const uint8_t zero = 0; |
-| L07235 | src/mod/session2/server.cpp:1647:54 | close_open_move | inline literal (semantic audit required) | 0 | inject(troc::make(mv::kMoveFieldCompleteReq, 0, std::span<const uint8_t>(&zero, 1)), InjectKind::CloseMove); |
-| L07236 | src/mod/session2/server.cpp:1647:89 | close_open_move | inline literal (semantic audit required) | 1 | inject(troc::make(mv::kMoveFieldCompleteReq, 0, std::span<const uint8_t>(&zero, 1)), InjectKind::CloseMove); |
-| L07237 | src/mod/session2/server.cpp:1656:39 | close_open_move | inline literal (semantic audit required) | 1 | g_n.move_close_injected.fetch_add(1); |
-| L07238 | src/mod/session2/server.cpp:1717:37 | hand_logout | inline literal (semantic audit required) | 0 | g_logout_asked_ms.store(0);  // log once |
-| L07239 | src/mod/session2/server.cpp:1719:56 | hand_logout | inline literal (semantic audit required) | 1000 | g_logout_why, kLogoutPendingMs / 1000); |
-| L07240 | src/mod/session2/server.cpp:1734:26 | hand_logout | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
-| L07241 | src/mod/session2/server.cpp:1745:35 | hand_logout | inline literal (semantic audit required) | 1 | g_n.logout_injected.fetch_add(1); |
-| L07242 | src/mod/session2/server.cpp:1746:94 | hand_logout | inline literal (semantic audit required) | 1 | if (const uint32_t e = g_want_epoch.load(); e < kEpochSlots) g_logout_count[e].fetch_add(1); |
-| L07243 | src/mod/session2/server.cpp:1805:64 | server_begin_epoch | inline literal (semantic audit required) | 1 | if (epoch >= kEpochSlots &#124;&#124; epoch != g_want_epoch.load() + 1) return false; |
-| L07244 | src/mod/session2/server.cpp:1816:27 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_logout_handed.store(0); |
-| L07245 | src/mod/session2/server.cpp:1817:29 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_logout_asked_ms.store(0); |
-| L07246 | src/mod/session2/server.cpp:1826:26 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_user2_player.store(0); |
-| L07247 | src/mod/session2/server.cpp:1832:31 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_user2_userkey.store(0); |
-| L07248 | src/mod/session2/server.cpp:1833:36 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::puppet_guard_also_key(0); |
-| L07249 | src/mod/session2/server.cpp:1834:34 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::horse_diag_also_key(0); |
-| L07250 | src/mod/session2/server.cpp:1835:33 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::puppet_guard_owner(0); |
-| L07251 | src/mod/session2/server.cpp:1836:31 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::horse_diag_owner(0); |
-| L07252 | src/mod/session2/server.cpp:1845:23 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_close_session = 0; |
-| L07253 | src/mod/session2/server.cpp:1846:17 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_nak.store(0); |
-| L07254 | src/mod/session2/server.cpp:1847:30 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_nak_after_logout.store(0); |
-| L07255 | src/mod/session2/server.cpp:1857:91 | server_epoch_session | inline literal (semantic audit required) | 0 | return epoch < kEpochSlots ? g_epoch_session[epoch].load(std::memory_order_acquire) : 0; |
-| L07256 | src/mod/session2/server.cpp:1860:64 | server_logout_handed | inline literal (semantic audit required) | 0 | bool server_logout_handed() { return g_logout_handed.load() != 0; } |
-| L07257 | src/mod/session2/server.cpp:1863:22 | server_capture_user2 | inline literal (semantic audit required) | 0 | uintptr_t user = 0; |
-| L07258 | src/mod/session2/server.cpp:1879:22 | server_host_field | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
-| L07259 | src/mod/session2/server.cpp:1885:43 | server_host_field | inline literal (semantic audit required) | 0x68 | const auto c68 = pj ? probe_ptr(*pj + 0x68) : std::nullopt; |
-| L07260 | src/mod/session2/server.cpp:1886:44 | server_host_field | inline literal (semantic audit required) | 0x1A0 | const auto ts = c68 ? probe_ptr(*c68 + 0x1A0) : std::nullopt; |
-| L07261 | src/mod/session2/server.cpp:1906:37 | server_barrier_read | inline literal (semantic audit required) | 0 | r.session_user = u.value_or(0); |
-| L07262 | src/mod/session2/server.cpp:1940:27 | server_barrier_read | inline literal (semantic audit required) | 0 | uintptr_t host_user = 0; |
-| L07263 | src/mod/session2/server.cpp:1967:103 | server_epoch_reached | inline literal (semantic audit required) | 0 | bool server_epoch_reached(uint32_t epoch) { return epoch < kEpochSlots && g_pb_queued[epoch].load() > 0; } |
-| L07264 | src/mod/session2/server.cpp:1977:21 | server_threads_park | inline literal (semantic audit required) | 0 | uintptr_t net = 0, arr = 0; |
-| L07265 | src/mod/session2/server.cpp:1977:30 | server_threads_park | inline literal (semantic audit required) | 0 | uintptr_t net = 0, arr = 0; |
-| L07266 | src/mod/session2/server.cpp:1978:18 | server_threads_park | inline literal (semantic audit required) | 0 | uint32_t n = 0; |
-| L07267 | src/mod/session2/server.cpp:1984:23 | peek | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < n && i < 16; ++i) { |
-| L07268 | src/mod/session2/server.cpp:1984:39 | peek | inline literal (semantic audit required) | 16 | for (uint32_t i = 0; i < n && i < 16; ++i) { |
-| L07269 | src/mod/session2/server.cpp:1985:24 | peek | inline literal (semantic audit required) | 0 | uint32_t tid = 0; |
-| L07270 | src/mod/session2/server.cpp:1986:26 | peek | inline literal (semantic audit required) | 0 | uintptr_t flag = 0; |
-| L07271 | src/mod/session2/server.cpp:1987:19 | peek | inline literal (semantic audit required) | 3 | uint8_t b[3] = {}; |
-| L07272 | src/mod/session2/server.cpp:1988:104 | peek | inline literal (semantic audit required) | 8 | if (!peek(arr + i * off::kServerThreadEntry, tid) &#124;&#124; !peek(arr + i * off::kServerThreadEntry + 8, flag) &#124;&#124; |
-| L07273 | src/mod/session2/server.cpp:1989:36 | peek | inline literal (semantic audit required) | 0 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
-| L07274 | src/mod/session2/server.cpp:1989:56 | peek | inline literal (semantic audit required) | 1 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
-| L07275 | src/mod/session2/server.cpp:1989:61 | peek | inline literal (semantic audit required) | 1 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
-| L07276 | src/mod/session2/server.cpp:1989:81 | peek | inline literal (semantic audit required) | 2 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
-| L07277 | src/mod/session2/server.cpp:1989:86 | peek | inline literal (semantic audit required) | 2 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
-| L07278 | src/mod/session2/server.cpp:1993:47 | peek | inline literal (semantic audit required) | 0 | s += std::format(" T{}{}{}{}", tid, b[0] ? " PARK-ASKED" : "", b[1] ? " PARKED" : "", b[2] ? " busy" : " idle"); |
-| L07279 | src/mod/session2/server.cpp:1993:74 | peek | inline literal (semantic audit required) | 1 | s += std::format(" T{}{}{}{}", tid, b[0] ? " PARK-ASKED" : "", b[1] ? " PARKED" : "", b[2] ? " busy" : " idle"); |
-| L07280 | src/mod/session2/server.cpp:1993:97 | peek | inline literal (semantic audit required) | 2 | s += std::format(" T{}{}{}{}", tid, b[0] ? " PARK-ASKED" : "", b[1] ? " PARKED" : "", b[2] ? " busy" : " idle"); |
-| L07281 | src/mod/session2/server.cpp:2014:32 | load | inline literal (semantic audit required) | 0 | static uint32_t told = 0; |
-| L07282 | src/mod/session2/server.cpp:2026:28 | load | inline literal (semantic audit required) | 0 | g_q_size.store(0, std::memory_order_release); |
-| L07283 | src/mod/session2/server.cpp:2050:77 | load | inline literal (semantic audit required) | 0 | switch (g_pump_watch.update(now, g_pump_turns.load(), g_q_size.load() > 0)) { |
-| L07284 | src/mod/session2/server.cpp:2065:108 | load | inline literal (semantic audit required) | 5000 | if (const uint64_t full = g_held_full.load(); full != g_full_logged_count && now - g_full_logged_at >= 5000) { |
-| L07285 | src/mod/session2/server.cpp:2066:21 | load | inline literal (semantic audit required) | 0 | size_t kb = 0; |
-| L07286 | src/mod/session2/server.cpp:2069:33 | load | inline literal (semantic audit required) | 10 | kb = g_q.bytes() >> 10; |
-| L07287 | src/mod/session2/server.cpp:2079:63 | server_inject_halted | inline literal (semantic audit required) | 0 | bool server_inject_halted() { return g_halted_epoch.load() != 0; } |
-| L07288 | src/mod/session2/server.cpp:2089:19 | server_inject_describe | inline literal (semantic audit required) | 0 | size_t peak = 0; |
-| L07289 | src/mod/session2/server.cpp:2097:123 | server_inject_describe | inline literal (semantic audit required) | 0 | g_q_size.load(), peak, handed, g_pump_tid.load(), g_pump_turns.load(), handed ? g_pump_wait_sum.load() / handed : 0, |
-| L07290 | src/mod/session2/server.cpp:2114:75 | server_epoch_describe | inline literal (semantic audit required) | 0 | e < kEpochSlots ? g_pb_pushed[e].load() : 0, e < kEpochSlots ? g_pb_seen[e].load() : 0); |
-| L07291 | src/mod/session2/server.cpp:2114:118 | server_epoch_describe | inline literal (semantic audit required) | 0 | e < kEpochSlots ? g_pb_pushed[e].load() : 0, e < kEpochSlots ? g_pb_seen[e].load() : 0); |
-| L07292 | src/mod/session2/server.cpp:2134:58 | server_describe | inline literal (semantic audit required) | 0 | if (const int64_t slot = g_host_slot.load(); slot >= 0) s += std::format(" &#124; host save slot {}", slot); |
-| L07293 | src/mod/session2/server.cpp:2153:25 | load | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < g_hostkey_ops.size(); ++i) { |
-| L07294 | src/mod/session2/server.cpp:2161:29 | load | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < ops.size() && i < 8; ++i) s += std::format(" {}x{}", ops[i].second, ops[i].first); |
-| L07295 | src/mod/session2/server.cpp:2161:54 | load | inline literal (semantic audit required) | 8 | for (size_t i = 0; i < ops.size() && i < 8; ++i) s += std::format(" {}x{}", ops[i].second, ops[i].first); |
-| L07296 | src/mod/session2/server.cpp:2174:44 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_nonempty[0].load(), g_n.finder_calls[0].load(), g_n.finder_relayed[0].load(), |
-| L07297 | src/mod/session2/server.cpp:2174:72 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_nonempty[0].load(), g_n.finder_calls[0].load(), g_n.finder_relayed[0].load(), |
-| L07298 | src/mod/session2/server.cpp:2174:102 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_nonempty[0].load(), g_n.finder_calls[0].load(), g_n.finder_relayed[0].load(), |
-| L07299 | src/mod/session2/server.cpp:2175:42 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_errors[0].load(), g_n.finder_nonempty[1].load(), g_n.finder_calls[1].load(), |
-| L07300 | src/mod/session2/server.cpp:2175:73 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_errors[0].load(), g_n.finder_nonempty[1].load(), g_n.finder_calls[1].load(), |
-| L07301 | src/mod/session2/server.cpp:2175:101 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_errors[0].load(), g_n.finder_nonempty[1].load(), g_n.finder_calls[1].load(), |
-| L07302 | src/mod/session2/server.cpp:2176:43 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_relayed[1].load(), g_n.finder_errors[1].load()); |
-| L07303 | src/mod/session2/server.cpp:2176:72 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_relayed[1].load(), g_n.finder_errors[1].load()); |
-| L07304 | src/mod/session2/server.h:42:32 | (file scope) | inline literal (semantic audit required) | 1000 | uint32_t mirror_delay_ms = 1000; |
-| L07305 | src/mod/session2/server.h:45:24 | (file scope) | inline literal (semantic audit required) | 1 | uint64_t account = 1; |
-| L07306 | src/mod/session2/session2.cpp:73:34 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint8_t> g_rean_mode{0};  // P8 session 9 child_reannounce, host side (ran::Mode) |
-| L07307 | src/mod/session2/session2.cpp:83:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_hold_retry_at = 0; |
-| L07308 | src/mod/session2/session2.cpp:84:26 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_held_offers = 0, g_dropped_offers = 0, g_dropped_logged = 0; |
-| L07309 | src/mod/session2/session2.cpp:84:48 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_held_offers = 0, g_dropped_offers = 0, g_dropped_logged = 0; |
-| L07310 | src/mod/session2/session2.cpp:84:70 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_held_offers = 0, g_dropped_offers = 0, g_dropped_logged = 0; |
-| L07311 | src/mod/session2/session2.cpp:87:30 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_control_ms = 0; |
-| L07312 | src/mod/session2/session2.cpp:89:33 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_blocked_from_guest = 0; |
-| L07313 | src/mod/session2/session2.cpp:90:33 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_unknown_from_guest = 0; |
-| L07314 | src/mod/session2/session2.cpp:91:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_after_goodbye = 0;          // guest packets dropped after its logout (C4) |
-| L07315 | src/mod/session2/session2.cpp:92:33 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_link_down_since_ms = 0;     // C4: when the guest's connection went away (0 = connected) |
-| L07316 | src/mod/session2/session2.cpp:97:44 | (file scope) | inline literal (semantic audit required) | 10000 | GuestLifecycle g_lc{GuestLifecycle::Config{10000, 60000, 500, kMaxGuestEpochs}}; |
-| L07317 | src/mod/session2/session2.cpp:97:51 | (file scope) | inline literal (semantic audit required) | 60000 | GuestLifecycle g_lc{GuestLifecycle::Config{10000, 60000, 500, kMaxGuestEpochs}}; |
-| L07318 | src/mod/session2/session2.cpp:97:58 | (file scope) | inline literal (semantic audit required) | 500 | GuestLifecycle g_lc{GuestLifecycle::Config{10000, 60000, 500, kMaxGuestEpochs}}; |
-| L07319 | src/mod/session2/session2.cpp:102:21 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_now_ms = 0; |
-| L07320 | src/mod/session2/session2.cpp:103:30 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_link_epoch = 0; |
-| L07321 | src/mod/session2/session2.cpp:104:29 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_sample_ms = 0, g_last_barrier_ms = 0; |
-| L07322 | src/mod/session2/session2.cpp:104:52 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_sample_ms = 0, g_last_barrier_ms = 0; |
-| L07323 | src/mod/session2/session2.cpp:105:28 | (file scope) | inline literal (semantic audit required) | 0u | unsigned g_last_pattern = ~0u; |
-| L07324 | src/mod/session2/session2.cpp:107:27 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_not_admitted = 0;     // guest packets outside the current epoch's connection |
-| L07325 | src/mod/session2/session2.cpp:108:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_out_discarded = 0;    // server packets for a guest that is no longer there |
-| L07326 | src/mod/session2/session2.cpp:114:33 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_rejoin_started_for = 0;  // the guest conversation the current epoch was started for in-band (0 = none) |
-| L07327 | src/mod/session2/session2.cpp:115:32 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_rejoin_started_ms = 0;   // when (the network thread's clock): an unused grant is given up (rjl::grant_unused) |
-| L07328 | src/mod/session2/session2.cpp:116:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_unused = 0;       // epochs begun for a re-entry and never used |
-| L07329 | src/mod/session2/session2.cpp:117:24 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
-| L07330 | src/mod/session2/session2.cpp:117:42 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
-| L07331 | src/mod/session2/session2.cpp:117:64 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
-| L07332 | src/mod/session2/session2.cpp:117:85 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
-| L07333 | src/mod/session2/session2.cpp:117:105 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
-| L07334 | src/mod/session2/session2.cpp:118:29 | (file scope) | inline literal (semantic audit required) | 0 | c_rejoin_ignored = 0, c_rejoin_off = 0, c_epoch_out = 0; |
-| L07335 | src/mod/session2/session2.cpp:118:47 | (file scope) | inline literal (semantic audit required) | 0 | c_rejoin_ignored = 0, c_rejoin_off = 0, c_epoch_out = 0; |
-| L07336 | src/mod/session2/session2.cpp:118:64 | (file scope) | inline literal (semantic audit required) | 0 | c_rejoin_ignored = 0, c_rejoin_off = 0, c_epoch_out = 0; |
-| L07337 | src/mod/session2/session2.cpp:119:27 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_rejoin_lines = 0; |
-| L07338 | src/mod/session2/session2.cpp:135:81 | push_epoch | inline literal (semantic audit required) | 0 | if (g_rejoin == rjl::Mode::Off &#124;&#124; (link.peer_caps() & troc::kCapsRejoin) == 0) return; |
-| L07339 | src/mod/session2/session2.cpp:164:30 | push_epoch | inline literal (semantic audit required) | 0 | uint64_t g_slow_tick_lines = 0; |
-| L07340 | src/mod/session2/session2.cpp:171:23 | probe_thread | inline literal (semantic audit required) | 1 | for (int minute = 1;; ++minute) { |
-| L07341 | src/mod/session2/session2.cpp:173:22 | probe_thread | inline literal (semantic audit required) | 0 | for (int i = 0; i < 6; ++i) { |
-| L07342 | src/mod/session2/session2.cpp:173:29 | probe_thread | inline literal (semantic audit required) | 6 | for (int i = 0; i < 6; ++i) { |
-| L07343 | src/mod/session2/session2.cpp:174:19 | probe_thread | inline literal (semantic audit required) | 10000 | Sleep(10000); |
-| L07344 | src/mod/session2/session2.cpp:238:22 | push_host_character | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
-| L07345 | src/mod/session2/session2.cpp:243:26 | push_host_character | inline literal (semantic audit required) | 28 | if (!key &#124;&#124; (*key >> 28) != hold::kCharKeyClass) return; |
-| L07346 | src/mod/session2/session2.cpp:245:21 | push_host_character | inline literal (semantic audit required) | 5 | const uint8_t p[5] = {troc::kControlHostCharacter, static_cast<uint8_t>(*key), static_cast<uint8_t>(*key >> 8), |
-| L07347 | src/mod/session2/session2.cpp:245:113 | push_host_character | inline literal (semantic audit required) | 8 | const uint8_t p[5] = {troc::kControlHostCharacter, static_cast<uint8_t>(*key), static_cast<uint8_t>(*key >> 8), |
-| L07348 | src/mod/session2/session2.cpp:246:56 | push_host_character | inline literal (semantic audit required) | 16 | static_cast<uint8_t>(*key >> 16), static_cast<uint8_t>(*key >> 24)}; |
-| L07349 | src/mod/session2/session2.cpp:246:90 | push_host_character | inline literal (semantic audit required) | 24 | static_cast<uint8_t>(*key >> 16), static_cast<uint8_t>(*key >> 24)}; |
-| L07350 | src/mod/session2/session2.cpp:247:49 | push_host_character | inline literal (semantic audit required) | 1 | link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(p, sizeof p))); |
-| L07351 | src/mod/session2/session2.cpp:278:22 | never_from_guest | inline literal (semantic audit required) | 2790 | return opcode == 2790 &#124;&#124; opcode == 2038 &#124;&#124; opcode == 2004 &#124;&#124; opcode == kOpSetFieldTimeReq &#124;&#124; |
-| L07352 | src/mod/session2/session2.cpp:278:40 | never_from_guest | inline literal (semantic audit required) | 2038 | return opcode == 2790 &#124;&#124; opcode == 2038 &#124;&#124; opcode == 2004 &#124;&#124; opcode == kOpSetFieldTimeReq &#124;&#124; |
-| L07353 | src/mod/session2/session2.cpp:278:58 | never_from_guest | inline literal (semantic audit required) | 2004 | return opcode == 2790 &#124;&#124; opcode == 2038 &#124;&#124; opcode == 2004 &#124;&#124; opcode == kOpSetFieldTimeReq &#124;&#124; |
-| L07354 | src/mod/session2/session2.cpp:279:23 | never_from_guest | inline literal (semantic audit required) | 1001 | (opcode >= 1001 && opcode <= 1008); |
-| L07355 | src/mod/session2/session2.cpp:279:41 | never_from_guest | inline literal (semantic audit required) | 1008 | (opcode >= 1001 && opcode <= 1008); |
-| L07356 | src/mod/session2/session2.cpp:285:30 | never_from_guest | inline literal (semantic audit required) | 0 | uint64_t g_weather_blocked = 0; |
-| L07357 | src/mod/session2/session2.cpp:287:31 | never_from_guest | inline literal (semantic audit required) | 0 | uint64_t g_own_save_blocked = 0, g_own_save_allowed = 0; |
-| L07358 | src/mod/session2/session2.cpp:287:55 | never_from_guest | inline literal (semantic audit required) | 0 | uint64_t g_own_save_blocked = 0, g_own_save_allowed = 0; |
-| L07359 | src/mod/session2/session2.cpp:326:36 | offer | inline literal (semantic audit required) | 0 | if (g_weather_blocked++ == 0) { |
-| L07360 | src/mod/session2/session2.cpp:355:36 | offer | inline literal (semantic audit required) | 8 | if (g_own_save_blocked++ < 8) { |
-| L07361 | src/mod/session2/session2.cpp:417:44 | offer | inline literal (semantic audit required) | 16 | if (g_own_save_allowed++ < 16) { |
-| L07362 | src/mod/session2/session2.cpp:436:36 | offer | inline literal (semantic audit required) | 16 | if (g_dropped_logged < 16) { |
-| L07363 | src/mod/session2/session2.cpp:490:23 | drain_held | inline literal (semantic audit required) | 0 | size_t released = 0; |
-| L07364 | src/mod/session2/session2.cpp:535:23 | begin_logout | inline literal (semantic audit required) | 0u | g_last_pattern = ~0u; |
-| L07365 | src/mod/session2/session2.cpp:536:25 | begin_logout | inline literal (semantic audit required) | 0 | g_last_barrier_ms = 0; |
-| L07366 | src/mod/session2/session2.cpp:553:61 | start_epoch | inline literal (semantic audit required) | 0 | void start_epoch(uint32_t link_epoch, uint32_t inband_for = 0) { |
-| L07367 | src/mod/session2/session2.cpp:554:42 | start_epoch | inline literal (semantic audit required) | 1 | const uint32_t next = g_lc.epoch() + 1; |
-| L07368 | src/mod/session2/session2.cpp:573:28 | start_epoch | inline literal (semantic audit required) | 0 | g_link_down_since_ms = 0; |
-| L07369 | src/mod/session2/session2.cpp:574:23 | start_epoch | inline literal (semantic audit required) | 0u | g_last_pattern = ~0u; |
-| L07370 | src/mod/session2/session2.cpp:617:41 | on_guest_rejoin | inline literal (semantic audit required) | 0 | if (g_rejoin_started_for == 0) { |
-| L07371 | src/mod/session2/session2.cpp:642:109 | on_guest_rejoin | inline literal (semantic audit required) | 1 | ? std::format("probe: would begin epoch {} in-band (nothing started)", epoch_before + 1) |
-| L07372 | src/mod/session2/session2.cpp:657:55 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_session / 1000.0, g_snap.keys.size(), r.us_keys / 1000.0, |
-| L07373 | src/mod/session2/session2.cpp:657:95 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_session / 1000.0, g_snap.keys.size(), r.us_keys / 1000.0, |
-| L07374 | src/mod/session2/session2.cpp:658:52 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_list / 1000.0, r.us_field / 1000.0); |
-| L07375 | src/mod/session2/session2.cpp:658:73 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_list / 1000.0, r.us_field / 1000.0); |
-| L07376 | src/mod/session2/session2.cpp:680:34 | barrier_tick | inline literal (semantic audit required) | 0ull | static uint64_t seen_last = ~0ull; |
-| L07377 | src/mod/session2/session2.cpp:681:38 | barrier_tick | inline literal (semantic audit required) | 0 | static uint32_t seen_change_ms = 0; |
-| L07378 | src/mod/session2/session2.cpp:695:68 | barrier_tick | inline literal (semantic audit required) | 0 | if (g_lc.make_ready(g_link ? g_link->session_epoch() : 0)) { |
-| L07379 | src/mod/session2/session2.cpp:696:111 | barrier_tick | inline literal (semantic audit required) | 1 | log::info("Session2 C4: reconnect epoch={} ready (a NEW guest connection starts it)", epoch + 1); |
-| L07380 | src/mod/session2/session2.cpp:734:32 | rjl::grant_unused | inline literal (semantic audit required) | 0 | g_rejoin_started_for = 0; |
-| L07381 | src/mod/session2/session2.cpp:738:61 | rjl::grant_unused | inline literal (semantic audit required) | 1000 | g_lc.epoch(), conv, rjl::kGrantUnusedMs / 1000); |
-| L07382 | src/mod/session2/session2.cpp:783:32 | rjl::grant_unused | inline literal (semantic audit required) | 0 | g_link_down_since_ms = 0; |
-| L07383 | src/mod/session2/session2.cpp:785:50 | rjl::grant_unused | inline literal (semantic audit required) | 1 | g_link_down_since_ms = now_ms ? now_ms : 1; |
-| L07384 | src/mod/session2/session2.cpp:788:83 | server_user2_present | inline literal (semantic audit required) | 1000 | kill_tunnel(std::format("the guest has been gone for {} s", kLinkLostMs / 1000)); |
-| L07385 | src/mod/session2/session2.cpp:808:59 | server_user2_present | inline literal (semantic audit required) | 1000 | if (link.connected() && now_ms - g_last_control_ms >= 1000) { |
-| L07386 | src/mod/session2/session2.cpp:816:37 | server_user2_present | inline literal (semantic audit required) | 0 | : 0; |
-| L07387 | src/mod/session2/session2.cpp:817:64 | server_user2_present | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
-| L07388 | src/mod/session2/session2.cpp:817:100 | server_user2_present | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
-| L07389 | src/mod/session2/session2.cpp:830:41 | end_tick | inline literal (semantic audit required) | 1000 | if (g_prof.part_us(kPartBarrier) >= 1000 && !g_last_barrier_reads.empty()) { |
-| L07390 | src/mod/session2/session2.cpp:833:43 | end_tick | inline literal (semantic audit required) | 1000 | if (g_prof.part_us(kPartLinkFlush) >= 1000 &#124;&#124; g_prof.part_us(kPartOutgoing) >= 1000) { |
-| L07391 | src/mod/session2/session2.cpp:833:84 | end_tick | inline literal (semantic audit required) | 1000 | if (g_prof.part_us(kPartLinkFlush) >= 1000 &#124;&#124; g_prof.part_us(kPartOutgoing) >= 1000) { |
-| L07392 | src/mod/session2/session2.cpp:1002:63 | install | inline literal (semantic audit required) | 0 | child_hold_set_settle_ms(opt.create_session ? settle_ms : 0); |
-| L07393 | src/mod/session2/session2.cpp:1008:24 | install | inline literal (semantic audit required) | 0 | uint8_t mode = 0; |
-| L07394 | src/mod/session2/session2.cpp:1022:31 | install | inline literal (semantic audit required) | 2 | mode >= 2 ? "ON" : "PROBE", |
-| L07395 | src/mod/session2/session2.cpp:1023:31 | install | inline literal (semantic audit required) | 2 | mode >= 2 ? "is withheld from user 2 even with restore 1 and announced natively after its 2762" |
-| L07396 | src/mod/session2/session2.cpp:1025:54 | install | inline literal (semantic audit required) | 2 | hold::kLoadDeferMaxMs, mode >= 2 ? "" : " only with 1"); |
-| L07397 | src/mod/session2/session2.cpp:1035:24 | install | inline literal (semantic audit required) | 0 | uint8_t mode = 0; |
-| L07398 | src/mod/session2/session2.cpp:1053:36 | install | inline literal (semantic audit required) | 2 | key, mode >= 2 ? "ON" : "PROBE", hold::kComponentsHierarchy, hold::kHierParent, |
-| L07399 | src/mod/session2/session2.cpp:1054:31 | install | inline literal (semantic audit required) | 2 | mode >= 2 ? "is withheld there too and announced right behind its parent (in its release, or " |
-| L07400 | src/mod/session2/session2.cpp:1069:24 | install | inline literal (semantic audit required) | 0 | uint8_t mode = 0; |
-| L07401 | src/mod/session2/session2.cpp:1176:73 | child_hold_install | inline literal (semantic audit required) | 1 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
-| L07402 | src/mod/session2/session2.cpp:1176:77 | child_hold_install | inline literal (semantic audit required) | 0 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
-| L07403 | src/mod/session2/session2.cpp:1176:112 | child_hold_install | inline literal (semantic audit required) | 1 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
-| L07404 | src/mod/session2/session2.cpp:1176:116 | child_hold_install | inline literal (semantic audit required) | 0 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
-| L07405 | src/mod/session2/session2.cpp:1258:77 | child_hold_install | inline literal (semantic audit required) | 2 | observer_seq_copy_set_milestone_hold(child_hold_load_defer() >= 2 && observer_hold_active() ? 2000 : 0); |
-| L07406 | src/mod/session2/session2.cpp:1258:107 | child_hold_install | inline literal (semantic audit required) | 2000 | observer_seq_copy_set_milestone_hold(child_hold_load_defer() >= 2 && observer_hold_active() ? 2000 : 0); |
-| L07407 | src/mod/session2/session2.cpp:1258:114 | child_hold_install | inline literal (semantic audit required) | 0 | observer_seq_copy_set_milestone_hold(child_hold_load_defer() >= 2 && observer_hold_active() ? 2000 : 0); |
-| L07408 | src/mod/session2/session2.cpp:1293:48 | child_hold_install | inline literal (semantic audit required) | 1 | observer_stage_install(oss ? oss : 1); |
-| L07409 | src/mod/session2/session2.cpp:1318:54 | child_hold_install | inline literal (semantic audit required) | 1 | ran::kMaxAttempts, ran::backoff_ms(1), ran::backoff_ms(2), ran::backoff_ms(3), |
-| L07410 | src/mod/session2/session2.cpp:1318:74 | child_hold_install | inline literal (semantic audit required) | 2 | ran::kMaxAttempts, ran::backoff_ms(1), ran::backoff_ms(2), ran::backoff_ms(3), |
-| L07411 | src/mod/session2/session2.cpp:1318:94 | child_hold_install | inline literal (semantic audit required) | 3 | ran::kMaxAttempts, ran::backoff_ms(1), ran::backoff_ms(2), ran::backoff_ms(3), |
-| L07412 | src/mod/session2/session2.cpp:1411:54 | child_hold_install | inline literal (semantic audit required) | 0 | if (opt.probe) CloseHandle(CreateThread(nullptr, 0, probe_thread, nullptr, 0, nullptr)); |
-| L07413 | src/mod/session2/session2.cpp:1411:80 | child_hold_install | inline literal (semantic audit required) | 0 | if (opt.probe) CloseHandle(CreateThread(nullptr, 0, probe_thread, nullptr, 0, nullptr)); |
-| L07414 | src/mod/session2/session2.cpp:1421:45 | child_hold_install | inline literal (semantic audit required) | 1000 | g_lc.config().budget_ms / 1000, kMaxGuestEpochs); |
-| L07415 | src/mod/session2/session2.cpp:1465:15 | tunnel_wanted | inline literal (semantic audit required) | 32 | ran::Attempts<32> g_rean_host; |
-| L07416 | src/mod/session2/session2.cpp:1466:25 | tunnel_wanted | inline literal (semantic audit required) | 0 | uint32_t g_rean_epoch = 0; |
-| L07417 | src/mod/session2/session2.cpp:1467:33 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
-| L07418 | src/mod/session2/session2.cpp:1467:48 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
-| L07419 | src/mod/session2/session2.cpp:1467:65 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
-| L07420 | src/mod/session2/session2.cpp:1467:85 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
-| L07421 | src/mod/session2/session2.cpp:1467:102 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
-| L07422 | src/mod/session2/session2.cpp:1469:37 | tunnel_wanted | inline literal (semantic audit required) | 8 | std::atomic<uint64_t> c_rean_result[8] = {}; |
-| L07423 | src/mod/session2/session2.cpp:1470:25 | tunnel_wanted | inline literal (semantic audit required) | 0 | uint64_t g_rean_lines = 0; |
-| L07424 | src/mod/session2/session2.cpp:1476:25 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_in.fetch_add(1, std::memory_order_relaxed); |
-| L07425 | src/mod/session2/session2.cpp:1480:30 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_bad.fetch_add(1, std::memory_order_relaxed); |
-| L07426 | src/mod/session2/session2.cpp:1491:27 | on_guest_control | inline literal (semantic audit required) | 0 | uint8_t attempt = 0; |
-| L07427 | src/mod/session2/session2.cpp:1494:64 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_verdict[static_cast<size_t>(verdict)].fetch_add(1, std::memory_order_relaxed); |
-| L07428 | src/mod/session2/session2.cpp:1502:54 | on_guest_control | inline literal (semantic audit required) | 7 | c_rean_result[static_cast<size_t>(res) & 7].fetch_add(1, std::memory_order_relaxed); |
-| L07429 | src/mod/session2/session2.cpp:1502:67 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_result[static_cast<size_t>(res) & 7].fetch_add(1, std::memory_order_relaxed); |
-| L07430 | src/mod/session2/session2.cpp:1505:68 | on_guest_control | inline literal (semantic audit required) | 1 | (probe ? c_rean_probe : c_rean_accepted).fetch_add(1, std::memory_order_relaxed); |
-| L07431 | src/mod/session2/session2.cpp:1526:21 | reannounce_host_describe | inline literal (semantic audit required) | 0 | for (size_t i = 0; i <= static_cast<size_t>(Reannounce::Full); ++i) { |
-| L07432 | src/mod/session2/session2.cpp:1556:77 | tunnel_on_packet | inline literal (semantic audit required) | 2 | const bool control = g_rejoin != rjl::Mode::Off && packet.size() >= 2 && |
-| L07433 | src/mod/session2/session2.cpp:1557:38 | tunnel_on_packet | inline literal (semantic audit required) | 0 | (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode; |
-| L07434 | src/mod/session2/session2.cpp:1557:51 | tunnel_on_packet | inline literal (semantic audit required) | 1 | (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode; |
-| L07435 | src/mod/session2/session2.cpp:1557:57 | tunnel_on_packet | inline literal (semantic audit required) | 8 | (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode; |
-| L07436 | src/mod/session2/session2.cpp:1586:26 | tunnel_on_packet | inline literal (semantic audit required) | 2 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
-| L07437 | src/mod/session2/session2.cpp:1586:39 | tunnel_on_packet | inline literal (semantic audit required) | 0 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
-| L07438 | src/mod/session2/session2.cpp:1586:52 | tunnel_on_packet | inline literal (semantic audit required) | 1 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
-| L07439 | src/mod/session2/session2.cpp:1586:58 | tunnel_on_packet | inline literal (semantic audit required) | 8 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
-| L07440 | src/mod/session2/session2.cpp:1587:32 | tunnel_on_packet | inline literal (semantic audit required) | 1 | c_rean_other.fetch_add(1, std::memory_order_relaxed); |
-| L07441 | src/mod/session2/session2.cpp:1590:83 | tunnel_on_packet | inline literal (semantic audit required) | 0 | if (g_early.empty() && server_accepts_guest()) mount_sync_note_hold(true, 0); |
-| L07442 | src/mod/session2/session2.cpp:1609:40 | tunnel_tick | inline literal (semantic audit required) | 0 | static uint32_t last_rean_ms = 0; |
-| L07443 | src/mod/session2/session2.cpp:1610:38 | tunnel_tick | inline literal (semantic audit required) | 60000 | if (now_ms - last_rean_ms >= 60000) { |
-| L07444 | src/mod/session2/session2.cpp:1637:32 | tunnel_tick | inline literal (semantic audit required) | 0 | g_link_down_since_ms = 0; |
-| L07445 | src/mod/session2/session2.cpp:1639:50 | tunnel_tick | inline literal (semantic audit required) | 1 | g_link_down_since_ms = now_ms ? now_ms : 1; |
-| L07446 | src/mod/session2/session2.cpp:1641:83 | tunnel_tick | inline literal (semantic audit required) | 1000 | kill_tunnel(std::format("the guest has been gone for {} s", kLinkLostMs / 1000)); |
-| L07447 | src/mod/session2/session2.cpp:1655:59 | tunnel_tick | inline literal (semantic audit required) | 1000 | if (link.connected() && now_ms - g_last_control_ms >= 1000) { |
-| L07448 | src/mod/session2/session2.cpp:1659:58 | tunnel_tick | inline literal (semantic audit required) | 0 | : 0; |
-| L07449 | src/mod/session2/session2.cpp:1660:64 | tunnel_tick | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
-| L07450 | src/mod/session2/session2.cpp:1660:100 | tunnel_tick | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
-| L07451 | src/mod/session2/session2.h:32:24 | (file scope) | inline literal (semantic audit required) | 1 | uint64_t account = 1; |
-| L07452 | src/mod/session2/session2.h:34:32 | (file scope) | inline literal (semantic audit required) | 1000 | uint32_t mirror_delay_ms = 1000; |
-| L07453 | src/mod/session2/slot_refresh.cpp:14:17 | Planner::arm | inline literal (semantic audit required) | 0 | attempts_ = 0; |
-| L07454 | src/mod/session2/slot_refresh.cpp:17:33 | Planner::arm | inline literal (semantic audit required) | 0 | if (limits_.max_attempts == 0) limits_.max_attempts = 1; |
-| L07455 | src/mod/session2/slot_refresh.cpp:17:59 | Planner::arm | inline literal (semantic audit required) | 1 | if (limits_.max_attempts == 0) limits_.max_attempts = 1; |
-| L07456 | src/mod/session2/slot_refresh.cpp:48:23 | parse_entries | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < count && i < kMaxEntriesRead; ++i) { |
-| L07457 | src/mod/session2/slot_refresh.cpp:50:18 | parse_entries | inline literal (semantic audit required) | 16 | if (at + 16 > raw.size()) break; |
-| L07458 | src/mod/session2/slot_refresh.cpp:53:48 | parse_entries | inline literal (semantic audit required) | 8 | std::memcpy(&e.time, raw.data() + at + 8, sizeof e.time); |
-| L07459 | src/mod/session2/slot_refresh.cpp:61:22 | title_would_enable | inline literal (semantic audit required) | 3 | if (e.slot < 3 &#124;&#124; e.slot - 100u < 9u) return true; |
-| L07460 | src/mod/session2/slot_refresh.cpp:61:36 | title_would_enable | inline literal (semantic audit required) | 100u | if (e.slot < 3 &#124;&#124; e.slot - 100u < 9u) return true; |
-| L07461 | src/mod/session2/slot_refresh.cpp:61:43 | title_would_enable | inline literal (semantic audit required) | 9u | if (e.slot < 3 &#124;&#124; e.slot - 100u < 9u) return true; |
-| L07462 | src/mod/session2/slot_refresh.cpp:68:21 | describe | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < entries.size(); ++i) { |
-| L07463 | src/mod/session2/slot_refresh.cpp:75:50 | first_mismatch | inline literal (semantic audit required) | 0 | if (actual.size() != expected.size()) return 0; |
-| L07464 | src/mod/session2/slot_refresh.cpp:76:21 | first_mismatch | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < actual.size(); ++i) { |
-| L07465 | src/mod/session2/slot_refresh.cpp:79:13 | first_mismatch | inline literal (semantic audit required) | 1 | return -1; |
-| L07466 | src/mod/session2/slot_refresh.h:37:28 | (file scope) | inline literal (semantic audit required) | 100 | uint32_t interval_ms = 100;   // between tries (the pump turns every <= 16 ms) |
-| L07467 | src/mod/session2/slot_refresh.h:38:29 | (file scope) | inline literal (semantic audit required) | 50 | uint32_t max_attempts = 50;   // ~5 s of NotReady/Busy |
-| L07468 | src/mod/session2/slot_refresh.h:65:21 | done_count | inline literal (semantic audit required) | 0 | uint64_t key_ = 0, next_ms_ = 0; |
-| L07469 | src/mod/session2/slot_refresh.h:65:35 | done_count | inline literal (semantic audit required) | 0 | uint64_t key_ = 0, next_ms_ = 0; |
-| L07470 | src/mod/session2/slot_refresh.h:66:26 | done_count | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, done_ = 0; |
-| L07471 | src/mod/session2/slot_refresh.h:66:37 | done_count | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, done_ = 0; |
-| L07472 | src/mod/session2/slot_refresh.h:72:21 | done_count | inline literal (semantic audit required) | 0 | uint32_t slot = 0; |
-| L07473 | src/mod/session2/slot_refresh.h:73:20 | done_count | inline literal (semantic audit required) | 0 | int64_t time = 0; |
-| L07474 | src/mod/session2/travel_probe.h:42:19 | (file scope) | inline literal (semantic audit required) | 0 | size_t size = 0; |
-| L07475 | src/mod/session2/travel_probe.h:43:27 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
-| L07476 | src/mod/session2/travel_probe.h:43:41 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
-| L07477 | src/mod/session2/travel_probe.h:43:52 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
-| L07478 | src/mod/session2/travel_probe.h:43:67 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
-| L07479 | src/mod/session2/travel_probe_logic.h:48:100 | owner_layout_ok | inline literal (semantic audit required) | 0 | if (opcode == kOpMoveFieldAck) return n >= kMoveFieldHead && (n - kMoveFieldHead) % kRecord == 0; |
-| L07480 | src/mod/session2/travel_probe_logic.h:49:113 | owner_layout_ok | inline literal (semantic audit required) | 0 | if (opcode == kOpLoadingFieldDataAck) return n >= kLoadingFieldHead && (n - kLoadingFieldHead) % kRecord == 0; |
-| L07481 | src/mod/session2/travel_probe_logic.h:53:52 | is_user_key | inline literal (semantic audit required) | 28 | inline bool is_user_key(uint32_t k) { return (k >> 28) == 0x9; } |
-| L07482 | src/mod/session2/travel_probe_logic.h:53:59 | is_user_key | inline literal (semantic audit required) | 0x9 | inline bool is_user_key(uint32_t k) { return (k >> 28) == 0x9; } |
-| L07483 | src/mod/session2/travel_probe_logic.h:67:23 | is_user_key | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
-| L07484 | src/mod/session2/travel_probe_logic.h:68:27 | is_user_key | inline literal (semantic audit required) | 0 | size_t payload_size = 0; |
-| L07485 | src/mod/session2/travel_probe_logic.h:69:22 | is_user_key | inline literal (semantic audit required) | 0 | uint32_t owner = 0;       // the u32 +9 the server wrote |
-| L07486 | src/mod/session2/travel_probe_logic.h:70:19 | is_user_key | inline literal (semantic audit required) | 0 | uint32_t me = 0;          // user 2's user key (its MainUserDataStartAck), 0 = unknown |
-| L07487 | src/mod/session2/travel_probe_logic.h:102:33 | alias_name | inline literal (semantic audit required) | 0 | if (owner_out) *owner_out = 0; |
-| L07488 | src/mod/session2/travel_probe_logic.h:110:67 | alias_name | inline literal (semantic audit required) | 4 | std::memcpy(&in.owner, packet.data() + header + kOwnerAt, 4); |
-| L07489 | src/mod/session2/travel_probe_logic.h:114:85 | alias_name | inline literal (semantic audit required) | 4 | if (o == AliasOut::Rewrite) std::memcpy(packet.data() + header + kOwnerAt, &me, 4); |
-| L07490 | src/mod/session2/travel_probe_logic.h:121:20 | alias_name | inline literal (semantic audit required) | 0 | uint8_t kind = 0;        // @0 (0x299B689 writes 4 on this path) |
-| L07491 | src/mod/session2/travel_probe_logic.h:122:22 | alias_name | inline literal (semantic audit required) | 0 | uint32_t actor = 0;      // @1 |
-| L07492 | src/mod/session2/travel_probe_logic.h:123:26 | alias_name | inline literal (semantic audit required) | 0 | uint32_t field_key = 0;  // @5 |
-| L07493 | src/mod/session2/travel_probe_logic.h:124:22 | alias_name | inline literal (semantic audit required) | 0 | uint32_t owner = 0;      // @9 |
-| L07494 | src/mod/session2/travel_probe_logic.h:125:22 | alias_name | inline literal (semantic audit required) | 0 | uint8_t flag13 = 0, flag14 = 0; |
-| L07495 | src/mod/session2/travel_probe_logic.h:125:34 | alias_name | inline literal (semantic audit required) | 0 | uint8_t flag13 = 0, flag14 = 0; |
-| L07496 | src/mod/session2/travel_probe_logic.h:126:26 | alias_name | inline literal (semantic audit required) | 0 | uint32_t selection = 0;  // @15 |
-| L07497 | src/mod/session2/travel_probe_logic.h:127:22 | alias_name | inline literal (semantic audit required) | 0 | uint8_t append = 0;      // @19 (0: the client's 0x9404C60 replaces P+0x128/+0x12C/+0x130 and the list) |
-| L07498 | src/mod/session2/travel_probe_logic.h:128:22 | alias_name | inline literal (semantic audit required) | 0 | size_t records = 0;      // 48-byte records from +20 |
-| L07499 | src/mod/session2/travel_probe_logic.h:135:16 | parse_loading_field_data | inline literal (semantic audit required) | 0 | d.kind = p[0]; |
-| L07500 | src/mod/session2/travel_probe_logic.h:136:38 | parse_loading_field_data | inline literal (semantic audit required) | 1 | std::memcpy(&d.actor, p.data() + 1, 4); |
-| L07501 | src/mod/session2/travel_probe_logic.h:136:41 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.actor, p.data() + 1, 4); |
-| L07502 | src/mod/session2/travel_probe_logic.h:137:42 | parse_loading_field_data | inline literal (semantic audit required) | 5 | std::memcpy(&d.field_key, p.data() + 5, 4); |
-| L07503 | src/mod/session2/travel_probe_logic.h:137:45 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.field_key, p.data() + 5, 4); |
-| L07504 | src/mod/session2/travel_probe_logic.h:138:38 | parse_loading_field_data | inline literal (semantic audit required) | 9 | std::memcpy(&d.owner, p.data() + 9, 4); |
-| L07505 | src/mod/session2/travel_probe_logic.h:138:41 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.owner, p.data() + 9, 4); |
-| L07506 | src/mod/session2/travel_probe_logic.h:139:18 | parse_loading_field_data | inline literal (semantic audit required) | 13 | d.flag13 = p[13]; |
-| L07507 | src/mod/session2/travel_probe_logic.h:140:18 | parse_loading_field_data | inline literal (semantic audit required) | 14 | d.flag14 = p[14]; |
-| L07508 | src/mod/session2/travel_probe_logic.h:141:42 | parse_loading_field_data | inline literal (semantic audit required) | 15 | std::memcpy(&d.selection, p.data() + 15, 4); |
-| L07509 | src/mod/session2/travel_probe_logic.h:141:46 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.selection, p.data() + 15, 4); |
-| L07510 | src/mod/session2/travel_probe_logic.h:142:18 | parse_loading_field_data | inline literal (semantic audit required) | 19 | d.append = p[19]; |
-| L07511 | src/mod/session2/travel_probe_logic.h:153:22 | parse_loading_field_data | inline literal (semantic audit required) | 0 | uint32_t actor = 0; |
-| L07512 | src/mod/session2/travel_probe_logic.h:154:22 | parse_loading_field_data | inline literal (semantic audit required) | 0 | uint8_t reason = 0; |
-| L07513 | src/mod/session2/travel_probe_logic.h:155:22 | parse_loading_field_data | inline literal (semantic audit required) | 0 | uint32_t error = 0; |
-| L07514 | src/mod/session2/travel_probe_logic.h:160:20 | parse_logout | inline literal (semantic audit required) | 9 | if (p.size() < 9) return std::nullopt; |
-| L07515 | src/mod/session2/travel_probe_logic.h:162:37 | parse_logout | inline literal (semantic audit required) | 4 | std::memcpy(&l.actor, p.data(), 4); |
-| L07516 | src/mod/session2/travel_probe_logic.h:163:18 | parse_logout | inline literal (semantic audit required) | 4 | l.reason = p[4]; |
-| L07517 | src/mod/session2/travel_probe_logic.h:164:38 | parse_logout | inline literal (semantic audit required) | 5 | std::memcpy(&l.error, p.data() + 5, 4); |
-| L07518 | src/mod/session2/travel_probe_logic.h:164:41 | parse_logout | inline literal (semantic audit required) | 4 | std::memcpy(&l.error, p.data() + 5, 4); |
-| L07519 | src/mod/session2/travel_probe_logic.h:175:24 | parse_logout | inline literal (semantic audit required) | 0 | uint32_t pending = 0; |
-| L07520 | src/mod/session2/travel_probe_logic.h:176:20 | parse_logout | inline literal (semantic audit required) | 0 | uint8_t f568 = 0, f569 = 0, armed = 0; |
-| L07521 | src/mod/session2/travel_probe_logic.h:176:30 | parse_logout | inline literal (semantic audit required) | 0 | uint8_t f568 = 0, f569 = 0, armed = 0; |
-| L07522 | src/mod/session2/travel_probe_logic.h:176:41 | parse_logout | inline literal (semantic audit required) | 0 | uint8_t f568 = 0, f569 = 0, armed = 0; |
-| L07523 | src/mod/session2/travel_probe_logic.h:180:23 | pack | inline literal (semantic audit required) | 0 | if (!s.ok) return 0; |
-| L07524 | src/mod/session2/travel_probe_logic.h:181:13 | pack | inline literal (semantic audit required) | 1ull | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
-| L07525 | src/mod/session2/travel_probe_logic.h:181:21 | pack | inline literal (semantic audit required) | 63 | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
-| L07526 | src/mod/session2/travel_probe_logic.h:181:61 | pack | inline literal (semantic audit required) | 48 | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
-| L07527 | src/mod/session2/travel_probe_logic.h:181:101 | pack | inline literal (semantic audit required) | 40 | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
-| L07528 | src/mod/session2/travel_probe_logic.h:182:47 | pack | inline literal (semantic audit required) | 32 | (static_cast<uint64_t>(s.armed) << 32) &#124; s.pending; |
-| L07529 | src/mod/session2/travel_probe_logic.h:187:18 | unpack | inline literal (semantic audit required) | 63 | s.ok = (v >> 63) != 0; |
-| L07530 | src/mod/session2/travel_probe_logic.h:187:25 | unpack | inline literal (semantic audit required) | 0 | s.ok = (v >> 63) != 0; |
-| L07531 | src/mod/session2/travel_probe_logic.h:190:41 | unpack | inline literal (semantic audit required) | 32 | s.armed = static_cast<uint8_t>(v >> 32); |
-| L07532 | src/mod/session2/travel_probe_logic.h:191:40 | unpack | inline literal (semantic audit required) | 40 | s.f568 = static_cast<uint8_t>(v >> 40); |
-| L07533 | src/mod/session2/travel_probe_logic.h:192:40 | unpack | inline literal (semantic audit required) | 48 | s.f569 = static_cast<uint8_t>(v >> 48); |
-| L07534 | src/mod/session2/travel_probe_logic.h:211:31 | same | inline literal (semantic audit required) | 0 | uint8_t host_6a0_before = 0, host_6a0_after = 0; |
-| L07535 | src/mod/session2/travel_probe_logic.h:211:51 | same | inline literal (semantic audit required) | 0 | uint8_t host_6a0_before = 0, host_6a0_after = 0; |
-| L07536 | src/mod/session2/travel_probe_logic.h:219:35 | decide_prepared | inline literal (semantic audit required) | 0 | return in.u2_after.pending != 0 && in.u2_after.armed != 0 ? PreparedOut::Prepared : PreparedOut::NotPrepared; |
-| L07537 | src/mod/session2/travel_probe_logic.h:219:61 | decide_prepared | inline literal (semantic audit required) | 0 | return in.u2_after.pending != 0 && in.u2_after.armed != 0 ? PreparedOut::Prepared : PreparedOut::NotPrepared; |
-| L07538 | src/mod/session2/travel_probe_logic.h:298:22 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
-| L07539 | src/mod/session2/travel_probe_logic.h:298:33 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
-| L07540 | src/mod/session2/travel_probe_logic.h:298:44 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
-| L07541 | src/mod/session2/travel_probe_logic.h:298:55 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
-| L07542 | src/mod/session2/travel_probe_logic.h:298:66 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
-| L07543 | src/mod/session2/travel_probe_logic.h:298:77 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
-| L07544 | src/mod/session2/travel_probe_logic.h:298:86 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
-| L07545 | src/mod/session2/travel_probe_logic.h:299:22 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2322 = 0;  // P8 S16: PlayAllPreLoadSequencerAck 2322 to user 2 (native or observer_milestone_reload's) |
-| L07546 | src/mod/session2/travel_probe_logic.h:331:23 | add | inline literal (semantic audit required) | 0 | uint64_t t_2873 = 0;   // when (the sniffer's clock: p8_now_us) |
-| L07547 | src/mod/session2/travel_probe_logic.h:332:22 | add | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
-| L07548 | src/mod/session2/travel_probe_logic.h:332:33 | add | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
-| L07549 | src/mod/session2/travel_probe_logic.h:332:44 | add | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
-| L07550 | src/mod/session2/travel_probe_logic.h:333:28 | add | inline literal (semantic audit required) | 0 | uint64_t t_host_2873 = 0;  // the host client's own last 2873 (C>S), any time |
-| L07551 | src/mod/session2/travel_probe_logic.h:339:33 | open | inline literal (semantic audit required) | 0 | n2661 = n2981 = n2322 = 0; |
-| L07552 | src/mod/session2/travel_probe_logic.h:385:44 | pack | inline literal (semantic audit required) | 0xFFFF | return static_cast<uint64_t>(b.n2661 & 0xFFFF) &#124; static_cast<uint64_t>(b.n2981 & 0xFFFF) << 16 &#124; |
-| L07553 | src/mod/session2/travel_probe_logic.h:385:86 | pack | inline literal (semantic audit required) | 0xFFFF | return static_cast<uint64_t>(b.n2661 & 0xFFFF) &#124; static_cast<uint64_t>(b.n2981 & 0xFFFF) << 16 &#124; |
-| L07554 | src/mod/session2/travel_probe_logic.h:385:97 | pack | inline literal (semantic audit required) | 16 | return static_cast<uint64_t>(b.n2661 & 0xFFFF) &#124; static_cast<uint64_t>(b.n2981 & 0xFFFF) << 16 &#124; |
-| L07555 | src/mod/session2/travel_probe_logic.h:386:44 | pack | inline literal (semantic audit required) | 0xFFFF | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
-| L07556 | src/mod/session2/travel_probe_logic.h:386:55 | pack | inline literal (semantic audit required) | 32 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
-| L07557 | src/mod/session2/travel_probe_logic.h:386:92 | pack | inline literal (semantic audit required) | 1 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
-| L07558 | src/mod/session2/travel_probe_logic.h:386:96 | pack | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
-| L07559 | src/mod/session2/travel_probe_logic.h:386:102 | pack | inline literal (semantic audit required) | 48 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
-| L07560 | src/mod/session2/travel_probe_logic.h:387:45 | pack | inline literal (semantic audit required) | 1 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
-| L07561 | src/mod/session2/travel_probe_logic.h:387:49 | pack | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
-| L07562 | src/mod/session2/travel_probe_logic.h:387:55 | pack | inline literal (semantic audit required) | 49 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
-| L07563 | src/mod/session2/travel_probe_logic.h:387:97 | pack | inline literal (semantic audit required) | 1 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
-| L07564 | src/mod/session2/travel_probe_logic.h:387:101 | pack | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
-| L07565 | src/mod/session2/travel_probe_logic.h:387:107 | pack | inline literal (semantic audit required) | 50 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
-| L07566 | src/mod/session2/travel_probe_logic.h:391:22 | pack | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
-| L07567 | src/mod/session2/travel_probe_logic.h:391:33 | pack | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
-| L07568 | src/mod/session2/travel_probe_logic.h:391:44 | pack | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
-| L07569 | src/mod/session2/travel_probe_logic.h:398:41 | unpack_host | inline literal (semantic audit required) | 0xFFFF | h.n2661 = static_cast<uint32_t>(v & 0xFFFF); |
-| L07570 | src/mod/session2/travel_probe_logic.h:399:43 | unpack_host | inline literal (semantic audit required) | 16 | h.n2981 = static_cast<uint32_t>((v >> 16) & 0xFFFF); |
-| L07571 | src/mod/session2/travel_probe_logic.h:399:49 | unpack_host | inline literal (semantic audit required) | 0xFFFF | h.n2981 = static_cast<uint32_t>((v >> 16) & 0xFFFF); |
-| L07572 | src/mod/session2/travel_probe_logic.h:400:43 | unpack_host | inline literal (semantic audit required) | 32 | h.n2322 = static_cast<uint32_t>((v >> 32) & 0xFFFF); |
-| L07573 | src/mod/session2/travel_probe_logic.h:400:49 | unpack_host | inline literal (semantic audit required) | 0xFFFF | h.n2322 = static_cast<uint32_t>((v >> 32) & 0xFFFF); |
-| L07574 | src/mod/session2/travel_probe_logic.h:401:21 | unpack_host | inline literal (semantic audit required) | 48 | h.armed = (v >> 48) & 1; |
-| L07575 | src/mod/session2/travel_probe_logic.h:401:27 | unpack_host | inline literal (semantic audit required) | 1 | h.armed = (v >> 48) & 1; |
-| L07576 | src/mod/session2/travel_probe_logic.h:402:22 | unpack_host | inline literal (semantic audit required) | 49 | h.handed = (v >> 49) & 1; |
-| L07577 | src/mod/session2/travel_probe_logic.h:402:28 | unpack_host | inline literal (semantic audit required) | 1 | h.handed = (v >> 49) & 1; |
-| L07578 | src/mod/session2/travel_probe_logic.h:403:24 | unpack_host | inline literal (semantic audit required) | 50 | h.host_own = (v >> 50) & 1; |
-| L07579 | src/mod/session2/travel_probe_logic.h:403:30 | unpack_host | inline literal (semantic audit required) | 1 | h.host_own = (v >> 50) & 1; |
-| L07580 | src/mod/session2/tree_bend_logic.h:39:51 | player_key | inline literal (semantic audit required) | 28 | inline bool player_key(uint32_t k) { return (k >> 28) == 0xA; } |
-| L07581 | src/mod/session2/tree_bend_logic.h:39:58 | player_key | inline literal (semantic audit required) | 0xA | inline bool player_key(uint32_t k) { return (k >> 28) == 0xA; } |
-| L07582 | src/mod/session2/tree_bend_logic.h:46:35 | player_key | inline literal (semantic audit required) | 15 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07583 | src/mod/session2/tree_bend_logic.h:46:42 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07584 | src/mod/session2/tree_bend_logic.h:46:48 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07585 | src/mod/session2/tree_bend_logic.h:46:54 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07586 | src/mod/session2/tree_bend_logic.h:46:60 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07587 | src/mod/session2/tree_bend_logic.h:46:66 | player_key | inline literal (semantic audit required) | 0x08 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07588 | src/mod/session2/tree_bend_logic.h:46:72 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07589 | src/mod/session2/tree_bend_logic.h:46:78 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07590 | src/mod/session2/tree_bend_logic.h:46:84 | player_key | inline literal (semantic audit required) | 0x6C | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
-| L07591 | src/mod/session2/tree_bend_logic.h:47:42 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
-| L07592 | src/mod/session2/tree_bend_logic.h:47:48 | player_key | inline literal (semantic audit required) | 0x10 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
-| L07593 | src/mod/session2/tree_bend_logic.h:47:54 | player_key | inline literal (semantic audit required) | 0x48 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
-| L07594 | src/mod/session2/tree_bend_logic.h:47:60 | player_key | inline literal (semantic audit required) | 0x89 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
-| L07595 | src/mod/session2/tree_bend_logic.h:47:66 | player_key | inline literal (semantic audit required) | 0x74 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
-| L07596 | src/mod/session2/tree_bend_logic.h:47:72 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
-| L07597 | src/mod/session2/tree_bend_logic.h:47:78 | player_key | inline literal (semantic audit required) | 0x20 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
-| L07598 | src/mod/session2/tree_bend_logic.h:52:37 | player_key | inline literal (semantic audit required) | 11 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07599 | src/mod/session2/tree_bend_logic.h:52:44 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07600 | src/mod/session2/tree_bend_logic.h:52:50 | player_key | inline literal (semantic audit required) | 0x8B | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07601 | src/mod/session2/tree_bend_logic.h:52:56 | player_key | inline literal (semantic audit required) | 0xC4 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07602 | src/mod/session2/tree_bend_logic.h:52:62 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07603 | src/mod/session2/tree_bend_logic.h:52:68 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07604 | src/mod/session2/tree_bend_logic.h:52:74 | player_key | inline literal (semantic audit required) | 0x58 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07605 | src/mod/session2/tree_bend_logic.h:52:80 | player_key | inline literal (semantic audit required) | 0x10 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07606 | src/mod/session2/tree_bend_logic.h:52:86 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07607 | src/mod/session2/tree_bend_logic.h:52:92 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07608 | src/mod/session2/tree_bend_logic.h:52:98 | player_key | inline literal (semantic audit required) | 0x68 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07609 | src/mod/session2/tree_bend_logic.h:52:104 | player_key | inline literal (semantic audit required) | 0x18 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
-| L07610 | src/mod/session2/tree_bend_logic.h:55:42 | player_key | inline literal (semantic audit required) | 5 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
-| L07611 | src/mod/session2/tree_bend_logic.h:55:48 | player_key | inline literal (semantic audit required) | 0xE8 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
-| L07612 | src/mod/session2/tree_bend_logic.h:55:54 | player_key | inline literal (semantic audit required) | 0xBA | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
-| L07613 | src/mod/session2/tree_bend_logic.h:55:60 | player_key | inline literal (semantic audit required) | 0x16 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
-| L07614 | src/mod/session2/tree_bend_logic.h:55:66 | player_key | inline literal (semantic audit required) | 0x01 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
-| L07615 | src/mod/session2/tree_bend_logic.h:55:72 | player_key | inline literal (semantic audit required) | 0x00 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
-| L07616 | src/mod/session2/tree_bend_logic.h:58:39 | player_key | inline literal (semantic audit required) | 10 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07617 | src/mod/session2/tree_bend_logic.h:58:46 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07618 | src/mod/session2/tree_bend_logic.h:58:52 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07619 | src/mod/session2/tree_bend_logic.h:58:58 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07620 | src/mod/session2/tree_bend_logic.h:58:64 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07621 | src/mod/session2/tree_bend_logic.h:58:70 | player_key | inline literal (semantic audit required) | 0x08 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07622 | src/mod/session2/tree_bend_logic.h:58:76 | player_key | inline literal (semantic audit required) | 0x57 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07623 | src/mod/session2/tree_bend_logic.h:58:82 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07624 | src/mod/session2/tree_bend_logic.h:58:88 | player_key | inline literal (semantic audit required) | 0x83 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07625 | src/mod/session2/tree_bend_logic.h:58:94 | player_key | inline literal (semantic audit required) | 0xEC | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07626 | src/mod/session2/tree_bend_logic.h:58:100 | player_key | inline literal (semantic audit required) | 0x30 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
-| L07627 | src/mod/session2/tree_bend_logic.h:61:44 | player_key | inline literal (semantic audit required) | 5 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
-| L07628 | src/mod/session2/tree_bend_logic.h:61:50 | player_key | inline literal (semantic audit required) | 0xE8 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
-| L07629 | src/mod/session2/tree_bend_logic.h:61:56 | player_key | inline literal (semantic audit required) | 0xD9 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
-| L07630 | src/mod/session2/tree_bend_logic.h:61:62 | player_key | inline literal (semantic audit required) | 0xD4 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
-| L07631 | src/mod/session2/tree_bend_logic.h:61:68 | player_key | inline literal (semantic audit required) | 0x30 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
-| L07632 | src/mod/session2/tree_bend_logic.h:61:74 | player_key | inline literal (semantic audit required) | 0x02 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
-| L07633 | src/mod/session2/tree_bend_logic.h:66:36 | player_key | inline literal (semantic audit required) | 9 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07634 | src/mod/session2/tree_bend_logic.h:66:42 | player_key | inline literal (semantic audit required) | 0x40 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07635 | src/mod/session2/tree_bend_logic.h:66:48 | player_key | inline literal (semantic audit required) | 0x55 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07636 | src/mod/session2/tree_bend_logic.h:66:54 | player_key | inline literal (semantic audit required) | 0x53 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07637 | src/mod/session2/tree_bend_logic.h:66:60 | player_key | inline literal (semantic audit required) | 0x56 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07638 | src/mod/session2/tree_bend_logic.h:66:66 | player_key | inline literal (semantic audit required) | 0x57 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07639 | src/mod/session2/tree_bend_logic.h:66:72 | player_key | inline literal (semantic audit required) | 0x41 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07640 | src/mod/session2/tree_bend_logic.h:66:78 | player_key | inline literal (semantic audit required) | 0x54 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07641 | src/mod/session2/tree_bend_logic.h:66:84 | player_key | inline literal (semantic audit required) | 0x41 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07642 | src/mod/session2/tree_bend_logic.h:66:90 | player_key | inline literal (semantic audit required) | 0x55 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
-| L07643 | src/mod/session2/tree_bend_logic.h:70:41 | player_key | inline literal (semantic audit required) | 5 | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
-| L07644 | src/mod/session2/tree_bend_logic.h:70:47 | player_key | inline literal (semantic audit required) | 0xE9 | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
-| L07645 | src/mod/session2/tree_bend_logic.h:70:53 | player_key | inline literal (semantic audit required) | 0x2B | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
-| L07646 | src/mod/session2/tree_bend_logic.h:70:59 | player_key | inline literal (semantic audit required) | 0x63 | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
-| L07647 | src/mod/session2/tree_bend_logic.h:70:65 | player_key | inline literal (semantic audit required) | 0xCF | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
-| L07648 | src/mod/session2/tree_bend_logic.h:70:71 | player_key | inline literal (semantic audit required) | 0xFF | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
-| L07649 | src/mod/session2/tree_bend_logic.h:75:41 | player_key | inline literal (semantic audit required) | 11 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07650 | src/mod/session2/tree_bend_logic.h:75:48 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07651 | src/mod/session2/tree_bend_logic.h:75:54 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07652 | src/mod/session2/tree_bend_logic.h:75:60 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07653 | src/mod/session2/tree_bend_logic.h:75:66 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07654 | src/mod/session2/tree_bend_logic.h:75:72 | player_key | inline literal (semantic audit required) | 0x10 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07655 | src/mod/session2/tree_bend_logic.h:75:78 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07656 | src/mod/session2/tree_bend_logic.h:75:84 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07657 | src/mod/session2/tree_bend_logic.h:75:90 | player_key | inline literal (semantic audit required) | 0x74 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07658 | src/mod/session2/tree_bend_logic.h:75:96 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07659 | src/mod/session2/tree_bend_logic.h:75:102 | player_key | inline literal (semantic audit required) | 0x18 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07660 | src/mod/session2/tree_bend_logic.h:75:108 | player_key | inline literal (semantic audit required) | 0x57 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
-| L07661 | src/mod/session2/tree_bend_logic.h:77:40 | player_key | inline literal (semantic audit required) | 15 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07662 | src/mod/session2/tree_bend_logic.h:77:47 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07663 | src/mod/session2/tree_bend_logic.h:77:53 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07664 | src/mod/session2/tree_bend_logic.h:77:59 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07665 | src/mod/session2/tree_bend_logic.h:77:65 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07666 | src/mod/session2/tree_bend_logic.h:77:71 | player_key | inline literal (semantic audit required) | 0x08 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07667 | src/mod/session2/tree_bend_logic.h:77:77 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07668 | src/mod/session2/tree_bend_logic.h:77:83 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07669 | src/mod/session2/tree_bend_logic.h:77:89 | player_key | inline literal (semantic audit required) | 0x74 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
-| L07670 | src/mod/session2/tree_bend_logic.h:78:47 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
-| L07671 | src/mod/session2/tree_bend_logic.h:78:53 | player_key | inline literal (semantic audit required) | 0x10 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
-| L07672 | src/mod/session2/tree_bend_logic.h:78:59 | player_key | inline literal (semantic audit required) | 0x48 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
-| L07673 | src/mod/session2/tree_bend_logic.h:78:65 | player_key | inline literal (semantic audit required) | 0x89 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
-| L07674 | src/mod/session2/tree_bend_logic.h:78:71 | player_key | inline literal (semantic audit required) | 0x7C | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
-| L07675 | src/mod/session2/tree_bend_logic.h:78:77 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
-| L07676 | src/mod/session2/tree_bend_logic.h:78:83 | player_key | inline literal (semantic audit required) | 0x18 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
-| L07677 | src/mod/session2/tree_bend_logic.h:115:16 | scene_set | inline literal (semantic audit required) | 3 | uint32_t d[3]; |
-| L07678 | src/mod/session2/tree_bend_logic.h:117:14 | scene_set | inline literal (semantic audit required) | 0 | return d[0] &#124;&#124; d[1] &#124;&#124; d[2]; |
-| L07679 | src/mod/session2/tree_bend_logic.h:117:22 | scene_set | inline literal (semantic audit required) | 1 | return d[0] &#124;&#124; d[1] &#124;&#124; d[2]; |
-| L07680 | src/mod/session2/tree_bend_logic.h:117:30 | scene_set | inline literal (semantic audit required) | 2 | return d[0] &#124;&#124; d[1] &#124;&#124; d[2]; |
-| L07681 | src/mod/session2/tree_bend_logic.h:129:38 | scene_set | inline literal (semantic audit required) | 1 | enum class Kind : uint8_t { Sample = 1, End = 2 }; |
-| L07682 | src/mod/session2/tree_bend_logic.h:129:47 | scene_set | inline literal (semantic audit required) | 2 | enum class Kind : uint8_t { Sample = 1, End = 2 }; |
-| L07683 | src/mod/session2/tree_bend_logic.h:134:20 | scene_set | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
-| L07684 | src/mod/session2/tree_bend_logic.h:135:21 | scene_set | inline literal (semantic audit required) | 0 | uint8_t flags = 0; |
-| L07685 | src/mod/session2/tree_bend_logic.h:136:20 | scene_set | inline literal (semantic audit required) | 0 | uint32_t key = 0;   // the thrower, 0xA... |
-| L07686 | src/mod/session2/tree_bend_logic.h:137:20 | scene_set | inline literal (semantic audit required) | 0 | uint32_t seq = 0;   // per sender, increasing (never 0) |
-| L07687 | src/mod/session2/tree_bend_logic.h:138:20 | scene_set | inline literal (semantic audit required) | 0 | uint32_t run = 0;   // the sender's bend run (never 0) |
-| L07688 | src/mod/session2/tree_bend_logic.h:139:19 | scene_set | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
-| L07689 | src/mod/session2/tree_bend_logic.h:140:20 | scene_set | inline literal (semantic audit required) | 0.0f | float amount = 0.0f;  // [-1, 1] |
-| L07690 | src/mod/session2/tree_bend_logic.h:141:16 | scene_set | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
-| L07691 | src/mod/session2/tree_bend_logic.h:141:27 | scene_set | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
-| L07692 | src/mod/session2/tree_bend_logic.h:142:24 | scene_set | inline literal (semantic audit required) | 0 | uint32_t tick_ms = 0;  // the sender's clock (QPC ms, low 32 bits) |
-| L07693 | src/mod/session2/tree_bend_logic.h:146:18 | put32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L07694 | src/mod/session2/tree_bend_logic.h:146:25 | put32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L07695 | src/mod/session2/tree_bend_logic.h:146:67 | put32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
-| L07696 | src/mod/session2/tree_bend_logic.h:149:36 | get32 | inline literal (semantic audit required) | 0 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L07697 | src/mod/session2/tree_bend_logic.h:149:67 | get32 | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L07698 | src/mod/session2/tree_bend_logic.h:149:74 | get32 | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L07699 | src/mod/session2/tree_bend_logic.h:149:104 | get32 | inline literal (semantic audit required) | 2 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L07700 | src/mod/session2/tree_bend_logic.h:149:111 | get32 | inline literal (semantic audit required) | 16 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
-| L07701 | src/mod/session2/tree_bend_logic.h:150:37 | get32 | inline literal (semantic audit required) | 3 | (static_cast<uint32_t>(p[3]) << 24); |
-| L07702 | src/mod/session2/tree_bend_logic.h:150:44 | get32 | inline literal (semantic audit required) | 24 | (static_cast<uint32_t>(p[3]) << 24); |
-| L07703 | src/mod/session2/tree_bend_logic.h:153:18 | putf | inline literal (semantic audit required) | 0 | uint32_t v = 0; |
-| L07704 | src/mod/session2/tree_bend_logic.h:154:25 | putf | inline literal (semantic audit required) | 4 | std::memcpy(&v, &f, 4); |
-| L07705 | src/mod/session2/tree_bend_logic.h:159:15 | getf | inline literal (semantic audit required) | 0.0f | float f = 0.0f; |
-| L07706 | src/mod/session2/tree_bend_logic.h:160:25 | getf | inline literal (semantic audit required) | 4 | std::memcpy(&f, &v, 4); |
-| L07707 | src/mod/session2/tree_bend_logic.h:168:7 | encode | inline literal (semantic audit required) | 0 | p[0] = kControlTreeBend; |
-| L07708 | src/mod/session2/tree_bend_logic.h:169:7 | encode | inline literal (semantic audit required) | 1 | p[1] = kVersion; |
-| L07709 | src/mod/session2/tree_bend_logic.h:170:7 | encode | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(s.kind); |
-| L07710 | src/mod/session2/tree_bend_logic.h:171:7 | encode | inline literal (semantic audit required) | 3 | p[3] = s.slot; |
-| L07711 | src/mod/session2/tree_bend_logic.h:172:7 | encode | inline literal (semantic audit required) | 4 | p[4] = s.flags; |
-| L07712 | src/mod/session2/tree_bend_logic.h:173:14 | encode | inline literal (semantic audit required) | 8 | put32(&p[8], s.key); |
-| L07713 | src/mod/session2/tree_bend_logic.h:174:14 | encode | inline literal (semantic audit required) | 12 | put32(&p[12], s.seq); |
-| L07714 | src/mod/session2/tree_bend_logic.h:175:14 | encode | inline literal (semantic audit required) | 16 | put32(&p[16], s.run); |
-| L07715 | src/mod/session2/tree_bend_logic.h:176:20 | encode | inline literal (semantic audit required) | 20 | std::memcpy(&p[20], s.scene, 16); |
-| L07716 | src/mod/session2/tree_bend_logic.h:176:34 | encode | inline literal (semantic audit required) | 16 | std::memcpy(&p[20], s.scene, 16); |
-| L07717 | src/mod/session2/tree_bend_logic.h:177:13 | encode | inline literal (semantic audit required) | 36 | putf(&p[36], s.amount); |
-| L07718 | src/mod/session2/tree_bend_logic.h:178:13 | encode | inline literal (semantic audit required) | 40 | putf(&p[40], s.dx); |
-| L07719 | src/mod/session2/tree_bend_logic.h:179:13 | encode | inline literal (semantic audit required) | 44 | putf(&p[44], s.dz); |
-| L07720 | src/mod/session2/tree_bend_logic.h:180:14 | encode | inline literal (semantic audit required) | 48 | put32(&p[48], s.tick_ms); |
-| L07721 | src/mod/session2/tree_bend_logic.h:187:39 | decode | inline literal (semantic audit required) | 0 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlTreeBend &#124;&#124; p[1] != kVersion) return std::nullopt; |
-| L07722 | src/mod/session2/tree_bend_logic.h:187:67 | decode | inline literal (semantic audit required) | 1 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlTreeBend &#124;&#124; p[1] != kVersion) return std::nullopt; |
-| L07723 | src/mod/session2/tree_bend_logic.h:188:12 | decode | inline literal (semantic audit required) | 2 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07724 | src/mod/session2/tree_bend_logic.h:188:18 | decode | inline literal (semantic audit required) | 1 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07725 | src/mod/session2/tree_bend_logic.h:188:25 | decode | inline literal (semantic audit required) | 2 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07726 | src/mod/session2/tree_bend_logic.h:188:31 | decode | inline literal (semantic audit required) | 2 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07727 | src/mod/session2/tree_bend_logic.h:188:39 | decode | inline literal (semantic audit required) | 5 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07728 | src/mod/session2/tree_bend_logic.h:188:45 | decode | inline literal (semantic audit required) | 0 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07729 | src/mod/session2/tree_bend_logic.h:188:52 | decode | inline literal (semantic audit required) | 6 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07730 | src/mod/session2/tree_bend_logic.h:188:58 | decode | inline literal (semantic audit required) | 0 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07731 | src/mod/session2/tree_bend_logic.h:188:65 | decode | inline literal (semantic audit required) | 7 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07732 | src/mod/session2/tree_bend_logic.h:188:71 | decode | inline literal (semantic audit required) | 0 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
-| L07733 | src/mod/session2/tree_bend_logic.h:190:34 | decode | inline literal (semantic audit required) | 2 | s.kind = static_cast<Kind>(p[2]); |
-| L07734 | src/mod/session2/tree_bend_logic.h:191:16 | decode | inline literal (semantic audit required) | 3 | s.slot = p[3]; |
-| L07735 | src/mod/session2/tree_bend_logic.h:192:17 | decode | inline literal (semantic audit required) | 4 | s.flags = p[4]; |
-| L07736 | src/mod/session2/tree_bend_logic.h:193:22 | decode | inline literal (semantic audit required) | 8 | s.key = get32(&p[8]); |
-| L07737 | src/mod/session2/tree_bend_logic.h:194:22 | decode | inline literal (semantic audit required) | 12 | s.seq = get32(&p[12]); |
-| L07738 | src/mod/session2/tree_bend_logic.h:195:22 | decode | inline literal (semantic audit required) | 16 | s.run = get32(&p[16]); |
-| L07739 | src/mod/session2/tree_bend_logic.h:196:29 | decode | inline literal (semantic audit required) | 20 | std::memcpy(s.scene, &p[20], 16); |
-| L07740 | src/mod/session2/tree_bend_logic.h:196:34 | decode | inline literal (semantic audit required) | 16 | std::memcpy(s.scene, &p[20], 16); |
-| L07741 | src/mod/session2/tree_bend_logic.h:197:24 | decode | inline literal (semantic audit required) | 36 | s.amount = getf(&p[36]); |
-| L07742 | src/mod/session2/tree_bend_logic.h:198:20 | decode | inline literal (semantic audit required) | 40 | s.dx = getf(&p[40]); |
-| L07743 | src/mod/session2/tree_bend_logic.h:199:20 | decode | inline literal (semantic audit required) | 44 | s.dz = getf(&p[44]); |
-| L07744 | src/mod/session2/tree_bend_logic.h:200:26 | decode | inline literal (semantic audit required) | 48 | s.tick_ms = get32(&p[48]); |
-| L07745 | src/mod/session2/tree_bend_logic.h:201:60 | decode | inline literal (semantic audit required) | 0 | if (!player_key(s.key) &#124;&#124; s.slot >= kSlots &#124;&#124; s.seq == 0 &#124;&#124; s.run == 0 &#124;&#124; !scene_set(s.scene)) return std::nullopt; |
-| L07746 | src/mod/session2/tree_bend_logic.h:201:74 | decode | inline literal (semantic audit required) | 0 | if (!player_key(s.key) &#124;&#124; s.slot >= kSlots &#124;&#124; s.seq == 0 &#124;&#124; s.run == 0 &#124;&#124; !scene_set(s.scene)) return std::nullopt; |
-| L07747 | src/mod/session2/tree_bend_logic.h:203:21 | decode | inline literal (semantic audit required) | 1.0f | if (s.amount < -1.0f &#124;&#124; s.amount > 1.0f) return std::nullopt; |
-| L07748 | src/mod/session2/tree_bend_logic.h:203:40 | decode | inline literal (semantic audit required) | 1.0f | if (s.amount < -1.0f &#124;&#124; s.amount > 1.0f) return std::nullopt; |
-| L07749 | src/mod/session2/tree_bend_logic.h:204:66 | decode | inline literal (semantic audit required) | 6f | if (s.kind == Kind::Sample && s.dx * s.dx + s.dz * s.dz < 1e-6f) return std::nullopt; |
-| L07750 | src/mod/session2/tree_bend_logic.h:212:7 | frame | inline literal (semantic audit required) | 0 | f[0] = kControlOpcode & 0xFF; |
-| L07751 | src/mod/session2/tree_bend_logic.h:212:29 | frame | inline literal (semantic audit required) | 0xFF | f[0] = kControlOpcode & 0xFF; |
-| L07752 | src/mod/session2/tree_bend_logic.h:213:7 | frame | inline literal (semantic audit required) | 1 | f[1] = kControlOpcode >> 8; |
-| L07753 | src/mod/session2/tree_bend_logic.h:213:30 | frame | inline literal (semantic audit required) | 8 | f[1] = kControlOpcode >> 8; |
-| L07754 | src/mod/session2/tree_bend_logic.h:214:7 | frame | inline literal (semantic audit required) | 2 | f[2] = 0xFF; |
-| L07755 | src/mod/session2/tree_bend_logic.h:214:12 | frame | inline literal (semantic audit required) | 0xFF | f[2] = 0xFF; |
-| L07756 | src/mod/session2/tree_bend_logic.h:215:7 | frame | inline literal (semantic audit required) | 3 | f[3] = kPayloadSize & 0xFF; |
-| L07757 | src/mod/session2/tree_bend_logic.h:215:27 | frame | inline literal (semantic audit required) | 0xFF | f[3] = kPayloadSize & 0xFF; |
-| L07758 | src/mod/session2/tree_bend_logic.h:216:7 | frame | inline literal (semantic audit required) | 4 | f[4] = kPayloadSize >> 8; |
-| L07759 | src/mod/session2/tree_bend_logic.h:216:28 | frame | inline literal (semantic audit required) | 8 | f[4] = kPayloadSize >> 8; |
-| L07760 | src/mod/session2/tree_bend_logic.h:217:21 | frame | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kPayloadSize; ++i) f[kHeader + i] = p[i]; |
-| L07761 | src/mod/session2/tree_bend_logic.h:223:40 | is_frame | inline literal (semantic audit required) | 0 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
-| L07762 | src/mod/session2/tree_bend_logic.h:223:64 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
-| L07763 | src/mod/session2/tree_bend_logic.h:223:75 | is_frame | inline literal (semantic audit required) | 1 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
-| L07764 | src/mod/session2/tree_bend_logic.h:223:100 | is_frame | inline literal (semantic audit required) | 8 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
-| L07765 | src/mod/session2/tree_bend_logic.h:223:108 | is_frame | inline literal (semantic audit required) | 2 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
-| L07766 | src/mod/session2/tree_bend_logic.h:223:114 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
-| L07767 | src/mod/session2/tree_bend_logic.h:224:14 | is_frame | inline literal (semantic audit required) | 3 | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
-| L07768 | src/mod/session2/tree_bend_logic.h:224:36 | is_frame | inline literal (semantic audit required) | 0xFF | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
-| L07769 | src/mod/session2/tree_bend_logic.h:224:47 | is_frame | inline literal (semantic audit required) | 4 | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
-| L07770 | src/mod/session2/tree_bend_logic.h:224:70 | is_frame | inline literal (semantic audit required) | 8 | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
-| L07771 | src/mod/session2/tree_bend_logic.h:239:20 | is_frame | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07772 | src/mod/session2/tree_bend_logic.h:240:20 | is_frame | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
-| L07773 | src/mod/session2/tree_bend_logic.h:241:21 | is_frame | inline literal (semantic audit required) | 0 | uint8_t flags = 0; |
-| L07774 | src/mod/session2/tree_bend_logic.h:242:19 | is_frame | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
-| L07775 | src/mod/session2/tree_bend_logic.h:243:20 | is_frame | inline literal (semantic audit required) | 0.0f | float amount = 0.0f; |
-| L07776 | src/mod/session2/tree_bend_logic.h:244:16 | is_frame | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
-| L07777 | src/mod/session2/tree_bend_logic.h:244:27 | is_frame | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
-| L07778 | src/mod/session2/tree_bend_logic.h:245:21 | is_frame | inline literal (semantic audit required) | 0 | uint64_t t_ms = 0; |
-| L07779 | src/mod/session2/tree_bend_logic.h:248:44 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
-| L07780 | src/mod/session2/tree_bend_logic.h:248:52 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
-| L07781 | src/mod/session2/tree_bend_logic.h:248:63 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
-| L07782 | src/mod/session2/tree_bend_logic.h:248:70 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
-| L07783 | src/mod/session2/tree_bend_logic.h:254:24 | clamp1 | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07784 | src/mod/session2/tree_bend_logic.h:255:24 | clamp1 | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
-| L07785 | src/mod/session2/tree_bend_logic.h:256:24 | clamp1 | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
-| L07786 | src/mod/session2/tree_bend_logic.h:271:92 | std::isfinite | inline literal (semantic audit required) | 6f | !std::isfinite(b.dx) &#124;&#124; !std::isfinite(b.dz) &#124;&#124; b.dx * b.dx + b.dz * b.dz < 1e-6f) { |
-| L07787 | src/mod/session2/tree_bend_logic.h:276:49 | std::isfinite | inline literal (semantic audit required) | 16 | if (c && std::memcmp(c->scene, b.scene, 16) != 0) { |
-| L07788 | src/mod/session2/tree_bend_logic.h:276:56 | std::isfinite | inline literal (semantic audit required) | 0 | if (c && std::memcmp(c->scene, b.scene, 16) != 0) { |
-| L07789 | src/mod/session2/tree_bend_logic.h:293:44 | std::isfinite | inline literal (semantic audit required) | 16 | std::memcpy(c->scene, b.scene, 16); |
-| L07790 | src/mod/session2/tree_bend_logic.h:312:20 | tick | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L07791 | src/mod/session2/tree_bend_logic.h:333:24 | seq | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07792 | src/mod/session2/tree_bend_logic.h:334:24 | seq | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
-| L07793 | src/mod/session2/tree_bend_logic.h:336:24 | seq | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
-| L07794 | src/mod/session2/tree_bend_logic.h:337:23 | seq | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
-| L07795 | src/mod/session2/tree_bend_logic.h:338:33 | seq | inline literal (semantic audit required) | 0 | uint64_t last_bend_ms = 0; |
-| L07796 | src/mod/session2/tree_bend_logic.h:339:33 | seq | inline literal (semantic audit required) | 0 | uint64_t last_sent_ms = 0; |
-| L07797 | src/mod/session2/tree_bend_logic.h:340:29 | seq | inline literal (semantic audit required) | 0.0f | float last_amount = 0.0f; |
-| L07798 | src/mod/session2/tree_bend_logic.h:341:25 | seq | inline literal (semantic audit required) | 1.0f | float last_dx = 1.0f, last_dz = 0.0f; |
-| L07799 | src/mod/session2/tree_bend_logic.h:341:41 | seq | inline literal (semantic audit required) | 0.0f | float last_dx = 1.0f, last_dz = 0.0f; |
-| L07800 | src/mod/session2/tree_bend_logic.h:342:30 | seq | inline literal (semantic audit required) | 0 | uint8_t last_flags = 0; |
-| L07801 | src/mod/session2/tree_bend_logic.h:369:39 | emit | inline literal (semantic audit required) | 16 | std::memcpy(s.scene, c.scene, 16); |
-| L07802 | src/mod/session2/tree_bend_logic.h:392:43 | make_end | inline literal (semantic audit required) | 16 | std::memcpy(e.end.scene, c.scene, 16); |
-| L07803 | src/mod/session2/tree_bend_logic.h:400:21 | make_end | inline literal (semantic audit required) | 0 | uint32_t seq_ = 0; |
-| L07804 | src/mod/session2/tree_bend_logic.h:401:21 | make_end | inline literal (semantic audit required) | 0 | uint32_t run_ = 0; |
-| L07805 | src/mod/session2/tree_bend_logic.h:402:22 | make_end | inline literal (semantic audit required) | 0 | uint64_t full_ = 0; |
-| L07806 | src/mod/session2/tree_bend_logic.h:434:25 | discarded | inline literal (semantic audit required) | 0 | uint64_t dropped_ = 0; |
-| L07807 | src/mod/session2/tree_bend_logic.h:435:27 | discarded | inline literal (semantic audit required) | 0 | uint64_t discarded_ = 0; |
-| L07808 | src/mod/session2/tree_bend_logic.h:459:20 | rx_name | inline literal (semantic audit required) | 0.0f | float amount = 0.0f; |
-| L07809 | src/mod/session2/tree_bend_logic.h:460:16 | rx_name | inline literal (semantic audit required) | 1.0f | float dx = 1.0f, dz = 0.0f; |
-| L07810 | src/mod/session2/tree_bend_logic.h:460:27 | rx_name | inline literal (semantic audit required) | 0.0f | float dx = 1.0f, dz = 0.0f; |
-| L07811 | src/mod/session2/tree_bend_logic.h:461:19 | rx_name | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
-| L07812 | src/mod/session2/tree_bend_logic.h:462:23 | rx_name | inline literal (semantic audit required) | 0 | uint32_t age_ms = 0;  // since the newest sample was received |
-| L07813 | src/mod/session2/tree_bend_logic.h:463:20 | rx_name | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
-| L07814 | src/mod/session2/tree_bend_logic.h:464:20 | rx_name | inline literal (semantic audit required) | 0 | uint32_t seq = 0; |
-| L07815 | src/mod/session2/tree_bend_logic.h:496:57 | on_sample | inline literal (semantic audit required) | 0 | const bool new_run = e->run != s.run &#124;&#124; e->n == 0; |
-| L07816 | src/mod/session2/tree_bend_logic.h:499:20 | on_sample | inline literal (semantic audit required) | 0 | e->n = 0; |
-| L07817 | src/mod/session2/tree_bend_logic.h:506:42 | on_sample | inline literal (semantic audit required) | 1 | e->n = std::min<uint32_t>(e->n + 1, 2); |
-| L07818 | src/mod/session2/tree_bend_logic.h:506:45 | on_sample | inline literal (semantic audit required) | 2 | e->n = std::min<uint32_t>(e->n + 1, 2); |
-| L07819 | src/mod/session2/tree_bend_logic.h:513:39 | query | inline literal (semantic audit required) | 0 | if (!e &#124;&#124; e->ended &#124;&#124; e->n == 0) return std::nullopt; |
-| L07820 | src/mod/session2/tree_bend_logic.h:520:45 | query | inline literal (semantic audit required) | 16 | std::memcpy(p.scene, e->last.scene, 16); |
-| L07821 | src/mod/session2/tree_bend_logic.h:522:21 | query | inline literal (semantic audit required) | 2 | if (e->n >= 2) { |
-| L07822 | src/mod/session2/tree_bend_logic.h:526:24 | query | inline literal (semantic audit required) | 0 | if (span > 0 && span <= kMaxSpanMs) { |
-| L07823 | src/mod/session2/tree_bend_logic.h:529:31 | query | inline literal (semantic audit required) | 1.0f | float alpha = 1.0f + static_cast<float>(render) / static_cast<float>(span); |
-| L07824 | src/mod/session2/tree_bend_logic.h:530:33 | query | inline literal (semantic audit required) | 0.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
-| L07825 | src/mod/session2/tree_bend_logic.h:530:40 | query | inline literal (semantic audit required) | 0.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
-| L07826 | src/mod/session2/tree_bend_logic.h:530:55 | query | inline literal (semantic audit required) | 1.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
-| L07827 | src/mod/session2/tree_bend_logic.h:530:62 | query | inline literal (semantic audit required) | 1.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
-| L07828 | src/mod/session2/tree_bend_logic.h:537:22 | query | inline literal (semantic audit required) | 4f | if (len > 1e-4f) { |
-| L07829 | src/mod/session2/tree_bend_logic.h:544:25 | query | inline literal (semantic audit required) | 4f | if (l2 > 1e-4f) { |
-| L07830 | src/mod/session2/tree_bend_logic.h:562:24 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L07831 | src/mod/session2/tree_bend_logic.h:563:24 | epoch_resets | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
-| L07832 | src/mod/session2/tree_bend_logic.h:564:29 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t last_seq = 0; |
-| L07833 | src/mod/session2/tree_bend_logic.h:565:33 | epoch_resets | inline literal (semantic audit required) | 0 | uint64_t last_recv_ms = 0;  // any frame |
-| L07834 | src/mod/session2/tree_bend_logic.h:567:24 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
-| L07835 | src/mod/session2/tree_bend_logic.h:568:22 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t n = 0;  // samples of this run kept (0..2) |
-| L07836 | src/mod/session2/tree_bend_logic.h:570:33 | epoch_resets | inline literal (semantic audit required) | 0 | uint64_t prev_recv_ms = 0, last_recv_sample_ms = 0; |
-| L07837 | src/mod/session2/tree_bend_logic.h:570:58 | epoch_resets | inline literal (semantic audit required) | 0 | uint64_t prev_recv_ms = 0, last_recv_sample_ms = 0; |
-| L07838 | src/mod/session2/tree_bend_logic.h:605:23 | alloc | inline literal (semantic audit required) | 0 | uint64_t epoch_ = 0; |
-| L07839 | src/mod/session2/tree_bend_logic.h:607:30 | alloc | inline literal (semantic audit required) | 0 | uint64_t epoch_resets_ = 0; |
-| L07840 | src/mod/session2/tree_bend_logic.h:657:21 | outcome_name | inline literal (semantic audit required) | 0 | uint8_t state = 0; |
-| L07841 | src/mod/session2/tree_bend_logic.h:658:19 | outcome_name | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
-| L07842 | src/mod/session2/tree_bend_logic.h:666:39 | decide | inline literal (semantic audit required) | 16 | if (std::memcmp(v.scene, p.scene, 16) != 0) return Outcome::SceneMismatch; |
-| L07843 | src/mod/session2/tree_bend_logic.h:666:46 | decide | inline literal (semantic audit required) | 0 | if (std::memcmp(v.scene, p.scene, 16) != 0) return Outcome::SceneMismatch; |
-| L07844 | src/mod/session2/tree_bend_logic.h:675:31 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> key{0}; |
-| L07845 | src/mod/session2/tree_bend_logic.h:676:30 | decide | inline literal (semantic audit required) | 0xFF | std::atomic<uint8_t> ctl{0xFF};  // [actor+0xC8] at the last M1 / M2 / M4 call (0xFF unread) |
-| L07846 | src/mod/session2/tree_bend_logic.h:677:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_calls{0}, m1_main{0}, m1_f6{0}; |
-| L07847 | src/mod/session2/tree_bend_logic.h:677:48 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_calls{0}, m1_main{0}, m1_f6{0}; |
-| L07848 | src/mod/session2/tree_bend_logic.h:677:58 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_calls{0}, m1_main{0}, m1_f6{0}; |
-| L07849 | src/mod/session2/tree_bend_logic.h:678:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_last_us{0}; |
-| L07850 | src/mod/session2/tree_bend_logic.h:679:35 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> m1_runs{0}; |
-| L07851 | src/mod/session2/tree_bend_logic.h:680:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m2_flag1{0}, m2_flag0{0}; |
-| L07852 | src/mod/session2/tree_bend_logic.h:680:49 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m2_flag1{0}, m2_flag0{0}; |
-| L07853 | src/mod/session2/tree_bend_logic.h:681:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_calls{0}, m3_main{0}; |
-| L07854 | src/mod/session2/tree_bend_logic.h:681:48 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_calls{0}, m3_main{0}; |
-| L07855 | src/mod/session2/tree_bend_logic.h:682:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_calls{0}, m4_main{0}; |
-| L07856 | src/mod/session2/tree_bend_logic.h:682:48 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_calls{0}, m4_main{0}; |
-| L07857 | src/mod/session2/tree_bend_logic.h:683:41 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_last_ev_us{0}; |
-| L07858 | src/mod/session2/tree_bend_logic.h:684:42 | decide | inline literal (semantic audit required) | 0xFF | std::atomic<uint8_t> m4_last_outcome{0xFF}; |
-| L07859 | src/mod/session2/tree_bend_logic.h:685:34 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> m4_tid{0}; |
-| L07860 | src/mod/session2/tree_bend_logic.h:686:34 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> m3_tid{0}; |
-| L07861 | src/mod/session2/tree_bend_logic.h:689:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_in_tick{0}; |
-| L07862 | src/mod/session2/tree_bend_logic.h:690:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_in_tick{0}, m3_same_comp{0}; |
-| L07863 | src/mod/session2/tree_bend_logic.h:690:55 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_in_tick{0}, m3_same_comp{0}; |
-| L07864 | src/mod/session2/tree_bend_logic.h:693:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
-| L07865 | src/mod/session2/tree_bend_logic.h:693:55 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
-| L07866 | src/mod/session2/tree_bend_logic.h:693:71 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
-| L07867 | src/mod/session2/tree_bend_logic.h:693:93 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
-| L07868 | src/mod/session2/tree_bend_logic.h:694:44 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_last_apply_us{0}; |
-| L07869 | src/mod/session2/tree_bend_logic.h:697:19 | clear | inline literal (semantic audit required) | 0xFF | ctl.store(0xFF, std::memory_order_relaxed); |
-| L07870 | src/mod/session2/tree_bend_logic.h:701:22 | clear | inline literal (semantic audit required) | 0 | a->store(0, std::memory_order_relaxed); |
-| L07871 | src/mod/session2/tree_bend_logic.h:703:23 | clear | inline literal (semantic audit required) | 0 | m1_runs.store(0, std::memory_order_relaxed); |
-| L07872 | src/mod/session2/tree_bend_logic.h:704:31 | clear | inline literal (semantic audit required) | 0xFF | m4_last_outcome.store(0xFF, std::memory_order_relaxed); |
-| L07873 | src/mod/session2/tree_bend_logic.h:705:22 | clear | inline literal (semantic audit required) | 0 | m4_tid.store(0, std::memory_order_relaxed); |
-| L07874 | src/mod/session2/tree_bend_logic.h:706:22 | clear | inline literal (semantic audit required) | 0 | m3_tid.store(0, std::memory_order_relaxed); |
-| L07875 | src/mod/session2/tree_bend_logic.h:707:19 | clear | inline literal (semantic audit required) | 0 | key.store(0, std::memory_order_release); |
-| L07876 | src/mod/session2/tree_bend_logic.h:716:37 | get | inline literal (semantic audit required) | 1 | size_t i = hash(key) & (N - 1); |
-| L07877 | src/mod/session2/tree_bend_logic.h:717:25 | get | inline literal (semantic audit required) | 0 | for (size_t n = 0; n < N; ++n, i = (i + 1) & (N - 1)) { |
-| L07878 | src/mod/session2/tree_bend_logic.h:717:49 | get | inline literal (semantic audit required) | 1 | for (size_t n = 0; n < N; ++n, i = (i + 1) & (N - 1)) { |
-| L07879 | src/mod/session2/tree_bend_logic.h:717:59 | get | inline literal (semantic audit required) | 1 | for (size_t n = 0; n < N; ++n, i = (i + 1) & (N - 1)) { |
-| L07880 | src/mod/session2/tree_bend_logic.h:720:22 | get | inline literal (semantic audit required) | 0 | if (k == 0) { |
-| L07881 | src/mod/session2/tree_bend_logic.h:721:35 | get | inline literal (semantic audit required) | 0 | uint32_t expect = 0; |
-| L07882 | src/mod/session2/tree_bend_logic.h:726:25 | get | inline literal (semantic audit required) | 1 | full_.fetch_add(1, std::memory_order_relaxed); |
-| L07883 | src/mod/session2/tree_bend_logic.h:733:20 | used | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L07884 | src/mod/session2/tree_bend_logic.h:734:84 | used | inline literal (semantic audit required) | 0 | for (const KeyStats& e : e_) n += e.key.load(std::memory_order_relaxed) != 0; |
-| L07885 | src/mod/session2/tree_bend_logic.h:740:21 | clear | inline literal (semantic audit required) | 0 | full_.store(0, std::memory_order_relaxed); |
-| L07886 | src/mod/session2/tree_bend_logic.h:745:24 | size | inline literal (semantic audit required) | 2 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L07887 | src/mod/session2/tree_bend_logic.h:745:39 | size | inline literal (semantic audit required) | 1 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L07888 | src/mod/session2/tree_bend_logic.h:745:46 | size | inline literal (semantic audit required) | 0 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L07889 | src/mod/session2/tree_bend_logic.h:746:70 | hash | inline literal (semantic audit required) | 2654435761u | static size_t hash(uint32_t k) { return static_cast<size_t>((k * 2654435761u) >> 7); } |
-| L07890 | src/mod/session2/tree_bend_logic.h:746:86 | hash | inline literal (semantic audit required) | 7 | static size_t hash(uint32_t k) { return static_cast<size_t>((k * 2654435761u) >> 7); } |
-| L07891 | src/mod/session2/tree_bend_logic.h:748:33 | hash | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> full_{0}; |
-| L07892 | src/mod/session2/tree_bend_logic.h:757:78 | active | inline literal (semantic audit required) | 1 | KeyTable<N>& active() { return t_[idx_.load(std::memory_order_acquire) & 1]; } |
-| L07893 | src/mod/session2/tree_bend_logic.h:758:90 | active | inline literal (semantic audit required) | 1 | const KeyTable<N>& active() const { return t_[idx_.load(std::memory_order_acquire) & 1]; } |
-| L07894 | src/mod/session2/tree_bend_logic.h:761:71 | switch_tables | inline literal (semantic audit required) | 1 | const unsigned next = (idx_.load(std::memory_order_relaxed) + 1) & 1; |
-| L07895 | src/mod/session2/tree_bend_logic.h:761:76 | switch_tables | inline literal (semantic audit required) | 1 | const unsigned next = (idx_.load(std::memory_order_relaxed) + 1) & 1; |
-| L07896 | src/mod/session2/tree_bend_logic.h:769:20 | switches | inline literal (semantic audit required) | 2 | KeyTable<N> t_[2]; |
-| L07897 | src/mod/session2/tree_bend_logic.h:770:32 | switches | inline literal (semantic audit required) | 0 | std::atomic<unsigned> idx_{0}; |
-| L07898 | src/mod/session2/tree_bend_logic.h:771:26 | switches | inline literal (semantic audit required) | 0 | uint64_t switches_ = 0; |
-| L07899 | src/mod/session2/tree_bend_logic.h:784:24 | add | inline literal (semantic audit required) | 0 | if (cur == 0 && t.compare_exchange_strong(cur, tid, std::memory_order_relaxed)) return; |
-| L07900 | src/mod/session2/tree_bend_logic.h:787:25 | add | inline literal (semantic audit required) | 1 | over_.fetch_add(1, std::memory_order_relaxed); |
-| L07901 | src/mod/session2/tree_bend_logic.h:796:20 | size | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L07902 | src/mod/session2/tree_bend_logic.h:797:76 | size | inline literal (semantic audit required) | 0 | for (const auto& t : t_) n += t.load(std::memory_order_relaxed) != 0; |
-| L07903 | src/mod/session2/tree_bend_logic.h:805:20 | common | inline literal (semantic audit required) | 0 | size_t n = 0; |
-| L07904 | src/mod/session2/tree_bend_logic.h:815:33 | common | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> over_{0}; |
-| L07905 | src/mod/session2/tree_bend_logic.h:824:19 | own_bend_same_tree | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0; |
-| L07906 | src/mod/session2/tree_bend_logic.h:824:27 | own_bend_same_tree | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0; |
-| L07907 | src/mod/session2/tree_bend_logic.h:825:29 | own_bend_same_tree | inline literal (semantic audit required) | 8 | std::memcpy(&lo, scene, 8); |
-| L07908 | src/mod/session2/tree_bend_logic.h:826:30 | own_bend_same_tree | inline literal (semantic audit required) | 8 | std::memcpy(&hi, scene + 8, 8); |
-| L07909 | src/mod/session2/tree_bend_logic.h:826:33 | own_bend_same_tree | inline literal (semantic audit required) | 8 | std::memcpy(&hi, scene + 8, 8); |
-| L07910 | src/mod/session2/tree_bend_logic.h:852:18 | record | inline literal (semantic audit required) | 1 | if ((s & 1) &#124;&#124; !seq_.compare_exchange_strong(s, s + 1, std::memory_order_acquire, std::memory_order_relaxed)) { |
-| L07911 | src/mod/session2/tree_bend_logic.h:852:61 | record | inline literal (semantic audit required) | 1 | if ((s & 1) &#124;&#124; !seq_.compare_exchange_strong(s, s + 1, std::memory_order_acquire, std::memory_order_relaxed)) { |
-| L07912 | src/mod/session2/tree_bend_logic.h:859:24 | record | inline literal (semantic audit required) | 2 | seq_.store(s + 2, std::memory_order_release); |
-| L07913 | src/mod/session2/tree_bend_logic.h:864:22 | read | inline literal (semantic audit required) | 0 | for (int i = 0; i < kReadTries; ++i) { |
-| L07914 | src/mod/session2/tree_bend_logic.h:866:22 | read | inline literal (semantic audit required) | 1 | if (s1 & 1) continue; |
-| L07915 | src/mod/session2/tree_bend_logic.h:877:23 | same_tree_now | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0, us = 0; |
-| L07916 | src/mod/session2/tree_bend_logic.h:877:31 | same_tree_now | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0, us = 0; |
-| L07917 | src/mod/session2/tree_bend_logic.h:877:39 | same_tree_now | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0, us = 0; |
-| L07918 | src/mod/session2/tree_bend_logic.h:883:32 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> seq_{0}; |
-| L07919 | src/mod/session2/tree_bend_logic.h:884:31 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> lo_{0}, hi_{0}, us_{0}; |
-| L07920 | src/mod/session2/tree_bend_logic.h:884:39 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> lo_{0}, hi_{0}, us_{0}; |
-| L07921 | src/mod/session2/tree_bend_logic.h:884:47 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> lo_{0}, hi_{0}, us_{0}; |
-| L07922 | src/mod/session2/ui_pause_logic.h:55:91 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.front() == ' ' &#124;&#124; raw.front() == '\t')) raw.remove_prefix(1); |
-| L07923 | src/mod/session2/ui_pause_logic.h:56:111 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.back() == ' ' &#124;&#124; raw.back() == '\t' &#124;&#124; raw.back() == '\r')) raw.remove_suffix(1); |
-| L07924 | src/mod/session2/ui_pause_logic.h:59:26 | parse_mode | inline literal (semantic audit required) | 0 | raw = raw.substr(0, c); |
-| L07925 | src/mod/session2/ui_pause_logic.h:60:93 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.back() == ' ' &#124;&#124; raw.back() == '\t')) raw.remove_suffix(1); |
-| L07926 | src/mod/session2/ui_pause_logic.h:118:47 | classify | inline literal (semantic audit required) | 0.0f | if (std::isnan(v) &#124;&#124; std::isinf(v) &#124;&#124; v < 0.0f) return Kind::Invalid; |
-| L07927 | src/mod/session2/ui_pause_logic.h:119:14 | classify | inline literal (semantic audit required) | 1.0f | if (v == 1.0f) return Kind::Neutral; |
-| L07928 | src/mod/session2/ui_pause_logic.h:120:13 | classify | inline literal (semantic audit required) | 1.0f | if (v > 1.0f) return Kind::Fast; |
-| L07929 | src/mod/session2/ui_pause_logic.h:142:19 | active | inline literal (semantic audit required) | 1.0f | float value = 1.0f;     // what 0x35CD990 returns to the game |
-| L07930 | src/mod/session2/ui_pause_logic.h:151:27 | decide | inline literal (semantic audit required) | 1.0f | d.value = d.blocked ? 1.0f : original; |
-| L07931 | src/mod/session2/ui_pause_logic.h:164:22 | decide | inline literal (semantic audit required) | 1.0f | float smoothed = 1.0f;  // world+0x312C0 (stored unsnapped, 0xAD1519) |
-| L07932 | src/mod/session2/ui_pause_logic.h:165:18 | decide | inline literal (semantic audit required) | 2.5f | float rate = 2.5f;      // [0x6D2A028] |
-| L07933 | src/mod/session2/ui_pause_logic.h:166:24 | decide | inline literal (semantic audit required) | 4f | float epsilon = 1e-4f;  // close enough: snaps to the target (0xAD152E..0xAD1534) |
-| L07934 | src/mod/session2/ui_pause_logic.h:169:63 | effective | inline literal (semantic audit required) | 0.0f | float effective() const { return smoothed < kPauseBelow ? 0.0f : smoothed; } |
-| L07935 | src/mod/session2/ui_pause_logic.h:174:29 | step | inline literal (semantic audit required) | 1.0f | const float k = 1.0f - std::exp(-rate * dt); |
-| L07936 | src/mod/session2/ui_pause_logic.h:203:22 | step | inline literal (semantic audit required) | 0 | uint32_t index = 0;      // in the list |
-| L07937 | src/mod/session2/ui_pause_logic.h:204:21 | step | inline literal (semantic audit required) | 0 | uint8_t state = 0;       // +0x26F (0 or 1) |
-| L07938 | src/mod/session2/ui_pause_logic.h:206:22 | step | inline literal (semantic audit required) | 0 | uintptr_t view = 0, root = 0, root_vtable = 0; |
-| L07939 | src/mod/session2/ui_pause_logic.h:206:32 | step | inline literal (semantic audit required) | 0 | uintptr_t view = 0, root = 0, root_vtable = 0; |
-| L07940 | src/mod/session2/ui_pause_logic.h:206:49 | step | inline literal (semantic audit required) | 0 | uintptr_t view = 0, root = 0, root_vtable = 0; |
-| L07941 | src/mod/session2/ui_pause_logic.h:207:27 | step | inline literal (semantic audit required) | 0 | uint32_t scale_bits = 0;  // +0x23C as read |
-| L07942 | src/mod/session2/ui_pause_logic.h:214:22 | scale | inline literal (semantic audit required) | 0 | uint32_t count = 0;      // entries in the list |
-| L07943 | src/mod/session2/ui_pause_logic.h:215:21 | scale | inline literal (semantic audit required) | 0 | uint32_t open = 0;       // open views (state 0/1) |
-| L07944 | src/mod/session2/ui_pause_logic.h:216:21 | scale | inline literal (semantic audit required) | 0 | uint32_t hits = 0;       // open views asking for something (all of them, even past kMaxHits) |
-| L07945 | src/mod/session2/ui_pause_logic.h:220:19 | scale | inline literal (semantic audit required) | 1 | int source = -1; |
-| L07946 | src/mod/session2/ui_pause_logic.h:229:22 | walk_views | inline literal (semantic audit required) | 0 | uintptr_t list = 0, data = 0; |
-| L07947 | src/mod/session2/ui_pause_logic.h:229:32 | walk_views | inline literal (semantic audit required) | 0 | uintptr_t list = 0, data = 0; |
-| L07948 | src/mod/session2/ui_pause_logic.h:230:22 | walk_views | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
-| L07949 | src/mod/session2/ui_pause_logic.h:245:23 | u32 | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < count; ++i) { |
-| L07950 | src/mod/session2/ui_pause_logic.h:246:23 | u32 | inline literal (semantic audit required) | 0 | uintptr_t e = 0, holder = 0, view = 0; |
-| L07951 | src/mod/session2/ui_pause_logic.h:246:35 | u32 | inline literal (semantic audit required) | 0 | uintptr_t e = 0, holder = 0, view = 0; |
-| L07952 | src/mod/session2/ui_pause_logic.h:246:45 | u32 | inline literal (semantic audit required) | 0 | uintptr_t e = 0, holder = 0, view = 0; |
-| L07953 | src/mod/session2/ui_pause_logic.h:247:27 | u32 | inline literal (semantic audit required) | 8ull | if (!m.ptr(data + 8ull * i, e)) { |
-| L07954 | src/mod/session2/ui_pause_logic.h:259:25 | u32 | inline literal (semantic audit required) | 0 | uint8_t state = 0; |
-| L07955 | src/mod/session2/ui_pause_logic.h:264:22 | u32 | inline literal (semantic audit required) | 2 | if (state >= 2) continue;  // hiding (2) or unloaded (3+): not counted by the original |
-| L07956 | src/mod/session2/ui_pause_logic.h:266:26 | u32 | inline literal (semantic audit required) | 0 | uintptr_t root = 0, vt = 0, fn = 0; |
-| L07957 | src/mod/session2/ui_pause_logic.h:266:34 | u32 | inline literal (semantic audit required) | 0 | uintptr_t root = 0, vt = 0, fn = 0; |
-| L07958 | src/mod/session2/ui_pause_logic.h:266:42 | u32 | inline literal (semantic audit required) | 0 | uintptr_t root = 0, vt = 0, fn = 0; |
-| L07959 | src/mod/session2/ui_pause_logic.h:267:25 | u32 | inline literal (semantic audit required) | 0 | uint32_t bits = 0; |
-| L07960 | src/mod/session2/ui_pause_logic.h:276:54 | u32 | inline literal (semantic audit required) | 1.0f | if (!custom && std::bit_cast<float>(bits) == 1.0f) continue; |
-| L07961 | src/mod/session2/ui_pause_logic.h:277:23 | u32 | inline literal (semantic audit required) | 0 | if (w.hits == 0) w.source = custom ? -1 : 0; |
-| L07962 | src/mod/session2/ui_pause_logic.h:277:47 | u32 | inline literal (semantic audit required) | 1 | if (w.hits == 0) w.source = custom ? -1 : 0; |
-| L07963 | src/mod/session2/ui_pause_logic.h:277:51 | u32 | inline literal (semantic audit required) | 0 | if (w.hits == 0) w.source = custom ? -1 : 0; |
-| L07964 | src/mod/session2/ui_pause_logic.h:297:37 | u32 | inline literal (semantic audit required) | 0 | enum class Site : uint8_t { Other = 0, First = 1, Second = 2 }; |
-| L07965 | src/mod/session2/ui_pause_logic.h:297:48 | u32 | inline literal (semantic audit required) | 1 | enum class Site : uint8_t { Other = 0, First = 1, Second = 2 }; |
-| L07966 | src/mod/session2/ui_pause_logic.h:297:60 | u32 | inline literal (semantic audit required) | 2 | enum class Site : uint8_t { Other = 0, First = 1, Second = 2 }; |
-| L07967 | src/mod/session2/ui_pause_logic.h:300:21 | u32 | inline literal (semantic audit required) | 1 | kEvTransition = 1,  // the original value changed |
-| L07968 | src/mod/session2/ui_pause_logic.h:301:17 | u32 | inline literal (semantic audit required) | 2 | kEvSource = 2,      // same value, another view explains it now (a menu opened from another one) |
-| L07969 | src/mod/session2/ui_pause_logic.h:308:25 | u32 | inline literal (semantic audit required) | 0 | uint32_t old_bits = 0, new_bits = 0;  // the original's value, before and now |
-| L07970 | src/mod/session2/ui_pause_logic.h:308:39 | u32 | inline literal (semantic audit required) | 0 | uint32_t old_bits = 0, new_bits = 0;  // the original's value, before and now |
-| L07971 | src/mod/session2/ui_pause_logic.h:313:24 | u32 | inline literal (semantic audit required) | 0 | uint64_t ep_seen = 0, ep_blocked = 0;  // the episode this event closes (first-call frames) |
-| L07972 | src/mod/session2/ui_pause_logic.h:313:40 | u32 | inline literal (semantic audit required) | 0 | uint64_t ep_seen = 0, ep_blocked = 0;  // the episode this event closes (first-call frames) |
-| L07973 | src/mod/session2/ui_pause_logic.h:320:52 | pack | inline literal (semantic audit required) | 1u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
-| L07974 | src/mod/session2/ui_pause_logic.h:320:57 | pack | inline literal (semantic audit required) | 0u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
-| L07975 | src/mod/session2/ui_pause_logic.h:320:76 | pack | inline literal (semantic audit required) | 2u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
-| L07976 | src/mod/session2/ui_pause_logic.h:320:81 | pack | inline literal (semantic audit required) | 0u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
-| L07977 | src/mod/session2/ui_pause_logic.h:320:97 | pack | inline literal (semantic audit required) | 4u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
-| L07978 | src/mod/session2/ui_pause_logic.h:320:102 | pack | inline literal (semantic audit required) | 0u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
-| L07979 | src/mod/session2/ui_pause_logic.h:321:70 | pack | inline literal (semantic audit required) | 3u | (static_cast<unsigned>(n.site) & 3u) << 3 &#124; |
-| L07980 | src/mod/session2/ui_pause_logic.h:321:77 | pack | inline literal (semantic audit required) | 3 | (static_cast<unsigned>(n.site) & 3u) << 3 &#124; |
-| L07981 | src/mod/session2/ui_pause_logic.h:322:70 | pack | inline literal (semantic audit required) | 3u | (static_cast<unsigned>(n.mode) & 3u) << 5); |
-| L07982 | src/mod/session2/ui_pause_logic.h:322:77 | pack | inline literal (semantic audit required) | 5 | (static_cast<unsigned>(n.mode) & 3u) << 5); |
-| L07983 | src/mod/session2/ui_pause_logic.h:323:9 | pack | inline literal (semantic audit required) | 0 | e.v[0] = n.old_bits &#124; static_cast<uint64_t>(n.new_bits) << 32; |
-| L07984 | src/mod/session2/ui_pause_logic.h:323:64 | pack | inline literal (semantic audit required) | 32 | e.v[0] = n.old_bits &#124; static_cast<uint64_t>(n.new_bits) << 32; |
-| L07985 | src/mod/session2/ui_pause_logic.h:324:9 | pack | inline literal (semantic audit required) | 1 | e.v[1] = n.ep_seen; |
-| L07986 | src/mod/session2/ui_pause_logic.h:325:9 | pack | inline literal (semantic audit required) | 2 | e.v[2] = n.ep_blocked; |
-| L07987 | src/mod/session2/ui_pause_logic.h:326:9 | pack | inline literal (semantic audit required) | 3 | e.v[3] = n.walk.count &#124; static_cast<uint64_t>(n.walk.open) << 32; |
-| L07988 | src/mod/session2/ui_pause_logic.h:326:67 | pack | inline literal (semantic audit required) | 32 | e.v[3] = n.walk.count &#124; static_cast<uint64_t>(n.walk.open) << 32; |
-| L07989 | src/mod/session2/ui_pause_logic.h:327:9 | pack | inline literal (semantic audit required) | 4 | e.v[4] = n.walk.hits &#124; static_cast<uint64_t>(static_cast<uint8_t>(n.walk.source + 1)) << 32 &#124; |
-| L07990 | src/mod/session2/ui_pause_logic.h:327:87 | pack | inline literal (semantic audit required) | 1 | e.v[4] = n.walk.hits &#124; static_cast<uint64_t>(static_cast<uint8_t>(n.walk.source + 1)) << 32 &#124; |
-| L07991 | src/mod/session2/ui_pause_logic.h:327:94 | pack | inline literal (semantic audit required) | 32 | e.v[4] = n.walk.hits &#124; static_cast<uint64_t>(static_cast<uint8_t>(n.walk.source + 1)) << 32 &#124; |
-| L07992 | src/mod/session2/ui_pause_logic.h:328:27 | pack | inline literal (semantic audit required) | 1ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L07993 | src/mod/session2/ui_pause_logic.h:328:34 | pack | inline literal (semantic audit required) | 0ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L07994 | src/mod/session2/ui_pause_logic.h:328:43 | pack | inline literal (semantic audit required) | 40 | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L07995 | src/mod/session2/ui_pause_logic.h:328:68 | pack | inline literal (semantic audit required) | 1ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L07996 | src/mod/session2/ui_pause_logic.h:328:75 | pack | inline literal (semantic audit required) | 0ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L07997 | src/mod/session2/ui_pause_logic.h:328:84 | pack | inline literal (semantic audit required) | 41 | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L07998 | src/mod/session2/ui_pause_logic.h:328:101 | pack | inline literal (semantic audit required) | 1ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L07999 | src/mod/session2/ui_pause_logic.h:328:108 | pack | inline literal (semantic audit required) | 0ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L08000 | src/mod/session2/ui_pause_logic.h:328:117 | pack | inline literal (semantic audit required) | 42 | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
-| L08001 | src/mod/session2/ui_pause_logic.h:329:21 | pack | inline literal (semantic audit required) | 0 | uint64_t meta = 0; |
-| L08002 | src/mod/session2/ui_pause_logic.h:330:21 | pack | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kMaxHits; ++i) { |
-| L08003 | src/mod/session2/ui_pause_logic.h:332:80 | pack | inline literal (semantic audit required) | 0xFFFFFFFFull | const bool in_image = h.root_vtable >= base && h.root_vtable - base <= 0xFFFFFFFFull; |
-| L08004 | src/mod/session2/ui_pause_logic.h:333:64 | pack | inline literal (semantic audit required) | 0 | const uint64_t rva = in_image ? h.root_vtable - base : 0; |
-| L08005 | src/mod/session2/ui_pause_logic.h:334:13 | pack | inline literal (semantic audit required) | 5 | e.v[5 + 2 * i] = h.view; |
-| L08006 | src/mod/session2/ui_pause_logic.h:334:17 | pack | inline literal (semantic audit required) | 2 | e.v[5 + 2 * i] = h.view; |
-| L08007 | src/mod/session2/ui_pause_logic.h:335:13 | pack | inline literal (semantic audit required) | 6 | e.v[6 + 2 * i] = rva &#124; static_cast<uint64_t>(h.scale_bits) << 32; |
-| L08008 | src/mod/session2/ui_pause_logic.h:335:17 | pack | inline literal (semantic audit required) | 2 | e.v[6 + 2 * i] = rva &#124; static_cast<uint64_t>(h.scale_bits) << 32; |
-| L08009 | src/mod/session2/ui_pause_logic.h:335:71 | pack | inline literal (semantic audit required) | 32 | e.v[6 + 2 * i] = rva &#124; static_cast<uint64_t>(h.scale_bits) << 32; |
-| L08010 | src/mod/session2/ui_pause_logic.h:336:39 | pack | inline literal (semantic audit required) | 0xFFFFull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
-| L08011 | src/mod/session2/ui_pause_logic.h:336:63 | pack | inline literal (semantic audit required) | 1ull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
-| L08012 | src/mod/session2/ui_pause_logic.h:336:72 | pack | inline literal (semantic audit required) | 16 | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
-| L08013 | src/mod/session2/ui_pause_logic.h:336:92 | pack | inline literal (semantic audit required) | 1ull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
-| L08014 | src/mod/session2/ui_pause_logic.h:336:99 | pack | inline literal (semantic audit required) | 0ull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
-| L08015 | src/mod/session2/ui_pause_logic.h:336:108 | pack | inline literal (semantic audit required) | 17 | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
-| L08016 | src/mod/session2/ui_pause_logic.h:337:40 | pack | inline literal (semantic audit required) | 1ull | (in_image ? 1ull : 0ull) << 18; |
-| L08017 | src/mod/session2/ui_pause_logic.h:337:47 | pack | inline literal (semantic audit required) | 0ull | (in_image ? 1ull : 0ull) << 18; |
-| L08018 | src/mod/session2/ui_pause_logic.h:337:56 | pack | inline literal (semantic audit required) | 18 | (in_image ? 1ull : 0ull) << 18; |
-| L08019 | src/mod/session2/ui_pause_logic.h:338:23 | pack | inline literal (semantic audit required) | 20 | meta &#124;= m << (20 * i); |
-| L08020 | src/mod/session2/ui_pause_logic.h:340:9 | pack | inline literal (semantic audit required) | 11 | e.v[11] = meta; |
-| L08021 | src/mod/session2/ui_pause_logic.h:346:30 | unpack | inline literal (semantic audit required) | 1u | n.d.blocked = (e.flags & 1u) != 0; |
-| L08022 | src/mod/session2/ui_pause_logic.h:346:37 | unpack | inline literal (semantic audit required) | 0 | n.d.blocked = (e.flags & 1u) != 0; |
-| L08023 | src/mod/session2/ui_pause_logic.h:347:28 | unpack | inline literal (semantic audit required) | 2u | n.d.would = (e.flags & 2u) != 0; |
-| L08024 | src/mod/session2/ui_pause_logic.h:347:35 | unpack | inline literal (semantic audit required) | 0 | n.d.would = (e.flags & 2u) != 0; |
-| L08025 | src/mod/session2/ui_pause_logic.h:348:25 | unpack | inline literal (semantic audit required) | 4u | n.live = (e.flags & 4u) != 0; |
-| L08026 | src/mod/session2/ui_pause_logic.h:348:32 | unpack | inline literal (semantic audit required) | 0 | n.live = (e.flags & 4u) != 0; |
-| L08027 | src/mod/session2/ui_pause_logic.h:349:44 | unpack | inline literal (semantic audit required) | 3 | n.site = static_cast<Site>((e.flags >> 3) & 3u); |
-| L08028 | src/mod/session2/ui_pause_logic.h:349:49 | unpack | inline literal (semantic audit required) | 3u | n.site = static_cast<Site>((e.flags >> 3) & 3u); |
-| L08029 | src/mod/session2/ui_pause_logic.h:350:44 | unpack | inline literal (semantic audit required) | 5 | n.mode = static_cast<Mode>((e.flags >> 5) & 3u); |
-| L08030 | src/mod/session2/ui_pause_logic.h:350:49 | unpack | inline literal (semantic audit required) | 3u | n.mode = static_cast<Mode>((e.flags >> 5) & 3u); |
-| L08031 | src/mod/session2/ui_pause_logic.h:351:44 | unpack | inline literal (semantic audit required) | 0 | n.old_bits = static_cast<uint32_t>(e.v[0]); |
-| L08032 | src/mod/session2/ui_pause_logic.h:352:44 | unpack | inline literal (semantic audit required) | 0 | n.new_bits = static_cast<uint32_t>(e.v[0] >> 32); |
-| L08033 | src/mod/session2/ui_pause_logic.h:352:50 | unpack | inline literal (semantic audit required) | 32 | n.new_bits = static_cast<uint32_t>(e.v[0] >> 32); |
-| L08034 | src/mod/session2/ui_pause_logic.h:353:31 | unpack | inline literal (semantic audit required) | 1.0f | n.d.value = n.d.blocked ? 1.0f : std::bit_cast<float>(n.new_bits); |
-| L08035 | src/mod/session2/ui_pause_logic.h:354:21 | unpack | inline literal (semantic audit required) | 1 | n.ep_seen = e.v[1]; |
-| L08036 | src/mod/session2/ui_pause_logic.h:355:24 | unpack | inline literal (semantic audit required) | 2 | n.ep_blocked = e.v[2]; |
-| L08037 | src/mod/session2/ui_pause_logic.h:356:46 | unpack | inline literal (semantic audit required) | 3 | n.walk.count = static_cast<uint32_t>(e.v[3]); |
-| L08038 | src/mod/session2/ui_pause_logic.h:357:45 | unpack | inline literal (semantic audit required) | 3 | n.walk.open = static_cast<uint32_t>(e.v[3] >> 32); |
-| L08039 | src/mod/session2/ui_pause_logic.h:357:51 | unpack | inline literal (semantic audit required) | 32 | n.walk.open = static_cast<uint32_t>(e.v[3] >> 32); |
-| L08040 | src/mod/session2/ui_pause_logic.h:358:45 | unpack | inline literal (semantic audit required) | 4 | n.walk.hits = static_cast<uint32_t>(e.v[4]); |
-| L08041 | src/mod/session2/ui_pause_logic.h:359:63 | unpack | inline literal (semantic audit required) | 4 | n.walk.source = static_cast<int>(static_cast<uint8_t>(e.v[4] >> 32)) - 1; |
-| L08042 | src/mod/session2/ui_pause_logic.h:359:69 | unpack | inline literal (semantic audit required) | 32 | n.walk.source = static_cast<int>(static_cast<uint8_t>(e.v[4] >> 32)) - 1; |
-| L08043 | src/mod/session2/ui_pause_logic.h:359:76 | unpack | inline literal (semantic audit required) | 1 | n.walk.source = static_cast<int>(static_cast<uint8_t>(e.v[4] >> 32)) - 1; |
-| L08044 | src/mod/session2/ui_pause_logic.h:360:22 | unpack | inline literal (semantic audit required) | 4 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
-| L08045 | src/mod/session2/ui_pause_logic.h:360:28 | unpack | inline literal (semantic audit required) | 40 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
-| L08046 | src/mod/session2/ui_pause_logic.h:360:33 | unpack | inline literal (semantic audit required) | 1 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
-| L08047 | src/mod/session2/ui_pause_logic.h:360:39 | unpack | inline literal (semantic audit required) | 0 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
-| L08048 | src/mod/session2/ui_pause_logic.h:361:29 | unpack | inline literal (semantic audit required) | 4 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
-| L08049 | src/mod/session2/ui_pause_logic.h:361:35 | unpack | inline literal (semantic audit required) | 41 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
-| L08050 | src/mod/session2/ui_pause_logic.h:361:40 | unpack | inline literal (semantic audit required) | 1 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
-| L08051 | src/mod/session2/ui_pause_logic.h:361:46 | unpack | inline literal (semantic audit required) | 0 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
-| L08052 | src/mod/session2/ui_pause_logic.h:362:21 | unpack | inline literal (semantic audit required) | 4 | n.walked = (e.v[4] >> 42 & 1) != 0; |
-| L08053 | src/mod/session2/ui_pause_logic.h:362:27 | unpack | inline literal (semantic audit required) | 42 | n.walked = (e.v[4] >> 42 & 1) != 0; |
-| L08054 | src/mod/session2/ui_pause_logic.h:362:32 | unpack | inline literal (semantic audit required) | 1 | n.walked = (e.v[4] >> 42 & 1) != 0; |
-| L08055 | src/mod/session2/ui_pause_logic.h:362:38 | unpack | inline literal (semantic audit required) | 0 | n.walked = (e.v[4] >> 42 & 1) != 0; |
-| L08056 | src/mod/session2/ui_pause_logic.h:363:21 | unpack | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kMaxHits; ++i) { |
-| L08057 | src/mod/session2/ui_pause_logic.h:365:32 | unpack | inline literal (semantic audit required) | 11 | const uint64_t m = e.v[11] >> (20 * i); |
-| L08058 | src/mod/session2/ui_pause_logic.h:365:40 | unpack | inline literal (semantic audit required) | 20 | const uint64_t m = e.v[11] >> (20 * i); |
-| L08059 | src/mod/session2/ui_pause_logic.h:366:45 | unpack | inline literal (semantic audit required) | 0xFFFF | h.index = static_cast<uint32_t>(m & 0xFFFF); |
-| L08060 | src/mod/session2/ui_pause_logic.h:367:45 | unpack | inline literal (semantic audit required) | 16 | h.state = static_cast<uint8_t>(m >> 16 & 1); |
-| L08061 | src/mod/session2/ui_pause_logic.h:367:50 | unpack | inline literal (semantic audit required) | 1 | h.state = static_cast<uint8_t>(m >> 16 & 1); |
-| L08062 | src/mod/session2/ui_pause_logic.h:368:29 | unpack | inline literal (semantic audit required) | 17 | h.custom_vf = (m >> 17 & 1) != 0; |
-| L08063 | src/mod/session2/ui_pause_logic.h:368:34 | unpack | inline literal (semantic audit required) | 1 | h.custom_vf = (m >> 17 & 1) != 0; |
-| L08064 | src/mod/session2/ui_pause_logic.h:368:40 | unpack | inline literal (semantic audit required) | 0 | h.custom_vf = (m >> 17 & 1) != 0; |
-| L08065 | src/mod/session2/ui_pause_logic.h:369:37 | unpack | inline literal (semantic audit required) | 18 | const bool in_image = (m >> 18 & 1) != 0; |
-| L08066 | src/mod/session2/ui_pause_logic.h:369:42 | unpack | inline literal (semantic audit required) | 1 | const bool in_image = (m >> 18 & 1) != 0; |
-| L08067 | src/mod/session2/ui_pause_logic.h:369:48 | unpack | inline literal (semantic audit required) | 0 | const bool in_image = (m >> 18 & 1) != 0; |
-| L08068 | src/mod/session2/ui_pause_logic.h:370:45 | unpack | inline literal (semantic audit required) | 5 | h.view = static_cast<uintptr_t>(e.v[5 + 2 * i]); |
-| L08069 | src/mod/session2/ui_pause_logic.h:370:49 | unpack | inline literal (semantic audit required) | 2 | h.view = static_cast<uintptr_t>(e.v[5 + 2 * i]); |
-| L08070 | src/mod/session2/ui_pause_logic.h:371:69 | unpack | inline literal (semantic audit required) | 6 | h.root_vtable = in_image ? base + static_cast<uint32_t>(e.v[6 + 2 * i]) : 0; |
-| L08071 | src/mod/session2/ui_pause_logic.h:371:73 | unpack | inline literal (semantic audit required) | 2 | h.root_vtable = in_image ? base + static_cast<uint32_t>(e.v[6 + 2 * i]) : 0; |
-| L08072 | src/mod/session2/ui_pause_logic.h:371:83 | unpack | inline literal (semantic audit required) | 0 | h.root_vtable = in_image ? base + static_cast<uint32_t>(e.v[6 + 2 * i]) : 0; |
-| L08073 | src/mod/session2/ui_pause_logic.h:372:50 | unpack | inline literal (semantic audit required) | 6 | h.scale_bits = static_cast<uint32_t>(e.v[6 + 2 * i] >> 32); |
-| L08074 | src/mod/session2/ui_pause_logic.h:372:54 | unpack | inline literal (semantic audit required) | 2 | h.scale_bits = static_cast<uint32_t>(e.v[6 + 2 * i] >> 32); |
-| L08075 | src/mod/session2/ui_pause_logic.h:372:64 | unpack | inline literal (semantic audit required) | 32 | h.scale_bits = static_cast<uint32_t>(e.v[6 + 2 * i] >> 32); |
-| L08076 | src/mod/session2/ui_pause_logic.h:381:51 | attributed_vtable | inline literal (semantic audit required) | 0 | if (!n.walked &#124;&#124; !n.walk.ok &#124;&#124; n.walk.hits == 0) return 0; |
-| L08077 | src/mod/session2/ui_pause_logic.h:381:61 | attributed_vtable | inline literal (semantic audit required) | 0 | if (!n.walked &#124;&#124; !n.walk.ok &#124;&#124; n.walk.hits == 0) return 0; |
-| L08078 | src/mod/session2/ui_pause_logic.h:382:36 | attributed_vtable | inline literal (semantic audit required) | 0 | const int i = n.walk.source >= 0 ? n.walk.source : 0; |
-| L08079 | src/mod/session2/ui_pause_logic.h:382:56 | attributed_vtable | inline literal (semantic audit required) | 0 | const int i = n.walk.source >= 0 ? n.walk.source : 0; |
-| L08080 | src/mod/session2/ui_pause_logic.h:394:29 | attributed_vtable | inline literal (semantic audit required) | 0 | uint64_t episodes = 0;        // transitions into a value this UI explained |
-| L08081 | src/mod/session2/ui_pause_logic.h:395:35 | attributed_vtable | inline literal (semantic audit required) | 0 | uint64_t frames_blocked = 0;  // first-call frames replaced by 1.0 while it was the source |
-| L08082 | src/mod/session2/ui_pause_logic.h:396:32 | attributed_vtable | inline literal (semantic audit required) | 0 | uint64_t frames_seen = 0;     // first-call frames it was the source (blocked or not) |
-| L08083 | src/mod/session2/ui_pause_logic.h:397:27 | attributed_vtable | inline literal (semantic audit required) | 1.0f | float min_scale = 1.0f; |
-| L08084 | src/mod/session2/ui_pause_logic.h:412:22 | total_blocked | inline literal (semantic audit required) | 0 | uint64_t n = 0; |
-| L08085 | src/mod/session2/ui_pause_logic.h:425:32 | total_blocked | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> seen{0}, blocked{0}; |
-| L08086 | src/mod/session2/ui_pause_logic.h:425:44 | total_blocked | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> seen{0}, blocked{0}; |
-| L08087 | src/mod/session2/ui_pause_logic.h:428:24 | frame | inline literal (semantic audit required) | 1 | seen.fetch_add(1, std::memory_order_relaxed); |
-| L08088 | src/mod/session2/ui_pause_logic.h:429:44 | frame | inline literal (semantic audit required) | 1 | if (was_blocked) blocked.fetch_add(1, std::memory_order_relaxed); |
-| L08089 | src/mod/session2/ui_pause_logic.h:433:27 | close | inline literal (semantic audit required) | 0 | s = seen.exchange(0, std::memory_order_relaxed); |
-| L08090 | src/mod/session2/ui_pause_logic.h:434:30 | close | inline literal (semantic audit required) | 0 | b = blocked.exchange(0, std::memory_order_relaxed); |
-| L08091 | src/mod/session2/user2_funnels.h:112:23 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
-| L08092 | src/mod/session2/user2_funnels.h:113:21 | (file scope) | inline literal (semantic audit required) | 0 | uint8_t route = 0;      // u2f::RouteFail (2372) |
-| L08093 | src/mod/session2/user2_funnels.h:114:21 | (file scope) | inline literal (semantic audit required) | 0 | uint8_t field = 0;      // 0 unknown, 1 the host's, 2 its own, 3 another |
-| L08094 | src/mod/session2/user2_funnels.h:115:26 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t first_u32 = 0; |
-| L08095 | src/mod/session2/user2_funnels.h:116:18 | (file scope) | inline literal (semantic audit required) | 16 | uint8_t head[16] = {}; |
-| L08096 | src/mod/session2/user2_funnels.h:117:21 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t size = 0; |
-| L08097 | src/mod/session2/user2_funnels_logic.h:44:91 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.front() == ' ' &#124;&#124; raw.front() == '\t')) raw.remove_prefix(1); |
-| L08098 | src/mod/session2/user2_funnels_logic.h:46:97 | parse_mode | inline literal (semantic audit required) | 0 | if (const size_t c = raw.find_first_of(";#"); c != std::string_view::npos) raw = raw.substr(0, c); |
-| L08099 | src/mod/session2/user2_funnels_logic.h:48:27 | parse_mode | inline literal (semantic audit required) | 1 | raw.remove_suffix(1); |
-| L08100 | src/mod/session2/user2_funnels_logic.h:185:25 | decide_quest_policy | inline literal (semantic audit required) | 0 | uint32_t char_key = 0, user2_char = 0; |
-| L08101 | src/mod/session2/user2_funnels_logic.h:185:41 | decide_quest_policy | inline literal (semantic audit required) | 0 | uint32_t char_key = 0, user2_char = 0; |
-| L08102 | src/mod/session2/user2_funnels_logic.h:265:18 | host_quest_ack_index | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) { |
-| L08103 | src/mod/session2/user2_funnels_logic.h:265:25 | host_quest_ack_index | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) { |
-| L08104 | src/mod/session2/user2_funnels_logic.h:268:13 | host_quest_ack_index | inline literal (semantic audit required) | 1 | return -1; |
-| L08105 | src/mod/session2/user2_funnels_logic.h:275:51 | is_user_key | inline literal (semantic audit required) | 0 | inline bool is_user_key(uint32_t k) { return k != 0 && (k >> 28) == 0x9; } |
-| L08106 | src/mod/session2/user2_funnels_logic.h:275:62 | is_user_key | inline literal (semantic audit required) | 28 | inline bool is_user_key(uint32_t k) { return k != 0 && (k >> 28) == 0x9; } |
-| L08107 | src/mod/session2/user2_funnels_logic.h:275:69 | is_user_key | inline literal (semantic audit required) | 0x9 | inline bool is_user_key(uint32_t k) { return k != 0 && (k >> 28) == 0x9; } |
-| L08108 | src/mod/session2/user2_funnels_logic.h:276:56 | is_character_key | inline literal (semantic audit required) | 0 | inline bool is_character_key(uint32_t k) { return k != 0 && (k >> 28) == 0xA; } |
-| L08109 | src/mod/session2/user2_funnels_logic.h:276:67 | is_character_key | inline literal (semantic audit required) | 28 | inline bool is_character_key(uint32_t k) { return k != 0 && (k >> 28) == 0xA; } |
-| L08110 | src/mod/session2/user2_funnels_logic.h:276:74 | is_character_key | inline literal (semantic audit required) | 0xA | inline bool is_character_key(uint32_t k) { return k != 0 && (k >> 28) == 0xA; } |
-| L08111 | src/mod/session2/user2_funnels_logic.h:281:27 | is_character_key | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0;  // its user key (MainUserDataStartAck), 0x9... |
-| L08112 | src/mod/session2/user2_funnels_logic.h:282:27 | is_character_key | inline literal (semantic audit required) | 0 | uint32_t user2_char = 0;  // its main character's key (MainPlayerDataStartAck), 0xA... |
-| L08113 | src/mod/session2/user2_funnels_logic.h:283:26 | is_character_key | inline literal (semantic audit required) | 0 | uint32_t host_user = 0;   // the host's user key (session 1's ServerUserActor +0x60), 0x9... |
-| L08114 | src/mod/session2/user2_funnels_logic.h:309:19 | is_user2_character | inline literal (semantic audit required) | 0 | uint8_t arg = 0;          // dl |
-| L08115 | src/mod/session2/user2_funnels_logic.h:311:20 | is_user2_character | inline literal (semantic audit required) | 0 | uint32_t key = 0;         // u32 [X+0x60] |
-| L08116 | src/mod/session2/user2_funnels_logic.h:312:27 | is_user2_character | inline literal (semantic audit required) | 0 | uint32_t controller = 0;  // u32 [X+0x90] |
-| L08117 | src/mod/session2/user2_funnels_logic.h:335:43 | decide_rank | inline literal (semantic audit required) | 5 | if (in.mode == Mode::Off &#124;&#124; in.arg != 5 &#124;&#124; !keys_for_rank(in.keys) &#124;&#124; !in.read_ok) return d; |
-| L08118 | src/mod/session2/user2_funnels_logic.h:379:23 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t actor = 0;        // [params] |
-| L08119 | src/mod/session2/user2_funnels_logic.h:381:24 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t vtable = 0; |
-| L08120 | src/mod/session2/user2_funnels_logic.h:382:33 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t expected_vtable = 0;   // exe + 0x5B1E2B0: ServerChildOnlyInGameActor (the user's characters, [user+0xD0]) |
-| L08121 | src/mod/session2/user2_funnels_logic.h:383:34 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t expected_vtable2 = 0;  // exe + 0x5B1DE20: ServerNormalInGameActor |
-| L08122 | src/mod/session2/user2_funnels_logic.h:384:20 | rank_out_name | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
-| L08123 | src/mod/session2/user2_funnels_logic.h:385:27 | rank_out_name | inline literal (semantic audit required) | 0 | uint32_t controller = 0; |
-| L08124 | src/mod/session2/user2_funnels_logic.h:425:22 | subject_name | inline literal (semantic audit required) | 0 | uint32_t owner = 0; |
-| L08125 | src/mod/session2/user2_funnels_logic.h:446:23 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2C4A36F | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
-| L08126 | src/mod/session2/user2_funnels_logic.h:446:47 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2C4A0AD | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
-| L08127 | src/mod/session2/user2_funnels_logic.h:446:71 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2B03AA7 | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
-| L08128 | src/mod/session2/user2_funnels_logic.h:446:95 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2896347 | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
-| L08129 | src/mod/session2/user2_funnels_logic.h:507:23 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
-| L08130 | src/mod/session2/user2_funnels_logic.h:507:33 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
-| L08131 | src/mod/session2/user2_funnels_logic.h:507:41 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
-| L08132 | src/mod/session2/user2_funnels_logic.h:507:50 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
-| L08133 | src/mod/session2/user2_funnels_logic.h:526:33 | add | inline literal (semantic audit required) | 0 | c_[op < kOpcodes ? op : 0].fetch_add(1, std::memory_order_relaxed); |
-| L08134 | src/mod/session2/user2_funnels_logic.h:526:46 | add | inline literal (semantic audit required) | 1 | c_[op < kOpcodes ? op : 0].fetch_add(1, std::memory_order_relaxed); |
-| L08135 | src/mod/session2/user2_funnels_logic.h:528:69 | at | inline literal (semantic audit required) | 0 | uint32_t at(uint16_t op) const { return c_[op < kOpcodes ? op : 0].load(std::memory_order_relaxed); } |
-| L08136 | src/mod/session2/user2_funnels_logic.h:532:25 | top | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kOpcodes; ++i) { |
-| L08137 | src/mod/session2/user2_funnels_logic.h:549:24 | std::stable_sort | inline literal (semantic audit required) | 2 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L08138 | src/mod/session2/user2_funnels_logic.h:549:39 | std::stable_sort | inline literal (semantic audit required) | 1 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L08139 | src/mod/session2/user2_funnels_logic.h:549:46 | std::stable_sort | inline literal (semantic audit required) | 0 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
-| L08140 | src/mod/session2/user2_funnels_logic.h:554:33 | add | inline literal (semantic audit required) | 1 | overflow_.fetch_add(1, std::memory_order_relaxed); |
-| L08141 | src/mod/session2/user2_funnels_logic.h:557:27 | add | inline literal (semantic audit required) | 2654435761u | size_t i = (rva * 2654435761u) & (N - 1); |
-| L08142 | src/mod/session2/user2_funnels_logic.h:557:47 | add | inline literal (semantic audit required) | 1 | size_t i = (rva * 2654435761u) & (N - 1); |
-| L08143 | src/mod/session2/user2_funnels_logic.h:558:29 | add | inline literal (semantic audit required) | 0 | for (size_t probe = 0; probe < N; ++probe, i = (i + 1) & (N - 1)) { |
-| L08144 | src/mod/session2/user2_funnels_logic.h:558:61 | add | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < N; ++probe, i = (i + 1) & (N - 1)) { |
-| L08145 | src/mod/session2/user2_funnels_logic.h:558:71 | add | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < N; ++probe, i = (i + 1) & (N - 1)) { |
-| L08146 | src/mod/session2/user2_funnels_logic.h:560:22 | add | inline literal (semantic audit required) | 0 | if (k == 0 && key_[i].compare_exchange_strong(k, rva, std::memory_order_acq_rel)) k = rva; |
-| L08147 | src/mod/session2/user2_funnels_logic.h:562:33 | add | inline literal (semantic audit required) | 1 | n_[i].fetch_add(1, std::memory_order_relaxed); |
-| L08148 | src/mod/session2/user2_funnels_logic.h:566:29 | add | inline literal (semantic audit required) | 1 | overflow_.fetch_add(1, std::memory_order_relaxed); |
-| L08149 | src/mod/session2/user2_funnels_logic.h:571:25 | rows | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) { |
-| L08150 | src/mod/session2/user2_funnels_logic.h:583:37 | overflow | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> overflow_{0}; |
-| L08151 | src/mod/session2/user2_funnels_logic.h:587:33 | overflow | inline literal (semantic audit required) | 0 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
-| L08152 | src/mod/session2/user2_funnels_logic.h:587:44 | overflow | inline literal (semantic audit required) | 1 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
-| L08153 | src/mod/session2/user2_funnels_logic.h:587:59 | overflow | inline literal (semantic audit required) | 2 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
-| L08154 | src/mod/session2/user2_funnels_logic.h:587:70 | overflow | inline literal (semantic audit required) | 3 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
-| L08155 | src/mod/session2/user2_funnels_logic.h:587:81 | overflow | inline literal (semantic audit required) | 4 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
-| L08156 | src/mod/session2/user2_funnels_logic.h:587:95 | overflow | inline literal (semantic audit required) | 5 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
-| L08157 | src/mod/session2/user2_funnels_logic.h:602:33 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> calls{0};          // every call (vf40/vf48/FindUser: only under a subject) |
-| L08158 | src/mod/session2/user2_funnels_logic.h:603:41 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> under_subject{0};  // inside a Req of user 2 |
-| L08159 | src/mod/session2/user2_funnels_logic.h:604:39 | funnel_name | inline literal (semantic audit required) | 8 | std::array<std::atomic<uint64_t>, 8> out{};  // by FunnelOut |
-| L08160 | src/mod/session2/user2_funnels_logic.h:605:32 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> same{0}, differ{0};    // probe: the original vs user 2's |
-| L08161 | src/mod/session2/user2_funnels_logic.h:605:43 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> same{0}, differ{0};    // probe: the original vs user 2's |
-| L08162 | src/mod/session2/user2_funnels_logic.h:606:38 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0};         // user 2's value could not be built: the original |
-| L08163 | src/mod/session2/user2_stages.h:125:31 | (file scope) | inline literal (semantic audit required) | 5000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |
-| L08164 | src/mod/session2/user2_stages.h:125:52 | (file scope) | inline literal (semantic audit required) | 8000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |
-| L08165 | src/mod/session2/user2_stages.h:125:77 | (file scope) | inline literal (semantic audit required) | 2000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |
-| L08166 | src/mod/session2/user2_stages.h:125:101 | (file scope) | inline literal (semantic audit required) | 60000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |
+| L05496 | src/mod/session2/identity_probe.cpp:93:42 | (file scope) | inline literal (semantic audit required) | 24 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05497 | src/mod/session2/identity_probe.cpp:93:46 | (file scope) | inline literal (semantic audit required) | 80 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05498 | src/mod/session2/identity_probe.cpp:93:50 | (file scope) | inline literal (semantic audit required) | 40 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05499 | src/mod/session2/identity_probe.cpp:93:54 | (file scope) | inline literal (semantic audit required) | 8 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05500 | src/mod/session2/identity_probe.cpp:93:57 | (file scope) | inline literal (semantic audit required) | 8 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05501 | src/mod/session2/identity_probe.cpp:93:60 | (file scope) | inline literal (semantic audit required) | 16 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05502 | src/mod/session2/identity_probe.cpp:93:64 | (file scope) | inline literal (semantic audit required) | 12 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05503 | src/mod/session2/identity_probe.cpp:93:68 | (file scope) | inline literal (semantic audit required) | 8 | constexpr uint64_t kPointCap[kPoints] = {24, 80, 40, 8, 8, 16, 12, 8}; |
+| L05504 | src/mod/session2/identity_probe.cpp:102:33 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> calls{0}, user2{0}, tries{0}, host_tries{0}, lines{0}; |
+| L05505 | src/mod/session2/identity_probe.cpp:102:43 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> calls{0}, user2{0}, tries{0}, host_tries{0}, lines{0}; |
+| L05506 | src/mod/session2/identity_probe.cpp:102:53 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> calls{0}, user2{0}, tries{0}, host_tries{0}, lines{0}; |
+| L05507 | src/mod/session2/identity_probe.cpp:102:68 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> calls{0}, user2{0}, tries{0}, host_tries{0}, lines{0}; |
+| L05508 | src/mod/session2/identity_probe.cpp:102:78 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> calls{0}, user2{0}, tries{0}, host_tries{0}, lines{0}; |
+| L05509 | src/mod/session2/identity_probe.cpp:105:20 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t g_base = 0, g_image_end = 0, g_status_vt = 0; |
+| L05510 | src/mod/session2/identity_probe.cpp:105:37 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t g_base = 0, g_image_end = 0, g_status_vt = 0; |
+| L05511 | src/mod/session2/identity_probe.cpp:105:54 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t g_base = 0, g_image_end = 0, g_status_vt = 0; |
+| L05512 | src/mod/session2/identity_probe.cpp:120:32 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_logged{0}, g_loads{0}, g_window_until{0}; |
+| L05513 | src/mod/session2/identity_probe.cpp:120:44 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_logged{0}, g_loads{0}, g_window_until{0}; |
+| L05514 | src/mod/session2/identity_probe.cpp:120:63 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_logged{0}, g_loads{0}, g_window_until{0}; |
+| L05515 | src/mod/session2/identity_probe.cpp:121:34 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_host_key{0};  // last host user key read (fallback when the lookup fails) |
+| L05516 | src/mod/session2/identity_probe.cpp:125:23 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t actor = 0; |
+| L05517 | src/mod/session2/identity_probe.cpp:126:19 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t id = 0; |
+| L05518 | src/mod/session2/identity_probe.cpp:133:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t no_at_entry = 0; |
+| L05519 | src/mod/session2/identity_probe.cpp:134:27 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t components = 0, stubs = 0, after_status = 0, owners = 0, status_index = 0; |
+| L05520 | src/mod/session2/identity_probe.cpp:134:38 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t components = 0, stubs = 0, after_status = 0, owners = 0, status_index = 0; |
+| L05521 | src/mod/session2/identity_probe.cpp:134:56 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t components = 0, stubs = 0, after_status = 0, owners = 0, status_index = 0; |
+| L05522 | src/mod/session2/identity_probe.cpp:134:68 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t components = 0, stubs = 0, after_status = 0, owners = 0, status_index = 0; |
+| L05523 | src/mod/session2/identity_probe.cpp:134:86 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t components = 0, stubs = 0, after_status = 0, owners = 0, status_index = 0; |
+| L05524 | src/mod/session2/identity_probe.cpp:138:28 | (file scope) | inline literal (semantic audit required) | 0 | thread_local int t_depth = 0; |
+| L05525 | src/mod/session2/identity_probe.cpp:140:47 | current_frame | inline literal (semantic audit required) | 0 | LoadFrame* current_frame() { return t_depth > 0 && t_depth <= kMaxDepth ? &t_frames[t_depth - 1] : nullptr; } |
+| L05526 | src/mod/session2/identity_probe.cpp:140:95 | current_frame | inline literal (semantic audit required) | 1 | LoadFrame* current_frame() { return t_depth > 0 && t_depth <= kMaxDepth ? &t_frames[t_depth - 1] : nullptr; } |
+| L05527 | src/mod/session2/identity_probe.cpp:148:19 | peekp | inline literal (semantic audit required) | 0 | uintptr_t v = 0; |
+| L05528 | src/mod/session2/identity_probe.cpp:149:29 | peekp | inline literal (semantic audit required) | 0 | return peek(a, v) ? v : 0; |
+| L05529 | src/mod/session2/identity_probe.cpp:157:40 | note | inline literal (semantic audit required) | 1 | if (host && s.host_tries.fetch_add(1) >= kMaxHostLines) return false; |
+| L05530 | src/mod/session2/identity_probe.cpp:158:27 | note | inline literal (semantic audit required) | 1 | if (s.tries.fetch_add(1) >= kPointCap[p]) return false; |
+| L05531 | src/mod/session2/identity_probe.cpp:159:28 | note | inline literal (semantic audit required) | 1 | if (g_logged.fetch_add(1) >= kMaxLogged) return false; |
+| L05532 | src/mod/session2/identity_probe.cpp:160:23 | note | inline literal (semantic audit required) | 1 | s.lines.fetch_add(1); |
+| L05533 | src/mod/session2/identity_probe.cpp:176:19 | character_no | inline literal (semantic audit required) | 0 | uint64_t no = 0; |
+| L05534 | src/mod/session2/identity_probe.cpp:182:18 | restore_version | inline literal (semantic audit required) | 0 | uint32_t v = 0; |
+| L05535 | src/mod/session2/identity_probe.cpp:192:20 | users_now | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L05536 | src/mod/session2/identity_probe.cpp:196:18 | users_now | inline literal (semantic audit required) | 0 | u.host = 0; |
+| L05537 | src/mod/session2/identity_probe.cpp:199:43 | users_now | inline literal (semantic audit required) | 0 | if (!server_user2(u.user2)) u.user2 = 0; |
+| L05538 | src/mod/session2/identity_probe.cpp:206:23 | users_now | inline literal (semantic audit required) | 0 | uintptr_t owner = 0; |
+| L05539 | src/mod/session2/identity_probe.cpp:207:26 | users_now | inline literal (semantic audit required) | 0 | uint32_t owner_key = 0, key = 0; |
+| L05540 | src/mod/session2/identity_probe.cpp:207:35 | users_now | inline literal (semantic audit required) | 0 | uint32_t owner_key = 0, key = 0; |
+| L05541 | src/mod/session2/identity_probe.cpp:260:39 | load_detour | inline literal (semantic audit required) | 1 | g_pt[kPtLoad].calls.fetch_add(1); |
+| L05542 | src/mod/session2/identity_probe.cpp:263:39 | load_detour | inline literal (semantic audit required) | 1 | f->id = g_loads.fetch_add(1) + 1; |
+| L05543 | src/mod/session2/identity_probe.cpp:263:44 | load_detour | inline literal (semantic audit required) | 1 | f->id = g_loads.fetch_add(1) + 1; |
+| L05544 | src/mod/session2/identity_probe.cpp:276:63 | load_detour | inline literal (semantic audit required) | 1 | if (id.user2()) g_pt[kPtLoad].user2.fetch_add(1); |
+| L05545 | src/mod/session2/identity_probe.cpp:305:29 | load_detour | inline literal (semantic audit required) | 0 | uint32_t code = 0; |
+| L05546 | src/mod/session2/identity_probe.cpp:307:27 | load_detour | inline literal (semantic audit required) | 0 | uint64_t no = 0; |
+| L05547 | src/mod/session2/identity_probe.cpp:331:44 | owner_detour | inline literal (semantic audit required) | 1 | g_pt[kPtOwner].calls.fetch_add(1); |
+| L05548 | src/mod/session2/identity_probe.cpp:335:60 | owner_detour | inline literal (semantic audit required) | 1 | if (id.user2()) g_pt[kPtOwner].user2.fetch_add(1); |
+| L05549 | src/mod/session2/identity_probe.cpp:340:30 | owner_detour | inline literal (semantic audit required) | 0 | uint16_t t = 0; |
+| L05550 | src/mod/session2/identity_probe.cpp:341:35 | owner_detour | inline literal (semantic audit required) | 0 | uint64_t copied = 0; |
+| L05551 | src/mod/session2/identity_probe.cpp:357:23 | phases_detour | inline literal (semantic audit required) | 0 | uintptr_t actor = 0; |
+| L05552 | src/mod/session2/identity_probe.cpp:363:41 | phases_detour | inline literal (semantic audit required) | 1 | g_pt[kPtPhases].calls.fetch_add(1); |
+| L05553 | src/mod/session2/identity_probe.cpp:364:58 | phases_detour | inline literal (semantic audit required) | 8 | actor = peekp(reinterpret_cast<uintptr_t>(obj) + 8); |
+| L05554 | src/mod/session2/identity_probe.cpp:368:45 | phases_detour | inline literal (semantic audit required) | 1 | g_pt[kPtPhases].user2.fetch_add(1); |
+| L05555 | src/mod/session2/identity_probe.cpp:380:29 | phases_detour | inline literal (semantic audit required) | 0 | uint32_t code = 0; |
+| L05556 | src/mod/session2/identity_probe.cpp:394:38 | ack_detour | inline literal (semantic audit required) | 1 | g_pt[kPtAck].calls.fetch_add(1); |
+| L05557 | src/mod/session2/identity_probe.cpp:398:42 | ack_detour | inline literal (semantic audit required) | 1 | g_pt[kPtAck].user2.fetch_add(1); |
+| L05558 | src/mod/session2/identity_probe.cpp:416:45 | packer_detour | inline literal (semantic audit required) | 1 | g_pt[kPtPacker].calls.fetch_add(1); |
+| L05559 | src/mod/session2/identity_probe.cpp:419:61 | packer_detour | inline literal (semantic audit required) | 1 | if (id.user2()) g_pt[kPtPacker].user2.fetch_add(1); |
+| L05560 | src/mod/session2/identity_probe.cpp:438:44 | on_component | inline literal (semantic audit required) | 1 | g_pt[kPtComponent].calls.fetch_add(1); |
+| L05561 | src/mod/session2/identity_probe.cpp:442:46 | on_component | inline literal (semantic audit required) | 0x50 | const uintptr_t vf = vt ? peekp(vt + 0x50) : 0; |
+| L05562 | src/mod/session2/identity_probe.cpp:442:54 | on_component | inline literal (semantic audit required) | 0 | const uintptr_t vf = vt ? peekp(vt + 0x50) : 0; |
+| L05563 | src/mod/session2/identity_probe.cpp:453:78 | on_component | inline literal (semantic audit required) | 1 | const bool host = f->host && (status &#124;&#124; (after && f->after_status == 1)); |
+| L05564 | src/mod/session2/identity_probe.cpp:456:48 | on_component | inline literal (semantic audit required) | 1 | g_pt[kPtComponent].user2.fetch_add(1); |
+| L05565 | src/mod/session2/identity_probe.cpp:458:25 | on_component | inline literal (semantic audit required) | 0 | uint32_t code = 0; |
+| L05566 | src/mod/session2/identity_probe.cpp:470:42 | on_version | inline literal (semantic audit required) | 1 | g_pt[kPtVersion].calls.fetch_add(1); |
+| L05567 | src/mod/session2/identity_probe.cpp:471:24 | on_version | inline literal (semantic audit required) | 0 | uint32_t old = 0; |
+| L05568 | src/mod/session2/identity_probe.cpp:477:58 | on_version | inline literal (semantic audit required) | 1 | if (id.user2()) g_pt[kPtVersion].user2.fetch_add(1); |
+| L05569 | src/mod/session2/identity_probe.cpp:491:48 | on_client_version | inline literal (semantic audit required) | 1 | g_pt[kPtClientVersion].calls.fetch_add(1); |
+| L05570 | src/mod/session2/identity_probe.cpp:492:24 | on_client_version | inline literal (semantic audit required) | 0 | uint32_t old = 0; |
+| L05571 | src/mod/session2/identity_probe.cpp:494:23 | on_client_version | inline literal (semantic audit required) | 0 | uint64_t no = 0; |
+| L05572 | src/mod/session2/identity_probe.cpp:507:20 | code_ok | inline literal (semantic audit required) | 64 | uint8_t actual[64] = {}; |
+| L05573 | src/mod/session2/identity_probe.cpp:508:109 | code_ok | inline literal (semantic audit required) | 0 | if (n <= sizeof actual && game::safe_read(g_base + rva_, actual, n) && std::memcmp(actual, bytes, n) == 0) { |
+| L05574 | src/mod/session2/identity_probe.cpp:544:20 | identity_owner | inline literal (semantic audit required) | 0 | uintptr_t vt = 0, owner = 0; |
+| L05575 | src/mod/session2/identity_probe.cpp:544:31 | identity_owner | inline literal (semantic audit required) | 0 | uintptr_t vt = 0, owner = 0; |
+| L05576 | src/mod/session2/identity_probe.cpp:545:44 | identity_owner | inline literal (semantic audit required) | 0 | if (!actor &#124;&#124; !peek(actor, vt)) return 0; |
+| L05577 | src/mod/session2/identity_probe.cpp:550:59 | identity_owner | inline literal (semantic audit required) | 0 | return peek(actor + idp::kActorUser, owner) ? owner : 0; |
+| L05578 | src/mod/session2/identity_probe.cpp:558:20 | identity_who | inline literal (semantic audit required) | 0 | uintptr_t vt = 0; |
+| L05579 | src/mod/session2/identity_probe.cpp:559:20 | identity_who | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L05580 | src/mod/session2/identity_probe.cpp:569:23 | identity_character_no | inline literal (semantic audit required) | 0 | uintptr_t table = 0, status = 0, p = 0; |
+| L05581 | src/mod/session2/identity_probe.cpp:569:35 | identity_character_no | inline literal (semantic audit required) | 0 | uintptr_t table = 0, status = 0, p = 0; |
+| L05582 | src/mod/session2/identity_probe.cpp:569:42 | identity_character_no | inline literal (semantic audit required) | 0 | uintptr_t table = 0, status = 0, p = 0; |
+| L05583 | src/mod/session2/identity_probe.cpp:575:23 | identity_status_actor | inline literal (semantic audit required) | 0 | uintptr_t actor = 0, table = 0, back = 0; |
+| L05584 | src/mod/session2/identity_probe.cpp:575:34 | identity_status_actor | inline literal (semantic audit required) | 0 | uintptr_t actor = 0, table = 0, back = 0; |
+| L05585 | src/mod/session2/identity_probe.cpp:575:44 | identity_status_actor | inline literal (semantic audit required) | 0 | uintptr_t actor = 0, table = 0, back = 0; |
+| L05586 | src/mod/session2/identity_probe.cpp:580:18 | identity_status_actor | inline literal (semantic audit required) | 0 | : 0; |
+| L05587 | src/mod/session2/identity_probe.cpp:593:20 | init_base | inline literal (semantic audit required) | 0 | uintptr_t vf = 0; |
+| L05588 | src/mod/session2/identity_probe.cpp:594:39 | init_base | inline literal (semantic audit required) | 0x50 | if (peek(g_base + kStatusVtable + 0x50, vf) && vf == g_base + kStatusLoad) { |
+| L05589 | src/mod/session2/identity_probe.cpp:652:18 | code_ok | inline literal (semantic audit required) | 0 | for (int p = 0; p < kPoints; ++p) (g_pt[p].on.load() ? on : off) += std::format(" {},", kPointName[p]); |
+| L05590 | src/mod/session2/identity_probe.cpp:668:18 | identity_probe_describe | inline literal (semantic audit required) | 0 | for (int p = 0; p < kPoints; ++p) { |
+| L05591 | src/mod/session2/identity_probe.h:60:22 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
+| L05592 | src/mod/session2/identity_probe.h:61:25 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t host_key = 0; |
+| L05593 | src/mod/session2/identity_probe.h:62:23 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t user2 = 0; |
+| L05594 | src/mod/session2/inject_logic.h:95:23 | disposition | inline literal (semantic audit required) | 0 | uint8_t channel = 0; |
+| L05595 | src/mod/session2/inject_logic.h:96:20 | disposition | inline literal (semantic audit required) | 0 | uint32_t tag = 0;    // pb_tag(epoch), written at +0x8010 |
+| L05596 | src/mod/session2/inject_logic.h:97:22 | disposition | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
+| L05597 | src/mod/session2/inject_logic.h:98:23 | disposition | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
+| L05598 | src/mod/session2/inject_logic.h:99:26 | disposition | inline literal (semantic audit required) | 0 | uint64_t queued_ms = 0; |
+| L05599 | src/mod/session2/inject_logic.h:103:26 | disposition | inline literal (semantic audit required) | 65536 | size_t max_packets = 65536;          // ~10 min of a guest's ~100 Req/s while the host is paused |
+| L05600 | src/mod/session2/inject_logic.h:104:24 | disposition | inline literal (semantic audit required) | 32u | size_t max_bytes = 32u << 20; |
+| L05601 | src/mod/session2/inject_logic.h:104:31 | disposition | inline literal (semantic audit required) | 20 | size_t max_bytes = 32u << 20; |
+| L05602 | src/mod/session2/inject_logic.h:105:30 | disposition | inline literal (semantic audit required) | 8 | size_t control_reserve = 8;          // room kept for the logout sequence (2549 / 2001) |
+| L05603 | src/mod/session2/inject_logic.h:106:30 | disposition | inline literal (semantic audit required) | 512 | uint64_t in_flight_max = 512;        // our buffers in Q0 not yet seen by the server |
+| L05604 | src/mod/session2/inject_logic.h:107:26 | disposition | inline literal (semantic audit required) | 256 | size_t pump_budget = 256;            // buffers handed per NetworkThread turn |
+| L05605 | src/mod/session2/inject_logic.h:117:63 | has_room | inline literal (semantic audit required) | 0 | const size_t extra = control ? lim_.control_reserve : 0; |
+| L05606 | src/mod/session2/inject_logic.h:118:98 | has_room | inline literal (semantic audit required) | 0x8000 | return q_.size() < lim_.max_packets + extra && bytes_ + size <= lim_.max_bytes + extra * 0x8000; |
+| L05607 | src/mod/session2/inject_logic.h:142:20 | drop_other_epochs | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L05608 | src/mod/session2/inject_logic.h:157:18 | clear | inline literal (semantic audit required) | 0 | bytes_ = 0; |
+| L05609 | src/mod/session2/inject_logic.h:165:97 | oldest_age | inline literal (semantic audit required) | 0 | uint64_t oldest_age(uint64_t now) const { return q_.empty() &#124;&#124; now < q_.front().queued_ms ? 0 : now - q_.front().queued_ms; } |
+| L05610 | src/mod/session2/inject_logic.h:171:21 | limits | inline literal (semantic audit required) | 0 | size_t bytes_ = 0, peak_ = 0; |
+| L05611 | src/mod/session2/inject_logic.h:171:32 | limits | inline literal (semantic audit required) | 0 | size_t bytes_ = 0, peak_ = 0; |
+| L05612 | src/mod/session2/inject_logic.h:172:24 | limits | inline literal (semantic audit required) | 0 | uint64_t queued_ = 0, full_ = 0; |
+| L05613 | src/mod/session2/inject_logic.h:172:35 | limits | inline literal (semantic audit required) | 0 | uint64_t queued_ = 0, full_ = 0; |
+| L05614 | src/mod/session2/inject_logic.h:178:64 | may_hand | inline literal (semantic audit required) | 0 | const uint64_t in_flight = pushed > seen ? pushed - seen : 0; |
+| L05615 | src/mod/session2/inject_logic.h:179:46 | may_hand | inline literal (semantic audit required) | 0 | if (in_flight >= l.in_flight_max) return 0; |
+| L05616 | src/mod/session2/inject_logic.h:191:39 | may_hand | inline literal (semantic audit required) | 250 | RetryPacer(uint32_t interval_ms = 250, uint32_t max_attempts = 240, uint32_t log_ms = 5000) |
+| L05617 | src/mod/session2/inject_logic.h:191:68 | may_hand | inline literal (semantic audit required) | 240 | RetryPacer(uint32_t interval_ms = 250, uint32_t max_attempts = 240, uint32_t log_ms = 5000) |
+| L05618 | src/mod/session2/inject_logic.h:191:91 | may_hand | inline literal (semantic audit required) | 5000 | RetryPacer(uint32_t interval_ms = 250, uint32_t max_attempts = 240, uint32_t log_ms = 5000) |
+| L05619 | src/mod/session2/inject_logic.h:194:21 | reset | inline literal (semantic audit required) | 0 | attempts_ = 0; |
+| L05620 | src/mod/session2/inject_logic.h:195:17 | reset | inline literal (semantic audit required) | 0 | last_ = 0; |
+| L05621 | src/mod/session2/inject_logic.h:197:21 | reset | inline literal (semantic audit required) | 0 | last_log_ = 0; |
+| L05622 | src/mod/session2/inject_logic.h:199:22 | reset | inline literal (semantic audit required) | 0 | since_log_ = 0; |
+| L05623 | src/mod/session2/inject_logic.h:213:22 | failed_should_log | inline literal (semantic audit required) | 0 | since_log_ = 0; |
+| L05624 | src/mod/session2/inject_logic.h:222:26 | attempts | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, since_log_ = 0; |
+| L05625 | src/mod/session2/inject_logic.h:222:42 | attempts | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, since_log_ = 0; |
+| L05626 | src/mod/session2/inject_logic.h:223:22 | attempts | inline literal (semantic audit required) | 0 | uint64_t last_ = 0, last_log_ = 0; |
+| L05627 | src/mod/session2/inject_logic.h:223:37 | attempts | inline literal (semantic audit required) | 0 | uint64_t last_ = 0, last_log_ = 0; |
+| L05628 | src/mod/session2/inject_logic.h:234:49 | attempts | inline literal (semantic audit required) | 1000 | explicit StallWatch(uint64_t threshold_ms = 1000, uint64_t repeat_ms = 5000) |
+| L05629 | src/mod/session2/inject_logic.h:234:76 | attempts | inline literal (semantic audit required) | 5000 | explicit StallWatch(uint64_t threshold_ms = 1000, uint64_t repeat_ms = 5000) |
+| L05630 | src/mod/session2/inject_logic.h:239:49 | update | inline literal (semantic audit required) | 0 | stalled_for_ = was ? now - since_ : 0; |
+| L05631 | src/mod/session2/inject_logic.h:265:31 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
+| L05632 | src/mod/session2/inject_logic.h:265:43 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
+| L05633 | src/mod/session2/inject_logic.h:265:61 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
+| L05634 | src/mod/session2/inject_logic.h:265:79 | stalled_ms | inline literal (semantic audit required) | 0 | uint64_t last_progress_ = 0, since_ = 0, last_report_ = 0, stalled_for_ = 0; |
+| L05635 | src/mod/session2/inject_logic.h:309:21 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t code = 0; |
+| L05636 | src/mod/session2/inject_logic.h:310:24 | step_is_ours | inline literal (semantic audit required) | 0 | uint64_t address = 0; |
+| L05637 | src/mod/session2/inject_logic.h:311:20 | step_is_ours | inline literal (semantic audit required) | 0 | uint64_t rva = 0;        // address - exe base, if inside the exe (else 0) |
+| L05638 | src/mod/session2/inject_logic.h:313:24 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t nparams = 0; |
+| L05639 | src/mod/session2/inject_logic.h:314:21 | step_is_ours | inline literal (semantic audit required) | 2 | uint64_t params[2] = {};  // for an access violation: read/write flag and the address |
+| L05640 | src/mod/session2/inject_logic.h:315:23 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t thread = 0; |
+| L05641 | src/mod/session2/inject_logic.h:317:23 | step_is_ours | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
+| L05642 | src/mod/session2/inject_logic.h:318:22 | step_is_ours | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
+| L05643 | src/mod/session2/inject_logic.h:319:24 | step_is_ours | inline literal (semantic audit required) | 0 | uint64_t when_ms = 0; |
+| L05644 | src/mod/session2/inject_logic.h:327:19 | describe | inline literal (semantic audit required) | 0xC0000005u | if (e.code == 0xC0000005u && e.nparams >= 2) { |
+| L05645 | src/mod/session2/inject_logic.h:327:47 | describe | inline literal (semantic audit required) | 2 | if (e.code == 0xC0000005u && e.nparams >= 2) { |
+| L05646 | src/mod/session2/inject_logic.h:328:54 | describe | inline literal (semantic audit required) | 0 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
+| L05647 | src/mod/session2/inject_logic.h:328:60 | describe | inline literal (semantic audit required) | 0 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
+| L05648 | src/mod/session2/inject_logic.h:328:82 | describe | inline literal (semantic audit required) | 0 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
+| L05649 | src/mod/session2/inject_logic.h:328:88 | describe | inline literal (semantic audit required) | 1 | s += std::format(" &#124; {} of 0x{:X}", e.params[0] == 0 ? "read" : e.params[0] == 1 ? "write" : "execute", |
+| L05650 | src/mod/session2/inject_logic.h:329:35 | describe | inline literal (semantic audit required) | 1 | e.params[1]); |
+| L05651 | src/mod/session2/load_trip.cpp:19:16 | (file scope) | inline literal (semantic audit required) | 2048 | p8p::EventRing<2048> g_ring; |
+| L05652 | src/mod/session2/load_trip.cpp:20:30 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_lost{0}, g_events{0}; |
+| L05653 | src/mod/session2/load_trip.cpp:20:43 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_lost{0}, g_events{0}; |
+| L05654 | src/mod/session2/load_trip.cpp:21:20 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_lines = 0;  // diagnostics thread only |
+| L05655 | src/mod/session2/load_trip.cpp:29:65 | op_of | inline literal (semantic audit required) | 2 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
+| L05656 | src/mod/session2/load_trip.cpp:29:93 | op_of | inline literal (semantic audit required) | 0 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
+| L05657 | src/mod/session2/load_trip.cpp:29:101 | op_of | inline literal (semantic audit required) | 1 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
+| L05658 | src/mod/session2/load_trip.cpp:29:107 | op_of | inline literal (semantic audit required) | 8 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
+| L05659 | src/mod/session2/load_trip.cpp:29:113 | op_of | inline literal (semantic audit required) | 0 | uint16_t op_of(std::span<const uint8_t> p) { return p.size() >= 2 ? static_cast<uint16_t>(p[0] &#124; (p[1] << 8)) : 0; } |
+| L05660 | src/mod/session2/load_trip.cpp:32:25 | u32_at | inline literal (semantic audit required) | 4 | if (b.size() < at + 4) return 0; |
+| L05661 | src/mod/session2/load_trip.cpp:32:35 | u32_at | inline literal (semantic audit required) | 0 | if (b.size() < at + 4) return 0; |
+| L05662 | src/mod/session2/load_trip.cpp:33:72 | u32_at | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(b[at]) &#124; static_cast<uint32_t>(b[at + 1]) << 8 &#124; |
+| L05663 | src/mod/session2/load_trip.cpp:33:79 | u32_at | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(b[at]) &#124; static_cast<uint32_t>(b[at + 1]) << 8 &#124; |
+| L05664 | src/mod/session2/load_trip.cpp:34:41 | u32_at | inline literal (semantic audit required) | 2 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
+| L05665 | src/mod/session2/load_trip.cpp:34:48 | u32_at | inline literal (semantic audit required) | 16 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
+| L05666 | src/mod/session2/load_trip.cpp:34:82 | u32_at | inline literal (semantic audit required) | 3 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
+| L05667 | src/mod/session2/load_trip.cpp:34:89 | u32_at | inline literal (semantic audit required) | 24 | static_cast<uint32_t>(b[at + 2]) << 16 &#124; static_cast<uint32_t>(b[at + 3]) << 24; |
+| L05668 | src/mod/session2/load_trip.cpp:42:9 | push | inline literal (semantic audit required) | 0 | e.v[0] = v0; |
+| L05669 | src/mod/session2/load_trip.cpp:43:9 | push | inline literal (semantic audit required) | 1 | e.v[1] = v1; |
+| L05670 | src/mod/session2/load_trip.cpp:44:9 | push | inline literal (semantic audit required) | 2 | e.v[2] = guest_connection_epoch(); |
+| L05671 | src/mod/session2/load_trip.cpp:45:24 | push | inline literal (semantic audit required) | 1 | g_events.fetch_add(1, std::memory_order_relaxed); |
+| L05672 | src/mod/session2/load_trip.cpp:46:43 | push | inline literal (semantic audit required) | 1 | if (!g_ring.push(e)) g_lost.fetch_add(1, std::memory_order_relaxed); |
+| L05673 | src/mod/session2/load_trip.cpp:51:60 | value_of | inline literal (semantic audit required) | 9 | if (op == ltr::kOpMoveFieldAck) return u32_at(payload, 9); |
+| L05674 | src/mod/session2/load_trip.cpp:52:57 | value_of | inline literal (semantic audit required) | 0 | if (op == ltr::kOpMilestone) return u32_at(payload, 0); |
+| L05675 | src/mod/session2/load_trip.cpp:53:12 | value_of | inline literal (semantic audit required) | 0 | return 0; |
+| L05676 | src/mod/session2/load_trip.cpp:78:52 | load_trip_on_delivered | inline literal (semantic audit required) | 5 | if (op == ltr::kOpMilestone && packet.size() > 5 && guest_seq_route_other_character(op, packet.subspan(5))) return; |
+| L05677 | src/mod/session2/load_trip.cpp:78:108 | load_trip_on_delivered | inline literal (semantic audit required) | 5 | if (op == ltr::kOpMilestone && packet.size() > 5 && guest_seq_route_other_character(op, packet.subspan(5))) return; |
+| L05678 | src/mod/session2/load_trip.cpp:79:31 | load_trip_on_delivered | inline literal (semantic audit required) | 0 | push(ltr::kDelivered, op, 0); |
+| L05679 | src/mod/session2/load_trip.cpp:85:25 | load_trip_on_out | inline literal (semantic audit required) | 0 | push(ltr::kOut, op, 0); |
+| L05680 | src/mod/session2/load_trip.cpp:93:9 | load_trip_on_state | inline literal (semantic audit required) | 0 | e.v[0] = static_cast<uint64_t>(static_cast<int64_t>(old_state)); |
+| L05681 | src/mod/session2/load_trip.cpp:94:9 | load_trip_on_state | inline literal (semantic audit required) | 1 | e.v[1] = static_cast<uint64_t>(new_state & 0xFF); |
+| L05682 | src/mod/session2/load_trip.cpp:94:48 | load_trip_on_state | inline literal (semantic audit required) | 0xFF | e.v[1] = static_cast<uint64_t>(new_state & 0xFF); |
+| L05683 | src/mod/session2/load_trip.cpp:95:9 | load_trip_on_state | inline literal (semantic audit required) | 2 | e.v[2] = guest_connection_epoch(); |
+| L05684 | src/mod/session2/load_trip.cpp:96:43 | load_trip_on_state | inline literal (semantic audit required) | 1 | if (!g_ring.push(e)) g_lost.fetch_add(1, std::memory_order_relaxed); |
+| L05685 | src/mod/session2/load_trip.cpp:109:39 | load_trip_tick | inline literal (semantic audit required) | 0 | static uint64_t lost_logged = 0; |
+| L05686 | src/mod/session2/load_trip_logic.h:43:28 | followed_out | inline literal (semantic audit required) | 0 | enum Ev : uint16_t { kIn = 0, kDelivered, kOut, kState, kEvCount }; |
+| L05687 | src/mod/session2/load_trip_logic.h:47:36 | followed_out | inline literal (semantic audit required) | 3 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
+| L05688 | src/mod/session2/load_trip_logic.h:47:42 | followed_out | inline literal (semantic audit required) | 10 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
+| L05689 | src/mod/session2/load_trip_logic.h:47:46 | followed_out | inline literal (semantic audit required) | 60 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
+| L05690 | src/mod/session2/load_trip_logic.h:47:50 | followed_out | inline literal (semantic audit required) | 300 | inline constexpr uint32_t kReportS[3] = {10, 60, 300}; |
+| L05691 | src/mod/session2/load_trip_logic.h:51:18 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n = 0; |
+| L05692 | src/mod/session2/load_trip_logic.h:52:21 | followed_out | inline literal (semantic audit required) | 0 | uint64_t conn = 0; |
+| L05693 | src/mod/session2/load_trip_logic.h:53:22 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05694 | src/mod/session2/load_trip_logic.h:53:33 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05695 | src/mod/session2/load_trip_logic.h:53:44 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05696 | src/mod/session2/load_trip_logic.h:53:55 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05697 | src/mod/session2/load_trip_logic.h:53:66 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05698 | src/mod/session2/load_trip_logic.h:53:81 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05699 | src/mod/session2/load_trip_logic.h:53:92 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05700 | src/mod/session2/load_trip_logic.h:53:103 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t2174 = 0, t2549 = 0, t2144 = 0, t3066 = 0, t2322 = 0, t2322_dlv = 0, t2445 = 0, t2762 = 0; |
+| L05701 | src/mod/session2/load_trip_logic.h:54:23 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t_next = 0;  // the next trip's 2174 (0 = still the current one) |
+| L05702 | src/mod/session2/load_trip_logic.h:55:22 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
+| L05703 | src/mod/session2/load_trip_logic.h:55:33 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
+| L05704 | src/mod/session2/load_trip_logic.h:55:44 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
+| L05705 | src/mod/session2/load_trip_logic.h:55:55 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
+| L05706 | src/mod/session2/load_trip_logic.h:55:66 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
+| L05707 | src/mod/session2/load_trip_logic.h:55:77 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
+| L05708 | src/mod/session2/load_trip_logic.h:55:91 | followed_out | inline literal (semantic audit required) | 0 | uint32_t n2144 = 0, n3066 = 0, n2322 = 0, n2445 = 0, n2762 = 0, n2549 = 0, n_bundle = 0; |
+| L05709 | src/mod/session2/load_trip_logic.h:56:22 | followed_out | inline literal (semantic audit required) | 0 | uint32_t owner = 0, actor2322 = 0; |
+| L05710 | src/mod/session2/load_trip_logic.h:56:37 | followed_out | inline literal (semantic audit required) | 0 | uint32_t owner = 0, actor2322 = 0; |
+| L05711 | src/mod/session2/load_trip_logic.h:58:24 | followed_out | inline literal (semantic audit required) | 1 | int first_state = -1, last_state = -1; |
+| L05712 | src/mod/session2/load_trip_logic.h:58:41 | followed_out | inline literal (semantic audit required) | 1 | int first_state = -1, last_state = -1; |
+| L05713 | src/mod/session2/load_trip_logic.h:59:23 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t_in11 = 0, t_out11 = 0; |
+| L05714 | src/mod/session2/load_trip_logic.h:59:36 | followed_out | inline literal (semantic audit required) | 0 | uint64_t t_in11 = 0, t_out11 = 0; |
+| L05715 | src/mod/session2/load_trip_logic.h:60:21 | followed_out | inline literal (semantic audit required) | 1 | int out11_to = -1; |
+| L05716 | src/mod/session2/load_trip_logic.h:61:23 | followed_out | inline literal (semantic audit required) | 0 | uint32_t states = 0; |
+| L05717 | src/mod/session2/load_trip_logic.h:63:24 | followed_out | inline literal (semantic audit required) | 0 | uint8_t reported = 0; |
+| L05718 | src/mod/session2/load_trip_logic.h:66:51 | state_text | inline literal (semantic audit required) | 0 | inline std::string state_text(int s) { return s < 0 ? std::string("?") : std::format("0x{:02X}", s); } |
+| L05719 | src/mod/session2/load_trip_logic.h:70:61 | dt | inline literal (semantic audit required) | 1000.0 | const double ms = b >= a ? static_cast<double>(b - a) / 1000.0 : -static_cast<double>(a - b) / 1000.0; |
+| L05720 | src/mod/session2/load_trip_logic.h:70:100 | dt | inline literal (semantic audit required) | 1000.0 | const double ms = b >= a ? static_cast<double>(b - a) / 1000.0 : -static_cast<double>(a - b) / 1000.0; |
+| L05721 | src/mod/session2/load_trip_logic.h:80:26 | verdict | inline literal (semantic audit required) | 1 | } else if (t.n2322 > 1) { |
+| L05722 | src/mod/session2/load_trip_logic.h:89:27 | verdict | inline literal (semantic audit required) | 0x12 | if (t.out11_to == 0x12) { |
+| L05723 | src/mod/session2/load_trip_logic.h:98:28 | verdict | inline literal (semantic audit required) | 0x12 | v += t.out11_to == 0x12 ? " &#124; 2445 and 2762: normal load completion" : " &#124; 2762 seen"; |
+| L05724 | src/mod/session2/load_trip_logic.h:116:51 | on_event | inline literal (semantic audit required) | 0 | const auto op = static_cast<uint16_t>(e.v[0]); |
+| L05725 | src/mod/session2/load_trip_logic.h:117:54 | on_event | inline literal (semantic audit required) | 1 | const auto value = static_cast<uint32_t>(e.v[1]); |
+| L05726 | src/mod/session2/load_trip_logic.h:118:35 | on_event | inline literal (semantic audit required) | 2 | const uint64_t conn = e.v[2]; |
+| L05727 | src/mod/session2/load_trip_logic.h:175:32 | on_event | inline literal (semantic audit required) | 1 | t->n2322 > 1 ? " &#124; DUPLICATE in this trip" : (!t->t2144 ? " &#124; BEFORE any 2144 of this trip" : ""))); |
+| L05728 | src/mod/session2/load_trip_logic.h:201:26 | tick | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
+| L05729 | src/mod/session2/load_trip_logic.h:201:33 | tick | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
+| L05730 | src/mod/session2/load_trip_logic.h:202:35 | tick | inline literal (semantic audit required) | 1u | if (t.reported & (1u << i)) continue; |
+| L05731 | src/mod/session2/load_trip_logic.h:203:77 | tick | inline literal (semantic audit required) | 1'000'000 | if (now_us < t.t2322 + static_cast<uint64_t>(kReportS[i]) * 1'000'000) break; |
+| L05732 | src/mod/session2/load_trip_logic.h:204:52 | tick | inline literal (semantic audit required) | 1u | t.reported &#124;= static_cast<uint8_t>(1u << i); |
+| L05733 | src/mod/session2/load_trip_logic.h:211:50 | states_known | inline literal (semantic audit required) | 0 | bool states_known() const { return states_ > 0; } |
+| L05734 | src/mod/session2/load_trip_logic.h:223:77 | on_state | inline literal (semantic audit required) | 0 | const StateEv s{e.qpc_us, static_cast<int>(static_cast<int64_t>(e.v[0])), static_cast<int>(e.v[1] & 0xFF)}; |
+| L05735 | src/mod/session2/load_trip_logic.h:223:104 | on_state | inline literal (semantic audit required) | 1 | const StateEv s{e.qpc_us, static_cast<int>(static_cast<int64_t>(e.v[0])), static_cast<int>(e.v[1] & 0xFF)}; |
+| L05736 | src/mod/session2/load_trip_logic.h:223:109 | on_state | inline literal (semantic audit required) | 0xFF | const StateEv s{e.qpc_us, static_cast<int>(static_cast<int64_t>(e.v[0])), static_cast<int>(e.v[1] & 0xFF)}; |
+| L05737 | src/mod/session2/load_trip_logic.h:225:36 | on_state | inline literal (semantic audit required) | 256 | while (state_log_.size() > 256) state_log_.pop_front(); |
+| L05738 | src/mod/session2/load_trip_logic.h:240:30 | apply | inline literal (semantic audit required) | 0 | if (t->first_state < 0) t->first_state = s.to; |
+| L05739 | src/mod/session2/load_trip_logic.h:242:21 | apply | inline literal (semantic audit required) | 0x11 | if (s.to == 0x11 && !t->t_in11) t->t_in11 = s.t; |
+| L05740 | src/mod/session2/load_trip_logic.h:243:23 | apply | inline literal (semantic audit required) | 0x11 | if (s.from == 0x11 && !t->t_out11) { |
+| L05741 | src/mod/session2/load_trip_logic.h:253:45 | reattribute | inline literal (semantic audit required) | 1 | t.first_state = t.last_state = -1; |
+| L05742 | src/mod/session2/load_trip_logic.h:254:36 | reattribute | inline literal (semantic audit required) | 0 | t.t_in11 = t.t_out11 = 0; |
+| L05743 | src/mod/session2/load_trip_logic.h:255:27 | reattribute | inline literal (semantic audit required) | 1 | t.out11_to = -1; |
+| L05744 | src/mod/session2/load_trip_logic.h:256:24 | reattribute | inline literal (semantic audit required) | 0 | t.states = 0; |
+| L05745 | src/mod/session2/load_trip_logic.h:269:68 | summary | inline literal (semantic audit required) | 0 | dt(t.t2174, t.t2762), t.n_bundle, verdict(t, states_ > 0)); |
+| L05746 | src/mod/session2/load_trip_logic.h:275:23 | summary | inline literal (semantic audit required) | 0 | uint32_t count_ = 0; |
+| L05747 | src/mod/session2/load_trip_logic.h:276:24 | summary | inline literal (semantic audit required) | 0 | uint64_t states_ = 0; |
+| L05748 | src/mod/session2/mount_sync_logic.h:41:52 | is_char | inline literal (semantic audit required) | 28 | inline bool is_char(uint32_t key) { return (key >> 28) == 0xA; } |
+| L05749 | src/mod/session2/mount_sync_logic.h:41:59 | is_char | inline literal (semantic audit required) | 0xA | inline bool is_char(uint32_t key) { return (key >> 28) == 0xA; } |
+| L05750 | src/mod/session2/mount_sync_logic.h:42:49 | is_b | inline literal (semantic audit required) | 28 | inline bool is_b(uint32_t key) { return (key >> 28) == 0xB; } |
+| L05751 | src/mod/session2/mount_sync_logic.h:42:56 | is_b | inline literal (semantic audit required) | 0xB | inline bool is_b(uint32_t key) { return (key >> 28) == 0xB; } |
+| L05752 | src/mod/session2/mount_sync_logic.h:58:39 | is_b | inline literal (semantic audit required) | 1 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
+| L05753 | src/mod/session2/mount_sync_logic.h:58:51 | is_b | inline literal (semantic audit required) | 2 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
+| L05754 | src/mod/session2/mount_sync_logic.h:58:63 | is_b | inline literal (semantic audit required) | 3 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
+| L05755 | src/mod/session2/mount_sync_logic.h:58:75 | is_b | inline literal (semantic audit required) | 4 | enum class EvKind : uint8_t { Begin = 1, Commit = 2, Detach = 3, Status = 4 }; |
+| L05756 | src/mod/session2/mount_sync_logic.h:87:20 | ev_name | inline literal (semantic audit required) | 0 | uint8_t seat = 0;        // R9b of vf53 (indexes the seats; Link+0x14) |
+| L05757 | src/mod/session2/mount_sync_logic.h:88:21 | ev_name | inline literal (semantic audit required) | 0 | uint8_t fifth = 0;       // the byte at [entry rsp+0x28] |
+| L05758 | src/mod/session2/mount_sync_logic.h:89:21 | ev_name | inline literal (semantic audit required) | 0 | uint8_t flags = 0; |
+| L05759 | src/mod/session2/mount_sync_logic.h:90:22 | ev_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0;      // 0xA... key |
+| L05760 | src/mod/session2/mount_sync_logic.h:91:22 | ev_name | inline literal (semantic audit required) | 0 | uint32_t horse = 0;      // 0xB... key ([vc+8]+0x60) |
+| L05761 | src/mod/session2/mount_sync_logic.h:92:27 | ev_name | inline literal (semantic audit required) | 0 | uint32_t transition = 0; // monotonic per controller process (nonce) |
+| L05762 | src/mod/session2/mount_sync_logic.h:93:23 | ev_name | inline literal (semantic audit required) | 0 | uint32_t result = 0;     // *result after (Commit / Detach) |
+| L05763 | src/mod/session2/mount_sync_logic.h:94:22 | ev_name | inline literal (semantic audit required) | 0 | uint32_t nonce = 0;      // the controller process' random id: a new one forgets the old transitions |
+| L05764 | src/mod/session2/mount_sync_logic.h:95:27 | ev_name | inline literal (semantic audit required) | 0 | uint32_t caller_rva = 0; // the vtable call site of the client vf53 (or of 0x2228E40) |
+| L05765 | src/mod/session2/mount_sync_logic.h:96:20 | ev_name | inline literal (semantic audit required) | 0 | uint32_t aux = 0;        // Commit: occupant count after; Detach: 0x2228E40's 4th argument (low 32 bits) |
+| L05766 | src/mod/session2/mount_sync_logic.h:97:24 | ev_name | inline literal (semantic audit required) | 0 | uint64_t tick_ms = 0;    // the controller's GetTickCount64 |
+| L05767 | src/mod/session2/mount_sync_logic.h:101:18 | put32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L05768 | src/mod/session2/mount_sync_logic.h:101:25 | put32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L05769 | src/mod/session2/mount_sync_logic.h:101:67 | put32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L05770 | src/mod/session2/mount_sync_logic.h:104:36 | get32 | inline literal (semantic audit required) | 0 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L05771 | src/mod/session2/mount_sync_logic.h:104:67 | get32 | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L05772 | src/mod/session2/mount_sync_logic.h:104:74 | get32 | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L05773 | src/mod/session2/mount_sync_logic.h:104:104 | get32 | inline literal (semantic audit required) | 2 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L05774 | src/mod/session2/mount_sync_logic.h:104:111 | get32 | inline literal (semantic audit required) | 16 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L05775 | src/mod/session2/mount_sync_logic.h:105:37 | get32 | inline literal (semantic audit required) | 3 | (static_cast<uint32_t>(p[3]) << 24); |
+| L05776 | src/mod/session2/mount_sync_logic.h:105:44 | get32 | inline literal (semantic audit required) | 24 | (static_cast<uint32_t>(p[3]) << 24); |
+| L05777 | src/mod/session2/mount_sync_logic.h:112:7 | encode | inline literal (semantic audit required) | 0 | p[0] = kControlMountSync; |
+| L05778 | src/mod/session2/mount_sync_logic.h:113:7 | encode | inline literal (semantic audit required) | 1 | p[1] = kVersion; |
+| L05779 | src/mod/session2/mount_sync_logic.h:114:7 | encode | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(e.kind); |
+| L05780 | src/mod/session2/mount_sync_logic.h:115:7 | encode | inline literal (semantic audit required) | 3 | p[3] = e.seat; |
+| L05781 | src/mod/session2/mount_sync_logic.h:116:7 | encode | inline literal (semantic audit required) | 4 | p[4] = e.fifth; |
+| L05782 | src/mod/session2/mount_sync_logic.h:117:7 | encode | inline literal (semantic audit required) | 5 | p[5] = e.flags; |
+| L05783 | src/mod/session2/mount_sync_logic.h:118:14 | encode | inline literal (semantic audit required) | 8 | put32(&p[8], e.rider); |
+| L05784 | src/mod/session2/mount_sync_logic.h:119:14 | encode | inline literal (semantic audit required) | 12 | put32(&p[12], e.horse); |
+| L05785 | src/mod/session2/mount_sync_logic.h:120:14 | encode | inline literal (semantic audit required) | 16 | put32(&p[16], e.transition); |
+| L05786 | src/mod/session2/mount_sync_logic.h:121:14 | encode | inline literal (semantic audit required) | 20 | put32(&p[20], e.result); |
+| L05787 | src/mod/session2/mount_sync_logic.h:122:14 | encode | inline literal (semantic audit required) | 24 | put32(&p[24], e.nonce); |
+| L05788 | src/mod/session2/mount_sync_logic.h:123:14 | encode | inline literal (semantic audit required) | 28 | put32(&p[28], e.caller_rva); |
+| L05789 | src/mod/session2/mount_sync_logic.h:124:14 | encode | inline literal (semantic audit required) | 32 | put32(&p[32], e.aux); |
+| L05790 | src/mod/session2/mount_sync_logic.h:125:14 | encode | inline literal (semantic audit required) | 36 | put32(&p[36], static_cast<uint32_t>(e.tick_ms)); |
+| L05791 | src/mod/session2/mount_sync_logic.h:126:14 | encode | inline literal (semantic audit required) | 40 | put32(&p[40], static_cast<uint32_t>(e.tick_ms >> 32)); |
+| L05792 | src/mod/session2/mount_sync_logic.h:126:54 | encode | inline literal (semantic audit required) | 32 | put32(&p[40], static_cast<uint32_t>(e.tick_ms >> 32)); |
+| L05793 | src/mod/session2/mount_sync_logic.h:133:39 | decode | inline literal (semantic audit required) | 0 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlMountSync &#124;&#124; p[1] != kVersion) return std::nullopt; |
+| L05794 | src/mod/session2/mount_sync_logic.h:133:68 | decode | inline literal (semantic audit required) | 1 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlMountSync &#124;&#124; p[1] != kVersion) return std::nullopt; |
+| L05795 | src/mod/session2/mount_sync_logic.h:134:11 | decode | inline literal (semantic audit required) | 2 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05796 | src/mod/session2/mount_sync_logic.h:134:16 | decode | inline literal (semantic audit required) | 1 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05797 | src/mod/session2/mount_sync_logic.h:134:23 | decode | inline literal (semantic audit required) | 2 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05798 | src/mod/session2/mount_sync_logic.h:134:28 | decode | inline literal (semantic audit required) | 4 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05799 | src/mod/session2/mount_sync_logic.h:134:35 | decode | inline literal (semantic audit required) | 6 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05800 | src/mod/session2/mount_sync_logic.h:134:41 | decode | inline literal (semantic audit required) | 0 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05801 | src/mod/session2/mount_sync_logic.h:134:48 | decode | inline literal (semantic audit required) | 7 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05802 | src/mod/session2/mount_sync_logic.h:134:54 | decode | inline literal (semantic audit required) | 0 | if (p[2] < 1 &#124;&#124; p[2] > 4 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L05803 | src/mod/session2/mount_sync_logic.h:136:36 | decode | inline literal (semantic audit required) | 2 | e.kind = static_cast<EvKind>(p[2]); |
+| L05804 | src/mod/session2/mount_sync_logic.h:137:16 | decode | inline literal (semantic audit required) | 3 | e.seat = p[3]; |
+| L05805 | src/mod/session2/mount_sync_logic.h:138:17 | decode | inline literal (semantic audit required) | 4 | e.fifth = p[4]; |
+| L05806 | src/mod/session2/mount_sync_logic.h:139:17 | decode | inline literal (semantic audit required) | 5 | e.flags = p[5]; |
+| L05807 | src/mod/session2/mount_sync_logic.h:140:24 | decode | inline literal (semantic audit required) | 8 | e.rider = get32(&p[8]); |
+| L05808 | src/mod/session2/mount_sync_logic.h:141:24 | decode | inline literal (semantic audit required) | 12 | e.horse = get32(&p[12]); |
+| L05809 | src/mod/session2/mount_sync_logic.h:142:29 | decode | inline literal (semantic audit required) | 16 | e.transition = get32(&p[16]); |
+| L05810 | src/mod/session2/mount_sync_logic.h:143:25 | decode | inline literal (semantic audit required) | 20 | e.result = get32(&p[20]); |
+| L05811 | src/mod/session2/mount_sync_logic.h:144:24 | decode | inline literal (semantic audit required) | 24 | e.nonce = get32(&p[24]); |
+| L05812 | src/mod/session2/mount_sync_logic.h:145:29 | decode | inline literal (semantic audit required) | 28 | e.caller_rva = get32(&p[28]); |
+| L05813 | src/mod/session2/mount_sync_logic.h:146:22 | decode | inline literal (semantic audit required) | 32 | e.aux = get32(&p[32]); |
+| L05814 | src/mod/session2/mount_sync_logic.h:147:26 | decode | inline literal (semantic audit required) | 36 | e.tick_ms = get32(&p[36]) &#124; (static_cast<uint64_t>(get32(&p[40])) << 32); |
+| L05815 | src/mod/session2/mount_sync_logic.h:147:65 | decode | inline literal (semantic audit required) | 40 | e.tick_ms = get32(&p[36]) &#124; (static_cast<uint64_t>(get32(&p[40])) << 32); |
+| L05816 | src/mod/session2/mount_sync_logic.h:147:74 | decode | inline literal (semantic audit required) | 32 | e.tick_ms = get32(&p[36]) &#124; (static_cast<uint64_t>(get32(&p[40])) << 32); |
+| L05817 | src/mod/session2/mount_sync_logic.h:149:25 | decode | inline literal (semantic audit required) | 0 | if ((e.rider != 0 && !is_char(e.rider)) &#124;&#124; e.horse != 0 &#124;&#124; e.seat != 0) return std::nullopt; |
+| L05818 | src/mod/session2/mount_sync_logic.h:149:63 | decode | inline literal (semantic audit required) | 0 | if ((e.rider != 0 && !is_char(e.rider)) &#124;&#124; e.horse != 0 &#124;&#124; e.seat != 0) return std::nullopt; |
+| L05819 | src/mod/session2/mount_sync_logic.h:149:78 | decode | inline literal (semantic audit required) | 0 | if ((e.rider != 0 && !is_char(e.rider)) &#124;&#124; e.horse != 0 &#124;&#124; e.seat != 0) return std::nullopt; |
+| L05820 | src/mod/session2/mount_sync_logic.h:152:87 | decode | inline literal (semantic audit required) | 0 | if (!is_char(e.rider) &#124;&#124; !is_b(e.horse) &#124;&#124; e.seat >= kMaxSeats &#124;&#124; e.transition == 0) return std::nullopt; |
+| L05821 | src/mod/session2/mount_sync_logic.h:160:48 | status_event | inline literal (semantic audit required) | 0 | e.rider = is_char(local_key) ? local_key : 0; |
+| L05822 | src/mod/session2/mount_sync_logic.h:162:49 | status_event | inline literal (semantic audit required) | 0 | e.flags = cannot_publish ? kFlagNoPublish : 0; |
+| L05823 | src/mod/session2/mount_sync_logic.h:175:7 | frame | inline literal (semantic audit required) | 0 | f[0] = kControlOpcode & 0xFF; |
+| L05824 | src/mod/session2/mount_sync_logic.h:175:29 | frame | inline literal (semantic audit required) | 0xFF | f[0] = kControlOpcode & 0xFF; |
+| L05825 | src/mod/session2/mount_sync_logic.h:176:7 | frame | inline literal (semantic audit required) | 1 | f[1] = kControlOpcode >> 8; |
+| L05826 | src/mod/session2/mount_sync_logic.h:176:30 | frame | inline literal (semantic audit required) | 8 | f[1] = kControlOpcode >> 8; |
+| L05827 | src/mod/session2/mount_sync_logic.h:177:7 | frame | inline literal (semantic audit required) | 2 | f[2] = 0xFF; |
+| L05828 | src/mod/session2/mount_sync_logic.h:177:12 | frame | inline literal (semantic audit required) | 0xFF | f[2] = 0xFF; |
+| L05829 | src/mod/session2/mount_sync_logic.h:178:7 | frame | inline literal (semantic audit required) | 3 | f[3] = kPayloadSize & 0xFF; |
+| L05830 | src/mod/session2/mount_sync_logic.h:178:27 | frame | inline literal (semantic audit required) | 0xFF | f[3] = kPayloadSize & 0xFF; |
+| L05831 | src/mod/session2/mount_sync_logic.h:179:7 | frame | inline literal (semantic audit required) | 4 | f[4] = kPayloadSize >> 8; |
+| L05832 | src/mod/session2/mount_sync_logic.h:179:28 | frame | inline literal (semantic audit required) | 8 | f[4] = kPayloadSize >> 8; |
+| L05833 | src/mod/session2/mount_sync_logic.h:180:21 | frame | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kPayloadSize; ++i) f[kHeader + i] = p[i]; |
+| L05834 | src/mod/session2/mount_sync_logic.h:187:52 | is_frame | inline literal (semantic audit required) | 0 | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L05835 | src/mod/session2/mount_sync_logic.h:187:76 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L05836 | src/mod/session2/mount_sync_logic.h:187:87 | is_frame | inline literal (semantic audit required) | 1 | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L05837 | src/mod/session2/mount_sync_logic.h:187:112 | is_frame | inline literal (semantic audit required) | 8 | return f.size() == kHeader + kPayloadSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L05838 | src/mod/session2/mount_sync_logic.h:188:14 | is_frame | inline literal (semantic audit required) | 2 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
+| L05839 | src/mod/session2/mount_sync_logic.h:188:20 | is_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
+| L05840 | src/mod/session2/mount_sync_logic.h:188:30 | is_frame | inline literal (semantic audit required) | 3 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
+| L05841 | src/mod/session2/mount_sync_logic.h:188:52 | is_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
+| L05842 | src/mod/session2/mount_sync_logic.h:188:63 | is_frame | inline literal (semantic audit required) | 4 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
+| L05843 | src/mod/session2/mount_sync_logic.h:188:86 | is_frame | inline literal (semantic audit required) | 8 | f[2] == 0xFF && f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && |
+| L05844 | src/mod/session2/mount_sync_logic.h:194:25 | publishable | inline literal (semantic audit required) | 0 | return local_key != 0 && rider == local_key && is_char(rider) && is_b(horse) && seat < kMaxSeats; |
+| L05845 | src/mod/session2/mount_sync_logic.h:205:31 | publishable | inline literal (semantic audit required) | 0 | uint8_t horse_has_seats = 0;                    // horse vc+0xEB |
+| L05846 | src/mod/session2/mount_sync_logic.h:206:28 | publishable | inline literal (semantic audit required) | 0 | uint32_t cur_vehicle = 0;                       // Link+0x10 |
+| L05847 | src/mod/session2/mount_sync_logic.h:207:24 | publishable | inline literal (semantic audit required) | 1 | int8_t cur_seat = -1;                           // Link+0x14 |
+| L05848 | src/mod/session2/mount_sync_logic.h:208:28 | publishable | inline literal (semantic audit required) | 0 | uint32_t res_vehicle = 0;                       // Link+0x08 |
+| L05849 | src/mod/session2/mount_sync_logic.h:209:24 | publishable | inline literal (semantic audit required) | 1 | int8_t res_seat = -1;                           // Link+0x0C |
+| L05850 | src/mod/session2/mount_sync_logic.h:210:25 | publishable | inline literal (semantic audit required) | 0 | uint32_t occupant = 0;                          // horse vc+0x48+4*seat |
+| L05851 | src/mod/session2/mount_sync_logic.h:211:24 | publishable | inline literal (semantic audit required) | 0 | uint32_t reserve = 0;                           // horse vc+0x88+4*seat |
+| L05852 | src/mod/session2/mount_sync_logic.h:212:21 | publishable | inline literal (semantic audit required) | 0 | uint8_t count = 0;                              // horse vc+0xC8 |
+| L05853 | src/mod/session2/mount_sync_logic.h:213:27 | publishable | inline literal (semantic audit required) | 0 | uint32_t rider_ctrl = 0, horse_ctrl = 0;        // actor+0x90 (controlling user key) |
+| L05854 | src/mod/session2/mount_sync_logic.h:213:43 | publishable | inline literal (semantic audit required) | 0 | uint32_t rider_ctrl = 0, horse_ctrl = 0;        // actor+0x90 (controlling user key) |
+| L05855 | src/mod/session2/mount_sync_logic.h:214:24 | publishable | inline literal (semantic audit required) | 0 | uint8_t rider_c8 = 0, horse_c8 = 0;             // actor+0xC8 (ClientActor vf188, 0x4FA620) |
+| L05856 | src/mod/session2/mount_sync_logic.h:214:38 | publishable | inline literal (semantic audit required) | 0 | uint8_t rider_c8 = 0, horse_c8 = 0;             // actor+0xC8 (ClientActor vf188, 0x4FA620) |
+| L05857 | src/mod/session2/mount_sync_logic.h:217:29 | publishable | inline literal (semantic audit required) | 0 | uint32_t deps_missing = 0; |
+| L05858 | src/mod/session2/mount_sync_logic.h:220:28 | publishable | inline literal (semantic audit required) | 0xFF | uint8_t rider_method = 0xFF; |
+| L05859 | src/mod/session2/mount_sync_logic.h:221:28 | publishable | inline literal (semantic audit required) | 0 | uint32_t rideoff_key = 0; |
+| L05860 | src/mod/session2/mount_sync_logic.h:281:50 | ride_method | inline literal (semantic audit required) | 0 | uint32_t linked_here = 0) { |
+| L05861 | src/mod/session2/mount_sync_logic.h:291:62 | ride_method | inline literal (semantic audit required) | 0 | if (s.rider_method == kMethodRideOff && s.rideoff_key != 0) return Judge::StuckInRideOff; |
+| L05862 | src/mod/session2/mount_sync_logic.h:292:23 | ride_method | inline literal (semantic audit required) | 0 | if (s.occupant != 0 && s.occupant != rider) return Judge::SeatTaken; |
+| L05863 | src/mod/session2/mount_sync_logic.h:293:26 | ride_method | inline literal (semantic audit required) | 0 | if (s.cur_vehicle != 0 && s.cur_vehicle != horse) { |
+| L05864 | src/mod/session2/mount_sync_logic.h:296:25 | ride_method | inline literal (semantic audit required) | 0 | if (s.rider_ctrl == 0 &#124;&#124; s.rider_ctrl != s.horse_ctrl) return Judge::ControllerMismatch; |
+| L05865 | src/mod/session2/mount_sync_logic.h:297:23 | ride_method | inline literal (semantic audit required) | 1 | if (s.rider_c8 == 1) return Judge::RiderLocal; |
+| L05866 | src/mod/session2/mount_sync_logic.h:298:17 | ride_method | inline literal (semantic audit required) | 0 | if (seat == 0 && fifth != 1 && s.horse_c8 != 0) return Judge::HorseActionBranch; |
+| L05867 | src/mod/session2/mount_sync_logic.h:298:31 | ride_method | inline literal (semantic audit required) | 1 | if (seat == 0 && fifth != 1 && s.horse_c8 != 0) return Judge::HorseActionBranch; |
+| L05868 | src/mod/session2/mount_sync_logic.h:298:50 | ride_method | inline literal (semantic audit required) | 0 | if (seat == 0 && fifth != 1 && s.horse_c8 != 0) return Judge::HorseActionBranch; |
+| L05869 | src/mod/session2/mount_sync_logic.h:321:19 | post_name | inline literal (semantic audit required) | 0 | if (result != 0) return Post::Result; |
+| L05870 | src/mod/session2/mount_sync_logic.h:324:82 | post_name | inline literal (semantic audit required) | 0 | const uint8_t want = static_cast<uint8_t>(before.count + (before.occupant == 0 ? 1 : 0)); |
+| L05871 | src/mod/session2/mount_sync_logic.h:324:86 | post_name | inline literal (semantic audit required) | 1 | const uint8_t want = static_cast<uint8_t>(before.count + (before.occupant == 0 ? 1 : 0)); |
+| L05872 | src/mod/session2/mount_sync_logic.h:324:90 | post_name | inline literal (semantic audit required) | 0 | const uint8_t want = static_cast<uint8_t>(before.count + (before.occupant == 0 ? 1 : 0)); |
+| L05873 | src/mod/session2/mount_sync_logic.h:326:30 | post_name | inline literal (semantic audit required) | 0 | if (after.res_vehicle != 0) return Post::Reserve; |
+| L05874 | src/mod/session2/mount_sync_logic.h:335:19 | post_name | inline literal (semantic audit required) | 0 | if (result != 0) return Post::Result; |
+| L05875 | src/mod/session2/mount_sync_logic.h:338:51 | post_name | inline literal (semantic audit required) | 1 | if (before.occupant == rider && after.count + 1 != before.count) return Post::Count; |
+| L05876 | src/mod/session2/mount_sync_logic.h:352:78 | detach_decide | inline literal (semantic audit required) | 0 | if (!s.horse_found &#124;&#124; !s.horse_vc &#124;&#124; !s.horse_has_seats &#124;&#124; s.horse_c8 != 0) return DetachCall::Refused; |
+| L05877 | src/mod/session2/mount_sync_logic.h:361:23 | detach_decide | inline literal (semantic audit required) | 0 | (result == 0 && after.cur_vehicle == horse && after.cur_seat == static_cast<int8_t>(seat) && |
+| L05878 | src/mod/session2/mount_sync_logic.h:370:50 | arm_pack | inline literal (semantic audit required) | 32 | return (static_cast<uint64_t>(transition) << 32) &#124; horse; |
+| L05879 | src/mod/session2/mount_sync_logic.h:373:90 | arm_transition | inline literal (semantic audit required) | 32 | inline constexpr uint32_t arm_transition(uint64_t a) { return static_cast<uint32_t>(a >> 32); } |
+| L05880 | src/mod/session2/mount_sync_logic.h:383:62 | ctl_link | inline literal (semantic audit required) | 0 | if (!s.rider_found &#124;&#124; !s.rider_vc &#124;&#124; !s.link &#124;&#124; horse == 0) return CtlLink::Unknown; |
+| L05881 | src/mod/session2/mount_sync_logic.h:394:16 | observed_detach | inline literal (semantic audit required) | 0 | e.result = 0; |
+| L05882 | src/mod/session2/mount_sync_logic.h:396:13 | observed_detach | inline literal (semantic audit required) | 0 | e.aux = 0; |
+| L05883 | src/mod/session2/mount_sync_logic.h:409:33 | observed_detach | inline literal (semantic audit required) | 3 | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
+| L05884 | src/mod/session2/mount_sync_logic.h:409:39 | observed_detach | inline literal (semantic audit required) | 0.05f | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
+| L05885 | src/mod/session2/mount_sync_logic.h:409:46 | observed_detach | inline literal (semantic audit required) | 1.56f | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
+| L05886 | src/mod/session2/mount_sync_logic.h:409:53 | observed_detach | inline literal (semantic audit required) | 0.55f | inline constexpr float kSeatRef[3] = {0.05f, 1.56f, 0.55f}; |
+| L05887 | src/mod/session2/mount_sync_logic.h:414:24 | geo_speed_bucket | inline literal (semantic audit required) | 0 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
+| L05888 | src/mod/session2/mount_sync_logic.h:414:40 | geo_speed_bucket | inline literal (semantic audit required) | 1 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
+| L05889 | src/mod/session2/mount_sync_logic.h:414:56 | geo_speed_bucket | inline literal (semantic audit required) | 2 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
+| L05890 | src/mod/session2/mount_sync_logic.h:414:73 | geo_speed_bucket | inline literal (semantic audit required) | 3 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
+| L05891 | src/mod/session2/mount_sync_logic.h:414:77 | geo_speed_bucket | inline literal (semantic audit required) | 4 | return mps < 1.f ? 0 : mps < 3.f ? 1 : mps < 6.f ? 2 : mps < 10.f ? 3 : 4; |
+| L05892 | src/mod/session2/mount_sync_logic.h:417:17 | geo_err_bucket | inline literal (semantic audit required) | 0.25f | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05893 | src/mod/session2/mount_sync_logic.h:417:25 | geo_err_bucket | inline literal (semantic audit required) | 0 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05894 | src/mod/session2/mount_sync_logic.h:417:34 | geo_err_bucket | inline literal (semantic audit required) | 0.5f | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05895 | src/mod/session2/mount_sync_logic.h:417:41 | geo_err_bucket | inline literal (semantic audit required) | 1 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05896 | src/mod/session2/mount_sync_logic.h:417:56 | geo_err_bucket | inline literal (semantic audit required) | 2 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05897 | src/mod/session2/mount_sync_logic.h:417:71 | geo_err_bucket | inline literal (semantic audit required) | 3 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05898 | src/mod/session2/mount_sync_logic.h:417:86 | geo_err_bucket | inline literal (semantic audit required) | 4 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05899 | src/mod/session2/mount_sync_logic.h:417:90 | geo_err_bucket | inline literal (semantic audit required) | 5 | return m <= 0.25f ? 0 : m <= 0.5f ? 1 : m <= 1.f ? 2 : m <= 2.f ? 3 : m <= 5.f ? 4 : 5; |
+| L05900 | src/mod/session2/mount_sync_logic.h:420:38 | rotate_inv | inline literal (semantic audit required) | 4 | inline void rotate_inv(const float q[4], const float v[3], float out[3]) { |
+| L05901 | src/mod/session2/mount_sync_logic.h:420:56 | rotate_inv | inline literal (semantic audit required) | 3 | inline void rotate_inv(const float q[4], const float v[3], float out[3]) { |
+| L05902 | src/mod/session2/mount_sync_logic.h:420:70 | rotate_inv | inline literal (semantic audit required) | 3 | inline void rotate_inv(const float q[4], const float v[3], float out[3]) { |
+| L05903 | src/mod/session2/mount_sync_logic.h:421:24 | rotate_inv | inline literal (semantic audit required) | 0 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
+| L05904 | src/mod/session2/mount_sync_logic.h:421:35 | rotate_inv | inline literal (semantic audit required) | 1 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
+| L05905 | src/mod/session2/mount_sync_logic.h:421:46 | rotate_inv | inline literal (semantic audit required) | 2 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
+| L05906 | src/mod/session2/mount_sync_logic.h:421:56 | rotate_inv | inline literal (semantic audit required) | 3 | const float x = -q[0], y = -q[1], z = -q[2], w = q[3]; |
+| L05907 | src/mod/session2/mount_sync_logic.h:422:22 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05908 | src/mod/session2/mount_sync_logic.h:422:33 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05909 | src/mod/session2/mount_sync_logic.h:422:44 | rotate_inv | inline literal (semantic audit required) | 1 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05910 | src/mod/session2/mount_sync_logic.h:422:54 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05911 | src/mod/session2/mount_sync_logic.h:422:65 | rotate_inv | inline literal (semantic audit required) | 0 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05912 | src/mod/session2/mount_sync_logic.h:422:76 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05913 | src/mod/session2/mount_sync_logic.h:422:86 | rotate_inv | inline literal (semantic audit required) | 2 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05914 | src/mod/session2/mount_sync_logic.h:422:97 | rotate_inv | inline literal (semantic audit required) | 1 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05915 | src/mod/session2/mount_sync_logic.h:422:108 | rotate_inv | inline literal (semantic audit required) | 0 | const float tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); |
+| L05916 | src/mod/session2/mount_sync_logic.h:423:9 | rotate_inv | inline literal (semantic audit required) | 0 | out[0] = v[0] + w * tx + (y * tz - z * ty); |
+| L05917 | src/mod/session2/mount_sync_logic.h:423:16 | rotate_inv | inline literal (semantic audit required) | 0 | out[0] = v[0] + w * tx + (y * tz - z * ty); |
+| L05918 | src/mod/session2/mount_sync_logic.h:424:9 | rotate_inv | inline literal (semantic audit required) | 1 | out[1] = v[1] + w * ty + (z * tx - x * tz); |
+| L05919 | src/mod/session2/mount_sync_logic.h:424:16 | rotate_inv | inline literal (semantic audit required) | 1 | out[1] = v[1] + w * ty + (z * tx - x * tz); |
+| L05920 | src/mod/session2/mount_sync_logic.h:425:9 | rotate_inv | inline literal (semantic audit required) | 2 | out[2] = v[2] + w * tz + (x * ty - y * tx); |
+| L05921 | src/mod/session2/mount_sync_logic.h:425:16 | rotate_inv | inline literal (semantic audit required) | 2 | out[2] = v[2] + w * tz + (x * ty - y * tx); |
+| L05922 | src/mod/session2/mount_sync_logic.h:427:37 | unit_quat | inline literal (semantic audit required) | 4 | inline bool unit_quat(const float q[4]) { |
+| L05923 | src/mod/session2/mount_sync_logic.h:428:23 | unit_quat | inline literal (semantic audit required) | 0 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05924 | src/mod/session2/mount_sync_logic.h:428:30 | unit_quat | inline literal (semantic audit required) | 0 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05925 | src/mod/session2/mount_sync_logic.h:428:37 | unit_quat | inline literal (semantic audit required) | 1 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05926 | src/mod/session2/mount_sync_logic.h:428:44 | unit_quat | inline literal (semantic audit required) | 1 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05927 | src/mod/session2/mount_sync_logic.h:428:51 | unit_quat | inline literal (semantic audit required) | 2 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05928 | src/mod/session2/mount_sync_logic.h:428:58 | unit_quat | inline literal (semantic audit required) | 2 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05929 | src/mod/session2/mount_sync_logic.h:428:65 | unit_quat | inline literal (semantic audit required) | 3 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05930 | src/mod/session2/mount_sync_logic.h:428:72 | unit_quat | inline literal (semantic audit required) | 3 | const float l = q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]; |
+| L05931 | src/mod/session2/mount_sync_logic.h:429:16 | unit_quat | inline literal (semantic audit required) | 0.81f | return l > 0.81f && l < 1.21f; |
+| L05932 | src/mod/session2/mount_sync_logic.h:429:29 | unit_quat | inline literal (semantic audit required) | 1.21f | return l > 0.81f && l < 1.21f; |
+| L05933 | src/mod/session2/mount_sync_logic.h:445:47 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
+| L05934 | src/mod/session2/mount_sync_logic.h:445:69 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
+| L05935 | src/mod/session2/mount_sync_logic.h:445:96 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
+| L05936 | src/mod/session2/mount_sync_logic.h:445:118 | geo_frozen | inline literal (semantic audit required) | 3 | inline bool geo_frozen(const float rider_prev[3], const float rider[3], const float horse_prev[3], const float horse[3]) { |
+| L05937 | src/mod/session2/mount_sync_logic.h:446:15 | geo_frozen | inline literal (semantic audit required) | 0 | float r = 0, h = 0; |
+| L05938 | src/mod/session2/mount_sync_logic.h:446:22 | geo_frozen | inline literal (semantic audit required) | 0 | float r = 0, h = 0; |
+| L05939 | src/mod/session2/mount_sync_logic.h:447:18 | geo_frozen | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
+| L05940 | src/mod/session2/mount_sync_logic.h:447:25 | geo_frozen | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
+| L05941 | src/mod/session2/mount_sync_logic.h:458:60 | geo_frozen | inline literal (semantic audit required) | 3 | std::array<std::array<std::array<std::atomic<int64_t>, 3>, kGeoSpeeds>, kGeoLinks> sum_mm{};       // local offset sums |
+| L05942 | src/mod/session2/mount_sync_logic.h:460:38 | geo_frozen | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0}, off_far{0}, frozen{0}; |
+| L05943 | src/mod/session2/mount_sync_logic.h:460:50 | geo_frozen | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0}, off_far{0}, frozen{0}; |
+| L05944 | src/mod/session2/mount_sync_logic.h:460:61 | geo_frozen | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0}, off_far{0}, frozen{0}; |
+| L05945 | src/mod/session2/mount_sync_logic.h:464:45 | add | inline literal (semantic audit required) | 3 | bool add(size_t link, const float rider[3], const float horse[3], const float hq[4], float speed) { |
+| L05946 | src/mod/session2/mount_sync_logic.h:464:67 | add | inline literal (semantic audit required) | 3 | bool add(size_t link, const float rider[3], const float horse[3], const float hq[4], float speed) { |
+| L05947 | src/mod/session2/mount_sync_logic.h:464:86 | add | inline literal (semantic audit required) | 4 | bool add(size_t link, const float rider[3], const float horse[3], const float hq[4], float speed) { |
+| L05948 | src/mod/session2/mount_sync_logic.h:466:34 | add | inline literal (semantic audit required) | 1 | unreadable.fetch_add(1, std::memory_order_relaxed); |
+| L05949 | src/mod/session2/mount_sync_logic.h:469:23 | add | inline literal (semantic audit required) | 3 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
+| L05950 | src/mod/session2/mount_sync_logic.h:469:35 | add | inline literal (semantic audit required) | 0 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
+| L05951 | src/mod/session2/mount_sync_logic.h:469:46 | add | inline literal (semantic audit required) | 0 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
+| L05952 | src/mod/session2/mount_sync_logic.h:469:56 | add | inline literal (semantic audit required) | 1 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
+| L05953 | src/mod/session2/mount_sync_logic.h:469:67 | add | inline literal (semantic audit required) | 1 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
+| L05954 | src/mod/session2/mount_sync_logic.h:469:77 | add | inline literal (semantic audit required) | 2 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
+| L05955 | src/mod/session2/mount_sync_logic.h:469:88 | add | inline literal (semantic audit required) | 2 | const float d[3] = {rider[0] - horse[0], rider[1] - horse[1], rider[2] - horse[2]}; |
+| L05956 | src/mod/session2/mount_sync_logic.h:470:21 | add | inline literal (semantic audit required) | 3 | float local[3]; |
+| L05957 | src/mod/session2/mount_sync_logic.h:472:32 | add | inline literal (semantic audit required) | 0 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
+| L05958 | src/mod/session2/mount_sync_logic.h:472:46 | add | inline literal (semantic audit required) | 0 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
+| L05959 | src/mod/session2/mount_sync_logic.h:472:61 | add | inline literal (semantic audit required) | 1 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
+| L05960 | src/mod/session2/mount_sync_logic.h:472:75 | add | inline literal (semantic audit required) | 1 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
+| L05961 | src/mod/session2/mount_sync_logic.h:472:90 | add | inline literal (semantic audit required) | 2 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
+| L05962 | src/mod/session2/mount_sync_logic.h:472:104 | add | inline literal (semantic audit required) | 2 | const float ex = local[0] - kSeatRef[0], ey = local[1] - kSeatRef[1], ez = local[2] - kSeatRef[2]; |
+| L05963 | src/mod/session2/mount_sync_logic.h:475:31 | add | inline literal (semantic audit required) | 1 | off_far.fetch_add(1, std::memory_order_relaxed); |
+| L05964 | src/mod/session2/mount_sync_logic.h:479:27 | add | inline literal (semantic audit required) | 1 | n[l][s].fetch_add(1, std::memory_order_relaxed); |
+| L05965 | src/mod/session2/mount_sync_logic.h:480:48 | add | inline literal (semantic audit required) | 1 | err[l][s][geo_err_bucket(e)].fetch_add(1, std::memory_order_relaxed); |
+| L05966 | src/mod/session2/mount_sync_logic.h:481:22 | add | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
+| L05967 | src/mod/session2/mount_sync_logic.h:481:29 | add | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
+| L05968 | src/mod/session2/mount_sync_logic.h:544:22 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
+| L05969 | src/mod/session2/mount_sync_logic.h:544:33 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
+| L05970 | src/mod/session2/mount_sync_logic.h:544:49 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
+| L05971 | src/mod/session2/mount_sync_logic.h:544:60 | phase_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0, horse = 0, transition = 0, nonce = 0; |
+| L05972 | src/mod/session2/mount_sync_logic.h:545:20 | phase_name | inline literal (semantic audit required) | 0 | uint8_t seat = 0, fifth = 0; |
+| L05973 | src/mod/session2/mount_sync_logic.h:545:31 | phase_name | inline literal (semantic audit required) | 0 | uint8_t seat = 0, fifth = 0; |
+| L05974 | src/mod/session2/mount_sync_logic.h:547:25 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
+| L05975 | src/mod/session2/mount_sync_logic.h:547:43 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
+| L05976 | src/mod/session2/mount_sync_logic.h:547:58 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
+| L05977 | src/mod/session2/mount_sync_logic.h:547:72 | phase_name | inline literal (semantic audit required) | 0 | uint64_t begun_ms = 0, committed_ms = 0, detach_ms = 0, claim_ms = 0; |
+| L05978 | src/mod/session2/mount_sync_logic.h:548:27 | phase_name | inline literal (semantic audit required) | 0 | uint32_t detach_aux = 0;     // 0x2228E40's 4th argument on the controller |
+| L05979 | src/mod/session2/mount_sync_logic.h:549:27 | phase_name | inline literal (semantic audit required) | 0 | uint8_t detach_flag = 0;     // its 5th |
+| L05980 | src/mod/session2/mount_sync_logic.h:560:24 | phase_name | inline literal (semantic audit required) | 0 | uint32_t relinks = 0; |
+| L05981 | src/mod/session2/mount_sync_logic.h:566:25 | phase_name | inline literal (semantic audit required) | 0 | uint32_t attempts = 0; |
+| L05982 | src/mod/session2/mount_sync_logic.h:568:27 | phase_name | inline literal (semantic audit required) | 0 | uint64_t on_foot_ms = 0;     // since when the rider's actions are on foot here (0: mounted / not yet) |
+| L05983 | src/mod/session2/mount_sync_logic.h:573:28 | phase_name | inline literal (semantic audit required) | 0 | uint32_t linked_here = 0; |
+| L05984 | src/mod/session2/mount_sync_logic.h:579:30 | phase_name | inline literal (semantic audit required) | 0 | uint64_t unreadable_ms = 0;   // since when the rider could not be read (DetachPolicy::Native), 0 = readable |
+| L05985 | src/mod/session2/mount_sync_logic.h:638:22 | accept_name | inline literal (semantic audit required) | 0 | uint32_t rider = 0; |
+| L05986 | src/mod/session2/mount_sync_logic.h:640:29 | accept_name | inline literal (semantic audit required) | 0 | uint32_t link_vehicle = 0;  // Link+0x10 |
+| L05987 | src/mod/session2/mount_sync_logic.h:641:22 | accept_name | inline literal (semantic audit required) | 0xFF | uint8_t method = 0xFF;      // mc+0xF0 |
+| L05988 | src/mod/session2/mount_sync_logic.h:649:24 | accept_name | inline literal (semantic audit required) | 0ull | uint64_t parent = ~0ull; |
+| L05989 | src/mod/session2/mount_sync_logic.h:650:23 | accept_name | inline literal (semantic audit required) | 0 | uint32_t target = 0; |
+| L05990 | src/mod/session2/mount_sync_logic.h:655:21 | premount_names_horse | inline literal (semantic audit required) | 0 | return horse != 0 && a.parent == ~0ull && a.target == horse; |
+| L05991 | src/mod/session2/mount_sync_logic.h:655:39 | premount_names_horse | inline literal (semantic audit required) | 0ull | return horse != 0 && a.parent == ~0ull && a.target == horse; |
+| L05992 | src/mod/session2/mount_sync_logic.h:671:43 | relink_due | inline literal (semantic audit required) | 0 | rn.known && rn.link_vehicle == 0 && t.attempts < kMaxAttempts && t.committed_ms && |
+| L05993 | src/mod/session2/mount_sync_logic.h:686:25 | reset | inline literal (semantic audit required) | 0 | quarantine_n_ = 0; |
+| L05994 | src/mod/session2/mount_sync_logic.h:697:27 | on_event | inline literal (semantic audit required) | 0 | if (remote_key == 0 &#124;&#124; e.rider != remote_key) return Accept::NotRemote; |
+| L05995 | src/mod/session2/mount_sync_logic.h:704:43 | on_event | inline literal (semantic audit required) | 0 | if (t && t->transition != 0 && t->nonce == e.nonce && e.transition <= t->transition) { |
+| L05996 | src/mod/session2/mount_sync_logic.h:719:49 | on_event | inline literal (semantic audit required) | 1 | t->begun_ms = now_ms ? now_ms : 1; |
+| L05997 | src/mod/session2/mount_sync_logic.h:724:67 | on_event | inline literal (semantic audit required) | 0 | if (!t &#124;&#124; t->nonce != e.nonce &#124;&#124; t->transition == 0) return Accept::NoTxn; |
+| L05998 | src/mod/session2/mount_sync_logic.h:729:33 | on_event | inline literal (semantic audit required) | 0 | if (e.result != 0 &#124;&#124; !(e.flags & kFlagOk)) { |
+| L05999 | src/mod/session2/mount_sync_logic.h:734:53 | on_event | inline literal (semantic audit required) | 1 | t->committed_ms = now_ms ? now_ms : 1; |
+| L06000 | src/mod/session2/mount_sync_logic.h:738:67 | on_event | inline literal (semantic audit required) | 0 | if (!t &#124;&#124; t->nonce != e.nonce &#124;&#124; t->transition == 0) return Accept::NoTxn; |
+| L06001 | src/mod/session2/mount_sync_logic.h:741:33 | on_event | inline literal (semantic audit required) | 0 | if (e.result != 0 &#124;&#124; !(e.flags & kFlagOk)) return Accept::DetachFailed; |
+| L06002 | src/mod/session2/mount_sync_logic.h:783:20 | expire | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06003 | src/mod/session2/mount_sync_logic.h:802:20 | cancel_holds | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06004 | src/mod/session2/mount_sync_logic.h:841:50 | plan | inline literal (semantic audit required) | 1 | const uint64_t stamp = now_ms ? now_ms : 1; |
+| L06005 | src/mod/session2/mount_sync_logic.h:870:39 | plan | inline literal (semantic audit required) | 0 | t.unreadable_ms = 0; |
+| L06006 | src/mod/session2/mount_sync_logic.h:876:36 | plan | inline literal (semantic audit required) | 0 | t.detach_aux = 0; |
+| L06007 | src/mod/session2/mount_sync_logic.h:889:40 | plan | inline literal (semantic audit required) | 0 | t.detach_aux = 0; |
+| L06008 | src/mod/session2/mount_sync_logic.h:900:32 | plan | inline literal (semantic audit required) | 0 | t.detach_aux = 0; |
+| L06009 | src/mod/session2/mount_sync_logic.h:930:41 | note_rider_parent | inline literal (semantic audit required) | 32 | const bool mounted = (parent >> 32) == 0 && is_b(static_cast<uint32_t>(parent)); |
+| L06010 | src/mod/session2/mount_sync_logic.h:930:48 | note_rider_parent | inline literal (semantic audit required) | 0 | const bool mounted = (parent >> 32) == 0 && is_b(static_cast<uint32_t>(parent)); |
+| L06011 | src/mod/session2/mount_sync_logic.h:932:29 | note_rider_parent | inline literal (semantic audit required) | 0 | t->on_foot_ms = 0; |
+| L06012 | src/mod/session2/mount_sync_logic.h:933:31 | note_rider_parent | inline literal (semantic audit required) | 0ull | } else if (parent == ~0ull && target != t->horse && !t->on_foot_ms) { |
+| L06013 | src/mod/session2/mount_sync_logic.h:934:47 | note_rider_parent | inline literal (semantic audit required) | 1 | t->on_foot_ms = now_ms ? now_ms : 1; |
+| L06014 | src/mod/session2/mount_sync_logic.h:942:43 | finish_commit | inline literal (semantic audit required) | 0 | if (retired_old) t->linked_here = 0; |
+| L06015 | src/mod/session2/mount_sync_logic.h:976:89 | finish_detach | inline literal (semantic audit required) | 0 | if (o == Outcome::Applied &#124;&#124; o == Outcome::AlreadyApplied) t->linked_here = 0; |
+| L06016 | src/mod/session2/mount_sync_logic.h:998:46 | find | inline literal (semantic audit required) | 0 | if (t.rider == rider && rider != 0) return &t; |
+| L06017 | src/mod/session2/mount_sync_logic.h:1003:25 | quarantined | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < quarantine_n_; ++i) { |
+| L06018 | src/mod/session2/mount_sync_logic.h:1004:32 | quarantined | inline literal (semantic audit required) | 0 | if (quarantine_[i][0] == rider && quarantine_[i][1] == horse) return true; |
+| L06019 | src/mod/session2/mount_sync_logic.h:1004:62 | quarantined | inline literal (semantic audit required) | 1 | if (quarantine_[i][0] == rider && quarantine_[i][1] == horse) return true; |
+| L06020 | src/mod/session2/mount_sync_logic.h:1018:41 | take_detach | inline literal (semantic audit required) | 1 | t.detach_ms = now_ms ? now_ms : 1; |
+| L06021 | src/mod/session2/mount_sync_logic.h:1021:58 | take_detach | inline literal (semantic audit required) | 0 | t.detach_observed = (e.flags & kFlagObserved) != 0; |
+| L06022 | src/mod/session2/mount_sync_logic.h:1026:61 | take_detach | inline literal (semantic audit required) | 0 | if (policy_ == DetachPolicy::Native) t.on_foot_ms = 0; |
+| L06023 | src/mod/session2/mount_sync_logic.h:1057:46 | slot_of | inline literal (semantic audit required) | 0 | if (t.rider == rider && rider != 0) return &t; |
+| L06024 | src/mod/session2/mount_sync_logic.h:1063:28 | alloc | inline literal (semantic audit required) | 0 | if (t.rider == 0) return &t; |
+| L06025 | src/mod/session2/mount_sync_logic.h:1066:28 | alloc | inline literal (semantic audit required) | 0 | Txn* best = &slot_[0]; |
+| L06026 | src/mod/session2/mount_sync_logic.h:1079:46 | add_quarantine | inline literal (semantic audit required) | 1 | quarantine_[quarantine_.size() - 1] = {rider, horse}; |
+| L06027 | src/mod/session2/mount_sync_logic.h:1083:37 | add_quarantine | inline literal (semantic audit required) | 2 | std::array<std::array<uint32_t, 2>, 8> quarantine_{}; |
+| L06028 | src/mod/session2/mount_sync_logic.h:1083:41 | add_quarantine | inline literal (semantic audit required) | 8 | std::array<std::array<uint32_t, 2>, 8> quarantine_{}; |
+| L06029 | src/mod/session2/mount_sync_logic.h:1084:28 | add_quarantine | inline literal (semantic audit required) | 0 | size_t quarantine_n_ = 0; |
+| L06030 | src/mod/session2/mount_sync_logic.h:1109:18 | add_quarantine | inline literal (semantic audit required) | 0xFF | uint8_t c8 = 0xFF;          // its actor+0xC8 (0 = a remote copy here) |
+| L06031 | src/mod/session2/mount_sync_logic.h:1111:22 | add_quarantine | inline literal (semantic audit required) | 0xFF | uint8_t method = 0xFF;      // mc+0xF0 |
+| L06032 | src/mod/session2/mount_sync_logic.h:1123:21 | add_quarantine | inline literal (semantic audit required) | 0xFF | uint8_t chart = 0xFF; |
+| L06033 | src/mod/session2/mount_sync_logic.h:1164:62 | gate_stuck | inline literal (semantic audit required) | 0 | if (v.cur40 && (v.method == kMethodRideOff &#124;&#124; v.chart == 0)) return true; |
+| L06034 | src/mod/session2/mount_sync_logic.h:1169:36 | gate_decide | inline literal (semantic audit required) | 0 | if (!v.remote_rider &#124;&#124; v.c8 != 0) return GateVerdict::NotRider; |
+| L06035 | src/mod/session2/mount_sync_logic.h:1189:22 | gate_decide | inline literal (semantic audit required) | 0 | uint32_t drops = 0; |
+| L06036 | src/mod/session2/mount_sync_logic.h:1194:21 | on | inline literal (semantic audit required) | 0 | drops = 0; |
+| L06037 | src/mod/session2/mount_sync_logic.h:1208:23 | gate_clear_bits | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < kGateEntries; ++i) { |
+| L06038 | src/mod/session2/mount_sync_logic.h:1244:54 | seat_horse_type | inline literal (semantic audit required) | 1 | inline bool seat_horse_type(uint8_t t) { return t == 1 &#124;&#124; (t >= 3 && t <= 9 && t != kActorWorld); } |
+| L06039 | src/mod/session2/mount_sync_logic.h:1244:65 | seat_horse_type | inline literal (semantic audit required) | 3 | inline bool seat_horse_type(uint8_t t) { return t == 1 &#124;&#124; (t >= 3 && t <= 9 && t != kActorWorld); } |
+| L06040 | src/mod/session2/mount_sync_logic.h:1244:75 | seat_horse_type | inline literal (semantic audit required) | 9 | inline bool seat_horse_type(uint8_t t) { return t == 1 &#124;&#124; (t >= 3 && t <= 9 && t != kActorWorld); } |
+| L06041 | src/mod/session2/mount_sync_logic.h:1251:27 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t attach_type = 0xFF;  // [[CC+0x100]+8] (0xFF unreadable) |
+| L06042 | src/mod/session2/mount_sync_logic.h:1253:27 | seat_horse_type | inline literal (semantic audit required) | 0 | uint32_t parent_key = 0;     // [[[actor+0x68]+0x1B8]+0x1C] |
+| L06043 | src/mod/session2/mount_sync_logic.h:1254:21 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t cc228 = 0xFF;        // CC+0x228: 1 once CC vf19 (0x85E2B0) ran (component initialised); vf42 detaches only then |
+| L06044 | src/mod/session2/mount_sync_logic.h:1255:26 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t rider_type = 0xFF;   // [[rider+0x88]+1] (1 player) |
+| L06045 | src/mod/session2/mount_sync_logic.h:1256:26 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t horse_type = 0xFF;   // [[horse+0x88]+1] |
+| L06046 | src/mod/session2/mount_sync_logic.h:1257:27 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t parent_type = 0xFF;  // [[[actor+0x68]+0x1B8]+0x18]: the hierarchy's attach type (0x15ECA10 writes it with the key) |
+| L06047 | src/mod/session2/mount_sync_logic.h:1259:27 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t rider_local = 0xFF;  // byte rider+0x94 (one half of vf178 0x4FE260; 1 on both players' characters) |
+| L06048 | src/mod/session2/mount_sync_logic.h:1260:22 | seat_horse_type | inline literal (semantic audit required) | 0 | uint32_t vf178 = 0;          // RVA of the rider's vtable slot +0x178 (0x4FE260 every client in-game actor) |
+| L06049 | src/mod/session2/mount_sync_logic.h:1261:27 | seat_horse_type | inline literal (semantic audit required) | 0 | uint64_t rider_user = 0;     // [rider+0xA0] (its user object) |
+| L06050 | src/mod/session2/mount_sync_logic.h:1262:27 | seat_horse_type | inline literal (semantic audit required) | 0 | uint64_t local_user = 0;     // [[WorldSystem+0x30]+0x58] (this client's user object) |
+| L06051 | src/mod/session2/mount_sync_logic.h:1263:24 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t rider_c8 = 0xFF;     // rider +0xC8 (0 a remote copy here, 1 / 2 controlled here; 0xFF unreadable) |
+| L06052 | src/mod/session2/mount_sync_logic.h:1264:24 | seat_horse_type | inline literal (semantic audit required) | 0xFF | uint8_t horse_c8 = 0xFF;     // horse +0xC8 |
+| L06053 | src/mod/session2/mount_sync_logic.h:1273:32 | seat_local_user | inline literal (semantic audit required) | 0 | return s.local_user == 0 &#124;&#124; s.rider_user == 0 &#124;&#124; (s.rider_user == s.local_user && s.rider_local != 0); |
+| L06054 | src/mod/session2/mount_sync_logic.h:1273:53 | seat_local_user | inline literal (semantic audit required) | 0 | return s.local_user == 0 &#124;&#124; s.rider_user == 0 &#124;&#124; (s.rider_user == s.local_user && s.rider_local != 0); |
+| L06055 | src/mod/session2/mount_sync_logic.h:1273:108 | seat_local_user | inline literal (semantic audit required) | 0 | return s.local_user == 0 &#124;&#124; s.rider_user == 0 &#124;&#124; (s.rider_user == s.local_user && s.rider_local != 0); |
+| L06056 | src/mod/session2/mount_sync_logic.h:1275:56 | seat_local_user | inline literal (semantic audit required) | 0 | if (s.vf178 == kVf178User) return s.rider_local != 0; |
+| L06057 | src/mod/session2/mount_sync_logic.h:1328:50 | seat_why_name | inline literal (semantic audit required) | 0 | uint32_t rider_key = 0, uint32_t local_key = 0) { |
+| L06058 | src/mod/session2/mount_sync_logic.h:1328:74 | seat_why_name | inline literal (semantic audit required) | 0 | uint32_t rider_key = 0, uint32_t local_key = 0) { |
+| L06059 | src/mod/session2/mount_sync_logic.h:1331:22 | seat_why_name | inline literal (semantic audit required) | 0 | if (rider_key == 0 &#124;&#124; local_key == 0 &#124;&#124; rider_key == local_key) return {SeatVerdict::Refused, SeatWhy::Local}; |
+| L06060 | src/mod/session2/mount_sync_logic.h:1331:40 | seat_why_name | inline literal (semantic audit required) | 0 | if (rider_key == 0 &#124;&#124; local_key == 0 &#124;&#124; rider_key == local_key) return {SeatVerdict::Refused, SeatWhy::Local}; |
+| L06061 | src/mod/session2/mount_sync_logic.h:1332:47 | seat_why_name | inline literal (semantic audit required) | 0 | if (!p.rider_found &#124;&#124; !p.link &#124;&#124; horse == 0 &#124;&#124; p.cur_vehicle != horse &#124;&#124; p.cur_seat != static_cast<int8_t>(seat)) { |
+| L06062 | src/mod/session2/mount_sync_logic.h:1335:17 | seat_why_name | inline literal (semantic audit required) | 0 | if (seat != 0) return {SeatVerdict::Refused, SeatWhy::NotSeat0}; |
+| L06063 | src/mod/session2/mount_sync_logic.h:1337:42 | seat_why_name | inline literal (semantic audit required) | 0xFF | if (!s.has_cc100 &#124;&#124; s.attach_type == 0xFF) return {SeatVerdict::Refused, SeatWhy::NoAttach}; |
+| L06064 | src/mod/session2/mount_sync_logic.h:1340:42 | seat_why_name | inline literal (semantic audit required) | 0 | if (!s.has_parent &#124;&#124; s.parent_key != 0) return {SeatVerdict::Refused, SeatWhy::ParentSet}; |
+| L06065 | src/mod/session2/mount_sync_logic.h:1341:20 | seat_why_name | inline literal (semantic audit required) | 1 | if (s.cc228 != 1) return {SeatVerdict::Refused, SeatWhy::NotInit}; |
+| L06066 | src/mod/session2/mount_sync_logic.h:1345:23 | seat_why_name | inline literal (semantic audit required) | 0 | if (s.rider_c8 != 0 &#124;&#124; s.horse_c8 != 0) return {SeatVerdict::Refused, SeatWhy::Controlled}; |
+| L06067 | src/mod/session2/mount_sync_logic.h:1345:42 | seat_why_name | inline literal (semantic audit required) | 0 | if (s.rider_c8 != 0 &#124;&#124; s.horse_c8 != 0) return {SeatVerdict::Refused, SeatWhy::Controlled}; |
+| L06068 | src/mod/session2/mount_sync_logic.h:1368:16 | seat_verify | inline literal (semantic audit required) | 0 | if (res != 0) return SeatPost::Result; |
+| L06069 | src/mod/session2/mount_sync_logic.h:1369:48 | seat_verify | inline literal (semantic audit required) | 0xFF | if (!post.has_cc100 &#124;&#124; post.attach_type == 0xFF) return SeatPost::Unreadable; |
+| L06070 | src/mod/session2/mount_sync_logic.h:1401:26 | seat_cause_name | inline literal (semantic audit required) | 0ull | uint64_t after_ms = ~0ull;  // since the expectation (~0: none) |
+| L06071 | src/mod/session2/mount_sync_logic.h:1402:26 | seat_cause_name | inline literal (semantic audit required) | 0 | uint64_t seated_ms = 0;     // since the seat |
+| L06072 | src/mod/session2/mount_sync_logic.h:1403:20 | seat_cause_name | inline literal (semantic audit required) | 0xFF | uint8_t type = 0xFF;        // the attach type now |
+| L06073 | src/mod/session2/mount_sync_logic.h:1420:51 | expecting | inline literal (semantic audit required) | 0 | bool expecting() const { return expect_ms_ != 0; } |
+| L06074 | src/mod/session2/mount_sync_logic.h:1427:40 | expect | inline literal (semantic audit required) | 1 | expect_ms_ = now_ms ? now_ms : 1; |
+| L06075 | src/mod/session2/mount_sync_logic.h:1433:26 | mounted | inline literal (semantic audit required) | 0 | expect_ms_ = 0; |
+| L06076 | src/mod/session2/mount_sync_logic.h:1443:83 | step | inline literal (semantic audit required) | 0ull | st.after_ms = expect_ms_ && now_ms >= expect_ms_ ? now_ms - expect_ms_ : ~0ull; |
+| L06077 | src/mod/session2/mount_sync_logic.h:1444:65 | step | inline literal (semantic audit required) | 0 | st.seated_ms = now_ms >= seat_ms_ ? now_ms - seat_ms_ : 0; |
+| L06078 | src/mod/session2/mount_sync_logic.h:1445:21 | step | inline literal (semantic audit required) | 0xFF | if (type == 0xFF) { |
+| L06079 | src/mod/session2/mount_sync_logic.h:1447:46 | step | inline literal (semantic audit required) | 1 | lost_ms_ = now_ms ? now_ms : 1; |
+| L06080 | src/mod/session2/mount_sync_logic.h:1454:20 | step | inline literal (semantic audit required) | 0 | lost_ms_ = 0; |
+| L06081 | src/mod/session2/mount_sync_logic.h:1467:44 | step | inline literal (semantic audit required) | 1 | expect_ms_ = now_ms ? now_ms : 1;  // the retirement gets its own wait |
+| L06082 | src/mod/session2/mount_sync_logic.h:1481:23 | set_retire | inline literal (semantic audit required) | 0 | uint32_t rider_ = 0, horse_ = 0; |
+| L06083 | src/mod/session2/mount_sync_logic.h:1481:35 | set_retire | inline literal (semantic audit required) | 0 | uint32_t rider_ = 0, horse_ = 0; |
+| L06084 | src/mod/session2/mount_sync_logic.h:1482:25 | set_retire | inline literal (semantic audit required) | 0 | uint64_t seat_ms_ = 0, expect_ms_ = 0, lost_ms_ = 0; |
+| L06085 | src/mod/session2/mount_sync_logic.h:1482:41 | set_retire | inline literal (semantic audit required) | 0 | uint64_t seat_ms_ = 0, expect_ms_ = 0, lost_ms_ = 0; |
+| L06086 | src/mod/session2/mount_sync_logic.h:1482:55 | set_retire | inline literal (semantic audit required) | 0 | uint64_t seat_ms_ = 0, expect_ms_ = 0, lost_ms_ = 0; |
+| L06087 | src/mod/session2/mount_sync_logic.h:1503:26 | hold_who | inline literal (semantic audit required) | 0 | if (!early &#124;&#124; key == 0 &#124;&#124; key == local) return HoldWho::None; |
+| L06088 | src/mod/session2/mount_sync_logic.h:1504:19 | hold_who | inline literal (semantic audit required) | 0 | if (remote != 0 && key == remote) return HoldWho::Remote; |
+| L06089 | src/mod/session2/mount_sync_logic.h:1508:42 | hold_pose_ok | inline literal (semantic audit required) | 3 | inline bool hold_pose_ok(const float pos[3], int16_t sector_x, int16_t sector_z) { |
+| L06090 | src/mod/session2/mount_sync_logic.h:1509:15 | hold_pose_ok | inline literal (semantic audit required) | 0 | float l = 0; |
+| L06091 | src/mod/session2/mount_sync_logic.h:1510:18 | hold_pose_ok | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
+| L06092 | src/mod/session2/mount_sync_logic.h:1510:25 | hold_pose_ok | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
+| L06093 | src/mod/session2/mount_sync_logic.h:1514:26 | hold_pose_ok | inline literal (semantic audit required) | 0 | return !(sector_x == 0 && sector_z == 0 && l < 1.f); |
+| L06094 | src/mod/session2/mount_sync_logic.h:1514:43 | hold_pose_ok | inline literal (semantic audit required) | 0 | return !(sector_x == 0 && sector_z == 0 && l < 1.f); |
+| L06095 | src/mod/session2/mount_sync_logic.h:1518:81 | hold_decide | inline literal (semantic audit required) | 3 | inline HoldAct hold_decide(Mode m, HoldWho who, bool pose_read, const float pos[3], int16_t sector_x, int16_t sector_z) { |
+| L06096 | src/mod/session2/mount_sync_logic.h:1531:37 | self_check_hit | inline literal (semantic audit required) | 4 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
+| L06097 | src/mod/session2/mount_sync_logic.h:1531:50 | self_check_hit | inline literal (semantic audit required) | 0 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
+| L06098 | src/mod/session2/mount_sync_logic.h:1531:63 | self_check_hit | inline literal (semantic audit required) | 1 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
+| L06099 | src/mod/session2/mount_sync_logic.h:1531:69 | self_check_hit | inline literal (semantic audit required) | 8 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
+| L06100 | src/mod/session2/mount_sync_logic.h:1531:102 | self_check_hit | inline literal (semantic audit required) | 0 | if (!packet &#124;&#124; size < kHeader + 4 &#124;&#124; (packet[0] &#124; (packet[1] << 8)) != kOpStartActionReq) return 0; |
+| L06101 | src/mod/session2/mount_sync_logic.h:1533:39 | self_check_hit | inline literal (semantic audit required) | 1 | if (rider && key == rider) return 1; |
+| L06102 | src/mod/session2/mount_sync_logic.h:1534:39 | self_check_hit | inline literal (semantic audit required) | 2 | if (horse && key == horse) return 2; |
+| L06103 | src/mod/session2/mount_sync_logic.h:1535:12 | self_check_hit | inline literal (semantic audit required) | 0 | return 0; |
+| L06104 | src/mod/session2/mount_sync_logic.h:1556:29 | drain | inline literal (semantic audit required) | 1 | busy_.fetch_add(1, std::memory_order_relaxed); |
+| L06105 | src/mod/session2/mount_sync_logic.h:1557:20 | drain | inline literal (semantic audit required) | 0 | return 0; |
+| L06106 | src/mod/session2/mount_sync_logic.h:1559:20 | drain | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06107 | src/mod/session2/mount_sync_logic.h:1562:35 | drain | inline literal (semantic audit required) | 1 | failed_.fetch_add(1, std::memory_order_relaxed); |
+| L06108 | src/mod/session2/mount_sync_logic.h:1563:24 | drain | inline literal (semantic audit required) | 0 | return 0; |
+| L06109 | src/mod/session2/mount_sync_logic.h:1574:35 | drain | inline literal (semantic audit required) | 1 | failed_.fetch_add(1, std::memory_order_relaxed); |
+| L06110 | src/mod/session2/mount_sync_logic.h:1592:35 | discard | inline literal (semantic audit required) | 1 | size_t n = has_pending_ ? 1 : 0; |
+| L06111 | src/mod/session2/mount_sync_logic.h:1592:39 | discard | inline literal (semantic audit required) | 0 | size_t n = has_pending_ ? 1 : 0; |
+| L06112 | src/mod/session2/mount_sync_logic.h:1611:35 | pending | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> failed_{0}, busy_{0}, pushed_{0}; |
+| L06113 | src/mod/session2/mount_sync_logic.h:1611:45 | pending | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> failed_{0}, busy_{0}, pushed_{0}; |
+| L06114 | src/mod/session2/mount_sync_logic.h:1611:57 | pending | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> failed_{0}, busy_{0}, pushed_{0}; |
+| L06115 | src/mod/session2/observer_hold_acks.h:87:29 | active | inline literal (semantic audit required) | 0 | uint32_t extra_pushed = 0; // Pushed: packets queued after/with it (released or spilled) |
+| L06116 | src/mod/session2/observer_hold_acks.h:88:29 | active | inline literal (semantic audit required) | 0 | uint32_t extra_failed = 0; // ... of which the queue refused |
+| L06117 | src/mod/session2/observer_hold_acks_logic.h:62:21 | op_index | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kHeldOps.size(); ++i) { |
+| L06118 | src/mod/session2/observer_hold_acks_logic.h:65:13 | op_index | inline literal (semantic audit required) | 1 | return -1; |
+| L06119 | src/mod/session2/observer_hold_acks_logic.h:69:18 | le32 | inline literal (semantic audit required) | 0 | uint32_t v = 0; |
+| L06120 | src/mod/session2/observer_hold_acks_logic.h:70:24 | le32 | inline literal (semantic audit required) | 4 | std::memcpy(&v, p, 4); |
+| L06121 | src/mod/session2/observer_hold_acks_logic.h:76:28 | npc_key_of | inline literal (semantic audit required) | 0 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
+| L06122 | src/mod/session2/observer_hold_acks_logic.h:76:50 | npc_key_of | inline literal (semantic audit required) | 4 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
+| L06123 | src/mod/session2/observer_hold_acks_logic.h:78:17 | npc_key_of | inline literal (semantic audit required) | 28 | if ((key >> 28) != kNpcKeyClass) return std::nullopt; |
+| L06124 | src/mod/session2/observer_hold_acks_logic.h:88:28 | held_key_of | inline literal (semantic audit required) | 0 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
+| L06125 | src/mod/session2/observer_hold_acks_logic.h:88:50 | held_key_of | inline literal (semantic audit required) | 4 | if (op_index(opcode) < 0 &#124;&#124; payload.size() < 4) return std::nullopt; |
+| L06126 | src/mod/session2/observer_hold_acks_logic.h:90:17 | held_key_of | inline literal (semantic audit required) | 28 | if ((key >> 28) != kNpcKeyClass && (key >> 28) != kCharKeyClass) return std::nullopt; |
+| L06127 | src/mod/session2/observer_hold_acks_logic.h:90:48 | held_key_of | inline literal (semantic audit required) | 28 | if ((key >> 28) != kNpcKeyClass && (key >> 28) != kCharKeyClass) return std::nullopt; |
+| L06128 | src/mod/session2/observer_hold_acks_logic.h:97:104 | announce_keys | inline literal (semantic audit required) | 4096 | inline size_t announce_keys(std::span<const uint8_t> payload, std::vector<uint32_t>& out, size_t max = 4096) { |
+| L06129 | src/mod/session2/observer_hold_acks_logic.h:98:16 | announce_keys | inline literal (semantic audit required) | 0 | size_t n = 0, p = 0; |
+| L06130 | src/mod/session2/observer_hold_acks_logic.h:98:23 | announce_keys | inline literal (semantic audit required) | 0 | size_t n = 0, p = 0; |
+| L06131 | src/mod/session2/observer_hold_acks_logic.h:99:27 | announce_keys | inline literal (semantic audit required) | 2 | while (n < max && p + 2 <= payload.size()) { |
+| L06132 | src/mod/session2/observer_hold_acks_logic.h:100:24 | announce_keys | inline literal (semantic audit required) | 0 | uint16_t len = 0; |
+| L06133 | src/mod/session2/observer_hold_acks_logic.h:101:47 | announce_keys | inline literal (semantic audit required) | 2 | std::memcpy(&len, payload.data() + p, 2); |
+| L06134 | src/mod/session2/observer_hold_acks_logic.h:102:20 | announce_keys | inline literal (semantic audit required) | 0 | if (len == 0 &#124;&#124; p + 2 + len > payload.size()) break; |
+| L06135 | src/mod/session2/observer_hold_acks_logic.h:102:29 | announce_keys | inline literal (semantic audit required) | 2 | if (len == 0 &#124;&#124; p + 2 + len > payload.size()) break; |
+| L06136 | src/mod/session2/observer_hold_acks_logic.h:103:20 | announce_keys | inline literal (semantic audit required) | 5 | if (len >= 5 && payload[p + 2] != 0) { |
+| L06137 | src/mod/session2/observer_hold_acks_logic.h:103:37 | announce_keys | inline literal (semantic audit required) | 2 | if (len >= 5 && payload[p + 2] != 0) { |
+| L06138 | src/mod/session2/observer_hold_acks_logic.h:103:43 | announce_keys | inline literal (semantic audit required) | 0 | if (len >= 5 && payload[p + 2] != 0) { |
+| L06139 | src/mod/session2/observer_hold_acks_logic.h:104:53 | announce_keys | inline literal (semantic audit required) | 3 | out.push_back(le32(payload.data() + p + 3)); |
+| L06140 | src/mod/session2/observer_hold_acks_logic.h:107:14 | announce_keys | inline literal (semantic audit required) | 2 | p += 2 + len; |
+| L06141 | src/mod/session2/observer_hold_acks_logic.h:113:23 | announce_keys | inline literal (semantic audit required) | 1024 | size_t max_keys = 1024;                // = observer_hold's NPC table (hold::kNpcTableCapacity) |
+| L06142 | src/mod/session2/observer_hold_acks_logic.h:114:34 | announce_keys | inline literal (semantic audit required) | 32 | size_t max_packets_per_key = 32;       // session 6B: at most 5 per key (3 x 2404 + 2 x 2586... + 2723) |
+| L06143 | src/mod/session2/observer_hold_acks_logic.h:115:32 | announce_keys | inline literal (semantic audit required) | 32 | size_t max_bytes_per_key = 32 * 1024;  // session 6B: at most 3437 bytes per key |
+| L06144 | src/mod/session2/observer_hold_acks_logic.h:115:37 | announce_keys | inline literal (semantic audit required) | 1024 | size_t max_bytes_per_key = 32 * 1024;  // session 6B: at most 3437 bytes per key |
+| L06145 | src/mod/session2/observer_hold_acks_logic.h:116:30 | announce_keys | inline literal (semantic audit required) | 4u | size_t max_bytes_total = 4u << 20; |
+| L06146 | src/mod/session2/observer_hold_acks_logic.h:116:36 | announce_keys | inline literal (semantic audit required) | 20 | size_t max_bytes_total = 4u << 20; |
+| L06147 | src/mod/session2/observer_hold_acks_logic.h:119:28 | announce_keys | inline literal (semantic audit required) | 100000 | uint64_t max_hold_ms = 100000; |
+| L06148 | src/mod/session2/observer_hold_acks_logic.h:120:26 | announce_keys | inline literal (semantic audit required) | 2000 | uint64_t orphan_ms = 2000;     // a release whose 2005 was not seen: its packets wait this long |
+| L06149 | src/mod/session2/observer_hold_acks_logic.h:139:20 | discard_name | inline literal (semantic audit required) | 0 | uint64_t seq = 0;  // one order across keys |
+| L06150 | src/mod/session2/observer_hold_acks_logic.h:140:23 | discard_name | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
+| L06151 | src/mod/session2/observer_hold_acks_logic.h:141:20 | discard_name | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L06152 | src/mod/session2/observer_hold_acks_logic.h:142:21 | discard_name | inline literal (semantic audit required) | 0 | uint64_t t_ms = 0; |
+| L06153 | src/mod/session2/observer_hold_acks_logic.h:147:22 | discard_name | inline literal (semantic audit required) | 0 | uint64_t begun = 0, again = 0, full = 0; |
+| L06154 | src/mod/session2/observer_hold_acks_logic.h:147:33 | discard_name | inline literal (semantic audit required) | 0 | uint64_t begun = 0, again = 0, full = 0; |
+| L06155 | src/mod/session2/observer_hold_acks_logic.h:147:43 | discard_name | inline literal (semantic audit required) | 0 | uint64_t begun = 0, again = 0, full = 0; |
+| L06156 | src/mod/session2/observer_hold_acks_logic.h:148:21 | discard_name | inline literal (semantic audit required) | 0 | uint64_t held = 0; |
+| L06157 | src/mod/session2/observer_hold_acks_logic.h:150:30 | discard_name | inline literal (semantic audit required) | 0 | uint64_t released_pkts = 0, released_keys = 0, announced_empty = 0; |
+| L06158 | src/mod/session2/observer_hold_acks_logic.h:150:49 | discard_name | inline literal (semantic audit required) | 0 | uint64_t released_pkts = 0, released_keys = 0, announced_empty = 0; |
+| L06159 | src/mod/session2/observer_hold_acks_logic.h:150:70 | discard_name | inline literal (semantic audit required) | 0 | uint64_t released_pkts = 0, released_keys = 0, announced_empty = 0; |
+| L06160 | src/mod/session2/observer_hold_acks_logic.h:151:28 | discard_name | inline literal (semantic audit required) | 0 | uint64_t wait_sum_ms = 0, wait_max_ms = 0;  // first held packet -> its 2005 |
+| L06161 | src/mod/session2/observer_hold_acks_logic.h:151:45 | discard_name | inline literal (semantic audit required) | 0 | uint64_t wait_sum_ms = 0, wait_max_ms = 0;  // first held packet -> its 2005 |
+| L06162 | src/mod/session2/observer_hold_acks_logic.h:152:28 | discard_name | inline literal (semantic audit required) | 0 | uint64_t per_key_max = 0; |
+| L06163 | src/mod/session2/observer_hold_acks_logic.h:154:29 | discard_name | inline literal (semantic audit required) | 0 | uint64_t spilled_keys = 0, spilled_pkts = 0, spilled_closed = 0; |
+| L06164 | src/mod/session2/observer_hold_acks_logic.h:154:47 | discard_name | inline literal (semantic audit required) | 0 | uint64_t spilled_keys = 0, spilled_pkts = 0, spilled_closed = 0; |
+| L06165 | src/mod/session2/observer_hold_acks_logic.h:154:67 | discard_name | inline literal (semantic audit required) | 0 | uint64_t spilled_keys = 0, spilled_pkts = 0, spilled_closed = 0; |
+| L06166 | src/mod/session2/observer_hold_acks_logic.h:155:26 | discard_name | inline literal (semantic audit required) | 0 | uint64_t keys_peak = 0, bytes_peak = 0; |
+| L06167 | src/mod/session2/observer_hold_acks_logic.h:155:42 | discard_name | inline literal (semantic audit required) | 0 | uint64_t keys_peak = 0, bytes_peak = 0; |
+| L06168 | src/mod/session2/observer_hold_acks_logic.h:160:20 | discard_name | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L06169 | src/mod/session2/observer_hold_acks_logic.h:161:22 | discard_name | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
+| L06170 | src/mod/session2/observer_hold_acks_logic.h:162:24 | discard_name | inline literal (semantic audit required) | 0 | uint64_t wait_ms = 0; |
+| L06171 | src/mod/session2/observer_hold_acks_logic.h:163:25 | discard_name | inline literal (semantic audit required) | 0 | uint16_t first_op = 0, last_op = 0; |
+| L06172 | src/mod/session2/observer_hold_acks_logic.h:163:38 | discard_name | inline literal (semantic audit required) | 0 | uint16_t first_op = 0, last_op = 0; |
+| L06173 | src/mod/session2/observer_hold_acks_logic.h:187:29 | begin | inline literal (semantic audit required) | 0 | e.deadline_ms = 0; |
+| L06174 | src/mod/session2/observer_hold_acks_logic.h:215:26 | begin | inline literal (semantic audit required) | 1 | if (e.q.size() + 1 > l_.max_packets_per_key &#124;&#124; e.bytes + size > l_.max_bytes_per_key &#124;&#124; |
+| L06175 | src/mod/session2/observer_hold_acks_logic.h:218:45 | begin | inline literal (semantic audit required) | 1 | c_.spilled_pkts += e.q.size() + 1; |
+| L06176 | src/mod/session2/observer_hold_acks_logic.h:224:23 | begin | inline literal (semantic audit required) | 0 | e.bytes = 0; |
+| L06177 | src/mod/session2/observer_hold_acks_logic.h:243:50 | begin | inline literal (semantic audit required) | 0 | if (const int i = op_index(opcode); i >= 0) ++c_.held_by_op[static_cast<size_t>(i)]; |
+| L06178 | src/mod/session2/observer_hold_acks_logic.h:255:33 | begin | inline literal (semantic audit required) | 0 | if (matched) *matched = 0; |
+| L06179 | src/mod/session2/observer_hold_acks_logic.h:266:84 | begin | inline literal (semantic audit required) | 0 | const uint64_t wait = now_ms >= e.first_ms ? now_ms - e.first_ms : 0; |
+| L06180 | src/mod/session2/observer_hold_acks_logic.h:288:36 | drop | inline literal (semantic audit required) | 0 | if (it == m_.end()) return 0; |
+| L06181 | src/mod/session2/observer_hold_acks_logic.h:308:20 | clear | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06182 | src/mod/session2/observer_hold_acks_logic.h:314:18 | clear | inline literal (semantic audit required) | 0 | bytes_ = 0; |
+| L06183 | src/mod/session2/observer_hold_acks_logic.h:320:24 | clear | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L06184 | src/mod/session2/observer_hold_acks_logic.h:322:26 | clear | inline literal (semantic audit required) | 0 | size_t packets = 0; |
+| L06185 | src/mod/session2/observer_hold_acks_logic.h:325:20 | expire | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06186 | src/mod/session2/observer_hold_acks_logic.h:361:20 | packets | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06187 | src/mod/session2/observer_hold_acks_logic.h:371:26 | limits | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
+| L06188 | src/mod/session2/observer_hold_acks_logic.h:373:29 | limits | inline literal (semantic audit required) | 0 | uint64_t since_ms = 0, first_ms = 0, deadline_ms = 0; |
+| L06189 | src/mod/session2/observer_hold_acks_logic.h:373:43 | limits | inline literal (semantic audit required) | 0 | uint64_t since_ms = 0, first_ms = 0, deadline_ms = 0; |
+| L06190 | src/mod/session2/observer_hold_acks_logic.h:373:60 | limits | inline literal (semantic audit required) | 0 | uint64_t since_ms = 0, first_ms = 0, deadline_ms = 0; |
+| L06191 | src/mod/session2/observer_hold_acks_logic.h:374:24 | limits | inline literal (semantic audit required) | 0 | size_t bytes = 0; |
+| L06192 | src/mod/session2/observer_hold_acks_logic.h:385:19 | discard | inline literal (semantic audit required) | 0 | e.bytes = 0; |
+| L06193 | src/mod/session2/observer_hold_acks_logic.h:391:21 | discard | inline literal (semantic audit required) | 0 | size_t bytes_ = 0; |
+| L06194 | src/mod/session2/observer_hold_acks_logic.h:392:21 | discard | inline literal (semantic audit required) | 0 | uint64_t seq_ = 0; |
+| L06195 | src/mod/session2/observer_milestone_logic.h:72:12 | mode_name | inline literal (semantic audit required) | 0 | None = 0, |
+| L06196 | src/mod/session2/observer_milestone_logic.h:136:20 | why_name | inline literal (semantic audit required) | 0 | uint32_t tid = 0; |
+| L06197 | src/mod/session2/observer_milestone_logic.h:137:21 | why_name | inline literal (semantic audit required) | 0 | uint64_t t_us = 0; |
+| L06198 | src/mod/session2/observer_milestone_logic.h:138:22 | why_name | inline literal (semantic audit required) | 0 | uint32_t epoch = 0;          // server_epoch() |
+| L06199 | src/mod/session2/observer_milestone_logic.h:143:23 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
+| L06200 | src/mod/session2/observer_milestone_logic.h:143:34 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
+| L06201 | src/mod/session2/observer_milestone_logic.h:143:44 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
+| L06202 | src/mod/session2/observer_milestone_logic.h:143:62 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
+| L06203 | src/mod/session2/observer_milestone_logic.h:143:82 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
+| L06204 | src/mod/session2/observer_milestone_logic.h:143:96 | why_name | inline literal (semantic audit required) | 0 | uintptr_t field = 0, actor = 0, user = 0, user_session = 0, main_character = 0, fm_field = 0; |
+| L06205 | src/mod/session2/observer_milestone_logic.h:144:28 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
+| L06206 | src/mod/session2/observer_milestone_logic.h:144:43 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
+| L06207 | src/mod/session2/observer_milestone_logic.h:144:57 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
+| L06208 | src/mod/session2/observer_milestone_logic.h:144:72 | why_name | inline literal (semantic audit required) | 0 | uint32_t field_owner = 0, field_key = 0, user_key = 0, actor_key = 0; |
+| L06209 | src/mod/session2/observer_milestone_logic.h:146:30 | why_name | inline literal (semantic audit required) | 0 | uintptr_t live_session = 0;  // the live session 2 of `epoch` (0 = none) |
+| L06210 | src/mod/session2/observer_milestone_logic.h:147:31 | why_name | inline literal (semantic audit required) | 0 | uint32_t user2_user_key = 0, user2_actor_key = 0, host_user_key = 0; |
+| L06211 | src/mod/session2/observer_milestone_logic.h:147:52 | why_name | inline literal (semantic audit required) | 0 | uint32_t user2_user_key = 0, user2_actor_key = 0, host_user_key = 0; |
+| L06212 | src/mod/session2/observer_milestone_logic.h:147:71 | why_name | inline literal (semantic audit required) | 0 | uint32_t user2_user_key = 0, user2_actor_key = 0, host_user_key = 0; |
+| L06213 | src/mod/session2/observer_milestone_logic.h:148:28 | why_name | inline literal (semantic audit required) | 0 | uintptr_t host_field = 0;    // the host's current field (0 = unknown) |
+| L06214 | src/mod/session2/observer_milestone_logic.h:152:26 | why_name | inline literal (semantic audit required) | 0 | uintptr_t send_ctx = 0; |
+| L06215 | src/mod/session2/observer_milestone_logic.h:153:26 | why_name | inline literal (semantic audit required) | 0 | uint8_t scope_flag = 0; |
+| L06216 | src/mod/session2/observer_milestone_logic.h:154:28 | why_name | inline literal (semantic audit required) | 0 | uint32_t scope_count = 0; |
+| L06217 | src/mod/session2/observer_milestone_logic.h:155:30 | why_name | inline literal (semantic audit required) | 1 | int32_t scope_current = -1; |
+| L06218 | src/mod/session2/observer_milestone_logic.h:162:20 | why_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0; |
+| L06219 | src/mod/session2/observer_milestone_logic.h:180:19 | call_name | inline literal (semantic audit required) | 0 | kNTripStart = 0,  // v0 gen, v1 epoch, v2 owner (2174, original), v3 pushed, v4 superseded gen |
+| L06220 | src/mod/session2/observer_milestone_logic.h:218:46 | outcome_name | inline literal (semantic audit required) | 0 | virtual void note(const p8p::Event& e) = 0; |
+| L06221 | src/mod/session2/observer_milestone_logic.h:225:20 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
+| L06222 | src/mod/session2/observer_milestone_logic.h:225:31 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
+| L06223 | src/mod/session2/observer_milestone_logic.h:226:22 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t owner = 0;  // the owner the server wrote in this trip's 2174 (0 = unknown layout) |
+| L06224 | src/mod/session2/observer_milestone_logic.h:227:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2174 = 0; |
+| L06225 | src/mod/session2/observer_milestone_logic.h:230:23 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2144 = 0, tid_2144 = 0; |
+| L06226 | src/mod/session2/observer_milestone_logic.h:230:37 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2144 = 0, tid_2144 = 0; |
+| L06227 | src/mod/session2/observer_milestone_logic.h:231:25 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t seq_2144 = 0, t_2144 = 0; |
+| L06228 | src/mod/session2/observer_milestone_logic.h:231:37 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t seq_2144 = 0, t_2144 = 0; |
+| L06229 | src/mod/session2/observer_milestone_logic.h:232:31 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t seq_3066_after = 0;  // the seq of the 2144 a pushed 3066 followed on tid_2144 |
+| L06230 | src/mod/session2/observer_milestone_logic.h:236:24 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t entries = 0;  // observer entries of user 2 seen in the trip |
+| L06231 | src/mod/session2/observer_milestone_logic.h:241:27 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t ours_count = 0; |
+| L06232 | src/mod/session2/observer_milestone_logic.h:242:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_ours = 0; |
+| L06233 | src/mod/session2/observer_milestone_logic.h:243:28 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t native_2322 = 0; |
+| L06234 | src/mod/session2/observer_milestone_logic.h:245:23 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2549 = 0, n_2445 = 0, n_2762 = 0; |
+| L06235 | src/mod/session2/observer_milestone_logic.h:245:35 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2549 = 0, n_2445 = 0, n_2762 = 0; |
+| L06236 | src/mod/session2/observer_milestone_logic.h:245:47 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n_2549 = 0, n_2445 = 0, n_2762 = 0; |
+| L06237 | src/mod/session2/observer_milestone_logic.h:246:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2445 = 0, t_2762 = 0; |
+| L06238 | src/mod/session2/observer_milestone_logic.h:246:35 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2445 = 0, t_2762 = 0; |
+| L06239 | src/mod/session2/observer_milestone_logic.h:247:24 | outcome_name | inline literal (semantic audit required) | 0 | uint8_t reported = 0;  // follow-ups written (bit i: kFollowUpS[i]) |
+| L06240 | src/mod/session2/observer_milestone_logic.h:251:38 | outcome_name | inline literal (semantic audit required) | 3 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
+| L06241 | src/mod/session2/observer_milestone_logic.h:251:44 | outcome_name | inline literal (semantic audit required) | 10 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
+| L06242 | src/mod/session2/observer_milestone_logic.h:251:48 | outcome_name | inline literal (semantic audit required) | 60 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
+| L06243 | src/mod/session2/observer_milestone_logic.h:251:52 | outcome_name | inline literal (semantic audit required) | 300 | inline constexpr uint32_t kFollowUpS[3] = {10, 60, 300}; |
+| L06244 | src/mod/session2/observer_milestone_logic.h:254:24 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
+| L06245 | src/mod/session2/observer_milestone_logic.h:254:46 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
+| L06246 | src/mod/session2/observer_milestone_logic.h:254:65 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
+| L06247 | src/mod/session2/observer_milestone_logic.h:254:83 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
+| L06248 | src/mod/session2/observer_milestone_logic.h:254:99 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t entries = 0, observer_entries = 0, owner_entries = 0, host_entries = 0, unreadable = 0; |
+| L06249 | src/mod/session2/observer_milestone_logic.h:255:22 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
+| L06250 | src/mod/session2/observer_milestone_logic.h:255:37 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
+| L06251 | src/mod/session2/observer_milestone_logic.h:255:48 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
+| L06252 | src/mod/session2/observer_milestone_logic.h:255:63 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
+| L06253 | src/mod/session2/observer_milestone_logic.h:255:74 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
+| L06254 | src/mod/session2/observer_milestone_logic.h:255:88 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
+| L06255 | src/mod/session2/observer_milestone_logic.h:255:104 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t trips = 0, decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, queue_lost = 0, |
+| L06256 | src/mod/session2/observer_milestone_logic.h:256:25 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
+| L06257 | src/mod/session2/observer_milestone_logic.h:256:42 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
+| L06258 | src/mod/session2/observer_milestone_logic.h:256:59 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
+| L06259 | src/mod/session2/observer_milestone_logic.h:256:82 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
+| L06260 | src/mod/session2/observer_milestone_logic.h:256:95 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
+| L06261 | src/mod/session2/observer_milestone_logic.h:256:110 | outcome_name | inline literal (semantic audit required) | 0 | not_seen = 0, call_failed = 0, native_2322 = 0, native_after_ours = 0, bundles = 0, cancelled = 0, |
+| L06262 | src/mod/session2/observer_milestone_logic.h:257:35 | outcome_name | inline literal (semantic audit required) | 0 | duplicates_avoided = 0; |
+| L06263 | src/mod/session2/observer_milestone_logic.h:283:65 | on_out | inline literal (semantic audit required) | 1u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06264 | src/mod/session2/observer_milestone_logic.h:283:70 | on_out | inline literal (semantic audit required) | 0u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06265 | src/mod/session2/observer_milestone_logic.h:283:88 | on_out | inline literal (semantic audit required) | 1u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06266 | src/mod/session2/observer_milestone_logic.h:283:93 | on_out | inline literal (semantic audit required) | 0u | note(s, kNOurs2322, t_us, tid, {emit_gen_, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06267 | src/mod/session2/observer_milestone_logic.h:297:81 | on_out | inline literal (semantic audit required) | 1u | note(s, kNTripStart, t_us, tid, {trip_.gen, epoch_, value, pushed ? 1u : 0u, old}); |
+| L06268 | src/mod/session2/observer_milestone_logic.h:297:86 | on_out | inline literal (semantic audit required) | 0u | note(s, kNTripStart, t_us, tid, {trip_.gen, epoch_, value, pushed ? 1u : 0u, old}); |
+| L06269 | src/mod/session2/observer_milestone_logic.h:308:65 | on_out | inline literal (semantic audit required) | 1u | note(s, kN2144, t_us, tid, {trip_.gen, pushed ? 1u : 0u, trip_.seq_2144, trip_.n_2144}); |
+| L06270 | src/mod/session2/observer_milestone_logic.h:308:70 | on_out | inline literal (semantic audit required) | 0u | note(s, kN2144, t_us, tid, {trip_.gen, pushed ? 1u : 0u, trip_.seq_2144, trip_.n_2144}); |
+| L06271 | src/mod/session2/observer_milestone_logic.h:315:65 | on_out | inline literal (semantic audit required) | 1u | note(s, kN3066, t_us, tid, {trip_.gen, pushed ? 1u : 0u, follows ? trip_.seq_2144 : 0}); |
+| L06272 | src/mod/session2/observer_milestone_logic.h:315:70 | on_out | inline literal (semantic audit required) | 0u | note(s, kN3066, t_us, tid, {trip_.gen, pushed ? 1u : 0u, follows ? trip_.seq_2144 : 0}); |
+| L06273 | src/mod/session2/observer_milestone_logic.h:315:101 | on_out | inline literal (semantic audit required) | 0 | note(s, kN3066, t_us, tid, {trip_.gen, pushed ? 1u : 0u, follows ? trip_.seq_2144 : 0}); |
+| L06274 | src/mod/session2/observer_milestone_logic.h:322:71 | on_out | inline literal (semantic audit required) | 1u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
+| L06275 | src/mod/session2/observer_milestone_logic.h:322:76 | on_out | inline literal (semantic audit required) | 0u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
+| L06276 | src/mod/session2/observer_milestone_logic.h:322:87 | on_out | inline literal (semantic audit required) | 1 | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
+| L06277 | src/mod/session2/observer_milestone_logic.h:322:108 | on_out | inline literal (semantic audit required) | 1u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
+| L06278 | src/mod/session2/observer_milestone_logic.h:322:113 | on_out | inline literal (semantic audit required) | 0u | note(s, kNNative2322, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, 1, trip_.ours_seen ? 1u : 0u}); |
+| L06279 | src/mod/session2/observer_milestone_logic.h:328:43 | on_out | inline literal (semantic audit required) | 1u | {trip_.gen, pushed ? 1u : 0u, trip_.t_ours ? t_us - trip_.t_ours : 0, |
+| L06280 | src/mod/session2/observer_milestone_logic.h:328:48 | on_out | inline literal (semantic audit required) | 0u | {trip_.gen, pushed ? 1u : 0u, trip_.t_ours ? t_us - trip_.t_ours : 0, |
+| L06281 | src/mod/session2/observer_milestone_logic.h:328:89 | on_out | inline literal (semantic audit required) | 0 | {trip_.gen, pushed ? 1u : 0u, trip_.t_ours ? t_us - trip_.t_ours : 0, |
+| L06282 | src/mod/session2/observer_milestone_logic.h:329:60 | on_out | inline literal (semantic audit required) | 0 | trip_.t_2445 ? t_us - trip_.t_2445 : 0}); |
+| L06283 | src/mod/session2/observer_milestone_logic.h:333:35 | on_out | inline literal (semantic audit required) | 16 | if (c_.bundles <= 16) note(s, kNBundle, t_us, tid, {trip_.gen, pushed ? 1u : 0u, c_.bundles}); |
+| L06284 | src/mod/session2/observer_milestone_logic.h:333:89 | on_out | inline literal (semantic audit required) | 1u | if (c_.bundles <= 16) note(s, kNBundle, t_us, tid, {trip_.gen, pushed ? 1u : 0u, c_.bundles}); |
+| L06285 | src/mod/session2/observer_milestone_logic.h:333:94 | on_out | inline literal (semantic audit required) | 0u | if (c_.bundles <= 16) note(s, kNBundle, t_us, tid, {trip_.gen, pushed ? 1u : 0u, c_.bundles}); |
+| L06286 | src/mod/session2/observer_milestone_logic.h:342:22 | on_in | inline literal (semantic audit required) | 0 | uint32_t n = 0; |
+| L06287 | src/mod/session2/observer_milestone_logic.h:348:29 | on_in | inline literal (semantic audit required) | 0 | note(s, kNIn, t_us, 0, {trip_.gen, op, n, trip_.t_ours ? t_us - trip_.t_ours : 0}); |
+| L06288 | src/mod/session2/observer_milestone_logic.h:348:88 | on_in | inline literal (semantic audit required) | 0 | note(s, kNIn, t_us, 0, {trip_.gen, op, n, trip_.t_ours ? t_us - trip_.t_ours : 0}); |
+| L06289 | src/mod/session2/observer_milestone_logic.h:360:27 | on_epoch | inline literal (semantic audit required) | 0 | end_trip(s, t_us, 0); |
+| L06290 | src/mod/session2/observer_milestone_logic.h:364:32 | on_epoch | inline literal (semantic audit required) | 0 | note(s, kNEpoch, t_us, 0, {epoch, g, decided ? 1u : 0u}); |
+| L06291 | src/mod/session2/observer_milestone_logic.h:364:56 | on_epoch | inline literal (semantic audit required) | 1u | note(s, kNEpoch, t_us, 0, {epoch, g, decided ? 1u : 0u}); |
+| L06292 | src/mod/session2/observer_milestone_logic.h:364:61 | on_epoch | inline literal (semantic audit required) | 0u | note(s, kNEpoch, t_us, 0, {epoch, g, decided ? 1u : 0u}); |
+| L06293 | src/mod/session2/observer_milestone_logic.h:377:33 | on_logout | inline literal (semantic audit required) | 0 | note(s, kNLogout, t_us, 0, {trip_.gen, before ? 1u : 0u}); |
+| L06294 | src/mod/session2/observer_milestone_logic.h:377:57 | on_logout | inline literal (semantic audit required) | 1u | note(s, kNLogout, t_us, 0, {trip_.gen, before ? 1u : 0u}); |
+| L06295 | src/mod/session2/observer_milestone_logic.h:377:62 | on_logout | inline literal (semantic audit required) | 0u | note(s, kNLogout, t_us, 0, {trip_.gen, before ? 1u : 0u}); |
+| L06296 | src/mod/session2/observer_milestone_logic.h:388:34 | decide | inline literal (semantic audit required) | 16 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
+| L06297 | src/mod/session2/observer_milestone_logic.h:388:100 | decide | inline literal (semantic audit required) | 0 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
+| L06298 | src/mod/session2/observer_milestone_logic.h:388:103 | decide | inline literal (semantic audit required) | 0 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
+| L06299 | src/mod/session2/observer_milestone_logic.h:388:106 | decide | inline literal (semantic audit required) | 0 | if (c_.unreadable <= 16) note(s, kNSkip, f.t_us, f.tid, {static_cast<uint64_t>(d.why), 0, 0, 0}); |
+| L06300 | src/mod/session2/observer_milestone_logic.h:424:31 | decide | inline literal (semantic audit required) | 0 | emit_count_ = 0; |
+| L06301 | src/mod/session2/observer_milestone_logic.h:429:101 | decide | inline literal (semantic audit required) | 16 | if (d.why != Why::AlreadyDecided &#124;&#124; c_.refused[static_cast<size_t>(Why::AlreadyDecided)] <= 16) { |
+| L06302 | src/mod/session2/observer_milestone_logic.h:431:65 | decide | inline literal (semantic audit required) | 1u | {d.gen, static_cast<uint64_t>(d.why), d.emit ? 1u : 0u, static_cast<uint64_t>(mode_), f.epoch, |
+| L06303 | src/mod/session2/observer_milestone_logic.h:431:70 | decide | inline literal (semantic audit required) | 0u | {d.gen, static_cast<uint64_t>(d.why), d.emit ? 1u : 0u, static_cast<uint64_t>(mode_), f.epoch, |
+| L06304 | src/mod/session2/observer_milestone_logic.h:432:70 | decide | inline literal (semantic audit required) | 32 | f.actor_key &#124; static_cast<uint64_t>(f.user_key) << 32, f.field, |
+| L06305 | src/mod/session2/observer_milestone_logic.h:433:73 | decide | inline literal (semantic audit required) | 32 | f.field_owner &#124; static_cast<uint64_t>(f.field_key) << 32, f.live_session, f.user_session, |
+| L06306 | src/mod/session2/observer_milestone_logic.h:434:97 | decide | inline literal (semantic audit required) | 8 | static_cast<uint64_t>(f.scope_flag) &#124; static_cast<uint64_t>(f.scope_count) << 8 &#124; |
+| L06307 | src/mod/session2/observer_milestone_logic.h:435:88 | decide | inline literal (semantic audit required) | 40 | static_cast<uint64_t>(static_cast<uint32_t>(f.scope_current)) << 40, |
+| L06308 | src/mod/session2/observer_milestone_logic.h:436:30 | decide | inline literal (semantic audit required) | 1u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
+| L06309 | src/mod/session2/observer_milestone_logic.h:436:35 | decide | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
+| L06310 | src/mod/session2/observer_milestone_logic.h:436:55 | decide | inline literal (semantic audit required) | 2u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
+| L06311 | src/mod/session2/observer_milestone_logic.h:436:60 | decide | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
+| L06312 | src/mod/session2/observer_milestone_logic.h:436:91 | decide | inline literal (semantic audit required) | 4u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
+| L06313 | src/mod/session2/observer_milestone_logic.h:436:96 | decide | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u) &#124; (mode_ == Mode::DryRun ? 4u : 0u)}); |
+| L06314 | src/mod/session2/observer_milestone_logic.h:453:42 | decide | inline literal (semantic audit required) | 0 | trip_.t_ours = seen ? t_us : 0; |
+| L06315 | src/mod/session2/observer_milestone_logic.h:466:53 | decide | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06316 | src/mod/session2/observer_milestone_logic.h:466:58 | decide | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06317 | src/mod/session2/observer_milestone_logic.h:466:71 | decide | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06318 | src/mod/session2/observer_milestone_logic.h:466:76 | decide | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06319 | src/mod/session2/observer_milestone_logic.h:467:37 | decide | inline literal (semantic audit required) | 1u | emit_wrong_session_ ? 1u : 0u}); |
+| L06320 | src/mod/session2/observer_milestone_logic.h:467:42 | decide | inline literal (semantic audit required) | 0u | emit_wrong_session_ ? 1u : 0u}); |
+| L06321 | src/mod/session2/observer_milestone_logic.h:474:22 | follow_ups | inline literal (semantic audit required) | 0 | for (int i = 0; i < 3; ++i) { |
+| L06322 | src/mod/session2/observer_milestone_logic.h:474:29 | follow_ups | inline literal (semantic audit required) | 3 | for (int i = 0; i < 3; ++i) { |
+| L06323 | src/mod/session2/observer_milestone_logic.h:475:35 | follow_ups | inline literal (semantic audit required) | 1u | if (trip_.reported & (1u << i)) continue; |
+| L06324 | src/mod/session2/observer_milestone_logic.h:476:80 | follow_ups | inline literal (semantic audit required) | 1'000'000 | if (now_us < trip_.t_ours + static_cast<uint64_t>(kFollowUpS[i]) * 1'000'000) break; |
+| L06325 | src/mod/session2/observer_milestone_logic.h:477:52 | follow_ups | inline literal (semantic audit required) | 1u | trip_.reported &#124;= static_cast<uint8_t>(1u << i); |
+| L06326 | src/mod/session2/observer_milestone_logic.h:479:41 | follow_ups | inline literal (semantic audit required) | 0 | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
+| L06327 | src/mod/session2/observer_milestone_logic.h:479:86 | follow_ups | inline literal (semantic audit required) | 1u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
+| L06328 | src/mod/session2/observer_milestone_logic.h:479:91 | follow_ups | inline literal (semantic audit required) | 0u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
+| L06329 | src/mod/session2/observer_milestone_logic.h:479:110 | follow_ups | inline literal (semantic audit required) | 1u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
+| L06330 | src/mod/session2/observer_milestone_logic.h:479:115 | follow_ups | inline literal (semantic audit required) | 0u | note(s, kNFollowUp, now_us, 0, {trip_.gen, kFollowUpS[i], trip_.n_2445 ? 1u : 0u, trip_.n_2762 ? 1u : 0u}); |
+| L06331 | src/mod/session2/observer_milestone_logic.h:534:33 | clear_emit | inline literal (semantic audit required) | 0 | emit_tid_ = emit_gen_ = 0; |
+| L06332 | src/mod/session2/observer_milestone_logic.h:536:23 | clear_emit | inline literal (semantic audit required) | 0 | emit_count_ = 0; |
+| L06333 | src/mod/session2/observer_milestone_logic.h:544:20 | note | inline literal (semantic audit required) | 0 | size_t i = 0; |
+| L06334 | src/mod/session2/observer_milestone_logic.h:546:21 | note | inline literal (semantic audit required) | 12 | if (i < 12) e.v[i++] = x; |
+| L06335 | src/mod/session2/observer_milestone_logic.h:552:23 | note | inline literal (semantic audit required) | 1 | uint32_t epoch_ = 1, gen_ = 0; |
+| L06336 | src/mod/session2/observer_milestone_logic.h:552:33 | note | inline literal (semantic audit required) | 0 | uint32_t epoch_ = 1, gen_ = 0; |
+| L06337 | src/mod/session2/observer_milestone_logic.h:553:21 | note | inline literal (semantic audit required) | 0 | uint64_t seq_ = 0; |
+| L06338 | src/mod/session2/observer_milestone_logic.h:556:26 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_gen_ = 0, emit_count_ = 0; |
+| L06339 | src/mod/session2/observer_milestone_logic.h:556:41 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_gen_ = 0, emit_count_ = 0; |
+| L06340 | src/mod/session2/observer_milestone_logic.h:556:58 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_gen_ = 0, emit_count_ = 0; |
+| L06341 | src/mod/session2/observer_milestone_reload_logic.h:87:83 | parse_mode | inline literal (semantic audit required) | 1 | while (!v.empty() && (v.front() == ' ' &#124;&#124; v.front() == '\t')) v.remove_prefix(1); |
+| L06342 | src/mod/session2/observer_milestone_reload_logic.h:88:81 | parse_mode | inline literal (semantic audit required) | 1 | while (!v.empty() && (v.back() == ' ' &#124;&#124; v.back() == '\t')) v.remove_suffix(1); |
+| L06343 | src/mod/session2/observer_milestone_reload_logic.h:140:14 | load_req_name | inline literal (semantic audit required) | 0 | case 0: return "no 2283 / 2362 of user 2 seen before it"; |
+| L06344 | src/mod/session2/observer_milestone_reload_logic.h:180:21 | drops | inline literal (semantic audit required) | 0 | uint64_t t_us = 0;                       // now (p8_now_us), for the age bound |
+| L06345 | src/mod/session2/observer_milestone_reload_logic.h:185:12 | drops | inline literal (semantic audit required) | 0 | None = 0, |
+| L06346 | src/mod/session2/observer_milestone_reload_logic.h:318:20 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
+| L06347 | src/mod/session2/observer_milestone_reload_logic.h:318:31 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t gen = 0, epoch = 0; |
+| L06348 | src/mod/session2/observer_milestone_reload_logic.h:320:21 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_f3 = 0, t_2437 = 0, t_reply = 0; |
+| L06349 | src/mod/session2/observer_milestone_reload_logic.h:320:33 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_f3 = 0, t_2437 = 0, t_reply = 0; |
+| L06350 | src/mod/session2/observer_milestone_reload_logic.h:320:46 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_f3 = 0, t_2437 = 0, t_reply = 0; |
+| L06351 | src/mod/session2/observer_milestone_reload_logic.h:321:22 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2643 = 0, n3066 = 0; |
+| L06352 | src/mod/session2/observer_milestone_reload_logic.h:321:33 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2643 = 0, n3066 = 0; |
+| L06353 | src/mod/session2/observer_milestone_reload_logic.h:322:22 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2873 = 0, dropped = 0, passed = 0; |
+| L06354 | src/mod/session2/observer_milestone_reload_logic.h:322:35 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2873 = 0, dropped = 0, passed = 0; |
+| L06355 | src/mod/session2/observer_milestone_reload_logic.h:322:47 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t n2873 = 0, dropped = 0, passed = 0; |
+| L06356 | src/mod/session2/observer_milestone_reload_logic.h:323:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_2873 = 0; |
+| L06357 | src/mod/session2/observer_milestone_reload_logic.h:327:25 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t attempts = 0; |
+| L06358 | src/mod/session2/observer_milestone_reload_logic.h:328:26 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_attempt = 0;  // the last counted transient refusal |
+| L06359 | src/mod/session2/observer_milestone_reload_logic.h:332:27 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t ours_count = 0; |
+| L06360 | src/mod/session2/observer_milestone_reload_logic.h:333:23 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_ours = 0, t_2762 = 0; |
+| L06361 | src/mod/session2/observer_milestone_reload_logic.h:333:35 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t_ours = 0, t_2762 = 0; |
+| L06362 | src/mod/session2/observer_milestone_reload_logic.h:334:28 | outcome_name | inline literal (semantic audit required) | 0 | uint32_t native_2322 = 0;  // for user 2's character, after its 2437 |
+| L06363 | src/mod/session2/observer_milestone_reload_logic.h:340:24 | outcome_name | inline literal (semantic audit required) | 0 | uint16_t load_op = 0; |
+| L06364 | src/mod/session2/observer_milestone_reload_logic.h:345:18 | outcome_name | inline literal (semantic audit required) | 0 | uint64_t t = 0; |
+| L06365 | src/mod/session2/observer_milestone_reload_logic.h:353:22 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
+| L06366 | src/mod/session2/observer_milestone_reload_logic.h:353:35 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
+| L06367 | src/mod/session2/observer_milestone_reload_logic.h:353:54 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
+| L06368 | src/mod/session2/observer_milestone_reload_logic.h:353:72 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips = 0, reloads = 0, field_changes = 0, refused_2679 = 0; |
+| L06369 | src/mod/session2/observer_milestone_reload_logic.h:354:30 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips_at_2437 = 0, reloads_at_2437 = 0, nested_2437 = 0;  // P8 S27 (observer_milestone_reload_any) |
+| L06370 | src/mod/session2/observer_milestone_reload_logic.h:354:51 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips_at_2437 = 0, reloads_at_2437 = 0, nested_2437 = 0;  // P8 S27 (observer_milestone_reload_any) |
+| L06371 | src/mod/session2/observer_milestone_reload_logic.h:354:68 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t trips_at_2437 = 0, reloads_at_2437 = 0, nested_2437 = 0;  // P8 S27 (observer_milestone_reload_any) |
+| L06372 | src/mod/session2/observer_milestone_reload_logic.h:355:29 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t stale_closed = 0;  // P8 S27 review: live trips older than kMaxAgeUs closed by a new 2437 |
+| L06373 | src/mod/session2/observer_milestone_reload_logic.h:356:33 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native_in_reload = 0;  // P8 S27: 2873s handed to the server during an unfinished reload (warnings) |
+| L06374 | src/mod/session2/observer_milestone_reload_logic.h:357:26 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
+| L06375 | src/mod/session2/observer_milestone_reload_logic.h:357:39 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
+| L06376 | src/mod/session2/observer_milestone_reload_logic.h:357:55 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
+| L06377 | src/mod/session2/observer_milestone_reload_logic.h:357:67 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t seen_2873 = 0, dropped = 0, would_drop = 0, passed = 0; |
+| L06378 | src/mod/session2/observer_milestone_reload_logic.h:358:26 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06379 | src/mod/session2/observer_milestone_reload_logic.h:358:37 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06380 | src/mod/session2/observer_milestone_reload_logic.h:358:52 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06381 | src/mod/session2/observer_milestone_reload_logic.h:358:63 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06382 | src/mod/session2/observer_milestone_reload_logic.h:358:77 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06383 | src/mod/session2/observer_milestone_reload_logic.h:358:87 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06384 | src/mod/session2/observer_milestone_reload_logic.h:358:101 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06385 | src/mod/session2/observer_milestone_reload_logic.h:358:113 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t decisions = 0, emits = 0, dry_emits = 0, calls = 0, enqueued = 0, lost = 0, not_seen = 0, failed = 0; |
+| L06386 | src/mod/session2/observer_milestone_reload_logic.h:359:23 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native = 0, transient = 0, cancelled = 0; |
+| L06387 | src/mod/session2/observer_milestone_reload_logic.h:359:38 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native = 0, transient = 0, cancelled = 0; |
+| L06388 | src/mod/session2/observer_milestone_reload_logic.h:359:53 | unfinished_reload | inline literal (semantic audit required) | 0 | uint64_t native = 0, transient = 0, cancelled = 0; |
+| L06389 | src/mod/session2/observer_milestone_reload_logic.h:369:20 | unfinished_reload | inline literal (semantic audit required) | 0 | uint32_t gen = 0; |
+| L06390 | src/mod/session2/observer_milestone_reload_logic.h:397:31 | on_f3_accepted | inline literal (semantic audit required) | 0 | note(s, kNTrip, t_us, 0, {trip_.gen, epoch_, prev}); |
+| L06391 | src/mod/session2/observer_milestone_reload_logic.h:405:32 | on_2437 | inline literal (semantic audit required) | 0 | note(s, kNPhase, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), kOpGameLoadingStartReq, 0, 1}); |
+| L06392 | src/mod/session2/observer_milestone_reload_logic.h:405:107 | on_2437 | inline literal (semantic audit required) | 0 | note(s, kNPhase, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), kOpGameLoadingStartReq, 0, 1}); |
+| L06393 | src/mod/session2/observer_milestone_reload_logic.h:405:110 | on_2437 | inline literal (semantic audit required) | 1 | note(s, kNPhase, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), kOpGameLoadingStartReq, 0, 1}); |
+| L06394 | src/mod/session2/observer_milestone_reload_logic.h:426:37 | on_2437_any | inline literal (semantic audit required) | 0 | note(s, kNNested, t_us, 0, {trip_.gen, static_cast<uint64_t>(trip_.phase), load_op}); |
+| L06395 | src/mod/session2/observer_milestone_reload_logic.h:442:35 | on_2437_any | inline literal (semantic audit required) | 0 | note(s, kNTrip2437, t_us, 0, |
+| L06396 | src/mod/session2/observer_milestone_reload_logic.h:443:88 | on_2437_any | inline literal (semantic audit required) | 1u | {trip_.gen, epoch_, prev, load_op, load_age_us, ts_packed, trip_.shadow ? 1u : 0u, |
+| L06397 | src/mod/session2/observer_milestone_reload_logic.h:443:93 | on_2437_any | inline literal (semantic audit required) | 0u | {trip_.gen, epoch_, prev, load_op, load_age_us, ts_packed, trip_.shadow ? 1u : 0u, |
+| L06398 | src/mod/session2/observer_milestone_reload_logic.h:457:61 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06399 | src/mod/session2/observer_milestone_reload_logic.h:457:66 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06400 | src/mod/session2/observer_milestone_reload_logic.h:457:84 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06401 | src/mod/session2/observer_milestone_reload_logic.h:457:89 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNOurs, t_us, tid, {trip_.gen, pushed ? 1u : 0u, value, live ? 1u : 0u}); |
+| L06402 | src/mod/session2/observer_milestone_reload_logic.h:463:93 | on_2437_any | inline literal (semantic audit required) | 0 | const uint64_t since = trip_.t_2437 && t_us >= trip_.t_2437 ? t_us - trip_.t_2437 : 0; |
+| L06403 | src/mod/session2/observer_milestone_reload_logic.h:469:113 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
+| L06404 | src/mod/session2/observer_milestone_reload_logic.h:469:118 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
+| L06405 | src/mod/session2/observer_milestone_reload_logic.h:475:113 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
+| L06406 | src/mod/session2/observer_milestone_reload_logic.h:475:118 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNPhase, t_us, tid, {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
+| L06407 | src/mod/session2/observer_milestone_reload_logic.h:487:94 | on_2437_any | inline literal (semantic audit required) | 1u | {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
+| L06408 | src/mod/session2/observer_milestone_reload_logic.h:487:99 | on_2437_any | inline literal (semantic audit required) | 0u | {trip_.gen, static_cast<uint64_t>(trip_.phase), op, since, pushed ? 1u : 0u}); |
+| L06409 | src/mod/session2/observer_milestone_reload_logic.h:494:74 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNNative, t_us, tid, {trip_.gen, value, pushed ? 1u : 0u, 1}); |
+| L06410 | src/mod/session2/observer_milestone_reload_logic.h:494:79 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNNative, t_us, tid, {trip_.gen, value, pushed ? 1u : 0u, 1}); |
+| L06411 | src/mod/session2/observer_milestone_reload_logic.h:494:83 | on_2437_any | inline literal (semantic audit required) | 1 | note(s, kNNative, t_us, tid, {trip_.gen, value, pushed ? 1u : 0u, 1}); |
+| L06412 | src/mod/session2/observer_milestone_reload_logic.h:500:95 | on_2437_any | inline literal (semantic audit required) | 0 | note(s, kNLoaded, t_us, tid, {trip_.gen, trip_.t_ours ? t_us - trip_.t_ours : 0, pushed ? 1u : 0u}); |
+| L06413 | src/mod/session2/observer_milestone_reload_logic.h:500:107 | on_2437_any | inline literal (semantic audit required) | 1u | note(s, kNLoaded, t_us, tid, {trip_.gen, trip_.t_ours ? t_us - trip_.t_ours : 0, pushed ? 1u : 0u}); |
+| L06414 | src/mod/session2/observer_milestone_reload_logic.h:500:112 | on_2437_any | inline literal (semantic audit required) | 0u | note(s, kNLoaded, t_us, tid, {trip_.gen, trip_.t_ours ? t_us - trip_.t_ours : 0, pushed ? 1u : 0u}); |
+| L06415 | src/mod/session2/observer_milestone_reload_logic.h:543:30 | record_offer | inline literal (semantic audit required) | 0 | trip_.attempts = 0; |
+| L06416 | src/mod/session2/observer_milestone_reload_logic.h:545:29 | record_offer | inline literal (semantic audit required) | 32 | if (c_.seen_2873 <= 32) { |
+| L06417 | src/mod/session2/observer_milestone_reload_logic.h:546:36 | record_offer | inline literal (semantic audit required) | 0 | note(s, kNOffer, t_us, 0, |
+| L06418 | src/mod/session2/observer_milestone_reload_logic.h:547:38 | record_offer | inline literal (semantic audit required) | 0 | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), handed ? 1u : 0u, trip_.n2873, |
+| L06419 | src/mod/session2/observer_milestone_reload_logic.h:547:76 | record_offer | inline literal (semantic audit required) | 1u | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), handed ? 1u : 0u, trip_.n2873, |
+| L06420 | src/mod/session2/observer_milestone_reload_logic.h:547:81 | record_offer | inline literal (semantic audit required) | 0u | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), handed ? 1u : 0u, trip_.n2873, |
+| L06421 | src/mod/session2/observer_milestone_reload_logic.h:555:49 | record_offer | inline literal (semantic audit required) | 0 | note(s, kNNativeInReload, t_us, 0, |
+| L06422 | src/mod/session2/observer_milestone_reload_logic.h:556:42 | record_offer | inline literal (semantic audit required) | 0 | {mine ? trip_.gen : 0, static_cast<uint64_t>(g), c_.seen_2873, |
+| L06423 | src/mod/session2/observer_milestone_reload_logic.h:557:60 | record_offer | inline literal (semantic audit required) | 0 | t_us >= l2437_.t ? t_us - l2437_.t : 0, static_cast<uint64_t>(where), |
+| L06424 | src/mod/session2/observer_milestone_reload_logic.h:597:39 | at_exit | inline literal (semantic audit required) | 4 | if (trip_.attempts <= 4) note(s, kNTransient, f.t_us, f.tid, {trip_.gen, static_cast<uint64_t>(why), trip_.attempts}); |
+| L06425 | src/mod/session2/observer_milestone_reload_logic.h:617:31 | at_exit | inline literal (semantic audit required) | 0 | emit_count_ = 0; |
+| L06426 | src/mod/session2/observer_milestone_reload_logic.h:621:63 | at_exit | inline literal (semantic audit required) | 1u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
+| L06427 | src/mod/session2/observer_milestone_reload_logic.h:621:68 | at_exit | inline literal (semantic audit required) | 0u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
+| L06428 | src/mod/session2/observer_milestone_reload_logic.h:621:80 | at_exit | inline literal (semantic audit required) | 1u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
+| L06429 | src/mod/session2/observer_milestone_reload_logic.h:621:85 | at_exit | inline literal (semantic audit required) | 0u | {trip_.gen, static_cast<uint64_t>(why), d.emit ? 1u : 0u, d.dry ? 1u : 0u, trip_.attempts, |
+| L06430 | src/mod/session2/observer_milestone_reload_logic.h:622:89 | at_exit | inline literal (semantic audit required) | 32 | f.t_us - trip_.t_2873, f.actor_key &#124; static_cast<uint64_t>(f.user_key) << 32, |
+| L06431 | src/mod/session2/observer_milestone_reload_logic.h:623:73 | at_exit | inline literal (semantic audit required) | 32 | f.field_owner &#124; static_cast<uint64_t>(f.host_user_key) << 32, f.live_session, f.user_session, f.tid, |
+| L06432 | src/mod/session2/observer_milestone_reload_logic.h:624:26 | at_exit | inline literal (semantic audit required) | 1u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
+| L06433 | src/mod/session2/observer_milestone_reload_logic.h:624:31 | at_exit | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
+| L06434 | src/mod/session2/observer_milestone_reload_logic.h:624:51 | at_exit | inline literal (semantic audit required) | 2u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
+| L06435 | src/mod/session2/observer_milestone_reload_logic.h:624:56 | at_exit | inline literal (semantic audit required) | 0u | (f.realm ? 1u : 0u) &#124; (f.send_ctx ? 2u : 0u)}); |
+| L06436 | src/mod/session2/observer_milestone_reload_logic.h:640:42 | at_exit | inline literal (semantic audit required) | 0 | trip_.t_ours = seen ? t_us : 0; |
+| L06437 | src/mod/session2/observer_milestone_reload_logic.h:652:53 | at_exit | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06438 | src/mod/session2/observer_milestone_reload_logic.h:652:58 | at_exit | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06439 | src/mod/session2/observer_milestone_reload_logic.h:652:71 | at_exit | inline literal (semantic audit required) | 1u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06440 | src/mod/session2/observer_milestone_reload_logic.h:652:76 | at_exit | inline literal (semantic audit required) | 0u | {gen, static_cast<uint64_t>(r), seen ? 1u : 0u, pushed ? 1u : 0u, emit_count_, finder_session, dur_us, |
+| L06441 | src/mod/session2/observer_milestone_reload_logic.h:653:37 | at_exit | inline literal (semantic audit required) | 1u | emit_wrong_session_ ? 1u : 0u}); |
+| L06442 | src/mod/session2/observer_milestone_reload_logic.h:653:42 | at_exit | inline literal (semantic audit required) | 0u | emit_wrong_session_ ? 1u : 0u}); |
+| L06443 | src/mod/session2/observer_milestone_reload_logic.h:670:22 | on_logout | inline literal (semantic audit required) | 0 | cancel(t_us, 0, s); |
+| L06444 | src/mod/session2/observer_milestone_reload_logic.h:695:34 | end_trip | inline literal (semantic audit required) | 0 | note(s, kNTripEnd, t_us, 0, |
+| L06445 | src/mod/session2/observer_milestone_reload_logic.h:697:91 | end_trip | inline literal (semantic audit required) | 0 | trip_.dropped, trip_.t_2437 && trip_.t_2873 ? trip_.t_2873 - trip_.t_2437 : 0, |
+| L06446 | src/mod/session2/observer_milestone_reload_logic.h:698:76 | end_trip | inline literal (semantic audit required) | 0 | trip_.t_ours && trip_.t_2873 ? trip_.t_ours - trip_.t_2873 : 0, |
+| L06447 | src/mod/session2/observer_milestone_reload_logic.h:699:108 | end_trip | inline literal (semantic audit required) | 0 | trip_.t_ours && trip_.t_2762 && trip_.t_2762 >= trip_.t_ours ? trip_.t_2762 - trip_.t_ours : 0, |
+| L06448 | src/mod/session2/observer_milestone_reload_logic.h:701:69 | end_trip | inline literal (semantic audit required) | 1ull | static_cast<uint64_t>(trip_.origin) &#124; (trip_.shadow ? 1ull << 8 : 0) &#124; |
+| L06449 | src/mod/session2/observer_milestone_reload_logic.h:701:77 | end_trip | inline literal (semantic audit required) | 8 | static_cast<uint64_t>(trip_.origin) &#124; (trip_.shadow ? 1ull << 8 : 0) &#124; |
+| L06450 | src/mod/session2/observer_milestone_reload_logic.h:701:81 | end_trip | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(trip_.origin) &#124; (trip_.shadow ? 1ull << 8 : 0) &#124; |
+| L06451 | src/mod/session2/observer_milestone_reload_logic.h:702:59 | end_trip | inline literal (semantic audit required) | 16 | static_cast<uint64_t>(trip_.load_op) << 16}); |
+| L06452 | src/mod/session2/observer_milestone_reload_logic.h:720:33 | cancel | inline literal (semantic audit required) | 0 | note(s, kNCancel, t_us, 0, {trip_.gen, epoch, before ? 1u : 0u}); |
+| L06453 | src/mod/session2/observer_milestone_reload_logic.h:720:64 | cancel | inline literal (semantic audit required) | 1u | note(s, kNCancel, t_us, 0, {trip_.gen, epoch, before ? 1u : 0u}); |
+| L06454 | src/mod/session2/observer_milestone_reload_logic.h:720:69 | cancel | inline literal (semantic audit required) | 0u | note(s, kNCancel, t_us, 0, {trip_.gen, epoch, before ? 1u : 0u}); |
+| L06455 | src/mod/session2/observer_milestone_reload_logic.h:738:35 | clear_emit | inline literal (semantic audit required) | 0 | emit_tid_ = emit_count_ = 0; |
+| L06456 | src/mod/session2/observer_milestone_reload_logic.h:747:20 | note | inline literal (semantic audit required) | 0 | size_t i = 0; |
+| L06457 | src/mod/session2/observer_milestone_reload_logic.h:749:21 | note | inline literal (semantic audit required) | 12 | if (i < 12) e.v[i++] = x; |
+| L06458 | src/mod/session2/observer_milestone_reload_logic.h:756:23 | note | inline literal (semantic audit required) | 1 | uint32_t epoch_ = 1, gen_ = 0; |
+| L06459 | src/mod/session2/observer_milestone_reload_logic.h:756:33 | note | inline literal (semantic audit required) | 0 | uint32_t epoch_ = 1, gen_ = 0; |
+| L06460 | src/mod/session2/observer_milestone_reload_logic.h:760:26 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_count_ = 0; |
+| L06461 | src/mod/session2/observer_milestone_reload_logic.h:760:43 | note | inline literal (semantic audit required) | 0 | uint32_t emit_tid_ = 0, emit_count_ = 0; |
+| L06462 | src/mod/session2/p8_probe_logic.h:25:23 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t qpc_us = 0;  // QueryPerformanceCounter in microseconds (the sniffer's t_us clock) |
+| L06463 | src/mod/session2/p8_probe_logic.h:26:20 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t tid = 0; |
+| L06464 | src/mod/session2/p8_probe_logic.h:27:21 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t kind = 0; |
+| L06465 | src/mod/session2/p8_probe_logic.h:28:22 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t flags = 0; |
+| L06466 | src/mod/session2/p8_probe_logic.h:29:16 | (file scope) | inline literal (semantic audit required) | 12 | uint64_t v[12] = {}; |
+| L06467 | src/mod/session2/p8_probe_logic.h:39:21 | copy_event | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < 12; ++i) dst.v[i] = src.v[i]; |
+| L06468 | src/mod/session2/p8_probe_logic.h:39:28 | copy_event | inline literal (semantic audit required) | 12 | for (size_t i = 0; i < 12; ++i) dst.v[i] = src.v[i]; |
+| L06469 | src/mod/session2/p8_probe_logic.h:47:24 | copy_event | inline literal (semantic audit required) | 2 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L06470 | src/mod/session2/p8_probe_logic.h:47:39 | copy_event | inline literal (semantic audit required) | 1 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L06471 | src/mod/session2/p8_probe_logic.h:47:46 | copy_event | inline literal (semantic audit required) | 0 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L06472 | src/mod/session2/p8_probe_logic.h:51:25 | EventRing | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) cells_[i].seq.store(i, std::memory_order_relaxed); |
+| L06473 | src/mod/session2/p8_probe_logic.h:59:41 | push | inline literal (semantic audit required) | 1 | Cell& c = cells_[pos & (N - 1)]; |
+| L06474 | src/mod/session2/p8_probe_logic.h:62:24 | push | inline literal (semantic audit required) | 0 | if (dif == 0) { |
+| L06475 | src/mod/session2/p8_probe_logic.h:63:59 | push | inline literal (semantic audit required) | 1 | if (enq_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) { |
+| L06476 | src/mod/session2/p8_probe_logic.h:65:39 | push | inline literal (semantic audit required) | 1 | c.seq.store(pos + 1, std::memory_order_release); |
+| L06477 | src/mod/session2/p8_probe_logic.h:68:30 | push | inline literal (semantic audit required) | 0 | } else if (dif < 0) { |
+| L06478 | src/mod/session2/p8_probe_logic.h:69:36 | push | inline literal (semantic audit required) | 1 | dropped_.fetch_add(1, std::memory_order_relaxed); |
+| L06479 | src/mod/session2/p8_probe_logic.h:80:41 | pop | inline literal (semantic audit required) | 1 | Cell& c = cells_[pos & (N - 1)]; |
+| L06480 | src/mod/session2/p8_probe_logic.h:82:91 | pop | inline literal (semantic audit required) | 1 | const intptr_t dif = static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos + 1); |
+| L06481 | src/mod/session2/p8_probe_logic.h:83:24 | pop | inline literal (semantic audit required) | 0 | if (dif == 0) { |
+| L06482 | src/mod/session2/p8_probe_logic.h:84:59 | pop | inline literal (semantic audit required) | 1 | if (deq_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) { |
+| L06483 | src/mod/session2/p8_probe_logic.h:89:30 | pop | inline literal (semantic audit required) | 0 | } else if (dif < 0) { |
+| L06484 | src/mod/session2/p8_probe_logic.h:102:33 | capacity | inline literal (semantic audit required) | 0 | std::atomic<size_t> seq{0}; |
+| L06485 | src/mod/session2/p8_probe_logic.h:106:30 | capacity | inline literal (semantic audit required) | 0 | std::atomic<size_t> enq_{0}; |
+| L06486 | src/mod/session2/p8_probe_logic.h:107:30 | capacity | inline literal (semantic audit required) | 0 | std::atomic<size_t> deq_{0}; |
+| L06487 | src/mod/session2/p8_probe_logic.h:108:36 | capacity | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> dropped_{0}; |
+| L06488 | src/mod/session2/p8_probe_logic.h:120:63 | take | inline literal (semantic audit required) | 0 | const uint64_t w = window_us_ ? now_us / window_us_ : 0; |
+| L06489 | src/mod/session2/p8_probe_logic.h:123:26 | take | inline literal (semantic audit required) | 0 | count_.store(0, std::memory_order_relaxed); |
+| L06490 | src/mod/session2/p8_probe_logic.h:125:30 | take | inline literal (semantic audit required) | 1 | if (count_.fetch_add(1, std::memory_order_relaxed) < per_) return true; |
+| L06491 | src/mod/session2/p8_probe_logic.h:126:28 | take | inline literal (semantic audit required) | 1 | refused_.fetch_add(1, std::memory_order_relaxed); |
+| L06492 | src/mod/session2/p8_probe_logic.h:134:36 | refused | inline literal (semantic audit required) | 0ull | std::atomic<uint64_t> window_{~0ull}; |
+| L06493 | src/mod/session2/p8_probe_logic.h:135:34 | refused | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> count_{0}; |
+| L06494 | src/mod/session2/p8_probe_logic.h:136:36 | refused | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> refused_{0}; |
+| L06495 | src/mod/session2/p8_probe_logic.h:147:24 | refused | inline literal (semantic audit required) | 4 | static_assert(N >= 4 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L06496 | src/mod/session2/p8_probe_logic.h:147:39 | refused | inline literal (semantic audit required) | 1 | static_assert(N >= 4 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L06497 | src/mod/session2/p8_probe_logic.h:147:46 | refused | inline literal (semantic audit required) | 0 | static_assert(N >= 4 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L06498 | src/mod/session2/p8_probe_logic.h:154:26 | bump | inline literal (semantic audit required) | 0 | if (!key) return 0; |
+| L06499 | src/mod/session2/p8_probe_logic.h:157:29 | bump | inline literal (semantic audit required) | 0 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
+| L06500 | src/mod/session2/p8_probe_logic.h:157:66 | bump | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
+| L06501 | src/mod/session2/p8_probe_logic.h:157:76 | bump | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
+| L06502 | src/mod/session2/p8_probe_logic.h:159:24 | bump | inline literal (semantic audit required) | 0 | if (cur == 0) { |
+| L06503 | src/mod/session2/p8_probe_logic.h:166:37 | bump | inline literal (semantic audit required) | 1 | size_.fetch_add(1, std::memory_order_relaxed); |
+| L06504 | src/mod/session2/p8_probe_logic.h:170:57 | bump | inline literal (semantic audit required) | 1 | if (cur == key) return counts_[i].fetch_add(1, std::memory_order_relaxed) + 1; |
+| L06505 | src/mod/session2/p8_probe_logic.h:170:89 | bump | inline literal (semantic audit required) | 1 | if (cur == key) return counts_[i].fetch_add(1, std::memory_order_relaxed) + 1; |
+| L06506 | src/mod/session2/p8_probe_logic.h:172:25 | bump | inline literal (semantic audit required) | 1 | full_.fetch_add(1, std::memory_order_relaxed); |
+| L06507 | src/mod/session2/p8_probe_logic.h:173:16 | bump | inline literal (semantic audit required) | 0 | return 0; |
+| L06508 | src/mod/session2/p8_probe_logic.h:177:26 | count | inline literal (semantic audit required) | 0 | if (!key) return 0; |
+| L06509 | src/mod/session2/p8_probe_logic.h:179:29 | count | inline literal (semantic audit required) | 0 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
+| L06510 | src/mod/session2/p8_probe_logic.h:179:66 | count | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
+| L06511 | src/mod/session2/p8_probe_logic.h:179:76 | count | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < kProbe; ++probe, i = (i + 1) & (N - 1)) { |
+| L06512 | src/mod/session2/p8_probe_logic.h:182:24 | count | inline literal (semantic audit required) | 0 | if (cur == 0) return 0; |
+| L06513 | src/mod/session2/p8_probe_logic.h:182:34 | count | inline literal (semantic audit required) | 0 | if (cur == 0) return 0; |
+| L06514 | src/mod/session2/p8_probe_logic.h:184:16 | count | inline literal (semantic audit required) | 0 | return 0; |
+| L06515 | src/mod/session2/p8_probe_logic.h:190:75 | hash | inline literal (semantic audit required) | 0x9E3779B1u | static size_t hash(uint32_t key) { return (static_cast<size_t>(key) * 0x9E3779B1u) & (N - 1); } |
+| L06516 | src/mod/session2/p8_probe_logic.h:190:95 | hash | inline literal (semantic audit required) | 1 | static size_t hash(uint32_t key) { return (static_cast<size_t>(key) * 0x9E3779B1u) & (N - 1); } |
+| L06517 | src/mod/session2/p8_probe_logic.h:193:31 | hash | inline literal (semantic audit required) | 0 | std::atomic<size_t> size_{0}; |
+| L06518 | src/mod/session2/p8_probe_logic.h:195:33 | hash | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> full_{0}; |
+| L06519 | src/mod/session2/p8_probe_logic.h:200:80 | within_key_budget | inline literal (semantic audit required) | 0 | constexpr bool within_key_budget(uint32_t nth, uint32_t first) { return nth != 0 && nth <= first; } |
+| L06520 | src/mod/session2/p8_probe_logic.h:214:33 | last | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> last_{0}; |
+| L06521 | src/mod/session2/p8_probe_logic.h:220:29 | mix | inline literal (semantic audit required) | 0x9E3779B97F4A7C15ull | uint64_t z = acc ^ (v + 0x9E3779B97F4A7C15ull + (acc << 6) + (acc >> 2)); |
+| L06522 | src/mod/session2/p8_probe_logic.h:220:61 | mix | inline literal (semantic audit required) | 6 | uint64_t z = acc ^ (v + 0x9E3779B97F4A7C15ull + (acc << 6) + (acc >> 2)); |
+| L06523 | src/mod/session2/p8_probe_logic.h:220:74 | mix | inline literal (semantic audit required) | 2 | uint64_t z = acc ^ (v + 0x9E3779B97F4A7C15ull + (acc << 6) + (acc >> 2)); |
+| L06524 | src/mod/session2/p8_probe_logic.h:221:20 | mix | inline literal (semantic audit required) | 30 | z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ull; |
+| L06525 | src/mod/session2/p8_probe_logic.h:221:27 | mix | inline literal (semantic audit required) | 0xBF58476D1CE4E5B9ull | z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ull; |
+| L06526 | src/mod/session2/p8_probe_logic.h:222:20 | mix | inline literal (semantic audit required) | 27 | z = (z ^ (z >> 27)) * 0x94D049BB133111EBull; |
+| L06527 | src/mod/session2/p8_probe_logic.h:222:27 | mix | inline literal (semantic audit required) | 0x94D049BB133111EBull | z = (z ^ (z >> 27)) * 0x94D049BB133111EBull; |
+| L06528 | src/mod/session2/p8_probe_logic.h:223:22 | mix | inline literal (semantic audit required) | 31 | return z ^ (z >> 31); |
+| L06529 | src/mod/session2/p8_probe_logic.h:229:34 | qpc_to_us | inline literal (semantic audit required) | 1000000ull | return freq ? ticks / freq * 1000000ull + ticks % freq * 1000000ull / freq : 0; |
+| L06530 | src/mod/session2/p8_probe_logic.h:229:62 | qpc_to_us | inline literal (semantic audit required) | 1000000ull | return freq ? ticks / freq * 1000000ull + ticks % freq * 1000000ull / freq : 0; |
+| L06531 | src/mod/session2/p8_probe_logic.h:229:82 | qpc_to_us | inline literal (semantic audit required) | 0 | return freq ? ticks / freq * 1000000ull + ticks % freq * 1000000ull / freq : 0; |
+| L06532 | src/mod/session2/p8_probe_logic.h:251:22 | qpc_to_us | inline literal (semantic audit required) | 1 | int32_t index = -1; |
+| L06533 | src/mod/session2/p8_probe_logic.h:252:22 | qpc_to_us | inline literal (semantic audit required) | 0 | uint32_t count = 0, iterations = 0; |
+| L06534 | src/mod/session2/p8_probe_logic.h:252:38 | qpc_to_us | inline literal (semantic audit required) | 0 | uint32_t count = 0, iterations = 0; |
+| L06535 | src/mod/session2/p8_probe_logic.h:253:23 | qpc_to_us | inline literal (semantic audit required) | 0 | uintptr_t table = 0; |
+| L06536 | src/mod/session2/p8_probe_logic.h:254:22 | qpc_to_us | inline literal (semantic audit required) | 3 | uintptr_t triple[3] = {}; |
+| L06537 | src/mod/session2/p8_probe_logic.h:260:89 | graph_find | inline literal (semantic audit required) | 40 | FindResult graph_find(const Mem& m, uintptr_t graph, uint32_t hash, uint32_t max_iter = 40) { |
+| L06538 | src/mod/session2/p8_probe_logic.h:264:20 | graph_find | inline literal (semantic audit required) | 0 | if (r.count == 0) { |
+| L06539 | src/mod/session2/p8_probe_logic.h:268:49 | graph_find | inline literal (semantic audit required) | 1 | int32_t hi = static_cast<int32_t>(r.count - 1), lo = 0; |
+| L06540 | src/mod/session2/p8_probe_logic.h:268:58 | graph_find | inline literal (semantic audit required) | 0 | int32_t hi = static_cast<int32_t>(r.count - 1), lo = 0; |
+| L06541 | src/mod/session2/p8_probe_logic.h:269:14 | graph_find | inline literal (semantic audit required) | 0 | if (hi < 0) { |
+| L06542 | src/mod/session2/p8_probe_logic.h:277:17 | graph_find | inline literal (semantic audit required) | 0 | if (d < 0) ++d; |
+| L06543 | src/mod/session2/p8_probe_logic.h:278:35 | graph_find | inline literal (semantic audit required) | 1 | const int32_t mid = (d >> 1) + lo; |
+| L06544 | src/mod/session2/p8_probe_logic.h:280:24 | graph_find | inline literal (semantic audit required) | 0 | uintptr_t p0 = 0, p1 = 0, p2 = 0; |
+| L06545 | src/mod/session2/p8_probe_logic.h:280:32 | graph_find | inline literal (semantic audit required) | 0 | uintptr_t p0 = 0, p1 = 0, p2 = 0; |
+| L06546 | src/mod/session2/p8_probe_logic.h:280:40 | graph_find | inline literal (semantic audit required) | 0 | uintptr_t p0 = 0, p1 = 0, p2 = 0; |
+| L06547 | src/mod/session2/p8_probe_logic.h:283:22 | graph_find | inline literal (semantic audit required) | 0 | uint32_t k = 0; |
+| L06548 | src/mod/session2/p8_probe_logic.h:285:28 | graph_find | inline literal (semantic audit required) | 8 | if (!m.ptr(e + 8, p1)) return r; |
+| L06549 | src/mod/session2/p8_probe_logic.h:287:32 | graph_find | inline literal (semantic audit required) | 0x10 | if (!m.ptr(e + 0x10, p2)) return r; |
+| L06550 | src/mod/session2/p8_probe_logic.h:295:24 | graph_find | inline literal (semantic audit required) | 1 | hi = mid - 1; |
+| L06551 | src/mod/session2/p8_probe_logic.h:298:36 | graph_find | inline literal (semantic audit required) | 0 | if (!(p0 && p1 && p2)) k = 0; |
+| L06552 | src/mod/session2/p8_probe_logic.h:301:23 | graph_find | inline literal (semantic audit required) | 0 | if (mid < 0) return r; |
+| L06553 | src/mod/session2/p8_probe_logic.h:304:22 | graph_find | inline literal (semantic audit required) | 0 | r.triple[0] = p0; |
+| L06554 | src/mod/session2/p8_probe_logic.h:305:22 | graph_find | inline literal (semantic audit required) | 1 | r.triple[1] = p1; |
+| L06555 | src/mod/session2/p8_probe_logic.h:306:22 | graph_find | inline literal (semantic audit required) | 2 | r.triple[2] = p2; |
+| L06556 | src/mod/session2/p8_probe_logic.h:309:20 | graph_find | inline literal (semantic audit required) | 1 | lo = mid + 1; |
+| L06557 | src/mod/session2/p8_probe_logic.h:328:17 | graph_find | inline literal (semantic audit required) | 0 | if (hash == 0) return RestartPath::HashZero; |
+| L06558 | src/mod/session2/p8_probe_logic.h:351:53 | triple_complete | inline literal (semantic audit required) | 3 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
+| L06559 | src/mod/session2/p8_probe_logic.h:351:68 | triple_complete | inline literal (semantic audit required) | 0 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
+| L06560 | src/mod/session2/p8_probe_logic.h:351:76 | triple_complete | inline literal (semantic audit required) | 1 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
+| L06561 | src/mod/session2/p8_probe_logic.h:351:84 | triple_complete | inline literal (semantic audit required) | 2 | constexpr bool triple_complete(const uintptr_t (&t)[3]) { return t[0] && t[1] && t[2]; } |
+| L06562 | src/mod/session2/p8_probe_logic.h:374:15 | s1_hash | inline literal (semantic audit required) | 6 | float box[6];  // min x,y,z then max x,y,z |
+| L06563 | src/mod/session2/p8_probe_logic.h:379:20 | s1_hash | inline literal (semantic audit required) | 0 | uint8_t b231 = 0; |
+| L06564 | src/mod/session2/p8_probe_logic.h:380:20 | s1_hash | inline literal (semantic audit required) | 0 | int32_t i174 = 0; |
+| L06565 | src/mod/session2/p8_probe_logic.h:381:20 | s1_hash | inline literal (semantic audit required) | 0 | uint8_t b2d4 = 0; |
+| L06566 | src/mod/session2/p8_probe_logic.h:382:18 | s1_hash | inline literal (semantic audit required) | 0.0f | float f2d0 = 0.0f, threshold = 0.0f;  // threshold: the float at exe+0x6CC8898 |
+| L06567 | src/mod/session2/p8_probe_logic.h:382:36 | s1_hash | inline literal (semantic audit required) | 0.0f | float f2d0 = 0.0f, threshold = 0.0f;  // threshold: the float at exe+0x6CC8898 |
+| L06568 | src/mod/session2/p8_probe_logic.h:383:15 | s1_hash | inline literal (semantic audit required) | 3 | float pos[3] = {}; |
+| L06569 | src/mod/session2/p8_probe_logic.h:384:28 | s1_hash | inline literal (semantic audit required) | 0 | uint32_t list1_count = 0, list2_count = 0; |
+| L06570 | src/mod/session2/p8_probe_logic.h:384:45 | s1_hash | inline literal (semantic audit required) | 0 | uint32_t list1_count = 0, list2_count = 0; |
+| L06571 | src/mod/session2/p8_probe_logic.h:402:22 | s1_hash | inline literal (semantic audit required) | 1 | int32_t index = -1;          // the list-1 entry, for the List1* blockers |
+| L06572 | src/mod/session2/p8_probe_logic.h:403:31 | s1_hash | inline literal (semantic audit required) | 0 | uint32_t unknown_before = 0;  // list-1 entries before it whose 0x1AC2830 we cannot know |
+| L06573 | src/mod/session2/p8_probe_logic.h:407:40 | in_box | inline literal (semantic audit required) | 6 | constexpr bool in_box(const float (&b)[6], const float (&p)[3]) { |
+| L06574 | src/mod/session2/p8_probe_logic.h:407:61 | in_box | inline literal (semantic audit required) | 3 | constexpr bool in_box(const float (&b)[6], const float (&p)[3]) { |
+| L06575 | src/mod/session2/p8_probe_logic.h:408:14 | in_box | inline literal (semantic audit required) | 0 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06576 | src/mod/session2/p8_probe_logic.h:408:22 | in_box | inline literal (semantic audit required) | 0 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06577 | src/mod/session2/p8_probe_logic.h:408:30 | in_box | inline literal (semantic audit required) | 1 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06578 | src/mod/session2/p8_probe_logic.h:408:38 | in_box | inline literal (semantic audit required) | 1 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06579 | src/mod/session2/p8_probe_logic.h:408:46 | in_box | inline literal (semantic audit required) | 2 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06580 | src/mod/session2/p8_probe_logic.h:408:54 | in_box | inline literal (semantic audit required) | 2 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06581 | src/mod/session2/p8_probe_logic.h:408:62 | in_box | inline literal (semantic audit required) | 0 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06582 | src/mod/session2/p8_probe_logic.h:408:70 | in_box | inline literal (semantic audit required) | 3 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06583 | src/mod/session2/p8_probe_logic.h:408:78 | in_box | inline literal (semantic audit required) | 1 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06584 | src/mod/session2/p8_probe_logic.h:408:86 | in_box | inline literal (semantic audit required) | 4 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06585 | src/mod/session2/p8_probe_logic.h:408:94 | in_box | inline literal (semantic audit required) | 2 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06586 | src/mod/session2/p8_probe_logic.h:408:102 | in_box | inline literal (semantic audit required) | 5 | return b[0] <= p[0] && b[1] <= p[1] && b[2] <= p[2] && p[0] <= b[3] && p[1] <= b[4] && p[2] <= b[5]; |
+| L06587 | src/mod/session2/p8_probe_logic.h:422:18 | attribute_a97d60 | inline literal (semantic audit required) | 2 | if (s.b231 < 2) { |
+| L06588 | src/mod/session2/p8_probe_logic.h:426:19 | attribute_a97d60 | inline literal (semantic audit required) | 0 | if (s.i174 != 0) { |
+| L06589 | src/mod/session2/p8_probe_logic.h:430:19 | attribute_a97d60 | inline literal (semantic audit required) | 0 | if (s.b2d4 != 0 && s.f2d0 < s.threshold) { |
+| L06590 | src/mod/session2/p8_probe_logic.h:435:21 | attribute_a97d60 | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < s.list1.size(); ++i) { |
+| L06591 | src/mod/session2/p8_probe_logic.h:443:26 | attribute_a97d60 | inline literal (semantic audit required) | 0 | if (e.flag28c == 0) { |
+| L06592 | src/mod/session2/p8_probe_logic.h:445:33 | attribute_a97d60 | inline literal (semantic audit required) | 5 | } else if (e.state61 == 5) { |
+| L06593 | src/mod/session2/p8_probe_logic.h:447:33 | attribute_a97d60 | inline literal (semantic audit required) | 0 | } else if ((e.mode60 == 0 &#124;&#124; e.mode60 == 1) && in_box(e.box, s.pos)) { |
+| L06594 | src/mod/session2/p8_probe_logic.h:447:50 | attribute_a97d60 | inline literal (semantic audit required) | 1 | } else if ((e.mode60 == 0 &#124;&#124; e.mode60 == 1) && in_box(e.box, s.pos)) { |
+| L06595 | src/mod/session2/reannounce_logic.h:47:20 | backoff_ms | inline literal (semantic audit required) | 1 | if (attempt <= 1) return 2000; |
+| L06596 | src/mod/session2/reannounce_logic.h:47:30 | backoff_ms | inline literal (semantic audit required) | 2000 | if (attempt <= 1) return 2000; |
+| L06597 | src/mod/session2/reannounce_logic.h:48:20 | backoff_ms | inline literal (semantic audit required) | 2 | if (attempt == 2) return 4000; |
+| L06598 | src/mod/session2/reannounce_logic.h:48:30 | backoff_ms | inline literal (semantic audit required) | 4000 | if (attempt == 2) return 4000; |
+| L06599 | src/mod/session2/reannounce_logic.h:49:12 | backoff_ms | inline literal (semantic audit required) | 8000 | return 8000; |
+| L06600 | src/mod/session2/reannounce_logic.h:54:20 | backoff_ms | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L06601 | src/mod/session2/reannounce_logic.h:55:22 | backoff_ms | inline literal (semantic audit required) | 0 | uint32_t owner = 0; |
+| L06602 | src/mod/session2/reannounce_logic.h:59:51 | split_failure | inline literal (semantic audit required) | 32 | const auto owner = static_cast<uint32_t>(v >> 32); |
+| L06603 | src/mod/session2/reannounce_logic.h:60:17 | split_failure | inline literal (semantic audit required) | 28 | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
+| L06604 | src/mod/session2/reannounce_logic.h:60:24 | split_failure | inline literal (semantic audit required) | 0xB | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
+| L06605 | src/mod/session2/reannounce_logic.h:60:41 | split_failure | inline literal (semantic audit required) | 28 | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
+| L06606 | src/mod/session2/reannounce_logic.h:60:48 | split_failure | inline literal (semantic audit required) | 0x9 | if ((key >> 28) != 0xB &#124;&#124; (owner >> 28) != 0x9) return std::nullopt; |
+| L06607 | src/mod/session2/reannounce_logic.h:66:7 | encode | inline literal (semantic audit required) | 0 | p[0] = kControlReannounce; |
+| L06608 | src/mod/session2/reannounce_logic.h:67:18 | encode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
+| L06609 | src/mod/session2/reannounce_logic.h:67:25 | encode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
+| L06610 | src/mod/session2/reannounce_logic.h:67:35 | encode | inline literal (semantic audit required) | 1 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
+| L06611 | src/mod/session2/reannounce_logic.h:67:73 | encode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[1 + i] = static_cast<uint8_t>(key >> (8 * i)); |
+| L06612 | src/mod/session2/reannounce_logic.h:68:18 | encode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
+| L06613 | src/mod/session2/reannounce_logic.h:68:25 | encode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
+| L06614 | src/mod/session2/reannounce_logic.h:68:35 | encode | inline literal (semantic audit required) | 5 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
+| L06615 | src/mod/session2/reannounce_logic.h:68:75 | encode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[5 + i] = static_cast<uint8_t>(owner >> (8 * i)); |
+| L06616 | src/mod/session2/reannounce_logic.h:69:7 | encode | inline literal (semantic audit required) | 9 | p[9] = attempt; |
+| L06617 | src/mod/session2/reannounce_logic.h:79:40 | is_reannounce_frame | inline literal (semantic audit required) | 0 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06618 | src/mod/session2/reannounce_logic.h:79:64 | is_reannounce_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06619 | src/mod/session2/reannounce_logic.h:79:75 | is_reannounce_frame | inline literal (semantic audit required) | 1 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06620 | src/mod/session2/reannounce_logic.h:79:100 | is_reannounce_frame | inline literal (semantic audit required) | 8 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06621 | src/mod/session2/reannounce_logic.h:80:14 | is_reannounce_frame | inline literal (semantic audit required) | 2 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
+| L06622 | src/mod/session2/reannounce_logic.h:80:20 | is_reannounce_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
+| L06623 | src/mod/session2/reannounce_logic.h:80:30 | is_reannounce_frame | inline literal (semantic audit required) | 3 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
+| L06624 | src/mod/session2/reannounce_logic.h:80:54 | is_reannounce_frame | inline literal (semantic audit required) | 4 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
+| L06625 | src/mod/session2/reannounce_logic.h:80:60 | is_reannounce_frame | inline literal (semantic audit required) | 0 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
+| L06626 | src/mod/session2/reannounce_logic.h:80:67 | is_reannounce_frame | inline literal (semantic audit required) | 5 | f[2] == 0xFF && f[3] == kPayloadSize && f[4] == 0 && f[5] == kControlReannounce; |
+| L06627 | src/mod/session2/reannounce_logic.h:84:20 | is_reannounce_frame | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L06628 | src/mod/session2/reannounce_logic.h:85:22 | is_reannounce_frame | inline literal (semantic audit required) | 0 | uint32_t owner = 0; |
+| L06629 | src/mod/session2/reannounce_logic.h:86:23 | is_reannounce_frame | inline literal (semantic audit required) | 0 | uint8_t attempt = 0; |
+| L06630 | src/mod/session2/reannounce_logic.h:89:51 | decode | inline literal (semantic audit required) | 0 | if (payload.size() != kPayloadSize &#124;&#124; payload[0] != kControlReannounce) return std::nullopt; |
+| L06631 | src/mod/session2/reannounce_logic.h:91:18 | decode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
+| L06632 | src/mod/session2/reannounce_logic.h:91:25 | decode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
+| L06633 | src/mod/session2/reannounce_logic.h:91:72 | decode | inline literal (semantic audit required) | 1 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
+| L06634 | src/mod/session2/reannounce_logic.h:91:84 | decode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) r.key &#124;= static_cast<uint32_t>(payload[1 + i]) << (8 * i); |
+| L06635 | src/mod/session2/reannounce_logic.h:92:18 | decode | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
+| L06636 | src/mod/session2/reannounce_logic.h:92:25 | decode | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
+| L06637 | src/mod/session2/reannounce_logic.h:92:74 | decode | inline literal (semantic audit required) | 5 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
+| L06638 | src/mod/session2/reannounce_logic.h:92:86 | decode | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) r.owner &#124;= static_cast<uint32_t>(payload[5 + i]) << (8 * i); |
+| L06639 | src/mod/session2/reannounce_logic.h:93:25 | decode | inline literal (semantic audit required) | 9 | r.attempt = payload[9]; |
+| L06640 | src/mod/session2/reannounce_logic.h:94:19 | decode | inline literal (semantic audit required) | 28 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
+| L06641 | src/mod/session2/reannounce_logic.h:94:26 | decode | inline literal (semantic audit required) | 0xB | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
+| L06642 | src/mod/session2/reannounce_logic.h:94:45 | decode | inline literal (semantic audit required) | 28 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
+| L06643 | src/mod/session2/reannounce_logic.h:94:52 | decode | inline literal (semantic audit required) | 0x9 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
+| L06644 | src/mod/session2/reannounce_logic.h:94:72 | decode | inline literal (semantic audit required) | 0 | if ((r.key >> 28) != 0xB &#124;&#124; (r.owner >> 28) != 0x9 &#124;&#124; r.attempt == 0 &#124;&#124; r.attempt > kMaxAttempts) { |
+| L06645 | src/mod/session2/reannounce_logic.h:135:19 | peek | inline literal (semantic audit required) | 0 | attempt = 0; |
+| L06646 | src/mod/session2/reannounce_logic.h:136:21 | peek | inline literal (semantic audit required) | 28 | if ((key >> 28) != 0xB) return Verdict::NotAChild; |
+| L06647 | src/mod/session2/reannounce_logic.h:136:28 | peek | inline literal (semantic audit required) | 0xB | if ((key >> 28) != 0xB) return Verdict::NotAChild; |
+| L06648 | src/mod/session2/reannounce_logic.h:141:23 | peek | inline literal (semantic audit required) | 1 | attempt = 1; |
+| L06649 | src/mod/session2/reannounce_logic.h:146:47 | peek | inline literal (semantic audit required) | 1 | attempt = static_cast<uint8_t>(s->n + 1); |
+| L06650 | src/mod/session2/reannounce_logic.h:155:28 | commit | inline literal (semantic audit required) | 0 | *s = Slot{key, 0, 0}; |
+| L06651 | src/mod/session2/reannounce_logic.h:155:31 | commit | inline literal (semantic audit required) | 0 | *s = Slot{key, 0, 0}; |
+| L06652 | src/mod/session2/reannounce_logic.h:158:40 | commit | inline literal (semantic audit required) | 1 | s->last_ms = now_ms ? now_ms : 1; |
+| L06653 | src/mod/session2/reannounce_logic.h:178:16 | count | inline literal (semantic audit required) | 0 | return 0; |
+| L06654 | src/mod/session2/reannounce_logic.h:183:18 | reset | inline literal (semantic audit required) | 0 | total_ = 0; |
+| L06655 | src/mod/session2/reannounce_logic.h:188:24 | reset | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L06656 | src/mod/session2/reannounce_logic.h:189:21 | reset | inline literal (semantic audit required) | 0 | uint8_t n = 0; |
+| L06657 | src/mod/session2/reannounce_logic.h:190:28 | reset | inline literal (semantic audit required) | 0 | uint64_t last_ms = 0; |
+| L06658 | src/mod/session2/reannounce_logic.h:217:23 | free_slot | inline literal (semantic audit required) | 0 | uint32_t total_ = 0; |
+| L06659 | src/mod/session2/rejoin_logic.h:56:36 | (file scope) | inline literal (semantic audit required) | 1 | enum class Kind : uint8_t { Real = 1, Probe = 2 }; |
+| L06660 | src/mod/session2/rejoin_logic.h:56:47 | (file scope) | inline literal (semantic audit required) | 2 | enum class Kind : uint8_t { Real = 1, Probe = 2 }; |
+| L06661 | src/mod/session2/rejoin_logic.h:57:43 | (file scope) | inline literal (semantic audit required) | 0 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
+| L06662 | src/mod/session2/rejoin_logic.h:57:57 | (file scope) | inline literal (semantic audit required) | 1 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
+| L06663 | src/mod/session2/rejoin_logic.h:57:68 | (file scope) | inline literal (semantic audit required) | 2 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
+| L06664 | src/mod/session2/rejoin_logic.h:57:79 | (file scope) | inline literal (semantic audit required) | 3 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
+| L06665 | src/mod/session2/rejoin_logic.h:57:96 | (file scope) | inline literal (semantic audit required) | 4 | enum class HostState : uint8_t { Active = 0, Retiring = 1, Clean = 2, Ready = 3, Quarantined = 4 }; |
+| L06666 | src/mod/session2/rejoin_logic.h:58:43 | (file scope) | inline literal (semantic audit required) | 0 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
+| L06667 | src/mod/session2/rejoin_logic.h:58:60 | (file scope) | inline literal (semantic audit required) | 1 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
+| L06668 | src/mod/session2/rejoin_logic.h:58:81 | (file scope) | inline literal (semantic audit required) | 2 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
+| L06669 | src/mod/session2/rejoin_logic.h:58:97 | (file scope) | inline literal (semantic audit required) | 3 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
+| L06670 | src/mod/session2/rejoin_logic.h:58:110 | (file scope) | inline literal (semantic audit required) | 4 | enum class Reason : uint8_t { Heartbeat = 0, StartRejoin = 1, StartConnection = 2, ProbeWould = 3, Ignored = 4 }; |
+| L06671 | src/mod/session2/rejoin_logic.h:83:29 | reason_name | inline literal (semantic audit required) | 0 | uint32_t conversation = 0; |
+| L06672 | src/mod/session2/rejoin_logic.h:84:27 | reason_name | inline literal (semantic audit required) | 0 | uint32_t last_epoch = 0; |
+| L06673 | src/mod/session2/rejoin_logic.h:89:22 | reason_name | inline literal (semantic audit required) | 0 | uint32_t epoch = 0; |
+| L06674 | src/mod/session2/rejoin_logic.h:90:29 | reason_name | inline literal (semantic audit required) | 0 | uint32_t conversation = 0; |
+| L06675 | src/mod/session2/rejoin_logic.h:95:18 | put32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L06676 | src/mod/session2/rejoin_logic.h:95:25 | put32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L06677 | src/mod/session2/rejoin_logic.h:95:67 | put32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L06678 | src/mod/session2/rejoin_logic.h:98:18 | get32 | inline literal (semantic audit required) | 0 | uint32_t v = 0; |
+| L06679 | src/mod/session2/rejoin_logic.h:99:18 | get32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) v &#124;= static_cast<uint32_t>(p[i]) << (8 * i); |
+| L06680 | src/mod/session2/rejoin_logic.h:99:25 | get32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) v &#124;= static_cast<uint32_t>(p[i]) << (8 * i); |
+| L06681 | src/mod/session2/rejoin_logic.h:99:70 | get32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) v &#124;= static_cast<uint32_t>(p[i]) << (8 * i); |
+| L06682 | src/mod/session2/rejoin_logic.h:103:28 | frame_of | inline literal (semantic audit required) | 5 | inline std::array<uint8_t, 5 + N> frame_of(const std::array<uint8_t, N>& payload) { |
+| L06683 | src/mod/session2/rejoin_logic.h:104:25 | frame_of | inline literal (semantic audit required) | 5 | std::array<uint8_t, 5 + N> f{}; |
+| L06684 | src/mod/session2/rejoin_logic.h:105:7 | frame_of | inline literal (semantic audit required) | 0 | f[0] = kControlOpcode & 0xFF; |
+| L06685 | src/mod/session2/rejoin_logic.h:105:29 | frame_of | inline literal (semantic audit required) | 0xFF | f[0] = kControlOpcode & 0xFF; |
+| L06686 | src/mod/session2/rejoin_logic.h:106:7 | frame_of | inline literal (semantic audit required) | 1 | f[1] = kControlOpcode >> 8; |
+| L06687 | src/mod/session2/rejoin_logic.h:106:30 | frame_of | inline literal (semantic audit required) | 8 | f[1] = kControlOpcode >> 8; |
+| L06688 | src/mod/session2/rejoin_logic.h:107:7 | frame_of | inline literal (semantic audit required) | 2 | f[2] = 0xFF;  // slot -1 |
+| L06689 | src/mod/session2/rejoin_logic.h:107:12 | frame_of | inline literal (semantic audit required) | 0xFF | f[2] = 0xFF;  // slot -1 |
+| L06690 | src/mod/session2/rejoin_logic.h:108:7 | frame_of | inline literal (semantic audit required) | 3 | f[3] = static_cast<uint8_t>(N); |
+| L06691 | src/mod/session2/rejoin_logic.h:109:7 | frame_of | inline literal (semantic audit required) | 4 | f[4] = 0; |
+| L06692 | src/mod/session2/rejoin_logic.h:109:12 | frame_of | inline literal (semantic audit required) | 0 | f[4] = 0; |
+| L06693 | src/mod/session2/rejoin_logic.h:110:21 | frame_of | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) f[5 + i] = payload[i]; |
+| L06694 | src/mod/session2/rejoin_logic.h:110:38 | frame_of | inline literal (semantic audit required) | 5 | for (size_t i = 0; i < N; ++i) f[5 + i] = payload[i]; |
+| L06695 | src/mod/session2/rejoin_logic.h:114:24 | is_frame | inline literal (semantic audit required) | 5 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06696 | src/mod/session2/rejoin_logic.h:114:41 | is_frame | inline literal (semantic audit required) | 0 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06697 | src/mod/session2/rejoin_logic.h:114:65 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06698 | src/mod/session2/rejoin_logic.h:114:76 | is_frame | inline literal (semantic audit required) | 1 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06699 | src/mod/session2/rejoin_logic.h:114:101 | is_frame | inline literal (semantic audit required) | 8 | return f.size() == 5 + payload && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && |
+| L06700 | src/mod/session2/rejoin_logic.h:115:14 | is_frame | inline literal (semantic audit required) | 2 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
+| L06701 | src/mod/session2/rejoin_logic.h:115:20 | is_frame | inline literal (semantic audit required) | 0xFF | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
+| L06702 | src/mod/session2/rejoin_logic.h:115:30 | is_frame | inline literal (semantic audit required) | 3 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
+| L06703 | src/mod/session2/rejoin_logic.h:115:49 | is_frame | inline literal (semantic audit required) | 4 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
+| L06704 | src/mod/session2/rejoin_logic.h:115:55 | is_frame | inline literal (semantic audit required) | 0 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
+| L06705 | src/mod/session2/rejoin_logic.h:115:62 | is_frame | inline literal (semantic audit required) | 5 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
+| L06706 | src/mod/session2/rejoin_logic.h:115:79 | is_frame | inline literal (semantic audit required) | 6 | f[2] == 0xFF && f[3] == payload && f[4] == 0 && f[5] == state && f[6] == kWireVersion; |
+| L06707 | src/mod/session2/rejoin_logic.h:121:7 | encode_rejoin | inline literal (semantic audit required) | 0 | p[0] = kControlRejoin; |
+| L06708 | src/mod/session2/rejoin_logic.h:122:7 | encode_rejoin | inline literal (semantic audit required) | 1 | p[1] = kWireVersion; |
+| L06709 | src/mod/session2/rejoin_logic.h:123:7 | encode_rejoin | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(r.kind); |
+| L06710 | src/mod/session2/rejoin_logic.h:124:30 | encode_rejoin | inline literal (semantic audit required) | 3 | detail::put32(p.data() + 3, r.conversation); |
+| L06711 | src/mod/session2/rejoin_logic.h:125:30 | encode_rejoin | inline literal (semantic audit required) | 7 | detail::put32(p.data() + 7, r.last_epoch); |
+| L06712 | src/mod/session2/rejoin_logic.h:129:41 | decode_rejoin | inline literal (semantic audit required) | 0 | if (p.size() != kRejoinPayload &#124;&#124; p[0] != kControlRejoin &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
+| L06713 | src/mod/session2/rejoin_logic.h:129:67 | decode_rejoin | inline literal (semantic audit required) | 1 | if (p.size() != kRejoinPayload &#124;&#124; p[0] != kControlRejoin &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
+| L06714 | src/mod/session2/rejoin_logic.h:130:11 | decode_rejoin | inline literal (semantic audit required) | 2 | if (p[2] != static_cast<uint8_t>(Kind::Real) && p[2] != static_cast<uint8_t>(Kind::Probe)) return std::nullopt; |
+| L06715 | src/mod/session2/rejoin_logic.h:130:55 | decode_rejoin | inline literal (semantic audit required) | 2 | if (p[2] != static_cast<uint8_t>(Kind::Real) && p[2] != static_cast<uint8_t>(Kind::Probe)) return std::nullopt; |
+| L06716 | src/mod/session2/rejoin_logic.h:132:34 | decode_rejoin | inline literal (semantic audit required) | 2 | r.kind = static_cast<Kind>(p[2]); |
+| L06717 | src/mod/session2/rejoin_logic.h:133:47 | decode_rejoin | inline literal (semantic audit required) | 3 | r.conversation = detail::get32(p.data() + 3); |
+| L06718 | src/mod/session2/rejoin_logic.h:134:45 | decode_rejoin | inline literal (semantic audit required) | 7 | r.last_epoch = detail::get32(p.data() + 7); |
+| L06719 | src/mod/session2/rejoin_logic.h:135:26 | decode_rejoin | inline literal (semantic audit required) | 2 | if (r.conversation < 2) return std::nullopt;  // the first conversation is never asked for |
+| L06720 | src/mod/session2/rejoin_logic.h:140:7 | encode_epoch | inline literal (semantic audit required) | 0 | p[0] = kControlEpoch; |
+| L06721 | src/mod/session2/rejoin_logic.h:141:7 | encode_epoch | inline literal (semantic audit required) | 1 | p[1] = kWireVersion; |
+| L06722 | src/mod/session2/rejoin_logic.h:142:7 | encode_epoch | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(e.state); |
+| L06723 | src/mod/session2/rejoin_logic.h:143:7 | encode_epoch | inline literal (semantic audit required) | 3 | p[3] = static_cast<uint8_t>(e.reason); |
+| L06724 | src/mod/session2/rejoin_logic.h:144:30 | encode_epoch | inline literal (semantic audit required) | 4 | detail::put32(p.data() + 4, e.epoch); |
+| L06725 | src/mod/session2/rejoin_logic.h:145:30 | encode_epoch | inline literal (semantic audit required) | 8 | detail::put32(p.data() + 8, e.conversation); |
+| L06726 | src/mod/session2/rejoin_logic.h:149:40 | decode_epoch | inline literal (semantic audit required) | 0 | if (p.size() != kEpochPayload &#124;&#124; p[0] != kControlEpoch &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
+| L06727 | src/mod/session2/rejoin_logic.h:149:65 | decode_epoch | inline literal (semantic audit required) | 1 | if (p.size() != kEpochPayload &#124;&#124; p[0] != kControlEpoch &#124;&#124; p[1] != kWireVersion) return std::nullopt; |
+| L06728 | src/mod/session2/rejoin_logic.h:150:11 | decode_epoch | inline literal (semantic audit required) | 2 | if (p[2] > static_cast<uint8_t>(HostState::Quarantined) &#124;&#124; p[3] > static_cast<uint8_t>(Reason::Ignored)) { |
+| L06729 | src/mod/session2/rejoin_logic.h:150:66 | decode_epoch | inline literal (semantic audit required) | 3 | if (p[2] > static_cast<uint8_t>(HostState::Quarantined) &#124;&#124; p[3] > static_cast<uint8_t>(Reason::Ignored)) { |
+| L06730 | src/mod/session2/rejoin_logic.h:154:40 | decode_epoch | inline literal (semantic audit required) | 2 | e.state = static_cast<HostState>(p[2]); |
+| L06731 | src/mod/session2/rejoin_logic.h:155:38 | decode_epoch | inline literal (semantic audit required) | 3 | e.reason = static_cast<Reason>(p[3]); |
+| L06732 | src/mod/session2/rejoin_logic.h:156:40 | decode_epoch | inline literal (semantic audit required) | 4 | e.epoch = detail::get32(p.data() + 4); |
+| L06733 | src/mod/session2/rejoin_logic.h:157:47 | decode_epoch | inline literal (semantic audit required) | 8 | e.conversation = detail::get32(p.data() + 8); |
+| L06734 | src/mod/session2/rejoin_logic.h:160:28 | rejoin_frame | inline literal (semantic audit required) | 5 | inline std::array<uint8_t, 5 + kRejoinPayload> rejoin_frame(const Rejoin& r) { return detail::frame_of(encode_rejoin(r)); } |
+| L06735 | src/mod/session2/rejoin_logic.h:161:28 | epoch_frame | inline literal (semantic audit required) | 5 | inline std::array<uint8_t, 5 + kEpochPayload> epoch_frame(const Epoch& e) { return detail::frame_of(encode_epoch(e)); } |
+| L06736 | src/mod/session2/rejoin_logic.h:166:57 | parse_rejoin_frame | inline literal (semantic audit required) | 5 | return is_rejoin_frame(f) ? decode_rejoin(f.subspan(5)) : std::nullopt; |
+| L06737 | src/mod/session2/rejoin_logic.h:169:55 | parse_epoch_frame | inline literal (semantic audit required) | 5 | return is_epoch_frame(f) ? decode_epoch(f.subspan(5)) : std::nullopt; |
+| L06738 | src/mod/session2/rejoin_logic.h:195:28 | host_action_name | inline literal (semantic audit required) | 0 | uint32_t started_for = 0;      // the guest conversation the current epoch was started for in-band (0 = none) |
+| L06739 | src/mod/session2/rejoin_logic.h:207:28 | host_decide | inline literal (semantic audit required) | 0 | (in.started_for == 0 &#124;&#124; in.started_for == in.request.conversation)) { |
+| L06740 | src/mod/session2/rejoin_logic.h:217:33 | heartbeat_conversation | inline literal (semantic audit required) | 0 | return conversation_bound ? 0 : started_for; |
+| L06741 | src/mod/session2/rejoin_logic.h:226:80 | heartbeat_conversation | inline literal (semantic audit required) | 0 | return state == HostState::Active && !conversation_bound && started_for != 0 && now_ms >= started_ms && |
+| L06742 | src/mod/session2/rejoin_logic.h:232:82 | reentry_conversation | inline literal (semantic audit required) | 2 | inline bool reentry_conversation(uint32_t conversation) { return conversation >= 2; } |
+| L06743 | src/mod/session2/rejoin_logic.h:291:19 | on_epoch | inline literal (semantic audit required) | 0 | silent_ = 0;  // the host answers: not silence (review of c4367f8, 5) |
+| L06744 | src/mod/session2/rejoin_logic.h:299:87 | on_epoch | inline literal (semantic audit required) | 0 | if (phase_ == Phase::Asking && e.conversation == asking_ && e.conversation != 0) { |
+| L06745 | src/mod/session2/rejoin_logic.h:302:42 | on_epoch | inline literal (semantic audit required) | 1 | probe_epoch_ = e.epoch + 1; |
+| L06746 | src/mod/session2/rejoin_logic.h:322:17 | on_remote_begin | inline literal (semantic audit required) | 0 | asks_ = 0; |
+| L06747 | src/mod/session2/rejoin_logic.h:336:35 | on_remote_over | inline literal (semantic audit required) | 1 | asking_ = conversation_ + 1; |
+| L06748 | src/mod/session2/rejoin_logic.h:338:17 | on_remote_over | inline literal (semantic audit required) | 0 | asks_ = 0; |
+| L06749 | src/mod/session2/rejoin_logic.h:339:19 | on_remote_over | inline literal (semantic audit required) | 0 | silent_ = 0; |
+| L06750 | src/mod/session2/rejoin_logic.h:417:92 | judge | inline literal (semantic audit required) | 0 | asking_, now_ms > granted_ms_ ? now_ms - granted_ms_ : 0, |
+| L06751 | src/mod/session2/rejoin_logic.h:478:28 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
+| L06752 | src/mod/session2/rejoin_logic.h:478:47 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
+| L06753 | src/mod/session2/rejoin_logic.h:478:67 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
+| L06754 | src/mod/session2/rejoin_logic.h:478:85 | refuse | inline literal (semantic audit required) | 0 | uint32_t last_epoch_ = 0, played_epoch_ = 0, granted_epoch_ = 0, probe_epoch_ = 0; |
+| L06755 | src/mod/session2/rejoin_logic.h:479:30 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
+| L06756 | src/mod/session2/rejoin_logic.h:479:43 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
+| L06757 | src/mod/session2/rejoin_logic.h:479:54 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
+| L06758 | src/mod/session2/rejoin_logic.h:479:67 | refuse | inline literal (semantic audit required) | 0 | uint32_t conversation_ = 0, asking_ = 0, asks_ = 0, silent_ = 0; |
+| L06759 | src/mod/session2/rejoin_logic.h:480:29 | refuse | inline literal (semantic audit required) | 0 | uint64_t next_ask_ms_ = 0, granted_ms_ = 0, began_ms_ = 0; |
+| L06760 | src/mod/session2/rejoin_logic.h:480:46 | refuse | inline literal (semantic audit required) | 0 | uint64_t next_ask_ms_ = 0, granted_ms_ = 0, began_ms_ = 0; |
+| L06761 | src/mod/session2/rejoin_logic.h:480:61 | refuse | inline literal (semantic audit required) | 0 | uint64_t next_ask_ms_ = 0, granted_ms_ = 0, began_ms_ = 0; |
+| L06762 | src/mod/session2/rejoin_logic.h:481:29 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
+| L06763 | src/mod/session2/rejoin_logic.h:481:49 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
+| L06764 | src/mod/session2/rejoin_logic.h:481:66 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
+| L06765 | src/mod/session2/rejoin_logic.h:481:84 | refuse | inline literal (semantic audit required) | 0 | uint64_t ready_count_ = 0, granted_ready_ = 0, over_ready_ = 0, epochs_seen_ = 0; |
+| L06766 | src/mod/session2/remote_interp.h:50:86 | (file scope) | inline literal (semantic audit required) | 0 | void remote_interp_start(const std::string& raw, bool guest, uint32_t owned_cap_ms = 0, bool pair = false, |
+| L06767 | src/mod/session2/report_guard.cpp:28:33 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_dropped{0}; |
+| L06768 | src/mod/session2/report_guard.cpp:29:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_dropped_live{0}; |
+| L06769 | src/mod/session2/report_guard.cpp:35:14 | read_text | inline literal (semantic audit required) | 0 | char c = 0; |
+| L06770 | src/mod/session2/report_guard.cpp:37:48 | read_text | inline literal (semantic audit required) | 1 | if (!game::safe_read(p + s.size(), &c, 1)) return s + "(unreadable)"; |
+| L06771 | src/mod/session2/report_guard.cpp:47:20 | reporter_detour | inline literal (semantic audit required) | 0 | uint8_t live = 0; |
+| L06772 | src/mod/session2/report_guard.cpp:48:94 | reporter_detour | inline literal (semantic audit required) | 1 | const bool known = active && game::safe_read(reinterpret_cast<uintptr_t>(active), &live, 1); |
+| L06773 | src/mod/session2/report_guard.cpp:49:44 | reporter_detour | inline literal (semantic audit required) | 1 | const uint64_t n = g_dropped.fetch_add(1) + 1; |
+| L06774 | src/mod/session2/report_guard.cpp:49:49 | reporter_detour | inline literal (semantic audit required) | 1 | const uint64_t n = g_dropped.fetch_add(1) + 1; |
+| L06775 | src/mod/session2/report_guard.cpp:50:40 | reporter_detour | inline literal (semantic audit required) | 1 | if (live) g_dropped_live.fetch_add(1); |
+| L06776 | src/mod/session2/report_guard.cpp:68:57 | report_describe | inline literal (semantic audit required) | 1 | s += std::format(", {} file{}", v.count, v.count == 1 ? "" : "s"); |
+| L06777 | src/mod/session2/report_guard.cpp:69:23 | report_describe | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < v.count && i < kMaxPaths; ++i) { |
+| L06778 | src/mod/session2/report_guard.cpp:82:20 | report_guard_install_at | inline literal (semantic audit required) | 32 | uint8_t actual[32] = {}; |
+| L06779 | src/mod/session2/report_guard.cpp:85:49 | std::memcmp | inline literal (semantic audit required) | 0 | std::memcmp(actual, head, head_size) != 0) { |
+| L06780 | src/mod/session2/ride_filter_logic.h:85:36 | rd32 | inline literal (semantic audit required) | 0 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L06781 | src/mod/session2/ride_filter_logic.h:85:67 | rd32 | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L06782 | src/mod/session2/ride_filter_logic.h:85:74 | rd32 | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L06783 | src/mod/session2/ride_filter_logic.h:85:104 | rd32 | inline literal (semantic audit required) | 2 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L06784 | src/mod/session2/ride_filter_logic.h:85:111 | rd32 | inline literal (semantic audit required) | 16 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L06785 | src/mod/session2/ride_filter_logic.h:86:37 | rd32 | inline literal (semantic audit required) | 3 | (static_cast<uint32_t>(p[3]) << 24); |
+| L06786 | src/mod/session2/ride_filter_logic.h:86:44 | rd32 | inline literal (semantic audit required) | 24 | (static_cast<uint32_t>(p[3]) << 24); |
+| L06787 | src/mod/session2/ride_filter_logic.h:88:91 | rd64 | inline literal (semantic audit required) | 4 | inline uint64_t rd64(const uint8_t* p) { return rd32(p) &#124; (static_cast<uint64_t>(rd32(p + 4)) << 32); } |
+| L06788 | src/mod/session2/ride_filter_logic.h:88:98 | rd64 | inline literal (semantic audit required) | 32 | inline uint64_t rd64(const uint8_t* p) { return rd32(p) &#124; (static_cast<uint64_t>(rd32(p + 4)) << 32); } |
+| L06789 | src/mod/session2/ride_filter_logic.h:94:20 | rd64 | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L06790 | src/mod/session2/ride_filter_logic.h:95:19 | rd64 | inline literal (semantic audit required) | 0 | uint32_t a0 = 0, a1 = 0; |
+| L06791 | src/mod/session2/ride_filter_logic.h:95:27 | rd64 | inline literal (semantic audit required) | 0 | uint32_t a0 = 0, a1 = 0; |
+| L06792 | src/mod/session2/ride_filter_logic.h:96:24 | rd64 | inline literal (semantic audit required) | 0ull | uint64_t parent = ~0ull; |
+| L06793 | src/mod/session2/ride_filter_logic.h:97:23 | rd64 | inline literal (semantic audit required) | 0 | uint32_t target = 0; |
+| L06794 | src/mod/session2/ride_filter_logic.h:112:57 | is_character | inline literal (semantic audit required) | 28 | inline bool is_character(uint32_t key) { return (key >> 28) == 0xA; } |
+| L06795 | src/mod/session2/ride_filter_logic.h:112:64 | is_character | inline literal (semantic audit required) | 0xA | inline bool is_character(uint32_t key) { return (key >> 28) == 0xA; } |
+| L06796 | src/mod/session2/ride_filter_logic.h:113:49 | is_b_key | inline literal (semantic audit required) | 32 | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
+| L06797 | src/mod/session2/ride_filter_logic.h:113:56 | is_b_key | inline literal (semantic audit required) | 0 | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
+| L06798 | src/mod/session2/ride_filter_logic.h:113:90 | is_b_key | inline literal (semantic audit required) | 28 | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
+| L06799 | src/mod/session2/ride_filter_logic.h:113:97 | is_b_key | inline literal (semantic audit required) | 0xB | inline bool is_b_key(uint64_t k) { return (k >> 32) == 0 && (static_cast<uint32_t>(k) >> 28) == 0xB; } |
+| L06800 | src/mod/session2/ride_filter_logic.h:114:62 | has_b_parent | inline literal (semantic audit required) | 0ull | inline bool has_b_parent(const Ack& a) { return a.parent != ~0ull && is_b_key(a.parent); } |
+| L06801 | src/mod/session2/ride_filter_logic.h:145:47 | is_remote_player | inline literal (semantic audit required) | 0 | return is_character(key) && remote_key != 0 && key == remote_key && key != local_key; |
+| L06802 | src/mod/session2/ride_filter_logic.h:150:29 | host_character_from_control | inline literal (semantic audit required) | 5 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
+| L06803 | src/mod/session2/ride_filter_logic.h:150:42 | host_character_from_control | inline literal (semantic audit required) | 0 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
+| L06804 | src/mod/session2/ride_filter_logic.h:150:48 | host_character_from_control | inline literal (semantic audit required) | 4 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
+| L06805 | src/mod/session2/ride_filter_logic.h:150:58 | host_character_from_control | inline literal (semantic audit required) | 0 | if (!payload &#124;&#124; size != 5 &#124;&#124; payload[0] != 4) return 0; |
+| L06806 | src/mod/session2/ride_filter_logic.h:151:39 | host_character_from_control | inline literal (semantic audit required) | 1 | const uint32_t k = rd32(payload + 1); |
+| L06807 | src/mod/session2/ride_filter_logic.h:152:34 | host_character_from_control | inline literal (semantic audit required) | 0 | return is_character(k) ? k : 0; |
+| L06808 | src/mod/session2/ride_filter_logic.h:157:21 | put_block | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kBlock; ++i) d[i] = src[i]; |
+| L06809 | src/mod/session2/ride_filter_logic.h:190:31 | rewrite | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> key{0}; |
+| L06810 | src/mod/session2/ride_filter_logic.h:191:35 | rewrite | inline literal (semantic audit required) | 0ull | std::atomic<uint64_t> parent{~0ull}; |
+| L06811 | src/mod/session2/ride_filter_logic.h:192:38 | rewrite | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> changed_ms{0}; |
+| L06812 | src/mod/session2/ride_filter_logic.h:197:30 | note | inline literal (semantic audit required) | 0 | changed_ms.store(0, std::memory_order_relaxed); |
+| L06813 | src/mod/session2/ride_filter_logic.h:200:48 | note | inline literal (semantic audit required) | 1 | changed_ms.store(now_ms ? now_ms : 1, std::memory_order_relaxed); |
+| L06814 | src/mod/session2/ride_filter_logic.h:204:31 | note | inline literal (semantic audit required) | 0 | w.after_change = c != 0 && now_ms >= c && now_ms - c <= kWindowMs; |
+| L06815 | src/mod/session2/ride_filter_logic.h:205:73 | note | inline literal (semantic audit required) | 0 | w.in_window = w.after_change &#124;&#124; has_b_parent(a) &#124;&#124; (a.target != 0 && is_b_key(a.target)); |
+| L06816 | src/mod/session2/ride_filter_logic.h:212:17 | pair_flags | inline literal (semantic audit required) | 0 | uint8_t f = 0; |
+| L06817 | src/mod/session2/ride_filter_logic.h:213:31 | pair_flags | inline literal (semantic audit required) | 1 | if (has_b_parent(a)) f &#124;= 1; |
+| L06818 | src/mod/session2/ride_filter_logic.h:214:21 | pair_flags | inline literal (semantic audit required) | 0 | if (a.target != 0 && is_b_key(a.target)) f &#124;= 2; |
+| L06819 | src/mod/session2/ride_filter_logic.h:214:51 | pair_flags | inline literal (semantic audit required) | 2 | if (a.target != 0 && is_b_key(a.target)) f &#124;= 2; |
+| L06820 | src/mod/session2/ride_filter_logic.h:215:28 | pair_flags | inline literal (semantic audit required) | 4 | if (after_change) f &#124;= 4; |
+| L06821 | src/mod/session2/ride_filter_logic.h:216:65 | pair_flags | inline literal (semantic audit required) | 4 | return static_cast<uint8_t>(f &#124; (static_cast<uint8_t>(k) << 4)); |
+| L06822 | src/mod/session2/ride_filter_logic.h:225:34 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> a0{0}, a1{0}; |
+| L06823 | src/mod/session2/ride_filter_logic.h:225:41 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> a0{0}, a1{0}; |
+| L06824 | src/mod/session2/ride_filter_logic.h:226:36 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint8_t> flags{0}; |
+| L06825 | src/mod/session2/ride_filter_logic.h:227:33 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> n{0}; |
+| L06826 | src/mod/session2/ride_filter_logic.h:230:36 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> overflow{0}, busy{0}; |
+| L06827 | src/mod/session2/ride_filter_logic.h:230:45 | pair_flags | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> overflow{0}, busy{0}; |
+| L06828 | src/mod/session2/ride_filter_logic.h:234:28 | add | inline literal (semantic audit required) | 1 | busy.fetch_add(1, std::memory_order_relaxed); |
+| L06829 | src/mod/session2/ride_filter_logic.h:243:27 | add | inline literal (semantic audit required) | 1 | s.n.store(1, std::memory_order_relaxed); |
+| L06830 | src/mod/session2/ride_filter_logic.h:250:31 | load | inline literal (semantic audit required) | 1 | s.n.fetch_add(1, std::memory_order_relaxed); |
+| L06831 | src/mod/session2/ride_filter_logic.h:255:39 | load | inline literal (semantic audit required) | 1 | if (!done) overflow.fetch_add(1, std::memory_order_relaxed); |
+| L06832 | src/mod/session2/ride_filter_logic.h:259:20 | used | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06833 | src/mod/session2/ride_filter_logic.h:260:82 | used | inline literal (semantic audit required) | 1 | for (const Slot& s : slot) n += s.used.load(std::memory_order_acquire) ? 1 : 0; |
+| L06834 | src/mod/session2/ride_filter_logic.h:260:86 | used | inline literal (semantic audit required) | 0 | for (const Slot& s : slot) n += s.used.load(std::memory_order_acquire) ? 1 : 0; |
+| L06835 | src/mod/session2/ride_filter_logic.h:278:43 | used | inline literal (semantic audit required) | 0 | enum class Dismount : uint8_t { Rewrite = 0, Partial = 1, Native = 2 }; |
+| L06836 | src/mod/session2/ride_filter_logic.h:278:56 | used | inline literal (semantic audit required) | 1 | enum class Dismount : uint8_t { Rewrite = 0, Partial = 1, Native = 2 }; |
+| L06837 | src/mod/session2/ride_filter_logic.h:278:68 | used | inline literal (semantic audit required) | 2 | enum class Dismount : uint8_t { Rewrite = 0, Partial = 1, Native = 2 }; |
+| L06838 | src/mod/session2/ride_filter_logic.h:292:91 | parse_dismount | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.front() == ' ' &#124;&#124; raw.front() == '\t')) raw.remove_prefix(1); |
+| L06839 | src/mod/session2/ride_filter_logic.h:293:89 | parse_dismount | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.back() == ' ' &#124;&#124; raw.back() == '\t')) raw.remove_suffix(1); |
+| L06840 | src/mod/session2/ride_filter_logic.h:309:32 | parse_dismount | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> full{0}; |
+| L06841 | src/mod/session2/ride_filter_logic.h:328:29 | learn | inline literal (semantic audit required) | 0 | uint32_t want = 0; |
+| L06842 | src/mod/session2/ride_filter_logic.h:332:24 | learn | inline literal (semantic audit required) | 1 | full.fetch_add(1, std::memory_order_relaxed); |
+| L06843 | src/mod/session2/ride_filter_logic.h:336:20 | learned | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L06844 | src/mod/session2/ride_filter_logic.h:337:74 | learned | inline literal (semantic audit required) | 1 | for (const auto& s : h) n += s.load(std::memory_order_relaxed) ? 1 : 0; |
+| L06845 | src/mod/session2/ride_filter_logic.h:337:78 | learned | inline literal (semantic audit required) | 0 | for (const auto& s : h) n += s.load(std::memory_order_relaxed) ? 1 : 0; |
+| L06846 | src/mod/session2/ride_filter_logic.h:395:54 | filter_packet | inline literal (semantic audit required) | 0 | const uint16_t op = static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)); |
+| L06847 | src/mod/session2/ride_filter_logic.h:395:67 | filter_packet | inline literal (semantic audit required) | 1 | const uint16_t op = static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)); |
+| L06848 | src/mod/session2/ride_filter_logic.h:395:73 | filter_packet | inline literal (semantic audit required) | 8 | const uint16_t op = static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)); |
+| L06849 | src/mod/session2/ride_filter_logic.h:396:55 | filter_packet | inline literal (semantic audit required) | 3 | const uint16_t len = static_cast<uint16_t>(packet[3] &#124; (packet[4] << 8)); |
+| L06850 | src/mod/session2/ride_filter_logic.h:396:68 | filter_packet | inline literal (semantic audit required) | 4 | const uint16_t len = static_cast<uint16_t>(packet[3] &#124; (packet[4] << 8)); |
+| L06851 | src/mod/session2/ride_filter_logic.h:396:74 | filter_packet | inline literal (semantic audit required) | 8 | const uint16_t len = static_cast<uint16_t>(packet[3] &#124; (packet[4] << 8)); |
+| L06852 | src/mod/session2/save_hooks.cpp:37:48 | narrow | inline literal (semantic audit required) | 0 | const int n = WideCharToMultiByte(CP_UTF8, 0, w.data(), static_cast<int>(w.size()), nullptr, 0, nullptr, nullptr); |
+| L06853 | src/mod/session2/save_hooks.cpp:37:98 | narrow | inline literal (semantic audit required) | 0 | const int n = WideCharToMultiByte(CP_UTF8, 0, w.data(), static_cast<int>(w.size()), nullptr, 0, nullptr, nullptr); |
+| L06854 | src/mod/session2/save_hooks.cpp:39:34 | narrow | inline literal (semantic audit required) | 0 | WideCharToMultiByte(CP_UTF8, 0, w.data(), static_cast<int>(w.size()), s.data(), n, nullptr, nullptr); |
+| L06855 | src/mod/session2/save_hooks.cpp:47:43 | widen | inline literal (semantic audit required) | 0 | const int n = MultiByteToWideChar(cp, 0, a, -1, nullptr, 0); |
+| L06856 | src/mod/session2/save_hooks.cpp:47:50 | widen | inline literal (semantic audit required) | 1 | const int n = MultiByteToWideChar(cp, 0, a, -1, nullptr, 0); |
+| L06857 | src/mod/session2/save_hooks.cpp:47:62 | widen | inline literal (semantic audit required) | 0 | const int n = MultiByteToWideChar(cp, 0, a, -1, nullptr, 0); |
+| L06858 | src/mod/session2/save_hooks.cpp:48:14 | widen | inline literal (semantic audit required) | 1 | if (n <= 1) return {}; |
+| L06859 | src/mod/session2/save_hooks.cpp:49:44 | widen | inline literal (semantic audit required) | 1 | std::wstring w(static_cast<size_t>(n - 1), L'\0'); |
+| L06860 | src/mod/session2/save_hooks.cpp:49:51 | widen | inline literal (semantic audit required) | 0' | std::wstring w(static_cast<size_t>(n - 1), L'\0'); |
+| L06861 | src/mod/session2/save_hooks.cpp:50:29 | widen | inline literal (semantic audit required) | 0 | MultiByteToWideChar(cp, 0, a, -1, w.data(), n); |
+| L06862 | src/mod/session2/save_hooks.cpp:50:36 | widen | inline literal (semantic audit required) | 1 | MultiByteToWideChar(cp, 0, a, -1, w.data(), n); |
+| L06863 | src/mod/session2/save_hooks.cpp:59:14 | full_path | inline literal (semantic audit required) | 0 | if (n == 0) return p; |
+| L06864 | src/mod/session2/save_hooks.cpp:61:34 | full_path | inline literal (semantic audit required) | 1 | std::vector<wchar_t> big(n + 1); |
+| L06865 | src/mod/session2/save_hooks.cpp:62:33 | full_path | inline literal (semantic audit required) | 1 | n = GetFullPathNameW(p, n + 1, big.data(), nullptr); |
+| L06866 | src/mod/session2/save_hooks.cpp:68:14 | report | inline literal (semantic audit required) | 50 | if (n <= 50 &#124;&#124; n % 100 == 0) { |
+| L06867 | src/mod/session2/save_hooks.cpp:68:24 | report | inline literal (semantic audit required) | 100 | if (n <= 50 &#124;&#124; n % 100 == 0) { |
+| L06868 | src/mod/session2/save_hooks.cpp:68:31 | report | inline literal (semantic audit required) | 0 | if (n <= 50 &#124;&#124; n % 100 == 0) { |
+| L06869 | src/mod/session2/save_hooks.cpp:199:21 | emit | inline literal (semantic audit required) | 0 | if (line.seq == 0) return; |
+| L06870 | src/mod/session2/save_hooks.cpp:256:32 | maybe_save | inline literal (semantic audit required) | 0 | const uint32_t first = u(p[0]) &#124; 0x20; |
+| L06871 | src/mod/session2/save_hooks.cpp:256:38 | maybe_save | inline literal (semantic audit required) | 0x20 | const uint32_t first = u(p[0]) &#124; 0x20; |
+| L06872 | src/mod/session2/save_hooks.cpp:257:58 | maybe_save | inline literal (semantic audit required) | 1 | const bool drive = first >= 'a' && first <= 'z' && p[1] == C(':') && (p[2] == C('\\') &#124;&#124; p[2] == C('/')); |
+| L06873 | src/mod/session2/save_hooks.cpp:257:77 | maybe_save | inline literal (semantic audit required) | 2 | const bool drive = first >= 'a' && first <= 'z' && p[1] == C(':') && (p[2] == C('\\') &#124;&#124; p[2] == C('/')); |
+| L06874 | src/mod/session2/save_hooks.cpp:257:96 | maybe_save | inline literal (semantic audit required) | 2 | const bool drive = first >= 'a' && first <= 'z' && p[1] == C(':') && (p[2] == C('\\') &#124;&#124; p[2] == C('/')); |
+| L06875 | src/mod/session2/save_hooks.cpp:258:13 | maybe_save | inline literal (semantic audit required) | 0 | if (!(p[0] == C('\\') &#124;&#124; p[0] == C('/') &#124;&#124; drive)) return true; |
+| L06876 | src/mod/session2/save_hooks.cpp:258:32 | maybe_save | inline literal (semantic audit required) | 0 | if (!(p[0] == C('\\') &#124;&#124; p[0] == C('/') &#124;&#124; drive)) return true; |
+| L06877 | src/mod/session2/save_hooks.cpp:261:20 | maybe_save | inline literal (semantic audit required) | 0 | size_t i = 0; |
+| L06878 | src/mod/session2/save_hooks.cpp:262:47 | maybe_save | inline literal (semantic audit required) | 0x80 | while (kName[i] && s[i] && (u(s[i]) < 0x80 ? u(s[i]) &#124; 0x20 : u(s[i])) == static_cast<uint32_t>(kName[i])) { |
+| L06879 | src/mod/session2/save_hooks.cpp:262:64 | maybe_save | inline literal (semantic audit required) | 0x20 | while (kName[i] && s[i] && (u(s[i]) < 0x80 ? u(s[i]) &#124; 0x20 : u(s[i])) == static_cast<uint32_t>(kName[i])) { |
+| L06880 | src/mod/session2/save_hooks.cpp:280:38 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
+| L06881 | src/mod/session2/save_hooks.cpp:280:56 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
+| L06882 | src/mod/session2/save_hooks.cpp:280:76 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
+| L06883 | src/mod/session2/save_hooks.cpp:280:95 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
+| L06884 | src/mod/session2/save_hooks.cpp:280:113 | maybe_save | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_redir_writes{0}, g_redir_reads{0}, g_redir_queries{0}, g_redir_failed{0}, g_redir_lines{0}; |
+| L06885 | src/mod/session2/save_hooks.cpp:291:17 | FullPath | inline literal (semantic audit required) | 0 | if (n > 0 && n < MAX_PATH) { |
+| L06886 | src/mod/session2/save_hooks.cpp:294:55 | FullPath | inline literal (semantic audit required) | 1 | big_.reset(new (std::nothrow) wchar_t[n + 1]); |
+| L06887 | src/mod/session2/save_hooks.cpp:295:60 | FullPath | inline literal (semantic audit required) | 1 | const DWORD m = big_ ? GetFullPathNameW(p, n + 1, big_.get(), nullptr) : 0; |
+| L06888 | src/mod/session2/save_hooks.cpp:295:86 | FullPath | inline literal (semantic audit required) | 0 | const DWORD m = big_ ? GetFullPathNameW(p, n + 1, big_.get(), nullptr) : 0; |
+| L06889 | src/mod/session2/save_hooks.cpp:296:21 | FullPath | inline literal (semantic audit required) | 0 | if (m > 0 && m <= n) { |
+| L06890 | src/mod/session2/save_hooks.cpp:335:15 | map_arg | inline literal (semantic audit required) | 0 | p[0] == L'\\' &#124;&#124; p[0] == L'/' &#124;&#124; (p[0] && p[1] == L':' && (p[2] == L'\\' &#124;&#124; p[2] == L'/')); |
+| L06891 | src/mod/session2/save_hooks.cpp:373:21 | redirect_arg_text | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) { |
+| L06892 | src/mod/session2/save_hooks.cpp:380:53 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_failed.fetch_add(1, std::memory_order_relaxed) + 1; |
+| L06893 | src/mod/session2/save_hooks.cpp:380:85 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_failed.fetch_add(1, std::memory_order_relaxed) + 1; |
+| L06894 | src/mod/session2/save_hooks.cpp:398:24 | redirect_arg_text | inline literal (semantic audit required) | 1 | .fetch_add(1, std::memory_order_relaxed); |
+| L06895 | src/mod/session2/save_hooks.cpp:400:56 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_lines.fetch_add(1, std::memory_order_relaxed) + 1; |
+| L06896 | src/mod/session2/save_hooks.cpp:400:88 | redirect_arg_text | inline literal (semantic audit required) | 1 | const uint64_t n = g_redir_lines.fetch_add(1, std::memory_order_relaxed) + 1; |
+| L06897 | src/mod/session2/save_hooks.cpp:403:33 | redirect_arg_text | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) text += (i ? ", " : "") + redirect_arg_text(labels[i], m[i]); |
+| L06898 | src/mod/session2/save_hooks.cpp:435:26 | redirect_arg_text | inline literal (semantic audit required) | 1 | return redirected<R, 1>( |
+| L06899 | src/mod/session2/save_hooks.cpp:437:46 | redirect_arg_text | inline literal (semantic audit required) | 1 | [&](const std::array<const wchar_t*, 1>& a) { return a[0] == given ? call_a() : call_w(a[0]); }, kind_of, |
+| L06900 | src/mod/session2/save_hooks.cpp:437:64 | redirect_arg_text | inline literal (semantic audit required) | 0 | [&](const std::array<const wchar_t*, 1>& a) { return a[0] == given ? call_a() : call_w(a[0]); }, kind_of, |
+| L06901 | src/mod/session2/save_hooks.cpp:437:98 | redirect_arg_text | inline literal (semantic audit required) | 0 | [&](const std::array<const wchar_t*, 1>& a) { return a[0] == given ? call_a() : call_w(a[0]); }, kind_of, |
+| L06902 | src/mod/session2/save_hooks.cpp:441:35 | redirect_arg_text | inline literal (semantic audit required) | 1 | constexpr std::array<const char*, 1> kOne{""}; |
+| L06903 | src/mod/session2/save_hooks.cpp:442:35 | redirect_arg_text | inline literal (semantic audit required) | 2 | constexpr std::array<const char*, 2> kFromTo{"from", "to"}; |
+| L06904 | src/mod/session2/save_hooks.cpp:460:37 | redirect_arg_text | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_watch_lobby{0}, g_watch_save{0}; |
+| L06905 | src/mod/session2/save_hooks.cpp:460:54 | redirect_arg_text | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_watch_lobby{0}, g_watch_save{0}; |
+| L06906 | src/mod/session2/save_hooks.cpp:468:37 | watch_note | inline literal (semantic audit required) | 1 | g_watch_lobby.fetch_add(1, std::memory_order_relaxed); |
+| L06907 | src/mod/session2/save_hooks.cpp:470:36 | watch_note | inline literal (semantic audit required) | 1 | g_watch_save.fetch_add(1, std::memory_order_relaxed); |
+| L06908 | src/mod/session2/save_hooks.cpp:480:75 | create_kind | inline literal (semantic audit required) | 0 | if (kind == Kind::Read && h != INVALID_HANDLE_VALUE) watch_note(m[0]); |
+| L06909 | src/mod/session2/save_hooks.cpp:489:22 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
+| L06910 | src/mod/session2/save_hooks.cpp:489:32 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
+| L06911 | src/mod/session2/save_hooks.cpp:489:43 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
+| L06912 | src/mod/session2/save_hooks.cpp:489:62 | create_kind | inline literal (semantic audit required) | 0 | uint64_t files = 0, dirs = 0, bytes = 0, time_failures = 0; |
+| L06913 | src/mod/session2/save_hooks.cpp:492:43 | is_dots | inline literal (semantic audit required) | 0 | bool is_dots(const wchar_t* n) { return n[0] == L'.' && (n[1] == 0 &#124;&#124; (n[1] == L'.' && n[2] == 0)); } |
+| L06914 | src/mod/session2/save_hooks.cpp:492:90 | is_dots | inline literal (semantic audit required) | 2 | bool is_dots(const wchar_t* n) { return n[0] == L'.' && (n[1] == 0 &#124;&#124; (n[1] == L'.' && n[2] == 0)); } |
+| L06915 | src/mod/session2/save_hooks.cpp:492:96 | is_dots | inline literal (semantic audit required) | 0 | bool is_dots(const wchar_t* n) { return n[0] == L'.' && (n[1] == 0 &#124;&#124; (n[1] == L'.' && n[2] == 0)); } |
+| L06916 | src/mod/session2/save_hooks.cpp:517:112 | delete_tree | inline literal (semantic audit required) | 0 | HANDLE f = FindFirstFileExW((root + L"\\*").c_str(), FindExInfoBasic, &fd, FindExSearchNameMatch, nullptr, 0); |
+| L06917 | src/mod/session2/save_hooks.cpp:532:112 | copy_tree | inline literal (semantic audit required) | 0 | HANDLE f = FindFirstFileExW((from + L"\\*").c_str(), FindExInfoBasic, &fd, FindExSearchNameMatch, nullptr, 0); |
+| L06918 | src/mod/session2/save_hooks.cpp:561:69 | copy_tree | inline literal (semantic audit required) | 32 | st.bytes += (static_cast<uint64_t>(fd.nFileSizeHigh) << 32) &#124; fd.nFileSizeLow; |
+| L06919 | src/mod/session2/save_hooks.cpp:596:57 | prepare_sandbox | inline literal (semantic audit required) | 0 | : sandbox.substr(0, slash + 1) + archived.aside_name; |
+| L06920 | src/mod/session2/save_hooks.cpp:596:68 | prepare_sandbox | inline literal (semantic audit required) | 1 | : sandbox.substr(0, slash + 1) + archived.aside_name; |
+| L06921 | src/mod/session2/save_hooks.cpp:597:75 | prepare_sandbox | inline literal (semantic audit required) | 0 | if (aside.empty() &#124;&#124; !MoveFileExW(sandbox.c_str(), aside.c_str(), 0)) { |
+| L06922 | src/mod/session2/save_hooks.cpp:610:57 | prepare_sandbox | inline literal (semantic audit required) | 0 | if (!MoveFileExW(sandbox.c_str(), prev.c_str(), 0)) { |
+| L06923 | src/mod/session2/save_hooks.cpp:652:35 | prepare_sandbox | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
+| L06924 | src/mod/session2/save_hooks.cpp:655:60 | prepare_sandbox | inline literal (semantic audit required) | 0 | return g_create_w.unsafe_stdcall<HANDLE>(a[0], access, share, sa, disp, flags, tmpl); |
+| L06925 | src/mod/session2/save_hooks.cpp:686:74 | prepare_sandbox | inline literal (semantic audit required) | 0 | const DWORD flags = ext ? ext->dwFileFlags &#124; ext->dwFileAttributes : 0; |
+| L06926 | src/mod/session2/save_hooks.cpp:688:35 | prepare_sandbox | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
+| L06927 | src/mod/session2/save_hooks.cpp:690:77 | prepare_sandbox | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_create_2.unsafe_stdcall<HANDLE>(a[0], access, share, disp, ext); }, |
+| L06928 | src/mod/session2/save_hooks.cpp:701:33 | delete_file_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
+| L06929 | src/mod/session2/save_hooks.cpp:702:111 | delete_file_w | inline literal (semantic audit required) | 0 | "DeleteFileW", {name}, kOne, FALSE, [&](const auto& a) { return g_delete_w.unsafe_stdcall<BOOL>(a[0]); }, |
+| L06930 | src/mod/session2/save_hooks.cpp:731:33 | move_file_ex_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
+| L06931 | src/mod/session2/save_hooks.cpp:733:76 | move_file_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_move_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], flags); }, kWrite, kBoolText); |
+| L06932 | src/mod/session2/save_hooks.cpp:733:82 | move_file_ex_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_move_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], flags); }, kWrite, kBoolText); |
+| L06933 | src/mod/session2/save_hooks.cpp:745:33 | move_file_progress_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
+| L06934 | src/mod/session2/save_hooks.cpp:747:82 | move_file_progress_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_move_progress_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, flags); }, |
+| L06935 | src/mod/session2/save_hooks.cpp:747:88 | move_file_progress_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_move_progress_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, flags); }, |
+| L06936 | src/mod/session2/save_hooks.cpp:760:33 | copy_file_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
+| L06937 | src/mod/session2/save_hooks.cpp:762:73 | copy_file_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_copy_w.unsafe_stdcall<BOOL>(a[0], a[1], fail_if_exists); }, kWriteIfSecond, |
+| L06938 | src/mod/session2/save_hooks.cpp:762:79 | copy_file_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_copy_w.unsafe_stdcall<BOOL>(a[0], a[1], fail_if_exists); }, kWriteIfSecond, |
+| L06939 | src/mod/session2/save_hooks.cpp:777:33 | copy_file_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
+| L06940 | src/mod/session2/save_hooks.cpp:779:76 | copy_file_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_copy_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, cancel, flags); }, |
+| L06941 | src/mod/session2/save_hooks.cpp:779:82 | copy_file_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_copy_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], cb, data, cancel, flags); }, |
+| L06942 | src/mod/session2/save_hooks.cpp:792:36 | copy_file_2 | inline literal (semantic audit required) | 2 | return redirected<HRESULT, 2>( |
+| L06943 | src/mod/session2/save_hooks.cpp:794:76 | copy_file_2 | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_copy_2.unsafe_stdcall<HRESULT>(a[0], a[1], ext); }, kWriteIfSecond, |
+| L06944 | src/mod/session2/save_hooks.cpp:794:82 | copy_file_2 | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_copy_2.unsafe_stdcall<HRESULT>(a[0], a[1], ext); }, kWriteIfSecond, |
+| L06945 | src/mod/session2/save_hooks.cpp:801:96 | copy_file_2 | inline literal (semantic audit required) | 0 | trace_two(d, false, from, to, std::format("flags 0x{:X}", ext ? ext->dwCopyFlags : 0), |
+| L06946 | src/mod/session2/save_hooks.cpp:808:33 | set_attributes_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
+| L06947 | src/mod/session2/save_hooks.cpp:810:73 | set_attributes_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_attr_w.unsafe_stdcall<BOOL>(a[0], attrs); }, kWrite, kBoolText); |
+| L06948 | src/mod/session2/save_hooks.cpp:839:33 | remove_directory_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
+| L06949 | src/mod/session2/save_hooks.cpp:841:74 | remove_directory_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_rmdir_w.unsafe_stdcall<BOOL>(a[0]); }, kWrite, kBoolText); |
+| L06950 | src/mod/session2/save_hooks.cpp:853:33 | create_directory_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
+| L06951 | src/mod/session2/save_hooks.cpp:855:74 | create_directory_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_mkdir_w.unsafe_stdcall<BOOL>(a[0], sa); }, kWrite, kBoolText); |
+| L06952 | src/mod/session2/save_hooks.cpp:879:33 | create_directory_ex_w | inline literal (semantic audit required) | 2 | return redirected<BOOL, 2>( |
+| L06953 | src/mod/session2/save_hooks.cpp:881:77 | create_directory_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_mkdir_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], sa); }, kWriteIfSecond, |
+| L06954 | src/mod/session2/save_hooks.cpp:881:83 | create_directory_ex_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_mkdir_ex_w.unsafe_stdcall<BOOL>(a[0], a[1], sa); }, kWriteIfSecond, |
+| L06955 | src/mod/session2/save_hooks.cpp:895:33 | create_directory_ex_w | inline literal (semantic audit required) | 3 | return redirected<BOOL, 3>( |
+| L06956 | src/mod/session2/save_hooks.cpp:897:76 | create_directory_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_replace_w.unsafe_stdcall<BOOL>(a[0], a[1], a[2], flags, e1, e2); }, kWrite, |
+| L06957 | src/mod/session2/save_hooks.cpp:897:82 | create_directory_ex_w | inline literal (semantic audit required) | 1 | [&](const auto& a) { return g_replace_w.unsafe_stdcall<BOOL>(a[0], a[1], a[2], flags, e1, e2); }, kWrite, |
+| L06958 | src/mod/session2/save_hooks.cpp:897:88 | create_directory_ex_w | inline literal (semantic audit required) | 2 | [&](const auto& a) { return g_replace_w.unsafe_stdcall<BOOL>(a[0], a[1], a[2], flags, e1, e2); }, kWrite, |
+| L06959 | src/mod/session2/save_hooks.cpp:925:35 | find_first_file_w | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
+| L06960 | src/mod/session2/save_hooks.cpp:927:81 | find_first_file_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_find_first_w.unsafe_stdcall<HANDLE>(a[0], data); }, kQuery, kNoText); |
+| L06961 | src/mod/session2/save_hooks.cpp:938:35 | find_first_file_w | inline literal (semantic audit required) | 1 | return redirected<HANDLE, 1>( |
+| L06962 | src/mod/session2/save_hooks.cpp:941:67 | find_first_file_w | inline literal (semantic audit required) | 0 | return g_find_first_ex_w.unsafe_stdcall<HANDLE>(a[0], level, data, op, filter, flags); |
+| L06963 | src/mod/session2/save_hooks.cpp:959:34 | get_attributes_w | inline literal (semantic audit required) | 1 | return redirected<DWORD, 1>( |
+| L06964 | src/mod/session2/save_hooks.cpp:961:78 | get_attributes_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_get_attr_w.unsafe_stdcall<DWORD>(a[0]); }, kQuery, kNoText); |
+| L06965 | src/mod/session2/save_hooks.cpp:975:33 | get_attributes_ex_w | inline literal (semantic audit required) | 1 | return redirected<BOOL, 1>( |
+| L06966 | src/mod/session2/save_hooks.cpp:977:80 | get_attributes_ex_w | inline literal (semantic audit required) | 0 | [&](const auto& a) { return g_get_attr_ex_w.unsafe_stdcall<BOOL>(a[0], level, info); }, kQuery, kNoText); |
+| L06967 | src/mod/session2/save_hooks.cpp:986:84 | get_attributes_ex_w | inline literal (semantic audit required) | 32 | (static_cast<uint64_t>(fa->nFileSizeHigh) << 32) &#124; fa->nFileSizeLow); |
+| L06968 | src/mod/session2/save_hooks.cpp:1061:14 | save_hooks_install_guest_role | inline literal (semantic audit required) | 0 | if (n == 0 &#124;&#124; n >= MAX_PATH) { |
+| L06969 | src/mod/session2/save_hooks.cpp:1081:104 | save_hooks_install_guest_role | inline literal (semantic audit required) | 1 | for (size_t at = target.find(L'\\', 3); at != std::wstring::npos; at = target.find(L'\\', at + 1)) { |
+| L06970 | src/mod/session2/save_hooks.cpp:1082:44 | save_hooks_install_guest_role | inline literal (semantic audit required) | 0 | CreateDirectoryW(target.substr(0, at).c_str(), nullptr); |
+| L06971 | src/mod/session2/save_hooks.cpp:1129:14 | save_hooks_install | inline literal (semantic audit required) | 0 | if (n == 0 &#124;&#124; n >= MAX_PATH) { |
+| L06972 | src/mod/session2/save_hooks.cpp:1197:71 | save_hooks_blocked | inline literal (semantic audit required) | 0 | uint64_t save_hooks_blocked() { return g_guard ? g_guard->blocked() : 0; } |
+| L06973 | src/mod/session2/save_hooks.cpp:1198:75 | save_hooks_reads | inline literal (semantic audit required) | 0 | uint64_t save_hooks_reads() { return g_guard ? g_guard->allowed_reads() : 0; } |
+| L06974 | src/mod/session2/server.cpp:79:20 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t g_base = 0; |
+| L06975 | src/mod/session2/server.cpp:99:35 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_session2{0}; |
+| L06976 | src/mod/session2/server.cpp:103:36 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_built_net{0}, g_built_s1{0}; |
+| L06977 | src/mod/session2/server.cpp:103:51 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_built_net{0}, g_built_s1{0}; |
+| L06978 | src/mod/session2/server.cpp:104:35 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_built_tid{0}; |
+| L06979 | src/mod/session2/server.cpp:105:33 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_rebuilt{0}; |
+| L06980 | src/mod/session2/server.cpp:116:36 | (file scope) | inline literal (semantic audit required) | 1 | std::atomic<uint32_t> g_want_epoch{1};     // network thread: the epoch whose session 2 should exist |
+| L06981 | src/mod/session2/server.cpp:117:39 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_session_epoch{0};  // server thread: the epoch g_session2 was built for |
+| L06982 | src/mod/session2/server.cpp:119:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_stale_routed{0}, g_untagged_routed{0}, g_late_out{0}; |
+| L06983 | src/mod/session2/server.cpp:119:60 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_stale_routed{0}, g_untagged_routed{0}, g_late_out{0}; |
+| L06984 | src/mod/session2/server.cpp:119:75 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_stale_routed{0}, g_untagged_routed{0}, g_late_out{0}; |
+| L06985 | src/mod/session2/server.cpp:124:21 | (file scope) | inline literal (semantic audit required) | 0x10000 | std::array<uint8_t, 0x10000> g_channel; |
+| L06986 | src/mod/session2/server.cpp:127:21 | (file scope) | inline literal (semantic audit required) | 0x10000 | std::array<uint8_t, 0x10000> g_blocked_channel; |
+| L06987 | src/mod/session2/server.cpp:132:35 | (file scope) | inline literal (semantic audit required) | 1 | std::atomic<int64_t> g_host_slot{-1}; |
+| L06988 | src/mod/session2/server.cpp:141:39 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_user2_userkey{0};           // from user 2's MainUserDataStartAck |
+| L06989 | src/mod/session2/server.cpp:142:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_host_userkey{0};            // the host's user key, read once (session 1's user +0x60) |
+| L06990 | src/mod/session2/server.cpp:143:40 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_owner_rewrites{0}, g_owner_unexpected{0}; |
+| L06991 | src/mod/session2/server.cpp:143:63 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_owner_rewrites{0}, g_owner_unexpected{0}; |
+| L06992 | src/mod/session2/server.cpp:146:45 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_load_owner_rewrites{0}, g_load_owner_unexpected{0}, g_load_owner_other{0}; |
+| L06993 | src/mod/session2/server.cpp:146:73 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_load_owner_rewrites{0}, g_load_owner_unexpected{0}, g_load_owner_other{0}; |
+| L06994 | src/mod/session2/server.cpp:146:96 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_load_owner_rewrites{0}, g_load_owner_unexpected{0}, g_load_owner_other{0}; |
+| L06995 | src/mod/session2/server.cpp:149:35 | (file scope) | inline literal (semantic audit required) | 4096 | std::array<std::atomic<uint32_t>, 4096> g_hostkey_ops{}; |
+| L06996 | src/mod/session2/server.cpp:151:38 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_user2_player{0}; |
+| L06997 | src/mod/session2/server.cpp:160:39 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_mirror_copied{0}, g_mirror_dropped{0}; |
+| L06998 | src/mod/session2/server.cpp:160:60 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_mirror_copied{0}, g_mirror_dropped{0}; |
+| L06999 | src/mod/session2/server.cpp:165:40 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uintptr_t> g_logout_handed{0};     // the session 2 the 2001 went to (0 = not yet) |
+| L07000 | src/mod/session2/server.cpp:166:41 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_logout_asked_ms{0}; |
+| L07001 | src/mod/session2/server.cpp:180:29 | (file scope) | inline literal (semantic audit required) | 0 | uintptr_t g_close_session = 0; |
+| L07002 | src/mod/session2/server.cpp:183:29 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_nak{0}, g_nak_after_logout{0};  // Nak 1013 written to session 2 (this epoch) |
+| L07003 | src/mod/session2/server.cpp:183:52 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_nak{0}, g_nak_after_logout{0};  // Nak 1013 written to session 2 (this epoch) |
+| L07004 | src/mod/session2/server.cpp:201:30 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<size_t> g_q_size{0};            // g_q.size(), read without the lock |
+| L07005 | src/mod/session2/server.cpp:202:31 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<size_t> g_in_hand{0};           // popped by the NetworkThread, not pushed (or dropped) yet |
+| L07006 | src/mod/session2/server.cpp:206:38 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_halted_epoch{0}; |
+| L07007 | src/mod/session2/server.cpp:210:35 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_exc_count{0}; |
+| L07008 | src/mod/session2/server.cpp:211:25 | phase_reset | inline literal (semantic audit required) | 0 | uint32_t g_exc_logged = 0;  // network thread only |
+| L07009 | src/mod/session2/server.cpp:214:36 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
+| L07010 | src/mod/session2/server.cpp:214:54 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
+| L07011 | src/mod/session2/server.cpp:214:71 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
+| L07012 | src/mod/session2/server.cpp:214:92 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
+| L07013 | src/mod/session2/server.cpp:214:113 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_turns{0}, g_pump_handed{0}, g_pump_stale{0}, g_pump_other_net{0}, g_pump_not_ready{0}, |
+| L07014 | src/mod/session2/server.cpp:215:21 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
+| L07015 | src/mod/session2/server.cpp:215:41 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
+| L07016 | src/mod/session2/server.cpp:215:62 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
+| L07017 | src/mod/session2/server.cpp:215:86 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
+| L07018 | src/mod/session2/server.cpp:215:109 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
+| L07019 | src/mod/session2/server.cpp:215:125 | phase_reset | inline literal (semantic audit required) | 0 | g_pump_wait_sum{0}, g_pump_wait_max{0}, g_pump_batch_max{0}, g_pump_inflight_max{0}, g_global_heap_flag{0}, g_q_cleared{0}; |
+| L07020 | src/mod/session2/server.cpp:216:34 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> g_pump_tid{0}; |
+| L07021 | src/mod/session2/server.cpp:217:38 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_pump_last_ms{0}; |
+| L07022 | src/mod/session2/server.cpp:218:40 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_held_not_ready{0}, g_held_full{0}; |
+| L07023 | src/mod/session2/server.cpp:218:56 | phase_reset | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> g_held_not_ready{0}, g_held_full{0}; |
+| L07024 | src/mod/session2/server.cpp:222:32 | phase_reset | inline literal (semantic audit required) | 1000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
+| L07025 | src/mod/session2/server.cpp:222:38 | phase_reset | inline literal (semantic audit required) | 5000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
+| L07026 | src/mod/session2/server.cpp:222:58 | phase_reset | inline literal (semantic audit required) | 1000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
+| L07027 | src/mod/session2/server.cpp:222:64 | phase_reset | inline literal (semantic audit required) | 5000 | inj::StallWatch g_server_watch{1000, 5000}, g_pump_watch{1000, 5000}; |
+| L07028 | src/mod/session2/server.cpp:223:29 | phase_reset | inline literal (semantic audit required) | 0 | uint64_t g_full_logged_at = 0, g_full_logged_count = 0; |
+| L07029 | src/mod/session2/server.cpp:223:54 | phase_reset | inline literal (semantic audit required) | 0 | uint64_t g_full_logged_at = 0, g_full_logged_count = 0; |
+| L07030 | src/mod/session2/server.cpp:241:46 | note_exception | inline literal (semantic audit required) | 1 | const uint32_t i = g_exc_count.fetch_add(1); |
+| L07031 | src/mod/session2/server.cpp:243:72 | note_exception | inline literal (semantic audit required) | 1 | if (!inj::step_is_ours(step)) g_halted_epoch.store(epoch ? epoch : 1); |
+| L07032 | src/mod/session2/server.cpp:249:64 | note_exception | inline literal (semantic audit required) | 0x20000000 | n.in_exe = n.address >= g_base && n.address < g_base + 0x20000000; |
+| L07033 | src/mod/session2/server.cpp:250:49 | note_exception | inline literal (semantic audit required) | 0 | n.rva = n.in_exe ? n.address - g_base : 0; |
+| L07034 | src/mod/session2/server.cpp:252:18 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
+| L07035 | src/mod/session2/server.cpp:252:45 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
+| L07036 | src/mod/session2/server.cpp:252:73 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
+| L07037 | src/mod/session2/server.cpp:252:78 | note_exception | inline literal (semantic audit required) | 0 | n.params[0] = r->NumberParameters > 0 ? r->ExceptionInformation[0] : 0; |
+| L07038 | src/mod/session2/server.cpp:253:18 | note_exception | inline literal (semantic audit required) | 1 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
+| L07039 | src/mod/session2/server.cpp:253:45 | note_exception | inline literal (semantic audit required) | 1 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
+| L07040 | src/mod/session2/server.cpp:253:73 | note_exception | inline literal (semantic audit required) | 1 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
+| L07041 | src/mod/session2/server.cpp:253:78 | note_exception | inline literal (semantic audit required) | 0 | n.params[1] = r->NumberParameters > 1 ? r->ExceptionInformation[1] : 0; |
+| L07042 | src/mod/session2/server.cpp:272:65 | game_alloc_raw | inline literal (semantic audit required) | 0x58 | const auto tls_array = static_cast<uintptr_t>(__readgsqword(0x58)); |
+| L07043 | src/mod/session2/server.cpp:274:75 | game_alloc_raw | inline literal (semantic audit required) | 8ull | const uintptr_t tls = *reinterpret_cast<const uintptr_t*>(tls_array + 8ull * index); |
+| L07044 | src/mod/session2/server.cpp:275:77 | game_alloc_raw | inline literal (semantic audit required) | 0 | if (*reinterpret_cast<const uint8_t*>(tls + off::kTls_UseGlobalHeap) != 0) { |
+| L07045 | src/mod/session2/server.cpp:276:38 | game_alloc_raw | inline literal (semantic audit required) | 1 | g_global_heap_flag.fetch_add(1, std::memory_order_relaxed); |
+| L07046 | src/mod/session2/server.cpp:278:37 | game_alloc_raw | inline literal (semantic audit required) | 0x10 | return g_alloc_global(size, 0x10); |
+| L07047 | src/mod/session2/server.cpp:280:33 | game_alloc_raw | inline literal (semantic audit required) | 0x10 | return g_alloc_thread(size, 0x10); |
+| L07048 | src/mod/session2/server.cpp:291:46 | __except | inline literal (semantic audit required) | 1 | g_halted_epoch.store(epoch ? epoch : 1);  // the game's heap may be damaged: nothing more |
+| L07049 | src/mod/session2/server.cpp:298:36 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
+| L07050 | src/mod/session2/server.cpp:298:55 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
+| L07051 | src/mod/session2/server.cpp:298:74 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
+| L07052 | src/mod/session2/server.cpp:298:92 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
+| L07053 | src/mod/session2/server.cpp:298:106 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> injected{0}, inject_refused{0}, inject_blocked{0}, inject_failed{0}, recv_ours{0}; |
+| L07054 | src/mod/session2/server.cpp:299:36 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> sent_out{0}, sent_bad{0}, save_reqs{0}; |
+| L07055 | src/mod/session2/server.cpp:299:49 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> sent_out{0}, sent_bad{0}, save_reqs{0}; |
+| L07056 | src/mod/session2/server.cpp:299:63 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> sent_out{0}, sent_bad{0}, save_reqs{0}; |
+| L07057 | src/mod/session2/server.cpp:300:43 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> logout_injected{0}, logout_acks{0}, inject_after_logout{0};  // C4 |
+| L07058 | src/mod/session2/server.cpp:300:59 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> logout_injected{0}, logout_acks{0}, inject_after_logout{0};  // C4 |
+| L07059 | src/mod/session2/server.cpp:300:83 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> logout_injected{0}, logout_acks{0}, inject_after_logout{0};  // C4 |
+| L07060 | src/mod/session2/server.cpp:301:47 | __except | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> move_close_injected{0};  // MoveFieldCompleteReq 2549 handed before a 2001 |
+| L07061 | src/mod/session2/server.cpp:302:40 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
+| L07062 | src/mod/session2/server.cpp:302:62 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
+| L07063 | src/mod/session2/server.cpp:302:83 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
+| L07064 | src/mod/session2/server.cpp:302:103 | __except | inline literal (semantic audit required) | 2 | std::atomic<uint64_t> finder_calls[2]{}, finder_nonempty[2]{}, finder_relayed[2]{}, finder_errors[2]{}; |
+| L07065 | src/mod/session2/server.cpp:341:21 | same_server | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
+| L07066 | src/mod/session2/server.cpp:341:29 | same_server | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
+| L07067 | src/mod/session2/server.cpp:350:88 | live_session2 | inline literal (semantic audit required) | 0 | return s2 && g_session_epoch.load() == g_want_epoch.load() && same_server() ? s2 : 0; |
+| L07068 | src/mod/session2/server.cpp:355:21 | epoch_sessions | inline literal (semantic audit required) | 0 | for (size_t e = 0; e < kEpochSlots; ++e) out[e] = g_epoch_session[e].load(std::memory_order_acquire); |
+| L07069 | src/mod/session2/server.cpp:361:20 | session_user | inline literal (semantic audit required) | 0 | uintptr_t vt = 0, back = 0; |
+| L07070 | src/mod/session2/server.cpp:361:30 | session_user | inline literal (semantic audit required) | 0 | uintptr_t vt = 0, back = 0; |
+| L07071 | src/mod/session2/server.cpp:372:45 | build_session | inline literal (semantic audit required) | 0 | if (!game_alloc(off::kSessionSize, obj, 0, g_want_epoch.load())) return false; |
+| L07072 | src/mod/session2/server.cpp:375:26 | build_session | inline literal (semantic audit required) | 0 | std::memset(obj, 0, off::kSessionSize); |
+| L07073 | src/mod/session2/server.cpp:377:21 | build_session | inline literal (semantic audit required) | 0 | g_ctor(obj, 0); |
+| L07074 | src/mod/session2/server.cpp:381:62 | build_session | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint64_t*>(s + off::kSession_B0) = 0; |
+| L07075 | src/mod/session2/server.cpp:382:62 | build_session | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint64_t*>(s + off::kSession_B8) = 0; |
+| L07076 | src/mod/session2/server.cpp:383:62 | build_session | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint16_t*>(s + off::kSession_C0) = 0; |
+| L07077 | src/mod/session2/server.cpp:384:83 | build_session | inline literal (semantic audit required) | 1 | *reinterpret_cast<uintptr_t*>(s) = reinterpret_cast<uintptr_t>(g_vtable + 1); |
+| L07078 | src/mod/session2/server.cpp:398:65 | __except | inline literal (semantic audit required) | 0 | } __except (note_exception(GetExceptionInformation(), step, 0, g_want_epoch.load())) { |
+| L07079 | src/mod/session2/server.cpp:409:39 | __except | inline literal (semantic audit required) | 0 | thread_local int t_take_frame_depth = 0; |
+| L07080 | src/mod/session2/server.cpp:419:32 | push_outgoing | inline literal (semantic audit required) | 2 | if (ok && packet.size() >= 2 && attach_follow_active()) { |
+| L07081 | src/mod/session2/server.cpp:420:59 | push_outgoing | inline literal (semantic audit required) | 0 | attach_follow_on_out(static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)), packet, nullptr); |
+| L07082 | src/mod/session2/server.cpp:420:72 | push_outgoing | inline literal (semantic audit required) | 1 | attach_follow_on_out(static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)), packet, nullptr); |
+| L07083 | src/mod/session2/server.cpp:420:78 | push_outgoing | inline literal (semantic audit required) | 8 | attach_follow_on_out(static_cast<uint16_t>(packet[0] &#124; (packet[1] << 8)), packet, nullptr); |
+| L07084 | src/mod/session2/server.cpp:429:70 | push_outgoing_extra | inline literal (semantic audit required) | 2 | return g_outgoing.bytes() + packet.size() <= kMaxOutgoingBytes / 2 && g_outgoing.push(packet); |
+| L07085 | src/mod/session2/server.cpp:443:63 | Depth | inline literal (semantic audit required) | 1 | if (const uint32_t want = g_want_epoch.load(); want > 1) { |
+| L07086 | src/mod/session2/server.cpp:448:38 | Depth | inline literal (semantic audit required) | 1 | g_late_out.fetch_add(1, std::memory_order_relaxed); |
+| L07087 | src/mod/session2/server.cpp:453:25 | Depth | inline literal (semantic audit required) | 0 | uint16_t flen = 0; |
+| L07088 | src/mod/session2/server.cpp:454:100 | Depth | inline literal (semantic audit required) | 0x8000 | if (!peek(frame, flen) &#124;&#124; flen < off::kFrameOverhead + troc::kInternalHeaderSize &#124;&#124; flen > 0x8000) { |
+| L07089 | src/mod/session2/server.cpp:455:36 | Depth | inline literal (semantic audit required) | 1 | g_n.sent_bad.fetch_add(1, std::memory_order_relaxed);  // SendPacket wrote no frame |
+| L07090 | src/mod/session2/server.cpp:462:35 | Depth | inline literal (semantic audit required) | 2 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
+| L07091 | src/mod/session2/server.cpp:462:43 | Depth | inline literal (semantic audit required) | 0 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
+| L07092 | src/mod/session2/server.cpp:462:51 | Depth | inline literal (semantic audit required) | 1 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
+| L07093 | src/mod/session2/server.cpp:462:57 | Depth | inline literal (semantic audit required) | 8 | if (copied && p.size() >= 2 && (p[0] &#124; (p[1] << 8)) == kOpNak) { |
+| L07094 | src/mod/session2/server.cpp:463:29 | Depth | inline literal (semantic audit required) | 1 | g_nak.fetch_add(1, std::memory_order_relaxed); |
+| L07095 | src/mod/session2/server.cpp:464:70 | Depth | inline literal (semantic audit required) | 1 | if (g_logout_handed.load()) g_nak_after_logout.fetch_add(1, std::memory_order_relaxed); |
+| L07096 | src/mod/session2/server.cpp:467:36 | Depth | inline literal (semantic audit required) | 1 | g_n.sent_bad.fetch_add(1, std::memory_order_relaxed); |
+| L07097 | src/mod/session2/server.cpp:477:39 | Depth | inline literal (semantic audit required) | 1 | g_n.logout_acks.fetch_add(1, std::memory_order_relaxed); |
+| L07098 | src/mod/session2/server.cpp:499:16 | LoadedAfterPush | inline literal (semantic audit required) | 0 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07099 | src/mod/session2/server.cpp:499:24 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07100 | src/mod/session2/server.cpp:499:30 | LoadedAfterPush | inline literal (semantic audit required) | 8 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07101 | src/mod/session2/server.cpp:499:98 | LoadedAfterPush | inline literal (semantic audit required) | 4 | if ((p[0] &#124; (p[1] << 8)) == kOpMainPlayerDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07102 | src/mod/session2/server.cpp:500:28 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07103 | src/mod/session2/server.cpp:501:61 | LoadedAfterPush | inline literal (semantic audit required) | 4 | std::memcpy(&key, p.data() + troc::kHeaderSize, 4); |
+| L07104 | src/mod/session2/server.cpp:510:16 | LoadedAfterPush | inline literal (semantic audit required) | 0 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07105 | src/mod/session2/server.cpp:510:24 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07106 | src/mod/session2/server.cpp:510:30 | LoadedAfterPush | inline literal (semantic audit required) | 8 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07107 | src/mod/session2/server.cpp:510:96 | LoadedAfterPush | inline literal (semantic audit required) | 4 | if ((p[0] &#124; (p[1] << 8)) == kOpMainUserDataStartAck && p.size() >= troc::kHeaderSize + 4) { |
+| L07108 | src/mod/session2/server.cpp:511:28 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07109 | src/mod/session2/server.cpp:512:61 | LoadedAfterPush | inline literal (semantic audit required) | 4 | std::memcpy(&key, p.data() + troc::kHeaderSize, 4); |
+| L07110 | src/mod/session2/server.cpp:526:36 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t milestone_value = 0; |
+| L07111 | src/mod/session2/server.cpp:531:31 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t owner_orig = 0, owner_copy = 0; |
+| L07112 | src/mod/session2/server.cpp:531:47 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t owner_orig = 0, owner_copy = 0; |
+| L07113 | src/mod/session2/server.cpp:542:81 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((move ? g_owner_rewrites : g_load_owner_rewrites).fetch_add(1) < 8) { |
+| L07114 | src/mod/session2/server.cpp:542:86 | LoadedAfterPush | inline literal (semantic audit required) | 8 | if ((move ? g_owner_rewrites : g_load_owner_rewrites).fetch_add(1) < 8) { |
+| L07115 | src/mod/session2/server.cpp:548:85 | LoadedAfterPush | inline literal (semantic audit required) | 1 | if ((move ? g_owner_unexpected : g_load_owner_unexpected).fetch_add(1) < 4) { |
+| L07116 | src/mod/session2/server.cpp:548:90 | LoadedAfterPush | inline literal (semantic audit required) | 4 | if ((move ? g_owner_unexpected : g_load_owner_unexpected).fetch_add(1) < 4) { |
+| L07117 | src/mod/session2/server.cpp:553:62 | LoadedAfterPush | inline literal (semantic audit required) | 1 | } else if (!move && g_load_owner_other.fetch_add(1) < 4) { |
+| L07118 | src/mod/session2/server.cpp:553:67 | LoadedAfterPush | inline literal (semantic audit required) | 4 | } else if (!move && g_load_owner_other.fetch_add(1) < 4) { |
+| L07119 | src/mod/session2/server.cpp:560:30 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
+| L07120 | src/mod/session2/server.cpp:561:26 | LoadedAfterPush | inline literal (semantic audit required) | 0 | uint32_t k = 0; |
+| L07121 | src/mod/session2/server.cpp:562:55 | LoadedAfterPush | inline literal (semantic audit required) | 0x60 | if (server_host_user(host) && peek(host + 0x60, k) && k) g_host_userkey.store(k); |
+| L07122 | src/mod/session2/server.cpp:564:33 | size | inline literal (semantic audit required) | 0 | if (uint32_t host_key = 0; v->opcode < g_hostkey_ops.size() && (host_key = g_host_userkey.load()) != 0) { |
+| L07123 | src/mod/session2/server.cpp:564:110 | size | inline literal (semantic audit required) | 0 | if (uint32_t host_key = 0; v->opcode < g_hostkey_ops.size() && (host_key = g_host_userkey.load()) != 0) { |
+| L07124 | src/mod/session2/server.cpp:565:29 | size | inline literal (semantic audit required) | 4 | const uint8_t k[4] = {static_cast<uint8_t>(host_key), static_cast<uint8_t>(host_key >> 8), |
+| L07125 | src/mod/session2/server.cpp:565:100 | size | inline literal (semantic audit required) | 8 | const uint8_t k[4] = {static_cast<uint8_t>(host_key), static_cast<uint8_t>(host_key >> 8), |
+| L07126 | src/mod/session2/server.cpp:566:68 | size | inline literal (semantic audit required) | 16 | static_cast<uint8_t>(host_key >> 16), static_cast<uint8_t>(host_key >> 24)}; |
+| L07127 | src/mod/session2/server.cpp:566:106 | size | inline literal (semantic audit required) | 24 | static_cast<uint8_t>(host_key >> 16), static_cast<uint8_t>(host_key >> 24)}; |
+| L07128 | src/mod/session2/server.cpp:568:52 | size | inline literal (semantic audit required) | 1 | g_hostkey_ops[v->opcode].fetch_add(1, std::memory_order_relaxed); |
+| L07129 | src/mod/session2/server.cpp:571:68 | size | inline literal (semantic audit required) | 4 | if (v->opcode == oms::kOpMilestone && v->payload.size() >= 4) std::memcpy(&milestone_value, v->payload.data(), 4); |
+| L07130 | src/mod/session2/server.cpp:571:120 | size | inline literal (semantic audit required) | 4 | if (v->opcode == oms::kOpMilestone && v->payload.size() >= 4) std::memcpy(&milestone_value, v->payload.data(), 4); |
+| L07131 | src/mod/session2/server.cpp:582:32 | size | inline literal (semantic audit required) | 0 | size_t loading_ack_n = 0; |
+| L07132 | src/mod/session2/server.cpp:599:23 | size | inline literal (semantic audit required) | 2005 | if (opcode == 2005) v = troc::parse_wire(p, troc::Dir::ToGuestClient); |
+| L07133 | src/mod/session2/server.cpp:603:43 | size | inline literal (semantic audit required) | 1u | const uint64_t ok = (pushed ? 1u : 0u) + ar.extra_pushed - ar.extra_failed; |
+| L07134 | src/mod/session2/server.cpp:603:48 | size | inline literal (semantic audit required) | 0u | const uint64_t ok = (pushed ? 1u : 0u) + ar.extra_pushed - ar.extra_failed; |
+| L07135 | src/mod/session2/server.cpp:609:40 | size | inline literal (semantic audit required) | 1 | g_n.sent_out.fetch_add(1, std::memory_order_relaxed); |
+| L07136 | src/mod/session2/server.cpp:632:34 | size | inline literal (semantic audit required) | 2005 | if (pushed && (opcode == 2005 &#124;&#124; opcode == 2516 &#124;&#124; opcode == 2174) && self == live_session2()) { |
+| L07137 | src/mod/session2/server.cpp:632:52 | size | inline literal (semantic audit required) | 2516 | if (pushed && (opcode == 2005 &#124;&#124; opcode == 2516 &#124;&#124; opcode == 2174) && self == live_session2()) { |
+| L07138 | src/mod/session2/server.cpp:632:70 | size | inline literal (semantic audit required) | 2174 | if (pushed && (opcode == 2005 &#124;&#124; opcode == 2516 &#124;&#124; opcode == 2174) && self == live_session2()) { |
+| L07139 | src/mod/session2/server.cpp:642:121 | size | inline literal (semantic audit required) | 0 | if (to_live) observer_seq_copy_on_out(opcode, v->payload, pushed, opcode == kOpMoveFieldAck ? milestone_value : 0); |
+| L07140 | src/mod/session2/server.cpp:651:73 | size | inline literal (semantic audit required) | 0 | observer_seq_copy_on_out(sv->opcode, sv->payload, true, 0); |
+| L07141 | src/mod/session2/server.cpp:667:34 | size | inline literal (semantic audit required) | 2322 | if (pushed && (opcode == 2322 &#124;&#124; opcode == 2335 &#124;&#124; opcode == 2005)) { |
+| L07142 | src/mod/session2/server.cpp:667:52 | size | inline literal (semantic audit required) | 2335 | if (pushed && (opcode == 2322 &#124;&#124; opcode == 2335 &#124;&#124; opcode == 2005)) { |
+| L07143 | src/mod/session2/server.cpp:667:70 | size | inline literal (semantic audit required) | 2005 | if (pushed && (opcode == 2322 &#124;&#124; opcode == 2335 &#124;&#124; opcode == 2005)) { |
+| L07144 | src/mod/session2/server.cpp:676:116 | size | inline literal (semantic audit required) | 0 | observer_milestone_reload_on_out(opcode, self, pushed, opcode == omr::kOpMilestone ? milestone_value : 0); |
+| L07145 | src/mod/session2/server.cpp:686:18 | session2_send | inline literal (semantic audit required) | 0 | int result = 0; |
+| L07146 | src/mod/session2/server.cpp:693:32 | session2_send | inline literal (semantic audit required) | 0 | uintptr_t server_net = 0, q2 = 0; |
+| L07147 | src/mod/session2/server.cpp:693:40 | session2_send | inline literal (semantic audit required) | 0 | uintptr_t server_net = 0, q2 = 0; |
+| L07148 | src/mod/session2/server.cpp:696:22 | guarded_push | inline literal (semantic audit required) | 1 | result = 1; |
+| L07149 | src/mod/session2/server.cpp:719:25 | mirror_copy | inline literal (semantic audit required) | 0 | uint16_t size = 0; |
+| L07150 | src/mod/session2/server.cpp:720:24 | mirror_copy | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07151 | src/mod/session2/server.cpp:722:39 | mirror_copy | inline literal (semantic audit required) | 0x28 | if (!user2_key &#124;&#124; !peek(rsp + 0x28, size) &#124;&#124; size < troc::kHeaderSize + 4 &#124;&#124; size > 0x7F00 &#124;&#124; |
+| L07152 | src/mod/session2/server.cpp:722:81 | mirror_copy | inline literal (semantic audit required) | 4 | if (!user2_key &#124;&#124; !peek(rsp + 0x28, size) &#124;&#124; size < troc::kHeaderSize + 4 &#124;&#124; size > 0x7F00 &#124;&#124; |
+| L07153 | src/mod/session2/server.cpp:722:93 | mirror_copy | inline literal (semantic audit required) | 0x7F00 | if (!user2_key &#124;&#124; !peek(rsp + 0x28, size) &#124;&#124; size < troc::kHeaderSize + 4 &#124;&#124; size > 0x7F00 &#124;&#124; |
+| L07154 | src/mod/session2/server.cpp:723:60 | peek | inline literal (semantic audit required) | 28 | !peek(pkt + troc::kHeaderSize, key) &#124;&#124; (key >> 28) != 0xA &#124;&#124; key == user2_key) { |
+| L07155 | src/mod/session2/server.cpp:723:67 | peek | inline literal (semantic audit required) | 0xA | !peek(pkt + troc::kHeaderSize, key) &#124;&#124; (key >> 28) != 0xA &#124;&#124; key == user2_key) { |
+| L07156 | src/mod/session2/server.cpp:728:63 | peek | inline literal (semantic audit required) | 4 | std::memcpy(p.data() + troc::kHeaderSize, &user2_key, 4); |
+| L07157 | src/mod/session2/server.cpp:731:40 | peek | inline literal (semantic audit required) | 1 | g_mirror_dropped.fetch_add(1, std::memory_order_relaxed); |
+| L07158 | src/mod/session2/server.cpp:735:35 | peek | inline literal (semantic audit required) | 1 | g_mirror_copied.fetch_add(1, std::memory_order_relaxed); |
+| L07159 | src/mod/session2/server.cpp:737:36 | peek | inline literal (semantic audit required) | 1 | g_mirror_dropped.fetch_add(1, std::memory_order_relaxed); |
+| L07160 | src/mod/session2/server.cpp:752:35 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | if (g_n.injected.load() > 0) g_outgoing_lost.store(true); |
+| L07161 | src/mod/session2/server.cpp:753:26 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | g_session2.store(0, std::memory_order_release); |
+| L07162 | src/mod/session2/server.cpp:754:31 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | g_session_epoch.store(0); |
+| L07163 | src/mod/session2/server.cpp:755:30 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | g_user2_player.store(0); |
+| L07164 | src/mod/session2/server.cpp:756:36 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::puppet_guard_also_key(0); |
+| L07165 | src/mod/session2/server.cpp:757:34 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::horse_diag_also_key(0); |
+| L07166 | src/mod/session2/server.cpp:758:33 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::puppet_guard_owner(0); |
+| L07167 | src/mod/session2/server.cpp:759:31 | GetCurrentThreadId | inline literal (semantic audit required) | 0 | net::horse_diag_owner(0); |
+| L07168 | src/mod/session2/server.cpp:760:29 | GetCurrentThreadId | inline literal (semantic audit required) | 1 | g_rebuilt.fetch_add(1); |
+| L07169 | src/mod/session2/server.cpp:775:23 | load | inline literal (semantic audit required) | 0 | uintptr_t s = 0; |
+| L07170 | src/mod/session2/server.cpp:782:39 | load | inline literal (semantic audit required) | 0 | g_logout_handed.store(0); |
+| L07171 | src/mod/session2/server.cpp:796:19 | load | inline literal (semantic audit required) | 0 | uint16_t op = 0; |
+| L07172 | src/mod/session2/server.cpp:800:27 | load | inline literal (semantic audit required) | 0 | uintptr_t frame = 0, base = 0; |
+| L07173 | src/mod/session2/server.cpp:800:37 | load | inline literal (semantic audit required) | 0 | uintptr_t frame = 0, base = 0; |
+| L07174 | src/mod/session2/server.cpp:801:26 | load | inline literal (semantic audit required) | 0 | uint64_t magic = 0; |
+| L07175 | src/mod/session2/server.cpp:807:28 | peek | inline literal (semantic audit required) | 0 | uint32_t tag = 0; |
+| L07176 | src/mod/session2/server.cpp:814:50 | peek | inline literal (semantic audit required) | 1 | g_pb_seen[route.epoch].fetch_add(1, std::memory_order_relaxed); |
+| L07177 | src/mod/session2/server.cpp:815:59 | peek | inline literal (semantic audit required) | 1 | if (route.stale) g_stale_routed.fetch_add(1, std::memory_order_relaxed); |
+| L07178 | src/mod/session2/server.cpp:818:45 | peek | inline literal (semantic audit required) | 1 | g_untagged_routed.fetch_add(1, std::memory_order_relaxed); |
+| L07179 | src/mod/session2/server.cpp:820:37 | peek | inline literal (semantic audit required) | 1 | g_n.recv_ours.fetch_add(1, std::memory_order_relaxed); |
+| L07180 | src/mod/session2/server.cpp:825:40 | peek | inline literal (semantic audit required) | 3037 | if (pkt && peek(pkt, op) && (op == 3037 &#124;&#124; op == 2910)) g_n.save_reqs.fetch_add(1, std::memory_order_relaxed); |
+| L07181 | src/mod/session2/server.cpp:825:54 | peek | inline literal (semantic audit required) | 2910 | if (pkt && peek(pkt, op) && (op == 3037 &#124;&#124; op == 2910)) g_n.save_reqs.fetch_add(1, std::memory_order_relaxed); |
+| L07182 | src/mod/session2/server.cpp:825:85 | peek | inline literal (semantic audit required) | 1 | if (pkt && peek(pkt, op) && (op == 3037 &#124;&#124; op == 2910)) g_n.save_reqs.fetch_add(1, std::memory_order_relaxed); |
+| L07183 | src/mod/session2/server.cpp:832:21 | peek | inline literal (semantic audit required) | 0 | uint32_t slot = 0; |
+| L07184 | src/mod/session2/server.cpp:833:99 | peek | inline literal (semantic audit required) | 9 | if (op == kOpLoginCharacterToFieldServerReq && ctx.r8 != s2 && peek(pkt + troc::kHeaderSize + 9, slot)) { |
+| L07185 | src/mod/session2/server.cpp:846:24 | peek | inline literal (semantic audit required) | 0 | uint16_t in_size = 0; |
+| L07186 | src/mod/session2/server.cpp:847:55 | peek | inline literal (semantic audit required) | 0x28 | const bool in_sized = pkt && op && peek(ctx.rsp + 0x28, in_size); |
+| L07187 | src/mod/session2/server.cpp:850:90 | peek | inline literal (semantic audit required) | 0 | if (from_user2) user2_stages_server_packet(op, from_user2, pkt, in_sized ? in_size : 0); |
+| L07188 | src/mod/session2/server.cpp:865:22 | session_user_key | inline literal (semantic audit required) | 0 | uintptr_t user = 0; |
+| L07189 | src/mod/session2/server.cpp:875:89 | actor_session | inline literal (semantic audit required) | 0xE8 | session = reinterpret_cast<GetSession>(*reinterpret_cast<const uintptr_t*>(vt + 0xE8))(actor); |
+| L07190 | src/mod/session2/server.cpp:887:27 | array_remove | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < count; ++i) { |
+| L07191 | src/mod/session2/server.cpp:889:35 | array_remove | inline literal (semantic audit required) | 1 | for (uint32_t j = i + 1; j < count; ++j) data[j - 1] = data[j]; |
+| L07192 | src/mod/session2/server.cpp:889:63 | array_remove | inline literal (semantic audit required) | 1 | for (uint32_t j = i + 1; j < count; ++j) data[j - 1] = data[j]; |
+| L07193 | src/mod/session2/server.cpp:921:39 | finder_common | inline literal (semantic audit required) | 1 | g_n.finder_calls[which].fetch_add(1, std::memory_order_relaxed); |
+| L07194 | src/mod/session2/server.cpp:923:22 | finder_common | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
+| L07195 | src/mod/session2/server.cpp:925:46 | finder_common | inline literal (semantic audit required) | 1 | g_n.finder_nonempty[which].fetch_add(1, std::memory_order_relaxed); |
+| L07196 | src/mod/session2/server.cpp:929:21 | finder_common | inline literal (semantic audit required) | 0 | uint32_t key2 = 0; |
+| L07197 | src/mod/session2/server.cpp:933:19 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
+| L07198 | src/mod/session2/server.cpp:933:26 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
+| L07199 | src/mod/session2/server.cpp:933:34 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
+| L07200 | src/mod/session2/server.cpp:933:45 | finder_common | inline literal (semantic audit required) | 0 | uintptr_t a = 0, b = 0, ts = 0, actor = 0; |
+| L07201 | src/mod/session2/server.cpp:934:27 | finder_common | inline literal (semantic audit required) | 0 | uint32_t controller = 0, key1 = 0; |
+| L07202 | src/mod/session2/server.cpp:934:37 | finder_common | inline literal (semantic audit required) | 0 | uint32_t controller = 0, key1 = 0; |
+| L07203 | src/mod/session2/server.cpp:936:95 | finder_common | inline literal (semantic audit required) | 0x68 | if (!peek(reinterpret_cast<uintptr_t>(finder) + off::kFinder_Actor, a) &#124;&#124; !a &#124;&#124; !peek(a + 0x68, b) &#124;&#124; !b &#124;&#124; |
+| L07204 | src/mod/session2/server.cpp:937:19 | finder_common | inline literal (semantic audit required) | 0x1A0 | !peek(b + 0x1A0, ts) &#124;&#124; !ts &#124;&#124; !peek(ts + 8, actor) &#124;&#124; !actor &#124;&#124; |
+| L07205 | src/mod/session2/server.cpp:937:51 | finder_common | inline literal (semantic audit required) | 8 | !peek(b + 0x1A0, ts) &#124;&#124; !ts &#124;&#124; !peek(ts + 8, actor) &#124;&#124; !actor &#124;&#124; |
+| L07206 | src/mod/session2/server.cpp:941:25 | peek | inline literal (semantic audit required) | 0 | uintptr_t exclude = 0; |
+| L07207 | src/mod/session2/server.cpp:942:18 | peek | inline literal (semantic audit required) | 1 | if (which == 1) { |
+| L07208 | src/mod/session2/server.cpp:953:21 | peek | inline literal (semantic audit required) | 0 | uintptr_t ret = 0; |
+| L07209 | src/mod/session2/server.cpp:955:44 | peek | inline literal (semantic audit required) | 1 | g_n.finder_errors[which].fetch_add(1, std::memory_order_relaxed); |
+| L07210 | src/mod/session2/server.cpp:958:41 | peek | inline literal (semantic audit required) | 1 | g_n.finder_relayed[which].fetch_add(1, std::memory_order_relaxed); |
+| L07211 | src/mod/session2/server.cpp:962:89 | except_one_control | inline literal (semantic audit required) | 0 | uintptr_t __fastcall except_one_control(void* finder, void* out) { return finder_common(0, g_control_hook, finder, out); } |
+| L07212 | src/mod/session2/server.cpp:963:86 | except_one_self | inline literal (semantic audit required) | 1 | uintptr_t __fastcall except_one_self(void* finder, void* out) { return finder_common(1, g_self_hook, finder, out); } |
+| L07213 | src/mod/session2/server.cpp:969:103 | head_matches | inline literal (semantic audit required) | 0 | if (game::safe_read(g_base + rva, actual.data(), n) && std::memcmp(actual.data(), expected, n) == 0) return true; |
+| L07214 | src/mod/session2/server.cpp:977:16 | load_channels | inline literal (semantic audit required) | 0 | size_t n = 0, blocked = 0; |
+| L07215 | src/mod/session2/server.cpp:977:29 | load_channels | inline literal (semantic audit required) | 0 | size_t n = 0, blocked = 0; |
+| L07216 | src/mod/session2/server.cpp:978:101 | load_channels | inline literal (semantic audit required) | 8 | for (uintptr_t a = g_base + off::kTrocInstancesBegin; a < g_base + off::kTrocInstancesEnd; a += 8) { |
+| L07217 | src/mod/session2/server.cpp:980:52 | load_channels | inline literal (semantic audit required) | 0x10000000 | if (!vt &#124;&#124; *vt < g_base &#124;&#124; *vt >= g_base + 0x10000000) continue; |
+| L07218 | src/mod/session2/server.cpp:981:64 | load_channels | inline literal (semantic audit required) | 0 | if (game::rtti_name_of_vtable(*vt).rfind(".?AVTrocTr", 0) != 0) continue; |
+| L07219 | src/mod/session2/server.cpp:981:70 | load_channels | inline literal (semantic audit required) | 0 | if (game::rtti_name_of_vtable(*vt).rfind(".?AVTrocTr", 0) != 0) continue; |
+| L07220 | src/mod/session2/server.cpp:1002:45 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
+| L07221 | src/mod/session2/server.cpp:1002:51 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
+| L07222 | src/mod/session2/server.cpp:1002:81 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
+| L07223 | src/mod/session2/server.cpp:1002:87 | load_channels | inline literal (semantic audit required) | 0 | bool never = full.rfind("Save", 0) == 0 &#124;&#124; full.rfind("DeleteSave", 0) == 0 &#124;&#124; |
+| L07224 | src/mod/session2/server.cpp:1003:56 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
+| L07225 | src/mod/session2/server.cpp:1003:62 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
+| L07226 | src/mod/session2/server.cpp:1003:98 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
+| L07227 | src/mod/session2/server.cpp:1003:104 | load_channels | inline literal (semantic audit required) | 0 | full.rfind("DeleteCharacter", 0) == 0 &#124;&#124; full.rfind("ReportFromViewer", 0) == 0; |
+| L07228 | src/mod/session2/server.cpp:1012:14 | load_channels | inline literal (semantic audit required) | 0x80 | a += 0x80;  // the rest of this 0x90-byte instance |
+| L07229 | src/mod/session2/server.cpp:1024:31 | build_vtable | inline literal (semantic audit required) | 4096 | VirtualAlloc(nullptr, 4096, MEM_COMMIT &#124; MEM_RESERVE, PAGE_READWRITE)); |
+| L07230 | src/mod/session2/server.cpp:1027:71 | build_vtable | inline literal (semantic audit required) | 8 | if (!game::safe_read(g_base + off::kNwVirtualAsyncSessionVtable - 8, vt, |
+| L07231 | src/mod/session2/server.cpp:1028:56 | sizeof | inline literal (semantic audit required) | 1 | (off::kSessionVtableEntries + 1) * sizeof(uintptr_t))) { |
+| L07232 | src/mod/session2/server.cpp:1031:12 | sizeof | inline literal (semantic audit required) | 1 | if (vt[1 + off::kSessionVfSend] != g_base + off::kSessionSend) return false; |
+| L07233 | src/mod/session2/server.cpp:1032:8 | sizeof | inline literal (semantic audit required) | 1 | vt[1 + off::kSessionVfSend] = reinterpret_cast<uintptr_t>(&session2_send); |
+| L07234 | src/mod/session2/server.cpp:1033:17 | sizeof | inline literal (semantic audit required) | 0 | DWORD old = 0; |
+| L07235 | src/mod/session2/server.cpp:1034:24 | sizeof | inline literal (semantic audit required) | 4096 | VirtualProtect(vt, 4096, PAGE_READONLY, &old); |
+| L07236 | src/mod/session2/server.cpp:1040:58 | vtable_slot_is | inline literal (semantic audit required) | 8 | auto v = game::read<uintptr_t>(g_base + vtable_rva + 8 * slot); |
+| L07237 | src/mod/session2/server.cpp:1074:65 | server_install | inline literal (semantic audit required) | 1 | if (!vtable_slot_is(off::kToNearExceptOneControlVtable, 1, off::kExceptOneVf1) &#124;&#124; |
+| L07238 | src/mod/session2/server.cpp:1075:62 | server_install | inline literal (semantic audit required) | 1 | !vtable_slot_is(off::kToNearExceptOneSelfVtable, 1, off::kExceptOneSelfVf1) &#124;&#124; |
+| L07239 | src/mod/session2/server.cpp:1076:49 | vtable_slot_is | inline literal (semantic audit required) | 1 | !vtable_slot_is(off::kToNearVtable, 1, off::kToNearVf1)) { |
+| L07240 | src/mod/session2/server.cpp:1135:45 | head_matches | inline literal (semantic audit required) | 20 | g_q.limits().max_bytes >> 20, g_q.limits().in_flight_max); |
+| L07241 | src/mod/session2/server.cpp:1137:47 | head_matches | inline literal (semantic audit required) | 0 | CloseHandle(CreateThread(nullptr, 0, mirror_thread, nullptr, 0, nullptr)); |
+| L07242 | src/mod/session2/server.cpp:1137:74 | head_matches | inline literal (semantic audit required) | 0 | CloseHandle(CreateThread(nullptr, 0, mirror_thread, nullptr, 0, nullptr)); |
+| L07243 | src/mod/session2/server.cpp:1186:65 | server_probe_log | inline literal (semantic audit required) | 0x24 | const auto crypto_on = crypto ? read<uint8_t>(*crypto + 0x24) : std::nullopt; |
+| L07244 | src/mod/session2/server.cpp:1203:42 | server_probe_log | inline literal (semantic audit required) | 0x20 | const auto c20 = cn ? read_ptr(*cn + 0x20) : std::nullopt; |
+| L07245 | src/mod/session2/server.cpp:1204:42 | server_probe_log | inline literal (semantic audit required) | 0x28 | const auto c28 = cn ? read_ptr(*cn + 0x28) : std::nullopt; |
+| L07246 | src/mod/session2/server.cpp:1225:49 | server_probe_log | inline literal (semantic audit required) | 0xD0 | const auto pj = user ? read_ptr(*user + 0xD0) : std::nullopt; |
+| L07247 | src/mod/session2/server.cpp:1227:46 | server_probe_log | inline literal (semantic audit required) | 0x68 | const auto c68 = pj ? read_ptr(*pj + 0x68) : std::nullopt; |
+| L07248 | src/mod/session2/server.cpp:1228:47 | server_probe_log | inline literal (semantic audit required) | 0x1A0 | const auto ts = c68 ? read_ptr(*c68 + 0x1A0) : std::nullopt; |
+| L07249 | src/mod/session2/server.cpp:1229:49 | server_probe_log | inline literal (semantic audit required) | 0x540 | const auto sector = ts ? read_ptr(*ts + 0x540) : std::nullopt; |
+| L07250 | src/mod/session2/server.cpp:1233:48 | server_probe_log | inline literal (semantic audit required) | 0x500 | const auto field = ts ? read_ptr(*ts + 0x500) : std::nullopt; |
+| L07251 | src/mod/session2/server.cpp:1237:57 | server_probe_log | inline literal (semantic audit required) | 0x180 | hex(read<uint32_t>(*field + 0x180)), hex(read<uint32_t>(*field + 0x2A8)), |
+| L07252 | src/mod/session2/server.cpp:1237:94 | server_probe_log | inline literal (semantic audit required) | 0x2A8 | hex(read<uint32_t>(*field + 0x180)), hex(read<uint32_t>(*field + 0x2A8)), |
+| L07253 | src/mod/session2/server.cpp:1238:57 | server_probe_log | inline literal (semantic audit required) | 0x2B0 | hex(read<uint32_t>(*field + 0x2B0)), hex(read<uint32_t>(*field + 0x2C8))); |
+| L07254 | src/mod/session2/server.cpp:1238:94 | server_probe_log | inline literal (semantic audit required) | 0x2C8 | hex(read<uint32_t>(*field + 0x2B0)), hex(read<uint32_t>(*field + 0x2C8))); |
+| L07255 | src/mod/session2/server.cpp:1248:16 | server_probe_log | inline literal (semantic audit required) | 32 | uint8_t ft[32] = {}; |
+| L07256 | src/mod/session2/server.cpp:1249:34 | server_probe_log | inline literal (semantic audit required) | 0x6A6D238 | if (game::safe_read(g_base + 0x6A6D238, ft, sizeof ft)) { |
+| L07257 | src/mod/session2/server.cpp:1256:57 | server_session_ready | inline literal (semantic audit required) | 0 | bool server_session_ready() { return live_session2() != 0; } |
+| L07258 | src/mod/session2/server.cpp:1266:20 | server_user2_present | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07259 | src/mod/session2/server.cpp:1271:21 | server_users | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
+| L07260 | src/mod/session2/server.cpp:1271:29 | server_users | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
+| L07261 | src/mod/session2/server.cpp:1278:21 | server_host_user | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
+| L07262 | src/mod/session2/server.cpp:1278:29 | server_host_user | inline literal (semantic audit required) | 0 | uintptr_t net = 0, s1 = 0; |
+| L07263 | src/mod/session2/server.cpp:1293:59 | server_in_take_frame | inline literal (semantic audit required) | 0 | bool server_in_take_frame() { return t_take_frame_depth > 0; } |
+| L07264 | src/mod/session2/server.cpp:1297:31 | server_user2_in_world | inline literal (semantic audit required) | 0 | return live_session2() != 0 && !g_logout_asked.load() && phase_snapshot().phase() == MovePhase::Stable; |
+| L07265 | src/mod/session2/server.cpp:1304:44 | server_push_extra | inline literal (semantic audit required) | 0 | const bool queued = live_session2() != 0 && push_outgoing_extra(packet); |
+| L07266 | src/mod/session2/server.cpp:1327:26 | server_push_extra | inline literal (semantic audit required) | 0 | std::memset(mem, 0, off::kFrameHeader + len + (off::kFrameOverhead - off::kFrameHeader)); |
+| L07267 | src/mod/session2/server.cpp:1329:42 | server_push_extra | inline literal (semantic audit required) | 2 | *reinterpret_cast<uint8_t*>(pb + 2) = channel; |
+| L07268 | src/mod/session2/server.cpp:1331:70 | server_push_extra | inline literal (semantic audit required) | 0 | std::memset(reinterpret_cast<void*>(pb + off::kPb_FramePtr), 0, off::kPbSize - off::kPb_FramePtr); |
+| L07269 | src/mod/session2/server.cpp:1336:64 | server_push_extra | inline literal (semantic audit required) | 0 | *reinterpret_cast<uint8_t*>(pb + off::kPb_IsRequest) = 0; |
+| L07270 | src/mod/session2/server.cpp:1339:43 | server_push_extra | inline literal (semantic audit required) | 0x8020 | *reinterpret_cast<uint64_t*>(pb + 0x8020) = 0x7FFFFFFFFFFFFFFFull; |
+| L07271 | src/mod/session2/server.cpp:1339:53 | server_push_extra | inline literal (semantic audit required) | 0x7FFFFFFFFFFFFFFFull | *reinterpret_cast<uint64_t*>(pb + 0x8020) = 0x7FFFFFFFFFFFFFFFull; |
+| L07272 | src/mod/session2/server.cpp:1347:46 | __except | inline literal (semantic audit required) | 1 | g_halted_epoch.store(epoch ? epoch : 1); |
+| L07273 | src/mod/session2/server.cpp:1355:28 | pump_body | inline literal (semantic audit required) | 1 | g_pump_turns.fetch_add(1, std::memory_order_relaxed); |
+| L07274 | src/mod/session2/server.cpp:1359:20 | pump_body | inline literal (semantic audit required) | 0 | uintptr_t cn = 0, server_net = 0; |
+| L07275 | src/mod/session2/server.cpp:1359:36 | pump_body | inline literal (semantic audit required) | 0 | uintptr_t cn = 0, server_net = 0; |
+| L07276 | src/mod/session2/server.cpp:1362:36 | pump_body | inline literal (semantic audit required) | 1 | g_pump_other_net.fetch_add(1, std::memory_order_relaxed); |
+| L07277 | src/mod/session2/server.cpp:1377:36 | pump_body | inline literal (semantic audit required) | 1 | g_pump_not_ready.fetch_add(1, std::memory_order_relaxed); |
+| L07278 | src/mod/session2/server.cpp:1382:21 | pump_body | inline literal (semantic audit required) | 0 | size_t handed = 0; |
+| L07279 | src/mod/session2/server.cpp:1391:33 | pump_body | inline literal (semantic audit required) | 1 | g_in_hand.fetch_add(1);  // before the size goes down: the barrier never sees neither |
+| L07280 | src/mod/session2/server.cpp:1395:33 | pump_body | inline literal (semantic audit required) | 1 | g_in_hand.fetch_sub(1); |
+| L07281 | src/mod/session2/server.cpp:1396:36 | pump_body | inline literal (semantic audit required) | 1 | g_pump_stale.fetch_add(1, std::memory_order_relaxed); |
+| L07282 | src/mod/session2/server.cpp:1400:40 | pump_body | inline literal (semantic audit required) | 1 | g_pb_pushed[p.epoch].fetch_add(1); |
+| L07283 | src/mod/session2/server.cpp:1401:29 | pump_body | inline literal (semantic audit required) | 1 | g_in_hand.fetch_sub(1);  // now counted as pushed (taken back below if the push fails) |
+| L07284 | src/mod/session2/server.cpp:1403:44 | pump_body | inline literal (semantic audit required) | 1 | g_pb_pushed[p.epoch].fetch_sub(1); |
+| L07285 | src/mod/session2/server.cpp:1404:41 | pump_body | inline literal (semantic audit required) | 1 | g_n.inject_failed.fetch_add(1); |
+| L07286 | src/mod/session2/server.cpp:1405:82 | pump_body | inline literal (semantic audit required) | 1 | if (!g_halted_epoch.load()) g_halted_epoch.store(p.epoch ? p.epoch : 1);  // a null buffer: stop too |
+| L07287 | src/mod/session2/server.cpp:1408:32 | pump_body | inline literal (semantic audit required) | 1 | g_n.injected.fetch_add(1); |
+| L07288 | src/mod/session2/server.cpp:1410:72 | pump_body | inline literal (semantic audit required) | 0 | const uint64_t wait = now >= p.queued_ms ? now - p.queued_ms : 0; |
+| L07289 | src/mod/session2/server.cpp:1418:73 | pump_body | inline literal (semantic audit required) | 0 | atomic_max(g_pump_inflight_max, pushed > seen ? pushed - seen : 0); |
+| L07290 | src/mod/session2/server.cpp:1428:36 | on_client_pump | inline literal (semantic audit required) | 1 | g_pump_other_net.fetch_add(1, std::memory_order_relaxed); |
+| L07291 | src/mod/session2/server.cpp:1452:42 | inject | inline literal (semantic audit required) | 8 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
+| L07292 | src/mod/session2/server.cpp:1452:51 | inject | inline literal (semantic audit required) | 0 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
+| L07293 | src/mod/session2/server.cpp:1452:60 | inject | inline literal (semantic audit required) | 1 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
+| L07294 | src/mod/session2/server.cpp:1452:66 | inject | inline literal (semantic audit required) | 8 | if (in.size() >= troc::kHeaderSize + 8 && (in[0] &#124; (in[1] << 8)) == kOpLoginUserToFieldServerReq) { |
+| L07295 | src/mod/session2/server.cpp:1456:69 | inject | inline literal (semantic audit required) | 0ull | const uint64_t account = g_opt.account && g_opt.account != ~0ull ? g_opt.account : 1; |
+| L07296 | src/mod/session2/server.cpp:1456:92 | inject | inline literal (semantic audit required) | 1 | const uint64_t account = g_opt.account && g_opt.account != ~0ull ? g_opt.account : 1; |
+| L07297 | src/mod/session2/server.cpp:1457:64 | inject | inline literal (semantic audit required) | 8 | std::memcpy(copy.data() + troc::kHeaderSize, &account, 8); |
+| L07298 | src/mod/session2/server.cpp:1464:67 | inject | inline literal (semantic audit required) | 9 | if (identity_fix_active() && in.size() >= troc::kHeaderSize + 9 && |
+| L07299 | src/mod/session2/server.cpp:1465:13 | inject | inline literal (semantic audit required) | 0 | (in[0] &#124; (in[1] << 8)) == kOpLoginCharacterToFieldServerReq) { |
+| L07300 | src/mod/session2/server.cpp:1465:22 | inject | inline literal (semantic audit required) | 1 | (in[0] &#124; (in[1] << 8)) == kOpLoginCharacterToFieldServerReq) { |
+| L07301 | src/mod/session2/server.cpp:1465:28 | inject | inline literal (semantic audit required) | 8 | (in[0] &#124; (in[1] << 8)) == kOpLoginCharacterToFieldServerReq) { |
+| L07302 | src/mod/session2/server.cpp:1466:26 | inject | inline literal (semantic audit required) | 0 | uint64_t asked = 0; |
+| L07303 | src/mod/session2/server.cpp:1467:61 | inject | inline literal (semantic audit required) | 1 | std::memcpy(&asked, in.data() + troc::kHeaderSize + 1, sizeof asked); |
+| L07304 | src/mod/session2/server.cpp:1471:59 | inject | inline literal (semantic audit required) | 1 | std::memcpy(copy.data() + troc::kHeaderSize + 1, &own, sizeof own); |
+| L07305 | src/mod/session2/server.cpp:1479:53 | inject | inline literal (semantic audit required) | 0x8000 | if (!v &#124;&#124; packet.size() + off::kFrameOverhead > 0x8000) { |
+| L07306 | src/mod/session2/server.cpp:1480:38 | inject | inline literal (semantic audit required) | 1 | g_n.inject_refused.fetch_add(1); |
+| L07307 | src/mod/session2/server.cpp:1491:42 | inject | inline literal (semantic audit required) | 0 | const bool live = live_session2() != 0; |
+| L07308 | src/mod/session2/server.cpp:1493:36 | inject | inline literal (semantic audit required) | 1 | g_held_not_ready.fetch_add(1); |
+| L07309 | src/mod/session2/server.cpp:1501:43 | inject | inline literal (semantic audit required) | 1 | g_n.inject_after_logout.fetch_add(1); |
+| L07310 | src/mod/session2/server.cpp:1507:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
+| L07311 | src/mod/session2/server.cpp:1513:80 | identity_fix_admit | inline literal (semantic audit required) | 13 | if (v->opcode == kOpLoginCharacterToFieldServerReq && v->payload.size() >= 13) { |
+| L07312 | src/mod/session2/server.cpp:1514:25 | identity_fix_admit | inline literal (semantic audit required) | 0 | uint32_t slot = 0; |
+| L07313 | src/mod/session2/server.cpp:1515:48 | identity_fix_admit | inline literal (semantic audit required) | 9 | std::memcpy(&slot, v->payload.data() + 9, 4); |
+| L07314 | src/mod/session2/server.cpp:1515:51 | identity_fix_admit | inline literal (semantic audit required) | 4 | std::memcpy(&slot, v->payload.data() + 9, 4); |
+| L07315 | src/mod/session2/server.cpp:1516:21 | identity_fix_admit | inline literal (semantic audit required) | 3 | if (slot == 3 &#124;&#124; slot == 206) { |
+| L07316 | src/mod/session2/server.cpp:1516:34 | identity_fix_admit | inline literal (semantic audit required) | 206 | if (slot == 3 &#124;&#124; slot == 206) { |
+| L07317 | src/mod/session2/server.cpp:1517:42 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
+| L07318 | src/mod/session2/server.cpp:1528:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
+| L07319 | src/mod/session2/server.cpp:1535:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_blocked.fetch_add(1); |
+| L07320 | src/mod/session2/server.cpp:1539:38 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_n.inject_refused.fetch_add(1); |
+| L07321 | src/mod/session2/server.cpp:1542:28 | identity_fix_admit | inline literal (semantic audit required) | 0 | uintptr_t server_net = 0; |
+| L07322 | src/mod/session2/server.cpp:1544:36 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_held_not_ready.fetch_add(1); |
+| L07323 | src/mod/session2/server.cpp:1551:35 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_held_full.fetch_add(1); |
+| L07324 | src/mod/session2/server.cpp:1567:35 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_held_full.fetch_add(1); |
+| L07325 | src/mod/session2/server.cpp:1580:34 | identity_fix_admit | inline literal (semantic audit required) | 1 | g_pb_queued[epoch].fetch_add(1); |
+| L07326 | src/mod/session2/server.cpp:1592:15 | mirror_thread | inline literal (semantic audit required) | 5 | Sleep(5); |
+| L07327 | src/mod/session2/server.cpp:1607:44 | mirror_thread | inline literal (semantic audit required) | 1 | g_mirror_dropped.fetch_add(1, std::memory_order_relaxed); |
+| L07328 | src/mod/session2/server.cpp:1619:22 | user2_move_diag | inline literal (semantic audit required) | 0 | uintptr_t user = 0; |
+| L07329 | src/mod/session2/server.cpp:1645:26 | close_open_move | inline literal (semantic audit required) | 0 | const uint8_t zero = 0; |
+| L07330 | src/mod/session2/server.cpp:1647:54 | close_open_move | inline literal (semantic audit required) | 0 | inject(troc::make(mv::kMoveFieldCompleteReq, 0, std::span<const uint8_t>(&zero, 1)), InjectKind::CloseMove); |
+| L07331 | src/mod/session2/server.cpp:1647:89 | close_open_move | inline literal (semantic audit required) | 1 | inject(troc::make(mv::kMoveFieldCompleteReq, 0, std::span<const uint8_t>(&zero, 1)), InjectKind::CloseMove); |
+| L07332 | src/mod/session2/server.cpp:1656:39 | close_open_move | inline literal (semantic audit required) | 1 | g_n.move_close_injected.fetch_add(1); |
+| L07333 | src/mod/session2/server.cpp:1717:37 | hand_logout | inline literal (semantic audit required) | 0 | g_logout_asked_ms.store(0);  // log once |
+| L07334 | src/mod/session2/server.cpp:1719:56 | hand_logout | inline literal (semantic audit required) | 1000 | g_logout_why, kLogoutPendingMs / 1000); |
+| L07335 | src/mod/session2/server.cpp:1734:26 | hand_logout | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
+| L07336 | src/mod/session2/server.cpp:1745:35 | hand_logout | inline literal (semantic audit required) | 1 | g_n.logout_injected.fetch_add(1); |
+| L07337 | src/mod/session2/server.cpp:1746:94 | hand_logout | inline literal (semantic audit required) | 1 | if (const uint32_t e = g_want_epoch.load(); e < kEpochSlots) g_logout_count[e].fetch_add(1); |
+| L07338 | src/mod/session2/server.cpp:1805:64 | server_begin_epoch | inline literal (semantic audit required) | 1 | if (epoch >= kEpochSlots &#124;&#124; epoch != g_want_epoch.load() + 1) return false; |
+| L07339 | src/mod/session2/server.cpp:1816:27 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_logout_handed.store(0); |
+| L07340 | src/mod/session2/server.cpp:1817:29 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_logout_asked_ms.store(0); |
+| L07341 | src/mod/session2/server.cpp:1826:26 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_user2_player.store(0); |
+| L07342 | src/mod/session2/server.cpp:1832:31 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_user2_userkey.store(0); |
+| L07343 | src/mod/session2/server.cpp:1833:36 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::puppet_guard_also_key(0); |
+| L07344 | src/mod/session2/server.cpp:1834:34 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::horse_diag_also_key(0); |
+| L07345 | src/mod/session2/server.cpp:1835:33 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::puppet_guard_owner(0); |
+| L07346 | src/mod/session2/server.cpp:1836:31 | server_begin_epoch | inline literal (semantic audit required) | 0 | net::horse_diag_owner(0); |
+| L07347 | src/mod/session2/server.cpp:1845:23 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_close_session = 0; |
+| L07348 | src/mod/session2/server.cpp:1846:17 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_nak.store(0); |
+| L07349 | src/mod/session2/server.cpp:1847:30 | server_begin_epoch | inline literal (semantic audit required) | 0 | g_nak_after_logout.store(0); |
+| L07350 | src/mod/session2/server.cpp:1857:91 | server_epoch_session | inline literal (semantic audit required) | 0 | return epoch < kEpochSlots ? g_epoch_session[epoch].load(std::memory_order_acquire) : 0; |
+| L07351 | src/mod/session2/server.cpp:1860:64 | server_logout_handed | inline literal (semantic audit required) | 0 | bool server_logout_handed() { return g_logout_handed.load() != 0; } |
+| L07352 | src/mod/session2/server.cpp:1863:22 | server_capture_user2 | inline literal (semantic audit required) | 0 | uintptr_t user = 0; |
+| L07353 | src/mod/session2/server.cpp:1879:22 | server_host_field | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
+| L07354 | src/mod/session2/server.cpp:1885:43 | server_host_field | inline literal (semantic audit required) | 0x68 | const auto c68 = pj ? probe_ptr(*pj + 0x68) : std::nullopt; |
+| L07355 | src/mod/session2/server.cpp:1886:44 | server_host_field | inline literal (semantic audit required) | 0x1A0 | const auto ts = c68 ? probe_ptr(*c68 + 0x1A0) : std::nullopt; |
+| L07356 | src/mod/session2/server.cpp:1906:37 | server_barrier_read | inline literal (semantic audit required) | 0 | r.session_user = u.value_or(0); |
+| L07357 | src/mod/session2/server.cpp:1940:27 | server_barrier_read | inline literal (semantic audit required) | 0 | uintptr_t host_user = 0; |
+| L07358 | src/mod/session2/server.cpp:1967:103 | server_epoch_reached | inline literal (semantic audit required) | 0 | bool server_epoch_reached(uint32_t epoch) { return epoch < kEpochSlots && g_pb_queued[epoch].load() > 0; } |
+| L07359 | src/mod/session2/server.cpp:1977:21 | server_threads_park | inline literal (semantic audit required) | 0 | uintptr_t net = 0, arr = 0; |
+| L07360 | src/mod/session2/server.cpp:1977:30 | server_threads_park | inline literal (semantic audit required) | 0 | uintptr_t net = 0, arr = 0; |
+| L07361 | src/mod/session2/server.cpp:1978:18 | server_threads_park | inline literal (semantic audit required) | 0 | uint32_t n = 0; |
+| L07362 | src/mod/session2/server.cpp:1984:23 | peek | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < n && i < 16; ++i) { |
+| L07363 | src/mod/session2/server.cpp:1984:39 | peek | inline literal (semantic audit required) | 16 | for (uint32_t i = 0; i < n && i < 16; ++i) { |
+| L07364 | src/mod/session2/server.cpp:1985:24 | peek | inline literal (semantic audit required) | 0 | uint32_t tid = 0; |
+| L07365 | src/mod/session2/server.cpp:1986:26 | peek | inline literal (semantic audit required) | 0 | uintptr_t flag = 0; |
+| L07366 | src/mod/session2/server.cpp:1987:19 | peek | inline literal (semantic audit required) | 3 | uint8_t b[3] = {}; |
+| L07367 | src/mod/session2/server.cpp:1988:104 | peek | inline literal (semantic audit required) | 8 | if (!peek(arr + i * off::kServerThreadEntry, tid) &#124;&#124; !peek(arr + i * off::kServerThreadEntry + 8, flag) &#124;&#124; |
+| L07368 | src/mod/session2/server.cpp:1989:36 | peek | inline literal (semantic audit required) | 0 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
+| L07369 | src/mod/session2/server.cpp:1989:56 | peek | inline literal (semantic audit required) | 1 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
+| L07370 | src/mod/session2/server.cpp:1989:61 | peek | inline literal (semantic audit required) | 1 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
+| L07371 | src/mod/session2/server.cpp:1989:81 | peek | inline literal (semantic audit required) | 2 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
+| L07372 | src/mod/session2/server.cpp:1989:86 | peek | inline literal (semantic audit required) | 2 | !flag &#124;&#124; !peek(flag, b[0]) &#124;&#124; !peek(flag + 1, b[1]) &#124;&#124; !peek(flag + 2, b[2])) { |
+| L07373 | src/mod/session2/server.cpp:1993:47 | peek | inline literal (semantic audit required) | 0 | s += std::format(" T{}{}{}{}", tid, b[0] ? " PARK-ASKED" : "", b[1] ? " PARKED" : "", b[2] ? " busy" : " idle"); |
+| L07374 | src/mod/session2/server.cpp:1993:74 | peek | inline literal (semantic audit required) | 1 | s += std::format(" T{}{}{}{}", tid, b[0] ? " PARK-ASKED" : "", b[1] ? " PARKED" : "", b[2] ? " busy" : " idle"); |
+| L07375 | src/mod/session2/server.cpp:1993:97 | peek | inline literal (semantic audit required) | 2 | s += std::format(" T{}{}{}{}", tid, b[0] ? " PARK-ASKED" : "", b[1] ? " PARKED" : "", b[2] ? " busy" : " idle"); |
+| L07376 | src/mod/session2/server.cpp:2014:32 | load | inline literal (semantic audit required) | 0 | static uint32_t told = 0; |
+| L07377 | src/mod/session2/server.cpp:2026:28 | load | inline literal (semantic audit required) | 0 | g_q_size.store(0, std::memory_order_release); |
+| L07378 | src/mod/session2/server.cpp:2050:77 | load | inline literal (semantic audit required) | 0 | switch (g_pump_watch.update(now, g_pump_turns.load(), g_q_size.load() > 0)) { |
+| L07379 | src/mod/session2/server.cpp:2065:108 | load | inline literal (semantic audit required) | 5000 | if (const uint64_t full = g_held_full.load(); full != g_full_logged_count && now - g_full_logged_at >= 5000) { |
+| L07380 | src/mod/session2/server.cpp:2066:21 | load | inline literal (semantic audit required) | 0 | size_t kb = 0; |
+| L07381 | src/mod/session2/server.cpp:2069:33 | load | inline literal (semantic audit required) | 10 | kb = g_q.bytes() >> 10; |
+| L07382 | src/mod/session2/server.cpp:2079:63 | server_inject_halted | inline literal (semantic audit required) | 0 | bool server_inject_halted() { return g_halted_epoch.load() != 0; } |
+| L07383 | src/mod/session2/server.cpp:2089:19 | server_inject_describe | inline literal (semantic audit required) | 0 | size_t peak = 0; |
+| L07384 | src/mod/session2/server.cpp:2097:123 | server_inject_describe | inline literal (semantic audit required) | 0 | g_q_size.load(), peak, handed, g_pump_tid.load(), g_pump_turns.load(), handed ? g_pump_wait_sum.load() / handed : 0, |
+| L07385 | src/mod/session2/server.cpp:2114:75 | server_epoch_describe | inline literal (semantic audit required) | 0 | e < kEpochSlots ? g_pb_pushed[e].load() : 0, e < kEpochSlots ? g_pb_seen[e].load() : 0); |
+| L07386 | src/mod/session2/server.cpp:2114:118 | server_epoch_describe | inline literal (semantic audit required) | 0 | e < kEpochSlots ? g_pb_pushed[e].load() : 0, e < kEpochSlots ? g_pb_seen[e].load() : 0); |
+| L07387 | src/mod/session2/server.cpp:2134:58 | server_describe | inline literal (semantic audit required) | 0 | if (const int64_t slot = g_host_slot.load(); slot >= 0) s += std::format(" &#124; host save slot {}", slot); |
+| L07388 | src/mod/session2/server.cpp:2153:25 | load | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < g_hostkey_ops.size(); ++i) { |
+| L07389 | src/mod/session2/server.cpp:2161:29 | load | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < ops.size() && i < 8; ++i) s += std::format(" {}x{}", ops[i].second, ops[i].first); |
+| L07390 | src/mod/session2/server.cpp:2161:54 | load | inline literal (semantic audit required) | 8 | for (size_t i = 0; i < ops.size() && i < 8; ++i) s += std::format(" {}x{}", ops[i].second, ops[i].first); |
+| L07391 | src/mod/session2/server.cpp:2174:44 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_nonempty[0].load(), g_n.finder_calls[0].load(), g_n.finder_relayed[0].load(), |
+| L07392 | src/mod/session2/server.cpp:2174:72 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_nonempty[0].load(), g_n.finder_calls[0].load(), g_n.finder_relayed[0].load(), |
+| L07393 | src/mod/session2/server.cpp:2174:102 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_nonempty[0].load(), g_n.finder_calls[0].load(), g_n.finder_relayed[0].load(), |
+| L07394 | src/mod/session2/server.cpp:2175:42 | server_finder_describe | inline literal (semantic audit required) | 0 | g_n.finder_errors[0].load(), g_n.finder_nonempty[1].load(), g_n.finder_calls[1].load(), |
+| L07395 | src/mod/session2/server.cpp:2175:73 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_errors[0].load(), g_n.finder_nonempty[1].load(), g_n.finder_calls[1].load(), |
+| L07396 | src/mod/session2/server.cpp:2175:101 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_errors[0].load(), g_n.finder_nonempty[1].load(), g_n.finder_calls[1].load(), |
+| L07397 | src/mod/session2/server.cpp:2176:43 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_relayed[1].load(), g_n.finder_errors[1].load()); |
+| L07398 | src/mod/session2/server.cpp:2176:72 | server_finder_describe | inline literal (semantic audit required) | 1 | g_n.finder_relayed[1].load(), g_n.finder_errors[1].load()); |
+| L07399 | src/mod/session2/server.h:42:32 | (file scope) | inline literal (semantic audit required) | 1000 | uint32_t mirror_delay_ms = 1000; |
+| L07400 | src/mod/session2/server.h:45:24 | (file scope) | inline literal (semantic audit required) | 1 | uint64_t account = 1; |
+| L07401 | src/mod/session2/session2.cpp:73:34 | (file scope) | inline literal (semantic audit required) | 0 | std::atomic<uint8_t> g_rean_mode{0};  // P8 session 9 child_reannounce, host side (ran::Mode) |
+| L07402 | src/mod/session2/session2.cpp:83:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_hold_retry_at = 0; |
+| L07403 | src/mod/session2/session2.cpp:84:26 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_held_offers = 0, g_dropped_offers = 0, g_dropped_logged = 0; |
+| L07404 | src/mod/session2/session2.cpp:84:48 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_held_offers = 0, g_dropped_offers = 0, g_dropped_logged = 0; |
+| L07405 | src/mod/session2/session2.cpp:84:70 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_held_offers = 0, g_dropped_offers = 0, g_dropped_logged = 0; |
+| L07406 | src/mod/session2/session2.cpp:87:30 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_control_ms = 0; |
+| L07407 | src/mod/session2/session2.cpp:89:33 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_blocked_from_guest = 0; |
+| L07408 | src/mod/session2/session2.cpp:90:33 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_unknown_from_guest = 0; |
+| L07409 | src/mod/session2/session2.cpp:91:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_after_goodbye = 0;          // guest packets dropped after its logout (C4) |
+| L07410 | src/mod/session2/session2.cpp:92:33 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_link_down_since_ms = 0;     // C4: when the guest's connection went away (0 = connected) |
+| L07411 | src/mod/session2/session2.cpp:97:44 | (file scope) | inline literal (semantic audit required) | 10000 | GuestLifecycle g_lc{GuestLifecycle::Config{10000, 60000, 500, kMaxGuestEpochs}}; |
+| L07412 | src/mod/session2/session2.cpp:97:51 | (file scope) | inline literal (semantic audit required) | 60000 | GuestLifecycle g_lc{GuestLifecycle::Config{10000, 60000, 500, kMaxGuestEpochs}}; |
+| L07413 | src/mod/session2/session2.cpp:97:58 | (file scope) | inline literal (semantic audit required) | 500 | GuestLifecycle g_lc{GuestLifecycle::Config{10000, 60000, 500, kMaxGuestEpochs}}; |
+| L07414 | src/mod/session2/session2.cpp:102:21 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_now_ms = 0; |
+| L07415 | src/mod/session2/session2.cpp:103:30 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_link_epoch = 0; |
+| L07416 | src/mod/session2/session2.cpp:104:29 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_sample_ms = 0, g_last_barrier_ms = 0; |
+| L07417 | src/mod/session2/session2.cpp:104:52 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_last_sample_ms = 0, g_last_barrier_ms = 0; |
+| L07418 | src/mod/session2/session2.cpp:105:28 | (file scope) | inline literal (semantic audit required) | 0u | unsigned g_last_pattern = ~0u; |
+| L07419 | src/mod/session2/session2.cpp:107:27 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_not_admitted = 0;     // guest packets outside the current epoch's connection |
+| L07420 | src/mod/session2/session2.cpp:108:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_out_discarded = 0;    // server packets for a guest that is no longer there |
+| L07421 | src/mod/session2/session2.cpp:114:33 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_rejoin_started_for = 0;  // the guest conversation the current epoch was started for in-band (0 = none) |
+| L07422 | src/mod/session2/session2.cpp:115:32 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t g_rejoin_started_ms = 0;   // when (the network thread's clock): an unused grant is given up (rjl::grant_unused) |
+| L07423 | src/mod/session2/session2.cpp:116:28 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_unused = 0;       // epochs begun for a re-entry and never used |
+| L07424 | src/mod/session2/session2.cpp:117:24 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
+| L07425 | src/mod/session2/session2.cpp:117:42 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
+| L07426 | src/mod/session2/session2.cpp:117:64 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
+| L07427 | src/mod/session2/session2.cpp:117:85 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
+| L07428 | src/mod/session2/session2.cpp:117:105 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t c_rejoin_in = 0, c_rejoin_bad = 0, c_rejoin_started = 0, c_rejoin_repeat = 0, c_rejoin_probe = 0, |
+| L07429 | src/mod/session2/session2.cpp:118:29 | (file scope) | inline literal (semantic audit required) | 0 | c_rejoin_ignored = 0, c_rejoin_off = 0, c_epoch_out = 0; |
+| L07430 | src/mod/session2/session2.cpp:118:47 | (file scope) | inline literal (semantic audit required) | 0 | c_rejoin_ignored = 0, c_rejoin_off = 0, c_epoch_out = 0; |
+| L07431 | src/mod/session2/session2.cpp:118:64 | (file scope) | inline literal (semantic audit required) | 0 | c_rejoin_ignored = 0, c_rejoin_off = 0, c_epoch_out = 0; |
+| L07432 | src/mod/session2/session2.cpp:119:27 | (file scope) | inline literal (semantic audit required) | 0 | uint64_t g_rejoin_lines = 0; |
+| L07433 | src/mod/session2/session2.cpp:135:81 | push_epoch | inline literal (semantic audit required) | 0 | if (g_rejoin == rjl::Mode::Off &#124;&#124; (link.peer_caps() & troc::kCapsRejoin) == 0) return; |
+| L07434 | src/mod/session2/session2.cpp:164:30 | push_epoch | inline literal (semantic audit required) | 0 | uint64_t g_slow_tick_lines = 0; |
+| L07435 | src/mod/session2/session2.cpp:171:23 | probe_thread | inline literal (semantic audit required) | 1 | for (int minute = 1;; ++minute) { |
+| L07436 | src/mod/session2/session2.cpp:173:22 | probe_thread | inline literal (semantic audit required) | 0 | for (int i = 0; i < 6; ++i) { |
+| L07437 | src/mod/session2/session2.cpp:173:29 | probe_thread | inline literal (semantic audit required) | 6 | for (int i = 0; i < 6; ++i) { |
+| L07438 | src/mod/session2/session2.cpp:174:19 | probe_thread | inline literal (semantic audit required) | 10000 | Sleep(10000); |
+| L07439 | src/mod/session2/session2.cpp:238:22 | push_host_character | inline literal (semantic audit required) | 0 | uintptr_t host = 0; |
+| L07440 | src/mod/session2/session2.cpp:243:26 | push_host_character | inline literal (semantic audit required) | 28 | if (!key &#124;&#124; (*key >> 28) != hold::kCharKeyClass) return; |
+| L07441 | src/mod/session2/session2.cpp:245:21 | push_host_character | inline literal (semantic audit required) | 5 | const uint8_t p[5] = {troc::kControlHostCharacter, static_cast<uint8_t>(*key), static_cast<uint8_t>(*key >> 8), |
+| L07442 | src/mod/session2/session2.cpp:245:113 | push_host_character | inline literal (semantic audit required) | 8 | const uint8_t p[5] = {troc::kControlHostCharacter, static_cast<uint8_t>(*key), static_cast<uint8_t>(*key >> 8), |
+| L07443 | src/mod/session2/session2.cpp:246:56 | push_host_character | inline literal (semantic audit required) | 16 | static_cast<uint8_t>(*key >> 16), static_cast<uint8_t>(*key >> 24)}; |
+| L07444 | src/mod/session2/session2.cpp:246:90 | push_host_character | inline literal (semantic audit required) | 24 | static_cast<uint8_t>(*key >> 16), static_cast<uint8_t>(*key >> 24)}; |
+| L07445 | src/mod/session2/session2.cpp:247:49 | push_host_character | inline literal (semantic audit required) | 1 | link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(p, sizeof p))); |
+| L07446 | src/mod/session2/session2.cpp:278:22 | never_from_guest | inline literal (semantic audit required) | 2790 | return opcode == 2790 &#124;&#124; opcode == 2038 &#124;&#124; opcode == 2004 &#124;&#124; opcode == kOpSetFieldTimeReq &#124;&#124; |
+| L07447 | src/mod/session2/session2.cpp:278:40 | never_from_guest | inline literal (semantic audit required) | 2038 | return opcode == 2790 &#124;&#124; opcode == 2038 &#124;&#124; opcode == 2004 &#124;&#124; opcode == kOpSetFieldTimeReq &#124;&#124; |
+| L07448 | src/mod/session2/session2.cpp:278:58 | never_from_guest | inline literal (semantic audit required) | 2004 | return opcode == 2790 &#124;&#124; opcode == 2038 &#124;&#124; opcode == 2004 &#124;&#124; opcode == kOpSetFieldTimeReq &#124;&#124; |
+| L07449 | src/mod/session2/session2.cpp:279:23 | never_from_guest | inline literal (semantic audit required) | 1001 | (opcode >= 1001 && opcode <= 1008); |
+| L07450 | src/mod/session2/session2.cpp:279:41 | never_from_guest | inline literal (semantic audit required) | 1008 | (opcode >= 1001 && opcode <= 1008); |
+| L07451 | src/mod/session2/session2.cpp:285:30 | never_from_guest | inline literal (semantic audit required) | 0 | uint64_t g_weather_blocked = 0; |
+| L07452 | src/mod/session2/session2.cpp:287:31 | never_from_guest | inline literal (semantic audit required) | 0 | uint64_t g_own_save_blocked = 0, g_own_save_allowed = 0; |
+| L07453 | src/mod/session2/session2.cpp:287:55 | never_from_guest | inline literal (semantic audit required) | 0 | uint64_t g_own_save_blocked = 0, g_own_save_allowed = 0; |
+| L07454 | src/mod/session2/session2.cpp:326:36 | offer | inline literal (semantic audit required) | 0 | if (g_weather_blocked++ == 0) { |
+| L07455 | src/mod/session2/session2.cpp:355:36 | offer | inline literal (semantic audit required) | 8 | if (g_own_save_blocked++ < 8) { |
+| L07456 | src/mod/session2/session2.cpp:417:44 | offer | inline literal (semantic audit required) | 16 | if (g_own_save_allowed++ < 16) { |
+| L07457 | src/mod/session2/session2.cpp:436:36 | offer | inline literal (semantic audit required) | 16 | if (g_dropped_logged < 16) { |
+| L07458 | src/mod/session2/session2.cpp:490:23 | drain_held | inline literal (semantic audit required) | 0 | size_t released = 0; |
+| L07459 | src/mod/session2/session2.cpp:535:23 | begin_logout | inline literal (semantic audit required) | 0u | g_last_pattern = ~0u; |
+| L07460 | src/mod/session2/session2.cpp:536:25 | begin_logout | inline literal (semantic audit required) | 0 | g_last_barrier_ms = 0; |
+| L07461 | src/mod/session2/session2.cpp:553:61 | start_epoch | inline literal (semantic audit required) | 0 | void start_epoch(uint32_t link_epoch, uint32_t inband_for = 0) { |
+| L07462 | src/mod/session2/session2.cpp:554:42 | start_epoch | inline literal (semantic audit required) | 1 | const uint32_t next = g_lc.epoch() + 1; |
+| L07463 | src/mod/session2/session2.cpp:573:28 | start_epoch | inline literal (semantic audit required) | 0 | g_link_down_since_ms = 0; |
+| L07464 | src/mod/session2/session2.cpp:574:23 | start_epoch | inline literal (semantic audit required) | 0u | g_last_pattern = ~0u; |
+| L07465 | src/mod/session2/session2.cpp:617:41 | on_guest_rejoin | inline literal (semantic audit required) | 0 | if (g_rejoin_started_for == 0) { |
+| L07466 | src/mod/session2/session2.cpp:642:109 | on_guest_rejoin | inline literal (semantic audit required) | 1 | ? std::format("probe: would begin epoch {} in-band (nothing started)", epoch_before + 1) |
+| L07467 | src/mod/session2/session2.cpp:657:55 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_session / 1000.0, g_snap.keys.size(), r.us_keys / 1000.0, |
+| L07468 | src/mod/session2/session2.cpp:657:95 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_session / 1000.0, g_snap.keys.size(), r.us_keys / 1000.0, |
+| L07469 | src/mod/session2/session2.cpp:658:52 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_list / 1000.0, r.us_field / 1000.0); |
+| L07470 | src/mod/session2/session2.cpp:658:73 | barrier_tick | inline literal (semantic audit required) | 1000.0 | r.us_list / 1000.0, r.us_field / 1000.0); |
+| L07471 | src/mod/session2/session2.cpp:680:34 | barrier_tick | inline literal (semantic audit required) | 0ull | static uint64_t seen_last = ~0ull; |
+| L07472 | src/mod/session2/session2.cpp:681:38 | barrier_tick | inline literal (semantic audit required) | 0 | static uint32_t seen_change_ms = 0; |
+| L07473 | src/mod/session2/session2.cpp:695:68 | barrier_tick | inline literal (semantic audit required) | 0 | if (g_lc.make_ready(g_link ? g_link->session_epoch() : 0)) { |
+| L07474 | src/mod/session2/session2.cpp:696:111 | barrier_tick | inline literal (semantic audit required) | 1 | log::info("Session2 C4: reconnect epoch={} ready (a NEW guest connection starts it)", epoch + 1); |
+| L07475 | src/mod/session2/session2.cpp:734:32 | rjl::grant_unused | inline literal (semantic audit required) | 0 | g_rejoin_started_for = 0; |
+| L07476 | src/mod/session2/session2.cpp:738:61 | rjl::grant_unused | inline literal (semantic audit required) | 1000 | g_lc.epoch(), conv, rjl::kGrantUnusedMs / 1000); |
+| L07477 | src/mod/session2/session2.cpp:783:32 | rjl::grant_unused | inline literal (semantic audit required) | 0 | g_link_down_since_ms = 0; |
+| L07478 | src/mod/session2/session2.cpp:785:50 | rjl::grant_unused | inline literal (semantic audit required) | 1 | g_link_down_since_ms = now_ms ? now_ms : 1; |
+| L07479 | src/mod/session2/session2.cpp:788:83 | server_user2_present | inline literal (semantic audit required) | 1000 | kill_tunnel(std::format("the guest has been gone for {} s", kLinkLostMs / 1000)); |
+| L07480 | src/mod/session2/session2.cpp:808:59 | server_user2_present | inline literal (semantic audit required) | 1000 | if (link.connected() && now_ms - g_last_control_ms >= 1000) { |
+| L07481 | src/mod/session2/session2.cpp:816:37 | server_user2_present | inline literal (semantic audit required) | 0 | : 0; |
+| L07482 | src/mod/session2/session2.cpp:817:64 | server_user2_present | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
+| L07483 | src/mod/session2/session2.cpp:817:100 | server_user2_present | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
+| L07484 | src/mod/session2/session2.cpp:830:41 | end_tick | inline literal (semantic audit required) | 1000 | if (g_prof.part_us(kPartBarrier) >= 1000 && !g_last_barrier_reads.empty()) { |
+| L07485 | src/mod/session2/session2.cpp:833:43 | end_tick | inline literal (semantic audit required) | 1000 | if (g_prof.part_us(kPartLinkFlush) >= 1000 &#124;&#124; g_prof.part_us(kPartOutgoing) >= 1000) { |
+| L07486 | src/mod/session2/session2.cpp:833:84 | end_tick | inline literal (semantic audit required) | 1000 | if (g_prof.part_us(kPartLinkFlush) >= 1000 &#124;&#124; g_prof.part_us(kPartOutgoing) >= 1000) { |
+| L07487 | src/mod/session2/session2.cpp:1002:63 | install | inline literal (semantic audit required) | 0 | child_hold_set_settle_ms(opt.create_session ? settle_ms : 0); |
+| L07488 | src/mod/session2/session2.cpp:1008:24 | install | inline literal (semantic audit required) | 0 | uint8_t mode = 0; |
+| L07489 | src/mod/session2/session2.cpp:1022:31 | install | inline literal (semantic audit required) | 2 | mode >= 2 ? "ON" : "PROBE", |
+| L07490 | src/mod/session2/session2.cpp:1023:31 | install | inline literal (semantic audit required) | 2 | mode >= 2 ? "is withheld from user 2 even with restore 1 and announced natively after its 2762" |
+| L07491 | src/mod/session2/session2.cpp:1025:54 | install | inline literal (semantic audit required) | 2 | hold::kLoadDeferMaxMs, mode >= 2 ? "" : " only with 1"); |
+| L07492 | src/mod/session2/session2.cpp:1035:24 | install | inline literal (semantic audit required) | 0 | uint8_t mode = 0; |
+| L07493 | src/mod/session2/session2.cpp:1053:36 | install | inline literal (semantic audit required) | 2 | key, mode >= 2 ? "ON" : "PROBE", hold::kComponentsHierarchy, hold::kHierParent, |
+| L07494 | src/mod/session2/session2.cpp:1054:31 | install | inline literal (semantic audit required) | 2 | mode >= 2 ? "is withheld there too and announced right behind its parent (in its release, or " |
+| L07495 | src/mod/session2/session2.cpp:1069:24 | install | inline literal (semantic audit required) | 0 | uint8_t mode = 0; |
+| L07496 | src/mod/session2/session2.cpp:1176:73 | child_hold_install | inline literal (semantic audit required) | 1 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
+| L07497 | src/mod/session2/session2.cpp:1176:77 | child_hold_install | inline literal (semantic audit required) | 0 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
+| L07498 | src/mod/session2/session2.cpp:1176:112 | child_hold_install | inline literal (semantic audit required) | 1 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
+| L07499 | src/mod/session2/session2.cpp:1176:116 | child_hold_install | inline literal (semantic audit required) | 0 | oms::mode_name(milestone), lc.s2_observer_milestone ? 1 : 0, lc.s2_observer_milestone_send ? 1 : 0, |
+| L07500 | src/mod/session2/session2.cpp:1258:77 | child_hold_install | inline literal (semantic audit required) | 2 | observer_seq_copy_set_milestone_hold(child_hold_load_defer() >= 2 && observer_hold_active() ? 2000 : 0); |
+| L07501 | src/mod/session2/session2.cpp:1258:107 | child_hold_install | inline literal (semantic audit required) | 2000 | observer_seq_copy_set_milestone_hold(child_hold_load_defer() >= 2 && observer_hold_active() ? 2000 : 0); |
+| L07502 | src/mod/session2/session2.cpp:1258:114 | child_hold_install | inline literal (semantic audit required) | 0 | observer_seq_copy_set_milestone_hold(child_hold_load_defer() >= 2 && observer_hold_active() ? 2000 : 0); |
+| L07503 | src/mod/session2/session2.cpp:1293:48 | child_hold_install | inline literal (semantic audit required) | 1 | observer_stage_install(oss ? oss : 1); |
+| L07504 | src/mod/session2/session2.cpp:1318:54 | child_hold_install | inline literal (semantic audit required) | 1 | ran::kMaxAttempts, ran::backoff_ms(1), ran::backoff_ms(2), ran::backoff_ms(3), |
+| L07505 | src/mod/session2/session2.cpp:1318:74 | child_hold_install | inline literal (semantic audit required) | 2 | ran::kMaxAttempts, ran::backoff_ms(1), ran::backoff_ms(2), ran::backoff_ms(3), |
+| L07506 | src/mod/session2/session2.cpp:1318:94 | child_hold_install | inline literal (semantic audit required) | 3 | ran::kMaxAttempts, ran::backoff_ms(1), ran::backoff_ms(2), ran::backoff_ms(3), |
+| L07507 | src/mod/session2/session2.cpp:1411:54 | child_hold_install | inline literal (semantic audit required) | 0 | if (opt.probe) CloseHandle(CreateThread(nullptr, 0, probe_thread, nullptr, 0, nullptr)); |
+| L07508 | src/mod/session2/session2.cpp:1411:80 | child_hold_install | inline literal (semantic audit required) | 0 | if (opt.probe) CloseHandle(CreateThread(nullptr, 0, probe_thread, nullptr, 0, nullptr)); |
+| L07509 | src/mod/session2/session2.cpp:1421:45 | child_hold_install | inline literal (semantic audit required) | 1000 | g_lc.config().budget_ms / 1000, kMaxGuestEpochs); |
+| L07510 | src/mod/session2/session2.cpp:1465:15 | tunnel_wanted | inline literal (semantic audit required) | 32 | ran::Attempts<32> g_rean_host; |
+| L07511 | src/mod/session2/session2.cpp:1466:25 | tunnel_wanted | inline literal (semantic audit required) | 0 | uint32_t g_rean_epoch = 0; |
+| L07512 | src/mod/session2/session2.cpp:1467:33 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
+| L07513 | src/mod/session2/session2.cpp:1467:48 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
+| L07514 | src/mod/session2/session2.cpp:1467:65 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
+| L07515 | src/mod/session2/session2.cpp:1467:85 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
+| L07516 | src/mod/session2/session2.cpp:1467:102 | tunnel_wanted | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> c_rean_in{0}, c_rean_bad{0}, c_rean_other{0}, c_rean_accepted{0}, c_rean_probe{0}; |
+| L07517 | src/mod/session2/session2.cpp:1469:37 | tunnel_wanted | inline literal (semantic audit required) | 8 | std::atomic<uint64_t> c_rean_result[8] = {}; |
+| L07518 | src/mod/session2/session2.cpp:1470:25 | tunnel_wanted | inline literal (semantic audit required) | 0 | uint64_t g_rean_lines = 0; |
+| L07519 | src/mod/session2/session2.cpp:1476:25 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_in.fetch_add(1, std::memory_order_relaxed); |
+| L07520 | src/mod/session2/session2.cpp:1480:30 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_bad.fetch_add(1, std::memory_order_relaxed); |
+| L07521 | src/mod/session2/session2.cpp:1491:27 | on_guest_control | inline literal (semantic audit required) | 0 | uint8_t attempt = 0; |
+| L07522 | src/mod/session2/session2.cpp:1494:64 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_verdict[static_cast<size_t>(verdict)].fetch_add(1, std::memory_order_relaxed); |
+| L07523 | src/mod/session2/session2.cpp:1502:54 | on_guest_control | inline literal (semantic audit required) | 7 | c_rean_result[static_cast<size_t>(res) & 7].fetch_add(1, std::memory_order_relaxed); |
+| L07524 | src/mod/session2/session2.cpp:1502:67 | on_guest_control | inline literal (semantic audit required) | 1 | c_rean_result[static_cast<size_t>(res) & 7].fetch_add(1, std::memory_order_relaxed); |
+| L07525 | src/mod/session2/session2.cpp:1505:68 | on_guest_control | inline literal (semantic audit required) | 1 | (probe ? c_rean_probe : c_rean_accepted).fetch_add(1, std::memory_order_relaxed); |
+| L07526 | src/mod/session2/session2.cpp:1526:21 | reannounce_host_describe | inline literal (semantic audit required) | 0 | for (size_t i = 0; i <= static_cast<size_t>(Reannounce::Full); ++i) { |
+| L07527 | src/mod/session2/session2.cpp:1556:77 | tunnel_on_packet | inline literal (semantic audit required) | 2 | const bool control = g_rejoin != rjl::Mode::Off && packet.size() >= 2 && |
+| L07528 | src/mod/session2/session2.cpp:1557:38 | tunnel_on_packet | inline literal (semantic audit required) | 0 | (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode; |
+| L07529 | src/mod/session2/session2.cpp:1557:51 | tunnel_on_packet | inline literal (semantic audit required) | 1 | (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode; |
+| L07530 | src/mod/session2/session2.cpp:1557:57 | tunnel_on_packet | inline literal (semantic audit required) | 8 | (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode; |
+| L07531 | src/mod/session2/session2.cpp:1586:26 | tunnel_on_packet | inline literal (semantic audit required) | 2 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
+| L07532 | src/mod/session2/session2.cpp:1586:39 | tunnel_on_packet | inline literal (semantic audit required) | 0 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
+| L07533 | src/mod/session2/session2.cpp:1586:52 | tunnel_on_packet | inline literal (semantic audit required) | 1 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
+| L07534 | src/mod/session2/session2.cpp:1586:58 | tunnel_on_packet | inline literal (semantic audit required) | 8 | if (packet.size() >= 2 && (packet[0] &#124; (packet[1] << 8)) == troc::kControlOpcode) { |
+| L07535 | src/mod/session2/session2.cpp:1587:32 | tunnel_on_packet | inline literal (semantic audit required) | 1 | c_rean_other.fetch_add(1, std::memory_order_relaxed); |
+| L07536 | src/mod/session2/session2.cpp:1590:83 | tunnel_on_packet | inline literal (semantic audit required) | 0 | if (g_early.empty() && server_accepts_guest()) mount_sync_note_hold(true, 0); |
+| L07537 | src/mod/session2/session2.cpp:1609:40 | tunnel_tick | inline literal (semantic audit required) | 0 | static uint32_t last_rean_ms = 0; |
+| L07538 | src/mod/session2/session2.cpp:1610:38 | tunnel_tick | inline literal (semantic audit required) | 60000 | if (now_ms - last_rean_ms >= 60000) { |
+| L07539 | src/mod/session2/session2.cpp:1637:32 | tunnel_tick | inline literal (semantic audit required) | 0 | g_link_down_since_ms = 0; |
+| L07540 | src/mod/session2/session2.cpp:1639:50 | tunnel_tick | inline literal (semantic audit required) | 1 | g_link_down_since_ms = now_ms ? now_ms : 1; |
+| L07541 | src/mod/session2/session2.cpp:1641:83 | tunnel_tick | inline literal (semantic audit required) | 1000 | kill_tunnel(std::format("the guest has been gone for {} s", kLinkLostMs / 1000)); |
+| L07542 | src/mod/session2/session2.cpp:1655:59 | tunnel_tick | inline literal (semantic audit required) | 1000 | if (link.connected() && now_ms - g_last_control_ms >= 1000) { |
+| L07543 | src/mod/session2/session2.cpp:1659:58 | tunnel_tick | inline literal (semantic audit required) | 0 | : 0; |
+| L07544 | src/mod/session2/session2.cpp:1660:64 | tunnel_tick | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
+| L07545 | src/mod/session2/session2.cpp:1660:100 | tunnel_tick | inline literal (semantic audit required) | 1 | if (state) link.push(troc::make(troc::kControlOpcode, -1, std::span<const uint8_t>(&state, 1))); |
+| L07546 | src/mod/session2/session2.h:32:24 | (file scope) | inline literal (semantic audit required) | 1 | uint64_t account = 1; |
+| L07547 | src/mod/session2/session2.h:34:32 | (file scope) | inline literal (semantic audit required) | 1000 | uint32_t mirror_delay_ms = 1000; |
+| L07548 | src/mod/session2/slot_refresh.cpp:14:17 | Planner::arm | inline literal (semantic audit required) | 0 | attempts_ = 0; |
+| L07549 | src/mod/session2/slot_refresh.cpp:17:33 | Planner::arm | inline literal (semantic audit required) | 0 | if (limits_.max_attempts == 0) limits_.max_attempts = 1; |
+| L07550 | src/mod/session2/slot_refresh.cpp:17:59 | Planner::arm | inline literal (semantic audit required) | 1 | if (limits_.max_attempts == 0) limits_.max_attempts = 1; |
+| L07551 | src/mod/session2/slot_refresh.cpp:48:23 | parse_entries | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < count && i < kMaxEntriesRead; ++i) { |
+| L07552 | src/mod/session2/slot_refresh.cpp:50:18 | parse_entries | inline literal (semantic audit required) | 16 | if (at + 16 > raw.size()) break; |
+| L07553 | src/mod/session2/slot_refresh.cpp:53:48 | parse_entries | inline literal (semantic audit required) | 8 | std::memcpy(&e.time, raw.data() + at + 8, sizeof e.time); |
+| L07554 | src/mod/session2/slot_refresh.cpp:61:22 | title_would_enable | inline literal (semantic audit required) | 3 | if (e.slot < 3 &#124;&#124; e.slot - 100u < 9u) return true; |
+| L07555 | src/mod/session2/slot_refresh.cpp:61:36 | title_would_enable | inline literal (semantic audit required) | 100u | if (e.slot < 3 &#124;&#124; e.slot - 100u < 9u) return true; |
+| L07556 | src/mod/session2/slot_refresh.cpp:61:43 | title_would_enable | inline literal (semantic audit required) | 9u | if (e.slot < 3 &#124;&#124; e.slot - 100u < 9u) return true; |
+| L07557 | src/mod/session2/slot_refresh.cpp:68:21 | describe | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < entries.size(); ++i) { |
+| L07558 | src/mod/session2/slot_refresh.cpp:75:50 | first_mismatch | inline literal (semantic audit required) | 0 | if (actual.size() != expected.size()) return 0; |
+| L07559 | src/mod/session2/slot_refresh.cpp:76:21 | first_mismatch | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < actual.size(); ++i) { |
+| L07560 | src/mod/session2/slot_refresh.cpp:79:13 | first_mismatch | inline literal (semantic audit required) | 1 | return -1; |
+| L07561 | src/mod/session2/slot_refresh.h:37:28 | (file scope) | inline literal (semantic audit required) | 100 | uint32_t interval_ms = 100;   // between tries (the pump turns every <= 16 ms) |
+| L07562 | src/mod/session2/slot_refresh.h:38:29 | (file scope) | inline literal (semantic audit required) | 50 | uint32_t max_attempts = 50;   // ~5 s of NotReady/Busy |
+| L07563 | src/mod/session2/slot_refresh.h:65:21 | done_count | inline literal (semantic audit required) | 0 | uint64_t key_ = 0, next_ms_ = 0; |
+| L07564 | src/mod/session2/slot_refresh.h:65:35 | done_count | inline literal (semantic audit required) | 0 | uint64_t key_ = 0, next_ms_ = 0; |
+| L07565 | src/mod/session2/slot_refresh.h:66:26 | done_count | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, done_ = 0; |
+| L07566 | src/mod/session2/slot_refresh.h:66:37 | done_count | inline literal (semantic audit required) | 0 | uint32_t attempts_ = 0, done_ = 0; |
+| L07567 | src/mod/session2/slot_refresh.h:72:21 | done_count | inline literal (semantic audit required) | 0 | uint32_t slot = 0; |
+| L07568 | src/mod/session2/slot_refresh.h:73:20 | done_count | inline literal (semantic audit required) | 0 | int64_t time = 0; |
+| L07569 | src/mod/session2/travel_probe.h:42:19 | (file scope) | inline literal (semantic audit required) | 0 | size_t size = 0; |
+| L07570 | src/mod/session2/travel_probe.h:43:27 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
+| L07571 | src/mod/session2/travel_probe.h:43:41 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
+| L07572 | src/mod/session2/travel_probe.h:43:52 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
+| L07573 | src/mod/session2/travel_probe.h:43:67 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0, char_key = 0, owner = 0, host_user = 0; |
+| L07574 | src/mod/session2/travel_probe_logic.h:48:100 | owner_layout_ok | inline literal (semantic audit required) | 0 | if (opcode == kOpMoveFieldAck) return n >= kMoveFieldHead && (n - kMoveFieldHead) % kRecord == 0; |
+| L07575 | src/mod/session2/travel_probe_logic.h:49:113 | owner_layout_ok | inline literal (semantic audit required) | 0 | if (opcode == kOpLoadingFieldDataAck) return n >= kLoadingFieldHead && (n - kLoadingFieldHead) % kRecord == 0; |
+| L07576 | src/mod/session2/travel_probe_logic.h:53:52 | is_user_key | inline literal (semantic audit required) | 28 | inline bool is_user_key(uint32_t k) { return (k >> 28) == 0x9; } |
+| L07577 | src/mod/session2/travel_probe_logic.h:53:59 | is_user_key | inline literal (semantic audit required) | 0x9 | inline bool is_user_key(uint32_t k) { return (k >> 28) == 0x9; } |
+| L07578 | src/mod/session2/travel_probe_logic.h:67:23 | is_user_key | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
+| L07579 | src/mod/session2/travel_probe_logic.h:68:27 | is_user_key | inline literal (semantic audit required) | 0 | size_t payload_size = 0; |
+| L07580 | src/mod/session2/travel_probe_logic.h:69:22 | is_user_key | inline literal (semantic audit required) | 0 | uint32_t owner = 0;       // the u32 +9 the server wrote |
+| L07581 | src/mod/session2/travel_probe_logic.h:70:19 | is_user_key | inline literal (semantic audit required) | 0 | uint32_t me = 0;          // user 2's user key (its MainUserDataStartAck), 0 = unknown |
+| L07582 | src/mod/session2/travel_probe_logic.h:102:33 | alias_name | inline literal (semantic audit required) | 0 | if (owner_out) *owner_out = 0; |
+| L07583 | src/mod/session2/travel_probe_logic.h:110:67 | alias_name | inline literal (semantic audit required) | 4 | std::memcpy(&in.owner, packet.data() + header + kOwnerAt, 4); |
+| L07584 | src/mod/session2/travel_probe_logic.h:114:85 | alias_name | inline literal (semantic audit required) | 4 | if (o == AliasOut::Rewrite) std::memcpy(packet.data() + header + kOwnerAt, &me, 4); |
+| L07585 | src/mod/session2/travel_probe_logic.h:121:20 | alias_name | inline literal (semantic audit required) | 0 | uint8_t kind = 0;        // @0 (0x299B689 writes 4 on this path) |
+| L07586 | src/mod/session2/travel_probe_logic.h:122:22 | alias_name | inline literal (semantic audit required) | 0 | uint32_t actor = 0;      // @1 |
+| L07587 | src/mod/session2/travel_probe_logic.h:123:26 | alias_name | inline literal (semantic audit required) | 0 | uint32_t field_key = 0;  // @5 |
+| L07588 | src/mod/session2/travel_probe_logic.h:124:22 | alias_name | inline literal (semantic audit required) | 0 | uint32_t owner = 0;      // @9 |
+| L07589 | src/mod/session2/travel_probe_logic.h:125:22 | alias_name | inline literal (semantic audit required) | 0 | uint8_t flag13 = 0, flag14 = 0; |
+| L07590 | src/mod/session2/travel_probe_logic.h:125:34 | alias_name | inline literal (semantic audit required) | 0 | uint8_t flag13 = 0, flag14 = 0; |
+| L07591 | src/mod/session2/travel_probe_logic.h:126:26 | alias_name | inline literal (semantic audit required) | 0 | uint32_t selection = 0;  // @15 |
+| L07592 | src/mod/session2/travel_probe_logic.h:127:22 | alias_name | inline literal (semantic audit required) | 0 | uint8_t append = 0;      // @19 (0: the client's 0x9404C60 replaces P+0x128/+0x12C/+0x130 and the list) |
+| L07593 | src/mod/session2/travel_probe_logic.h:128:22 | alias_name | inline literal (semantic audit required) | 0 | size_t records = 0;      // 48-byte records from +20 |
+| L07594 | src/mod/session2/travel_probe_logic.h:135:16 | parse_loading_field_data | inline literal (semantic audit required) | 0 | d.kind = p[0]; |
+| L07595 | src/mod/session2/travel_probe_logic.h:136:38 | parse_loading_field_data | inline literal (semantic audit required) | 1 | std::memcpy(&d.actor, p.data() + 1, 4); |
+| L07596 | src/mod/session2/travel_probe_logic.h:136:41 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.actor, p.data() + 1, 4); |
+| L07597 | src/mod/session2/travel_probe_logic.h:137:42 | parse_loading_field_data | inline literal (semantic audit required) | 5 | std::memcpy(&d.field_key, p.data() + 5, 4); |
+| L07598 | src/mod/session2/travel_probe_logic.h:137:45 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.field_key, p.data() + 5, 4); |
+| L07599 | src/mod/session2/travel_probe_logic.h:138:38 | parse_loading_field_data | inline literal (semantic audit required) | 9 | std::memcpy(&d.owner, p.data() + 9, 4); |
+| L07600 | src/mod/session2/travel_probe_logic.h:138:41 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.owner, p.data() + 9, 4); |
+| L07601 | src/mod/session2/travel_probe_logic.h:139:18 | parse_loading_field_data | inline literal (semantic audit required) | 13 | d.flag13 = p[13]; |
+| L07602 | src/mod/session2/travel_probe_logic.h:140:18 | parse_loading_field_data | inline literal (semantic audit required) | 14 | d.flag14 = p[14]; |
+| L07603 | src/mod/session2/travel_probe_logic.h:141:42 | parse_loading_field_data | inline literal (semantic audit required) | 15 | std::memcpy(&d.selection, p.data() + 15, 4); |
+| L07604 | src/mod/session2/travel_probe_logic.h:141:46 | parse_loading_field_data | inline literal (semantic audit required) | 4 | std::memcpy(&d.selection, p.data() + 15, 4); |
+| L07605 | src/mod/session2/travel_probe_logic.h:142:18 | parse_loading_field_data | inline literal (semantic audit required) | 19 | d.append = p[19]; |
+| L07606 | src/mod/session2/travel_probe_logic.h:153:22 | parse_loading_field_data | inline literal (semantic audit required) | 0 | uint32_t actor = 0; |
+| L07607 | src/mod/session2/travel_probe_logic.h:154:22 | parse_loading_field_data | inline literal (semantic audit required) | 0 | uint8_t reason = 0; |
+| L07608 | src/mod/session2/travel_probe_logic.h:155:22 | parse_loading_field_data | inline literal (semantic audit required) | 0 | uint32_t error = 0; |
+| L07609 | src/mod/session2/travel_probe_logic.h:160:20 | parse_logout | inline literal (semantic audit required) | 9 | if (p.size() < 9) return std::nullopt; |
+| L07610 | src/mod/session2/travel_probe_logic.h:162:37 | parse_logout | inline literal (semantic audit required) | 4 | std::memcpy(&l.actor, p.data(), 4); |
+| L07611 | src/mod/session2/travel_probe_logic.h:163:18 | parse_logout | inline literal (semantic audit required) | 4 | l.reason = p[4]; |
+| L07612 | src/mod/session2/travel_probe_logic.h:164:38 | parse_logout | inline literal (semantic audit required) | 5 | std::memcpy(&l.error, p.data() + 5, 4); |
+| L07613 | src/mod/session2/travel_probe_logic.h:164:41 | parse_logout | inline literal (semantic audit required) | 4 | std::memcpy(&l.error, p.data() + 5, 4); |
+| L07614 | src/mod/session2/travel_probe_logic.h:175:24 | parse_logout | inline literal (semantic audit required) | 0 | uint32_t pending = 0; |
+| L07615 | src/mod/session2/travel_probe_logic.h:176:20 | parse_logout | inline literal (semantic audit required) | 0 | uint8_t f568 = 0, f569 = 0, armed = 0; |
+| L07616 | src/mod/session2/travel_probe_logic.h:176:30 | parse_logout | inline literal (semantic audit required) | 0 | uint8_t f568 = 0, f569 = 0, armed = 0; |
+| L07617 | src/mod/session2/travel_probe_logic.h:176:41 | parse_logout | inline literal (semantic audit required) | 0 | uint8_t f568 = 0, f569 = 0, armed = 0; |
+| L07618 | src/mod/session2/travel_probe_logic.h:180:23 | pack | inline literal (semantic audit required) | 0 | if (!s.ok) return 0; |
+| L07619 | src/mod/session2/travel_probe_logic.h:181:13 | pack | inline literal (semantic audit required) | 1ull | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
+| L07620 | src/mod/session2/travel_probe_logic.h:181:21 | pack | inline literal (semantic audit required) | 63 | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
+| L07621 | src/mod/session2/travel_probe_logic.h:181:61 | pack | inline literal (semantic audit required) | 48 | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
+| L07622 | src/mod/session2/travel_probe_logic.h:181:101 | pack | inline literal (semantic audit required) | 40 | return (1ull << 63) &#124; (static_cast<uint64_t>(s.f569) << 48) &#124; (static_cast<uint64_t>(s.f568) << 40) &#124; |
+| L07623 | src/mod/session2/travel_probe_logic.h:182:47 | pack | inline literal (semantic audit required) | 32 | (static_cast<uint64_t>(s.armed) << 32) &#124; s.pending; |
+| L07624 | src/mod/session2/travel_probe_logic.h:187:18 | unpack | inline literal (semantic audit required) | 63 | s.ok = (v >> 63) != 0; |
+| L07625 | src/mod/session2/travel_probe_logic.h:187:25 | unpack | inline literal (semantic audit required) | 0 | s.ok = (v >> 63) != 0; |
+| L07626 | src/mod/session2/travel_probe_logic.h:190:41 | unpack | inline literal (semantic audit required) | 32 | s.armed = static_cast<uint8_t>(v >> 32); |
+| L07627 | src/mod/session2/travel_probe_logic.h:191:40 | unpack | inline literal (semantic audit required) | 40 | s.f568 = static_cast<uint8_t>(v >> 40); |
+| L07628 | src/mod/session2/travel_probe_logic.h:192:40 | unpack | inline literal (semantic audit required) | 48 | s.f569 = static_cast<uint8_t>(v >> 48); |
+| L07629 | src/mod/session2/travel_probe_logic.h:211:31 | same | inline literal (semantic audit required) | 0 | uint8_t host_6a0_before = 0, host_6a0_after = 0; |
+| L07630 | src/mod/session2/travel_probe_logic.h:211:51 | same | inline literal (semantic audit required) | 0 | uint8_t host_6a0_before = 0, host_6a0_after = 0; |
+| L07631 | src/mod/session2/travel_probe_logic.h:219:35 | decide_prepared | inline literal (semantic audit required) | 0 | return in.u2_after.pending != 0 && in.u2_after.armed != 0 ? PreparedOut::Prepared : PreparedOut::NotPrepared; |
+| L07632 | src/mod/session2/travel_probe_logic.h:219:61 | decide_prepared | inline literal (semantic audit required) | 0 | return in.u2_after.pending != 0 && in.u2_after.armed != 0 ? PreparedOut::Prepared : PreparedOut::NotPrepared; |
+| L07633 | src/mod/session2/travel_probe_logic.h:298:22 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
+| L07634 | src/mod/session2/travel_probe_logic.h:298:33 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
+| L07635 | src/mod/session2/travel_probe_logic.h:298:44 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
+| L07636 | src/mod/session2/travel_probe_logic.h:298:55 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
+| L07637 | src/mod/session2/travel_probe_logic.h:298:66 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
+| L07638 | src/mod/session2/travel_probe_logic.h:298:77 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
+| L07639 | src/mod/session2/travel_probe_logic.h:298:86 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2174 = 0, n2643 = 0, n3066 = 0, n2144 = 0, n2762 = 0, n2679 = 0, nak = 0; |
+| L07640 | src/mod/session2/travel_probe_logic.h:299:22 | always_noted | inline literal (semantic audit required) | 0 | uint32_t n2322 = 0;  // P8 S16: PlayAllPreLoadSequencerAck 2322 to user 2 (native or observer_milestone_reload's) |
+| L07641 | src/mod/session2/travel_probe_logic.h:331:23 | add | inline literal (semantic audit required) | 0 | uint64_t t_2873 = 0;   // when (the sniffer's clock: p8_now_us) |
+| L07642 | src/mod/session2/travel_probe_logic.h:332:22 | add | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
+| L07643 | src/mod/session2/travel_probe_logic.h:332:33 | add | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
+| L07644 | src/mod/session2/travel_probe_logic.h:332:44 | add | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
+| L07645 | src/mod/session2/travel_probe_logic.h:333:28 | add | inline literal (semantic audit required) | 0 | uint64_t t_host_2873 = 0;  // the host client's own last 2873 (C>S), any time |
+| L07646 | src/mod/session2/travel_probe_logic.h:339:33 | open | inline literal (semantic audit required) | 0 | n2661 = n2981 = n2322 = 0; |
+| L07647 | src/mod/session2/travel_probe_logic.h:385:44 | pack | inline literal (semantic audit required) | 0xFFFF | return static_cast<uint64_t>(b.n2661 & 0xFFFF) &#124; static_cast<uint64_t>(b.n2981 & 0xFFFF) << 16 &#124; |
+| L07648 | src/mod/session2/travel_probe_logic.h:385:86 | pack | inline literal (semantic audit required) | 0xFFFF | return static_cast<uint64_t>(b.n2661 & 0xFFFF) &#124; static_cast<uint64_t>(b.n2981 & 0xFFFF) << 16 &#124; |
+| L07649 | src/mod/session2/travel_probe_logic.h:385:97 | pack | inline literal (semantic audit required) | 16 | return static_cast<uint64_t>(b.n2661 & 0xFFFF) &#124; static_cast<uint64_t>(b.n2981 & 0xFFFF) << 16 &#124; |
+| L07650 | src/mod/session2/travel_probe_logic.h:386:44 | pack | inline literal (semantic audit required) | 0xFFFF | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
+| L07651 | src/mod/session2/travel_probe_logic.h:386:55 | pack | inline literal (semantic audit required) | 32 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
+| L07652 | src/mod/session2/travel_probe_logic.h:386:92 | pack | inline literal (semantic audit required) | 1 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
+| L07653 | src/mod/session2/travel_probe_logic.h:386:96 | pack | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
+| L07654 | src/mod/session2/travel_probe_logic.h:386:102 | pack | inline literal (semantic audit required) | 48 | static_cast<uint64_t>(b.n2322 & 0xFFFF) << 32 &#124; static_cast<uint64_t>(b.armed ? 1 : 0) << 48 &#124; |
+| L07655 | src/mod/session2/travel_probe_logic.h:387:45 | pack | inline literal (semantic audit required) | 1 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
+| L07656 | src/mod/session2/travel_probe_logic.h:387:49 | pack | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
+| L07657 | src/mod/session2/travel_probe_logic.h:387:55 | pack | inline literal (semantic audit required) | 49 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
+| L07658 | src/mod/session2/travel_probe_logic.h:387:97 | pack | inline literal (semantic audit required) | 1 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
+| L07659 | src/mod/session2/travel_probe_logic.h:387:101 | pack | inline literal (semantic audit required) | 0 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
+| L07660 | src/mod/session2/travel_probe_logic.h:387:107 | pack | inline literal (semantic audit required) | 50 | static_cast<uint64_t>(b.handed ? 1 : 0) << 49 &#124; static_cast<uint64_t>(b.host_own() ? 1 : 0) << 50; |
+| L07661 | src/mod/session2/travel_probe_logic.h:391:22 | pack | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
+| L07662 | src/mod/session2/travel_probe_logic.h:391:33 | pack | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
+| L07663 | src/mod/session2/travel_probe_logic.h:391:44 | pack | inline literal (semantic audit required) | 0 | uint32_t n2661 = 0, n2981 = 0, n2322 = 0; |
+| L07664 | src/mod/session2/travel_probe_logic.h:398:41 | unpack_host | inline literal (semantic audit required) | 0xFFFF | h.n2661 = static_cast<uint32_t>(v & 0xFFFF); |
+| L07665 | src/mod/session2/travel_probe_logic.h:399:43 | unpack_host | inline literal (semantic audit required) | 16 | h.n2981 = static_cast<uint32_t>((v >> 16) & 0xFFFF); |
+| L07666 | src/mod/session2/travel_probe_logic.h:399:49 | unpack_host | inline literal (semantic audit required) | 0xFFFF | h.n2981 = static_cast<uint32_t>((v >> 16) & 0xFFFF); |
+| L07667 | src/mod/session2/travel_probe_logic.h:400:43 | unpack_host | inline literal (semantic audit required) | 32 | h.n2322 = static_cast<uint32_t>((v >> 32) & 0xFFFF); |
+| L07668 | src/mod/session2/travel_probe_logic.h:400:49 | unpack_host | inline literal (semantic audit required) | 0xFFFF | h.n2322 = static_cast<uint32_t>((v >> 32) & 0xFFFF); |
+| L07669 | src/mod/session2/travel_probe_logic.h:401:21 | unpack_host | inline literal (semantic audit required) | 48 | h.armed = (v >> 48) & 1; |
+| L07670 | src/mod/session2/travel_probe_logic.h:401:27 | unpack_host | inline literal (semantic audit required) | 1 | h.armed = (v >> 48) & 1; |
+| L07671 | src/mod/session2/travel_probe_logic.h:402:22 | unpack_host | inline literal (semantic audit required) | 49 | h.handed = (v >> 49) & 1; |
+| L07672 | src/mod/session2/travel_probe_logic.h:402:28 | unpack_host | inline literal (semantic audit required) | 1 | h.handed = (v >> 49) & 1; |
+| L07673 | src/mod/session2/travel_probe_logic.h:403:24 | unpack_host | inline literal (semantic audit required) | 50 | h.host_own = (v >> 50) & 1; |
+| L07674 | src/mod/session2/travel_probe_logic.h:403:30 | unpack_host | inline literal (semantic audit required) | 1 | h.host_own = (v >> 50) & 1; |
+| L07675 | src/mod/session2/tree_bend_logic.h:39:51 | player_key | inline literal (semantic audit required) | 28 | inline bool player_key(uint32_t k) { return (k >> 28) == 0xA; } |
+| L07676 | src/mod/session2/tree_bend_logic.h:39:58 | player_key | inline literal (semantic audit required) | 0xA | inline bool player_key(uint32_t k) { return (k >> 28) == 0xA; } |
+| L07677 | src/mod/session2/tree_bend_logic.h:46:35 | player_key | inline literal (semantic audit required) | 15 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07678 | src/mod/session2/tree_bend_logic.h:46:42 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07679 | src/mod/session2/tree_bend_logic.h:46:48 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07680 | src/mod/session2/tree_bend_logic.h:46:54 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07681 | src/mod/session2/tree_bend_logic.h:46:60 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07682 | src/mod/session2/tree_bend_logic.h:46:66 | player_key | inline literal (semantic audit required) | 0x08 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07683 | src/mod/session2/tree_bend_logic.h:46:72 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07684 | src/mod/session2/tree_bend_logic.h:46:78 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07685 | src/mod/session2/tree_bend_logic.h:46:84 | player_key | inline literal (semantic audit required) | 0x6C | inline constexpr uint8_t kVf2Head[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, |
+| L07686 | src/mod/session2/tree_bend_logic.h:47:42 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
+| L07687 | src/mod/session2/tree_bend_logic.h:47:48 | player_key | inline literal (semantic audit required) | 0x10 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
+| L07688 | src/mod/session2/tree_bend_logic.h:47:54 | player_key | inline literal (semantic audit required) | 0x48 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
+| L07689 | src/mod/session2/tree_bend_logic.h:47:60 | player_key | inline literal (semantic audit required) | 0x89 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
+| L07690 | src/mod/session2/tree_bend_logic.h:47:66 | player_key | inline literal (semantic audit required) | 0x74 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
+| L07691 | src/mod/session2/tree_bend_logic.h:47:72 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
+| L07692 | src/mod/session2/tree_bend_logic.h:47:78 | player_key | inline literal (semantic audit required) | 0x20 | 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x20}; |
+| L07693 | src/mod/session2/tree_bend_logic.h:52:37 | player_key | inline literal (semantic audit required) | 11 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07694 | src/mod/session2/tree_bend_logic.h:52:44 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07695 | src/mod/session2/tree_bend_logic.h:52:50 | player_key | inline literal (semantic audit required) | 0x8B | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07696 | src/mod/session2/tree_bend_logic.h:52:56 | player_key | inline literal (semantic audit required) | 0xC4 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07697 | src/mod/session2/tree_bend_logic.h:52:62 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07698 | src/mod/session2/tree_bend_logic.h:52:68 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07699 | src/mod/session2/tree_bend_logic.h:52:74 | player_key | inline literal (semantic audit required) | 0x58 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07700 | src/mod/session2/tree_bend_logic.h:52:80 | player_key | inline literal (semantic audit required) | 0x10 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07701 | src/mod/session2/tree_bend_logic.h:52:86 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07702 | src/mod/session2/tree_bend_logic.h:52:92 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07703 | src/mod/session2/tree_bend_logic.h:52:98 | player_key | inline literal (semantic audit required) | 0x68 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07704 | src/mod/session2/tree_bend_logic.h:52:104 | player_key | inline literal (semantic audit required) | 0x18 | inline constexpr uint8_t kApplyHead[11] = {0x48, 0x8B, 0xC4, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x68, 0x18}; |
+| L07705 | src/mod/session2/tree_bend_logic.h:55:42 | player_key | inline literal (semantic audit required) | 5 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
+| L07706 | src/mod/session2/tree_bend_logic.h:55:48 | player_key | inline literal (semantic audit required) | 0xE8 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
+| L07707 | src/mod/session2/tree_bend_logic.h:55:54 | player_key | inline literal (semantic audit required) | 0xBA | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
+| L07708 | src/mod/session2/tree_bend_logic.h:55:60 | player_key | inline literal (semantic audit required) | 0x16 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
+| L07709 | src/mod/session2/tree_bend_logic.h:55:66 | player_key | inline literal (semantic audit required) | 0x01 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
+| L07710 | src/mod/session2/tree_bend_logic.h:55:72 | player_key | inline literal (semantic audit required) | 0x00 | inline constexpr uint8_t kApplyCallBytes[5] = {0xE8, 0xBA, 0x16, 0x01, 0x00}; |
+| L07711 | src/mod/session2/tree_bend_logic.h:58:39 | player_key | inline literal (semantic audit required) | 10 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07712 | src/mod/session2/tree_bend_logic.h:58:46 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07713 | src/mod/session2/tree_bend_logic.h:58:52 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07714 | src/mod/session2/tree_bend_logic.h:58:58 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07715 | src/mod/session2/tree_bend_logic.h:58:64 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07716 | src/mod/session2/tree_bend_logic.h:58:70 | player_key | inline literal (semantic audit required) | 0x08 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07717 | src/mod/session2/tree_bend_logic.h:58:76 | player_key | inline literal (semantic audit required) | 0x57 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07718 | src/mod/session2/tree_bend_logic.h:58:82 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07719 | src/mod/session2/tree_bend_logic.h:58:88 | player_key | inline literal (semantic audit required) | 0x83 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07720 | src/mod/session2/tree_bend_logic.h:58:94 | player_key | inline literal (semantic audit required) | 0xEC | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07721 | src/mod/session2/tree_bend_logic.h:58:100 | player_key | inline literal (semantic audit required) | 0x30 | inline constexpr uint8_t kSetBendHead[10] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x30}; |
+| L07722 | src/mod/session2/tree_bend_logic.h:61:44 | player_key | inline literal (semantic audit required) | 5 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
+| L07723 | src/mod/session2/tree_bend_logic.h:61:50 | player_key | inline literal (semantic audit required) | 0xE8 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
+| L07724 | src/mod/session2/tree_bend_logic.h:61:56 | player_key | inline literal (semantic audit required) | 0xD9 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
+| L07725 | src/mod/session2/tree_bend_logic.h:61:62 | player_key | inline literal (semantic audit required) | 0xD4 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
+| L07726 | src/mod/session2/tree_bend_logic.h:61:68 | player_key | inline literal (semantic audit required) | 0x30 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
+| L07727 | src/mod/session2/tree_bend_logic.h:61:74 | player_key | inline literal (semantic audit required) | 0x02 | inline constexpr uint8_t kSetBendCallBytes[5] = {0xE8, 0xD9, 0xD4, 0x30, 0x02}; |
+| L07728 | src/mod/session2/tree_bend_logic.h:66:36 | player_key | inline literal (semantic audit required) | 9 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07729 | src/mod/session2/tree_bend_logic.h:66:42 | player_key | inline literal (semantic audit required) | 0x40 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07730 | src/mod/session2/tree_bend_logic.h:66:48 | player_key | inline literal (semantic audit required) | 0x55 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07731 | src/mod/session2/tree_bend_logic.h:66:54 | player_key | inline literal (semantic audit required) | 0x53 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07732 | src/mod/session2/tree_bend_logic.h:66:60 | player_key | inline literal (semantic audit required) | 0x56 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07733 | src/mod/session2/tree_bend_logic.h:66:66 | player_key | inline literal (semantic audit required) | 0x57 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07734 | src/mod/session2/tree_bend_logic.h:66:72 | player_key | inline literal (semantic audit required) | 0x41 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07735 | src/mod/session2/tree_bend_logic.h:66:78 | player_key | inline literal (semantic audit required) | 0x54 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07736 | src/mod/session2/tree_bend_logic.h:66:84 | player_key | inline literal (semantic audit required) | 0x41 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07737 | src/mod/session2/tree_bend_logic.h:66:90 | player_key | inline literal (semantic audit required) | 0x55 | inline constexpr uint8_t kTickHead[9] = {0x40, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55}; |
+| L07738 | src/mod/session2/tree_bend_logic.h:70:41 | player_key | inline literal (semantic audit required) | 5 | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
+| L07739 | src/mod/session2/tree_bend_logic.h:70:47 | player_key | inline literal (semantic audit required) | 0xE9 | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
+| L07740 | src/mod/session2/tree_bend_logic.h:70:53 | player_key | inline literal (semantic audit required) | 0x2B | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
+| L07741 | src/mod/session2/tree_bend_logic.h:70:59 | player_key | inline literal (semantic audit required) | 0x63 | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
+| L07742 | src/mod/session2/tree_bend_logic.h:70:65 | player_key | inline literal (semantic audit required) | 0xCF | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
+| L07743 | src/mod/session2/tree_bend_logic.h:70:71 | player_key | inline literal (semantic audit required) | 0xFF | inline constexpr uint8_t kTickJumpBytes[5] = {0xE9, 0x2B, 0x63, 0xCF, 0xFF}; |
+| L07744 | src/mod/session2/tree_bend_logic.h:75:41 | player_key | inline literal (semantic audit required) | 11 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07745 | src/mod/session2/tree_bend_logic.h:75:48 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07746 | src/mod/session2/tree_bend_logic.h:75:54 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07747 | src/mod/session2/tree_bend_logic.h:75:60 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07748 | src/mod/session2/tree_bend_logic.h:75:66 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07749 | src/mod/session2/tree_bend_logic.h:75:72 | player_key | inline literal (semantic audit required) | 0x10 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07750 | src/mod/session2/tree_bend_logic.h:75:78 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07751 | src/mod/session2/tree_bend_logic.h:75:84 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07752 | src/mod/session2/tree_bend_logic.h:75:90 | player_key | inline literal (semantic audit required) | 0x74 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07753 | src/mod/session2/tree_bend_logic.h:75:96 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07754 | src/mod/session2/tree_bend_logic.h:75:102 | player_key | inline literal (semantic audit required) | 0x18 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07755 | src/mod/session2/tree_bend_logic.h:75:108 | player_key | inline literal (semantic audit required) | 0x57 | inline constexpr uint8_t kGetTargetHead[11] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57}; |
+| L07756 | src/mod/session2/tree_bend_logic.h:77:40 | player_key | inline literal (semantic audit required) | 15 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07757 | src/mod/session2/tree_bend_logic.h:77:47 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07758 | src/mod/session2/tree_bend_logic.h:77:53 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07759 | src/mod/session2/tree_bend_logic.h:77:59 | player_key | inline literal (semantic audit required) | 0x5C | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07760 | src/mod/session2/tree_bend_logic.h:77:65 | player_key | inline literal (semantic audit required) | 0x24 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07761 | src/mod/session2/tree_bend_logic.h:77:71 | player_key | inline literal (semantic audit required) | 0x08 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07762 | src/mod/session2/tree_bend_logic.h:77:77 | player_key | inline literal (semantic audit required) | 0x48 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07763 | src/mod/session2/tree_bend_logic.h:77:83 | player_key | inline literal (semantic audit required) | 0x89 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07764 | src/mod/session2/tree_bend_logic.h:77:89 | player_key | inline literal (semantic audit required) | 0x74 | inline constexpr uint8_t kFindTreeHead[15] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, |
+| L07765 | src/mod/session2/tree_bend_logic.h:78:47 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
+| L07766 | src/mod/session2/tree_bend_logic.h:78:53 | player_key | inline literal (semantic audit required) | 0x10 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
+| L07767 | src/mod/session2/tree_bend_logic.h:78:59 | player_key | inline literal (semantic audit required) | 0x48 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
+| L07768 | src/mod/session2/tree_bend_logic.h:78:65 | player_key | inline literal (semantic audit required) | 0x89 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
+| L07769 | src/mod/session2/tree_bend_logic.h:78:71 | player_key | inline literal (semantic audit required) | 0x7C | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
+| L07770 | src/mod/session2/tree_bend_logic.h:78:77 | player_key | inline literal (semantic audit required) | 0x24 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
+| L07771 | src/mod/session2/tree_bend_logic.h:78:83 | player_key | inline literal (semantic audit required) | 0x18 | 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x18}; |
+| L07772 | src/mod/session2/tree_bend_logic.h:115:16 | scene_set | inline literal (semantic audit required) | 3 | uint32_t d[3]; |
+| L07773 | src/mod/session2/tree_bend_logic.h:117:14 | scene_set | inline literal (semantic audit required) | 0 | return d[0] &#124;&#124; d[1] &#124;&#124; d[2]; |
+| L07774 | src/mod/session2/tree_bend_logic.h:117:22 | scene_set | inline literal (semantic audit required) | 1 | return d[0] &#124;&#124; d[1] &#124;&#124; d[2]; |
+| L07775 | src/mod/session2/tree_bend_logic.h:117:30 | scene_set | inline literal (semantic audit required) | 2 | return d[0] &#124;&#124; d[1] &#124;&#124; d[2]; |
+| L07776 | src/mod/session2/tree_bend_logic.h:129:38 | scene_set | inline literal (semantic audit required) | 1 | enum class Kind : uint8_t { Sample = 1, End = 2 }; |
+| L07777 | src/mod/session2/tree_bend_logic.h:129:47 | scene_set | inline literal (semantic audit required) | 2 | enum class Kind : uint8_t { Sample = 1, End = 2 }; |
+| L07778 | src/mod/session2/tree_bend_logic.h:134:20 | scene_set | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
+| L07779 | src/mod/session2/tree_bend_logic.h:135:21 | scene_set | inline literal (semantic audit required) | 0 | uint8_t flags = 0; |
+| L07780 | src/mod/session2/tree_bend_logic.h:136:20 | scene_set | inline literal (semantic audit required) | 0 | uint32_t key = 0;   // the thrower, 0xA... |
+| L07781 | src/mod/session2/tree_bend_logic.h:137:20 | scene_set | inline literal (semantic audit required) | 0 | uint32_t seq = 0;   // per sender, increasing (never 0) |
+| L07782 | src/mod/session2/tree_bend_logic.h:138:20 | scene_set | inline literal (semantic audit required) | 0 | uint32_t run = 0;   // the sender's bend run (never 0) |
+| L07783 | src/mod/session2/tree_bend_logic.h:139:19 | scene_set | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
+| L07784 | src/mod/session2/tree_bend_logic.h:140:20 | scene_set | inline literal (semantic audit required) | 0.0f | float amount = 0.0f;  // [-1, 1] |
+| L07785 | src/mod/session2/tree_bend_logic.h:141:16 | scene_set | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
+| L07786 | src/mod/session2/tree_bend_logic.h:141:27 | scene_set | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
+| L07787 | src/mod/session2/tree_bend_logic.h:142:24 | scene_set | inline literal (semantic audit required) | 0 | uint32_t tick_ms = 0;  // the sender's clock (QPC ms, low 32 bits) |
+| L07788 | src/mod/session2/tree_bend_logic.h:146:18 | put32 | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L07789 | src/mod/session2/tree_bend_logic.h:146:25 | put32 | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L07790 | src/mod/session2/tree_bend_logic.h:146:67 | put32 | inline literal (semantic audit required) | 8 | for (int i = 0; i < 4; ++i) p[i] = static_cast<uint8_t>(v >> (8 * i)); |
+| L07791 | src/mod/session2/tree_bend_logic.h:149:36 | get32 | inline literal (semantic audit required) | 0 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L07792 | src/mod/session2/tree_bend_logic.h:149:67 | get32 | inline literal (semantic audit required) | 1 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L07793 | src/mod/session2/tree_bend_logic.h:149:74 | get32 | inline literal (semantic audit required) | 8 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L07794 | src/mod/session2/tree_bend_logic.h:149:104 | get32 | inline literal (semantic audit required) | 2 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L07795 | src/mod/session2/tree_bend_logic.h:149:111 | get32 | inline literal (semantic audit required) | 16 | return static_cast<uint32_t>(p[0]) &#124; (static_cast<uint32_t>(p[1]) << 8) &#124; (static_cast<uint32_t>(p[2]) << 16) &#124; |
+| L07796 | src/mod/session2/tree_bend_logic.h:150:37 | get32 | inline literal (semantic audit required) | 3 | (static_cast<uint32_t>(p[3]) << 24); |
+| L07797 | src/mod/session2/tree_bend_logic.h:150:44 | get32 | inline literal (semantic audit required) | 24 | (static_cast<uint32_t>(p[3]) << 24); |
+| L07798 | src/mod/session2/tree_bend_logic.h:153:18 | putf | inline literal (semantic audit required) | 0 | uint32_t v = 0; |
+| L07799 | src/mod/session2/tree_bend_logic.h:154:25 | putf | inline literal (semantic audit required) | 4 | std::memcpy(&v, &f, 4); |
+| L07800 | src/mod/session2/tree_bend_logic.h:159:15 | getf | inline literal (semantic audit required) | 0.0f | float f = 0.0f; |
+| L07801 | src/mod/session2/tree_bend_logic.h:160:25 | getf | inline literal (semantic audit required) | 4 | std::memcpy(&f, &v, 4); |
+| L07802 | src/mod/session2/tree_bend_logic.h:168:7 | encode | inline literal (semantic audit required) | 0 | p[0] = kControlTreeBend; |
+| L07803 | src/mod/session2/tree_bend_logic.h:169:7 | encode | inline literal (semantic audit required) | 1 | p[1] = kVersion; |
+| L07804 | src/mod/session2/tree_bend_logic.h:170:7 | encode | inline literal (semantic audit required) | 2 | p[2] = static_cast<uint8_t>(s.kind); |
+| L07805 | src/mod/session2/tree_bend_logic.h:171:7 | encode | inline literal (semantic audit required) | 3 | p[3] = s.slot; |
+| L07806 | src/mod/session2/tree_bend_logic.h:172:7 | encode | inline literal (semantic audit required) | 4 | p[4] = s.flags; |
+| L07807 | src/mod/session2/tree_bend_logic.h:173:14 | encode | inline literal (semantic audit required) | 8 | put32(&p[8], s.key); |
+| L07808 | src/mod/session2/tree_bend_logic.h:174:14 | encode | inline literal (semantic audit required) | 12 | put32(&p[12], s.seq); |
+| L07809 | src/mod/session2/tree_bend_logic.h:175:14 | encode | inline literal (semantic audit required) | 16 | put32(&p[16], s.run); |
+| L07810 | src/mod/session2/tree_bend_logic.h:176:20 | encode | inline literal (semantic audit required) | 20 | std::memcpy(&p[20], s.scene, 16); |
+| L07811 | src/mod/session2/tree_bend_logic.h:176:34 | encode | inline literal (semantic audit required) | 16 | std::memcpy(&p[20], s.scene, 16); |
+| L07812 | src/mod/session2/tree_bend_logic.h:177:13 | encode | inline literal (semantic audit required) | 36 | putf(&p[36], s.amount); |
+| L07813 | src/mod/session2/tree_bend_logic.h:178:13 | encode | inline literal (semantic audit required) | 40 | putf(&p[40], s.dx); |
+| L07814 | src/mod/session2/tree_bend_logic.h:179:13 | encode | inline literal (semantic audit required) | 44 | putf(&p[44], s.dz); |
+| L07815 | src/mod/session2/tree_bend_logic.h:180:14 | encode | inline literal (semantic audit required) | 48 | put32(&p[48], s.tick_ms); |
+| L07816 | src/mod/session2/tree_bend_logic.h:187:39 | decode | inline literal (semantic audit required) | 0 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlTreeBend &#124;&#124; p[1] != kVersion) return std::nullopt; |
+| L07817 | src/mod/session2/tree_bend_logic.h:187:67 | decode | inline literal (semantic audit required) | 1 | if (p.size() != kPayloadSize &#124;&#124; p[0] != kControlTreeBend &#124;&#124; p[1] != kVersion) return std::nullopt; |
+| L07818 | src/mod/session2/tree_bend_logic.h:188:12 | decode | inline literal (semantic audit required) | 2 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07819 | src/mod/session2/tree_bend_logic.h:188:18 | decode | inline literal (semantic audit required) | 1 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07820 | src/mod/session2/tree_bend_logic.h:188:25 | decode | inline literal (semantic audit required) | 2 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07821 | src/mod/session2/tree_bend_logic.h:188:31 | decode | inline literal (semantic audit required) | 2 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07822 | src/mod/session2/tree_bend_logic.h:188:39 | decode | inline literal (semantic audit required) | 5 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07823 | src/mod/session2/tree_bend_logic.h:188:45 | decode | inline literal (semantic audit required) | 0 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07824 | src/mod/session2/tree_bend_logic.h:188:52 | decode | inline literal (semantic audit required) | 6 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07825 | src/mod/session2/tree_bend_logic.h:188:58 | decode | inline literal (semantic audit required) | 0 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07826 | src/mod/session2/tree_bend_logic.h:188:65 | decode | inline literal (semantic audit required) | 7 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07827 | src/mod/session2/tree_bend_logic.h:188:71 | decode | inline literal (semantic audit required) | 0 | if ((p[2] != 1 && p[2] != 2) &#124;&#124; p[5] != 0 &#124;&#124; p[6] != 0 &#124;&#124; p[7] != 0) return std::nullopt; |
+| L07828 | src/mod/session2/tree_bend_logic.h:190:34 | decode | inline literal (semantic audit required) | 2 | s.kind = static_cast<Kind>(p[2]); |
+| L07829 | src/mod/session2/tree_bend_logic.h:191:16 | decode | inline literal (semantic audit required) | 3 | s.slot = p[3]; |
+| L07830 | src/mod/session2/tree_bend_logic.h:192:17 | decode | inline literal (semantic audit required) | 4 | s.flags = p[4]; |
+| L07831 | src/mod/session2/tree_bend_logic.h:193:22 | decode | inline literal (semantic audit required) | 8 | s.key = get32(&p[8]); |
+| L07832 | src/mod/session2/tree_bend_logic.h:194:22 | decode | inline literal (semantic audit required) | 12 | s.seq = get32(&p[12]); |
+| L07833 | src/mod/session2/tree_bend_logic.h:195:22 | decode | inline literal (semantic audit required) | 16 | s.run = get32(&p[16]); |
+| L07834 | src/mod/session2/tree_bend_logic.h:196:29 | decode | inline literal (semantic audit required) | 20 | std::memcpy(s.scene, &p[20], 16); |
+| L07835 | src/mod/session2/tree_bend_logic.h:196:34 | decode | inline literal (semantic audit required) | 16 | std::memcpy(s.scene, &p[20], 16); |
+| L07836 | src/mod/session2/tree_bend_logic.h:197:24 | decode | inline literal (semantic audit required) | 36 | s.amount = getf(&p[36]); |
+| L07837 | src/mod/session2/tree_bend_logic.h:198:20 | decode | inline literal (semantic audit required) | 40 | s.dx = getf(&p[40]); |
+| L07838 | src/mod/session2/tree_bend_logic.h:199:20 | decode | inline literal (semantic audit required) | 44 | s.dz = getf(&p[44]); |
+| L07839 | src/mod/session2/tree_bend_logic.h:200:26 | decode | inline literal (semantic audit required) | 48 | s.tick_ms = get32(&p[48]); |
+| L07840 | src/mod/session2/tree_bend_logic.h:201:60 | decode | inline literal (semantic audit required) | 0 | if (!player_key(s.key) &#124;&#124; s.slot >= kSlots &#124;&#124; s.seq == 0 &#124;&#124; s.run == 0 &#124;&#124; !scene_set(s.scene)) return std::nullopt; |
+| L07841 | src/mod/session2/tree_bend_logic.h:201:74 | decode | inline literal (semantic audit required) | 0 | if (!player_key(s.key) &#124;&#124; s.slot >= kSlots &#124;&#124; s.seq == 0 &#124;&#124; s.run == 0 &#124;&#124; !scene_set(s.scene)) return std::nullopt; |
+| L07842 | src/mod/session2/tree_bend_logic.h:203:21 | decode | inline literal (semantic audit required) | 1.0f | if (s.amount < -1.0f &#124;&#124; s.amount > 1.0f) return std::nullopt; |
+| L07843 | src/mod/session2/tree_bend_logic.h:203:40 | decode | inline literal (semantic audit required) | 1.0f | if (s.amount < -1.0f &#124;&#124; s.amount > 1.0f) return std::nullopt; |
+| L07844 | src/mod/session2/tree_bend_logic.h:204:66 | decode | inline literal (semantic audit required) | 6f | if (s.kind == Kind::Sample && s.dx * s.dx + s.dz * s.dz < 1e-6f) return std::nullopt; |
+| L07845 | src/mod/session2/tree_bend_logic.h:212:7 | frame | inline literal (semantic audit required) | 0 | f[0] = kControlOpcode & 0xFF; |
+| L07846 | src/mod/session2/tree_bend_logic.h:212:29 | frame | inline literal (semantic audit required) | 0xFF | f[0] = kControlOpcode & 0xFF; |
+| L07847 | src/mod/session2/tree_bend_logic.h:213:7 | frame | inline literal (semantic audit required) | 1 | f[1] = kControlOpcode >> 8; |
+| L07848 | src/mod/session2/tree_bend_logic.h:213:30 | frame | inline literal (semantic audit required) | 8 | f[1] = kControlOpcode >> 8; |
+| L07849 | src/mod/session2/tree_bend_logic.h:214:7 | frame | inline literal (semantic audit required) | 2 | f[2] = 0xFF; |
+| L07850 | src/mod/session2/tree_bend_logic.h:214:12 | frame | inline literal (semantic audit required) | 0xFF | f[2] = 0xFF; |
+| L07851 | src/mod/session2/tree_bend_logic.h:215:7 | frame | inline literal (semantic audit required) | 3 | f[3] = kPayloadSize & 0xFF; |
+| L07852 | src/mod/session2/tree_bend_logic.h:215:27 | frame | inline literal (semantic audit required) | 0xFF | f[3] = kPayloadSize & 0xFF; |
+| L07853 | src/mod/session2/tree_bend_logic.h:216:7 | frame | inline literal (semantic audit required) | 4 | f[4] = kPayloadSize >> 8; |
+| L07854 | src/mod/session2/tree_bend_logic.h:216:28 | frame | inline literal (semantic audit required) | 8 | f[4] = kPayloadSize >> 8; |
+| L07855 | src/mod/session2/tree_bend_logic.h:217:21 | frame | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kPayloadSize; ++i) f[kHeader + i] = p[i]; |
+| L07856 | src/mod/session2/tree_bend_logic.h:223:40 | is_frame | inline literal (semantic audit required) | 0 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
+| L07857 | src/mod/session2/tree_bend_logic.h:223:64 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
+| L07858 | src/mod/session2/tree_bend_logic.h:223:75 | is_frame | inline literal (semantic audit required) | 1 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
+| L07859 | src/mod/session2/tree_bend_logic.h:223:100 | is_frame | inline literal (semantic audit required) | 8 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
+| L07860 | src/mod/session2/tree_bend_logic.h:223:108 | is_frame | inline literal (semantic audit required) | 2 | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
+| L07861 | src/mod/session2/tree_bend_logic.h:223:114 | is_frame | inline literal (semantic audit required) | 0xFF | return f.size() == kFrameSize && f[0] == (kControlOpcode & 0xFF) && f[1] == (kControlOpcode >> 8) && f[2] == 0xFF && |
+| L07862 | src/mod/session2/tree_bend_logic.h:224:14 | is_frame | inline literal (semantic audit required) | 3 | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
+| L07863 | src/mod/session2/tree_bend_logic.h:224:36 | is_frame | inline literal (semantic audit required) | 0xFF | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
+| L07864 | src/mod/session2/tree_bend_logic.h:224:47 | is_frame | inline literal (semantic audit required) | 4 | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
+| L07865 | src/mod/session2/tree_bend_logic.h:224:70 | is_frame | inline literal (semantic audit required) | 8 | f[3] == (kPayloadSize & 0xFF) && f[4] == (kPayloadSize >> 8) && f[kHeader] == kControlTreeBend; |
+| L07866 | src/mod/session2/tree_bend_logic.h:239:20 | is_frame | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07867 | src/mod/session2/tree_bend_logic.h:240:20 | is_frame | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
+| L07868 | src/mod/session2/tree_bend_logic.h:241:21 | is_frame | inline literal (semantic audit required) | 0 | uint8_t flags = 0; |
+| L07869 | src/mod/session2/tree_bend_logic.h:242:19 | is_frame | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
+| L07870 | src/mod/session2/tree_bend_logic.h:243:20 | is_frame | inline literal (semantic audit required) | 0.0f | float amount = 0.0f; |
+| L07871 | src/mod/session2/tree_bend_logic.h:244:16 | is_frame | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
+| L07872 | src/mod/session2/tree_bend_logic.h:244:27 | is_frame | inline literal (semantic audit required) | 0.0f | float dx = 0.0f, dz = 0.0f; |
+| L07873 | src/mod/session2/tree_bend_logic.h:245:21 | is_frame | inline literal (semantic audit required) | 0 | uint64_t t_ms = 0; |
+| L07874 | src/mod/session2/tree_bend_logic.h:248:44 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
+| L07875 | src/mod/session2/tree_bend_logic.h:248:52 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
+| L07876 | src/mod/session2/tree_bend_logic.h:248:63 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
+| L07877 | src/mod/session2/tree_bend_logic.h:248:70 | clamp1 | inline literal (semantic audit required) | 1.0f | inline float clamp1(float v) { return v < -1.0f ? -1.0f : v > 1.0f ? 1.0f : v; } |
+| L07878 | src/mod/session2/tree_bend_logic.h:254:24 | clamp1 | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07879 | src/mod/session2/tree_bend_logic.h:255:24 | clamp1 | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
+| L07880 | src/mod/session2/tree_bend_logic.h:256:24 | clamp1 | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
+| L07881 | src/mod/session2/tree_bend_logic.h:271:92 | std::isfinite | inline literal (semantic audit required) | 6f | !std::isfinite(b.dx) &#124;&#124; !std::isfinite(b.dz) &#124;&#124; b.dx * b.dx + b.dz * b.dz < 1e-6f) { |
+| L07882 | src/mod/session2/tree_bend_logic.h:276:49 | std::isfinite | inline literal (semantic audit required) | 16 | if (c && std::memcmp(c->scene, b.scene, 16) != 0) { |
+| L07883 | src/mod/session2/tree_bend_logic.h:276:56 | std::isfinite | inline literal (semantic audit required) | 0 | if (c && std::memcmp(c->scene, b.scene, 16) != 0) { |
+| L07884 | src/mod/session2/tree_bend_logic.h:293:44 | std::isfinite | inline literal (semantic audit required) | 16 | std::memcpy(c->scene, b.scene, 16); |
+| L07885 | src/mod/session2/tree_bend_logic.h:312:20 | tick | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L07886 | src/mod/session2/tree_bend_logic.h:333:24 | seq | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07887 | src/mod/session2/tree_bend_logic.h:334:24 | seq | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
+| L07888 | src/mod/session2/tree_bend_logic.h:336:24 | seq | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
+| L07889 | src/mod/session2/tree_bend_logic.h:337:23 | seq | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
+| L07890 | src/mod/session2/tree_bend_logic.h:338:33 | seq | inline literal (semantic audit required) | 0 | uint64_t last_bend_ms = 0; |
+| L07891 | src/mod/session2/tree_bend_logic.h:339:33 | seq | inline literal (semantic audit required) | 0 | uint64_t last_sent_ms = 0; |
+| L07892 | src/mod/session2/tree_bend_logic.h:340:29 | seq | inline literal (semantic audit required) | 0.0f | float last_amount = 0.0f; |
+| L07893 | src/mod/session2/tree_bend_logic.h:341:25 | seq | inline literal (semantic audit required) | 1.0f | float last_dx = 1.0f, last_dz = 0.0f; |
+| L07894 | src/mod/session2/tree_bend_logic.h:341:41 | seq | inline literal (semantic audit required) | 0.0f | float last_dx = 1.0f, last_dz = 0.0f; |
+| L07895 | src/mod/session2/tree_bend_logic.h:342:30 | seq | inline literal (semantic audit required) | 0 | uint8_t last_flags = 0; |
+| L07896 | src/mod/session2/tree_bend_logic.h:369:39 | emit | inline literal (semantic audit required) | 16 | std::memcpy(s.scene, c.scene, 16); |
+| L07897 | src/mod/session2/tree_bend_logic.h:392:43 | make_end | inline literal (semantic audit required) | 16 | std::memcpy(e.end.scene, c.scene, 16); |
+| L07898 | src/mod/session2/tree_bend_logic.h:400:21 | make_end | inline literal (semantic audit required) | 0 | uint32_t seq_ = 0; |
+| L07899 | src/mod/session2/tree_bend_logic.h:401:21 | make_end | inline literal (semantic audit required) | 0 | uint32_t run_ = 0; |
+| L07900 | src/mod/session2/tree_bend_logic.h:402:22 | make_end | inline literal (semantic audit required) | 0 | uint64_t full_ = 0; |
+| L07901 | src/mod/session2/tree_bend_logic.h:434:25 | discarded | inline literal (semantic audit required) | 0 | uint64_t dropped_ = 0; |
+| L07902 | src/mod/session2/tree_bend_logic.h:435:27 | discarded | inline literal (semantic audit required) | 0 | uint64_t discarded_ = 0; |
+| L07903 | src/mod/session2/tree_bend_logic.h:459:20 | rx_name | inline literal (semantic audit required) | 0.0f | float amount = 0.0f; |
+| L07904 | src/mod/session2/tree_bend_logic.h:460:16 | rx_name | inline literal (semantic audit required) | 1.0f | float dx = 1.0f, dz = 0.0f; |
+| L07905 | src/mod/session2/tree_bend_logic.h:460:27 | rx_name | inline literal (semantic audit required) | 0.0f | float dx = 1.0f, dz = 0.0f; |
+| L07906 | src/mod/session2/tree_bend_logic.h:461:19 | rx_name | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
+| L07907 | src/mod/session2/tree_bend_logic.h:462:23 | rx_name | inline literal (semantic audit required) | 0 | uint32_t age_ms = 0;  // since the newest sample was received |
+| L07908 | src/mod/session2/tree_bend_logic.h:463:20 | rx_name | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
+| L07909 | src/mod/session2/tree_bend_logic.h:464:20 | rx_name | inline literal (semantic audit required) | 0 | uint32_t seq = 0; |
+| L07910 | src/mod/session2/tree_bend_logic.h:496:57 | on_sample | inline literal (semantic audit required) | 0 | const bool new_run = e->run != s.run &#124;&#124; e->n == 0; |
+| L07911 | src/mod/session2/tree_bend_logic.h:499:20 | on_sample | inline literal (semantic audit required) | 0 | e->n = 0; |
+| L07912 | src/mod/session2/tree_bend_logic.h:506:42 | on_sample | inline literal (semantic audit required) | 1 | e->n = std::min<uint32_t>(e->n + 1, 2); |
+| L07913 | src/mod/session2/tree_bend_logic.h:506:45 | on_sample | inline literal (semantic audit required) | 2 | e->n = std::min<uint32_t>(e->n + 1, 2); |
+| L07914 | src/mod/session2/tree_bend_logic.h:513:39 | query | inline literal (semantic audit required) | 0 | if (!e &#124;&#124; e->ended &#124;&#124; e->n == 0) return std::nullopt; |
+| L07915 | src/mod/session2/tree_bend_logic.h:520:45 | query | inline literal (semantic audit required) | 16 | std::memcpy(p.scene, e->last.scene, 16); |
+| L07916 | src/mod/session2/tree_bend_logic.h:522:21 | query | inline literal (semantic audit required) | 2 | if (e->n >= 2) { |
+| L07917 | src/mod/session2/tree_bend_logic.h:526:24 | query | inline literal (semantic audit required) | 0 | if (span > 0 && span <= kMaxSpanMs) { |
+| L07918 | src/mod/session2/tree_bend_logic.h:529:31 | query | inline literal (semantic audit required) | 1.0f | float alpha = 1.0f + static_cast<float>(render) / static_cast<float>(span); |
+| L07919 | src/mod/session2/tree_bend_logic.h:530:33 | query | inline literal (semantic audit required) | 0.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
+| L07920 | src/mod/session2/tree_bend_logic.h:530:40 | query | inline literal (semantic audit required) | 0.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
+| L07921 | src/mod/session2/tree_bend_logic.h:530:55 | query | inline literal (semantic audit required) | 1.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
+| L07922 | src/mod/session2/tree_bend_logic.h:530:62 | query | inline literal (semantic audit required) | 1.0f | alpha = alpha < 0.0f ? 0.0f : alpha > 1.0f ? 1.0f : alpha; |
+| L07923 | src/mod/session2/tree_bend_logic.h:537:22 | query | inline literal (semantic audit required) | 4f | if (len > 1e-4f) { |
+| L07924 | src/mod/session2/tree_bend_logic.h:544:25 | query | inline literal (semantic audit required) | 4f | if (l2 > 1e-4f) { |
+| L07925 | src/mod/session2/tree_bend_logic.h:562:24 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L07926 | src/mod/session2/tree_bend_logic.h:563:24 | epoch_resets | inline literal (semantic audit required) | 0 | uint8_t slot = 0; |
+| L07927 | src/mod/session2/tree_bend_logic.h:564:29 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t last_seq = 0; |
+| L07928 | src/mod/session2/tree_bend_logic.h:565:33 | epoch_resets | inline literal (semantic audit required) | 0 | uint64_t last_recv_ms = 0;  // any frame |
+| L07929 | src/mod/session2/tree_bend_logic.h:567:24 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t run = 0; |
+| L07930 | src/mod/session2/tree_bend_logic.h:568:22 | epoch_resets | inline literal (semantic audit required) | 0 | uint32_t n = 0;  // samples of this run kept (0..2) |
+| L07931 | src/mod/session2/tree_bend_logic.h:570:33 | epoch_resets | inline literal (semantic audit required) | 0 | uint64_t prev_recv_ms = 0, last_recv_sample_ms = 0; |
+| L07932 | src/mod/session2/tree_bend_logic.h:570:58 | epoch_resets | inline literal (semantic audit required) | 0 | uint64_t prev_recv_ms = 0, last_recv_sample_ms = 0; |
+| L07933 | src/mod/session2/tree_bend_logic.h:605:23 | alloc | inline literal (semantic audit required) | 0 | uint64_t epoch_ = 0; |
+| L07934 | src/mod/session2/tree_bend_logic.h:607:30 | alloc | inline literal (semantic audit required) | 0 | uint64_t epoch_resets_ = 0; |
+| L07935 | src/mod/session2/tree_bend_logic.h:657:21 | outcome_name | inline literal (semantic audit required) | 0 | uint8_t state = 0; |
+| L07936 | src/mod/session2/tree_bend_logic.h:658:19 | outcome_name | inline literal (semantic audit required) | 16 | uint8_t scene[16] = {}; |
+| L07937 | src/mod/session2/tree_bend_logic.h:666:39 | decide | inline literal (semantic audit required) | 16 | if (std::memcmp(v.scene, p.scene, 16) != 0) return Outcome::SceneMismatch; |
+| L07938 | src/mod/session2/tree_bend_logic.h:666:46 | decide | inline literal (semantic audit required) | 0 | if (std::memcmp(v.scene, p.scene, 16) != 0) return Outcome::SceneMismatch; |
+| L07939 | src/mod/session2/tree_bend_logic.h:675:31 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> key{0}; |
+| L07940 | src/mod/session2/tree_bend_logic.h:676:30 | decide | inline literal (semantic audit required) | 0xFF | std::atomic<uint8_t> ctl{0xFF};  // [actor+0xC8] at the last M1 / M2 / M4 call (0xFF unread) |
+| L07941 | src/mod/session2/tree_bend_logic.h:677:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_calls{0}, m1_main{0}, m1_f6{0}; |
+| L07942 | src/mod/session2/tree_bend_logic.h:677:48 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_calls{0}, m1_main{0}, m1_f6{0}; |
+| L07943 | src/mod/session2/tree_bend_logic.h:677:58 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_calls{0}, m1_main{0}, m1_f6{0}; |
+| L07944 | src/mod/session2/tree_bend_logic.h:678:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_last_us{0}; |
+| L07945 | src/mod/session2/tree_bend_logic.h:679:35 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> m1_runs{0}; |
+| L07946 | src/mod/session2/tree_bend_logic.h:680:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m2_flag1{0}, m2_flag0{0}; |
+| L07947 | src/mod/session2/tree_bend_logic.h:680:49 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m2_flag1{0}, m2_flag0{0}; |
+| L07948 | src/mod/session2/tree_bend_logic.h:681:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_calls{0}, m3_main{0}; |
+| L07949 | src/mod/session2/tree_bend_logic.h:681:48 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_calls{0}, m3_main{0}; |
+| L07950 | src/mod/session2/tree_bend_logic.h:682:36 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_calls{0}, m4_main{0}; |
+| L07951 | src/mod/session2/tree_bend_logic.h:682:48 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_calls{0}, m4_main{0}; |
+| L07952 | src/mod/session2/tree_bend_logic.h:683:41 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_last_ev_us{0}; |
+| L07953 | src/mod/session2/tree_bend_logic.h:684:42 | decide | inline literal (semantic audit required) | 0xFF | std::atomic<uint8_t> m4_last_outcome{0xFF}; |
+| L07954 | src/mod/session2/tree_bend_logic.h:685:34 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> m4_tid{0}; |
+| L07955 | src/mod/session2/tree_bend_logic.h:686:34 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> m3_tid{0}; |
+| L07956 | src/mod/session2/tree_bend_logic.h:689:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m1_in_tick{0}; |
+| L07957 | src/mod/session2/tree_bend_logic.h:690:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_in_tick{0}, m3_same_comp{0}; |
+| L07958 | src/mod/session2/tree_bend_logic.h:690:55 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m3_in_tick{0}, m3_same_comp{0}; |
+| L07959 | src/mod/session2/tree_bend_logic.h:693:38 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
+| L07960 | src/mod/session2/tree_bend_logic.h:693:55 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
+| L07961 | src/mod/session2/tree_bend_logic.h:693:71 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
+| L07962 | src/mod/session2/tree_bend_logic.h:693:93 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> pull_calls{0}, pull_running{0}, pull_inline{0}, pull_during_apply{0}; |
+| L07963 | src/mod/session2/tree_bend_logic.h:694:44 | decide | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> m4_last_apply_us{0}; |
+| L07964 | src/mod/session2/tree_bend_logic.h:697:19 | clear | inline literal (semantic audit required) | 0xFF | ctl.store(0xFF, std::memory_order_relaxed); |
+| L07965 | src/mod/session2/tree_bend_logic.h:701:22 | clear | inline literal (semantic audit required) | 0 | a->store(0, std::memory_order_relaxed); |
+| L07966 | src/mod/session2/tree_bend_logic.h:703:23 | clear | inline literal (semantic audit required) | 0 | m1_runs.store(0, std::memory_order_relaxed); |
+| L07967 | src/mod/session2/tree_bend_logic.h:704:31 | clear | inline literal (semantic audit required) | 0xFF | m4_last_outcome.store(0xFF, std::memory_order_relaxed); |
+| L07968 | src/mod/session2/tree_bend_logic.h:705:22 | clear | inline literal (semantic audit required) | 0 | m4_tid.store(0, std::memory_order_relaxed); |
+| L07969 | src/mod/session2/tree_bend_logic.h:706:22 | clear | inline literal (semantic audit required) | 0 | m3_tid.store(0, std::memory_order_relaxed); |
+| L07970 | src/mod/session2/tree_bend_logic.h:707:19 | clear | inline literal (semantic audit required) | 0 | key.store(0, std::memory_order_release); |
+| L07971 | src/mod/session2/tree_bend_logic.h:716:37 | get | inline literal (semantic audit required) | 1 | size_t i = hash(key) & (N - 1); |
+| L07972 | src/mod/session2/tree_bend_logic.h:717:25 | get | inline literal (semantic audit required) | 0 | for (size_t n = 0; n < N; ++n, i = (i + 1) & (N - 1)) { |
+| L07973 | src/mod/session2/tree_bend_logic.h:717:49 | get | inline literal (semantic audit required) | 1 | for (size_t n = 0; n < N; ++n, i = (i + 1) & (N - 1)) { |
+| L07974 | src/mod/session2/tree_bend_logic.h:717:59 | get | inline literal (semantic audit required) | 1 | for (size_t n = 0; n < N; ++n, i = (i + 1) & (N - 1)) { |
+| L07975 | src/mod/session2/tree_bend_logic.h:720:22 | get | inline literal (semantic audit required) | 0 | if (k == 0) { |
+| L07976 | src/mod/session2/tree_bend_logic.h:721:35 | get | inline literal (semantic audit required) | 0 | uint32_t expect = 0; |
+| L07977 | src/mod/session2/tree_bend_logic.h:726:25 | get | inline literal (semantic audit required) | 1 | full_.fetch_add(1, std::memory_order_relaxed); |
+| L07978 | src/mod/session2/tree_bend_logic.h:733:20 | used | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L07979 | src/mod/session2/tree_bend_logic.h:734:84 | used | inline literal (semantic audit required) | 0 | for (const KeyStats& e : e_) n += e.key.load(std::memory_order_relaxed) != 0; |
+| L07980 | src/mod/session2/tree_bend_logic.h:740:21 | clear | inline literal (semantic audit required) | 0 | full_.store(0, std::memory_order_relaxed); |
+| L07981 | src/mod/session2/tree_bend_logic.h:745:24 | size | inline literal (semantic audit required) | 2 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L07982 | src/mod/session2/tree_bend_logic.h:745:39 | size | inline literal (semantic audit required) | 1 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L07983 | src/mod/session2/tree_bend_logic.h:745:46 | size | inline literal (semantic audit required) | 0 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L07984 | src/mod/session2/tree_bend_logic.h:746:70 | hash | inline literal (semantic audit required) | 2654435761u | static size_t hash(uint32_t k) { return static_cast<size_t>((k * 2654435761u) >> 7); } |
+| L07985 | src/mod/session2/tree_bend_logic.h:746:86 | hash | inline literal (semantic audit required) | 7 | static size_t hash(uint32_t k) { return static_cast<size_t>((k * 2654435761u) >> 7); } |
+| L07986 | src/mod/session2/tree_bend_logic.h:748:33 | hash | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> full_{0}; |
+| L07987 | src/mod/session2/tree_bend_logic.h:757:78 | active | inline literal (semantic audit required) | 1 | KeyTable<N>& active() { return t_[idx_.load(std::memory_order_acquire) & 1]; } |
+| L07988 | src/mod/session2/tree_bend_logic.h:758:90 | active | inline literal (semantic audit required) | 1 | const KeyTable<N>& active() const { return t_[idx_.load(std::memory_order_acquire) & 1]; } |
+| L07989 | src/mod/session2/tree_bend_logic.h:761:71 | switch_tables | inline literal (semantic audit required) | 1 | const unsigned next = (idx_.load(std::memory_order_relaxed) + 1) & 1; |
+| L07990 | src/mod/session2/tree_bend_logic.h:761:76 | switch_tables | inline literal (semantic audit required) | 1 | const unsigned next = (idx_.load(std::memory_order_relaxed) + 1) & 1; |
+| L07991 | src/mod/session2/tree_bend_logic.h:769:20 | switches | inline literal (semantic audit required) | 2 | KeyTable<N> t_[2]; |
+| L07992 | src/mod/session2/tree_bend_logic.h:770:32 | switches | inline literal (semantic audit required) | 0 | std::atomic<unsigned> idx_{0}; |
+| L07993 | src/mod/session2/tree_bend_logic.h:771:26 | switches | inline literal (semantic audit required) | 0 | uint64_t switches_ = 0; |
+| L07994 | src/mod/session2/tree_bend_logic.h:784:24 | add | inline literal (semantic audit required) | 0 | if (cur == 0 && t.compare_exchange_strong(cur, tid, std::memory_order_relaxed)) return; |
+| L07995 | src/mod/session2/tree_bend_logic.h:787:25 | add | inline literal (semantic audit required) | 1 | over_.fetch_add(1, std::memory_order_relaxed); |
+| L07996 | src/mod/session2/tree_bend_logic.h:796:20 | size | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L07997 | src/mod/session2/tree_bend_logic.h:797:76 | size | inline literal (semantic audit required) | 0 | for (const auto& t : t_) n += t.load(std::memory_order_relaxed) != 0; |
+| L07998 | src/mod/session2/tree_bend_logic.h:805:20 | common | inline literal (semantic audit required) | 0 | size_t n = 0; |
+| L07999 | src/mod/session2/tree_bend_logic.h:815:33 | common | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> over_{0}; |
+| L08000 | src/mod/session2/tree_bend_logic.h:824:19 | own_bend_same_tree | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0; |
+| L08001 | src/mod/session2/tree_bend_logic.h:824:27 | own_bend_same_tree | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0; |
+| L08002 | src/mod/session2/tree_bend_logic.h:825:29 | own_bend_same_tree | inline literal (semantic audit required) | 8 | std::memcpy(&lo, scene, 8); |
+| L08003 | src/mod/session2/tree_bend_logic.h:826:30 | own_bend_same_tree | inline literal (semantic audit required) | 8 | std::memcpy(&hi, scene + 8, 8); |
+| L08004 | src/mod/session2/tree_bend_logic.h:826:33 | own_bend_same_tree | inline literal (semantic audit required) | 8 | std::memcpy(&hi, scene + 8, 8); |
+| L08005 | src/mod/session2/tree_bend_logic.h:852:18 | record | inline literal (semantic audit required) | 1 | if ((s & 1) &#124;&#124; !seq_.compare_exchange_strong(s, s + 1, std::memory_order_acquire, std::memory_order_relaxed)) { |
+| L08006 | src/mod/session2/tree_bend_logic.h:852:61 | record | inline literal (semantic audit required) | 1 | if ((s & 1) &#124;&#124; !seq_.compare_exchange_strong(s, s + 1, std::memory_order_acquire, std::memory_order_relaxed)) { |
+| L08007 | src/mod/session2/tree_bend_logic.h:859:24 | record | inline literal (semantic audit required) | 2 | seq_.store(s + 2, std::memory_order_release); |
+| L08008 | src/mod/session2/tree_bend_logic.h:864:22 | read | inline literal (semantic audit required) | 0 | for (int i = 0; i < kReadTries; ++i) { |
+| L08009 | src/mod/session2/tree_bend_logic.h:866:22 | read | inline literal (semantic audit required) | 1 | if (s1 & 1) continue; |
+| L08010 | src/mod/session2/tree_bend_logic.h:877:23 | same_tree_now | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0, us = 0; |
+| L08011 | src/mod/session2/tree_bend_logic.h:877:31 | same_tree_now | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0, us = 0; |
+| L08012 | src/mod/session2/tree_bend_logic.h:877:39 | same_tree_now | inline literal (semantic audit required) | 0 | uint64_t lo = 0, hi = 0, us = 0; |
+| L08013 | src/mod/session2/tree_bend_logic.h:883:32 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint32_t> seq_{0}; |
+| L08014 | src/mod/session2/tree_bend_logic.h:884:31 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> lo_{0}, hi_{0}, us_{0}; |
+| L08015 | src/mod/session2/tree_bend_logic.h:884:39 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> lo_{0}, hi_{0}, us_{0}; |
+| L08016 | src/mod/session2/tree_bend_logic.h:884:47 | same_tree_now | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> lo_{0}, hi_{0}, us_{0}; |
+| L08017 | src/mod/session2/ui_pause_logic.h:55:91 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.front() == ' ' &#124;&#124; raw.front() == '\t')) raw.remove_prefix(1); |
+| L08018 | src/mod/session2/ui_pause_logic.h:56:111 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.back() == ' ' &#124;&#124; raw.back() == '\t' &#124;&#124; raw.back() == '\r')) raw.remove_suffix(1); |
+| L08019 | src/mod/session2/ui_pause_logic.h:59:26 | parse_mode | inline literal (semantic audit required) | 0 | raw = raw.substr(0, c); |
+| L08020 | src/mod/session2/ui_pause_logic.h:60:93 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.back() == ' ' &#124;&#124; raw.back() == '\t')) raw.remove_suffix(1); |
+| L08021 | src/mod/session2/ui_pause_logic.h:118:47 | classify | inline literal (semantic audit required) | 0.0f | if (std::isnan(v) &#124;&#124; std::isinf(v) &#124;&#124; v < 0.0f) return Kind::Invalid; |
+| L08022 | src/mod/session2/ui_pause_logic.h:119:14 | classify | inline literal (semantic audit required) | 1.0f | if (v == 1.0f) return Kind::Neutral; |
+| L08023 | src/mod/session2/ui_pause_logic.h:120:13 | classify | inline literal (semantic audit required) | 1.0f | if (v > 1.0f) return Kind::Fast; |
+| L08024 | src/mod/session2/ui_pause_logic.h:142:19 | active | inline literal (semantic audit required) | 1.0f | float value = 1.0f;     // what 0x35CD990 returns to the game |
+| L08025 | src/mod/session2/ui_pause_logic.h:151:27 | decide | inline literal (semantic audit required) | 1.0f | d.value = d.blocked ? 1.0f : original; |
+| L08026 | src/mod/session2/ui_pause_logic.h:164:22 | decide | inline literal (semantic audit required) | 1.0f | float smoothed = 1.0f;  // world+0x312C0 (stored unsnapped, 0xAD1519) |
+| L08027 | src/mod/session2/ui_pause_logic.h:165:18 | decide | inline literal (semantic audit required) | 2.5f | float rate = 2.5f;      // [0x6D2A028] |
+| L08028 | src/mod/session2/ui_pause_logic.h:166:24 | decide | inline literal (semantic audit required) | 4f | float epsilon = 1e-4f;  // close enough: snaps to the target (0xAD152E..0xAD1534) |
+| L08029 | src/mod/session2/ui_pause_logic.h:169:63 | effective | inline literal (semantic audit required) | 0.0f | float effective() const { return smoothed < kPauseBelow ? 0.0f : smoothed; } |
+| L08030 | src/mod/session2/ui_pause_logic.h:174:29 | step | inline literal (semantic audit required) | 1.0f | const float k = 1.0f - std::exp(-rate * dt); |
+| L08031 | src/mod/session2/ui_pause_logic.h:203:22 | step | inline literal (semantic audit required) | 0 | uint32_t index = 0;      // in the list |
+| L08032 | src/mod/session2/ui_pause_logic.h:204:21 | step | inline literal (semantic audit required) | 0 | uint8_t state = 0;       // +0x26F (0 or 1) |
+| L08033 | src/mod/session2/ui_pause_logic.h:206:22 | step | inline literal (semantic audit required) | 0 | uintptr_t view = 0, root = 0, root_vtable = 0; |
+| L08034 | src/mod/session2/ui_pause_logic.h:206:32 | step | inline literal (semantic audit required) | 0 | uintptr_t view = 0, root = 0, root_vtable = 0; |
+| L08035 | src/mod/session2/ui_pause_logic.h:206:49 | step | inline literal (semantic audit required) | 0 | uintptr_t view = 0, root = 0, root_vtable = 0; |
+| L08036 | src/mod/session2/ui_pause_logic.h:207:27 | step | inline literal (semantic audit required) | 0 | uint32_t scale_bits = 0;  // +0x23C as read |
+| L08037 | src/mod/session2/ui_pause_logic.h:214:22 | scale | inline literal (semantic audit required) | 0 | uint32_t count = 0;      // entries in the list |
+| L08038 | src/mod/session2/ui_pause_logic.h:215:21 | scale | inline literal (semantic audit required) | 0 | uint32_t open = 0;       // open views (state 0/1) |
+| L08039 | src/mod/session2/ui_pause_logic.h:216:21 | scale | inline literal (semantic audit required) | 0 | uint32_t hits = 0;       // open views asking for something (all of them, even past kMaxHits) |
+| L08040 | src/mod/session2/ui_pause_logic.h:220:19 | scale | inline literal (semantic audit required) | 1 | int source = -1; |
+| L08041 | src/mod/session2/ui_pause_logic.h:229:22 | walk_views | inline literal (semantic audit required) | 0 | uintptr_t list = 0, data = 0; |
+| L08042 | src/mod/session2/ui_pause_logic.h:229:32 | walk_views | inline literal (semantic audit required) | 0 | uintptr_t list = 0, data = 0; |
+| L08043 | src/mod/session2/ui_pause_logic.h:230:22 | walk_views | inline literal (semantic audit required) | 0 | uint32_t count = 0; |
+| L08044 | src/mod/session2/ui_pause_logic.h:245:23 | u32 | inline literal (semantic audit required) | 0 | for (uint32_t i = 0; i < count; ++i) { |
+| L08045 | src/mod/session2/ui_pause_logic.h:246:23 | u32 | inline literal (semantic audit required) | 0 | uintptr_t e = 0, holder = 0, view = 0; |
+| L08046 | src/mod/session2/ui_pause_logic.h:246:35 | u32 | inline literal (semantic audit required) | 0 | uintptr_t e = 0, holder = 0, view = 0; |
+| L08047 | src/mod/session2/ui_pause_logic.h:246:45 | u32 | inline literal (semantic audit required) | 0 | uintptr_t e = 0, holder = 0, view = 0; |
+| L08048 | src/mod/session2/ui_pause_logic.h:247:27 | u32 | inline literal (semantic audit required) | 8ull | if (!m.ptr(data + 8ull * i, e)) { |
+| L08049 | src/mod/session2/ui_pause_logic.h:259:25 | u32 | inline literal (semantic audit required) | 0 | uint8_t state = 0; |
+| L08050 | src/mod/session2/ui_pause_logic.h:264:22 | u32 | inline literal (semantic audit required) | 2 | if (state >= 2) continue;  // hiding (2) or unloaded (3+): not counted by the original |
+| L08051 | src/mod/session2/ui_pause_logic.h:266:26 | u32 | inline literal (semantic audit required) | 0 | uintptr_t root = 0, vt = 0, fn = 0; |
+| L08052 | src/mod/session2/ui_pause_logic.h:266:34 | u32 | inline literal (semantic audit required) | 0 | uintptr_t root = 0, vt = 0, fn = 0; |
+| L08053 | src/mod/session2/ui_pause_logic.h:266:42 | u32 | inline literal (semantic audit required) | 0 | uintptr_t root = 0, vt = 0, fn = 0; |
+| L08054 | src/mod/session2/ui_pause_logic.h:267:25 | u32 | inline literal (semantic audit required) | 0 | uint32_t bits = 0; |
+| L08055 | src/mod/session2/ui_pause_logic.h:276:54 | u32 | inline literal (semantic audit required) | 1.0f | if (!custom && std::bit_cast<float>(bits) == 1.0f) continue; |
+| L08056 | src/mod/session2/ui_pause_logic.h:277:23 | u32 | inline literal (semantic audit required) | 0 | if (w.hits == 0) w.source = custom ? -1 : 0; |
+| L08057 | src/mod/session2/ui_pause_logic.h:277:47 | u32 | inline literal (semantic audit required) | 1 | if (w.hits == 0) w.source = custom ? -1 : 0; |
+| L08058 | src/mod/session2/ui_pause_logic.h:277:51 | u32 | inline literal (semantic audit required) | 0 | if (w.hits == 0) w.source = custom ? -1 : 0; |
+| L08059 | src/mod/session2/ui_pause_logic.h:297:37 | u32 | inline literal (semantic audit required) | 0 | enum class Site : uint8_t { Other = 0, First = 1, Second = 2 }; |
+| L08060 | src/mod/session2/ui_pause_logic.h:297:48 | u32 | inline literal (semantic audit required) | 1 | enum class Site : uint8_t { Other = 0, First = 1, Second = 2 }; |
+| L08061 | src/mod/session2/ui_pause_logic.h:297:60 | u32 | inline literal (semantic audit required) | 2 | enum class Site : uint8_t { Other = 0, First = 1, Second = 2 }; |
+| L08062 | src/mod/session2/ui_pause_logic.h:300:21 | u32 | inline literal (semantic audit required) | 1 | kEvTransition = 1,  // the original value changed |
+| L08063 | src/mod/session2/ui_pause_logic.h:301:17 | u32 | inline literal (semantic audit required) | 2 | kEvSource = 2,      // same value, another view explains it now (a menu opened from another one) |
+| L08064 | src/mod/session2/ui_pause_logic.h:308:25 | u32 | inline literal (semantic audit required) | 0 | uint32_t old_bits = 0, new_bits = 0;  // the original's value, before and now |
+| L08065 | src/mod/session2/ui_pause_logic.h:308:39 | u32 | inline literal (semantic audit required) | 0 | uint32_t old_bits = 0, new_bits = 0;  // the original's value, before and now |
+| L08066 | src/mod/session2/ui_pause_logic.h:313:24 | u32 | inline literal (semantic audit required) | 0 | uint64_t ep_seen = 0, ep_blocked = 0;  // the episode this event closes (first-call frames) |
+| L08067 | src/mod/session2/ui_pause_logic.h:313:40 | u32 | inline literal (semantic audit required) | 0 | uint64_t ep_seen = 0, ep_blocked = 0;  // the episode this event closes (first-call frames) |
+| L08068 | src/mod/session2/ui_pause_logic.h:320:52 | pack | inline literal (semantic audit required) | 1u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
+| L08069 | src/mod/session2/ui_pause_logic.h:320:57 | pack | inline literal (semantic audit required) | 0u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
+| L08070 | src/mod/session2/ui_pause_logic.h:320:76 | pack | inline literal (semantic audit required) | 2u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
+| L08071 | src/mod/session2/ui_pause_logic.h:320:81 | pack | inline literal (semantic audit required) | 0u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
+| L08072 | src/mod/session2/ui_pause_logic.h:320:97 | pack | inline literal (semantic audit required) | 4u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
+| L08073 | src/mod/session2/ui_pause_logic.h:320:102 | pack | inline literal (semantic audit required) | 0u | e.flags = static_cast<uint16_t>((n.d.blocked ? 1u : 0u) &#124; (n.d.would ? 2u : 0u) &#124; (n.live ? 4u : 0u) &#124; |
+| L08074 | src/mod/session2/ui_pause_logic.h:321:70 | pack | inline literal (semantic audit required) | 3u | (static_cast<unsigned>(n.site) & 3u) << 3 &#124; |
+| L08075 | src/mod/session2/ui_pause_logic.h:321:77 | pack | inline literal (semantic audit required) | 3 | (static_cast<unsigned>(n.site) & 3u) << 3 &#124; |
+| L08076 | src/mod/session2/ui_pause_logic.h:322:70 | pack | inline literal (semantic audit required) | 3u | (static_cast<unsigned>(n.mode) & 3u) << 5); |
+| L08077 | src/mod/session2/ui_pause_logic.h:322:77 | pack | inline literal (semantic audit required) | 5 | (static_cast<unsigned>(n.mode) & 3u) << 5); |
+| L08078 | src/mod/session2/ui_pause_logic.h:323:9 | pack | inline literal (semantic audit required) | 0 | e.v[0] = n.old_bits &#124; static_cast<uint64_t>(n.new_bits) << 32; |
+| L08079 | src/mod/session2/ui_pause_logic.h:323:64 | pack | inline literal (semantic audit required) | 32 | e.v[0] = n.old_bits &#124; static_cast<uint64_t>(n.new_bits) << 32; |
+| L08080 | src/mod/session2/ui_pause_logic.h:324:9 | pack | inline literal (semantic audit required) | 1 | e.v[1] = n.ep_seen; |
+| L08081 | src/mod/session2/ui_pause_logic.h:325:9 | pack | inline literal (semantic audit required) | 2 | e.v[2] = n.ep_blocked; |
+| L08082 | src/mod/session2/ui_pause_logic.h:326:9 | pack | inline literal (semantic audit required) | 3 | e.v[3] = n.walk.count &#124; static_cast<uint64_t>(n.walk.open) << 32; |
+| L08083 | src/mod/session2/ui_pause_logic.h:326:67 | pack | inline literal (semantic audit required) | 32 | e.v[3] = n.walk.count &#124; static_cast<uint64_t>(n.walk.open) << 32; |
+| L08084 | src/mod/session2/ui_pause_logic.h:327:9 | pack | inline literal (semantic audit required) | 4 | e.v[4] = n.walk.hits &#124; static_cast<uint64_t>(static_cast<uint8_t>(n.walk.source + 1)) << 32 &#124; |
+| L08085 | src/mod/session2/ui_pause_logic.h:327:87 | pack | inline literal (semantic audit required) | 1 | e.v[4] = n.walk.hits &#124; static_cast<uint64_t>(static_cast<uint8_t>(n.walk.source + 1)) << 32 &#124; |
+| L08086 | src/mod/session2/ui_pause_logic.h:327:94 | pack | inline literal (semantic audit required) | 32 | e.v[4] = n.walk.hits &#124; static_cast<uint64_t>(static_cast<uint8_t>(n.walk.source + 1)) << 32 &#124; |
+| L08087 | src/mod/session2/ui_pause_logic.h:328:27 | pack | inline literal (semantic audit required) | 1ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08088 | src/mod/session2/ui_pause_logic.h:328:34 | pack | inline literal (semantic audit required) | 0ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08089 | src/mod/session2/ui_pause_logic.h:328:43 | pack | inline literal (semantic audit required) | 40 | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08090 | src/mod/session2/ui_pause_logic.h:328:68 | pack | inline literal (semantic audit required) | 1ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08091 | src/mod/session2/ui_pause_logic.h:328:75 | pack | inline literal (semantic audit required) | 0ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08092 | src/mod/session2/ui_pause_logic.h:328:84 | pack | inline literal (semantic audit required) | 41 | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08093 | src/mod/session2/ui_pause_logic.h:328:101 | pack | inline literal (semantic audit required) | 1ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08094 | src/mod/session2/ui_pause_logic.h:328:108 | pack | inline literal (semantic audit required) | 0ull | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08095 | src/mod/session2/ui_pause_logic.h:328:117 | pack | inline literal (semantic audit required) | 42 | (n.walk.ok ? 1ull : 0ull) << 40 &#124; (n.walk.truncated ? 1ull : 0ull) << 41 &#124; (n.walked ? 1ull : 0ull) << 42; |
+| L08096 | src/mod/session2/ui_pause_logic.h:329:21 | pack | inline literal (semantic audit required) | 0 | uint64_t meta = 0; |
+| L08097 | src/mod/session2/ui_pause_logic.h:330:21 | pack | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kMaxHits; ++i) { |
+| L08098 | src/mod/session2/ui_pause_logic.h:332:80 | pack | inline literal (semantic audit required) | 0xFFFFFFFFull | const bool in_image = h.root_vtable >= base && h.root_vtable - base <= 0xFFFFFFFFull; |
+| L08099 | src/mod/session2/ui_pause_logic.h:333:64 | pack | inline literal (semantic audit required) | 0 | const uint64_t rva = in_image ? h.root_vtable - base : 0; |
+| L08100 | src/mod/session2/ui_pause_logic.h:334:13 | pack | inline literal (semantic audit required) | 5 | e.v[5 + 2 * i] = h.view; |
+| L08101 | src/mod/session2/ui_pause_logic.h:334:17 | pack | inline literal (semantic audit required) | 2 | e.v[5 + 2 * i] = h.view; |
+| L08102 | src/mod/session2/ui_pause_logic.h:335:13 | pack | inline literal (semantic audit required) | 6 | e.v[6 + 2 * i] = rva &#124; static_cast<uint64_t>(h.scale_bits) << 32; |
+| L08103 | src/mod/session2/ui_pause_logic.h:335:17 | pack | inline literal (semantic audit required) | 2 | e.v[6 + 2 * i] = rva &#124; static_cast<uint64_t>(h.scale_bits) << 32; |
+| L08104 | src/mod/session2/ui_pause_logic.h:335:71 | pack | inline literal (semantic audit required) | 32 | e.v[6 + 2 * i] = rva &#124; static_cast<uint64_t>(h.scale_bits) << 32; |
+| L08105 | src/mod/session2/ui_pause_logic.h:336:39 | pack | inline literal (semantic audit required) | 0xFFFFull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
+| L08106 | src/mod/session2/ui_pause_logic.h:336:63 | pack | inline literal (semantic audit required) | 1ull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
+| L08107 | src/mod/session2/ui_pause_logic.h:336:72 | pack | inline literal (semantic audit required) | 16 | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
+| L08108 | src/mod/session2/ui_pause_logic.h:336:92 | pack | inline literal (semantic audit required) | 1ull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
+| L08109 | src/mod/session2/ui_pause_logic.h:336:99 | pack | inline literal (semantic audit required) | 0ull | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
+| L08110 | src/mod/session2/ui_pause_logic.h:336:108 | pack | inline literal (semantic audit required) | 17 | const uint64_t m = (h.index & 0xFFFFull) &#124; (h.state & 1ull) << 16 &#124; (h.custom_vf ? 1ull : 0ull) << 17 &#124; |
+| L08111 | src/mod/session2/ui_pause_logic.h:337:40 | pack | inline literal (semantic audit required) | 1ull | (in_image ? 1ull : 0ull) << 18; |
+| L08112 | src/mod/session2/ui_pause_logic.h:337:47 | pack | inline literal (semantic audit required) | 0ull | (in_image ? 1ull : 0ull) << 18; |
+| L08113 | src/mod/session2/ui_pause_logic.h:337:56 | pack | inline literal (semantic audit required) | 18 | (in_image ? 1ull : 0ull) << 18; |
+| L08114 | src/mod/session2/ui_pause_logic.h:338:23 | pack | inline literal (semantic audit required) | 20 | meta &#124;= m << (20 * i); |
+| L08115 | src/mod/session2/ui_pause_logic.h:340:9 | pack | inline literal (semantic audit required) | 11 | e.v[11] = meta; |
+| L08116 | src/mod/session2/ui_pause_logic.h:346:30 | unpack | inline literal (semantic audit required) | 1u | n.d.blocked = (e.flags & 1u) != 0; |
+| L08117 | src/mod/session2/ui_pause_logic.h:346:37 | unpack | inline literal (semantic audit required) | 0 | n.d.blocked = (e.flags & 1u) != 0; |
+| L08118 | src/mod/session2/ui_pause_logic.h:347:28 | unpack | inline literal (semantic audit required) | 2u | n.d.would = (e.flags & 2u) != 0; |
+| L08119 | src/mod/session2/ui_pause_logic.h:347:35 | unpack | inline literal (semantic audit required) | 0 | n.d.would = (e.flags & 2u) != 0; |
+| L08120 | src/mod/session2/ui_pause_logic.h:348:25 | unpack | inline literal (semantic audit required) | 4u | n.live = (e.flags & 4u) != 0; |
+| L08121 | src/mod/session2/ui_pause_logic.h:348:32 | unpack | inline literal (semantic audit required) | 0 | n.live = (e.flags & 4u) != 0; |
+| L08122 | src/mod/session2/ui_pause_logic.h:349:44 | unpack | inline literal (semantic audit required) | 3 | n.site = static_cast<Site>((e.flags >> 3) & 3u); |
+| L08123 | src/mod/session2/ui_pause_logic.h:349:49 | unpack | inline literal (semantic audit required) | 3u | n.site = static_cast<Site>((e.flags >> 3) & 3u); |
+| L08124 | src/mod/session2/ui_pause_logic.h:350:44 | unpack | inline literal (semantic audit required) | 5 | n.mode = static_cast<Mode>((e.flags >> 5) & 3u); |
+| L08125 | src/mod/session2/ui_pause_logic.h:350:49 | unpack | inline literal (semantic audit required) | 3u | n.mode = static_cast<Mode>((e.flags >> 5) & 3u); |
+| L08126 | src/mod/session2/ui_pause_logic.h:351:44 | unpack | inline literal (semantic audit required) | 0 | n.old_bits = static_cast<uint32_t>(e.v[0]); |
+| L08127 | src/mod/session2/ui_pause_logic.h:352:44 | unpack | inline literal (semantic audit required) | 0 | n.new_bits = static_cast<uint32_t>(e.v[0] >> 32); |
+| L08128 | src/mod/session2/ui_pause_logic.h:352:50 | unpack | inline literal (semantic audit required) | 32 | n.new_bits = static_cast<uint32_t>(e.v[0] >> 32); |
+| L08129 | src/mod/session2/ui_pause_logic.h:353:31 | unpack | inline literal (semantic audit required) | 1.0f | n.d.value = n.d.blocked ? 1.0f : std::bit_cast<float>(n.new_bits); |
+| L08130 | src/mod/session2/ui_pause_logic.h:354:21 | unpack | inline literal (semantic audit required) | 1 | n.ep_seen = e.v[1]; |
+| L08131 | src/mod/session2/ui_pause_logic.h:355:24 | unpack | inline literal (semantic audit required) | 2 | n.ep_blocked = e.v[2]; |
+| L08132 | src/mod/session2/ui_pause_logic.h:356:46 | unpack | inline literal (semantic audit required) | 3 | n.walk.count = static_cast<uint32_t>(e.v[3]); |
+| L08133 | src/mod/session2/ui_pause_logic.h:357:45 | unpack | inline literal (semantic audit required) | 3 | n.walk.open = static_cast<uint32_t>(e.v[3] >> 32); |
+| L08134 | src/mod/session2/ui_pause_logic.h:357:51 | unpack | inline literal (semantic audit required) | 32 | n.walk.open = static_cast<uint32_t>(e.v[3] >> 32); |
+| L08135 | src/mod/session2/ui_pause_logic.h:358:45 | unpack | inline literal (semantic audit required) | 4 | n.walk.hits = static_cast<uint32_t>(e.v[4]); |
+| L08136 | src/mod/session2/ui_pause_logic.h:359:63 | unpack | inline literal (semantic audit required) | 4 | n.walk.source = static_cast<int>(static_cast<uint8_t>(e.v[4] >> 32)) - 1; |
+| L08137 | src/mod/session2/ui_pause_logic.h:359:69 | unpack | inline literal (semantic audit required) | 32 | n.walk.source = static_cast<int>(static_cast<uint8_t>(e.v[4] >> 32)) - 1; |
+| L08138 | src/mod/session2/ui_pause_logic.h:359:76 | unpack | inline literal (semantic audit required) | 1 | n.walk.source = static_cast<int>(static_cast<uint8_t>(e.v[4] >> 32)) - 1; |
+| L08139 | src/mod/session2/ui_pause_logic.h:360:22 | unpack | inline literal (semantic audit required) | 4 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
+| L08140 | src/mod/session2/ui_pause_logic.h:360:28 | unpack | inline literal (semantic audit required) | 40 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
+| L08141 | src/mod/session2/ui_pause_logic.h:360:33 | unpack | inline literal (semantic audit required) | 1 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
+| L08142 | src/mod/session2/ui_pause_logic.h:360:39 | unpack | inline literal (semantic audit required) | 0 | n.walk.ok = (e.v[4] >> 40 & 1) != 0; |
+| L08143 | src/mod/session2/ui_pause_logic.h:361:29 | unpack | inline literal (semantic audit required) | 4 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
+| L08144 | src/mod/session2/ui_pause_logic.h:361:35 | unpack | inline literal (semantic audit required) | 41 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
+| L08145 | src/mod/session2/ui_pause_logic.h:361:40 | unpack | inline literal (semantic audit required) | 1 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
+| L08146 | src/mod/session2/ui_pause_logic.h:361:46 | unpack | inline literal (semantic audit required) | 0 | n.walk.truncated = (e.v[4] >> 41 & 1) != 0; |
+| L08147 | src/mod/session2/ui_pause_logic.h:362:21 | unpack | inline literal (semantic audit required) | 4 | n.walked = (e.v[4] >> 42 & 1) != 0; |
+| L08148 | src/mod/session2/ui_pause_logic.h:362:27 | unpack | inline literal (semantic audit required) | 42 | n.walked = (e.v[4] >> 42 & 1) != 0; |
+| L08149 | src/mod/session2/ui_pause_logic.h:362:32 | unpack | inline literal (semantic audit required) | 1 | n.walked = (e.v[4] >> 42 & 1) != 0; |
+| L08150 | src/mod/session2/ui_pause_logic.h:362:38 | unpack | inline literal (semantic audit required) | 0 | n.walked = (e.v[4] >> 42 & 1) != 0; |
+| L08151 | src/mod/session2/ui_pause_logic.h:363:21 | unpack | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kMaxHits; ++i) { |
+| L08152 | src/mod/session2/ui_pause_logic.h:365:32 | unpack | inline literal (semantic audit required) | 11 | const uint64_t m = e.v[11] >> (20 * i); |
+| L08153 | src/mod/session2/ui_pause_logic.h:365:40 | unpack | inline literal (semantic audit required) | 20 | const uint64_t m = e.v[11] >> (20 * i); |
+| L08154 | src/mod/session2/ui_pause_logic.h:366:45 | unpack | inline literal (semantic audit required) | 0xFFFF | h.index = static_cast<uint32_t>(m & 0xFFFF); |
+| L08155 | src/mod/session2/ui_pause_logic.h:367:45 | unpack | inline literal (semantic audit required) | 16 | h.state = static_cast<uint8_t>(m >> 16 & 1); |
+| L08156 | src/mod/session2/ui_pause_logic.h:367:50 | unpack | inline literal (semantic audit required) | 1 | h.state = static_cast<uint8_t>(m >> 16 & 1); |
+| L08157 | src/mod/session2/ui_pause_logic.h:368:29 | unpack | inline literal (semantic audit required) | 17 | h.custom_vf = (m >> 17 & 1) != 0; |
+| L08158 | src/mod/session2/ui_pause_logic.h:368:34 | unpack | inline literal (semantic audit required) | 1 | h.custom_vf = (m >> 17 & 1) != 0; |
+| L08159 | src/mod/session2/ui_pause_logic.h:368:40 | unpack | inline literal (semantic audit required) | 0 | h.custom_vf = (m >> 17 & 1) != 0; |
+| L08160 | src/mod/session2/ui_pause_logic.h:369:37 | unpack | inline literal (semantic audit required) | 18 | const bool in_image = (m >> 18 & 1) != 0; |
+| L08161 | src/mod/session2/ui_pause_logic.h:369:42 | unpack | inline literal (semantic audit required) | 1 | const bool in_image = (m >> 18 & 1) != 0; |
+| L08162 | src/mod/session2/ui_pause_logic.h:369:48 | unpack | inline literal (semantic audit required) | 0 | const bool in_image = (m >> 18 & 1) != 0; |
+| L08163 | src/mod/session2/ui_pause_logic.h:370:45 | unpack | inline literal (semantic audit required) | 5 | h.view = static_cast<uintptr_t>(e.v[5 + 2 * i]); |
+| L08164 | src/mod/session2/ui_pause_logic.h:370:49 | unpack | inline literal (semantic audit required) | 2 | h.view = static_cast<uintptr_t>(e.v[5 + 2 * i]); |
+| L08165 | src/mod/session2/ui_pause_logic.h:371:69 | unpack | inline literal (semantic audit required) | 6 | h.root_vtable = in_image ? base + static_cast<uint32_t>(e.v[6 + 2 * i]) : 0; |
+| L08166 | src/mod/session2/ui_pause_logic.h:371:73 | unpack | inline literal (semantic audit required) | 2 | h.root_vtable = in_image ? base + static_cast<uint32_t>(e.v[6 + 2 * i]) : 0; |
+| L08167 | src/mod/session2/ui_pause_logic.h:371:83 | unpack | inline literal (semantic audit required) | 0 | h.root_vtable = in_image ? base + static_cast<uint32_t>(e.v[6 + 2 * i]) : 0; |
+| L08168 | src/mod/session2/ui_pause_logic.h:372:50 | unpack | inline literal (semantic audit required) | 6 | h.scale_bits = static_cast<uint32_t>(e.v[6 + 2 * i] >> 32); |
+| L08169 | src/mod/session2/ui_pause_logic.h:372:54 | unpack | inline literal (semantic audit required) | 2 | h.scale_bits = static_cast<uint32_t>(e.v[6 + 2 * i] >> 32); |
+| L08170 | src/mod/session2/ui_pause_logic.h:372:64 | unpack | inline literal (semantic audit required) | 32 | h.scale_bits = static_cast<uint32_t>(e.v[6 + 2 * i] >> 32); |
+| L08171 | src/mod/session2/ui_pause_logic.h:381:51 | attributed_vtable | inline literal (semantic audit required) | 0 | if (!n.walked &#124;&#124; !n.walk.ok &#124;&#124; n.walk.hits == 0) return 0; |
+| L08172 | src/mod/session2/ui_pause_logic.h:381:61 | attributed_vtable | inline literal (semantic audit required) | 0 | if (!n.walked &#124;&#124; !n.walk.ok &#124;&#124; n.walk.hits == 0) return 0; |
+| L08173 | src/mod/session2/ui_pause_logic.h:382:36 | attributed_vtable | inline literal (semantic audit required) | 0 | const int i = n.walk.source >= 0 ? n.walk.source : 0; |
+| L08174 | src/mod/session2/ui_pause_logic.h:382:56 | attributed_vtable | inline literal (semantic audit required) | 0 | const int i = n.walk.source >= 0 ? n.walk.source : 0; |
+| L08175 | src/mod/session2/ui_pause_logic.h:394:29 | attributed_vtable | inline literal (semantic audit required) | 0 | uint64_t episodes = 0;        // transitions into a value this UI explained |
+| L08176 | src/mod/session2/ui_pause_logic.h:395:35 | attributed_vtable | inline literal (semantic audit required) | 0 | uint64_t frames_blocked = 0;  // first-call frames replaced by 1.0 while it was the source |
+| L08177 | src/mod/session2/ui_pause_logic.h:396:32 | attributed_vtable | inline literal (semantic audit required) | 0 | uint64_t frames_seen = 0;     // first-call frames it was the source (blocked or not) |
+| L08178 | src/mod/session2/ui_pause_logic.h:397:27 | attributed_vtable | inline literal (semantic audit required) | 1.0f | float min_scale = 1.0f; |
+| L08179 | src/mod/session2/ui_pause_logic.h:412:22 | total_blocked | inline literal (semantic audit required) | 0 | uint64_t n = 0; |
+| L08180 | src/mod/session2/ui_pause_logic.h:425:32 | total_blocked | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> seen{0}, blocked{0}; |
+| L08181 | src/mod/session2/ui_pause_logic.h:425:44 | total_blocked | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> seen{0}, blocked{0}; |
+| L08182 | src/mod/session2/ui_pause_logic.h:428:24 | frame | inline literal (semantic audit required) | 1 | seen.fetch_add(1, std::memory_order_relaxed); |
+| L08183 | src/mod/session2/ui_pause_logic.h:429:44 | frame | inline literal (semantic audit required) | 1 | if (was_blocked) blocked.fetch_add(1, std::memory_order_relaxed); |
+| L08184 | src/mod/session2/ui_pause_logic.h:433:27 | close | inline literal (semantic audit required) | 0 | s = seen.exchange(0, std::memory_order_relaxed); |
+| L08185 | src/mod/session2/ui_pause_logic.h:434:30 | close | inline literal (semantic audit required) | 0 | b = blocked.exchange(0, std::memory_order_relaxed); |
+| L08186 | src/mod/session2/user2_funnels.h:112:23 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t opcode = 0; |
+| L08187 | src/mod/session2/user2_funnels.h:113:21 | (file scope) | inline literal (semantic audit required) | 0 | uint8_t route = 0;      // u2f::RouteFail (2372) |
+| L08188 | src/mod/session2/user2_funnels.h:114:21 | (file scope) | inline literal (semantic audit required) | 0 | uint8_t field = 0;      // 0 unknown, 1 the host's, 2 its own, 3 another |
+| L08189 | src/mod/session2/user2_funnels.h:115:26 | (file scope) | inline literal (semantic audit required) | 0 | uint32_t first_u32 = 0; |
+| L08190 | src/mod/session2/user2_funnels.h:116:18 | (file scope) | inline literal (semantic audit required) | 16 | uint8_t head[16] = {}; |
+| L08191 | src/mod/session2/user2_funnels.h:117:21 | (file scope) | inline literal (semantic audit required) | 0 | uint16_t size = 0; |
+| L08192 | src/mod/session2/user2_funnels_logic.h:44:91 | parse_mode | inline literal (semantic audit required) | 1 | while (!raw.empty() && (raw.front() == ' ' &#124;&#124; raw.front() == '\t')) raw.remove_prefix(1); |
+| L08193 | src/mod/session2/user2_funnels_logic.h:46:97 | parse_mode | inline literal (semantic audit required) | 0 | if (const size_t c = raw.find_first_of(";#"); c != std::string_view::npos) raw = raw.substr(0, c); |
+| L08194 | src/mod/session2/user2_funnels_logic.h:48:27 | parse_mode | inline literal (semantic audit required) | 1 | raw.remove_suffix(1); |
+| L08195 | src/mod/session2/user2_funnels_logic.h:185:25 | decide_quest_policy | inline literal (semantic audit required) | 0 | uint32_t char_key = 0, user2_char = 0; |
+| L08196 | src/mod/session2/user2_funnels_logic.h:185:41 | decide_quest_policy | inline literal (semantic audit required) | 0 | uint32_t char_key = 0, user2_char = 0; |
+| L08197 | src/mod/session2/user2_funnels_logic.h:265:18 | host_quest_ack_index | inline literal (semantic audit required) | 0 | for (int i = 0; i < 4; ++i) { |
+| L08198 | src/mod/session2/user2_funnels_logic.h:265:25 | host_quest_ack_index | inline literal (semantic audit required) | 4 | for (int i = 0; i < 4; ++i) { |
+| L08199 | src/mod/session2/user2_funnels_logic.h:268:13 | host_quest_ack_index | inline literal (semantic audit required) | 1 | return -1; |
+| L08200 | src/mod/session2/user2_funnels_logic.h:275:51 | is_user_key | inline literal (semantic audit required) | 0 | inline bool is_user_key(uint32_t k) { return k != 0 && (k >> 28) == 0x9; } |
+| L08201 | src/mod/session2/user2_funnels_logic.h:275:62 | is_user_key | inline literal (semantic audit required) | 28 | inline bool is_user_key(uint32_t k) { return k != 0 && (k >> 28) == 0x9; } |
+| L08202 | src/mod/session2/user2_funnels_logic.h:275:69 | is_user_key | inline literal (semantic audit required) | 0x9 | inline bool is_user_key(uint32_t k) { return k != 0 && (k >> 28) == 0x9; } |
+| L08203 | src/mod/session2/user2_funnels_logic.h:276:56 | is_character_key | inline literal (semantic audit required) | 0 | inline bool is_character_key(uint32_t k) { return k != 0 && (k >> 28) == 0xA; } |
+| L08204 | src/mod/session2/user2_funnels_logic.h:276:67 | is_character_key | inline literal (semantic audit required) | 28 | inline bool is_character_key(uint32_t k) { return k != 0 && (k >> 28) == 0xA; } |
+| L08205 | src/mod/session2/user2_funnels_logic.h:276:74 | is_character_key | inline literal (semantic audit required) | 0xA | inline bool is_character_key(uint32_t k) { return k != 0 && (k >> 28) == 0xA; } |
+| L08206 | src/mod/session2/user2_funnels_logic.h:281:27 | is_character_key | inline literal (semantic audit required) | 0 | uint32_t user2_user = 0;  // its user key (MainUserDataStartAck), 0x9... |
+| L08207 | src/mod/session2/user2_funnels_logic.h:282:27 | is_character_key | inline literal (semantic audit required) | 0 | uint32_t user2_char = 0;  // its main character's key (MainPlayerDataStartAck), 0xA... |
+| L08208 | src/mod/session2/user2_funnels_logic.h:283:26 | is_character_key | inline literal (semantic audit required) | 0 | uint32_t host_user = 0;   // the host's user key (session 1's ServerUserActor +0x60), 0x9... |
+| L08209 | src/mod/session2/user2_funnels_logic.h:309:19 | is_user2_character | inline literal (semantic audit required) | 0 | uint8_t arg = 0;          // dl |
+| L08210 | src/mod/session2/user2_funnels_logic.h:311:20 | is_user2_character | inline literal (semantic audit required) | 0 | uint32_t key = 0;         // u32 [X+0x60] |
+| L08211 | src/mod/session2/user2_funnels_logic.h:312:27 | is_user2_character | inline literal (semantic audit required) | 0 | uint32_t controller = 0;  // u32 [X+0x90] |
+| L08212 | src/mod/session2/user2_funnels_logic.h:335:43 | decide_rank | inline literal (semantic audit required) | 5 | if (in.mode == Mode::Off &#124;&#124; in.arg != 5 &#124;&#124; !keys_for_rank(in.keys) &#124;&#124; !in.read_ok) return d; |
+| L08213 | src/mod/session2/user2_funnels_logic.h:379:23 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t actor = 0;        // [params] |
+| L08214 | src/mod/session2/user2_funnels_logic.h:381:24 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t vtable = 0; |
+| L08215 | src/mod/session2/user2_funnels_logic.h:382:33 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t expected_vtable = 0;   // exe + 0x5B1E2B0: ServerChildOnlyInGameActor (the user's characters, [user+0xD0]) |
+| L08216 | src/mod/session2/user2_funnels_logic.h:383:34 | rank_out_name | inline literal (semantic audit required) | 0 | uintptr_t expected_vtable2 = 0;  // exe + 0x5B1DE20: ServerNormalInGameActor |
+| L08217 | src/mod/session2/user2_funnels_logic.h:384:20 | rank_out_name | inline literal (semantic audit required) | 0 | uint32_t key = 0; |
+| L08218 | src/mod/session2/user2_funnels_logic.h:385:27 | rank_out_name | inline literal (semantic audit required) | 0 | uint32_t controller = 0; |
+| L08219 | src/mod/session2/user2_funnels_logic.h:425:22 | subject_name | inline literal (semantic audit required) | 0 | uint32_t owner = 0; |
+| L08220 | src/mod/session2/user2_funnels_logic.h:446:23 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2C4A36F | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
+| L08221 | src/mod/session2/user2_funnels_logic.h:446:47 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2C4A0AD | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
+| L08222 | src/mod/session2/user2_funnels_logic.h:446:71 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2B03AA7 | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
+| L08223 | src/mod/session2/user2_funnels_logic.h:446:95 | vf40_caller_allowed | inline literal (semantic audit required) | 0x2896347 | return ret_rva == 0x2C4A36F &#124;&#124; ret_rva == 0x2C4A0AD &#124;&#124; ret_rva == 0x2B03AA7 &#124;&#124; ret_rva == 0x2896347; |
+| L08224 | src/mod/session2/user2_funnels_logic.h:507:23 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
+| L08225 | src/mod/session2/user2_funnels_logic.h:507:33 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
+| L08226 | src/mod/session2/user2_funnels_logic.h:507:41 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
+| L08227 | src/mod/session2/user2_funnels_logic.h:507:50 | chain_fail_name | inline literal (semantic audit required) | 0 | uintptr_t comps = 0, comp = 0, vt = 0, mgr = 0; |
+| L08228 | src/mod/session2/user2_funnels_logic.h:526:33 | add | inline literal (semantic audit required) | 0 | c_[op < kOpcodes ? op : 0].fetch_add(1, std::memory_order_relaxed); |
+| L08229 | src/mod/session2/user2_funnels_logic.h:526:46 | add | inline literal (semantic audit required) | 1 | c_[op < kOpcodes ? op : 0].fetch_add(1, std::memory_order_relaxed); |
+| L08230 | src/mod/session2/user2_funnels_logic.h:528:69 | at | inline literal (semantic audit required) | 0 | uint32_t at(uint16_t op) const { return c_[op < kOpcodes ? op : 0].load(std::memory_order_relaxed); } |
+| L08231 | src/mod/session2/user2_funnels_logic.h:532:25 | top | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < kOpcodes; ++i) { |
+| L08232 | src/mod/session2/user2_funnels_logic.h:549:24 | std::stable_sort | inline literal (semantic audit required) | 2 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L08233 | src/mod/session2/user2_funnels_logic.h:549:39 | std::stable_sort | inline literal (semantic audit required) | 1 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L08234 | src/mod/session2/user2_funnels_logic.h:549:46 | std::stable_sort | inline literal (semantic audit required) | 0 | static_assert(N >= 2 && (N & (N - 1)) == 0, "N must be a power of two"); |
+| L08235 | src/mod/session2/user2_funnels_logic.h:554:33 | add | inline literal (semantic audit required) | 1 | overflow_.fetch_add(1, std::memory_order_relaxed); |
+| L08236 | src/mod/session2/user2_funnels_logic.h:557:27 | add | inline literal (semantic audit required) | 2654435761u | size_t i = (rva * 2654435761u) & (N - 1); |
+| L08237 | src/mod/session2/user2_funnels_logic.h:557:47 | add | inline literal (semantic audit required) | 1 | size_t i = (rva * 2654435761u) & (N - 1); |
+| L08238 | src/mod/session2/user2_funnels_logic.h:558:29 | add | inline literal (semantic audit required) | 0 | for (size_t probe = 0; probe < N; ++probe, i = (i + 1) & (N - 1)) { |
+| L08239 | src/mod/session2/user2_funnels_logic.h:558:61 | add | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < N; ++probe, i = (i + 1) & (N - 1)) { |
+| L08240 | src/mod/session2/user2_funnels_logic.h:558:71 | add | inline literal (semantic audit required) | 1 | for (size_t probe = 0; probe < N; ++probe, i = (i + 1) & (N - 1)) { |
+| L08241 | src/mod/session2/user2_funnels_logic.h:560:22 | add | inline literal (semantic audit required) | 0 | if (k == 0 && key_[i].compare_exchange_strong(k, rva, std::memory_order_acq_rel)) k = rva; |
+| L08242 | src/mod/session2/user2_funnels_logic.h:562:33 | add | inline literal (semantic audit required) | 1 | n_[i].fetch_add(1, std::memory_order_relaxed); |
+| L08243 | src/mod/session2/user2_funnels_logic.h:566:29 | add | inline literal (semantic audit required) | 1 | overflow_.fetch_add(1, std::memory_order_relaxed); |
+| L08244 | src/mod/session2/user2_funnels_logic.h:571:25 | rows | inline literal (semantic audit required) | 0 | for (size_t i = 0; i < N; ++i) { |
+| L08245 | src/mod/session2/user2_funnels_logic.h:583:37 | overflow | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> overflow_{0}; |
+| L08246 | src/mod/session2/user2_funnels_logic.h:587:33 | overflow | inline literal (semantic audit required) | 0 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
+| L08247 | src/mod/session2/user2_funnels_logic.h:587:44 | overflow | inline literal (semantic audit required) | 1 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
+| L08248 | src/mod/session2/user2_funnels_logic.h:587:59 | overflow | inline literal (semantic audit required) | 2 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
+| L08249 | src/mod/session2/user2_funnels_logic.h:587:70 | overflow | inline literal (semantic audit required) | 3 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
+| L08250 | src/mod/session2/user2_funnels_logic.h:587:81 | overflow | inline literal (semantic audit required) | 4 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
+| L08251 | src/mod/session2/user2_funnels_logic.h:587:95 | overflow | inline literal (semantic audit required) | 5 | enum Funnel : uint8_t { kVf40 = 0, kVf48 = 1, kFindUser = 2, kDead = 3, kLoot = 4, kFunnels = 5 }; |
+| L08252 | src/mod/session2/user2_funnels_logic.h:602:33 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> calls{0};          // every call (vf40/vf48/FindUser: only under a subject) |
+| L08253 | src/mod/session2/user2_funnels_logic.h:603:41 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> under_subject{0};  // inside a Req of user 2 |
+| L08254 | src/mod/session2/user2_funnels_logic.h:604:39 | funnel_name | inline literal (semantic audit required) | 8 | std::array<std::atomic<uint64_t>, 8> out{};  // by FunnelOut |
+| L08255 | src/mod/session2/user2_funnels_logic.h:605:32 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> same{0}, differ{0};    // probe: the original vs user 2's |
+| L08256 | src/mod/session2/user2_funnels_logic.h:605:43 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> same{0}, differ{0};    // probe: the original vs user 2's |
+| L08257 | src/mod/session2/user2_funnels_logic.h:606:38 | funnel_name | inline literal (semantic audit required) | 0 | std::atomic<uint64_t> unreadable{0};         // user 2's value could not be built: the original |
+| L08258 | src/mod/session2/user2_stages.h:125:31 | (file scope) | inline literal (semantic audit required) | 5000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |
+| L08259 | src/mod/session2/user2_stages.h:125:52 | (file scope) | inline literal (semantic audit required) | 8000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |
+| L08260 | src/mod/session2/user2_stages.h:125:77 | (file scope) | inline literal (semantic audit required) | 2000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |
+| L08261 | src/mod/session2/user2_stages.h:125:101 | (file scope) | inline literal (semantic audit required) | 60000 | uint32_t no_progress_ms = 5000, req_grace_ms = 8000, guest_silence_ms = 2000, postpone_max_ms = 60000; |

@@ -1,0 +1,210 @@
+{
+  "identity": {
+    "path": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+    "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "file_size": 335440280,
+    "timestamp": "0x6AF5D198",
+    "image_base": "0x140000000",
+    "image_size": "0x144E9000",
+    "pdata_entries": 249586,
+    "sections": [
+      {
+        "name": ".reloc",
+        "rva": 4096,
+        "raw": 1024,
+        "size": 90251264,
+        "virtual_size": 90251264,
+        "flags": 1610612768
+      },
+      {
+        "name": ".00cfg",
+        "rva": 90255360,
+        "raw": 90252288,
+        "size": 24391680,
+        "virtual_size": 24391680,
+        "flags": 1073741888
+      },
+      {
+        "name": ".sxdata",
+        "rva": 114647040,
+        "raw": 114643968,
+        "size": 3591168,
+        "virtual_size": 8851456,
+        "flags": 3221225536
+      },
+      {
+        "name": ".debug$P",
+        "rva": 123498496,
+        "raw": 118235136,
+        "size": 2998272,
+        "virtual_size": 2998272,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls$",
+        "rva": 126496768,
+        "raw": 121233408,
+        "size": 12288,
+        "virtual_size": 12288,
+        "flags": 1073741888
+      },
+      {
+        "name": ".srdata",
+        "rva": 126509056,
+        "raw": 121245696,
+        "size": 196608,
+        "virtual_size": 196608,
+        "flags": 1073741888
+      },
+      {
+        "name": ".ecode",
+        "rva": 126705664,
+        "raw": 121442304,
+        "size": 2023424,
+        "virtual_size": 2023424,
+        "flags": 1107296320
+      },
+      {
+        "name": ".data1",
+        "rva": 128729088,
+        "raw": 123465728,
+        "size": 207098368,
+        "virtual_size": 207097956,
+        "flags": 3758096416
+      },
+      {
+        "name": ".sbss",
+        "rva": 335831040,
+        "raw": 330564096,
+        "size": 1822720,
+        "virtual_size": 1822270,
+        "flags": 1073741856
+      },
+      {
+        "name": ".xcode",
+        "rva": 337653760,
+        "raw": 332386816,
+        "size": 1024,
+        "virtual_size": 560,
+        "flags": 3221225504
+      },
+      {
+        "name": ".trace",
+        "rva": 337657856,
+        "raw": 332387840,
+        "size": 36352,
+        "virtual_size": 36316,
+        "flags": 1073741888
+      },
+      {
+        "name": ".rodata",
+        "rva": 337694720,
+        "raw": 332424192,
+        "size": 2995200,
+        "virtual_size": 2995032,
+        "flags": 1073741888
+      }
+    ]
+  },
+  "descriptors": [
+    {
+      "name": ".?AVTrocTrMainUserDataStartAck@pa@@",
+      "vtable": "0x5A14AD8",
+      "initializer": "0x1522D0",
+      "store": "0x1522FC",
+      "instance": "0x6F22BB0",
+      "kind": 1,
+      "opcode": 2420,
+      "flags": "0x2000002",
+      "descriptor_min": 5,
+      "descriptor_max": 32710,
+      "adopted": false,
+      "missing": "Handler consumption and opcode identity cross-check"
+    },
+    {
+      "name": ".?AVTrocTrMainPlayerDataStartAck@pa@@",
+      "vtable": "0x5A17218",
+      "initializer": "0x14BC00",
+      "store": "0x14BC2C",
+      "instance": "0x6F172A0",
+      "kind": 1,
+      "opcode": 2844,
+      "flags": "0x2000000",
+      "descriptor_min": 5,
+      "descriptor_max": 32710,
+      "adopted": false,
+      "missing": "Handler consumption and opcode identity cross-check"
+    },
+    {
+      "name": ".?AVTrocTrLoginUserToFieldServerReq@pa@@",
+      "vtable": "0x5F65C78",
+      "initializer": "0x25E140",
+      "store": "0x25E16C",
+      "instance": "0x6F3F8D0",
+      "kind": 4,
+      "opcode": 2554,
+      "flags": "0xFF0002",
+      "descriptor_min": 5,
+      "descriptor_max": 32710,
+      "adopted": false,
+      "missing": "Handler consumption and opcode identity cross-check"
+    },
+    {
+      "name": ".?AVTrocTrConnectCryptogramToServerReq@pa@@",
+      "vtable": "0x5F65CB8",
+      "initializer": "0x25E1E0",
+      "store": "0x25E20C",
+      "instance": "0x6F3F9F0",
+      "kind": 2147483646,
+      "opcode": 2401,
+      "flags": "0xFF0000",
+      "descriptor_min": 5,
+      "descriptor_max": 32710,
+      "adopted": false,
+      "missing": "Handler consumption and opcode identity cross-check"
+    },
+    {
+      "name": ".?AVTrocTrSaveDataSlotRefreshReq@pa@@",
+      "vtable": "0x5F65D38",
+      "initializer": "0x25E320",
+      "store": "0x25E34C",
+      "instance": "0x6F3FC30",
+      "kind": 4,
+      "opcode": 3005,
+      "flags": "0x40000",
+      "descriptor_min": 5,
+      "descriptor_max": 32710,
+      "adopted": false,
+      "missing": "Handler consumption and opcode identity cross-check"
+    },
+    {
+      "name": ".?AVTrocTrMoveFieldCompleteReq@pa@@",
+      "vtable": "0x5F67DB8",
+      "initializer": "0x259370",
+      "store": "0x25939C",
+      "instance": "0x6F36CC0",
+      "kind": 4,
+      "opcode": 2723,
+      "flags": "0x100000",
+      "descriptor_min": 5,
+      "descriptor_max": 32710,
+      "adopted": false,
+      "missing": "Handler consumption and opcode identity cross-check"
+    },
+    {
+      "name": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@",
+      "vtable": "0x5F676B8",
+      "initializer": "0x2588D0",
+      "store": "0x2588FC",
+      "instance": "0x6F359A0",
+      "kind": 4,
+      "opcode": 3081,
+      "flags": "0x40000",
+      "descriptor_min": 5,
+      "descriptor_max": 32710,
+      "adopted": false,
+      "missing": "Handler consumption and opcode identity cross-check"
+    }
+  ],
+  "adopted": 0
+}

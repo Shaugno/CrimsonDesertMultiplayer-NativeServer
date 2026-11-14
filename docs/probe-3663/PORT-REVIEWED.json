@@ -1,0 +1,39 @@
+{
+  "scope": "Static identities only; incomplete core table; no gameplay authorization",
+  "source": "src/mod/session2/offsets_s2.h",
+  "proofs": {
+    "send": "Unique whole-function normalized fingerprints in both files; unique short signatures; named NwVirtualAsyncSession slot 9 / NwVirtualSyncSession slot 6; paired Ghidra bodies confirm queue forwarding and result-pointer ABI.",
+    "queue": "Unique whole-function normalized fingerprint; paired Ghidra lock/queue bodies; both independently matched session-send functions call the same new queue push.",
+    "alloc": "Unique whole-function normalized fingerprints; paired Ghidra thread/global heap semantics; independent 3663 PostPacket and native session-construction callers select these same allocators.",
+    "ctor": "Paired Ghidra base-session constructor bodies; exact named NwSession COL/vtable identity; native 3663 async-session construction allocates 0xD0 then calls this constructor with flag zero before installing the derived vtable.",
+    "tls-index": "Paired allocator instructions load the index via this RIP-relative slot; independent PE TLS directory AddressOfIndex is RVA 0x715BFD0. It is BSS and is not read as file-backed data.",
+    "tls-flag": "Old constructor/PostPacket use +0x1FD; independently decoded 3663 constructor, PostPacket and native ServerModule initialization use +0x1FE before choosing the same matched heap functions.",
+    "async-table": "Exact NwVirtualAsyncSession mangled type, self-consistent COL, and primary table in both files; independently matched Send is slot 9; native 3663 construction writes this derived table.",
+    "async-base-table": "Exact NwAsyncSession mangled type/COL/table in both files; native 3663 construction writes this base table before the derived virtual-session table.",
+    "size": "Native 3663 initialization allocates 0xD0 for this exact named async-session object; constructor/derived initialization writes through the last qword at +0xC8, consistent with the independently delimited 15-slot table and 2976 construction contract.",
+    "vtable-count": "Both exact named primary async-session tables contain 15 executable pointers before the next locator/data entry; Send remains at independently matched slot 9.",
+    "out-queue": "Paired Send bodies read session+0xC8; independent native 3663 ServerModule initialization initializes and assigns that same field before the session is used.",
+    "frame": "Paired Send bodies convert AsyncRequestSend* to the queue item at +0x30; the independently matched queue push receives exactly that derived pointer, as on 2976.",
+    "server-recv": "Direct-call-neighbour matching ranks 0x2A0EA70 first (six mapped callees); paired Ghidra bodies independently confirm six-argument receive ABI, framed-length check, server kind/channel dispatch and session handling. This does not validate every downstream payload or session layout.",
+    "save-refresh": "Named SaveDataSlotRefreshReq RTTI slot 2 leads to the locked busy-flag sequence calling 0x1A18320; independently followed thunk reaches .xtls 0xBB0CBC0, whose paired body enumerates slot folders and rebuilds the same manager table. Other guest save/lifecycle paths remain unverified."
+  },
+  "matches": [
+    {"symbol":"kSessionSend","value":"0x165C1F0","proof":"send"},
+    {"symbol":"kSyncSessionSend","value":"0x165CB60","proof":"send"},
+    {"symbol":"kQueuePush","value":"0x3AB4C0","proof":"queue"},
+    {"symbol":"kAllocThread","value":"0x4B7E0C0","proof":"alloc"},
+    {"symbol":"kAllocGlobal","value":"0x4B7E188","proof":"alloc"},
+    {"symbol":"kNwSessionCtor","value":"0x165B9D0","proof":"ctor"},
+    {"symbol":"kTlsIndexSlot","value":"0x715BFD0","proof":"tls-index"},
+    {"symbol":"kTls_UseGlobalHeap","value":"0x1FE","proof":"tls-flag"},
+    {"symbol":"kNwVirtualAsyncSessionVtable","value":"0x5B40310","proof":"async-table"},
+    {"symbol":"kNwAsyncSessionVtable","value":"0x5B403A8","proof":"async-base-table"},
+    {"symbol":"kSessionSize","value":"0xD0","proof":"size"},
+    {"symbol":"kSessionVtableEntries","value":"15","proof":"vtable-count"},
+    {"symbol":"kSessionVfSend","value":"9","proof":"async-table"},
+    {"symbol":"kSession_OutQueue","value":"0xC8","proof":"out-queue"},
+    {"symbol":"kRq_Frame","value":"0x30","proof":"frame"},
+    {"symbol":"kServerOnRecvPacket","value":"0x2A0EA70","proof":"server-recv"},
+    {"symbol":"kSaveMgrRefreshSlots","value":"0x1A18320","proof":"save-refresh"}
+  ]
+}

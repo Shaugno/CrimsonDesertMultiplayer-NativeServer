@@ -1,0 +1,4644 @@
+{
+  "identity": {
+    "path": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+    "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "file_size": 335440280,
+    "timestamp": "0x6AF5D198",
+    "image_base": "0x140000000",
+    "image_size": "0x144E9000",
+    "pdata_entries": 249586,
+    "sections": [
+      {
+        "name": ".reloc",
+        "rva": 4096,
+        "raw": 1024,
+        "size": 90251264,
+        "virtual_size": 90251264,
+        "flags": 1610612768
+      },
+      {
+        "name": ".00cfg",
+        "rva": 90255360,
+        "raw": 90252288,
+        "size": 24391680,
+        "virtual_size": 24391680,
+        "flags": 1073741888
+      },
+      {
+        "name": ".sxdata",
+        "rva": 114647040,
+        "raw": 114643968,
+        "size": 3591168,
+        "virtual_size": 8851456,
+        "flags": 3221225536
+      },
+      {
+        "name": ".debug$P",
+        "rva": 123498496,
+        "raw": 118235136,
+        "size": 2998272,
+        "virtual_size": 2998272,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls$",
+        "rva": 126496768,
+        "raw": 121233408,
+        "size": 12288,
+        "virtual_size": 12288,
+        "flags": 1073741888
+      },
+      {
+        "name": ".srdata",
+        "rva": 126509056,
+        "raw": 121245696,
+        "size": 196608,
+        "virtual_size": 196608,
+        "flags": 1073741888
+      },
+      {
+        "name": ".ecode",
+        "rva": 126705664,
+        "raw": 121442304,
+        "size": 2023424,
+        "virtual_size": 2023424,
+        "flags": 1107296320
+      },
+      {
+        "name": ".data1",
+        "rva": 128729088,
+        "raw": 123465728,
+        "size": 207098368,
+        "virtual_size": 207097956,
+        "flags": 3758096416
+      },
+      {
+        "name": ".sbss",
+        "rva": 335831040,
+        "raw": 330564096,
+        "size": 1822720,
+        "virtual_size": 1822270,
+        "flags": 1073741856
+      },
+      {
+        "name": ".xcode",
+        "rva": 337653760,
+        "raw": 332386816,
+        "size": 1024,
+        "virtual_size": 560,
+        "flags": 3221225504
+      },
+      {
+        "name": ".trace",
+        "rva": 337657856,
+        "raw": 332387840,
+        "size": 36352,
+        "virtual_size": 36316,
+        "flags": 1073741888
+      },
+      {
+        "name": ".rodata",
+        "rva": 337694720,
+        "raw": 332424192,
+        "size": 2995200,
+        "virtual_size": 2995032,
+        "flags": 1073741888
+      }
+    ]
+  },
+  "adopted": 0,
+  "types": [
+    {
+      "name": ".?AV?$VariantItem@V?$WeakPtr@VDelegateWrapper@BuildCharacterScene@ClientCharacterControlActorComponent@pa@@$0A@@pa@@@pa@@",
+      "descriptor": "0x6F6C710",
+      "locators": [
+        {
+          "rva": "0x61F5B28",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5987F28",
+          "locator": "0x61F5B28",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x5498D0",
+              "pdata_entry": false
+            },
+            {
+              "index": 1,
+              "rva": "0x548880",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x5488D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x548920",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x548930",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x539071",
+              "pdata_owner": "0x5388A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x539533",
+              "pdata_owner": "0x5388A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x53A931",
+              "pdata_owner": "0x53A250",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x53EAF0",
+              "pdata_owner": "0x53C760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x53ECE4",
+              "pdata_owner": "0x53C760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5488DF",
+              "pdata_owner": "0x5488D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x8C55E64",
+              "pdata_owner": "0x8C55E50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x8C5E434",
+              "pdata_owner": "0x8C5E420",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVDelegateWrapper@BuildCharacterScene@ClientCharacterControlActorComponent@pa@@",
+      "descriptor": "0x6F6D210",
+      "locators": [
+        {
+          "rva": "0x61F5D80",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5989D78",
+          "locator": "0x61F5D80",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x5374A0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x96D058C",
+              "pdata_owner": "0x96D04A0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVClientFrameEventProjectileToNearActor@pa@@",
+      "descriptor": "0x6F6F3B0",
+      "locators": [
+        {
+          "rva": "0x61FE628",
+          "this_offset": 0,
+          "ctor_offset": 0
+        },
+        {
+          "rva": "0x61FE678",
+          "this_offset": 16,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x598F528",
+          "locator": "0x61FE628",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x5C66B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x916200",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x5C66BD",
+              "pdata_owner": "0x5C66B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5CF586",
+              "pdata_owner": "0x5CD840",
+              "verified_instruction_boundary": false
+            }
+          ]
+        },
+        {
+          "rva": "0x598F568",
+          "locator": "0x61FE678",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x5D7FEC",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x5C66C7",
+              "pdata_owner": "0x5C66B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5CF590",
+              "pdata_owner": "0x5CD840",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVClientChildOnlyInGameActor@pa@@",
+      "descriptor": "0x6F719C0",
+      "locators": [
+        {
+          "rva": "0x6201D10",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5990BF0",
+          "locator": "0x6201D10",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x5EF4C0",
+              "pdata_entry": false
+            },
+            {
+              "index": 1,
+              "rva": "0x165B120",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x198E630",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x165B410",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x5DA720",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x3EAA90",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x165B110",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x165B500",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x5D9370",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x198D7F0",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x165B4B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x165B520",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x165B530",
+              "pdata_entry": false
+            },
+            {
+              "index": 14,
+              "rva": "0x165B540",
+              "pdata_entry": false
+            },
+            {
+              "index": 15,
+              "rva": "0x165B550",
+              "pdata_entry": false
+            },
+            {
+              "index": 16,
+              "rva": "0x165B560",
+              "pdata_entry": false
+            },
+            {
+              "index": 17,
+              "rva": "0x165B570",
+              "pdata_entry": false
+            },
+            {
+              "index": 18,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 19,
+              "rva": "0x2294EF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 20,
+              "rva": "0x5DA9F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 21,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 22,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 23,
+              "rva": "0x5D93D0",
+              "pdata_entry": false
+            },
+            {
+              "index": 24,
+              "rva": "0x5D93C0",
+              "pdata_entry": false
+            },
+            {
+              "index": 25,
+              "rva": "0x5F0B20",
+              "pdata_entry": false
+            },
+            {
+              "index": 26,
+              "rva": "0x165B770",
+              "pdata_entry": false
+            },
+            {
+              "index": 27,
+              "rva": "0x165B780",
+              "pdata_entry": false
+            },
+            {
+              "index": 28,
+              "rva": "0x198EA10",
+              "pdata_entry": false
+            },
+            {
+              "index": 29,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 30,
+              "rva": "0x5F0B10",
+              "pdata_entry": false
+            },
+            {
+              "index": 31,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x8BF5145",
+              "pdata_owner": "0x8BF50A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x8E87544",
+              "pdata_owner": "0x8E87530",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVUIPhaseData_GoToWorldPosition@pa@@",
+      "descriptor": "0x6F75340",
+      "locators": [
+        {
+          "rva": "0x6207AF0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x599C308",
+          "locator": "0x6207AF0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x72D620",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x72D690",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x72D62D",
+              "pdata_owner": "0x72D620",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1275B16",
+              "pdata_owner": "0x1273D60",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVUpdateEnviromentSelfPlayerProcessWork__Deprecated@?4??updateEnvironment_SelfPlayer@Environment@ClientCharacterControlActorComponent@pa@@QEAAXM@Z@",
+      "descriptor": "0x6F77C90",
+      "locators": [
+        {
+          "rva": "0x620D098",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59A84D8",
+          "locator": "0x620D098",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x7E2770",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x162C450",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x80E820",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x7DFFA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x162C330",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x80E179",
+              "pdata_owner": "0x80DFC0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AUOnlyTerrainQueryFilter@?BH@??updatePoseModifierParams_RootBoneIK__@PoseModifier@ClientCharacterControlActorComponent@pa@@AEAAXM@Z@",
+      "descriptor": "0x6F78150",
+      "locators": [
+        {
+          "rva": "0x620D3E8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59A8C50",
+          "locator": "0x620D3E8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x8258A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x825840",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x82516E",
+              "pdata_owner": "0x824ED0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVCommonCharacterControlActorComponent@pa@@",
+      "descriptor": "0x6F85860",
+      "locators": [
+        {
+          "rva": "0x6365050",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5DB7BB0",
+          "locator": "0x6365050",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x25819E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xAB0040",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x970980",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x2581B40",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x2581C30",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x2581ED0",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x2582580",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 14,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 15,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 16,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 17,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 18,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 19,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 20,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 21,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 22,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 23,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 24,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 25,
+              "rva": "0x2581FF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 26,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 27,
+              "rva": "0x3EAAA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 28,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 29,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 30,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 31,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2581103",
+              "pdata_owner": "0x25810D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xD7869D7",
+              "pdata_owner": "0xD7869C0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVClientCharacterControlActorComponent@pa@@",
+      "descriptor": "0x6F858A0",
+      "locators": [
+        {
+          "rva": "0x621C170",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59C1660",
+          "locator": "0x621C170",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x9707F0",
+              "pdata_entry": false
+            },
+            {
+              "index": 1,
+              "rva": "0xAB0040",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x970980",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x971AA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x9709A0",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x970B20",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x970CE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x970F50",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x2582580",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 14,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 15,
+              "rva": "0x977760",
+              "pdata_entry": false
+            },
+            {
+              "index": 16,
+              "rva": "0x971190",
+              "pdata_entry": true
+            },
+            {
+              "index": 17,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 18,
+              "rva": "0x971460",
+              "pdata_entry": false
+            },
+            {
+              "index": 19,
+              "rva": "0x9712D0",
+              "pdata_entry": false
+            },
+            {
+              "index": 20,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 21,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 22,
+              "rva": "0x971650",
+              "pdata_entry": false
+            },
+            {
+              "index": 23,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 24,
+              "rva": "0x9717B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 25,
+              "rva": "0x2581FF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 26,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 27,
+              "rva": "0x3EAAA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 28,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 29,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 30,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 31,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x96FB52",
+              "pdata_owner": "0x96FB30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x96CFA3D",
+              "pdata_owner": "0x96CFA30",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVDestroyClientActorAsyncTask@?1??collectGarbageActor@ClientActorManager@pa@@QEAA_N_N@Z@",
+      "descriptor": "0x6F85E30",
+      "locators": [
+        {
+          "rva": "0x621D290",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59C2710",
+          "locator": "0x621D290",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x9CEB40",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x9CE3C0",
+              "pdata_owner": "0x9CDFD0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVLoadGimmickSceneObjectsInLevelWork@?1??onProcessPendingLoadGimmickSceneObjectsInLevel@ClientActorManager@pa@@QEAAXXZ@",
+      "descriptor": "0x6F85EA0",
+      "locators": [
+        {
+          "rva": "0x621D2E0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59C2720",
+          "locator": "0x621D2E0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x9D0890",
+              "pdata_entry": false
+            },
+            {
+              "index": 1,
+              "rva": "0x162C450",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x9D0750",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x7DFFA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x162C330",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x9D04FC",
+              "pdata_owner": "0x9D02E0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVClientActorManager@pa@@",
+      "descriptor": "0x6F86778",
+      "locators": [
+        {
+          "rva": "0x621D538",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59C2760",
+          "locator": "0x621D538",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x9C0220",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x9C7070",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x9C7250",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x9C73F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x9C5F90",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x9C6280",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x9C6470",
+              "pdata_entry": true
+            },
+            {
+              "index": 7,
+              "rva": "0x9C3100",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x9C55E0",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x9C6660",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x9BE847",
+              "pdata_owner": "0x9BE800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x9C0294",
+              "pdata_owner": "0x9C0280",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVCommonActorManager@pa@@",
+      "descriptor": "0x6F867A8",
+      "locators": [
+        {
+          "rva": "0x633A918",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5D31578",
+          "locator": "0x633A918",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x219DD00",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x4C274FE",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x9BE818",
+              "pdata_owner": "0x9BE800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x9C0CE9",
+              "pdata_owner": "0x9C0280",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x219DD14",
+              "pdata_owner": "0x219DD00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x219DDAD",
+              "pdata_owner": "0x219DDA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A5EB75",
+              "pdata_owner": "0x2A5E840",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A624A5",
+              "pdata_owner": "0x2A62400",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A6306B",
+              "pdata_owner": "0x2A62FD0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVDynamicPrefabAsyncLoadingTask@?1??addDynamicPrefab@AnimationControl@ClientCharacterControlActorComponent@pa@@QEAAXAEBV?$ArrayReference@VResourceReferencePath_Prefab@pa@@@4@W4ActionLayerType@4@AEBVIndexedStringA@4@22_NAEBVItemKey@4@@Z@",
+      "descriptor": "0x6F8CB10",
+      "locators": [
+        {
+          "rva": "0x6229330",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59D3EB0",
+          "locator": "0x6229330",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB9F400",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0xB9DEF9",
+              "pdata_owner": "0xB9D5D0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVPhysics@ClientCharacterControlActorComponent@pa@@",
+      "descriptor": "0x6F8CD80",
+      "locators": [
+        {
+          "rva": "0x6229740",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x59D4450",
+          "locator": "0x6229740",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xBAF3B0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x97003F",
+              "pdata_owner": "0x96FB30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x9C0AA4C",
+              "pdata_owner": "0x9C0AA30",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLogoutCharacterToFieldServerAck@pa@@",
+      "descriptor": "0x6F9F408",
+      "locators": [
+        {
+          "rva": "0x624DBD8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5A17258",
+          "locator": "0x624DBD8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xC995F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xC99580",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xCB7AC0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x14BCC5",
+              "pdata_owner": "0x14BCA0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVNwVirtualAsyncSession@pa@@",
+      "descriptor": "0x6FC28D8",
+      "locators": [
+        {
+          "rva": "0x62866C0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B40310",
+          "locator": "0x62866C0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x165C030",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x165C0B0",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x165C1F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 10,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 12,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 14,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x165C044",
+              "pdata_owner": "0x165C030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE6F8D27",
+              "pdata_owner": "0xE6F8C70",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVNwVirtualSyncSession@pa@@",
+      "descriptor": "0x6FC2930",
+      "locators": [
+        {
+          "rva": "0x6286738",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B40428",
+          "locator": "0x6286738",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x165CAC0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x165CB60",
+              "pdata_entry": true
+            },
+            {
+              "index": 7,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 12,
+              "rva": "0x4084B0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x165CAD4",
+              "pdata_owner": "0x165CAC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x89710DB",
+              "pdata_owner": "0x8970F90",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AV?$CompressedObjectMemoryPool@VAIFunction_ApplySkillToNear@pa@@W4AIChartObjectType@2@@pa@@",
+      "descriptor": "0x7031540",
+      "locators": [
+        {
+          "rva": "0x632C650",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5D19E18",
+          "locator": "0x632C650",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x1F20D70",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1CD4230",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x1CD43D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x1CD4480",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x1CD4530",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x1CD45E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x7F9B10",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x1CD57C0",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x1CD57E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 9,
+              "rva": "0x1CD47B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 10,
+              "rva": "0x1CD4910",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x1D52DB0",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x1D52F00",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x1D53040",
+              "pdata_entry": true
+            },
+            {
+              "index": 14,
+              "rva": "0x1CD6240",
+              "pdata_entry": true
+            },
+            {
+              "index": 15,
+              "rva": "0x1D53360",
+              "pdata_entry": true
+            },
+            {
+              "index": 16,
+              "rva": "0x1CD5160",
+              "pdata_entry": true
+            },
+            {
+              "index": 17,
+              "rva": "0x1D535C0",
+              "pdata_entry": true
+            },
+            {
+              "index": 18,
+              "rva": "0x1D53670",
+              "pdata_entry": true
+            },
+            {
+              "index": 19,
+              "rva": "0x1CD6010",
+              "pdata_entry": true
+            },
+            {
+              "index": 20,
+              "rva": "0x1CD6110",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1F20D86",
+              "pdata_owner": "0x1F20D70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xC15F907",
+              "pdata_owner": "0xC15F8D0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AV?$CompressedObjectMemoryPool@VAIFunction_SetDestination_ToNearEscapePosition@pa@@W4AIChartObjectType@2@@pa@@",
+      "descriptor": "0x70333E0",
+      "locators": [
+        {
+          "rva": "0x632C290",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5D1C968",
+          "locator": "0x632C290",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x1F1C7B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1CD4230",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x1CD43D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x1CD4480",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x1CD4530",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x1CD45E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x1CD9490",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x1CD94A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x1CD94C0",
+              "pdata_entry": true
+            },
+            {
+              "index": 9,
+              "rva": "0x1CD47B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 10,
+              "rva": "0x1CD4910",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x1D290D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x1D29220",
+              "pdata_entry": true
+            },
+            {
+              "index": 13,
+              "rva": "0x1D29360",
+              "pdata_entry": true
+            },
+            {
+              "index": 14,
+              "rva": "0x1CD9EA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 15,
+              "rva": "0x1D29680",
+              "pdata_entry": true
+            },
+            {
+              "index": 16,
+              "rva": "0x1CD5160",
+              "pdata_entry": true
+            },
+            {
+              "index": 17,
+              "rva": "0x1D298E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 18,
+              "rva": "0x1D29990",
+              "pdata_entry": true
+            },
+            {
+              "index": 19,
+              "rva": "0x1CD9CA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 20,
+              "rva": "0x1CD9D90",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1D28F17",
+              "pdata_owner": "0x1D28EE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1F1C7C6",
+              "pdata_owner": "0x1F1C7B0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AV?$CompressedObjectMemoryPool@VAIFunction_SetDestination_ToNearbyEmptyPosition@pa@@W4AIChartObjectType@2@@pa@@",
+      "descriptor": "0x7033680",
+      "locators": [
+        {
+          "rva": "0x632C308",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5D1C808",
+          "locator": "0x632C308",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x1F1C450",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1CD4230",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x1CD43D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x1CD4480",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x1CD4530",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x1CD45E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x1CEBB70",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x1CEBB80",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x1CEBBA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 9,
+              "rva": "0x1CD47B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 10,
+              "rva": "0x1CD4910",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x1D26FD0",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x1D27120",
+              "pdata_entry": true
+            },
+            {
+              "index": 13,
+              "rva": "0x1D27260",
+              "pdata_entry": true
+            },
+            {
+              "index": 14,
+              "rva": "0x1CEC600",
+              "pdata_entry": true
+            },
+            {
+              "index": 15,
+              "rva": "0x1D27580",
+              "pdata_entry": true
+            },
+            {
+              "index": 16,
+              "rva": "0x1CD5160",
+              "pdata_entry": true
+            },
+            {
+              "index": 17,
+              "rva": "0x1D277E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 18,
+              "rva": "0x1D27890",
+              "pdata_entry": true
+            },
+            {
+              "index": 19,
+              "rva": "0x1CEC3D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 20,
+              "rva": "0x1CEC4C0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1D26E17",
+              "pdata_owner": "0x1D26DE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1F1C466",
+              "pdata_owner": "0x1F1C450",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AV?$CompressedObjectMemoryPool@VAIFunction_SetDestination_MoveToNearValidJumpablePostition@pa@@W4AIChartObjectType@2@@pa@@",
+      "descriptor": "0x70363E0",
+      "locators": [
+        {
+          "rva": "0x632D280",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5D1DBF8",
+          "locator": "0x632D280",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x1F1A830",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1CD4230",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x1CD43D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x1CD4480",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x1CD4530",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x1CD45E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x1CD9490",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x1CD94A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x1CD94C0",
+              "pdata_entry": true
+            },
+            {
+              "index": 9,
+              "rva": "0x1CD47B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 10,
+              "rva": "0x1CD4910",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x1D15CF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x1D15E40",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x1D15F80",
+              "pdata_entry": true
+            },
+            {
+              "index": 14,
+              "rva": "0x1CD9EA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 15,
+              "rva": "0x1D162B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 16,
+              "rva": "0x1CD5160",
+              "pdata_entry": true
+            },
+            {
+              "index": 17,
+              "rva": "0x1D16510",
+              "pdata_entry": true
+            },
+            {
+              "index": 18,
+              "rva": "0x1D165D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 19,
+              "rva": "0x1CD9CA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 20,
+              "rva": "0x1CD9D90",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1F1A846",
+              "pdata_owner": "0x1F1A830",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xC072CB7",
+              "pdata_owner": "0xC072C80",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVConditionData_IsEnterToFieldLoadingComplete@pa@@",
+      "descriptor": "0x7049B90",
+      "locators": [
+        {
+          "rva": "0x63510D8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5D83EB8",
+          "locator": "0x63510D8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x247BFB0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x3EB140",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x2489120",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x247BBE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x54D3D0",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x26A4E10",
+              "pdata_entry": true
+            },
+            {
+              "index": 11,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 12,
+              "rva": "0x2482850",
+              "pdata_entry": true
+            },
+            {
+              "index": 13,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 14,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 15,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 16,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 17,
+              "rva": "0x2488ED0",
+              "pdata_entry": false
+            },
+            {
+              "index": 18,
+              "rva": "0x2488FA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 19,
+              "rva": "0x2489040",
+              "pdata_entry": true
+            },
+            {
+              "index": 20,
+              "rva": "0x24F4100",
+              "pdata_entry": false
+            },
+            {
+              "index": 21,
+              "rva": "0x24F4030",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x247F7BF",
+              "pdata_owner": "0x247F790",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVAIFunction_SetDestination_ToNearbyEmptyPosition@pa@@",
+      "descriptor": "0x7051F50",
+      "locators": [
+        {
+          "rva": "0x635CB98",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5DAD3D0",
+          "locator": "0x635CB98",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2541BB0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x254ECE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x2541340",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x2541730",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x25419D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x254ECF0",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x254ED00",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x20D6D30",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1D27347",
+              "pdata_owner": "0x1D27260",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1D2786E",
+              "pdata_owner": "0x1D277E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1F7D2AF",
+              "pdata_owner": "0x1F7D030",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVAIFunction_SetDestination_ToNearEscapePosition@pa@@",
+      "descriptor": "0x7052040",
+      "locators": [
+        {
+          "rva": "0x635CC10",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5DAD4D8",
+          "locator": "0x635CC10",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2541BB0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x254EE50",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x254D410",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x254D450",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x254D490",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x254EE60",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x254EE70",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x20D6D30",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1D29447",
+              "pdata_owner": "0x1D29360",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1D2996E",
+              "pdata_owner": "0x1D298E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1F7E5DF",
+              "pdata_owner": "0x1F7E360",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVAIFunction_SetDestination_MoveToNearValidJumpablePostition@pa@@",
+      "descriptor": "0x7052550",
+      "locators": [
+        {
+          "rva": "0x635D9F8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5DAD9D8",
+          "locator": "0x635D9F8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x254A7B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x254E540",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x254A860",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x254A8D0",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x254A930",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x254E550",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x254E560",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x20D6D30",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1D16067",
+              "pdata_owner": "0x1D15F80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1D1659E",
+              "pdata_owner": "0x1D16510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1F73145",
+              "pdata_owner": "0x1F72EC0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVAIFunction_ApplySkillToNear@pa@@",
+      "descriptor": "0x70545C8",
+      "locators": [
+        {
+          "rva": "0x635DE58",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5DAF348",
+          "locator": "0x635DE58",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x25469A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2546A10",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x2546A30",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x2546B70",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x2546C10",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x2546A20",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x2546C90",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1D5310A",
+              "pdata_owner": "0x1D53040",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1D5362F",
+              "pdata_owner": "0x1D535C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1F96AFA",
+              "pdata_owner": "0x1F968B0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVMoveInventoryItemToFieldBehavior@pa@@",
+      "descriptor": "0x70AD588",
+      "locators": [
+        {
+          "rva": "0x63D8450",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F47DC0",
+          "locator": "0x63D8450",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2A55360",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2A547A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x134F0A0",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x2A54920",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x2A55410",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x2A55480",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2A55374",
+              "pdata_owner": "0x2A55360",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EC4575",
+              "pdata_owner": "0x2EC36A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EC46CA",
+              "pdata_owner": "0x2EC36A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EC76DD",
+              "pdata_owner": "0x2EC7620",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVServerFrameEventProjectileToNearActor@pa@@",
+      "descriptor": "0x70B2EC0",
+      "locators": [
+        {
+          "rva": "0x63E2F40",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F60790",
+          "locator": "0x63E2F40",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2BBF7B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2A83080",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2BC1A09",
+              "pdata_owner": "0x2BC0250",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLoginUserToFieldServerReq@pa@@",
+      "descriptor": "0x70B5898",
+      "locators": [
+        {
+          "rva": "0x63F2620",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F65C78",
+          "locator": "0x63F2620",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xC995F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xC99580",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2D11F20",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x25E165",
+              "pdata_owner": "0x25E140",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@",
+      "descriptor": "0x70BB068",
+      "locators": [
+        {
+          "rva": "0x63F51B8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F676B8",
+          "locator": "0x63F51B8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xC995F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xC99580",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2C6AE10",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2588F5",
+              "pdata_owner": "0x2588D0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLogoutCharacterToFieldServerReq@pa@@",
+      "descriptor": "0x70BB0A8",
+      "locators": [
+        {
+          "rva": "0x63F51E0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F676D8",
+          "locator": "0x63F51E0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xC995F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xC99580",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2C6B390",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x258945",
+              "pdata_owner": "0x258920",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVToNearSendTargetFinder@pa@@",
+      "descriptor": "0x70BB5C8",
+      "locators": [
+        {
+          "rva": "0x63F58A0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F68780",
+          "locator": "0x63F58A0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D6C0F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2D6C210",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x2D6C200",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2A2516D",
+              "pdata_owner": "0x2A24E50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A252C1",
+              "pdata_owner": "0x2A24E50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A4B8C9",
+              "pdata_owner": "0x2A4B330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A4B956",
+              "pdata_owner": "0x2A4B330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A53B27",
+              "pdata_owner": "0x2A53530",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A79041",
+              "pdata_owner": "0x2A78FC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A79161",
+              "pdata_owner": "0x2A78FC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A82A15",
+              "pdata_owner": "0x2A7FAB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A8613C",
+              "pdata_owner": "0x2A86030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A86545",
+              "pdata_owner": "0x2A86030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A8661A",
+              "pdata_owner": "0x2A86030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A87F70",
+              "pdata_owner": "0x2A87D10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AB2B88",
+              "pdata_owner": "0x2AB27B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AC08D1",
+              "pdata_owner": "0x2AC0100",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AC0FE0",
+              "pdata_owner": "0x2AC0BA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AC72DF",
+              "pdata_owner": "0x2AC6DF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AD99C7",
+              "pdata_owner": "0x2AD91E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2ADA353",
+              "pdata_owner": "0x2AD9C00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2ADBCC5",
+              "pdata_owner": "0x2ADB9F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B46E82",
+              "pdata_owner": "0x2B46390",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B55365",
+              "pdata_owner": "0x2B551F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B55631",
+              "pdata_owner": "0x2B55470",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B559F8",
+              "pdata_owner": "0x2B55700",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B56E3C",
+              "pdata_owner": "0x2B55F70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B5C18B",
+              "pdata_owner": "0x2B5C0F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B6E4C0",
+              "pdata_owner": "0x2B6E380",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B6F156",
+              "pdata_owner": "0x2B6F0F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B6F217",
+              "pdata_owner": "0x2B6F0F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B6F344",
+              "pdata_owner": "0x2B6F0F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B741FD",
+              "pdata_owner": "0x2B73EE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B75AF9",
+              "pdata_owner": "0x2B758F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B75EB4",
+              "pdata_owner": "0x2B75D90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B778FA",
+              "pdata_owner": "0x2B76060",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B789C4",
+              "pdata_owner": "0x2B78930",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B78C14",
+              "pdata_owner": "0x2B78930",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B94F76",
+              "pdata_owner": "0x2B93630",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BA2CB6",
+              "pdata_owner": "0x2BA2510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BCB650",
+              "pdata_owner": "0x2BCB560",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BCC44D",
+              "pdata_owner": "0x2BCC3F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD4E88",
+              "pdata_owner": "0x2BD4DC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD5600",
+              "pdata_owner": "0x2BD4DC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD5A9A",
+              "pdata_owner": "0x2BD5960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C08449",
+              "pdata_owner": "0x2C079C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C08FF3",
+              "pdata_owner": "0x2C079C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C0A63F",
+              "pdata_owner": "0x2C09BC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C0B719",
+              "pdata_owner": "0x2C0AA30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C1A944",
+              "pdata_owner": "0x2C1A840",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C1AE27",
+              "pdata_owner": "0x2C1AD50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C1AF87",
+              "pdata_owner": "0x2C1AEB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C1CDAB",
+              "pdata_owner": "0x2C1CB40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C1DB9B",
+              "pdata_owner": "0x2C1D730",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C1E8D0",
+              "pdata_owner": "0x2C1E250",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C24BCA",
+              "pdata_owner": "0x2C24020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C2AC62",
+              "pdata_owner": "0x2C2A1F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C2BED4",
+              "pdata_owner": "0x2C2B350",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C2C990",
+              "pdata_owner": "0x2C2C800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C4AC88",
+              "pdata_owner": "0x2C4AA00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C4B26B",
+              "pdata_owner": "0x2C4AE10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C4B8DB",
+              "pdata_owner": "0x2C4B480",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C4BF25",
+              "pdata_owner": "0x2C4BAF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C4C575",
+              "pdata_owner": "0x2C4C140",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C4DC73",
+              "pdata_owner": "0x2C4DAE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C62134",
+              "pdata_owner": "0x2C61EE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C6CD12",
+              "pdata_owner": "0x2C6CA40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CD2C4B",
+              "pdata_owner": "0x2CD28B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D010B2",
+              "pdata_owner": "0x2D00E40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D64F01",
+              "pdata_owner": "0x2D64A20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D70C82",
+              "pdata_owner": "0x2D709A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D72AD4",
+              "pdata_owner": "0x2D72AB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D72FBB",
+              "pdata_owner": "0x2D72B10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D734E6",
+              "pdata_owner": "0x2D73010",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D8929C",
+              "pdata_owner": "0x2D89180",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D8944D",
+              "pdata_owner": "0x2D892E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D89CD3",
+              "pdata_owner": "0x2D89890",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D8B556",
+              "pdata_owner": "0x2D8B060",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D8C33C",
+              "pdata_owner": "0x2D8B880",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D9015B",
+              "pdata_owner": "0x2D8FE90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D93B7F",
+              "pdata_owner": "0x2D93AD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D9B3BB",
+              "pdata_owner": "0x2D99C30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D9E61F",
+              "pdata_owner": "0x2D9E500",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DA4881",
+              "pdata_owner": "0x2DA4790",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DA6C1A",
+              "pdata_owner": "0x2DA4FF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB0A34",
+              "pdata_owner": "0x2DAFD70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB0F9D",
+              "pdata_owner": "0x2DB0B60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB1167",
+              "pdata_owner": "0x2DB1020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB9637",
+              "pdata_owner": "0x2DB9560",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DBCB53",
+              "pdata_owner": "0x2DBC9B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DBEC81",
+              "pdata_owner": "0x2DBEA90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DBF1E8",
+              "pdata_owner": "0x2DBF0E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DBF570",
+              "pdata_owner": "0x2DBF550",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DC5D42",
+              "pdata_owner": "0x2DC5AB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DC5FF6",
+              "pdata_owner": "0x2DC5E70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DD6CEA",
+              "pdata_owner": "0x2DD6A80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DD7B05",
+              "pdata_owner": "0x2DD71F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DDBCB9",
+              "pdata_owner": "0x2DDB770",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DDBFAC",
+              "pdata_owner": "0x2DDBD20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DDF80D",
+              "pdata_owner": "0x2DDE0A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DE2370",
+              "pdata_owner": "0x2DE20D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DE2794",
+              "pdata_owner": "0x2DE20D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DE2F45",
+              "pdata_owner": "0x2DE2900",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DE5738",
+              "pdata_owner": "0x2DE4E10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E785A3",
+              "pdata_owner": "0x2E751E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E8ABB6",
+              "pdata_owner": "0x2E8AB70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E8D90E",
+              "pdata_owner": "0x2E8D7C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EAF291",
+              "pdata_owner": "0x2EAEEE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EBCFFC",
+              "pdata_owner": "0x2EBCE00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2ED4E02",
+              "pdata_owner": "0x2ED4D20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EDAC2A",
+              "pdata_owner": "0x2EDA3A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EDACA6",
+              "pdata_owner": "0x2EDA3A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EDB65C",
+              "pdata_owner": "0x2EDA3A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EDBDAF",
+              "pdata_owner": "0x2EDBAA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EE2FEE",
+              "pdata_owner": "0x2EE2FD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EE31B3",
+              "pdata_owner": "0x2EE3030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EE32A6",
+              "pdata_owner": "0x2EE3240",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EED5F6",
+              "pdata_owner": "0x2EED210",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EFBEED",
+              "pdata_owner": "0x2EFAC60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EFE50C",
+              "pdata_owner": "0x2EFDB60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EFEC3E",
+              "pdata_owner": "0x2EFE870",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F04557",
+              "pdata_owner": "0x2F03830",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F07995",
+              "pdata_owner": "0x2F07400",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F26741",
+              "pdata_owner": "0x2F25D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F268C3",
+              "pdata_owner": "0x2F26850",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F26A5A",
+              "pdata_owner": "0x2F26910",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F26DD2",
+              "pdata_owner": "0x2F26CE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F4E7BC",
+              "pdata_owner": "0x2F4E5E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2F5413D",
+              "pdata_owner": "0x2F53FE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE8FEE1C",
+              "pdata_owner": "0xE8FEBE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE989EF8",
+              "pdata_owner": "0xE989E60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE9D4AEF",
+              "pdata_owner": "0xE9D4AD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE9DF17C",
+              "pdata_owner": "0xE9DF140",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE9EC6FF",
+              "pdata_owner": "0xE9EC510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE9F7E8A",
+              "pdata_owner": "0xE9F7E10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE9F7EE6",
+              "pdata_owner": "0xE9F7E10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE9F9620",
+              "pdata_owner": "0xE9F94F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE9F9B6E",
+              "pdata_owner": "0xE9F9AF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEA00F8B",
+              "pdata_owner": "0xEA00F10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEA033CA",
+              "pdata_owner": "0xEA033A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEA22799",
+              "pdata_owner": "0xEA226B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEAA4EA4",
+              "pdata_owner": "0xEAA4E80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEAE70CB",
+              "pdata_owner": "0xEAE7050",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEB21C37",
+              "pdata_owner": "0xEB21B50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEB280E6",
+              "pdata_owner": "0xEB28020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEB33777",
+              "pdata_owner": "0xEB33740",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEB37190",
+              "pdata_owner": "0xEB370D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC56E7B",
+              "pdata_owner": "0xEC56D50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC5B4B7",
+              "pdata_owner": "0xEC5B2A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC5FDEB",
+              "pdata_owner": "0xEC5FD30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC6557F",
+              "pdata_owner": "0xEC65510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC66BD1",
+              "pdata_owner": "0xEC668F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC779EB",
+              "pdata_owner": "0xEC77950",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC77AA2",
+              "pdata_owner": "0xEC77A40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xECAEF74",
+              "pdata_owner": "0xECAEF50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xED65FCA",
+              "pdata_owner": "0xED65E40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xED680FF",
+              "pdata_owner": "0xED67FA0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVToNearExceptOneSelfSendTargetFinder@pa@@",
+      "descriptor": "0x70BB5F8",
+      "locators": [
+        {
+          "rva": "0x63F58C8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F686A0",
+          "locator": "0x63F58C8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D6C0F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2D6C230",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2D6C200",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2A7ED01",
+              "pdata_owner": "0x2A7EC10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D647F4",
+              "pdata_owner": "0x2D64430",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB9609",
+              "pdata_owner": "0x2DB9560",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DD0E9B",
+              "pdata_owner": "0x2DD02C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DD5439",
+              "pdata_owner": "0x2DD4D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xED3BF6C",
+              "pdata_owner": "0xED3BE00",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVToFieldSendTargetFinder@pa@@",
+      "descriptor": "0x70BB6A0",
+      "locators": [
+        {
+          "rva": "0x63F56A0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F68640",
+          "locator": "0x63F56A0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D6C0F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2D6C8B0",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x2D6C200",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2AD1EA1",
+              "pdata_owner": "0x2AD07B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AD2874",
+              "pdata_owner": "0x2AD22E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AD5AF3",
+              "pdata_owner": "0x2AD51C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AD7975",
+              "pdata_owner": "0x2AD78F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE85A8EA",
+              "pdata_owner": "0xE85A870",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE862795",
+              "pdata_owner": "0xE8625C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xE865811",
+              "pdata_owner": "0xE865730",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEB0E64A",
+              "pdata_owner": "0xEB0E4E0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVToWorldSendTargetFinder@pa@@",
+      "descriptor": "0x70BB6D8",
+      "locators": [
+        {
+          "rva": "0x63F56C8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F68660",
+          "locator": "0x63F56C8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D6C0F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2D6C8C0",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2BD377B",
+              "pdata_owner": "0x2BD35D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD3956",
+              "pdata_owner": "0x2BD35D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD3BE3",
+              "pdata_owner": "0x2BD3B00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD3D1D",
+              "pdata_owner": "0x2BD3C30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD3EB3",
+              "pdata_owner": "0x2BD3DA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C77A66",
+              "pdata_owner": "0x2C77830",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xED1FC96",
+              "pdata_owner": "0xED1FC40",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVToNearExceptOneControlSendTargetFinder@pa@@",
+      "descriptor": "0x70BB710",
+      "locators": [
+        {
+          "rva": "0x63F57D8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F686C0",
+          "locator": "0x63F57D8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D6C0F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2D6C360",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2D6C200",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2C55709",
+              "pdata_owner": "0x2C55540",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C55A7F",
+              "pdata_owner": "0x2C55880",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C55E36",
+              "pdata_owner": "0x2C55C10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C6EF00",
+              "pdata_owner": "0x2C6EC80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D70C4B",
+              "pdata_owner": "0x2D709A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D70CB5",
+              "pdata_owner": "0x2D709A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EDB696",
+              "pdata_owner": "0x2EDA3A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC1078B",
+              "pdata_owner": "0xEC10630",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVToNearAndPartySendTargetFinder@pa@@",
+      "descriptor": "0x70BB788",
+      "locators": [
+        {
+          "rva": "0x63F5828",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F68700",
+          "locator": "0x63F5828",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D6C0F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2D6C4A0",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x2D6C6C0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2EE219E",
+              "pdata_owner": "0x2EE1A40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EE240E",
+              "pdata_owner": "0x2EE2340",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EE24FA",
+              "pdata_owner": "0x2EE2340",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEC3C41E",
+              "pdata_owner": "0xEC3C2A0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVServerCharacterControlActorComponent@pa@@",
+      "descriptor": "0x70BB7C0",
+      "locators": [
+        {
+          "rva": "0x63F5940",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F687C8",
+          "locator": "0x63F5940",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D6CDB0",
+              "pdata_entry": false
+            },
+            {
+              "index": 1,
+              "rva": "0xAB0040",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x970980",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x2581B40",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x2D6CE50",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x2D6CF10",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x2582580",
+              "pdata_entry": true
+            },
+            {
+              "index": 12,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x2D6D580",
+              "pdata_entry": true
+            },
+            {
+              "index": 14,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 15,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 16,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 17,
+              "rva": "0x3A6E20",
+              "pdata_entry": false
+            },
+            {
+              "index": 18,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 19,
+              "rva": "0x2D6EE60",
+              "pdata_entry": false
+            },
+            {
+              "index": 20,
+              "rva": "0x2D727B0",
+              "pdata_entry": false
+            },
+            {
+              "index": 21,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 22,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 23,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 24,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 25,
+              "rva": "0x2581FF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 26,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 27,
+              "rva": "0x3EAAA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 28,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 29,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 30,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 31,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0xEA90E88",
+              "pdata_owner": "0xEA90E70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEA99154",
+              "pdata_owner": "0xEA99140",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVServerUserActor@pa@@",
+      "descriptor": "0x70BB800",
+      "locators": [
+        {
+          "rva": "0x63F59C8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F68B10",
+          "locator": "0x63F59C8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2D738A0",
+              "pdata_entry": false
+            },
+            {
+              "index": 1,
+              "rva": "0x165B120",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2D73960",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x165B410",
+              "pdata_entry": true
+            },
+            {
+              "index": 4,
+              "rva": "0x2D73910",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x3EAA90",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x165B110",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x165B500",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x22973F0",
+              "pdata_entry": false
+            },
+            {
+              "index": 9,
+              "rva": "0x2297440",
+              "pdata_entry": false
+            },
+            {
+              "index": 10,
+              "rva": "0x2D73C20",
+              "pdata_entry": false
+            },
+            {
+              "index": 11,
+              "rva": "0x2D73D10",
+              "pdata_entry": false
+            },
+            {
+              "index": 12,
+              "rva": "0x2D73A60",
+              "pdata_entry": false
+            },
+            {
+              "index": 13,
+              "rva": "0x2D73AA0",
+              "pdata_entry": false
+            },
+            {
+              "index": 14,
+              "rva": "0x165B540",
+              "pdata_entry": false
+            },
+            {
+              "index": 15,
+              "rva": "0x165B550",
+              "pdata_entry": false
+            },
+            {
+              "index": 16,
+              "rva": "0x2D73AF0",
+              "pdata_entry": false
+            },
+            {
+              "index": 17,
+              "rva": "0x2D73B40",
+              "pdata_entry": false
+            },
+            {
+              "index": 18,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 19,
+              "rva": "0x2294EF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 20,
+              "rva": "0x2D73E60",
+              "pdata_entry": false
+            },
+            {
+              "index": 21,
+              "rva": "0x2D73E70",
+              "pdata_entry": true
+            },
+            {
+              "index": 22,
+              "rva": "0x2D73FB0",
+              "pdata_entry": true
+            },
+            {
+              "index": 23,
+              "rva": "0x9BE620",
+              "pdata_entry": false
+            },
+            {
+              "index": 24,
+              "rva": "0x9BE610",
+              "pdata_entry": false
+            },
+            {
+              "index": 25,
+              "rva": "0x2D74060",
+              "pdata_entry": false
+            },
+            {
+              "index": 26,
+              "rva": "0x2D74080",
+              "pdata_entry": false
+            },
+            {
+              "index": 27,
+              "rva": "0x2D740A0",
+              "pdata_entry": false
+            },
+            {
+              "index": 28,
+              "rva": "0x165B790",
+              "pdata_entry": true
+            },
+            {
+              "index": 29,
+              "rva": "0x2D740C0",
+              "pdata_entry": false
+            },
+            {
+              "index": 30,
+              "rva": "0x3AD510",
+              "pdata_entry": false
+            },
+            {
+              "index": 31,
+              "rva": "0x2297660",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2D79A4C",
+              "pdata_owner": "0x2D799B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEAA6564",
+              "pdata_owner": "0xEAA6550",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVServerActorManager@pa@@",
+      "descriptor": "0x70BB8E8",
+      "locators": [
+        {
+          "rva": "0x63F5B68",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F69100",
+          "locator": "0x63F5B68",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2A62FD0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2D78130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2D78360",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x2D78590",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x2D787E0",
+              "pdata_entry": true
+            },
+            {
+              "index": 5,
+              "rva": "0x2D78A00",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x2D78C20",
+              "pdata_entry": true
+            },
+            {
+              "index": 7,
+              "rva": "0x2D75980",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x2D77F80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2A5EB9E",
+              "pdata_owner": "0x2A5E840",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A62420",
+              "pdata_owner": "0x2A62400",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A62FE6",
+              "pdata_owner": "0x2A62FD0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AV?$ScopeAttacher@VServerUserActor@pa@@@pa@@",
+      "descriptor": "0x70BB918",
+      "locators": [
+        {
+          "rva": "0x63F5B90",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F68E50",
+          "locator": "0x63F5B90",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x3D6B00",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1659360",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x1659370",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2D7919F",
+              "pdata_owner": "0x2D79060",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D79212",
+              "pdata_owner": "0x2D79060",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D7925E",
+              "pdata_owner": "0x2D79060",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D7A1BC",
+              "pdata_owner": "0x2D7A100",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D7A2BD",
+              "pdata_owner": "0x2D7A100",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D7B284",
+              "pdata_owner": "0x2D7B210",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D7B319",
+              "pdata_owner": "0x2D7B210",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D7B99C",
+              "pdata_owner": "0x2D7B8F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D7BB09",
+              "pdata_owner": "0x2D7BA70",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AV?$ActorComponentPool@VServerCharacterControlActorComponent@pa@@@pa@@",
+      "descriptor": "0x70BD810",
+      "locators": [
+        {
+          "rva": "0x63FA580",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F6D410",
+          "locator": "0x63FA580",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2E14CA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x2E0ECA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2E0ECF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 3,
+              "rva": "0x2E0E730",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2E0CC12",
+              "pdata_owner": "0x2E0C970",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E14CB9",
+              "pdata_owner": "0x2E14CA0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AV?$Pool@VServerCharacterControlActorComponent@pa@@@pa@@",
+      "descriptor": "0x70BDA50",
+      "locators": [
+        {
+          "rva": "0x63FA558",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F6D090",
+          "locator": "0x63FA558",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x2E14D40",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x3ABEE0",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x2E0EDDD",
+              "pdata_owner": "0x2E0EDD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E18B82",
+              "pdata_owner": "0x2E18B70",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
