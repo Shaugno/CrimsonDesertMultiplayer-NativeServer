@@ -1,3 +1,184 @@
+# Phase 9 — blocker package for Claude's final review
+
+**The native two-player 3663 goal was not reached.** This is the plan's blocker
+handoff, with all independent completed work preserved and pushed.
+No live two-player, native spawn/movement, disconnect/removal or save-isolation
+result is claimed. The 3663 gameplay gate remains unarmed.
+
+Branch: `gpt/3663-port` at
+https://github.com/Shaugno/CrimsonDesertMultiplayer-NativeServer/tree/gpt/3663-port.
+Base: `a8656e87a0c43db400bdf863193c1afb353d6de0` (`origin/grok/compat-guard`).
+Final package commit: the Phase 9 commit containing this section. Its exact
+full SHA and the full commit list including Phase 9 are written **after the
+commit/push** into `PHASE9-MANIFEST.json` inside the local review ZIP in
+`dist/phase9/`. `tools/port3663/package_phase9.py` reproduces the package directly
+from committed Git blobs, not working-tree files. The final chat also names
+the final SHA. No release or binary publication was performed.
+
+## Completion boundary
+
+| Phase | Actual result |
+|---|---|
+| 0 | Complete: all five review fixes, regressions and full suites pass |
+| 1 | Complete required references: 2976 downloaded/verified; optional 3576 midpoint unavailable |
+| 2 | Partial: reproducible conservative inventory; semantic/minimal-reachability audit remains |
+| 3 | Partial: 17 corroborated values; complete core map unresolved |
+| 4 | Partial: separate static header and strict recognition; native modules unarmed/unrouted |
+| 5 | Complete game-free validation of this guarded checkpoint, not of a functional port |
+| 6 | Blocked before any live session |
+| 7 | Blocked before any two-instance session |
+| 8 | Blocked before any two-PC Steam session or guest kit |
+| 9 | Blocker review package |
+
+Contiguous implementation completion ends at Phase 1. Independent work extends
+through the Phase 5 validation. The Phase 6–8 commits record blocked status;
+their existence is not evidence that live acceptance passed.
+
+## Build, identities and hashes
+
+x64 RelWithDebInfo, VS 18 Community, MSVC toolset 14.52.37025 / compiler
+19.52.37029.0, Windows SDK 10.0.26100.0, C++20 and static CRT. The tested ASI
+contains clean source build ID **3C3EC37B** (source commit
+3c3ec37b713d7e676cd6bb898b21e32e92075699). Later commits are analysis/reporting
+changes. Binary SHA-256 values and sizes: `port-evidence/phase5-binary-hashes.json`.
+ASI hash: `5E2FC9BEF6D8802150936FC381F23AE89C061AB53A78F5E3DEEA9592D67C9FEE`.
+Compiled binaries remain local in `build/bin/RelWithDebInfo` and `build/e2e`.
+The Phase 9 review ZIP deliberately contains source/evidence only.
+
+2976 reference (outside repo):
+`C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\reference-bins\2976\CrimsonDesert.exe`,
+SHA-256 `57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7`.
+The user completed the single Steam depot touchpoint. See PHASE1-REFERENCES.md.
+
+Installed 3663 target: timestamp 0x6AF5D198, SizeOfImage 0x144E9000, preferred
+base 0x140000000, SHA-256
+`8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8`.
+Re-hashed for Phase 3 and each Phase 6–8 preflight, with no drift. JSON file
+facts are in port-evidence/. Neither game executable was executed. Installed
+files and saves were not changed or read as a live process.
+
+Evidence SHA-256 values for the committed Git-blob bytes are recorded in
+PORT-EVIDENCE-SHA256.json; this avoids ambiguity from Windows checkout newline
+conversion. The ZIP's PHASE9-MANIFEST.json hashes every included file and records
+the exact final commit. Evidence text has trailing whitespace normalized.
+
+## Inventory, matches and the next experiment
+
+PORT-INVENTORY.md and its JSON/literal supplement are pinned to the 2976 source
+baseline. They include 1292 named rows and 8261 inline scalar occurrences in
+193 files. These are a conservative audit superset, including policy values
+and disabled headers, not 9553 required game offsets.
+
+PORT-MATCHES.md / PORT-MATCHES-LITERALS.md list every row and its missing check.
+**17 named values adopted as strong static identities; 1275 named plus 8261
+inline occurrences remain unadopted/unclassified.** Three PE identity fields
+are separate file facts. Only the 17 reviewed values enter build_3663.h;
+none enables native execution. Weak discoveries remain in evidence only.
+
+Methods: paired targeted Ghidra 12.1.4 analysis; Zydis whole-pdata normalized
+fingerprints (242245/247296 decoded functions; 57160 unique candidates); named
+RTTI/COL/vtable slots; existing short signatures; call-neighbour ranking;
+strict pkt3663 entry verifier. This is not completed project-wide BSim/Version
+Tracking. Ghidra/JDK projects/tools remain local; reproducible scripts and
+commands are in tools/port3663/README.md. A concrete changed field is the heap
+selector TLS byte: 2976 +0x1FD becomes 3663 +0x1FE, independently confirmed at
+multiple native callers. Copying layouts unchanged is unsafe.
+
+All blocking groups, with precise missing evidence:
+
+1. **Field sharing:** old AcquireField 0x2B07790 and EnterField 0x2BC04F0 have
+   no corroborated target after signature, normalized-function and neighbour
+   matching. Confirm current function entries, the two locks, field user list,
+   counts, reference ownership and rollback before installing H1/H2.
+2. **Identity/status:** component-load and phase hooks have multiple candidates
+   without independent role/register checks. Confirm current lobby/status
+   number storage and post-load ordering before any identity write.
+3. **Player/SAM and cleanup:** confirm singleton provenance, guarded player/HP
+   chain, exact-key lookup, field user/actor accounting, native logout and
+   deferred removal barriers. The 2976 maps cannot simply be reused.
+4. **Wire completeness:** current descriptor IDs are discovery evidence only;
+   confirm each handler/writer's exact consumption, conditional fields, sizes,
+   channel/kind semantics and frame tag/tail usage. No old ID or layout adopted.
+5. **Guest saves:** matching one refresh thunk does not establish early guest
+   interception, save ownership or load ordering. These remain a live blocker.
+
+**Smallest next experiment:** file-only trace of the named 3663
+LoginCharacterToFieldServerReq handler at 0x2C6AE10 to its field-acquisition and
+entry call paths; corroborate both targets and the actual list/lock writers
+against the paired 2976 functions. This directly targets the first core blocker.
+The existing coop3663 structural decoders/FakeActorBackend do not provide field
+sharing, initialized native characters, identity fixups or deferred cleanup;
+they are preserved as fallback research/tests, without expansion in this run.
+
+## Exact validation and live-session record
+
+| Check | Command / evidence | Result |
+|---|---|---|
+| Phase 0 baseline | `scripts/build.ps1`; phase0-baseline.txt | 101/101, 139.68 s |
+| Phase 0 fixed | `scripts/build.ps1`; phase0-fixed.txt | 101/101, 93.77 s |
+| Focused feed/decoder | build target cdmp_tests_coop3663, then executable | Passed |
+| Phase 4 guard | build target cdmp_tests_build_guard, then executable; phase4-guard.txt | Passed, including wrong-size 3663 and zero gameplay callbacks |
+| Phase 4 ASI | `cmake --build build --config RelWithDebInfo --target cdmp_mod` | Passed |
+| Phase 5 full build/suite | `scripts/build.ps1`; phase5-suite.txt | 101/101, 111.81 s |
+| Phase 5 synthetic loopback | `tools/port3663/smoke.ps1`; build/e2e host/peer, UDP 39763, 8 s | 78 remote states, sent 85/recv 83, rejected 0, clean shutdown/unload |
+| Phase 6 | PHASE6-LIVE-STATUS.md; phase6-preflight-identity.json | NOT STARTED; blocked |
+| Phase 7 | PHASE7-TWO-INSTANCE-STATUS.md; phase7-preflight-identity.json | NOT STARTED; blocked |
+| Phase 8 | PHASE8-TWO-PC-STATUS.md; phase8-preflight-identity.json | NOT STARTED; blocked |
+
+Failures/corrections: initial sandbox configure could not resolve github.com
+for pinned dependencies; the authorized network-enabled build succeeded.
+The first normal push stalled in the configured credential helper; the existing
+authenticated GitHub CLI helper completed all phase pushes without new login.
+A Python syntax-check invocation passed a literal wildcard; compileall corrected
+the invocation and passed. No CTest failures or live crashes occurred in this
+run. Full outputs are retained; the corrected commands, not suppressed results,
+are the recorded validation. Self-review and scope are in PHASE5-VALIDATION.md.
+
+No live session began, so no save backup, live log/capture or crash context was
+generated. The Phase 6–8 files state the question, expected observation, time
+limit and stop condition for future sessions. No deployment/removal or launcher
+command ran. The combined Phase 6–7 presence and Phase 8 second-PC touchpoints
+remain unused until their offline prerequisites are satisfied.
+
+## What works and what remains disabled
+
+Works: Phase 0 synthetic lifecycle/decoder fixes; reproducible static reference
+comparison; a limited corroborated value header; strict 3663 identity rejection
+of all gameplay side effects; complete game-free suite and synthetic transport.
+
+Disabled on 3663: all native modules, including the intended minimal path,
+plus mounts/rope/shops/docked gimmicks, NPC/enemy/control/combat probes,
+scene/schedule extras, map/minimap and overlay. Compiled legacy defaults do not
+grant permission because the central gate remains closed. 2976 address tables,
+legacy module implementations, wire version, Steam-friends restriction and
+executable filter are preserved. 3576 stays recognized and unarmed.
+
+Do not deploy this branch as a working 3663 co-op kit. Passing loopback is only
+synthetic transport evidence. Native walk/turn, creation/removal, reconnect,
+save safety and real Steam tunnel acceptance remain unverified.
+
+## Commits since the requested base
+
+All checkpoint commits below were pushed to origin/gpt/3663-port. The final
+Phase 9 package commit and its full SHA are appended to this list in the ZIP
+manifest generated after publication.
+
+| Commit | Subject |
+|---|---|
+| 3cc9c28018de903fdc8a5bfcceb322033b42dace | Phase 0: fix offline feed generation fences and review findings |
+| 5abdc221b524e6d12b674ff55f2f26dcba19d550 | Phase 1: verify and record static reference executables |
+| 57097568652233fff6088d548e7b7c3f0101e16d | Phase 2: inventory option-D dependencies and record 3663 feature boundary |
+| 878d14fe129b5569c606318677e9703f0a4ce972 | Phase 3: corroborate static matches and document unresolved core port rows |
+| 3c3ec37b713d7e676cd6bb898b21e32e92075699 | Phase 4: recognize 3663 while keeping incomplete gameplay path unarmed |
+| 8e454e945f744f03ce1c8e6a59dcc6f8b369afc4 | Phase 5: validate guarded build and synthetic loopback, pin inventory source |
+| fc61b770a39bfb78a48d8b6f61a7afb983699b81 | Phase 6: record live prerequisites blocked and verified build identity |
+| 5b3e54062c437ad4a56ecd3d8218e6e08a3fd583 | Phase 7: record blocked two-instance acceptance and preparation |
+| 0d4490706fecce9060756dcd84331257f6162e92 | Phase 8: record blocked Steam two-PC acceptance and guest-kit prerequisites |
+
+---
+
+## Historical checkpoints (superseded by the Phase 9 status above)
+
 # 3663 port run — Phases 0–1 complete, later phases in progress
 
 Branch: gpt/3663-port, based on a8656e87a0c43db400bdf863193c1afb353d6de0.

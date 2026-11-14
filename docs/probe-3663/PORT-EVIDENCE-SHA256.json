@@ -1,0 +1,117 @@
+{
+  "byte_convention": "SHA-256 of committed Git blob bytes, before Windows checkout newline conversion",
+  "files": {
+    "docs/probe-3663/port-evidence/base-session-rtti-2976.json": {
+      "sha256": "4596132DE505116F6ADB81B9376D21931AB0D7C9C0E26F6FA1567D61A36E69C2",
+      "bytes": 6513
+    },
+    "docs/probe-3663/port-evidence/call-neighbors.json": {
+      "sha256": "05C02EB0DFD96A9F371B7C4ED21641AF01266CFBB8C873965B2525EA72FC38BF",
+      "bytes": 28354
+    },
+    "docs/probe-3663/port-evidence/core-descriptors-3663.json": {
+      "sha256": "D3DACCDF6B57B11E7FEF6E2F64D648B7FD2240C4D10428914502FC025F330EEF",
+      "bytes": 5439
+    },
+    "docs/probe-3663/port-evidence/core-rtti-3663.json": {
+      "sha256": "77B92A7DAAF17DD88AADAA87BB33B4CF0F193E0DDF2B801497C31035199ECD54",
+      "bytes": 13074
+    },
+    "docs/probe-3663/port-evidence/file-scan-3663.txt": {
+      "sha256": "D7ECC90602E069A043A971EFB2E6EE95B52452CF1D8DB3DF8E3A3C713F3253B7",
+      "bytes": 6197
+    },
+    "docs/probe-3663/port-evidence/function-correlations.json": {
+      "sha256": "1569B7CE5E5589C30458F7D2E3EE3DB60A6DACFF24CEC69A43969AD34647E6E0",
+      "bytes": 35367
+    },
+    "docs/probe-3663/port-evidence/ghidra-2976-expanded.txt": {
+      "sha256": "6C75363B27BAB0A30F86F6EAB7C82A4C0EFEB8FA0AC04E3CA32042E476E30A7B",
+      "bytes": 77394
+    },
+    "docs/probe-3663/port-evidence/ghidra-3663-core-handlers.txt": {
+      "sha256": "159D92588BE59EF9DAE39B50DF0BBDCFAA468077BCB18ED7976E763FF5EF2CDE",
+      "bytes": 48925
+    },
+    "docs/probe-3663/port-evidence/ghidra-3663-expanded.txt": {
+      "sha256": "63FBAD8F4B92D7EB501477FB34CD56F72B345416B74EB79A6F60DBBC9D162CED",
+      "bytes": 76673
+    },
+    "docs/probe-3663/port-evidence/ghidra-3663-refresh.txt": {
+      "sha256": "416F062A3FB56F739FC2820D2CB3628C4BDD9BF0E43BEF217F968DE8A9B9E6F2",
+      "bytes": 2089
+    },
+    "docs/probe-3663/port-evidence/identity-phase3.json": {
+      "sha256": "B0FC4E3669DF67EB7A0EB44A9EB68DC135906949D3B76497556FDB2ACFB95BE8",
+      "bytes": 2331
+    },
+    "docs/probe-3663/port-evidence/identity-rtti-3663.json": {
+      "sha256": "A06B252768DCEDE1CCB386795D5BD5AA4ADA267CF2D728088A32BC77422B1886",
+      "bytes": 20743
+    },
+    "docs/probe-3663/port-evidence/installed-3663-identity.json": {
+      "sha256": "B33D62DC62EF7B5962C36284050A8D494D24146B9C56903D571D2A4CA5F8E194",
+      "bytes": 2299
+    },
+    "docs/probe-3663/port-evidence/phase0-baseline.txt": {
+      "sha256": "E8F58B68D7197DE0979A94C884C8D3DE1FA880E4887238F5F0B3A7B5BDAC6F38",
+      "bytes": 63780
+    },
+    "docs/probe-3663/port-evidence/phase0-fixed.txt": {
+      "sha256": "4AF8957642843E04D9F04D7AA5FCEBE1691D55C71B104D2C472BEDFA03979352",
+      "bytes": 32000
+    },
+    "docs/probe-3663/port-evidence/phase4-guard.txt": {
+      "sha256": "0DA1A8964C3C59517D438207A5A312195546B7FBB52B7E774114700E654B2BA3",
+      "bytes": 195
+    },
+    "docs/probe-3663/port-evidence/phase5-binary-hashes.json": {
+      "sha256": "103AD6E073F490B4118A4C0EAEAA8C6EE351202C38264652A429A8B9212E2B94",
+      "bytes": 878
+    },
+    "docs/probe-3663/port-evidence/phase5-loopback-host.txt": {
+      "sha256": "852994D8A7AFE500622DC6A5D046E43FD10957F3C4177D2EFE5E83AA14F34ED2",
+      "bytes": 6504
+    },
+    "docs/probe-3663/port-evidence/phase5-loopback-run.txt": {
+      "sha256": "4185E3CAB0525F82F98D8F1B4EE1D516B2608EF623025C4DD395B31E84B566E7",
+      "bytes": 150
+    },
+    "docs/probe-3663/port-evidence/phase5-loopback.ini": {
+      "sha256": "8CA25E6F448BAB0380916B38FA0C573231D903BF9AB0F8F7B309A22FF319C318",
+      "bytes": 230
+    },
+    "docs/probe-3663/port-evidence/phase5-suite.txt": {
+      "sha256": "8FFE3790A1D8897E86F7B18855CD3777248AEC3EDE16E9EC57355CFC2EEFB24D",
+      "bytes": 32018
+    },
+    "docs/probe-3663/port-evidence/phase6-preflight-identity.json": {
+      "sha256": "B0FC4E3669DF67EB7A0EB44A9EB68DC135906949D3B76497556FDB2ACFB95BE8",
+      "bytes": 2331
+    },
+    "docs/probe-3663/port-evidence/phase7-preflight-identity.json": {
+      "sha256": "B0FC4E3669DF67EB7A0EB44A9EB68DC135906949D3B76497556FDB2ACFB95BE8",
+      "bytes": 2331
+    },
+    "docs/probe-3663/port-evidence/phase8-preflight-identity.json": {
+      "sha256": "B0FC4E3669DF67EB7A0EB44A9EB68DC135906949D3B76497556FDB2ACFB95BE8",
+      "bytes": 2331
+    },
+    "docs/probe-3663/port-evidence/reference-2976-identity.json": {
+      "sha256": "22207BF8472626F9B447A2A16378A8116AF63873AB0A9D763936C939EEEFBC4B",
+      "bytes": 2349
+    },
+    "docs/probe-3663/port-evidence/rtti-2976.json": {
+      "sha256": "D901DBF9FC166CCC3C974451BA2415A95402CD2FE769BB3E59176315E52E81FA",
+      "bytes": 74383
+    },
+    "docs/probe-3663/port-evidence/rtti-3663.json": {
+      "sha256": "0643FCD9106967A5C7CA77011344C0C188816C59EB99BA8088A841306723445C",
+      "bytes": 121039
+    },
+    "docs/probe-3663/port-evidence/signature-candidates.json": {
+      "sha256": "976C16041FAA453308E0FA2997C137E60A2950E5BB2B33558FA09C3FA7D2CA9D",
+      "bytes": 390766
+    }
+  }
+}
