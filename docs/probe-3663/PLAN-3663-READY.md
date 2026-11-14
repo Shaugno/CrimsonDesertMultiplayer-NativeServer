@@ -58,6 +58,11 @@ It still does not open the ASI guard or make an on-disk value a live opcode.
 The complete game-free build and 99-test suite passed after independent review;
 the game stayed closed. A controlled passive session remains a separate step.
 
+The separate controller is now local and pending review. Its contract and
+game-free results are `docs/probe-3663/LIVE-CONTROLLER-3663.md` and
+`docs/probe-3663/CONTROLLER-HANDOFF-20261113.md`. That work does not authorize
+the live session in the list below.
+
 ## Next steps after offline review
 
 1. Codex reviews the scan. A partial type name is not the message it contains.

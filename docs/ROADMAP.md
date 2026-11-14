@@ -15,8 +15,9 @@ reviewed, including control after hooks are installed and strict PID parsing.
 The last published game-free suite passed 95/95, including the file-only 3663
 scanner and strict packet-entry verifier. The separate 3663 passive runner and
 its additional offline tests are implemented in the current work. Independent
-review fixes are applied, and the complete local suite passed 99/99 before any
-live session.
+review fixes are applied, and that reviewed suite passed 99/99. The 3663
+controller and its game-free test are now local on this branch. That suite
+passed 100/100 and is waiting for Codex review.
 The first controlled 3576 capture was reviewed, and the current movement/action
 and actor-message IDs were independently verified on disk. Full payload layouts
 and native-session compatibility still need evidence.
@@ -28,10 +29,13 @@ and native-session compatibility still need evidence.
    pump roles pass a strict file verifier; see
    docs/probe-3663/ENTRY-VERIFIER-3663.md. The isolated passive runner is
    implemented and independently game-free tested; see
-   docs/probe-3663/LIVE-RUNNER-3663.md. The candidates remain experimental and
-   unadopted. The complete local suite passed 99/99. The next step is a
-   separately authorized controlled passive live session. Do not install the
-   ASI.
+   docs/probe-3663/LIVE-RUNNER-3663.md. The separate controller is implemented
+   locally and pending Codex review; see
+   docs/probe-3663/LIVE-CONTROLLER-3663.md and
+   docs/probe-3663/CONTROLLER-HANDOFF-20261113.md. The candidates remain
+   experimental and unadopted. The local RelWithDebInfo suite passed 100/100
+   with the game closed. After that review, the next step is a separately
+   authorized controlled passive live session. Do not install the ASI.
 3. Spawn and move a second visible actor from those verified fields. Do not
    invent a spawn call or reuse 2976 packet sizes.
 4. Validate loading, reconnects, combat, save handling, and two-PC play before

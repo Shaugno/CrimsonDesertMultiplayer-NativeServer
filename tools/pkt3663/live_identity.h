@@ -9,6 +9,12 @@
 
 namespace pkt3663 {
 
+inline constexpr wchar_t kExeName[] = L"CrimsonDesert.exe";
+// Largest single copy identify_image requests. A remote reader must accept
+// this size and refuse a larger copy. live_identity.cpp static_asserts that
+// the scan chunk plus the anchor overlap stays equal to this cap.
+inline constexpr size_t kMappedReadCap = 64 * 1024 + 128;
+
 enum class IdentityKind {
   Match,
   Unreadable,
@@ -80,5 +86,12 @@ bool read_mapped_bytes(uintptr_t address, void *destination, size_t size);
 
 bool identity_allows_hooks(const Identity &identity);
 const char *identity_kind_name(IdentityKind kind);
+
+// Absolute log directories only. Rejects a relative path, any
+// "Crimson Desert\bin64" path, and the directory of a loaded
+// CrimsonDesert.exe. The external controller calls this before injection.
+// The runner calls the same function after it is loaded.
+bool log_directory_allowed(const wchar_t *host_exe_path,
+                           const wchar_t *log_directory);
 
 } // namespace pkt3663

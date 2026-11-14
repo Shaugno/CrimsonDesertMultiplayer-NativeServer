@@ -134,11 +134,16 @@ dedicated `pkt3663_observer`, `pkt3663_capture`, `pkt3663_live`, and
 `pkt3663_live_host` tests passed again after the final ownership and log-fault
 fixes. The game stayed closed. The ASI was not installed or run.
 
+External control of that runner is a separate local tool, pending review:
+`docs/probe-3663/LIVE-CONTROLLER-3663.md`. The controller reuses this runner's
+identity check and log-directory rule. It does not change hook ownership,
+candidate addresses, or the recording-ready cutoff.
+
 ## Remaining safety boundary
 
 Passing the offline suite makes the runner ready for a separately approved,
-controlled passive test; it does not prove that the candidates are reached in
-the live 3663 process. It also does not prove an opcode, packet role at the
+controlled passive test once the controller review accepts the operator path.
+It does not prove that the candidates are reached in the live 3663 process. It also does not prove an opcode, packet role at the
 wire boundary, position, rotation, actor identity, or any payload layout.
 
 A future live test must keep `cdmp.asi` and `winmm.dll` absent, preserve saves

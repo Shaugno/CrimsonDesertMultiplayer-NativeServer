@@ -19,7 +19,6 @@
 namespace pkt3663 {
 namespace {
 
-constexpr wchar_t kExeName[] = L"CrimsonDesert.exe";
 constexpr uint16_t kDosMagic = 0x5A4D;
 constexpr uint32_t kPeSignature = 0x00004550;
 constexpr uint16_t kPe32PlusMagic = 0x020B;
@@ -31,7 +30,7 @@ constexpr uint16_t kMaxOptionalSize = 512;
 constexpr uint32_t kMaxFunctionRows = 1000000;
 constexpr size_t kScanChunk = 64 * 1024;
 constexpr size_t kMaxAnchorSize = 128;
-constexpr size_t kMaxMappedRead = kScanChunk + kMaxAnchorSize;
+static_assert(kScanChunk + kMaxAnchorSize == kMappedReadCap);
 constexpr size_t kPathCap = 1024;
 
 struct MappedSection {
@@ -421,7 +420,7 @@ const wchar_t *file_name_of(const wchar_t *path) {
 } // namespace
 
 bool read_mapped_bytes(uintptr_t address, void *destination, size_t size) {
-  if (destination == nullptr || size == 0 || size > kMaxMappedRead)
+  if (destination == nullptr || size == 0 || size > kMappedReadCap)
     return false;
   if (!range_readable(address, size))
     return false;
@@ -751,6 +750,104 @@ const char *identity_kind_name(IdentityKind kind) {
     return "call-target-mismatch";
   }
   return "unreadable";
+}
+
+namespace {
+
+bool path_is_absolute(const wchar_t *path) {
+  if (path == nullptr || path[0] == L'\0')
+    return false;
+  if ((path[0] == L'\\' && path[1] == L'\\') ||
+      (path[0] == L'/' && path[1] == L'/'))
+    return true;
+  const bool drive = (path[0] >= L'A' && path[0] <= L'Z') ||
+                     (path[0] >= L'a' && path[0] <= L'z');
+  return drive && path[1] == L':' && (path[2] == L'\\' || path[2] == L'/');
+}
+
+bool has_game_bin64_pair(const wchar_t *path) {
+  wchar_t previous[128] = {};
+  const wchar_t *cursor = path;
+  while (*cursor != L'\0') {
+    const wchar_t *start = cursor;
+    while (*cursor != L'\0' && *cursor != L'\\' && *cursor != L'/')
+      ++cursor;
+    const size_t length = static_cast<size_t>(cursor - start);
+    wchar_t current[128] = {};
+    if (length != 0 && length < 128) {
+      std::memcpy(current, start, length * sizeof(wchar_t));
+      current[length] = L'\0';
+      if (_wcsicmp(previous, L"Crimson Desert") == 0 &&
+          _wcsicmp(current, L"bin64") == 0)
+        return true;
+      wcsncpy_s(previous, current, _TRUNCATE);
+    } else {
+      previous[0] = L'\0';
+    }
+    if (*cursor != L'\0')
+      ++cursor;
+  }
+  return false;
+}
+
+void directory_of(const wchar_t *path, wchar_t *output, size_t count) {
+  output[0] = L'\0';
+  if (path == nullptr)
+    return;
+  wcsncpy_s(output, count, path, _TRUNCATE);
+  wchar_t *last = nullptr;
+  for (wchar_t *cursor = output; *cursor != L'\0'; ++cursor) {
+    if (*cursor == L'\\' || *cursor == L'/')
+      last = cursor;
+  }
+  if (last == nullptr) {
+    output[0] = L'\0';
+  } else if (last == output + 2 && output[1] == L':') {
+    last[1] = L'\0';
+  } else {
+    *last = L'\0';
+  }
+}
+
+bool same_or_under(const wchar_t *path, const wchar_t *root) {
+  const size_t length = wcslen(root);
+  if (length == 0 || _wcsnicmp(path, root, length) != 0)
+    return false;
+  return path[length] == L'\0' || path[length] == L'\\' || path[length] == L'/';
+}
+
+const wchar_t *path_file_name(const wchar_t *path) {
+  if (path == nullptr)
+    return L"";
+  const wchar_t *name = path;
+  for (const wchar_t *cursor = path; *cursor != L'\0'; ++cursor) {
+    if (*cursor == L'\\' || *cursor == L'/')
+      name = cursor + 1;
+  }
+  return name;
+}
+
+} // namespace
+
+bool log_directory_allowed(const wchar_t *host, const wchar_t *directory) {
+  constexpr size_t kCap = 1024;
+  if (!path_is_absolute(directory))
+    return false;
+  wchar_t full[kCap] = {};
+  const DWORD length =
+      GetFullPathNameW(directory, static_cast<DWORD>(kCap), full, nullptr);
+  if (length == 0 || length >= kCap || has_game_bin64_pair(full))
+    return false;
+  if (_wcsicmp(path_file_name(host), kExeName) != 0)
+    return true;
+  wchar_t host_full[kCap] = {};
+  const DWORD host_length =
+      GetFullPathNameW(host, static_cast<DWORD>(kCap), host_full, nullptr);
+  if (host_length == 0 || host_length >= kCap)
+    return false;
+  wchar_t host_directory[kCap] = {};
+  directory_of(host_full, host_directory, kCap);
+  return !same_or_under(full, host_directory);
 }
 
 } // namespace pkt3663
