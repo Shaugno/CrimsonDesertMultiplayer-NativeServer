@@ -10,6 +10,8 @@
 
 #include "mod/game/build_guard.h"
 #include "mod/game/offsets.h"
+#include "mod/game/player_layout.h"
+#include "mod/game/stat_id.h"
 
 namespace {
 
@@ -379,9 +381,70 @@ void test_build_3663_is_recognized_but_unarmed() {
     std::printf("Build 3663 recognized and unarmed: OK\n");
 }
 
+void test_3663_tier_dependency_matrix() {
+    namespace build = cdmp::game::build_3663;
+    const auto identity = guard::identify_image(make_image(build::kPeTimestamp, 0x80, build::kSizeOfImage),
+                                               build::kImageBase);
+    // All 256 request/evidence combinations: missing or disabled lower tiers
+    // must deny every higher tier, independently of that higher tier's proof.
+    for (unsigned requests = 0; requests < 16; ++requests) {
+        for (unsigned evidence = 0; evidence < 16; ++evidence) {
+            auto mask = [](unsigned x) { return guard::TierPermissions{
+                (x & 1) != 0, (x & 2) != 0, (x & 4) != 0, (x & 8) != 0}; };
+            const auto out = guard::select_3663_tiers(identity, mask(requests), mask(evidence));
+            const unsigned both = requests & evidence;
+            CHECK(out.tier_a_reads == ((both & 1) == 1));
+            CHECK(out.tier_b_tunnel == ((both & 3) == 3));
+            CHECK(out.tier_c_join == ((both & 7) == 7));
+            CHECK(out.tier_d_lifecycle == ((both & 15) == 15));
+        }
+    }
+    for (unsigned fault = 0; fault < 7; ++fault) {
+        auto bad = identity;
+        switch (fault) {
+            case 0: bad.size_of_image -= 0x1000; break;
+            case 1: ++bad.timestamp; break;
+            case 2: bad.mapped_base += 0x1000; break;
+            case 3: bad.size_known = false; break;
+            case 4: bad.timestamp_known = false; break;
+            case 5: bad.kind = guard::IdentityKind::Unsupported; break;
+            case 6: bad.kind = guard::IdentityKind::Build3576; break;
+        }
+        const auto denied = guard::select_3663_tiers(bad, {true,true,true,true}, {true,true,true,true});
+        CHECK(!denied.tier_a_reads && !denied.tier_b_tunnel && !denied.tier_c_join && !denied.tier_d_lifecycle);
+    }
+    const auto actual = guard::decide_startup(request(true, false, false, identity));
+    CHECK(!actual.tier_a_reads && !actual.tier_b_tunnel && !actual.tier_c_join && !actual.tier_d_lifecycle);
+    check_blocked(actual);
+    CHECK(cdmp::game::player_layout(identity) == nullptr);
+    const auto legacy = guard::identify_image(make_image(kPeTimestamp), kImageBase);
+    CHECK(cdmp::game::player_layout(legacy) == &cdmp::game::kPlayerLayout2976);
+    const auto unknown = guard::identify_image(make_image(kPeTimestamp + 1), kImageBase);
+    CHECK(cdmp::game::player_layout(unknown) == nullptr);
+    std::printf("3663 tier request/evidence and identity matrices: OK\n");
+}
+
 }  // namespace
 
 int main() {
+    {
+        uint8_t padded_id[8] = {0,0,0xAB,0xCD,0xEF,0x12,0x34,0x56};
+        size_t copied = 0;
+        auto read = [&](uintptr_t, void* out, size_t size) {
+            copied = size;
+            std::memcpy(out, padded_id, size);
+            return true;
+        };
+        CHECK(cdmp::game::read_stat_id(1,2,read) == 0);
+        CHECK(copied == 2);
+        CHECK(cdmp::game::read_stat_id(1,8,read) != 0);
+        CHECK(copied == 8);
+        copied = 0;
+        CHECK(!cdmp::game::read_stat_id(1,4,read));
+        CHECK(copied == 0);
+        CHECK(!cdmp::game::read_stat_id(1,2,[](uintptr_t,void*,size_t) { return false; }));
+    }
+    test_3663_tier_dependency_matrix();
     test_supported();
     test_unsupported();
     test_unreadable();

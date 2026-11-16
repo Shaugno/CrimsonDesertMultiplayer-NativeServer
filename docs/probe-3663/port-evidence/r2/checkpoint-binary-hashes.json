@@ -1,0 +1,22 @@
+[
+  {
+    "name": "cdmp.asi",
+    "sha256": "E8E4B1CC02DA5E1C72F67F45DFEB88EB4E41BE295DDCBD54883D6478777EB6A4",
+    "bytes": 15936512
+  },
+  {
+    "name": "cdmp_host.exe",
+    "sha256": "B64AFF7BD423ADF4B344CD1CC05CD594BB7AAD7CA3BC594122F6BF7B9121E53E",
+    "bytes": 737280
+  },
+  {
+    "name": "cdmp_peer.exe",
+    "sha256": "730B43D1D0F3D41A6CEFE5E4B798F41C4A796C0ECC9DE8289F8642B1F309FC1F",
+    "bytes": 2723328
+  },
+  {
+    "name": "cdmp_tests_build_guard.exe",
+    "sha256": "2CCB33B2C1B48C7A3CC029A714F1FB5231695E7215F082468DFB03DB48D641E7",
+    "bytes": 1963520
+  }
+]

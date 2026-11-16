@@ -1,0 +1,24 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x2A82F90
+Function=thunk_FUN_15052d2b0 body=[[142a82f90, 142a82f94]]
+142a82f90 JMP 0x15052d2b0
+
+undefined8 *
+thunk_FUN_15052d2b0(longlong param_1,undefined8 *param_2,longlong param_3,undefined8 param_4)
+
+{
+  if (param_3 == 0) {
+    *param_2 = &UNK_145725e48;
+    param_2[1] = 0;
+    *(undefined2 *)(param_2 + 2) = 0;
+    param_2[3] = 0;
+    *param_2 = &UNK_145573840;
+    *(undefined1 *)((longlong)param_2 + 0x11) = 0;
+  }
+  else {
+    FUN_142a7d9f0(param_3,param_2,*(longlong *)(param_1 + 0x50) + 0x18,param_4,0);
+  }
+  return param_2;
+}

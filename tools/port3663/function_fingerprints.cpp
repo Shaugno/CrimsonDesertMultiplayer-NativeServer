@@ -7,6 +7,8 @@
 #include <cstring>
 #include <fstream>
 #include <vector>
+#include <cstdlib>
+#include <algorithm>
 #include "pkt3663/assess.h"
 
 namespace {
@@ -41,7 +43,16 @@ void mix(uint64_t& hash, uint64_t& other, uint8_t byte) {
 }
 
 int main(int argc, char** argv) {
-    if (argc != 2) { std::fprintf(stderr, "usage: port3663_fingerprints <exe>\n"); return 2; }
+    const bool refs = argc >= 4 && std::strcmp(argv[2], "--refs") == 0;
+    const bool fields = argc >= 4 && std::strcmp(argv[2], "--fields") == 0;
+    if (argc != 2 && !refs && !fields) { std::fprintf(stderr, "usage: port3663_fingerprints <exe> [--refs rva ... | --fields displacement ...]\n"); return 2; }
+    std::vector<uint32_t> targets;
+    if (refs || fields) for (int i = 3; i < argc; ++i) {
+        char* tail = nullptr;
+        const auto value = std::strtoull(argv[i], &tail, 0);
+        if (!tail || *tail || value > UINT32_MAX) return 2;
+        targets.push_back(static_cast<uint32_t>(value));
+    }
     std::ifstream input(argv[1], std::ios::binary | std::ios::ate);
     if (!input) return 2;
     const auto size = input.tellg();
@@ -59,7 +70,7 @@ int main(int argc, char** argv) {
     ZydisDecoder decoder;
     ZydisDecoderInit(&decoder, ZYDIS_MACHINE_MODE_LONG_64, ZYDIS_STACK_WIDTH_64);
     std::printf("# timestamp=0x%X image_size=0x%X adopted=0\n", image.timestamp, image.size_of_image);
-    std::printf("begin\tend\tinstructions\tfingerprint\tcalls\n");
+    std::printf(refs ? "function\tinstruction\ttarget\tmnemonic\n" : "begin\tend\tinstructions\tfingerprint\tcalls\n");
     uint32_t accepted = 0, refused = 0;
     for (uint32_t record = 0; record < image.exception_size; record += 12) {
         const uint32_t begin = word(pdata + record), end = word(pdata + record + 4);
@@ -71,12 +82,33 @@ int main(int argc, char** argv) {
         uint64_t hash = 14695981039346656037ull, other = 0xD6E8FEB86659FD93ull;
         uint32_t cursor = 0, instructions = 0;
         std::vector<uint32_t> calls;
+        std::vector<bool> found(targets.size(), false);
+        bool stride90 = false;
         bool valid = true;
         while (cursor < end - begin) {
             ZydisDecodedInstruction instruction{};
             ZydisDecodedOperand operands[ZYDIS_MAX_OPERAND_COUNT]{};
             if (!ZYAN_SUCCESS(ZydisDecoderDecodeFull(&decoder, function + cursor, end - begin - cursor,
                                                      &instruction, operands))) { valid = false; break; }
+            if (refs) for (uint8_t i = 0; i < instruction.operand_count_visible; ++i) {
+                if (operands[i].type != ZYDIS_OPERAND_TYPE_MEMORY || operands[i].mem.base != ZYDIS_REGISTER_RIP) continue;
+                ZyanU64 address = 0;
+                if (!ZYAN_SUCCESS(ZydisCalcAbsoluteAddress(&instruction, &operands[i], image.image_base + begin + cursor, &address)) ||
+                    address < image.image_base || address - image.image_base > UINT32_MAX) continue;
+                for (const auto target : targets) if (address - image.image_base == target)
+                    std::printf("0x%X\t0x%X\t0x%X\t%s\n", begin, begin + cursor, target,
+                                ZydisMnemonicGetString(instruction.mnemonic));
+            }
+            if (fields) for (uint8_t i = 0; i < instruction.operand_count_visible; ++i) {
+                const auto& op = operands[i];
+                if (op.type == ZYDIS_OPERAND_TYPE_IMMEDIATE && !op.imm.is_relative && op.imm.value.u == 0x90 &&
+                    (instruction.mnemonic == ZYDIS_MNEMONIC_ADD || instruction.mnemonic == ZYDIS_MNEMONIC_IMUL)) stride90 = true;
+                if (op.type == ZYDIS_OPERAND_TYPE_IMMEDIATE && !op.imm.is_relative)
+                    for (size_t j = 0; j < targets.size(); ++j) if (op.imm.value.u == targets[j]) found[j] = true;
+                if (op.type != ZYDIS_OPERAND_TYPE_MEMORY || op.mem.base == ZYDIS_REGISTER_RIP ||
+                    !op.mem.disp.has_displacement || op.mem.disp.value < 0) continue;
+                for (size_t j = 0; j < targets.size(); ++j) if (op.mem.disp.value == targets[j]) found[j] = true;
+            }
             uint8_t normalized[ZYDIS_MAX_INSTRUCTION_LENGTH]{};
             std::memcpy(normalized, function + cursor, instruction.length);
             bool rip = false;
@@ -101,6 +133,9 @@ int main(int argc, char** argv) {
         }
         if (!valid) { ++refused; continue; }
         ++accepted;
+        if (refs) continue;
+        if (fields && (instructions > 1000 || std::find(found.begin(), found.end(), false) != found.end())) continue;
+        if (fields && std::find(targets.begin(), targets.end(), 0x90) != targets.end() && !stride90) continue;
         std::printf("0x%X\t0x%X\t%u\t%016llX%016llX\t", begin, end, instructions,
                     static_cast<unsigned long long>(hash), static_cast<unsigned long long>(other));
         for (size_t i = 0; i < calls.size(); ++i) std::printf("%s0x%X", i ? "," : "", calls[i]);

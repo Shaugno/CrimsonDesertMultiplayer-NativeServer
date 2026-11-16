@@ -4040,10 +4040,20 @@
     "tier": "A",
     "symbol": "NativeStatUnits",
     "value": "1000.0f",
-    "source": "src/mod/game/player_reader.cpp:143",
+    "source": "src/mod/game/player_layout.h:42",
     "use": "native int64 stat conversion scale (not a timeout)",
     "id": "inline",
     "r2": "A029",
+    "adopted_r1": false
+  },
+  {
+    "tier": "A",
+    "symbol": "StatIdReadWidth",
+    "value": "8",
+    "source": "src/mod/game/player_layout.h:43",
+    "use": "legacy reader width; target native ID width must be confirmed separately from padding",
+    "id": "inline",
+    "r2": "A030",
     "adopted_r1": false
   },
   {

@@ -1,6 +1,7 @@
 # R2 core list — reviewed reachability cut
 
-Source baseline: 90c12f5 (production code unchanged since R1). Reproduce with
+Scope baseline: 90c12f5. Reader refactoring adds an explicit native ID-width
+contract; declaration locations follow the working branch. Reproduce with
 `python tools/port3663/r2_core.py`. Stable R2 IDs refer to the generated JSON.
 Each row is a game contract, including signatures and native wire layouts;
 a compound native structure/signature is shown in full as one contract.
@@ -35,7 +36,7 @@ MaxStatEntries=64, loading radius=5, MaxEntries=64, MaxActors=0x4000 and C4
 SamUserListMax=0x4000 are policy bounds. Stamina stays included because today's
 reader reads it; no unimplemented exclusion is used to make A appear complete.
 
-Counts: A 29, B 75, C 150, D 125; total 379; R1 adopted 17.
+Counts: A 30, B 75, C 150, D 125; total 380; R1 adopted 17.
 
 | Row | Tier | Symbol | 2976 value | Source | Use | Evidence status |
 |---|---|---|---|---|---|---|
@@ -406,7 +407,8 @@ Counts: A 29, B 75, C 150, D 125; total 379; R1 adopted 17.
 | C142 | C | kLayer_Playback | `0x18` | src/mod/game/offsets.h:222 | puppet_install_layer_guards: shared action-layer crash containment | needs target evidence |
 | C143 | C | kLayer_Chart | `0x110` | src/mod/game/offsets.h:223 | puppet_install_layer_guards: shared action-layer crash containment | needs target evidence |
 | C144 | C | kActor_OwnerUser | `0x90` | src/mod/game/offsets.h:230 | puppet_install_layer_guards: shared action-layer crash containment | needs target evidence |
-| A029 | A | NativeStatUnits | `1000.0f` | src/mod/game/player_reader.cpp:143 | native int64 stat conversion scale (not a timeout) | needs target evidence |
+| A029 | A | NativeStatUnits | `1000.0f` | src/mod/game/player_layout.h:42 | native int64 stat conversion scale (not a timeout) | needs target evidence |
+| A030 | A | StatIdReadWidth | `8` | src/mod/game/player_layout.h:43 | legacy reader width; target native ID width must be confirmed separately from padding | needs target evidence |
 | C145 | C | FieldLockAcquireVslot | `8` | src/mod/session2/field_share.cpp:65 | both field lock acquire slots | needs target evidence |
 | C146 | C | FieldLockReleaseVslot | `0x10` | src/mod/session2/field_share.cpp:74 | both field lock release slots | needs target evidence |
 | C147 | C | HostCharacterComponents | `0x68` | src/mod/session2/field_share.cpp:115 | field-share traversal to host components | needs target evidence |

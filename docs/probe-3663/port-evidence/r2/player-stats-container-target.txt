@@ -1,0 +1,62 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=26463824
+Function=FUN_14193ce50 body=[[14193ce50, 14193ceb9]]
+14193ce50 MOV qword ptr [RSP + 0x8],RBX
+14193ce55 PUSH RDI
+14193ce56 SUB RSP,0x20
+14193ce5a MOV RBX,qword ptr [RCX]
+14193ce5d MOV RDI,RCX
+14193ce60 TEST RBX,RBX
+14193ce63 JZ 0x14193ceaf
+14193ce65 MOV RCX,RBX
+14193ce68 CALL 0x141948f60
+14193ce6d CALL 0x141595740
+14193ce72 MOV RAX,qword ptr GS:[0x58]
+14193ce7b MOV ECX,0x1fe
+14193ce80 MOV RDX,qword ptr [RAX]
+14193ce83 CMP byte ptr [RCX + RDX*0x1],0x0
+14193ce87 MOV RCX,RBX
+14193ce8a JZ 0x14193cea3
+14193ce8c CALL 0x144b7eacc
+14193ce91 MOV qword ptr [RDI],0x0
+14193ce98 MOV RBX,qword ptr [RSP + 0x30]
+14193ce9d ADD RSP,0x20
+14193cea1 POP RDI
+14193cea2 RET
+14193cea3 CALL 0x144b7e9cc
+14193cea8 MOV qword ptr [RDI],0x0
+14193ceaf MOV RBX,qword ptr [RSP + 0x30]
+14193ceb4 ADD RSP,0x20
+14193ceb8 POP RDI
+14193ceb9 RET
+
+void FUN_14193ce50(longlong *param_1)
+
+{
+  longlong lVar1;
+  longlong unaff_GS_OFFSET;
+
+  lVar1 = *param_1;
+  if (lVar1 != 0) {
+    func_0x000141948f60(lVar1);
+    FUN_141595740();
+    if (*(char *)(**(longlong **)(unaff_GS_OFFSET + 0x58) + 0x1fe) != '\0') {
+      FUN_144b7eacc();
+      *param_1 = 0;
+      return;
+    }
+    FUN_144b7e9cc(lVar1);
+    *param_1 = 0;
+  }
+  return;
+}
+
+
+
+RVA=1145763472
+BLOCKED: no function at requested address
+
+RVA=1145755328
+BLOCKED: no function at requested address

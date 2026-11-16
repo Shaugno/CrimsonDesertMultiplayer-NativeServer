@@ -1,0 +1,339 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=26513248
+Function=thunk_FUN_14b7d3f40 body=[[141948f60, 141948f64]]
+141948f60 JMP 0x14b7d3f40
+
+void thunk_FUN_14b7d3f40(longlong param_1)
+
+{
+  longlong lVar1;
+  longlong unaff_GS_OFFSET;
+
+  lVar1 = *(longlong *)(param_1 + 0x120);
+  if (lVar1 != 0) {
+    FUN_141595740();
+    if (*(char *)(**(longlong **)(unaff_GS_OFFSET + 0x58) + 0x1fe) == '\0') {
+      FUN_144b7e9cc(lVar1);
+    }
+    else {
+      FUN_144b7eacc();
+    }
+  }
+  *(undefined8 *)(param_1 + 0x120) = 0;
+  *(undefined8 *)(param_1 + 0x128) = 0;
+  *(int *)(param_1 + 0x10c) = *(int *)(param_1 + 0x10c) + 1;
+  FUN_140536e90();
+  lVar1 = *(longlong *)(param_1 + 0xf0);
+  if (lVar1 != 0) {
+    FUN_141595740();
+    if (*(char *)(**(longlong **)(unaff_GS_OFFSET + 0x58) + 0x1fe) == '\0') {
+      FUN_144b7e9cc(lVar1);
+    }
+    else {
+      FUN_144b7eacc();
+      DAT_147f27501 = DAT_147f27883;
+    }
+  }
+  *(undefined8 *)(param_1 + 0xf0) = 0;
+  *(undefined8 *)(param_1 + 0xf8) = 0;
+  lVar1 = *(longlong *)(param_1 + 0xd8);
+  if (lVar1 != 0) {
+    FUN_141595740();
+    if (*(char *)(**(longlong **)(unaff_GS_OFFSET + 0x58) + 0x1fe) == '\0') {
+      FUN_144b7e9cc(lVar1);
+    }
+    else {
+      FUN_144b7eacc();
+    }
+  }
+  *(undefined8 *)(param_1 + 0xd8) = 0;
+  *(undefined8 *)(param_1 + 0xe0) = 0;
+  FUN_14041f6e0(param_1 + 0xb8);
+  FUN_14041f6e0(param_1 + 0x98);
+  FUN_14041f6e0(param_1 + 0x78);
+  FUN_1409dc650(param_1 + 0x58);
+  FUN_1409dc650(param_1 + 0x48);
+  FUN_1409dc650(param_1 + 0x38);
+  FUN_1409dc650(param_1 + 0x28);
+  FUN_1409dc650(param_1 + 0x18);
+  lVar1 = *(longlong *)(param_1 + 8);
+  if (lVar1 != 0) {
+    FUN_141595740();
+    if (*(char *)(**(longlong **)(unaff_GS_OFFSET + 0x58) + 0x1fe) == '\0') {
+      FUN_144b7e9cc(lVar1);
+    }
+    else {
+      FUN_144b7eacc();
+    }
+  }
+  *(undefined8 *)(param_1 + 8) = 0;
+  *(undefined8 *)(param_1 + 0x10) = 0;
+  return;
+}
+
+
+
+RVA=72021648
+Function=FUN_1444af690 body=[[1444af690, 1444af70a]]
+1444af690 MOVUPS XMM5,xmmword ptr [RDX]
+1444af693 MOVAPS XMM1,XMM5
+1444af696 MOVAPS XMM0,XMM5
+1444af699 ADDPS XMM1,XMM5
+1444af69c SHUFPS XMM0,XMM5,0x41
+1444af6a0 MOVAPS XMM2,XMM5
+1444af6a3 SHUFPS XMM5,XMM5,0xfe
+1444af6a7 MULSS XMM2,XMM1
+1444af6ab MOVAPS XMM4,XMM1
+1444af6ae SHUFPS XMM4,XMM1,0xa5
+1444af6b2 SHUFPS XMM1,XMM1,0x1a
+1444af6b6 MULPS XMM5,XMM1
+1444af6b9 MULPS XMM4,XMM0
+1444af6bc MOVAPS XMM0,xmmword ptr [0x146d61900]
+1444af6c3 XORPS XMM5,xmmword ptr [0x1456f3110]
+1444af6ca MOVAPS XMM3,XMM0
+1444af6cd ADDSS XMM5,XMM0
+1444af6d1 SUBSS XMM3,XMM2
+1444af6d5 MOVAPS XMM1,XMM5
+1444af6d8 SUBSS XMM3,XMM4
+1444af6dc XORPS XMM4,xmmword ptr [0x1456f3100]
+1444af6e3 SUBPS XMM1,XMM4
+1444af6e6 MOVSS XMM4,XMM2
+1444af6ea MOVUPS xmmword ptr [RCX],XMM1
+1444af6ed XORPS XMM5,xmmword ptr [0x1456f3100]
+1444af6f4 SUBPS XMM5,XMM4
+1444af6f7 SHUFPS XMM5,XMM5,0xb1
+1444af6fb MOVHLPS XMM1,XMM5
+1444af6fe SHUFPS XMM1,XMM3,0x8d
+1444af702 MOVUPS xmmword ptr [RCX + 0x20],XMM1
+1444af706 MOVUPS xmmword ptr [RCX + 0x10],XMM5
+1444af70a RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_1444af690(float *param_1,float *param_2)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  float fVar8;
+  float fVar9;
+  float fVar10;
+  float fVar11;
+  float fVar12;
+  float fVar13;
+
+  fVar2 = fRam0000000146d61908;
+  fVar5 = *param_2;
+  fVar1 = param_2[1];
+  fVar7 = param_2[2];
+  fVar8 = param_2[3];
+  fVar3 = fVar1 + fVar1;
+  fVar4 = fVar7 + fVar7;
+  fVar6 = fVar5 * (fVar5 + fVar5);
+  fVar11 = (float)((uint)(fVar8 * fVar4) ^ _UNK_1456f3114);
+  fVar12 = (float)((uint)(fVar8 * fVar3) ^ _UNK_1456f3118);
+  fVar13 = (float)((uint)(fVar8 * (fVar5 + fVar5)) ^ _UNK_1456f311c);
+  fVar10 = (float)((uint)(fVar7 * fVar4) ^ _DAT_1456f3110) + _DAT_146d61900;
+  fVar7 = _DAT_146d61900 - fVar6;
+  fVar8 = (float)((uint)(fVar3 * fVar5) ^ _UNK_1456f3104);
+  fVar9 = (float)((uint)(fVar4 * fVar5) ^ _UNK_1456f3108);
+  fVar4 = (float)((uint)(fVar4 * fVar1) ^ _UNK_1456f310c);
+  fVar5 = fVar13 - fVar4;
+  *param_1 = fVar10 - (float)((uint)(fVar3 * fVar1) ^ _DAT_1456f3100);
+  param_1[1] = fVar11 - fVar8;
+  param_1[2] = fVar12 - fVar9;
+  param_1[3] = fVar5;
+  fVar10 = (float)((uint)fVar10 ^ _DAT_1456f3100);
+  fVar11 = (float)((uint)fVar11 ^ _UNK_1456f3104);
+  fVar13 = (float)((uint)fVar13 ^ _UNK_1456f310c);
+  fVar9 = (float)((uint)fVar12 ^ _UNK_1456f3108) - fVar9;
+  param_1[8] = fVar9;
+  param_1[9] = fVar5;
+  param_1[10] = fVar7 - fVar3 * fVar1;
+  param_1[0xb] = fVar2;
+  param_1[4] = fVar11 - fVar8;
+  param_1[5] = fVar10 - fVar6;
+  param_1[6] = fVar13 - fVar4;
+  param_1[7] = fVar9;
+  return;
+}
+
+
+
+RVA=72013504
+Function=FUN_1444ad6c0 body=[[1444ad6c0, 1444ad836]]
+1444ad6c0 SUB RSP,0x78
+1444ad6c4 MOVUPS XMM3,xmmword ptr [RDX + 0x20]
+1444ad6c8 MOVUPS XMM5,xmmword ptr [RDX + 0x10]
+1444ad6cc MOVAPS XMM2,XMM3
+1444ad6cf MOVAPS XMM1,xmmword ptr [0x1461c1570]
+1444ad6d6 MOVAPS xmmword ptr [RSP],XMM12
+1444ad6db XORPS XMM12,XMM12
+1444ad6df MOVAPS xmmword ptr [RSP + 0x60],XMM6
+1444ad6e4 MOVAPS XMM6,XMM3
+1444ad6e7 MOVAPS xmmword ptr [RSP + 0x40],XMM8
+1444ad6ed MOVAPS XMM8,XMM5
+1444ad6f1 MOVAPS xmmword ptr [RSP + 0x30],XMM9
+1444ad6f7 MOVUPS XMM9,xmmword ptr [RDX]
+1444ad6fb MOVAPS xmmword ptr [RSP + 0x20],XMM10
+1444ad701 MOVAPS XMM4,XMM9
+1444ad705 MOVAPS xmmword ptr [RSP + 0x10],XMM11
+1444ad70b MOVAPS XMM10,XMM9
+1444ad70f MOVAPS XMM11,XMM5
+1444ad713 SHUFPS XMM6,XMM3,0xaa
+1444ad717 UCOMISS XMM12,XMM6
+1444ad71b SHUFPS XMM10,XMM9,0x0
+1444ad720 SHUFPS XMM11,XMM5,0x55
+1444ad725 SHUFPS XMM4,XMM9,0x55
+1444ad72a SHUFPS XMM8,XMM5,0x0
+1444ad72f SHUFPS XMM2,XMM3,0x0
+1444ad733 SHUFPS XMM9,XMM9,0xaa
+1444ad738 SHUFPS XMM5,XMM5,0xaa
+1444ad73c SHUFPS XMM3,XMM3,0x55
+1444ad740 JBE 0x1444ad789
+1444ad742 UCOMISS XMM10,XMM11
+1444ad746 MOVAPS XMM0,XMM10
+1444ad74a ADDPS XMM8,XMM4
+1444ad74e SUBPS XMM0,XMM11
+1444ad752 SUBPS XMM1,XMM6
+1444ad755 JBE 0x1444ad76d
+1444ad757 ADDPS XMM1,XMM0
+1444ad75a ADDPS XMM2,XMM9
+1444ad75e SUBPS XMM5,XMM3
+1444ad761 UNPCKLPS XMM1,XMM8
+1444ad765 UNPCKLPS XMM2,XMM5
+1444ad768 MOVLHPS XMM1,XMM2
+1444ad76b JMP 0x1444ad7dd
+1444ad76d SUBPS XMM1,XMM0
+1444ad770 ADDPS XMM3,XMM5
+1444ad773 SUBPS XMM2,XMM9
+1444ad777 MOVAPS XMM0,XMM1
+1444ad77a MOVAPS XMM1,XMM8
+1444ad77e UNPCKLPS XMM1,XMM0
+1444ad781 UNPCKLPS XMM3,XMM2
+1444ad784 MOVLHPS XMM1,XMM3
+1444ad787 JMP 0x1444ad7dd
+1444ad789 MOVAPS xmmword ptr [RSP + 0x50],XMM7
+1444ad78e ADDPS XMM6,XMM1
+1444ad791 XORPS XMM0,XMM0
+1444ad794 SUBPS XMM4,XMM8
+1444ad798 SUBPS XMM0,XMM11
+1444ad79c MOVAPS XMM7,XMM11
+1444ad7a0 ADDPS XMM7,XMM10
+1444ad7a4 UCOMISS XMM0,XMM10
+1444ad7a8 JBE 0x1444ad7c2
+1444ad7aa MOVAPS XMM1,XMM2
+1444ad7ad ADDPS XMM3,XMM5
+1444ad7b0 ADDPS XMM1,XMM9
+1444ad7b4 SUBPS XMM6,XMM7
+1444ad7b7 UNPCKLPS XMM1,XMM3
+1444ad7ba UNPCKLPS XMM6,XMM4
+1444ad7bd MOVLHPS XMM1,XMM6
+1444ad7c0 JMP 0x1444ad7d8
+1444ad7c2 MOVAPS XMM1,XMM5
+1444ad7c5 SUBPS XMM2,XMM9
+1444ad7c9 SUBPS XMM1,XMM3
+1444ad7cc ADDPS XMM7,XMM6
+1444ad7cf UNPCKLPS XMM1,XMM2
+1444ad7d2 UNPCKLPS XMM4,XMM7
+1444ad7d5 MOVLHPS XMM1,XMM4
+1444ad7d8 MOVAPS XMM7,xmmword ptr [RSP + 0x50]
+1444ad7dd MOVAPS XMM11,xmmword ptr [RSP + 0x10]
+1444ad7e3 MOVAPS XMM2,XMM1
+1444ad7e6 MOVAPS XMM10,xmmword ptr [RSP + 0x20]
+1444ad7ec MOVAPS XMM9,xmmword ptr [RSP + 0x30]
+1444ad7f2 MOVAPS XMM8,xmmword ptr [RSP + 0x40]
+1444ad7f8 MOVAPS XMM6,xmmword ptr [RSP + 0x60]
+1444ad7fd DPPS XMM2,XMM1,0xff
+1444ad803 MOVAPS XMM0,XMM2
+1444ad806 CMPEQSS XMM0,XMM12
+1444ad80c MOVD EAX,XMM0
+1444ad810 BT EAX,0x0
+1444ad814 JNC 0x1444ad824
+1444ad816 MOVUPS xmmword ptr [RCX],XMM12
+1444ad81a MOVAPS XMM12,xmmword ptr [RSP]
+1444ad81f ADD RSP,0x78
+1444ad823 RET
+1444ad824 MOVAPS XMM12,xmmword ptr [RSP]
+1444ad829 SQRTPS XMM0,XMM2
+1444ad82c DIVPS XMM1,XMM0
+1444ad82f MOVUPS xmmword ptr [RCX],XMM1
+1444ad832 ADD RSP,0x78
+1444ad836 RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_1444ad6c0(undefined1 (*param_1) [16],float *param_2)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  uint uVar8;
+  undefined1 auVar9 [16];
+  undefined1 auVar10 [16];
+  undefined1 auVar11 [16];
+  float fVar12;
+
+  fVar1 = param_2[8];
+  fVar2 = param_2[9];
+  fVar3 = param_2[10];
+  fVar4 = param_2[5];
+  fVar5 = param_2[6];
+  fVar6 = *param_2;
+  fVar7 = param_2[2];
+  if (0.0 <= fVar3) {
+    fVar12 = param_2[1] - param_2[4];
+    if (0.0 - fVar4 <= fVar6) {
+      auVar10._0_4_ = fVar5 - fVar2;
+      auVar10._4_4_ = fVar1 - fVar7;
+      auVar10._12_4_ = fVar4 + fVar6 + fVar3 + _DAT_1461c1570;
+      auVar10._8_4_ = fVar12;
+    }
+    else {
+      auVar10._0_4_ = fVar1 + fVar7;
+      auVar10._4_4_ = fVar2 + fVar5;
+      auVar10._12_4_ = fVar12;
+      auVar10._8_4_ = (fVar3 + _DAT_1461c1570) - (fVar4 + fVar6);
+    }
+  }
+  else {
+    fVar12 = param_2[4] + param_2[1];
+    if (fVar6 <= fVar4) {
+      auVar10._4_4_ = (_DAT_1461c1570 - fVar3) - (fVar6 - fVar4);
+      auVar10._0_4_ = fVar12;
+      auVar10._12_4_ = fVar1 - fVar7;
+      auVar10._8_4_ = fVar2 + fVar5;
+    }
+    else {
+      auVar10._0_4_ = (_DAT_1461c1570 - fVar3) + (fVar6 - fVar4);
+      auVar10._4_4_ = fVar12;
+      auVar10._12_4_ = fVar5 - fVar2;
+      auVar10._8_4_ = fVar1 + fVar7;
+    }
+  }
+  auVar11 = dpps(auVar10,auVar10,0xff);
+  uVar8 = -(uint)(auVar11._0_4_ == 0.0);
+  auVar9._4_12_ = auVar11._4_12_;
+  auVar9._0_4_ = uVar8;
+  if ((uVar8 & 1) == 0) {
+    auVar9 = sqrtps(auVar9,auVar11);
+    auVar10 = divps(auVar10,auVar9);
+    *param_1 = auVar10;
+    return;
+  }
+  *(undefined8 *)*param_1 = 0;
+  *(undefined8 *)(*param_1 + 8) = 0;
+  return;
+}

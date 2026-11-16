@@ -53,6 +53,29 @@ struct ImageIdentity {
     uint32_t size_of_image = 0;
 };
 
+struct TierPermissions {
+    bool tier_a_reads = false;
+    bool tier_b_tunnel = false;
+    bool tier_c_join = false;
+    bool tier_d_lifecycle = false;
+};
+
+// Pure dependency policy, also exercised with synthetic completeness masks.
+// Production passes only the compiled table evidence below. A caller-provided
+// identity enum by itself cannot grant a tier: all measured PE facts must match.
+inline TierPermissions select_3663_tiers(const ImageIdentity& id, const TierPermissions& requested,
+                                       const TierPermissions& complete) {
+    TierPermissions out;
+    if (id.kind != IdentityKind::Build3663 || !id.timestamp_known || !id.size_known ||
+        id.timestamp != build_3663::kPeTimestamp || id.mapped_base != build_3663::kImageBase ||
+        id.size_of_image != build_3663::kSizeOfImage) return out;
+    out.tier_a_reads = requested.tier_a_reads && complete.tier_a_reads;
+    out.tier_b_tunnel = out.tier_a_reads && requested.tier_b_tunnel && complete.tier_b_tunnel;
+    out.tier_c_join = out.tier_b_tunnel && requested.tier_c_join && complete.tier_c_join;
+    out.tier_d_lifecycle = out.tier_c_join && requested.tier_d_lifecycle && complete.tier_d_lifecycle;
+    return out;
+}
+
 struct StartupRequest {
     bool in_game = false;       // process image is CrimsonDesert.exe
     bool test_overlay = false;  // CDMP_TEST_OVERLAY, explicit and off the game path
@@ -76,7 +99,7 @@ enum class PlayerFeed {
 // A rejected in-game image, including a recognized 3576/3663 image, leaves
 // networking off and player_feed Off. A 3576 guest still ends: the save
 // redirect is a 2976 install and must not run.
-struct StartupDecision {
+struct StartupDecision : TierPermissions {
     GameBuild build = GameBuild::None;
     bool read_game_addresses = false;
     bool install_hooks = false;
@@ -225,6 +248,7 @@ inline StartupDecision decide_startup(const StartupRequest& req) {
         decision.install_hooks = true;
         decision.run_network = true;
         decision.player_feed = PlayerFeed::Game;
+        decision.tier_a_reads = decision.tier_b_tunnel = decision.tier_c_join = decision.tier_d_lifecycle = true;
         return decision;
     }
     if (req.identity.kind == IdentityKind::Build3576) {
@@ -236,6 +260,9 @@ inline StartupDecision decide_startup(const StartupRequest& req) {
         // Recognition is not permission to reuse the legacy readers, hooks or
         // early guest save redirect. Unresolved core rows stay inaccessible.
         decision.build = GameBuild::Build3663;
+        static_cast<TierPermissions&>(decision) = select_3663_tiers(req.identity, {true, true, true, true},
+            {build_3663::kTierAComplete, build_3663::kTierBComplete,
+             build_3663::kTierCComplete, build_3663::kTierDComplete});
         decision.end_guest_process = req.guest_role;
         return decision;
     }

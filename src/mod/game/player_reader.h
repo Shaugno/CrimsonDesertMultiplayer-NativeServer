@@ -12,6 +12,8 @@
 
 namespace cdmp::game {
 
+struct PlayerLayout;
+
 struct PlayerSnapshot {
     proto::Vec3 position;        // world space (chunk origin applied); Y is up
     proto::Vec3 local_position;  // physics position, relative to the map chunk
@@ -46,6 +48,7 @@ private:
 
     bool enabled_ = false;
     uintptr_t base_ = 0;
+    const PlayerLayout* layout_ = nullptr;
     std::string last_failure_;
 };
 

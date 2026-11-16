@@ -73,7 +73,8 @@ def raw(tier, file, needle, symbol, value, use):
     found = next(i+1 for i,s in enumerate(lines) if needle in s)
     rows.append(dict(tier=tier, symbol=symbol, value=value, source=f'{file}:{found}', use=use, id='inline'))
 
-raw('A', G+'player_reader.cpp', '/ 1000.0f', 'NativeStatUnits', '1000.0f', 'native int64 stat conversion scale (not a timeout)')
+raw('A', G+'player_layout.h', 'stat_units = 1000.0f', 'NativeStatUnits', '1000.0f', 'native int64 stat conversion scale (not a timeout)')
+raw('A', G+'player_layout.h', 'stat_id_bytes = 8', 'StatIdReadWidth', '8', 'legacy reader width; target native ID width must be confirmed separately from padding')
 raw('C', S+'field_share.cpp', 'lock_call(field + fld::kLock1, 8)', 'FieldLockAcquireVslot', '8', 'both field lock acquire slots')
 raw('C', S+'field_share.cpp', 'lock_call(second, 0x10)', 'FieldLockReleaseVslot', '0x10', 'both field lock release slots')
 raw('C', S+'field_share.cpp', '!peek(pj + 0x68', 'HostCharacterComponents', '0x68', 'field-share traversal to host components')
@@ -109,7 +110,8 @@ assert sum(r['adopted_r1'] for r in rows) == 17
 (OUT/'R2-CORE-LIST.json').write_text(json.dumps(rows, indent=2)+'\n')
 intro = '''# R2 core list — reviewed reachability cut
 
-Source baseline: 90c12f5 (production code unchanged since R1). Reproduce with
+Scope baseline: 90c12f5. Reader refactoring adds an explicit native ID-width
+contract; declaration locations follow the working branch. Reproduce with
 `python tools/port3663/r2_core.py`. Stable R2 IDs refer to the generated JSON.
 Each row is a game contract, including signatures and native wire layouts;
 a compound native structure/signature is shown in full as one contract.
