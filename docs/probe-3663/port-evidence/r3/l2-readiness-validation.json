@@ -1,0 +1,27 @@
+{
+  "full_suite": {
+    "passed": 104,
+    "failed": 0,
+    "seconds": 88.22
+  },
+  "game_free_smoke": "clean unload and remote states; not native acceptance",
+  "change": "Wait at most 60 seconds for named adopted boundary descriptors and actual cryptogram channel/kind before native hooks; no arbitrary-delay bypass",
+  "live_retry": "pending",
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\l2-readiness-suite.txt",
+      "bytes": 38075,
+      "sha256": "FB632EF2EF3142BD308023192353148A04FEB6069E4F0850D76DC59B3B49A849"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\l2-readiness-smoke.txt",
+      "bytes": 153,
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\l2-readiness-host.log",
+      "bytes": 6689,
+      "sha256": "34663FC86C72E97038FD56C22C8A92AD0295D694A3C604A783139107DC846229"
+    }
+  ]
+}

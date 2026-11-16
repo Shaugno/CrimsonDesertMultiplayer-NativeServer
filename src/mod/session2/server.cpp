@@ -1049,7 +1049,8 @@ void load_channels() {
         // reach. Never the global shutdown 2790/2038 nor 2004 (pointers).
         const bool connect = name == "ConnectCryptogramToServerReq" ||
                              (name == "LogoutSessionToServerReq" && op && *op == troc::kOpLogoutSessionReq);
-        if (kind && op && ch && (*kind == tunnel_offsets().kTrocKindServer || connect) && *ch < kBlocked) {
+        const bool internal_ready = connect && (!core_only() || (kind && *kind == 0x7FFFFFFEu));
+        if (kind && op && ch && (*kind == tunnel_offsets().kTrocKindServer || internal_ready) && *ch < kBlocked) {
             const std::string full = game::short_class_name(game::rtti_name_of_vtable(*vt), "TrocTr");
             // The tunnel never asks the host's server to save, delete saves or run cheats.
             // Covers every Req of domain cheat/dev in troc_messages_2976.csv and none
@@ -1156,11 +1157,36 @@ bool server_install(const ServerOptions& opt) {
     g_to_near = core_only() ? nullptr : reinterpret_cast<FinderVf1>(g_base + off::kToNearVf1);
 
     if (hooks_server) {
-        load_channels();
-        if (core_only() && g_channel[tunnel_offsets().connect_opcode] >= kBlocked) {
-            log::error("3663 B: named cryptogram descriptor not found; no native hook installed");
-            return false;
-        }
+        if (core_only()) {
+            // ASI can start before the game's dynamic descriptor constructors.
+            // No native hook/allocation until both adopted boundary objects and
+            // the actual named cryptogram channel are initialized. Never assume
+            // a delay alone means readiness.
+            const uint64_t started = GetTickCount64();
+            uint64_t last_report = 0;
+            for (;;) {
+                const auto first = game::read_ptr(g_base + tunnel_offsets().kTrocInstancesBegin);
+                const auto last = game::read_ptr(g_base + tunnel_offsets().kTrocInstancesEnd);
+                const auto first_name = first ? game::rtti_name_of_vtable(*first) : std::string();
+                const auto last_name = last ? game::rtti_name_of_vtable(*last) : std::string();
+                if (first_name == ".?AVTrocTrStartActionAck@pa@@" &&
+                    last_name == ".?AVTrocTrOnLogoutXxxToServerReq@pa@@") {
+                    load_channels();
+                    if (g_channel[tunnel_offsets().connect_opcode] < kBlocked) break;
+                }
+                const auto elapsed = GetTickCount64()-started;
+                if (elapsed >= 60000) {
+                    log::error("3663 B: native descriptor readiness timed out; no native hook installed");
+                    return false;
+                }
+                if (!last_report || elapsed-last_report>=5000) {
+                    log::info("3663 B: waiting for native descriptors; first 0x{:X} '{}' last 0x{:X} '{}'",
+                        first.value_or(0),first_name,last.value_or(0),last_name);
+                    last_report=elapsed+1;
+                }
+                Sleep(100);
+            }
+        } else load_channels();
         if (!build_vtable()) {
             log::error("Session2: cannot build session 2's vtable; option D stays off");
             return false;

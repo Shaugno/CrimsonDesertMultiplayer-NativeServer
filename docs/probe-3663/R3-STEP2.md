@@ -34,3 +34,10 @@ Validation: 103/103 tests passed in 86.64 seconds, followed by a clean
 game-free host/peer loopback (78 remote states). The new tunnel
 fixture first failed because it queued before initial epoch reset; corrected
 and full suite rerun. L2 remains pending. See step2-validation.json.
+
+First L2 launch safely refused at 0.23 seconds: zero initialized handlers, no
+native hooks installed. User quit at title. Normal exit, all 23 saves unchanged,
+installation restored. Added bounded named descriptor readiness (60 seconds),
+including the internal handler kind; no guard is bypassed. Full suite 104/104
+(88.22 seconds), game-free smoke clean. Native retry is pending; see
+l2-refusal-result.json and l2-readiness-validation.json.

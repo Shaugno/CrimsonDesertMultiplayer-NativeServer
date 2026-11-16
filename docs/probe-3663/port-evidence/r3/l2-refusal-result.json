@@ -1,0 +1,64 @@
+{
+  "session": "R3-L2-20261116-122500",
+  "controller_session": "R2-P1-20261116-122500",
+  "result": "safely_refused_before_hooks",
+  "question": "Does the private-session cryptogram cross the native tunnel and real movement stream both ways?",
+  "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "observed": "Zero initialized server handlers at 0.23 seconds after worker start; no cryptogram descriptor; no native hooks installed. Worker exited.",
+  "user": "At title, then quit without Continue as requested",
+  "native_hook_installed": false,
+  "native_calls": false,
+  "game_crash": false,
+  "termination": "normal exit",
+  "save_verification": {
+    "session": "R2-P1-20261116-122500",
+    "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "backup_verified": true,
+    "live_saves_unchanged": true,
+    "before_files": 23,
+    "after_files": 23
+  },
+  "fix": "Bounded named descriptor readiness before scanning/hooking; pending runtime verification",
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\question.md",
+      "bytes": 2321,
+      "sha256": "64A9BF9E5C72B1A12F6C3125E0FEBDEEEBC1811067F9ABA7AB0EA59F3798C8A4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\deployed-hashes.json",
+      "bytes": 663,
+      "sha256": "353CB33F1DD11CC4FF7DFC34FE00F5346B863C08F035BBCF27E6A0B115265BC4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\installed-receipt.json",
+      "bytes": 478,
+      "sha256": "E76D1C1D0DF312A4FE093139218789652ABB2A15B5BBC6A11AC7324DA2674E50"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\save-verification.json",
+      "bytes": 235,
+      "sha256": "FB0971B2E8F69AFEE26BE0B64EDF5CCCAF4300E1D6900A78485F8C9884D1695A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\watchdog.json",
+      "bytes": 496,
+      "sha256": "265AED08C8B14436C7DF60FBD7DC34367B37F0918E31C4D9613CEB8636EE0483"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\cdmp.log",
+      "bytes": 1526,
+      "sha256": "C7420EF2EAD37AC2624323529DAC852606009383443D1CABBB9A233603A5641E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\peer.stdout.txt",
+      "bytes": 11268,
+      "sha256": "9992D8B2BBE4A1C3A3D299D4FADF2827EB244594F187FC1BC6FD3F976D725196"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\peer.stderr.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  ]
+}
