@@ -1,0 +1,129 @@
+{
+  "authority": "User-approved R3 rule 2 overrides R2 conflict veto for these named siblings",
+  "rows": {
+    "C009": {
+      "symbol": "kToNearExceptOneControlVtable",
+      "old": "0x5B25358",
+      "target": "0x5f686c0",
+      "adopted": true,
+      "method": "Approved R3 rule 2: exact named RTTI slot plus independent native behavior",
+      "native_check": "Reviewed native bodies obtain actor/TS from finder+10, use mover 4F0->508, acquire/release the native field holder and do not fill the output. Named RTTI disambiguates near-identical siblings.",
+      "bindiff_result": [
+        {
+          "target": "0x2d6c230",
+          "similarity": 1.0,
+          "confidence": 0.9894232242221226
+        }
+      ],
+      "conflict_retained": true,
+      "tier_armed": false
+    },
+    "C012": {
+      "symbol": "kExceptOneVf1",
+      "old": "0x2A759B0",
+      "target": "0x2d6c360",
+      "adopted": true,
+      "method": "Approved R3 rule 2: exact named RTTI slot plus independent native behavior",
+      "native_check": "Reviewed native bodies obtain actor/TS from finder+10, use mover 4F0->508, acquire/release the native field holder and do not fill the output. Named RTTI disambiguates near-identical siblings.",
+      "bindiff_result": [
+        {
+          "target": "0x2d6c230",
+          "similarity": 1.0,
+          "confidence": 0.9894232242221226
+        }
+      ],
+      "conflict_retained": true,
+      "tier_armed": false
+    },
+    "C010": {
+      "symbol": "kToNearExceptOneSelfVtable",
+      "old": "0x5B25378",
+      "target": "0x5f686a0",
+      "adopted": true,
+      "method": "Approved R3 rule 2: exact named RTTI slot plus independent native behavior",
+      "native_check": "Reviewed native bodies obtain actor/TS from finder+10, use mover 4F0->508, acquire/release the native field holder and do not fill the output. Named RTTI disambiguates near-identical siblings.",
+      "bindiff_result": [
+        {
+          "target": "0x2d6c360",
+          "similarity": 1.0,
+          "confidence": 0.9894232242221226
+        }
+      ],
+      "conflict_retained": true,
+      "tier_armed": false
+    },
+    "C013": {
+      "symbol": "kExceptOneSelfVf1",
+      "old": "0x2A75880",
+      "target": "0x2d6c230",
+      "adopted": true,
+      "method": "Approved R3 rule 2: exact named RTTI slot plus independent native behavior",
+      "native_check": "Reviewed native bodies obtain actor/TS from finder+10, use mover 4F0->508, acquire/release the native field holder and do not fill the output. Named RTTI disambiguates near-identical siblings.",
+      "bindiff_result": [
+        {
+          "target": "0x2d6c360",
+          "similarity": 1.0,
+          "confidence": 0.9894232242221226
+        }
+      ],
+      "conflict_retained": true,
+      "tier_armed": false
+    },
+    "C011": {
+      "symbol": "kToNearVtable",
+      "old": "0x5B25418",
+      "target": "0x5f68780",
+      "adopted": true,
+      "method": "Approved R3 rule 2: exact named RTTI slot plus independent native behavior",
+      "native_check": "Named slot-1 leaf wrappers tail-dispatch the independently reviewed near-recipient collection; both traverse finder+10, actor+68, TS+1A0 and jump to matched 2BC51E0/2ED0860.",
+      "bindiff_result": [],
+      "conflict_retained": true,
+      "tier_armed": false
+    },
+    "C014": {
+      "symbol": "kToNearVf1",
+      "old": "0x2A75860",
+      "target": "0x2d6c210",
+      "adopted": true,
+      "method": "Approved R3 rule 2: exact named RTTI slot plus independent native behavior",
+      "native_check": "Named slot-1 leaf wrappers tail-dispatch the independently reviewed near-recipient collection; both traverse finder+10, actor+68, TS+1A0 and jump to matched 2BC51E0/2ED0860.",
+      "bindiff_result": [],
+      "conflict_retained": true,
+      "tier_armed": false
+    },
+    "C015": {
+      "symbol": "kExceptOneVf1Head",
+      "old": "{0x40, 0x53, 0x48, 0x83, 0xEC, 0x50, 0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x99, 0xA0, 0x01, 0x00, 0x00}",
+      "target": "40 53 48 83 ec 50 48 8b 41 10 48 8b 48 68 48 8b 99 a0 01 00 00",
+      "adopted": true,
+      "method": "Native entry prefix for the R3 named-slot adoption; not an unchanged ABI claim",
+      "tier_armed": false
+    },
+    "C016": {
+      "symbol": "kToNearVf1Head",
+      "old": "{0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x89, 0xA0, 0x01, 0x00, 0x00, 0xE9}",
+      "target": "48 8b 41 10 48 8b 48 68 48 8b 89 a0 01 00 00 e9",
+      "adopted": true,
+      "method": "Native entry prefix for the R3 named-slot adoption; not an unchanged ABI claim",
+      "tier_armed": false
+    }
+  },
+  "evidence": [
+    {
+      "path": "docs\\probe-3663\\port-evidence\\r2\\recipient-finders-old.txt",
+      "sha256": "0FC8F166657E6767F7CFD3244C3CBB5E7E25CC32F00945279FF6BE6530964CED"
+    },
+    {
+      "path": "docs\\probe-3663\\port-evidence\\r2\\recipient-finders-new.txt",
+      "sha256": "6F94C88E735985F50ED6E91EF9CD7E382EFF51AC3A9205E8B5AE7BED72134A9F"
+    },
+    {
+      "path": "docs\\probe-3663\\port-evidence\\r2\\recipient-near-complete-old.txt",
+      "sha256": "E30F9B5364C6A77A89456896CEFCDCE5D3F64A54654966BD2EDFF5464AE33E0E"
+    },
+    {
+      "path": "docs\\probe-3663\\port-evidence\\r2\\recipient-near-helpers-new.txt",
+      "sha256": "5EB158646E1694E458BCFE2668740F9659231F185ADD5699F8C6644E089A6FB5"
+    }
+  ]
+}
