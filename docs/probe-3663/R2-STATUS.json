@@ -1,0 +1,578 @@
+{
+  "generated_utc": "2026-11-16T15:33:05.520256+00:00",
+  "branch": "gpt/3663-port",
+  "package_type": "Step 7 blocker package",
+  "native_goal_reached": false,
+  "native_two_player_demonstrated": false,
+  "tiers_armed": [],
+  "furthest_tier_armed": null,
+  "furthest_live_session_passed": null,
+  "final_commit": "R2-MANIFEST.json final_commit, generated from clean committed HEAD",
+  "base_commit": "2c80c21d31e11fbc05cc83883502b27d4f63ffb3",
+  "counts": {
+    "A": {
+      "adopted": 34,
+      "blocked": 3
+    },
+    "B": {
+      "adopted": 73,
+      "blocked": 5
+    },
+    "C": {
+      "adopted": 113,
+      "blocked": 37
+    },
+    "D": {
+      "adopted": 109,
+      "blocked": 21
+    }
+  },
+  "steps": {
+    "1": "completed; 395 core game contracts, 17 retained R1 adoptions",
+    "2": "completed required whole-image AutoVT and default BinDiff; per-row native/conflict checks retained",
+    "3": "blocked field-sharing assessment; changed three-argument ABI and unresolved roster ownership",
+    "4": "guard framework and partial evidence tables prepared; all four native tiers blocked/unarmed",
+    "5": "three passive sessions recorded; L1-L4 blocked, no two-player acceptance",
+    "6": "completed in c5f7074; fallback scope unchanged",
+    "7": "blocker package; exact clean source commit and archive hashes in generated manifest"
+  },
+  "validation": {
+    "configuration": "x64 MSVC RelWithDebInfo",
+    "command": "scripts/build.ps1 -BuildDir <local r2-build>",
+    "tests_passed": 101,
+    "tests_failed": 0,
+    "seconds": 87.04,
+    "log": "port-evidence/r2/session-lock-final-build.txt",
+    "loopback": {
+      "remote_states": 77,
+      "rejected": 0,
+      "clean_stop": true,
+      "native_evidence": false
+    },
+    "failures_and_reruns": "port-evidence/r2/validation-deviations.md"
+  },
+  "binaries": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r2-build\\bin\\RelWithDebInfo\\cdmp.asi",
+      "bytes": 15945216,
+      "sha256": "8AA59BE1F8D70DE14736619B46D2785B6CDB498FC9E05B101C8DE05207818673"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r2-build\\bin\\RelWithDebInfo\\cdmp_host.exe",
+      "bytes": 737280,
+      "sha256": "4B3DA924D51443E1D7269373976E4AD8DDBDF74918B16F899C3C31E8DC4C2629"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r2-build\\bin\\RelWithDebInfo\\cdmp_peer.exe",
+      "bytes": 2723328,
+      "sha256": "2A2FB5B34B5D416D85588FDF504778111CA4BDC010EB6C441CD3DBA83999F1CE"
+    }
+  ],
+  "live_sessions": [
+    {
+      "id": "R2-P1-20261116-072000",
+      "result": "Definition key confirmed at full HP; session-control deviation",
+      "l1_passed": false,
+      "evidence": "docs/probe-3663/port-evidence/r2/live/R2-P1-20261116-072000/result.json"
+    },
+    {
+      "id": "R2-P1-20261116-075900",
+      "result": "Walking/turning observed; loading transition unresolved",
+      "l1_passed": false,
+      "evidence": "docs/probe-3663/port-evidence/r2/live/R2-P1-20261116-075900/result.json"
+    },
+    {
+      "id": "R2-P1-20261116-100800",
+      "result": "Title and initial loading captured; fast-travel readiness remains unresolved",
+      "l1_passed": false,
+      "evidence": "docs/probe-3663/port-evidence/r2/live/R2-P1-20261116-100800/result.json"
+    },
+    {
+      "id": "L1",
+      "result": "blocked",
+      "passed": false
+    },
+    {
+      "id": "L2",
+      "result": "blocked",
+      "passed": false
+    },
+    {
+      "id": "L3",
+      "result": "blocked",
+      "passed": false
+    },
+    {
+      "id": "L4",
+      "result": "blocked",
+      "passed": false
+    }
+  ],
+  "remaining": [
+    {
+      "tier": "A",
+      "row": "A026",
+      "symbol": "kStatId_Health",
+      "missing": "P1 HP confirmed both definition registries select key 0 and unique raw 900000/900000 agrees with visible 900/900. Publish the definition-derived selector only with adopted definition-slot RVAs; one full-HP state does not prove literal-ID stability.",
+      "next_experiment": "Complete standard address validation and publish the existing HP-only target path; verify ordinary HP variation in real L1."
+    },
+    {
+      "tier": "A",
+      "row": "A027",
+      "symbol": "kStatId_Stamina",
+      "missing": "The legacy reader still consumes stamina key 22. Prove the target stamina key, or publish an actual HP-only 3663 layout and explicitly revise target reachability; the unpublished helper alone does not retire this row.",
+      "next_experiment": "Use native stat-definition consumers to identify stamina, or complete the already prepared HP-only target path after P1 and standard address validation."
+    },
+    {
+      "tier": "A",
+      "row": "A028",
+      "symbol": "kLoadingParkHeight",
+      "missing": "P1 synchronized from title captured chain_not_ready, initial park at (0,1000,0), placement, walking/turning and user-confirmed fast travel with a 182.35m world jump. During travel the actor chain stayed coherent with no distinct park/not-ready interval; the initial park rule alone does not prove readiness during travel or pointer lifetime.",
+      "next_experiment": "Identify a native non-mutating loading/control readiness field and its update/lifetime contract from the actual client loading path, then prepare a passive trace that samples it across one fast travel. Do not call the reference-acquisition vslot or infer readiness from unchanged actor pointers."
+    },
+    {
+      "tier": "B",
+      "row": "B052",
+      "symbol": "kTrocInstancesBegin",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kTrocInstancesBegin at 2976 0x6A51AE0",
+      "next_experiment": null
+    },
+    {
+      "tier": "B",
+      "row": "B053",
+      "symbol": "kTrocInstancesEnd",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kTrocInstancesEnd at 2976 0x6A82C80",
+      "next_experiment": null
+    },
+    {
+      "tier": "B",
+      "row": "B065",
+      "symbol": "kNetLoopPump",
+      "missing": "Standard support for candidate 0x3a8d94 (or its documented native operand anchor) is absent; independent check: Decoded seven-byte MOV RAX,[R15+E0] at the pre-flush native NetworkThread point; R15 is ClientNet, incoming queue+18 is handled before this point, then synchronous session+10 is flushed and returned queue+28 freed. Both complete parent loops reviewed. This is a safetyhook mid-point, not an inline entry.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C001",
+      "symbol": "kSamSlot",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kSamSlot at 2976 0x6DA67D8",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C009",
+      "symbol": "kToNearExceptOneControlVtable",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kToNearExceptOneControlVtable at 2976 0x5B25358",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C010",
+      "symbol": "kToNearExceptOneSelfVtable",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kToNearExceptOneSelfVtable at 2976 0x5B25378",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C011",
+      "symbol": "kToNearVtable",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kToNearVtable at 2976 0x5B25418",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C012",
+      "symbol": "kExceptOneVf1",
+      "missing": "Resolve contradictory direct standard evidence for candidate 0x2d6c360; its anchor cannot override the conflict. independent check: Exact named RTTI primary-vtable slot 1 identifies control/self/near independently; paired native bodies follow finder+10 to actor+68/TS+1A0 and the field mover (4F0 -> 508). Except-one implementations preserve native reference acquisition/release without filling the output; near tail-dispatches its full recipient-list helper. Default BinDiff swaps the similar control/self bodies, which is a conflict, not corroboration.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C013",
+      "symbol": "kExceptOneSelfVf1",
+      "missing": "Resolve contradictory direct standard evidence for candidate 0x2d6c230; its anchor cannot override the conflict. independent check: Exact named RTTI primary-vtable slot 1 identifies control/self/near independently; paired native bodies follow finder+10 to actor+68/TS+1A0 and the field mover (4F0 -> 508). Except-one implementations preserve native reference acquisition/release without filling the output; near tail-dispatches its full recipient-list helper. Default BinDiff swaps the similar control/self bodies, which is a conflict, not corroboration.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C014",
+      "symbol": "kToNearVf1",
+      "missing": "Standard support for candidate 0x2d6c210 (or its documented native operand anchor) is absent; independent check: Exact named RTTI primary-vtable slot 1 identifies control/self/near independently; paired native bodies follow finder+10 to actor+68/TS+1A0 and the field mover (4F0 -> 508). Except-one implementations preserve native reference acquisition/release without filling the output; near tail-dispatches its full recipient-list helper. Default BinDiff swaps the similar control/self bodies, which is a conflict, not corroboration.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C015",
+      "symbol": "kExceptOneVf1Head",
+      "missing": "Confirm 3663 code consumes kExceptOneVf1Head for the same native role as src/mod/session2/offsets_s2.h:101 ({0x40, 0x53, 0x48, 0x83, 0xEC, 0x50, 0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x99, 0xA0, 0x01, 0x00, 0x00})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C016",
+      "symbol": "kToNearVf1Head",
+      "missing": "Confirm 3663 code consumes kToNearVf1Head for the same native role as src/mod/session2/offsets_s2.h:103 ({0x48, 0x8B, 0x41, 0x10, 0x48, 0x8B, 0x48, 0x68, 0x48, 0x8B, 0x89, 0xA0, 0x01, 0x00, 0x00, 0xE9})",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D014",
+      "symbol": "kWindowsLockVf1",
+      "missing": "Standard support for candidate 0x1593240 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 1 has the paired native thunk that dispatches this through vslot+18. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role.",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D015",
+      "symbol": "kWindowsLockVf2",
+      "missing": "Standard support for candidate 0xe297f0 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 2 has the paired native thunk that dispatches this through vslot+20. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role.",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D020",
+      "symbol": "kSlotRefreshReqSequence",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kSlotRefreshReqSequence at 2976 0x2A22475",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D021",
+      "symbol": "kSlotRefreshReqSequenceBytes",
+      "missing": "Confirm 3663 code consumes kSlotRefreshReqSequenceBytes for the same native role as src/mod/session2/offsets_s2.h:191 ({ 0x48, 0x8B, 0x05, 0x1C, 0x72, 0x34, 0x04, 0x4C, 0x8B, 0x78, 0x48, 0x4C, 0x89, 0x7D, 0x07, 0x45, 0x32, 0xF6, 0x44, 0x88, 0x75, 0x0F, 0x49, 0x8B, 0x1F, 0x48, 0x89, 0x5D, 0x77, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x08, 0x90, 0x45, 0x38, 0x77, 0x60, 0x75, 0x0C, 0x41, 0xC6, 0x47, 0x60, 0x01, 0x41, 0xB6, 0x01, 0x44, 0x88, 0x75, 0x0F, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x10, 0x90, 0x45, 0x84, 0xF6, 0x75, 0x05, 0xE9, 0x91, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x0D, 0xCF, 0x71, 0x34, 0x04, 0x48, 0x8B, 0x49, 0x48, 0xE8, 0x4E, 0xE7, 0xE4, 0xFE, 0x90, 0x49, 0x8B, 0x1F, 0x48, 0x89, 0x5D, 0x77, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x08, 0x90, 0x41, 0xC6, 0x47, 0x60, 0x00, 0x48, 0x8B, 0x03, 0x48, 0x8B, 0xCB, 0xFF, 0x50, 0x10})",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D022",
+      "symbol": "kTitlePlayReadsSaveMgr",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kTitlePlayReadsSaveMgr at 2976 0x65DC3E",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D023",
+      "symbol": "kTitlePlayReadsSaveMgrBytes",
+      "missing": "Confirm 3663 code consumes kTitlePlayReadsSaveMgrBytes for the same native role as src/mod/session2/offsets_s2.h:212 ({0x4C, 0x8B, 0x1D, 0x4B, 0xB5, 0x70, 0x06, 0x49, 0x8B, 0x83, 0x88, 0x00, 0x00, 0x00})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C043",
+      "symbol": "kEnterField",
+      "missing": "Standard support for candidate 0x2ecb130 (or its documented native operand anchor) is absent; independent check: Native field admission and failure cleanup. ABI CHANGED: 3663 has three arguments and iterates its character list; matching this RVA does not authorize the legacy four-argument detour.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C047",
+      "symbol": "kVecPush",
+      "missing": "Resolve contradictory direct standard evidence for candidate 0x4cae10; its anchor cannot override the conflict. independent check: Native AddActor callee; 16-byte user entries, vector pointer/count/capacity, growth and element copy verified.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C066",
+      "symbol": "kCharacterClass",
+      "missing": "Confirm 3663 code consumes kCharacterClass for the same native role as src/mod/session2/identity_fix.h:63 (0xA)",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C067",
+      "symbol": "kLobbyLoad",
+      "missing": "Standard support for candidate 0x2e879a0 (or its documented native operand anchor) is absent; independent check: Paired ServerLobbyActorComponent native loads obtain the owner lock and INT64_MAX number, call paired lobby-entry writers with the same argument roles and propagate results. Exact RTTI vtable slot +50 independently identifies both entries; RTTI labels alone are not a second native-body check.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C069",
+      "symbol": "kLobbyVtable",
+      "missing": "Standard support for candidate 0x5f6f2e8 (or its documented native operand anchor) is absent; independent check: Exact MSVC RTTI class/COL identifies this component vtable; slot +50 points to the independently reviewed native loader with matching role and changed fields. Standard loader agreement can anchor the paired slot relationship; RTTI naming alone does not satisfy adoption.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C070",
+      "symbol": "kLobbyConstant",
+      "missing": "Standard support for candidate 0x2e87db0 (or its documented native operand anchor) is absent; independent check: Native lobby loader instruction MOV RAX,7FFFFFFFFFFFFFFF followed by a stack store; its address-taken qword becomes the paired entry writer character-number argument. Target stack slot changes to RBP-40; no old instruction patch bytes are reused.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C072",
+      "symbol": "kLobbyAddCall",
+      "missing": "Standard support for candidate 0x2e87e10 (or its documented native operand anchor) is absent; independent check: Native E8 call from the lobby loader to paired entry writer 2143E70/237EA60, with component, result, address-of-number, slot/name data and extra native arguments. This callsite proof does not establish a safe detour ABI.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C074",
+      "symbol": "kClearLobbySite",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kClearLobbySite at 2976 0x2C3E0FF",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C075",
+      "symbol": "kClearLobbySiteBytes",
+      "missing": "Confirm 3663 code consumes kClearLobbySiteBytes for the same native role as src/mod/session2/identity_fix.cpp:227 ({0x49, 0x8B, 0x47, 0x68, 0x48, 0x8B, 0x58, 0x10, 0x48, 0x8B, 0x7B, 0x08})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C076",
+      "symbol": "kClearListSite",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kClearListSite at 2976 0x2C3E126",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C077",
+      "symbol": "kClearListSiteBytes",
+      "missing": "Confirm 3663 code consumes kClearListSiteBytes for the same native role as src/mod/session2/identity_fix.cpp:229 ({0x48, 0x8B, 0x4B, 0x18})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C078",
+      "symbol": "kStatusVtable",
+      "missing": "Standard support for candidate 0x5f63430 (or its documented native operand anchor) is absent; independent check: Exact MSVC RTTI class/COL identifies this component vtable; slot +50 points to the independently reviewed native loader with matching role and changed fields. Standard loader agreement can anchor the paired slot relationship; RTTI naming alone does not satisfy adoption.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C079",
+      "symbol": "kStatusLoad",
+      "missing": "Standard support for candidate 0x2c160b0 (or its documented native operand anchor) is absent; independent check: Paired ServerStatusActorComponent loads call the common status loader, propagate its result and write INT64_MAX through the character-number pointer, changed +70 -> +90; target LoginCharacter lookup consumes +90 independently. Exact named RTTI slot +50 supplies entry identity.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C080",
+      "symbol": "kLoginMgrSite",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kLoginMgrSite at 2976 0x2777A18",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C081",
+      "symbol": "kLoginMgrSiteBytes",
+      "missing": "Confirm 3663 code consumes kLoginMgrSiteBytes for the same native role as src/mod/session2/identity_fix.cpp:235 ({0x48, 0x8B, 0x0D, 0x89, 0x1C, 0x5F, 0x04, 0x48, 0x8B, 0x09})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C099",
+      "symbol": "kPhases",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kPhases at 2976 0x2941020",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C100",
+      "symbol": "kPhasesHead",
+      "missing": "Confirm 3663 code consumes kPhasesHead for the same native role as src/mod/session2/identity_probe.cpp:51 ({0x48, 0x89, 0x5C, 0x24, 0x08, 0x44, 0x89, 0x4C, 0x24, 0x20, 0x4C, 0x89, 0x44, 0x24, 0x18, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0x6C, 0x24, 0xD9, 0x48, 0x81, 0xEC, 0xC0, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xFA, 0x4C, 0x8B, 0x71, 0x08, 0x49, 0x8B, 0x7E, 0x78})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C101",
+      "symbol": "kStatusVtable",
+      "missing": "Standard support for candidate 0x5f63430 (or its documented native operand anchor) is absent; independent check: Exact MSVC RTTI class/COL identifies this component vtable; slot +50 points to the independently reviewed native loader with matching role and changed fields. Standard loader agreement can anchor the paired slot relationship; RTTI naming alone does not satisfy adoption.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C102",
+      "symbol": "kStatusLoad",
+      "missing": "Standard support for candidate 0x2c160b0 (or its documented native operand anchor) is absent; independent check: Paired ServerStatusActorComponent loads call the common status loader, propagate its result and write INT64_MAX through the character-number pointer, changed +70 -> +90; target LoginCharacter lookup consumes +90 independently. Exact named RTTI slot +50 supplies entry identity.",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C103",
+      "symbol": "kLoadStub",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kLoadStub at 2976 0x35EA90",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C110",
+      "symbol": "kTravel",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kTravel at 2976 0x2BC0A30",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C111",
+      "symbol": "kTravelHead",
+      "missing": "Confirm 3663 code consumes kTravelHead for the same native role as src/mod/session2/clock_gate.cpp:22 ({0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0x6C, 0x24, 0xC9, 0x48, 0x81, 0xEC, 0xC0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C112",
+      "symbol": "kTravelOwnerCmp",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kTravelOwnerCmp at 2976 0x2BC0A78",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C113",
+      "symbol": "kTravelOwnerCmpBytes",
+      "missing": "Confirm 3663 code consumes kTravelOwnerCmpBytes for the same native role as src/mod/session2/clock_gate.cpp:26 ({0x39, 0x82, 0x80, 0x01, 0x00, 0x00})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C114",
+      "symbol": "kTravelGetterCall",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kTravelGetterCall at 2976 0x2BC0CC7",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C115",
+      "symbol": "kTravelGetterCallBytes",
+      "missing": "Confirm 3663 code consumes kTravelGetterCallBytes for the same native role as src/mod/session2/clock_gate.cpp:28 ({0xE8, 0xD4, 0x48, 0x52, 0xFF})",
+      "next_experiment": null
+    },
+    {
+      "tier": "C",
+      "row": "C122",
+      "symbol": "kSessionId",
+      "missing": "Confirm 3663 code consumes kSessionId for the same native role as src/mod/session2/server.cpp:76 (0)",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D030",
+      "symbol": "kSamBucketMaxEntries",
+      "missing": "Confirm 3663 code consumes kSamBucketMaxEntries for the same native role as src/mod/session2/guest_lifecycle.h:55 ((kSamBucketBytes - 8) / 8)",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D044",
+      "symbol": "kTsMoving",
+      "missing": "Confirm 3663 code consumes kTsMoving for the same native role as src/mod/session2/guest_lifecycle.h:199 (0x3DC)",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D045",
+      "symbol": "kFmMoving",
+      "missing": "Confirm 3663 code consumes kFmMoving for the same native role as src/mod/session2/guest_lifecycle.h:200 (0x58)",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D063",
+      "symbol": "kCallSites[0].site",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kCallSites[0].site at 2976 0x2C17881",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D064",
+      "symbol": "kCallSites[1].site",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kCallSites[1].site at 2976 0x2C3E1CE",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D065",
+      "symbol": "kCallSites[2].site",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kCallSites[2].site at 2976 0x1042ABF3",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D066",
+      "symbol": "kCallSites[3].site",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kCallSites[3].site at 2976 0xCBD86CE",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D067",
+      "symbol": "kCallSites[4].site",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kCallSites[4].site at 2976 0x103BE99A",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D100",
+      "symbol": "kRetUserLogin",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kRetUserLogin at 2976 0x2C17886",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D101",
+      "symbol": "kRetLobby3093",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kRetLobby3093 at 2976 0x2C3E1D3",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D102",
+      "symbol": "kRetCharacter3093",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kRetCharacter3093 at 2976 0x1042ABF8",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D103",
+      "symbol": "kRetAutosave",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kRetAutosave at 2976 0xCBD86D3",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D104",
+      "symbol": "kRetManual2910",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kRetManual2910 at 2976 0x103BE99F",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D115",
+      "symbol": "kReporterHead",
+      "missing": "Confirm 3663 code consumes kReporterHead for the same native role as src/mod/session2/report_guard.cpp:20 ({0x48, 0x89, 0x5C, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57})",
+      "next_experiment": null
+    },
+    {
+      "tier": "B",
+      "row": "B075",
+      "symbol": "kMaxPacketSize",
+      "missing": "The legacy shared packet limit 7FE0 differs from the target native PostPacket bound 7FDA and ordinary decoder payload bound 7FC1. A target-specific acceptance bound and complete framing check remain necessary.",
+      "next_experiment": "Review native writer/decoder length arithmetic together, then add per-build boundary regressions without changing legacy limits or assuming a new mod wire format."
+    },
+    {
+      "tier": "C",
+      "row": "C144",
+      "symbol": "kActor_OwnerUser",
+      "missing": "Confirm 3663 code consumes kActor_OwnerUser for the same native role as src/mod/game/offsets.h:230 (0x90)",
+      "next_experiment": null
+    },
+    {
+      "tier": "D",
+      "row": "D130",
+      "symbol": "NativeTitleSlotDomain",
+      "missing": "Target title eligibility adds per-entry u32-list membership at +68/count+70 against available .admeta IDs at global 71AEAA0/71AEAA8. Target producer 14AA720 reads those IDs in addition to names; reference producer 128D360 only builds names. The new global dependencies, list lifetime/coherence and complete target parser remain unadopted/unimplemented. The old domain-only playable count is insufficient.",
+      "next_experiment": "Correlate the native metadata producer, validate the new ID-vector operands and saved-entry list lifecycle, then introduce the new target dependencies and implement/test complete membership-based eligibility. Retain native resource IDs without inferring DLC semantics."
+    },
+    {
+      "tier": "B",
+      "row": "B078",
+      "symbol": "NativeTrocScanSkip",
+      "missing": "The native descriptor scan skips 80h bytes after a match, then advances eight more. Target minimum instance span/alignment for every scanned descriptor is not yet established; the skip must not hide a neighbouring target descriptor.",
+      "next_experiment": "Prove the common target descriptor storage contract from native initialization, or implement a target scan that advances eight bytes throughout and does not rely on native object size."
+    }
+  ],
+  "next_experiment": "First establish the client loading flags start/reset, actor association and lifetime contract offline. Then extend the passive collector to sample the verified fields across fast travel. Never invoke native reference-acquisition/control helpers or infer readiness from stable pointers.",
+  "cleanup": "Last passive session exited normally; 23 save files unchanged, backup verified, test installation removed and no game remains. Optional supplemental matcher stopped with exact identity verification after required runs completed; inputs retained and no partial result counted.",
+  "scope": "2976 behavior preserved, 3576 recognized/unarmed, 3663 recognized/unarmed. No optional module or fallback expansion, wire-version change, unsupported guard bypass, binary release, or claim of native multiplayer success."
+}

@@ -36,6 +36,17 @@ def main():
     status=json.loads(payload[prefix+'R2-STATUS.json'].decode('utf-8-sig'))
     matches=json.loads(payload[prefix+'R2-MATCHES.json'].decode('utf-8-sig'))
     core=json.loads(payload[prefix+'R2-CORE-LIST.json'].decode('utf-8-sig'))
+    # Check the bytes that reviewers actually receive, after Git's newline
+    # normalization, rather than trusting a working-tree/raw capture digest.
+    for path,data in payload.items():
+        if '/live/' not in path or not path.endswith('/result.json'): continue
+        session=json.loads(data.decode('utf-8-sig'))
+        for item in session['files']:
+            assert Path(item['name']).name==item['name'],item['name']
+            included=path.rsplit('/',1)[0]+'/'+item['name']
+            assert included in payload,('Missing live evidence',included)
+            assert len(payload[included])==item['bytes'],included
+            assert digest(payload[included])==item['sha256'].upper(),included
     assert {r['row'] for r in matches['rows']}=={r['r2'] for r in core}
     for row in matches['rows']:
         assert bool(row['missing'])!=bool(row['adopted']),row['row']

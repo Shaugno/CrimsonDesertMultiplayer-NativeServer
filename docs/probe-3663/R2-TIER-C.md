@@ -8,7 +8,7 @@ Implementation boundary: the existing legacy modules remain on their 2976 addres
 
 Guard validation: build_guard_tests exercises all 256 request/completeness combinations, each tier on/off through lower-tier dependencies, wrong image size/timestamp/base, unknown/missing identity and recognized 3576. It asserts actual 3663 startup is unarmed and cannot route legacy game reads, hooks, overlay, synthetic state or network callbacks. The target-only A callback is isolated. This proves denial, not successful native operation.
 
-Latest game-closed scripts/build.ps1 x64 MSVC RelWithDebInfo: **101/101, 87.04 seconds**. Synthetic cdmp_host/cdmp_peer loopback: **78 remote states, zero rejected, clean network stop and worker exit**. It is not L2 or native two-player evidence. The preceding failures, fixes and reruns are retained in port-evidence/r2/validation-deviations.md and its referenced logs. Documentation-only tier decisions reuse this unchanged validated build.
+Latest game-closed scripts/build.ps1 x64 MSVC RelWithDebInfo: **101/101, 87.04 seconds**. Synthetic cdmp_host/cdmp_peer loopback: **77 remote states, zero rejected, clean network stop and worker exit**. It is not L2 or native two-player evidence. The preceding failures, fixes and reruns are retained in port-evidence/r2/validation-deviations.md and its referenced logs. Documentation-only tier decisions reuse this unchanged validated build.
 
 Self-review: no new runtime thread or escaped reader lifetime; native calls remain behind closed startup gates; payloads retain existing bounds/serialization and friends restriction; target identity is exact; no address-based peer identity; no new deployment or reconnect/cleanup behavior is claimed. Deferred native ownership and per-build bounds remain prerequisites.
 
@@ -54,4 +54,4 @@ Self-review: no new runtime thread or escaped reader lifetime; native calls rema
 
 Next validation when prerequisites are resolved: regenerate the catalog, implement the actual per-build route, rerun guards/full CTest/loopback, then perform the plan’s ordered live test with fresh backups and presence. Never enable this flag merely to test an incomplete table.
 
-Final evidence refresh: native user-session and lock-constructor checks are included in the validated source tree; full suite 101/101 in 87.04 seconds and loopback 78 states/zero rejected/clean stop. No tier permission changed.
+Final evidence refresh: native user-session and lock-constructor checks are included in the validated source tree; full suite 101/101 in 87.04 seconds and loopback 77 states/zero rejected/clean stop. No tier permission changed.
