@@ -1,5 +1,13 @@
 # R3 Step 2 — native tunnel port
 
+Current result: L2 PASSED on R3-L2-20261116-123100. Private-session native
+cryptogram request 2401 (291 bytes) crossed Q0 and was seen once; native Ack
+2128 (330 bytes) reached the loopback peer. 1044 real movement states returned,
+zero network rejections, normal process exit, all 23 saves unchanged, install
+restored. A/B armed; C/D closed. Native host with UDP initiation toward the
+test peer; no native guest join, actor/reconnect or two-player claim. See
+port-evidence/r3/l2-result.json. Earlier pending/refusal notes below are history.
+
 Before this change, enabling a 3663 tunnel could reach 2976 constants and
 optional join/save callbacks. Reproduce offline by following server_install,
 on_server_recv, take_frame and run_network with a 3663 identity: the shared
