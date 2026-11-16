@@ -1,30 +1,38 @@
-# Current R2 continuation — completed default matching, 2026-11-16
+# R2 Step 7 final blocker package — 2026-11-16
 
-Whole-image AutoVT and the full default BinDiff run are complete. The primary
-join uses the default database (207,217 function pairs); the conservative
-profile remains supplemental. Actual raw hashes and algorithm counts are in
-port-evidence/r2/standard-completion.json. The additional structural profile
-was stopped as an optional redundant subset after the required default run completed; no partial result is counted. Native checks and explicit
-conflict handling remain required.
+The source/evidence package is ready for final review. HANDOFF-CURRENT.md,
+R2-STATUS.json and the generated R2-MANIFEST.json are authoritative; the
+sections below are chronological investigation history. No native tier is
+armed and none of L1–L4 passed. The native two-player goal was not reached.
 
-Current catalog: A 34/37, B 73/78, C 113/150, D 109/130 adopted (329/395).
-The 265 separately reviewed native contracts include entry guards; 58 adopted
-RVA constants are emitted. C047 VecPush is blocked following the default/VT
-conflict. The native layer chart offset changed 110 -> 118; the old travel
-clock helper's publication is embedded in the larger target transition.
-Neither finding installs a hook. All four completeness gates remain false.
+Required whole-image AutoVT and full default BinDiff are complete. The join
+uses 207,217 default function pairs with explicit native/conflict checks.
+The conservative result is supplemental; the optional structural subset was
+stopped after required runs completed, with no partial result counted.
+All identities, raw hashes, warnings and stop receipt are retained.
 
-The loading trace and cleanup were validated without UI control. User-reported
-fast travel is retained, but it is not synchronized with the captured movement
-interval; L1 remains unpassed. Both P1 session results, the HP session time-cap
-deviation, watchdog fix and exact receipts are preserved under live/. A fresh
-read-only cleanup recheck confirms no game process and no test ASI/PDB/loader/ini.
+Final catalog: A 34/37, B 73/78, C 113/150, D 109/130 adopted: **329/395**,
+with **66 blocked**. The header contains 265 native layout/guard contracts
+and 58 adopted RVA constants; all completeness gates remain false.
 
-Latest intermediate full builds: 101/101 in 109.33 s (default join) and 90.32 s
-(thread layouts). The latter synthetic loopback unloads cleanly; the final
-layer-header build is running. These tests are game-free and do not count as L2.
-The remainder of this file is chronological history; its old pending statements
-are superseded by R2-MATCHES and this section. Work continues through Step 7.
+Three passive sessions are recorded, including the synchronized 100800
+loading rerun: title not-ready, initial park, placement and a 182.35 m jump
+in the user-confirmed travel interval. No distinct not-ready state appears
+during travel, so pointer stability is insufficient for Tier A readiness.
+The game exited normally; 23 save files unchanged, backup verified and test
+installation restored. No UI control was used. Final read-only checks find
+no game or owned matcher process and no test ASI/PDB/loader/config installed.
+
+Latest full x64 MSVC RelWithDebInfo validation: **101/101, 87.04 seconds**.
+Latest synthetic loopback: **77 remote states, zero rejected, clean stop**.
+Earlier failures, fixes, reruns and corrected canonical evidence hashes are
+retained; synthetic results are not native multiplayer evidence.
+
+The exact committed source revision and full commit list since 2c80c21 are
+in the generated manifest. The Step 7 archive includes the source delta,
+evidence and GPL/attribution, with no binaries, saves or tool databases.
+
+---
 
 # R2 work in progress — 2026-11-16
 
