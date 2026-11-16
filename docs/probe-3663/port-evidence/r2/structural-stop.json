@@ -1,0 +1,11 @@
+{
+  "state": "stopped_optional_supplement",
+  "reason": "Required whole-image AutoVT and default BinDiff are complete; this additional stock subset is redundant and cannot substitute for the outstanding native readiness/ownership/adapter contracts. No partial result is counted.",
+  "stopped_utc": "2026-11-16T15:28:41.6869181Z",
+  "pid": 19332,
+  "start_filetime": "134393126659150054",
+  "command_sha256": "5FC02434304ECC114B27CCBAC4F92A4A4EDF7055DD057D01C0EC125F3C9CAF01",
+  "cpu_seconds": 3302.578125,
+  "exports_preserved": true,
+  "database_present": false
+}

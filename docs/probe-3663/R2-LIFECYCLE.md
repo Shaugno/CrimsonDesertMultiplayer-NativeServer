@@ -138,3 +138,12 @@ vector, capacity, busy/pending fields and storage construction identify the
 manager role. Exact RTTI tables map lock vslots 1/2 to native dispatch thunks
 1593240/E297F0. Those function/vtable RVAs still require standard support;
 the lock self-offset is no longer unproved.
+
+Final constructor check: the source save-manager constructor is CBD2920
+in .xtls, independently matched by default BinDiff to target 1A15340. Its
+LEA/store at CBD2956 assigns WindowsLock<3> 557C120 to this+8, corresponding
+to target 1A1537C and 59874C8. The shared slot-vector/pending/busy initialization
+and named RTTI corroborate the relationship. D013 is adopted through this
+constructor operand; the short lock-dispatch function RVAs still lack standard
+support. The native user-session getter is independently proved at user+1F8
+through named slot +E8 and actual recipient-list consumers.

@@ -1,0 +1,104 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x3AFA10
+Function=FUN_1403afa10 body=[[1403afa10, 1403afa50]]
+1403afa10 SUB RSP,0x38
+1403afa14 MOV RAX,qword ptr [0x1472451c0]
+1403afa1b MOV RCX,qword ptr [RCX + 0x8]
+1403afa1f MOV RDX,qword ptr [RAX + 0x30]
+1403afa23 MOV RAX,qword ptr [RCX + 0xa0]
+1403afa2a CMP qword ptr [RDX + 0x58],RAX
+1403afa2e JNZ 0x1403afa4a
+1403afa30 CMP byte ptr [RCX + 0x94],0x0
+1403afa37 JZ 0x1403afa4a
+1403afa39 LEA RDX,[RSP + 0x20]
+1403afa3e CALL 0x1405e3ec0
+1403afa43 XOR AL,0x1
+1403afa45 ADD RSP,0x38
+1403afa49 RET
+1403afa4a MOV AL,0x1
+1403afa4c ADD RSP,0x38
+1403afa50 RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+ulonglong FUN_1403afa10(longlong param_1)
+
+{
+  longlong lVar1;
+  ulonglong uVar2;
+  undefined1 auStack_18 [24];
+
+  lVar1 = *(longlong *)(param_1 + 8);
+  if ((*(longlong *)(*(longlong *)(_DAT_1472451c0 + 0x30) + 0x58) == *(longlong *)(lVar1 + 0xa0)) &&
+     (*(char *)(lVar1 + 0x94) != '\0')) {
+    uVar2 = FUN_1405e3ec0(lVar1,auStack_18);
+    return uVar2 ^ 1;
+  }
+  return CONCAT71((int7)((ulonglong)*(longlong *)(lVar1 + 0xa0) >> 8),1);
+}
+
+
+
+RVA=0x5D9370
+Function=thunk_FUN_148e1de70 body=[[1405d9370, 1405d9374]]
+1405d9370 JMP 0x148e1de70
+
+int * thunk_FUN_148e1de70(undefined8 param_1,int *param_2,undefined8 param_3,undefined8 param_4,
+                         undefined1 param_5,undefined1 param_6)
+
+{
+  int *piVar1;
+  undefined1 auStack_18 [16];
+
+  piVar1 = (int *)FUN_14cc7ac20(param_1,auStack_18,param_3,param_4,param_5,param_6);
+  if (*piVar1 != 0) {
+    *param_2 = *piVar1;
+    return param_2;
+  }
+  *param_2 = 0;
+  return param_2;
+}
+
+
+
+RVA=0x198D7F0
+Function=thunk_FUN_14b838b80 body=[[14198d7f0, 14198d7f4]]
+14198d7f0 JMP 0x14b838b80
+
+void thunk_FUN_14b838b80(longlong param_1)
+
+{
+  FUN_14b839330();
+  *(undefined8 *)(param_1 + 0x88) = 0;
+  FUN_14cc7dfb0(param_1);
+  *(undefined4 *)(param_1 + 0x60) = 0;
+  return;
+}
+
+
+
+RVA=0x198EA10
+Function=thunk_FUN_14b84e390 body=[[14198ea10, 14198ea14]]
+14198ea10 JMP 0x14b84e390
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined8 * thunk_FUN_14b84e390(longlong param_1,undefined8 *param_2)
+
+{
+  longlong lVar1;
+  undefined *puVar2;
+
+  lVar1 = *(longlong *)(*(longlong *)(param_1 + 0x68) + 0x20);
+  *param_2 = 0;
+  puVar2 = *(undefined **)(lVar1 + 0x98);
+  *param_2 = puVar2;
+  if ((puVar2 != &DAT_146f29f30) && (-1 < *(int *)(puVar2 + 0x10))) {
+    LOCK();
+    *(int *)(puVar2 + 0x10) = *(int *)(puVar2 + 0x10) + 1;
+    UNLOCK();
+  }
+  return param_2;
+}

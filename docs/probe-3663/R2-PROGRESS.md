@@ -4,11 +4,11 @@ Whole-image AutoVT and the full default BinDiff run are complete. The primary
 join uses the default database (207,217 function pairs); the conservative
 profile remains supplemental. Actual raw hashes and algorithm counts are in
 port-evidence/r2/standard-completion.json. The additional structural profile
-is still computing and is not counted as evidence. Native checks and explicit
+was stopped as an optional redundant subset after the required default run completed; no partial result is counted. Native checks and explicit
 conflict handling remain required.
 
-Current catalog: A 34/37, B 73/78, C 112/150, D 108/130 adopted (327/395).
-The 264 separately reviewed native contracts include entry guards; 57 adopted
+Current catalog: A 34/37, B 73/78, C 113/150, D 109/130 adopted (329/395).
+The 265 separately reviewed native contracts include entry guards; 58 adopted
 RVA constants are emitted. C047 VecPush is blocked following the default/VT
 conflict. The native layer chart offset changed 110 -> 118; the old travel
 clock helper's publication is embedded in the larger target transition.

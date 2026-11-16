@@ -63,53 +63,74 @@
   "files": [
     {
       "name": "question.md",
-      "bytes": 2074,
-      "sha256": "500B117B7F7B1D0C701A2B170EB61B0097321203C359A4F0B84689DB7C37BD57"
+      "bytes": 2073,
+      "sha256": "526E790DCA3BBFF3E227B2552387F20DF64988A2025C53816972584F8E48D5F0",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\question.md",
+      "raw_sha256": "500B117B7F7B1D0C701A2B170EB61B0097321203C359A4F0B84689DB7C37BD57"
     },
     {
       "name": "trace.log",
-      "bytes": 217336,
-      "sha256": "0C35CCB790186A650B3815FEB680CAF7F051332A49B02C9FECC51627D02B5716"
+      "bytes": 216944,
+      "sha256": "D58C921D58AC8FBF941A09E518D6A46C0F686814BE1EFC44AC7BECBA2EB8E2F7",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\trace.log",
+      "raw_sha256": "0C35CCB790186A650B3815FEB680CAF7F051332A49B02C9FECC51627D02B5716"
     },
     {
       "name": "cdmp.log",
-      "bytes": 1407,
-      "sha256": "839BD217646CFE4B3231DF676960E60A2D3536ADCCA61EBB39275873B98B9013"
+      "bytes": 1397,
+      "sha256": "AB77384A1FA898FCB04BDB26043C0D3D1025D96F971BAEA69F03594DD8E15683",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\cdmp.log",
+      "raw_sha256": "839BD217646CFE4B3231DF676960E60A2D3536ADCCA61EBB39275873B98B9013"
     },
     {
       "name": "deployed-hashes.json",
-      "bytes": 663,
-      "sha256": "BAD3F4CF9FE08EE134B2DECC49BCC988B2A3A29A00A193E3E46EAF13FD4BC946"
+      "bytes": 646,
+      "sha256": "A6DA36C120829616E758D53AFD84F3FAE4E81BD7A317FBCE5ABF00B54FBA07F8",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\deployed-hashes.json",
+      "raw_sha256": "BAD3F4CF9FE08EE134B2DECC49BCC988B2A3A29A00A193E3E46EAF13FD4BC946"
     },
     {
       "name": "installed-receipt.json",
-      "bytes": 478,
-      "sha256": "EC291C1B7CE21C8602EC888258E472DC5B1EF84ADF567CA4E93CC4DE7609F337"
+      "bytes": 460,
+      "sha256": "0A5F221C0C9F4E0F865F46B9E8A88B22F06FDFBE08822B9AAC4DF84DAA28CE22",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\installed-receipt.json",
+      "raw_sha256": "EC291C1B7CE21C8602EC888258E472DC5B1EF84ADF567CA4E93CC4DE7609F337"
     },
     {
       "name": "paused-matching.json",
-      "bytes": 245,
-      "sha256": "B64061AE272575D541ABE9F26CDB472BDB9B69B0924194EA9C8E2234658D6863"
+      "bytes": 236,
+      "sha256": "D4AE1A4004CA9F59608B1E83D7EDCB0ED893DF2009CF59F6C2C38463AFB02A51",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\paused-matching.json",
+      "raw_sha256": "B64061AE272575D541ABE9F26CDB472BDB9B69B0924194EA9C8E2234658D6863"
     },
     {
       "name": "session-profile.json",
-      "bytes": 317,
-      "sha256": "E6633D1381036A9DC34FF667287BE368A7104F24674537ACF58369D4256000CE"
+      "bytes": 312,
+      "sha256": "EE7AC814C64F59DB407B617F5C16E449588625DDEB58520711690C8EACA74130",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\session-profile.json",
+      "raw_sha256": "E6633D1381036A9DC34FF667287BE368A7104F24674537ACF58369D4256000CE"
     },
     {
       "name": "save-verification.json",
-      "bytes": 235,
-      "sha256": "E5A986CEC9ED7BA25BFA684D325D3A20FB2363A5D27ADE1B37CB929A28199806"
+      "bytes": 227,
+      "sha256": "70142B58DDA5B6A4BBA837588A7DA1EF445D346A58EB80F2BB4C301FEC5D65D8",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\save-verification.json",
+      "raw_sha256": "E5A986CEC9ED7BA25BFA684D325D3A20FB2363A5D27ADE1B37CB929A28199806"
     },
     {
       "name": "watchdog.json",
-      "bytes": 506,
-      "sha256": "EDA519212A84F99E7BA2209ECDF15DBADFFC4CDB89DE62A23F113BA16A489636"
+      "bytes": 494,
+      "sha256": "DA5F80048FADC095E5CCCE9278E368BB5FD62F0B5247AF375CFBB975AAB22E00",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\watchdog.json",
+      "raw_sha256": "EDA519212A84F99E7BA2209ECDF15DBADFFC4CDB89DE62A23F113BA16A489636"
     },
     {
       "name": "loading-start-inventory.png",
       "bytes": 244927,
-      "sha256": "59BB362358D18CDEA6299542EB59E23A86C00A199EA2083DC98BEBA94EF1B0FA"
+      "sha256": "59BB362358D18CDEA6299542EB59E23A86C00A199EA2083DC98BEBA94EF1B0FA",
+      "raw_local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-075900\\loading-start-inventory.png",
+      "raw_sha256": "59BB362358D18CDEA6299542EB59E23A86C00A199EA2083DC98BEBA94EF1B0FA"
     }
-  ]
+  ],
+  "evidence_hash_convention": "sha256/bytes describe canonical committed bytes (UTF-8 LF, trailing whitespace stripped for text); raw_local/raw_sha256 preserve original capture provenance. Screenshots remain byte-exact."
 }

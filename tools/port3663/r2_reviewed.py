@@ -22,8 +22,11 @@ prove('B','src/mod/session2/offsets_s2.h',dict(kArray_Count='0x08',kArray_Capaci
     'Native vector push reads u32 count at vector+8 and capacity+C, grows 16-byte storage and increments count. The independently paired server thread vector embeds the same pointer/u32/u32 header at ServerNet+F8/+100/+104. This layout proof does not resolve the conflicting C047 helper function identity.')
 
 prove('C','src/mod/session2/offsets_s2.h',dict(kFinder_Actor='0x10',kServerActor_Controller='0x90'),
-    'port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt',
+    'port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt; recipient-near-complete-old.txt; recipient-near-helpers-new.txt',
     'Named finder slot-1 bodies load the actor pointer from finder+10. The complete ToNear tail-dispatched helper compares the owning user key at actor+90 with the user actor key+60 before recipient/session collection; the qword owner actor at +A0 is a separate member. Paired native roles prove these fields independently of the unresolved finder RVA correlations.')
+prove('C','src/mod/session2/offsets_s2.h',dict(kUser_Session='0x1F8'),
+    'port-evidence/rtti-2976.json; rtti-3663.json; port-evidence/r2/recipient-near-complete-old.txt; recipient-near-helpers-new.txt',
+    'Exact named ServerUserActor slot 29 (+E8) points to 2A7D9E0/2D740C0. Both complete eight-byte getters load [this+1F8] and return. Paired named recipient collection calls this user virtual slot, checks the returned session and appends it to the recipient-session vector. Native constructor zero-initialization corroborates storage only; it is not the sole role proof.')
 prove('C','src/mod/game/offsets.h',dict(kControl_Layer0='0x88',kLayer_Playback='0x18',kLayer_Chart='0x118'),
     'port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt',
     'Paired complete ActionLayersAdvance 2329700/258C5A0 walks two layer pointers at control+88/+90 and passes layer+18 to independently matched ActionLayerAdvance. The chart-presence gate changes from qword [layer+110] to [layer+118]. Both exact CMP operands and subsequent layer-time update/rescale are decoded; the target additionally validates action+111. Never copy the legacy chart displacement unchanged.')

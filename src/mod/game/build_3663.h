@@ -144,6 +144,7 @@ inline constexpr uint32_t kOpConnectCryptogramToServerReq = 2401; // 2976 2319; 
 namespace field_layout {
 inline constexpr uint32_t kFinder_Actor = 0x10; // 2976 0x10; R2 C017
 inline constexpr uint32_t kServerActor_Controller = 0x90; // 2976 0x90; R2 C007
+inline constexpr uint32_t kUser_Session = 0x1F8; // 2976 0x1F8; R2 C006
 inline constexpr uint32_t kControl_Layer0 = 0x88; // 2976 0x88; R2 C141
 inline constexpr uint32_t kLayer_Playback = 0x18; // 2976 0x18; R2 C142
 inline constexpr uint32_t kLayer_Chart = 0x118; // 2976 0x110; R2 C143
@@ -385,6 +386,7 @@ inline constexpr uintptr_t B063_kSyncSessionSend = 0x165CB60; // 2976 0x14380B0;
 inline constexpr uintptr_t B069_kClientOnRecvPacket = 0x3a9cf0; // 2976 0x35CA00; R2 B069, R2-MATCHES.json
 inline constexpr uintptr_t C004_kServerUserActorVtable = 0x5f68b10; // 2976 0x5B257A8; R2 C004, R2-MATCHES.json
 inline constexpr uintptr_t D002_kServerActorLookupSlot = 0x72456d0; // 2976 0x6D69698; R2 D002, R2-MATCHES.json
+inline constexpr uintptr_t D013_kWindowsLock3Vtable = 0x59874c8; // 2976 0x557C120; R2 D013, R2-MATCHES.json
 inline constexpr uintptr_t D018_kSaveMgrRefreshSlots = 0x1A18320; // 2976 0x1870C20; R2 D018, R2-MATCHES.json
 inline constexpr uintptr_t C041_kAcquireField = 0x2e08520; // 2976 0x2B07790; R2 C041, R2-MATCHES.json
 inline constexpr uintptr_t C045_kTryAddRef = 0x1658e90; // 2976 0x14343A0; R2 C045, R2-MATCHES.json

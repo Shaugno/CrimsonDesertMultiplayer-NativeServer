@@ -127,3 +127,16 @@ loading capture began after the save loaded, and reported travel timing was
 not synchronized, so it cannot establish a loading predicate. A second
 user-present passive loading session is being prepared after the DateTime
 receipt fix, with collection verified at title before Continue.
+
+Native loading follow-up: named MoveFieldAck CD4D70 reaches B370E0,
+MoveFieldCompleteAck CD57C0 reaches B36ED0, and LoadingCompleteAck CD9DF0
+reaches B37830. Completion sets actor+C2 and sometimes +C4 after component
+initialization; the latter handler reaches the previously reviewed completion
+and signals [WorldSystem+28]+28 on success. The move-start path also changes
+other actors' lifecycle states under native locks. Their full start/reset,
+controlled-actor association and asynchronous lifetime contract are not proved.
+They are candidate observations for a future trace, not a production predicate.
+The local-owner predicate 3AFA10 reads actor+94, then calls 5E3EC0, which takes
+native locks, traverses other subsystems and allocates/frees temporary storage.
+It must not be called by a passive external reader or relabeled pure readiness.
+These native exports preserve the exact next investigation boundary.

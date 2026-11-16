@@ -28,7 +28,7 @@
   },
   "supplemental_runs": {
     "broad": "completed; primary join now uses default result",
-    "structural": "still running; no completion evidence claimed"
+    "structural": "Stopped optional stock subset after required AutoVT/default BinDiff completion; no result database and no partial match counted. See structural-stop.json."
   },
   "outputs": [
     {
@@ -85,6 +85,21 @@
       "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-run.log",
       "bytes": 6190312,
       "sha256": "a3ad48e78f1d14874b2412324f510819f603ce929079dc06b1a4b4616fb1cc10"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-structural-run.log",
+      "bytes": 48361520,
+      "sha256": "02056cb345cde6f2eb680c98c41237928c593262509b33a9ed4ee5d1aeb528bf"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-structural\\stock-structural-config.json",
+      "bytes": 11557,
+      "sha256": "cdcd4a48b3ba224fcc46f963822313abf7e0bc39da07d1d34ad41651265d4cd8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-structural\\run-receipt.json",
+      "bytes": 713,
+      "sha256": "97bee19c4ef13e801dd31e0e2279b5f483d16440070ef841fcbb4d190e4694c4"
     }
   ],
   "bindiff_conservative": {

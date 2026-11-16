@@ -1,6 +1,6 @@
 # R2 Step 4 Tier C — Join and identity
 
-Decision: **blocked and unarmed**. 112/150 contracts are adopted; 38 remain blocked. All lower tiers are mandatory. The compiled completeness flag remains false.
+Decision: **blocked and unarmed**. 113/150 contracts are adopted; 37 remain blocked. All lower tiers are mandatory. The compiled completeness flag remains false.
 
 EnterField changed to three arguments and iterates a native roster. Complete ownership/rollback is unresolved. Default matching swaps named control/self recipient finders and conflicts on VecPush; those results are blocked. Travel clock publication is inside the larger transition, so its old standalone inline detour cannot be moved there. Required character containment must be separated from optional horse diagnostics before a target join route is enabled.
 
@@ -8,14 +8,13 @@ Implementation boundary: the existing legacy modules remain on their 2976 addres
 
 Guard validation: build_guard_tests exercises all 256 request/completeness combinations, each tier on/off through lower-tier dependencies, wrong image size/timestamp/base, unknown/missing identity and recognized 3576. It asserts actual 3663 startup is unarmed and cannot route legacy game reads, hooks, overlay, synthetic state or network callbacks. The target-only A callback is isolated. This proves denial, not successful native operation.
 
-Latest game-closed scripts/build.ps1 x64 MSVC RelWithDebInfo: **101/101, 87.03 seconds**. Synthetic cdmp_host/cdmp_peer loopback: **78 remote states, zero rejected, clean network stop and worker exit**. It is not L2 or native two-player evidence. The preceding failures, fixes and reruns are retained in port-evidence/r2/validation-deviations.md and its referenced logs. Documentation-only tier decisions reuse this unchanged validated build.
+Latest game-closed scripts/build.ps1 x64 MSVC RelWithDebInfo: **101/101, 87.04 seconds**. Synthetic cdmp_host/cdmp_peer loopback: **78 remote states, zero rejected, clean network stop and worker exit**. It is not L2 or native two-player evidence. The preceding failures, fixes and reruns are retained in port-evidence/r2/validation-deviations.md and its referenced logs. Documentation-only tier decisions reuse this unchanged validated build.
 
 Self-review: no new runtime thread or escaped reader lifetime; native calls remain behind closed startup gates; payloads retain existing bounds/serialization and friends restriction; target identity is exact; no address-based peer identity; no new deployment or reconnect/cleanup behavior is claimed. Deferred native ownership and per-build bounds remain prerequisites.
 
 | Row | Contract | Exact missing fact |
 |---|---|---|
 | C001 | kSamSlot | Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kSamSlot at 2976 0x6DA67D8 |
-| C006 | kUser_Session | Confirm 3663 code consumes kUser_Session for the same native role as src/mod/session2/offsets_s2.h:45 (0x1F8) |
 | C009 | kToNearExceptOneControlVtable | Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kToNearExceptOneControlVtable at 2976 0x5B25358 |
 | C010 | kToNearExceptOneSelfVtable | Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kToNearExceptOneSelfVtable at 2976 0x5B25378 |
 | C011 | kToNearVtable | Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kToNearVtable at 2976 0x5B25418 |
@@ -54,3 +53,5 @@ Self-review: no new runtime thread or escaped reader lifetime; native calls rema
 | C144 | kActor_OwnerUser | Confirm 3663 code consumes kActor_OwnerUser for the same native role as src/mod/game/offsets.h:230 (0x90) |
 
 Next validation when prerequisites are resolved: regenerate the catalog, implement the actual per-build route, rerun guards/full CTest/loopback, then perform the plan’s ordered live test with fresh backups and presence. Never enable this flag merely to test an incomplete table.
+
+Final evidence refresh: native user-session and lock-constructor checks are included in the validated source tree; full suite 101/101 in 87.04 seconds and loopback 78 states/zero rejected/clean stop. No tier permission changed.

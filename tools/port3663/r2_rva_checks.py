@@ -170,8 +170,8 @@ for symbol,old,target,proof in [
     check(symbol,old,target,proof+' Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role.',
         'port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt')
 check('kWindowsLock3Vtable',0x557C120,0x59874C8,
-    'Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role.',
-    'port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt',[0x1371340,0x1593240])
+    'Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; paired save-manager constructors CBD2920/1A15340 write it to this+8 and store that pointer at this+0. Exact LEA/store operands CBD2956/1A1537C and native slot-vector/pending/busy initialization corroborate the role. The source constructor is in Denuvo .xtls, not the ordinary save-function address range.',
+    'port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt; save-manager-constructor-old.txt',[0xCBD2920,0x1A15340])
 for symbol,old,target in [('kExceptOneVf1',0x2A759B0,0x2D6C360),
                           ('kExceptOneSelfVf1',0x2A75880,0x2D6C230),
                           ('kToNearVf1',0x2A75860,0x2D6C210)]:

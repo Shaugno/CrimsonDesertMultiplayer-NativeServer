@@ -25,3 +25,5 @@ All raw failed/passed logs are retained with hashes.
 An attempted structural join was refused because no result database existed;
 the supplemental process was verified still running. It is not completion
 evidence. A later authorized live session pauses that exact matcher.
+
+Final session/lock contract build: 101/101, 87.04 seconds; loopback 78 states, zero rejected, clean stop. Session evidence hashes were corrected to canonical Git bytes, preserving original raw hashes; package validation now verifies every live file against its recorded byte count and SHA-256.

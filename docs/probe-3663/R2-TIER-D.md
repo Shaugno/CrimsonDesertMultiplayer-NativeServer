@@ -1,6 +1,6 @@
 # R2 Step 4 Tier D — Removal, reconnect and save protection
 
-Decision: **blocked and unarmed**. 108/130 contracts are adopted; 22 remain blocked. All lower tiers are mandatory. The compiled completeness flag remains false.
+Decision: **blocked and unarmed**. 109/130 contracts are adopted; 21 remain blocked. All lower tiers are mandatory. The compiled completeness flag remains false.
 
 Target title-slot eligibility now depends on an available-resource ID vector and per-entry list membership. Complete producer/lifetime/eligibility handling is absent. Save callsite/return identities and moving-state members remain blocked. A native release function returning is not proof that deferred destruction and reconnect ownership barriers are complete.
 
@@ -8,13 +8,12 @@ Implementation boundary: the existing legacy modules remain on their 2976 addres
 
 Guard validation: build_guard_tests exercises all 256 request/completeness combinations, each tier on/off through lower-tier dependencies, wrong image size/timestamp/base, unknown/missing identity and recognized 3576. It asserts actual 3663 startup is unarmed and cannot route legacy game reads, hooks, overlay, synthetic state or network callbacks. The target-only A callback is isolated. This proves denial, not successful native operation.
 
-Latest game-closed scripts/build.ps1 x64 MSVC RelWithDebInfo: **101/101, 87.03 seconds**. Synthetic cdmp_host/cdmp_peer loopback: **78 remote states, zero rejected, clean network stop and worker exit**. It is not L2 or native two-player evidence. The preceding failures, fixes and reruns are retained in port-evidence/r2/validation-deviations.md and its referenced logs. Documentation-only tier decisions reuse this unchanged validated build.
+Latest game-closed scripts/build.ps1 x64 MSVC RelWithDebInfo: **101/101, 87.04 seconds**. Synthetic cdmp_host/cdmp_peer loopback: **78 remote states, zero rejected, clean network stop and worker exit**. It is not L2 or native two-player evidence. The preceding failures, fixes and reruns are retained in port-evidence/r2/validation-deviations.md and its referenced logs. Documentation-only tier decisions reuse this unchanged validated build.
 
 Self-review: no new runtime thread or escaped reader lifetime; native calls remain behind closed startup gates; payloads retain existing bounds/serialization and friends restriction; target identity is exact; no address-based peer identity; no new deployment or reconnect/cleanup behavior is claimed. Deferred native ownership and per-build bounds remain prerequisites.
 
 | Row | Contract | Exact missing fact |
 |---|---|---|
-| D013 | kWindowsLock3Vtable | Standard support for candidate 0x59874c8 (or its documented native operand anchor) is absent; independent check: Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role. |
 | D014 | kWindowsLockVf1 | Standard support for candidate 0x1593240 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 1 has the paired native thunk that dispatches this through vslot+18. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role. |
 | D015 | kWindowsLockVf2 | Standard support for candidate 0xe297f0 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 2 has the paired native thunk that dispatches this through vslot+20. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role. |
 | D020 | kSlotRefreshReqSequence | Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kSlotRefreshReqSequence at 2976 0x2A22475 |
@@ -38,3 +37,5 @@ Self-review: no new runtime thread or escaped reader lifetime; native calls rema
 | D130 | NativeTitleSlotDomain | Target title eligibility adds per-entry u32-list membership at +68/count+70 against available .admeta IDs at global 71AEAA0/71AEAA8. Target producer 14AA720 reads those IDs in addition to names; reference producer 128D360 only builds names. The new global dependencies, list lifetime/coherence and complete target parser remain unadopted/unimplemented. The old domain-only playable count is insufficient. |
 
 Next validation when prerequisites are resolved: regenerate the catalog, implement the actual per-build route, rerun guards/full CTest/loopback, then perform the plan’s ordered live test with fresh backups and presence. Never enable this flag merely to test an incomplete table.
+
+Final evidence refresh: native user-session and lock-constructor checks are included in the validated source tree; full suite 101/101 in 87.04 seconds and loopback 78 states/zero rejected/clean stop. No tier permission changed.

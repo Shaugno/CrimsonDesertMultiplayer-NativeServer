@@ -537,11 +537,11 @@
     "target": "0x59874c8",
     "old": "0x557c120",
     "symbol": "kWindowsLock3Vtable",
-    "second_check": "Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role.",
-    "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt",
+    "second_check": "Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; paired save-manager constructors CBD2920/1A15340 write it to this+8 and store that pointer at this+0. Exact LEA/store operands CBD2956/1A1537C and native slot-vector/pending/busy initialization corroborate the role. The source constructor is in Denuvo .xtls, not the ordinary save-function address range.",
+    "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt; save-manager-constructor-old.txt",
     "anchor": [
-      20386624,
-      22622784
+      213723424,
+      27349824
     ]
   },
   "C012": {

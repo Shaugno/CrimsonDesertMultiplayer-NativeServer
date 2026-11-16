@@ -1338,12 +1338,13 @@
       "row": "C006",
       "symbol": "kUser_Session",
       "old": "0x1F8",
-      "target": null,
-      "adopted": false,
-      "method": "none",
-      "second_check": "none",
-      "confidence": "blocked",
-      "missing": "Confirm 3663 code consumes kUser_Session for the same native role as src/mod/session2/offsets_s2.h:45 (0x1F8)"
+      "target": "0x1F8",
+      "adopted": true,
+      "method": "paired native code consumption",
+      "second_check": "Exact named ServerUserActor slot 29 (+E8) points to 2A7D9E0/2D740C0. Both complete eight-byte getters load [this+1F8] and return. Paired named recipient collection calls this user virtual slot, checks the returned session and appends it to the recipient-session vector. Native constructor zero-initialization corroborates storage only; it is not the sole role proof.",
+      "confidence": "high",
+      "evidence": "port-evidence/rtti-2976.json; rtti-3663.json; port-evidence/r2/recipient-near-complete-old.txt; recipient-near-helpers-new.txt",
+      "missing": ""
     },
     {
       "tier": "C",
@@ -1355,7 +1356,7 @@
       "method": "paired native code consumption",
       "second_check": "Named finder slot-1 bodies load the actor pointer from finder+10. The complete ToNear tail-dispatched helper compares the owning user key at actor+90 with the user actor key+60 before recipient/session collection; the qword owner actor at +A0 is a separate member. Paired native roles prove these fields independently of the unresolved finder RVA correlations.",
       "confidence": "high",
-      "evidence": "port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt",
+      "evidence": "port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt; recipient-near-complete-old.txt; recipient-near-helpers-new.txt",
       "missing": ""
     },
     {
@@ -1486,7 +1487,7 @@
       "method": "paired native code consumption",
       "second_check": "Named finder slot-1 bodies load the actor pointer from finder+10. The complete ToNear tail-dispatched helper compares the owning user key at actor+90 with the user actor key+60 before recipient/session collection; the qword owner actor at +A0 is a separate member. Paired native roles prove these fields independently of the unresolved finder RVA correlations.",
       "confidence": "high",
-      "evidence": "port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt",
+      "evidence": "port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt; recipient-near-complete-old.txt; recipient-near-helpers-new.txt",
       "missing": ""
     },
     {
@@ -1650,15 +1651,13 @@
       "row": "D013",
       "symbol": "kWindowsLock3Vtable",
       "old": "0x557C120",
-      "target": null,
-      "adopted": false,
-      "method": "VT no accepted pair",
-      "second_check": "BinDiff no function pair",
-      "confidence": "blocked",
-      "candidate": "0x59874c8",
-      "independent_check": "Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role.",
-      "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt",
-      "missing": "Standard support for candidate 0x59874c8 (or its documented native operand anchor) is absent; independent check: Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role."
+      "target": "0x59874c8",
+      "adopted": true,
+      "method": "Native relationship to anchor 0xcbd2920 -> 0x1a15340: BinDiff similarity=0.981282, confidence=0.988254",
+      "second_check": "Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; paired save-manager constructors CBD2920/1A15340 write it to this+8 and store that pointer at this+0. Exact LEA/store operands CBD2956/1A1537C and native slot-vector/pending/busy initialization corroborate the role. The source constructor is in Denuvo .xtls, not the ordinary save-function address range.",
+      "confidence": "high",
+      "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt; save-manager-constructor-old.txt",
+      "missing": ""
     },
     {
       "tier": "D",
