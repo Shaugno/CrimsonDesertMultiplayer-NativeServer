@@ -1,3 +1,19 @@
+# Current Step 4 Tier A decision — blocked and unarmed
+
+34/37 contracts are adopted. A026/A027 require the actual target HP-only
+layout using adopted native definition roots; the guarded implementation is
+prepared but unpublished. A028 now has positive initial-park evidence and
+a concrete remaining fast-travel readiness gap. Read R2-LIVE-SESSIONS.md and
+the 100800 session result before interpreting earlier pending statements.
+No 3663 PlayerLayout is returned and the completeness flag stays false.
+The existing 256 guard combinations, wrong-size/unknown-build checks, full
+game-closed CTest 101/101 (87.03 s), and loopback 78 states/zero rejected/clean
+stop validate this denial state. They do not establish an armed reader or L1.
+Self-review leaves lifetime and travel readiness as explicit prerequisites.
+No code was changed for this documentation-only decision.
+
+The following sections are chronological implementation and investigation history.
+
 # R2 Tier A — isolated route prepared, arming blocked
 
 Tier A remains **off**. The core contains 37 A contracts: 24 reviewed member,
