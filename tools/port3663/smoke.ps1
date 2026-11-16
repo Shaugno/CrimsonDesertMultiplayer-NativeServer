@@ -1,5 +1,5 @@
 # Synthetic host/peer loopback only. Never launches or attaches to the game.
-param([int]$Seconds = 8, [int]$Port = 39763, [string]$BuildDir = '')
+param([int]$Seconds = 8, [int]$Port = 39763, [string]$BuildDir = '',[switch]$RequireV1)
 $ErrorActionPreference = 'Stop'
 if ($Seconds -lt 6 -or $Seconds -gt 60 -or $Port -lt 1024 -or $Port -gt 65535) { throw 'Invalid smoke parameters' }
 if (Get-Process CrimsonDesert -ErrorAction SilentlyContinue) { throw 'Keep the game closed' }
@@ -38,7 +38,8 @@ enabled=0
 $env:CDMP_ROLE = ''
 $peer = Start-Process -FilePath (Join-Path $run 'cdmp_peer.exe') -ArgumentList @('--port', "$Port", '--mode', 'ghost') -WorkingDirectory $run -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $run 'peer.stdout.txt') -RedirectStandardError (Join-Path $run 'peer.stderr.txt')
 try {
-    & (Join-Path $run 'cdmp_host.exe') (Join-Path $run 'cdmp.asi') $Seconds
+    if($RequireV1){& (Join-Path $run 'cdmp_host.exe') (Join-Path $run 'cdmp.asi') $Seconds --require-3663-v1}
+    else{& (Join-Path $run 'cdmp_host.exe') (Join-Path $run 'cdmp.asi') $Seconds}
     if ($LASTEXITCODE) { throw "host exit $LASTEXITCODE" }
     $log = Get-Content -LiteralPath (Join-Path $run 'cdmp.log') -Raw
     if ($log -notmatch 'Connected|connected') { throw 'No connection in host log' }

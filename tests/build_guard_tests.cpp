@@ -431,7 +431,15 @@ void test_3663_tier_dependency_matrix() {
         CHECK(!cdmp::game::r3_pump_probe::allowed(bad,true));
     }
     const auto actual = guard::decide_startup(request(true, false, false, identity));
-    CHECK(actual.tier_a_reads && actual.tier_b_tunnel && !actual.tier_c_join && !actual.tier_d_lifecycle);
+    CHECK(actual.tier_a_reads && actual.tier_b_tunnel && actual.tier_c_join && actual.tier_d_lifecycle);
+    auto guest_request=request(true,true,false,identity);
+    CHECK(guard::decide_startup(guest_request).end_guest_process); // bits alone never grant guest startup
+    guest_request.save_sandbox_verified=true;
+    const auto sandboxed=guard::decide_startup(guest_request);
+    CHECK(!sandboxed.end_guest_process && sandboxed.tier_d_lifecycle);
+    CHECK(!sandboxed.read_game_addresses && !sandboxed.install_hooks); // legacy installers still unreachable
+    guest_request.identity=guard::identify_image(make_image(kPeTimestamp + 1), kImageBase);
+    CHECK(guard::decide_startup(guest_request).end_guest_process); // a sandbox cannot approve another build
     CHECK(drive(actual).tier_a_reads == 1);
     const auto* target = cdmp::game::player_layout(identity);
     CHECK(target == &cdmp::game::kPlayerLayout3663);

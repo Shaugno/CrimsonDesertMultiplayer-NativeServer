@@ -3628,7 +3628,7 @@
         "replaced_by_adapter": 2,
         "retired_by_scope": 6
       },
-      "armed": false
+      "armed": true
     },
     "D": {
       "total": 130,
@@ -3639,24 +3639,25 @@
         "retired_by_scope": 15,
         "adopted_policy": 1
       },
-      "armed": false
+      "armed": true
     }
   },
   "limitations": [
     "Closed rows include approved policies and R4 scope retirements; they are not all native RVA adoptions.",
-    "A/B armed; B remains the explicit native-host loopback diagnostic. C/D and native guest startup remain closed.",
-    "Native join/reference/rollback and identity adapters are implemented but unarmed; Step4 must connect the complete target host/guest/lifecycle route before C/D permission.",
-    "The file sandbox is verified offline, with no in-game validation yet. Its launcher Run path awaits C/D.",
+    "A/B/C/D compiled and armed for explicit guarded v1; the default target installation remains the Tier A reader.",
+    "Native host/guest route, identity, join and stable disconnect are implemented. L3/L4 execution and acceptance remain separate.",
+    "The file sandbox and controlled launcher are verified offline; gameplay C/D have no in-game validation yet.",
+    "Reconnect is unsupported. Guest conversation change exits with guard code 0xCD67; loading loss quarantines and requires restart.",
     "Guest travel/time and legacy per-callsite save/title patches are outside 3663 v1 scope.",
     "One prior full run exposed the existing optional S3 ring publication race; final Step 1 and Step 2 suites passed. That race is not claimed fixed."
   ],
   "r4_baseline": "0f11f6e",
   "preceding_ledger": "R3-STATUS.json",
   "steps": {
-    "1": "complete; file sandbox and offline fixture verified; launch awaits C/D",
+    "1": "complete; file sandbox and offline fixture verified",
     "2": "complete; native control filter; travel/time scope retired",
-    "3": "native adapter and passive sitting implemented; see Step3 result for validation; route/arming separate",
-    "4": "pending lifecycle implementation and arming",
+    "3": "complete; native adapter, identity and passive sitting; historical Step3 evidence retained",
+    "4": "complete; explicit guarded v1 route; 114/114 tests and synthetic tier-metadata smoke; see Step4 result",
     "5": "pending L3 then L4; one completed R4 passive sitting; zero join attempts",
     "6": "pending final review package"
   }

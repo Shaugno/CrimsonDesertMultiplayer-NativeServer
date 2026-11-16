@@ -44,11 +44,14 @@ struct ServerOptions {
     // Written into every LoginUserToFieldServerReq for session 2: never 0, the
     // host's own account (the server would take it for a relogin of the host).
     uint64_t account = 1;
+    bool core_v1 = false; // separate 3663 C/D route; preserves existing aggregate prefix
 };
 
 // Checks the build and every function's first bytes, then installs what the
 // options ask for. False = nothing was installed.
 bool server_install(const ServerOptions& opt);
+bool server_core_v1();
+void server_halt_core_native_fault() noexcept;
 
 // E0: one read-only snapshot in the log.
 void server_probe_log(const char* when);

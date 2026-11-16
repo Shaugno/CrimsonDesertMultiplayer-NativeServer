@@ -93,8 +93,9 @@ bool normalize_lobby(uintptr_t component,const field_share3663::Context& c){
     if(plan.edit==p::Edit::Replace && !replace(at,p::kNative,p::kGuest))return false;
     uint64_t check=0;if(!read(at,check) || check!=p::kGuest || !same(c))return false;
     {std::lock_guard lock(state_mutex);
-     if(state.epoch && (state.epoch!=c.epoch || state.user!=c.guest))return false; // reconnect not silently reused
-     state.epoch=c.epoch;state.user=c.guest;state.thread=GetCurrentThreadId();state.lobby_ready=true;}
+     if(state.epoch && (state.epoch!=c.epoch || state.user!=c.guest || state.user_key!=key(c.guest)))return false; // no pointer/key ABA or reconnect
+     state.epoch=c.epoch;state.user=c.guest;state.user_key=key(c.guest);
+     state.thread=GetCurrentThreadId();state.lobby_ready=true;}
     ++lobby_edits;return true;
 }
 bool normalize_status(uintptr_t actor,const field_share3663::Context& c){
@@ -105,7 +106,7 @@ bool normalize_status(uintptr_t actor,const field_share3663::Context& c){
     const auto plan=p::status(before);
     if(plan==p::Edit::Refuse || (plan==p::Edit::Replace && !replace(at,p::kNative,p::kGuest)) ||
         !read(at,after) || after!=p::kGuest || !same(c))return false;
-    {std::lock_guard lock(state_mutex);state.actor=actor;state.status_ready=true;}
+    {std::lock_guard lock(state_mutex);state.actor=actor;state.actor_key=key(actor);state.status_ready=true;state.phases_ready=false;}
     ++status_edits;return true;
 }
 bool invariant(uintptr_t actor,const field_share3663::Context& c){
@@ -114,7 +115,8 @@ bool invariant(uintptr_t actor,const field_share3663::Context& c){
     if(!lobby_numbers(lobby_for(c.guest),values,data,count) ||
         p::lobby({values.data(),count}).edit!=p::Edit::Already || !read(status_number(actor),number) || number!=p::kGuest)return false;
     {std::lock_guard lock(state_mutex);
-     if(!p::bound(state,c.epoch,c.guest) || state.actor!=actor || !state.status_ready || !state.lobby_ready)return false;
+     if(!p::bound(state,c.epoch,c.guest) || state.actor!=actor || state.user_key!=key(c.guest) ||
+        state.actor_key!=key(actor) || !state.status_ready || !state.lobby_ready)return false;
      state.phases_ready=true;}
     ++phase_checks;return true;
 }
@@ -180,12 +182,16 @@ bool install(const game::build_guard::ImageIdentity& id,field_share3663::ReadCon
 }
 bool active(){return on.load();}
 bool failed(){return broken.load();}
-bool ready(uintptr_t user,uintptr_t actor,uint64_t epoch){std::lock_guard lock(state_mutex);return p::ready(state,epoch,user,actor);}
+bool ready(uintptr_t user,uintptr_t actor,uint64_t epoch){
+    const auto user_key=key(user),actor_key=key(actor);
+    std::lock_guard lock(state_mutex);return p::ready(state,epoch,user,actor,user_key,actor_key);
+}
 bool admit(uint16_t opcode,std::span<const uint8_t> payload){
     if(!on.load() || broken.load())return false;
     if(opcode!=3081)return true;
     field_share3663::Context c;if(!context(c))return false;
-    std::lock_guard lock(state_mutex);const bool ok=p::login_character(state,c.epoch,c.guest,payload);
+    const auto user_key=key(c.guest);
+    std::lock_guard lock(state_mutex);const bool ok=state.user_key==user_key && p::login_character(state,c.epoch,c.guest,payload);
     if(!ok)++refusals;return ok;
 }
 std::string describe(){return std::format("3663 identity: lobby {} status {} phases {} refused {} affinity {} failed {}",

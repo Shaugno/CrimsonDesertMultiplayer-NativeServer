@@ -1,0 +1,13 @@
+{
+  "executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "sites": {
+    "ExceptControl": "0x2d6c360",
+    "ExceptSelf": "0x2d6c230",
+    "ToNear": "0x2d6c210",
+    "Refresh": "0x1a18320",
+    "Loading": "0x23dc630",
+    "LoadingFlag": "0x23dc66b"
+  },
+  "authority": "R3 recipient-adoptions.json C009-C016; R2-MATCHES.json D018; R4 core-adoptions.json D014/D015",
+  "limit": "Extra runtime guards for previously adopted functions. Does not adopt a new native function or arm a tier."
+}

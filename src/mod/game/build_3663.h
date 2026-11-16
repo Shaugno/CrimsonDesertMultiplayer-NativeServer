@@ -18,8 +18,10 @@ inline constexpr uint32_t kSizeOfImage = 0x144E9000;
 // These are compiled evidence, never ini/environment overrides.
 inline constexpr bool kTierAComplete = true;
 inline constexpr bool kTierBComplete = true;
-inline constexpr bool kTierCComplete = false;
-inline constexpr bool kTierDComplete = false;
+// R4: separate guarded v1 route, native three-argument backend, identity,
+// file sandbox and stable disconnect. Explicit opt-in; runtime L3/L4 separate.
+inline constexpr bool kTierCComplete = true;
+inline constexpr bool kTierDComplete = true;
 
 inline constexpr uintptr_t kSessionSend = 0x165C1F0;       // 2976 0x1437740; N0981, send; R2 B023
 inline constexpr uintptr_t kSyncSessionSend = 0x165CB60;   // 2976 0x14380B0; N1030, send; R2 B063

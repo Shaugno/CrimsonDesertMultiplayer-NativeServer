@@ -21,11 +21,13 @@ inline Edit status(uint64_t before){return before==kNative?Edit::Replace:before=
 struct State {
     uint64_t epoch{};uintptr_t user{},actor{};uint32_t thread{};
     bool lobby_ready{},status_ready{},phases_ready{},failed{};
+    uint32_t user_key{},actor_key{}; // generation-bearing native keys, not pointer identity alone
 };
 inline bool affinity(uint32_t expected,uint32_t actual){return expected && expected==actual;}
 inline bool bound(const State& s,uint64_t epoch,uintptr_t user){return !s.failed && epoch && s.epoch==epoch && user && s.user==user;}
-inline bool ready(const State& s,uint64_t epoch,uintptr_t user,uintptr_t actor){
-    return bound(s,epoch,user) && actor && s.actor==actor && s.lobby_ready && s.status_ready && s.phases_ready;
+inline bool ready(const State& s,uint64_t epoch,uintptr_t user,uintptr_t actor,uint32_t user_key,uint32_t actor_key){
+    return bound(s,epoch,user) && actor && s.actor==actor && user_key && actor_key &&
+        s.user_key==user_key && s.actor_key==actor_key && s.lobby_ready && s.status_ready && s.phases_ready;
 }
 // LoginCharacter payload: u8 discriminator, u64 number, u32 save slot.
 // No CrossSave (3) or native one-use slot (206), no trailing ambiguity here.

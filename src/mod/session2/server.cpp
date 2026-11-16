@@ -48,6 +48,9 @@
 #include "mod/session2/observer_seq_copy.h"
 #include "mod/session2/offsets_s2.h"
 #include "mod/session2/tunnel_layout.h"
+#include "mod/session2/v1_3663.h"
+#include "mod/session2/identity3663.h"
+#include "coop3663/v1_3663_policy.h"
 #include "mod/session2/owner_fanout.h"
 #include "mod/session2/p8_probes.h"
 #include "mod/session2/travel_probe.h"
@@ -368,7 +371,8 @@ void epoch_sessions(uintptr_t (&out)[kEpochSlots]) {
 bool session_user(uintptr_t session, uintptr_t& user) {
     uintptr_t vt = 0, back = 0;
     return session && peek(session + tunnel_offsets().kSession_User, user) && user && peek(user, vt) &&
-           vt == g_base + off::kServerUserActorVtable && peek(user + off::kUser_Session, back) && back == session;
+           vt == g_base + (core_only()?game::build_3663::core_rvas::C004_kServerUserActorVtable:off::kServerUserActorVtable) &&
+           peek(user + off::kUser_Session, back) && back == session;
 }
 
 // P1, on ServerRunThread: the steps of ServerModule::Init for the game's own
@@ -397,7 +401,11 @@ bool build_session(uintptr_t& out) {
         const uintptr_t server_net = *reinterpret_cast<uintptr_t*>(g_base + tunnel_offsets().kServerNetSlot);
         *reinterpret_cast<uintptr_t*>(s + tunnel_offsets().kSession_OutQueue) =
             *reinterpret_cast<uintptr_t*>(server_net + tunnel_offsets().kServerNet_FreeS2C);
-        // Target retains its native constructor key; C122 is not adopted.
+        // C122: retain and validate the native constructor's zero key.
+        if(core_only()){
+            const auto id=*reinterpret_cast<uint32_t**>(s+tunnel_offsets().kSession_IdPtr);
+            if(!id || *id!=0){g_create_failed.store(true);return false;}
+        }
         if (!core_only()) {
             if (auto* id = *reinterpret_cast<uint32_t**>(s + tunnel_offsets().kSession_IdPtr)) *id = kSessionId;
         }
@@ -457,7 +465,11 @@ void take_frame(uintptr_t rq, uintptr_t self) noexcept {
                 !parse_tunnel_packet(packet, troc::Dir::ToGuestClient, tunnel_offsets())) {
                 ++g_n.sent_bad; return;
             }
-            // No actor, save, phase or optional observer code in a B-only send.
+            if(g_opt.core_v1){
+                const auto view=parse_tunnel_packet(packet,troc::Dir::ToGuestClient,tunnel_offsets());
+                if(view)v1_3663::note_response(view->opcode);
+            }
+            // No legacy actor, save or optional observer callback in this route.
             if (!g_outgoing.push(packet)) g_outgoing_lost.store(true);
             else ++g_n.sent_out;
         } catch (...) { g_outgoing_lost.store(true); }
@@ -1055,8 +1067,9 @@ void load_channels() {
             // The tunnel never asks the host's server to save, delete saves or run cheats.
             // Covers every Req of domain cheat/dev in troc_messages_2976.csv and none
             // of the login or movement scripts (checked against the table).
-            bool never = (core_only() && (full != "ConnectCryptogramToServerReq" ||
-                         *op != tunnel_offsets().connect_opcode)) || full.rfind("Save", 0) == 0 || full.rfind("DeleteSave", 0) == 0 ||
+            bool never = (core_only() && (g_opt.core_v1 ? !coop3663::v1::request_name(full) :
+                         (full != "ConnectCryptogramToServerReq" || *op != tunnel_offsets().connect_opcode))) ||
+                         full.rfind("Save", 0) == 0 || full.rfind("DeleteSave", 0) == 0 ||
                          full.rfind("DeleteCharacter", 0) == 0 || full.rfind("ReportFromViewer", 0) == 0;
             for (const char* k : {"Cheat", "ForDev", "Debug", "DevReq", "ByGm", "Test"}) {
                 never = never || full.find(k) != std::string::npos;
@@ -1111,6 +1124,9 @@ bool server_install(const ServerOptions& opt) {
         return false;
     }
     g_tunnel_layout = layout;
+    if(opt.core_v1 && (!core_only() || opt.core_loopback_probe || !game::build_guard::select_3663_tiers(identity,
+        {true,true,true,true},{game::build_3663::kTierAComplete,game::build_3663::kTierBComplete,
+        game::build_3663::kTierCComplete,game::build_3663::kTierDComplete}).tier_d_lifecycle))return false;
     if (core_only() && (opt.probe || opt.finder_log || opt.relay_fix || opt.mirror_host ||
         !opt.create_session || !opt.accept_tunnel)) {
         log::error("3663 B requires the core host options; C/D and optional hooks remain closed");
@@ -1368,6 +1384,8 @@ void server_probe_log(const char* when) {
 }
 
 bool server_session_ready() { return live_session2() != 0; }
+bool server_core_v1(){return core_only() && g_opt.core_v1;}
+void server_halt_core_native_fault() noexcept {g_halted_epoch.store(g_want_epoch.load());}
 
 bool server_accepts_guest() {
     if (live_session2()) return true;
@@ -1567,20 +1585,28 @@ inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
     if (core_only()) {
         const auto view = parse_tunnel_packet(in, troc::Dir::ToHostServer, tunnel_offsets());
         if (!view) return inj::Outcome::Refused;
-        if (!core_tunnel_request_allowed(in, tunnel_offsets()) ||
+        if ((!g_opt.core_v1 && !core_tunnel_request_allowed(in, tunnel_offsets())) ||
             g_channel[view->opcode] >= kBlocked || kind != InjectKind::Normal) return inj::Outcome::Blocked;
+        if(g_opt.core_v1 && (!v1_3663::admit_request(view->opcode) ||
+            (view->opcode!=troc::kOpLogoutSessionReq &&
+             (v1_3663::stopped() || !identity3663::admit(view->opcode,view->payload)))))return inj::Outcome::Blocked;
         if (g_halted_epoch.load()) return inj::Outcome::Halted;
         const uint32_t epoch = g_want_epoch.load();
         if (!server_accepts_guest() || epoch != 1) return inj::Outcome::NotReady;
         inj::Pending pending;
         pending.packet.assign(in.begin(), in.end());
+        if(g_opt.core_v1 && view->opcode==2554){
+            if(view->payload.size()<8 || !g_opt.account || g_opt.account==~0ull)return inj::Outcome::Blocked;
+            std::memcpy(pending.packet.data()+troc::kHeaderSize,&g_opt.account,8);
+        }
         pending.channel = g_channel[view->opcode]; pending.tag = pb_tag(epoch);
         pending.epoch = epoch; pending.opcode = view->opcode; pending.queued_ms = now_ms();
         std::lock_guard lock(g_q_mu);
-        if (g_core_request_queued) return inj::Outcome::Blocked;
+        if (!g_opt.core_v1 && g_core_request_queued) return inj::Outcome::Blocked;
         const auto outcome = g_q.push(std::move(pending), false);
         if (outcome == inj::Outcome::Queued) {
-            g_core_request_queued = true;
+            if(!g_opt.core_v1)g_core_request_queued = true;
+            else v1_3663::note_request(view->opcode);
             g_q_size.store(g_q.size(), std::memory_order_release);
             ++g_pb_queued[epoch];
         }

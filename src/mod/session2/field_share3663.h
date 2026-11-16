@@ -9,7 +9,8 @@ namespace cdmp::session2::field_share3663 {
 struct Context { uintptr_t host{}, guest{}; uint64_t epoch{}; };
 using ReadContext = bool(*)(Context&);
 using IdentityReady = bool(*)(uintptr_t guest, uintptr_t primary, uint64_t epoch);
-bool install(const game::build_guard::ImageIdentity&, ReadContext, IdentityReady);
+using NativeFatal = void(*)() noexcept; // atomic stop only; no lock/allocation/native calls
+bool install(const game::build_guard::ImageIdentity&, ReadContext, IdentityReady, NativeFatal);
 bool active();
 bool quarantined();
 std::string describe();

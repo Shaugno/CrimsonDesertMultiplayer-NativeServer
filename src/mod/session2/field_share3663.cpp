@@ -5,6 +5,8 @@
 #include "coop3663/join3663_transaction.h"
 #include "mod/game/hook_prepare.h"
 #include "mod/game/safe_memory.h"
+#include "mod/game/native_call_scope.h"
+#include "mod/game/game_fault.h"
 #include "mod/log.h"
 #include <windows.h>
 #include <safetyhook.hpp>
@@ -29,7 +31,9 @@ Pins quarantine_pins;
 std::atomic<bool> on{}, sealed{}, busy{};
 std::atomic<uintptr_t> known_guest{};
 std::atomic<uint64_t> clock{1}, generations{1}, inserted{}, committed{}, undone{}, refused{};
+std::atomic<uint32_t> diagnostic_lines{};
 ReadContext read_context{}; IdentityReady identity_ready{};
+NativeFatal native_fatal{};
 SafetyHookInline acquire_hook,enter_hook;
 SafetyHookMid add_observer,remove_observer;
 
@@ -78,7 +82,8 @@ bool field_pin(uintptr_t field,Scope& out){
 }
 bool context_matches(const Context& c){Context now;return read_context && read_context(now) &&
     now.host==c.host && now.guest==c.guest && now.epoch==c.epoch && c.epoch;}
-bool context(Context& c){const bool ok=read_context && read_context(c);
+bool context(Context& c,bool* host_valid=nullptr){const bool valid=read_context && read_context(c) && c.host && c.epoch;
+    if(host_valid)*host_valid=valid;const bool ok=valid && c.guest;
     if(ok && c.guest)known_guest.store(c.guest);return ok;}
 bool rw_object(uintptr_t obj,uintptr_t vt){return obj && ptr(obj)==base+vt &&
     ptr(base+vt+8)==base+n::kRwLock.rva && ptr(base+vt+0x10)==base+n::kRwUnlock.rva;}
@@ -86,9 +91,11 @@ void rw(uintptr_t obj,bool unlock){reinterpret_cast<void(__fastcall*)(uintptr_t)
 // No failure after the first lock can skip unlocking it. Pointer/type checks
 // occur before acquisition; native pinned lifetime keeps these objects alive.
 bool lock_field(uintptr_t field,uintptr_t& second){
-    second=ptr(field+8);
-    if(!rw_object(field+0x18,0x5B3FFB0) || !rw_object(second,0x5BCEE40))return false;
-    rw(field+0x18,false);rw(second,false);return true;
+    second=0;if(!rw_object(field+0x18,0x5B3FFB0))return false;
+    rw(field+0x18,false);
+    const auto candidate=ptr(field+8); // read second object UNDER the first lock, as native AddActor
+    if(!rw_object(candidate,0x5BCEE40)){rw(field+0x18,true);return false;}
+    second=candidate;rw(second,false);return true;
 }
 void unlock_field(uintptr_t field,uintptr_t second){rw(second,true);rw(field+0x18,true);}
 bool rows(uintptr_t field,std::array<Row,64>& out,uintptr_t& data,uint32_t& count){
@@ -103,21 +110,33 @@ void mutation(safetyhook::Context&){clock.fetch_add(1,std::memory_order_seq_cst)
 bool native_refusal(uint32_t* result){
     uint32_t error=0;return read(base+0x71D0D3C,error) && error && store(reinterpret_cast<uintptr_t>(result),error);
 }
+int native_fault(Pins& pins,EXCEPTION_POINTERS* exception){
+    sealed.store(true);busy.store(false);
+    if(pins.host_user.valid || pins.guest_user.valid || pins.host_actor.valid || pins.primary.valid ||
+       pins.field.valid || pins.access.scope.vt){quarantine_pins=pins;pins={};}
+    if(native_fatal)native_fatal();
+    // No unlock, rollback or further native cleanup after a native fault.
+    return game::game_fault_continue(exception,"3663 join","native reference/insertion/EnterField transaction");
+}
 
 struct Transaction {
     Context c;uintptr_t fm{},field{},actor{},second{},vector{},initial_vector{};
     uint32_t field_key{},before_count{};uint64_t generation{};
+    uint32_t pin_stage{};policy::Admission admission=policy::Admission::Incoherent;
     uint32_t* result{};uint32_t* returned{};
     Pins pins;std::array<policy::RosterEntry,1> roster{};
     std::array<Row,64> before{};
     policy::Ticket ticket;
     bool partial=false,called=false;
     bool pin(){
+        pin_stage=1;
         if(!context_matches(c) || !typed_pin(c.host,pins.host_user) || !typed_pin(c.guest,pins.guest_user))return false;
+        pin_stage=2;
         actor=ptr(ptr(fm)+8);
         const uintptr_t host_actor=ptr(c.host+0xD0);
         if(!typed_pin(host_actor,pins.host_actor) || !typed_pin(actor,pins.primary) ||
             !field_access(host_actor,pins.access) || pins.access.scope.object!=field || !field_pin(field,pins.field))return false;
+        pin_stage=3;
         generation=generations.fetch_add(1);
         return read(field+0x2D0,field_key) && context_matches(c);
     }
@@ -126,9 +145,10 @@ struct Transaction {
     policy::Snapshot snapshot(){
         policy::Snapshot s;
         uint32_t nowkey=0,fmkey=0,count=0;uint16_t fm_busy=1;uint8_t open=0;
-        uintptr_t native_roster=0,current_field=~uintptr_t{};uint16_t kind=0;uint32_t rosterkey=0;
+        uintptr_t native_roster=0,current_field=~uintptr_t{};uint16_t kind=0;uint32_t rosterkey=0,controller=0;
         s.coherent=context_matches(c) && read(field+0x2D0,nowkey) && nowkey==field_key &&
             ptr(ptr(fm)+8)==actor && mover(actor)==fm && ptr(fm-0x508+8)==actor && ptr(actor+0xA0)==c.guest &&
+            read(actor+0x90,controller) && controller==key(c.guest) &&
             pins.access.scope.object==field && read(mover(pins.host_actor.object)+8,fmkey) && fmkey==field_key &&
             ptr(mover(pins.host_actor.object)+0x10)==field && read(field+0x4A,open) &&
             read(fm+0x10,current_field) && read(fm+0x4A,fm_busy) && read(fm+0x68,native_roster) && read(fm+0x70,count) && count==1 &&
@@ -140,7 +160,7 @@ struct Transaction {
         s.mover_empty=current_field==0;s.mover_idle=fm_busy==0;
         // The native producer, separately traced, sets class A for the primary.
         if((s.primary_key>>28)!=0xA || !read(field+0x180,nowkey) || nowkey!=s.host_owner)s.coherent=false;
-        roster[0]={kind,rosterkey,s.primary_owner};s.roster=roster;return s;
+        roster[0]={kind,rosterkey,s.primary_owner};s.roster=roster;admission=policy::preflight(s);return s;
     }
     bool insert(){
         if(!rows(field,before,initial_vector,before_count) || before_count>=63)return false;
@@ -188,7 +208,12 @@ uint32_t* __fastcall enter_detour(void* mover_arg,uint32_t* result,void* field_a
     Context c;
     const uintptr_t fm=reinterpret_cast<uintptr_t>(mover_arg),field=reinterpret_cast<uintptr_t>(field_arg);
     const uintptr_t actor=ptr(ptr(fm)+8),owner=ptr(actor+0xA0);
-    const bool have_context=context(c);
+    bool host_valid=false;const bool have_context=context(c,&host_valid);
+    if(on.load() && host_valid && owner==c.host && actor==ptr(c.host+0xD0))
+        return enter_hook.unsafe_call<uint32_t*>(mover_arg,result,field_arg);
+    if(on.load() && have_context && actor==ptr(c.guest+0xD0) && owner!=c.guest){
+        ++refused;(void)native_refusal(result);return result;
+    }
     if(on.load() && !have_context && owner && owner==known_guest.load()){
         ++refused;(void)native_refusal(result);return result;
     }
@@ -196,7 +221,14 @@ uint32_t* __fastcall enter_detour(void* mover_arg,uint32_t* result,void* field_a
         return enter_hook.unsafe_call<uint32_t*>(mover_arg,result,field_arg);
     if(sealed.load() || busy.exchange(true)){++refused;(void)native_refusal(result);return result;}
     Transaction t;t.c=c;t.fm=fm;t.field=field;t.result=result;
-    const auto outcome=policy::transact(t);
+    auto operation=[&](){return policy::transact(t);};
+    auto fault=[&](EXCEPTION_POINTERS* e){return native_fault(t.pins,e);};
+    const auto outcome=game::native_call_scope(operation,fault,policy::Result::Quarantined);
+    if(diagnostic_lines.fetch_add(1)<32)try{
+        uint32_t code=~0u;(void)read(reinterpret_cast<uintptr_t>(result),code);
+        log::info("3663 join Enter: outcome {} pin stage {} admission {} original called {} result 0x{:X} field key 0x{:X}",
+            static_cast<int>(outcome),t.pin_stage,static_cast<int>(t.admission),t.called,code,t.field_key);
+    }catch(...){}
     busy.store(false);
     if(outcome==policy::Result::Refused){++refused;(void)native_refusal(result);return result;}
     if(!t.called){(void)native_refusal(result);return result;}
@@ -205,7 +237,9 @@ uint32_t* __fastcall enter_detour(void* mover_arg,uint32_t* result,void* field_a
 
 uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,void* out_arg,void* traveller){
     Context c;const auto out=reinterpret_cast<uintptr_t>(out_arg);
-    const bool have_context=context(c);
+    bool host_valid=false;const bool have_context=context(c,&host_valid);
+    if(on.load() && host_valid && reinterpret_cast<uintptr_t>(traveller)==c.host)
+        return acquire_hook.unsafe_call<uint32_t*>(manager,result,type,out_arg,traveller);
     if(on.load() && !have_context && traveller && reinterpret_cast<uintptr_t>(traveller)==known_guest.load()){
         ++refused;(void)native_refusal(result);return result;
     }
@@ -213,6 +247,7 @@ uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,
         return acquire_hook.unsafe_call<uint32_t*>(manager,result,type,out_arg,traveller);
     if(sealed.load() || busy.exchange(true)){++refused;(void)native_refusal(result);return result;}
     Pins p;bool success=false;
+    auto operation=[&](){
     if(!sealed.load() && typed_pin(c.host,p.host_user) && typed_pin(c.guest,p.guest_user) &&
         typed_pin(ptr(c.host+0xD0),p.host_actor) && field_access(p.host_actor.object,p.access)){
         const auto field=p.access.scope.object;
@@ -245,7 +280,14 @@ uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,
             else{sealed.store(true);quarantine_pins=p;p={};}
         }
     }
-    release(p);
+    if(diagnostic_lines.fetch_add(1)<32)try{
+        log::info("3663 join Acquire: shared {} host pin {} guest pin {} host primary pin {} field access {}",
+            success,p.host_user.valid,p.guest_user.valid,p.host_actor.valid,p.access.scope.valid);
+    }catch(...){}
+    release(p);return success;
+    };
+    auto fault=[&](EXCEPTION_POINTERS* e){return native_fault(p,e);};
+    success=game::native_call_scope(operation,fault,false);
     busy.store(false);
     if(!success){++refused;(void)native_refusal(result);}
     return result; // guest refusal must never silently acquire a private field
@@ -263,14 +305,14 @@ template<class Hook,class Fn> bool prepare(const n::Site& s,Fn fn,Hook& out){
     return true;
 }
 }
-bool install(const game::build_guard::ImageIdentity& id,ReadContext context,IdentityReady identity){
+bool install(const game::build_guard::ImageIdentity& id,ReadContext context,IdentityReady identity,NativeFatal fatal){
     if(on.load())return true;
     if(!game::build_guard::select_3663_tiers(id,{true,true,true,true},
         {game::build_3663::kTierAComplete,game::build_3663::kTierBComplete,
-         game::build_3663::kTierCComplete,game::build_3663::kTierDComplete}).tier_c_join || !context || !identity)return false;
+         game::build_3663::kTierCComplete,game::build_3663::kTierDComplete}).tier_c_join || !context || !identity || !fatal)return false;
     for(const auto& s:{n::kAcquire,n::kEnter,n::kTryAddRef,n::kVecPush,n::kFindActor,n::kFindUser,n::kDispose,
         n::kGetField,n::kFieldAccessDtor,n::kRwLock,n::kRwUnlock,n::kAddActor,n::kRemoveActor})if(!matches(s))return false;
-    read_context=context;identity_ready=identity;
+    read_context=context;identity_ready=identity;native_fatal=fatal;
     if(!prepare(n::kAddActor,&mutation,add_observer) || !prepare(n::kRemoveActor,&mutation,remove_observer) ||
         !prepare(n::kEnter,&enter_detour,enter_hook) || !prepare(n::kAcquire,&acquire_detour,acquire_hook))return false;
     // Until every hook is enabled, callbacks only run their originals.

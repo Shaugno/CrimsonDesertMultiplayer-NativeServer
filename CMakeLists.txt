@@ -180,6 +180,8 @@ add_library(cdmp_mod SHARED
     src/mod/session2/file_sandbox3663.cpp
     src/mod/session2/field_share3663.cpp
     src/mod/session2/identity3663.cpp
+    src/mod/session2/guest3663.cpp
+    src/mod/session2/v1_3663.cpp
     src/mod/session2/save_hooks.cpp
     src/mod/session2/host_save_export.cpp
     src/mod/session2/session2.cpp
@@ -309,6 +311,14 @@ add_executable(cdmp_tests_identity3663_policy tests/identity3663_policy_tests.cp
 cdmp_strict(cdmp_tests_identity3663_policy)
 target_include_directories(cdmp_tests_identity3663_policy PRIVATE src)
 add_test(NAME identity3663_policy COMMAND cdmp_tests_identity3663_policy)
+add_executable(cdmp_tests_v1_3663_policy tests/v1_3663_policy_tests.cpp)
+cdmp_strict(cdmp_tests_v1_3663_policy)
+target_include_directories(cdmp_tests_v1_3663_policy PRIVATE src)
+add_test(NAME v1_3663_policy COMMAND cdmp_tests_v1_3663_policy)
+add_executable(cdmp_tests_native_call_scope tests/native_call_scope_tests.cpp)
+cdmp_strict(cdmp_tests_native_call_scope)
+target_include_directories(cdmp_tests_native_call_scope PRIVATE src)
+add_test(NAME native_call_scope COMMAND cdmp_tests_native_call_scope)
 add_executable(cdmp_tests_title3663_eligibility tests/title3663_eligibility_tests.cpp)
 cdmp_strict(cdmp_tests_title3663_eligibility)
 target_include_directories(cdmp_tests_title3663_eligibility PRIVATE src)
@@ -566,6 +576,12 @@ set_tests_properties(file_sandbox3663 PROPERTIES TIMEOUT 120)
 add_test(NAME launch_2inst_3663 COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
          -File "${CMAKE_SOURCE_DIR}/tests/launch_2inst_3663_tests.ps1" -Launcher "${CMAKE_SOURCE_DIR}/scripts/launch-2inst-3663.ps1")
 set_tests_properties(launch_2inst_3663 PROPERTIES TIMEOUT 120)
+add_test(NAME r4_session_watchdog COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+         -File "${CMAKE_SOURCE_DIR}/tools/port3663/r4_session_watchdog.ps1" -SelfTest)
+set_tests_properties(r4_session_watchdog PROPERTIES TIMEOUT 30)
+add_test(NAME r4_capture COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+         -File "${CMAKE_SOURCE_DIR}/tools/port3663/r4_capture.ps1" -SelfTest)
+set_tests_properties(r4_capture PROPERTIES TIMEOUT 30)
 add_executable(cdmp_fixture_debugger tools/port3663/fixture_debugger.cpp)
 cdmp_strict(cdmp_fixture_debugger)
 target_link_libraries(cdmp_fixture_debugger PRIVATE dbghelp)

@@ -67,6 +67,8 @@
 #include "mod/session2/remote_interp.h"
 #include "mod/session2/save_hooks.h"
 #include "mod/session2/file_sandbox3663.h"
+#include "mod/session2/v1_3663.h"
+#include "mod/session2/guest3663.h"
 #include "mod/session2/mount_sync.h"
 #include "mod/session2/ride_filter.h"
 #include "mod/session2/ui_pause.h"
@@ -299,7 +301,7 @@ private:
     std::string status_;
 };
 
-void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = false) {
+void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = false, bool core_v1 = false) {
     if (!net::startup()) {
         log::error("Winsock startup failed");
         return;
@@ -381,7 +383,9 @@ void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = 
     // Option D: the host's end of the Troc tunnel, once [session2] is up; or,
     // on the guest's PC (P8), the client's end.
     std::unique_ptr<session2::R3TunnelBridge> r3_tunnel;
-    if (core_tunnel_only) r3_tunnel = std::make_unique<session2::R3TunnelBridge>(session);
+    if (core_tunnel_only && !core_v1) r3_tunnel = std::make_unique<session2::R3TunnelBridge>(session);
+    std::unique_ptr<session2::v1_3663::Bridge> v1_tunnel;
+    if(core_v1)v1_tunnel=std::make_unique<session2::v1_3663::Bridge>(session,host);
     std::unique_ptr<troc::TrocLink> s2_link;
     std::unique_ptr<troc::TrocLink> s2_guest_link;
 
@@ -479,6 +483,7 @@ void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = 
                                              : "");
         }
         if (r3_tunnel) r3_tunnel->tick(now);
+        if (v1_tunnel) v1_tunnel->tick(now);
         if (s2_link) session2::tunnel_tick(*s2_link, now);
         // P8 S25 weather (weather_sync.h): the host's newest weather sample as control state 12 (weather_sync=1 and a
         // guest that announced caps 0x04; nothing otherwise). Flushed by the next tunnel_tick.
@@ -601,6 +606,7 @@ void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = 
             if (coop) log::info("{}", coop->describe());
             if (!core_tunnel_only && session2::installed()) log::info("{}", session2::describe());
             if (r3_tunnel) log::info("{}", r3_tunnel->describe());
+            if (v1_tunnel) log::info("{}", v1_tunnel->describe());
             // CDMP_ROLE=guest: where its saves went, once a minute.
             if (!core_tunnel_only && session2::save_hooks_guest_role() && ++guest_role_reports % 12 == 1) {
                 log::info("Role guest: save redirect {}", session2::save_hooks_redirect_describe());
@@ -632,6 +638,7 @@ void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = 
     }
 
     r3_tunnel.reset();
+    v1_tunnel.reset();
     coop.reset();
     s2_link.reset();
     s2_guest_link.reset();
@@ -996,6 +1003,17 @@ DWORD WINAPI worker(LPVOID) {
     try {
         const ProcessFacts proc = log_process_info();
         const bool in_game = proc.in_game;
+        // Controlled two-instance deployment: a Steam bootstrap must not lose
+        // its role/sandbox environment and silently become a real-save game.
+        // The launcher owns and removes this marker; ordinary installs lack it.
+        if(coop3663::v1::reject_test_process(
+            GetFileAttributesW((dir+L"cdmp.r4-test-lock").c_str())!=INVALID_FILE_ATTRIBUTES,in_game,
+            proc.identity.kind==game::build_guard::IdentityKind::Build3663,
+            rs.role==role::Role::Host || rs.role==role::Role::Guest,
+            GetEnvironmentVariableW(L"CDMP_SAVE_SANDBOX",nullptr,0)>0)){
+            log::error("R4 controlled session refused an untagged, unsupported or unsandboxed game process");
+            log::flush(2000);TerminateProcess(GetCurrentProcess(),0xCD66);return 0;
+        }
         if (!rs.valid) return 0;
         if (rs.role != role::Role::None) log_parent();
         game::build_guard::StartupRequest guard_req;
@@ -1003,7 +1021,7 @@ DWORD WINAPI worker(LPVOID) {
         guard_req.test_overlay = GetEnvironmentVariableW(L"CDMP_TEST_OVERLAY", nullptr, 0) > 0;
         guard_req.guest_role = rs.role == role::Role::Guest;
         guard_req.identity = proc.identity;
-        const auto startup = game::build_guard::decide_startup(guard_req);
+        auto startup = game::build_guard::decide_startup(guard_req);
         bool allow_reads = false;
         bool allow_hooks = false;
         bool allow_test_overlay = false;
@@ -1023,6 +1041,10 @@ DWORD WINAPI worker(LPVOID) {
             log::flush(2000);
             TerminateProcess(GetCurrentProcess(),0xCD64);
             return 0;
+        }
+        if(sandbox_3663){
+            guard_req.save_sandbox_verified=session2::file_sandbox3663::verified();
+            startup=game::build_guard::decide_startup(guard_req);
         }
         // The guest's saves: before anything else (the game reads its save list early), in every guest-role process
         // (the later ones too). Never on the real folder: a failure ends the game here, before it touched a save.
@@ -1081,6 +1103,35 @@ DWORD WINAPI worker(LPVOID) {
                     return;
                 }
                 LocalSource local(true);
+                if(cfg.r4_core_v1){
+                    const bool guest_role=rs.role==role::Role::Guest;
+                    const bool host_role=rs.role==role::Role::Host;
+                    namespace v1=coop3663::v1;
+                    const auto route=v1::route({startup.tier_c_join && startup.tier_d_lifecycle,
+                        session2::file_sandbox3663::verified(),cfg.net_enabled,cfg.s2_enabled,
+                        host_role,guest_role,cfg.net_role_host,cfg.s2_guest,cfg.s2_create_session,cfg.s2_accept_tunnel,
+                        cfg.net_transport_steam,cfg.host_loopback_only,cfg.peer_host=="127.0.0.1",cfg.coop_enabled,
+                        cfg.r3_pump_probe || cfg.r3_join_probe || cfg.r4_core_probe || cfg.r3_tunnel_probe});
+                    const bool valid=route!=v1::Route::Refuse;
+                    bool installed=false;
+                    if(valid && guest_role)installed=session2::guest3663::install(proc.identity);
+                    else if(valid && host_role){
+                        session2::ServerOptions options;options.core_v1=true;options.probe=false;
+                        options.create_session=options.accept_tunnel=true;
+                        installed=session2::server_install(options) && session2::v1_3663::host_install(proc.identity);
+                    }
+                    if(!installed){
+                        log::error("3663 v1 refused: exact C/D, sandbox, role/configuration or native guards incomplete");
+                        if(guest_role){log::flush(2000);TerminateProcess(GetCurrentProcess(),0xCD65);}
+                        return;
+                    }
+                    log::info("3663 v1 {} active: sandbox verified; optional modules unreachable; no runtime acceptance claimed",guest_role?"guest":"host");
+                    run_network(cfg,local,true,true);return;
+                }
+                if(rs.role==role::Role::Guest){
+                    log::error("3663 guest requires the explicit v1 route; ending before title");
+                    log::flush(2000);TerminateProcess(GetCurrentProcess(),0xCD65);return;
+                }
                 if (startup.tier_b_tunnel && cfg.net_enabled && cfg.s2_enabled && cfg.s2_create_session &&
                     cfg.s2_accept_tunnel && !cfg.s2_guest && !cfg.r3_pump_probe) {
                     // Until C/D, native B is a host-only loopback diagnostic. The network

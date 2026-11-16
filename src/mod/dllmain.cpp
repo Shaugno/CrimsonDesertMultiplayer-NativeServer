@@ -8,6 +8,7 @@
 
 #include "mod/log.h"
 #include "mod/mod.h"
+#include "mod/game/build_3663.h"
 
 namespace {
 
@@ -31,6 +32,12 @@ bool g_started = false;
 // Lets a test host stop the worker cleanly before FreeLibrary.
 extern "C" __declspec(dllexport) void cdmp_shutdown() {
     if (g_started) cdmp::stop();
+}
+// Read-only compiled metadata. It grants no process/build/sandbox permission.
+// The synthetic host records this for the controlled launch receipt.
+extern "C" __declspec(dllexport) uint32_t cdmp_3663_tier_mask(){
+    namespace b=cdmp::game::build_3663;
+    return (b::kTierAComplete?1u:0u)|(b::kTierBComplete?2u:0u)|(b::kTierCComplete?4u:0u)|(b::kTierDComplete?8u:0u);
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID reserved) {

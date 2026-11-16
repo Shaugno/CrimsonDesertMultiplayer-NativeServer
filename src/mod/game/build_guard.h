@@ -80,6 +80,7 @@ struct StartupRequest {
     bool in_game = false;       // process image is CrimsonDesert.exe
     bool test_overlay = false;  // CDMP_TEST_OVERLAY, explicit and off the game path
     bool guest_role = false;    // CDMP_ROLE=guest
+    bool save_sandbox_verified = false; // receipt from installed file layer; never an ini permission
     ImageIdentity identity{};
 };
 
@@ -217,7 +218,7 @@ inline std::string diagnostic(const ImageIdentity& id) {
     if (id.kind == IdentityKind::Build3663) {
         return std::format(
             "Recognized game build Crimson Desert 1.0.0.3663 (PE timestamp 0x{:08X}, image base 0x{:X}, "
-            "image size 0x{:X}). Tier A HP-only reader enabled; core join remains incomplete. "
+            "image size 0x{:X}). Tier A HP-only reader enabled; guarded C/D v1 requires explicit configuration and a verified sandbox. "
             "Legacy paths remain off; the guarded B loopback host route requires explicit configuration.",
             build_3663::kPeTimestamp, build_3663::kImageBase, build_3663::kSizeOfImage);
     }
@@ -258,12 +259,13 @@ inline StartupDecision decide_startup(const StartupRequest& req) {
     }
     if (req.identity.kind == IdentityKind::Build3663) {
         // Recognition is not permission to reuse the legacy readers, hooks or
-        // early guest save redirect. Unresolved core rows stay inaccessible.
+        // early guest save redirect. The target route also requires its own
+        // verified file sandbox, independent of the compiled evidence bits.
         decision.build = GameBuild::Build3663;
         static_cast<TierPermissions&>(decision) = select_3663_tiers(req.identity, {true, true, true, true},
             {build_3663::kTierAComplete, build_3663::kTierBComplete,
              build_3663::kTierCComplete, build_3663::kTierDComplete});
-        decision.end_guest_process = req.guest_role;
+        decision.end_guest_process = req.guest_role && (!decision.tier_d_lifecycle || !req.save_sandbox_verified);
         return decision;
     }
     decision.end_guest_process = req.guest_role;
