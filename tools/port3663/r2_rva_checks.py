@@ -52,6 +52,22 @@ check('kVtPhysicsObject',0x5D00F88,0x614A050,
     'Native physics constructors 1408ECE0/11B11940 assign these vtables and construct the rotation/position base; mapped constructor/destructor call neighbours, no MSVC COL assumed.',
     'port-evidence/r2/player-physics-reference.txt; player-physics-constructor-target.txt; player-physics-target.txt',
     [0x1408ECE0,0x11B11940])
+check('kLoadSlot',0x186F570,0x1A16C40,
+    'Paired native four-argument LoadSlot verifies the same slot domain, actor presence, lock/busy gate, storage-backed load, result propagation and busy cleanup; named LoginCharacter implementation invokes it in the corresponding native login sequence.',
+    'port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; field-login-role-target.txt')
+check('kServerActorLookupSlot',0x6D69698,0x72456D0,
+    'Named SaveDataSlotRefreshReq consumes the RIP-relative lookup root and +48 save manager, takes/releases its lock, tests/sets +60 busy and calls the retained refresh function.',
+    'port-evidence/ghidra-3663-core-handlers.txt; port-evidence/r2/save-manager-reference.txt',
+    [0x2A22380,0x2D133B0])
+for symbol,old,target,role in [
+    ('kErrBusy.site',0x186F6DF,0x1A16DCE,'busy return instruction'),
+    ('kErrBusy.global',0x6CF7CA4,0x71D0CFC,'busy error-code global'),
+    ('kErrInvalidSlot.site',0x186F62C,0x1A16D1F,'first invalid-slot return instruction'),
+    ('kErrInvalidSlot.global',0x6CF7900,0x71D092C,'invalid-slot error-code global')]:
+    check(symbol,old,target,
+        f'Paired LoadSlot native {role}: exact MOV EAX,[RIP+error] decoded in both files, corresponding slot-domain or busy-under-lock branch and result propagation. No numeric error value is assumed unchanged.',
+        'port-evidence/r2/save-manager-reference.txt; save-manager-target.txt',
+        [0x186F570,0x1A16C40])
 
 (docs/'r2-rva-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Independent RVA checks awaiting standard support',len(result))

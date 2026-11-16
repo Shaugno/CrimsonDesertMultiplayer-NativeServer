@@ -1,0 +1,570 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x227B80
+Function=FUN_140227b80 body=[[140227b80, 140227bc2]]
+140227b80 SUB RSP,0x28
+140227b84 MOV R9,-0x1
+140227b8b LEA R8,[0x1455734ac]
+140227b92 MOV EDX,0x65
+140227b97 LEA RCX,[0x146a7a5a2]
+140227b9e CALL qword ptr [0x1451ec4b0]
+140227ba4 NOP
+140227ba5 LEA RAX,[0x145b22638]
+140227bac MOV qword ptr [0x146a7a580],RAX
+140227bb3 LEA RCX,[0x14510fe50]
+140227bba ADD RSP,0x28
+140227bbe JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140227b80(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a7a5a2,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a7a580 = &UNK_145b22638;
+  lVar1 = FUN_144895710(FUN_14510fe50);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x227AE0
+Function=FUN_140227ae0 body=[[140227ae0, 140227b22]]
+140227ae0 SUB RSP,0x28
+140227ae4 MOV R9,-0x1
+140227aeb LEA R8,[0x1455734ac]
+140227af2 MOV EDX,0x65
+140227af7 LEA RCX,[0x146a7a482]
+140227afe CALL qword ptr [0x1451ec4b0]
+140227b04 NOP
+140227b05 LEA RAX,[0x145b22678]
+140227b0c MOV qword ptr [0x146a7a460],RAX
+140227b13 LEA RCX,[0x14510fe30]
+140227b1a ADD RSP,0x28
+140227b1e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140227ae0(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a7a482,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a7a460 = &UNK_145b22678;
+  lVar1 = FUN_144895710(FUN_14510fe30);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x222770
+Function=FUN_140222770 body=[[140222770, 1402227b2]]
+140222770 SUB RSP,0x28
+140222774 MOV R9,-0x1
+14022277b LEA R8,[0x1455734ac]
+140222782 MOV EDX,0x65
+140222787 LEA RCX,[0x146a70e52]
+14022278e CALL qword ptr [0x1451ec4b0]
+140222794 NOP
+140222795 LEA RAX,[0x145b243f8]
+14022279c MOV qword ptr [0x146a70e30],RAX
+1402227a3 LEA RCX,[0x14510ed80]
+1402227aa ADD RSP,0x28
+1402227ae JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140222770(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a70e52,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a70e30 = &UNK_145b243f8;
+  lVar1 = FUN_144895710(FUN_14510ed80);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x130620
+Function=FUN_140130620 body=[[140130620, 140130662]]
+140130620 SUB RSP,0x28
+140130624 MOV R9,-0x1
+14013062b LEA R8,[0x1455734ac]
+140130632 MOV EDX,0x65
+140130637 LEA RCX,[0x146a53e72]
+14013063e CALL qword ptr [0x1451ec4b0]
+140130644 NOP
+140130645 LEA RAX,[0x14560b430]
+14013064c MOV qword ptr [0x146a53e50],RAX
+140130653 LEA RCX,[0x145085250]
+14013065a ADD RSP,0x28
+14013065e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140130620(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a53e72,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a53e50 = &UNK_14560b430;
+  lVar1 = FUN_144895710(FUN_145085250);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x136430
+Function=FUN_140136430 body=[[140136430, 140136472]]
+140136430 SUB RSP,0x28
+140136434 MOV R9,-0x1
+14013643b LEA R8,[0x1455734ac]
+140136442 MOV EDX,0x65
+140136447 LEA RCX,[0x146a5e7c2]
+14013644e CALL qword ptr [0x1451ec4b0]
+140136454 NOP
+140136455 LEA RAX,[0x145608f10]
+14013645c MOV qword ptr [0x146a5e7a0],RAX
+140136463 LEA RCX,[0x145086520]
+14013646a ADD RSP,0x28
+14013646e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140136430(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a5e7c2,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a5e7a0 = &UNK_145608f10;
+  lVar1 = FUN_144895710(FUN_145086520);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x131110
+Function=FUN_140131110 body=[[140131110, 140131152]]
+140131110 SUB RSP,0x28
+140131114 MOV R9,-0x1
+14013111b LEA R8,[0x1455734ac]
+140131122 MOV EDX,0x65
+140131127 LEA RCX,[0x146a55222]
+14013112e CALL qword ptr [0x1451ec4b0]
+140131134 NOP
+140131135 LEA RAX,[0x14560afd0]
+14013113c MOV qword ptr [0x146a55200],RAX
+140131143 LEA RCX,[0x145085480]
+14013114a ADD RSP,0x28
+14013114e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140131110(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a55222,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a55200 = &UNK_14560afd0;
+  lVar1 = FUN_144895710(FUN_145085480);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x145500
+Function=FUN_140145500 body=[[140145500, 140145542]]
+140145500 SUB RSP,0x28
+140145504 MOV R9,-0x1
+14014550b LEA R8,[0x1455734ac]
+140145512 MOV EDX,0x65
+140145517 LEA RCX,[0x146a64c92]
+14014551e CALL qword ptr [0x1451ec4b0]
+140145524 NOP
+140145525 LEA RAX,[0x145648228]
+14014552c MOV qword ptr [0x146a64c70],RAX
+140145533 LEA RCX,[0x14508f0d0]
+14014553a ADD RSP,0x28
+14014553e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140145500(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a64c92,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a64c70 = &UNK_145648228;
+  lVar1 = FUN_144895710(FUN_14508f0d0);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x145420
+Function=FUN_140145420 body=[[140145420, 140145462]]
+140145420 SUB RSP,0x28
+140145424 MOV R9,-0x1
+14014542b LEA R8,[0x1455734ac]
+140145432 MOV EDX,0x65
+140145437 LEA RCX,[0x146a64b72]
+14014543e CALL qword ptr [0x1451ec4b0]
+140145444 NOP
+140145445 LEA RAX,[0x145647900]
+14014544c MOV qword ptr [0x146a64b50],RAX
+140145453 LEA RCX,[0x14508ef80]
+14014545a ADD RSP,0x28
+14014545e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140145420(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a64b72,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a64b50 = &UNK_145647900;
+  lVar1 = FUN_144895710(FUN_14508ef80);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x136200
+Function=FUN_140136200 body=[[140136200, 140136242]]
+140136200 SUB RSP,0x28
+140136204 MOV R9,-0x1
+14013620b LEA R8,[0x1455734ac]
+140136212 MOV EDX,0x65
+140136217 LEA RCX,[0x146a5e3d2]
+14013621e CALL qword ptr [0x1451ec4b0]
+140136224 NOP
+140136225 LEA RAX,[0x145609030]
+14013622c MOV qword ptr [0x146a5e3b0],RAX
+140136233 LEA RCX,[0x1450864b0]
+14013623a ADD RSP,0x28
+14013623e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140136200(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a5e3d2,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a5e3b0 = &UNK_145609030;
+  lVar1 = FUN_144895710(FUN_1450864b0);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x223300
+Function=FUN_140223300 body=[[140223300, 140223342]]
+140223300 SUB RSP,0x28
+140223304 MOV R9,-0x1
+14022330b LEA R8,[0x1455734ac]
+140223312 MOV EDX,0x65
+140223317 LEA RCX,[0x146a72322]
+14022331e CALL qword ptr [0x1451ec4b0]
+140223324 NOP
+140223325 LEA RAX,[0x145b24758]
+14022332c MOV qword ptr [0x146a72300],RAX
+140223333 LEA RCX,[0x14510efd0]
+14022333a ADD RSP,0x28
+14022333e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140223300(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a72322,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a72300 = &UNK_145b24758;
+  lVar1 = FUN_144895710(FUN_14510efd0);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x227B30
+Function=FUN_140227b30 body=[[140227b30, 140227b72]]
+140227b30 SUB RSP,0x28
+140227b34 MOV R9,-0x1
+140227b3b LEA R8,[0x1455734ac]
+140227b42 MOV EDX,0x65
+140227b47 LEA RCX,[0x146a7a512]
+140227b4e CALL qword ptr [0x1451ec4b0]
+140227b54 NOP
+140227b55 LEA RAX,[0x145b22658]
+140227b5c MOV qword ptr [0x146a7a4f0],RAX
+140227b63 LEA RCX,[0x14510fe40]
+140227b6a ADD RSP,0x28
+140227b6e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140227b30(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a7a512,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a7a4f0 = &UNK_145b22658;
+  lVar1 = FUN_144895710(FUN_14510fe40);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x227C20
+Function=FUN_140227c20 body=[[140227c20, 140227c62]]
+140227c20 SUB RSP,0x28
+140227c24 MOV R9,-0x1
+140227c2b LEA R8,[0x1455734ac]
+140227c32 MOV EDX,0x65
+140227c37 LEA RCX,[0x146a7a6c2]
+140227c3e CALL qword ptr [0x1451ec4b0]
+140227c44 NOP
+140227c45 LEA RAX,[0x145b225d8]
+140227c4c MOV qword ptr [0x146a7a6a0],RAX
+140227c53 LEA RCX,[0x14510fe70]
+140227c5a ADD RSP,0x28
+140227c5e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140227c20(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a7a6c2,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a7a6a0 = &UNK_145b225d8;
+  lVar1 = FUN_144895710(FUN_14510fe70);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x227BD0
+Function=FUN_140227bd0 body=[[140227bd0, 140227c12]]
+140227bd0 SUB RSP,0x28
+140227bd4 MOV R9,-0x1
+140227bdb LEA R8,[0x1455734ac]
+140227be2 MOV EDX,0x65
+140227be7 LEA RCX,[0x146a7a632]
+140227bee CALL qword ptr [0x1451ec4b0]
+140227bf4 NOP
+140227bf5 LEA RAX,[0x145b22618]
+140227bfc MOV qword ptr [0x146a7a610],RAX
+140227c03 LEA RCX,[0x14510fe60]
+140227c0a ADD RSP,0x28
+140227c0e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140227bd0(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a7a632,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a7a610 = &UNK_145b22618;
+  lVar1 = FUN_144895710(FUN_14510fe60);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x136520
+Function=FUN_140136520 body=[[140136520, 140136562]]
+140136520 SUB RSP,0x28
+140136524 MOV R9,-0x1
+14013652b LEA R8,[0x1455734ac]
+140136532 MOV EDX,0x65
+140136537 LEA RCX,[0x146a5e972]
+14013653e CALL qword ptr [0x1451ec4b0]
+140136544 NOP
+140136545 LEA RAX,[0x145608ef0]
+14013654c MOV qword ptr [0x146a5e950],RAX
+140136553 LEA RCX,[0x145086550]
+14013655a ADD RSP,0x28
+14013655e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140136520(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a5e972,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a5e950 = &UNK_145608ef0;
+  lVar1 = FUN_144895710(FUN_145086550);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x227900
+Function=FUN_140227900 body=[[140227900, 140227942]]
+140227900 SUB RSP,0x28
+140227904 MOV R9,-0x1
+14022790b LEA R8,[0x1455734ac]
+140227912 MOV EDX,0x65
+140227917 LEA RCX,[0x146a7a122]
+14022791e CALL qword ptr [0x1451ec4b0]
+140227924 NOP
+140227925 LEA RAX,[0x145b22558]
+14022792c MOV qword ptr [0x146a7a100],RAX
+140227933 LEA RCX,[0x14510fdd0]
+14022793a ADD RSP,0x28
+14022793e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140227900(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a7a122,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a7a100 = &UNK_145b22558;
+  lVar1 = FUN_144895710(FUN_14510fdd0);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x227A40
+Function=FUN_140227a40 body=[[140227a40, 140227a82]]
+140227a40 SUB RSP,0x28
+140227a44 MOV R9,-0x1
+140227a4b LEA R8,[0x1455734ac]
+140227a52 MOV EDX,0x65
+140227a57 LEA RCX,[0x146a7a362]
+140227a5e CALL qword ptr [0x1451ec4b0]
+140227a64 NOP
+140227a65 LEA RAX,[0x145b224d8]
+140227a6c MOV qword ptr [0x146a7a340],RAX
+140227a73 LEA RCX,[0x14510fe10]
+140227a7a ADD RSP,0x28
+140227a7e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140227a40(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a7a362,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a7a340 = &UNK_145b224d8;
+  lVar1 = FUN_144895710(FUN_14510fe10);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x232C30
+Function=FUN_140232c30 body=[[140232c30, 140232c72]]
+140232c30 SUB RSP,0x28
+140232c34 MOV R9,-0x1
+140232c3b LEA R8,[0x1455734ac]
+140232c42 MOV EDX,0x65
+140232c47 LEA RCX,[0x146a82c12]
+140232c4e CALL qword ptr [0x1451ec4b0]
+140232c54 NOP
+140232c55 LEA RAX,[0x145b352a0]
+140232c5c MOV qword ptr [0x146a82bf0],RAX
+140232c63 LEA RCX,[0x145114a30]
+140232c6a ADD RSP,0x28
+140232c6e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140232c30(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a82c12,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a82bf0 = &UNK_145b352a0;
+  lVar1 = FUN_144895710(FUN_145114a30);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x145380
+Function=FUN_140145380 body=[[140145380, 1401453c2]]
+140145380 SUB RSP,0x28
+140145384 MOV R9,-0x1
+14014538b LEA R8,[0x1455734ac]
+140145392 MOV EDX,0x65
+140145397 LEA RCX,[0x146a64a52]
+14014539e CALL qword ptr [0x1451ec4b0]
+1401453a4 NOP
+1401453a5 LEA RAX,[0x145647960]
+1401453ac MOV qword ptr [0x146a64a30],RAX
+1401453b3 LEA RCX,[0x14508ef60]
+1401453ba ADD RSP,0x28
+1401453be JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_140145380(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a64a52,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a64a30 = &UNK_145647960;
+  lVar1 = FUN_144895710(FUN_14508ef60);
+  return (lVar1 != 0) - 1;
+}
+
+
+
+RVA=0x1453D0
+Function=FUN_1401453d0 body=[[1401453d0, 140145412]]
+1401453d0 SUB RSP,0x28
+1401453d4 MOV R9,-0x1
+1401453db LEA R8,[0x1455734ac]
+1401453e2 MOV EDX,0x65
+1401453e7 LEA RCX,[0x146a64ae2]
+1401453ee CALL qword ptr [0x1451ec4b0]
+1401453f4 NOP
+1401453f5 LEA RAX,[0x145647920]
+1401453fc MOV qword ptr [0x146a64ac0],RAX
+140145403 LEA RCX,[0x14508ef70]
+14014540a ADD RSP,0x28
+14014540e JMP 0x14489574c
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_1401453d0(void)
+
+{
+  longlong lVar1;
+
+  strncpy_s(0x146a64ae2,0x65,&UNK_1455734ac,0xffffffffffffffff);
+  _DAT_146a64ac0 = &UNK_145647920;
+  lVar1 = FUN_144895710(FUN_14508ef70);
+  return (lVar1 != 0) - 1;
+}

@@ -1,0 +1,264 @@
+{
+  "rows": {
+    "B071": {
+      "target": "2401",
+      "old": "2319",
+      "symbol": "kOpConnectCryptogramToServerReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrConnectCryptogramToServerReq@pa@@: source opcode 2319, target 2401; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12540 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C089": {
+      "target": "2554",
+      "old": "2490",
+      "symbol": "kOpLoginUser",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C124": {
+      "target": "2554",
+      "old": "2490",
+      "symbol": "kOpLoginUserToFieldServerReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C134": {
+      "target": "2554",
+      "old": "2490",
+      "symbol": "kOpLoginUserToFieldServerReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C090": {
+      "target": "3081",
+      "old": "3093",
+      "symbol": "kOpLoginCharacter",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C123": {
+      "target": "3081",
+      "old": "3093",
+      "symbol": "kOpLoginCharacterToFieldServerReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C133": {
+      "target": "3081",
+      "old": "3093",
+      "symbol": "kOpLoginCharacterToFieldServerReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D112": {
+      "target": "3081",
+      "old": "3093",
+      "symbol": "kOpLoginCharacterReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C125": {
+      "target": "2844",
+      "old": "2756",
+      "symbol": "kOpMainPlayerDataStartAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrMainPlayerDataStartAck@pa@@: source opcode 2756, target 2844; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCB72E0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C126": {
+      "target": "2420",
+      "old": "2646",
+      "symbol": "kOpMainUserDataStartAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrMainUserDataStartAck@pa@@: source opcode 2646, target 2420; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD41AD0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C127": {
+      "target": "2364",
+      "old": "2174",
+      "symbol": "kOpMoveFieldAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrMoveFieldAck@pa@@: source opcode 2174, target 2364; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD4D70 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C129": {
+      "target": "2046",
+      "old": "2042",
+      "symbol": "kOpScopeSenderAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrScopeSenderAck@pa@@: source opcode 2042, target 2046; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE24530 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C130": {
+      "target": "2005",
+      "old": "2005",
+      "symbol": "kOpActorAppear",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrActorLoadDataAck@pa@@: source opcode 2005, target 2005; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE22330 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C131": {
+      "target": "2896",
+      "old": "2869",
+      "symbol": "kOpDataAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrCharacterLobbyDataAck@pa@@: source opcode 2869, target 2896; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD3EFF0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "C135": {
+      "target": "2150",
+      "old": "2125",
+      "symbol": "kOpSetFieldTimeReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrSetFieldTimeReq@pa@@: source opcode 2125, target 2150; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CA68F0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D024": {
+      "target": "2447",
+      "old": "2790",
+      "symbol": "kOpReserveShutDownServerReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrReserveShutDownServerReq@pa@@: source opcode 2790, target 2447; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12310 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D107": {
+      "target": "2234",
+      "old": "3037",
+      "symbol": "kOpSaveAutoReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrSaveAutoReq@pa@@: source opcode 3037, target 2234; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12DF0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D108": {
+      "target": "3158",
+      "old": "2910",
+      "symbol": "kOpSaveToFileCurrentPlayerReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrSaveToFileCurrentPlayerReq@pa@@: source opcode 2910, target 3158; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12AC0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D109": {
+      "target": "2813",
+      "old": "3016",
+      "symbol": "kOpSaveToFileCurrentPlayerAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrSaveToFileCurrentPlayerAck@pa@@: source opcode 3016, target 2813; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD42840 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D110": {
+      "target": "2533",
+      "old": "2711",
+      "symbol": "kOpCreateCharacterReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrCreateCharacterReq@pa@@: source opcode 2711, target 2533; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D0E0E0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D111": {
+      "target": "2688",
+      "old": "2178",
+      "symbol": "kOpNewGameStartReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrNewGameStartReq@pa@@: source opcode 2178, target 2688; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D0EE00 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D113": {
+      "target": "2001",
+      "old": "2001",
+      "symbol": "kOpLogoutSessionReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLogoutSessionToServerReq@pa@@: source opcode 2001, target 2001; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2F55680 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D116": {
+      "target": "2001",
+      "old": "2001",
+      "symbol": "kOpLogoutSessionReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLogoutSessionToServerReq@pa@@: source opcode 2001, target 2001; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2F55680 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D117": {
+      "target": "2002",
+      "old": "2002",
+      "symbol": "kOpLogoutSessionAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLogoutSessionToServerAck@pa@@: source opcode 2002, target 2002; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE22070 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D118": {
+      "target": "2003",
+      "old": "2003",
+      "symbol": "kOpLogoutUserAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLogoutUserToServerAck@pa@@: source opcode 2003, target 2003; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE220D0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+    },
+    "D123": {
+      "target": "14 B; key0 slot4 ok8 flag9 result10",
+      "old": "14 B; key0 slot4 ok8 flag9 result10",
+      "symbol": "SaveCurrentAckLayout",
+      "method": "paired native payload consumption",
+      "second_check": "Named old BE02B0 and target D42840 decode consecutive 4,4,1,1,4-byte fields and require exact payload consumption. Current-player save completion uses the slot/flag/result in the corresponding native callbacks. Both have the ordinary five-byte packet envelope.",
+      "evidence": "port-evidence/r2/request-handlers-reference.txt; request-handlers-target.txt; request-candidates.json",
+      "members": {
+        "kSaveCurrentAckSize": 14,
+        "kSaveCurrentAckKey": 0,
+        "kSaveCurrentAckSlot": 4,
+        "kSaveCurrentAckOk": 8,
+        "kSaveCurrentAckFlag": 9,
+        "kSaveCurrentAckResult": 10
+      }
+    },
+    "D124": {
+      "target": "slot0:u32; length4:u32; UTF16+8; terminator; 10+2n bytes; n<=30",
+      "old": "slot0:u32; length4:u32; UTF16+8; terminator; 10+2n bytes; n<=30",
+      "symbol": "SaveReq2910Layout",
+      "method": "paired native payload consumption",
+      "second_check": "Named old 2A21B80 and target 2D12AC0 consume a u32 slot, u32 name length <31, 2*n+2 UTF16 bytes including a checked NUL, advance the reader by that amount and require exact payload exhaustion.",
+      "evidence": "port-evidence/r2/request-handlers-reference.txt; request-handlers-target.txt; request-candidates.json",
+      "members": {
+        "kSaveRequestSlot": 0,
+        "kSaveRequestNameLength": 4,
+        "kSaveRequestName": 8,
+        "kSaveRequestFixedSize": 10,
+        "kSaveRequestMaxName": 30
+      }
+    },
+    "D125": {
+      "target": "flag0:u8; characterNo1:u64; slot9:u32",
+      "old": "flag0:u8; characterNo1:u64; slot9:u32",
+      "symbol": "LoginCharacterSaveLayout",
+      "method": "paired native payload consumption",
+      "second_check": "Named old 298BA10 and target 2C6AE10 decode a one-byte flag, eight-byte character number, then a four-byte slot, in that order. This proves the prefix used by the guest slot selector, not an assertion that the entire native payload ends at byte13.",
+      "evidence": "port-evidence/r2/request-handlers-reference.txt; request-handlers-target.txt; request-candidates.json",
+      "members": {
+        "kLoginCharacterFlag": 0,
+        "kLoginCharacterNumber": 1,
+        "kLoginCharacterSlot": 9
+      }
+    },
+    "D119": {
+      "target": "3",
+      "old": "3",
+      "symbol": "kInternalHeaderSize",
+      "method": "paired native payload consumption",
+      "second_check": "Named LogoutSession/User Ack handlers consume a u32 at packet+3; paired descriptors require exactly seven bytes. Named LogoutSession Req descriptor requires exactly three bytes and its handler uses the existing session context without decoding an ordinary u16 payload length. This confirms the distinct internal header, not the ordinary five-byte format.",
+      "evidence": "port-evidence/r2/request-handlers-reference.txt; request-handlers-target.txt; request-candidates.json"
+    },
+    "D120": {
+      "target": "7",
+      "old": "7",
+      "symbol": "kLogoutAckSize",
+      "method": "paired native payload consumption",
+      "second_check": "Named LogoutSession/User Ack handlers consume a u32 at packet+3; paired descriptors require exactly seven bytes. Named LogoutSession Req descriptor requires exactly three bytes and its handler uses the existing session context without decoding an ordinary u16 payload length. This confirms the distinct internal header, not the ordinary five-byte format.",
+      "evidence": "port-evidence/r2/request-handlers-reference.txt; request-handlers-target.txt; request-candidates.json"
+    }
+  }
+}

@@ -128,5 +128,68 @@
       336129248,
       296819008
     ]
+  },
+  "D053": {
+    "target": "0x1a16c40",
+    "old": "0x186f570",
+    "symbol": "kLoadSlot",
+    "second_check": "Paired native four-argument LoadSlot verifies the same slot domain, actor presence, lock/busy gate, storage-backed load, result propagation and busy cleanup; named LoginCharacter implementation invokes it in the corresponding native login sequence.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; field-login-role-target.txt",
+    "anchor": null
+  },
+  "D002": {
+    "target": "0x72456d0",
+    "old": "0x6d69698",
+    "symbol": "kServerActorLookupSlot",
+    "second_check": "Named SaveDataSlotRefreshReq consumes the RIP-relative lookup root and +48 save manager, takes/releases its lock, tests/sets +60 busy and calls the retained refresh function.",
+    "evidence": "port-evidence/ghidra-3663-core-handlers.txt; port-evidence/r2/save-manager-reference.txt",
+    "anchor": [
+      44180352,
+      47264688
+    ]
+  },
+  "D070": {
+    "target": "0x1a16dce",
+    "old": "0x186f6df",
+    "symbol": "kErrBusy.site",
+    "second_check": "Paired LoadSlot native busy return instruction: exact MOV EAX,[RIP+error] decoded in both files, corresponding slot-domain or busy-under-lock branch and result propagation. No numeric error value is assumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt",
+    "anchor": [
+      25621872,
+      27356224
+    ]
+  },
+  "D071": {
+    "target": "0x71d0cfc",
+    "old": "0x6cf7ca4",
+    "symbol": "kErrBusy.global",
+    "second_check": "Paired LoadSlot native busy error-code global: exact MOV EAX,[RIP+error] decoded in both files, corresponding slot-domain or busy-under-lock branch and result propagation. No numeric error value is assumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt",
+    "anchor": [
+      25621872,
+      27356224
+    ]
+  },
+  "D072": {
+    "target": "0x1a16d1f",
+    "old": "0x186f62c",
+    "symbol": "kErrInvalidSlot.site",
+    "second_check": "Paired LoadSlot native first invalid-slot return instruction: exact MOV EAX,[RIP+error] decoded in both files, corresponding slot-domain or busy-under-lock branch and result propagation. No numeric error value is assumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt",
+    "anchor": [
+      25621872,
+      27356224
+    ]
+  },
+  "D073": {
+    "target": "0x71d092c",
+    "old": "0x6cf7900",
+    "symbol": "kErrInvalidSlot.global",
+    "second_check": "Paired LoadSlot native invalid-slot error-code global: exact MOV EAX,[RIP+error] decoded in both files, corresponding slot-domain or busy-under-lock branch and result propagation. No numeric error value is assumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt",
+    "anchor": [
+      25621872,
+      27356224
+    ]
   }
 }

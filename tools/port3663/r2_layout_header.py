@@ -15,11 +15,24 @@ for row in core.values():
 begin,end = '// R2 reviewed layouts BEGIN','// R2 reviewed layouts END'
 if begin in text: text = text[:text.index(begin)] + text[text.index(end)+len(end):]
 section = begin+'\n// Layout proof catalog: docs/probe-3663/r2-reviewed.json. No tier is armed.\n'
-for tier,namespace in [('A','player_layout'),('B','tunnel_layout'),('C','field_layout')]:
+for tier,namespace in [('A','player_layout'),('B','tunnel_layout'),('C','field_layout'),('D','lifecycle_layout')]:
     section += 'namespace '+namespace+' {\n'
+    emitted={}
     for key,row in proofs.items():
         if core[key]['tier']!=tier: continue
         symbol = row['symbol'] if row['symbol'].startswith('k') else 'k'+row['symbol']
+        if symbol in emitted:
+            previous=emitted[symbol]
+            if previous==row['target']:
+                section += f'// {symbol}: same native contract; 2976 {row["old"]}; R2 {key}\n'
+                continue
+            symbol += '_'+key
+        emitted[symbol]=row['target']
+        if 'members' in row:
+            for name,value in row['members'].items():
+                assert isinstance(value,int) and 0<=value<=0xFFFFFFFF
+                section += f'inline constexpr uint32_t {name} = {value}; // 2976 {value} (paired schema); R2 {key}\n'
+            continue
         if row['symbol']=='FieldUserEntryLayout':
             for name,value in [('Size','16'),('User','0'),('Actors','8')]:
                 section += f'inline constexpr uint32_t kFieldUserEntry{name} = {value}; // 2976 {value}; R2 {key}\n'

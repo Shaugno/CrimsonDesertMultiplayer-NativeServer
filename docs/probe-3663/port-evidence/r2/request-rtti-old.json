@@ -1,0 +1,2491 @@
+{
+  "identity": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\reference-bins\\2976\\CrimsonDesert.exe",
+    "sha256": "57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7",
+    "file_size": 384521624,
+    "timestamp": "0x6AB28F00",
+    "image_base": "0x140000000",
+    "image_size": "0x173AB000",
+    "pdata_entries": 244444,
+    "tls_index_rva": "0x6C88C50",
+    "sections": [
+      {
+        "name": ".rsrc",
+        "rva": 4096,
+        "raw": 1024,
+        "size": 85893120,
+        "virtual_size": 85893120,
+        "flags": 1610612768
+      },
+      {
+        "name": ".xdata",
+        "rva": 85897216,
+        "raw": 85894144,
+        "size": 23756800,
+        "virtual_size": 23756800,
+        "flags": 1073741888
+      },
+      {
+        "name": ".rdata",
+        "rva": 109654016,
+        "raw": 109650944,
+        "size": 3524608,
+        "virtual_size": 8732672,
+        "flags": 3221225536
+      },
+      {
+        "name": ".00cfg",
+        "rva": 118386688,
+        "raw": 113175552,
+        "size": 2936832,
+        "virtual_size": 2936832,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls$",
+        "rva": 121323520,
+        "raw": 116112384,
+        "size": 12288,
+        "virtual_size": 12288,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls",
+        "rva": 121335808,
+        "raw": 116124672,
+        "size": 196608,
+        "virtual_size": 196608,
+        "flags": 1073741888
+      },
+      {
+        "name": ".xtext",
+        "rva": 121532416,
+        "raw": 116321280,
+        "size": 1974272,
+        "virtual_size": 1974272,
+        "flags": 1107296320
+      },
+      {
+        "name": ".xtls",
+        "rva": 123506688,
+        "raw": 118295552,
+        "size": 261384192,
+        "virtual_size": 261383906,
+        "flags": 3758096416
+      },
+      {
+        "name": ".text",
+        "rva": 384892928,
+        "raw": 379679744,
+        "size": 1849856,
+        "virtual_size": 1849734,
+        "flags": 1073741856
+      },
+      {
+        "name": ".shared",
+        "rva": 386744320,
+        "raw": 381529600,
+        "size": 1024,
+        "virtual_size": 584,
+        "flags": 3221225504
+      },
+      {
+        "name": ".impdata",
+        "rva": 386748416,
+        "raw": 381530624,
+        "size": 36352,
+        "virtual_size": 36316,
+        "flags": 1073741888
+      },
+      {
+        "name": ".trace",
+        "rva": 386785280,
+        "raw": 381566976,
+        "size": 2933760,
+        "virtual_size": 2933328,
+        "flags": 1073741888
+      }
+    ]
+  },
+  "adopted": 0,
+  "types": [
+    {
+      "name": ".?AVTrocTrGameOptionDataAck@pa@@",
+      "descriptor": "0x6ACF150",
+      "locators": [
+        {
+          "rva": "0x5DF9E50",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5607D10",
+          "locator": "0x5DF9E50",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xC15B90",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x138FC5",
+              "pdata_owner": "0x138FA0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSetGlobalStageSequencerPlayDataAck@pa@@",
+      "descriptor": "0x6ACF5C0",
+      "locators": [
+        {
+          "rva": "0x5DF9AB8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5607E70",
+          "locator": "0x5DF9AB8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xC0E770",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x138985",
+              "pdata_owner": "0x138960",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrNotifyQuestSaveDataAck@pa@@",
+      "descriptor": "0x6AD0BD8",
+      "locators": [
+        {
+          "rva": "0x5DFAB20",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608870",
+          "locator": "0x5DFAB20",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBF78D0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1375D5",
+              "pdata_owner": "0x1375B0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrMercenaryPrivateDataAck@pa@@",
+      "descriptor": "0x6AD0F40",
+      "locators": [
+        {
+          "rva": "0x5DFB278",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608A70",
+          "locator": "0x5DFB278",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBE5FD0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x136775",
+              "pdata_owner": "0x136750",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrResetKnowledgeLearnDelayDataAck@pa@@",
+      "descriptor": "0x6AD1710",
+      "locators": [
+        {
+          "rva": "0x5DFB7A0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5609170",
+          "locator": "0x5DFB7A0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBD8D10",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x135D75",
+              "pdata_owner": "0x135D50",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrRefreshMercenaryDataAck@pa@@",
+      "descriptor": "0x6AD17D0",
+      "locators": [
+        {
+          "rva": "0x5DFB2F0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608A90",
+          "locator": "0x5DFB2F0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBE50B0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x136685",
+              "pdata_owner": "0x136660",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrDeleteSaveDataAck@pa@@",
+      "descriptor": "0x6AD1878",
+      "locators": [
+        {
+          "rva": "0x5DFB340",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608AF0",
+          "locator": "0x5DFB340",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBE0680",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x136595",
+              "pdata_owner": "0x136570",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSaveToFileCurrentPlayerAck@pa@@",
+      "descriptor": "0x6AD18B0",
+      "locators": [
+        {
+          "rva": "0x5DFACD8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608EF0",
+          "locator": "0x5DFACD8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBE02B0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x136545",
+              "pdata_owner": "0x136520",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrConnectCryptogramToServerAck@pa@@",
+      "descriptor": "0x6AD18F0",
+      "locators": [
+        {
+          "rva": "0x5DFAD00",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608ED0",
+          "locator": "0x5DFAD00",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBDFC10",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1364F5",
+              "pdata_owner": "0x1364D0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrMainUserDataStartAck@pa@@",
+      "descriptor": "0x6AD1968",
+      "locators": [
+        {
+          "rva": "0x5DFAD28",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608F10",
+          "locator": "0x5DFAD28",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBDF670",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x136455",
+              "pdata_owner": "0x136430",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrNewGameStartAck@pa@@",
+      "descriptor": "0x6AD1A78",
+      "locators": [
+        {
+          "rva": "0x5DFADC8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5608F90",
+          "locator": "0x5DFADC8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBDDB40",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x136315",
+              "pdata_owner": "0x1362F0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrCharacterLobbyDataAck@pa@@",
+      "descriptor": "0x6AD1B18",
+      "locators": [
+        {
+          "rva": "0x5DFAE90",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5609030",
+          "locator": "0x5DFAE90",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBDCE50",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x136225",
+              "pdata_owner": "0x136200",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrCreateCharacterAck@pa@@",
+      "descriptor": "0x6AD1B50",
+      "locators": [
+        {
+          "rva": "0x5DFAE68",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5609010",
+          "locator": "0x5DFAE68",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBDC8F0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1361D5",
+              "pdata_owner": "0x1361B0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateItemDataAck@pa@@",
+      "descriptor": "0x6AD2870",
+      "locators": [
+        {
+          "rva": "0x5DFBDE0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x56099D0",
+          "locator": "0x5DFBDE0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBCAF20",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x135055",
+              "pdata_owner": "0x135030",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrClearHousingSyncDataAck@pa@@",
+      "descriptor": "0x6AD39E8",
+      "locators": [
+        {
+          "rva": "0x5DFC7E0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560A390",
+          "locator": "0x5DFC7E0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBA1BE0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x132F85",
+              "pdata_owner": "0x132F60",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSyncAndConsumeCustomHouseSyncDataAck@pa@@",
+      "descriptor": "0x6AD3AE0",
+      "locators": [
+        {
+          "rva": "0x5DFC880",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560A410",
+          "locator": "0x5DFC880",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xBA0EC0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x132E45",
+              "pdata_owner": "0x132E20",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrRefreshMiniGameBanDataAck@pa@@",
+      "descriptor": "0x6AD4290",
+      "locators": [
+        {
+          "rva": "0x5DFD3E8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560ABD0",
+          "locator": "0x5DFD3E8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB99200",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1324E5",
+              "pdata_owner": "0x1324C0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateMiniGameLeaderboardDataAck@pa@@",
+      "descriptor": "0x6AD49E0",
+      "locators": [
+        {
+          "rva": "0x5DFD320",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560ABB0",
+          "locator": "0x5DFD320",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB99FD0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1325D5",
+              "pdata_owner": "0x1325B0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrDeleteFactionMovingGroupDataAck@pa@@",
+      "descriptor": "0x6AD4A98",
+      "locators": [
+        {
+          "rva": "0x5DFD8C0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560A7D0",
+          "locator": "0x5DFD8C0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8FEC0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131AE5",
+              "pdata_owner": "0x131AC0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionMovingCharacterDataAck@pa@@",
+      "descriptor": "0x6AD4AE0",
+      "locators": [
+        {
+          "rva": "0x5DFD898",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560A830",
+          "locator": "0x5DFD898",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8F9C0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131A95",
+              "pdata_owner": "0x131A70",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionOwnedItemDataAck@pa@@",
+      "descriptor": "0x6AD4B28",
+      "locators": [
+        {
+          "rva": "0x5DFD8E8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560A810",
+          "locator": "0x5DFD8E8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8F4A0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131A45",
+              "pdata_owner": "0x131A20",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionDependencyDataAck@pa@@",
+      "descriptor": "0x6AD4B68",
+      "locators": [
+        {
+          "rva": "0x5DFD910",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AC70",
+          "locator": "0x5DFD910",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8EFA0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1319F5",
+              "pdata_owner": "0x1319D0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionLeaderDataAck@pa@@",
+      "descriptor": "0x6AD4BA8",
+      "locators": [
+        {
+          "rva": "0x5DFD960",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AC50",
+          "locator": "0x5DFD960",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8EAA0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1319A5",
+              "pdata_owner": "0x131980",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionFireArmDataAck@pa@@",
+      "descriptor": "0x6AD4CA8",
+      "locators": [
+        {
+          "rva": "0x5DFDA00",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560ACD0",
+          "locator": "0x5DFDA00",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8D4D0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131865",
+              "pdata_owner": "0x131840",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionReligionDataAck@pa@@",
+      "descriptor": "0x6AD4CE8",
+      "locators": [
+        {
+          "rva": "0x5DFD9D8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AD30",
+          "locator": "0x5DFD9D8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8CF80",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131815",
+              "pdata_owner": "0x1317F0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionConquerDataAck@pa@@",
+      "descriptor": "0x6AD4D28",
+      "locators": [
+        {
+          "rva": "0x5DFDA28",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AD10",
+          "locator": "0x5DFDA28",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8C9F0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1317C5",
+              "pdata_owner": "0x1317A0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionBlockDataAck@pa@@",
+      "descriptor": "0x6AD4D68",
+      "locators": [
+        {
+          "rva": "0x5DFDA50",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AD70",
+          "locator": "0x5DFDA50",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8C4B0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131775",
+              "pdata_owner": "0x131750",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionDataAck@pa@@",
+      "descriptor": "0x6AD4DA8",
+      "locators": [
+        {
+          "rva": "0x5DFDAA0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AD50",
+          "locator": "0x5DFDAA0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB8BE30",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131725",
+              "pdata_owner": "0x131700",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateFactionRelationDataAck@pa@@",
+      "descriptor": "0x6AD4FC0",
+      "locators": [
+        {
+          "rva": "0x5DFD050",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560A6B0",
+          "locator": "0x5DFD050",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB92C80",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131E55",
+              "pdata_owner": "0x131E30",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrMoveFieldAck@pa@@",
+      "descriptor": "0x6AD5230",
+      "locators": [
+        {
+          "rva": "0x5DFD6B8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AFD0",
+          "locator": "0x5DFD6B8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB87360",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131135",
+              "pdata_owner": "0x131110",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLoadingFieldDataAck@pa@@",
+      "descriptor": "0x6AD57B8",
+      "locators": [
+        {
+          "rva": "0x5DFD578",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AEF0",
+          "locator": "0x5DFD578",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB88FD0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1313B5",
+              "pdata_owner": "0x131390",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSetFieldTimeAck@pa@@",
+      "descriptor": "0x6AD5828",
+      "locators": [
+        {
+          "rva": "0x5DFD5F0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AF30",
+          "locator": "0x5DFD5F0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB88990",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131315",
+              "pdata_owner": "0x1312F0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSetMoveFieldAck@pa@@",
+      "descriptor": "0x6AD5898",
+      "locators": [
+        {
+          "rva": "0x5DFD618",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560AF70",
+          "locator": "0x5DFD618",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB882A0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x131275",
+              "pdata_owner": "0x131250",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrMainPlayerDataStartAck@pa@@",
+      "descriptor": "0x6AD5A10",
+      "locators": [
+        {
+          "rva": "0x5DFDC80",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B430",
+          "locator": "0x5DFDC80",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB6EB20",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x130645",
+              "pdata_owner": "0x130620",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSyncActorDataAck@pa@@",
+      "descriptor": "0x6AD5DC8",
+      "locators": [
+        {
+          "rva": "0x5DFE090",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B250",
+          "locator": "0x5DFE090",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB72320",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x130AF5",
+              "pdata_owner": "0x130AD0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrClearKillerActorDataAck@pa@@",
+      "descriptor": "0x6AD5FC8",
+      "locators": [
+        {
+          "rva": "0x5DFDB68",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B390",
+          "locator": "0x5DFDB68",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB70130",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x130825",
+              "pdata_owner": "0x130800",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrClearAllyGroupDataAck@pa@@",
+      "descriptor": "0x6AD6000",
+      "locators": [
+        {
+          "rva": "0x5DFDB90",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B370",
+          "locator": "0x5DFDB90",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB6FDD0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1307D5",
+              "pdata_owner": "0x1307B0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrCurrentScheduleDataAck@pa@@",
+      "descriptor": "0x6AD64A0",
+      "locators": [
+        {
+          "rva": "0x5DFE5E0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B650",
+          "locator": "0x5DFE5E0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB68C40",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x130145",
+              "pdata_owner": "0x130120",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateAIJumpTargetDataAck@pa@@",
+      "descriptor": "0x6AD6588",
+      "locators": [
+        {
+          "rva": "0x5DFE680",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B6B0",
+          "locator": "0x5DFE680",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB64D40",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x130005",
+              "pdata_owner": "0x12FFE0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateSeatDataAck@pa@@",
+      "descriptor": "0x6AD65C8",
+      "locators": [
+        {
+          "rva": "0x5DFE658",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B6F0",
+          "locator": "0x5DFE658",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB64950",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x12FFB5",
+              "pdata_owner": "0x12FF90",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateWallUpDataAck@pa@@",
+      "descriptor": "0x6AD6600",
+      "locators": [
+        {
+          "rva": "0x5DFE6A8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B6D0",
+          "locator": "0x5DFE6A8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB64460",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x12FF65",
+              "pdata_owner": "0x12FF40",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrUpdateDiscoveredLevelGimmickSceneObjectDataAck@pa@@",
+      "descriptor": "0x6AD6640",
+      "locators": [
+        {
+          "rva": "0x5DFE6D0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B730",
+          "locator": "0x5DFE6D0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB63EC0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x12FF15",
+              "pdata_owner": "0x12FEF0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrFogDataAck@pa@@",
+      "descriptor": "0x6AD66C8",
+      "locators": [
+        {
+          "rva": "0x5DFE6F8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x560B770",
+          "locator": "0x5DFE6F8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xB63660",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x12FE75",
+              "pdata_owner": "0x12FE50",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLogoutUserToServerAck@pa@@",
+      "descriptor": "0x6AE16D0",
+      "locators": [
+        {
+          "rva": "0x5E0E060",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5647920",
+          "locator": "0x5E0E060",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xCB2360",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1453F5",
+              "pdata_owner": "0x1453D0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLogoutSessionToServerAck@pa@@",
+      "descriptor": "0x6AE1740",
+      "locators": [
+        {
+          "rva": "0x5E0E088",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5647960",
+          "locator": "0x5E0E088",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xCB2300",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x1453A5",
+              "pdata_owner": "0x145380",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrActorLoadDataAck@pa@@",
+      "descriptor": "0x6AE1778",
+      "locators": [
+        {
+          "rva": "0x5E0E038",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5647900",
+          "locator": "0x5E0E038",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xCB23C0",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0xCB25A0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x145445",
+              "pdata_owner": "0x145420",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrScopeSenderAck@pa@@",
+      "descriptor": "0x6AE17D0",
+      "locators": [
+        {
+          "rva": "0x5E0E218",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5648228",
+          "locator": "0x5E0E218",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xCB45E0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x145525",
+              "pdata_owner": "0x145500",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrCreateCharacterReq@pa@@",
+      "descriptor": "0x6BE2D08",
+      "locators": [
+        {
+          "rva": "0x5F91178",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B22558",
+          "locator": "0x5F91178",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A1D380",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227925",
+              "pdata_owner": "0x227900",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrConnectCryptogramToServerReq@pa@@",
+      "descriptor": "0x6BE2ED8",
+      "locators": [
+        {
+          "rva": "0x5F91290",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B22638",
+          "locator": "0x5F91290",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A21670",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227BA5",
+              "pdata_owner": "0x227B80",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrReserveShutDownServerReq@pa@@",
+      "descriptor": "0x6BE2F18",
+      "locators": [
+        {
+          "rva": "0x5F913A8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B22658",
+          "locator": "0x5F913A8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A21400",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227B55",
+              "pdata_owner": "0x227B30",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSaveAutoReq@pa@@",
+      "descriptor": "0x6BE2F50",
+      "locators": [
+        {
+          "rva": "0x5F91308",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B225D8",
+          "locator": "0x5F91308",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A21E60",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227C45",
+              "pdata_owner": "0x227C20",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSaveToFileCurrentPlayerReq@pa@@",
+      "descriptor": "0x6BE2F80",
+      "locators": [
+        {
+          "rva": "0x5F91268",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B22618",
+          "locator": "0x5F91268",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A21B80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227BF5",
+              "pdata_owner": "0x227BD0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrNewGameStartReq@pa@@",
+      "descriptor": "0x6BE2FC0",
+      "locators": [
+        {
+          "rva": "0x5F91330",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B224D8",
+          "locator": "0x5F91330",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A1DFB0",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227A65",
+              "pdata_owner": "0x227A40",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLoginUserToFieldServerReq@pa@@",
+      "descriptor": "0x6BE3028",
+      "locators": [
+        {
+          "rva": "0x5F913D0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B22678",
+          "locator": "0x5F913D0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A21060",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227B05",
+              "pdata_owner": "0x227AE0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLogoutUserToServerTranReq@pa@@",
+      "descriptor": "0x6BE3A10",
+      "locators": [
+        {
+          "rva": "0x5F91C40",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B22578",
+          "locator": "0x5F91C40",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2A22640",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x227D35",
+              "pdata_owner": "0x227D10",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@",
+      "descriptor": "0x6BE7100",
+      "locators": [
+        {
+          "rva": "0x5F93A40",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B243F8",
+          "locator": "0x5F93A40",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x298BA10",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x222795",
+              "pdata_owner": "0x222770",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrSetFieldTimeReq@pa@@",
+      "descriptor": "0x6BE7278",
+      "locators": [
+        {
+          "rva": "0x5F94530",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B24758",
+          "locator": "0x5F94530",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x29BFD70",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x223325",
+              "pdata_owner": "0x223300",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrLogoutSessionToServerReq@pa@@",
+      "descriptor": "0x6BEF1B0",
+      "locators": [
+        {
+          "rva": "0x5FA1800",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B352A0",
+          "locator": "0x5FA1800",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xB541A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xB54130",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2C482E0",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x232C55",
+              "pdata_owner": "0x232C30",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

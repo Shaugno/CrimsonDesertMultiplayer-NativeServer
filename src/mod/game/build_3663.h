@@ -109,6 +109,7 @@ inline constexpr uint8_t kQueuePushHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48,
 inline constexpr uint8_t kAllocGlobalHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9, 0x48, 0x8B, 0xDA}; // 2976 signature: src/mod/session2/offsets_s2.h:72; R2 B030
 inline constexpr uint8_t kAllocThreadBytes[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xFA, 0x44, 0x8B, 0x05, 0xEE, 0xDE, 0x5D, 0x02, 0x48, 0x8B, 0xF1, 0x4A, 0x8B, 0x1C, 0xC0, 0xB8, 0x98, 0x00, 0x00, 0x00, 0x80, 0x3C, 0x18, 0x00, 0x75, 0x05, 0xE8, 0xDB, 0x59, 0x0A, 0x00, 0xB9, 0x90, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xD6, 0x48, 0x8B, 0x0C, 0x19, 0x48, 0x8B, 0x5C, 0x24, 0x30, 0x48, 0x8B, 0x74, 0x24, 0x38, 0x48, 0x83, 0xC4, 0x20, 0x5F, 0xE9, 0x3C, 0xFC, 0xFF, 0xFF}; // 2976 signature: src/mod/session2/offsets_s2.h:76; R2 B032
 inline constexpr uint8_t kSyncSessionSendHead[] = {0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xDA}; // 2976 signature: src/mod/session2/offsets_s2.h:141; R2 B064
+inline constexpr uint32_t kOpConnectCryptogramToServerReq = 2401; // 2976 2319; R2 B071
 } // namespace tunnel_layout
 namespace field_layout {
 inline constexpr uint32_t kRefs = 0x10; // 2976 0x10; R2 C018
@@ -143,7 +144,74 @@ inline constexpr uint32_t kHostTransformSyncComponent = 0x1A0; // 2976 0x1A0; R2
 inline constexpr uint32_t kFieldUserEntrySize = 16; // 2976 16; R2 C149
 inline constexpr uint32_t kFieldUserEntryUser = 0; // 2976 0; R2 C149
 inline constexpr uint32_t kFieldUserEntryActors = 8; // 2976 8; R2 C149
+inline constexpr uint32_t kOpNak = 1013; // 2976 1013; R2 C128
+inline constexpr uint32_t kUserMainCharacter = 0xD0; // 2976 0xD0; R2 C049
+inline constexpr uint32_t kSam_ActorCount = 0x9C; // 2976 0x9C; R2 C003
+inline constexpr uint32_t kOpLoginUser = 2554; // 2976 2490; R2 C089
+inline constexpr uint32_t kOpLoginUserToFieldServerReq = 2554; // 2976 2490; R2 C124
+// kOpLoginUserToFieldServerReq: same native contract; 2976 2490; R2 C134
+inline constexpr uint32_t kOpLoginCharacter = 3081; // 2976 3093; R2 C090
+inline constexpr uint32_t kOpLoginCharacterToFieldServerReq = 3081; // 2976 3093; R2 C123
+// kOpLoginCharacterToFieldServerReq: same native contract; 2976 3093; R2 C133
+inline constexpr uint32_t kOpMainPlayerDataStartAck = 2844; // 2976 2756; R2 C125
+inline constexpr uint32_t kOpMainUserDataStartAck = 2420; // 2976 2646; R2 C126
+inline constexpr uint32_t kOpMoveFieldAck = 2364; // 2976 2174; R2 C127
+inline constexpr uint32_t kOpScopeSenderAck = 2046; // 2976 2042; R2 C129
+inline constexpr uint32_t kOpActorAppear = 2005; // 2976 2005; R2 C130
+inline constexpr uint32_t kOpDataAck = 2896; // 2976 2869; R2 C131
+inline constexpr uint32_t kOpSetFieldTimeReq = 2150; // 2976 2125; R2 C135
 } // namespace field_layout
+namespace lifecycle_layout {
+inline constexpr uint32_t kServerActorLookup_SaveManager = 0x48; // 2976 0x48; R2 D003
+inline constexpr uint32_t kSaveMgr_Lock = 0x00; // 2976 0x00; R2 D004
+inline constexpr uint32_t kSaveMgr_Slots = 0x40; // 2976 0x40; R2 D006
+inline constexpr uint32_t kSaveMgr_Count = 0x48; // 2976 0x48; R2 D007
+inline constexpr uint32_t kSaveMgr_Storage = 0x50; // 2976 0x50; R2 D009
+inline constexpr uint32_t kSaveMgr_Busy = 0x60; // 2976 0x60; R2 D010
+inline constexpr uint32_t kSaveMgr_EntrySize = 0x78; // 2976 0x68; R2 D011
+inline constexpr uint32_t kSaveStorage_FolderCount = 0x40; // 2976 0x40; R2 D012
+inline constexpr uint32_t kNativeSlotBaseMax = 3; // 2976 3 (paired schema); R2 D121
+inline constexpr uint32_t kNativeSlotManualBegin = 100; // 2976 100 (paired schema); R2 D121
+inline constexpr uint32_t kNativeSlotManualCount = 9; // 2976 9 (paired schema); R2 D121
+inline constexpr uint32_t kNativeSlotSpecialBegin = 200; // 2976 200 (paired schema); R2 D121
+inline constexpr uint32_t kNativeSlotSpecialCount = 8; // 2976 8 (paired schema); R2 D121
+inline constexpr uint32_t kActorDescriptor = 0x88; // 2976 0x88; R2 D081
+inline constexpr uint32_t kActorUser = 0xA0; // 2976 0xA0; R2 D082
+inline constexpr uint32_t kActorKey = 0x60; // 2976 0x60; R2 D083
+inline constexpr uint32_t kUserMainCharacter = 0xD0; // 2976 0xD0; R2 D035
+// kActorKey: same native contract; 2976 0x60; R2 D034
+inline constexpr uint32_t kSamMapBuckets = 0x98; // 2976 0x98; R2 D025
+inline constexpr uint32_t kSamMapSize = 0x9C; // 2976 0x9C; R2 D026
+inline constexpr uint32_t kSamMapBucketBase = 0xA8; // 2976 0xA8; R2 D027
+inline constexpr uint32_t kSamMapHolders = 0xB0; // 2976 0xB0; R2 D028
+inline constexpr uint32_t kOpLoginCharacterReq = 3081; // 2976 3093; R2 D112
+inline constexpr uint32_t kOpReserveShutDownServerReq = 2447; // 2976 2790; R2 D024
+inline constexpr uint32_t kOpSaveAutoReq = 2234; // 2976 3037; R2 D107
+inline constexpr uint32_t kOpSaveToFileCurrentPlayerReq = 3158; // 2976 2910; R2 D108
+inline constexpr uint32_t kOpSaveToFileCurrentPlayerAck = 2813; // 2976 3016; R2 D109
+inline constexpr uint32_t kOpCreateCharacterReq = 2533; // 2976 2711; R2 D110
+inline constexpr uint32_t kOpNewGameStartReq = 2688; // 2976 2178; R2 D111
+inline constexpr uint32_t kOpLogoutSessionReq = 2001; // 2976 2001; R2 D113
+// kOpLogoutSessionReq: same native contract; 2976 2001; R2 D116
+inline constexpr uint32_t kOpLogoutSessionAck = 2002; // 2976 2002; R2 D117
+inline constexpr uint32_t kOpLogoutUserAck = 2003; // 2976 2003; R2 D118
+inline constexpr uint32_t kSaveCurrentAckSize = 14; // 2976 14 (paired schema); R2 D123
+inline constexpr uint32_t kSaveCurrentAckKey = 0; // 2976 0 (paired schema); R2 D123
+inline constexpr uint32_t kSaveCurrentAckSlot = 4; // 2976 4 (paired schema); R2 D123
+inline constexpr uint32_t kSaveCurrentAckOk = 8; // 2976 8 (paired schema); R2 D123
+inline constexpr uint32_t kSaveCurrentAckFlag = 9; // 2976 9 (paired schema); R2 D123
+inline constexpr uint32_t kSaveCurrentAckResult = 10; // 2976 10 (paired schema); R2 D123
+inline constexpr uint32_t kSaveRequestSlot = 0; // 2976 0 (paired schema); R2 D124
+inline constexpr uint32_t kSaveRequestNameLength = 4; // 2976 4 (paired schema); R2 D124
+inline constexpr uint32_t kSaveRequestName = 8; // 2976 8 (paired schema); R2 D124
+inline constexpr uint32_t kSaveRequestFixedSize = 10; // 2976 10 (paired schema); R2 D124
+inline constexpr uint32_t kSaveRequestMaxName = 30; // 2976 30 (paired schema); R2 D124
+inline constexpr uint32_t kLoginCharacterFlag = 0; // 2976 0 (paired schema); R2 D125
+inline constexpr uint32_t kLoginCharacterNumber = 1; // 2976 1 (paired schema); R2 D125
+inline constexpr uint32_t kLoginCharacterSlot = 9; // 2976 9 (paired schema); R2 D125
+inline constexpr uint32_t kInternalHeaderSize = 3; // 2976 3; R2 D119
+inline constexpr uint32_t kLogoutAckSize = 7; // 2976 7; R2 D120
+} // namespace lifecycle_layout
 // R2 reviewed layouts END
 
 }  // namespace cdmp::game::build_3663

@@ -53,6 +53,20 @@ must prove ownership for the entire list, insert once under both locks, call
 the three-argument original and undo only its own still-unused insertion on
 failure. It must preserve the 2976 four-argument implementation.
 
+The new roster is concrete: target EnterField walks the mover vector at +68,
+u32 count +70, with a 0x3C-byte stride. Each record contains a kind at +0 and
+an actor key at +4. It resolves existing actors through 2D78E40, or invokes
+factory 2EA4860, then admits each resolved actor and assigns that actor's own
+mover. The factory obtains its primary actor from component+8 and passes it
+as the owner argument to 2E98B30. This does not yet prove all existing roster
+actors belong to the travelling user, or every factory branch's owner and
+rollback. The reference main actor was admitted explicitly before handling
+its companion; the target loop is a substantial behavioral change. A bounded
+single-main-character gate is a possible smaller adapter, but it still needs
+native lookup/lifetime and primary-roster proof before implementation/arming.
+These probe-only roster details have not been promoted into production or
+used to declare Tier C complete.
+
 Remaining Step 3 facts: standard-correlator support for the candidate entries;
 complete list ownership/rollback conditions and result ABI for the new adapter;
 verified target entry signatures and all host/guest identity prerequisites.

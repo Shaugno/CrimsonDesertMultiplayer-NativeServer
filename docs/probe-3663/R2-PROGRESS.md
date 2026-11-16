@@ -1,5 +1,47 @@
 # R2 work in progress — 2026-11-16
 
+Latest continuation:
+
+- Pushed 5df9866 (native evidence/passive preparation) and 06e8b72 (isolated
+  Tier A route). Full routing build: 101/101, 88.70 s; synthetic smoke 78
+  states, zero rejected, clean unload. Actual A/B/C/D remain false.
+- Reviewed catalog now includes wire and lifecycle facts in addition to the
+  earlier layouts/entry guards. R2-WIRE.md records 19 named ID mappings and
+  separately proved save/login/logout payloads. R2-LIFECYCLE.md records the
+  native save-entry stride change 68→78. Native actor-map member roles are
+  verified independently of their still-unmatched entry RVAs. Reproduce the
+  current exact contract count with r2_reviewed.py; do not use older counts.
+- Corrected native full-image analysis completed: source 211152 functions /
+  18688006 instructions (734 s), target 214216 / 19517708 (771 s). Official
+  unmodified BinExport is still building the full graphs. The correlators
+  themselves have NOT completed yet. A local controller waits for both
+  completed exports and database closure, then runs standard VT and BinDiff
+  in parallel with fresh file-identity checks.
+- Projects: build/r2/projects/R2NativeCleanSource and R2NativeCleanTarget;
+  raw output analysis-tools/r2-native. Active export Java PIDs at this
+  checkpoint: 53872 source / 12868 target. Controller exec session 35252.
+  The redundant direct jobs were stopped incomplete after the native analyses
+  completed; no default/graph/direct result is counted as completed evidence.
+- One native-profile preflight misspelled the analyzer "Address Tables";
+  the actual key is "Create Address Tables". Its two jobs were stopped and
+  logs preserved as failed-option-old/new.log. Options now use HeadlessScript
+  ABORT until success, so a script exception cannot silently continue analysis.
+  Existing-database preflight verified all four table/FID settings and RTTI on
+  before the corrected full imports. Driver rejects REPORT SCRIPT ERROR.
+- New target EnterField roster semantics are documented in R2-FIELD-SHARING.md.
+  Ownership of all existing roster members/factory branches remains a real
+  adapter prerequisite. An unrelated auxiliary offline query was excluded
+  from proofs; its raw output is private under build/r2, and the canonical
+  roster export was regenerated with only the two actually reached callees.
+- P1 is still only prepared, not deployed/run. No user presence question has
+  been sent. Matching/export jobs must close before the live sitting. The
+  Downloads R2 plan and repository copy still have identical SHA-256
+  A020CF4B70EEBFAABE6A3CA7C048F9AA598D094B0A9DD988249A23E1BAF2AF66.
+- Step 7 packaging script is prepared but not run: it requires the final
+  committed status and real matcher outputs. This continuation is not Step 7.
+
+## Prior checkpoint before these continuations
+
 Current checkpoint (supersedes the historical section below):
 
 - Branch gpt/3663-port; Step 1 and Step 6 pushed. Step 2 remains in progress;

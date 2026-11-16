@@ -29,8 +29,9 @@ $project = if ($Image -eq 'old') { 'R2Match/old' } else { 'R2Target/new' }
 $sourceProject = 'R2Match'
 $options = @()
 if ($Profile -ne 'default') {
-    if ($Mode -ne 'vt') { $env:GHIDRA_HEADLESS_MAXMEM = '16G' }
-    $prefix = switch ($Profile) { 'native' { 'R2Native' }; 'direct' { 'R2Direct' }; 'graph' { 'R2Graph' }; default { 'R2Correlation' } }
+    if ($Mode -eq 'analyze') { $env:GHIDRA_HEADLESS_MAXMEM = '16G' }
+    if ($Mode -eq 'export') { $env:GHIDRA_HEADLESS_MAXMEM = '32G' }
+    $prefix = switch ($Profile) { 'native' { 'R2NativeClean' }; 'direct' { 'R2Direct' }; 'graph' { 'R2Graph' }; default { 'R2Correlation' } }
     $sourceProject = "${prefix}Source"
     $project = if ($Image -eq 'old') { "${prefix}Source/old" } else { "${prefix}Target/new" }
     $options = @('-preScript', 'R2CorrelationOptions.java', (Join-Path $output "options-$Image.txt"), $Profile)
@@ -46,6 +47,7 @@ if ($Mode -eq 'analyze') {
 $result = $LASTEXITCODE
 Get-Content -LiteralPath $log -Tail 18
 if ($result) { throw "Headless analysis exit $result" }
+if (Select-String -LiteralPath $log -SimpleMatch 'REPORT SCRIPT ERROR' -Quiet) { throw 'Ghidra script failed; outputs cannot be used as completion evidence' }
 if ($Mode -eq 'analyze') {
     if (-not (Test-Path -LiteralPath $summary)) { throw 'Missing analysis completion summary; inspect log' }
     Get-Content -LiteralPath $summary

@@ -69,8 +69,38 @@ prove('B','src/mod/session2/guest.cpp',dict(kNoEpoch='0x7FFFFFFFFFFFFFFF'),
 prove('B','src/common/troc_frame.h',dict(kHeaderSize='5'),
     'port-evidence/r2/field-login-target.txt; ../ghidra-3663-core-handlers.txt',
     'Named target LoginCharacter decoder reads u16 payload length at packet+3, requires packet_size-5 equal to it and initializes its decode cursor at packet+5. Native dispatcher reads opcode u16 at packet+0 and handles the slot at +2; internal system messages have separate framing and are not covered by this row.')
+prove('C','src/mod/session2/server.cpp',dict(kOpNak='1013'),
+    'port-evidence/r2/request-handlers-target.txt',
+    'Named target LogoutSessionToServerReq handler 2F55680, body ED59430, constructs a u16 opcode 3F5 and passes 3F5 to the native failure-message writer with its 11-hex-byte packet. This confirms the Nak identifier only; it does not adopt an unreviewed payload schema.')
+prove('D','src/mod/session2/offsets_s2.h',dict(kServerActorLookup_SaveManager='0x48',kSaveMgr_Lock='0x00',kSaveMgr_Slots='0x40',kSaveMgr_Count='0x48',kSaveMgr_Storage='0x50',kSaveMgr_Busy='0x60',kSaveMgr_EntrySize='0x78',kSaveStorage_FolderCount='0x40'),
+    'port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; ../ghidra-3663-core-handlers.txt; ../ghidra-3663-refresh.txt',
+    'Named target refresh handler 2D133B0 reads lookup+48, locks [manager+0], tests/sets manager+60 and calls retained refresh 1A18320. Native LoadSlot uses the same lock/busy/storage fields. Refresh rebuilds vector manager+40 from storage+38/count+40; clear BB1A850 walks count at vector+8 with IMUL 78, and sort BB1DBE0 independently copies/swaps 78-byte entries. ENTRY STRIDE CHANGED 68 -> 78; capacity and lock-object self-offset are not inferred.')
+prove('D','src/mod/session2/guest_save_logic.h',dict(NativeSlotNumberDomain='0..3;100..108;200..207'),
+    'port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; ../ghidra-3663-refresh.txt',
+    'Paired native LoadSlot 186F570/1A16C40 explicitly accepts u32 slot <3, ==3, slot-100<9 or slot-200<8. Native target refresh independently tests that same domain before its special disk exclusions. This does not establish which slots are memory-only.')
+domain_row,=[r['r2'] for r in core if r['symbol']=='NativeSlotNumberDomain']
+result[domain_row]['members']=dict(kNativeSlotBaseMax=3,kNativeSlotManualBegin=100,
+    kNativeSlotManualCount=9,kNativeSlotSpecialBegin=200,kNativeSlotSpecialCount=8)
+prove('D','src/mod/session2/guest_save_host.cpp',dict(kActorDescriptor='0x88',kActorUser='0xA0',kActorKey='0x60'),
+    'port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt',
+    'Paired native load reads actor+88 descriptor byte+1. Target save/auto-save wrappers traverse actor+A0 to its owning user, compare [user+D0] with that actor and publish actor key+60 in the native request context, matching the legacy save/identity field roles.')
+prove('C','src/mod/session2/field_share.cpp',dict(kUserMainCharacter='0xD0'),
+    'port-evidence/r2/save-manager-target.txt; request-handlers-target.txt',
+    'Native SaveToFile and SaveAuto wrappers require [actor owning user at +A0]+D0 equal the requesting actor; this is the same user main-character ownership gate used by sharing.')
+prove('D','src/mod/session2/guest_lifecycle.h',dict(kUserMainCharacter='0xD0',kActorKey='0x60'),
+    'port-evidence/r2/save-manager-target.txt; request-handlers-target.txt',
+    'Native save wrappers verify owning user+D0 is this server character and publish its key at actor+60. These prove the fields only, not disconnect/removal barrier behavior.')
+prove('D','src/mod/session2/guest_lifecycle.h',dict(kSamMapBuckets='0x98',kSamMapSize='0x9C',kSamMapBucketBase='0xA8',kSamMapHolders='0xB0'),
+    'port-evidence/r2/actor-map-reference.txt; field-roster-ownership-target.txt',
+    'Both reference lookup candidates 2A82370/2A827B0 and target native actor lookup 2D78E40 check map size+9C and bucket count+98, select key-low20 modulo bucket count, use 100-byte buckets from +A8 and holder array +B0, validate holder key+4 and obtain actor pointer+8 under the manager lock. This proves map fields, not an RVA match or the user-list/removal lifecycle.')
+prove('C','src/mod/session2/offsets_s2.h',dict(kSam_ActorCount='0x9C'),
+    'port-evidence/r2/actor-map-reference.txt; field-roster-ownership-target.txt',
+    'The native server actor lookup checks manager map size at +9C before resolving an actor by key. Reference and target use the same counted map role; the root RVA is still separate.')
 signatures=docs/'r2-signatures.json'
 if signatures.exists():
     result.update(json.loads(signatures.read_text())['rows'])
+wire=docs/'r2-wire-reviewed.json'
+if wire.exists():
+    result.update(json.loads(wire.read_text())['rows'])
 (docs/'r2-reviewed.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Manually reviewed native contracts',len(result),'(layouts and entry guards; no new function/global RVA adoption)')
