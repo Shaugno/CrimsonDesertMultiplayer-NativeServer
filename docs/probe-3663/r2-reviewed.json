@@ -758,6 +758,150 @@
     "old": "0x9C",
     "symbol": "kSam_ActorCount"
   },
+  "C052": {
+    "target": "0x7FFFFFFFFFFFFFFF",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x7FFFFFFFFFFFFFFF",
+    "symbol": "kNative"
+  },
+  "C053": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x08",
+    "symbol": "kLobbyOwner"
+  },
+  "C054": {
+    "target": "0x18",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x18",
+    "symbol": "kLobbyList"
+  },
+  "C055": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x08",
+    "symbol": "kListCount"
+  },
+  "C056": {
+    "target": "0xD0",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0xD0",
+    "symbol": "kEntryStride"
+  },
+  "C057": {
+    "target": "0x00",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x00",
+    "symbol": "kEntryNumber"
+  },
+  "C058": {
+    "target": "0x68",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x68",
+    "symbol": "kUserComponents"
+  },
+  "C059": {
+    "target": "0x10",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x10",
+    "symbol": "kTableLobby"
+  },
+  "C060": {
+    "target": "0x20",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x20",
+    "symbol": "kTableStatus"
+  },
+  "C061": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x08",
+    "symbol": "kStatusActor"
+  },
+  "C062": {
+    "target": "0x90",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x70",
+    "symbol": "kStatusNumber"
+  },
+  "C065": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "old": "0x08",
+    "symbol": "kLockObject"
+  },
+  "C091": {
+    "target": "0x68",
+    "method": "paired native code consumption",
+    "second_check": "Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt",
+    "old": "0x68",
+    "symbol": "kActorComponents"
+  },
+  "C092": {
+    "target": "0x20",
+    "method": "paired native code consumption",
+    "second_check": "Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt",
+    "old": "0x20",
+    "symbol": "kTableStatus"
+  },
+  "C093": {
+    "target": "0x90",
+    "method": "paired native code consumption",
+    "second_check": "Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt",
+    "old": "0x70",
+    "symbol": "kStatusCharacterNo"
+  },
+  "C094": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt",
+    "old": "0x08",
+    "symbol": "kComponentOwner"
+  },
+  "C095": {
+    "target": "0xA0",
+    "method": "paired native code consumption",
+    "second_check": "Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt",
+    "old": "0xA0",
+    "symbol": "kActorUser"
+  },
+  "C096": {
+    "target": "0x60",
+    "method": "paired native code consumption",
+    "second_check": "Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt",
+    "old": "0x60",
+    "symbol": "kKey"
+  },
   "B022": {
     "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}",
     "method": "native entry bytes at retained R1 function",

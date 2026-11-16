@@ -191,5 +191,84 @@
       25621872,
       27356224
     ]
+  },
+  "C067": {
+    "target": "0x2e879a0",
+    "old": "0x2b7f4d0",
+    "symbol": "kLobbyLoad",
+    "second_check": "Paired ServerLobbyActorComponent native loads obtain the owner lock and INT64_MAX number, call paired lobby-entry writers with the same argument roles and propagate results. Exact RTTI vtable slot +50 independently identifies both entries; RTTI labels alone are not a second native-body check.",
+    "evidence": "port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "anchor": null
+  },
+  "C079": {
+    "target": "0x2c160b0",
+    "old": "0x293fe70",
+    "symbol": "kStatusLoad",
+    "second_check": "Paired ServerStatusActorComponent loads call the common status loader, propagate its result and write INT64_MAX through the character-number pointer, changed +70 -> +90; target LoginCharacter lookup consumes +90 independently. Exact named RTTI slot +50 supplies entry identity.",
+    "evidence": "port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt",
+    "anchor": null
+  },
+  "C102": {
+    "target": "0x2c160b0",
+    "old": "0x293fe70",
+    "symbol": "kStatusLoad",
+    "second_check": "Paired ServerStatusActorComponent loads call the common status loader, propagate its result and write INT64_MAX through the character-number pointer, changed +70 -> +90; target LoginCharacter lookup consumes +90 independently. Exact named RTTI slot +50 supplies entry identity.",
+    "evidence": "port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt",
+    "anchor": null
+  },
+  "C069": {
+    "target": "0x5f6f2e8",
+    "old": "0x5b2be58",
+    "symbol": "kLobbyVtable",
+    "second_check": "Exact MSVC RTTI class/COL identifies this component vtable; slot +50 points to the independently reviewed native loader with matching role and changed fields. Standard loader agreement can anchor the paired slot relationship; RTTI naming alone does not satisfy adoption.",
+    "evidence": "port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt",
+    "anchor": [
+      45610192,
+      48789920
+    ]
+  },
+  "C078": {
+    "target": "0x5f63430",
+    "old": "0x5b203f0",
+    "symbol": "kStatusVtable",
+    "second_check": "Exact MSVC RTTI class/COL identifies this component vtable; slot +50 points to the independently reviewed native loader with matching role and changed fields. Standard loader agreement can anchor the paired slot relationship; RTTI naming alone does not satisfy adoption.",
+    "evidence": "port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt",
+    "anchor": [
+      43253360,
+      46227632
+    ]
+  },
+  "C101": {
+    "target": "0x5f63430",
+    "old": "0x5b203f0",
+    "symbol": "kStatusVtable",
+    "second_check": "Exact MSVC RTTI class/COL identifies this component vtable; slot +50 points to the independently reviewed native loader with matching role and changed fields. Standard loader agreement can anchor the paired slot relationship; RTTI naming alone does not satisfy adoption.",
+    "evidence": "port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt",
+    "anchor": [
+      43253360,
+      46227632
+    ]
+  },
+  "C070": {
+    "target": "0x2e87db0",
+    "old": "0x2b7f66c",
+    "symbol": "kLobbyConstant",
+    "second_check": "Native lobby loader instruction MOV RAX,7FFFFFFFFFFFFFFF followed by a stack store; its address-taken qword becomes the paired entry writer character-number argument. Target stack slot changes to RBP-40; no old instruction patch bytes are reused.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt",
+    "anchor": [
+      45610192,
+      48789920
+    ]
+  },
+  "C072": {
+    "target": "0x2e87e10",
+    "old": "0x2b7f6db",
+    "symbol": "kLobbyAddCall",
+    "second_check": "Native E8 call from the lobby loader to paired entry writer 2143E70/237EA60, with component, result, address-of-number, slot/name data and extra native arguments. This callsite proof does not establish a safe detour ABI.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+    "anchor": [
+      45610192,
+      48789920
+    ]
   }
 }

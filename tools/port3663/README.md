@@ -53,8 +53,9 @@ Core-descriptor pass:
 Ghidra imports use separate projects so the identically named input files do
 not collide. Each import uses `-noanalysis`, then targeted function creation,
 flow-body fixup and 30-second bounded decompilation per requested entry.
-This is paired targeted analysis; no complete Version Tracking/BSim analysis
-has been performed. A five-byte thunk can lead to a Denuvo region; trace the
+This R1 workflow is paired targeted analysis; it is not complete Version
+Tracking/BSim evidence. R2 uses separate whole-image projects described below.
+A five-byte thunk can lead to a Denuvo region; trace the
 destination explicitly when a claim depends on its body.
 
 ```powershell
@@ -72,3 +73,25 @@ For an existing project replace `-import <path>` with
 not raw executable dumps. Projects, downloaded tools and game binaries are
 never committed. All adopted values still require the complete minimal path
 and game-free validation before any live test is eligible.
+
+## R2 whole-image pipeline
+
+Read `docs/probe-3663/R2-EXPORTER.md` before reproducing. Required tools are
+Ghidra 12.1.4, JDK 21, Gradle 8.14.3 and BinDiff 8; Google BinExport source
+revision is pinned in `r2_build_exporter.ps1`. Build its separate corrected
+jar and compare it with the installed original on the owned CMake fixture
+using `r2_export_fixture.ps1`. The original extension remains installed.
+
+Run `r2_pipeline.ps1 -AnalysisRoot <tools-root>` with the game closed. It
+hash-checks both images, imports each whole image independently with RTTI
+seeds and recorded native options, saves analysis, exports the entire graph,
+then runs stock Auto Version Tracking and BinDiff. Output goes to
+`<tools-root>/r2-nativefix`; project databases remain local in build/r2/projects.
+Interrupted default/graph/direct/native jobs are not completion evidence.
+
+Only after both standard outputs finish, run `r2_matches.py --vt <tsv>
+--bindiff <database> --reviewed docs/probe-3663/r2-reviewed.json`. Native
+consumption proofs and independent RVA checks are generated separately by
+`r2_reviewed.py` and `r2_rva_checks.py`. `r2_match_tests.py` covers contradictory
+matches and insufficient evidence; its synthetic outputs never enter docs.
+Do not treat a prepared script or a small fixture as a real matcher result.

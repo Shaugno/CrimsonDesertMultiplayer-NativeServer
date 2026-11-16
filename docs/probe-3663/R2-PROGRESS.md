@@ -2,6 +2,26 @@
 
 Latest continuation:
 
+- Native identity review adds 18 contracts: catalog now 149 plus 17 retained
+  R1 values; 28 RVA candidates have independent checks but still require
+  standard support. Status character-number pointer changes 70→90. Incremental
+  ASI/guard build passed; guard identity/tier matrices passed. See R2-IDENTITY.
+- Original native exports were retired incomplete after repeated stacks in
+  promoteUndefinedFunctions. R2-EXPORTER records the one-line defined-function
+  skip, original revision, isolated jar, fixture failures/fixes and complete
+  graph equivalence (759 instructions, 68 flow graphs, undefined function
+  restored). This is transparently a patched exporter; matchers are stock.
+- Current pipeline uses nativefix, projects R2NativeSavedSource/Target and raw
+  analysis-tools/r2-nativefix. Analyses save before exports in separate
+  processes. Then both standard matchers run. Controller exec session 60079;
+  no actual matcher completion or new RVA adoption is claimed yet. Earlier
+  PIDs and the unmodified-export controller below are historical, stopped.
+- All tiers remain disabled; no live presence request/deployment/game access
+  has occurred. P1 remains prepared, not run. This remains a Step 2 checkpoint,
+  not the final Step 7 package; independent native save review continues.
+
+Earlier continuation:
+
 - Pushed 5df9866 (native evidence/passive preparation) and 06e8b72 (isolated
   Tier A route). Full routing build: 101/101, 88.70 s; synthetic smoke 78
   states, zero rejected, clean unload. Actual A/B/C/D remain false.

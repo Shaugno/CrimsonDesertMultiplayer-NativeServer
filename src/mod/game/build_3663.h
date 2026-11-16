@@ -147,6 +147,24 @@ inline constexpr uint32_t kFieldUserEntryActors = 8; // 2976 8; R2 C149
 inline constexpr uint32_t kOpNak = 1013; // 2976 1013; R2 C128
 inline constexpr uint32_t kUserMainCharacter = 0xD0; // 2976 0xD0; R2 C049
 inline constexpr uint32_t kSam_ActorCount = 0x9C; // 2976 0x9C; R2 C003
+inline constexpr uint64_t kNative = 0x7FFFFFFFFFFFFFFF; // 2976 0x7FFFFFFFFFFFFFFF; R2 C052
+inline constexpr uint32_t kLobbyOwner = 0x08; // 2976 0x08; R2 C053
+inline constexpr uint32_t kLobbyList = 0x18; // 2976 0x18; R2 C054
+inline constexpr uint32_t kListCount = 0x08; // 2976 0x08; R2 C055
+inline constexpr uint32_t kEntryStride = 0xD0; // 2976 0xD0; R2 C056
+inline constexpr uint32_t kEntryNumber = 0x00; // 2976 0x00; R2 C057
+inline constexpr uint32_t kUserComponents = 0x68; // 2976 0x68; R2 C058
+inline constexpr uint32_t kTableLobby = 0x10; // 2976 0x10; R2 C059
+inline constexpr uint32_t kTableStatus = 0x20; // 2976 0x20; R2 C060
+inline constexpr uint32_t kStatusActor = 0x08; // 2976 0x08; R2 C061
+inline constexpr uint32_t kStatusNumber = 0x90; // 2976 0x70; R2 C062
+inline constexpr uint32_t kLockObject = 0x08; // 2976 0x08; R2 C065
+inline constexpr uint32_t kActorComponents = 0x68; // 2976 0x68; R2 C091
+// kTableStatus: same native contract; 2976 0x20; R2 C092
+inline constexpr uint32_t kStatusCharacterNo = 0x90; // 2976 0x70; R2 C093
+inline constexpr uint32_t kComponentOwner = 0x08; // 2976 0x08; R2 C094
+// kActorUser: same native contract; 2976 0xA0; R2 C095
+inline constexpr uint32_t kKey_C096 = 0x60; // 2976 0x60; R2 C096
 inline constexpr uint32_t kOpLoginUser = 2554; // 2976 2490; R2 C089
 inline constexpr uint32_t kOpLoginUserToFieldServerReq = 2554; // 2976 2490; R2 C124
 // kOpLoginUserToFieldServerReq: same native contract; 2976 2490; R2 C134

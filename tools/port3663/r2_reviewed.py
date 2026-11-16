@@ -96,6 +96,18 @@ prove('D','src/mod/session2/guest_lifecycle.h',dict(kSamMapBuckets='0x98',kSamMa
 prove('C','src/mod/session2/offsets_s2.h',dict(kSam_ActorCount='0x9C'),
     'port-evidence/r2/actor-map-reference.txt; field-roster-ownership-target.txt',
     'The native server actor lookup checks manager map size at +9C before resolving an actor by key. Reference and target use the same counted map role; the root RVA is still separate.')
+prove('C','src/mod/session2/identity_fix.h',dict(
+    kNative='0x7FFFFFFFFFFFFFFF',kLobbyOwner='0x08',kLobbyList='0x18',
+    kListCount='0x08',kEntryStride='0xD0',kEntryNumber='0x00',
+    kUserComponents='0x68',kTableLobby='0x10',kTableStatus='0x20',
+    kStatusActor='0x08',kStatusNumber='0x90',kLockObject='0x08'),
+    'port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt',
+    'Paired native lobby loads 2B7F4D0/2E879A0 lock [component+8]+8 and pass INT64_MAX as the character number to entry writers 2143E70/237EA60. Both writers search entries by first qword, use component+18 list/count+8 and D0 stride; target writes the passed number into the first entry qword. Named LoginCharacter implementations follow actor+68, lobby+10 or status+20. Status loads 293FE70/2C160B0 reset the character number through a pointer CHANGED +70 -> +90, and the target login lookup independently compares through +90. Status owner is component+8. No hook ABI or native address is adopted by this field proof.')
+prove('C','src/mod/session2/identity_probe.h',dict(kActorComponents='0x68',
+    kTableStatus='0x20',kStatusCharacterNo='0x90',kComponentOwner='0x08',
+    kActorUser='0xA0',kKey='0x60'),
+    'port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt',
+    'Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.')
 signatures=docs/'r2-signatures.json'
 if signatures.exists():
     result.update(json.loads(signatures.read_text())['rows'])

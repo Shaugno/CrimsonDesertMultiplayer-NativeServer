@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.24)
+project(r2_export_fixture LANGUAGES CXX)
+add_executable(r2_export_fixture fixture.cpp)
+target_compile_options(r2_export_fixture PRIVATE /O2 /GL-)
+target_link_options(r2_export_fixture PRIVATE /INCREMENTAL:NO /LTCG:OFF)

@@ -1,0 +1,49 @@
+{
+  "upstream": "9648cacb21a71aa6c21b3fca504f146c39164a53",
+  "patch": "Skip all already-defined functions in promoteUndefinedFunctions",
+  "result": "PASS: complete protobuf content equality after timestamp removal and call-edge multiset ordering; undefined fixture function restored by both",
+  "instructions": 759,
+  "flow_graphs": 68,
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\BinExport-defined-skip.jar",
+      "bytes": 289833,
+      "sha256": "067C04AD9291C8F4355CB616478C2DE025EBBF829D4A61A36F3F45D954AF7ADE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\binexport-source\\java\\src\\main\\java\\com\\google\\security\\binexport\\BinExport2Builder.java",
+      "bytes": 46334,
+      "sha256": "570F0BDE2E4639A66B5A537F30E07669DA86407D9D596056AF1215D4F36399C8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\export-fixture\\Release\\r2_export_fixture.exe",
+      "bytes": 10240,
+      "sha256": "6E5F5CBAB4A01C31CE11404AF8B87850512AEB8509F0D32AA9E16C63C3FA92AF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\export-fixture\\stock.BinExport",
+      "bytes": 42016,
+      "sha256": "F8A753671F177B299FEB1974BF277D4ECB91578A93D7EC6D927C7B8660D00CDA"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\export-fixture\\fixed.BinExport",
+      "bytes": 42016,
+      "sha256": "616079FE52D1B281BC6278819CEB39332ABC8DAC2866E693A863C020D1636E0C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\export-fixture\\stock.log",
+      "bytes": 18766,
+      "sha256": "0E2091523AEE51C70B439A4F4DE27F718FCA1C5302A7F545A98A4596CB22567F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\export-fixture\\fixed.log",
+      "bytes": 18910,
+      "sha256": "2DEEED7DF86948D43D2D016434CDC2AED02923A63BFA141AAA36B21416C789ED"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\export-fixture\\compare.log",
+      "bytes": 6050,
+      "sha256": "3371CE4960AABE17CD7E5E3B87691DAEDF1DFF8AD20BF382FC727475E8058611"
+    }
+  ]
+}

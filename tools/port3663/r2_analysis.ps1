@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][ValidateSet('old','new')][string]$Image,
     [Parameter(Mandatory=$true)][string]$AnalysisRoot,
     [ValidateSet('analyze','export','vt')][string]$Mode = 'analyze',
-    [ValidateSet('default','correlation','graph','direct','native')][string]$Profile = 'default'
+    [ValidateSet('default','correlation','graph','direct','native','nativefix')][string]$Profile = 'default'
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
@@ -31,12 +31,26 @@ $options = @()
 if ($Profile -ne 'default') {
     if ($Mode -eq 'analyze') { $env:GHIDRA_HEADLESS_MAXMEM = '16G' }
     if ($Mode -eq 'export') { $env:GHIDRA_HEADLESS_MAXMEM = '32G' }
-    $prefix = switch ($Profile) { 'native' { 'R2NativeClean' }; 'direct' { 'R2Direct' }; 'graph' { 'R2Graph' }; default { 'R2Correlation' } }
+    $prefix = switch ($Profile) { 'nativefix' { 'R2NativeSaved' }; 'native' { 'R2NativeClean' }; 'direct' { 'R2Direct' }; 'graph' { 'R2Graph' }; default { 'R2Correlation' } }
     $sourceProject = "${prefix}Source"
     $project = if ($Image -eq 'old') { "${prefix}Source/old" } else { "${prefix}Target/new" }
-    $options = @('-preScript', 'R2CorrelationOptions.java', (Join-Path $output "options-$Image.txt"), $Profile)
+    $analysisProfile = if ($Profile -eq 'nativefix') { 'native' } else { $Profile }
+    $options = @('-preScript', 'R2CorrelationOptions.java', (Join-Path $output "options-$Image.txt"), $analysisProfile)
 }
-if ($Mode -eq 'analyze') {
+if ($Profile -eq 'nativefix' -and $Mode -ne 'vt') {
+    $fixedJar = Join-Path $AnalysisRoot 'BinExport-defined-skip.jar'
+    if (!(Test-Path -LiteralPath $fixedJar)) { throw 'Missing validated fixed exporter jar' }
+    if ($Mode -eq 'analyze') {
+        # Save the complete analysis in its own process before a long export.
+        & $headless $projects $project -import $program -max-cpu 8 -scriptPath $PSScriptRoot -preScript R2SeedRtti.java $labels @options -postScript R2AnalysisSummary.java $summary *> $log
+        if ($LASTEXITCODE -or (Select-String -LiteralPath $log -SimpleMatch 'REPORT SCRIPT ERROR' -Quiet) -or
+            !(Select-String -LiteralPath $log -SimpleMatch 'Save succeeded for:' -Quiet) -or
+            !(Test-Path -LiteralPath $summary)) { throw "Analysis/save failed; inspect $log" }
+    }
+    $env:GHIDRA_HEADLESS_MAXMEM = '32G'
+    $log = Join-Path $output "export-$Image.log"
+    & $headless $projects $project -process CrimsonDesert.exe -noanalysis -scriptPath $PSScriptRoot -postScript R2ExportFixed.java (Join-Path $output "$Image.BinExport") $fixedJar *> $log
+} elseif ($Mode -eq 'analyze') {
     & $headless $projects $project -import $program -max-cpu 8 -scriptPath $PSScriptRoot -preScript R2SeedRtti.java $labels @options -postScript R2AnalysisSummary.java $summary -postScript R2Export.java (Join-Path $output "$Image.BinExport") *> $log
 } elseif ($Mode -eq 'export') {
     & $headless $projects $project -process CrimsonDesert.exe -noanalysis -scriptPath $PSScriptRoot -postScript R2Export.java (Join-Path $output "$Image.BinExport") *> $log

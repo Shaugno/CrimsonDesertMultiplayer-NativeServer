@@ -69,5 +69,23 @@ for symbol,old,target,role in [
         'port-evidence/r2/save-manager-reference.txt; save-manager-target.txt',
         [0x186F570,0x1A16C40])
 
+check('kLobbyLoad',0x2B7F4D0,0x2E879A0,
+    'Paired ServerLobbyActorComponent native loads obtain the owner lock and INT64_MAX number, call paired lobby-entry writers with the same argument roles and propagate results. Exact RTTI vtable slot +50 independently identifies both entries; RTTI labels alone are not a second native-body check.',
+    'port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt')
+check('kStatusLoad',0x293FE70,0x2C160B0,
+    'Paired ServerStatusActorComponent loads call the common status loader, propagate its result and write INT64_MAX through the character-number pointer, changed +70 -> +90; target LoginCharacter lookup consumes +90 independently. Exact named RTTI slot +50 supplies entry identity.',
+    'port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt')
+for symbol,old,target,anchor in [
+    ('kLobbyVtable',0x5B2BE58,0x5F6F2E8,[0x2B7F4D0,0x2E879A0]),
+    ('kStatusVtable',0x5B203F0,0x5F63430,[0x293FE70,0x2C160B0])]:
+    check(symbol,old,target,
+        'Exact MSVC RTTI class/COL identifies this component vtable; slot +50 points to the independently reviewed native loader with matching role and changed fields. Standard loader agreement can anchor the paired slot relationship; RTTI naming alone does not satisfy adoption.',
+        'port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt',anchor)
+check('kLobbyConstant',0x2B7F66C,0x2E87DB0,
+    'Native lobby loader instruction MOV RAX,7FFFFFFFFFFFFFFF followed by a stack store; its address-taken qword becomes the paired entry writer character-number argument. Target stack slot changes to RBP-40; no old instruction patch bytes are reused.',
+    'port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt',[0x2B7F4D0,0x2E879A0])
+check('kLobbyAddCall',0x2B7F6DB,0x2E87E10,
+    'Native E8 call from the lobby loader to paired entry writer 2143E70/237EA60, with component, result, address-of-number, slot/name data and extra native arguments. This callsite proof does not establish a safe detour ABI.',
+    'port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt',[0x2B7F4D0,0x2E879A0])
 (docs/'r2-rva-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Independent RVA checks awaiting standard support',len(result))
