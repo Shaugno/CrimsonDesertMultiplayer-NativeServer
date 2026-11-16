@@ -178,6 +178,8 @@ add_library(cdmp_mod SHARED
     src/mod/session2/identity_probe.cpp
     src/mod/session2/report_guard.cpp
     src/mod/session2/file_sandbox3663.cpp
+    src/mod/session2/field_share3663.cpp
+    src/mod/session2/identity3663.cpp
     src/mod/session2/save_hooks.cpp
     src/mod/session2/host_save_export.cpp
     src/mod/session2/session2.cpp
@@ -299,6 +301,14 @@ add_executable(cdmp_tests_join3663_policy tests/join3663_policy_tests.cpp)
 cdmp_strict(cdmp_tests_join3663_policy)
 target_include_directories(cdmp_tests_join3663_policy PRIVATE src)
 add_test(NAME join3663_policy COMMAND cdmp_tests_join3663_policy)
+add_executable(cdmp_tests_join3663_transaction tests/join3663_transaction_tests.cpp)
+cdmp_strict(cdmp_tests_join3663_transaction)
+target_include_directories(cdmp_tests_join3663_transaction PRIVATE src)
+add_test(NAME join3663_transaction COMMAND cdmp_tests_join3663_transaction)
+add_executable(cdmp_tests_identity3663_policy tests/identity3663_policy_tests.cpp)
+cdmp_strict(cdmp_tests_identity3663_policy)
+target_include_directories(cdmp_tests_identity3663_policy PRIVATE src)
+add_test(NAME identity3663_policy COMMAND cdmp_tests_identity3663_policy)
 add_executable(cdmp_tests_title3663_eligibility tests/title3663_eligibility_tests.cpp)
 cdmp_strict(cdmp_tests_title3663_eligibility)
 target_include_directories(cdmp_tests_title3663_eligibility PRIVATE src)

@@ -1,0 +1,229 @@
+{
+  "rows": {
+    "C001": {
+      "target": "0x7283378",
+      "reason": "Strong paired SAM getter returns this holder; actual teardown55288C0, not weak54EEA70; live root equals login-manager SAM and exact named vtable5F69100.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C047": {
+      "target": "0x4CAE10",
+      "reason": "Complete paired vector allocator/growth/copy/free contract; actual AddActor call EB6883B and two paired passive growth events. Conflicting default generic-helper match14AD670 rejected in this role.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C066": {
+      "target": "0xA",
+      "reason": "Key producer2D740D0 installs definition type bits at2D741EA; live primary definition2 ->classA and children definition3 ->classB, distinct from roster kind0.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C070": {
+      "target": "0x2E87DB0",
+      "reason": "Native constant and its stack lifetime measured at the approved passive point. New adapter normalizes after original LobbyLoad; no midpoint instruction patch is required.",
+      "disposition": "replaced_by_adapter",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C072": {
+      "target": "0x2E87E10",
+      "reason": "Native entry writer consumes live R8 pointer to INT64_MAX under owner lock; new adapter does not hook or invoke this many-argument callsite. Guarded parent entry/return replaces the old patch.",
+      "disposition": "replaced_by_adapter",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C074": {
+      "target": "0x2F4AF52",
+      "reason": "Strong matched character-login parent and exact native component/owner loads; passive sample agrees with actual user/lobby.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C076": {
+      "target": "0x2F4AF79",
+      "reason": "Strong matched parent, native list load and clear routine; passive pre-clear list count1 and INT64_MAX.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C080": {
+      "target": "0x2A12A58",
+      "reason": "Strong matched native parent2A12A30 loads72456E0 then dereferences manager. No live site hit; independent roots/getter establish its exact SAM object, not a fabricated hit.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C075": {
+      "target": "49 8b 47 68 48 8b 58 10 48 8b 7b 08",
+      "reason": "Exact target instruction bytes from independently matched native context; all guarded separately in new adapter.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C077": {
+      "target": "48 8b 4b 18",
+      "reason": "Exact target instruction bytes from independently matched native context; all guarded separately in new adapter.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C081": {
+      "target": "48 8b 0d 81 2c 83 04 48 8b 09",
+      "reason": "Exact target instruction bytes from independently matched native context; all guarded separately in new adapter.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C103": {
+      "target": "0x3ABEE0",
+      "reason": "Exact named IActorComponent primary slot10 and many derived tables; paired zero-result thunk bodies. One passive native component-dispatch hit returned through the actual shared stub.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C122": {
+      "target": "0",
+      "reason": "Retain the native session constructor key unchanged; native receive loads its ID from+88; passive title ID0 and completed R3 private-session crypto path corroborate. No forced nonzero ID or table index.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "C144": {
+      "target": "0x90",
+      "reason": "u32 controller/owning-user key in named MoveActorReq and adopted recipient finder C007; passive comparison uses vf170 returned key. Distinct pointer+A0 is not substituted.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "D014": {
+      "target": "0x1593240",
+      "reason": "Exact named WindowsLock3 slot1 and paired dispatch-through+18 thunk, now corroborated by actual native save-manager lock and vslot1.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "D015": {
+      "target": "0xE297F0",
+      "reason": "Exact named WindowsLock3 slot2 and paired dispatch-through+20 thunk, now corroborated by actual native save-manager lock and vslot2.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "D030": {
+      "target": "31",
+      "reason": "Conservative geometry bound: proved 256-byte bucket, 8-byte header, 8-byte pairs =>31. Reject larger counts before reading; not a claim that observed counts reached31.",
+      "disposition": "adopted_policy",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "D044": {
+      "target": "0x3DC",
+      "reason": "Strong matched native movement predicate23E1090, actual CMP at23E1106; passive owner/component chain agrees. Fragment23E0FF0 rejected.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "D045": {
+      "target": "0x48",
+      "reason": "Strong paired FieldMover::GetField2BBF340->2EC9C70 compares moving flag58->48, refuses access while set, increments busy5A->4A only after acceptance. Native field-access destructor balances that access.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    },
+    "D115": {
+      "target": "48 89 5c 24 10 55 56 57 41 54 41 55 41 56 41 57",
+      "reason": "Adopted reporter1536D20, complete native body and exact target prologue. This fact alone does not install/suppress any reporter.",
+      "disposition": "adopted",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": ""
+    }
+  },
+  "standard_contexts": [
+    {
+      "source": "0x2775800",
+      "target": "0x2a10830",
+      "similarity": 1.0,
+      "confidence": 0.9918374288468401
+    },
+    {
+      "source": "0x27779f0",
+      "target": "0x2a12a30",
+      "similarity": 1.0,
+      "confidence": 0.9921029164925812
+    },
+    {
+      "source": "0x2c3e030",
+      "target": "0x2f4ae80",
+      "similarity": 1.0,
+      "confidence": 0.9925755342691197
+    },
+    {
+      "source": "0x1434880",
+      "target": "0x1659380",
+      "similarity": 1.0,
+      "confidence": 0.9933071490757153
+    },
+    {
+      "source": "0x2a827b0",
+      "target": "0x2d78e40",
+      "similarity": 1.0,
+      "confidence": 0.9933071490757153
+    },
+    {
+      "source": "0x2a82590",
+      "target": "0x2d78c20",
+      "similarity": 1.0,
+      "confidence": 0.9933071490757153
+    },
+    {
+      "source": "0x2bbf340",
+      "target": "0x2ec9c70",
+      "similarity": 1.0,
+      "confidence": 0.9911635995393923
+    },
+    {
+      "source": "0x21a1580",
+      "target": "0x23e1090",
+      "similarity": 1.0,
+      "confidence": 0.9933071490757153
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\disconnect-native-old.txt",
+      "sha256": "B311C911CE9F82BBC3A5FC8274EBA8CDB22C7842984ED8FD7597223CAB19CAF1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\disconnect-native-new.txt",
+      "sha256": "B3A72B95DC687C94AC84CC00E845F6FCEE8918B4C81BAB809FB4C5F5895BCB79"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\reference-lifecycle-old.txt",
+      "sha256": "E2BC31E65788260EABA71DA35958179682D3A2F312EA3B23B9167C1217DF4FDF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\reference-lifecycle-new.txt",
+      "sha256": "CC51039D0319E2D30D62D9A7049E7AA9287D724DBD695957A45000CAC815353F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\typed-pins-new.txt",
+      "sha256": "B826EEDE71539B4D1E2E764C61DA3C9403AA239E809694111EFBBE311A2369F4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\field-scope-destructor-new.txt",
+      "sha256": "BC853B2D0B1C0F8F6CF3D198D468232AE5CB4A8330D2D20EDED17B058BDEB816"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r4\\native-bindings.json",
+      "sha256": "25682C1069BE1B1F9B43308EEC53FB87C9B14C1FCF4E544C4DAFF48A963633D9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r4\\passive-result.json",
+      "sha256": "7E9F55473379E70CD6CC48207314822CC54B77AC8D813FA031781F5D6AA2881A"
+    }
+  ],
+  "limits": "These close address/layout/policy obligations. They do not establish guest live execution or authorize an incomplete production route. C/D arming remains a separate Step4 gate."
+}

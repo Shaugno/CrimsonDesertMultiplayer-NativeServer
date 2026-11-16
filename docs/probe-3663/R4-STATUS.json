@@ -887,10 +887,11 @@
       "row": "C001",
       "tier": "C",
       "symbol": "kSamSlot",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kSamSlot at 2976 0x6DA67D8"
+      "disposition": "adopted",
+      "target": "0x7283378",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Strong paired SAM getter returns this holder; actual teardown55288C0, not weak54EEA70; live root equals login-manager SAM and exact named vtable5F69100."
     },
     {
       "row": "C002",
@@ -1157,19 +1158,21 @@
       "row": "D014",
       "tier": "D",
       "symbol": "kWindowsLockVf1",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Standard support for candidate 0x1593240 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 1 has the paired native thunk that dispatches this through vslot+18. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role."
+      "disposition": "adopted",
+      "target": "0x1593240",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Exact named WindowsLock3 slot1 and paired dispatch-through+18 thunk, now corroborated by actual native save-manager lock and vslot1."
     },
     {
       "row": "D015",
       "tier": "D",
       "symbol": "kWindowsLockVf2",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Standard support for candidate 0xe297f0 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 2 has the paired native thunk that dispatches this through vslot+20. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role."
+      "disposition": "adopted",
+      "target": "0xE297F0",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Exact named WindowsLock3 slot2 and paired dispatch-through+20 thunk, now corroborated by actual native save-manager lock and vslot2."
     },
     {
       "row": "D016",
@@ -1512,10 +1515,11 @@
       "row": "C047",
       "tier": "C",
       "symbol": "kVecPush",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Accepted VT/native AddActor identifies candidate 4CAE10; default BinDiff instead maps legacy 40B5B0 to 14AD670 (confidence 0.952574). Resolve the generic-helper conflict and its native allocation/growth ownership; named-RTTI rule 2 does not settle it. The passive trace did not instrument this helper."
+      "disposition": "adopted",
+      "target": "0x4CAE10",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Complete paired vector allocator/growth/copy/free contract; actual AddActor call EB6883B and two paired passive growth events. Conflicting default generic-helper match14AD670 rejected in this role."
     },
     {
       "row": "C048",
@@ -1683,10 +1687,11 @@
       "row": "C066",
       "tier": "C",
       "symbol": "kCharacterClass",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Roster kind 0 and observed primary key A0100001 do not prove the separate legacy character-class constant 0xA in its actual producer/consumer role."
+      "disposition": "adopted",
+      "target": "0xA",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Key producer2D740D0 installs definition type bits at2D741EA; live primary definition2 ->classA and children definition3 ->classB, distinct from roster kind0."
     },
     {
       "row": "C067",
@@ -1719,10 +1724,11 @@
       "row": "C070",
       "tier": "C",
       "symbol": "kLobbyConstant",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Lobby parent 2E879A0 is now adopted. Candidate constant site 2E87DB0 still needs the target stack-slot/argument lifetime, exact relocated instruction and safe per-build patch semantics; the old instruction patch must not be reused."
+      "disposition": "replaced_by_adapter",
+      "target": "0x2E87DB0",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Native constant and its stack lifetime measured at the approved passive point. New adapter normalizes after original LobbyLoad; no midpoint instruction patch is required."
     },
     {
       "row": "C071",
@@ -1737,10 +1743,11 @@
       "row": "C072",
       "tier": "C",
       "symbol": "kLobbyAddCall",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Lobby parent is adopted, but candidate call 2E87E10 to entry writer 237EA60 still lacks a proved target callsite detour ABI/argument ownership and safe guard/relocation strategy."
+      "disposition": "replaced_by_adapter",
+      "target": "0x2E87E10",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Native entry writer consumes live R8 pointer to INT64_MAX under owner lock; new adapter does not hook or invoke this many-argument callsite. Guarded parent entry/return replaces the old patch."
     },
     {
       "row": "C073",
@@ -1755,37 +1762,41 @@
       "row": "C074",
       "tier": "C",
       "symbol": "kClearLobbySite",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kClearLobbySite at 2976 0x2C3E0FF"
+      "disposition": "adopted",
+      "target": "0x2F4AF52",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Strong matched character-login parent and exact native component/owner loads; passive sample agrees with actual user/lobby."
     },
     {
       "row": "C075",
       "tier": "C",
       "symbol": "kClearLobbySiteBytes",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kClearLobbySiteBytes for the same native role as src/mod/session2/identity_fix.cpp:227 ({0x49, 0x8B, 0x47, 0x68, 0x48, 0x8B, 0x58, 0x10, 0x48, 0x8B, 0x7B, 0x08})"
+      "disposition": "adopted",
+      "target": "49 8b 47 68 48 8b 58 10 48 8b 7b 08",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Exact target instruction bytes from independently matched native context; all guarded separately in new adapter."
     },
     {
       "row": "C076",
       "tier": "C",
       "symbol": "kClearListSite",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kClearListSite at 2976 0x2C3E126"
+      "disposition": "adopted",
+      "target": "0x2F4AF79",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Strong matched parent, native list load and clear routine; passive pre-clear list count1 and INT64_MAX."
     },
     {
       "row": "C077",
       "tier": "C",
       "symbol": "kClearListSiteBytes",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kClearListSiteBytes for the same native role as src/mod/session2/identity_fix.cpp:229 ({0x48, 0x8B, 0x4B, 0x18})"
+      "disposition": "adopted",
+      "target": "48 8b 4b 18",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Exact target instruction bytes from independently matched native context; all guarded separately in new adapter."
     },
     {
       "row": "C078",
@@ -1809,19 +1820,21 @@
       "row": "C080",
       "tier": "C",
       "symbol": "kLoginMgrSite",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kLoginMgrSite at 2976 0x2777A18"
+      "disposition": "adopted",
+      "target": "0x2A12A58",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Strong matched native parent2A12A30 loads72456E0 then dereferences manager. No live site hit; independent roots/getter establish its exact SAM object, not a fabricated hit."
     },
     {
       "row": "C081",
       "tier": "C",
       "symbol": "kLoginMgrSiteBytes",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kLoginMgrSiteBytes for the same native role as src/mod/session2/identity_fix.cpp:235 ({0x48, 0x8B, 0x0D, 0x89, 0x1C, 0x5F, 0x04, 0x48, 0x8B, 0x09})"
+      "disposition": "adopted",
+      "target": "48 8b 0d 81 2c 83 04 48 8b 09",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Exact target instruction bytes from independently matched native context; all guarded separately in new adapter."
     },
     {
       "row": "C082",
@@ -2016,10 +2029,11 @@
       "row": "C103",
       "tier": "C",
       "symbol": "kLoadStub",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kLoadStub at 2976 0x35EA90"
+      "disposition": "adopted",
+      "target": "0x3ABEE0",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Exact named IActorComponent primary slot10 and many derived tables; paired zero-result thunk bodies. One passive native component-dispatch hit returned through the actual shared stub."
     },
     {
       "row": "C104",
@@ -2193,10 +2207,11 @@
       "row": "C122",
       "tier": "C",
       "symbol": "kSessionId",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kSessionId for the same native role as src/mod/session2/server.cpp:76 (0)"
+      "disposition": "adopted",
+      "target": "0",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Retain the native session constructor key unchanged; native receive loads its ID from+88; passive title ID0 and completed R3 private-session crypto path corroborate. No forced nonzero ID or table index."
     },
     {
       "row": "C123",
@@ -2391,10 +2406,11 @@
       "row": "D030",
       "tier": "D",
       "symbol": "kSamBucketMaxEntries",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kSamBucketMaxEntries for the same native role as src/mod/session2/guest_lifecycle.h:55 ((kSamBucketBytes - 8) / 8)"
+      "disposition": "adopted_policy",
+      "target": "31",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Conservative geometry bound: proved 256-byte bucket, 8-byte header, 8-byte pairs =>31. Reject larger counts before reading; not a claim that observed counts reached31."
     },
     {
       "row": "D031",
@@ -2517,19 +2533,21 @@
       "row": "D044",
       "tier": "D",
       "symbol": "kTsMoving",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kTsMoving for the same native role as src/mod/session2/guest_lifecycle.h:199 (0x3DC)"
+      "disposition": "adopted",
+      "target": "0x3DC",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Strong matched native movement predicate23E1090, actual CMP at23E1106; passive owner/component chain agrees. Fragment23E0FF0 rejected."
     },
     {
       "row": "D045",
       "tier": "D",
       "symbol": "kFmMoving",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kFmMoving for the same native role as src/mod/session2/guest_lifecycle.h:200 (0x58)"
+      "disposition": "adopted",
+      "target": "0x48",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Strong paired FieldMover::GetField2BBF340->2EC9C70 compares moving flag58->48, refuses access while set, increments busy5A->4A only after acceptance. Native field-access destructor balances that access."
     },
     {
       "row": "D046",
@@ -3166,10 +3184,11 @@
       "row": "D115",
       "tier": "D",
       "symbol": "kReporterHead",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "Confirm 3663 code consumes kReporterHead for the same native role as src/mod/session2/report_guard.cpp:20 ({0x48, 0x89, 0x5C, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57})"
+      "disposition": "adopted",
+      "target": "48 89 5c 24 10 55 56 57 41 54 41 55 41 56 41 57",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "Adopted reporter1536D20, complete native body and exact target prologue. This fact alone does not install/suppress any reporter."
     },
     {
       "row": "B074",
@@ -3319,10 +3338,11 @@
       "row": "C144",
       "tier": "C",
       "symbol": "kActor_OwnerUser",
-      "disposition": "blocked",
-      "target": null,
-      "authority": "R2-MATCHES.json",
-      "missing": "The observed native ServerActor owner at +A0 is also +A0 in the paired reference AddActor body. It does not prove the separate legacy Actor_OwnerUser+90 contract; identify its actual object type/consumer and target member."
+      "disposition": "adopted",
+      "target": "0x90",
+      "authority": "port-evidence/r4/core-adoptions.json",
+      "missing": "",
+      "reason": "u32 controller/owning-user key in named MoveActorReq and adopted recipient finder C007; passive comparison uses vf170 returned key. Distinct pointer+A0 is not substituted."
     },
     {
       "row": "A029",
@@ -3601,23 +3621,23 @@
     },
     "C": {
       "total": 150,
-      "closed": 136,
-      "blocked": 14,
+      "closed": 150,
+      "blocked": 0,
       "dispositions": {
-        "blocked": 14,
-        "adopted": 130,
+        "adopted": 142,
+        "replaced_by_adapter": 2,
         "retired_by_scope": 6
       },
       "armed": false
     },
     "D": {
       "total": 130,
-      "closed": 124,
-      "blocked": 6,
+      "closed": 130,
+      "blocked": 0,
       "dispositions": {
-        "adopted": 109,
-        "blocked": 6,
-        "retired_by_scope": 15
+        "adopted": 114,
+        "retired_by_scope": 15,
+        "adopted_policy": 1
       },
       "armed": false
     }
@@ -3625,7 +3645,7 @@
   "limitations": [
     "Closed rows include approved policies and R4 scope retirements; they are not all native RVA adoptions.",
     "A/B armed; B remains the explicit native-host loopback diagnostic. C/D and native guest startup remain closed.",
-    "C requires the native reference/insertion/rollback backend and identity fixes; pure policies are not native proof.",
+    "Native join/reference/rollback and identity adapters are implemented but unarmed; Step4 must connect the complete target host/guest/lifecycle route before C/D permission.",
     "The file sandbox is verified offline, with no in-game validation yet. Its launcher Run path awaits C/D.",
     "Guest travel/time and legacy per-callsite save/title patches are outside 3663 v1 scope.",
     "One prior full run exposed the existing optional S3 ring publication race; final Step 1 and Step 2 suites passed. That race is not claimed fixed."
@@ -3635,9 +3655,9 @@
   "steps": {
     "1": "complete; file sandbox and offline fixture verified; launch awaits C/D",
     "2": "complete; native control filter; travel/time scope retired",
-    "3": "pending native backend and passive sitting",
+    "3": "native adapter and passive sitting implemented; see Step3 result for validation; route/arming separate",
     "4": "pending lifecycle implementation and arming",
-    "5": "pending L3 then L4; no R4 live sessions or join attempts",
+    "5": "pending L3 then L4; one completed R4 passive sitting; zero join attempts",
     "6": "pending final review package"
   }
 }

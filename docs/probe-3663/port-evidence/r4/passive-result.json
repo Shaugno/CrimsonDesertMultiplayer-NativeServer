@@ -1,0 +1,91 @@
+{
+  "events": 161,
+  "counts": {
+    "ClearList": 1,
+    "ClearLobby": 1,
+    "Component": 20,
+    "FieldLocks": 32,
+    "KeyClass": 32,
+    "LobbyAdd": 2,
+    "LobbyConstant": 2,
+    "MoveFlag": 32,
+    "OwnerKey": 32,
+    "Phases": 1,
+    "SessionId": 2,
+    "VecEntry": 2,
+    "VecExit": 2
+  },
+  "invalid_events": 0,
+  "sequence_gaps": 0,
+  "vector_pairs": 2,
+  "vector_field_keys": [
+    "0x81020000",
+    "0x81020001"
+  ],
+  "vector_transition": "count/capacity 0/0 -> 1/1; row actor count 1; native AddActor caller EB6883B",
+  "key_class_pairs": [
+    "definition 2 -> class A",
+    "definition 3 -> class B"
+  ],
+  "load_dispatch_calls": 20,
+  "load_stub_dispatch_calls": 1,
+  "session_ids": [
+    0
+  ],
+  "login_manager_site_hits": 0,
+  "identity_threads": [
+    3516
+  ],
+  "network_threads": [
+    30924
+  ],
+  "roots": "SAM root equals dereferenced login-manager holder; exact named SAM and WindowsLock3 vtables/slots agree",
+  "field_locks": "two distinct WindowsRWLock types, slot 1/2 = 1593320/1593370; NOT WindowsLock3",
+  "session": "R2-P1-20261116-161703",
+  "source_commit": "9cc2c4a",
+  "executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "question": "Do the native vector, lobby/login, key-class and session contexts agree with the expected object identities?",
+  "result": "passive evidence collected; no join attempted",
+  "user_report": "requested sequence done, including fast travel and Quit to Desktop",
+  "exit": "observed natural process exit; no forced termination; no exit code was collected",
+  "requested_quit_local": "2026-11-16 16:38 America/New_York",
+  "observed_exit_utc": "2026-11-16T21:39:42.9008628Z",
+  "deadline_utc": "2026-11-16T21:42:23.4027305Z",
+  "real_saves_unchanged": 23,
+  "join_attempts": 0,
+  "gameplay_networking": false,
+  "cleanup": "Finish controller restored prior installation; elevated host process/file inspection confirmed no game process or deployed ASI/PDB/loader",
+  "limits": [
+    "Bounded samples are ordinary local admissions, not guest join/rollback evidence.",
+    "No LoginMgr site hit; root equality is separate corroboration of static getter/context proof.",
+    "OwnerKey data19 read vtable+20, outside the three-entry ScopeAttacher table: rejected. Correct native Dispose is slot2 (+10), 1659370 -> 1659380.",
+    "Memory-readable validity does not validate a function pointer or permit a call.",
+    "Requested 16:38 quit was exceeded; observed exit remained within fourteen-minute watchdog and fifteen-minute session limit."
+  ],
+  "local_evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\cdmp.log",
+      "sha256": "89B074B8DCF28CDD8A4E90627ED5E21F89BB8AFF78226F5DA05AFD8FCBF3B556"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\question.md",
+      "sha256": "B5D18BDF7270B630E15FE8E0A2FFCDCC8D8C8C2447630383F8B3FA08F1E39E23"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\save-verification.json",
+      "sha256": "D4A01495A721D339FBF343AC4D9A3DB4D0D0B33178CBA364D64B6B5508C25693"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\watchdog.json",
+      "sha256": "E5C30D83412D3FD2ABF612D1F1BF0DA6933BC7F34073DB7231CAD3B463BFEDEB"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\deployed-hashes.json",
+      "sha256": "C37133834B4FF6340B630C7B90A5C8521C72A17C0C702285E3861CCA29FBBCBC"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\evidence-hashes.json",
+      "sha256": "94062ECDBBFD80E8C4AA277F2F73FB5B79C7FEEBE0C7C302C67B3BDE28D3F1B9"
+    }
+  ]
+}

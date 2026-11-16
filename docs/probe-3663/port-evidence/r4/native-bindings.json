@@ -1,0 +1,170 @@
+{
+  "executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "reference_sha256": "57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7",
+  "sites": {
+    "Acquire": {
+      "rva": "0x2e08520",
+      "guard": "48 89 5c 24 10 48 89 74 24 18 48 89 7c 24 20 55"
+    },
+    "Enter": {
+      "rva": "0x2ecb130",
+      "guard": "48 89 5c 24 18 48 89 54 24 10 48 89 4c 24 08 55"
+    },
+    "TryAddRef": {
+      "rva": "0x1658e90",
+      "guard": "48 89 5c 24 08 48 89 74 24 18 57 48 83 ec 20 48"
+    },
+    "VecPush": {
+      "rva": "0x4cae10",
+      "guard": "40 53 41 57 48 83 ec 28 48 8b d9 4c 8b fa 8b 49"
+    },
+    "FindActor": {
+      "rva": "0x2d78e40",
+      "guard": "44 89 44 24 18 48 89 54 24 10 53 55 56 57 41 56"
+    },
+    "FindUser": {
+      "rva": "0x2d78c20",
+      "guard": "44 89 44 24 18 48 89 54 24 10 53 55 56 57 41 56"
+    },
+    "Dispose": {
+      "rva": "0x1659380",
+      "guard": "48 89 5c 24 10 48 89 74 24 18 57 48 83 ec 20 48"
+    },
+    "GetField": {
+      "rva": "0x2ec9c70",
+      "guard": "48 89 5c 24 18 48 89 54 24 10 55 56 57 41 56 41"
+    },
+    "FieldAccessDtor": {
+      "rva": "0x23073e0",
+      "guard": "48 89 5c 24 10 48 89 4c 24 08 57 48 83 ec 20 8b"
+    },
+    "AddActor": {
+      "rva": "0xeb68740",
+      "guard": "48 89 5c 24 08 48 89 6c 24 10 56 57 41 55 41 56"
+    },
+    "RemoveActor": {
+      "rva": "0xeb6c670",
+      "guard": "48 89 5c 24 18 48 89 6c 24 20 56 57 41 54 41 56"
+    },
+    "RwLock": {
+      "rva": "0x1593320",
+      "guard": "40 53 48 83 ec 20 48 8b d9 b9 01 00 00 00 f0 0f"
+    },
+    "RwUnlock": {
+      "rva": "0x1593370",
+      "guard": "40 53 48 83 ec 20 48 8b 01 33 d2 48 8b d9 ff 50"
+    },
+    "LobbyLoad": {
+      "rva": "0x2e879a0",
+      "guard": "48 89 5c 24 08 48 89 54 24 10 55 56 57 41 54 41"
+    },
+    "LoadComponents": {
+      "rva": "0x22951b0",
+      "guard": "48 89 54 24 10 48 89 4c 24 08 55 53 56 57 41 54"
+    },
+    "Phases": {
+      "rva": "0x2c17410",
+      "guard": "44 89 4c 24 20 4c 89 44 24 18 53 55 56 57 41 54"
+    },
+    "ClearLobby": {
+      "rva": "0x2f4af52",
+      "guard": "49 8b 47 68 48 8b 58 10 48 8b 7b 08 48 8d 57 08"
+    },
+    "ClearList": {
+      "rva": "0x2f4af79",
+      "guard": "48 8b 4b 18 e8 ce ac bc fd 90 48 8b 5d 9f 48 8b"
+    },
+    "LoginMgr": {
+      "rva": "0x2a12a58",
+      "guard": "48 8b 0d 81 2c 83 04 48 8b 09 e8 d9 7b 36 00 90"
+    },
+    "LobbyConstant": {
+      "rva": "0x2e87db0",
+      "guard": "48 b8 ff ff ff ff ff ff ff 7f 48 89 45 c0 c5 fb"
+    },
+    "LobbyAdd": {
+      "rva": "0x2e87e10",
+      "guard": "e8 4b 6c 4f ff 8b 44 24 60 85 c0 0f 84 ea 00 00"
+    },
+    "Lock3": {
+      "rva": "0x1593240",
+      "guard": "48 8b 01 48 ff 60 18 cc cc cc cc cc cc cc cc cc"
+    },
+    "Unlock3": {
+      "rva": "0xe297f0",
+      "guard": "48 8b 01 48 ff 60 20 cc cc cc cc cc cc cc cc cc"
+    },
+    "Reporter": {
+      "rva": "0x1536d20",
+      "guard": "48 89 5c 24 10 55 56 57 41 54 41 55 41 56 41 57"
+    }
+  },
+  "reference_contract": "Native typed FindActor output: 32 bytes, valid+10, flag+11=0; Dispose 1659380 matches old1434880. Field-access output: 48 bytes, destroy with 23073E0(out,0), which returns the mover access through holder vf148 THEN disposes its field reference. Generic Dispose alone leaks that mover access.",
+  "mutation_contract": "Observe both complete AddActor body and RemoveActor thunk; monotonic caller-owned mutation clock. Any intervening native entry, changed row/vector/count/epoch/field key or nonzero actor count prevents rollback and quarantines owning references.",
+  "rejected": [
+    "vtable+20 ScopeAttacher exploratory read: only slots 0..2 exist; never invoked",
+    "537440 is a type predicate, not retain",
+    "weak SAM teardown 54EEA70 clears another root",
+    "23E0FF0 is a fragment, not movement function",
+    "default generic VecPush match 14AD670 conflicts with actual EB6883B caller; traced 4CAE10 is adopted instead"
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\core-context-old.txt",
+      "sha256": "CE8CAAA3901482C4E83CEA8B25C47858CFD907FB5F7E5DCE6BF42E1527C33231"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\core-context-new.txt",
+      "sha256": "35C748788B750AEB016E626E759D85B423D30328AEF293C1606292995F1CE91E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\identity-sites-new.txt",
+      "sha256": "FE70952FA2E1D3F12BC38B9810A412625BAF0C43FEC25DAC4F500B6AAEB3F120"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\key-constructors-new.txt",
+      "sha256": "DB006A6BCFE604D0478302F830CC590F9DE8A2AA547610306C7F9967D4F6F92E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\sam-slot-old.txt",
+      "sha256": "F5664827503EB71695A4AA4D49FC5627F2FFB90EEF89654E76997A4945D6F06F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\sam-join-new.txt",
+      "sha256": "7F2E92B9A51B828FA2B451363620EFE62E0466F25F6C74268ED1C194FF7A6F67"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\component-context-new.txt",
+      "sha256": "12BFBF98868D9D430F79CB8EF54E0BADF93962C95F1F51F849A35208B65F155E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\reference-lifecycle-old.txt",
+      "sha256": "E2BC31E65788260EABA71DA35958179682D3A2F312EA3B23B9167C1217DF4FDF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\reference-lifecycle-new.txt",
+      "sha256": "CC51039D0319E2D30D62D9A7049E7AA9287D724DBD695957A45000CAC815353F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\disconnect-native-new.txt",
+      "sha256": "B3A72B95DC687C94AC84CC00E845F6FCEE8918B4C81BAB809FB4C5F5895BCB79"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\field-scope-destructor-new.txt",
+      "sha256": "BC853B2D0B1C0F8F6CF3D198D468232AE5CB4A8330D2D20EDED17B058BDEB816"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\remove-body-new.txt",
+      "sha256": "2E6A909B6E6E74E5F78037266E052873B95A1BCFB12362BB1F9D653BCD0E4F35"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\typed-pins-new.txt",
+      "sha256": "B826EEDE71539B4D1E2E764C61DA3C9403AA239E809694111EFBBE311A2369F4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r4\\passive-result.json",
+      "sha256": "7E9F55473379E70CD6CC48207314822CC54B77AC8D813FA031781F5D6AA2881A"
+    }
+  ],
+  "tiers_armed": false
+}

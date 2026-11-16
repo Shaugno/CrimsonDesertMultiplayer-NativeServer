@@ -15,16 +15,16 @@ status['preceding_ledger'] = 'R3-STATUS.json'
 status['limitations'] = [
     'Closed rows include approved policies and R4 scope retirements; they are not all native RVA adoptions.',
     'A/B armed; B remains the explicit native-host loopback diagnostic. C/D and native guest startup remain closed.',
-    'C requires the native reference/insertion/rollback backend and identity fixes; pure policies are not native proof.',
+    'Native join/reference/rollback and identity adapters are implemented but unarmed; Step4 must connect the complete target host/guest/lifecycle route before C/D permission.',
     'The file sandbox is verified offline, with no in-game validation yet. Its launcher Run path awaits C/D.',
     'Guest travel/time and legacy per-callsite save/title patches are outside 3663 v1 scope.',
     'One prior full run exposed the existing optional S3 ring publication race; final Step 1 and Step 2 suites passed. That race is not claimed fixed.'
 ]
 status['steps'] = {'1': 'complete; file sandbox and offline fixture verified; launch awaits C/D',
                    '2': 'complete; native control filter; travel/time scope retired',
-                   '3': 'pending native backend and passive sitting',
+                   '3': 'native adapter and passive sitting implemented; see Step3 result for validation; route/arming separate',
                    '4': 'pending lifecycle implementation and arming',
-                   '5': 'pending L3 then L4; no R4 live sessions or join attempts',
+                   '5': 'pending L3 then L4; one completed R4 passive sitting; zero join attempts',
                    '6': 'pending final review package'}
 for row in status['rows']:
     if row['row'] in save['retired_by_scope']:
@@ -33,6 +33,11 @@ for row in status['rows']:
     if row['row'] in scope['retired_by_scope']:
         row.update(disposition='retired_by_scope', target=None, authority='port-evidence/r4/scope-result.json',
                    missing='', reason='R4 v1 refuses guest travel/fast-travel and time publication before host native dispatch; these legacy publication adapters remain unreachable.')
+adoptions_path=docs/'port-evidence/r4/core-adoptions.json'
+if adoptions_path.exists():
+    adoptions=json.loads(adoptions_path.read_text(encoding='utf-8'))['rows']
+    for row in status['rows']:
+        if row['row'] in adoptions: row.update(adoptions[row['row']])
 header = (root / 'src/mod/game/build_3663.h').read_text(encoding='utf-8')
 status['tiers'] = {}
 for tier in 'ABCD':

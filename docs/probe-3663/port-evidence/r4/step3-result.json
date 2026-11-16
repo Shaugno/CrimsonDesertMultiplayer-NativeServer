@@ -1,0 +1,76 @@
+{
+  "step": 3,
+  "result": "offline implementation and passive evidence complete; target route unarmed pending Step4",
+  "suite": "110/110 passed",
+  "suite_seconds": 91.39,
+  "synthetic_remote_states": 78,
+  "smoke": "eight seconds, zero rejects, clean worker stop/unload; synthetic only",
+  "live_session": "R2-P1-20261116-161703",
+  "join_attempts": 0,
+  "implemented": [
+    "three-argument native EnterField backend gated by R3 pure policy",
+    "typed FindUser and FindActor owning scopes; field reference and native field-access destructor",
+    "two field locks in native order; native 16-byte VecPush; exact last-row insertion ticket",
+    "native AddActor and RemoveActor body mutation observers; epoch/key/vector/count/row validation before rollback",
+    "uncertain/used/changed insertion quarantines references and seals guest admission; never closes host field",
+    "separate per-build lobby/status normalization and pre-phase invariant; host-derived thread affinity; uniqueness and login payload gates"
+  ],
+  "limitations": [
+    "C/D not yet armed or routed; adapters have no in-game execution evidence.",
+    "Only the measured single-primary roster is admitted. Companion/factory branches remain refused.",
+    "Any intervening native actor mutation conservatively prevents rollback, even if unrelated.",
+    "Quarantine holds owning references until process exit and requires restart; not reconnect support.",
+    "No legacy identity patch, TLS realm offset, four-argument EnterField or optional module is used.",
+    "Live trace is ordinary local play. It does not prove cross-user sharing or rollback execution."
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\step3-final-suite.txt",
+      "sha256": "FE29DE1B285ABE1FDDF22E8F2C630089E2C168A8ECF366F3A0AB41B5DD2DF689"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\step3-final-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\step3-final-smoke-run\\e2e\\cdmp.log",
+      "sha256": "DA02A634878462F7C772CDD281E02071BA3C6A64D57DC0A0CBA7346B86BC68EE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\src\\mod\\session2\\field_share3663.cpp",
+      "sha256": "BC285415CE4BD3E445C0B77FF7E162914AE894EAAF06F27683A691B22C9E057B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\src\\mod\\session2\\identity3663.cpp",
+      "sha256": "83939FE84A6C27B90BB304D800A1D2F8DA1748155D1B8B1A6A0E48E2ADF1C7A0"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\src\\mod\\session2\\r4_native_bindings.h",
+      "sha256": "EB66812669C41D634FF6603914E1F893BEF37A08A8955E9AE4AB5953A9A192C5"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\src\\coop3663\\join3663_transaction.h",
+      "sha256": "D05D1F12C8CB407C9961323C8B76E6DBE5A694D7EE3CF7BFD9ED3A529472911B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\src\\coop3663\\identity3663_policy.h",
+      "sha256": "8FBC926482206531DA8A6819951E4C457E74E6333C576A8EE7BCED1D78A1E22A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\tests\\join3663_transaction_tests.cpp",
+      "sha256": "12A8C301DF705138DE88747E614DD742CCAFF505703DB119EFF4CFC6E0FD3BE0"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\tests\\identity3663_policy_tests.cpp",
+      "sha256": "41930EC605C8010318384EB4099CDF51E10EB8B597AEECB041E4E0AA19DF2252"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r4\\core-adoptions.json",
+      "sha256": "596574CACA07C25E376CD6F733583A0733A0CAB5E64FB3C0F865E7C48496FB72"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r4\\passive-result.json",
+      "sha256": "7E9F55473379E70CD6CC48207314822CC54B77AC8D813FA031781F5D6AA2881A"
+    }
+  ]
+}

@@ -1,5 +1,59 @@
 # R4 Step 3 — native backend investigation and implementation record
 
+Completed offline implementation, 2026-11-16. The final source passes 110/110
+tests in 91.39 seconds and the unique eight-second synthetic host/peer smoke.
+See `port-evidence/r4/step3-result.json` for immutable local evidence hashes.
+C/D remain unarmed until Step 4 connects the complete target route.
+
+The one passive sitting completed as R2-P1-20261116-161703: 161 complete valid
+events, two native vector growth pairs in fields 81020000/81020001, primary
+definition type 2 -> key class A, children type 3 -> B, and one actual shared
+component-load stub dispatch. No LoginMgr site hit occurred; its static proof
+is corroborated separately by root equality. User confirmed travel and exit.
+The game exited at 16:39:42 Eastern without watchdog termination (later than
+the requested 16:38, within the fourteen-minute watchdog). All 23 real saves
+match the verified backup. Cleanup restored the previous installation and
+an elevated process/file inventory confirmed game closure and removal.
+
+`field_share3663.cpp` implements the separate three-argument transaction.
+Native typed FindUser/FindActor scopes pin the users and characters; native
+GetField pins the host field through its actor's lock. The verified 48-byte
+field-access destructor returns the mover access before disposing its field
+reference. Generic ScopeAttacher Dispose alone would leak that access.
+Native field locks are two distinct WindowsRWLock types, not WindowsLock3.
+The backend validates both exact vtables and their acquire/release slots.
+
+Insertion uses the native allocator-backed VecPush under both locks, then
+releases both before original EnterField. The ticket records caller-owned
+epoch/generation/mutation serial and exact vector, row and count. Both full
+native AddActor/RemoveActor entries advance the mutation clock. Failure can
+remove only the adapter's unchanged last row with zero actors. A mutation,
+partial write, changed lifetime or uncertain row seals admission and retains
+the owning wrappers in a bounded process-lifetime quarantine. The host field
+is never closed. Native result pointer and code are preserved after a call;
+refused paths use the verified native permission-error value.
+
+`identity3663.cpp` independently guards target LobbyLoad, LoadComponents and
+Phases entries. It normalizes the guest's lobby after the original and the
+status number through **status+90**, using aligned compare/exchange, explicit
+owner/epoch/uniqueness checks, and a pre-phase invariant. Thread affinity is
+learned only from a validated host native callback, never the network worker
+or the old TLS realm byte. Its leaf state lock is never held across native
+calls. No legacy midpoint patches or optional probe installers are reused.
+
+The exploratory trace read at ScopeAttacher vtable+20 was outside its three
+function slots and is rejected. The actual release slot is +10, thunk1659370
+to Dispose1659380. The helper537440 is a type predicate, not a retain. Native
+FindActor excludes users; typed user retention uses FindUser2D78C20 instead.
+These corrections are explicit in the retained evidence and binding catalog.
+
+`core-adoptions.json` closes the twenty remaining C/D address/layout/policy
+obligations. This is not arming or two-player proof. The adapters admit only
+the traced single-primary roster. Conservative quarantine requires restart;
+companion paths and reconnect remain outside this adapter's claim.
+
+Historical investigation and collector checkpoint follow.
+
 Reproduction: the R3 three-argument EnterField policy has no native reference,
 insertion or rollback backend. The target guest installer is still closed;
 reusing the legacy four-argument detour or its identity patch bytes is invalid.
