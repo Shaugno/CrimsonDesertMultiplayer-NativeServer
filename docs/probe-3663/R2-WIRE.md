@@ -72,12 +72,23 @@ Further core control review confirms the native shutdown timer changes
 `OnLogoutXxxToServerReq` remains 2004. Its target handler reads native process
 pointers at packet+3 and +B; it must never cross the tunnel. Named connection
 descriptors retain 1002/1004/1005/1006, and the target network pump explicitly
-constructs 1008. These are partial facts for C150: that aggregate remains
-blocked until all control roles and the target filter are proved and routed.
+constructs 1008. An earlier investigation treated every integer in the
+connection deny interval as an individual native-ID adoption obligation.
 The target connect writer 3A9440 explicitly constructs opcode 1001 before
 calling PostPacket 3A9960. Raw word searches for 1003/1007 instead found short
 jumps and shifts; those false leads are rejected, not ID evidence. The
-remaining 1003/1007 roles are unresolved.
+remaining 1003/1007 roles are unresolved; no native identity is claimed for them.
+
+C150 now distinguishes the native IDs from unchanged conservative policy:
+the filter rejects **every** value 1001..1008 regardless of handler existence.
+The three actual protected native opcodes are proved as 2447/2042/2004;
+field-time 2150 has its own row. control_filter.h accepts explicit per-build
+native values and denies every request if that table is incomplete. Boundary
+tests cover the whole closed interval, including its unclassified values,
+and preserve legitimate logout 2001 with complete data. The production caller
+still supplies only legacy values and remains unreachable on 3663; a target
+route must supply the target catalog before any tunnel is enabled. C150's
+native-value contract is proved; this is not a claim that Tier C is armed.
 The active 2976 filter has not been changed. Discovery records continue to
 say unadopted; no target network path is enabled by this review.
 

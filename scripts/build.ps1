@@ -8,12 +8,16 @@
 param(
     [ValidateSet('Debug', 'Release', 'RelWithDebInfo')]
     [string]$Config = 'RelWithDebInfo',
-    [switch]$SkipTests
+    [switch]$SkipTests,
+    [string]$BuildDir = ''
 )
 # Native tools write warnings to stderr; with 'Stop' PowerShell 5.1 would turn
 # those into terminating errors. Failures are detected via $LASTEXITCODE.
 $ErrorActionPreference = 'Continue'
 $root = Split-Path $PSScriptRoot -Parent
+$buildRoot = if (!$BuildDir) { Join-Path $root 'build' } elseif ([IO.Path]::IsPathRooted($BuildDir)) {
+    [IO.Path]::GetFullPath($BuildDir)
+} else { [IO.Path]::GetFullPath((Join-Path $root $BuildDir)) }
 
 $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
 $vs = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
@@ -28,15 +32,15 @@ $cmakeBin = Join-Path $vs 'Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bi
 $cmake = Join-Path $cmakeBin 'cmake.exe'
 $ctest = Join-Path $cmakeBin 'ctest.exe'
 
-& $cmake -S $root -B "$root\build" -G $generator -A x64 -Wno-dev -Wno-deprecated
+& $cmake -S $root -B $buildRoot -G $generator -A x64 -Wno-dev -Wno-deprecated
 if ($LASTEXITCODE) { throw "CMake configure failed ($LASTEXITCODE)" }
 
-& $cmake --build "$root\build" --config $Config --parallel
+& $cmake --build $buildRoot --config $Config --parallel
 if ($LASTEXITCODE) { throw "Build failed ($LASTEXITCODE)" }
 
 if (-not $SkipTests) {
-    & $ctest --test-dir "$root\build" -C $Config --output-on-failure
+    & $ctest --test-dir $buildRoot -C $Config --output-on-failure
     if ($LASTEXITCODE) { throw "Tests failed ($LASTEXITCODE)" }
 }
 
-Write-Host "Build OK: $root\build\bin\$Config"
+Write-Host "Build OK: $buildRoot\bin\$Config"

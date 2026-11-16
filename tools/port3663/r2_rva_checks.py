@@ -122,6 +122,13 @@ check('kLoginMgrSlot',0x6D696A8,0x72456E0,
     'Paired logout callers read this exact RIP-relative global context. Its first pointer is passed to actor/login registry lookup; context+10 is the native save manager. Both roles and dereference levels are verified in native code; this does not adopt registry list fields or FindByCharacterNo.',
     'port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; identity-contracts-reference.txt',
     [0x28F26C0,0x2BC29F0])
+for symbol,old,target,role in [
+    ('kFindByNoScan',0x2A84066,0x2D7A726,'manager vector/count validation window'),
+    ('kFindByNoRead',0x2A84090,0x2D7A750,'actor component/status validation window')]:
+    check(symbol,old,target,
+        'Paired native FindByCharacterNo '+role+': same requested u64 number comparison, manager+68 read-lock protocol and owned result holder; vector+B8/count+C0 with pointer stride eight, and changed status number pointer+90. Target discovered by a raw displacement lead, then complete native body and instruction boundaries reviewed. This is a validation site, not a function-entry hook.',
+        'port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt; identity-scan-leads-target.json',
+        [0x2A83F80,0x2D7A640])
 check('kServerFrameworkMode',0x6A65564,0x6F29B70,
     'Paired native server receive loads this exact RIP-relative dword as the TrocFind kind-mask argument. File-backed initial values are independently read as 11h in each exact image; this is not the descriptor server-kind constant 4 and no runtime value is presumed. The native consumer correspondence and operand establish the global role.',
     'port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-mode-operands.json',

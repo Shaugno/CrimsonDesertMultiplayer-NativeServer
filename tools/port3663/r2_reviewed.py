@@ -162,6 +162,18 @@ prove('B','src/mod/session2/offsets_s2.h',dict(kTroc_Kind='0x08',kTroc_Opcode='0
     kTroc_Channel='0x14',kTroc_Flags='0x16',kTrocKindServer='4'),
     'port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; troc-register-target.txt; troc-mode-operands.json; request-candidates.json',
     'Paired native receive 2773C20/2A0EA70 compares the incoming channel to descriptor byte+14 and branches on u16 flags+16. Paired TrocFind 143B2C0/165FAC0 tests descriptor kind dword+8 against its supplied mask. Target registration CB4BE0 loads descriptor u16+0C as the registry key and stores the same descriptor pointer. Named LoginUser/Character request descriptors independently have kind 4 at +8 in both exact files; kind 4 is not confused with the framework-mode global initial 11h. These member/value proofs do not adopt descriptor table boundaries or a new function RVA.')
+prove('C','src/mod/session2/identity_fix.cpp',dict(kLoginMgrActors='0xB8',kLoginMgrCount='0xC0'),
+    'port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt',
+    'Paired native FindByCharacterNo 2A83F80/2D7A640 acquires the same manager+68 read lock, walks the pointer vector at manager+B8 using u32 count+C0 and an eight-byte stride, then compares actor+68/status+20/number-pointer (70 -> 90) against the requested u64 number. The native selected-actor reference/result holder and lock release are preserved in both bodies. This proves fields, not the lookup function or validation-site RVAs.')
+prove('D','src/mod/session2/offsets_s2.h',dict(kWorldSystem_SaveManager='0x88'),
+    'port-evidence/r2/title-entry-reference.txt; title-predicate-candidates-target.txt; title-entry-target.txt',
+    'Reference title predicate 65EAD0/body9096890 obtains WorldSystem+88 then slot-vector+40/count+48. Target native title eligibility consumer 758EA0 follows the exact target WorldSystem global through +88 to that same independently identified save-manager vector/count and changed stride78. This establishes the hop, not equality of the two title predicates; target has an additional per-entry requirement-list gate which remains unported.')
+prove('C','src/mod/session2/session2.cpp',dict(NativeForbiddenRequests='2447,2042,2004; deny1001..1008(policy)'),
+    'port-evidence/r2/tunnel-control-native-target.txt; request-initializers-target.txt; request-handlers-target.txt; r2-wire-reviewed.json; src/mod/session2/control_filter.h',
+    'Named native ReserveShutDownServerReq maps 2790 -> 2447; ShutDownServerOnceTimer maps 2038 -> 2042 and its actual handler shuts down the native server; pointer-bearing OnLogoutXxxToServerReq remains 2004 and its handler reads process-local pointers. The complete 1001..1008 interval is conservative tunnel deny policy, including unclassified values: no native handler identity is inferred for 1003/1007. Field-time ID has its own proved row. The helper accepts explicit per-build native IDs; the current production caller remains legacy and the target route stays disabled.')
+control_row,=[r['r2'] for r in core if r['symbol']=='NativeForbiddenRequests']
+result[control_row]['members']=dict(kForbiddenReserveShutdownOp=2447,kForbiddenShutdownTimerOp=2042,
+    kForbiddenPointerRequestOp=2004)
 signatures=docs/'r2-signatures.json'
 if signatures.exists():
     result.update(json.loads(signatures.read_text())['rows'])

@@ -178,6 +178,13 @@ inline constexpr uint32_t kStatusCharacterNo = 0x90; // 2976 0x70; R2 C093
 inline constexpr uint32_t kComponentOwner = 0x08; // 2976 0x08; R2 C094
 // kActorUser: same native contract; 2976 0xA0; R2 C095
 inline constexpr uint32_t kKey_C096 = 0x60; // 2976 0x60; R2 C096
+inline constexpr uint32_t kLoginMgrActors = 0xB8; // 2976 0xB8; R2 C087
+inline constexpr uint32_t kLoginMgrCount = 0xC0; // 2976 0xC0; R2 C088
+inline constexpr uint32_t kForbiddenReserveShutdownOp = 2447; // 2976 2447 (paired schema); R2 C150
+inline constexpr uint32_t kForbiddenShutdownTimerOp = 2042; // 2976 2042 (paired schema); R2 C150
+inline constexpr uint32_t kForbiddenPointerRequestOp = 2004; // 2976 2004 (paired schema); R2 C150
+inline constexpr uint8_t kFindByNoScanBytes[] = {0x48, 0x8B, 0x8D, 0xB8, 0x00, 0x00, 0x00, 0x8B, 0x85, 0xC0, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x14, 0xC1}; // 2976 signature: src/mod/session2/identity_fix.cpp:238; R2 C084
+inline constexpr uint8_t kFindByNoReadBytes[] = {0x4C, 0x8B, 0x31, 0x49, 0x8B, 0x46, 0x68, 0x48, 0x8B, 0x40, 0x20}; // 2976 signature: src/mod/session2/identity_fix.cpp:241; R2 C086
 inline constexpr uint32_t kOpLoginUser = 2554; // 2976 2490; R2 C089
 inline constexpr uint32_t kOpLoginUserToFieldServerReq = 2554; // 2976 2490; R2 C124
 // kOpLoginUserToFieldServerReq: same native contract; 2976 2490; R2 C134
@@ -251,6 +258,7 @@ inline constexpr uint32_t kSaveHeaderDataSizeOffset = 22; // 2976 22 (paired sch
 inline constexpr uint32_t kSaveHeaderVersionMin = 1; // 2976 1 (paired schema); R2 D126
 inline constexpr uint32_t kSaveHeaderVersionMax = 2; // 2976 2 (paired schema); R2 D126
 inline constexpr uint32_t kSaveHeaderAllowedFlags = 2; // 2976 2 (paired schema); R2 D126
+inline constexpr uint32_t kWorldSystem_SaveManager = 0x88; // 2976 0x88; R2 D001
 inline constexpr uint32_t kOpLoginCharacterReq = 3081; // 2976 3093; R2 D112
 inline constexpr uint32_t kOpReserveShutDownServerReq = 2447; // 2976 2790; R2 D024
 inline constexpr uint32_t kOpSaveAutoReq = 2234; // 2976 3037; R2 D107

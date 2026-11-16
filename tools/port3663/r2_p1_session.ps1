@@ -4,10 +4,15 @@ param(
     [Parameter(Mandatory=$true)][ValidatePattern('^R2-P1-[0-9]{8}-[0-9]{6}$')][string]$Session,
     [int]$GamePid = 0,
     [ValidateSet('hp','loading')][string]$Profile = 'hp',
-    [switch]$Present
+    [switch]$Present,
+    [string]$BuildDir = '',
+    [ValidatePattern('^$|^R2-MATCH-PAUSE-[0-9]{8}-[0-9]{6}$')][string]$MatchingPauseSession = ''
 )
 $ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+$buildRoot = if (!$BuildDir) { Join-Path $root 'build' } elseif ([IO.Path]::IsPathRooted($BuildDir)) {
+    [IO.Path]::GetFullPath($BuildDir)
+} else { [IO.Path]::GetFullPath((Join-Path $root $BuildDir)) }
 $gameDir='D:\SteamLibrary\steamapps\common\Crimson Desert\bin64'
 $saveRoot=Join-Path $env:LOCALAPPDATA 'Pearl Abyss\CD\save'
 $backupRoot=Join-Path $root "backups\$Session"
@@ -42,7 +47,16 @@ function Manifest([string]$path) {
 function Canonical($value) { ConvertTo-Json -InputObject @($value) -Depth 8 -Compress }
 function AssertNoMatching {
     $jobs=@(Get-CimInstance Win32_Process -Filter "Name='java.exe' OR Name='bindiff.exe'" | Where-Object { $_.CommandLine -match 'R2(Match|Target|Graph|Correlation|Direct|Native)|PortTarget3663|Port3663|r2-(direct|graph|native)' })
-    if ($jobs.Count) { throw 'Offline matching jobs must finish or be stopped before the live session' }
+    if (!$jobs.Count) { return }
+    if (!$MatchingPauseSession) { throw 'Offline matching jobs must finish or be verifiably paused before the live session' }
+    & (Join-Path $PSScriptRoot 'r2_matching_pause.ps1') -Stage Verify -Session $MatchingPauseSession
+    $path=Join-Path $root "build\r2\matching-pause\$MatchingPauseSession.json"
+    $receipt=Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+    $allowed=@($receipt.entries | ForEach-Object { $_.pid })
+    if (@($jobs | Where-Object { $_.ProcessId -notin $allowed }).Count) { throw 'An unlisted offline matcher is active' }
+    @{session=$MatchingPauseSession;receipt_sha256=(Get-FileHash -LiteralPath $path).Hash;
+      state='every owned matcher thread verified suspended';pids=$allowed} |
+      ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'paused-matching.json')
 }
 if ($Stage -eq 'Prepare') {
     if (Test-Path -LiteralPath $backupRoot) { throw 'Session backup already exists; use a new session ID' }
@@ -88,14 +102,16 @@ Installed executable SHA256: $expected
 Backup files: $($before.Count)
 Backup manifest SHA256: $((Get-FileHash -LiteralPath (Join-Path $backupRoot 'save-manifest.json')).Hash)
 "@ | Set-Content (Join-Path $evidence 'question.md')
-    @{profile=$Profile;question=$sessionQuestion} | ConvertTo-Json | Set-Content (Join-Path $evidence 'session-profile.json')
+    @{profile=$Profile;question=$sessionQuestion;build_root=$buildRoot} | ConvertTo-Json | Set-Content (Join-Path $evidence 'session-profile.json')
     Write-Output "Prepared $Session; files=$($before.Count); backup verified; no deployment or game launch."
     exit
 }
 if (!(Test-Path -LiteralPath (Join-Path $evidence 'question.md'))) { throw 'Prepare this session first' }
 $profileFile=Join-Path $evidence 'session-profile.json'
-$preparedProfile=if (Test-Path -LiteralPath $profileFile) { (Get-Content -Raw -LiteralPath $profileFile | ConvertFrom-Json).profile } else { 'hp' }
+$prepared=if (Test-Path -LiteralPath $profileFile) { Get-Content -Raw -LiteralPath $profileFile | ConvertFrom-Json } else { @{profile='hp'} }
+$preparedProfile=$prepared.profile
 if ($Profile -ne $preparedProfile) { throw 'Profile differs from the written question; prepare a fresh session' }
+if ($prepared.build_root -and $prepared.build_root -ne $buildRoot) { throw 'Build directory differs from preparation' }
 $before=@(Get-Content -Raw -LiteralPath (Join-Path $backupRoot 'save-manifest.json') | ConvertFrom-Json)
 $installed=@(Get-Content -Raw -LiteralPath (Join-Path $backupRoot 'install-manifest.json') | ConvertFrom-Json)
 if ($Stage -eq 'Deploy') {
@@ -119,7 +135,7 @@ if ($Stage -eq 'Deploy') {
     if ($LASTEXITCODE) { throw 'Collector logic test failed' }
     & $py (Join-Path $PSScriptRoot 'reader_probe.py') --api-self-test
     if ($LASTEXITCODE) { throw 'Collector API test failed' }
-    & (Join-Path $root 'scripts\deploy.ps1')
+    & (Join-Path $root 'scripts\deploy.ps1') -BuildDir $buildRoot
     $ini="[general]`nplayer_name=R2PassiveP1`nstartup_delay_ms=0`n[net]`nenabled=0`n[overlay]`nenabled=0`n[sniffer]`nenabled=0`n[coop]`nenabled=0`n[session2]`nenabled=0`n"
     [IO.File]::WriteAllText((Join-Path $gameDir 'cdmp.ini'),$ini,[Text.UTF8Encoding]::new($false))
     Get-FileHash -LiteralPath (Join-Path $gameDir 'cdmp.asi'),(Join-Path $PSScriptRoot 'reader_probe.py'),(Join-Path $root 'src\mod\game\build_3663.h') | ConvertTo-Json | Set-Content (Join-Path $evidence 'deployed-hashes.json')

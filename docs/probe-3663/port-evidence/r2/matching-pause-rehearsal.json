@@ -1,0 +1,62 @@
+{
+  "scope": "Owned analysis jobs only; game closed",
+  "result": "PASS after receipt bookkeeping fix",
+  "first_failure": "Both jobs resumed; assigning a missing resumed_utc property failed. Corrected with Add-Member, finalized the receipt and reran successfully.",
+  "negative_checks": [
+    "Unrelated PowerShell process rejected before receipt/control",
+    "Changed creation identity rejected before resume",
+    "Duplicate completed resume performs no native operation"
+  ],
+  "receipts": [
+    {
+      "session": "R2-MATCH-PAUSE-20261116-070500",
+      "state": "resumed",
+      "receipt_sha256": "CF9117D77577950326A52B3352B51D5C2A53C04540A84E359D2E36640B8FC313",
+      "entries": [
+        {
+          "role": "VT",
+          "pid": 15928,
+          "before_threads": 43,
+          "paused_threads": 43,
+          "initially_all_zero": true,
+          "paused_all_positive": true,
+          "resume_issued": true
+        },
+        {
+          "role": "BinDiff",
+          "pid": 52832,
+          "before_threads": 1,
+          "paused_threads": 1,
+          "initially_all_zero": true,
+          "paused_all_positive": true,
+          "resume_issued": true
+        }
+      ]
+    },
+    {
+      "session": "R2-MATCH-PAUSE-20261116-070600",
+      "state": "resumed",
+      "receipt_sha256": "7ACFEB0B88F6B86EADC8BC572C6BFA5DD8B154E991944F35D985CE24E3F6255D",
+      "entries": [
+        {
+          "role": "VT",
+          "pid": 15928,
+          "before_threads": 43,
+          "paused_threads": 43,
+          "initially_all_zero": true,
+          "paused_all_positive": true,
+          "resume_issued": true
+        },
+        {
+          "role": "BinDiff",
+          "pid": 52832,
+          "before_threads": 1,
+          "paused_threads": 1,
+          "initially_all_zero": true,
+          "paused_all_positive": true,
+          "resume_issued": true
+        }
+      ]
+    }
+  ]
+}

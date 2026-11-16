@@ -38,14 +38,16 @@ db.close()
 r1 = {r['symbol']:r for r in json.loads((docs/'PORT-REVIEWED.json').read_text())['matches']}
 reviewed = json.loads(args.reviewed.read_text()) if args.reviewed else {}
 checks = json.loads(args.checks.read_text()) if args.checks.exists() else {}
+blocker_file=docs/'r2-blockers.json'
+blockers=json.loads(blocker_file.read_text()) if blocker_file.exists() else {}
 def standard_conflict(source,target):
     destinations={m['target'] for m in vt.get(source,[])}
     binary=bd.get(source)
     return bool((destinations and destinations!={target}) or
         (binary and binary['confidence']>=0.8 and binary['target']!=target))
 
-def standard_support(source,target):
-    matches=vt.get(source,[])
+def standard_support(source,target,*,function_only=False):
+    matches=[m for m in vt.get(source,[]) if not function_only or m['type']=='FUNCTION']
     destinations={m['target'] for m in matches}
     support=[]
     binary=bd.get(source)
@@ -89,7 +91,7 @@ for row in core:
         direct_conflict=standard_conflict(int(value,0),int(check['target'],0))
         if not direct_conflict and not support and anchor:
             support=[f'Native operand in anchor {hex(anchor[0])} -> {hex(anchor[1])}: '+s
-                     for s in standard_support(*anchor)]
+                     for s in standard_support(*anchor,function_only=True)]
         if support:
             result.update(target=check['target'],adopted=True,method='; '.join(support),
                 second_check=check['second_check'],evidence=check['evidence'],confidence='high')
@@ -103,6 +105,9 @@ for row in core:
         assert manual['evidence'] and manual['second_check'] and manual['target'] is not None
         assert manual['old']==value and manual['symbol']==row['symbol'],row['r2']
         result.update(manual,adopted=True,confidence='high')
+    if not result['adopted'] and row['r2'] in blockers:
+        missing=blockers[row['r2']]['missing']
+        result['next_experiment']=blockers[row['r2']]['experiment']
     result['missing'] = '' if result['adopted'] else missing
     results.append(result)
 manifest = [dict(path=str(p.resolve()),bytes=p.stat().st_size,sha256=hashlib.file_digest(p.open('rb'),'sha256').hexdigest())
@@ -118,7 +123,9 @@ for tier in 'ABCD':
     text += f"Tier {tier}: {sum(r['adopted'] for r in selected)} adopted, {sum(not r['adopted'] for r in selected)} blocked.\n\n"
 text += '| Tier | Row / symbol | 3663 | Method | Second check | Confidence / missing fact |\n|---|---|---|---|---|---|\n'
 for row in results:
-    cells = [row['tier'],row['row']+' '+row['symbol'],str(row['target'] or 'unadopted'),row['method'],row['second_check'],row['confidence']+(': '+row['missing'] if row['missing'] else '')]
+    detail=row['confidence']+(': '+row['missing'] if row['missing'] else '')
+    if row.get('next_experiment'): detail+=' Next: '+row['next_experiment']
+    cells = [row['tier'],row['row']+' '+row['symbol'],str(row['target'] or 'unadopted'),row['method'],row['second_check'],detail]
     text += '| '+' | '.join(s.replace('|','\\|').replace('\n',' ') for s in cells)+' |\n'
 (args.output_dir/'R2-MATCHES.md').write_text(text)
 print(Counter((r['tier'],r['adopted']) for r in results))

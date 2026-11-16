@@ -1,0 +1,34 @@
+{
+  "A026": {
+    "missing": "Validate the unpublished definition-derived HP selector against visible HP on exact 3663, then publish it only with adopted definition-slot RVAs. Native code selects a runtime key; literal zero is not proved.",
+    "experiment": "Prepared P1 HP profile: compare both definition registries and one unique native current/max entry with the character HP display and ordinary regeneration."
+  },
+  "A027": {
+    "missing": "The legacy reader still consumes stamina key 22. Prove the target stamina key, or publish an actual HP-only 3663 layout and explicitly revise target reachability; the unpublished helper alone does not retire this row.",
+    "experiment": "Use native stat-definition consumers to identify stamina, or complete the already prepared HP-only target path after P1 and standard address validation."
+  },
+  "A028": {
+    "missing": "Target loading readiness and the old parked world position (0,1000,0) are unproved. A native reference-acquisition predicate was rejected because it mutates references.",
+    "experiment": "Prepared loading profile: guarded title/Continue/walk/turn/fast-travel trace, followed by real L1 once the resulting readiness rule is implemented and all A values are adopted."
+  },
+  "B046": {
+    "missing": "Native packet-buffer+8010 contains native metadata. Its downstream consumers and buffer lifetime do not yet prove safe reuse for the mod tag.",
+    "experiment": "Follow PostPacket, native queue consumers and destruction/free paths in both images before routing any target tag writes."
+  },
+  "B047": {
+    "missing": "Native packet-buffer+8018 receives the session epoch at +B8. Its downstream consumers and lifetime do not yet prove safe reuse for the mod magic.",
+    "experiment": "Trace all native reads of +8018 through dispatch/free queues; require a safe target storage strategy before enabling the tunnel."
+  },
+  "B075": {
+    "missing": "The legacy shared packet limit 7FE0 differs from the target native PostPacket bound 7FDA and ordinary decoder payload bound 7FC1. A target-specific acceptance bound and complete framing check remain necessary.",
+    "experiment": "Review native writer/decoder length arithmetic together, then add per-build boundary regressions without changing legacy limits or assuming a new mod wire format."
+  },
+  "B078": {
+    "missing": "The native descriptor scan skips 80h bytes after a match, then advances eight more. Target minimum instance span/alignment for every scanned descriptor is not yet established; the skip must not hide a neighbouring target descriptor.",
+    "experiment": "Prove the common target descriptor storage contract from native initialization, or implement a target scan that advances eight bytes throughout and does not rely on native object size."
+  },
+  "D130": {
+    "missing": "Target title eligibility adds per-entry u32-list membership at +68/count+70 against available .admeta IDs at global 71AEAA0/71AEAA8. Target producer 14AA720 reads those IDs in addition to names; reference producer 128D360 only builds names. The new global dependencies, list lifetime/coherence and complete target parser remain unadopted/unimplemented. The old domain-only playable count is insufficient.",
+    "experiment": "Correlate the native metadata producer, validate the new ID-vector operands and saved-entry list lifecycle, then introduce the new target dependencies and implement/test complete membership-based eligibility. Retain native resource IDs without inferring DLC semantics."
+  }
+}

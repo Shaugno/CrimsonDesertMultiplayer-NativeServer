@@ -20,6 +20,7 @@
 #include "mod/session2/child_hold.h"
 #include "mod/session2/clock_gate.h"
 #include "mod/session2/clock_push.h"
+#include "mod/session2/control_filter.h"
 #include "mod/session2/clock_push_logic.h"
 #include "mod/session2/combat_follow.h"
 #include "mod/session2/companion_probe.h"
@@ -275,8 +276,9 @@ void kill_tunnel(const std::string& why) {
 // (reloj.md §5.1, 0x2BC8970 publishes for any field owner).
 constexpr uint16_t kOpSetFieldTimeReq = 2125;
 bool never_from_guest(uint16_t opcode) {
-    return opcode == 2790 || opcode == 2038 || opcode == 2004 || opcode == kOpSetFieldTimeReq ||
-           (opcode >= 1001 && opcode <= 1008);
+    // This caller remains the legacy 2976 path. A target route must supply
+    // its separately proved native IDs; it cannot inherit this aggregate.
+    return blocked_native_control(opcode, {2790, 2038, 2004, kOpSetFieldTimeReq});
 }
 // P8 session 25, W1 (block_guest_weather, research/noche/clima-hora.md §5.2): user 2's SyncWeatherStateReq 2560
 // writes the host field's weather flags (0x20E6FE0, no owner check; the server answers nothing). Written by

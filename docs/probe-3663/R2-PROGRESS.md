@@ -2,6 +2,42 @@
 
 Latest continuation:
 
+- Current core: 395 (A37/B78/C150/D130), with 190 additional native contracts
+  plus 17 retained R1 values and 46 independent RVA checks awaiting standards.
+  B078 records the native-instance scan skip that the cut previously missed.
+  C150's known native protected IDs are proved; 1001..1008 is an unchanged
+  conservative deny interval, not a claim about every individual handler.
+  The new explicit control table denies everything when incomplete; actual
+  production still uses legacy values and all 3663 tiers remain closed.
+- Control-policy build initially passed 101/101 in 87.10 s. A subsequent build
+  hit Proton Drive locks (MSB3491, LNK1168/LNK1201), with ample disk space.
+  Optional BuildDir parameters preserve existing defaults while allowing an
+  unsynced build. Reusing pinned dependency source trees, the external x64
+  RelWithDebInfo build passed 101/101 in 131.07 s; smoke 78 remote states,
+  zero rejected, clean network stop/worker exit. offsync-*.txt and the failed
+  control-policy-final-build.txt preserve the actual failure/fix/rerun.
+- P1 now permits only receipt-verified suspended owned matchers during live
+  collection. Pause/Verify/Resume and duplicate-resume/foreign-PID/reused-PID
+  rejection were rehearsed without the game. R2-MATCHING-PAUSE.md records the
+  bookkeeping failure and fix. No matcher output is treated as finished by
+  suspension. The fresh HP backup/question is R2-P1-20261116-072000 (23 files,
+  verified); user presence has now been confirmed for the batched HP/loading
+  sitting. No live result is claimed yet.
+
+- Native character-number lookup is identified at 2D7A640 by its complete
+  locked list/number/reference role. Member +B8/+C0 and two validation-window
+  byte contracts are proved; their site RVAs still await standard support.
+  Title consumer 758EA0 independently confirms the WorldSystem+88 save-manager
+  hop, but exposes a new requirement-list eligibility gate absent from the
+  legacy parser. D130 stays blocked on that complete rule. Catalog is 189
+  plus R1 17; independent RVA candidates 46; core remains 394. Per-row critical
+  missing facts/next experiments are in r2-blockers.json, consumed by the
+  real evidence join without changing adoption decisions.
+- Evidence joins now require a FUNCTION association for a VT-only native
+  operand anchor. A DATA association cannot stand in for a function match;
+  a dedicated synthetic rejection fixture passes. All previous conflict and
+  manual-RVA bypass fixtures still pass.
+
 - Tier A preparation now has an unpublished HP-only native reader selected
   by an explicit definition-layout option. It requires both complete registry
   chains to agree on a u16 key, one valid matching stat, stable definitions

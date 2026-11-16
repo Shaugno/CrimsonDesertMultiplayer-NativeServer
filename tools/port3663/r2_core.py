@@ -92,7 +92,7 @@ raw('C', S+'field_share.h', 'struct FieldUserEntry', 'FieldUserEntryLayout', '16
 raw('D', S+'guest_save_logic.h', 'constexpr bool slot_number_valid', 'NativeSlotNumberDomain', '0..3;100..108;200..207', 'verify supported native slots before choosing reserved mod slot204')
 raw('D', S+'guest_save_logic.h', 'constexpr bool slot_memory_only', 'NativeMemoryOnlySlots', '201;205..207', 'verify which slots cannot be persisted')
 raw('D', S+'guest_save_guest.cpp', 'u32 key | u32 slot | u8 ok', 'SaveCurrentAckLayout', '14 B; key0 slot4 ok8 flag9 result10', 'native 3016 result parser')
-raw('C', S+'session2.cpp', 'return opcode == 2790', 'NativeForbiddenRequests', '2790,2038,2004,1001..1008', 'native shutdown, pointer and connection messages must never reach remote server')
+raw('C', S+'session2.cpp', 'return blocked_native_control(opcode', 'NativeForbiddenRequests', '2790,2038,2004,1001..1008', 'native shutdown/pointer IDs plus unchanged conservative connection-deny interval policy; field-time ID is a separate row')
 raw('D', S+'guest_save_wire.h', 'inline std::vector<uint8_t> make_save_req', 'SaveReq2910Layout', 'slot0:u32; length4:u32; UTF16+8; terminator; 10+2n bytes; n<=30', 'verify native 2910 writer and handler, including maximum native name length')
 raw('D', S+'guest_save_wire.h', 'kOpLoginCharacterReq =', 'LoginCharacterSaveLayout', 'flag0:u8; characterNo1:u64; slot9:u32', 'native 3093 payload used for selecting and holding the guest save')
 raw('D', S+'guest_save_logic.h', 'i.version = load_le', 'NativeSaveHeaderLayout',
@@ -111,6 +111,8 @@ raw('B', S+'guest.cpp', 'peek(crypto + 0x24', 'NativeCryptoEnabledOffset', '0x24
     'guest packet extraction rejects encrypted native frames based on this game field')
 raw('B', S+'guest.cpp', '!peek(pb + 0x8020', 'NativePacketEpochOffset', '0x8020',
     'guest_send takes the native packet epoch before the session fallback')
+raw('B', S+'server.cpp', 'a += 0x80;', 'NativeTrocScanSkip', '0x80',
+    'load_channels skips native instance storage after a matching RTTI descriptor; verify the minimum instance span or remove this optimization on the target path')
 # Split aggregate address arrays: each independent call/error address is a row.
 expanded = []
 for row in rows:

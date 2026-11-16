@@ -57,6 +57,22 @@
       "symbol": "kSyncSessionSendHead",
       "second_check": "R1 PORT-REVIEWED.json kSyncSessionSend; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 16 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
       "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+    },
+    "C084": {
+      "target": "{0x48, 0x8B, 0x8D, 0xB8, 0x00, 0x00, 0x00, 0x8B, 0x85, 0xC0, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x14, 0xC1}",
+      "method": "paired native validation-window bytes",
+      "old": "{0x48, 0x8B, 0x8D, 0xB8, 0x00, 0x00, 0x00, 0x8B, 0x85, 0xC0, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x14, 0xC1}",
+      "symbol": "kFindByNoScanBytes",
+      "second_check": "Reviewed native FindByCharacterNo scans manager+B8/count+C0 and reads actor+68/status+20, then the changed number pointer+90. Both instruction windows are decoded boundaries within the paired .pdata functions. These are validation windows, not inline-hook entries; C083/C085 still require standard support separately.",
+      "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt"
+    },
+    "C086": {
+      "target": "{0x4C, 0x8B, 0x31, 0x49, 0x8B, 0x46, 0x68, 0x48, 0x8B, 0x40, 0x20}",
+      "method": "paired native validation-window bytes",
+      "old": "{0x4C, 0x8B, 0x31, 0x49, 0x8B, 0x46, 0x68, 0x48, 0x8B, 0x40, 0x20}",
+      "symbol": "kFindByNoReadBytes",
+      "second_check": "Reviewed native FindByCharacterNo scans manager+B8/count+C0 and reads actor+68/status+20, then the changed number pointer+90. Both instruction windows are decoded boundaries within the paired .pdata functions. These are validation windows, not inline-hook entries; C083/C085 still require standard support separately.",
+      "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt"
     }
   }
 }

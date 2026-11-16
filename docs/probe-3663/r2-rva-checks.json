@@ -410,6 +410,28 @@
       45885936
     ]
   },
+  "C083": {
+    "target": "0x2d7a726",
+    "old": "0x2a84066",
+    "symbol": "kFindByNoScan",
+    "second_check": "Paired native FindByCharacterNo manager vector/count validation window: same requested u64 number comparison, manager+68 read-lock protocol and owned result holder; vector+B8/count+C0 with pointer stride eight, and changed status number pointer+90. Target discovered by a raw displacement lead, then complete native body and instruction boundaries reviewed. This is a validation site, not a function-entry hook.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt; identity-scan-leads-target.json",
+    "anchor": [
+      44580736,
+      47687232
+    ]
+  },
+  "C085": {
+    "target": "0x2d7a750",
+    "old": "0x2a84090",
+    "symbol": "kFindByNoRead",
+    "second_check": "Paired native FindByCharacterNo actor component/status validation window: same requested u64 number comparison, manager+68 read-lock protocol and owned result holder; vector+B8/count+C0 with pointer stride eight, and changed status number pointer+90. Target discovered by a raw displacement lead, then complete native body and instruction boundaries reviewed. This is a validation site, not a function-entry hook.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt; identity-scan-leads-target.json",
+    "anchor": [
+      44580736,
+      47687232
+    ]
+  },
   "B073": {
     "target": "0x6f29b70",
     "old": "0x6a65564",

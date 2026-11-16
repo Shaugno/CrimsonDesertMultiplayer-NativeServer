@@ -14,6 +14,7 @@ assert new.sha256=='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E5243
 rows=[]
 for pe,rva in ((old,0x6A65564),(new,0x6F29B70)):
     value=pe.u32(pe.offset(rva,4))
+    assert value==0x11
     rows.append(dict(sha256=pe.sha256,rva=hex(rva),initial_file_value=value,
         role='ServerOnRecvPacket native TrocFind mask operand; runtime mutability is not inferred'))
 root=Path(__file__).resolve().parents[2]

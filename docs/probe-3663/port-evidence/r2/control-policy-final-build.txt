@@ -1,0 +1,157 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26300.
+-- Fetching Zydis (v4.1.0)...
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE)
+-- Configuring done (4.0s)
+-- Generating done (5.9s)
+-- Build files have been written to: C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build
+MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
+
+  cdmp_pkt3663_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_lib.lib
+  cdmp_diag3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_diag3576_lib.lib
+  cdmp_pkt3663_live_dummy.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_dummy.exe
+  cdmp_host.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_host.exe
+  cdmp_pkt3576_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_lib.lib
+  cdmp_pkt3663_live_identity.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_identity.lib
+  cdmp_pkt3576_live_identity.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_identity.lib
+  cdmp_coop3663.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_coop3663.lib
+  cdmp_pkt3576_live_dummy.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_dummy.exe
+  cdmp_pkt3663_live_ctl_stub.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_ctl_stub.dll
+  cdmp_dx12_test.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_dx12_test.exe
+  Zycore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\zydis-build\zycore\RelWithDebInfo\Zycore.lib
+  cdmp_pkt3663_observer.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_observer.lib
+  imgui.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\imgui.lib
+  cdmp_tests_optd_bg_speed.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_bg_speed.exe
+  cdmp_common.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_common.lib
+  cdmp_tests_optd_freeze_watchdog.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_freeze_watchdog.exe
+  cdmp_tests_optd_log_ring.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_log_ring.exe
+  build_guard_tests.cpp
+  Retrying operation on file "cdmp_tests_optd_x_veto.dir\RelWithDebInfo\cdmp_tes.256E6E3C.tlog\cdmp_tests_optd_x_veto.lastbuildstate" (attempt 2 of 3). Reason: Access to the path is denied.
+  Retrying operation on file "cdmp_tests_optd_x_veto.dir\RelWithDebInfo\cdmp_tes.256E6E3C.tlog\cdmp_tests_optd_x_veto.lastbuildstate" (attempt 3 of 3). Reason: Access to the path is denied.
+  cdmp_tests_optd_shop_troc.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_troc.exe
+  cdmp_tests_optd_replay.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_replay.exe
+  cdmp_tests_optd_tree_bend.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_tree_bend.exe
+  cdmp_tests_optd_docked_gimmicks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_docked_gimmicks.exe
+  cdmp_tests_optd_seq_foreign.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_foreign.exe
+  cdmp_tests_optd_user2_funnels.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_funnels.exe
+  cdmp_tests_optd_rope_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_rope_probe.exe
+  cdmp_tests_optd_weather_sync.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_weather_sync.exe
+  cdmp_tests_optd_seq_present.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_present.exe
+  cdmp_tests_optd_user2_shops.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_shops.exe
+  cdmp_tests_optd_two_inst.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_two_inst.exe
+  cdmp_tests_optd_user2_road.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_road.exe
+  cdmp_tests_optd_world_anchor.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_world_anchor.exe
+  cdmp_tests_optd_seq_play.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_play.exe
+  cdmp_tests_optd.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd.exe
+  cdmp_tests_optd_mount_sync.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_mount_sync.exe
+  cdmp_tests_optd_slot_refresh.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_slot_refresh.exe
+  cdmp_tests_optd_c4.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_c4.exe
+  cdmp_tests_optd_observer_milestone.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_observer_milestone.exe
+  cdmp_tests_optd_seq_copy.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_copy.exe
+  cdmp_tests_optd_ui_pause.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_ui_pause.exe
+  cdmp_tests_optd_remote_rope.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_rope.exe
+  cdmp_tests_optd_combat.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_combat.exe
+  cdmp_tests_optd_shop_trade.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_trade.exe
+  cdmp_tests_optd_guest_stage.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_stage.exe
+  cdmp_tests_optd_user2_stages.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_user2_stages.exe
+  cdmp_tests_optd_p8_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_p8_probe.exe
+  cdmp_tests_optd_npc_activation.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_activation.exe
+  cdmp_tests_optd_seq_bodyanim.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_bodyanim.exe
+  cdmp_tests_optd_scene_level_share.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_level_share.exe
+  cdmp_tests_optd_rejoin.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_rejoin.exe
+  cdmp_tests_optd_npc_family.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_family.exe
+  cdmp_tests_optd_guest_actor.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_actor.exe
+  cdmp_tests_optd_seq_restore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_seq_restore.exe
+  cdmp_tests.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests.exe
+  cdmp_tests_optd_shop_c1.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_shop_c1.exe
+  cdmp_tests_optd_publication_gate.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_publication_gate.exe
+  cdmp_tests_optd_npc_probe_client.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_probe_client.exe
+  cdmp_tests_optd_remote_motion.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_motion.exe
+  cdmp_tests_optd_clock_push.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_clock_push.exe
+  cdmp_tests_optd_scene_diag.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_diag.exe
+  cdmp_tests_optd_npc_family_vehicles.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_npc_family_vehicles.exe
+  cdmp_tests_optd_catch_seq.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_catch_seq.exe
+  cdmp_tests_optd_guest_save_b.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_save_b.exe
+  cdmp_pkt3576_live_control.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_control.lib
+  cdmp_tests_optd_hold_scene_order.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hold_scene_order.exe
+  cdmp_tests_coop3663.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_coop3663.exe
+  cdmp_tests_optd_inject.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_inject.exe
+  cdmp_tests_pkt3663.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663.exe
+  cdmp_tests_optd_guest_inbound.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_inbound.exe
+  cdmp_tests_optd_observer_stage.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_observer_stage.exe
+  cdmp_tests_optd_gimmick_event_dedup.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_gimmick_event_dedup.exe
+  cdmp_tests_optd_fast_travel.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_fast_travel.exe
+  cdmp_tests_optd_sched_load.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_sched_load.exe
+  cdmp_tests_optd_door_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_door_trace.exe
+  cdmp_tests_optd_enemy_damage_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_enemy_damage_probe.exe
+  cdmp_diag3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_diag3576.exe
+  cdmp_tests_optd_fast_rearm.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_fast_rearm.exe
+  cdmp_tests_optd_guest_save.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_save.exe
+  cdmp_tests_optd_remote_interp.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_remote_interp.exe
+  Zydis.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\zydis-build\RelWithDebInfo\Zydis.lib
+  cdmp_tests_pkt3663_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_live.exe
+  cdmp_tests_pkt3663_observer.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_observer.exe
+  cdmp_pkt3663_live_control.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_control.lib
+  cdmp_peer.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_peer.exe
+  cdmp_tests_diag3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_diag3576.exe
+  cdmp_tests_pkt3576.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576.exe
+  cdmp_tests_optd_owner_fanout.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_owner_fanout.exe
+  cdmp_probe.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_probe.exe
+  cdmp_tests_optd_reload_wait.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_reload_wait.exe
+  cdmp_tests_optd_scene_acks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_scene_acks.exe
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(394,5): error MSB3491: Could not write lines to file "cdmp_tests_optd_x_veto.dir\RelWithDebInfo\cdmp_tes.256E6E3C.tlog\cdmp_tests_optd_x_veto.lastbuildstate". Access to the path is denied. The file is locked by: "Proton Drive (29552)" [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests_optd_x_veto.vcxproj]
+  cdmp_pkt3663_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_ctl.exe
+  cdmp_pkt3663_live_ctl_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_ctl_fixture.exe
+  cdmp_pkt3663_entry_verify.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_entry_verify.lib
+  Scanning sources for module dependencies...
+  cdmp_pkt3576_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_ctl.exe
+  cdmp_tests_optd_host_save.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_host_save.exe
+  cdmp_pkt3576_live_ctl_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_ctl_fixture.exe
+  pkt3663_ack_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\pkt3663_ack_trace.exe
+  port3663_fingerprints.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\port3663_fingerprints.exe
+  cdmp_tests_pkt3663_entries.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_entries.exe
+  pkt3663_scan.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\pkt3663_scan.exe
+  cdmp_tests_optd_s9.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_s9.exe
+  safetyhook.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\safetyhook-build\RelWithDebInfo\safetyhook.lib
+  Retrying operation on file "cdmp_tests_optd_pets.dir\RelWithDebInfo\cdmp_tes.43E2477A.tlog\cdmp_tests_optd_pets.lastbuildstate" (attempt 2 of 3). Reason: Access to the path is denied.
+  Retrying operation on file "cdmp_tests_optd_pets.dir\RelWithDebInfo\cdmp_tes.43E2477A.tlog\cdmp_tests_optd_pets.lastbuildstate" (attempt 3 of 3). Reason: Access to the path is denied.
+  cdmp_pkt3576_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_capture.lib
+  cdmp_tests_optd_hook_traps.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hook_traps.exe
+  cdmp_tests_optd_hook_near.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hook_near.exe
+  cdmp_tests_optd_guest_role.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_guest_role.exe
+  cdmp_pkt3663_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_capture.lib
+  cdmp_tests_optd_identity.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_identity.exe
+  cdmp_tests_optd_s3.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_s3.exe
+  cdmp_tests_pkt3576_capture_faults.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_capture_faults.exe
+  cdmp_tests_optd_report.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_report.exe
+  cdmp_tests_optd_companion.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_companion.exe
+  cdmp_tests_optd_character_hold.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_character_hold.exe
+  cdmp_tests_optd_hooks_redirect.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks_redirect.exe
+  cdmp_tests_optd_clock.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_clock.exe
+  cdmp_tests_optd_field.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_field.exe
+  cdmp_tests_optd_hooks_trace.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks_trace.exe
+  cdmp_pkt3576_live_fixture_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_fixture_lib.lib
+  cdmp_tests_pkt3576_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_capture.exe
+  cdmp_pkt3576_live_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3576_live_lib.lib
+  cdmp_pkt3663_live_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_lib.lib
+  cdmp_tests_optd_identity_fix.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_identity_fix.exe
+  cdmp_pkt3663_live_fixture_lib.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_pkt3663_live_fixture_lib.lib
+  cdmp_tests_pkt3663_capture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_capture.exe
+  cdmp_tests_optd_child_hold.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_child_hold.exe
+  cdmp_pkt3576_live_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live_fixture.dll
+  cdmp_tests_optd_hooks.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_optd_hooks.exe
+  cdmp_pkt3576_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3576_live.dll
+  cdmp_tests_pkt3576_live_faults.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live_faults.exe
+  cdmp_pkt3663_live_fixture.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live_fixture.dll
+  cdmp_tests_pkt3576_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live.exe
+  cdmp_tests_pkt3576_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live_ctl.exe
+  cdmp_pkt3663_live.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_pkt3663_live.dll
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(394,5): error MSB3491: Could not write lines to file "cdmp_tests_optd_pets.dir\RelWithDebInfo\cdmp_tes.43E2477A.tlog\cdmp_tests_optd_pets.lastbuildstate". Access to the path is denied. The file is locked by: "Proton Drive (29552)" [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests_optd_pets.vcxproj]
+  player_reader.cpp
+  cdmp_tests_pkt3576_live_host.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3576_live_host.exe
+  cdmp_tests_pkt3663_live_host.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_live_host.exe
+  cdmp_tests_pkt3663_live_ctl.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_pkt3663_live_ctl.exe
+  mod.cpp
+LINK : fatal error LNK1168: cannot open C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_build_guard.exe for writing (error code: 32) [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_tests_build_guard.vcxproj]
+  session2.cpp
+  Generating Code...
+LINK : fatal error LNK1201: error writing to program database 'C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp.pdb'; check for insufficient disk space, invalid path, or insufficient privilege [C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\cdmp_mod.vcxproj]

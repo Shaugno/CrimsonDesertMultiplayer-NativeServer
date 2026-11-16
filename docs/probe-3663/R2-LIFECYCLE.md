@@ -12,7 +12,8 @@ word is the lock pointer, busy is +60, storage is +50, slot vector/count are
 handler corroborate lock/busy/storage ownership. Paired title-vector population
 and fallback consumers now also confirm capacity +4C, slot number +0 and the
 metadata qword +8; the qword's units are not inferred. The lock's self-offset
-+8 and title's WorldSystem-to-save-manager hop remain unproved.
++8 remains unproved. The later native title eligibility consumer 758EA0
+independently confirms WorldSystem-to-save-manager +88 and the same vector.
 
 Paired LoadSlot 186F570/1A16C40 explicitly accepts 0..3, 100..108 and 200..207.
 Native refresh independently checks that domain before its special disk
@@ -69,9 +70,24 @@ The actual remote title parser uses its own stride constant, so that use is
 now included separately instead of treating the similarly named header alias
 as sufficient. Native population 1871D60→1A19720 and fallback
 1872620→1A1A080 use stride 68→78. Copy helpers 18735F0→1A1B1A0 copy the
-slot u32 at +0 and metadata qword at +8. Target eligibility for the title-only
-0..2 / 100..108 domain remains unproved (D130). Manager LoadSlot's broader
-domain above is not substituted for this UI predicate.
+slot u32 at +0 and metadata qword at +8. Target title consumer 758EA0 confirms
+the 0..2/100..108 domain, but adds an important gate: each entry's u32 list
+at +68/count+70 must be covered by a global set at 71AEAA0/71AEAA8 before
+that entry makes the predicate true. Its meaning and producers are not yet
+proved; it is not labelled as DLC or another feature by assumption. This
+extra vector accounts for native state the legacy domain-only parser does
+not consume. D130 remains blocked on the complete target eligibility rule,
+not just the already observed number range. The producer review now identifies
+these as .admeta metadata IDs: paired file-pattern producers 128D360/14AA720
+enumerate `*.admeta`; target additionally reads a u32 after each metadata name
+and builds the ID vector at 71AEAA0/count71AEAA8. Reference only builds names.
+The target lobby save path 2E88000 copies that ID set into saved metadata;
+title population copies its list into the new entry vector. These are new
+dependencies without an established old ID-vector counterpart, still requiring
+an adoption/guard strategy and a complete target parser. The operands and
+pattern bytes are reproducible with r2_admeta_constants.py. This consumer is not asserted
+to be the exact counterpart of the old inverted predicate 65EAD0. Manager
+LoadSlot's broader domain is not substituted for the title rule.
 
 Remaining work includes standard support for native flush and all classified return/call sites and
 entry signatures, the rest of the save manager's layout, native removal and

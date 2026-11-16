@@ -1,12 +1,15 @@
 # Synthetic host/peer loopback only. Never launches or attaches to the game.
-param([int]$Seconds = 8, [int]$Port = 39763)
+param([int]$Seconds = 8, [int]$Port = 39763, [string]$BuildDir = '')
 $ErrorActionPreference = 'Stop'
 if ($Seconds -lt 6 -or $Seconds -gt 60 -or $Port -lt 1024 -or $Port -gt 65535) { throw 'Invalid smoke parameters' }
 if (Get-Process CrimsonDesert -ErrorAction SilentlyContinue) { throw 'Keep the game closed' }
 if (Get-NetUDPEndpoint -LocalPort $Port -ErrorAction SilentlyContinue) { throw "UDP port $Port is already used" }
 $root = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-$binaryDir = Join-Path $root 'build\bin\RelWithDebInfo'
-$run = Join-Path $root 'build\e2e'
+$buildRoot = if (!$BuildDir) { Join-Path $root 'build' } elseif ([IO.Path]::IsPathRooted($BuildDir)) {
+    [IO.Path]::GetFullPath($BuildDir)
+} else { [IO.Path]::GetFullPath((Join-Path $root $BuildDir)) }
+$binaryDir = Join-Path $buildRoot 'bin\RelWithDebInfo'
+$run = Join-Path $buildRoot 'e2e'
 New-Item -ItemType Directory -Force -Path $run | Out-Null
 foreach ($name in @('cdmp.asi','cdmp_host.exe','cdmp_peer.exe')) {
     Copy-Item -LiteralPath (Join-Path $binaryDir $name) -Destination (Join-Path $run $name) -Force

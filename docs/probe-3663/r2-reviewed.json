@@ -1190,6 +1190,43 @@
     "old": "4",
     "symbol": "kTrocKindServer"
   },
+  "C087": {
+    "target": "0xB8",
+    "method": "paired native code consumption",
+    "second_check": "Paired native FindByCharacterNo 2A83F80/2D7A640 acquires the same manager+68 read lock, walks the pointer vector at manager+B8 using u32 count+C0 and an eight-byte stride, then compares actor+68/status+20/number-pointer (70 -> 90) against the requested u64 number. The native selected-actor reference/result holder and lock release are preserved in both bodies. This proves fields, not the lookup function or validation-site RVAs.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt",
+    "old": "0xB8",
+    "symbol": "kLoginMgrActors"
+  },
+  "C088": {
+    "target": "0xC0",
+    "method": "paired native code consumption",
+    "second_check": "Paired native FindByCharacterNo 2A83F80/2D7A640 acquires the same manager+68 read lock, walks the pointer vector at manager+B8 using u32 count+C0 and an eight-byte stride, then compares actor+68/status+20/number-pointer (70 -> 90) against the requested u64 number. The native selected-actor reference/result holder and lock release are preserved in both bodies. This proves fields, not the lookup function or validation-site RVAs.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt",
+    "old": "0xC0",
+    "symbol": "kLoginMgrCount"
+  },
+  "D001": {
+    "target": "0x88",
+    "method": "paired native code consumption",
+    "second_check": "Reference title predicate 65EAD0/body9096890 obtains WorldSystem+88 then slot-vector+40/count+48. Target native title eligibility consumer 758EA0 follows the exact target WorldSystem global through +88 to that same independently identified save-manager vector/count and changed stride78. This establishes the hop, not equality of the two title predicates; target has an additional per-entry requirement-list gate which remains unported.",
+    "evidence": "port-evidence/r2/title-entry-reference.txt; title-predicate-candidates-target.txt; title-entry-target.txt",
+    "old": "0x88",
+    "symbol": "kWorldSystem_SaveManager"
+  },
+  "C150": {
+    "target": "2447,2042,2004; deny1001..1008(policy)",
+    "method": "paired native code consumption",
+    "second_check": "Named native ReserveShutDownServerReq maps 2790 -> 2447; ShutDownServerOnceTimer maps 2038 -> 2042 and its actual handler shuts down the native server; pointer-bearing OnLogoutXxxToServerReq remains 2004 and its handler reads process-local pointers. The complete 1001..1008 interval is conservative tunnel deny policy, including unclassified values: no native handler identity is inferred for 1003/1007. Field-time ID has its own proved row. The helper accepts explicit per-build native IDs; the current production caller remains legacy and the target route stays disabled.",
+    "evidence": "port-evidence/r2/tunnel-control-native-target.txt; request-initializers-target.txt; request-handlers-target.txt; r2-wire-reviewed.json; src/mod/session2/control_filter.h",
+    "old": "2790,2038,2004,1001..1008",
+    "symbol": "NativeForbiddenRequests",
+    "members": {
+      "kForbiddenReserveShutdownOp": 2447,
+      "kForbiddenShutdownTimerOp": 2042,
+      "kForbiddenPointerRequestOp": 2004
+    }
+  },
   "B022": {
     "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}",
     "method": "native entry bytes at retained R1 function",
@@ -1245,6 +1282,22 @@
     "symbol": "kSyncSessionSendHead",
     "second_check": "R1 PORT-REVIEWED.json kSyncSessionSend; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 16 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
     "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+  },
+  "C084": {
+    "target": "{0x48, 0x8B, 0x8D, 0xB8, 0x00, 0x00, 0x00, 0x8B, 0x85, 0xC0, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x14, 0xC1}",
+    "method": "paired native validation-window bytes",
+    "old": "{0x48, 0x8B, 0x8D, 0xB8, 0x00, 0x00, 0x00, 0x8B, 0x85, 0xC0, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x14, 0xC1}",
+    "symbol": "kFindByNoScanBytes",
+    "second_check": "Reviewed native FindByCharacterNo scans manager+B8/count+C0 and reads actor+68/status+20, then the changed number pointer+90. Both instruction windows are decoded boundaries within the paired .pdata functions. These are validation windows, not inline-hook entries; C083/C085 still require standard support separately.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt"
+  },
+  "C086": {
+    "target": "{0x4C, 0x8B, 0x31, 0x49, 0x8B, 0x46, 0x68, 0x48, 0x8B, 0x40, 0x20}",
+    "method": "paired native validation-window bytes",
+    "old": "{0x4C, 0x8B, 0x31, 0x49, 0x8B, 0x46, 0x68, 0x48, 0x8B, 0x40, 0x20}",
+    "symbol": "kFindByNoReadBytes",
+    "second_check": "Reviewed native FindByCharacterNo scans manager+B8/count+C0 and reads actor+68/status+20, then the changed number pointer+90. Both instruction windows are decoded boundaries within the paired .pdata functions. These are validation windows, not inline-hook entries; C083/C085 still require standard support separately.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt"
   },
   "B071": {
     "target": "2401",

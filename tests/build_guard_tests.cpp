@@ -13,6 +13,7 @@
 #include "mod/game/offsets.h"
 #include "mod/game/player_layout.h"
 #include "mod/game/stat_id.h"
+#include "mod/session2/control_filter.h"
 
 namespace {
 
@@ -540,6 +541,26 @@ int main() {
     }
     test_3663_tier_dependency_matrix();
     test_native_health_selection();
+    {
+        using cdmp::session2::blocked_native_control;
+        constexpr cdmp::session2::NativeControlOpcodes legacy{2790,2038,2004,2125};
+        constexpr cdmp::session2::NativeControlOpcodes target{2447,2042,2004,2150};
+        CHECK(blocked_native_control(0, {}));
+        CHECK(blocked_native_control(2001, {}));
+        CHECK(blocked_native_control(65535, {}));
+        CHECK(blocked_native_control(2001, {2447,2042,2004,0}));
+        for (auto native : {legacy, target}) {
+            CHECK(blocked_native_control(native.reserve_shutdown, native));
+            CHECK(blocked_native_control(native.shutdown_timer, native));
+            CHECK(blocked_native_control(native.pointer_request, native));
+            CHECK(blocked_native_control(native.set_field_time, native));
+            for (uint16_t id = 1001; id <= 1008; ++id) CHECK(blocked_native_control(id, native));
+            CHECK(!blocked_native_control(1000, native) && !blocked_native_control(1009, native));
+            CHECK(!blocked_native_control(0, native) && !blocked_native_control(65535, native));
+            CHECK(!blocked_native_control(2001, native)); // Legitimate guest logout remains eligible.
+        }
+        std::printf("Native control IDs and closed connection interval policy: OK (synthetic only)\n");
+    }
     test_supported();
     test_unsupported();
     test_unreadable();

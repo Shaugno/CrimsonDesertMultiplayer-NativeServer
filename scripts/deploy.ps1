@@ -12,10 +12,14 @@ param(
     [string]$GameDir = $(if ($env:CDMP_GAME_DIR) { $env:CDMP_GAME_DIR } else { 'D:\SteamLibrary\steamapps\common\Crimson Desert\bin64' }),
     [ValidateSet('Debug', 'Release', 'RelWithDebInfo')]
     [string]$Config = 'RelWithDebInfo',
-    [switch]$Remove
+    [switch]$Remove,
+    [string]$BuildDir = ''
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
+$buildRoot = if (!$BuildDir) { Join-Path $root 'build' } elseif ([IO.Path]::IsPathRooted($BuildDir)) {
+    [IO.Path]::GetFullPath($BuildDir)
+} else { [IO.Path]::GetFullPath((Join-Path $root $BuildDir)) }
 $loaderSrc = Join-Path $root 'third_party\ultimate-asi-loader\v9.7.4\dinput8.dll'
 $loaderDst = Join-Path $GameDir 'winmm.dll'
 
@@ -45,7 +49,7 @@ if (-not (Test-Path $loaderSrc)) {
     throw 'Ultimate ASI Loader not found: see third_party\ultimate-asi-loader\README.md'
 }
 
-$bin = Join-Path $root "build\bin\$Config"
+$bin = Join-Path $buildRoot "bin\$Config"
 if (-not (Test-Path "$bin\cdmp.asi")) { throw "Build first: $bin\cdmp.asi not found" }
 
 Copy-Item "$bin\cdmp.asi" $GameDir -Force
