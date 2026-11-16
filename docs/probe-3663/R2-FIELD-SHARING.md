@@ -1,13 +1,16 @@
 # R2 Step 3 — native field-sharing contracts
 
-Static investigation is in progress. Candidate function RVAs below still await
-the Step 2 standard-correlator check; none authorizes a hook. Tier C is closed.
+Step 3 assessment after completed standard matching: field sharing remains
+blocked. AcquireField and TryAddRef are adopted; EnterField is not, and the
+vector helper has an explicit standard-result conflict. The table below
+records native candidates and roles, rather than universal RVA adoption.
+No field-sharing hook is authorized by this assessment. Tier C is closed.
 The native layout proofs are catalogued separately in `r2-reviewed.json` and
 compiled as unused constants in `build_3663.h`.
 
 Continuation decision: the offline ABI/ownership assessment is complete to
 the boundary below. The field-sharing port remains blocked; no legacy detour
-is redirected to a candidate address. Step 2 matching continues independently.
+is redirected to a candidate address. The completed default Step 2 result is recorded in R2-MATCHES.json.
 See R2-FIELD-TRACE.md for the smallest next observational experiment and its
 unmet implementation/preflight requirements. That document is a trace design,
 not a claim that a collector or live session has passed.
@@ -108,3 +111,14 @@ roster ownership remains unresolved. Full default BinDiff maps legacy VecPush
 callee check. C047 is withdrawn to blocked while this conflict is investigated;
 the conservative profile had no competing pair. Neither result may silently
 override the other. All Tier C permissions remain false.
+
+Step 3 completion decision: retain the legacy implementation unchanged and
+leave the target adapter unimplemented/unarmed. The exact missing facts are
+EnterField entry correspondence, native roster ownership and rollback for
+each branch, and the C047 vector-helper conflict. Travel clock publication
+also moved into the caller, so the old standalone clock detour cannot be
+retargeted. The next field experiment remains the passive design in
+R2-FIELD-TRACE.md, but it cannot run until entry correspondence and safe
+entry/exit logging are established. Current P1 player-read traces do not
+answer field-admission ownership. Independent tiers and final packaging
+continue; this is a blocker decision, not a review stop.
