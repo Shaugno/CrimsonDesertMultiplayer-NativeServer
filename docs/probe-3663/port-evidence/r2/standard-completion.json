@@ -26,32 +26,9 @@
     "core_anchor_associations_audited": 46,
     "warning_caveat": "Original stock warning retained; no assertion that no transient markup error occurred."
   },
-  "bindiff": {
-    "preset": "conservative",
-    "completed": true,
-    "stock_algorithms": true,
-    "configured_passes": [
-      "name hash",
-      "hash",
-      "prime signature"
-    ],
-    "builtin_call_reference_propagation": true,
-    "matched_functions": 64434,
-    "algorithm_counts": {
-      "function: name hash matching": 1033,
-      "function: hash matching": 6550,
-      "function: prime signature matching": 35752,
-      "function: call reference matching": 21099
-    },
-    "graphless_total": 1293,
-    "core_anchor_graphs_checked": 32,
-    "core_anchor_graphless": 0,
-    "missing_basic_block_diagnostics_retained": true,
-    "scope_caveat": "Additional conservative stock profile, not the unfinished broad/default profile. Full same-image exports and unchanged configured confidence values; fewer candidates. Native/entry/ABI checks remain separate."
-  },
   "supplemental_runs": {
-    "broad": "still running; not completion evidence",
-    "structural": "still running; not completion evidence"
+    "broad": "completed; primary join now uses default result",
+    "structural": "still running; no completion evidence claimed"
   },
   "outputs": [
     {
@@ -93,6 +70,73 @@
       "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\vt-markup-audit.log",
       "bytes": 6127,
       "sha256": "5eef21edce067d2e795edf57b1de6332d5f74f442740afceeff5ff775ac8bbe2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff\\old_vs_new.BinDiff",
+      "bytes": 532860928,
+      "sha256": "4afe0f675ff7eb9f02d363fa138d58e6cd298306778e4bf736e4ac6ceb2c1098"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff\\old_vs_new.results",
+      "bytes": 791674434,
+      "sha256": "22f1d4e76486662566a9efd0f5ce2b3994459d9de32447e22fb558e48c3d6367"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-run.log",
+      "bytes": 6190312,
+      "sha256": "a3ad48e78f1d14874b2412324f510819f603ce929079dc06b1a4b4616fb1cc10"
     }
-  ]
+  ],
+  "bindiff_conservative": {
+    "preset": "conservative",
+    "completed": true,
+    "stock_algorithms": true,
+    "configured_passes": [
+      "name hash",
+      "hash",
+      "prime signature"
+    ],
+    "builtin_call_reference_propagation": true,
+    "matched_functions": 64434,
+    "algorithm_counts": {
+      "function: name hash matching": 1033,
+      "function: hash matching": 6550,
+      "function: prime signature matching": 35752,
+      "function: call reference matching": 21099
+    },
+    "graphless_total": 1293,
+    "core_anchor_graphs_checked": 32,
+    "core_anchor_graphless": 0,
+    "missing_basic_block_diagnostics_retained": true,
+    "scope_caveat": "Additional conservative stock profile, not the unfinished broad/default profile. Full same-image exports and unchanged configured confidence values; fewer candidates. Native/entry/ABI checks remain separate."
+  },
+  "bindiff": {
+    "preset": "default",
+    "completed": true,
+    "stock_algorithms": true,
+    "matched_functions": 207217,
+    "global_similarity": 0.8397339587523067,
+    "global_confidence": 0.9773048569408797,
+    "algorithm_counts": {
+      "function: MD index matching (callGraph MD index, bottom up)": 55,
+      "function: MD index matching (callGraph MD index, top down)": 616,
+      "function: MD index matching (flowgraph MD index, bottom up)": 85,
+      "function: MD index matching (flowgraph MD index, top down)": 6567,
+      "function: address sequence": 96543,
+      "function: call reference matching": 21568,
+      "function: call sequence matching(exact)": 467,
+      "function: call sequence matching(sequence)": 13498,
+      "function: call sequence matching(topology)": 10,
+      "function: edges callgraph MD index": 15032,
+      "function: edges flowgraph MD index": 37297,
+      "function: hash matching": 6540,
+      "function: instruction count": 502,
+      "function: loop count matching": 1146,
+      "function: name hash matching": 1033,
+      "function: prime signature matching": 6255,
+      "function: relaxed MD index matching": 3
+    },
+    "missing_basic_block_diagnostics_retained": true,
+    "scope_caveat": "Default full-image result; global similarity/confidence is not per-row proof. Conflicting native/VT helper C047 remains blocked."
+  }
 }

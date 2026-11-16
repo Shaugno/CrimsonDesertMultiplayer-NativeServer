@@ -1,4 +1,84 @@
 {
+  "B035": {
+    "target": "0xF8",
+    "method": "paired native code consumption",
+    "second_check": "Paired native RegisterThread 27751D0/2A10180 obtains current thread ID, locks ServerNet+98, appends exactly 16 bytes through vector+F8/count+100/capacity+104 and releases the lock. Target stores TLS+4430 instead of legacy +4460 in the entry; no legacy TLS displacement is reused. Both scalar append and growth-copy paths prove the stride.",
+    "evidence": "port-evidence/r2/server-thread-vector-old.txt; server-thread-vector-new.txt",
+    "old": "0xF8",
+    "symbol": "kServerNet_Threads"
+  },
+  "B036": {
+    "target": "0x100",
+    "method": "paired native code consumption",
+    "second_check": "Paired native RegisterThread 27751D0/2A10180 obtains current thread ID, locks ServerNet+98, appends exactly 16 bytes through vector+F8/count+100/capacity+104 and releases the lock. Target stores TLS+4430 instead of legacy +4460 in the entry; no legacy TLS displacement is reused. Both scalar append and growth-copy paths prove the stride.",
+    "evidence": "port-evidence/r2/server-thread-vector-old.txt; server-thread-vector-new.txt",
+    "old": "0x100",
+    "symbol": "kServerNet_ThreadCount"
+  },
+  "B037": {
+    "target": "0x10",
+    "method": "paired native code consumption",
+    "second_check": "Paired native RegisterThread 27751D0/2A10180 obtains current thread ID, locks ServerNet+98, appends exactly 16 bytes through vector+F8/count+100/capacity+104 and releases the lock. Target stores TLS+4430 instead of legacy +4460 in the entry; no legacy TLS displacement is reused. Both scalar append and growth-copy paths prove the stride.",
+    "evidence": "port-evidence/r2/server-thread-vector-old.txt; server-thread-vector-new.txt",
+    "old": "0x10",
+    "symbol": "kServerThreadEntry"
+  },
+  "B038": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Native vector push reads u32 count at vector+8 and capacity+C, grows 16-byte storage and increments count. The independently paired server thread vector embeds the same pointer/u32/u32 header at ServerNet+F8/+100/+104. This layout proof does not resolve the conflicting C047 helper function identity.",
+    "evidence": "port-evidence/r2/field-getter-target.txt; server-thread-vector-old.txt; server-thread-vector-new.txt",
+    "old": "0x08",
+    "symbol": "kArray_Count"
+  },
+  "B039": {
+    "target": "0x0C",
+    "method": "paired native code consumption",
+    "second_check": "Native vector push reads u32 count at vector+8 and capacity+C, grows 16-byte storage and increments count. The independently paired server thread vector embeds the same pointer/u32/u32 header at ServerNet+F8/+100/+104. This layout proof does not resolve the conflicting C047 helper function identity.",
+    "evidence": "port-evidence/r2/field-getter-target.txt; server-thread-vector-old.txt; server-thread-vector-new.txt",
+    "old": "0x0C",
+    "symbol": "kArray_Capacity"
+  },
+  "C017": {
+    "target": "0x10",
+    "method": "paired native code consumption",
+    "second_check": "Named finder slot-1 bodies load the actor pointer from finder+10. The complete ToNear tail-dispatched helper compares the owning user key at actor+90 with the user actor key+60 before recipient/session collection; the qword owner actor at +A0 is a separate member. Paired native roles prove these fields independently of the unresolved finder RVA correlations.",
+    "evidence": "port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt",
+    "old": "0x10",
+    "symbol": "kFinder_Actor"
+  },
+  "C007": {
+    "target": "0x90",
+    "method": "paired native code consumption",
+    "second_check": "Named finder slot-1 bodies load the actor pointer from finder+10. The complete ToNear tail-dispatched helper compares the owning user key at actor+90 with the user actor key+60 before recipient/session collection; the qword owner actor at +A0 is a separate member. Paired native roles prove these fields independently of the unresolved finder RVA correlations.",
+    "evidence": "port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt",
+    "old": "0x90",
+    "symbol": "kServerActor_Controller"
+  },
+  "C141": {
+    "target": "0x88",
+    "method": "paired native code consumption",
+    "second_check": "Paired complete ActionLayersAdvance 2329700/258C5A0 walks two layer pointers at control+88/+90 and passes layer+18 to independently matched ActionLayerAdvance. The chart-presence gate changes from qword [layer+110] to [layer+118]. Both exact CMP operands and subsequent layer-time update/rescale are decoded; the target additionally validates action+111. Never copy the legacy chart displacement unchanged.",
+    "evidence": "port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt",
+    "old": "0x88",
+    "symbol": "kControl_Layer0"
+  },
+  "C142": {
+    "target": "0x18",
+    "method": "paired native code consumption",
+    "second_check": "Paired complete ActionLayersAdvance 2329700/258C5A0 walks two layer pointers at control+88/+90 and passes layer+18 to independently matched ActionLayerAdvance. The chart-presence gate changes from qword [layer+110] to [layer+118]. Both exact CMP operands and subsequent layer-time update/rescale are decoded; the target additionally validates action+111. Never copy the legacy chart displacement unchanged.",
+    "evidence": "port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt",
+    "old": "0x18",
+    "symbol": "kLayer_Playback"
+  },
+  "C143": {
+    "target": "0x118",
+    "method": "paired native code consumption",
+    "second_check": "Paired complete ActionLayersAdvance 2329700/258C5A0 walks two layer pointers at control+88/+90 and passes layer+18 to independently matched ActionLayerAdvance. The chart-presence gate changes from qword [layer+110] to [layer+118]. Both exact CMP operands and subsequent layer-time update/rescale are decoded; the target additionally validates action+111. Never copy the legacy chart displacement unchanged.",
+    "evidence": "port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt",
+    "old": "0x110",
+    "symbol": "kLayer_Chart"
+  },
   "C018": {
     "target": "0x10",
     "method": "paired native code consumption",
@@ -1641,7 +1721,7 @@
     "second_check": "kVecPush: reference 0x40b5b0, target candidate 0x4cae10, verified .pdata entry; exact reference guard checked, target 20-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C047; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
     "evidence": "port-evidence/r2/field-contracts-reference.txt; field-getter-target.txt",
     "entry_rva_row": "C047",
-    "entry_rva_adopted": true
+    "entry_rva_adopted": false
   },
   "C068": {
     "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x54, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0xF0, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x10, 0x03}",
@@ -1681,6 +1761,16 @@
     "second_check": "kActionLayerAdvance: reference 0x1f63f70, target candidate 0x21bd690, verified .pdata entry; exact reference guard checked, target 16-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C137; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
     "evidence": "R2-MATCHES.json; PORT-REVIEWED.json; paired whole-image exports",
     "entry_rva_row": "C137",
+    "entry_rva_adopted": true
+  },
+  "C140": {
+    "target": "{0x48, 0x8B, 0xC4, 0x41, 0x55, 0x41, 0x56, 0x48, 0x83, 0xEC, 0x68, 0xC5, 0xF8, 0x29, 0x70, 0xC8}",
+    "method": "verified native entry guard bytes",
+    "old": "{0x48, 0x8B, 0xC4, 0x41, 0x54, 0x41, 0x56, 0x48, 0x83, 0xEC, 0x68, 0xC5, 0xF8, 0x29, 0x70, 0xC8}",
+    "symbol": "kActionLayersAdvanceHead",
+    "second_check": "kActionLayersAdvance: reference 0x2329700, target candidate 0x258c5a0, verified .pdata entry; exact reference guard checked, target 16-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C139; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+    "evidence": "port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt",
+    "entry_rva_row": "C139",
     "entry_rva_adopted": true
   },
   "D016": {
@@ -1741,7 +1831,7 @@
     "second_check": "kFlush: reference 0x1871930, target candidate 0x1a192d0, verified .pdata entry; exact reference guard checked, target 43-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D057; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
     "evidence": "port-evidence/r2/save-manager-reference.txt; save-flush-target.txt; save-busy-leads-target.json; save-flush-callers-reference.txt; save-flush-callers-target.txt",
     "entry_rva_row": "D057",
-    "entry_rva_adopted": false
+    "entry_rva_adopted": true
   },
   "D060": {
     "target": "{0xE9, 0x9B, 0x3B, 0x2A, 0x0B}",

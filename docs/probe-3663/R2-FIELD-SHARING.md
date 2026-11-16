@@ -100,3 +100,11 @@ locked map lookup and vslot+B8 acquisition. It is therefore not a raw pointer
 lookup that a passive collector may call. The factory owner argument alone
 still does not prove every final actor+A0 owner or rollback lifetime. The
 full export is field-roster-factory-followup.txt; no adapter is installed.
+
+Completed standard-result update: AcquireField 2E08520 and TryAddRef 1658E90
+are adopted. EnterField 2ECB130 still lacks standard support and its changed
+roster ownership remains unresolved. Full default BinDiff maps legacy VecPush
+40B5B0 to 14AD670, conflicting with accepted VT 4CAE10 and the native AddActor
+callee check. C047 is withdrawn to blocked while this conflict is investigated;
+the conservative profile had no competing pair. Neither result may silently
+override the other. All Tier C permissions remain false.

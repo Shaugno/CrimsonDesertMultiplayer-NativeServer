@@ -27,9 +27,9 @@ check('kChunkOrigin',0x6D56500,0x7231330,
     'port-evidence/r2/player-inner-reference.txt; player-inner-target.txt',
     [0x36A36A0,0x39F6B20])
 check('kStaticPlayerPos',0x6D77858,0x7253E60,
-    'Paired native writers 941E20/A61070 populate the static world-position vector from the same controlled-stage position source and actor fallback, with changed target stage members.',
-    'port-evidence/r2/player-physics-reference.txt; player-physics-target.txt',
-    [0x941E20,0xA61070])
+    'Paired native writers 941E20/A61070 populate the static world-position vector from the same controlled-stage position source and actor fallback, with changed target stage members. Independently correlated parent update 9418D0/A60C50 calls these writers at decoded E8 sites 941A77/A60DE1 with the same stage/time argument roles, after native lock release and before the next two stage updates. Standard support is for the parent, not a claimed direct writer match.',
+    'port-evidence/r2/player-physics-reference.txt; player-physics-target.txt; static-writer-parent-old.txt; static-writer-parent-new.txt',
+    [0x9418D0,0xA60C50])
 for symbol,old,target in [('kHpDefinitionsSlot',0x6D69528,0x7245558),('kHpDefinitionsAltSlot',0x6D69530,0x7245560)]:
     check(symbol,old,target,
         'Paired named native HP updaters 62FA00/71C4E0 select these two definition roots using the TLS mode, dereference +0/+8/+10 and read a u16 key (A0 -> 78). The key is runtime data, not literal zero.',
@@ -172,5 +172,18 @@ for symbol,old,target,proof in [
 check('kWindowsLock3Vtable',0x557C120,0x59874C8,
     'Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role.',
     'port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt',[0x1371340,0x1593240])
+for symbol,old,target in [('kExceptOneVf1',0x2A759B0,0x2D6C360),
+                          ('kExceptOneSelfVf1',0x2A75880,0x2D6C230),
+                          ('kToNearVf1',0x2A75860,0x2D6C210)]:
+    check(symbol,old,target,
+        'Exact named RTTI primary-vtable slot 1 identifies control/self/near independently; paired native bodies follow finder+10 to actor+68/TS+1A0 and the field mover (4F0 -> 508). Except-one implementations preserve native reference acquisition/release without filling the output; near tail-dispatches its full recipient-list helper. Default BinDiff swaps the similar control/self bodies, which is a conflict, not corroboration.',
+        'port-evidence/rtti-2976.json; rtti-3663.json; port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt')
+check('kServerUserActorVtable',0x5B257A8,0x5F68B10,
+    'Exact named ServerUserActor RTTI primary COL and slot 2 identify the table; paired native cleanup 2A7D280/2D73960 releases each owned component before actor/user release. Target native construction 2D799B0 stores the same table before initializing user+1F8. The constructor observation alone does not prove that member role.',
+    'port-evidence/rtti-2976.json; rtti-3663.json; port-evidence/r2/lifecycle-lookup-reference.txt; lifecycle-user-release-target.txt; recipient-finders-new.txt',
+    [0x2A7D280,0x2D73960])
+check('kActionLayersAdvance',0x2329700,0x258C5A0,
+    'Paired complete native four-argument bodies iterate two layer pointers at this+88/+90, follow owner+58 to actor components+68 and character control+40, validate playback+10 readiness+111 and chart+18, call the independently matched single-layer advance 1F63F70/21BD690, update layer time+20/+24 and clear pending+F0. Target loop and final cross-layer duration rescale are independently decoded. This entry proof does not enable containment hooks.',
+    'port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt')
 (docs/'r2-rva-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Independent RVA checks awaiting standard support',len(result))

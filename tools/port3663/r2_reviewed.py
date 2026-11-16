@@ -13,6 +13,21 @@ def prove(tier, source, values, evidence, check):
         result[row['r2']] = dict(target=target,method='paired native code consumption',
             second_check=check,evidence=evidence,old=row['value'],symbol=symbol)
 
+prove('B','src/mod/session2/offsets_s2.h',dict(
+    kServerNet_Threads='0xF8',kServerNet_ThreadCount='0x100',kServerThreadEntry='0x10'),
+    'port-evidence/r2/server-thread-vector-old.txt; server-thread-vector-new.txt',
+    'Paired native RegisterThread 27751D0/2A10180 obtains current thread ID, locks ServerNet+98, appends exactly 16 bytes through vector+F8/count+100/capacity+104 and releases the lock. Target stores TLS+4430 instead of legacy +4460 in the entry; no legacy TLS displacement is reused. Both scalar append and growth-copy paths prove the stride.')
+prove('B','src/mod/session2/offsets_s2.h',dict(kArray_Count='0x08',kArray_Capacity='0x0C'),
+    'port-evidence/r2/field-getter-target.txt; server-thread-vector-old.txt; server-thread-vector-new.txt',
+    'Native vector push reads u32 count at vector+8 and capacity+C, grows 16-byte storage and increments count. The independently paired server thread vector embeds the same pointer/u32/u32 header at ServerNet+F8/+100/+104. This layout proof does not resolve the conflicting C047 helper function identity.')
+
+prove('C','src/mod/session2/offsets_s2.h',dict(kFinder_Actor='0x10',kServerActor_Controller='0x90'),
+    'port-evidence/r2/recipient-finders-old.txt; recipient-finders-new.txt',
+    'Named finder slot-1 bodies load the actor pointer from finder+10. The complete ToNear tail-dispatched helper compares the owning user key at actor+90 with the user actor key+60 before recipient/session collection; the qword owner actor at +A0 is a separate member. Paired native roles prove these fields independently of the unresolved finder RVA correlations.')
+prove('C','src/mod/game/offsets.h',dict(kControl_Layer0='0x88',kLayer_Playback='0x18',kLayer_Chart='0x118'),
+    'port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt',
+    'Paired complete ActionLayersAdvance 2329700/258C5A0 walks two layer pointers at control+88/+90 and passes layer+18 to independently matched ActionLayerAdvance. The chart-presence gate changes from qword [layer+110] to [layer+118]. Both exact CMP operands and subsequent layer-time update/rescale are decoded; the target additionally validates action+111. Never copy the legacy chart displacement unchanged.')
+
 prove('C','src/mod/session2/field_share.h',dict(
     kRefs='0x10',kLock1='0x18',kLock2Ptr='0x08',kOpen='0x4A',kOwner='0x180',
     kUsers='0x2A8',kUserCount='0x2B0',kUserActors='0x2B8',kLevelEntry='0x2D8'),

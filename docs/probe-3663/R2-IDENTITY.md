@@ -48,3 +48,15 @@ new RVAs `2E879A0,2C160B0,B15C50,2D7A640`; entry writers/common loaders old
 `2143E70,1791980`, new `237EA60,192EA40`. Small outputs and hashes are in
 `port-evidence/r2/identity-*.txt` and `text-hashes.json`. Run
 `r2_reviewed.py` then `r2_layout_header.py` to regenerate the catalog.
+
+Recipient follow-up: exact RTTI slot 1 maps control finder 2A759B0 ->
+2D6C360, self finder 2A75880 -> 2D6C230, and near finder 2A75860 ->
+2D6C210. Default BinDiff instead swaps control/self with high confidence.
+Both except-one native bodies acquire/release a field reference through the
+changed mover +508 and do not fill the output. Their similarity does not
+resolve identity. C012/C013 are explicitly blocked on that conflict; C014
+lacks standard support. Paired native near helpers confirm finder actor+10
+and server actor controller key+90, distinct from owner actor pointer+A0.
+The ServerUserActor table 5F68B10 is independently identified through exact
+RTTI, native construction and standard-matched cleanup slot 2. This does not
+publish a target session pointer layout or enable a recipient hook.

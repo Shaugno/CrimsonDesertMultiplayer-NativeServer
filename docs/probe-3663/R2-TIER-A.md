@@ -96,3 +96,18 @@ vtable-slot pointers are retained as negative evidence.
 Evidence: port-evidence/r2/tier-a-route-build.txt,
 tier-a-route-loopback.txt and tier-a-route-host.txt; hashes are in
 port-evidence/r2/text-hashes.json. Read R2-PROGRESS.md for ongoing Step 2 work.
+
+Completed standard-result update (2026-11-16): 34/37 Tier A rows are
+adopted. The older pending-address table above is chronological history.
+A002 now uses standard-correlated stage update 9418D0/A60C50, decoded
+calls at 941A77/A60DE1 to the independently reviewed writers, and the exact
+static-position store operands. This is a parent/callee/operand proof, not a
+claim that the writer itself matched. Remaining rows are dynamic HP selector
+A026, actual target HP-only reachability/stamina retirement A027, and loading
+readiness A028. Both definition roots and the other reader addresses now
+have standard support. No target PlayerLayout or permission is published.
+P1 HP and loading sessions ran; see their actual result.json files. The first
+loading capture began after the save loaded, and reported travel timing was
+not synchronized, so it cannot establish a loading predicate. A second
+user-present passive loading session is being prepared after the DateTime
+receipt fix, with collection verified at title before Continue.

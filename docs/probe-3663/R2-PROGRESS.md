@@ -1,3 +1,31 @@
+# Current R2 continuation — completed default matching, 2026-11-16
+
+Whole-image AutoVT and the full default BinDiff run are complete. The primary
+join uses the default database (207,217 function pairs); the conservative
+profile remains supplemental. Actual raw hashes and algorithm counts are in
+port-evidence/r2/standard-completion.json. The additional structural profile
+is still computing and is not counted as evidence. Native checks and explicit
+conflict handling remain required.
+
+Current catalog: A 34/37, B 73/78, C 112/150, D 108/130 adopted (327/395).
+The 264 separately reviewed native contracts include entry guards; 57 adopted
+RVA constants are emitted. C047 VecPush is blocked following the default/VT
+conflict. The native layer chart offset changed 110 -> 118; the old travel
+clock helper's publication is embedded in the larger target transition.
+Neither finding installs a hook. All four completeness gates remain false.
+
+The loading trace and cleanup were validated without UI control. User-reported
+fast travel is retained, but it is not synchronized with the captured movement
+interval; L1 remains unpassed. Both P1 session results, the HP session time-cap
+deviation, watchdog fix and exact receipts are preserved under live/. A fresh
+read-only cleanup recheck confirms no game process and no test ASI/PDB/loader/ini.
+
+Latest intermediate full builds: 101/101 in 109.33 s (default join) and 90.32 s
+(thread layouts). The latter synthetic loopback unloads cleanly; the final
+layer-header build is running. These tests are game-free and do not count as L2.
+The remainder of this file is chronological history; its old pending statements
+are superseded by R2-MATCHES and this section. Work continues through Step 7.
+
 # R2 work in progress — 2026-11-16
 
 Latest continuation:

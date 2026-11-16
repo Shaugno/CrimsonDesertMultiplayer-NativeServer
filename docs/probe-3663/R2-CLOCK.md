@@ -37,3 +37,18 @@ the client-gate query was rerun sequentially. No game ran during this work.
 Next: obtain standard support for completion and its operand anchors, identify
 the actual travel clock publisher, then implement and test the per-build clock
 gate without changing 2976 behavior. Do not arm joining without this protection.
+
+Follow-up after default matching: LoadingComplete, its publication branch and
+world-clock operand are adopted with standard support and native checks.
+The travel store was located by a file-only SIMD operand scan, then decoded
+in the complete FieldMover transition body at 2ECA480. The block at 2ECAA97
+obtains actor owner+A0/key+60 and compares field+180 before selecting field
+level+2D8, obtaining its clock, adding mover+64 milliseconds times 1000, and
+storing the 32-byte bank at 2ECAB4C/2ECAB56. Source 2BC0A30 performs the
+corresponding owner/key gate and publication as a separate two-argument function.
+The target block is inside the larger transition, rather than an established
+replacement entry for that helper. An inline detour there would violate the
+entry rule. A new, verified mid-hook/control-flow design and ownership-preserving
+clock suppression remain necessary; no adapter or skip branch was installed.
+The rejected 2ECB660 lead remains rejected. Exact native exports are
+travel-clock-layer-old.txt and travel-clock-owner-new.txt.

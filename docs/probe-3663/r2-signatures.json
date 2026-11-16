@@ -152,7 +152,7 @@
       "second_check": "kVecPush: reference 0x40b5b0, target candidate 0x4cae10, verified .pdata entry; exact reference guard checked, target 20-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C047; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
       "evidence": "port-evidence/r2/field-contracts-reference.txt; field-getter-target.txt",
       "entry_rva_row": "C047",
-      "entry_rva_adopted": true
+      "entry_rva_adopted": false
     },
     "C068": {
       "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x54, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0xF0, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x10, 0x03}",
@@ -192,6 +192,16 @@
       "second_check": "kActionLayerAdvance: reference 0x1f63f70, target candidate 0x21bd690, verified .pdata entry; exact reference guard checked, target 16-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C137; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
       "evidence": "R2-MATCHES.json; PORT-REVIEWED.json; paired whole-image exports",
       "entry_rva_row": "C137",
+      "entry_rva_adopted": true
+    },
+    "C140": {
+      "target": "{0x48, 0x8B, 0xC4, 0x41, 0x55, 0x41, 0x56, 0x48, 0x83, 0xEC, 0x68, 0xC5, 0xF8, 0x29, 0x70, 0xC8}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x8B, 0xC4, 0x41, 0x54, 0x41, 0x56, 0x48, 0x83, 0xEC, 0x68, 0xC5, 0xF8, 0x29, 0x70, 0xC8}",
+      "symbol": "kActionLayersAdvanceHead",
+      "second_check": "kActionLayersAdvance: reference 0x2329700, target candidate 0x258c5a0, verified .pdata entry; exact reference guard checked, target 16-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C139; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/travel-clock-layer-old.txt; clock-layer-followup-new.txt",
+      "entry_rva_row": "C139",
       "entry_rva_adopted": true
     },
     "D016": {
@@ -252,7 +262,7 @@
       "second_check": "kFlush: reference 0x1871930, target candidate 0x1a192d0, verified .pdata entry; exact reference guard checked, target 43-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D057; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
       "evidence": "port-evidence/r2/save-manager-reference.txt; save-flush-target.txt; save-busy-leads-target.json; save-flush-callers-reference.txt; save-flush-callers-target.txt",
       "entry_rva_row": "D057",
-      "entry_rva_adopted": false
+      "entry_rva_adopted": true
     },
     "D060": {
       "target": "{0xE9, 0x9B, 0x3B, 0x2A, 0x0B}",

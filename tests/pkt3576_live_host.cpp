@@ -62,7 +62,17 @@ std::wstring beside(const wchar_t* file_name) {
 std::wstring log_dir() {
     wchar_t temp[MAX_PATH] = {};
     GetTempPathW(MAX_PATH, temp);
-    return std::wstring(temp) + L"pkt3576-live-host-" + std::to_wstring(GetCurrentProcessId());
+    FILETIME created = {}, exited = {}, kernel = {}, user = {};
+    if (!GetProcessTimes(GetCurrentProcess(), &created, &exited, &kernel, &user)) {
+        CHECK(false);
+        return {};
+    }
+    const uint64_t birth = (static_cast<uint64_t>(created.dwHighDateTime) << 32) |
+                          created.dwLowDateTime;
+    // Windows reuses PIDs. Preserve old archives without making a later test
+    // process collide with the same PID's previous labeled capture files.
+    return std::wstring(temp) + L"pkt3576-live-host-" + std::to_wstring(GetCurrentProcessId()) +
+           L"-" + std::to_wstring(birth);
 }
 
 std::string read_file(const std::wstring& path) {

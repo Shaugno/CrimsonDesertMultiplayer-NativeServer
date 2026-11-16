@@ -95,6 +95,7 @@ for tier,signature,function in [
     ('C','kTryAddRefHead','kTryAddRef'),('C','kVecPushHead','kVecPush'),
     ('C','kLobbyLoadHead','kLobbyLoad'),('C','kLoadHead','kLoad'),
     ('C','kGetterHead','kGetter'),('C','kActionLayerAdvanceHead','kActionLayerAdvance'),
+    ('C','kActionLayersAdvanceHead','kActionLayersAdvance'),
     ('D','kWindowsLockVf1Head','kWindowsLockVf1'),('D','kWindowsLockVf2Head','kWindowsLockVf2'),
     ('D','kSaveMgrRefreshSlotsHead','kSaveMgrRefreshSlots'),('D','kLoadSlotHead','kLoadSlot'),
     ('D','kSaveHead','kSave'),('D','kFlushHead','kFlush'),
