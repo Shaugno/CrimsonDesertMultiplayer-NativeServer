@@ -1,0 +1,141 @@
+{
+  "session": "R3-JOIN-20261116-123800",
+  "controller_session": "R2-P1-20261116-123800",
+  "result": "passive_subset_passed",
+  "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "events": 16,
+  "site_counts": {
+    "6": 2,
+    "7": 2,
+    "4": 2,
+    "0": 2,
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "5": 2
+  },
+  "call_order": [
+    6,
+    7,
+    6,
+    7,
+    4,
+    0,
+    1,
+    2,
+    3,
+    5,
+    4,
+    0,
+    1,
+    2,
+    3,
+    5
+  ],
+  "entry_exit_pairs": 8,
+  "all_records_valid": true,
+  "native_data_writes": false,
+  "native_calls": false,
+  "context_changes": false,
+  "networking": false,
+  "enter_abi": "Three arguments: mover, result, field. Recorded R9 is incidental hardware context, never a fourth companion argument.",
+  "enter_results": [
+    {
+      "entry_seq": 8,
+      "exit_seq": 9,
+      "roster_count": 1,
+      "roster_kind": 0,
+      "primary_key": "0xa0100001",
+      "owner_key": "0x90100000",
+      "roster_matches_primary": true,
+      "primary_owner_matches_field_owner": true,
+      "users": [
+        0,
+        1
+      ],
+      "actors": [
+        0,
+        1
+      ],
+      "result": 0,
+      "returns_result_pointer": true
+    },
+    {
+      "entry_seq": 14,
+      "exit_seq": 15,
+      "roster_count": 1,
+      "roster_kind": 0,
+      "primary_key": "0xa0100001",
+      "owner_key": "0x90100000",
+      "roster_matches_primary": true,
+      "primary_owner_matches_field_owner": true,
+      "users": [
+        0,
+        1
+      ],
+      "actors": [
+        0,
+        1
+      ],
+      "result": 0,
+      "returns_result_pointer": true
+    }
+  ],
+  "same_primary_and_owner_across_fields": true,
+  "distinct_fields": 2,
+  "user_confirmation": "done (in response to Continue, pause, fast travel, pause, walk/turn, quit)",
+  "termination": "normal exit; watchdog exited",
+  "save_verification": {
+    "session": "R2-P1-20261116-123800",
+    "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "backup_verified": true,
+    "live_saves_unchanged": true,
+    "before_files": 23,
+    "after_files": 23
+  },
+  "installation_restored": true,
+  "limitations": [
+    "No guest/second-user insertion or failure rollback exercised",
+    "No companion, missing-actor factory branch, native reference count or acquired new-field flag sampled",
+    "Status/login-manager/add-actor thunks were omitted under candidate-entry rule",
+    "ServerActor+A0 owner observations do not prove the separate legacy Actor_OwnerUser+90 contract C144",
+    "Field counts are guarded diagnostic reads, not a lock-held transaction"
+  ],
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\cdmp.log",
+      "bytes": 30071,
+      "sha256": "BEDEC75A356D506D8AE3FFB998BD9012A735CC5E390B077BE95D96B5EC2533DA"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\question.md",
+      "bytes": 2293,
+      "sha256": "BA72AA5339DA603DC45A63E8F488414493D2ED5E652892536830C8DC40E7AFF5"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\installed-receipt.json",
+      "bytes": 478,
+      "sha256": "C582E3EA26DB7E6259F081140D6CBA63BCB3D6ED0F72BC85DF02B4D8263F49A8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\deployed-hashes.json",
+      "bytes": 663,
+      "sha256": "CE02483C759B90BB157C2FBDF376C7FB67915CF8E28128A6FD20EA82C9C7C3DD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\save-verification.json",
+      "bytes": 235,
+      "sha256": "4F56BDE6E5E25DF69C991EB9A35DAA7D27E8E6329F157C6C790C0CD734DD13A0"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\watchdog.json",
+      "bytes": 496,
+      "sha256": "C3BC977332C5A5C2F409B7F2699397427DFA8EA1A5CB3B33F08DE75C52AA2EB1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\session-profile.json",
+      "bytes": 476,
+      "sha256": "71B2EEE1FD47AB1025116DC1FDD3E7431B991C46681926A9CA67A4361A15DBEF"
+    }
+  ]
+}

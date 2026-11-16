@@ -1,0 +1,37 @@
+{
+  "step": 3,
+  "status": "C closed: traced entry and named identity facts adopted; pure policy tested, native backend blocked",
+  "full_suite": {
+    "passed": 106,
+    "failed": 0,
+    "seconds": 98.33,
+    "scope": "Full working-tree suite, including the independent Step 4 policy"
+  },
+  "loopback": {
+    "remote_states": 78,
+    "clean_unload": true,
+    "native_evidence": false
+  },
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-suite.txt",
+      "bytes": 38680,
+      "sha256": "BF441BF163AFC51CAA1DB5BF80D0228E51FE3EB54460A62D41670111950AFEE5"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-smoke.txt",
+      "bytes": 153,
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-host.log",
+      "bytes": 6729,
+      "sha256": "E1E961D7388D23D5CF3AF90BE4BD2BE8BE4C8BE861780E2A13999DEC200A727B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\final-cleanup.json",
+      "bytes": 524,
+      "sha256": "4D1470A1EFAA02559011453D0A899B9DEBC46C094CC44E695DE621F92D6F7A95"
+    }
+  ]
+}

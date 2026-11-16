@@ -12,8 +12,9 @@ inline constexpr uint32_t kPeTimestamp = 0x6AF5D198;
 inline constexpr uintptr_t kImageBase = 0x140000000;
 inline constexpr uint32_t kSizeOfImage = 0x144E9000;
 
-// R2 completeness gates. True requires every row of the named tier in
-// R2-CORE-LIST/R2-MATCHES plus its per-build module routing and validation.
+// R3 dependency gates: R2 catalog plus approved R3 scope/adoption records,
+// per-build routing and validation. B currently exposes the guarded native
+// host loopback diagnostic; native guest join and lifecycle require C/D.
 // These are compiled evidence, never ini/environment overrides.
 inline constexpr bool kTierAComplete = true;
 inline constexpr bool kTierBComplete = true;
@@ -433,5 +434,19 @@ inline constexpr uint32_t kOrdinaryPayloadMax = 0x7FC1; // R3 B075 native ordina
 inline constexpr uint32_t kDescriptorSkip = 0; // R3 B078: target visits every aligned pointer
 } // namespace r3_tunnel
 // R3 tunnel constants END
+
+
+
+// R3 join catalog BEGIN
+namespace r3_join {
+inline constexpr uintptr_t kLobbyVtable = 0x5f6f2e8; // C069
+inline constexpr uintptr_t kLobbyLoad = 0x2e879a0; // C067
+inline constexpr uintptr_t kStatusVtable = 0x5f63430; // C078
+inline constexpr uintptr_t kStatusLoad = 0x2c160b0; // C079
+inline constexpr uintptr_t kEnterField = 0x2ECB130; // C043
+inline constexpr uintptr_t kPhases = 0x2C17410; // C099
+inline constexpr uint8_t kPhasesHead[] = {0x44, 0x89, 0x4c, 0x24, 0x20, 0x4c, 0x89, 0x44, 0x24, 0x18, 0x53, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x56, 0x41, 0x57, 0x48, 0x81, 0xec, 0x80, 0x0, 0x0, 0x0, 0x4c, 0x8b, 0xfa, 0x4c, 0x8b, 0x71, 0x8, 0x49, 0x8b, 0x7e, 0x78, 0x41, 0x8b, 0xae, 0x80, 0x0, 0x0, 0x0, 0x48, 0xc1, 0xe5, 0x4}; // C100
+} // namespace r3_join
+// R3 join catalog END
 
 }  // namespace cdmp::game::build_3663

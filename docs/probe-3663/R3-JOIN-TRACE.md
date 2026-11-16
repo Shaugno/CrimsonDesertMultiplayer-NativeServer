@@ -1,5 +1,12 @@
 # R3 passive field trace
 
+Result: passive subset passed. R3-JOIN-20261116-123800 captured 16 valid
+records, eight pairs, two distinct fields through load and fast travel. No
+collection stop, native call, data/context change or networking. User confirmed
+completion; normal exit, all 23 saves unchanged, installation restored. See
+port-evidence/r3/join-result.json. Later static work adopted status slot 10 and
+the correct phase function; neither was instrumented in this session.
+
 Expected behavior and reproduction: the legacy four-argument EnterField hook
 cannot accept the target three-argument entry or its roster. During a normal
 local load and fast travel, record the original AcquireField, EnterField,

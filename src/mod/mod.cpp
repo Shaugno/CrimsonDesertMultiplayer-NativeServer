@@ -1075,7 +1075,8 @@ DWORD WINAPI worker(LPVOID) {
                     run_network(cfg, local, true);
                     return;
                 }
-                log::info("3663 Tier A: read-only local reader; no hooks or network");
+                log::info("3663 Tier A: local reader; networking off; passive diagnostics {}",
+                    cfg.r3_pump_probe || cfg.r3_join_probe);
                 uint32_t last_log = 0;
                 while (!stop_requested(50)) {
                     const uint32_t now = GetTickCount();
