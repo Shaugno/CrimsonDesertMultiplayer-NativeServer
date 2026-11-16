@@ -1,0 +1,40 @@
+{
+  "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "B075": {
+    "adopted": true,
+    "old_helper": "0x7FE0",
+    "target_outer": "0x7FDA",
+    "target_ordinary_payload": "0x7FC1",
+    "native": "PostPacket 3A9960 cap; server 2A0EA70 and client receiver require ushort(length-3)<=7FD7; ordinary decoders and descriptor bounds require payload<=7FC1. Target parser applies both, legacy parser unchanged.",
+    "implementation": "parse_tunnel_packet; before native queue insertion and outgoing forwarding"
+  },
+  "B078": {
+    "adopted": true,
+    "old_extra_skip": "0x80",
+    "target_extra_skip": 0,
+    "meaning": "Replace optimized fixed object skip with complete aligned-pointer scan. All named objects are 8-byte aligned; do not assume every object is 0x90. Target scan advances only 8 bytes, bounds by adopted endpoints, verifies named RTTI/kind/opcode/channel.",
+    "observed_counts": {
+      "old": 1115,
+      "new": 1179
+    }
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\R2-TUNNEL.md",
+      "sha256": "B4C8D8CBCDB6CD6CADB8D1054B37270ED010F9D20A06EF640655BFB4E808BFD3"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\tunnel-layout-target.txt",
+      "sha256": "978001553488F1AAC97908893287D130628DA8F4C0E9316F770E234975F80DEF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\request-handlers-target.txt",
+      "sha256": "EA3D1F585CA01654BBBC8AE5C376A1EA987882D9A00492FE15285CE65DBA3A34"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r3\\descriptor-bounds.json",
+      "sha256": "6C03B938FA694B0EA4544C223E4D1528163A37AE5FEB955373125B593BE735AE"
+    }
+  ],
+  "limit": "B-only host admits one cryptogram request. Login/world/save/reconnect requires C/D; no native guest route yet."
+}

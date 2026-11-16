@@ -16,7 +16,7 @@ inline constexpr uint32_t kSizeOfImage = 0x144E9000;
 // R2-CORE-LIST/R2-MATCHES plus its per-build module routing and validation.
 // These are compiled evidence, never ini/environment overrides.
 inline constexpr bool kTierAComplete = true;
-inline constexpr bool kTierBComplete = false;
+inline constexpr bool kTierBComplete = true;
 inline constexpr bool kTierCComplete = false;
 inline constexpr bool kTierDComplete = false;
 
@@ -422,5 +422,16 @@ inline constexpr uintptr_t A032_kHpDefinitionsSlot = 0x7245558; // 2976 0x6D6952
 inline constexpr uintptr_t A033_kHpDefinitionsAltSlot = 0x7245560; // 2976 0x6D69530; R2 A033, R2-MATCHES.json
 } // namespace core_rvas
 // R2 reviewed layouts END
+
+// R3 tunnel constants BEGIN
+namespace r3_tunnel {
+inline constexpr uintptr_t kTrocInstancesBegin = 0x6F14E10; // R3 B052; 2976 0x6A51AE0
+inline constexpr uintptr_t kTrocInstancesEnd = 0x6F487B0; // R3 B053; 2976 0x6A82C80
+inline constexpr uintptr_t kNetLoopPump = 0x3A8D94; // R3 B065; 2976 0x35BAD4
+inline constexpr uint32_t kPacketMax = 0x7FDA; // R3 B075 native PostPacket bound
+inline constexpr uint32_t kOrdinaryPayloadMax = 0x7FC1; // R3 B075 native ordinary decoder bound
+inline constexpr uint32_t kDescriptorSkip = 0; // R3 B078: target visits every aligned pointer
+} // namespace r3_tunnel
+// R3 tunnel constants END
 
 }  // namespace cdmp::game::build_3663

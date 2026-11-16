@@ -1,0 +1,46 @@
+{
+  "step": 2,
+  "armed": [
+    "A",
+    "B"
+  ],
+  "closed": [
+    "C",
+    "D"
+  ],
+  "scope": "B-only native host cryptogram tunnel; explicit loopback diagnostic. Native guest join and reconnect unavailable until C/D.",
+  "full_suite": {
+    "passed": 103,
+    "failed": 0,
+    "seconds": 86.64
+  },
+  "earlier_failure": "102/103; new pure tunnel fixture pushed before initial TrocLink epoch initialization. Production bridge already ticked first; corrected fixture and full rerun passed.",
+  "loopback": {
+    "remote_states": 78,
+    "clean_shutdown": true,
+    "native_evidence": false
+  },
+  "L2": "pending user-presence session; no live tunnel acceptance claimed",
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-full-suite.txt",
+      "bytes": 37775,
+      "sha256": "FBADBA7F35BA0215AB50F4FAD81A8B44D6230DA4998FEED03464C2DC6C565C36"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-reviewed-suite.txt",
+      "bytes": 29244,
+      "sha256": "60D672CC396DC2893016767E44188EC0A62541F1FB89280AD63BB497D30BA079"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-smoke.txt",
+      "bytes": 153,
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-host.log",
+      "bytes": 6729,
+      "sha256": "1BD7C5BBA3568DC7B73F474C7C4A6E8696EF64C474E4A7858146652E7DE24878"
+    }
+  ]
+}

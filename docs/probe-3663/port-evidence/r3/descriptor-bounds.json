@@ -1,0 +1,72 @@
+{
+  "rows": {
+    "B052": {
+      "symbol": "kTrocInstancesBegin",
+      "old": "0x6A51AE0",
+      "target": "0x6F14E10",
+      "adopted": true,
+      "method": "R3 named RTTI/handler identity plus paired native static-constructor RIP stores",
+      "role": "First named static Troc descriptor",
+      "name": "StartActionAck",
+      "conflict": "Generic BinDiff static initializer association disagrees; no initializer function is adopted. Named slot-2 handlers and actual constructor stores identify the objects.",
+      "independent_body": "Both StartActionAck handlers bound/deserialise action data, resolve actor, test descriptor kind and call character-control+118 action application.",
+      "initializer_pair": [
+        "0x12F270",
+        "0x14A7B0"
+      ]
+    },
+    "B053": {
+      "symbol": "kTrocInstancesEnd",
+      "old": "0x6A82C80",
+      "target": "0x6F487B0",
+      "adopted": true,
+      "method": "R3 named RTTI/handler identity plus paired native static-constructor RIP stores",
+      "role": "Excluded endpoint at the native pointer-bearing internal request, preserving legacy boundary semantics",
+      "name": "OnLogoutXxxToServerReq",
+      "conflict": "Generic BinDiff static initializer association disagrees; no initializer function is adopted. Named slot-2 handlers and actual constructor stores identify the objects.",
+      "independent_body": "Both OnLogoutXxx handlers read native object pointers at packet+3 and +B, acquire/release native references and call virtual logout; this pointer-bearing object is excluded, never replayed.",
+      "initializer_pair": [
+        "0x232C80",
+        "0x26B250"
+      ]
+    }
+  },
+  "counts": {
+    "source": 1115,
+    "target": 1179
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\descriptor-boundary-old.txt",
+      "sha256": "86D9C9705B632493634B24DC0200A1DAC6BA800A3A003D96B2438D29EEA3C140",
+      "bytes": 17060
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\descriptor-boundary-new.txt",
+      "sha256": "DA4AA40E3C60132604ABA98FB2B16899779EAC009AD6BF9F9C2B3F1AA77E34E2",
+      "bytes": 18280
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-descriptors-old.json",
+      "sha256": "F08F33F635EAD38DE3547B2407107D87D3E7A29AE0ADF32725568201DBBE0E82",
+      "bytes": 476610
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-descriptors-new.json",
+      "sha256": "0E893FB5ED14A5C90BBD95880090FDAAE02290E75BADC7784F41E6F903B773AB",
+      "bytes": 503982
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-rtti-old.json",
+      "sha256": "08C9172CA107BC660B8767370AA2B1E772699CB5B03A9120C1944BFE4129FE12",
+      "bytes": 1108501
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-rtti-new.json",
+      "sha256": "160BD98FF66B26E257AD868D9E8D130D5A4278311DF777CE5C266FB314732928",
+      "bytes": 1172288
+    }
+  ],
+  "budget": "Raw new analysis stays local; summaries/hashes only committed",
+  "tier_b_armed": false
+}

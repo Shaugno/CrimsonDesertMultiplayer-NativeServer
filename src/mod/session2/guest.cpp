@@ -48,6 +48,7 @@
 #include "mod/session2/mount_sync_logic.h"
 #include "mod/config.h"
 #include "mod/session2/offsets_s2.h"
+#include "mod/session2/tunnel_layout.h"
 #include "mod/session2/npc_probe_client.h"
 #include "mod/session2/door_trace.h"
 #include "mod/session2/p8_probes.h"
@@ -64,6 +65,9 @@
 
 namespace cdmp::session2 {
 namespace {
+const TunnelLayout* g_tunnel_layout = &kTunnelLayout2976;
+const TunnelLayout& tunnel_offsets() { return *g_tunnel_layout; }
+
 
 using OnRecvFn = void(__fastcall*)(void* net, void* session, uint64_t unused, const uint8_t* pkt, uint16_t size);
 using PushFn = void(__fastcall*)(void* queue, void** item);
@@ -502,18 +506,18 @@ std::vector<uint8_t> frame_packet(uintptr_t self, uintptr_t pb) noexcept {
         uintptr_t frame = 0, base = 0, crypto = 0;
         uint16_t flen = 0;
         uint8_t crypto_on = 0;
-        if (!peek(pb + off::kPb_FramePtr, frame) || frame != pb || !peek(pb + off::kPb_Base, base) || base != pb ||
-            !peek(pb + off::kPb_Len2, flen) || flen < off::kFrameOverhead + troc::kInternalHeaderSize ||
-            flen - off::kFrameOverhead > troc::kMaxPacketSize) {
+        if (!peek(pb + tunnel_offsets().kPb_FramePtr, frame) || frame != pb || !peek(pb + tunnel_offsets().kPb_Base, base) || base != pb ||
+            !peek(pb + tunnel_offsets().kPb_Len2, flen) || flen < tunnel_offsets().kFrameOverhead + troc::kInternalHeaderSize ||
+            flen - tunnel_offsets().kFrameOverhead > troc::kMaxPacketSize) {
             return {};
         }
         // With the session's crypto on, the frame would already be encrypted (0x35BF99).
-        if (peek(self + off::kSession_Crypto, crypto) && crypto && peek(crypto + 0x24, crypto_on) && crypto_on) {
+        if (peek(self + tunnel_offsets().kSession_Crypto, crypto) && crypto && peek(crypto + 0x24, crypto_on) && crypto_on) {
             return {};
         }
-        std::vector<uint8_t> p(flen - off::kFrameOverhead);
+        std::vector<uint8_t> p(flen - tunnel_offsets().kFrameOverhead);
         // C4: also the client's 3-byte native goodbye 2001 (salida.md §1.1).
-        if (!guarded_copy(p.data(), pb + off::kFrameHeader, p.size()) ||
+        if (!guarded_copy(p.data(), pb + tunnel_offsets().kFrameHeader, p.size()) ||
             !troc::parse_wire(p, troc::Dir::ToHostServer)) {
             return {};
         }
@@ -567,8 +571,8 @@ Mode decide(uint16_t first_op, uint64_t epoch) {
     if (!why) {
         uintptr_t net = 0, q3 = 0;
         // Q3 is where the buffers go back: checked once, with VirtualQuery, before relying on it.
-        if (!game::safe_read(g_base + off::kClientNetSlot, &net, sizeof net) || !net ||
-            !game::safe_read(net + off::kClientNet_FreeC2S, &q3, sizeof q3) || !q3 ||
+        if (!game::safe_read(g_base + tunnel_offsets().kClientNetSlot, &net, sizeof net) || !net ||
+            !game::safe_read(net + tunnel_offsets().kClientNet_FreeC2S, &q3, sizeof q3) || !q3 ||
             !game::safe_read(q3, &net, sizeof net)) {
             why = "ClientNet's Q3 is unreadable";
         } else {
@@ -940,7 +944,7 @@ void check_send_thread() noexcept {
         log::warn("Session2 guest: NwVirtualSyncSession::Send ran on thread {}, NOT the client NetworkThread {} that "
                   "turns at exe+0x{:X} (the static analysis says it cannot); its buffer still goes back to Q3 as "
                   "always. Counted in the status line (Send off the NetworkThread)",
-                  tid, g_net_owner.owner(), off::kNetLoopPump);
+                  tid, g_net_owner.owner(), tunnel_offsets().kNetLoopPump);
     } catch (...) {
     }
 }
@@ -951,7 +955,7 @@ int* __fastcall guest_send(void* self, int* res, void* pbv) {
     const auto pb = reinterpret_cast<uintptr_t>(pbv);
     // The packet's own epoch (+0x8020, written by PostPacket), else the session's.
     uint64_t epoch = kNoEpoch;
-    if (!pb || !peek(pb + 0x8020, epoch) || epoch == kNoEpoch) peek(s + off::kSyncSession_Epoch, epoch);
+    if (!pb || !peek(pb + 0x8020, epoch) || epoch == kNoEpoch) peek(s + tunnel_offsets().kSyncSession_Epoch, epoch);
     if (epoch != g_epoch.load()) {
         g_epoch.store(epoch);
         if (g_mode.load() == Mode::Remote) {
@@ -973,7 +977,7 @@ int* __fastcall guest_send(void* self, int* res, void* pbv) {
     }
     if (g_mode.load() == Mode::Undecided) {
         uint16_t op = 0;
-        if (pb) peek(pb + off::kFrameHeader, op);
+        if (pb) peek(pb + tunnel_offsets().kFrameHeader, op);
         const Mode m = decide(op, epoch);
         if (m == Mode::Remote) {
             g_had_remote.store(true);
@@ -988,7 +992,7 @@ int* __fastcall guest_send(void* self, int* res, void* pbv) {
     }
     if (g_mode.load() != Mode::Remote) {
         g_n.observed.fetch_add(1, std::memory_order_relaxed);
-        if (uint16_t op = 0; pb && peek(pb + off::kFrameHeader, op)) {
+        if (uint16_t op = 0; pb && peek(pb + tunnel_offsets().kFrameHeader, op)) {
             if (op == kOpLoginUserToFieldServerReq) g_local_login_out.store(true);
             // P8 re-entry: a save loaded on this PC's own server after a remote conversation ends the re-entry.
             if (op == gxv::kOpLoginCharacterToFieldServerReq && g_had_remote.load()) {
@@ -1114,9 +1118,9 @@ void deliver_all(uintptr_t net) noexcept {
     try {
         uintptr_t session = 0;
         uint64_t epoch = 0;
-        if (!peek(net + off::kClientNet_Session, session) || !session) return;
+        if (!peek(net + tunnel_offsets().kClientNet_Session, session) || !session) return;
         // Only into the connection the packets belong to.
-        if (!peek(session + off::kSyncSession_Epoch, epoch) || epoch != g_epoch.load()) return;
+        if (!peek(session + tunnel_offsets().kSyncSession_Epoch, epoch) || epoch != g_epoch.load()) return;
         // Only the NetworkThread gets here (guest_pump): reused, no allocation
         // of the array per turn once it has grown (the packets are the mod's heap).
         static std::vector<gin::Item> batch;
@@ -1176,8 +1180,8 @@ void answer_goodbye(uintptr_t net) noexcept {
         uintptr_t session = 0;
         uint64_t epoch = 0;
         uint32_t mode = 0;
-        if (!peek(net + off::kClientNet_Session, session) || !session) return;
-        if (!peek(session + off::kSyncSession_Epoch, epoch) || epoch != g_epoch.load()) return;
+        if (!peek(net + tunnel_offsets().kClientNet_Session, session) || !session) return;
+        if (!peek(session + tunnel_offsets().kSyncSession_Epoch, epoch) || epoch != g_epoch.load()) return;
         if (!game::safe_read(g_base + kServerFrameworkMode, &mode, sizeof mode)) return;
         g_goodbye_answered.store(true);
         for (const uint16_t op : {troc::kOpLogoutUserAck, troc::kOpLogoutSessionAck}) {
@@ -1274,12 +1278,12 @@ void note_pump_thread() noexcept {
                       "ms): only it hands the host's packets to ClientNet::OnRecvPacket (exe+0x{:X}, at most {} per "
                       "turn, oldest first) and returns the client's buffers to Q3 (exe+0x{:X}); the mod's network "
                       "thread only queues them (at most {} packets / {} MB)",
-                      g_net_owner.owner(), off::kNetLoopPump, off::kClientOnRecvPacket, gin::kMaxPerTurn,
-                      off::kQueuePush, gin::kLimits.max_packets, gin::kLimits.max_bytes >> 20);
+                      g_net_owner.owner(), tunnel_offsets().kNetLoopPump, tunnel_offsets().kClientOnRecvPacket, gin::kMaxPerTurn,
+                      tunnel_offsets().kQueuePush, gin::kLimits.max_packets, gin::kLimits.max_bytes >> 20);
         } else if (seen == gin::ThreadOwner::Seen::FirstForeign) {
             log::warn("Session2 guest: exe+0x{:X} turned on thread {}, not on {} (two client NetworkThreads?); "
                       "counted in the status line",
-                      off::kNetLoopPump, GetCurrentThreadId(), g_net_owner.owner());
+                      tunnel_offsets().kNetLoopPump, GetCurrentThreadId(), g_net_owner.owner());
         }
     } catch (...) {
     }
@@ -1357,34 +1361,40 @@ bool head_matches(uintptr_t rva, const uint8_t* expected, size_t n) {
 }
 
 bool client_connected(uintptr_t net) {
-    auto slot4 = game::read<uintptr_t>(net + off::kClientNet_Slot4);
+    auto slot4 = game::read<uintptr_t>(net + tunnel_offsets().kClientNet_Slot4);
     return !slot4 || *slot4 != 0;
 }
 
 uint64_t session_epoch(uintptr_t net) {
-    auto session = game::read_ptr(net + off::kClientNet_Session);
-    auto e = session ? game::read<uint64_t>(*session + off::kSyncSession_Epoch) : std::nullopt;
+    auto session = game::read_ptr(net + tunnel_offsets().kClientNet_Session);
+    auto e = session ? game::read<uint64_t>(*session + tunnel_offsets().kSyncSession_Epoch) : std::nullopt;
     return e ? *e : 0;
 }
 
 DWORD WINAPI install_thread(LPVOID) {
     g_base = reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
-    const auto* dos = reinterpret_cast<const IMAGE_DOS_HEADER*>(g_base);
-    const auto* nt = reinterpret_cast<const IMAGE_NT_HEADERS*>(g_base + dos->e_lfanew);
-    if (g_base != off::kImageBase || nt->FileHeader.TimeDateStamp != off::kPeTimestamp) {
+    const auto identity = game::build_guard::identify_mapped(g_base,
+        [](uintptr_t address, void* out, size_t size) { return game::safe_read(address,out,size); });
+    const auto* layout = tunnel_layout(identity);
+    if (!layout) {
         log::error("Session2 guest: unsupported game build; P8 off");
+        return 0;
+    }
+    g_tunnel_layout = layout;
+    if (layout->target3663) {
+        log::error("R3 tunnel runtime adaptation incomplete; native installer remains closed");
         return 0;
     }
     // As early as the game allows: ClientNet exists and the code is the one we know.
     uintptr_t net = 0;
     bool heads = false;
     for (int i = 0; i < 24000; ++i) {  // 2 minutes
-        heads = head_matches(off::kSyncSessionSend, off::kSyncSessionSendHead, sizeof off::kSyncSessionSendHead) &&
-                head_matches(off::kNetLoopPump, off::kNetLoopPumpAob, sizeof off::kNetLoopPumpAob) &&
-                head_matches(off::kClientOnRecvPacket, off::kClientOnRecvPacketHead,
-                             sizeof off::kClientOnRecvPacketHead) &&
-                head_matches(off::kQueuePush, off::kQueuePushHead, sizeof off::kQueuePushHead);
-        auto n = game::read_ptr(g_base + off::kClientNetSlot);
+        heads = head_matches(tunnel_offsets().kSyncSessionSend, tunnel_offsets().kSyncSessionSendHead.data(), tunnel_offsets().kSyncSessionSendHead.size()) &&
+                head_matches(tunnel_offsets().kNetLoopPump, tunnel_offsets().kNetLoopPumpAob.data(), tunnel_offsets().kNetLoopPumpAob.size()) &&
+                head_matches(tunnel_offsets().kClientOnRecvPacket, tunnel_offsets().kClientOnRecvPacketHead.data(),
+                             tunnel_offsets().kClientOnRecvPacketHead.size()) &&
+                head_matches(tunnel_offsets().kQueuePush, tunnel_offsets().kQueuePushHead.data(), tunnel_offsets().kQueuePushHead.size());
+        auto n = game::read_ptr(g_base + tunnel_offsets().kClientNetSlot);
         if (heads && n) {
             net = *n;
             break;
@@ -1404,8 +1414,8 @@ DWORD WINAPI install_thread(LPVOID) {
         too_late();
         return 0;
     }
-    g_on_recv = reinterpret_cast<OnRecvFn>(g_base + off::kClientOnRecvPacket);
-    g_push = reinterpret_cast<PushFn>(g_base + off::kQueuePush);
+    g_on_recv = reinterpret_cast<OnRecvFn>(g_base + tunnel_offsets().kClientOnRecvPacket);
+    g_push = reinterpret_cast<PushFn>(g_base + tunnel_offsets().kQueuePush);
     // The connection that exists now (none) stays local: only a new epoch is decided.
     g_epoch.store(session_epoch(net));
     g_mode.store(Mode::Local);
@@ -1414,13 +1424,13 @@ DWORD WINAPI install_thread(LPVOID) {
     // every P8 point (.rsrc only, the 39 verified bytes, exactly the 7-byte first
     // instruction relocated). The Send hook is prepared first: nothing is written
     // to the game unless both can go in.
-    g_send_hook = safetyhook::create_inline(reinterpret_cast<void*>(g_base + off::kSyncSessionSend),
+    g_send_hook = safetyhook::create_inline(reinterpret_cast<void*>(g_base + tunnel_offsets().kSyncSessionSend),
                                             reinterpret_cast<void*>(&guest_send), SafetyHookInline::StartDisabled);
     std::vector<gad::Section> secs;
     const bool pump_ok =
         g_send_hook && p8_exe_sections(g_base, secs) &&
-        p8_install_mid(g_base, secs, off::kNetLoopPump, off::kNetLoopPumpPatch,
-                       std::span<const uint8_t>(off::kNetLoopPumpAob, sizeof off::kNetLoopPumpAob), guest_pump,
+        p8_install_mid(g_base, secs, tunnel_offsets().kNetLoopPump, tunnel_offsets().kNetLoopPumpPatch,
+                       std::span<const uint8_t>(tunnel_offsets().kNetLoopPumpAob.data(), tunnel_offsets().kNetLoopPumpAob.size()), guest_pump,
                        g_pump_hook, "Session2 guest", "the client NetworkThread's turn");
     if (!pump_ok || !g_send_hook.enable()) {
         if (g_send_hook) (void)g_send_hook.disable();
@@ -1449,7 +1459,7 @@ DWORD WINAPI install_thread(LPVOID) {
         }
     }
     log::info("Session2 guest (P8): hooked NwVirtualSyncSession::Send (exe+0x{:X}) and the NetworkThread "
-              "(exe+0x{:X}); mode {}", off::kSyncSessionSend, off::kNetLoopPump,
+              "(exe+0x{:X}); mode {}", tunnel_offsets().kSyncSessionSend, tunnel_offsets().kNetLoopPump,
               g_remote_allowed ? "REMOTE: the next connection goes to the host if it is ready"
                                : "observe (guest_mode=observe: everything stays local, only counted)");
     // The counters once a minute, also without [net] (the network loop is what
@@ -1473,7 +1483,7 @@ DWORD WINAPI report_guard_thread(LPVOID) {
     const auto base = reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
     const auto* dos = reinterpret_cast<const IMAGE_DOS_HEADER*>(base);
     const auto* nt = reinterpret_cast<const IMAGE_NT_HEADERS*>(base + dos->e_lfanew);
-    if (base != off::kImageBase || nt->FileHeader.TimeDateStamp != off::kPeTimestamp) {
+    if (base != tunnel_offsets().kImageBase || nt->FileHeader.TimeDateStamp != tunnel_offsets().kPeTimestamp) {
         log::error("Session2 guest: unsupported game build; the report guard (K1) is NOT on: move "
                    "crashpad_handler.exe out (K2) before playing");
         return 0;

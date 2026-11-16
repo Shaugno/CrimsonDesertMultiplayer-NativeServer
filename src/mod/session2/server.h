@@ -32,6 +32,7 @@
 namespace cdmp::session2 {
 
 struct ServerOptions {
+    bool core_loopback_probe = false; // explicit L2 public-key echo, loopback transport only
     bool probe = true;
     bool finder_log = false;
     bool create_session = false;

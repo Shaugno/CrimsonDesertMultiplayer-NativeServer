@@ -18,6 +18,7 @@
 #include "common/clock.h"
 #include "common/troc_frame.h"
 #include "mod/game/game_fault.h"
+#include "mod/game/hook_prepare.h"
 #include "mod/game/rtti.h"
 #include "mod/game/safe_memory.h"
 #include "mod/log.h"
@@ -46,6 +47,7 @@
 #include "mod/session2/observer_scene_copy.h"
 #include "mod/session2/observer_seq_copy.h"
 #include "mod/session2/offsets_s2.h"
+#include "mod/session2/tunnel_layout.h"
 #include "mod/session2/owner_fanout.h"
 #include "mod/session2/p8_probes.h"
 #include "mod/session2/travel_probe.h"
@@ -56,6 +58,12 @@
 
 namespace cdmp::session2 {
 namespace {
+const TunnelLayout* g_tunnel_layout = &kTunnelLayout2976;
+const TunnelLayout& tunnel_offsets() { return *g_tunnel_layout; }
+bool core_only() { return tunnel_offsets().target3663; }
+std::atomic<bool> g_core_capture{false};
+bool g_core_request_queued = false; // g_q_mu, one handshake until D reconnect exists
+
 
 using AllocFn = void*(__fastcall*)(size_t size, size_t align);
 using CtorFn = void*(__fastcall*)(void* self, uint8_t flag);
@@ -270,9 +278,9 @@ int note_exception(EXCEPTION_POINTERS* ep, inj::Step step, uint16_t opcode, uint
 // one runs (for the filter: the global heap's call is under its lock).
 void* game_alloc_raw(size_t size, volatile inj::Step& step) {
     const auto tls_array = static_cast<uintptr_t>(__readgsqword(0x58));
-    const uint32_t index = *reinterpret_cast<const uint32_t*>(g_base + off::kTlsIndexSlot);
+    const uint32_t index = *reinterpret_cast<const uint32_t*>(g_base + tunnel_offsets().kTlsIndexSlot);
     const uintptr_t tls = *reinterpret_cast<const uintptr_t*>(tls_array + 8ull * index);
-    if (*reinterpret_cast<const uint8_t*>(tls + off::kTls_UseGlobalHeap) != 0) {
+    if (*reinterpret_cast<const uint8_t*>(tls + tunnel_offsets().kTls_UseGlobalHeap) != 0) {
         g_global_heap_flag.fetch_add(1, std::memory_order_relaxed);
         step = inj::Step::AllocGlobal;
         return g_alloc_global(size, 0x10);
@@ -339,8 +347,8 @@ bool guarded_copy(void* dst, uintptr_t src, size_t n) {
 // The server instance session 2 was built in is still the current one.
 bool same_server() {
     uintptr_t net = 0, s1 = 0;
-    return peek(g_base + off::kServerNetSlot, net) && net == g_built_net.load() &&
-           peek(net + off::kServerNet_Session, s1) && s1 == g_built_s1.load();
+    return peek(g_base + tunnel_offsets().kServerNetSlot, net) && net == g_built_net.load() &&
+           peek(net + tunnel_offsets().kServerNet_Session, s1) && s1 == g_built_s1.load();
 }
 
 // Session 2 if it exists, belongs to the current server and to the epoch the
@@ -359,7 +367,7 @@ void epoch_sessions(uintptr_t (&out)[kEpochSlots]) {
 // that session (a freed or reused block fails this).
 bool session_user(uintptr_t session, uintptr_t& user) {
     uintptr_t vt = 0, back = 0;
-    return session && peek(session + off::kSession_User, user) && user && peek(user, vt) &&
+    return session && peek(session + tunnel_offsets().kSession_User, user) && user && peek(user, vt) &&
            vt == g_base + off::kServerUserActorVtable && peek(user + off::kUser_Session, back) && back == session;
 }
 
@@ -369,29 +377,32 @@ bool session_user(uintptr_t session, uintptr_t& user) {
 // (p8-heap-inyeccion.md); it is never freed.
 bool build_session(uintptr_t& out) {
     void* obj = nullptr;
-    if (!game_alloc(off::kSessionSize, obj, 0, g_want_epoch.load())) return false;
+    if (!game_alloc(tunnel_offsets().kSessionSize, obj, 0, g_want_epoch.load())) return false;
     volatile inj::Step step = inj::Step::BuildSession;
     __try {
-        std::memset(obj, 0, off::kSessionSize);
+        std::memset(obj, 0, tunnel_offsets().kSessionSize);
         step = inj::Step::BuildCtor;  // allocates (either heap) and may raise 0xA0000002 itself
         g_ctor(obj, 0);
         step = inj::Step::BuildSession;
         const auto s = reinterpret_cast<uintptr_t>(obj);
-        *reinterpret_cast<uintptr_t*>(s) = g_base + off::kNwAsyncSessionVtable;
-        *reinterpret_cast<uint64_t*>(s + off::kSession_B0) = 0;
-        *reinterpret_cast<uint64_t*>(s + off::kSession_B8) = 0;
-        *reinterpret_cast<uint16_t*>(s + off::kSession_C0) = 0;
+        *reinterpret_cast<uintptr_t*>(s) = g_base + tunnel_offsets().kNwAsyncSessionVtable;
+        *reinterpret_cast<uint64_t*>(s + tunnel_offsets().kSession_B0) = 0;
+        *reinterpret_cast<uint64_t*>(s + tunnel_offsets().kSession_B8) = 0;
+        *reinterpret_cast<uint16_t*>(s + tunnel_offsets().kSession_C0) = 0;
         *reinterpret_cast<uintptr_t*>(s) = reinterpret_cast<uintptr_t>(g_vtable + 1);
-        *reinterpret_cast<uint16_t*>(s + off::kSession_Name) = '2';
+        *reinterpret_cast<uint16_t*>(s + tunnel_offsets().kSession_Name) = '2';
         // Never read for session 2 (its Send is ours). If something did push
         // there, Q2 is where the server takes S->C buffers back: no leak, no
         // packet for the host's client (decision D-6).
-        const uintptr_t server_net = *reinterpret_cast<uintptr_t*>(g_base + off::kServerNetSlot);
-        *reinterpret_cast<uintptr_t*>(s + off::kSession_OutQueue) =
-            *reinterpret_cast<uintptr_t*>(server_net + off::kServerNet_FreeS2C);
-        if (auto* id = *reinterpret_cast<uint32_t**>(s + off::kSession_IdPtr)) *id = kSessionId;
+        const uintptr_t server_net = *reinterpret_cast<uintptr_t*>(g_base + tunnel_offsets().kServerNetSlot);
+        *reinterpret_cast<uintptr_t*>(s + tunnel_offsets().kSession_OutQueue) =
+            *reinterpret_cast<uintptr_t*>(server_net + tunnel_offsets().kServerNet_FreeS2C);
+        // Target retains its native constructor key; C122 is not adopted.
+        if (!core_only()) {
+            if (auto* id = *reinterpret_cast<uint32_t**>(s + tunnel_offsets().kSession_IdPtr)) *id = kSessionId;
+        }
         g_built_net.store(server_net);
-        g_built_s1.store(*reinterpret_cast<uintptr_t*>(server_net + off::kServerNet_Session));
+        g_built_s1.store(*reinterpret_cast<uintptr_t*>(server_net + tunnel_offsets().kServerNet_Session));
         g_built_tid.store(GetCurrentThreadId());
         out = s;
         return true;
@@ -433,6 +444,25 @@ bool push_outgoing_extra(std::span<const uint8_t> packet) {
 // Runs on the game's threads: nothing may throw out of here. C4: what a
 // session 2 of an older epoch still writes never reaches the new guest.
 void take_frame(uintptr_t rq, uintptr_t self) noexcept {
+    if (core_only()) {
+        try {
+            if (self != live_session2()) return;
+            const uintptr_t frame = rq + tunnel_offsets().kRq_Frame;
+            uint16_t flen = 0;
+            if (!peek(frame, flen) || flen < tunnel_offsets().kFrameOverhead + troc::kHeaderSize || flen > 0x8000) {
+                ++g_n.sent_bad; return;
+            }
+            std::vector<uint8_t> packet(flen - tunnel_offsets().kFrameOverhead);
+            if (!guarded_copy(packet.data(), frame + tunnel_offsets().kFrameHeader, packet.size()) ||
+                !parse_tunnel_packet(packet, troc::Dir::ToGuestClient, tunnel_offsets())) {
+                ++g_n.sent_bad; return;
+            }
+            // No actor, save, phase or optional observer code in a B-only send.
+            if (!g_outgoing.push(packet)) g_outgoing_lost.store(true);
+            else ++g_n.sent_out;
+        } catch (...) { g_outgoing_lost.store(true); }
+        return;
+    }
     child_hold_settle_births();  // S33 review: a retired key born again (noted in the mid hook) before any filter
     NpcPublicationScope publication;
     struct Depth {
@@ -449,14 +479,14 @@ void take_frame(uintptr_t rq, uintptr_t self) noexcept {
                 return;
             }
         }
-        const uintptr_t frame = rq + off::kRq_Frame;
+        const uintptr_t frame = rq + tunnel_offsets().kRq_Frame;
         uint16_t flen = 0;
-        if (!peek(frame, flen) || flen < off::kFrameOverhead + troc::kInternalHeaderSize || flen > 0x8000) {
+        if (!peek(frame, flen) || flen < tunnel_offsets().kFrameOverhead + troc::kInternalHeaderSize || flen > 0x8000) {
             g_n.sent_bad.fetch_add(1, std::memory_order_relaxed);  // SendPacket wrote no frame
             return;
         }
-        std::vector<uint8_t> p(flen - off::kFrameOverhead);
-        const bool copied = guarded_copy(p.data(), frame + off::kFrameHeader, p.size());
+        std::vector<uint8_t> p(flen - tunnel_offsets().kFrameOverhead);
+        const bool copied = guarded_copy(p.data(), frame + tunnel_offsets().kFrameHeader, p.size());
         auto v = copied ? troc::parse_wire(p, troc::Dir::ToGuestClient) : std::nullopt;
         // salida-en-carga.md §2: a Nak 1013 for session 2 (e.g. its logout refused), counted.
         if (copied && p.size() >= 2 && (p[0] | (p[1] << 8)) == kOpNak) {
@@ -691,8 +721,8 @@ int* __fastcall session2_send(void* self, int* res, void* rq) {
         // the server drops its reference and frees it (D0 §3.2). If that is
         // impossible, report failure: SendPacket then frees it itself.
         uintptr_t server_net = 0, q2 = 0;
-        if (!peek(g_base + off::kServerNetSlot, server_net) || !peek(server_net + off::kServerNet_FreeS2C, q2) ||
-            !guarded_push(q2, reinterpret_cast<void*>(r + off::kRq_Frame))) {
+        if (!peek(g_base + tunnel_offsets().kServerNetSlot, server_net) || !peek(server_net + tunnel_offsets().kServerNet_FreeS2C, q2) ||
+            !guarded_push(q2, reinterpret_cast<void*>(r + tunnel_offsets().kRq_Frame))) {
             result = 1;
         }
     }
@@ -746,6 +776,12 @@ void on_server_recv(safetyhook::Context& ctx) {
     // OnRecvPacket has one caller, ServerRunThread's loop (D0 §4).
     if (g_session2.load(std::memory_order_acquire) &&
         (GetCurrentThreadId() != g_built_tid.load() || !same_server())) {
+        if (core_only()) {
+            // D lifecycle is unproved: never reuse a native session after replacement.
+            g_halted_epoch.store(g_want_epoch.load());
+            g_want_session.store(false);
+            return;
+        }
         // Another server instance: session 2 (and its user) belonged to the
         // old one. It is left as it is (never freed) and a new one is built.
         // A conversation that had started cannot go on.
@@ -780,7 +816,7 @@ void on_server_recv(safetyhook::Context& ctx) {
                 // these before asking for it, and may already have asked again.)
                 g_logout_asked.store(false);
                 g_logout_handed.store(0);
-                phase_reset();  // its user starts its login from nothing
+                if (!core_only()) phase_reset();  // C phases are inaccessible in a B-only host
             }
             // The session before its epoch: live_session2() must never pair the
             // old session with the new epoch (review of f15596e, finding 3).
@@ -796,11 +832,11 @@ void on_server_recv(safetyhook::Context& ctx) {
     uint16_t op = 0;
     bool from_user2 = false;  // one of our buffers (a Req of user 2, any epoch)
     if (s2 && pkt) {
-        const uintptr_t pb = pkt - off::kFrameHeader;
+        const uintptr_t pb = pkt - tunnel_offsets().kFrameHeader;
         uintptr_t frame = 0, base = 0;
         uint64_t magic = 0;
-        if (peek(pb + off::kPb_FramePtr, frame) && frame == pb && peek(pb + off::kPb_Base, base) && base == pb &&
-            peek(pb + off::kPb_Magic, magic) && magic == kMagic) {
+        if (peek(pb + tunnel_offsets().kPb_FramePtr, frame) && frame == pb && peek(pb + tunnel_offsets().kPb_Base, base) && base == pb &&
+            peek(pb + tunnel_offsets().kPb_Magic, magic) && magic == kMagic) {
             // C4: the session of the epoch the buffer was tagged with. A buffer
             // of an older epoch goes to ITS session (whose user is gone), never
             // to the new guest's; the barrier waits until none is in flight.
@@ -808,7 +844,7 @@ void on_server_recv(safetyhook::Context& ctx) {
             uintptr_t table[kEpochSlots];
             epoch_sessions(table);
             const PbRoute route =
-                peek(pb + off::kPb_Tag, tag) ? route_pb(tag, g_session_epoch.load(), table, kEpochSlots) : PbRoute{};
+                peek(pb + tunnel_offsets().kPb_Tag, tag) ? route_pb(tag, g_session_epoch.load(), table, kEpochSlots) : PbRoute{};
             if (route.session) {
                 ctx.r8 = route.session;
                 g_pb_seen[route.epoch].fetch_add(1, std::memory_order_relaxed);
@@ -820,6 +856,25 @@ void on_server_recv(safetyhook::Context& ctx) {
             g_n.recv_ours.fetch_add(1, std::memory_order_relaxed);
             from_user2 = true;
         }
+    }
+    if (core_only()) {
+        // Explicit L2 diagnostic only: copy the host's real public-key request once.
+        // Never copy a request already routed to our own session, and never log bytes.
+        uint16_t length = 0;
+        if (g_opt.core_loopback_probe && !from_user2 && s2 && ctx.r8 == g_built_s1.load() &&
+            peek(pkt, op) && op == tunnel_offsets().connect_opcode &&
+            peek(ctx.rsp + 0x28, length) && length <= tunnel_offsets().packet_max && length >= troc::kHeaderSize &&
+            !g_core_capture.exchange(true)) {
+            try {
+                std::vector<uint8_t> packet(length);
+                if (guarded_copy(packet.data(), pkt, packet.size()) &&
+                    parse_tunnel_packet(packet, troc::Dir::ToHostServer, tunnel_offsets()) &&
+                    g_outgoing.push(packet)) {
+                    // Captured before native handling; no native packet or context is changed.
+                } else g_outgoing_lost.store(true);
+            } catch (...) { g_outgoing_lost.store(true); }
+        }
+        return;
     }
     // P6, second layer (log only, decision D-5): the server is asked to save.
     if (pkt && peek(pkt, op) && (op == 3037 || op == 2910)) g_n.save_reqs.fetch_add(1, std::memory_order_relaxed);
@@ -883,7 +938,7 @@ bool actor_session(uintptr_t actor, uintptr_t& session) {
 bool array_remove(uintptr_t arr, uintptr_t session) {
     __try {
         auto* data = *reinterpret_cast<uintptr_t**>(arr);
-        auto& count = *reinterpret_cast<uint32_t*>(arr + off::kArray_Count);
+        auto& count = *reinterpret_cast<uint32_t*>(arr + tunnel_offsets().kArray_Count);
         for (uint32_t i = 0; i < count; ++i) {
             if (data[i] != session) continue;
             for (uint32_t j = i + 1; j < count; ++j) data[j - 1] = data[j];
@@ -921,7 +976,7 @@ uintptr_t finder_common(int which, SafetyHookInline& hook, void* finder, void* o
     g_n.finder_calls[which].fetch_add(1, std::memory_order_relaxed);
     const auto arr = reinterpret_cast<uintptr_t>(out);
     uint32_t count = 0;
-    if (g_opt.finder_log && peek(arr + off::kArray_Count, count) && count) {
+    if (g_opt.finder_log && peek(arr + tunnel_offsets().kArray_Count, count) && count) {
         g_n.finder_nonempty[which].fetch_add(1, std::memory_order_relaxed);
     }
     if (!g_opt.relay_fix || g_finder_faulted.load(std::memory_order_relaxed)) return original;
@@ -975,15 +1030,15 @@ void load_channels() {
     g_channel.fill(kNotReq);
     g_blocked_channel.fill(kNotReq);
     size_t n = 0, blocked = 0;
-    for (uintptr_t a = g_base + off::kTrocInstancesBegin; a < g_base + off::kTrocInstancesEnd; a += 8) {
+    for (uintptr_t a = g_base + tunnel_offsets().kTrocInstancesBegin; a < g_base + tunnel_offsets().kTrocInstancesEnd; a += 8) {
         auto vt = game::read_ptr(a);
         if (!vt || *vt < g_base || *vt >= g_base + 0x10000000) continue;
         if (game::rtti_name_of_vtable(*vt).rfind(".?AVTrocTr", 0) != 0) continue;
-        auto kind = game::read<uint32_t>(a + off::kTroc_Kind);
-        auto op = game::read<uint16_t>(a + off::kTroc_Opcode);
-        auto ch = game::read<uint8_t>(a + off::kTroc_Channel);
+        auto kind = game::read<uint32_t>(a + tunnel_offsets().kTroc_Kind);
+        auto op = game::read<uint16_t>(a + tunnel_offsets().kTroc_Opcode);
+        auto ch = game::read<uint8_t>(a + tunnel_offsets().kTroc_Channel);
         const std::string name =
-            kind && *kind != off::kTrocKindServer ? game::short_class_name(game::rtti_name_of_vtable(*vt), "TrocTr")
+            kind && *kind != tunnel_offsets().kTrocKindServer ? game::short_class_name(game::rtti_name_of_vtable(*vt), "TrocTr")
                                                   : std::string();
         // ConnectCryptogramToServerReq is an "internal" handler (kind 0x7FFFFFFE) that
         // the server finds by bit mask (Troc::Find, 0x143B351): the login's first
@@ -994,12 +1049,13 @@ void load_channels() {
         // reach. Never the global shutdown 2790/2038 nor 2004 (pointers).
         const bool connect = name == "ConnectCryptogramToServerReq" ||
                              (name == "LogoutSessionToServerReq" && op && *op == troc::kOpLogoutSessionReq);
-        if (kind && op && ch && (*kind == off::kTrocKindServer || connect) && *ch < kBlocked) {
+        if (kind && op && ch && (*kind == tunnel_offsets().kTrocKindServer || connect) && *ch < kBlocked) {
             const std::string full = game::short_class_name(game::rtti_name_of_vtable(*vt), "TrocTr");
             // The tunnel never asks the host's server to save, delete saves or run cheats.
             // Covers every Req of domain cheat/dev in troc_messages_2976.csv and none
             // of the login or movement scripts (checked against the table).
-            bool never = full.rfind("Save", 0) == 0 || full.rfind("DeleteSave", 0) == 0 ||
+            bool never = (core_only() && (full != "ConnectCryptogramToServerReq" ||
+                         *op != tunnel_offsets().connect_opcode)) || full.rfind("Save", 0) == 0 || full.rfind("DeleteSave", 0) == 0 ||
                          full.rfind("DeleteCharacter", 0) == 0 || full.rfind("ReportFromViewer", 0) == 0;
             for (const char* k : {"Cheat", "ForDev", "Debug", "DevReq", "ByGm", "Test"}) {
                 never = never || full.find(k) != std::string::npos;
@@ -1009,9 +1065,9 @@ void load_channels() {
             ++n;
             if (never) ++blocked;
         }
-        a += 0x80;  // the rest of this 0x90-byte instance
+        a += tunnel_offsets().descriptor_skip;  // target scans every aligned slot
     }
-    if (g_channel[troc::kOpLogoutSessionReq] >= kBlocked) {
+    if (!core_only() && g_channel[troc::kOpLogoutSessionReq] >= kBlocked) {
         log::error("Session2: LogoutSessionToServerReq 2001 not found among the server's handlers: user 2 cannot "
                    "be logged out (C4 off)");
     }
@@ -1024,12 +1080,12 @@ bool build_vtable() {
         VirtualAlloc(nullptr, 4096, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
     if (!vt) return false;
     // COL at [-1] keeps the RTTI name; then the 15 entries.
-    if (!game::safe_read(g_base + off::kNwVirtualAsyncSessionVtable - 8, vt,
-                         (off::kSessionVtableEntries + 1) * sizeof(uintptr_t))) {
+    if (!game::safe_read(g_base + tunnel_offsets().kNwVirtualAsyncSessionVtable - 8, vt,
+                         (tunnel_offsets().kSessionVtableEntries + 1) * sizeof(uintptr_t))) {
         return false;
     }
-    if (vt[1 + off::kSessionVfSend] != g_base + off::kSessionSend) return false;
-    vt[1 + off::kSessionVfSend] = reinterpret_cast<uintptr_t>(&session2_send);
+    if (vt[1 + tunnel_offsets().kSessionVfSend] != g_base + tunnel_offsets().kSessionSend) return false;
+    vt[1 + tunnel_offsets().kSessionVfSend] = reinterpret_cast<uintptr_t>(&session2_send);
     DWORD old = 0;
     VirtualProtect(vt, 4096, PAGE_READONLY, &old);
     g_vtable = vt;
@@ -1046,26 +1102,33 @@ bool vtable_slot_is(uintptr_t vtable_rva, int slot, uintptr_t fn_rva) {
 bool server_install(const ServerOptions& opt) {
     g_opt = opt;
     g_base = reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
-    const auto* dos = reinterpret_cast<const IMAGE_DOS_HEADER*>(g_base);
-    const auto* nt = reinterpret_cast<const IMAGE_NT_HEADERS*>(g_base + dos->e_lfanew);
-    if (g_base != off::kImageBase || nt->FileHeader.TimeDateStamp != off::kPeTimestamp) {
+    const auto identity = game::build_guard::identify_mapped(g_base,
+        [](uintptr_t address, void* out, size_t size) { return game::safe_read(address,out,size); });
+    const auto* layout = tunnel_layout(identity);
+    if (!layout) {
         log::error("Session2: unsupported game build; option D stays off");
+        return false;
+    }
+    g_tunnel_layout = layout;
+    if (core_only() && (opt.probe || opt.finder_log || opt.relay_fix || opt.mirror_host ||
+        !opt.create_session || !opt.accept_tunnel)) {
+        log::error("3663 B requires the core host options; C/D and optional hooks remain closed");
         return false;
     }
     const bool hooks_server = opt.create_session || opt.accept_tunnel;
     const bool hooks_finders = opt.finder_log || opt.relay_fix;
     if (hooks_server) {
-        if (!head_matches(off::kServerOnRecvPacket, off::kServerOnRecvPacketHead, sizeof off::kServerOnRecvPacketHead,
+        if (!head_matches(tunnel_offsets().kServerOnRecvPacket, tunnel_offsets().kServerOnRecvPacketHead.data(), tunnel_offsets().kServerOnRecvPacketHead.size(),
                           "ServerNet::OnRecvPacket") ||
-            !head_matches(off::kSessionSend, off::kSessionSendHead, sizeof off::kSessionSendHead,
+            !head_matches(tunnel_offsets().kSessionSend, tunnel_offsets().kSessionSendHead.data(), tunnel_offsets().kSessionSendHead.size(),
                           "NwVirtualAsyncSession::Send") ||
-            !head_matches(off::kNwSessionCtor, off::kNwSessionCtorHead, sizeof off::kNwSessionCtorHead,
+            !head_matches(tunnel_offsets().kNwSessionCtor, tunnel_offsets().kNwSessionCtorHead.data(), tunnel_offsets().kNwSessionCtorHead.size(),
                           "NwSession::NwSession") ||
-            !head_matches(off::kQueuePush, off::kQueuePushHead, sizeof off::kQueuePushHead, "queue push") ||
-            !head_matches(off::kAllocGlobal, off::kAllocGlobalHead, sizeof off::kAllocGlobalHead, "alloc") ||
-            !head_matches(off::kAllocThread, off::kAllocThreadBytes, sizeof off::kAllocThreadBytes,
+            !head_matches(tunnel_offsets().kQueuePush, tunnel_offsets().kQueuePushHead.data(), tunnel_offsets().kQueuePushHead.size(), "queue push") ||
+            !head_matches(tunnel_offsets().kAllocGlobal, tunnel_offsets().kAllocGlobalHead.data(), tunnel_offsets().kAllocGlobalHead.size(), "alloc") ||
+            !head_matches(tunnel_offsets().kAllocThread, tunnel_offsets().kAllocThreadBytes.data(), tunnel_offsets().kAllocThreadBytes.size(),
                           "the thread's own allocator") ||
-            !head_matches(off::kNetLoopPump, off::kNetLoopPumpAob, sizeof off::kNetLoopPumpAob,
+            !head_matches(tunnel_offsets().kNetLoopPump, tunnel_offsets().kNetLoopPumpAob.data(), tunnel_offsets().kNetLoopPumpAob.size(),
                           "the client NetworkThread's turn")) {
             return false;
         }
@@ -1086,14 +1149,18 @@ bool server_install(const ServerOptions& opt) {
         }
     }
 
-    g_alloc_global = reinterpret_cast<AllocFn>(g_base + off::kAllocGlobal);
-    g_alloc_thread = reinterpret_cast<AllocFn>(g_base + off::kAllocThread);
-    g_ctor = reinterpret_cast<CtorFn>(g_base + off::kNwSessionCtor);
-    g_push = reinterpret_cast<PushFn>(g_base + off::kQueuePush);
-    g_to_near = reinterpret_cast<FinderVf1>(g_base + off::kToNearVf1);
+    g_alloc_global = reinterpret_cast<AllocFn>(g_base + tunnel_offsets().kAllocGlobal);
+    g_alloc_thread = reinterpret_cast<AllocFn>(g_base + tunnel_offsets().kAllocThread);
+    g_ctor = reinterpret_cast<CtorFn>(g_base + tunnel_offsets().kNwSessionCtor);
+    g_push = reinterpret_cast<PushFn>(g_base + tunnel_offsets().kQueuePush);
+    g_to_near = core_only() ? nullptr : reinterpret_cast<FinderVf1>(g_base + off::kToNearVf1);
 
     if (hooks_server) {
         load_channels();
+        if (core_only() && g_channel[tunnel_offsets().connect_opcode] >= kBlocked) {
+            log::error("3663 B: named cryptogram descriptor not found; no native hook installed");
+            return false;
+        }
         if (!build_vtable()) {
             log::error("Session2: cannot build session 2's vtable; option D stays off");
             return false;
@@ -1105,7 +1172,26 @@ bool server_install(const ServerOptions& opt) {
             g_opt.mirror_host = false;
         }
         g_want_session.store(opt.create_session);
-        g_recv_hook = safetyhook::create_mid(reinterpret_cast<void*>(g_base + off::kServerOnRecvPacket), on_server_recv);
+        if (core_only()) {
+            auto recv = game::prepare_mid(g_base + tunnel_offsets().kServerOnRecvPacket, on_server_recv,
+                [](const std::vector<uint8_t>& bytes) {
+                    const auto expected = tunnel_offsets().kServerOnRecvPacketHead;
+                    return bytes.size() == 5 && std::equal(bytes.begin(), bytes.end(), expected.begin());
+                }, "3663 B", "native receiver entry");
+            auto pump = game::prepare_mid(g_base + tunnel_offsets().kNetLoopPump, on_client_pump,
+                [](const std::vector<uint8_t>& bytes) {
+                    const auto expected = tunnel_offsets().kNetLoopPumpAob;
+                    return bytes.size() == tunnel_offsets().kNetLoopPumpPatch &&
+                           std::equal(bytes.begin(), bytes.end(), expected.begin());
+                }, "3663 B", "native NetworkThread midpoint");
+            if (!recv || !pump) { g_want_session.store(false); return false; }
+            g_recv_hook = std::move(*recv); g_pump_hook = std::move(*pump);
+            if (!g_recv_hook.enable() || !g_pump_hook.enable()) {
+                g_want_session.store(false); g_pump_hook = {}; g_recv_hook = {};
+                return false;
+            }
+        } else {
+        g_recv_hook = safetyhook::create_mid(reinterpret_cast<void*>(g_base + tunnel_offsets().kServerOnRecvPacket), on_server_recv);
         if (!g_recv_hook) {
             g_want_session.store(false);
             log::error("Session2: cannot hook ServerNet::OnRecvPacket; option D stays off");
@@ -1119,26 +1205,27 @@ bool server_install(const ServerOptions& opt) {
         // relocates exactly the first instruction (7 bytes, mov rax,[r15+0xE0]).
         std::vector<gad::Section> secs;
         if (!p8_exe_sections(g_base, secs) ||
-            !p8_install_mid(g_base, secs, off::kNetLoopPump, off::kNetLoopPumpPatch,
-                            std::span<const uint8_t>(off::kNetLoopPumpAob, sizeof off::kNetLoopPumpAob),
+            !p8_install_mid(g_base, secs, tunnel_offsets().kNetLoopPump, tunnel_offsets().kNetLoopPumpPatch,
+                            std::span<const uint8_t>(tunnel_offsets().kNetLoopPumpAob.data(), tunnel_offsets().kNetLoopPumpAob.size()),
                             on_client_pump, g_pump_hook, "Session2", "the client NetworkThread's turn")) {
             g_want_session.store(false);
             g_recv_hook = {};
             log::error("Session2: cannot hook the client NetworkThread's turn (exe+0x{:X}); option D stays off",
-                       off::kNetLoopPump);
+                       tunnel_offsets().kNetLoopPump);
             return false;
+        }
         }
         log::info("Session2: the guest's Req go to the server from the client NetworkThread (mid-hook exe+0x{:X}, "
                   "every turn <= 16 ms): buffer from that thread's own heap (exe+0x{:X}), push exe+0x{:X}; queue "
                   "{} Req / {} MB, at most {} not yet taken by the server",
-                  off::kNetLoopPump, off::kAllocThread, off::kQueuePush, g_q.limits().max_packets,
+                  tunnel_offsets().kNetLoopPump, tunnel_offsets().kAllocThread, tunnel_offsets().kQueuePush, g_q.limits().max_packets,
                   g_q.limits().max_bytes >> 20, g_q.limits().in_flight_max);
         if (g_opt.mirror_host) {
             CloseHandle(CreateThread(nullptr, 0, mirror_thread, nullptr, 0, nullptr));
             log::info("Session2: mirror on: user 2 repeats the host player's movement {} ms later",
                       opt.mirror_delay_ms);
         }
-        log::info("Session2: hooked ServerNet::OnRecvPacket (exe+0x{:X}); session 2 {}", off::kServerOnRecvPacket,
+        log::info("Session2: hooked ServerNet::OnRecvPacket (exe+0x{:X}); session 2 {}", tunnel_offsets().kServerOnRecvPacket,
                   opt.create_session ? "will be built on the server thread" : "not built (create_session=0)");
     }
     if (hooks_finders) {
@@ -1163,10 +1250,11 @@ bool server_install(const ServerOptions& opt) {
 }
 
 void server_probe_log(const char* when) {
+    if (core_only()) return;  // legacy C/D fields are not a B diagnostic
     using game::read;
     using game::read_ptr;
-    const auto sn = read_ptr(g_base + off::kServerNetSlot);
-    const auto cn = read_ptr(g_base + off::kClientNetSlot);
+    const auto sn = read_ptr(g_base + tunnel_offsets().kServerNetSlot);
+    const auto cn = read_ptr(g_base + tunnel_offsets().kClientNetSlot);
     const auto sam = read_ptr(g_base + off::kSamSlot);
     auto rva = [](std::optional<uintptr_t> v) {
         return v ? std::format("exe+0x{:X}", *v - g_base) : std::string("?");
@@ -1176,16 +1264,16 @@ void server_probe_log(const char* when) {
         log::info("Session2 probe ({}): no ServerNet yet", when);
         return;
     }
-    const auto s1 = read_ptr(*sn + off::kServerNet_Session);
+    const auto s1 = read_ptr(*sn + tunnel_offsets().kServerNet_Session);
     std::string session = "none";
     if (s1) {
-        const auto idp = read_ptr(*s1 + off::kSession_IdPtr);
+        const auto idp = read_ptr(*s1 + tunnel_offsets().kSession_IdPtr);
         const auto id = idp ? read<uint32_t>(*idp) : std::nullopt;
-        const auto user = read_ptr(*s1 + off::kSession_User);
-        const auto crypto = read_ptr(*s1 + off::kSession_Crypto);
+        const auto user = read_ptr(*s1 + tunnel_offsets().kSession_User);
+        const auto crypto = read_ptr(*s1 + tunnel_offsets().kSession_Crypto);
         const auto crypto_on = crypto ? read<uint8_t>(*crypto + 0x24) : std::nullopt;
-        const auto outq = read_ptr(*s1 + off::kSession_OutQueue);
-        const auto cin = cn ? read_ptr(*cn + off::kClientNet_InQueue) : std::nullopt;
+        const auto outq = read_ptr(*s1 + tunnel_offsets().kSession_OutQueue);
+        const auto cin = cn ? read_ptr(*cn + tunnel_offsets().kClientNet_InQueue) : std::nullopt;
         std::string u = "none";
         if (user) {
             const auto uvt = read_ptr(*user);
@@ -1198,8 +1286,8 @@ void server_probe_log(const char* when) {
                               hex(s1), rva(read_ptr(*s1)), hex(id), u, hex(crypto_on), hex(outq),
                               outq && cin && *outq == *cin ? "same" : "DIFFERENT");
     }
-    const auto q2 = read_ptr(*sn + off::kServerNet_FreeS2C);
-    const auto q3 = read_ptr(*sn + off::kServerNet_FreeC2S);
+    const auto q2 = read_ptr(*sn + tunnel_offsets().kServerNet_FreeS2C);
+    const auto q3 = read_ptr(*sn + tunnel_offsets().kServerNet_FreeC2S);
     const auto c20 = cn ? read_ptr(*cn + 0x20) : std::nullopt;
     const auto c28 = cn ? read_ptr(*cn + 0x28) : std::nullopt;
     log::info("Session2 probe ({}): ServerNet {} | session 1 {} | Q2 {} Q3 {} (ClientNet+0x20/+0x28 {})", when, hex(sn),
@@ -1209,8 +1297,8 @@ void server_probe_log(const char* when) {
                   hex(read<uint32_t>(*sam + off::kSam_FreeKeys)), hex(read<uint32_t>(*sam + off::kSam_ActorCount)));
     }
     if (const uintptr_t s2 = live_session2()) {
-        const auto user = read_ptr(s2 + off::kSession_User);
-        const auto idp = read_ptr(s2 + off::kSession_IdPtr);
+        const auto user = read_ptr(s2 + tunnel_offsets().kSession_User);
+        const auto idp = read_ptr(s2 + tunnel_offsets().kSession_IdPtr);
         log::info("Session2 probe ({}): session 2 0x{:X} | id {} | user {} key {}", when, s2,
                   hex(idp ? read<uint32_t>(*idp) : std::nullopt), hex(user),
                   user ? hex(read<uint32_t>(*user + off::kUser_Key)) : std::string("-"));
@@ -1221,7 +1309,7 @@ void server_probe_log(const char* when) {
     // share a sector, so the host would not see user 2.
     auto where = [&](std::optional<uintptr_t> session) -> std::string {
         if (!session) return "-";
-        const auto user = read_ptr(*session + off::kSession_User);
+        const auto user = read_ptr(*session + tunnel_offsets().kSession_User);
         const auto pj = user ? read_ptr(*user + 0xD0) : std::nullopt;
         const auto key = pj ? read<uint32_t>(*pj + off::kServerActor_Key) : std::nullopt;
         const auto c68 = pj ? read_ptr(*pj + 0x68) : std::nullopt;
@@ -1270,13 +1358,13 @@ bool server_user2_present() {
 bool server_users(uintptr_t& host, uintptr_t& user2) {
     uintptr_t net = 0, s1 = 0;
     const uintptr_t s2 = live_session2();
-    return s2 && peek(g_base + off::kServerNetSlot, net) && peek(net + off::kServerNet_Session, s1) &&
+    return s2 && peek(g_base + tunnel_offsets().kServerNetSlot, net) && peek(net + tunnel_offsets().kServerNet_Session, s1) &&
            session_user(s1, host) && session_user(s2, user2);
 }
 
 bool server_host_user(uintptr_t& host) {
     uintptr_t net = 0, s1 = 0;
-    return peek(g_base + off::kServerNetSlot, net) && peek(net + off::kServerNet_Session, s1) &&
+    return peek(g_base + tunnel_offsets().kServerNetSlot, net) && peek(net + tunnel_offsets().kServerNet_Session, s1) &&
            session_user(s1, host);
 }
 
@@ -1319,26 +1407,26 @@ namespace {
 bool push_request(uintptr_t server_net, const uint8_t* pkt, size_t len, uint8_t channel, uint32_t tag,
                   uint16_t opcode, uint32_t epoch) {
     void* mem = nullptr;
-    if (!game_alloc(off::kPbSize, mem, opcode, epoch)) return false;
+    if (!game_alloc(tunnel_offsets().kPbSize, mem, opcode, epoch)) return false;
     const auto pb = reinterpret_cast<uintptr_t>(mem);
-    const auto flen = static_cast<uint16_t>(len + off::kFrameOverhead);
+    const auto flen = static_cast<uint16_t>(len + tunnel_offsets().kFrameOverhead);
     volatile inj::Step step = inj::Step::Fill;
     __try {
-        std::memset(mem, 0, off::kFrameHeader + len + (off::kFrameOverhead - off::kFrameHeader));
+        std::memset(mem, 0, tunnel_offsets().kFrameHeader + len + (tunnel_offsets().kFrameOverhead - tunnel_offsets().kFrameHeader));
         *reinterpret_cast<uint16_t*>(pb) = flen;
         *reinterpret_cast<uint8_t*>(pb + 2) = channel;
-        std::memcpy(reinterpret_cast<void*>(pb + off::kFrameHeader), pkt, len);
-        std::memset(reinterpret_cast<void*>(pb + off::kPb_FramePtr), 0, off::kPbSize - off::kPb_FramePtr);
-        *reinterpret_cast<uintptr_t*>(pb + off::kPb_FramePtr) = pb;
-        *reinterpret_cast<uint16_t*>(pb + off::kPb_Len1) = flen;
-        *reinterpret_cast<uint16_t*>(pb + off::kPb_Len2) = flen;
-        *reinterpret_cast<uint16_t*>(pb + off::kPb_Cap) = flen;
-        *reinterpret_cast<uint8_t*>(pb + off::kPb_IsRequest) = 0;
-        *reinterpret_cast<uint32_t*>(pb + off::kPb_Tag) = tag;
-        *reinterpret_cast<uint64_t*>(pb + off::kPb_Magic) = kMagic;
-        *reinterpret_cast<uint64_t*>(pb + 0x8020) = 0x7FFFFFFFFFFFFFFFull;
-        *reinterpret_cast<uintptr_t*>(pb + off::kPb_Base) = pb;
-        const uintptr_t q0 = *reinterpret_cast<uintptr_t*>(server_net + off::kServerNet_InQueue);
+        std::memcpy(reinterpret_cast<void*>(pb + tunnel_offsets().kFrameHeader), pkt, len);
+        std::memset(reinterpret_cast<void*>(pb + tunnel_offsets().kPb_FramePtr), 0, tunnel_offsets().kPbSize - tunnel_offsets().kPb_FramePtr);
+        *reinterpret_cast<uintptr_t*>(pb + tunnel_offsets().kPb_FramePtr) = pb;
+        *reinterpret_cast<uint16_t*>(pb + tunnel_offsets().kPb_Len1) = flen;
+        *reinterpret_cast<uint16_t*>(pb + tunnel_offsets().kPb_Len2) = flen;
+        *reinterpret_cast<uint16_t*>(pb + tunnel_offsets().kPb_Cap) = flen;
+        *reinterpret_cast<uint8_t*>(pb + tunnel_offsets().kPb_IsRequest) = 0;
+        *reinterpret_cast<uint32_t*>(pb + tunnel_offsets().kPb_Tag) = tag;
+        *reinterpret_cast<uint64_t*>(pb + tunnel_offsets().kPb_Magic) = kMagic;
+        *reinterpret_cast<uint64_t*>(pb + tunnel_offsets().packet_epoch_offset) = tunnel_offsets().no_epoch;
+        *reinterpret_cast<uintptr_t*>(pb + tunnel_offsets().kPb_Base) = pb;
+        const uintptr_t q0 = *reinterpret_cast<uintptr_t*>(server_net + tunnel_offsets().kServerNet_InQueue);
         void* item = mem;
         step = inj::Step::Push;
         g_push(reinterpret_cast<void*>(q0), &item);
@@ -1358,11 +1446,11 @@ void pump_body(uintptr_t client_net) {
     if (!g_q_size.load(std::memory_order_acquire) || g_halted_epoch.load()) return;
     uintptr_t cn = 0, server_net = 0;
     // Only the client of the current game (r15 = ClientNet at 0x35BAD4) and a live server.
-    if (!peek(g_base + off::kClientNetSlot, cn) || cn != client_net) {
+    if (!peek(g_base + tunnel_offsets().kClientNetSlot, cn) || cn != client_net) {
         g_pump_other_net.fetch_add(1, std::memory_order_relaxed);
         return;
     }
-    if (!peek(g_base + off::kServerNetSlot, server_net) || !server_net) return;
+    if (!peek(g_base + tunnel_offsets().kServerNetSlot, server_net) || !server_net) return;
     const uint32_t tid = GetCurrentThreadId();
     if (g_pump_tid.load(std::memory_order_relaxed) != tid) g_pump_tid.store(tid);
     const uint32_t epoch = g_want_epoch.load();
@@ -1445,6 +1533,28 @@ bool server_inject(std::span<const uint8_t> in) { return inject(in, InjectKind::
 namespace {
 
 inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
+    if (core_only()) {
+        const auto view = parse_tunnel_packet(in, troc::Dir::ToHostServer, tunnel_offsets());
+        if (!view) return inj::Outcome::Refused;
+        if (!core_tunnel_request_allowed(in, tunnel_offsets()) ||
+            g_channel[view->opcode] >= kBlocked || kind != InjectKind::Normal) return inj::Outcome::Blocked;
+        if (g_halted_epoch.load()) return inj::Outcome::Halted;
+        const uint32_t epoch = g_want_epoch.load();
+        if (!server_accepts_guest() || epoch != 1) return inj::Outcome::NotReady;
+        inj::Pending pending;
+        pending.packet.assign(in.begin(), in.end());
+        pending.channel = g_channel[view->opcode]; pending.tag = pb_tag(epoch);
+        pending.epoch = epoch; pending.opcode = view->opcode; pending.queued_ms = now_ms();
+        std::lock_guard lock(g_q_mu);
+        if (g_core_request_queued) return inj::Outcome::Blocked;
+        const auto outcome = g_q.push(std::move(pending), false);
+        if (outcome == inj::Outcome::Queued) {
+            g_core_request_queued = true;
+            g_q_size.store(g_q.size(), std::memory_order_release);
+            ++g_pb_queued[epoch];
+        }
+        return outcome;
+    }
     const bool close_move = kind == InjectKind::CloseMove;
     const bool final_save = kind == InjectKind::FinalSave;
     std::vector<uint8_t> copy;
@@ -1476,7 +1586,7 @@ inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
         }
     }
     auto v = troc::parse_wire(packet, troc::Dir::ToHostServer);
-    if (!v || packet.size() + off::kFrameOverhead > 0x8000) {
+    if (!v || packet.size() + tunnel_offsets().kFrameOverhead > 0x8000) {
         g_n.inject_refused.fetch_add(1);
         return inj::Outcome::Refused;
     }
@@ -1540,7 +1650,7 @@ inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
         return inj::Outcome::Refused;
     }
     uintptr_t server_net = 0;
-    if (!peek(g_base + off::kServerNetSlot, server_net) || !server_net) {
+    if (!peek(g_base + tunnel_offsets().kServerNetSlot, server_net) || !server_net) {
         g_held_not_ready.fetch_add(1);
         return inj::Outcome::NotReady;
     }
@@ -1776,6 +1886,7 @@ bool server_opcode_blocked(uint16_t opcode) { return g_channel[opcode] == kBlock
 bool server_opcode_known(uint16_t opcode) { return g_channel[opcode] != kNotReq; }
 
 std::deque<std::vector<uint8_t>> server_take_outgoing() {
+    if (core_only()) return g_outgoing.take_all();
     auto publication = observer_hold_acks_publication_guard();
     auto packets = g_outgoing.take_all();
     if (publication.owns_lock()) {
@@ -1901,7 +2012,7 @@ void server_barrier_read(uint32_t epoch, const DepartedSnap& snap, BarrierReadin
     };
     // a. Our own session object (alive for good): its +0x90.
     if (const uintptr_t s = server_epoch_session(epoch)) {
-        const auto u = probe<uintptr_t>(s + off::kSession_User);
+        const auto u = probe<uintptr_t>(s + tunnel_offsets().kSession_User);
         r.session_read = u.has_value();
         r.session_user = u.value_or(0);
         // Diagnostics (salida-en-carga.md §2): while the user is still attached
@@ -1976,8 +2087,8 @@ namespace {
 std::string server_threads_park() {
     uintptr_t net = 0, arr = 0;
     uint32_t n = 0;
-    if (!peek(g_base + off::kServerNetSlot, net) || !net || !peek(net + off::kServerNet_Threads, arr) || !arr ||
-        !peek(net + off::kServerNet_ThreadCount, n)) {
+    if (!peek(g_base + tunnel_offsets().kServerNetSlot, net) || !net || !peek(net + tunnel_offsets().kServerNet_Threads, arr) || !arr ||
+        !peek(net + tunnel_offsets().kServerNet_ThreadCount, n)) {
         return "server threads unreadable";
     }
     std::string s = std::format("server threads {}:", n);
@@ -1985,7 +2096,7 @@ std::string server_threads_park() {
         uint32_t tid = 0;
         uintptr_t flag = 0;
         uint8_t b[3] = {};
-        if (!peek(arr + i * off::kServerThreadEntry, tid) || !peek(arr + i * off::kServerThreadEntry + 8, flag) ||
+        if (!peek(arr + i * tunnel_offsets().kServerThreadEntry, tid) || !peek(arr + i * tunnel_offsets().kServerThreadEntry + 8, flag) ||
             !flag || !peek(flag, b[0]) || !peek(flag + 1, b[1]) || !peek(flag + 2, b[2])) {
             s += " ?";
             continue;

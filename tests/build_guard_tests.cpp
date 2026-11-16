@@ -431,7 +431,7 @@ void test_3663_tier_dependency_matrix() {
         CHECK(!cdmp::game::r3_pump_probe::allowed(bad,true));
     }
     const auto actual = guard::decide_startup(request(true, false, false, identity));
-    CHECK(actual.tier_a_reads && !actual.tier_b_tunnel && !actual.tier_c_join && !actual.tier_d_lifecycle);
+    CHECK(actual.tier_a_reads && actual.tier_b_tunnel && !actual.tier_c_join && !actual.tier_d_lifecycle);
     CHECK(drive(actual).tier_a_reads == 1);
     const auto* target = cdmp::game::player_layout(identity);
     CHECK(target == &cdmp::game::kPlayerLayout3663);
@@ -439,7 +439,7 @@ void test_3663_tier_dependency_matrix() {
     CHECK(target->kControlInner_Physics == 0x2D0);
     CHECK(target->stat_id_bytes == 2);
     CHECK(!cdmp::game::r3_pump_probe::allowed(identity,false));
-    CHECK(cdmp::game::r3_pump_probe::allowed(identity,true));
+    CHECK(cdmp::game::r3_pump_probe::allowed(identity,true) == !build::kTierBComplete);
     const auto legacy = guard::identify_image(make_image(kPeTimestamp), kImageBase);
     CHECK(cdmp::game::player_layout(legacy) == &cdmp::game::kPlayerLayout2976);
     CHECK(drive(guard::decide_startup(request(true,false,false,legacy))).tier_a_reads == 0);

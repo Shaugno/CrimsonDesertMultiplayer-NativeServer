@@ -59,6 +59,7 @@
 #include "mod/session2/door_trace.h"
 
 #include "mod/session2/server.h"
+#include "mod/session2/r3_tunnel.h"
 #include "mod/session2/session2.h"
 #include "mod/session2/remote_motion.h"
 #include "mod/session2/remote_interp.h"
@@ -295,7 +296,7 @@ private:
     std::string status_;
 };
 
-void run_network(const Config& cfg, LocalSource& local) {
+void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = false) {
     if (!net::startup()) {
         log::error("Winsock startup failed");
         return;
@@ -369,13 +370,15 @@ void run_network(const Config& cfg, LocalSource& local) {
     size_t last_friend_count = SIZE_MAX;
 
     std::unique_ptr<net::CoopLink> coop;
-    if (cfg.coop_enabled && local.in_game()) {
+    if (!core_tunnel_only && cfg.coop_enabled && local.in_game()) {
         coop = std::make_unique<net::CoopLink>(session, cfg.coop_delay_ms, cfg.coop_offset_m,
                                                cfg.coop_map_pin);
     }
 
     // Option D: the host's end of the Troc tunnel, once [session2] is up; or,
     // on the guest's PC (P8), the client's end.
+    std::unique_ptr<session2::R3TunnelBridge> r3_tunnel;
+    if (core_tunnel_only) r3_tunnel = std::make_unique<session2::R3TunnelBridge>(session);
     std::unique_ptr<troc::TrocLink> s2_link;
     std::unique_ptr<troc::TrocLink> s2_guest_link;
 
@@ -417,7 +420,7 @@ void run_network(const Config& cfg, LocalSource& local) {
         }
         health.mark(Phase::Poll, now_us());
         // P8 S25 phase B (guest_save_tunnel.h): both ends' SteamID64 for the guest's own save (0 = UDP / not known).
-        session2::guest_save_set_net_ids(steam ? steam->own_id() : 0,
+        if (!core_tunnel_only) session2::guest_save_set_net_ids(steam ? steam->own_id() : 0,
                                          peer && peer->kind == net::PeerAddr::Kind::Steam ? peer->value : 0);
 
         // Everything that is waiting, not one datagram per loop: with ~100
@@ -450,7 +453,7 @@ void run_network(const Config& cfg, LocalSource& local) {
         // player from this channel (the HUD's), for remote_motion's thread. Atomics and a short lock.
         if (const auto& rs = session.remote_state(); rs && session.stats().remote_states != last_channel_state) {
             last_channel_state = session.stats().remote_states;
-            session2::remote_motion_channel_position(rs->pos.x, rs->pos.y, rs->pos.z);
+            if (!core_tunnel_only) session2::remote_motion_channel_position(rs->pos.x, rs->pos.y, rs->pos.z);
         }
         const bool connected = session.state() == ClientSession::State::Connected;
         if (host && was_connected && !connected && peer) {
@@ -459,7 +462,7 @@ void run_network(const Config& cfg, LocalSource& local) {
         }
         was_connected = connected;
         health.mark(Phase::Session, now_us());
-        if (!s2_link && !coop && session2::tunnel_wanted()) {
+        if (!core_tunnel_only && !s2_link && !coop && session2::tunnel_wanted()) {
             s2_link = std::make_unique<troc::TrocLink>(
                 session, troc::Dir::ToGuestClient, troc::Dir::ToHostServer,
                 [&session](std::vector<uint8_t>&& p, uint32_t at) {
@@ -472,12 +475,13 @@ void run_network(const Config& cfg, LocalSource& local) {
                                                "decodes them"
                                              : "");
         }
+        if (r3_tunnel) r3_tunnel->tick(now);
         if (s2_link) session2::tunnel_tick(*s2_link, now);
         // P8 S25 weather (weather_sync.h): the host's newest weather sample as control state 12 (weather_sync=1 and a
         // guest that announced caps 0x04; nothing otherwise). Flushed by the next tunnel_tick.
         if (s2_link) session2::weather_sync_host_tick(*s2_link, now);
         health.mark(Phase::HostTunnel, now_us());
-        if (!s2_guest_link && !coop && session2::guest_active()) {
+        if (!core_tunnel_only && !s2_guest_link && !coop && session2::guest_active()) {
             s2_guest_link = std::make_unique<troc::TrocLink>(
                 session, troc::Dir::ToHostServer, troc::Dir::ToGuestClient,
                 [](std::vector<uint8_t>&& p, uint32_t) { session2::guest_deliver(std::move(p)); });
@@ -494,7 +498,7 @@ void run_network(const Config& cfg, LocalSource& local) {
         }
         // P8 S25 weather (weather_sync.h): with weather_sync=1 this end also announces caps 0x04 (state 12), before
         // its first packet of a connection (TrocLink sends the flags then).
-        if (const uint8_t wcaps = session2::weather_sync_guest_caps();
+        if (const uint8_t wcaps = core_tunnel_only ? 0 : session2::weather_sync_guest_caps();
             s2_guest_link && wcaps && !(s2_guest_link->announce_flags() & wcaps)) {
             s2_guest_link->set_announce_flags(static_cast<uint8_t>(s2_guest_link->announce_flags() | wcaps));
             log::info("Session2 guest: weather_sync=1: the tunnel also announces caps 0x{:02X} (the host's weather, "
@@ -535,6 +539,7 @@ void run_network(const Config& cfg, LocalSource& local) {
             last_state = now;
             if (auto state = local.sample(now)) session.send_local_state(*state, now);
 
+            if (!core_tunnel_only) {
             render::HudData hud;
             hud.connected = session.state() == ClientSession::State::Connected;
             hud.peer_name = session.peer_name();
@@ -563,6 +568,7 @@ void run_network(const Config& cfg, LocalSource& local) {
             // P8 S26: a controller that publishes no mount (this PC's or the other's), on the panel.
             hud.mount_problem = session2::mount_sync_hud_problem();
             render::hud_update(std::move(hud));
+            }
         }
         health.mark(Phase::State, now_us());
 
@@ -590,9 +596,10 @@ void run_network(const Config& cfg, LocalSource& local) {
             // The asynchronous log itself (p8-impl-log-async.md): drops and the slowest write.
             log::info("Log: {}", log::describe());
             if (coop) log::info("{}", coop->describe());
-            if (session2::installed()) log::info("{}", session2::describe());
+            if (!core_tunnel_only && session2::installed()) log::info("{}", session2::describe());
+            if (r3_tunnel) log::info("{}", r3_tunnel->describe());
             // CDMP_ROLE=guest: where its saves went, once a minute.
-            if (session2::save_hooks_guest_role() && ++guest_role_reports % 12 == 1) {
+            if (!core_tunnel_only && session2::save_hooks_guest_role() && ++guest_role_reports % 12 == 1) {
                 log::info("Role guest: save redirect {}", session2::save_hooks_redirect_describe());
             }
             if (s2_link) log::info("Session2: {}", s2_link->describe());
@@ -601,7 +608,7 @@ void run_network(const Config& cfg, LocalSource& local) {
             // their own low-priority thread (guest_diag_worker.h); this is a
             // SetEvent and never waits. They took 4-8 s here per report in
             // session 5 and the host timed the guest out (p8-hilo-red.md).
-            session2::guest_diag_kick();
+            if (!core_tunnel_only) session2::guest_diag_kick();
             if (s2_guest_link) log::info("Session2 guest: {}", s2_guest_link->describe());
             if (cfg.overlay_enabled) {
                 const auto ov = render::status();
@@ -620,6 +627,7 @@ void run_network(const Config& cfg, LocalSource& local) {
         }
     }
 
+    r3_tunnel.reset();
     coop.reset();
     s2_link.reset();
     s2_guest_link.reset();
@@ -1044,6 +1052,23 @@ DWORD WINAPI worker(LPVOID) {
                     return;
                 }
                 LocalSource local(true);
+                if (startup.tier_b_tunnel && cfg.net_enabled && cfg.s2_enabled && cfg.s2_create_session &&
+                    cfg.s2_accept_tunnel && !cfg.s2_guest && !cfg.r3_pump_probe) {
+                    // Until C/D, native B is a host-only loopback diagnostic. The network
+                    // initiator role connects to cdmp_peer; native server role stays host.
+                    if (cfg.net_transport_steam || cfg.net_role_host || cfg.peer_host != "127.0.0.1" ||
+                        !cfg.r3_tunnel_probe) {
+                        log::error("3663 B: current L2 route requires explicit tunnel probe and loopback UDP peer");
+                        return;
+                    }
+                    session2::ServerOptions options;
+                    options.probe = false; options.create_session = options.accept_tunnel = true;
+                    options.core_loopback_probe = true;
+                    if (!session2::server_install(options)) return;
+                    log::info("3663 B: native host tunnel, loopback handshake test; C/D and optional modules off");
+                    run_network(cfg, local, true);
+                    return;
+                }
                 log::info("3663 Tier A: read-only local reader; no hooks or network");
                 uint32_t last_log = 0;
                 while (!stop_requested(50)) {

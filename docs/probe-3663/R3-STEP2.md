@@ -1,26 +1,36 @@
-# R3 Step 2 — native tunnel work in progress
+# R3 Step 2 — native tunnel port
 
-B remains unarmed. The passive probe is an explicitly requested diagnostic,
-not a native tunnel route or L2 acceptance. Candidate 3A8D94 lies in native
-parent 3A8AC0, with a unique verified 39-byte window. Preparation checks exact
-3663 identity, live bytes and exactly seven relocated bytes before enabling
-a mid hook. It logs only guarded ClientNet context/root/field counts from
-the worker. No register/argument change, native call, packet access/replay or
-Tier B permission. The new ini flag defaults off, including test hosts.
+Before this change, enabling a 3663 tunnel could reach 2976 constants and
+optional join/save callbacks. Reproduce offline by following server_install,
+on_server_recv, take_frame and run_network with a 3663 identity: the shared
+path had no per-build profile and the target worker ran only the reader.
 
-Full suite: 101/101 (98.90 seconds), loopback successful; see pump-validation.json
-for actual state count and immutable local raw-log hashes. Wrong identity
-and disabled-request tests deny the probe. No live probe has passed yet.
+Expected behavior: exact 3663 identity selects all adopted B constants and
+native packet bounds. Its B-only host constructs a private native session on
+ServerRunThread, injects through the client's NetworkThread and native Q0,
+routes tagged buffers at the receiver, and returns native send buffers to Q2.
+Until C is complete it admits only the named cryptogram request. Login, world,
+save, optional observers and native reconnect remain inaccessible.
 
-Descriptor investigation found 1115 named source objects and 1179 target
-objects. Candidate target bounds are 6F14E10 (StartActionAck) and 6F487B0
-(OnLogoutXxxToServerReq, excluded endpoint as in legacy). These are native
-initializer/RTTI leads, not adopted from a numeric shift. Generic static
-initializer BinDiff pairs disagree; named handler/body and native constructor
-relationships still need explicit checks. B075 must enforce target packet
-and ordinary-payload bounds through the actual per-build path; B078 will
-avoid reliance on descriptor size by advancing eight bytes on the target.
-The legacy host/guest installers are still build-specific and must be
-routed without accidentally enabling join/save stages. No L2 success claimed.
+The planned L2 uses an explicit loopback-only test peer. The game-generated
+cryptogram request is copied once and echoed into the private session; its
+native response crosses the ordinary reliable tunnel. No key or raw packet
+is printed. Real Tier A pose samples travel in both directions. This is a
+handshake/transport test, not a guest world join or two-player evidence.
 
-Passive pump trace passed: 125528 observations, all matching ClientNet root and readable fields, no changed root in sampled reads. User confirmed travel, normal exit. B065 adopted under R3 rule 3; B remains false until the actual tunnel route is complete. Cleanup recovered from cloud-placeholder classification without changing saves; exact manifest and every backup file verified, all 23 live saves unchanged. See pump-result.json and r3_verify_backup.ps1.
+Pump adoption evidence: the passive session logged 125528 observations, all
+matching ClientNet and readable session/queue fields, zero changed roots.
+Travel and normal exit were confirmed. All 23 saves stayed unchanged and
+the installation was restored. The OneDrive backup placeholder issue was
+recovered with exact hashes; future R3 backups use the external build root.
+See pump-result.json, pump-adoption.json and r3_verify_backup.ps1.
+
+Descriptor bounds use paired named slot-2 handler bodies and actual native
+constructor RIP stores. Generic initializer BinDiff disagreements are retained
+in descriptor-bounds.json. Packet bounds and the full aligned-pointer scan
+are recorded in packet-scan-adoptions.json. No raw new RE dumps are committed.
+
+Validation: 103/103 tests passed in 86.64 seconds, followed by a clean
+game-free host/peer loopback (78 remote states). The new tunnel
+fixture first failed because it queued before initial epoch reset; corrected
+and full suite rerun. L2 remains pending. See step2-validation.json.

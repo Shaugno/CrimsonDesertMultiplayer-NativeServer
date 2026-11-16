@@ -218,7 +218,7 @@ inline std::string diagnostic(const ImageIdentity& id) {
         return std::format(
             "Recognized game build Crimson Desert 1.0.0.3663 (PE timestamp 0x{:08X}, image base 0x{:X}, "
             "image size 0x{:X}). Tier A HP-only reader enabled; core join remains incomplete. "
-            "Legacy game paths, hooks, and networking stay off.",
+            "Legacy paths remain off; the guarded B loopback host route requires explicit configuration.",
             build_3663::kPeTimestamp, build_3663::kImageBase, build_3663::kSizeOfImage);
     }
     if (id.kind == IdentityKind::Unreadable) {

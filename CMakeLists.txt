@@ -179,6 +179,7 @@ add_library(cdmp_mod SHARED
     src/mod/session2/host_save_export.cpp
     src/mod/session2/session2.cpp
     src/mod/session2/server.cpp
+    src/mod/session2/r3_tunnel.cpp
     src/mod/session2/guest.cpp
     src/mod/session2/guest_actor_diag.cpp
     src/mod/session2/guest_reload_wait.cpp
@@ -239,7 +240,7 @@ target_include_directories(cdmp_mod PRIVATE ${CMAKE_BINARY_DIR}/generated)
 set_target_properties(cdmp_mod PROPERTIES OUTPUT_NAME "cdmp" PREFIX "" SUFFIX ".asi")
 
 # Tools for single-PC development.
-add_executable(cdmp_peer tools/peer_sim/main.cpp tools/peer_sim/replay.cpp tools/peer_sim/save_sim.cpp)
+add_executable(cdmp_peer tools/peer_sim/r3_tunnel_peer.cpp tools/peer_sim/main.cpp tools/peer_sim/replay.cpp tools/peer_sim/save_sim.cpp)
 cdmp_strict(cdmp_peer)
 target_link_libraries(cdmp_peer PRIVATE cdmp_common)
 
@@ -278,6 +279,15 @@ add_executable(cdmp_tests_build_guard tests/build_guard_tests.cpp)
 cdmp_strict(cdmp_tests_build_guard)
 target_include_directories(cdmp_tests_build_guard PRIVATE src)
 add_test(NAME build_guard COMMAND cdmp_tests_build_guard)
+add_executable(cdmp_tests_tunnel_layout tests/tunnel_layout_tests.cpp)
+cdmp_strict(cdmp_tests_tunnel_layout)
+target_include_directories(cdmp_tests_tunnel_layout PRIVATE src)
+target_link_libraries(cdmp_tests_tunnel_layout PRIVATE cdmp_common)
+add_test(NAME tunnel_layout COMMAND cdmp_tests_tunnel_layout)
+add_executable(cdmp_tests_r3_tunnel_peer tests/r3_tunnel_peer_tests.cpp)
+cdmp_strict(cdmp_tests_r3_tunnel_peer)
+target_link_libraries(cdmp_tests_r3_tunnel_peer PRIVATE cdmp_common)
+add_test(NAME r3_tunnel_peer COMMAND cdmp_tests_r3_tunnel_peer)
 # 3576 diagnostic sampler. Fake memory only; it does not open the ASI guard.
 add_executable(cdmp_tests_diag3576 tests/diag3576_tests.cpp)
 cdmp_strict(cdmp_tests_diag3576)

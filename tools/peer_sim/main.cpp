@@ -36,6 +36,7 @@
 #include "common/protocol.h"
 #include "common/udp.h"
 #include "replay.h"
+#include "r3_tunnel_peer.h"
 
 using namespace cdmp;
 
@@ -83,7 +84,8 @@ bool parse_ops(const char* v, std::vector<uint16_t>& out) {
 
 void usage() {
     std::printf(
-        "Usage: cdmp_peer [--port N] [--mode relay|ghost|bot] [--delay MS] [--offset M]\n"
+        "Usage: cdmp_peer --mode r3-tunnel [--port N] [--seconds N] (loopback cryptogram/pose test)\n"
+        "       cdmp_peer [--port N] [--mode relay|ghost|bot] [--delay MS] [--offset M]\n"
         "                 [--loss PCT] [--jitter MS] [--public] [--quiet] [--seconds N]\n"
         "       cdmp_peer --mode replay (--script FILE | --capture FILE [--from S] [--to S]\n"
         "                 [--only OP,OP] [--skip OP,OP]) [--var NAME=VALUE]... [--record FILE]\n"
@@ -145,7 +147,7 @@ std::optional<Options> parse(int argc, char** argv) {
         }
     }
     if (o.mode != "relay" && o.mode != "ghost" && o.mode != "bot" && o.mode != "replay" &&
-        o.mode != "tunnel-measure") {
+        o.mode != "tunnel-measure" && o.mode != "r3-tunnel") {
         usage();
         return std::nullopt;
     }
@@ -170,6 +172,9 @@ std::optional<Options> parse(int argc, char** argv) {
         std::printf("--mode replay needs exactly one of --script or --capture\n");
         usage();
         return std::nullopt;
+    }
+    if (o.mode == "r3-tunnel" && o.public_bind) {
+        std::printf("R3 tunnel diagnostic requires loopback; --public refused\n"); return std::nullopt;
     }
     o.replay.port = o.port;
     o.replay.public_bind = o.public_bind;
@@ -419,7 +424,9 @@ int main(int argc, char** argv) {
     SetConsoleCtrlHandler(on_ctrl, TRUE);
 
     int rc = 1;
-    if (opt->mode == "tunnel-measure") {
+    if (opt->mode == "r3-tunnel") {
+        rc = run_r3_tunnel_peer(opt->port, opt->seconds, g_running);
+    } else if (opt->mode == "tunnel-measure") {
         rc = run_tunnel_measure(opt->replay);
     } else if (opt->mode == "replay") {
         rc = run_replay(opt->replay);
