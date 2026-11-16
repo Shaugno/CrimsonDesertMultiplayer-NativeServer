@@ -1,0 +1,19 @@
+{
+  "candidate_rva": "0x3A8D94",
+  "parent_entry": "0x3A8AC0",
+  "parent_pdata_ranges": [
+    [
+      "0x3a8ac0",
+      "0x3a9165"
+    ]
+  ],
+  "patch_bytes": 7,
+  "signature": "49 8b 87 e0 00 00 00 48 8b 38 48 89 7d c7 48 8b 07 48 8b cf ff 50 08 90 8b 5f 58 48 8b 07 48 8b cf ff 50 10 85 db 74",
+  "signature_occurrences": 1,
+  "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "authority": "R3 rule 3 and inherited verified-midpoint safety rule; not Tier B permission",
+  "runtime_reads_only": true,
+  "context_modifications": false,
+  "packet_replay": false,
+  "native_calls": false
+}

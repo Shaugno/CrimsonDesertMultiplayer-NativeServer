@@ -21,6 +21,7 @@
 #include "mod/game/build_guard.h"
 #include "mod/game/offsets.h"
 #include "mod/game/player_reader.h"
+#include "mod/game/r3_pump_probe.h"
 #include "mod/game/safe_memory.h"
 #include "mod/bg_speed.h"
 #include "mod/log.h"
@@ -1038,6 +1039,10 @@ DWORD WINAPI worker(LPVOID) {
         // Higher tiers need their own complete per-build tunnel/join route.
         if (game::build_guard::route_3663_reader(startup, [&] {
                 if (cfg.startup_delay_ms > 0 && stop_requested(cfg.startup_delay_ms)) return;
+                if (cfg.r3_pump_probe && !game::r3_pump_probe::install(proc.identity)) {
+                    log::error("R3PumpProbe: installation refused; no diagnostic hook active");
+                    return;
+                }
                 LocalSource local(true);
                 log::info("3663 Tier A: read-only local reader; no hooks or network");
                 uint32_t last_log = 0;
@@ -1046,6 +1051,7 @@ DWORD WINAPI worker(LPVOID) {
                     (void)local.sample(now);
                     if (now - last_log >= 2000) {
                         log::info("3663 Tier A: {}", local.describe());
+                        if (cfg.r3_pump_probe) game::r3_pump_probe::report();
                         last_log = now;
                     }
                 }

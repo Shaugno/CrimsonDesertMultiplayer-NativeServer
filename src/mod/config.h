@@ -16,6 +16,7 @@ struct Config {
     // (CDMP_ROLE set) only: while another window has the foreground, this process's GPU scheduling class goes up
     // so the copy in the background keeps its share of the GPU (bg_speed_logic.h). Without a role: a WRN, ignored.
     bool background_full_speed = false;
+    bool r3_pump_probe = false; // explicit passive diagnostic, exact 3663 only
 
     std::string peer_host = "127.0.0.1";
     uint16_t peer_port = 37015;

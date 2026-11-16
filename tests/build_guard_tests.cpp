@@ -12,6 +12,7 @@
 #include "mod/game/build_guard.h"
 #include "mod/game/offsets.h"
 #include "mod/game/player_layout.h"
+#include "mod/game/r3_pump_probe.h"
 #include "mod/game/stat_id.h"
 #include "mod/session2/control_filter.h"
 
@@ -427,6 +428,7 @@ void test_3663_tier_dependency_matrix() {
         const auto denied = guard::select_3663_tiers(bad, {true,true,true,true}, {true,true,true,true});
         CHECK(!denied.tier_a_reads && !denied.tier_b_tunnel && !denied.tier_c_join && !denied.tier_d_lifecycle);
         CHECK(cdmp::game::player_layout(bad) == nullptr);
+        CHECK(!cdmp::game::r3_pump_probe::allowed(bad,true));
     }
     const auto actual = guard::decide_startup(request(true, false, false, identity));
     CHECK(actual.tier_a_reads && !actual.tier_b_tunnel && !actual.tier_c_join && !actual.tier_d_lifecycle);
@@ -436,6 +438,8 @@ void test_3663_tier_dependency_matrix() {
     CHECK(target->native_hp_definitions.has_value());
     CHECK(target->kControlInner_Physics == 0x2D0);
     CHECK(target->stat_id_bytes == 2);
+    CHECK(!cdmp::game::r3_pump_probe::allowed(identity,false));
+    CHECK(cdmp::game::r3_pump_probe::allowed(identity,true));
     const auto legacy = guard::identify_image(make_image(kPeTimestamp), kImageBase);
     CHECK(cdmp::game::player_layout(legacy) == &cdmp::game::kPlayerLayout2976);
     CHECK(drive(guard::decide_startup(request(true,false,false,legacy))).tier_a_reads == 0);

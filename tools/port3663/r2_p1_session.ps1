@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$true)][ValidateSet('Prepare','Deploy','Probe','Finish')][string]$Stage,
     [Parameter(Mandatory=$true)][ValidatePattern('^R2-P1-[0-9]{8}-[0-9]{6}$')][string]$Session,
     [int]$GamePid = 0,
-    [ValidateSet('hp','loading','l1')][string]$Profile = 'hp',
+    [ValidateSet('hp','loading','l1','pump')][string]$Profile = 'hp',
     [switch]$Present,
     [string]$BuildDir = '',
     [ValidatePattern('^$|^R2-MATCH-PAUSE-[0-9]{8}-[0-9]{6}$')][string]$MatchingPauseSession = ''
@@ -22,22 +22,28 @@ $expected='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
 if ((Get-FileHash -LiteralPath (Join-Path $gameDir 'CrimsonDesert.exe')).Hash -ne $expected) { throw 'Build drift; rematch first' }
 if ($Stage -ne 'Probe' -and (Get-Process CrimsonDesert -ErrorAction SilentlyContinue)) { throw 'Game must be closed' }
 if ($Stage -in @('Deploy','Probe') -and !$Present) { throw 'The session requires the user at the PC' }
-$sessionQuestion = if ($Profile -eq 'l1') {
-    'Does the production R3 HP-only Tier A reader track position, rotation and changing HP through load and fast travel without fabricated samples?'
+$sessionQuestion = if ($Profile -eq 'pump') {
+    'Does the candidate pump point execute with R15 equal to ClientNet and readable session and queues?'
+} elseif ($Profile -eq 'l1') {
+    'Does the production R3 HP-only reader track pose and changing HP through load and fast travel?'
 } elseif ($Profile -eq 'hp') {
     "Which native HP definition key selects the local actor's status entry on the exact 3663 executable?"
 } else {
     'Does the candidate local-player chain expose a distinct missing-chain or parked-position transition during loading and fast travel on exact 3663?'
 }
-$expectedObservation = if ($Profile -eq 'l1') {
-    'The production ASI logs unavailable on park/chain/HP failures, coherent position/rotation after placement, and HP changing after ordinary damage. No hooks, native calls or networking.'
+$expectedObservation = if ($Profile -eq 'pump') {
+    'Read-only diagnostic mid-hook records matching context/root and readable fields, without changing context, calling native functions or replaying packets. B remains off.'
+} elseif ($Profile -eq 'l1') {
+    'Production reader reports guarded unavailable or coherent pose samples, and HP changing after ordinary damage. No hooks or networking.'
 } elseif ($Profile -eq 'hp') {
     "The native definition key selects one status entry whose current/max integer values, divided by the proved unit scale 1000, agree with the character's HP display. Both definition registries are logged separately; no ID is guessed."
 } else {
     'The guarded candidate position and rotation follow the controllable character, then loading produces a missing chain or a distinctive park interval before placement. The old (0,1000,0) park is only a logged hypothesis, not an adopted readiness rule.'
 }
-$sessionSteps = if ($Profile -eq 'l1') {
-    'Wait at title until the production reader log is confirmed, Continue, walk and turn, fast travel once, walk/turn after arrival, safely take a little ordinary damage and note HP, then quit to desktop at the stop signal.'
+$sessionSteps = if ($Profile -eq 'pump') {
+    'Wait at title for confirmation, Continue, walk and turn, fast travel once, walk/turn after arrival, quit within eight minutes. No damage required.'
+} elseif ($Profile -eq 'l1') {
+    'Wait at title for confirmation, Continue, walk/turn, fast travel, walk/turn after arrival, safely take a little ordinary damage and note HP, then quit.'
 } elseif ($Profile -eq 'hp') {
     'Select Continue and wait for control; show the character/status HP display and note current/max HP; let ordinary regeneration or a healing action change HP if available; quit to desktop at the stop signal.'
 } else {
@@ -88,7 +94,7 @@ if ($Stage -eq 'Prepare') {
     }
     ConvertTo-Json -InputObject $installed -Depth 8 | Set-Content (Join-Path $backupRoot 'install-manifest.json')
     @"
-# $Session â€” passive P1, prepared before launch
+# $Session — profile $Profile, prepared before launch
 
 Question: $sessionQuestion
 
@@ -100,7 +106,7 @@ Steps: after Shaugn confirms presence, deploy the profile-guarded ASI; launch th
 
 Stop: any crash, hang, identity drift, user request, or time limit. Never retry a crash blindly. Collect cdmp.log and crash context, fix offline and rerun the suite before another session.
 
-Capture profile: $Profile. For hp/loading, the external observer uses read/query-only access with guarded copies and all tiers closed. For l1, the production ASI uses the approved guarded HP-only Tier A reader and cdmp.log; B/C/D, hooks, native calls and networking stay off.
+Capture profile ${Profile}: hp/loading use an external guarded read/query-only observer with all tiers closed. L1 uses the production HP-only A reader without hooks. Pump adds only an exact-build/exact-byte read-only diagnostic mid-hook, with no context changes, native calls, packet replay or networking. B/C/D stay off.
 
 Supervisor: before collection, arm r2_session_watchdog.ps1 for the exact game PID. It pins the process handle and closes that test process at fourteen minutes from launch if normal quit has not completed. This separate deadline control does not grant the collector memory-write rights.
 
@@ -126,8 +132,8 @@ if ($Stage -eq 'Deploy') {
     AssertNoMatching
     $header=Get-Content -Raw -LiteralPath (Join-Path $root 'src\mod\game\build_3663.h')
     foreach ($tier in 'A','B','C','D') {
-        $required = if ($Profile -eq 'l1' -and $tier -eq 'A') { 'true' } else { 'false' }
-        if ($header -notmatch "kTier${tier}Complete = $required;") { throw 'Profile does not match compiled tier permissions' }
+        $required = if ($Profile -in @('l1','pump') -and $tier -eq 'A') { 'true' } else { 'false' }
+        if ($header -notmatch "kTier${tier}Complete = $required;") { throw 'Profile differs from compiled tier permissions' }
     }
     foreach ($name in @('cdmp.asi','cdmp.pdb','winmm.dll','cdmp.ini')) {
         $path=Join-Path $gameDir $name
@@ -146,6 +152,7 @@ if ($Stage -eq 'Deploy') {
     if ($LASTEXITCODE) { throw 'Collector API test failed' }
     & (Join-Path $root 'scripts\deploy.ps1') -BuildDir $buildRoot
     $ini="[general]`nplayer_name=R2PassiveP1`nstartup_delay_ms=0`n[net]`nenabled=0`n[overlay]`nenabled=0`n[sniffer]`nenabled=0`n[coop]`nenabled=0`n[session2]`nenabled=0`n"
+    if ($Profile -eq 'pump') { $ini += "[probe3663]`npump=1`n" }
     [IO.File]::WriteAllText((Join-Path $gameDir 'cdmp.ini'),$ini,[Text.UTF8Encoding]::new($false))
     Get-FileHash -LiteralPath (Join-Path $gameDir 'cdmp.asi'),(Join-Path $PSScriptRoot 'reader_probe.py'),(Join-Path $root 'src\mod\game\build_3663.h') | ConvertTo-Json | Set-Content (Join-Path $evidence 'deployed-hashes.json')
     $receipt=foreach ($name in @('cdmp.asi','cdmp.pdb','winmm.dll','cdmp.ini')) {
@@ -153,9 +160,9 @@ if ($Stage -eq 'Deploy') {
         if (Test-Path -LiteralPath $path) { [pscustomobject]@{name=$name;sha256=(Get-FileHash -LiteralPath $path).Hash} }
     }
     ConvertTo-Json -InputObject @($receipt) | Set-Content (Join-Path $evidence 'installed-receipt.json')
-    Write-Output 'Deployed profile-guarded read-only configuration. Launch only with user present.'
+    Write-Output 'Deployed profile-guarded configuration. Launch only with user present.'
 } elseif ($Stage -eq 'Probe') {
-    if ($Profile -eq 'l1') { throw 'L1 uses the production ASI log; no external P1 collector' }
+    if ($Profile -in @('l1','pump')) { throw 'Use production cdmp.log; no external P1 collector for this profile' }
     AssertNoMatching
     if ($GamePid -lt 1) { throw 'An explicit verified game PID is required' }
     $watchPath=Join-Path $evidence 'watchdog.json'

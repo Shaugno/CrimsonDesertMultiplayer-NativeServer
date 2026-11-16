@@ -161,6 +161,7 @@ Config load_config(const std::wstring& ini_path) {
     c.coop_copy_attack_slots = static_cast<int>(std::min(read_uint(ini_path, L"coop", L"copy_attack_slots", 0), 8u));
     c.coop_map_pin_shape = static_cast<uint8_t>(std::min(read_uint(ini_path, L"coop", L"map_pin_shape", 4), 13u));
     c.coop_map_pin_colour = static_cast<uint8_t>(std::min(read_uint(ini_path, L"coop", L"map_pin_colour", 14), 14u));
+    c.r3_pump_probe = read_uint(ini_path, L"probe3663", L"pump", 0) != 0;
     c.s2_enabled = read_uint(ini_path, L"session2", L"enabled", 0) != 0;
     c.s2_probe = read_uint(ini_path, L"session2", L"probe", 1) != 0;
     // 0 | 1 | trace | redirect; anything unknown keeps the safe side (block).

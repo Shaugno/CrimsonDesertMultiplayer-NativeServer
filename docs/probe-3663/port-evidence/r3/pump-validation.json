@@ -1,0 +1,40 @@
+{
+  "full_suite": {
+    "passed": 101,
+    "failed": 0,
+    "seconds": 98.9
+  },
+  "initial_build_passed": 101,
+  "loopback": {
+    "states": 78,
+    "rejected": 0,
+    "clean_stop": true
+  },
+  "profile": "pump",
+  "default_enabled": false,
+  "tier_b_enabled": false,
+  "code_review": "Only exact identity/bytes and seven-byte relocation accepted before enabling. Callback uses guarded reads and relaxed atomic counters only, no allocation, log call, context write, packet access or native function invocation. Worker reports aggregates; hook lifetime is the test process.",
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-build.txt",
+      "bytes": 37647,
+      "sha256": "161A5AD420E13B6E8E8EE72F0F6A544414AC5F51FFF142F12AEE88AADB2F7FFB"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-build.txt",
+      "bytes": 37285,
+      "sha256": "5C8265A6B29346F8AE09B3A2062DC21E49B6A4356E77438FAE39F1C5F2689435"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-smoke.txt",
+      "bytes": 153,
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-host.log",
+      "bytes": 6729,
+      "sha256": "3EA195C4CD3228C4E4235E67639897439C4895D6A092FDF1717EA5FDB5F6BAC8"
+    }
+  ],
+  "script_validation": "AST/receipt regression passed after correcting profile interpolation; original hp/loading require all tiers closed, l1/pump require A only. UTF-8 unrelated text edits removed before final build."
+}
