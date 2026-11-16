@@ -5,6 +5,13 @@ the Step 2 standard-correlator check; none authorizes a hook. Tier C is closed.
 The native layout proofs are catalogued separately in `r2-reviewed.json` and
 compiled as unused constants in `build_3663.h`.
 
+Continuation decision: the offline ABI/ownership assessment is complete to
+the boundary below. The field-sharing port remains blocked; no legacy detour
+is redirected to a candidate address. Step 2 matching continues independently.
+See R2-FIELD-TRACE.md for the smallest next observational experiment and its
+unmet implementation/preflight requirements. That document is a trace design,
+not a claim that a collector or live session has passed.
+
 The named 3663 LoginCharacterToFieldServerReq decoder at 0x2C6AE10 calls
 0x2F4AE80. This performs the native save/load/login-manager sequence, including
 0x1A16C40 and the login-manager lookup 0x2D79620 (Denuvo body 0xEAC9720).
@@ -68,8 +75,12 @@ These probe-only roster details have not been promoted into production or
 used to declare Tier C complete.
 
 Remaining Step 3 facts: standard-correlator support for the candidate entries;
-complete list ownership/rollback conditions and result ABI for the new adapter;
+complete list ownership/rollback conditions for the new adapter;
 verified target entry signatures and all host/guest identity prerequisites.
+Native EnterField returns the caller's result pointer on success and propagated
+error exits; both acquisition and entry therefore preserve pointer-to-result
+semantics. The three-argument entry ABI itself is established by the native
+register uses and caller. It does not establish safe roster-wide ownership.
 The smallest passive experiment, if static list ownership remains ambiguous,
 is a guarded entry/exit trace at the verified AcquireField and EnterField
 entries during one ordinary local login: record arguments, list owners, result,
