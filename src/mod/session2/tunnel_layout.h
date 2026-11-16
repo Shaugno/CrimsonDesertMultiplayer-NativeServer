@@ -5,6 +5,7 @@
 #include "common/troc_frame.h"
 #include "mod/game/build_guard.h"
 #include "mod/session2/offsets_s2.h"
+#include "mod/session2/control_filter.h"
 namespace cdmp::session2 {
 struct TunnelLayout {
     bool target3663 = false;
@@ -194,6 +195,7 @@ inline std::optional<troc::PacketView> parse_tunnel_packet(std::span<const uint8
 }
 inline bool core_tunnel_request_allowed(std::span<const uint8_t> bytes, const TunnelLayout& layout) {
     const auto view = parse_tunnel_packet(bytes, troc::Dir::ToHostServer, layout);
-    return view && view->opcode == layout.connect_opcode && view->slot == -1;
+    return view && (!layout.target3663 || !blocked_guest_control_3663(view->opcode)) &&
+        view->opcode == layout.connect_opcode && view->slot == -1;
 }
 } // namespace cdmp::session2

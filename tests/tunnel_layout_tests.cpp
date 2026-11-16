@@ -33,6 +33,21 @@ int main() {
     p=troc::make(2490,-1,std::vector<uint8_t>(16));
     check(!core_tunnel_request_allowed(p,target),"login not reachable with B only");
     check(!core_tunnel_request_allowed(logout,target),"native logout waits for D");
+    // The complete u16 domain catches accidental legacy-ID reuse and range
+    // widening. Travel denial must also hold at the final host admission gate.
+    for (unsigned value=0;value<=65535;++value) {
+        const auto op=static_cast<uint16_t>(value);
+        const bool refused=(op>=1001 && op<=1008) || op==2447 || op==2042 || op==2004 ||
+            op==3018 || op==2647 || op==2150 || op==2236;
+        check(blocked_guest_control_3663(op)==refused,"3663 control policy domain");
+    }
+    for(const auto op:scope3663::kRefusedRequests) {
+        p=troc::make(op,-1,std::vector<uint8_t>(4));
+        check(!core_tunnel_request_allowed(p,target),"travel/time refused on host");
+    }
+    for(const uint16_t op:{2554,3081,2350,2723,2789,2372})
+        check(!blocked_guest_control_3663(op),"initial login/loading is not guest travel");
+    check(!blocked_guest_control_3663(2283) && !blocked_guest_control_3663(2125),"legacy numeric IDs not reused");
     game::build_guard::ImageIdentity id;
     check(!tunnel_layout(id),"unknown denied");
     id.kind=game::build_guard::IdentityKind::Build3663;

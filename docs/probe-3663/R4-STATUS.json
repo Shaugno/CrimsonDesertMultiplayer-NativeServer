@@ -1,0 +1,3643 @@
+{
+  "baseline": "69075db",
+  "rows": [
+    {
+      "row": "A001",
+      "tier": "A",
+      "symbol": "kChunkOrigin",
+      "disposition": "adopted",
+      "target": "0x7231330",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A002",
+      "tier": "A",
+      "symbol": "kStaticPlayerPos",
+      "disposition": "adopted",
+      "target": "0x7253e60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A003",
+      "tier": "A",
+      "symbol": "kVtClientActorManager",
+      "disposition": "adopted",
+      "target": "0x59c2760",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A004",
+      "tier": "A",
+      "symbol": "kVtControlledActor",
+      "disposition": "adopted",
+      "target": "0x5990bf0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A005",
+      "tier": "A",
+      "symbol": "kVtCharacterControl",
+      "disposition": "adopted",
+      "target": "0x59c1660",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A006",
+      "tier": "A",
+      "symbol": "kVtStatusComponent",
+      "disposition": "adopted",
+      "target": "0x5998b60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A007",
+      "tier": "A",
+      "symbol": "kVtPhysicsObject",
+      "disposition": "adopted",
+      "target": "0x614a050",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A008",
+      "tier": "A",
+      "symbol": "kWorldSystem_ActorManager",
+      "disposition": "adopted",
+      "target": "0x30",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A009",
+      "tier": "A",
+      "symbol": "kActorManager_ControlledActor",
+      "disposition": "adopted",
+      "target": "0x50",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A010",
+      "tier": "A",
+      "symbol": "kActor_ComponentTable",
+      "disposition": "adopted",
+      "target": "0x68",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A011",
+      "tier": "A",
+      "symbol": "kComponents_Status",
+      "disposition": "adopted",
+      "target": "0x20",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A012",
+      "tier": "A",
+      "symbol": "kComponents_CharacterControl",
+      "disposition": "adopted",
+      "target": "0x40",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A013",
+      "tier": "A",
+      "symbol": "kControl_Inner",
+      "disposition": "adopted",
+      "target": "0x140",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A014",
+      "tier": "A",
+      "symbol": "kControlInner_Physics",
+      "disposition": "adopted",
+      "target": "0x2D0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A015",
+      "tier": "A",
+      "symbol": "kPhysics_AxisX",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A016",
+      "tier": "A",
+      "symbol": "kPhysics_AxisY",
+      "disposition": "adopted",
+      "target": "0x70",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A017",
+      "tier": "A",
+      "symbol": "kPhysics_AxisZ",
+      "disposition": "adopted",
+      "target": "0x80",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A018",
+      "tier": "A",
+      "symbol": "kPhysics_Position",
+      "disposition": "adopted",
+      "target": "0x90",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A019",
+      "tier": "A",
+      "symbol": "kStatus_StatContainer",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A020",
+      "tier": "A",
+      "symbol": "kStatContainer_Entries",
+      "disposition": "adopted",
+      "target": "0x58",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A021",
+      "tier": "A",
+      "symbol": "kStatContainer_Count",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A022",
+      "tier": "A",
+      "symbol": "kStatEntry_Size",
+      "disposition": "adopted",
+      "target": "0x90",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A023",
+      "tier": "A",
+      "symbol": "kStatEntry_Id",
+      "disposition": "adopted",
+      "target": "0x00",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A024",
+      "tier": "A",
+      "symbol": "kStatEntry_Current",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A025",
+      "tier": "A",
+      "symbol": "kStatEntry_Max",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A026",
+      "tier": "A",
+      "symbol": "kStatId_Health",
+      "disposition": "approved_policy",
+      "target": "native definition consensus; no guessed literal ID",
+      "authority": "User-approved R3 rule 1 + successful L1",
+      "missing": ""
+    },
+    {
+      "row": "A027",
+      "tier": "A",
+      "symbol": "kStatId_Stamina",
+      "disposition": "retired_by_scope",
+      "target": "3663 stamina unreachable",
+      "authority": "User-approved R3 rule 1 + successful L1",
+      "missing": ""
+    },
+    {
+      "row": "A028",
+      "tier": "A",
+      "symbol": "kLoadingParkHeight",
+      "disposition": "approved_policy",
+      "target": "park/changed chain/missing HP definitions => not ready",
+      "authority": "User-approved R3 rule 1 + successful L1",
+      "missing": ""
+    },
+    {
+      "row": "B001",
+      "tier": "B",
+      "symbol": "kServerNetSlot",
+      "disposition": "adopted",
+      "target": "0x72456b8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B002",
+      "tier": "B",
+      "symbol": "kClientNetSlot",
+      "disposition": "adopted",
+      "target": "0x72451a0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B003",
+      "tier": "B",
+      "symbol": "kServerNet_Session",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B004",
+      "tier": "B",
+      "symbol": "kServerNet_InQueue",
+      "disposition": "adopted",
+      "target": "0x20",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B005",
+      "tier": "B",
+      "symbol": "kServerNet_FreeC2S",
+      "disposition": "adopted",
+      "target": "0x78",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B006",
+      "tier": "B",
+      "symbol": "kServerNet_FreeS2C",
+      "disposition": "adopted",
+      "target": "0x80",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B007",
+      "tier": "B",
+      "symbol": "kClientNet_InQueue",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B008",
+      "tier": "B",
+      "symbol": "kNwVirtualAsyncSessionVtable",
+      "disposition": "adopted",
+      "target": "0x5B40310",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B009",
+      "tier": "B",
+      "symbol": "kNwAsyncSessionVtable",
+      "disposition": "adopted",
+      "target": "0x5B403A8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B010",
+      "tier": "B",
+      "symbol": "kSessionVtableEntries",
+      "disposition": "adopted",
+      "target": "15",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B011",
+      "tier": "B",
+      "symbol": "kSessionVfSend",
+      "disposition": "adopted",
+      "target": "9",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B012",
+      "tier": "B",
+      "symbol": "kSessionSize",
+      "disposition": "adopted",
+      "target": "0xD0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B013",
+      "tier": "B",
+      "symbol": "kSession_Name",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B014",
+      "tier": "B",
+      "symbol": "kSession_IdPtr",
+      "disposition": "adopted",
+      "target": "0x88",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B015",
+      "tier": "B",
+      "symbol": "kSession_User",
+      "disposition": "adopted",
+      "target": "0x90",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B016",
+      "tier": "B",
+      "symbol": "kSession_Crypto",
+      "disposition": "adopted",
+      "target": "0x98",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B017",
+      "tier": "B",
+      "symbol": "kSession_B0",
+      "disposition": "adopted",
+      "target": "0xB0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B018",
+      "tier": "B",
+      "symbol": "kSession_B8",
+      "disposition": "adopted",
+      "target": "0xB8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B019",
+      "tier": "B",
+      "symbol": "kSession_C0",
+      "disposition": "adopted",
+      "target": "0xC0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B020",
+      "tier": "B",
+      "symbol": "kSession_OutQueue",
+      "disposition": "adopted",
+      "target": "0xC8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B021",
+      "tier": "B",
+      "symbol": "kServerOnRecvPacket",
+      "disposition": "adopted",
+      "target": "0x2A0EA70",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B022",
+      "tier": "B",
+      "symbol": "kServerOnRecvPacketHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B023",
+      "tier": "B",
+      "symbol": "kSessionSend",
+      "disposition": "adopted",
+      "target": "0x165C1F0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B024",
+      "tier": "B",
+      "symbol": "kSessionSendHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xC8, 0x00, 0x00, 0x00, 0x49, 0x8D, 0x40, 0x30}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B025",
+      "tier": "B",
+      "symbol": "kNwSessionCtor",
+      "disposition": "adopted",
+      "target": "0x165B9D0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B026",
+      "tier": "B",
+      "symbol": "kNwSessionCtorHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B027",
+      "tier": "B",
+      "symbol": "kQueuePush",
+      "disposition": "adopted",
+      "target": "0x3AB4C0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B028",
+      "tier": "B",
+      "symbol": "kQueuePushHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B029",
+      "tier": "B",
+      "symbol": "kAllocGlobal",
+      "disposition": "adopted",
+      "target": "0x4B7E188",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B030",
+      "tier": "B",
+      "symbol": "kAllocGlobalHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9, 0x48, 0x8B, 0xDA}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B031",
+      "tier": "B",
+      "symbol": "kAllocThread",
+      "disposition": "adopted",
+      "target": "0x4B7E0C0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B032",
+      "tier": "B",
+      "symbol": "kAllocThreadBytes",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xFA, 0x44, 0x8B, 0x05, 0xEE, 0xDE, 0x5D, 0x02, 0x48, 0x8B, 0xF1, 0x4A, 0x8B, 0x1C, 0xC0, 0xB8, 0x98, 0x00, 0x00, 0x00, 0x80, 0x3C, 0x18, 0x00, 0x75, 0x05, 0xE8, 0xDB, 0x59, 0x0A, 0x00, 0xB9, 0x90, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xD6, 0x48, 0x8B, 0x0C, 0x19, 0x48, 0x8B, 0x5C, 0x24, 0x30, 0x48, 0x8B, 0x74, 0x24, 0x38, 0x48, 0x83, 0xC4, 0x20, 0x5F, 0xE9, 0x3C, 0xFC, 0xFF, 0xFF}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B033",
+      "tier": "B",
+      "symbol": "kTlsIndexSlot",
+      "disposition": "adopted",
+      "target": "0x715BFD0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B034",
+      "tier": "B",
+      "symbol": "kTls_UseGlobalHeap",
+      "disposition": "adopted",
+      "target": "0x1FE",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B035",
+      "tier": "B",
+      "symbol": "kServerNet_Threads",
+      "disposition": "adopted",
+      "target": "0xF8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B036",
+      "tier": "B",
+      "symbol": "kServerNet_ThreadCount",
+      "disposition": "adopted",
+      "target": "0x100",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B037",
+      "tier": "B",
+      "symbol": "kServerThreadEntry",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B038",
+      "tier": "B",
+      "symbol": "kArray_Count",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B039",
+      "tier": "B",
+      "symbol": "kArray_Capacity",
+      "disposition": "adopted",
+      "target": "0x0C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B040",
+      "tier": "B",
+      "symbol": "kPbSize",
+      "disposition": "adopted",
+      "target": "0x8030",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B041",
+      "tier": "B",
+      "symbol": "kPb_FramePtr",
+      "disposition": "adopted",
+      "target": "0x8000",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B042",
+      "tier": "B",
+      "symbol": "kPb_Len1",
+      "disposition": "adopted",
+      "target": "0x8008",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B043",
+      "tier": "B",
+      "symbol": "kPb_Len2",
+      "disposition": "adopted",
+      "target": "0x800A",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B044",
+      "tier": "B",
+      "symbol": "kPb_Cap",
+      "disposition": "adopted",
+      "target": "0x800C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B045",
+      "tier": "B",
+      "symbol": "kPb_IsRequest",
+      "disposition": "adopted",
+      "target": "0x800E",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B046",
+      "tier": "B",
+      "symbol": "kPb_Tag",
+      "disposition": "adopted",
+      "target": "0x8010",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B047",
+      "tier": "B",
+      "symbol": "kPb_Magic",
+      "disposition": "adopted",
+      "target": "0x8018",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B048",
+      "tier": "B",
+      "symbol": "kPb_Base",
+      "disposition": "adopted",
+      "target": "0x8028",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B049",
+      "tier": "B",
+      "symbol": "kFrameOverhead",
+      "disposition": "adopted",
+      "target": "0x1F",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B050",
+      "tier": "B",
+      "symbol": "kFrameHeader",
+      "disposition": "adopted",
+      "target": "3",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B051",
+      "tier": "B",
+      "symbol": "kRq_Frame",
+      "disposition": "adopted",
+      "target": "0x30",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B052",
+      "tier": "B",
+      "symbol": "kTrocInstancesBegin",
+      "disposition": "adopted",
+      "target": "0x6F14E10",
+      "authority": "R3 descriptor-bounds.json",
+      "missing": ""
+    },
+    {
+      "row": "B053",
+      "tier": "B",
+      "symbol": "kTrocInstancesEnd",
+      "disposition": "adopted",
+      "target": "0x6F487B0",
+      "authority": "R3 descriptor-bounds.json",
+      "missing": ""
+    },
+    {
+      "row": "B054",
+      "tier": "B",
+      "symbol": "kTroc_Kind",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B055",
+      "tier": "B",
+      "symbol": "kTroc_Opcode",
+      "disposition": "adopted",
+      "target": "0x0C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B056",
+      "tier": "B",
+      "symbol": "kTroc_Channel",
+      "disposition": "adopted",
+      "target": "0x14",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B057",
+      "tier": "B",
+      "symbol": "kTroc_Flags",
+      "disposition": "adopted",
+      "target": "0x16",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B058",
+      "tier": "B",
+      "symbol": "kTrocKindServer",
+      "disposition": "adopted",
+      "target": "4",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B059",
+      "tier": "B",
+      "symbol": "kClientNet_Session",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B060",
+      "tier": "B",
+      "symbol": "kClientNet_FreeC2S",
+      "disposition": "adopted",
+      "target": "0x28",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B061",
+      "tier": "B",
+      "symbol": "kClientNet_Slot4",
+      "disposition": "adopted",
+      "target": "0x58",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B062",
+      "tier": "B",
+      "symbol": "kSyncSession_Epoch",
+      "disposition": "adopted",
+      "target": "0xB0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B063",
+      "tier": "B",
+      "symbol": "kSyncSessionSend",
+      "disposition": "adopted",
+      "target": "0x165CB60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B064",
+      "tier": "B",
+      "symbol": "kSyncSessionSendHead",
+      "disposition": "adopted",
+      "target": "{0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xDA}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B065",
+      "tier": "B",
+      "symbol": "kNetLoopPump",
+      "disposition": "adopted",
+      "target": "0x3A8D94",
+      "authority": "R3 pump-adoption.json",
+      "missing": ""
+    },
+    {
+      "row": "B066",
+      "tier": "B",
+      "symbol": "kNetLoopPumpHead",
+      "disposition": "adopted",
+      "target": "{0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B067",
+      "tier": "B",
+      "symbol": "kNetLoopPumpPatch",
+      "disposition": "adopted",
+      "target": "7",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B068",
+      "tier": "B",
+      "symbol": "kNetLoopPumpAob",
+      "disposition": "adopted",
+      "target": "{0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x08, 0x90, 0x8B, 0x5F, 0x58, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x10, 0x85, 0xDB, 0x74}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B069",
+      "tier": "B",
+      "symbol": "kClientOnRecvPacket",
+      "disposition": "adopted",
+      "target": "0x3a9cf0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B070",
+      "tier": "B",
+      "symbol": "kClientOnRecvPacketHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C001",
+      "tier": "C",
+      "symbol": "kSamSlot",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kSamSlot at 2976 0x6DA67D8"
+    },
+    {
+      "row": "C002",
+      "tier": "C",
+      "symbol": "kSam_FreeKeys",
+      "disposition": "adopted",
+      "target": "0xD0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C003",
+      "tier": "C",
+      "symbol": "kSam_ActorCount",
+      "disposition": "adopted",
+      "target": "0x9C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C004",
+      "tier": "C",
+      "symbol": "kServerUserActorVtable",
+      "disposition": "adopted",
+      "target": "0x5f68b10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C005",
+      "tier": "C",
+      "symbol": "kUser_Key",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C006",
+      "tier": "C",
+      "symbol": "kUser_Session",
+      "disposition": "adopted",
+      "target": "0x1F8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C007",
+      "tier": "C",
+      "symbol": "kServerActor_Controller",
+      "disposition": "adopted",
+      "target": "0x90",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C008",
+      "tier": "C",
+      "symbol": "kServerActor_Key",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C009",
+      "tier": "C",
+      "symbol": "kToNearExceptOneControlVtable",
+      "disposition": "adopted",
+      "target": "0x5f686c0",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C010",
+      "tier": "C",
+      "symbol": "kToNearExceptOneSelfVtable",
+      "disposition": "adopted",
+      "target": "0x5f686a0",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C011",
+      "tier": "C",
+      "symbol": "kToNearVtable",
+      "disposition": "adopted",
+      "target": "0x5f68780",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C012",
+      "tier": "C",
+      "symbol": "kExceptOneVf1",
+      "disposition": "adopted",
+      "target": "0x2d6c360",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C013",
+      "tier": "C",
+      "symbol": "kExceptOneSelfVf1",
+      "disposition": "adopted",
+      "target": "0x2d6c230",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C014",
+      "tier": "C",
+      "symbol": "kToNearVf1",
+      "disposition": "adopted",
+      "target": "0x2d6c210",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C015",
+      "tier": "C",
+      "symbol": "kExceptOneVf1Head",
+      "disposition": "adopted",
+      "target": "40 53 48 83 ec 50 48 8b 41 10 48 8b 48 68 48 8b 99 a0 01 00 00",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C016",
+      "tier": "C",
+      "symbol": "kToNearVf1Head",
+      "disposition": "adopted",
+      "target": "48 8b 41 10 48 8b 48 68 48 8b 89 a0 01 00 00 e9",
+      "authority": "R3 recipient-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C017",
+      "tier": "C",
+      "symbol": "kFinder_Actor",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D001",
+      "tier": "D",
+      "symbol": "kWorldSystem_SaveManager",
+      "disposition": "adopted",
+      "target": "0x88",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D002",
+      "tier": "D",
+      "symbol": "kServerActorLookupSlot",
+      "disposition": "adopted",
+      "target": "0x72456d0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D003",
+      "tier": "D",
+      "symbol": "kServerActorLookup_SaveManager",
+      "disposition": "adopted",
+      "target": "0x48",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D004",
+      "tier": "D",
+      "symbol": "kSaveMgr_Lock",
+      "disposition": "adopted",
+      "target": "0x00",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D005",
+      "tier": "D",
+      "symbol": "kSaveMgr_LockObj",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D006",
+      "tier": "D",
+      "symbol": "kSaveMgr_Slots",
+      "disposition": "adopted",
+      "target": "0x40",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D007",
+      "tier": "D",
+      "symbol": "kSaveMgr_Count",
+      "disposition": "adopted",
+      "target": "0x48",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D008",
+      "tier": "D",
+      "symbol": "kSaveMgr_Capacity",
+      "disposition": "adopted",
+      "target": "0x4C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D009",
+      "tier": "D",
+      "symbol": "kSaveMgr_Storage",
+      "disposition": "adopted",
+      "target": "0x50",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D010",
+      "tier": "D",
+      "symbol": "kSaveMgr_Busy",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D011",
+      "tier": "D",
+      "symbol": "kSaveMgr_EntrySize",
+      "disposition": "adopted",
+      "target": "0x78",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D012",
+      "tier": "D",
+      "symbol": "kSaveStorage_FolderCount",
+      "disposition": "adopted",
+      "target": "0x40",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D013",
+      "tier": "D",
+      "symbol": "kWindowsLock3Vtable",
+      "disposition": "adopted",
+      "target": "0x59874c8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D014",
+      "tier": "D",
+      "symbol": "kWindowsLockVf1",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Standard support for candidate 0x1593240 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 1 has the paired native thunk that dispatches this through vslot+18. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role."
+    },
+    {
+      "row": "D015",
+      "tier": "D",
+      "symbol": "kWindowsLockVf2",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Standard support for candidate 0xe297f0 (or its documented native operand anchor) is absent; independent check: Named WindowsLock<3> vslot 2 has the paired native thunk that dispatches this through vslot+20. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role."
+    },
+    {
+      "row": "D016",
+      "tier": "D",
+      "symbol": "kWindowsLockVf1Head",
+      "disposition": "adopted",
+      "target": "{0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x18}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D017",
+      "tier": "D",
+      "symbol": "kWindowsLockVf2Head",
+      "disposition": "adopted",
+      "target": "{0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x20}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D018",
+      "tier": "D",
+      "symbol": "kSaveMgrRefreshSlots",
+      "disposition": "adopted",
+      "target": "0x1A18320",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D019",
+      "tier": "D",
+      "symbol": "kSaveMgrRefreshSlotsHead",
+      "disposition": "adopted",
+      "target": "{0xE9, 0x9B, 0x48, 0x0F, 0x0A}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D020",
+      "tier": "D",
+      "symbol": "kSlotRefreshReqSequence",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D021",
+      "tier": "D",
+      "symbol": "kSlotRefreshReqSequenceBytes",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D022",
+      "tier": "D",
+      "symbol": "kTitlePlayReadsSaveMgr",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D023",
+      "tier": "D",
+      "symbol": "kTitlePlayReadsSaveMgrBytes",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "C018",
+      "tier": "C",
+      "symbol": "kRefs",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C019",
+      "tier": "C",
+      "symbol": "kLock1",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C020",
+      "tier": "C",
+      "symbol": "kLock2Ptr",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C021",
+      "tier": "C",
+      "symbol": "kOpen",
+      "disposition": "adopted",
+      "target": "0x4A",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C022",
+      "tier": "C",
+      "symbol": "kOwner",
+      "disposition": "adopted",
+      "target": "0x180",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C023",
+      "tier": "C",
+      "symbol": "kUsers",
+      "disposition": "adopted",
+      "target": "0x2A8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C024",
+      "tier": "C",
+      "symbol": "kUserCount",
+      "disposition": "adopted",
+      "target": "0x2B0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C025",
+      "tier": "C",
+      "symbol": "kUserActors",
+      "disposition": "adopted",
+      "target": "0x2B8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C026",
+      "tier": "C",
+      "symbol": "kKey",
+      "disposition": "adopted",
+      "target": "0x2D0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C027",
+      "tier": "C",
+      "symbol": "kLevelEntry",
+      "disposition": "adopted",
+      "target": "0x2D8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C028",
+      "tier": "C",
+      "symbol": "kTsFieldMover",
+      "disposition": "adopted",
+      "target": "0x508",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C029",
+      "tier": "C",
+      "symbol": "kFmFieldKey",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C030",
+      "tier": "C",
+      "symbol": "kFmField",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C031",
+      "tier": "C",
+      "symbol": "kFmBusy",
+      "disposition": "adopted",
+      "target": "0x4A",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C032",
+      "tier": "C",
+      "symbol": "kOutField",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C033",
+      "tier": "C",
+      "symbol": "kOutValid",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C034",
+      "tier": "C",
+      "symbol": "kOutHolder",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C035",
+      "tier": "C",
+      "symbol": "kOutNew",
+      "disposition": "adopted",
+      "target": "0x20",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C036",
+      "tier": "C",
+      "symbol": "kOutInfoKey",
+      "disposition": "adopted",
+      "target": "0x24",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C037",
+      "tier": "C",
+      "symbol": "kMgrBucketCount",
+      "disposition": "adopted",
+      "target": "0x48",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C038",
+      "tier": "C",
+      "symbol": "kMgrEntries",
+      "disposition": "adopted",
+      "target": "0x4C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C039",
+      "tier": "C",
+      "symbol": "kMgrBuckets",
+      "disposition": "adopted",
+      "target": "0x58",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C040",
+      "tier": "C",
+      "symbol": "kMgrHolders",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C041",
+      "tier": "C",
+      "symbol": "kAcquireField",
+      "disposition": "adopted",
+      "target": "0x2e08520",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C042",
+      "tier": "C",
+      "symbol": "kAcquireFieldHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x70}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C043",
+      "tier": "C",
+      "symbol": "kEnterField",
+      "disposition": "adopted",
+      "target": "0x2ECB130",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C044",
+      "tier": "C",
+      "symbol": "kEnterFieldHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x18, 0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x70, 0xFF}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C045",
+      "tier": "C",
+      "symbol": "kTryAddRef",
+      "disposition": "adopted",
+      "target": "0x1658e90",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C046",
+      "tier": "C",
+      "symbol": "kTryAddRefHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C047",
+      "tier": "C",
+      "symbol": "kVecPush",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Accepted VT/native AddActor identifies candidate 4CAE10; default BinDiff instead maps legacy 40B5B0 to 14AD670 (confidence 0.952574). Resolve the generic-helper conflict and its native allocation/growth ownership; named-RTTI rule 2 does not settle it. The passive trace did not instrument this helper."
+    },
+    {
+      "row": "C048",
+      "tier": "C",
+      "symbol": "kVecPushHead",
+      "disposition": "adopted",
+      "target": "{0x40, 0x53, 0x41, 0x57, 0x48, 0x83, 0xEC, 0x28, 0x48, 0x8B, 0xD9, 0x4C, 0x8B, 0xFA, 0x8B, 0x49, 0x08, 0x8B, 0x43, 0x0C}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C049",
+      "tier": "C",
+      "symbol": "kUserMainCharacter",
+      "disposition": "adopted",
+      "target": "0xD0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C050",
+      "tier": "C",
+      "symbol": "kUserKey",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C051",
+      "tier": "C",
+      "symbol": "kActorUser",
+      "disposition": "adopted",
+      "target": "0xA0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C052",
+      "tier": "C",
+      "symbol": "kNative",
+      "disposition": "adopted",
+      "target": "0x7FFFFFFFFFFFFFFF",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C053",
+      "tier": "C",
+      "symbol": "kLobbyOwner",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C054",
+      "tier": "C",
+      "symbol": "kLobbyList",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C055",
+      "tier": "C",
+      "symbol": "kListCount",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C056",
+      "tier": "C",
+      "symbol": "kEntryStride",
+      "disposition": "adopted",
+      "target": "0xD0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C057",
+      "tier": "C",
+      "symbol": "kEntryNumber",
+      "disposition": "adopted",
+      "target": "0x00",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C058",
+      "tier": "C",
+      "symbol": "kUserComponents",
+      "disposition": "adopted",
+      "target": "0x68",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C059",
+      "tier": "C",
+      "symbol": "kTableLobby",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C060",
+      "tier": "C",
+      "symbol": "kTableStatus",
+      "disposition": "adopted",
+      "target": "0x20",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C061",
+      "tier": "C",
+      "symbol": "kStatusActor",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C062",
+      "tier": "C",
+      "symbol": "kStatusNumber",
+      "disposition": "adopted",
+      "target": "0x90",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C063",
+      "tier": "C",
+      "symbol": "kActorKey",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C064",
+      "tier": "C",
+      "symbol": "kActorUser",
+      "disposition": "adopted",
+      "target": "0xA0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C065",
+      "tier": "C",
+      "symbol": "kLockObject",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C066",
+      "tier": "C",
+      "symbol": "kCharacterClass",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Roster kind 0 and observed primary key A0100001 do not prove the separate legacy character-class constant 0xA in its actual producer/consumer role."
+    },
+    {
+      "row": "C067",
+      "tier": "C",
+      "symbol": "kLobbyLoad",
+      "disposition": "adopted",
+      "target": "0x2e879a0",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C068",
+      "tier": "C",
+      "symbol": "kLobbyLoadHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x54, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0xF0, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x10, 0x03}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C069",
+      "tier": "C",
+      "symbol": "kLobbyVtable",
+      "disposition": "adopted",
+      "target": "0x5f6f2e8",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C070",
+      "tier": "C",
+      "symbol": "kLobbyConstant",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Lobby parent 2E879A0 is now adopted. Candidate constant site 2E87DB0 still needs the target stack-slot/argument lifetime, exact relocated instruction and safe per-build patch semantics; the old instruction patch must not be reused."
+    },
+    {
+      "row": "C071",
+      "tier": "C",
+      "symbol": "kLobbyConstantBytes",
+      "disposition": "adopted",
+      "target": "{0x48, 0xB8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F, 0x48, 0x89, 0x45, 0xC0, 0xC5}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C072",
+      "tier": "C",
+      "symbol": "kLobbyAddCall",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Lobby parent is adopted, but candidate call 2E87E10 to entry writer 237EA60 still lacks a proved target callsite detour ABI/argument ownership and safe guard/relocation strategy."
+    },
+    {
+      "row": "C073",
+      "tier": "C",
+      "symbol": "kLobbyAddCallBytes",
+      "disposition": "adopted",
+      "target": "{0xE8, 0x4B, 0x6C, 0x4F, 0xFF}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C074",
+      "tier": "C",
+      "symbol": "kClearLobbySite",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kClearLobbySite at 2976 0x2C3E0FF"
+    },
+    {
+      "row": "C075",
+      "tier": "C",
+      "symbol": "kClearLobbySiteBytes",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kClearLobbySiteBytes for the same native role as src/mod/session2/identity_fix.cpp:227 ({0x49, 0x8B, 0x47, 0x68, 0x48, 0x8B, 0x58, 0x10, 0x48, 0x8B, 0x7B, 0x08})"
+    },
+    {
+      "row": "C076",
+      "tier": "C",
+      "symbol": "kClearListSite",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kClearListSite at 2976 0x2C3E126"
+    },
+    {
+      "row": "C077",
+      "tier": "C",
+      "symbol": "kClearListSiteBytes",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kClearListSiteBytes for the same native role as src/mod/session2/identity_fix.cpp:229 ({0x48, 0x8B, 0x4B, 0x18})"
+    },
+    {
+      "row": "C078",
+      "tier": "C",
+      "symbol": "kStatusVtable",
+      "disposition": "adopted",
+      "target": "0x5f63430",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C079",
+      "tier": "C",
+      "symbol": "kStatusLoad",
+      "disposition": "adopted",
+      "target": "0x2c160b0",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C080",
+      "tier": "C",
+      "symbol": "kLoginMgrSite",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kLoginMgrSite at 2976 0x2777A18"
+    },
+    {
+      "row": "C081",
+      "tier": "C",
+      "symbol": "kLoginMgrSiteBytes",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kLoginMgrSiteBytes for the same native role as src/mod/session2/identity_fix.cpp:235 ({0x48, 0x8B, 0x0D, 0x89, 0x1C, 0x5F, 0x04, 0x48, 0x8B, 0x09})"
+    },
+    {
+      "row": "C082",
+      "tier": "C",
+      "symbol": "kLoginMgrSlot",
+      "disposition": "adopted",
+      "target": "0x72456e0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C083",
+      "tier": "C",
+      "symbol": "kFindByNoScan",
+      "disposition": "adopted",
+      "target": "0x2d7a726",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C084",
+      "tier": "C",
+      "symbol": "kFindByNoScanBytes",
+      "disposition": "adopted",
+      "target": "{0x48, 0x8B, 0x8D, 0xB8, 0x00, 0x00, 0x00, 0x8B, 0x85, 0xC0, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x14, 0xC1}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C085",
+      "tier": "C",
+      "symbol": "kFindByNoRead",
+      "disposition": "adopted",
+      "target": "0x2d7a750",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C086",
+      "tier": "C",
+      "symbol": "kFindByNoReadBytes",
+      "disposition": "adopted",
+      "target": "{0x4C, 0x8B, 0x31, 0x49, 0x8B, 0x46, 0x68, 0x48, 0x8B, 0x40, 0x20}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C087",
+      "tier": "C",
+      "symbol": "kLoginMgrActors",
+      "disposition": "adopted",
+      "target": "0xB8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C088",
+      "tier": "C",
+      "symbol": "kLoginMgrCount",
+      "disposition": "adopted",
+      "target": "0xC0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C089",
+      "tier": "C",
+      "symbol": "kOpLoginUser",
+      "disposition": "adopted",
+      "target": "2554",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C090",
+      "tier": "C",
+      "symbol": "kOpLoginCharacter",
+      "disposition": "adopted",
+      "target": "3081",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C091",
+      "tier": "C",
+      "symbol": "kActorComponents",
+      "disposition": "adopted",
+      "target": "0x68",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C092",
+      "tier": "C",
+      "symbol": "kTableStatus",
+      "disposition": "adopted",
+      "target": "0x20",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C093",
+      "tier": "C",
+      "symbol": "kStatusCharacterNo",
+      "disposition": "adopted",
+      "target": "0x90",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C094",
+      "tier": "C",
+      "symbol": "kComponentOwner",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C095",
+      "tier": "C",
+      "symbol": "kActorUser",
+      "disposition": "adopted",
+      "target": "0xA0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C096",
+      "tier": "C",
+      "symbol": "kKey",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C097",
+      "tier": "C",
+      "symbol": "kLoad",
+      "disposition": "adopted",
+      "target": "0x22951b0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C098",
+      "tier": "C",
+      "symbol": "kLoadHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x68, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x98, 0x03, 0x00, 0x00, 0x49, 0x8B, 0xD9, 0x4D, 0x8B, 0xE8, 0x48, 0x8B, 0xF2, 0x4C, 0x8B, 0xF1}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C099",
+      "tier": "C",
+      "symbol": "kPhases",
+      "disposition": "adopted",
+      "target": "0x2C17410",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C100",
+      "tier": "C",
+      "symbol": "kPhasesHead",
+      "disposition": "adopted",
+      "target": "44 89 4c 24 20 4c 89 44 24 18 53 55 56 57 41 54 41 56 41 57 48 81 ec 80 00 00 00 4c 8b fa 4c 8b 71 08 49 8b 7e 78 41 8b ae 80 00 00 00 48 c1 e5 04",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C101",
+      "tier": "C",
+      "symbol": "kStatusVtable",
+      "disposition": "adopted",
+      "target": "0x5f63430",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C102",
+      "tier": "C",
+      "symbol": "kStatusLoad",
+      "disposition": "adopted",
+      "target": "0x2c160b0",
+      "authority": "R3 identity-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "C103",
+      "tier": "C",
+      "symbol": "kLoadStub",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Resolve standard correlator agreement or add an independent code/RTTI/xref proof for kLoadStub at 2976 0x35EA90"
+    },
+    {
+      "row": "C104",
+      "tier": "C",
+      "symbol": "kTsActor",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C105",
+      "tier": "C",
+      "symbol": "kActorUser",
+      "disposition": "adopted",
+      "target": "0xA0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C106",
+      "tier": "C",
+      "symbol": "kUserKey",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C107",
+      "tier": "C",
+      "symbol": "kTsFieldTime",
+      "disposition": "adopted",
+      "target": "0x450",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C108",
+      "tier": "C",
+      "symbol": "kFieldTimeSize",
+      "disposition": "adopted",
+      "target": "32",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C109",
+      "tier": "C",
+      "symbol": "kWorldTime",
+      "disposition": "adopted",
+      "target": "0x6f31c98",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C110",
+      "tier": "C",
+      "symbol": "kTravel",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/scope-result.json",
+      "missing": "",
+      "reason": "R4 v1 refuses guest travel/fast-travel and time publication before host native dispatch; these legacy publication adapters remain unreachable."
+    },
+    {
+      "row": "C111",
+      "tier": "C",
+      "symbol": "kTravelHead",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/scope-result.json",
+      "missing": "",
+      "reason": "R4 v1 refuses guest travel/fast-travel and time publication before host native dispatch; these legacy publication adapters remain unreachable."
+    },
+    {
+      "row": "C112",
+      "tier": "C",
+      "symbol": "kTravelOwnerCmp",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/scope-result.json",
+      "missing": "",
+      "reason": "R4 v1 refuses guest travel/fast-travel and time publication before host native dispatch; these legacy publication adapters remain unreachable."
+    },
+    {
+      "row": "C113",
+      "tier": "C",
+      "symbol": "kTravelOwnerCmpBytes",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/scope-result.json",
+      "missing": "",
+      "reason": "R4 v1 refuses guest travel/fast-travel and time publication before host native dispatch; these legacy publication adapters remain unreachable."
+    },
+    {
+      "row": "C114",
+      "tier": "C",
+      "symbol": "kTravelGetterCall",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/scope-result.json",
+      "missing": "",
+      "reason": "R4 v1 refuses guest travel/fast-travel and time publication before host native dispatch; these legacy publication adapters remain unreachable."
+    },
+    {
+      "row": "C115",
+      "tier": "C",
+      "symbol": "kTravelGetterCallBytes",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/scope-result.json",
+      "missing": "",
+      "reason": "R4 v1 refuses guest travel/fast-travel and time publication before host native dispatch; these legacy publication adapters remain unreachable."
+    },
+    {
+      "row": "C116",
+      "tier": "C",
+      "symbol": "kLoading",
+      "disposition": "adopted",
+      "target": "0x23dc630",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C117",
+      "tier": "C",
+      "symbol": "kLoadingHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x60, 0x4D, 0x8B, 0xE9, 0x49, 0x8B, 0xF0, 0x4C, 0x8B, 0xF2, 0x48, 0x8B, 0xD9}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C118",
+      "tier": "C",
+      "symbol": "kLoadingFlagCmp",
+      "disposition": "adopted",
+      "target": "0x23dc66b",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C119",
+      "tier": "C",
+      "symbol": "kLoadingFlagCmpBytes",
+      "disposition": "adopted",
+      "target": "{0x44, 0x38, 0x65, 0x50, 0x0F, 0x84, 0x0C, 0x01, 0x00, 0x00}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C120",
+      "tier": "C",
+      "symbol": "kGetter",
+      "disposition": "adopted",
+      "target": "0x231a180",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C121",
+      "tier": "C",
+      "symbol": "kGetterHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x60, 0x48, 0x8B, 0x01, 0x48, 0x8B, 0xFA, 0x48, 0x8D, 0x54, 0x24, 0x70, 0x48, 0x8B, 0xD9, 0xFF, 0x50, 0x60}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C122",
+      "tier": "C",
+      "symbol": "kSessionId",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kSessionId for the same native role as src/mod/session2/server.cpp:76 (0)"
+    },
+    {
+      "row": "C123",
+      "tier": "C",
+      "symbol": "kOpLoginCharacterToFieldServerReq",
+      "disposition": "adopted",
+      "target": "3081",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C124",
+      "tier": "C",
+      "symbol": "kOpLoginUserToFieldServerReq",
+      "disposition": "adopted",
+      "target": "2554",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C125",
+      "tier": "C",
+      "symbol": "kOpMainPlayerDataStartAck",
+      "disposition": "adopted",
+      "target": "2844",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C126",
+      "tier": "C",
+      "symbol": "kOpMainUserDataStartAck",
+      "disposition": "adopted",
+      "target": "2420",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C127",
+      "tier": "C",
+      "symbol": "kOpMoveFieldAck",
+      "disposition": "adopted",
+      "target": "2364",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C128",
+      "tier": "C",
+      "symbol": "kOpNak",
+      "disposition": "adopted",
+      "target": "1013",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B071",
+      "tier": "B",
+      "symbol": "kOpConnectCryptogramToServerReq",
+      "disposition": "adopted",
+      "target": "2401",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B072",
+      "tier": "B",
+      "symbol": "kNoEpoch",
+      "disposition": "adopted",
+      "target": "0x7FFFFFFFFFFFFFFF",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B073",
+      "tier": "B",
+      "symbol": "kServerFrameworkMode",
+      "disposition": "adopted",
+      "target": "0x6f29b70",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C129",
+      "tier": "C",
+      "symbol": "kOpScopeSenderAck",
+      "disposition": "adopted",
+      "target": "2046",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C130",
+      "tier": "C",
+      "symbol": "kOpActorAppear",
+      "disposition": "adopted",
+      "target": "2005",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C131",
+      "tier": "C",
+      "symbol": "kOpDataAck",
+      "disposition": "adopted",
+      "target": "2896",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C132",
+      "tier": "C",
+      "symbol": "kOp2679",
+      "disposition": "adopted",
+      "target": "3116",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C133",
+      "tier": "C",
+      "symbol": "kOpLoginCharacterToFieldServerReq",
+      "disposition": "adopted",
+      "target": "3081",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C134",
+      "tier": "C",
+      "symbol": "kOpLoginUserToFieldServerReq",
+      "disposition": "adopted",
+      "target": "2554",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D024",
+      "tier": "D",
+      "symbol": "kOpReserveShutDownServerReq",
+      "disposition": "adopted",
+      "target": "2447",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D025",
+      "tier": "D",
+      "symbol": "kSamMapBuckets",
+      "disposition": "adopted",
+      "target": "0x98",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D026",
+      "tier": "D",
+      "symbol": "kSamMapSize",
+      "disposition": "adopted",
+      "target": "0x9C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D027",
+      "tier": "D",
+      "symbol": "kSamMapBucketBase",
+      "disposition": "adopted",
+      "target": "0xA8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D028",
+      "tier": "D",
+      "symbol": "kSamMapHolders",
+      "disposition": "adopted",
+      "target": "0xB0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D029",
+      "tier": "D",
+      "symbol": "kSamBucketBytes",
+      "disposition": "adopted",
+      "target": "0x100",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D030",
+      "tier": "D",
+      "symbol": "kSamBucketMaxEntries",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kSamBucketMaxEntries for the same native role as src/mod/session2/guest_lifecycle.h:55 ((kSamBucketBytes - 8) / 8)"
+    },
+    {
+      "row": "D031",
+      "tier": "D",
+      "symbol": "kSamKeyIndexMask",
+      "disposition": "adopted",
+      "target": "0xFFFFF",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D032",
+      "tier": "D",
+      "symbol": "kSamUserList",
+      "disposition": "adopted",
+      "target": "0xB8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D033",
+      "tier": "D",
+      "symbol": "kSamUserCount",
+      "disposition": "adopted",
+      "target": "0xC0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D034",
+      "tier": "D",
+      "symbol": "kActorKey",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D035",
+      "tier": "D",
+      "symbol": "kUserMainCharacter",
+      "disposition": "adopted",
+      "target": "0xD0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D036",
+      "tier": "D",
+      "symbol": "kUserComponents",
+      "disposition": "adopted",
+      "target": "0x68",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D037",
+      "tier": "D",
+      "symbol": "kComponentsSlots",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D038",
+      "tier": "D",
+      "symbol": "kSlotsArray",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D039",
+      "tier": "D",
+      "symbol": "kSlotsCount",
+      "disposition": "adopted",
+      "target": "0x20",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D040",
+      "tier": "D",
+      "symbol": "kSlotStride",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D041",
+      "tier": "D",
+      "symbol": "kActorState",
+      "disposition": "adopted",
+      "target": "0x5E",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D042",
+      "tier": "D",
+      "symbol": "kActorComponents",
+      "disposition": "adopted",
+      "target": "0x68",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D043",
+      "tier": "D",
+      "symbol": "kComponentsTransformSync",
+      "disposition": "adopted",
+      "target": "0x1A0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D044",
+      "tier": "D",
+      "symbol": "kTsMoving",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kTsMoving for the same native role as src/mod/session2/guest_lifecycle.h:199 (0x3DC)"
+    },
+    {
+      "row": "D045",
+      "tier": "D",
+      "symbol": "kFmMoving",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kFmMoving for the same native role as src/mod/session2/guest_lifecycle.h:200 (0x58)"
+    },
+    {
+      "row": "D046",
+      "tier": "D",
+      "symbol": "kLoginCharacterReq",
+      "disposition": "adopted",
+      "target": "3081",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D047",
+      "tier": "D",
+      "symbol": "kGameLoadingStartReq",
+      "disposition": "adopted",
+      "target": "2350",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D048",
+      "tier": "D",
+      "symbol": "kMoveFieldCompleteReq",
+      "disposition": "adopted",
+      "target": "2723",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D049",
+      "tier": "D",
+      "symbol": "kLoadingCompleteReq",
+      "disposition": "adopted",
+      "target": "2789",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D050",
+      "tier": "D",
+      "symbol": "kMoveFieldAck",
+      "disposition": "adopted",
+      "target": "2364",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D051",
+      "tier": "D",
+      "symbol": "kMoveFieldCompleteAck",
+      "disposition": "adopted",
+      "target": "2268",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D052",
+      "tier": "D",
+      "symbol": "kLoadingCompleteAck",
+      "disposition": "adopted",
+      "target": "2891",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D053",
+      "tier": "D",
+      "symbol": "kLoadSlot",
+      "disposition": "adopted",
+      "target": "0x1a16c40",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D054",
+      "tier": "D",
+      "symbol": "kLoadSlotHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x44, 0x89, 0x44, 0x24, 0x18, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x50, 0xFF, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xB0, 0x01, 0x00, 0x00, 0x4D, 0x8B, 0xF1}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D055",
+      "tier": "D",
+      "symbol": "kSave",
+      "disposition": "adopted",
+      "target": "0x1a15930",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D056",
+      "tier": "D",
+      "symbol": "kSaveHead",
+      "disposition": "adopted",
+      "target": "{0x4C, 0x89, 0x4C, 0x24, 0x20, 0x44, 0x89, 0x44, 0x24, 0x18, 0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x38, 0xFC, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xC8, 0x04, 0x00, 0x00}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D057",
+      "tier": "D",
+      "symbol": "kFlush",
+      "disposition": "adopted",
+      "target": "0x1a192d0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D058",
+      "tier": "D",
+      "symbol": "kFlushHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x55, 0x57, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x40, 0xFF, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xC0, 0x01, 0x00, 0x00, 0x45, 0x0F, 0xB7, 0xF9, 0x4D, 0x8B, 0xE8, 0x48, 0x8B, 0xF2}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D059",
+      "tier": "D",
+      "symbol": "kGetOrCreate",
+      "disposition": "adopted",
+      "target": "0x25bb470",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D060",
+      "tier": "D",
+      "symbol": "kGetOrCreateHead",
+      "disposition": "adopted",
+      "target": "{0xE9, 0x9B, 0x3B, 0x2A, 0x0B}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D061",
+      "tier": "D",
+      "symbol": "kAddFile",
+      "disposition": "adopted",
+      "target": "0x25c0900",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D062",
+      "tier": "D",
+      "symbol": "kAddFileHead",
+      "disposition": "adopted",
+      "target": "{0x40, 0x53, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x81, 0xEC, 0x88, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xEA, 0x4C, 0x8B, 0xF9}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D063",
+      "tier": "D",
+      "symbol": "kCallSites[0].site",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D064",
+      "tier": "D",
+      "symbol": "kCallSites[1].site",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D065",
+      "tier": "D",
+      "symbol": "kCallSites[2].site",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D066",
+      "tier": "D",
+      "symbol": "kCallSites[3].site",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D067",
+      "tier": "D",
+      "symbol": "kCallSites[4].site",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D068",
+      "tier": "D",
+      "symbol": "kCallSites[5].site",
+      "disposition": "adopted",
+      "target": "0x2bc2a6a",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D069",
+      "tier": "D",
+      "symbol": "kCallSites[6].site",
+      "disposition": "adopted",
+      "target": "0xed099c8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D070",
+      "tier": "D",
+      "symbol": "kErrBusy.site",
+      "disposition": "adopted",
+      "target": "0x1a16dce",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D071",
+      "tier": "D",
+      "symbol": "kErrBusy.global",
+      "disposition": "adopted",
+      "target": "0x71d0cfc",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D072",
+      "tier": "D",
+      "symbol": "kErrInvalidSlot.site",
+      "disposition": "adopted",
+      "target": "0x1a16d1f",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D073",
+      "tier": "D",
+      "symbol": "kErrInvalidSlot.global",
+      "disposition": "adopted",
+      "target": "0x71d092c",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D074",
+      "tier": "D",
+      "symbol": "kErrAbsentSlot.site",
+      "disposition": "adopted",
+      "target": "0x2295fcf",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D075",
+      "tier": "D",
+      "symbol": "kErrAbsentSlot.global",
+      "disposition": "adopted",
+      "target": "0x71d0848",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D076",
+      "tier": "D",
+      "symbol": "kErrSaveFail.site",
+      "disposition": "adopted",
+      "target": "0x1a15c2a",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D077",
+      "tier": "D",
+      "symbol": "kErrSaveFail.global",
+      "disposition": "adopted",
+      "target": "0x71d0cf8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D078",
+      "tier": "D",
+      "symbol": "kSlotMemoryOnly",
+      "disposition": "adopted",
+      "target": "0x699",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D079",
+      "tier": "D",
+      "symbol": "kSlotInMemory",
+      "disposition": "adopted",
+      "target": "0x69C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D080",
+      "tier": "D",
+      "symbol": "kFileHeader",
+      "disposition": "adopted",
+      "target": "0x98",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D081",
+      "tier": "D",
+      "symbol": "kActorDescriptor",
+      "disposition": "adopted",
+      "target": "0x88",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D082",
+      "tier": "D",
+      "symbol": "kActorUser",
+      "disposition": "adopted",
+      "target": "0xA0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D083",
+      "tier": "D",
+      "symbol": "kActorKey",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D084",
+      "tier": "D",
+      "symbol": "kMgrPendingSlot",
+      "disposition": "adopted",
+      "target": "0x5C",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D085",
+      "tier": "D",
+      "symbol": "kHeaderSize",
+      "disposition": "adopted",
+      "target": "0x80",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D086",
+      "tier": "D",
+      "symbol": "kMagic",
+      "disposition": "adopted",
+      "target": "0x45564153",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D087",
+      "tier": "D",
+      "symbol": "kSlotNameMap",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D088",
+      "tier": "D",
+      "symbol": "kMapBucketCount",
+      "disposition": "adopted",
+      "target": "0x00",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D089",
+      "tier": "D",
+      "symbol": "kMapBuckets",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D090",
+      "tier": "D",
+      "symbol": "kMapEntries",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D091",
+      "tier": "D",
+      "symbol": "kBucketSize",
+      "disposition": "adopted",
+      "target": "0x100",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D092",
+      "tier": "D",
+      "symbol": "kBucketPairs",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D093",
+      "tier": "D",
+      "symbol": "kMaxBucketPairs",
+      "disposition": "adopted",
+      "target": "31",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D094",
+      "tier": "D",
+      "symbol": "kEntryKey",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D095",
+      "tier": "D",
+      "symbol": "kEntryValue",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D096",
+      "tier": "D",
+      "symbol": "kKeyChars",
+      "disposition": "adopted",
+      "target": "0x00",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D097",
+      "tier": "D",
+      "symbol": "kKeyLength",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D098",
+      "tier": "D",
+      "symbol": "kSlotNames",
+      "disposition": "adopted",
+      "target": "0x688",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D099",
+      "tier": "D",
+      "symbol": "kSlotNameCount",
+      "disposition": "adopted",
+      "target": "0x690",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D100",
+      "tier": "D",
+      "symbol": "kRetUserLogin",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D101",
+      "tier": "D",
+      "symbol": "kRetLobby3093",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D102",
+      "tier": "D",
+      "symbol": "kRetCharacter3093",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D103",
+      "tier": "D",
+      "symbol": "kRetAutosave",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D104",
+      "tier": "D",
+      "symbol": "kRetManual2910",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "D105",
+      "tier": "D",
+      "symbol": "kRetFlushLogout",
+      "disposition": "adopted",
+      "target": "0x2bc2a6f",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D106",
+      "tier": "D",
+      "symbol": "kRetFlushTimer",
+      "disposition": "adopted",
+      "target": "0xed099cd",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D107",
+      "tier": "D",
+      "symbol": "kOpSaveAutoReq",
+      "disposition": "adopted",
+      "target": "2234",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D108",
+      "tier": "D",
+      "symbol": "kOpSaveToFileCurrentPlayerReq",
+      "disposition": "adopted",
+      "target": "3158",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D109",
+      "tier": "D",
+      "symbol": "kOpSaveToFileCurrentPlayerAck",
+      "disposition": "adopted",
+      "target": "2813",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D110",
+      "tier": "D",
+      "symbol": "kOpCreateCharacterReq",
+      "disposition": "adopted",
+      "target": "2533",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D111",
+      "tier": "D",
+      "symbol": "kOpNewGameStartReq",
+      "disposition": "adopted",
+      "target": "2688",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D112",
+      "tier": "D",
+      "symbol": "kOpLoginCharacterReq",
+      "disposition": "adopted",
+      "target": "3081",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D113",
+      "tier": "D",
+      "symbol": "kOpLogoutSessionReq",
+      "disposition": "adopted",
+      "target": "2001",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D114",
+      "tier": "D",
+      "symbol": "kReporter",
+      "disposition": "adopted",
+      "target": "0x1536d20",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D115",
+      "tier": "D",
+      "symbol": "kReporterHead",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "Confirm 3663 code consumes kReporterHead for the same native role as src/mod/session2/report_guard.cpp:20 ({0x48, 0x89, 0x5C, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57})"
+    },
+    {
+      "row": "B074",
+      "tier": "B",
+      "symbol": "kHeaderSize",
+      "disposition": "adopted",
+      "target": "5",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B075",
+      "tier": "B",
+      "symbol": "kMaxPacketSize",
+      "disposition": "adopted",
+      "target": "outer 0x7FDA; ordinary payload 0x7FC1",
+      "authority": "R3 packet-scan-adoptions.json",
+      "missing": ""
+    },
+    {
+      "row": "D116",
+      "tier": "D",
+      "symbol": "kOpLogoutSessionReq",
+      "disposition": "adopted",
+      "target": "2001",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D117",
+      "tier": "D",
+      "symbol": "kOpLogoutSessionAck",
+      "disposition": "adopted",
+      "target": "2002",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D118",
+      "tier": "D",
+      "symbol": "kOpLogoutUserAck",
+      "disposition": "adopted",
+      "target": "2003",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D119",
+      "tier": "D",
+      "symbol": "kInternalHeaderSize",
+      "disposition": "adopted",
+      "target": "3",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D120",
+      "tier": "D",
+      "symbol": "kLogoutAckSize",
+      "disposition": "adopted",
+      "target": "7",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C135",
+      "tier": "C",
+      "symbol": "kOpSetFieldTimeReq",
+      "disposition": "adopted",
+      "target": "2150",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C136",
+      "tier": "C",
+      "symbol": "kActor_Key",
+      "disposition": "adopted",
+      "target": "0x60",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C137",
+      "tier": "C",
+      "symbol": "kActionLayerAdvance",
+      "disposition": "adopted",
+      "target": "0x21bd690",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C138",
+      "tier": "C",
+      "symbol": "kActionLayerAdvanceHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x8B, 0xC4, 0x57, 0x48, 0x81, 0xEC, 0x80, 0x00, 0x00, 0x00, 0xC5, 0xF8, 0x29, 0x78, 0xD8}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C139",
+      "tier": "C",
+      "symbol": "kActionLayersAdvance",
+      "disposition": "adopted",
+      "target": "0x258c5a0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C140",
+      "tier": "C",
+      "symbol": "kActionLayersAdvanceHead",
+      "disposition": "adopted",
+      "target": "{0x48, 0x8B, 0xC4, 0x41, 0x55, 0x41, 0x56, 0x48, 0x83, 0xEC, 0x68, 0xC5, 0xF8, 0x29, 0x70, 0xC8}",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C141",
+      "tier": "C",
+      "symbol": "kControl_Layer0",
+      "disposition": "adopted",
+      "target": "0x88",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C142",
+      "tier": "C",
+      "symbol": "kLayer_Playback",
+      "disposition": "adopted",
+      "target": "0x18",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C143",
+      "tier": "C",
+      "symbol": "kLayer_Chart",
+      "disposition": "adopted",
+      "target": "0x118",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C144",
+      "tier": "C",
+      "symbol": "kActor_OwnerUser",
+      "disposition": "blocked",
+      "target": null,
+      "authority": "R2-MATCHES.json",
+      "missing": "The observed native ServerActor owner at +A0 is also +A0 in the paired reference AddActor body. It does not prove the separate legacy Actor_OwnerUser+90 contract; identify its actual object type/consumer and target member."
+    },
+    {
+      "row": "A029",
+      "tier": "A",
+      "symbol": "NativeStatUnits",
+      "disposition": "adopted",
+      "target": "1000.0f",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A030",
+      "tier": "A",
+      "symbol": "StatIdReadWidth",
+      "disposition": "adopted",
+      "target": "2",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A031",
+      "tier": "A",
+      "symbol": "kWorldSystemSlot",
+      "disposition": "adopted",
+      "target": "0x72451c0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A032",
+      "tier": "A",
+      "symbol": "kHpDefinitionsSlot",
+      "disposition": "adopted",
+      "target": "0x7245558",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A033",
+      "tier": "A",
+      "symbol": "kHpDefinitionsAltSlot",
+      "disposition": "adopted",
+      "target": "0x7245560",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A034",
+      "tier": "A",
+      "symbol": "kHpDefinitionsRoot",
+      "disposition": "adopted",
+      "target": "0x00",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A035",
+      "tier": "A",
+      "symbol": "kHpDefinitionsTables",
+      "disposition": "adopted",
+      "target": "0x08",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A036",
+      "tier": "A",
+      "symbol": "kHpDefinitionsObject",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "A037",
+      "tier": "A",
+      "symbol": "kHpDefinitionId",
+      "disposition": "adopted",
+      "target": "0x78",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C145",
+      "tier": "C",
+      "symbol": "FieldLockAcquireVslot",
+      "disposition": "adopted",
+      "target": "8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C146",
+      "tier": "C",
+      "symbol": "FieldLockReleaseVslot",
+      "disposition": "adopted",
+      "target": "0x10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C147",
+      "tier": "C",
+      "symbol": "HostCharacterComponents",
+      "disposition": "adopted",
+      "target": "0x68",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C148",
+      "tier": "C",
+      "symbol": "HostTransformSyncComponent",
+      "disposition": "adopted",
+      "target": "0x1A0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C149",
+      "tier": "C",
+      "symbol": "FieldUserEntryLayout",
+      "disposition": "adopted",
+      "target": "16 B; user +0, actors +8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D121",
+      "tier": "D",
+      "symbol": "NativeSlotNumberDomain",
+      "disposition": "adopted",
+      "target": "0..3;100..108;200..207",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D122",
+      "tier": "D",
+      "symbol": "NativeMemoryOnlySlots",
+      "disposition": "adopted",
+      "target": "201;205..207",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D123",
+      "tier": "D",
+      "symbol": "SaveCurrentAckLayout",
+      "disposition": "adopted",
+      "target": "14 B; key0 slot4 ok8 flag9 result10",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "C150",
+      "tier": "C",
+      "symbol": "NativeForbiddenRequests",
+      "disposition": "adopted",
+      "target": "2447,2042,2004; deny1001..1008(policy)",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D124",
+      "tier": "D",
+      "symbol": "SaveReq2910Layout",
+      "disposition": "adopted",
+      "target": "slot0:u32; length4:u32; UTF16+8; terminator; 10+2n bytes; n<=30",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D125",
+      "tier": "D",
+      "symbol": "LoginCharacterSaveLayout",
+      "disposition": "adopted",
+      "target": "flag0:u8; characterNo1:u64; slot9:u32",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D126",
+      "tier": "D",
+      "symbol": "NativeSaveHeaderLayout",
+      "disposition": "adopted",
+      "target": "magic0:u32; version4:u16 in1..2; size6:u16=80h; flagsCh:u32 mask2; raw12h:u32>0; data16h:u32 in1..raw",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D127",
+      "tier": "D",
+      "symbol": "kEntrySize",
+      "disposition": "adopted",
+      "target": "0x78",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D128",
+      "tier": "D",
+      "symbol": "TitleSlotNumberOffset",
+      "disposition": "adopted",
+      "target": "0",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D129",
+      "tier": "D",
+      "symbol": "TitleSlotTimeOffset",
+      "disposition": "adopted",
+      "target": "8",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "D130",
+      "tier": "D",
+      "symbol": "NativeTitleSlotDomain",
+      "disposition": "retired_by_scope",
+      "target": null,
+      "authority": "port-evidence/r4/step1-result.json",
+      "missing": "",
+      "reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4."
+    },
+    {
+      "row": "B076",
+      "tier": "B",
+      "symbol": "NativeCryptoEnabledOffset",
+      "disposition": "adopted",
+      "target": "0x24",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B077",
+      "tier": "B",
+      "symbol": "NativePacketEpochOffset",
+      "disposition": "adopted",
+      "target": "0x8020",
+      "authority": "R2-MATCHES.json",
+      "missing": ""
+    },
+    {
+      "row": "B078",
+      "tier": "B",
+      "symbol": "NativeTrocScanSkip",
+      "disposition": "adopted",
+      "target": "extra skip 0; aligned scan increment 8",
+      "authority": "R3 packet-scan-adoptions.json",
+      "missing": ""
+    }
+  ],
+  "tiers": {
+    "A": {
+      "total": 37,
+      "closed": 37,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 34,
+        "approved_policy": 2,
+        "retired_by_scope": 1
+      },
+      "armed": true
+    },
+    "B": {
+      "total": 78,
+      "closed": 78,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 78
+      },
+      "armed": true
+    },
+    "C": {
+      "total": 150,
+      "closed": 136,
+      "blocked": 14,
+      "dispositions": {
+        "blocked": 14,
+        "adopted": 130,
+        "retired_by_scope": 6
+      },
+      "armed": false
+    },
+    "D": {
+      "total": 130,
+      "closed": 124,
+      "blocked": 6,
+      "dispositions": {
+        "adopted": 109,
+        "blocked": 6,
+        "retired_by_scope": 15
+      },
+      "armed": false
+    }
+  },
+  "limitations": [
+    "Closed rows include approved policies and R4 scope retirements; they are not all native RVA adoptions.",
+    "A/B armed; B remains the explicit native-host loopback diagnostic. C/D and native guest startup remain closed.",
+    "C requires the native reference/insertion/rollback backend and identity fixes; pure policies are not native proof.",
+    "The file sandbox is verified offline, with no in-game validation yet. Its launcher Run path awaits C/D.",
+    "Guest travel/time and legacy per-callsite save/title patches are outside 3663 v1 scope.",
+    "One prior full run exposed the existing optional S3 ring publication race; final Step 1 and Step 2 suites passed. That race is not claimed fixed."
+  ],
+  "r4_baseline": "0f11f6e",
+  "preceding_ledger": "R3-STATUS.json",
+  "steps": {
+    "1": "complete; file sandbox and offline fixture verified; launch awaits C/D",
+    "2": "complete; native control filter; travel/time scope retired",
+    "3": "pending native backend and passive sitting",
+    "4": "pending lifecycle implementation and arming",
+    "5": "pending L3 then L4; no R4 live sessions or join attempts",
+    "6": "pending final review package"
+  }
+}

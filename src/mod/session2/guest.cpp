@@ -1046,7 +1046,10 @@ int* __fastcall guest_send(void* self, int* res, void* pbv) {
             try {
                 // C4: the client's ReserveShutDownServerReq 2790 on quitting is its
                 // own server's business: never the host's (salida.md §1.3, §4.1).
-                if (opcode_of(p) == kOpReserveShutDownServerReq) {
+                if (tunnel_offsets().target3663 && blocked_guest_control_3663(opcode_of(p))) {
+                    g_n.dropped.fetch_add(1,std::memory_order_relaxed);
+                    ok=true; // consumed locally; never queued to the host
+                } else if (opcode_of(p) == kOpReserveShutDownServerReq) {
                     g_n.kept_local.fetch_add(1, std::memory_order_relaxed);
                     ok = true;
                 } else {

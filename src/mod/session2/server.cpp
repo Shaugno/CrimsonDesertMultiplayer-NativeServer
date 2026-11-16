@@ -1559,6 +1559,11 @@ bool server_inject(std::span<const uint8_t> in) { return inject(in, InjectKind::
 namespace {
 
 inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
+    if (tunnel_offsets().target3663) {
+        const auto view=parse_tunnel_packet(in,troc::Dir::ToHostServer,tunnel_offsets());
+        if(!view)return inj::Outcome::Refused;
+        if(blocked_guest_control_3663(view->opcode))return inj::Outcome::Blocked;
+    }
     if (core_only()) {
         const auto view = parse_tunnel_packet(in, troc::Dir::ToHostServer, tunnel_offsets());
         if (!view) return inj::Outcome::Refused;

@@ -1,0 +1,137 @@
+{
+  "step": 2,
+  "identities": {
+    "old": "57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7",
+    "new": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8"
+  },
+  "requests": {
+    "ReloadStageStartReq": {
+      "policy": "Fast-travel/reload request; decoded arguments reach 2B586B0 and its mover preparation. Refuse every guest payload.",
+      "native": {
+        "old": {
+          "opcode": 2283,
+          "kind": 4,
+          "vtable": "0x5B21998",
+          "initializer": "0x229D40",
+          "instance": "0x6A7E240",
+          "handler": "0x2A5F580"
+        },
+        "new": {
+          "opcode": 3018,
+          "kind": 4,
+          "vtable": "0x5F650F8",
+          "initializer": "0x260530",
+          "instance": "0x6F43980",
+          "handler": "0x2D55170"
+        }
+      }
+    },
+    "MoveFieldCheatReq": {
+      "policy": "Field-move cheat request. Target handler decodes 4/12/1/4 and currently returns success without a world mutation; refuse by v1 scope anyway.",
+      "native": {
+        "old": {
+          "opcode": 2838,
+          "kind": 4,
+          "vtable": "0x5B24AB8",
+          "initializer": "0x223120",
+          "instance": "0x6A71FA0",
+          "handler": "0x29BEE80"
+        },
+        "new": {
+          "opcode": 2647,
+          "kind": 4,
+          "vtable": "0x5F67D98",
+          "initializer": "0x259320",
+          "instance": "0x6F36C30",
+          "handler": "0x2CA5860"
+        }
+      }
+    },
+    "SetFieldTimeReq": {
+      "policy": "Time publication request. Target thunk reaches native TransformSync at actor components+1A0 and consumer 2ED4D20. Refuse every guest payload; no payload layout guessed.",
+      "native": {
+        "old": {
+          "opcode": 2125,
+          "kind": 4,
+          "vtable": "0x5B24758",
+          "initializer": "0x223300",
+          "instance": "0x6A72300",
+          "handler": "0x29BFD70"
+        },
+        "new": {
+          "opcode": 2150,
+          "kind": 4,
+          "vtable": "0x5F67C78",
+          "initializer": "0x259500",
+          "instance": "0x6F36F90",
+          "handler": "0x2CA68F0"
+        }
+      }
+    },
+    "AITeleportReq": {
+      "policy": "AI teleport control, with actor/owner validation before its native teleport component. Optional AI control is outside the walking/turning v1 scope.",
+      "native": {
+        "old": {
+          "opcode": 2091,
+          "kind": 4,
+          "vtable": "0x5B24F78",
+          "initializer": "0x2224F0",
+          "instance": "0x6A709B0",
+          "handler": "0x29841B0"
+        },
+        "new": {
+          "opcode": 2236,
+          "kind": 4,
+          "vtable": "0x5F68218",
+          "initializer": "0x2585B0",
+          "instance": "0x6F35400",
+          "handler": "0x2C60210"
+        }
+      }
+    }
+  },
+  "proofs": [
+    {
+      "path": "build\\r3\\troc-descriptors-old.json",
+      "bytes": 476610,
+      "sha256": "F08F33F635EAD38DE3547B2407107D87D3E7A29AE0ADF32725568201DBBE0E82"
+    },
+    {
+      "path": "build\\r4\\scope-old-native.txt",
+      "bytes": 53121,
+      "sha256": "EA8FD2330001B2CEB94A8C5970BFEB6D529DF43F38F002F1D5CE75825190CD28"
+    },
+    {
+      "path": "build\\r3\\troc-descriptors-new.json",
+      "bytes": 503982,
+      "sha256": "0E893FB5ED14A5C90BBD95880090FDAAE02290E75BADC7784F41E6F903B773AB"
+    },
+    {
+      "path": "build\\r4\\scope-new-native.txt",
+      "bytes": 53824,
+      "sha256": "F9128D1C023D8DA35B4705B60E2CAAF58A7EF1C659A599125C4082012CE6C136"
+    },
+    {
+      "path": "build\\r4\\scope-reload-consumer-new.txt",
+      "bytes": 81916,
+      "sha256": "4A0EA4F294A693986A4B0E916370EBF368C643FE0D4EFF8AA20BCAE988232B01"
+    }
+  ],
+  "retired_by_scope": [
+    "C110",
+    "C111",
+    "C112",
+    "C113",
+    "C114",
+    "C115"
+  ],
+  "loading_requests_not_refused": {
+    "LoginUser": 2554,
+    "LoginCharacter": 3081,
+    "GameLoadingStart": 2350,
+    "MoveFieldComplete": 2723,
+    "LoadingComplete": 2789,
+    "PreLoadSequencer": 2372
+  },
+  "adoption": "Native IDs and refusal policy only. No function RVA, payload rewrite, legacy byte patch or native call adopted."
+}

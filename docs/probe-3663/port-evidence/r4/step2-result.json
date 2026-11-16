@@ -1,0 +1,19 @@
+{
+  "step": 2,
+  "suite": "108/108 passed",
+  "seconds": 90.98,
+  "live_sessions": 0,
+  "join_attempts": 0,
+  "scope": "Guest walking/turning/running in the host field; no guest fast travel or time publication",
+  "c_d_armed": false,
+  "validation": {
+    "path": "build\\r4\\step2-suite.txt",
+    "bytes": 42076,
+    "sha256": "160250094752C03B0789BFAD0AC346DED09EF8B5861D0C042207AAA77D3212C8"
+  },
+  "filter_source_sha256": {
+    "src\\mod\\session2\\scope3663.h": "1678BF6C0D484D27D9FA66AD8A83A0AF3E8C556E91A9343D6AF7E1652D03C7D8",
+    "src\\mod\\session2\\control_filter.h": "53049A77B5DF557B3FF4E9BF811C90E078D128C868F6530899875B485BA5A97E",
+    "tests\\tunnel_layout_tests.cpp": "01D277C1B6BC4E3B66A6525922682D3D022FA6C80725A63D970441A4B9752CE2"
+  }
+}
