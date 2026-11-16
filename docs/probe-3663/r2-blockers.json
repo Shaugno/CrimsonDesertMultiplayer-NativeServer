@@ -8,8 +8,8 @@
     "experiment": "Use native stat-definition consumers to identify stamina, or complete the already prepared HP-only target path after P1 and standard address validation."
   },
   "A028": {
-    "missing": "P1 loading captured movement/rotation but no missing-chain or parked transition. User reports completed fast travel, which is not reflected in the candidate trace; unsynchronized event timing leaves stale-chain versus out-of-interval travel unresolved. The old park sentinel remains unproved.",
-    "experiment": "Identify a native non-mutating control/loading readiness predicate and its lifetime/generation contract offline. Only then prepare a synchronized title/load/travel trace with explicit event markers; do not infer readiness from a stable pointer chain."
+    "missing": "P1 synchronized from title captured chain_not_ready, initial park at (0,1000,0), placement, walking/turning and user-confirmed fast travel with a 182.35m world jump. During travel the actor chain stayed coherent with no distinct park/not-ready interval; the initial park rule alone does not prove readiness during travel or pointer lifetime.",
+    "experiment": "Identify a native non-mutating loading/control readiness field and its update/lifetime contract from the actual client loading path, then prepare a passive trace that samples it across one fast travel. Do not call the reference-acquisition vslot or infer readiness from unchanged actor pointers."
   },
   "B075": {
     "missing": "The legacy shared packet limit 7FE0 differs from the target native PostPacket bound 7FDA and ordinary decoder payload bound 7FC1. A target-specific acceptance bound and complete framing check remain necessary.",

@@ -1,0 +1,12 @@
+{
+  "state": "exited",
+  "game_pid": 28104,
+  "game_start_filetime": "134393154148423386",
+  "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+  "controller_pid": 57944,
+  "controller_start_filetime": "134393154451959325",
+  "deadline_utc": "2026-11-16T15:24:14.8423386Z",
+  "max_game_age_seconds": 840,
+  "helper_sha256": "76B2738ECF608244B38B8BFC3DAAA474DEBE350706E02F082C755D0E55B44822",
+  "ended_utc": "2026-11-16T15:14:44.0414695Z"
+}

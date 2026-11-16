@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E23579035365143C33B54E5B6ED670E21B3D6619D59C28E09D18527F2EF65ADA",
+    "Path": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\cdmp.asi"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "90C377B5A9488FC3A28AA19248CD6BD94BFDBB866F2479BD63F2246B2562DB41",
+    "Path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\tools\\port3663\\reader_probe.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "1E26DA07470E31273CAE625D34C2C19D4ADFC66D37B2A31A6E2A20DF76E8A9FD",
+    "Path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\src\\mod\\game\\build_3663.h"
+  }
+]
