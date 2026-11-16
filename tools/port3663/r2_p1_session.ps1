@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$true)][ValidateSet('Prepare','Deploy','Probe','Finish')][string]$Stage,
     [Parameter(Mandatory=$true)][ValidatePattern('^R2-P1-[0-9]{8}-[0-9]{6}$')][string]$Session,
     [int]$GamePid = 0,
-    [ValidateSet('hp','loading')][string]$Profile = 'hp',
+    [ValidateSet('hp','loading','l1')][string]$Profile = 'hp',
     [switch]$Present,
     [string]$BuildDir = '',
     [ValidatePattern('^$|^R2-MATCH-PAUSE-[0-9]{8}-[0-9]{6}$')][string]$MatchingPauseSession = ''
@@ -22,17 +22,23 @@ $expected='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
 if ((Get-FileHash -LiteralPath (Join-Path $gameDir 'CrimsonDesert.exe')).Hash -ne $expected) { throw 'Build drift; rematch first' }
 if ($Stage -ne 'Probe' -and (Get-Process CrimsonDesert -ErrorAction SilentlyContinue)) { throw 'Game must be closed' }
 if ($Stage -in @('Deploy','Probe') -and !$Present) { throw 'The session requires the user at the PC' }
-$sessionQuestion = if ($Profile -eq 'hp') {
+$sessionQuestion = if ($Profile -eq 'l1') {
+    'Does the production R3 HP-only Tier A reader track position, rotation and changing HP through load and fast travel without fabricated samples?'
+} elseif ($Profile -eq 'hp') {
     "Which native HP definition key selects the local actor's status entry on the exact 3663 executable?"
 } else {
     'Does the candidate local-player chain expose a distinct missing-chain or parked-position transition during loading and fast travel on exact 3663?'
 }
-$expectedObservation = if ($Profile -eq 'hp') {
+$expectedObservation = if ($Profile -eq 'l1') {
+    'The production ASI logs unavailable on park/chain/HP failures, coherent position/rotation after placement, and HP changing after ordinary damage. No hooks, native calls or networking.'
+} elseif ($Profile -eq 'hp') {
     "The native definition key selects one status entry whose current/max integer values, divided by the proved unit scale 1000, agree with the character's HP display. Both definition registries are logged separately; no ID is guessed."
 } else {
     'The guarded candidate position and rotation follow the controllable character, then loading produces a missing chain or a distinctive park interval before placement. The old (0,1000,0) park is only a logged hypothesis, not an adopted readiness rule.'
 }
-$sessionSteps = if ($Profile -eq 'hp') {
+$sessionSteps = if ($Profile -eq 'l1') {
+    'Wait at title until the production reader log is confirmed, Continue, walk and turn, fast travel once, walk/turn after arrival, safely take a little ordinary damage and note HP, then quit to desktop at the stop signal.'
+} elseif ($Profile -eq 'hp') {
     'Select Continue and wait for control; show the character/status HP display and note current/max HP; let ordinary regeneration or a healing action change HP if available; quit to desktop at the stop signal.'
 } else {
     'Start collection at the title screen, select Continue, wait for control, walk a few steps and turn, then use one ordinary fast travel; wait for placement and control, walk and turn again, and quit to desktop at the stop signal.'
@@ -82,7 +88,7 @@ if ($Stage -eq 'Prepare') {
     }
     ConvertTo-Json -InputObject $installed -Depth 8 | Set-Content (Join-Path $backupRoot 'install-manifest.json')
     @"
-# $Session — passive P1, prepared before launch
+# $Session â€” passive P1, prepared before launch
 
 Question: $sessionQuestion
 
@@ -90,11 +96,11 @@ Expected observation: $expectedObservation
 
 Duration: ten minutes from collector start, at most fifteen minutes for the sitting.
 
-Steps: after Shaugn confirms presence, deploy the closed-guard ASI; launch the game visibly. $sessionSteps
+Steps: after Shaugn confirms presence, deploy the profile-guarded ASI; launch the game visibly. $sessionSteps
 
 Stop: any crash, hang, identity drift, user request, or time limit. Never retry a crash blindly. Collect cdmp.log and crash context, fix offline and rerun the suite before another session.
 
-Collector: external PROCESS_VM_READ | PROCESS_QUERY_INFORMATION only. Every copy checks VirtualQueryEx and ReadProcessMemory. No hooks, game writes, native calls, packet replay or network feed. This is not L1 and does not arm Tier A.
+Capture profile: $Profile. For hp/loading, the external observer uses read/query-only access with guarded copies and all tiers closed. For l1, the production ASI uses the approved guarded HP-only Tier A reader and cdmp.log; B/C/D, hooks, native calls and networking stay off.
 
 Supervisor: before collection, arm r2_session_watchdog.ps1 for the exact game PID. It pins the process handle and closes that test process at fourteen minutes from launch if normal quit has not completed. This separate deadline control does not grant the collector memory-write rights.
 
@@ -120,7 +126,8 @@ if ($Stage -eq 'Deploy') {
     AssertNoMatching
     $header=Get-Content -Raw -LiteralPath (Join-Path $root 'src\mod\game\build_3663.h')
     foreach ($tier in 'A','B','C','D') {
-        if ($header -notmatch "kTier${tier}Complete = false;") { throw 'P1 requires every production tier closed' }
+        $required = if ($Profile -eq 'l1' -and $tier -eq 'A') { 'true' } else { 'false' }
+        if ($header -notmatch "kTier${tier}Complete = $required;") { throw 'Profile does not match compiled tier permissions' }
     }
     foreach ($name in @('cdmp.asi','cdmp.pdb','winmm.dll','cdmp.ini')) {
         $path=Join-Path $gameDir $name
@@ -146,8 +153,9 @@ if ($Stage -eq 'Deploy') {
         if (Test-Path -LiteralPath $path) { [pscustomobject]@{name=$name;sha256=(Get-FileHash -LiteralPath $path).Hash} }
     }
     ConvertTo-Json -InputObject @($receipt) | Set-Content (Join-Path $evidence 'installed-receipt.json')
-    Write-Output 'Deployed closed-guard passive configuration. Launch only with user present.'
+    Write-Output 'Deployed profile-guarded read-only configuration. Launch only with user present.'
 } elseif ($Stage -eq 'Probe') {
+    if ($Profile -eq 'l1') { throw 'L1 uses the production ASI log; no external P1 collector' }
     AssertNoMatching
     if ($GamePid -lt 1) { throw 'An explicit verified game PID is required' }
     $watchPath=Join-Path $evidence 'watchdog.json'

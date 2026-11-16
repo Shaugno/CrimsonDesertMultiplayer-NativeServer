@@ -217,8 +217,8 @@ inline std::string diagnostic(const ImageIdentity& id) {
     if (id.kind == IdentityKind::Build3663) {
         return std::format(
             "Recognized game build Crimson Desert 1.0.0.3663 (PE timestamp 0x{:08X}, image base 0x{:X}, "
-            "image size 0x{:X}). The 3663 core port is incomplete and not armed. "
-            "Game addresses, hooks, and networking stay off.",
+            "image size 0x{:X}). Tier A HP-only reader enabled; core join remains incomplete. "
+            "Legacy game paths, hooks, and networking stay off.",
             build_3663::kPeTimestamp, build_3663::kImageBase, build_3663::kSizeOfImage);
     }
     if (id.kind == IdentityKind::Unreadable) {

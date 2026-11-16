@@ -1,9 +1,7 @@
 #pragma once
-// Corroborated static identities only. This is NOT a complete address table.
-// Field sharing, player reads, identity/status, wire layouts, save ordering and
-// cleanup remain blocked in docs/probe-3663/PORT-MATCHES.md. No 3663 gameplay
-// installer or reader may use these until that complete path is validated.
-// Row numbers refer to the Phase 3 inventory at commit 878d14f.
+// Per-build evidence catalog. R3 approves the guarded HP-only Tier A reader.
+// B/C/D native paths require their own complete adapters and gates below.
+// Constants alone never authorize native calls or hooks. Preserve R2 row IDs.
 
 #include <cstdint>
 
@@ -17,7 +15,7 @@ inline constexpr uint32_t kSizeOfImage = 0x144E9000;
 // R2 completeness gates. True requires every row of the named tier in
 // R2-CORE-LIST/R2-MATCHES plus its per-build module routing and validation.
 // These are compiled evidence, never ini/environment overrides.
-inline constexpr bool kTierAComplete = false;
+inline constexpr bool kTierAComplete = true;
 inline constexpr bool kTierBComplete = false;
 inline constexpr bool kTierCComplete = false;
 inline constexpr bool kTierDComplete = false;
@@ -59,7 +57,7 @@ inline constexpr uint32_t kActorManager_ControlledActor = 0x50; // 2976 0x50; R2
 } // namespace diagnostic_candidates
 
 // R2 reviewed layouts BEGIN
-// Layout proof catalog: docs/probe-3663/r2-reviewed.json. No tier is armed.
+// Layout proof catalog: docs/probe-3663/r2-reviewed.json. Permissions are gated above.
 namespace player_layout {
 inline constexpr uint32_t kActor_ComponentTable = 0x68; // 2976 0x68; R2 A010
 inline constexpr uint32_t kComponents_CharacterControl = 0x40; // 2976 0x40; R2 A012

@@ -347,17 +347,19 @@ void test_build_3576_stays_off_the_2976_path() {
     std::printf("Build 3576 identity: OK\n");
 }
 
-void test_build_3663_is_recognized_but_unarmed() {
+void test_build_3663_hp_only() {
     namespace build = cdmp::game::build_3663;
     const auto bytes = make_image(build::kPeTimestamp, 0x80, build::kSizeOfImage);
     const auto identity = guard::identify_image(bytes, build::kImageBase);
     CHECK(identity.kind == guard::IdentityKind::Build3663);
     const auto text = guard::diagnostic(identity);
     CHECK(text.find("1.0.0.3663") != std::string::npos);
-    CHECK(text.find("not armed") != std::string::npos);
+    CHECK(text.find("Tier A HP-only") != std::string::npos);
     for (const bool guest : {false, true}) {
         const auto decision = guard::decide_startup(request(true, guest, true, identity));
-        check_blocked(decision);
+        const auto effects = drive(decision);
+        CHECK(effects.tier_a_reads == 1 && effects.reads == 0 && effects.hooks == 0);
+        CHECK(effects.networks == 0 && effects.synthetic == 0 && effects.overlays == 0);
         CHECK(decision.build == guard::GameBuild::Build3663);
         CHECK(decision.end_guest_process == guest);
     }
@@ -383,7 +385,7 @@ void test_build_3663_is_recognized_but_unarmed() {
     CHECK(counts.reads == 0 && counts.hooks == 0 && counts.game_sources == 0);
     CHECK(counts.synthetic == 1 && counts.networks == 1 && counts.overlays == 1);
     CHECK(!host.end_guest_process);
-    std::printf("Build 3663 recognized and unarmed: OK\n");
+    std::printf("Build 3663 recognized, HP-only A armed: OK\n");
 }
 
 void test_3663_tier_dependency_matrix() {
@@ -424,11 +426,16 @@ void test_3663_tier_dependency_matrix() {
         }
         const auto denied = guard::select_3663_tiers(bad, {true,true,true,true}, {true,true,true,true});
         CHECK(!denied.tier_a_reads && !denied.tier_b_tunnel && !denied.tier_c_join && !denied.tier_d_lifecycle);
+        CHECK(cdmp::game::player_layout(bad) == nullptr);
     }
     const auto actual = guard::decide_startup(request(true, false, false, identity));
-    CHECK(!actual.tier_a_reads && !actual.tier_b_tunnel && !actual.tier_c_join && !actual.tier_d_lifecycle);
-    check_blocked(actual);
-    CHECK(cdmp::game::player_layout(identity) == nullptr);
+    CHECK(actual.tier_a_reads && !actual.tier_b_tunnel && !actual.tier_c_join && !actual.tier_d_lifecycle);
+    CHECK(drive(actual).tier_a_reads == 1);
+    const auto* target = cdmp::game::player_layout(identity);
+    CHECK(target == &cdmp::game::kPlayerLayout3663);
+    CHECK(target->native_hp_definitions.has_value());
+    CHECK(target->kControlInner_Physics == 0x2D0);
+    CHECK(target->stat_id_bytes == 2);
     const auto legacy = guard::identify_image(make_image(kPeTimestamp), kImageBase);
     CHECK(cdmp::game::player_layout(legacy) == &cdmp::game::kPlayerLayout2976);
     CHECK(drive(guard::decide_startup(request(true,false,false,legacy))).tier_a_reads == 0);
@@ -567,7 +574,7 @@ int main() {
     test_mapped_reader();
     test_host_keeps_explicit_paths();
     test_build_3576_stays_off_the_2976_path();
-    test_build_3663_is_recognized_but_unarmed();
+    test_build_3663_hp_only();
     if (g_failures == 0) std::printf("All build guard tests passed\n");
     return g_failures == 0 ? 0 : 1;
 }

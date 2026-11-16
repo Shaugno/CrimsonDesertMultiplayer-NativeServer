@@ -66,6 +66,14 @@ std::optional<uintptr_t> PlayerReader::character_control() {
 std::optional<PlayerSnapshot> PlayerReader::read() {
     if (!enabled_) return fail("unsupported game build");
 
+    std::optional<uintptr_t> world_before, manager_before;
+    if (layout_->native_hp_definitions) {
+        world_before = read_ptr(base_ + layout_->kWorldSystemSlot);
+        if (!world_before) return fail("WorldSystem not created");
+        manager_before = read_ptr(*world_before + layout_->kWorldSystem_ActorManager);
+        if (!manager_before) return fail("actor manager missing");
+    }
+
     auto actor = resolve_actor();
     if (!actor) return std::nullopt;
 
@@ -112,7 +120,9 @@ std::optional<PlayerSnapshot> PlayerReader::read() {
     if (layout_->native_hp_definitions && !stats_ready)
         return fail("HP definitions or unique native stat not ready");
     if (layout_->native_hp_definitions &&
-        (resolve_actor() != actor || read_ptr(*actor + layout_->kActor_ComponentTable) != components ||
+        (read_ptr(base_ + layout_->kWorldSystemSlot) != world_before ||
+         read_ptr(*world_before + layout_->kWorldSystem_ActorManager) != manager_before ||
+         resolve_actor() != actor || read_ptr(*actor + layout_->kActor_ComponentTable) != components ||
          read_ptr(*components + layout_->kComponents_CharacterControl) != control ||
          read_ptr(*control + layout_->kControl_Inner) != inner ||
          read_ptr(*inner + layout_->kControlInner_Physics) != physics))

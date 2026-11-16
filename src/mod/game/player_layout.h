@@ -1,6 +1,6 @@
 #pragma once
 // One reader, explicit per-build data. No fallback from a recognized new build
-// to legacy offsets. A 3663 table is published only with complete R2 A proofs.
+// to legacy offsets. The HP-only 3663 scope follows the approved R3 rules.
 #include "mod/game/build_guard.h"
 #include "mod/game/health_definition.h"
 #include "mod/game/offsets.h"
@@ -48,12 +48,55 @@ struct PlayerLayout {
 };
 inline constexpr PlayerLayout kPlayerLayout2976{};
 
+// R3 approved HP-only scope: A026 dynamic definitions; A027 retired; A028 guarded park/chain/HP readiness.
+inline constexpr PlayerLayout kPlayerLayout3663{
+    .kWorldSystemSlot = build_3663::core_rvas::A031_kWorldSystemSlot,
+    .kChunkOrigin = build_3663::core_rvas::A001_kChunkOrigin,
+    .kStaticPlayerPos = build_3663::core_rvas::A002_kStaticPlayerPos,
+    .kVtClientActorManager = build_3663::core_rvas::A003_kVtClientActorManager,
+    .kVtControlledActor = build_3663::core_rvas::A004_kVtControlledActor,
+    .kVtCharacterControl = build_3663::core_rvas::A005_kVtCharacterControl,
+    .kVtStatusComponent = build_3663::core_rvas::A006_kVtStatusComponent,
+    .kVtPhysicsObject = build_3663::core_rvas::A007_kVtPhysicsObject,
+    .kWorldSystem_ActorManager = build_3663::player_layout::kWorldSystem_ActorManager,
+    .kActorManager_ControlledActor = build_3663::player_layout::kActorManager_ControlledActor,
+    .kActor_ComponentTable = build_3663::player_layout::kActor_ComponentTable,
+    .kComponents_Status = build_3663::player_layout::kComponents_Status,
+    .kComponents_CharacterControl = build_3663::player_layout::kComponents_CharacterControl,
+    .kControl_Inner = build_3663::player_layout::kControl_Inner,
+    .kControlInner_Physics = build_3663::player_layout::kControlInner_Physics,
+    .kPhysics_AxisX = build_3663::player_layout::kPhysics_AxisX,
+    .kPhysics_AxisY = build_3663::player_layout::kPhysics_AxisY,
+    .kPhysics_AxisZ = build_3663::player_layout::kPhysics_AxisZ,
+    .kPhysics_Position = build_3663::player_layout::kPhysics_Position,
+    .kStatus_StatContainer = build_3663::player_layout::kStatus_StatContainer,
+    .kStatContainer_Entries = build_3663::player_layout::kStatContainer_Entries,
+    .kStatContainer_Count = build_3663::player_layout::kStatContainer_Count,
+    .kStatEntry_Size = build_3663::player_layout::kStatEntry_Size,
+    .kStatEntry_Id = build_3663::player_layout::kStatEntry_Id,
+    .kStatEntry_Current = build_3663::player_layout::kStatEntry_Current,
+    .kStatEntry_Max = build_3663::player_layout::kStatEntry_Max,
+    .kStatId_Health = 0,
+    .kStatId_Stamina = 0,
+    .kMaxStatEntries = 64,
+    .kLoadingParkHeight = 1000.0f,
+    .kLoadingParkRadius = 5.0f,
+    .stat_units = build_3663::player_layout::kNativeStatUnits,
+    .stat_id_bytes = build_3663::player_layout::kStatIdReadWidth,
+    .native_hp_definitions = HealthDefinitionLayout{
+        build_3663::core_rvas::A032_kHpDefinitionsSlot, build_3663::core_rvas::A033_kHpDefinitionsAltSlot,
+        build_3663::player_layout::kHpDefinitionsRoot, build_3663::player_layout::kHpDefinitionsTables,
+        build_3663::player_layout::kHpDefinitionsObject, build_3663::player_layout::kHpDefinitionId},
+};
+
+
 inline const PlayerLayout* player_layout(const build_guard::ImageIdentity& id) {
     if (id.kind == build_guard::IdentityKind::Supported && id.timestamp_known &&
         id.timestamp == build_2976::kPeTimestamp && id.mapped_base == build_2976::kImageBase)
         return &kPlayerLayout2976;
-    // Prevent enabling A by editing a boolean while its table is still absent.
-    static_assert(!build_3663::kTierAComplete, "Publish the proved 3663 PlayerLayout before arming Tier A");
+    if (build_guard::select_3663_tiers(id, {true,false,false,false},
+            {build_3663::kTierAComplete,false,false,false}).tier_a_reads)
+        return &kPlayerLayout3663;
     return nullptr;
 }
 } // namespace cdmp::game

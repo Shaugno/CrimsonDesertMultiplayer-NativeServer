@@ -1,0 +1,40 @@
+{
+  "step": 1,
+  "tier_a_armed": true,
+  "tiers_bcd_armed": false,
+  "live_l1": "pending",
+  "full_suite": {
+    "passed": 101,
+    "failed": 0,
+    "seconds": 85.75
+  },
+  "earlier_failure": "100/101; 3576 diagnostic test mistakenly expected Tier A text; corrected then full rerun passed",
+  "loopback": {
+    "remote_states": 78,
+    "rejected": 0,
+    "clean_shutdown": true,
+    "native_evidence": false
+  },
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\r3-step1-build.txt",
+      "bytes": 37720,
+      "sha256": "202439FDFAB73BD06F360B221E8E52FF9C4B38912A7C690118874A73983BB426"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\r3-step1-final-build.txt",
+      "bytes": 37171,
+      "sha256": "C420E9D343386E7AF85820B5053C7E69C09E0CD7108C086E15DF832C504A2630"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\r3-step1-smoke.txt",
+      "bytes": 153,
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r2-build\\e2e\\cdmp.log",
+      "bytes": 6729,
+      "sha256": "59A33B2D2AD31771F010D34E92B57E173A180718CC21ADD4F08AFAB644D3EB9B"
+    }
+  ]
+}
