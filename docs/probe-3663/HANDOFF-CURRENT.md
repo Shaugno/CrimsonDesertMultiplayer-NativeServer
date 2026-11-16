@@ -1,3 +1,24 @@
+# R2 preflight — 2026-11-15: execution plan missing
+
+The user requested Steps 1–7 and per-step/tier commits on gpt/3663-port.
+AGENTS.md and CLAUDE.md were read. docs/GPT-3663-PORT-PLAN-R2.md is absent
+locally, from every fetched remote branch, and from fetched Git history;
+searches of Downloads and prior workspaces did not recover it.
+
+Required independent baseline passed: scripts/build.ps1, x64 RelWithDebInfo,
+101/101 CTest tests in 109.20 seconds. The installed executable and stored
+2976 reference retain their previously verified hashes; the game was closed.
+No production source, guard, offsets, deployment or saves were changed.
+No R2 step/tier or Step 7 package is claimed complete without its instructions.
+
+See R2-PREFLIGHT-BLOCKER-20261115.md and r2-evidence/ for the exact search
+scope, build output and current file identity. Required next input is the R2
+plan's contents at the requested path or a retrievable file/ref. Existing
+execution and push authorization remains in effect when that input is available.
+The Phase 9 section below describes the historical R1 package at 2c80c21.
+
+---
+
 # Phase 9 — blocker package for Claude's final review
 
 **The native two-player 3663 goal was not reached.** This is the plan's blocker
