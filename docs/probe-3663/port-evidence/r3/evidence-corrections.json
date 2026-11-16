@@ -1,0 +1,19 @@
+{
+  "corrections": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-smoke.txt",
+      "historical_sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F",
+      "historical_bytes": 153,
+      "observed_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "observed_bytes": 0,
+      "disposition": "Original generic wrapper transcript is unavailable; currently empty, cause not established. Do not count this as retained proof. Historical claim preserved without reconstructing another run as the original.",
+      "companion_evidence": {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-host.log",
+        "sha256": "3EA195C4CD3228C4E4235E67639897439C4895D6A092FDF1717EA5FDB5F6BAC8",
+        "remote_states": 78,
+        "clean_unload": true
+      },
+      "replacement_validation": "Final 106/106 suite and final game-free smoke have separately verified retained logs."
+    }
+  ]
+}

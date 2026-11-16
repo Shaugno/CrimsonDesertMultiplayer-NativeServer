@@ -1,3 +1,126 @@
+# R3 Step 5 — review package (2026-11-16)
+
+Branch: `gpt/3663-port`. Source through `c2d3604c00ff872250cb9be0ef11ff307303b1e4`; the subsequent
+Step 5 packaging commit is branch HEAD. This section supersedes the R2 status below.
+**A/B are armed; L1 and L2 passed. C/D stay closed. The native two-player goal is not reached.**
+
+The approved conditional R3 deliverable is complete: working Steps 1–2,
+independent C/D work and exact blockers, followed by this Step 5 package.
+No intermediate review approval is requested. `R3-REVIEW-PACKAGE.json` has
+the source/summary inventory, verified local evidence hashes and commits;
+`R3-STATUS.json` and `R3-BLOCKERS.md` retain every remaining contract.
+
+| Tier | Closed / total | Armed | Current behavior |
+| --- | ---: | --- | --- |
+| A | 37/37 | Yes | HP-only reader; definition consensus and park/chain/readiness guards |
+| B | 78/78 | Yes | Explicit loopback native-host cryptogram tunnel and real pose streaming |
+| C | 130/150 | No | Named/traced facts and three-argument pure guard/rollback policy; no native join backend |
+| D | 109/130 | No | Complete observed title membership policy on owned data; no native guest-save/lifecycle backend |
+
+Closed rows include two approved A policies and one stamina scope retirement,
+not 354 adopted native addresses. R2 evidence/history remains unchanged.
+
+## Validation and current installation
+
+- `scripts/build.ps1 -BuildDir <external r2-build>`: **106/106**, 98.33 seconds.
+- Final `tools/port3663/smoke.ps1`: 78 synthetic remote states and clean unload; game-free evidence only.
+- Guard matrix covers exact 3663 identity/dependencies, wrong timestamp/size/base, unknown builds, 3576 denial and preserved 2976/test-host paths.
+- New tests cover target packet bounds, reliable handshake shape, trace recursion/unwinding, three-argument type/owner/roster/rollback refusal and bounded metadata membership.
+- Game closed. Test ASI/PDB/loader/INI removed. Every R3 live session verified backups and unchanged saves (23 files each). No saves were restored over player progress.
+- First L2 launch safely refused before hooks because derived Troc descriptors were not ready. Bounded named readiness fixed that timing; retry passed. Earlier fixture failures and corrections remain recorded.
+- Evidence archival correction: one old pump smoke wrapper transcript is now empty (cause unestablished). Its earlier 153-byte hash is preserved but not counted as retained proof. The matching immutable ASI host log and final suite/smoke remain verified; see evidence-corrections.json.
+- Pump cleanup initially hit OneDrive CLOUD placeholders. Exact hashes were recovered with the read-only verifier; subsequent R3 backups are outside OneDrive. General no-link guards remain.
+- Supported target: executable 1.0.0.3663, timestamp `0x6AF5D198`, base `0x140000000`, size `0x144E9000`.
+- Target SHA256: `8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8`. Rechecked at final cleanup.
+
+## Live evidence
+
+Each session used presence, a written question, exact identity, verified save
+backup, pinned fourteen-minute watchdog and removal. Full questions/receipts
+and log paths are in the result JSON/manifest. No UI control was used.
+
+- **R3-L1-20261116-110000 — passed**. Does the HP-only production reader track pose and changing HP through load/travel?
+  Log SHA256: `24B4A1D623E32927B40E00F4AA1AC9F3DE6631CC7F251656FD50169AEAC72D38`; result: `port-evidence/r3/l1-result.json`.
+- **R3-PUMP-20261116-112400 — passed**. Does the candidate pump expose the expected ClientNet/session/queue context?
+  Log SHA256: `3AE7D89F56928A85137E9D3E469072CD49F2D0E40FF6983D3C83FF0834E4EC65`; result: `port-evidence/r3/pump-result.json`.
+- **R3-L2-20261116-122500 — safely_refused_before_hooks**. Does the native private-session handshake and movement stream work?
+  Log SHA256: `C7420EF2EAD37AC2624323529DAC852606009383443D1CABBB9A233603A5641E`; result: `port-evidence/r3/l2-refusal-result.json`.
+- **R3-L2-20261116-123100 — passed**. Does the native private-session handshake and movement stream work?
+  Log SHA256: `5708AFDD4DAE5A0440206BACC7566D2E464DDFB7E2433C20AD3EB67532034095`; result: `port-evidence/r3/l2-result.json`.
+- **R3-JOIN-20261116-123800 — passive_subset_passed**. What are the original acquisition/entry roster, owners, results and travel/lobby order?
+  Log SHA256: `BEDEC75A356D506D8AE3FFB998BD9012A735CC5E390B077BE95D96B5EC2533DA`; result: `port-evidence/r3/join-result.json`.
+
+L1 logged HP 900 → 1.8 and regeneration with user-confirmed damage/travel;
+no exact post-damage screen value was supplied. Pump recorded 125528 matching
+contexts. L2 copied one real request 2401 (291 bytes), injected it once into
+the private native session, and received native Ack 2128 (330 bytes) at the
+peer; 1044 real pose samples returned, no rejections. Native host used UDP
+initiation toward the loopback peer; this is not a native guest client or
+Steam/two-player test. Normal process exit was verified; D teardown was not.
+The field trace captured 16 valid records/eight pairs through two distinct
+fields. Both single-primary admissions returned success and users/actors
+0→1. No guest insertion, factory/failure path, native refcount or rollback
+was measured. Status/login-manager/phase sites were not instrumented.
+
+## Changes, blockers and next verification
+
+`R3-STEP2.md` describes the shared per-build tunnel, guarded queue/pump
+route and C/D isolation. `R3-JOIN-ADAPTER.md` defines the new three-argument
+transaction, reference/lock order and rollback contract. Its pure policy
+is tested but the native insertion/reference/rollback backend is absent.
+Nine additional C facts were adopted after the eight recipient rows:
+named lobby/status tables and slot 10, traced EnterField, and phase entry
+2C17410/new guard. Generic VecPush still conflicts (VT/native callee 4CAE10
+versus default BinDiff 14AD670); the named-RTTI exception does not settle it.
+Ordinary server owner+A0 and roster kind 0 do not prove the separate C144
+Actor_OwnerUser+90 or C066 class contracts. Travel clock publication is now
+inlined and cannot reuse the old standalone detour. **20 C rows remain.**
+
+`R3-STEP4.md` records the independent title eligibility implementation.
+D130 still needs coherent native metadata-vector ownership/parser, alongside
+early save interception, title/save/lock and lifecycle contracts. **21 D
+rows remain.** The exact symbols and missing facts are in `R3-BLOCKERS.md`.
+Guest-role target startup remains denied; L3/L4 were not attempted and the
+second PC was not requested while these prerequisites were missing.
+
+Manual verification after further implementation: first rerun the full
+game-free suite and smoke. Prove the missing C helper/reference/rollback
+backend and guest identity/travel paths before arming C. Complete early D
+guest save protection before any two-instance launch. Then use fresh
+separate save backups/presence/watchdogs for L3 native walking/turning,
+disconnect removal/reconnect and unchanged host saves; L4 requires the
+second legitimate PC over Steam friends and a load/travel on each side.
+Do not promote loopback/policy tests into two-player evidence.
+
+## Commits since 69075db
+
+Source/evidence commits through c2d3604c00ff872250cb9be0ef11ff307303b1e4 are below. Run
+`git log 69075db..gpt/3663-port` to include this subsequent packaging commit.
+
+- `ee69b36` R3: save approved port execution plan
+- `8365f55` R3 step 1: arm guarded HP-only 3663 Tier A
+- `348da83` R3 step 1 L1: verify production pose and changing HP
+- `be6614d` R3 step 2 preparation: validate bounded passive pump probe
+- `0b4657b` R3 step 3 preparation: adopt named recipient slots under approved rule
+- `375e07a` R3 L1: document acceptance and preserve immutable loopback log provenance
+- `7185c1b` R3 step 2: verify pump context and recover cloud-backup audit
+- `6cb39e3` R3 step 2: arm the guarded native host tunnel on build 3663
+- `3b3965b` R3 step 3: prepare bounded passive field entry and exit traces
+- `fe3404e` R3 step 2: wait for native descriptor readiness before installing hooks
+- `b3a5ef0` R3 step 2: accept the live native tunnel and real movement stream
+- `4caeb34` R3 step 3: adopt traced field and named identity contracts; keep join closed
+- `c2d3604` R3 step 4: test title metadata eligibility; keep native guest protection closed
+
+Original ByJunter attribution, history and GPL v3 preserved. Sibling
+original checkout and parent Start-Grok.ps1 untouched. No binaries/release,
+saves, new game screenshots or raw new decompiler dumps published.
+
+<!-- R3 PACKAGE END -->
+
+---
+
+Historical R2 package follows; its all-tiers-off state is superseded above.
+
 # R2 Step 7 — blocker package for final review (2026-11-16)
 
 Branch: `gpt/3663-port`. The native two-player goal was **not reached**.

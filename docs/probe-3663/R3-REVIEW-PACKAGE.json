@@ -1,0 +1,993 @@
+{
+  "package": "R3 Step 5",
+  "baseline": "69075db",
+  "source_head": "c2d3604c00ff872250cb9be0ef11ff307303b1e4",
+  "packaging_commit": "The subsequent Step 5 commit at gpt/3663-port HEAD; excluded from its own manifest",
+  "objective": "Native two-player prototype not reached; R3 conditional A/B deliverable achieved",
+  "steps": {
+    "1": "complete; A armed and L1 passed",
+    "2": "complete; guarded native-host loopback B and L2 passed",
+    "3": "blocked; 130/150 contracts adopted, passive subset/pure policy done, native backend absent",
+    "4": "blocked; 109/130 contracts adopted, title predicate policy done, save/lifecycle backend absent",
+    "5": "review package ready"
+  },
+  "tiers": {
+    "A": {
+      "total": 37,
+      "closed": 37,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 34,
+        "approved_policy": 2,
+        "retired_by_scope": 1
+      },
+      "armed": true
+    },
+    "B": {
+      "total": 78,
+      "closed": 78,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 78
+      },
+      "armed": true
+    },
+    "C": {
+      "total": 150,
+      "closed": 130,
+      "blocked": 20,
+      "dispositions": {
+        "blocked": 20,
+        "adopted": 130
+      },
+      "armed": false
+    },
+    "D": {
+      "total": 130,
+      "closed": 109,
+      "blocked": 21,
+      "dispositions": {
+        "adopted": 109,
+        "blocked": 21
+      },
+      "armed": false
+    }
+  },
+  "validation": {
+    "step": 4,
+    "status": "D closed: observed title eligibility policy tested; native parser/save protection and lifecycle blocked",
+    "full_suite": {
+      "passed": 106,
+      "failed": 0,
+      "seconds": 98.33,
+      "scope": "Full working-tree suite, including the independent Step 4 policy"
+    },
+    "loopback": {
+      "remote_states": 78,
+      "clean_unload": true,
+      "native_evidence": false
+    },
+    "files": [
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-suite.txt",
+        "bytes": 38680,
+        "sha256": "BF441BF163AFC51CAA1DB5BF80D0228E51FE3EB54460A62D41670111950AFEE5"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-smoke.txt",
+        "bytes": 153,
+        "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-host.log",
+        "bytes": 6729,
+        "sha256": "E1E961D7388D23D5CF3AF90BE4BD2BE8BE4C8BE861780E2A13999DEC200A727B"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\final-cleanup.json",
+        "bytes": 524,
+        "sha256": "4D1470A1EFAA02559011453D0A899B9DEBC46C094CC44E695DE621F92D6F7A95"
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session": "R3-L1-20261116-110000",
+      "controller_session": "R2-P1-20261116-110000",
+      "question": "Does the HP-only production reader track pose and changing HP through load/travel?",
+      "result": "passed",
+      "identity_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+      "log_sha256": "24B4A1D623E32927B40E00F4AA1AC9F3DE6631CC7F251656FD50169AEAC72D38",
+      "log_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\cdmp.log",
+      "result_file": "port-evidence/r3/l1-result.json"
+    },
+    {
+      "session": "R3-PUMP-20261116-112400",
+      "controller_session": "R2-P1-20261116-112400",
+      "question": "Does the candidate pump expose the expected ClientNet/session/queue context?",
+      "result": "passed",
+      "identity_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+      "log_sha256": "3AE7D89F56928A85137E9D3E469072CD49F2D0E40FF6983D3C83FF0834E4EC65",
+      "log_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\cdmp.log",
+      "result_file": "port-evidence/r3/pump-result.json"
+    },
+    {
+      "session": "R3-L2-20261116-122500",
+      "controller_session": "R2-P1-20261116-122500",
+      "question": "Does the native private-session handshake and movement stream work?",
+      "result": "safely_refused_before_hooks",
+      "identity_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+      "log_sha256": "C7420EF2EAD37AC2624323529DAC852606009383443D1CABBB9A233603A5641E",
+      "log_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\cdmp.log",
+      "result_file": "port-evidence/r3/l2-refusal-result.json"
+    },
+    {
+      "session": "R3-L2-20261116-123100",
+      "controller_session": "R2-P1-20261116-123100",
+      "question": "Does the native private-session handshake and movement stream work?",
+      "result": "passed",
+      "identity_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+      "log_sha256": "5708AFDD4DAE5A0440206BACC7566D2E464DDFB7E2433C20AD3EB67532034095",
+      "log_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\cdmp.log",
+      "result_file": "port-evidence/r3/l2-result.json"
+    },
+    {
+      "session": "R3-JOIN-20261116-123800",
+      "controller_session": "R2-P1-20261116-123800",
+      "question": "What are the original acquisition/entry roster, owners, results and travel/lobby order?",
+      "result": "passive_subset_passed",
+      "identity_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+      "log_sha256": "BEDEC75A356D506D8AE3FFB998BD9012A735CC5E390B077BE95D96B5EC2533DA",
+      "log_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\cdmp.log",
+      "result_file": "port-evidence/r3/join-result.json"
+    }
+  ],
+  "cleanup": {
+    "game_closed": true,
+    "deployment_files": [
+      {
+        "name": "cdmp.asi",
+        "present": false
+      },
+      {
+        "name": "cdmp.pdb",
+        "present": false
+      },
+      {
+        "name": "winmm.dll",
+        "present": false
+      },
+      {
+        "name": "cdmp.ini",
+        "present": false
+      }
+    ],
+    "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "verified_utc": "2026-11-16T18:15:55.3388980Z",
+    "native_guest_test_run": false,
+    "two_pc_test_run": false
+  },
+  "commits_since_69075db": [
+    {
+      "commit": "ee69b36d42ee2f0813a66d8059a858fb1424c7e8",
+      "subject": "R3: save approved port execution plan"
+    },
+    {
+      "commit": "8365f55e4b71dc2148233d810a7e82b392e1fef1",
+      "subject": "R3 step 1: arm guarded HP-only 3663 Tier A"
+    },
+    {
+      "commit": "348da83837fe4f5c0150c9da116d3708aa355f83",
+      "subject": "R3 step 1 L1: verify production pose and changing HP"
+    },
+    {
+      "commit": "be6614dcc5a9f02554a99f7338499d2d91cf4965",
+      "subject": "R3 step 2 preparation: validate bounded passive pump probe"
+    },
+    {
+      "commit": "0b4657bbaa3d0f641becda9363117f1d1393594d",
+      "subject": "R3 step 3 preparation: adopt named recipient slots under approved rule"
+    },
+    {
+      "commit": "375e07a7330e344aef9c57a56fda745f14648baa",
+      "subject": "R3 L1: document acceptance and preserve immutable loopback log provenance"
+    },
+    {
+      "commit": "7185c1b0239f499b796616a788f2166b46be7b9a",
+      "subject": "R3 step 2: verify pump context and recover cloud-backup audit"
+    },
+    {
+      "commit": "6cb39e348786f8a37f34507f7497bbec0a816f96",
+      "subject": "R3 step 2: arm the guarded native host tunnel on build 3663"
+    },
+    {
+      "commit": "3b3965b7b8ff9442ace4759ff8f1f3b1b7cc1c15",
+      "subject": "R3 step 3: prepare bounded passive field entry and exit traces"
+    },
+    {
+      "commit": "fe3404ecdf8d45b6824d59c8827003e7ca65d817",
+      "subject": "R3 step 2: wait for native descriptor readiness before installing hooks"
+    },
+    {
+      "commit": "b3a5ef0a42d5c46463e7196c00607b0774bcb176",
+      "subject": "R3 step 2: accept the live native tunnel and real movement stream"
+    },
+    {
+      "commit": "4caeb343df225da31621517ae55099d59bb72189",
+      "subject": "R3 step 3: adopt traced field and named identity contracts; keep join closed"
+    },
+    {
+      "commit": "c2d3604c00ff872250cb9be0ef11ff307303b1e4",
+      "subject": "R3 step 4: test title metadata eligibility; keep native guest protection closed"
+    }
+  ],
+  "verified_local_evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\cdmp.log",
+      "sha256": "24B4A1D623E32927B40E00F4AA1AC9F3DE6631CC7F251656FD50169AEAC72D38"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\cdmp.log",
+      "sha256": "3AE7D89F56928A85137E9D3E469072CD49F2D0E40FF6983D3C83FF0834E4EC65"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\cleanup-recovery.json",
+      "sha256": "B1DACE3C5DBB77189D12E826A6993B58FD00F12E060FA06C73BD20160A30188E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\deployed-hashes.json",
+      "sha256": "1BEB7A5BCBEE5E1DEB26BC6492B3268B0C80B5DA598097B708399170EA5E5A25"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\installed-receipt.json",
+      "sha256": "7864EAB6B6545710834845A6C2C82BB270F6CFEE348662B2D56E7887F358E142"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\question.md",
+      "sha256": "7679226E8A9718A3512B76D21D52B064948642C7A7EF7FE17DAF6C1439802FEA"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\save-verification.json",
+      "sha256": "4AE75EAF55898EC9E6A741C705F7AB3A671F8AB889E957959E66E4A265C021DD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\session-profile.json",
+      "sha256": "FAC4D596E379CD2FA8CF9FC8F2F5539C8EFB9DA4BC3A319A46F60575C2F98437"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\watchdog.json",
+      "sha256": "87D3BD3AC8F484482C3C3A8BD71A1DE29B92AB782647D3D60B7474D22147B8B9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\cdmp.log",
+      "sha256": "C7420EF2EAD37AC2624323529DAC852606009383443D1CABBB9A233603A5641E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\deployed-hashes.json",
+      "sha256": "353CB33F1DD11CC4FF7DFC34FE00F5346B863C08F035BBCF27E6A0B115265BC4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\installed-receipt.json",
+      "sha256": "E76D1C1D0DF312A4FE093139218789652ABB2A15B5BBC6A11AC7324DA2674E50"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\peer.stderr.txt",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\peer.stdout.txt",
+      "sha256": "9992D8B2BBE4A1C3A3D299D4FADF2827EB244594F187FC1BC6FD3F976D725196"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\question.md",
+      "sha256": "64A9BF9E5C72B1A12F6C3125E0FEBDEEEBC1811067F9ABA7AB0EA59F3798C8A4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\save-verification.json",
+      "sha256": "FB0971B2E8F69AFEE26BE0B64EDF5CCCAF4300E1D6900A78485F8C9884D1695A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-122500\\watchdog.json",
+      "sha256": "265AED08C8B14436C7DF60FBD7DC34367B37F0918E31C4D9613CEB8636EE0483"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\cdmp.log",
+      "sha256": "5708AFDD4DAE5A0440206BACC7566D2E464DDFB7E2433C20AD3EB67532034095"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\deployed-hashes.json",
+      "sha256": "CE02483C759B90BB157C2FBDF376C7FB67915CF8E28128A6FD20EA82C9C7C3DD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\installed-receipt.json",
+      "sha256": "E9CCF211C036C1C9D2C1A100CEC32793AD8C5D7B720EE8244FB621EC0E4EEE7F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\peer-process.json",
+      "sha256": "6BC0620D715ADE64EAD06920FE643525C38497FB4B069A1120E6181FF2DA4275"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\peer.stderr.txt",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\peer.stdout.txt",
+      "sha256": "DD6F4B09E058F7DF8A6B26AC514A2F8DE6512434324E1528E6BCD9128B147EB0"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\question.md",
+      "sha256": "AB3883C6E0D84604C23EC25B3C9EB5EDA40E324F6B5133FB8CF914AD4F0E61CB"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\save-verification.json",
+      "sha256": "9A71A1EAB0E7C6FFC8E9C623BA19966BD46DE9001F5C570BE3FF519D625EEADD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\session-profile.json",
+      "sha256": "22E94D814B94EA88357BAD91E9A0EF3E675B94D829605C5163CA055C2BD6791B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123100\\watchdog.json",
+      "sha256": "5378FD252A190B8ED1403BCC0320C7EB1496E1AD9E489473F838BF79CA52BBB6"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\cdmp.log",
+      "sha256": "BEDEC75A356D506D8AE3FFB998BD9012A735CC5E390B077BE95D96B5EC2533DA"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\deployed-hashes.json",
+      "sha256": "CE02483C759B90BB157C2FBDF376C7FB67915CF8E28128A6FD20EA82C9C7C3DD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\installed-receipt.json",
+      "sha256": "C582E3EA26DB7E6259F081140D6CBA63BCB3D6ED0F72BC85DF02B4D8263F49A8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\question.md",
+      "sha256": "BA72AA5339DA603DC45A63E8F488414493D2ED5E652892536830C8DC40E7AFF5"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\save-verification.json",
+      "sha256": "4F56BDE6E5E25DF69C991EB9A35DAA7D27E8E6329F157C6C790C0CD734DD13A0"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\session-profile.json",
+      "sha256": "71B2EEE1FD47AB1025116DC1FDD3E7431B991C46681926A9CA67A4361A15DBEF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-123800\\watchdog.json",
+      "sha256": "C3BC977332C5A5C2F409B7F2699397427DFA8EA1A5CB3B33F08DE75C52AA2EB1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\r3-step1-build.txt",
+      "sha256": "202439FDFAB73BD06F360B221E8E52FF9C4B38912A7C690118874A73983BB426"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\r3-step1-final-build.txt",
+      "sha256": "C420E9D343386E7AF85820B5053C7E69C09E0CD7108C086E15DF832C504A2630"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\r3-step1-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\descriptor-boundary-new.txt",
+      "sha256": "DA4AA40E3C60132604ABA98FB2B16899779EAC009AD6BF9F9C2B3F1AA77E34E2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\descriptor-boundary-old.txt",
+      "sha256": "86D9C9705B632493634B24DC0200A1DAC6BA800A3A003D96B2438D29EEA3C140"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\final-cleanup.json",
+      "sha256": "4D1470A1EFAA02559011453D0A899B9DEBC46C094CC44E695DE621F92D6F7A95"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\identity-rtti-new.json",
+      "sha256": "A9E395FB242A32103DEB1055EFCA3B3D48B47B5B4D7C27E99EB104A70C356FDD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\identity-rtti-old.json",
+      "sha256": "CFBA771BB22D7C266735B2C18FB45557A558C2E1CFA2CDD3808069CA1BD63F37"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-probe-host.log",
+      "sha256": "1F25B764DDB726ADC4D7A43AC3FC5C251E646129DC5DFFAB2D99805584DB6408"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-probe-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-probe-suite.txt",
+      "sha256": "E7857ECAAD3DBFE9C658421EBB77E08AD2A1A85B5157051BF8F8271BF5AC671E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-sites-new.txt",
+      "sha256": "B26B3F7CD2354805BAC5F9C60CA5B98EA2120A9D7D1FF3DAAF60DB245CCD044A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\l2-readiness-host.log",
+      "sha256": "34663FC86C72E97038FD56C22C8A92AD0295D694A3C604A783139107DC846229"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\l2-readiness-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\l2-readiness-suite.txt",
+      "sha256": "FB632EF2EF3142BD308023192353148A04FEB6069E4F0850D76DC59B3B49A849"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\phase-new.txt",
+      "sha256": "6E1B66264CC914AD446E766AAE5F807F10FA41334D2B3FC72949BD68ADE10D2C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\phase-old.txt",
+      "sha256": "7EC103050F123A7621BF6750BB2474D188F35DDB239C424CED099592FF8BA147"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\phase-standard-target.txt",
+      "sha256": "551EDFDFFB02E23506378D938153B1ADE3F5ACE766230B1F2D52371D8DD985BF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-build.txt",
+      "sha256": "161A5AD420E13B6E8E8EE72F0F6A544414AC5F51FFF142F12AEE88AADB2F7FFB"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-build.txt",
+      "sha256": "5C8265A6B29346F8AE09B3A2062DC21E49B6A4356E77438FAE39F1C5F2689435"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-host.log",
+      "sha256": "3EA195C4CD3228C4E4235E67639897439C4895D6A092FDF1717EA5FDB5F6BAC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-host.log",
+      "sha256": "E1E961D7388D23D5CF3AF90BE4BD2BE8BE4C8BE861780E2A13999DEC200A727B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\review-final-suite.txt",
+      "sha256": "BF441BF163AFC51CAA1DB5BF80D0228E51FE3EB54460A62D41670111950AFEE5"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\status-native-new.txt",
+      "sha256": "FB4499E464488C7AACC860EC6CE91EF8B394B60AC72B341E7875D11C3508D4AD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\status-native-old.txt",
+      "sha256": "261C58BAFE97933F2C17CC21A9AF6A5410DBDEAE8C8251A59C7AD0F1B3BCC82E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step1-host.log",
+      "sha256": "59A33B2D2AD31771F010D34E92B57E173A180718CC21ADD4F08AFAB644D3EB9B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-full-suite.txt",
+      "sha256": "FBADBA7F35BA0215AB50F4FAD81A8B44D6230DA4998FEED03464C2DC6C565C36"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-host.log",
+      "sha256": "1BD7C5BBA3568DC7B73F474C7C4A6E8696EF64C474E4A7858146652E7DE24878"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-reviewed-suite.txt",
+      "sha256": "60D672CC396DC2893016767E44188EC0A62541F1FB89280AD63BB497D30BA079"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\step2-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-descriptors-new.json",
+      "sha256": "0E893FB5ED14A5C90BBD95880090FDAAE02290E75BADC7784F41E6F903B773AB"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-descriptors-old.json",
+      "sha256": "F08F33F635EAD38DE3547B2407107D87D3E7A29AE0ADF32725568201DBBE0E82"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-rtti-new.json",
+      "sha256": "160BD98FF66B26E257AD868D9E8D130D5A4278311DF777CE5C266FB314732928"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\troc-rtti-old.json",
+      "sha256": "08C9172CA107BC660B8767370AA2B1E772699CB5B03A9120C1944BFE4129FE12"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\R2-TUNNEL.md",
+      "sha256": "B4C8D8CBCDB6CD6CADB8D1054B37270ED010F9D20A06EF640655BFB4E808BFD3"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\field-acquire-enter-target.txt",
+      "sha256": "9E97048AE8D23DA65EA6FFD8F40821658DE1C89847208F3807E694E36F95C216"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\field-mover-target.txt",
+      "sha256": "F0863475B8E097F5304BF43D189F51516BED2B1549434129679AC30472C6AA88"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\identity-contracts-reference.txt",
+      "sha256": "1359FA61ED684E53BFE21CB488C7215A44051DDF70F4427259CF930533E32187"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\identity-contracts-target.txt",
+      "sha256": "49C6F07956513F3CD32DAD9024715426257829183A1B05A24F547EFA9969B0EE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\recipient-finders-new.txt",
+      "sha256": "6F94C88E735985F50ED6E91EF9CD7E382EFF51AC3A9205E8B5AE7BED72134A9F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\recipient-finders-old.txt",
+      "sha256": "0FC8F166657E6767F7CFD3244C3CBB5E7E25CC32F00945279FF6BE6530964CED"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\recipient-near-complete-old.txt",
+      "sha256": "E30F9B5364C6A77A89456896CEFCDCE5D3F64A54654966BD2EDFF5464AE33E0E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\recipient-near-helpers-new.txt",
+      "sha256": "5EB158646E1694E458BCFE2668740F9659231F185ADD5699F8C6644E089A6FB5"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\request-handlers-target.txt",
+      "sha256": "EA3D1F585CA01654BBBC8AE5C376A1EA987882D9A00492FE15285CE65DBA3A34"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r2\\tunnel-layout-target.txt",
+      "sha256": "978001553488F1AAC97908893287D130628DA8F4C0E9316F770E234975F80DEF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r3\\descriptor-bounds.json",
+      "sha256": "6C03B938FA694B0EA4544C223E4D1528163A37AE5FEB955373125B593BE735AE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r3\\join-result.json",
+      "sha256": "19FF9EB9548032E182FD1CF30F66A5B5F9141FDAB583752BE1717C4F311D947C"
+    }
+  ],
+  "unavailable_historical_evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-smoke.txt",
+      "historical_sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F",
+      "historical_bytes": 153,
+      "observed_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "observed_bytes": 0,
+      "disposition": "Original generic wrapper transcript is unavailable; currently empty, cause not established. Do not count this as retained proof. Historical claim preserved without reconstructing another run as the original.",
+      "companion_evidence": {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\pump-probe-final-host.log",
+        "sha256": "3EA195C4CD3228C4E4235E67639897439C4895D6A092FDF1717EA5FDB5F6BAC8",
+        "remote_states": 78,
+        "clean_unload": true
+      },
+      "replacement_validation": "Final 106/106 suite and final game-free smoke have separately verified retained logs."
+    }
+  ],
+  "source_and_summary_inventory": [
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 73477,
+      "sha256_raw": "9559AC7053C2BECDDBBA482DE3479C37DEA9FEEA7D6D7E41FBFAC37D48CB9726",
+      "sha256_utf8_lf": "9559AC7053C2BECDDBBA482DE3479C37DEA9FEEA7D6D7E41FBFAC37D48CB9726"
+    },
+    {
+      "path": "docs/GPT-3663-PORT-PLAN-R3.md",
+      "bytes": 7082,
+      "sha256_raw": "4F5F4D78A6DB3E2CB38D3AD31875EB4B43F63537DC4F3448EAAB3233CBF2CDC1",
+      "sha256_utf8_lf": "4F5F4D78A6DB3E2CB38D3AD31875EB4B43F63537DC4F3448EAAB3233CBF2CDC1"
+    },
+    {
+      "path": "docs/probe-3663/R3-BLOCKERS.md",
+      "bytes": 9346,
+      "sha256_raw": "E570C29D2A6C0AC1E8E4E1F881AEC6A782C85F86C7EDB9E16FB2CAC4113FF9DF",
+      "sha256_utf8_lf": "E570C29D2A6C0AC1E8E4E1F881AEC6A782C85F86C7EDB9E16FB2CAC4113FF9DF"
+    },
+    {
+      "path": "docs/probe-3663/R3-JOIN-ADAPTER.md",
+      "bytes": 4439,
+      "sha256_raw": "E47967EBFEF1EBF7D7246CC94FA7D48D9D5C8073E258056614247631B5675F7B",
+      "sha256_utf8_lf": "E47967EBFEF1EBF7D7246CC94FA7D48D9D5C8073E258056614247631B5675F7B"
+    },
+    {
+      "path": "docs/probe-3663/R3-JOIN-TRACE.md",
+      "bytes": 2328,
+      "sha256_raw": "AB12552362F8C412A1AFE413BDEDFD054C695FB31A8E42D1CAEE8453EB62B9A4",
+      "sha256_utf8_lf": "AB12552362F8C412A1AFE413BDEDFD054C695FB31A8E42D1CAEE8453EB62B9A4"
+    },
+    {
+      "path": "docs/probe-3663/R3-STATUS.json",
+      "bytes": 94493,
+      "sha256_raw": "72595B92E4377CBBD0A49715BD4646F60B24FDAAC5CD15A996BB0A40AE6C4844",
+      "sha256_utf8_lf": "72595B92E4377CBBD0A49715BD4646F60B24FDAAC5CD15A996BB0A40AE6C4844"
+    },
+    {
+      "path": "docs/probe-3663/R3-STEP1.md",
+      "bytes": 2227,
+      "sha256_raw": "BF13B423990BDD5A054970D8CCC593491FFDF60DCB33D5822EEB731F739DA294",
+      "sha256_utf8_lf": "BF13B423990BDD5A054970D8CCC593491FFDF60DCB33D5822EEB731F739DA294"
+    },
+    {
+      "path": "docs/probe-3663/R3-STEP2.md",
+      "bytes": 3178,
+      "sha256_raw": "C8DE9051CB4EE36B60834461CA1C4ABD64629DE25DB857EDAC2D070E97EB22D9",
+      "sha256_utf8_lf": "C8DE9051CB4EE36B60834461CA1C4ABD64629DE25DB857EDAC2D070E97EB22D9"
+    },
+    {
+      "path": "docs/probe-3663/R3-STEP4.md",
+      "bytes": 2137,
+      "sha256_raw": "EE999EB591476423C9BE9C4947AC054CAC65BBAFB24F571C6201043236FA0C79",
+      "sha256_utf8_lf": "EE999EB591476423C9BE9C4947AC054CAC65BBAFB24F571C6201043236FA0C79"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/descriptor-bounds.json",
+      "bytes": 3232,
+      "sha256_raw": "6C03B938FA694B0EA4544C223E4D1528163A37AE5FEB955373125B593BE735AE",
+      "sha256_utf8_lf": "6C03B938FA694B0EA4544C223E4D1528163A37AE5FEB955373125B593BE735AE"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/evidence-corrections.json",
+      "bytes": 1053,
+      "sha256_raw": "77731EF70D8281995DB503C5FE3FD2EBFBC3C6AB1E88D292F45A2EEA86C90E1E",
+      "sha256_utf8_lf": "77731EF70D8281995DB503C5FE3FD2EBFBC3C6AB1E88D292F45A2EEA86C90E1E"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/identity-adoptions.json",
+      "bytes": 8146,
+      "sha256_raw": "543C8DBA5E55ABFD32242AA39D1C520959115BEAAA9334AC7C749E0C999568EB",
+      "sha256_utf8_lf": "543C8DBA5E55ABFD32242AA39D1C520959115BEAAA9334AC7C749E0C999568EB"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/join-preflight.json",
+      "bytes": 3220,
+      "sha256_raw": "31DC8A85198EFE6D46DAB9D9F047555E67EF9EDE20253B899A9AFE7574555203",
+      "sha256_utf8_lf": "31DC8A85198EFE6D46DAB9D9F047555E67EF9EDE20253B899A9AFE7574555203"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/join-result.json",
+      "bytes": 4399,
+      "sha256_raw": "19FF9EB9548032E182FD1CF30F66A5B5F9141FDAB583752BE1717C4F311D947C",
+      "sha256_utf8_lf": "19FF9EB9548032E182FD1CF30F66A5B5F9141FDAB583752BE1717C4F311D947C"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/join-validation.json",
+      "bytes": 2034,
+      "sha256_raw": "3591B20C1BDD4CE1F0B2C558CD03D92A60EA130AC0F0E5044D033595C8381416",
+      "sha256_utf8_lf": "3591B20C1BDD4CE1F0B2C558CD03D92A60EA130AC0F0E5044D033595C8381416"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/l1-result.json",
+      "bytes": 15776,
+      "sha256_raw": "1048F6A886FA4283439FD9167597AB31C86B1EFF3A1E5EE86AACF350236E088D",
+      "sha256_utf8_lf": "1048F6A886FA4283439FD9167597AB31C86B1EFF3A1E5EE86AACF350236E088D"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/l2-readiness-validation.json",
+      "bytes": 1051,
+      "sha256_raw": "CE97744505BA924CBF5A0D8ACDF6CF6C47007497322DC12E8949D9A2A1B43F90",
+      "sha256_utf8_lf": "CE97744505BA924CBF5A0D8ACDF6CF6C47007497322DC12E8949D9A2A1B43F90"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/l2-refusal-result.json",
+      "bytes": 3052,
+      "sha256_raw": "BD6FD5CB34CBFF58D5D318059D6847B0459E0F641612C247561AE3246A376D72",
+      "sha256_utf8_lf": "BD6FD5CB34CBFF58D5D318059D6847B0459E0F641612C247561AE3246A376D72"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/l2-result.json",
+      "bytes": 4365,
+      "sha256_raw": "5E06B0D45B9D02C462946899341CB14E83508ED80B026E5811BDE3D20558B7AC",
+      "sha256_utf8_lf": "5E06B0D45B9D02C462946899341CB14E83508ED80B026E5811BDE3D20558B7AC"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/packet-scan-adoptions.json",
+      "bytes": 2038,
+      "sha256_raw": "6396EEFF54E63DEE59BE457D1C29E7C0421D2810432431A7E7459C1F12F2093B",
+      "sha256_utf8_lf": "6396EEFF54E63DEE59BE457D1C29E7C0421D2810432431A7E7459C1F12F2093B"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/pump-adoption.json",
+      "bytes": 515,
+      "sha256_raw": "F015BF563A9E5F764FBED7E0B705A71CE4EC25713F2363E5E68FBDE59A64F9DD",
+      "sha256_utf8_lf": "F015BF563A9E5F764FBED7E0B705A71CE4EC25713F2363E5E68FBDE59A64F9DD"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/pump-candidate-preflight.json",
+      "bytes": 622,
+      "sha256_raw": "4883E147CC8C699718078D48727AFD484E2434F705803367799DAEB981326E49",
+      "sha256_utf8_lf": "4883E147CC8C699718078D48727AFD484E2434F705803367799DAEB981326E49"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/pump-result.json",
+      "bytes": 4204,
+      "sha256_raw": "292045254D8AFE79D4BEB8A1CB0ACCB7EC06997CB8519E77462C238E76CB1FB6",
+      "sha256_utf8_lf": "292045254D8AFE79D4BEB8A1CB0ACCB7EC06997CB8519E77462C238E76CB1FB6"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/pump-validation.json",
+      "bytes": 1741,
+      "sha256_raw": "C429B0249EC888E6B3460F0CF3DB3323A9EDBEE9271F6616F6A4660177DCED23",
+      "sha256_utf8_lf": "C429B0249EC888E6B3460F0CF3DB3323A9EDBEE9271F6616F6A4660177DCED23"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/recipient-adoptions.json",
+      "bytes": 5366,
+      "sha256_raw": "8D0A81B8C40CC4C3CF5E9B3DCEE9EF7275EAFA3552C978E45B9E8A1A3633242F",
+      "sha256_utf8_lf": "8D0A81B8C40CC4C3CF5E9B3DCEE9EF7275EAFA3552C978E45B9E8A1A3633242F"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/step1-validation.json",
+      "bytes": 1334,
+      "sha256_raw": "62A378581487C304A12E0B86F6E4DCF396ABB2C66C90BA1B4303665F071E3C73",
+      "sha256_utf8_lf": "62A378581487C304A12E0B86F6E4DCF396ABB2C66C90BA1B4303665F071E3C73"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/step2-validation.json",
+      "bytes": 1593,
+      "sha256_raw": "6EA52D1E2A5AFC96E8C93F38179884FBCFE6EA3EB7A213B405D07AB946AEC91B",
+      "sha256_utf8_lf": "6EA52D1E2A5AFC96E8C93F38179884FBCFE6EA3EB7A213B405D07AB946AEC91B"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/step3-validation.json",
+      "bytes": 1320,
+      "sha256_raw": "1AC1DE128FA6BA2B86A8A71205018CAFCE7936E52C075E4137307DD5FE934860",
+      "sha256_utf8_lf": "1AC1DE128FA6BA2B86A8A71205018CAFCE7936E52C075E4137307DD5FE934860"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r3/step4-validation.json",
+      "bytes": 1324,
+      "sha256_raw": "DB28962F9896B7BDB05E501A89AFB8D1887B18BCFBF636DFC57917BB7CC5D035",
+      "sha256_utf8_lf": "DB28962F9896B7BDB05E501A89AFB8D1887B18BCFBF636DFC57917BB7CC5D035"
+    },
+    {
+      "path": "src/coop3663/join3663_policy.h",
+      "bytes": 2556,
+      "sha256_raw": "94D89C367F2CD5D5F5733044ACF3CAB8F7866A9D6EECF73BA8F1A681A1B8EA4B",
+      "sha256_utf8_lf": "94D89C367F2CD5D5F5733044ACF3CAB8F7866A9D6EECF73BA8F1A681A1B8EA4B"
+    },
+    {
+      "path": "src/coop3663/title3663_eligibility.h",
+      "bytes": 1354,
+      "sha256_raw": "07D5B884BFB29CFB13C03DAFAA27769E2DDBB1B5977BA121B8461AD42E4D4728",
+      "sha256_utf8_lf": "07D5B884BFB29CFB13C03DAFAA27769E2DDBB1B5977BA121B8461AD42E4D4728"
+    },
+    {
+      "path": "src/mod/config.cpp",
+      "bytes": 30250,
+      "sha256_raw": "68B1012A710A6DB6B6BF3D4640E2FB57FA76ABB9143BEF0D348D62B33D3F2D99",
+      "sha256_utf8_lf": "68B1012A710A6DB6B6BF3D4640E2FB57FA76ABB9143BEF0D348D62B33D3F2D99"
+    },
+    {
+      "path": "src/mod/config.h",
+      "bytes": 59455,
+      "sha256_raw": "6EBEA40F580683C93FB2BC3DA93DF1DE0A179FCBFE866DB275C04F0FAFC36F60",
+      "sha256_utf8_lf": "6EBEA40F580683C93FB2BC3DA93DF1DE0A179FCBFE866DB275C04F0FAFC36F60"
+    },
+    {
+      "path": "src/mod/game/build_3663.h",
+      "bytes": 39951,
+      "sha256_raw": "3F97044545FC2E07CAFC1354E14B60EE6F08E6E28485552ED88F9D78B0C96152",
+      "sha256_utf8_lf": "3F97044545FC2E07CAFC1354E14B60EE6F08E6E28485552ED88F9D78B0C96152"
+    },
+    {
+      "path": "src/mod/game/build_guard.h",
+      "bytes": 13509,
+      "sha256_raw": "1301675302CA527BAAA0E56649484C389664925AB29447FD9D5CACC1CE5F44F0",
+      "sha256_utf8_lf": "1301675302CA527BAAA0E56649484C389664925AB29447FD9D5CACC1CE5F44F0"
+    },
+    {
+      "path": "src/mod/game/player_layout.h",
+      "bytes": 5415,
+      "sha256_raw": "CCB4921CA3500A65275F20D44A73ACAC25E33F6238ADA8B9C45164CA0FC60B74",
+      "sha256_utf8_lf": "CCB4921CA3500A65275F20D44A73ACAC25E33F6238ADA8B9C45164CA0FC60B74"
+    },
+    {
+      "path": "src/mod/game/player_reader.cpp",
+      "bytes": 9011,
+      "sha256_raw": "094B95D132DD0E1A0FF86F0D65D7298BC92FF64CD8BC499BAA822286A01B456B",
+      "sha256_utf8_lf": "E2395196FD43EB4B464E30404ABC76BD1003A2D0C7735EB1F06BE1A7DCA39F16"
+    },
+    {
+      "path": "src/mod/game/r3_join_probe.cpp",
+      "bytes": 7310,
+      "sha256_raw": "BB8231631119362458A288912AB831C39038F7BBACE5055265B6BFF7BE99C6D2",
+      "sha256_utf8_lf": "BB8231631119362458A288912AB831C39038F7BBACE5055265B6BFF7BE99C6D2"
+    },
+    {
+      "path": "src/mod/game/r3_join_probe.h",
+      "bytes": 159,
+      "sha256_raw": "C43051D99E9F7083D5489D7FF78DABC64791002341F14466A12F5388EA480B07",
+      "sha256_utf8_lf": "C43051D99E9F7083D5489D7FF78DABC64791002341F14466A12F5388EA480B07"
+    },
+    {
+      "path": "src/mod/game/r3_join_sites.h",
+      "bytes": 1087,
+      "sha256_raw": "2576984EA6A5DF2FAD0B104DC09E0A390107DD67CB24A2CE41A07311CEE4140A",
+      "sha256_utf8_lf": "2576984EA6A5DF2FAD0B104DC09E0A390107DD67CB24A2CE41A07311CEE4140A"
+    },
+    {
+      "path": "src/mod/game/r3_pump_probe.cpp",
+      "bytes": 2672,
+      "sha256_raw": "F5876B27F489EBD1E58BF4E6125548AB79A0BAA98DBA9F5FA890282E38858E55",
+      "sha256_utf8_lf": "F5876B27F489EBD1E58BF4E6125548AB79A0BAA98DBA9F5FA890282E38858E55"
+    },
+    {
+      "path": "src/mod/game/r3_pump_probe.h",
+      "bytes": 430,
+      "sha256_raw": "D766CEFB8A0985B724B6AC10FD56C8A077DED328907FA27C8A02ECA14D806C6C",
+      "sha256_utf8_lf": "D766CEFB8A0985B724B6AC10FD56C8A077DED328907FA27C8A02ECA14D806C6C"
+    },
+    {
+      "path": "src/mod/game/r3_trace_stack.h",
+      "bytes": 1279,
+      "sha256_raw": "D1B4DF6A53EB4C6B70DE5A0B44D1CC37D1315E5CC1E81F35ED687B52742B68D3",
+      "sha256_utf8_lf": "D1B4DF6A53EB4C6B70DE5A0B44D1CC37D1315E5CC1E81F35ED687B52742B68D3"
+    },
+    {
+      "path": "src/mod/mod.cpp",
+      "bytes": 81795,
+      "sha256_raw": "5BA7F3B8FDB25729FF0253E322DE210C256844A7DD354EC6ED17E48961732336",
+      "sha256_utf8_lf": "5BA7F3B8FDB25729FF0253E322DE210C256844A7DD354EC6ED17E48961732336"
+    },
+    {
+      "path": "src/mod/session2/guest.cpp",
+      "bytes": 110542,
+      "sha256_raw": "6A5CA62A4F18D223B0B708606BA5C45D6757AEB2D6F4BA98CC2318A63042D0DE",
+      "sha256_utf8_lf": "6A5CA62A4F18D223B0B708606BA5C45D6757AEB2D6F4BA98CC2318A63042D0DE"
+    },
+    {
+      "path": "src/mod/session2/r3_tunnel.cpp",
+      "bytes": 2516,
+      "sha256_raw": "AB0D59A9FBA385CA37D24DE7AB0D1E12AA51A12AFB8AAC84ABA11E62AF6D5E91",
+      "sha256_utf8_lf": "AB0D59A9FBA385CA37D24DE7AB0D1E12AA51A12AFB8AAC84ABA11E62AF6D5E91"
+    },
+    {
+      "path": "src/mod/session2/r3_tunnel.h",
+      "bytes": 578,
+      "sha256_raw": "18AD4664006165D03CEC6C73C7622E5316BC86816C52810359153F9A87A9A323",
+      "sha256_utf8_lf": "18AD4664006165D03CEC6C73C7622E5316BC86816C52810359153F9A87A9A323"
+    },
+    {
+      "path": "src/mod/session2/server.cpp",
+      "bytes": 124641,
+      "sha256_raw": "EC1D0105F1738E04F3B65EEAED27C3F96D79ED4AD8ACF4EBB5ADD451087B2B7F",
+      "sha256_utf8_lf": "EC1D0105F1738E04F3B65EEAED27C3F96D79ED4AD8ACF4EBB5ADD451087B2B7F"
+    },
+    {
+      "path": "src/mod/session2/server.h",
+      "bytes": 10021,
+      "sha256_raw": "055E8FA9A1135EB4FDE80D090447AB8B6B4A767BE73BC1BA6243251ED227257A",
+      "sha256_utf8_lf": "055E8FA9A1135EB4FDE80D090447AB8B6B4A767BE73BC1BA6243251ED227257A"
+    },
+    {
+      "path": "src/mod/session2/tunnel_layout.h",
+      "bytes": 13580,
+      "sha256_raw": "71BF2BF993339516C2EE1B3A1444EB1836EFF68AD9FEBC946787993D48949A9C",
+      "sha256_utf8_lf": "71BF2BF993339516C2EE1B3A1444EB1836EFF68AD9FEBC946787993D48949A9C"
+    },
+    {
+      "path": "tests/build_guard_tests.cpp",
+      "bytes": 27371,
+      "sha256_raw": "52D76A6E2898382B8FB74B7AFB0FE33602EE94E3C0B48ED67A6F4BF628F6E9D1",
+      "sha256_utf8_lf": "52D76A6E2898382B8FB74B7AFB0FE33602EE94E3C0B48ED67A6F4BF628F6E9D1"
+    },
+    {
+      "path": "tests/join3663_policy_tests.cpp",
+      "bytes": 1708,
+      "sha256_raw": "CEF27212FB82D3F10080276A8E8195702690D63B2996FF2BBD460CCB77A62309",
+      "sha256_utf8_lf": "CEF27212FB82D3F10080276A8E8195702690D63B2996FF2BBD460CCB77A62309"
+    },
+    {
+      "path": "tests/r3_trace_stack_tests.cpp",
+      "bytes": 1323,
+      "sha256_raw": "98BA4802864E296C4E11A14874BB336B34641E3312B8B6242D56E0CDF4BF4936",
+      "sha256_utf8_lf": "98BA4802864E296C4E11A14874BB336B34641E3312B8B6242D56E0CDF4BF4936"
+    },
+    {
+      "path": "tests/r3_tunnel_peer_tests.cpp",
+      "bytes": 1802,
+      "sha256_raw": "89568E39617B8EC4727DBA59B00B7125EA62E9B8CBF02335A065E8586413FA08",
+      "sha256_utf8_lf": "89568E39617B8EC4727DBA59B00B7125EA62E9B8CBF02335A065E8586413FA08"
+    },
+    {
+      "path": "tests/title3663_eligibility_tests.cpp",
+      "bytes": 1712,
+      "sha256_raw": "D07847ADF15FC1BF5CE46C41197EA50426E6A24593AF4AF7C98A47BAD28A9067",
+      "sha256_utf8_lf": "D07847ADF15FC1BF5CE46C41197EA50426E6A24593AF4AF7C98A47BAD28A9067"
+    },
+    {
+      "path": "tests/tunnel_layout_tests.cpp",
+      "bytes": 3094,
+      "sha256_raw": "667E228BD262FE24176698FFC4D3F3FCA201EF9624422255F90CA6175339A379",
+      "sha256_utf8_lf": "667E228BD262FE24176698FFC4D3F3FCA201EF9624422255F90CA6175339A379"
+    },
+    {
+      "path": "tools/peer_sim/main.cpp",
+      "bytes": 18524,
+      "sha256_raw": "024DC2D3A92E9F84278380CB1DC7AF32F70368F350521BD083C3C204DCEF26D4",
+      "sha256_utf8_lf": "024DC2D3A92E9F84278380CB1DC7AF32F70368F350521BD083C3C204DCEF26D4"
+    },
+    {
+      "path": "tools/peer_sim/r3_tunnel_peer.cpp",
+      "bytes": 3591,
+      "sha256_raw": "F9DBCE7B23B3679C991A9D59162206E861B82D116070ABFA5DCDBE79E587D725",
+      "sha256_utf8_lf": "F9DBCE7B23B3679C991A9D59162206E861B82D116070ABFA5DCDBE79E587D725"
+    },
+    {
+      "path": "tools/peer_sim/r3_tunnel_peer.h",
+      "bytes": 182,
+      "sha256_raw": "CBE956B15CFC577D0042B55E27EC895BC145F7D1CD5BAF137DAB7D185B6E1ABC",
+      "sha256_utf8_lf": "CBE956B15CFC577D0042B55E27EC895BC145F7D1CD5BAF137DAB7D185B6E1ABC"
+    },
+    {
+      "path": "tools/port3663/r2_p1_session.ps1",
+      "bytes": 18976,
+      "sha256_raw": "DCA4BF8AA886042CFFAADA45DD83C98C8720EFB1C93D0FDD97987F5A2C551491",
+      "sha256_utf8_lf": "DCA4BF8AA886042CFFAADA45DD83C98C8720EFB1C93D0FDD97987F5A2C551491"
+    },
+    {
+      "path": "tools/port3663/r3_identity_adoptions.py",
+      "bytes": 7726,
+      "sha256_raw": "F6EF93C46ED9C6070F217141C5CFE582C3B786E6432CB780592D06AC73A0924E",
+      "sha256_utf8_lf": "F6EF93C46ED9C6070F217141C5CFE582C3B786E6432CB780592D06AC73A0924E"
+    },
+    {
+      "path": "tools/port3663/r3_join_result.py",
+      "bytes": 4803,
+      "sha256_raw": "EEFB5D5E48DCA257F56469778E96B4220D50CC6B14599F4D3151D34CB91F0F82",
+      "sha256_utf8_lf": "EEFB5D5E48DCA257F56469778E96B4220D50CC6B14599F4D3151D34CB91F0F82"
+    },
+    {
+      "path": "tools/port3663/r3_join_sites.py",
+      "bytes": 2842,
+      "sha256_raw": "7A47BA3861246E701BF218A683E7F863C61B61DFB183B241D1AB9A48EDEF1987",
+      "sha256_utf8_lf": "7A47BA3861246E701BF218A683E7F863C61B61DFB183B241D1AB9A48EDEF1987"
+    },
+    {
+      "path": "tools/port3663/r3_l2_result.py",
+      "bytes": 3422,
+      "sha256_raw": "52CD61F543655F1E2866F96CB65CE3358C88BF5EB83AFECB39FFCF1A4B8CF45F",
+      "sha256_utf8_lf": "52CD61F543655F1E2866F96CB65CE3358C88BF5EB83AFECB39FFCF1A4B8CF45F"
+    },
+    {
+      "path": "tools/port3663/r3_package.py",
+      "bytes": 13840,
+      "sha256_raw": "269A033A03A139426BB79BC6B2CDD1A63710EE44E641295062C0C847D31F1A38",
+      "sha256_utf8_lf": "269A033A03A139426BB79BC6B2CDD1A63710EE44E641295062C0C847D31F1A38"
+    },
+    {
+      "path": "tools/port3663/r3_recipients.py",
+      "bytes": 4944,
+      "sha256_raw": "AF1A3932E462F432D2E57CABCA7E9AE468DA518DF98615236CC86620A294416A",
+      "sha256_utf8_lf": "AF1A3932E462F432D2E57CABCA7E9AE468DA518DF98615236CC86620A294416A"
+    },
+    {
+      "path": "tools/port3663/r3_status.py",
+      "bytes": 7087,
+      "sha256_raw": "B86A661FFEE433076CB33A2978E4DFB2EDAC0B9471D1B478E9FBA64B07622E48",
+      "sha256_utf8_lf": "B86A661FFEE433076CB33A2978E4DFB2EDAC0B9471D1B478E9FBA64B07622E48"
+    },
+    {
+      "path": "tools/port3663/r3_tunnel_layout.py",
+      "bytes": 5855,
+      "sha256_raw": "6D72CA1F7517EC74AC093F624D27367022467D6523F485C09D6FB3A690FF456E",
+      "sha256_utf8_lf": "6D72CA1F7517EC74AC093F624D27367022467D6523F485C09D6FB3A690FF456E"
+    },
+    {
+      "path": "tools/port3663/r3_verify_backup.ps1",
+      "bytes": 3448,
+      "sha256_raw": "8796E4E719837718F054BE937A3358C0BCF9778738FED2FFDC4C155DE54C4F24",
+      "sha256_utf8_lf": "8796E4E719837718F054BE937A3358C0BCF9778738FED2FFDC4C155DE54C4F24"
+    }
+  ],
+  "limits": [
+    "B is an explicit loopback-only native-host cryptogram diagnostic; guest join/Steam runtime/reconnect unproved",
+    "No L3/L4, second-PC test, remote actor creation/removal or two-player evidence",
+    "Pure C/D policies are not native implementation or runtime proof",
+    "No binaries, new raw decompiler dumps, saves or screenshots in this package"
+  ]
+}
