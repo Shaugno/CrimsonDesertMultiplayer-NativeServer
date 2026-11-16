@@ -10,8 +10,8 @@
 //
 // Sessions are explicit. publish accepts a sample only for the generation
 // last admitted by begin_session for that peer. Timestamps are ordered inside
-// that generation. A new begin_session retires the previous generation, fences
-// it, and resets the clock so a restarted session may use a smaller timestamp.
+// that generation. A new begin_session records the peer's new highest admitted
+// generation and resets the clock, so that session may use a smaller timestamp.
 // begin_session accepts only a strictly higher generation than any previously
 // admitted for that peer. History is never evicted, including on disconnect.
 // Generation wrap requires a new Feed lifetime, not an older generation.
