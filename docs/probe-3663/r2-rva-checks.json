@@ -410,6 +410,17 @@
       45885936
     ]
   },
+  "B073": {
+    "target": "0x6f29b70",
+    "old": "0x6a65564",
+    "symbol": "kServerFrameworkMode",
+    "second_check": "Paired native server receive loads this exact RIP-relative dword as the TrocFind kind-mask argument. File-backed initial values are independently read as 11h in each exact image; this is not the descriptor server-kind constant 4 and no runtime value is presumed. The native consumer correspondence and operand establish the global role.",
+    "evidence": "port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-mode-operands.json",
+    "anchor": [
+      41368608,
+      44100208
+    ]
+  },
   "B069": {
     "target": "0x3a9cf0",
     "old": "0x35ca00",

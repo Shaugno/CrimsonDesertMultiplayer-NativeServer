@@ -99,5 +99,16 @@ lead; actual instruction boundaries, call roles and both complete bodies
 were checked. This adds an RVA candidate awaiting standard support. The
 separately explored 3AAA60 is a constructor/setup routine, not this receiver.
 
+Five descriptor member/value contracts are now independently confirmed:
+kind+8, opcode+C, channel+14, flags+16 and named server-request kind 4.
+Target receive compares +14 to the incoming channel and consumes flags+16;
+native lookup masks kind+8; registration loads opcode+C and stores the same
+descriptor pointer. Both files' named LoginUser/Character request descriptors
+have kind 4. The separate framework-mode operand initially contains 11h in
+both files (an exploratory assertion expecting 4 failed offline and was
+corrected). Its target global candidate is 6F29B70, derived from the actual
+receive operand, not from the descriptor-kind constant. Runtime mode values,
+descriptor scan boundaries and scan skip remain separate contracts.
+
 Evidence: port-evidence/r2/request-*.json/txt, with original and canonical
 text hashes in port-evidence/r2/text-hashes.json.

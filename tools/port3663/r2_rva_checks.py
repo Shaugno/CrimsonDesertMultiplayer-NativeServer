@@ -122,6 +122,10 @@ check('kLoginMgrSlot',0x6D696A8,0x72456E0,
     'Paired logout callers read this exact RIP-relative global context. Its first pointer is passed to actor/login registry lookup; context+10 is the native save manager. Both roles and dereference levels are verified in native code; this does not adopt registry list fields or FindByCharacterNo.',
     'port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; identity-contracts-reference.txt',
     [0x28F26C0,0x2BC29F0])
+check('kServerFrameworkMode',0x6A65564,0x6F29B70,
+    'Paired native server receive loads this exact RIP-relative dword as the TrocFind kind-mask argument. File-backed initial values are independently read as 11h in each exact image; this is not the descriptor server-kind constant 4 and no runtime value is presumed. The native consumer correspondence and operand establish the global role.',
+    'port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-mode-operands.json',
+    [0x2773C20,0x2A0EA70])
 check('kClientOnRecvPacket',0x35CA00,0x3A9CF0,
     'Paired receive entries bound the u16 size-minus-three by 7FD7, obtain session crypto+98, dispatch through native TrocFind with kind mask 1, enforce descriptor min/max lengths and flag bits, build the request with session/key/handler/frame fields, invoke vslot+8 and enqueue to client+E8 or +F0. Cleanup retains target-specific destructors and TLS+1FE. Native entry boundaries and all argument roles are reviewed; a raw immediate search was discovery only.',
     'port-evidence/r2/tunnel-client-receive-reference.txt; client-receive-verified-target.txt')

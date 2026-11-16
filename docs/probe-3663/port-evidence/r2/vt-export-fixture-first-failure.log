@@ -1,0 +1,186 @@
+INFO  Using log config file: jar:file:/C:/Users/shaug/.codex/visualizations/2026/11/14/01a1dbbd-2726-7441-9a57-1b454819b3e7/analysis-tools/ghidra_12.1.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
+INFO  Using log file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\application.log (LoggingInitialization)
+INFO  Loading user preferences: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\preferences (Preferences)
+INFO  Searching for classes... (ClassSearcher)
+INFO  Class search complete (848 ms) (ClassSearcher)
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)
+INFO  Initializing Random Number Generator... (SecureRandomFactory)
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)
+INFO  Headless startup complete (2723 ms) (AnalyzeHeadless)
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)
+INFO  HEADLESS Script Paths:
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Extensions\BinExport\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tools\port3663
+    C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\SwiftDemangler\ghidra_scripts (HeadlessAnalyzer)
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)
+INFO  Opening existing project: C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\r2\vt-fixture\exportlock-0600 (HeadlessAnalyzer)
+INFO  Opening project: C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\r2\vt-fixture\exportlock-0600 (HeadlessProject)
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)
+INFO       project: C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\r2\vt-fixture\exportlock-0600 (HeadlessAnalyzer)
+INFO  IMPORTING: file:///C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/r2/export-fixture/Release/r2_export_fixture.exe (HeadlessAnalyzer)
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)
+INFO  Using Library Search Path: [., C:\WINDOWS\SysWOW64, C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\jdk-21.0.13+9\bin, C:\WINDOWS\Sun\Java\bin, C:\WINDOWS\system32, C:\WINDOWS, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\native\powershell, C:\Users\shaug\.codex\tmp\arg0-windows\codex-arg0u6V75g, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\native\libheif\libheif\bin, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\native\jxrlib\jxrlib\bin, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\native\poppler\Library\bin, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\bin\override, C:\Program Files (x86)\Razer Chroma SDK\bin, C:\Program Files\Razer Chroma SDK\bin, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR, C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common, C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps, C:\Program Files (x86)\Razer\ChromaBroadcast\bin, C:\Program Files\Razer\ChromaBroadcast\bin, C:\Users\shaug\AppData\Local\Microsoft\WindowsApps, C:\Users\shaug\AppData\Local\Microsoft\WinGet\Links, C:\Users\shaug\AppData\Local\GitHubDesktop\bin, C:\Users\shaug\AppData\Local\PowerToys\DSCModules\, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\, C:\Users\shaug\AppData\Local\Programs\OpenAI\Codex\bin, C:\Users\shaug\.grok\bin, C:\Users\shaug\AppData\Local\hermes\bin, C:\Users\shaug\scoop\shims, C:\Users\shaug\AppData\Local\Microsoft\WinGet\Packages\OpenAI.Codex_Microsoft.Winget.Source_8wekyb3d8bbwe, C:\Users\shaug\AppData\Local\PowerToys\bin\, C:\Users\shaug\AppData\Local\Microsoft\WinGet\Packages\GitHub.cli_Microsoft.Winget.Source_8wekyb3d8bbwe\bin, C:\Users\shaug\AppData\Local\CodexCLI\bin, C:\Users\shaug\AppData\Local\Programs\cursor\resources\app\bin, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\bin\fallback, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\node\bin, C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\native\git\cmd, C:\Program Files\WindowsApps\OpenAI.Codex_26.1111.2228.0_x64__2p2nqsd0c76g0\app\resources] (ProgramLoader)
+INFO  Additional info:
+Loading file:///C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/r2/export-fixture/Release/r2_export_fixture.exe?MD5=e0ac70b599bfb7c7ed47015d6628542e...
+------------------------------------------------
+
+Searching 34 paths for library API-MS-WIN-CRT-HEAP-L1-1-0.DLL...
+Loading file:///C:/Users/shaug/.codex/visualizations/2026/11/14/01a1dbbd-2726-7441-9a57-1b454819b3e7/analysis-tools/jdk-21.0.13+9/bin/api-ms-win-crt-heap-l1-1-0.dll?MD5=527bbbfded529ea77ee798d94ce0f243...
+Using existing exports file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-heap-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 34 paths for library API-MS-WIN-CRT-LOCALE-L1-1-0.DLL...
+Loading file:///C:/Users/shaug/.codex/visualizations/2026/11/14/01a1dbbd-2726-7441-9a57-1b454819b3e7/analysis-tools/jdk-21.0.13+9/bin/api-ms-win-crt-locale-l1-1-0.dll?MD5=09796dab12cbbd920f632aeb89820193...
+Using existing exports file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-locale-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 34 paths for library API-MS-WIN-CRT-MATH-L1-1-0.DLL...
+Loading file:///C:/Users/shaug/.codex/visualizations/2026/11/14/01a1dbbd-2726-7441-9a57-1b454819b3e7/analysis-tools/jdk-21.0.13+9/bin/api-ms-win-crt-math-l1-1-0.dll?MD5=aa9624cb27cc50a3fbbd3b223a617b1c...
+Using existing exports file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-math-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 34 paths for library API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL...
+Loading file:///C:/Users/shaug/.codex/visualizations/2026/11/14/01a1dbbd-2726-7441-9a57-1b454819b3e7/analysis-tools/jdk-21.0.13+9/bin/api-ms-win-crt-runtime-l1-1-0.dll?MD5=bbaa58e9e1abdf7d8c4c69652d29d789...
+Using existing exports file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 34 paths for library API-MS-WIN-CRT-STDIO-L1-1-0.DLL...
+Loading file:///C:/Users/shaug/.codex/visualizations/2026/11/14/01a1dbbd-2726-7441-9a57-1b454819b3e7/analysis-tools/jdk-21.0.13+9/bin/api-ms-win-crt-stdio-l1-1-0.dll?MD5=ef37235fc43157a4c93241d5e49e304b...
+Using existing exports file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-stdio-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 34 paths for library KERNEL32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/kernel32.dll
+Loading file:///C:/Windows/System32/kernel32.dll?MD5=a87115f2b32e0bdca676b0c029bf125e...
+Using existing exports file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\kernel32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 34 paths for library VCRUNTIME140.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/vcruntime140.dll
+Loading file:///C:/Users/shaug/.codex/visualizations/2026/11/14/01a1dbbd-2726-7441-9a57-1b454819b3e7/analysis-tools/jdk-21.0.13+9/bin/vcruntime140.dll?MD5=caf9edded91c1f6c0022b278c16679aa...
+Using existing exports file: C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\vcruntime140.exports
+Library not saved to project.
+------------------------------------------------
+
+Applying C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\vcruntime140.exports
+Applying C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Applying C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-math-l1-1-0.exports
+Applying C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-stdio-l1-1-0.exports
+Applying C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-locale-l1-1-0.exports
+Applying C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\api-ms-win-crt-heap-l1-1-0.exports
+Applying C:\Users\shaug\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\symbols\win64\kernel32.exports
+Linking the External Programs of 'r2_export_fixture.exe' to imported libraries...
+  [VCRUNTIME140.DLL] -> not found in project
+  [API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-MATH-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-STDIO-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-LOCALE-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-HEAP-L1-1-0.DLL] -> not found in project
+  [KERNEL32.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)
+INFO  ANALYZING all memory and code: file:///C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/r2/export-fixture/Release/r2_export_fixture.exe (HeadlessAnalyzer)
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)
+INFO  Skipping PDB processing: missing PDB information in program metadata (PdbUniversalAnalyzer)
+INFO  hit non-returning function, restarting decompiler switch analyzer later (DecompilerSwitchAnalyzer)
+INFO  Packed database cache: C:\Users\shaug\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.276 secs
+    Apply Data Archives                        0.482 secs
+    Call Convention ID                         0.000 secs
+    Call-Fixup Installer                       0.038 secs
+    Create Address Tables                      0.004 secs
+    Create Address Tables - One Time           0.002 secs
+    Create Function                            0.012 secs
+    Data Reference                             0.005 secs
+    Decompiler Parameter ID                    2.467 secs
+    Decompiler Switch Analysis                 0.523 secs
+    Decompiler Switch Analysis - One Time      0.767 secs
+    Demangler Microsoft                        0.004 secs
+    Disassemble Entry Points                   0.110 secs
+    Embedded Media                             0.002 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.115 secs
+    Function Start Search                      0.005 secs
+    Non-Returning Functions - Discovered       0.007 secs
+    Non-Returning Functions - Known            0.004 secs
+    PDB Universal                              0.001 secs
+    Reference                                  0.004 secs
+    Scalar Operand References                  0.009 secs
+    Shared Return Calls                        0.006 secs
+    Stack                                      0.039 secs
+    Subroutine References                      0.004 secs
+    Subroutine References - One Time           0.000 secs
+    Windows x86 PE Exception Handling          0.006 secs
+    Windows x86 PE RTTI Analyzer               0.002 secs
+    Windows x86 Thread Environment Block (TEB) Analyzer     0.010 secs
+    WindowsResourceReference                   0.388 secs
+    x86 Constant Reference Analyzer            0.092 secs
+-----------------------------------------------------
+     Total Time   5 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)
+INFO  REPORT: Analysis succeeded for file: file:///C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/r2/export-fixture/Release/r2_export_fixture.exe (HeadlessAnalyzer)
+INFO  REPORT: Execute script: R2VTOptions.java 'C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\r2\vt-fixture\exportlock-0600-options.txt'  (HeadlessAnalyzer)
+INFO  SCRIPT: C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tools\port3663\R2VTOptions.java (HeadlessAnalyzer)
+INFO  R2VTOptions.java> R2 standard VT options installed; optional duplicate pass off; all required passes on (GhidraScript)
+INFO  REPORT: Execute script: AutoVersionTrackingScript.java '/' 'FixtureSession' '/old/r2_export_fixture.exe'  (HeadlessAnalyzer)
+INFO  SCRIPT: C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\analysis-tools\ghidra_12.1.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts\AutoVersionTrackingScript.java (HeadlessAnalyzer)
+INFO  AutoVersionTrackingScript.java> VT Session destination program r2_export_fixture.exe is read-only which prevents its use. (GhidraScript)
+INFO  REPORT: Execute script: R2ExportMatches.java '/FixtureSession' 'C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\r2\vt-fixture\exportlock-0600-matches.tsv'  (HeadlessAnalyzer)
+INFO  SCRIPT: C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\tools\port3663\R2ExportMatches.java (HeadlessAnalyzer)
+ERROR REPORT SCRIPT ERROR:  (HeadlessAnalyzer) java.lang.IllegalStateException: Missing VT session /FixtureSession
+	at R2ExportMatches.run(R2ExportMatches.java:10)
+	at ghidra.app.script.GhidraScript.executeNormal(GhidraScript.java:460)
+	at ghidra.app.script.GhidraScript.doExecute(GhidraScript.java:314)
+	at ghidra.app.script.GhidraScript.execute(GhidraScript.java:290)
+	at ghidra.app.util.headless.HeadlessAnalyzer.runScript(HeadlessAnalyzer.java:585)
+	at ghidra.app.util.headless.HeadlessAnalyzer.runScriptsList(HeadlessAnalyzer.java:937)
+	at ghidra.app.util.headless.HeadlessAnalyzer.analyzeProgram(HeadlessAnalyzer.java:1093)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processFileWithImport(HeadlessAnalyzer.java:1591)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithLoader(HeadlessAnalyzer.java:1751)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithImport(HeadlessAnalyzer.java:1692)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithImport(HeadlessAnalyzer.java:1776)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processLocal(HeadlessAnalyzer.java:452)
+	at ghidra.app.util.headless.AnalyzeHeadless.launch(AnalyzeHeadless.java:199)
+	at ghidra.GhidraLauncher.launch(GhidraLauncher.java:81)
+	at ghidra.Ghidra.main(Ghidra.java:54)
+
+INFO  ANALYZING changes made by post scripts: file:///C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/r2/export-fixture/Release/r2_export_fixture.exe (HeadlessAnalyzer)
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Users/shaug/OneDrive/Documents/ChatGPT/Crimson mod/build/r2/export-fixture/Release/r2_export_fixture.exe (HeadlessAnalyzer)
+INFO  /new/r2_export_fixture.exe: file created (shaug) (LocalFileSystem)
+INFO  REPORT: Save succeeded for: /new/r2_export_fixture.exe (exportlock-0600:/new/r2_export_fixture.exe) (HeadlessAnalyzer)
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)

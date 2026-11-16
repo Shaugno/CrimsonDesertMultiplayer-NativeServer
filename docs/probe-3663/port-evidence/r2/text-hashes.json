@@ -730,11 +730,39 @@
       "normalized_sha256": "290e9208da57dc1b8dc5900858c4608849d76315c12068dffc1715fcf4bdb68e"
     },
     {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\troc-fields-build.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\troc-fields-build.txt",
+      "raw_bytes": 1127,
+      "raw_sha256": "1292c1b64e26abd17d7dd056489443f390806cbf45220b12c88a96bfc5fa5f05",
+      "normalized_sha256": "f20e36236e8ac0da4a9c9fc824f77960050f084705fc61951d4c6335c6beebe0"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\troc-fields-guards.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\troc-fields-guards.txt",
+      "raw_bytes": 257,
+      "raw_sha256": "f5be2fb290886677127b2acd151c9219e34002718a9c4e56dbb9c84a4df5f621",
+      "normalized_sha256": "2426f6451f7dd9544a371b8ef7f89a86d5bd686673ba98eb5ad10a31eb298696"
+    },
+    {
       "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\troc-register-target.txt",
       "repository": "docs\\probe-3663\\port-evidence\\r2\\troc-register-target.txt",
       "raw_bytes": 20091,
       "raw_sha256": "d659139d10d0f4b8adda82bb7924a360720c0c9ff1289f0a14e79f4d2fb37c94",
       "normalized_sha256": "db85c46a18ca57468a614890af2df1f096109da20c7341e8edb6c38a2282205e"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\troc-role-reference.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\troc-role-reference.txt",
+      "raw_bytes": 37942,
+      "raw_sha256": "af633518d2674fa85fdac89b95ce729717e690284466859771629c91d084f2eb",
+      "normalized_sha256": "2899d6e33cb015a7c02da30a4c7ffa594954b051cd89b92f2803eb74dd0993fd"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\troc-role-target.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\troc-role-target.txt",
+      "raw_bytes": 55673,
+      "raw_sha256": "7ba7c8d62f4cc37dc599b16a81d36f43681ca5221a293d9b87615a578029b9f3",
+      "normalized_sha256": "a48c48edb8d0467d031aa7bceed57310a6d6130a8d5add5898a41166c855494d"
     },
     {
       "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\tunnel-client-receive-reference.txt",

@@ -2,6 +2,16 @@
 
 Latest continuation:
 
+- After 8e1b8ef, descriptor consumers add five member/value proofs: catalog
+  184 plus 17 retained R1 values; 44 independent RVA checks await standard
+  support. Incremental cdmp_mod/build_guard compilation and all guard tests
+  passed (troc-fields-build.txt / troc-fields-guards.txt). The native framework
+  mode operand initially holds 11h, distinct from named request kind 4.
+- Step 3 ABI/ownership assessment is written in R2-FIELD-SHARING.md, with
+  R2-FIELD-TRACE.md specifying the next observation and its unmet collector
+  requirements. Field-sharing implementation remains blocked on standard
+  entry support and roster ownership/lifetime/rollback; no hook is armed.
+
 - At 05:49 EST both previously active matcher processes were absent and no
   final VT TSV or BinDiff database existed. Their last logs are preserved as
   vt-interrupted-0549.log and bindiff-interrupted-0549.log locally; the cause

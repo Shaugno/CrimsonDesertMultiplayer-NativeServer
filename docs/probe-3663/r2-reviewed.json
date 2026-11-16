@@ -1150,6 +1150,46 @@
       "kSaveHeaderAllowedFlags": 2
     }
   },
+  "B054": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Paired native receive 2773C20/2A0EA70 compares the incoming channel to descriptor byte+14 and branches on u16 flags+16. Paired TrocFind 143B2C0/165FAC0 tests descriptor kind dword+8 against its supplied mask. Target registration CB4BE0 loads descriptor u16+0C as the registry key and stores the same descriptor pointer. Named LoginUser/Character request descriptors independently have kind 4 at +8 in both exact files; kind 4 is not confused with the framework-mode global initial 11h. These member/value proofs do not adopt descriptor table boundaries or a new function RVA.",
+    "evidence": "port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; troc-register-target.txt; troc-mode-operands.json; request-candidates.json",
+    "old": "0x08",
+    "symbol": "kTroc_Kind"
+  },
+  "B055": {
+    "target": "0x0C",
+    "method": "paired native code consumption",
+    "second_check": "Paired native receive 2773C20/2A0EA70 compares the incoming channel to descriptor byte+14 and branches on u16 flags+16. Paired TrocFind 143B2C0/165FAC0 tests descriptor kind dword+8 against its supplied mask. Target registration CB4BE0 loads descriptor u16+0C as the registry key and stores the same descriptor pointer. Named LoginUser/Character request descriptors independently have kind 4 at +8 in both exact files; kind 4 is not confused with the framework-mode global initial 11h. These member/value proofs do not adopt descriptor table boundaries or a new function RVA.",
+    "evidence": "port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; troc-register-target.txt; troc-mode-operands.json; request-candidates.json",
+    "old": "0x0C",
+    "symbol": "kTroc_Opcode"
+  },
+  "B056": {
+    "target": "0x14",
+    "method": "paired native code consumption",
+    "second_check": "Paired native receive 2773C20/2A0EA70 compares the incoming channel to descriptor byte+14 and branches on u16 flags+16. Paired TrocFind 143B2C0/165FAC0 tests descriptor kind dword+8 against its supplied mask. Target registration CB4BE0 loads descriptor u16+0C as the registry key and stores the same descriptor pointer. Named LoginUser/Character request descriptors independently have kind 4 at +8 in both exact files; kind 4 is not confused with the framework-mode global initial 11h. These member/value proofs do not adopt descriptor table boundaries or a new function RVA.",
+    "evidence": "port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; troc-register-target.txt; troc-mode-operands.json; request-candidates.json",
+    "old": "0x14",
+    "symbol": "kTroc_Channel"
+  },
+  "B057": {
+    "target": "0x16",
+    "method": "paired native code consumption",
+    "second_check": "Paired native receive 2773C20/2A0EA70 compares the incoming channel to descriptor byte+14 and branches on u16 flags+16. Paired TrocFind 143B2C0/165FAC0 tests descriptor kind dword+8 against its supplied mask. Target registration CB4BE0 loads descriptor u16+0C as the registry key and stores the same descriptor pointer. Named LoginUser/Character request descriptors independently have kind 4 at +8 in both exact files; kind 4 is not confused with the framework-mode global initial 11h. These member/value proofs do not adopt descriptor table boundaries or a new function RVA.",
+    "evidence": "port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; troc-register-target.txt; troc-mode-operands.json; request-candidates.json",
+    "old": "0x16",
+    "symbol": "kTroc_Flags"
+  },
+  "B058": {
+    "target": "4",
+    "method": "paired native code consumption",
+    "second_check": "Paired native receive 2773C20/2A0EA70 compares the incoming channel to descriptor byte+14 and branches on u16 flags+16. Paired TrocFind 143B2C0/165FAC0 tests descriptor kind dword+8 against its supplied mask. Target registration CB4BE0 loads descriptor u16+0C as the registry key and stores the same descriptor pointer. Named LoginUser/Character request descriptors independently have kind 4 at +8 in both exact files; kind 4 is not confused with the framework-mode global initial 11h. These member/value proofs do not adopt descriptor table boundaries or a new function RVA.",
+    "evidence": "port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; troc-register-target.txt; troc-mode-operands.json; request-candidates.json",
+    "old": "4",
+    "symbol": "kTrocKindServer"
+  },
   "B022": {
     "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}",
     "method": "native entry bytes at retained R1 function",

@@ -1,0 +1,9 @@
+3663 tier request/evidence and identity matrices: OK
+Supported identity: OK
+Unsupported identity: OK
+Unreadable identity: OK
+Mapped reader: OK
+Test host: OK
+Build 3576 identity: OK
+Build 3663 recognized and unarmed: OK
+All build guard tests passed

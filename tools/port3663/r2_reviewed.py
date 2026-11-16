@@ -158,6 +158,10 @@ result[header_row['r2']]['members']=dict(kSaveHeaderMagicOffset=0,kSaveHeaderVer
     kSaveHeaderSizeOffset=6,kSaveHeaderFlagsOffset=0xC,kSaveHeaderRawSizeOffset=0x12,
     kSaveHeaderDataSizeOffset=0x16,kSaveHeaderVersionMin=1,kSaveHeaderVersionMax=2,
     kSaveHeaderAllowedFlags=2)
+prove('B','src/mod/session2/offsets_s2.h',dict(kTroc_Kind='0x08',kTroc_Opcode='0x0C',
+    kTroc_Channel='0x14',kTroc_Flags='0x16',kTrocKindServer='4'),
+    'port-evidence/r2/troc-role-reference.txt; troc-role-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; troc-register-target.txt; troc-mode-operands.json; request-candidates.json',
+    'Paired native receive 2773C20/2A0EA70 compares the incoming channel to descriptor byte+14 and branches on u16 flags+16. Paired TrocFind 143B2C0/165FAC0 tests descriptor kind dword+8 against its supplied mask. Target registration CB4BE0 loads descriptor u16+0C as the registry key and stores the same descriptor pointer. Named LoginUser/Character request descriptors independently have kind 4 at +8 in both exact files; kind 4 is not confused with the framework-mode global initial 11h. These member/value proofs do not adopt descriptor table boundaries or a new function RVA.')
 signatures=docs/'r2-signatures.json'
 if signatures.exists():
     result.update(json.loads(signatures.read_text())['rows'])
