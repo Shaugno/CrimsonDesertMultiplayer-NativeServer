@@ -51,6 +51,7 @@ std::vector<uint8_t> make_image(uint32_t timestamp, uint32_t e_lfanew = 0x80, ui
 }
 
 struct Counts {
+    int tier_a_reads = 0;
     int reads = 0;
     int hooks = 0;
     int overlays = 0;
@@ -64,6 +65,7 @@ struct Counts {
 // sampled only from run_network, which is the network callback.
 Counts drive(const guard::StartupDecision& decision, bool net_enabled = true) {
     Counts counts;
+    guard::route_3663_reader(decision, [&] { ++counts.tier_a_reads; });
     guard::apply_startup(
         decision, [&] { ++counts.reads; }, [&] { ++counts.hooks; }, [&] { ++counts.overlays; });
     guard::start_multiplayer(
@@ -84,6 +86,7 @@ guard::StartupRequest request(bool in_game, bool guest, bool test_overlay, const
 void check_blocked(const guard::StartupDecision& decision) {
     const Counts counts = drive(decision);
     CHECK(counts.reads == 0);
+    CHECK(counts.tier_a_reads == 0);
     CHECK(counts.hooks == 0);
     CHECK(counts.overlays == 0);
     CHECK(counts.game_sources == 0);
@@ -397,6 +400,13 @@ void test_3663_tier_dependency_matrix() {
             CHECK(out.tier_b_tunnel == ((both & 3) == 3));
             CHECK(out.tier_c_join == ((both & 7) == 7));
             CHECK(out.tier_d_lifecycle == ((both & 15) == 15));
+            guard::StartupDecision routed;
+            routed.build = guard::GameBuild::Build3663;
+            static_cast<guard::TierPermissions&>(routed) = out;
+            const auto effects = drive(routed);
+            CHECK(effects.tier_a_reads == (out.tier_a_reads ? 1 : 0));
+            CHECK(effects.reads == 0 && effects.hooks == 0 && effects.overlays == 0);
+            CHECK(effects.game_sources == 0 && effects.synthetic == 0 && effects.networks == 0);
         }
     }
     for (unsigned fault = 0; fault < 7; ++fault) {
@@ -419,6 +429,7 @@ void test_3663_tier_dependency_matrix() {
     CHECK(cdmp::game::player_layout(identity) == nullptr);
     const auto legacy = guard::identify_image(make_image(kPeTimestamp), kImageBase);
     CHECK(cdmp::game::player_layout(legacy) == &cdmp::game::kPlayerLayout2976);
+    CHECK(drive(guard::decide_startup(request(true,false,false,legacy))).tier_a_reads == 0);
     const auto unknown = guard::identify_image(make_image(kPeTimestamp + 1), kImageBase);
     CHECK(cdmp::game::player_layout(unknown) == nullptr);
     std::printf("3663 tier request/evidence and identity matrices: OK\n");

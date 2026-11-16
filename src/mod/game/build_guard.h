@@ -270,6 +270,16 @@ inline StartupDecision decide_startup(const StartupRequest& req) {
     return decision;
 }
 
+// The target reader has its own route. Even an armed A decision must never
+// enter the legacy all-features callbacks, late-init or optional installers.
+// True means the recognized target was handled (including an unarmed target).
+template <class ReadOnlyFn>
+bool route_3663_reader(const StartupDecision& decision, ReadOnlyFn&& read_only) {
+    if (decision.build != GameBuild::Build3663) return false;
+    if (decision.tier_a_reads) read_only();
+    return true;
+}
+
 // Invokes each side effect only when the decision allows it. Callers that
 // touch game addresses or install hooks go through this so a rejected identity
 // cannot reach them.

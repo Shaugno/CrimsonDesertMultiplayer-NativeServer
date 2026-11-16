@@ -244,7 +244,7 @@ public:
     explicit LocalSource(bool in_game) : in_game_(in_game) {
         if (!in_game_) return;
         if (reader_.init()) {
-            log::info("Game reader enabled (build 1.0.0.2976 offsets)");
+            log::info("Game reader enabled (verified per-build layout)");
         } else {
             log::warn("Game reader DISABLED: {}. Only networking will run.",
                       reader_.last_failure());
@@ -1033,6 +1033,27 @@ DWORD WINAPI worker(LPVOID) {
             return 0;
         }
         const Config cfg = load_config(dir + ini.name);
+        // Tier A is a read-only worker route, before every legacy optional
+        // configuration/installer. Config cannot grant a compiled permission.
+        // Higher tiers need their own complete per-build tunnel/join route.
+        if (game::build_guard::route_3663_reader(startup, [&] {
+                if (cfg.startup_delay_ms > 0 && stop_requested(cfg.startup_delay_ms)) return;
+                LocalSource local(true);
+                log::info("3663 Tier A: read-only local reader; no hooks or network");
+                uint32_t last_log = 0;
+                while (!stop_requested(50)) {
+                    const uint32_t now = GetTickCount();
+                    (void)local.sample(now);
+                    if (now - last_log >= 2000) {
+                        log::info("3663 Tier A: {}", local.describe());
+                        last_log = now;
+                    }
+                }
+            })) {
+            if (!startup.tier_a_reads) log::info("{}", game::build_guard::diagnostic(proc.identity));
+            log::info("Worker exiting");
+            return 0;
+        }
         if (rs.role == role::Role::Guest && !(cfg.s2_enabled && cfg.s2_guest)) {
             log::warn("Role guest: the ini has no [session2] enabled=1 guest=1; this copy is not a P8 guest");
         }
