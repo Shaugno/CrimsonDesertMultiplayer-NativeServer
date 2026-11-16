@@ -108,19 +108,49 @@ std::optional<PlayerSnapshot> PlayerReader::read() {
         return fail("loading (actor parked at 0,1000,0)");
     }
 
-    read_stats(*components, snap);
+    const bool stats_ready = read_stats(*components, snap);
+    if (layout_->native_hp_definitions && !stats_ready)
+        return fail("HP definitions or unique native stat not ready");
+    if (layout_->native_hp_definitions &&
+        (resolve_actor() != actor || read_ptr(*actor + layout_->kActor_ComponentTable) != components ||
+         read_ptr(*components + layout_->kComponents_CharacterControl) != control ||
+         read_ptr(*control + layout_->kControl_Inner) != inner ||
+         read_ptr(*inner + layout_->kControlInner_Physics) != physics))
+        return fail("player chain changed during snapshot");
     last_failure_.clear();
     return snap;
 }
 
-void PlayerReader::read_stats(uintptr_t components, PlayerSnapshot& out) {
+bool PlayerReader::read_stats(uintptr_t components, PlayerSnapshot& out) {
     auto status = read_ptr(components + layout_->kComponents_Status);
-    if (!status || !has_vtable(*status, base_ + layout_->kVtStatusComponent)) return;
+    if (!status || !has_vtable(*status, base_ + layout_->kVtStatusComponent)) return false;
     auto container = read_ptr(*status + layout_->kStatus_StatContainer);
-    if (!container) return;
+    if (!container) return false;
     auto entries = read_ptr(*container + layout_->kStatContainer_Entries);
     auto count = game::read<uint32_t>(*container + layout_->kStatContainer_Count);
-    if (!entries || !count || *count > layout_->kMaxStatEntries) return;
+    if (!entries || !count || *count > layout_->kMaxStatEntries) return false;
+
+    if (layout_->native_hp_definitions) {
+        const auto read = [](uintptr_t address, void* buffer, size_t size) {
+            return safe_read(address, buffer, size);
+        };
+        const auto& definition = *layout_->native_hp_definitions;
+        auto before = consensus_health_definition(base_, definition, read);
+        if (!before) return false;
+        auto health = read_unique_native_health(*entries, *count, layout_->kStatEntry_Size,
+            layout_->kStatEntry_Id, layout_->kStatEntry_Current, layout_->kStatEntry_Max,
+            before->normal.key, layout_->stat_units, read);
+        auto after = consensus_health_definition(base_, definition, read);
+        if (!health || !after || *before != *after ||
+            read_ptr(components + layout_->kComponents_Status) != status ||
+            read_ptr(*status + layout_->kStatus_StatContainer) != container ||
+            read_ptr(*container + layout_->kStatContainer_Entries) != entries ||
+            game::read<uint32_t>(*container + layout_->kStatContainer_Count) != count) return false;
+        out.health = health->current;
+        out.health_max = health->maximum;
+        // This native path intentionally reads HP only; no unproved stamina ID.
+        return true;
+    }
 
     // Look stats up by id: the entry order changes between patches.
     for (uint32_t i = 0; i < *count; ++i) {
@@ -145,6 +175,7 @@ void PlayerReader::read_stats(uintptr_t components, PlayerSnapshot& out) {
         *cur_out = static_cast<float>(*cur) / layout_->stat_units;
         *max_out = static_cast<float>(*max) / layout_->stat_units;
     }
+    return true;
 }
 
 }  // namespace cdmp::game

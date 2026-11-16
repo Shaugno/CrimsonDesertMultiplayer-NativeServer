@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
+#include <limits>
 #include <string>
 #include <vector>
 
@@ -435,6 +436,88 @@ void test_3663_tier_dependency_matrix() {
     std::printf("3663 tier request/evidence and identity matrices: OK\n");
 }
 
+void test_native_health_selection() {
+    // Fictional process memory only. Different registry chains select one
+    // key; dirty ID padding and a neighbouring stamina stat must not select HP.
+    constexpr uintptr_t base = 0x10000, entries = base + 0x3000;
+    std::vector<uint8_t> memory(0x4000, 0xA5);
+    auto put = [&](uintptr_t address, auto value) {
+        std::memcpy(memory.data() + address - base, &value, sizeof value);
+    };
+    auto read = [&](uintptr_t address, void* out, size_t size) {
+        if (address < base || address - base > memory.size() || size > memory.size() - (address - base))
+            return false;
+        std::memcpy(out, memory.data() + address - base, size);
+        return true;
+    };
+    cdmp::game::HealthDefinitionLayout layout{0x100, 0x108, 0, 8, 0x10, 0x78};
+    for (uintptr_t root : {base + 0x1000, base + 0x2000}) {
+        put(root, root + 0x100);
+        put(root + 0x108, root + 0x200);
+        put(root + 0x210, root + 0x300);
+        put(root + 0x378, uint16_t{7});
+    }
+    put(base + layout.normal_slot, base + 0x1000);
+    put(base + layout.alternate_slot, base + 0x2000);
+    auto sample = [&] { return cdmp::game::consensus_health_definition(base, layout, read); };
+    const auto first = sample();
+    CHECK(first && first->normal.key == 7 && first->alternate.key == 7);
+    put(base + 0x2378, uint16_t{22});
+    CHECK(!sample());
+    put(base + 0x2378, uint16_t{7});
+    put(base + layout.alternate_slot, uintptr_t{0});
+    CHECK(!sample());
+    put(base + layout.alternate_slot, base + 0x2000);
+    put(base + 0x2210, base + 0x2400);
+    put(base + 0x2478, uint16_t{7});
+    const auto changed = sample();
+    CHECK(first && changed && *first != *changed); // Same key, changed owning object.
+    put(base + 0x2210, base + 0x2300);
+    auto absent = layout;
+    absent.normal_slot = 0;
+    CHECK(!cdmp::game::consensus_health_definition(base, absent, read));
+    CHECK(!cdmp::game::health_address(UINTPTR_MAX - 4, 8, 2));
+    CHECK(!cdmp::game::health_address(0x7FFFFFFFFFFF, 0, 2));
+    CHECK(!cdmp::game::health_address(0, 0, 2));
+    put(base + 0x1378, uint16_t{0});
+    put(base + 0x2378, uint16_t{0});
+    CHECK(sample() && sample()->normal.key == 0); // Zero is a valid native key.
+    put(base + 0x1378, uint16_t{7});
+    put(base + 0x2378, uint16_t{7});
+    CHECK(!cdmp::game::consensus_health_definition(base, layout,
+        [](uintptr_t, void*, size_t) { return false; }));
+
+    put(entries, uint16_t{7});
+    put(entries + 8, int64_t{12000});
+    put(entries + 0x18, int64_t{20000});
+    put(entries + 0x90, uint16_t{22});
+    auto health = [&](uint16_t key = 7, uint32_t count = 2, float units = 1000.0f) {
+        return cdmp::game::read_unique_native_health(entries, count, 0x90, 0, 8, 0x18, key, units, read);
+    };
+    auto value = health();
+    CHECK(value && value->current == 12.0f && value->maximum == 20.0f);
+    CHECK(!health(9));
+    put(entries + 0x90, uint16_t{7});
+    CHECK(!health());
+    put(entries + 0x90, uint16_t{22});
+    for (int64_t invalid : {int64_t{-1}, int64_t{20001}}) {
+        put(entries + 8, invalid);
+        CHECK(!health());
+    }
+    put(entries + 8, int64_t{0});
+    CHECK(health() && health()->current == 0); // Dead/empty current HP is valid.
+    put(entries + 0x18, int64_t{0});
+    CHECK(!health());
+    put(entries + 0x18, int64_t{20000});
+    CHECK(!health(7, 0) && !health(7, 65));
+    CHECK(!health(7, 2, 0) && !health(7, 2, std::numeric_limits<float>::quiet_NaN()));
+    CHECK(!health(7, 2, std::numeric_limits<float>::denorm_min()));
+    CHECK(!cdmp::game::read_unique_native_health(entries, 1, 8, 0, 8, 0x18, 7, 1000, read));
+    CHECK(!cdmp::game::read_unique_native_health(0x7FFFFFFFFFF0, 1, 0x90, 0, 8, 0x18, 7, 1000, read));
+    CHECK(!cdmp::game::kPlayerLayout2976.native_hp_definitions);
+    std::printf("Native HP consensus, chain-change, ambiguity and bounds: OK (synthetic only)\n");
+}
+
 }  // namespace
 
 int main() {
@@ -456,6 +539,7 @@ int main() {
         CHECK(!cdmp::game::read_stat_id(1,2,[](uintptr_t,void*,size_t) { return false; }));
     }
     test_3663_tier_dependency_matrix();
+    test_native_health_selection();
     test_supported();
     test_unsupported();
     test_unreadable();

@@ -58,6 +58,19 @@ production tiers closed. It is not L1. L1 remains gated on a complete A table
 and then must demonstrate position, rotation, HP and explicit loading not-ready
 through load, walk, turn and fast travel, with the user present.
 
+An unpublished reader path now supports a guarded definition-derived HP key.
+It requires both complete native registry chains to agree, reads only the
+unique matching u16 stat, checks signed current/max bounds and finite units,
+then verifies both definition chains and the source container again. Changed,
+missing or ambiguous data produces explicit not-ready rather than a literal
+zero-ID fallback. It also rechecks the actor/control/physics pointer chain.
+This path reads HP only. The legacy layout keeps its literal health/stamina
+reader unchanged; no 3663 layout is published and all tier gates remain false.
+The conservative requirement for two agreeing registries may deny valid game
+states; P1 must establish whether it is usable before a target table selects
+it. Missing alternate definitions never silently select the normal registry.
+No core row is declared adopted or retired by this preparatory implementation.
+
 The session driver now also supports a separately written `-Profile loading`
 question. Its external read-only collector records the candidate position,
 chunk origin, rotation axes, static position and full-chain coherence, from

@@ -212,6 +212,34 @@
       "normalized_sha256": "f20e36236e8ac0da4a9c9fc824f77960050f084705fc61951d4c6335c6beebe0"
     },
     {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\native-health-build.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\native-health-build.txt",
+      "raw_bytes": 32589,
+      "raw_sha256": "2afdc5e4caeb27739cd73c2f127f462f81a992c2dc1829b66d3a16278d5bf8e4",
+      "normalized_sha256": "278d0fa5d9ba31bc58c8c3f613adfc8204cab8170bd7c4f409c71e2251c4968a"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\native-health-guards.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\native-health-guards.txt",
+      "raw_bytes": 335,
+      "raw_sha256": "b58eb2f301fdc85d2d2223a08a5e86d2cb3f1cb58260581292a298a388013d54",
+      "normalized_sha256": "a55a720410581aae12c59da2372bd8afe20df0f6248b887cd1d76a1bec84b238"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\native-health-host.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\native-health-host.txt",
+      "raw_bytes": 6559,
+      "raw_sha256": "bca28e4825f3c9161c38c8736adb7081d7f2b30d018b147cc8b7b8497e13445f",
+      "normalized_sha256": "355d0a7b7e17b1a22ef833ec2325026869fc73db3eb22ca18f01cdf2ec0028dd"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\native-health-smoke.txt",
+      "repository": "docs\\probe-3663\\port-evidence\\r2\\native-health-smoke.txt",
+      "raw_bytes": 153,
+      "raw_sha256": "7ef759b8b4376c158886256d1aba36257286ae0c9d91954b687e1a0af744743f",
+      "normalized_sha256": "4185e3cab0525f82f98d8f1b4ee1d516b2608ef623025c4dd395b31e84b566e7"
+    },
+    {
       "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\native-options-preflight.txt",
       "repository": "docs\\probe-3663\\port-evidence\\r2\\native-options-preflight.txt",
       "raw_bytes": 5532,

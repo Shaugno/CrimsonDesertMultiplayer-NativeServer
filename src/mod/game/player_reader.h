@@ -43,7 +43,7 @@ public:
 
 private:
     std::optional<uintptr_t> resolve_actor();
-    void read_stats(uintptr_t components, PlayerSnapshot& out);
+    bool read_stats(uintptr_t components, PlayerSnapshot& out);
     std::nullopt_t fail(const char* why);
 
     bool enabled_ = false;

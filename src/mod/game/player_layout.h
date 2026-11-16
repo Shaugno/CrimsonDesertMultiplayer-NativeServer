@@ -2,6 +2,7 @@
 // One reader, explicit per-build data. No fallback from a recognized new build
 // to legacy offsets. A 3663 table is published only with complete R2 A proofs.
 #include "mod/game/build_guard.h"
+#include "mod/game/health_definition.h"
 #include "mod/game/offsets.h"
 
 namespace cdmp::game {
@@ -41,6 +42,9 @@ struct PlayerLayout {
 #undef CDMP_PLAYER_FIELD
     const float stat_units = 1000.0f; // native 2976 unit conversion
     const uint32_t stat_id_bytes = 8; // preserve the legacy reader's width
+    // Presence selects the HP-only native reader. A target table must supply
+    // adopted slots/hops; missing or inconsistent definitions mean not-ready.
+    std::optional<HealthDefinitionLayout> native_hp_definitions;
 };
 inline constexpr PlayerLayout kPlayerLayout2976{};
 

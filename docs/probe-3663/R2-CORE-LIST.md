@@ -407,8 +407,8 @@ Counts: A 37, B 77, C 150, D 130; total 394; R1 adopted 17.
 | C142 | C | native member/value contract | kLayer_Playback | `0x18` | src/mod/game/offsets.h:222 | puppet_install_layer_guards: shared action-layer crash containment | needs target evidence |
 | C143 | C | native member/value contract | kLayer_Chart | `0x110` | src/mod/game/offsets.h:223 | puppet_install_layer_guards: shared action-layer crash containment | needs target evidence |
 | C144 | C | native member/value contract | kActor_OwnerUser | `0x90` | src/mod/game/offsets.h:230 | puppet_install_layer_guards: shared action-layer crash containment | needs target evidence |
-| A029 | A | native member/size contract | NativeStatUnits | `1000.0f` | src/mod/game/player_layout.h:42 | native int64 stat conversion scale (not a timeout) | needs target evidence |
-| A030 | A | native member/size contract | StatIdReadWidth | `8` | src/mod/game/player_layout.h:43 | legacy reader width; target native ID width must be confirmed separately from padding | needs target evidence |
+| A029 | A | native member/size contract | NativeStatUnits | `1000.0f` | src/mod/game/player_layout.h:43 | native int64 stat conversion scale (not a timeout) | needs target evidence |
+| A030 | A | native member/size contract | StatIdReadWidth | `8` | src/mod/game/player_layout.h:44 | legacy reader width; target native ID width must be confirmed separately from padding | needs target evidence |
 | A031 | A | function/global RVA | kWorldSystemSlot | `0x6D69190` | src/mod/game/offsets.h:15 | PlayerReader root and inherited save-manager root | needs target evidence |
 | A032 | A | function/global RVA | kHpDefinitionsSlot | `0x6D69528` | docs/probe-3663/port-evidence/r2/player-health-update-reference.txt:23 | native HP updater selects game-data definition registry | needs target evidence |
 | A033 | A | function/global RVA | kHpDefinitionsAltSlot | `0x6D69530` | docs/probe-3663/port-evidence/r2/player-health-update-reference.txt:25 | alternate native HP definition registry; no assumed selector ID | needs target evidence |

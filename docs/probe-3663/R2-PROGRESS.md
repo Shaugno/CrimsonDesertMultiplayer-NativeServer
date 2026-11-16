@@ -2,6 +2,21 @@
 
 Latest continuation:
 
+- Tier A preparation now has an unpublished HP-only native reader selected
+  by an explicit definition-layout option. It requires both complete registry
+  chains to agree on a u16 key, one valid matching stat, stable definitions
+  and source containers, and unchanged actor/control/physics pointers. No
+  literal ID or single-registry fallback is used. Legacy defaults keep the
+  existing health/stamina loop; the 3663 table remains absent and all tiers
+  false. No A row is adopted/retired by this change. P1 still must validate
+  usability and HP agreement, followed separately by real L1 readiness tests.
+- HP-path validation: full build/CTest 101/101, 87.82 seconds; targeted
+  consensus/changed-chain/ambiguity/value/bounds regressions passed. Synthetic
+  host/peer smoke logged 78 states, zero rejected, clean unload. Canonical
+  native-health-*.txt logs are retained. Self-review: all new memory accesses
+  use guarded copies; no native call, hook, network/protocol or save change;
+  no legacy layout or unknown-build fallback introduced.
+
 - After 8e1b8ef, descriptor consumers add five member/value proofs: catalog
   184 plus 17 retained R1 values; 44 independent RVA checks await standard
   support. Incremental cdmp_mod/build_guard compilation and all guard tests
