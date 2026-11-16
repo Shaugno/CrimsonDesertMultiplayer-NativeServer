@@ -8,6 +8,9 @@ public class R2ExportMatches extends GhidraScript {
         var args = getScriptArgs();
         var file = state.getProject().getProjectData().getFile(args[0]);
         if (file == null) throw new IllegalStateException("Missing VT session " + args[0]);
+        // As in stock AutoVersionTrackingScript: opening a VT session needs
+        // program locks, which the enclosing script transaction would hold.
+        end(true);
         var session = (VTSession) file.getDomainObject(this, true, false, monitor);
         try (var out = new PrintWriter(args[1], "UTF-8")) {
             out.println("source\tdestination\ttype\tstatus\tmethod\tsimilarity\tconfidence");

@@ -1,0 +1,22 @@
+{
+  "purpose": "Owned synthetic AutoVT/export regression only; not game matching evidence",
+  "accepted_functions": 125,
+  "result": "PASS",
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\vt-fixture\\exportlock-0605-matches.tsv",
+      "bytes": 28569,
+      "sha256": "61BED04B79AF693846C48CB63C98CA5DBCC7E2A69258A68CFA88DF7EC967063A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\vt-fixture\\exportlock-0605-options.txt",
+      "bytes": 449,
+      "sha256": "FE84E851768CCE763B60BC0E70697EBBDE5198379348BE6D27EAE8441A9FAE13"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\export-fixture\\Release\\r2_export_fixture.exe",
+      "bytes": 10240,
+      "sha256": "6E5F5CBAB4A01C31CE11404AF8B87850512AEB8509F0D32AA9E16C63C3FA92AF"
+    }
+  ]
+}

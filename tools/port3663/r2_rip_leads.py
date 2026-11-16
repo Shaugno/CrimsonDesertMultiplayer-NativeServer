@@ -1,4 +1,4 @@
-"""Locate file-only RIP operand leads. Every hit needs native disassembly review."""
+"""Locate file-only RIP operand/rel32 call leads; all need native disassembly."""
 import argparse
 from bisect import bisect_right
 import json
@@ -9,7 +9,7 @@ from pe_identity import PE
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('image',type=Path)
 p.add_argument('--rvas',nargs='+',required=True,type=lambda v:int(v,0))
-p.add_argument('--operation',choices=('lea','cmp'),default='lea')
+p.add_argument('--operation',choices=('lea','cmp','mov','call'),default='lea')
 p.add_argument('--out',type=Path,required=True)
 args=p.parse_args()
 image=PE(args.image)
@@ -23,16 +23,23 @@ rows=[]
 for section in image.sections:
     if not section['flags']&0x20000000: continue
     data=image.data[section['raw']:section['raw']+section['size']]
-    prefixes=(b'\x48\x8d',b'\x4c\x8d') if args.operation=='lea' else (b'\x3b',)
+    prefixes=(b'\x48\x8d',b'\x4c\x8d') if args.operation=='lea' else ((b'\x3b',) if args.operation=='cmp' else ((b'\xe8',) if args.operation=='call' else (b'\x8b',)))
     for prefix in prefixes:
         index=-1
         while True:
             index=data.find(prefix,index+1)
             if index<0: break
             operand=index+len(prefix)
-            if operand+5>len(data) or data[operand]&0xC7!=5: continue
+            if args.operation=='call':
+                if operand+4>len(data): continue
+                end=operand+4
+                displacement=operand
+            else:
+                if operand+5>len(data) or data[operand]&0xC7!=5: continue
+                end=operand+5
+                displacement=operand+1
             rva=section['rva']+index
-            target=section['rva']+operand+5+struct.unpack_from('<i',data,operand+1)[0]
+            target=section['rva']+end+struct.unpack_from('<i',data,displacement)[0]
             if target not in wanted: continue
             at=bisect_right(starts,rva)-1
             owner=ranges[at][0] if at>=0 and rva<ranges[at][1] else None

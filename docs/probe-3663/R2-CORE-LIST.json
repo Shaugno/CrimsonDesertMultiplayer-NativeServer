@@ -4654,5 +4654,77 @@
     "adopted_r1": false,
     "classification": "game",
     "kind": "native layout contract"
+  },
+  {
+    "id": "N1158",
+    "source": "src/mod/session2/slot_refresh.h:75",
+    "symbol": "kEntrySize",
+    "kind": "native member/size contract",
+    "value": "0x68",
+    "use": "read_slot_table -> slot_refresh::parse_entries uses its own native stride",
+    "tier": "D",
+    "r2": "D127",
+    "adopted_r1": false,
+    "classification": "game"
+  },
+  {
+    "tier": "D",
+    "symbol": "TitleSlotNumberOffset",
+    "value": "0",
+    "source": "src/mod/session2/slot_refresh.cpp:52",
+    "use": "title slot entry u32 number offset",
+    "id": "inline",
+    "r2": "D128",
+    "adopted_r1": false,
+    "classification": "game",
+    "kind": "native member/value contract"
+  },
+  {
+    "tier": "D",
+    "symbol": "TitleSlotTimeOffset",
+    "value": "8",
+    "source": "src/mod/session2/slot_refresh.cpp:53",
+    "use": "title slot entry i64 time offset",
+    "id": "inline",
+    "r2": "D129",
+    "adopted_r1": false,
+    "classification": "game",
+    "kind": "native member/value contract"
+  },
+  {
+    "tier": "D",
+    "symbol": "NativeTitleSlotDomain",
+    "value": "0..2;100..108",
+    "source": "src/mod/session2/slot_refresh.cpp:61",
+    "use": "native title enable predicate; unlike retry/count caps this is a game eligibility rule",
+    "id": "inline",
+    "r2": "D130",
+    "adopted_r1": false,
+    "classification": "game",
+    "kind": "native member/value contract"
+  },
+  {
+    "tier": "B",
+    "symbol": "NativeCryptoEnabledOffset",
+    "value": "0x24",
+    "source": "src/mod/session2/guest.cpp:511",
+    "use": "guest packet extraction rejects encrypted native frames based on this game field",
+    "id": "inline",
+    "r2": "B076",
+    "adopted_r1": false,
+    "classification": "game",
+    "kind": "native member/value contract"
+  },
+  {
+    "tier": "B",
+    "symbol": "NativePacketEpochOffset",
+    "value": "0x8020",
+    "source": "src/mod/session2/guest.cpp:954",
+    "use": "guest_send takes the native packet epoch before the session fallback",
+    "id": "inline",
+    "r2": "B077",
+    "adopted_r1": false,
+    "classification": "game",
+    "kind": "native member/value contract"
   }
 ]

@@ -108,6 +108,24 @@ prove('C','src/mod/session2/identity_probe.h',dict(kActorComponents='0x68',
     kActorUser='0xA0',kKey='0x60'),
     'port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt',
     'Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.')
+prove('D','src/mod/session2/guest_save_host.cpp',dict(kMgrPendingSlot='0x5C'),
+    'port-evidence/r2/save-manager-reference.txt; save-flush-target.txt; save-flush-callers-reference.txt; save-flush-callers-target.txt',
+    'Paired native six-argument FlushPendingSaveData 1871930/1A192D0 acquires busy/lock, validates generation, reads pending i32 slot at manager+5C, copies it to the out argument and resets +5C to FFFFFFFF under lock before formatting/committing that slot. This proves the field, not the callable RVA.')
+prove('D','src/mod/session2/offsets_s2.h',dict(kSaveMgr_Capacity='0x4C'),
+    'port-evidence/r2/title-entry-reference.txt; title-entry-target.txt',
+    'Paired native refresh entry-populators 1871D60/1A19720 and fallback constructors 1872620/1A1A080 compare manager count+48 with capacity+4C, reserve vector+40 when full, append an entry and increment count. Target stride is 78, independently corroborating the native vector field roles.')
+prove('D','src/mod/session2/slot_refresh.h',dict(kEntrySize='0x78'),
+    'port-evidence/r2/title-entry-reference.txt; title-entry-target.txt; save-manager-reference.txt; save-manager-target.txt',
+    'The title parser has a separate legacy 68-byte stride from offsets_s2. Both target native refresh population and fallback creation multiply index by 78, agreeing with native clear/sort. The 2976 parser remains unchanged; target routing must supply 78 explicitly.')
+prove('D','src/mod/session2/slot_refresh.cpp',dict(TitleSlotNumberOffset='0',TitleSlotTimeOffset='8'),
+    'port-evidence/r2/title-entry-reference.txt; title-entry-target.txt; title-entry-copy-reference.txt; title-entry-copy-target.txt',
+    'Paired native refresh entry-populators set the first u32 to the parsed slot number and copy the same lobby metadata qword at +68 to entry+8; fallback entries use the requested slot and a zero qword. Native copy constructors 18735F0/1A1B1A0 independently copy u32+0 and qword+8 into vector entries. This proves raw field roles/widths, not new timestamp units or title eligibility.')
+prove('B','src/mod/session2/guest.cpp',dict(NativeCryptoEnabledOffset='0x24'),
+    'port-evidence/r2/tunnel-crypto-rtti-reference.json; tunnel-crypto-rtti-target.json; tunnel-crypto-reference.txt; tunnel-crypto-target.txt; ../ghidra-3663-core-handlers.txt',
+    'The exact CryptogramAesGcm RTTI class has enabled predicate vslot+10 at 12B31D0/14D0E80. Both native bodies compare byte this+24 with one and return that result. Native target receive dispatch calls crypto vslot+10 before decrypting. This proves the AES field only; target extraction must reject unknown crypto object types before using it. Legacy nonzero rejection is conservative relative to the native equality test.')
+prove('B','src/mod/session2/guest.cpp',dict(NativePacketEpochOffset='0x8020'),
+    'port-evidence/ghidra-2976-expanded.txt; port-evidence/r2/tunnel-layout-target.txt; tunnel-connect-reference.txt; tunnel-connect-target.txt',
+    'Paired native PostPacket 35C670/3A9960 copy session+B0 into packet-buffer+8020, or INT64_MAX with no session; +8018 separately receives session+B8. Named OnConnect independently writes a fresh epoch at session+B0. This proves the qword read by guest_send, not safe reuse of the separate tag/magic fields.')
 save_constants=json.loads((docs/'r2-save-constants.json').read_text())
 prove('B','src/mod/session2/offsets_s2.h',dict(kSyncSession_Epoch='0xB0',kClientNet_Slot4='0x58'),
     'port-evidence/r2/tunnel-connect-reference.txt; tunnel-connect-target.txt; tunnel-control-native-target.txt',

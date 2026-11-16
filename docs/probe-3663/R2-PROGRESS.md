@@ -2,6 +2,44 @@
 
 Latest continuation:
 
+- At 05:49 EST both previously active matcher processes were absent and no
+  final VT TSV or BinDiff database existed. Their last logs are preserved as
+  vt-interrupted-0549.log and bindiff-interrupted-0549.log locally; the cause
+  of interruption is not established. Neither run counts as completed evidence.
+  BinDiff restarted from the unchanged saved exports; stock AutoVT restarted
+  in fresh session R2AutoCoreRetry0553. An immediate retry of R2AutoCore was
+  rejected because that interrupted session already exists. The driver now
+  accepts an explicit session name, preserving interrupted databases.
+- Export-session reopening also exposed a script transaction lock. The export
+  script now ends its enclosing transaction before opening the VT session,
+  following the stock AutoVersionTrackingScript lock sequence. Match algorithms
+  and adoption thresholds are unchanged; the final game export still needs to
+  run. The owned synthetic AutoVT/export fixture passed with 125 accepted
+  functions. Its first attempt tried matching an unsaved import, which stock
+  AutoVT refused as read-only; saving both imports before matching fixed that
+  fixture setup. Both failure and successful logs plus output hashes are
+  retained in port-evidence/r2/vt-export-fixture*. No fixture matches are
+  included in game adoption evidence.
+- Core is now 394 (A37/B77/C150/D130). Seven further native contracts bring
+  the reviewed catalog to 179, plus 17 retained R1 values. Independent RVA
+  checks now number 43; all await actual standard support. Save flush, title
+  entry, native AES enablement and packet epoch facts are detailed in the
+  canonical evidence. All prior core IDs/symbols/values are checked stable.
+- Evidence joins now reject a contradictory direct global match even if a
+  paired operand anchor agrees, and reject manual function/global RVA proofs
+  that bypass standard support. Synthetic regression fixtures pass. These
+  fixtures never populate the actual R2-MATCHES output.
+- The pinned official loader is now available locally and hash-verified;
+  port-evidence/r2/loader-identity.json records its identity. It has not been
+  deployed. Passive HP/loading profiles remain prepared and unrun.
+- Continuation validation: full scripts/build.ps1 passed 101/101 CTests in
+  91.15 seconds. Synthetic host/peer smoke logged 77 remote states, zero
+  rejected, clean network stop and worker exit; frozen local logs are
+  build/r2/continuation-build.txt and continuation-host.txt. This does not
+  establish native 3663 behavior. Evidence-join regression fixtures passed.
+
+Earlier checkpoint details (counts and process IDs below are historical):
+
 - Full whole-image exports completed and saved: reference 589385035 bytes,
   target 615418483 bytes, 18.69/19.52 million analyzed instructions. Hashes
   and local paths are in port-evidence/r2/whole-image-exports.json. BinDiff

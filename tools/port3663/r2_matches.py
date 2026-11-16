@@ -30,12 +30,20 @@ with args.vt.open(encoding='utf-8-sig') as stream:
         destination = int(row['destination'].split(':')[-1],16)-0x140000000
         if source>0 and destination>0: vt[source].append(dict(row, target=destination))
 db = sqlite3.connect(args.bindiff.resolve().as_uri()+'?mode=ro',uri=True)
+binary_rows=list(db.execute('SELECT address1,address2,similarity,confidence FROM function'))
+assert len(binary_rows)==len({a for a,_,_,_ in binary_rows}),'Ambiguous duplicate BinDiff source addresses'
 bd = {int(a)-0x140000000:dict(target=int(b)-0x140000000,similarity=similarity,confidence=confidence)
-      for a,b,similarity,confidence in db.execute('SELECT address1,address2,similarity,confidence FROM function')}
+      for a,b,similarity,confidence in binary_rows}
 db.close()
 r1 = {r['symbol']:r for r in json.loads((docs/'PORT-REVIEWED.json').read_text())['matches']}
 reviewed = json.loads(args.reviewed.read_text()) if args.reviewed else {}
 checks = json.loads(args.checks.read_text()) if args.checks.exists() else {}
+def standard_conflict(source,target):
+    destinations={m['target'] for m in vt.get(source,[])}
+    binary=bd.get(source)
+    return bool((destinations and destinations!={target}) or
+        (binary and binary['confidence']>=0.8 and binary['target']!=target))
+
 def standard_support(source,target):
     matches=vt.get(source,[])
     destinations={m['target'] for m in matches}
@@ -43,8 +51,7 @@ def standard_support(source,target):
     binary=bd.get(source)
     # Contradictory standard evidence needs explicit investigation. A native
     # candidate catalog must never silently conceal another accepted result.
-    if destinations and destinations!={target}: return []
-    if binary and binary['confidence']>=0.8 and binary['target']!=target: return []
+    if standard_conflict(source,target): return []
     if destinations=={target}:
         support.append('VT '+', '.join(sorted({m['method'] for m in matches})))
     if binary and binary['target']==target and binary['confidence']>=0.8:
@@ -66,7 +73,7 @@ for row in core:
         matches = vt.get(source,[])
         destinations = {m['target'] for m in matches if m['type']=='FUNCTION'}
         binary = bd.get(source)
-        if binary and len(destinations)==1 and binary['target'] in destinations and binary['confidence']>=0.8 and binary['similarity']>=0.8:
+        if binary and len(destinations)==1 and binary['target'] in destinations and binary['confidence']>=0.8 and binary['similarity']>=0.8 and not standard_conflict(source,binary['target']):
             result.update(target=hex(binary['target']),adopted=True,
                 method='VT '+', '.join(sorted({m['method'] for m in matches})),
                 second_check=f"BinDiff similarity={binary['similarity']:.6f}, confidence={binary['confidence']:.6f}",confidence='high')
@@ -79,7 +86,8 @@ for row in core:
         assert int(check['old'],0)==int(value,0) and check['symbol']==row['symbol']
         support=standard_support(int(value,0),int(check['target'],0))
         anchor=check.get('anchor')
-        if not support and anchor:
+        direct_conflict=standard_conflict(int(value,0),int(check['target'],0))
+        if not direct_conflict and not support and anchor:
             support=[f'Native operand in anchor {hex(anchor[0])} -> {hex(anchor[1])}: '+s
                      for s in standard_support(*anchor)]
         if support:
@@ -87,9 +95,11 @@ for row in core:
                 second_check=check['second_check'],evidence=check['evidence'],confidence='high')
         else:
             result.update(candidate=check['target'],independent_check=check['second_check'],evidence=check['evidence'])
-            missing=f"Standard support for candidate {check['target']} (or its documented native operand anchor) is absent; independent check: {check['second_check']}"
+            missing=(f"Resolve contradictory direct standard evidence for candidate {check['target']}; its anchor cannot override the conflict. " if direct_conflict else
+                f"Standard support for candidate {check['target']} (or its documented native operand anchor) is absent; ")+f"independent check: {check['second_check']}"
     if row['r2'] in reviewed:
         manual = reviewed[row['r2']]
+        assert row['kind'] not in ('function/global RVA','vtable RVA'),f"Manual RVA proof cannot bypass standard matching: {row['r2']}"
         assert manual['evidence'] and manual['second_check'] and manual['target'] is not None
         assert manual['old']==value and manual['symbol']==row['symbol'],row['r2']
         result.update(manual,adopted=True,confidence='high')

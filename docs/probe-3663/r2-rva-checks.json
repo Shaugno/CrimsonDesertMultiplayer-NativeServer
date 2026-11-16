@@ -346,5 +346,76 @@
       33982624,
       36262320
     ]
+  },
+  "D057": {
+    "target": "0x1a192d0",
+    "old": "0x1871930",
+    "symbol": "kFlush",
+    "second_check": "Paired six-argument native FlushPendingSaveData verifies busy/lock and generation, transfers/clears pending slot+5C, formats the slot, commits existing storage and notifies the result. Target was located from the verified busy-error global, then body and both direct callers were reviewed. No delta-only identification.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-flush-target.txt; save-busy-leads-target.json; save-flush-callers-reference.txt; save-flush-callers-target.txt",
+    "anchor": null
+  },
+  "D068": {
+    "target": "0x2bc2a6a",
+    "old": "0x28f273a",
+    "symbol": "kCallSites[5].site",
+    "second_check": "Paired native logout-phase flush call: exact E8 to reviewed FlushPendingSaveData, same six argument roles, result handling and owning actor/save-context use. Raw call leads are only discovery; native instruction boundaries and both callers are reviewed. Return is exactly call+5.",
+    "evidence": "port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; save-flush-call-leads-target.json",
+    "anchor": [
+      42936000,
+      45885936
+    ]
+  },
+  "D105": {
+    "target": "0x2bc2a6f",
+    "old": "0x28f273f",
+    "symbol": "kRetFlushLogout",
+    "second_check": "Paired native return following logout-phase flush: exact E8 to reviewed FlushPendingSaveData, same six argument roles, result handling and owning actor/save-context use. Raw call leads are only discovery; native instruction boundaries and both callers are reviewed. Return is exactly call+5.",
+    "evidence": "port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; save-flush-call-leads-target.json",
+    "anchor": [
+      42936000,
+      45885936
+    ]
+  },
+  "D069": {
+    "target": "0xed099c8",
+    "old": "0x108393c8",
+    "symbol": "kCallSites[6].site",
+    "second_check": "Paired native flush-timer native call: exact E8 to reviewed FlushPendingSaveData, same six argument roles, result handling and owning actor/save-context use. Raw call leads are only discovery; native instruction boundaries and both callers are reviewed. Return is exactly call+5.",
+    "evidence": "port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; save-flush-call-leads-target.json",
+    "anchor": [
+      277058416,
+      248551792
+    ]
+  },
+  "D106": {
+    "target": "0xed099cd",
+    "old": "0x108393cd",
+    "symbol": "kRetFlushTimer",
+    "second_check": "Paired native return following flush-timer call: exact E8 to reviewed FlushPendingSaveData, same six argument roles, result handling and owning actor/save-context use. Raw call leads are only discovery; native instruction boundaries and both callers are reviewed. Return is exactly call+5.",
+    "evidence": "port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; save-flush-call-leads-target.json",
+    "anchor": [
+      277058416,
+      248551792
+    ]
+  },
+  "C082": {
+    "target": "0x72456e0",
+    "old": "0x6d696a8",
+    "symbol": "kLoginMgrSlot",
+    "second_check": "Paired logout callers read this exact RIP-relative global context. Its first pointer is passed to actor/login registry lookup; context+10 is the native save manager. Both roles and dereference levels are verified in native code; this does not adopt registry list fields or FindByCharacterNo.",
+    "evidence": "port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; identity-contracts-reference.txt",
+    "anchor": [
+      42936000,
+      45885936
+    ]
+  },
+  "B069": {
+    "target": "0x3a9cf0",
+    "old": "0x35ca00",
+    "symbol": "kClientOnRecvPacket",
+    "second_check": "Paired receive entries bound the u16 size-minus-three by 7FD7, obtain session crypto+98, dispatch through native TrocFind with kind mask 1, enforce descriptor min/max lengths and flag bits, build the request with session/key/handler/frame fields, invoke vslot+8 and enqueue to client+E8 or +F0. Cleanup retains target-specific destructors and TLS+1FE. Native entry boundaries and all argument roles are reviewed; a raw immediate search was discovery only.",
+    "evidence": "port-evidence/r2/tunnel-client-receive-reference.txt; client-receive-verified-target.txt",
+    "anchor": null
   }
 }

@@ -9,9 +9,10 @@ title-slot reader must not be routed to this table unchanged.
 Other confirmed member roles: lookup+48 is the server save manager, its first
 word is the lock pointer, busy is +60, storage is +50, slot vector/count are
 +40/+48, and storage folder count is +40. Native LoadSlot and the named refresh
-handler corroborate lock/busy/storage ownership. The lock's self-offset +8,
-vector capacity +4C, title's WorldSystem-to-save-manager hop, and the complete
-table entry layout beyond its stride remain unproved.
+handler corroborate lock/busy/storage ownership. Paired title-vector population
+and fallback consumers now also confirm capacity +4C, slot number +0 and the
+metadata qword +8; the qword's units are not inferred. The lock's self-offset
++8 and title's WorldSystem-to-save-manager hop remain unproved.
 
 Paired LoadSlot 186F570/1A16C40 explicitly accepts 0..3, 100..108 and 200..207.
 Native refresh independently checks that domain before its special disk
@@ -53,9 +54,26 @@ check: magic+0, u16 version+4 in 1..2, u16 size+6 equal 80, flags+C masked by
 FFFFFFFD equal zero, u32 raw+12 and data+16 nonzero, and data<=raw. The target
 then copies all 80 bytes to file+98. This was added as stable core row D126;
 the original cut omitted that inline schema. Existing row IDs were preserved;
-the inventory is now 388. Local file/raw size and ratio caps remain policy.
+the inventory was then 388. The later title-parser cut correction brings it
+to 394. Local file/raw size and ratio caps remain policy.
 
-Remaining work includes native flush, all classified return/call sites and
+Native FlushPendingSaveData candidate 1871930→1A192D0 transfers manager+5C's
+pending slot to the output, clears it to FFFFFFFF, checks busy/lock/generation,
+and commits existing storage. Both native call paths have been reviewed:
+logout 28F26C0→2BC29F0 (call 28F273A→2BC2A6A; return +5), and timer
+10839370→ED09970 (call 108393C8→ED099C8; return +5). These are independently
+checked candidates, not adopted RVAs. The logout caller also identifies the
+login/save-context global 6D696A8→72456E0 and its +10 save-manager pointer.
+
+The actual remote title parser uses its own stride constant, so that use is
+now included separately instead of treating the similarly named header alias
+as sufficient. Native population 1871D60→1A19720 and fallback
+1872620→1A1A080 use stride 68→78. Copy helpers 18735F0→1A1B1A0 copy the
+slot u32 at +0 and metadata qword at +8. Target eligibility for the title-only
+0..2 / 100..108 domain remains unproved (D130). Manager LoadSlot's broader
+domain above is not substituted for this UI predicate.
+
+Remaining work includes standard support for native flush and all classified return/call sites and
 entry signatures, the rest of the save manager's layout, native removal and
 rejoin barriers, and early guest-role save redirection. Standard matching is
 still in progress. Tier D is not armed; no guest or two-instance test has run.

@@ -107,5 +107,23 @@ for symbol,old,target,anchor,role in [
     check(symbol,old,target,
         'Paired native '+role+'; explicit branch role, result propagation and file-backed RIP operand verified. Numeric error codes are not presumed unchanged.',
         'port-evidence/r2/save-manager-reference.txt; save-slot-construct-reference.txt; save-write-target.txt',anchor)
+check('kFlush',0x1871930,0x1A192D0,
+    'Paired six-argument native FlushPendingSaveData verifies busy/lock and generation, transfers/clears pending slot+5C, formats the slot, commits existing storage and notifies the result. Target was located from the verified busy-error global, then body and both direct callers were reviewed. No delta-only identification.',
+    'port-evidence/r2/save-manager-reference.txt; save-flush-target.txt; save-busy-leads-target.json; save-flush-callers-reference.txt; save-flush-callers-target.txt')
+for symbol,old,target,anchor,role in [
+    ('kCallSites[5].site',0x28F273A,0x2BC2A6A,[0x28F26C0,0x2BC29F0],'logout-phase flush call'),
+    ('kRetFlushLogout',0x28F273F,0x2BC2A6F,[0x28F26C0,0x2BC29F0],'return following logout-phase flush'),
+    ('kCallSites[6].site',0x108393C8,0xED099C8,[0x10839370,0xED09970],'flush-timer native call'),
+    ('kRetFlushTimer',0x108393CD,0xED099CD,[0x10839370,0xED09970],'return following flush-timer call')]:
+    check(symbol,old,target,
+        'Paired native '+role+': exact E8 to reviewed FlushPendingSaveData, same six argument roles, result handling and owning actor/save-context use. Raw call leads are only discovery; native instruction boundaries and both callers are reviewed. Return is exactly call+5.',
+        'port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; save-flush-call-leads-target.json',anchor)
+check('kLoginMgrSlot',0x6D696A8,0x72456E0,
+    'Paired logout callers read this exact RIP-relative global context. Its first pointer is passed to actor/login registry lookup; context+10 is the native save manager. Both roles and dereference levels are verified in native code; this does not adopt registry list fields or FindByCharacterNo.',
+    'port-evidence/r2/save-flush-callers-reference.txt; save-flush-callers-target.txt; identity-contracts-reference.txt',
+    [0x28F26C0,0x2BC29F0])
+check('kClientOnRecvPacket',0x35CA00,0x3A9CF0,
+    'Paired receive entries bound the u16 size-minus-three by 7FD7, obtain session crypto+98, dispatch through native TrocFind with kind mask 1, enforce descriptor min/max lengths and flag bits, build the request with session/key/handler/frame fields, invoke vslot+8 and enqueue to client+E8 or +F0. Cleanup retains target-specific destructors and TLS+1FE. Native entry boundaries and all argument roles are reviewed; a raw immediate search was discovery only.',
+    'port-evidence/r2/tunnel-client-receive-reference.txt; client-receive-verified-target.txt')
 (docs/'r2-rva-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Independent RVA checks awaiting standard support',len(result))

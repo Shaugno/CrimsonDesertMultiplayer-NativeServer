@@ -36,7 +36,7 @@ MaxStatEntries=64, loading radius=5, MaxEntries=64, MaxActors=0x4000 and C4
 SamUserListMax=0x4000 are policy bounds. Stamina stays included because today's
 reader reads it; no unimplemented exclusion is used to make A appear complete.
 
-Counts: A 37, B 75, C 150, D 126; total 388; R1 adopted 17.
+Counts: A 37, B 77, C 150, D 130; total 394; R1 adopted 17.
 
 | Row | Tier | Game contract | Symbol | 2976 value | Source | Use | Evidence status |
 |---|---|---|---|---|---|---|---|
@@ -428,3 +428,9 @@ Counts: A 37, B 75, C 150, D 126; total 388; R1 adopted 17.
 | D124 | D | native layout contract | SaveReq2910Layout | `slot0:u32; length4:u32; UTF16+8; terminator; 10+2n bytes; n<=30` | src/mod/session2/guest_save_wire.h:383 | verify native 2910 writer and handler, including maximum native name length | needs target evidence |
 | D125 | D | native layout contract | LoginCharacterSaveLayout | `flag0:u8; characterNo1:u64; slot9:u32` | src/mod/session2/guest_save_wire.h:72 | native 3093 payload used for selecting and holding the guest save | needs target evidence |
 | D126 | D | native layout contract | NativeSaveHeaderLayout | `magic0:u32; version4:u16 in1..2; size6:u16=80h; flagsCh:u32 mask2; raw12h:u32>0; data16h:u32 in1..raw` | src/mod/session2/guest_save_logic.h:152 | native save validator schema, including inline field offsets and domain checks; file/raw size caps remain policy | needs target evidence |
+| D127 | D | native member/size contract | kEntrySize | `0x68` | src/mod/session2/slot_refresh.h:75 | read_slot_table -> slot_refresh::parse_entries uses its own native stride | needs target evidence |
+| D128 | D | native member/value contract | TitleSlotNumberOffset | `0` | src/mod/session2/slot_refresh.cpp:52 | title slot entry u32 number offset | needs target evidence |
+| D129 | D | native member/value contract | TitleSlotTimeOffset | `8` | src/mod/session2/slot_refresh.cpp:53 | title slot entry i64 time offset | needs target evidence |
+| D130 | D | native member/value contract | NativeTitleSlotDomain | `0..2;100..108` | src/mod/session2/slot_refresh.cpp:61 | native title enable predicate; unlike retry/count caps this is a game eligibility rule | needs target evidence |
+| B076 | B | native member/value contract | NativeCryptoEnabledOffset | `0x24` | src/mod/session2/guest.cpp:511 | guest packet extraction rejects encrypted native frames based on this game field | needs target evidence |
+| B077 | B | native member/value contract | NativePacketEpochOffset | `0x8020` | src/mod/session2/guest.cpp:954 | guest_send takes the native packet epoch before the session fallback | needs target evidence |

@@ -1,0 +1,14 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x12B31D0
+Function=FUN_1412b31d0 body=[[1412b31d0, 1412b31d7]]
+1412b31d0 CMP byte ptr [RCX + 0x24],0x1
+1412b31d4 SETZ AL
+1412b31d7 RET
+
+bool FUN_1412b31d0(longlong param_1)
+
+{
+  return *(char *)(param_1 + 0x24) == '\x01';
+}

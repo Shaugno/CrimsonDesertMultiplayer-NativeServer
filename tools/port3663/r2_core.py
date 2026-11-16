@@ -98,6 +98,19 @@ raw('D', S+'guest_save_wire.h', 'kOpLoginCharacterReq =', 'LoginCharacterSaveLay
 raw('D', S+'guest_save_logic.h', 'i.version = load_le', 'NativeSaveHeaderLayout',
     'magic0:u32; version4:u16 in1..2; size6:u16=80h; flagsCh:u32 mask2; raw12h:u32>0; data16h:u32 in1..raw',
     'native save validator schema, including inline field offsets and domain checks; file/raw size caps remain policy')
+# The title refresh is reached by a remote connection, not only its test flag.
+# Its parser has a separate stride from the offsets_s2 alias.
+select(S+'slot_refresh.h','D','read_slot_table -> slot_refresh::parse_entries uses its own native stride',names='kEntrySize')
+raw('D', S+'slot_refresh.cpp', 'std::memcpy(&e.slot', 'TitleSlotNumberOffset', '0',
+    'title slot entry u32 number offset')
+raw('D', S+'slot_refresh.cpp', 'std::memcpy(&e.time', 'TitleSlotTimeOffset', '8',
+    'title slot entry i64 time offset')
+raw('D', S+'slot_refresh.cpp', 'if (e.slot < 3', 'NativeTitleSlotDomain', '0..2;100..108',
+    'native title enable predicate; unlike retry/count caps this is a game eligibility rule')
+raw('B', S+'guest.cpp', 'peek(crypto + 0x24', 'NativeCryptoEnabledOffset', '0x24',
+    'guest packet extraction rejects encrypted native frames based on this game field')
+raw('B', S+'guest.cpp', '!peek(pb + 0x8020', 'NativePacketEpochOffset', '0x8020',
+    'guest_send takes the native packet epoch before the session fallback')
 # Split aggregate address arrays: each independent call/error address is a row.
 expanded = []
 for row in rows:
@@ -133,6 +146,11 @@ for row in rows:
     row['kind']=kind
 assert len(rows) < 500
 assert sum(r['adopted_r1'] for r in rows) == 17
+previous=OUT/'R2-CORE-LIST.json'
+if previous.exists():
+    indexed={r['r2']:r for r in rows}
+    for old in json.loads(previous.read_text()):
+        assert old['r2'] in indexed and (old['symbol'],old['value'])==(indexed[old['r2']]['symbol'],indexed[old['r2']]['value']),f"Core ID drift: {old['r2']}"
 (OUT/'R2-CORE-LIST.json').write_text(json.dumps(rows, indent=2)+'\n')
 intro = '''# R2 core list — reviewed reachability cut
 

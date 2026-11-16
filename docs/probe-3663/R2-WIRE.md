@@ -42,8 +42,8 @@ No function/global RVA is adopted by this wire audit.
 | LogoutUserToServerAck | 2003 | 2003 |
 
 The native LogoutSession request failure path independently constructs Nak
-1013 (0x3F5). The unnamed old opcode 2679 remains unadopted until its actual
-native message role is identified. The aggregate forbidden-request filter
+1013 (0x3F5). The earlier unnamed opcode 2679 is now identified as the
+LogoutCharacterToFieldServerAck mapping above. The aggregate forbidden-request filter
 also remains blocked on every member, including shutdown 2038 and pointer
 message 2004; the 2790 shutdown mapping alone does not complete that filter.
 
@@ -73,7 +73,11 @@ Further core control review confirms the native shutdown timer changes
 pointers at packet+3 and +B; it must never cross the tunnel. Named connection
 descriptors retain 1002/1004/1005/1006, and the target network pump explicitly
 constructs 1008. These are partial facts for C150: that aggregate remains
-blocked until 1001/1003/1007 roles are checked and a target filter is routed.
+blocked until all control roles and the target filter are proved and routed.
+The target connect writer 3A9440 explicitly constructs opcode 1001 before
+calling PostPacket 3A9960. Raw word searches for 1003/1007 instead found short
+jumps and shifts; those false leads are rejected, not ID evidence. The
+remaining 1003/1007 roles are unresolved.
 The active 2976 filter has not been changed. Discovery records continue to
 say unadopted; no target network path is enabled by this review.
 
@@ -84,6 +88,16 @@ exact verified initializer operands before materializing the reviewed rows.
 Raw discovery records retain `adopted=false`; adoption is only in the reviewed
 catalog and eventual R2-MATCHES. No native wire or mod serialization is changed
 by this evidence-only catalog, so protocol kVersion is unchanged.
+
+The paired client receive entries 35CA00→3A9CF0 now have independent native
+code review: size-minus-three <=7FD7, optional crypto at session+98, TrocFind
+kind mask 1, descriptor minimum/maximum lengths +18/+1A and flags +16, native
+request construction, vslot+8 handler invocation, client queues +E8/+F0, and
+owned-buffer cleanup. The target uses its own destructor chain and TLS+1FE;
+this is not whole-body equality. A raw bound-immediate scan only found the
+lead; actual instruction boundaries, call roles and both complete bodies
+were checked. This adds an RVA candidate awaiting standard support. The
+separately explored 3AAA60 is a constructor/setup routine, not this receiver.
 
 Evidence: port-evidence/r2/request-*.json/txt, with original and canonical
 text hashes in port-evidence/r2/text-hashes.json.

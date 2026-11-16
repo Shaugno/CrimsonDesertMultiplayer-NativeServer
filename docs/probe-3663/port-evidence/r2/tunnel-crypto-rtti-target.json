@@ -1,0 +1,382 @@
+{
+  "identity": {
+    "path": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+    "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "file_size": 335440280,
+    "timestamp": "0x6AF5D198",
+    "image_base": "0x140000000",
+    "image_size": "0x144E9000",
+    "pdata_entries": 249586,
+    "tls_index_rva": "0x715BFD0",
+    "sections": [
+      {
+        "name": ".reloc",
+        "rva": 4096,
+        "raw": 1024,
+        "size": 90251264,
+        "virtual_size": 90251264,
+        "flags": 1610612768
+      },
+      {
+        "name": ".00cfg",
+        "rva": 90255360,
+        "raw": 90252288,
+        "size": 24391680,
+        "virtual_size": 24391680,
+        "flags": 1073741888
+      },
+      {
+        "name": ".sxdata",
+        "rva": 114647040,
+        "raw": 114643968,
+        "size": 3591168,
+        "virtual_size": 8851456,
+        "flags": 3221225536
+      },
+      {
+        "name": ".debug$P",
+        "rva": 123498496,
+        "raw": 118235136,
+        "size": 2998272,
+        "virtual_size": 2998272,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls$",
+        "rva": 126496768,
+        "raw": 121233408,
+        "size": 12288,
+        "virtual_size": 12288,
+        "flags": 1073741888
+      },
+      {
+        "name": ".srdata",
+        "rva": 126509056,
+        "raw": 121245696,
+        "size": 196608,
+        "virtual_size": 196608,
+        "flags": 1073741888
+      },
+      {
+        "name": ".ecode",
+        "rva": 126705664,
+        "raw": 121442304,
+        "size": 2023424,
+        "virtual_size": 2023424,
+        "flags": 1107296320
+      },
+      {
+        "name": ".data1",
+        "rva": 128729088,
+        "raw": 123465728,
+        "size": 207098368,
+        "virtual_size": 207097956,
+        "flags": 3758096416
+      },
+      {
+        "name": ".sbss",
+        "rva": 335831040,
+        "raw": 330564096,
+        "size": 1822720,
+        "virtual_size": 1822270,
+        "flags": 1073741856
+      },
+      {
+        "name": ".xcode",
+        "rva": 337653760,
+        "raw": 332386816,
+        "size": 1024,
+        "virtual_size": 560,
+        "flags": 3221225504
+      },
+      {
+        "name": ".trace",
+        "rva": 337657856,
+        "raw": 332387840,
+        "size": 36352,
+        "virtual_size": 36316,
+        "flags": 1073741888
+      },
+      {
+        "name": ".rodata",
+        "rva": 337694720,
+        "raw": 332424192,
+        "size": 2995200,
+        "virtual_size": 2995032,
+        "flags": 1073741888
+      }
+    ]
+  },
+  "adopted": 0,
+  "types": [
+    {
+      "name": ".?AVTrocTrConnectCryptogramToServerAck@pa@@",
+      "descriptor": "0x6F99CD0",
+      "locators": [
+        {
+          "rva": "0x624A820",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5A14A18",
+          "locator": "0x624A820",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xC995F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xC99580",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0xD42110",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x152395",
+              "pdata_owner": "0x152370",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVCryptogramAesGcm@pa@@",
+      "descriptor": "0x6FBDED0",
+      "locators": [
+        {
+          "rva": "0x627DAB8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B248E8",
+          "locator": "0x627DAB8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x14D0DE0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x14D0E70",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x14D0E80",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x14D0F30",
+              "pdata_entry": true
+            },
+            {
+              "index": 6,
+              "rva": "0x14D1100",
+              "pdata_entry": true
+            },
+            {
+              "index": 7,
+              "rva": "0x14D0E90",
+              "pdata_entry": true
+            },
+            {
+              "index": 8,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x14D0DF4",
+              "pdata_owner": "0x14D0DE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x165BCC1",
+              "pdata_owner": "0x165B9D0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVCryptogram@pa@@",
+      "descriptor": "0x6FBDF00",
+      "locators": [
+        {
+          "rva": "0x627DA50",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B24948",
+          "locator": "0x627DA50",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x14D0BA0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 5,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 6,
+              "rva": "0x3AD520",
+              "pdata_entry": false
+            },
+            {
+              "index": 7,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            },
+            {
+              "index": 8,
+              "rva": "0x3A6D80",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x14D0B89",
+              "pdata_owner": "0x14D0B80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14D0BB4",
+              "pdata_owner": "0x14D0BA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14D0C37",
+              "pdata_owner": "0x14D0C20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14D0E0E",
+              "pdata_owner": "0x14D0DE0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVCryptogramChaCha20@pa@@",
+      "descriptor": "0x6FBDF28",
+      "locators": [
+        {
+          "rva": "0x627DA78",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5B24938",
+          "locator": "0x627DA78",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x14D1320",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": []
+        }
+      ]
+    },
+    {
+      "name": ".?AVTrocTrConnectCryptogramToServerReq@pa@@",
+      "descriptor": "0x70B5910",
+      "locators": [
+        {
+          "rva": "0x63F13D8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x5F65CB8",
+          "locator": "0x63F13D8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0xC995F0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0xC99580",
+              "pdata_entry": true
+            },
+            {
+              "index": 2,
+              "rva": "0x2D12540",
+              "pdata_entry": true
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x25E205",
+              "pdata_owner": "0x25E1E0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

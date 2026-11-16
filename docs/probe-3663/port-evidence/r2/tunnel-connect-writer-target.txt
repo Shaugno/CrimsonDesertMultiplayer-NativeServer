@@ -1,0 +1,77 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x3A9440
+Function=FUN_1403a9440 body=[[1403a9440, 1403a9512]]
+1403a9440 MOV qword ptr [RSP + 0x8],RBX
+1403a9445 MOV qword ptr [RSP + 0x10],RBP
+1403a944a MOV qword ptr [RSP + 0x18],RSI
+1403a944f MOV qword ptr [RSP + 0x20],RDI
+1403a9454 PUSH R14
+1403a9456 SUB RSP,0x110
+1403a945d MOV RBP,RCX
+1403a9460 MOV RDI,R9
+1403a9463 MOV ECX,R8D
+1403a9466 MOV ESI,R8D
+1403a9469 MOV R14,RDX
+1403a946c CALL 0x14165b930
+1403a9471 MOVZX EBX,AX
+1403a9474 MOV byte ptr [0x1471600ad],0x0
+1403a947b CALL 0x14163afa0
+1403a9480 MOV qword ptr [0x1471600e8],RAX
+1403a9487 LEA RCX,[RSP + 0x46]
+1403a948c MOV qword ptr [0x1471600f8],RAX
+1403a9493 MOV R9,-0x1
+1403a949a MOV EAX,0x3e9
+1403a949f MOV qword ptr [0x1471600f0],0x0
+1403a94aa MOV R8,RDI
+1403a94ad MOV word ptr [RSP + 0x40],AX
+1403a94b2 MOV EDX,0xc9
+1403a94b7 MOV byte ptr [RSP + 0x42],0xff
+1403a94bc MOV word ptr [RSP + 0x43],BX
+1403a94c1 MOV byte ptr [RSP + 0x45],0x0
+1403a94c6 CALL qword ptr [0x1456144b8]
+1403a94cc MOV word ptr [RSP + 0x30],0x1
+1403a94d3 LEA R9,[RSP + 0x40]
+1403a94d8 MOV byte ptr [RSP + 0x28],0x0
+1403a94dd MOV R8D,ESI
+1403a94e0 MOV RDX,R14
+1403a94e3 MOV word ptr [RSP + 0x20],0xcf
+1403a94ea MOV RCX,RBP
+1403a94ed CALL 0x1403a9960
+1403a94f2 LEA R11,[RSP + 0x110]
+1403a94fa MOV RAX,R14
+1403a94fd MOV RBX,qword ptr [R11 + 0x10]
+1403a9501 MOV RBP,qword ptr [R11 + 0x18]
+1403a9505 MOV RSI,qword ptr [R11 + 0x20]
+1403a9509 MOV RDI,qword ptr [R11 + 0x28]
+1403a950d MOV RSP,R11
+1403a9510 POP R14
+1403a9512 RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined8
+FUN_1403a9440(undefined8 param_1,undefined8 param_2,undefined4 param_3,undefined8 param_4)
+
+{
+  undefined2 uVar1;
+  undefined2 uStack_d8;
+  undefined1 uStack_d6;
+  undefined2 uStack_d5;
+  undefined1 uStack_d3;
+  undefined1 auStack_d2 [202];
+
+  uVar1 = func_0x00014165b930(param_3);
+  DAT_1471600ad = 0;
+  _DAT_1471600e8 = FUN_14163afa0();
+  _DAT_1471600f0 = 0;
+  uStack_d8 = 0x3e9;
+  uStack_d6 = 0xff;
+  uStack_d3 = 0;
+  _DAT_1471600f8 = _DAT_1471600e8;
+  uStack_d5 = uVar1;
+  strncpy_s(auStack_d2,0xc9,param_4,0xffffffffffffffff);
+  FUN_1403a9960(param_1,param_2,param_3,&uStack_d8,0xcf,0,1);
+  return param_2;
+}
