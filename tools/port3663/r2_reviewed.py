@@ -108,6 +108,38 @@ prove('C','src/mod/session2/identity_probe.h',dict(kActorComponents='0x68',
     kActorUser='0xA0',kKey='0x60'),
     'port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; field-addactor-target.txt; save-manager-target.txt',
     'Native LoginCharacter status lookup consumes actor+68 -> status+20 -> character-number pointer +90; paired status load writes the same pointer (old +70). Native status load invokes its actor at component+8. Independently verified target field admission and save wrappers obtain actor owner +A0 and user/actor key +60. This adopts member roles only, not the surrounding hooks.')
+save_constants=json.loads((docs/'r2-save-constants.json').read_text())
+prove('B','src/mod/session2/offsets_s2.h',dict(kSyncSession_Epoch='0xB0',kClientNet_Slot4='0x58'),
+    'port-evidence/r2/tunnel-connect-reference.txt; tunnel-connect-target.txt; tunnel-control-native-target.txt',
+    'Named ConnectToServerAck handlers CB2170/E21EE0 call native OnConnect 8CAFF0/9E45B0 with the current session. On successful result zero, both store a fresh native epoch at session+B0 and the sentinel at +B8. Both obtain client net through its manager+18 and test the server-session slot at net+58 via its virtual alive predicate. This proves data fields, not the OnConnect RVA or game-world loading readiness.')
+assert save_constants['target_sha256']=='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
+prove('D','src/mod/session2/guest_save_host.cpp',dict(kSlotMemoryOnly='0x699',
+    kSlotInMemory='0x69C',kFileHeader='0x98'),
+    'port-evidence/r2/save-storage-reference.txt; save-slot-construct-reference.txt; save-create-target.txt; save-slot-construct-target.txt; save-addfile-target.txt; save-commit-target.txt; save-storage-target.txt',
+    'Native GetOrCreate writes +699 for special numeric slot names; CreateSlot stores its in-memory argument at +69C. Target CommitSlot independently skips disk writes if either byte is nonzero. Paired AddFile constructs the 80-byte native header at file+98; native target serialization copies those 80 bytes before payload. AddFile has its own same memory-only/in-memory gate.')
+prove('D','src/mod/session2/guest_save_logic.h',dict(kHeaderSize='0x80',kMagic='0x45564153'),
+    'port-evidence/r2/save-storage-reference.txt; save-addfile-target.txt; save-storage-target.txt; r2-save-constants.json',
+    'Paired AddFile initializes header magic from independently checked file-backed operands 5547B6C/59728FC, both SAVE. Target writes version/header-size qwords including 800002 at +9C; native serialization copies 80 bytes from +98 and appends payload at +80. This proves size/magic only; the complete validator schema remains a separate blocked row.')
+prove('D','src/mod/session2/guest_save_logic.h',dict(kSlotNameMap='0x08',
+    kMapBucketCount='0x00',kMapBuckets='0x10',kMapEntries='0x18',
+    kBucketSize='0x100',kBucketPairs='0x08',kMaxBucketPairs='31',
+    kEntryKey='0x08',kEntryValue='0x10',kKeyChars='0x00',kKeyLength='0x08',
+    kSlotNames='0x688',kSlotNameCount='0x690'),
+    'port-evidence/r2/save-storage-reference.txt; save-addfile-target.txt; save-name-map-reference.txt; save-name-map-target.txt; save-slot-construct-target.txt',
+    'Paired AddFile 235B100/25C0900 inserts at slot+8 and appends its named entry pointer to vector+688/count+690. Native map lookup 612620/40A5E0 uses bucket-count+0, bucket-base+10, entry-pointers+18; hash/index pairs start +8 in 100-byte buckets. Native insertion 235D2E0/25C29A0 explicitly splits at 1F pairs, constructs key pointer+8 and value+10. Lookup consumes key char pointer+0 and cached length+8, recomputing an FFFFFFFF length. This is member evidence, not an AddFile RVA adoption.')
+prove('D','src/mod/session2/guest_save_logic.h',dict(NativeMemoryOnlySlots='201;205..207'),
+    'port-evidence/r2/save-storage-reference.txt; save-create-target.txt; save-commit-target.txt; r2-save-constants.json',
+    'Paired GetOrCreate checks literal slot prefix, numeric suffix, exact 201 or unsigned slot-205<=2, then sets byte+699; target CommitSlot bypasses disk persistence for +699 or +69C. The target obfuscated subtraction operand is read from file: F9D00CD - [B7A5B48] = CD. Reserved mod slot204 remains policy.')
+memory_row,=[r['r2'] for r in core if r['symbol']=='NativeMemoryOnlySlots']
+result[memory_row]['members']=dict(kNativeMemoryOnlyExact=201,kNativeMemoryOnlyBegin=205,kNativeMemoryOnlyCount=3)
+header_row,=[r for r in core if r['symbol']=='NativeSaveHeaderLayout']
+prove('D','src/mod/session2/guest_save_logic.h',dict(NativeSaveHeaderLayout=header_row['value']),
+    'port-evidence/r2/save-file-header-reference.txt; save-file-header-target.txt; r2-save-constants.json',
+    'Paired native file loaders 2357DA0/25BD480 compare SAVE magic, require version 1..2, header size 80, flags masked by FFFFFFFD equal zero, nonzero raw/data sizes and data<=raw, using exact header offsets 0/4/6/C/12/16. Target instructions 25BD65A..25BD6AE establish every check, then copy 80 bytes into file+98 and consume data length at file+AE. Target functions found through actual RIP-relative comparisons to the independently verified magic operand, then paired code consumption; no function RVA is adopted by this schema proof. Local size/ratio caps remain policy.')
+result[header_row['r2']]['members']=dict(kSaveHeaderMagicOffset=0,kSaveHeaderVersionOffset=4,
+    kSaveHeaderSizeOffset=6,kSaveHeaderFlagsOffset=0xC,kSaveHeaderRawSizeOffset=0x12,
+    kSaveHeaderDataSizeOffset=0x16,kSaveHeaderVersionMin=1,kSaveHeaderVersionMax=2,
+    kSaveHeaderAllowedFlags=2)
 signatures=docs/'r2-signatures.json'
 if signatures.exists():
     result.update(json.loads(signatures.read_text())['rows'])

@@ -5,200 +5,208 @@
       "old": "2319",
       "symbol": "kOpConnectCryptogramToServerReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrConnectCryptogramToServerReq@pa@@: source opcode 2319, target 2401; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12540 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrConnectCryptogramToServerReq@pa@@: source opcode 2319, target 2401; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12540 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C089": {
       "target": "2554",
       "old": "2490",
       "symbol": "kOpLoginUser",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C124": {
       "target": "2554",
       "old": "2490",
       "symbol": "kOpLoginUserToFieldServerReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C134": {
       "target": "2554",
       "old": "2490",
       "symbol": "kOpLoginUserToFieldServerReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLoginUserToFieldServerReq@pa@@: source opcode 2490, target 2554; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D11F20 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C090": {
       "target": "3081",
       "old": "3093",
       "symbol": "kOpLoginCharacter",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C123": {
       "target": "3081",
       "old": "3093",
       "symbol": "kOpLoginCharacterToFieldServerReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C133": {
       "target": "3081",
       "old": "3093",
       "symbol": "kOpLoginCharacterToFieldServerReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D112": {
       "target": "3081",
       "old": "3093",
       "symbol": "kOpLoginCharacterReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C125": {
       "target": "2844",
       "old": "2756",
       "symbol": "kOpMainPlayerDataStartAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrMainPlayerDataStartAck@pa@@: source opcode 2756, target 2844; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCB72E0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrMainPlayerDataStartAck@pa@@: source opcode 2756, target 2844; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCB72E0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C126": {
       "target": "2420",
       "old": "2646",
       "symbol": "kOpMainUserDataStartAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrMainUserDataStartAck@pa@@: source opcode 2646, target 2420; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD41AD0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrMainUserDataStartAck@pa@@: source opcode 2646, target 2420; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD41AD0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C127": {
       "target": "2364",
       "old": "2174",
       "symbol": "kOpMoveFieldAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrMoveFieldAck@pa@@: source opcode 2174, target 2364; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD4D70 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrMoveFieldAck@pa@@: source opcode 2174, target 2364; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD4D70 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C129": {
       "target": "2046",
       "old": "2042",
       "symbol": "kOpScopeSenderAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrScopeSenderAck@pa@@: source opcode 2042, target 2046; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE24530 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrScopeSenderAck@pa@@: source opcode 2042, target 2046; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE24530 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C130": {
       "target": "2005",
       "old": "2005",
       "symbol": "kOpActorAppear",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrActorLoadDataAck@pa@@: source opcode 2005, target 2005; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE22330 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrActorLoadDataAck@pa@@: source opcode 2005, target 2005; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE22330 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C131": {
       "target": "2896",
       "old": "2869",
       "symbol": "kOpDataAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrCharacterLobbyDataAck@pa@@: source opcode 2869, target 2896; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD3EFF0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrCharacterLobbyDataAck@pa@@: source opcode 2869, target 2896; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD3EFF0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "C135": {
       "target": "2150",
       "old": "2125",
       "symbol": "kOpSetFieldTimeReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrSetFieldTimeReq@pa@@: source opcode 2125, target 2150; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CA68F0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrSetFieldTimeReq@pa@@: source opcode 2125, target 2150; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CA68F0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D024": {
       "target": "2447",
       "old": "2790",
       "symbol": "kOpReserveShutDownServerReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrReserveShutDownServerReq@pa@@: source opcode 2790, target 2447; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12310 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrReserveShutDownServerReq@pa@@: source opcode 2790, target 2447; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12310 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D107": {
       "target": "2234",
       "old": "3037",
       "symbol": "kOpSaveAutoReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrSaveAutoReq@pa@@: source opcode 3037, target 2234; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12DF0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrSaveAutoReq@pa@@: source opcode 3037, target 2234; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12DF0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D108": {
       "target": "3158",
       "old": "2910",
       "symbol": "kOpSaveToFileCurrentPlayerReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrSaveToFileCurrentPlayerReq@pa@@: source opcode 2910, target 3158; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12AC0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrSaveToFileCurrentPlayerReq@pa@@: source opcode 2910, target 3158; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D12AC0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D109": {
       "target": "2813",
       "old": "3016",
       "symbol": "kOpSaveToFileCurrentPlayerAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrSaveToFileCurrentPlayerAck@pa@@: source opcode 3016, target 2813; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD42840 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrSaveToFileCurrentPlayerAck@pa@@: source opcode 3016, target 2813; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xD42840 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D110": {
       "target": "2533",
       "old": "2711",
       "symbol": "kOpCreateCharacterReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrCreateCharacterReq@pa@@: source opcode 2711, target 2533; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D0E0E0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrCreateCharacterReq@pa@@: source opcode 2711, target 2533; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D0E0E0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D111": {
       "target": "2688",
       "old": "2178",
       "symbol": "kOpNewGameStartReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrNewGameStartReq@pa@@: source opcode 2178, target 2688; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D0EE00 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrNewGameStartReq@pa@@: source opcode 2178, target 2688; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2D0EE00 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D113": {
       "target": "2001",
       "old": "2001",
       "symbol": "kOpLogoutSessionReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLogoutSessionToServerReq@pa@@: source opcode 2001, target 2001; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2F55680 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLogoutSessionToServerReq@pa@@: source opcode 2001, target 2001; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2F55680 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D116": {
       "target": "2001",
       "old": "2001",
       "symbol": "kOpLogoutSessionReq",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLogoutSessionToServerReq@pa@@: source opcode 2001, target 2001; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2F55680 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLogoutSessionToServerReq@pa@@: source opcode 2001, target 2001; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2F55680 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D117": {
       "target": "2002",
       "old": "2002",
       "symbol": "kOpLogoutSessionAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLogoutSessionToServerAck@pa@@: source opcode 2002, target 2002; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE22070 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLogoutSessionToServerAck@pa@@: source opcode 2002, target 2002; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE22070 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D118": {
       "target": "2003",
       "old": "2003",
       "symbol": "kOpLogoutUserAck",
       "method": "native named descriptor, verified initializer and handler",
-      "second_check": ".?AVTrocTrLogoutUserToServerAck@pa@@: source opcode 2003, target 2003; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE220D0 reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.",
-      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt"
+      "second_check": ".?AVTrocTrLogoutUserToServerAck@pa@@: source opcode 2003, target 2003; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xE220D0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
+    },
+    "C132": {
+      "target": "3116",
+      "old": "2679",
+      "symbol": "kOp2679",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLogoutCharacterToFieldServerAck@pa@@: source opcode 2679, target 3116; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCB7AC0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
     "D123": {
       "target": "14 B; key0 slot4 ok8 flag9 result10",

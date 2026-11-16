@@ -1,0 +1,48 @@
+{
+  "scope": "Whole-image independent analyses and complete graph exports; standard matchers still running",
+  "exporter": "One-line defined-function skip; see R2-EXPORTER.md and exporter-fixture.json",
+  "source_instructions": 18688006,
+  "target_instructions": 19517708,
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\old.BinExport",
+      "bytes": 589385035,
+      "sha256": "227D4D3526163C3FC1B185F282495A28279D696C2A1082496A490EE147C3F47E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\new.BinExport",
+      "bytes": 615418483,
+      "sha256": "E97EA10170F8518AC4AF86BEA5E7D9FF4E578095C473B355796EEA58005DF0C0"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\analysis-old.json",
+      "bytes": 92,
+      "sha256": "00CA8BABA014F68D32021373A86D00AF5D095E906480669AFABBDB711E56DC38"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\analysis-new.json",
+      "bytes": 92,
+      "sha256": "6266A50C90340B03F7D8BB39D8686638BEC2D473D66FCFA9234802D6D532FC15"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\options-old.txt",
+      "bytes": 5532,
+      "sha256": "9D9AB8297F57718ADA0A39844CFCF39818711698F1AC2A3869186FAE3468E845"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\options-new.txt",
+      "bytes": 5532,
+      "sha256": "9D9AB8297F57718ADA0A39844CFCF39818711698F1AC2A3869186FAE3468E845"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\export-old.log",
+      "bytes": 12069,
+      "sha256": "19D8609AF870FBB4AC011D70F0D67EB84D5C39C4C75492BC0734904F02C8AAEE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\export-new.log",
+      "bytes": 8469,
+      "sha256": "D7037A0C184F016EF32F429AB4757B377582A485831C409156D614459878AEC6"
+    }
+  ]
+}

@@ -2,6 +2,41 @@
 
 Latest continuation:
 
+- Full whole-image exports completed and saved: reference 589385035 bytes,
+  target 615418483 bytes, 18.69/19.52 million analyzed instructions. Hashes
+  and local paths are in port-evidence/r2/whole-image-exports.json. BinDiff
+  runs on those completed independent exports; its missing-basic-block
+  warnings are retained for review, not hidden.
+- Stock AutoVT initially failed when opening/closing the source project
+  cleared AppInfo's active project. R2CopySource now restores the destination
+  and validates a reused full-image source copy. A default retry then spent
+  repeated samples in optional duplicate-function generation; it was stopped
+  incomplete. R2VTOptions uses the official headless configuration seam:
+  every Step 2 required standard pass remains enabled, optional Duplicate
+  Function Correlator is disabled, thresholds unchanged. Current session is
+  R2AutoCore, exec 68411; BinDiff remains under controller exec 60079 (that
+  controller will also report its earlier failed VT attempt). No partial or
+  stopped session is evidence. Both final correlators are still in progress.
+- Catalog now 172 beyond retained R1 17; 36 independent RVA checks await
+  standard support. Native save/header/map review is in R2-LIFECYCLE; native
+  wire registration/lookup code corroborates descriptor ID use. Character
+  logout Ack 2679→3116; shutdown timer 2038→2042 is a partial C150 fact, not
+  a completed target filter. Native epoch and client session-slot fields
+  are confirmed from the named connection acknowledgment.
+- Core cut correction: append D126 for the inline native save-header schema;
+  all older IDs/value pairs mechanically verified unchanged. Core is 388.
+- Passive trace preparation now has separate hp/loading profiles, each with
+  one written question, ten-minute collection and full backup/restore cycle.
+  Guarded loading collector tests passed; API check uses only its own process.
+  Native vslot C0 was rejected as a loading alternative because it mutates
+  references. Both actual passive profiles remain unrun; A/B/C/D stay false.
+- Full build/CTest after passive modes: 101/101, 98.63 seconds; synthetic
+  host/peer 78 remote states, zero rejected, clean network stop/worker exit.
+  Later unused catalog additions receive an incremental compile/guard check;
+  no native runtime result is inferred from these tests.
+
+Previous checkpoint:
+
 - Native identity review adds 18 contracts: catalog now 149 plus 17 retained
   R1 values; 28 RVA candidates have independent checks but still require
   standard support. Status character-number pointer changes 70→90. Incremental

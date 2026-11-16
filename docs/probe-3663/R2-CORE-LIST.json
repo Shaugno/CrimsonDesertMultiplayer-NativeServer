@@ -4642,5 +4642,17 @@
     "adopted_r1": false,
     "classification": "game",
     "kind": "native layout contract"
+  },
+  {
+    "tier": "D",
+    "symbol": "NativeSaveHeaderLayout",
+    "value": "magic0:u32; version4:u16 in1..2; size6:u16=80h; flagsCh:u32 mask2; raw12h:u32>0; data16h:u32 in1..raw",
+    "source": "src/mod/session2/guest_save_logic.h:152",
+    "use": "native save validator schema, including inline field offsets and domain checks; file/raw size caps remain policy",
+    "id": "inline",
+    "r2": "D126",
+    "adopted_r1": false,
+    "classification": "game",
+    "kind": "native layout contract"
   }
 ]

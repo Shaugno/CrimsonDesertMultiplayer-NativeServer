@@ -1,0 +1,143 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x165FAC0
+Function=FUN_14165fac0 body=[[14165fac0, 14165fb75]]
+14165fac0 PUSH RSI
+14165fac2 XOR R9D,R9D
+14165fac5 MOVZX R11D,DX
+14165fac9 CMP dword ptr [0x146f2a1cc],R9D
+14165fad0 MOV ESI,R8D
+14165fad3 JZ 0x14165fb71
+14165fad9 MOV ECX,dword ptr [0x146f2a1c8]
+14165fadf MOV qword ptr [RSP + 0x10],RBX
+14165fae4 MOV EBX,R11D
+14165fae7 TEST ECX,ECX
+14165fae9 JZ 0x14165fb67
+14165faeb XOR EDX,EDX
+14165faed MOV EAX,EBX
+14165faef DIV ECX
+14165faf1 MOV ECX,R9D
+14165faf4 MOV R8D,EDX
+14165faf7 SHL R8,0x8
+14165fafb ADD R8,qword ptr [0x146f2a1d8]
+14165fb02 MOV R10D,dword ptr [R8]
+14165fb05 TEST R10D,R10D
+14165fb08 JZ 0x14165fb67
+14165fb0a MOV qword ptr [RSP + 0x18],RDI
+14165fb0f MOV RDI,qword ptr [0x146f2a1e0]
+14165fb16 MOV EAX,ECX
+14165fb18 CMP dword ptr [R8 + RAX*0x8 + 0x8],EBX
+14165fb1d JNZ 0x14165fb2f
+14165fb1f MOV EAX,dword ptr [R8 + RAX*0x8 + 0xc]
+14165fb24 MOV RDX,qword ptr [RDI + RAX*0x8]
+14165fb28 CMP word ptr [RDX + 0x4],R11W
+14165fb2d JZ 0x14165fb45
+14165fb2f INC ECX
+14165fb31 CMP ECX,R10D
+14165fb34 JC 0x14165fb16
+14165fb36 MOV RDI,qword ptr [RSP + 0x18]
+14165fb3b MOV RAX,R9
+14165fb3e MOV RBX,qword ptr [RSP + 0x10]
+14165fb43 POP RSI
+14165fb44 RET
+14165fb45 LEA RCX,[RDX + 0x8]
+14165fb49 TEST RCX,RCX
+14165fb4c JZ 0x14165fb58
+14165fb4e MOV RCX,qword ptr [RCX]
+14165fb51 TEST dword ptr [RCX + 0x8],ESI
+14165fb54 CMOVNZ R9,RCX
+14165fb58 MOV RDI,qword ptr [RSP + 0x18]
+14165fb5d MOV RAX,R9
+14165fb60 MOV RBX,qword ptr [RSP + 0x10]
+14165fb65 POP RSI
+14165fb66 RET
+14165fb67 MOV RBX,qword ptr [RSP + 0x10]
+14165fb6c MOV RAX,R9
+14165fb6f POP RSI
+14165fb70 RET
+14165fb71 MOV RAX,R9
+14165fb74 POP RSI
+14165fb75 RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+ulonglong FUN_14165fac0(undefined8 param_1,ushort param_2,uint param_3)
+
+{
+  ulonglong *puVar1;
+  longlong lVar2;
+  uint uVar3;
+  ulonglong uVar4;
+  uint *puVar5;
+  ulonglong uVar6;
+
+  uVar6 = 0;
+  if (_DAT_146f2a1cc == 0) {
+    return 0;
+  }
+  if (_DAT_146f2a1c8 != 0) {
+    puVar5 = (uint *)(((ulonglong)(uint)param_2 % (ulonglong)_DAT_146f2a1c8) * 0x100 +
+                     _DAT_146f2a1d8);
+    uVar4 = uVar6;
+    if (*puVar5 != 0) {
+      while ((puVar5[uVar4 * 2 + 2] != (uint)param_2 ||
+             (lVar2 = *(longlong *)(_DAT_146f2a1e0 + (ulonglong)puVar5[uVar4 * 2 + 3] * 8),
+             *(ushort *)(lVar2 + 4) != param_2))) {
+        uVar3 = (int)uVar4 + 1;
+        uVar4 = (ulonglong)uVar3;
+        if (*puVar5 <= uVar3) {
+          return 0;
+        }
+      }
+      puVar1 = (ulonglong *)(lVar2 + 8);
+      if ((puVar1 != (ulonglong *)0x0) && (uVar4 = *puVar1, (*(uint *)(uVar4 + 8) & param_3) != 0))
+      {
+        uVar6 = uVar4;
+      }
+      return uVar6;
+    }
+  }
+  return 0;
+}
+
+
+
+RVA=0x165FA60
+Function=FUN_14165fa60 body=[[14165fa60, 14165fab9]]
+14165fa60 SUB RSP,0x28
+14165fa64 MOV EDX,0x9c
+14165fa69 MOV RAX,qword ptr GS:[0x58]
+14165fa72 MOV RCX,qword ptr [RAX]
+14165fa75 MOV EAX,dword ptr [RDX + RCX*0x1]
+14165fa78 CMP dword ptr [0x1473d8ef8],EAX
+14165fa7e JLE 0x14165faae
+14165fa80 LEA RCX,[0x1473d8ef8]
+14165fa87 CALL 0x144c23b8c
+14165fa8c CMP dword ptr [0x1473d8ef8],-0x1
+14165fa93 JNZ 0x14165faae
+14165fa95 LEA RCX,[0x1454b6850]
+14165fa9c CALL 0x144c23e5c
+14165faa1 NOP
+14165faa2 LEA RCX,[0x1473d8ef8]
+14165faa9 CALL 0x144c23b20
+14165faae LEA RAX,[0x1473d8efc]
+14165fab5 ADD RSP,0x28
+14165fab9 RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined8 FUN_14165fa60(void)
+
+{
+  longlong unaff_GS_OFFSET;
+
+  if (*(int *)(**(longlong **)(unaff_GS_OFFSET + 0x58) + 0x9c) < _DAT_1473d8ef8) {
+    FUN_144c23b8c(&DAT_1473d8ef8);
+    if (_DAT_1473d8ef8 == -1) {
+      FUN_144c23e5c(&UNK_1454b6850);
+      FUN_144c23b20(&DAT_1473d8ef8);
+    }
+  }
+  return 0x1473d8efc;
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "image": "old",
+    "sha256": "57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7",
+    "vtable": "0x5585c40",
+    "slot": "0xc0",
+    "candidate": "0x4f8ff0",
+    "pdata_entry": false,
+    "adopted": false
+  },
+  {
+    "image": "new",
+    "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "vtable": "0x5990bf0",
+    "slot": "0xc0",
+    "candidate": "0x5d93c0",
+    "pdata_entry": false,
+    "adopted": false
+  }
+]

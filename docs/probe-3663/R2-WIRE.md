@@ -1,7 +1,7 @@
 # R2 native wire audit
 
 No native target tunnel is armed. Native identifiers and payload layouts are
-separate contracts. `r2-wire-reviewed.json` records 30 reviewed core rows;
+separate contracts. `r2-wire-reviewed.json` records 31 reviewed core rows;
 `r2-reviewed.json` also records the native Nak ID. The numeric target values
 and the reviewed payload member fields live in build_3663.h, still unused.
 
@@ -11,6 +11,11 @@ that load its primary vtable and store it in the exact descriptor instance.
 The target's vslot-2 handler is reviewed alongside that descriptor; the native
 dispatcher reads descriptor opcode, kind and channel. This is stronger than
 searching for an integer or treating a descriptor size as a payload schema.
+Native registration CB4BE0 explicitly reads the named descriptor's u16 +C
+opcode, passes its key and instance to insertion 165FF90, and stores the key
+in registry entry+4. Lookup 165FAC0 compares that key and the descriptor's +8
+kind mask; ServerOnRecvPacket then selects the descriptor's handler. These
+target instructions corroborate the descriptor field's actual dispatch role.
 No function/global RVA is adopted by this wire audit.
 
 | Native message | 2976 | 3663 |
@@ -24,6 +29,7 @@ No function/global RVA is adopted by this wire audit.
 | ScopeSenderAck | 2042 | 2046 |
 | ActorLoadDataAck (legacy ActorAppear alias) | 2005 | 2005 |
 | CharacterLobbyDataAck (legacy DataAck alias) | 2869 | 2896 |
+| LogoutCharacterToFieldServerAck (legacy opaque kOp2679) | 2679 | 3116 |
 | SetFieldTimeReq | 2125 | 2150 |
 | ReserveShutDownServerReq | 2790 | 2447 |
 | SaveAutoReq | 3037 | 2234 |
@@ -60,6 +66,16 @@ Separately reviewed payloads:
 Field-time decoding crosses Denuvo helpers and obfuscated scalar accesses;
 its ID is established, but its complete 32-byte layout and target native
 consumer still need proof. No unchanged structure is inferred from its ID.
+
+Further core control review confirms the native shutdown timer changes
+**2038→2042** (`ShutDownServerOnceTimer`), whereas pointer-bearing
+`OnLogoutXxxToServerReq` remains 2004. Its target handler reads native process
+pointers at packet+3 and +B; it must never cross the tunnel. Named connection
+descriptors retain 1002/1004/1005/1006, and the target network pump explicitly
+constructs 1008. These are partial facts for C150: that aggregate remains
+blocked until 1001/1003/1007 roles are checked and a target filter is routed.
+The active 2976 filter has not been changed. Discovery records continue to
+say unadopted; no target network path is enabled by this review.
 
 Reproduce discovery with rtti_candidates.py, descriptor_candidates.py and
 r2_request_candidates.py, review the initializer/handler exports, then run

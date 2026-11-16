@@ -1,0 +1,50 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x25BAC30
+Function=thunk_FUN_14d85ea70 body=[[1425bac30, 1425bac34]]
+1425bac30 JMP 0x14d85ea70
+
+undefined8 thunk_FUN_14d85ea70(longlong param_1,longlong param_2)
+
+{
+  char cVar1;
+
+  if (((*(char *)(param_2 + 0x69c) == '\0') && (*(char *)(param_2 + 0x699) == '\0')) &&
+     (*(char *)(param_2 + 0x698) != '\0')) {
+    cVar1 = (**(code **)(**(longlong **)(param_1 + 0x10) + 0x20))();
+    if (cVar1 == '\0') {
+      *(undefined1 *)(param_2 + 0x69b) = 0;
+      FUN_1403ab260(&UNK_145dbf701);
+      FUN_1425bb820(param_1,&UNK_145dbf7e0,param_2);
+      return 0;
+    }
+    cVar1 = (**(code **)(**(longlong **)(param_1 + 0x10) + 0x48))
+                      (*(longlong **)(param_1 + 0x10),param_1 + 0x18);
+    if (cVar1 == '\0') {
+      *(undefined1 *)(param_2 + 0x69b) = 0;
+      FUN_1403ab260(&UNK_145dbf801);
+      FUN_1425bb820(param_1,&UNK_145dbf820,param_2);
+      return 0;
+    }
+    cVar1 = (**(code **)(**(longlong **)(param_1 + 0x10) + 0x28))
+                      (*(longlong **)(param_1 + 0x10),param_2);
+    if (cVar1 == '\0') {
+      *(undefined1 *)(param_2 + 0x69b) = 0;
+      FUN_1403ab260(&UNK_145dbf801);
+      FUN_1425bb820(param_1,&UNK_145dbf870,param_2);
+      return 0;
+    }
+    cVar1 = (**(code **)(**(longlong **)(param_1 + 0x10) + 0x30))
+                      (*(longlong **)(param_1 + 0x10),param_2);
+    if (cVar1 == '\0') {
+      *(undefined1 *)(param_2 + 0x69b) = 0;
+      FUN_1403ab260(&UNK_145dbf801);
+      FUN_1425bb820(param_1,&UNK_145dbf8b8,param_2);
+      return 0;
+    }
+    *(undefined1 *)(param_2 + 0x69b) = 1;
+    *(undefined1 *)(param_2 + 0x698) = 0;
+  }
+  return 1;
+}

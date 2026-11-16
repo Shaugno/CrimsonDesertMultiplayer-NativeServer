@@ -56,7 +56,7 @@ if ($Profile -eq 'nativefix' -and $Mode -ne 'vt') {
     & $headless $projects $project -process CrimsonDesert.exe -noanalysis -scriptPath $PSScriptRoot -postScript R2Export.java (Join-Path $output "$Image.BinExport") *> $log
 } else {
     if ($Image -ne 'new') { throw 'VT runs on destination only' }
-    & $headless $projects $project -process CrimsonDesert.exe -noanalysis -scriptPath $PSScriptRoot -preScript R2CopySource.java $projects $sourceProject -postScript AutoVersionTrackingScript.java / R2Auto /CrimsonDesert.exe -postScript R2ExportMatches.java /R2Auto (Join-Path $output 'vt-matches.tsv') *> $log
+    & $headless $projects $project -process CrimsonDesert.exe -noanalysis -scriptPath $PSScriptRoot -preScript R2CopySource.java $projects $sourceProject -preScript R2VTOptions.java (Join-Path $output 'vt-options.txt') -postScript AutoVersionTrackingScript.java / R2AutoCore /CrimsonDesert.exe -postScript R2ExportMatches.java /R2AutoCore (Join-Path $output 'vt-matches.tsv') *> $log
 }
 $result = $LASTEXITCODE
 Get-Content -LiteralPath $log -Tail 18

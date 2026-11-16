@@ -1,0 +1,16 @@
+MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
+
+  Zycore.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\zydis-build\zycore\RelWithDebInfo\Zycore.lib
+  Zydis.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\zydis-build\RelWithDebInfo\Zydis.lib
+  cdmp_common.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\cdmp_common.lib
+  imgui.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\RelWithDebInfo\imgui.lib
+  Scanning sources for module dependencies...
+  safetyhook.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\_deps\safetyhook-build\RelWithDebInfo\safetyhook.lib
+  player_reader.cpp
+  mod.cpp
+  Generating Code...
+  cdmp_mod.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp.asi
+MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
+
+  build_guard_tests.cpp
+  cdmp_tests_build_guard.vcxproj -> C:\Users\shaug\OneDrive\Documents\ChatGPT\Crimson mod\build\bin\RelWithDebInfo\cdmp_tests_build_guard.exe

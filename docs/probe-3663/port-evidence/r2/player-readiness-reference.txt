@@ -1,0 +1,49 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x4F8FF0
+Function=FUN_1404f8ff0 body=[[1404f8ff0, 1404f8ff8]]
+1404f8ff0 MOVZX EDX,R8W
+1404f8ff4 JMP 0x141436a90
+
+undefined1 FUN_1404f8ff0(longlong param_1,undefined8 param_2,ushort param_3)
+
+{
+  longlong *plVar1;
+  longlong lVar2;
+  char cVar3;
+  undefined1 uVar4;
+  longlong unaff_GS_OFFSET;
+
+  lVar2 = **(longlong **)(unaff_GS_OFFSET + 0x58);
+  if (*(char *)(lVar2 + 0x98) == '\0') {
+    thunk_FUN_1567fb3c0();
+  }
+  if (*(char *)(lVar2 + 0x1d2) == '\0') {
+    if (*(char *)(lVar2 + 0x98) == '\0') {
+      thunk_FUN_1567fb3c0();
+    }
+    if (*(char *)(lVar2 + 0x1d4) == '\0') {
+      plVar1 = (longlong *)(param_1 + 0x18);
+      (**(code **)(*plVar1 + 8))(plVar1);
+      if ((((*(ushort *)(param_1 + 0x5e) & param_3) == 0) &&
+          (cVar3 = FUN_141436910(param_1), cVar3 == '\0')) || (*(char *)(param_1 + 0x4a) == '\0')) {
+        uVar4 = 0;
+      }
+      else {
+        FUN_141434470(param_1,0);
+        uVar4 = 1;
+      }
+      (**(code **)(*plVar1 + 0x10))(plVar1);
+      return uVar4;
+    }
+  }
+  if (((*(ushort *)(param_1 + 0x5e) & param_3) == 0) &&
+     (cVar3 = FUN_141436910(param_1), cVar3 == '\0')) {
+    return 0;
+  }
+  LOCK();
+  *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
+  UNLOCK();
+  return 1;
+}

@@ -52,3 +52,21 @@ R2NativeSavedSource/old and R2NativeSavedTarget/new; raw output is
 analysis-tools/r2-nativefix. This avoids losing completed analysis to a long
 export. All production 3663 tiers remain disabled until their separate
 adoption and validation requirements pass.
+
+Both corrected exports completed: source 589385035 bytes, target 615418483.
+Analysis and export hashes are in `port-evidence/r2/whole-image-exports.json`.
+BinDiff reports some missing basic blocks; preserve these diagnostics and
+consider them when assessing relevant function matches.
+
+VT setup initially failed because source-project closure clears Ghidra's
+global active project, which the stock script's value parser needs.
+`R2CopySource` restores the destination and validates any existing source copy
+before reuse. The default duplicate-function pass was later stopped incomplete
+after repeated stack samples in candidate generation. Ghidra's official
+`SetAutoVersionTrackingOptionsScript.java` explicitly documents this pass as
+potentially slow on large duplicate sets. `R2VTOptions` uses that documented
+configuration seam to disable only the optional duplicate pass. All plan-listed
+standard exact/symbol/data/reference/implied passes remain enabled, with
+unchanged thresholds. Session `R2AutoCore` is the configured run; the earlier
+incomplete `R2Auto` session is not matcher evidence. The correlation algorithms
+themselves remain stock, and BinDiff inputs were exported before any VT markup.

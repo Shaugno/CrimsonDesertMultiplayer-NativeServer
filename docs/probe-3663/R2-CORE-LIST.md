@@ -36,7 +36,7 @@ MaxStatEntries=64, loading radius=5, MaxEntries=64, MaxActors=0x4000 and C4
 SamUserListMax=0x4000 are policy bounds. Stamina stays included because today's
 reader reads it; no unimplemented exclusion is used to make A appear complete.
 
-Counts: A 37, B 75, C 150, D 125; total 387; R1 adopted 17.
+Counts: A 37, B 75, C 150, D 126; total 388; R1 adopted 17.
 
 | Row | Tier | Game contract | Symbol | 2976 value | Source | Use | Evidence status |
 |---|---|---|---|---|---|---|---|
@@ -427,3 +427,4 @@ Counts: A 37, B 75, C 150, D 125; total 387; R1 adopted 17.
 | C150 | C | native identifier | NativeForbiddenRequests | `2790,2038,2004,1001..1008` | src/mod/session2/session2.cpp:278 | native shutdown, pointer and connection messages must never reach remote server | needs target evidence |
 | D124 | D | native layout contract | SaveReq2910Layout | `slot0:u32; length4:u32; UTF16+8; terminator; 10+2n bytes; n<=30` | src/mod/session2/guest_save_wire.h:383 | verify native 2910 writer and handler, including maximum native name length | needs target evidence |
 | D125 | D | native layout contract | LoginCharacterSaveLayout | `flag0:u8; characterNo1:u64; slot9:u32` | src/mod/session2/guest_save_wire.h:72 | native 3093 payload used for selecting and holding the guest save | needs target evidence |
+| D126 | D | native layout contract | NativeSaveHeaderLayout | `magic0:u32; version4:u16 in1..2; size6:u16=80h; flagsCh:u32 mask2; raw12h:u32>0; data16h:u32 in1..raw` | src/mod/session2/guest_save_logic.h:152 | native save validator schema, including inline field offsets and domain checks; file/raw size caps remain policy | needs target evidence |

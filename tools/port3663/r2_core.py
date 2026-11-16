@@ -95,6 +95,9 @@ raw('D', S+'guest_save_guest.cpp', 'u32 key | u32 slot | u8 ok', 'SaveCurrentAck
 raw('C', S+'session2.cpp', 'return opcode == 2790', 'NativeForbiddenRequests', '2790,2038,2004,1001..1008', 'native shutdown, pointer and connection messages must never reach remote server')
 raw('D', S+'guest_save_wire.h', 'inline std::vector<uint8_t> make_save_req', 'SaveReq2910Layout', 'slot0:u32; length4:u32; UTF16+8; terminator; 10+2n bytes; n<=30', 'verify native 2910 writer and handler, including maximum native name length')
 raw('D', S+'guest_save_wire.h', 'kOpLoginCharacterReq =', 'LoginCharacterSaveLayout', 'flag0:u8; characterNo1:u64; slot9:u32', 'native 3093 payload used for selecting and holding the guest save')
+raw('D', S+'guest_save_logic.h', 'i.version = load_le', 'NativeSaveHeaderLayout',
+    'magic0:u32; version4:u16 in1..2; size6:u16=80h; flagsCh:u32 mask2; raw12h:u32>0; data16h:u32 in1..raw',
+    'native save validator schema, including inline field offsets and domain checks; file/raw size caps remain policy')
 # Split aggregate address arrays: each independent call/error address is a row.
 expanded = []
 for row in rows:

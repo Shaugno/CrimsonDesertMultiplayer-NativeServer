@@ -87,5 +87,25 @@ check('kLobbyConstant',0x2B7F66C,0x2E87DB0,
 check('kLobbyAddCall',0x2B7F6DB,0x2E87E10,
     'Native E8 call from the lobby loader to paired entry writer 2143E70/237EA60, with component, result, address-of-number, slot/name data and extra native arguments. This callsite proof does not establish a safe detour ABI.',
     'port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt',[0x2B7F4D0,0x2E879A0])
+check('kSave',0x186E450,0x1A15930,
+    'Paired native SavePlayerToSlot has five argument roles (manager/result/slot/actor/options), formats slot name, serializes owning user and character, walks the pending file records, commits and propagates failure. Target manual-save wrapper 2BCD7E0 invokes it under the same manager busy/lock gate. No delta-only identification.',
+    'port-evidence/r2/save-manager-reference.txt; save-wrapper-target.txt; save-write-target.txt')
+check('kGetOrCreate',0x2355EC0,0x25BB470,
+    'Paired three-argument GetOrCreateSlot takes the storage lock, resolves a name map or calls native CreateSlot, then applies the exact slot-prefix/memory-only rule. Target SavePlayerToSlot and component writer independently call this thunk. Denuvo bodies and native constants are reviewed.',
+    'port-evidence/r2/save-storage-reference.txt; save-storage-target.txt; save-create-target.txt; save-slot-construct-target.txt; r2-save-constants.json')
+check('kAddFile',0x235B100,0x25C0900,
+    'Paired AddFile allocates 140 bytes, constructs native filename/header at +98, respects slot memory flags, inserts into slot+8 name map and appends entry to +688/+690. Target found by raw allocation-immediate lead, then full native role/ownership review; the lead itself is not adoption evidence.',
+    'port-evidence/r2/save-storage-reference.txt; save-addfile-target.txt; save-name-map-reference.txt; save-name-map-target.txt; r2-save-constants.json')
+check('kLoad',0x20688A0,0x22951B0,
+    'Paired LoadComponentsFromFile, reached directly by matched-role LoadSlot, resolves slot name in storage, chooses lobby/save by actor descriptor, loads component data through each component vslot +50, and propagates absent-slot or component-load errors. Target status/lobby loaders supply independent downstream role checks. Instruction body and hook ABI still need their own review.',
+    'port-evidence/r2/save-slot-construct-reference.txt; save-write-target.txt; identity-contracts-target.txt')
+for symbol,old,target,anchor,role in [
+    ('kErrSaveFail.site',0x186E780,0x1A15C2A,[0x186E450,0x1A15930],'failure MOV instruction after empty pending-file vector'),
+    ('kErrSaveFail.global',0x6CF7CA0,0x71D0CF8,[0x186E450,0x1A15930],'RIP-relative failure result global'),
+    ('kErrAbsentSlot.site',0x2069615,0x2295FCF,[0x20688A0,0x22951B0],'missing slot/name branch error MOV'),
+    ('kErrAbsentSlot.global',0x6CF781C,0x71D0848,[0x20688A0,0x22951B0],'RIP-relative absent-slot result global')]:
+    check(symbol,old,target,
+        'Paired native '+role+'; explicit branch role, result propagation and file-backed RIP operand verified. Numeric error codes are not presumed unchanged.',
+        'port-evidence/r2/save-manager-reference.txt; save-slot-construct-reference.txt; save-write-target.txt',anchor)
 (docs/'r2-rva-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Independent RVA checks awaiting standard support',len(result))

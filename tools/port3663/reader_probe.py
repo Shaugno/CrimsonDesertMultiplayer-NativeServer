@@ -1,4 +1,4 @@
-"""P1 passive HP-definition trace. External read/query handle only; never a feed.
+"""Passive HP-definition or loading trace. External read/query only; never a feed.
 
 Run --self-test without a game. A live run requires the R2 presence/backup/deploy
 session driver. Candidate RVAs come only from build_3663.h, not CLI overrides.
@@ -8,6 +8,7 @@ import ctypes as C
 from ctypes import wintypes as W
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import struct
@@ -86,6 +87,44 @@ class View:
         result.update(entries=count,matches=matches,coherent=stable and valid and bool(matches),reason=reason)
         return result
 
+class LoadingView(View):
+    def chain(self):
+        world=self.pointer(self.base+self.rv['kWorldSystemSlot'])
+        manager=self.object_at(world+self.layout['kWorldSystem_ActorManager'],'kVtClientActorManager') if world else None
+        actor=self.object_at(manager+self.layout['kActorManager_ControlledActor'],'kVtControlledActor') if manager else None
+        table=self.pointer(actor+self.layout['kActor_ComponentTable']) if actor else None
+        control=self.object_at(table+self.layout['kComponents_CharacterControl'],'kVtCharacterControl') if table else None
+        inner=self.pointer(control+self.layout['kControl_Inner']) if control else None
+        physics=self.object_at(inner+self.layout['kControlInner_Physics'],'kVtPhysicsObject') if inner else None
+        return world,manager,actor,table,control,inner,physics
+    def vector(self,address):
+        raw=self.read(address,12)
+        if raw is None: return None
+        values=struct.unpack('<3f',raw)
+        return values if all(math.isfinite(v) for v in values) else None
+    def sample(self):
+        chain=self.chain()
+        result=dict(kind='candidate_loading_trace',coherent=False,reason='chain_not_ready')
+        if not all(chain): return result
+        physics=chain[-1]
+        local=self.vector(physics+self.layout['kPhysics_Position'])
+        origin=self.vector(self.base+self.rv['kChunkOrigin'])
+        axes=[self.vector(physics+self.layout[key]) for key in ('kPhysics_AxisX','kPhysics_AxisY','kPhysics_AxisZ')]
+        static=self.vector(self.base+self.rv['kStaticPlayerPos'])
+        if local is None or origin is None or any(v is None for v in axes):
+            result['reason']='unreadable_or_nonfinite_pose'
+            return result
+        if chain!=self.chain():
+            result['reason']='chain_changed_during_sample'
+            return result
+        world=tuple(a+b for a,b in zip(local,origin))
+        # Report a hypothesis, never turn it into production readiness evidence.
+        parked=abs(world[0])<5 and abs(world[2])<5 and abs(world[1]-1000)<5
+        result.update(coherent=True,reason='observational_only',actor=hex(chain[2]),
+            position=world,local_position=local,chunk_origin=origin,axes=axes,
+            static_position=static,candidate_legacy_park=parked)
+        return result
+
 def self_test():
     rv,layout,identity = constants()
     memory = {}
@@ -132,6 +171,36 @@ def self_test():
     put(0x240000,'<Q',0xBAD)
     assert not view.sample()['coherent']
     print('P1 pure logic: dynamic ID, dirty padding, bounds, bad vtable, missing pointer PASS; no process opened')
+    loading=LoadingView(read,base,rv,layout)
+    put(0x230000+layout['kComponents_CharacterControl'],'<Q',0x280000)
+    put(0x280000,'<Q',base+rv['kVtCharacterControl'])
+    put(0x280000+layout['kControl_Inner'],'<Q',0x290000)
+    put(0x290000+layout['kControlInner_Physics'],'<Q',0x300000)
+    put(0x300000,'<Q',base+rv['kVtPhysicsObject'])
+    def vector(at,values):
+        for i,value in enumerate(values): put(at+4*i,'<f',value)
+    vector(base+rv['kChunkOrigin'],(10,20,30))
+    vector(base+rv['kStaticPlayerPos'],(11,22,33))
+    vector(0x300000+layout['kPhysics_Position'],(1,2,3))
+    for key,values in zip(('kPhysics_AxisX','kPhysics_AxisY','kPhysics_AxisZ'),((1,0,0),(0,1,0),(0,0,1))):
+        vector(0x300000+layout[key],values)
+    assert loading.sample()['position']==(11,22,33)
+    vector(0x300000+layout['kPhysics_Position'],(-10,980,-30))
+    assert loading.sample()['candidate_legacy_park']
+    vector(0x300000+layout['kPhysics_Position'],(1,float('nan'),3))
+    assert not loading.sample()['coherent']
+    vector(0x300000+layout['kPhysics_Position'],(1,2,3))
+    def changing_pose(address,size):
+        raw=read(address,size)
+        if address==0x300000+layout['kPhysics_Position']:
+            put(0x210000+layout['kActorManager_ControlledActor'],'<Q',0)
+        return raw
+    assert LoadingView(changing_pose,base,rv,layout).sample()['reason']=='chain_changed_during_sample'
+    assert not loading.sample()['coherent']
+    put(0x210000+layout['kActorManager_ControlledActor'],'<Q',0x220000)
+    put(0x300000,'<Q',0xBAD)
+    assert not loading.sample()['coherent']
+    print('Loading pure logic: origin+local, park hypothesis, NaN, changed identity, missing actor, bad physics type PASS; no process opened')
 
 class Remote:
     class Region(C.Structure):
@@ -180,6 +249,7 @@ def main():
     parser.add_argument('--api-self-test',action='store_true')
     parser.add_argument('--pid',type=int)
     parser.add_argument('--seconds',type=int,default=600)
+    parser.add_argument('--mode',choices=('hp','loading'),default='hp')
     args=parser.parse_args()
     if args.self_test: self_test(); return
     if args.api_self_test:
@@ -209,10 +279,12 @@ def main():
         header=remote.read(base+pe,24+60)
         if header is None or header[:4]!=b'PE\0\0' or struct.unpack_from('<H',header,4)[0]!=0x8664 or struct.unpack_from('<H',header,24)[0]!=0x20B or struct.unpack_from('<I',header,8)[0]!=identity['kPeTimestamp'] or struct.unpack_from('<I',header,80)[0]!=identity['kSizeOfImage']:
             raise RuntimeError('Mapped identity mismatch')
-        print(json.dumps(dict(kind='P1_external_read_only',pid=args.pid,sha256=digest,base=hex(base),
-              production_tiers='unarmed',question='Which native HP definition selects the local status entry?',
+        question='Which native HP definition selects the local status entry?' if args.mode=='hp' else 'Does the candidate local-player chain expose a distinct loading/park transition?'
+        print(json.dumps(dict(kind='passive_external_read_only',mode=args.mode,pid=args.pid,sha256=digest,base=hex(base),
+              production_tiers='unarmed',question=question,
               access_mask='0x410',hooks=False,writes=False,native_calls=False)),flush=True)
-        view=View(remote.read,base,rv,layout); start=time.monotonic(); last=None; last_log=-1
+        view=(View if args.mode=='hp' else LoadingView)(remote.read,base,rv,layout)
+        start=time.monotonic(); last=None; last_log=-1
         while time.monotonic()-start<args.seconds and remote.alive():
             now=time.monotonic()-start; row=view.sample()
             if row!=last or now-last_log>=1:

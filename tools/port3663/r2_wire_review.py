@@ -12,6 +12,7 @@ docs=root/'docs/probe-3663'
 folder=root/'build/r2'
 core=json.loads((docs/'R2-CORE-LIST.json').read_text())
 candidates=json.loads((folder/'request-candidates.json').read_text())
+candidates+=json.loads((folder/'tunnel-control-candidates.json').read_text())
 base=0x140000000
 def sections(path):
     text=path.read_text(encoding='utf-8-sig')
@@ -21,6 +22,20 @@ def sections(path):
 initializers={i:sections(folder/f'request-initializers-{suffix}.txt')
               for i,suffix in [('old','reference'),('new','target')]}
 handlers=sections(folder/'request-handlers-target.txt')
+for image,suffix in [('old','reference'),('new','target')]:
+    initializers[image].update(sections(folder/f'tunnel-control-native-{suffix}.txt'))
+handlers.update(sections(folder/'tunnel-control-native-target.txt'))
+
+# Native registration reads the named descriptor's actual +C opcode. Native
+# lookup uses the registered u16 key and kind mask before selecting its handler.
+registration=(folder/'troc-register-target.txt').read_text(encoding='utf-8-sig').lower()
+lookup=(folder/'troc-dispatch-lookup-target.txt').read_text(encoding='utf-8-sig').lower()
+insertion=(folder/'troc-dispatch-insert-target.txt').read_text(encoding='utf-8-sig').lower()
+assert 'movzx r8d,word ptr [0x146f173cc]' in registration
+assert 'lea rax,[0x146f173c0]' in registration and 'call 0x14165ff90' in registration
+assert 'cmp word ptr [rdx + 0x4],r11w' in lookup
+assert 'test dword ptr [rcx + 0x8],esi' in lookup
+assert '*(undefined2 *)(pivar5 + 1) = *(undefined2 *)*param_2' in insertion
 descriptors={i:{r['name']:r for r in candidates if r['image']==i} for i in ('old','new')}
 for image,expected in [('old','57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7'),
                        ('new','8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8')]:
@@ -47,6 +62,7 @@ contracts={
     'LogoutSessionToServerReq':(2001,['kOpLogoutSessionReq']),
     'LogoutSessionToServerAck':(2002,['kOpLogoutSessionAck']),
     'LogoutUserToServerAck':(2003,['kOpLogoutUserAck']),
+    'LogoutCharacterToFieldServerAck':(2679,['kOp2679']),
 }
 result={}
 for short,(old_id,symbols) in contracts.items():
@@ -64,8 +80,8 @@ for short,(old_id,symbols) in contracts.items():
     for row in rows:
         result[row['r2']]=dict(target=str(new['opcode']),old=row['value'],symbol=row['symbol'],
             method='native named descriptor, verified initializer and handler',
-            second_check=f'{name}: source opcode {old_id}, target {new["opcode"]}; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler {new["handler"]} reviewed. Native dispatcher consumes descriptor opcode/kind/channel; ID adoption does not adopt its payload or hook ABI.',
-            evidence='port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt')
+            second_check=f'{name}: source opcode {old_id}, target {new["opcode"]}; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler {new["handler"]} reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.',
+            evidence='port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt')
 
 def payload(symbol,description,proof,members=None):
     row,=[r for r in core if r['symbol']==symbol]

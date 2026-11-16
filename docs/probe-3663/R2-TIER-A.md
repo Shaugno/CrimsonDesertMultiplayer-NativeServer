@@ -58,6 +58,28 @@ production tiers closed. It is not L1. L1 remains gated on a complete A table
 and then must demonstrate position, rotation, HP and explicit loading not-ready
 through load, walk, turn and fast travel, with the user present.
 
+The session driver now also supports a separately written `-Profile loading`
+question. Its external read-only collector records the candidate position,
+chunk origin, rotation axes, static position and full-chain coherence, from
+title through load, walking/turning and one fast travel. It labels the old park
+position as a hypothesis; it never calls that a production readiness result.
+Each profile needs its own pre-launch backup, written question, explicit user
+presence, ten-minute collection limit, removal and installation restoration.
+The presence request can batch both profiles in one sitting. Neither has run.
+
+Pure tests cover missing actor, wrong physics vtable, nonfinite position,
+identity changing during a sample, chunk-origin addition and the park
+hypothesis. Windows API self-test uses only the tool's own process. These are
+tool checks, not live evidence or permission to arm A.
+
+An investigated readiness alternative was rejected: the controlled-actor
+getter's vslot C0 is a reference-acquisition wrapper, not a read-only loading
+predicate. Reference `4F8FF0` tail-jumps `1436A90`; target `5D93C0` tail-jumps
+`165B590`. They take locks and increment strong references, with changed TLS
+state (+1D2→+1D0). Tier A must not call them. Native +4A/+5E eligibility alone
+has not been shown to distinguish loading. Paired exports and the file-backed
+vtable-slot pointers are retained as negative evidence.
+
 Evidence: port-evidence/r2/tier-a-route-build.txt,
 tier-a-route-loopback.txt and tier-a-route-host.txt; hashes are in
 port-evidence/r2/text-hashes.json. Read R2-PROGRESS.md for ongoing Step 2 work.

@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory=$true)][ValidateSet('Prepare','Deploy','Probe','Finish')][string]$Stage,
     [Parameter(Mandatory=$true)][ValidatePattern('^R2-P1-[0-9]{8}-[0-9]{6}$')][string]$Session,
     [int]$GamePid = 0,
+    [ValidateSet('hp','loading')][string]$Profile = 'hp',
     [switch]$Present
 )
 $ErrorActionPreference='Stop'
@@ -16,6 +17,21 @@ $expected='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
 if ((Get-FileHash -LiteralPath (Join-Path $gameDir 'CrimsonDesert.exe')).Hash -ne $expected) { throw 'Build drift; rematch first' }
 if ($Stage -ne 'Probe' -and (Get-Process CrimsonDesert -ErrorAction SilentlyContinue)) { throw 'Game must be closed' }
 if ($Stage -in @('Deploy','Probe') -and !$Present) { throw 'The session requires the user at the PC' }
+$sessionQuestion = if ($Profile -eq 'hp') {
+    "Which native HP definition key selects the local actor's status entry on the exact 3663 executable?"
+} else {
+    'Does the candidate local-player chain expose a distinct missing-chain or parked-position transition during loading and fast travel on exact 3663?'
+}
+$expectedObservation = if ($Profile -eq 'hp') {
+    "The native definition key selects one status entry whose current/max integer values, divided by the proved unit scale 1000, agree with the character's HP display. Both definition registries are logged separately; no ID is guessed."
+} else {
+    'The guarded candidate position and rotation follow the controllable character, then loading produces a missing chain or a distinctive park interval before placement. The old (0,1000,0) park is only a logged hypothesis, not an adopted readiness rule.'
+}
+$sessionSteps = if ($Profile -eq 'hp') {
+    'Select Continue and wait for control; show the character/status HP display and note current/max HP; let ordinary regeneration or a healing action change HP if available; quit to desktop at the stop signal.'
+} else {
+    'Start collection at the title screen, select Continue, wait for control, walk a few steps and turn, then use one ordinary fast travel; wait for placement and control, walk and turn again, and quit to desktop at the stop signal.'
+}
 function Manifest([string]$path) {
     if (!(Test-Path -LiteralPath $path)) { throw "Missing source $path" }
     $links=@(Get-ChildItem -LiteralPath $path -Recurse -Force | Where-Object { $_.Attributes -band [IO.FileAttributes]::ReparsePoint })
@@ -54,13 +70,13 @@ if ($Stage -eq 'Prepare') {
     @"
 # $Session — passive P1, prepared before launch
 
-Question: Which native HP definition key selects the local actor's status entry on the exact 3663 executable?
+Question: $sessionQuestion
 
-Expected observation: the native definition key selects one status entry whose current/max integer values, divided by the proved unit scale 1000, agree with the character's HP display. Both definition registries are logged separately; no ID is guessed.
+Expected observation: $expectedObservation
 
 Duration: ten minutes from collector start, at most fifteen minutes for the sitting.
 
-Steps: after Shaugn confirms presence, deploy the closed-guard ASI; launch the game visibly; select Continue and wait for control; show the character/status HP display and note current/max HP; let ordinary regeneration or a healing action change HP if available; quit to desktop at the stop signal.
+Steps: after Shaugn confirms presence, deploy the closed-guard ASI; launch the game visibly. $sessionSteps
 
 Stop: any crash, hang, identity drift, user request, or time limit. Never retry a crash blindly. Collect cdmp.log and crash context, fix offline and rerun the suite before another session.
 
@@ -72,10 +88,14 @@ Installed executable SHA256: $expected
 Backup files: $($before.Count)
 Backup manifest SHA256: $((Get-FileHash -LiteralPath (Join-Path $backupRoot 'save-manifest.json')).Hash)
 "@ | Set-Content (Join-Path $evidence 'question.md')
+    @{profile=$Profile;question=$sessionQuestion} | ConvertTo-Json | Set-Content (Join-Path $evidence 'session-profile.json')
     Write-Output "Prepared $Session; files=$($before.Count); backup verified; no deployment or game launch."
     exit
 }
 if (!(Test-Path -LiteralPath (Join-Path $evidence 'question.md'))) { throw 'Prepare this session first' }
+$profileFile=Join-Path $evidence 'session-profile.json'
+$preparedProfile=if (Test-Path -LiteralPath $profileFile) { (Get-Content -Raw -LiteralPath $profileFile | ConvertFrom-Json).profile } else { 'hp' }
+if ($Profile -ne $preparedProfile) { throw 'Profile differs from the written question; prepare a fresh session' }
 $before=@(Get-Content -Raw -LiteralPath (Join-Path $backupRoot 'save-manifest.json') | ConvertFrom-Json)
 $installed=@(Get-Content -Raw -LiteralPath (Join-Path $backupRoot 'install-manifest.json') | ConvertFrom-Json)
 if ($Stage -eq 'Deploy') {
@@ -112,7 +132,7 @@ if ($Stage -eq 'Deploy') {
 } elseif ($Stage -eq 'Probe') {
     AssertNoMatching
     if ($GamePid -lt 1) { throw 'An explicit verified game PID is required' }
-    & $py (Join-Path $PSScriptRoot 'reader_probe.py') --pid $GamePid --seconds 600 *> (Join-Path $evidence 'trace.log')
+    & $py (Join-Path $PSScriptRoot 'reader_probe.py') --pid $GamePid --seconds 600 --mode $Profile *> (Join-Path $evidence 'trace.log')
     if ($LASTEXITCODE) { throw 'Probe failed; inspect trace; do not retry blindly' }
 } else {
     $receiptPath=Join-Path $evidence 'installed-receipt.json'

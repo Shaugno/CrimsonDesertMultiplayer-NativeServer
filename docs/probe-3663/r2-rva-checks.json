@@ -270,5 +270,81 @@
       45610192,
       48789920
     ]
+  },
+  "D055": {
+    "target": "0x1a15930",
+    "old": "0x186e450",
+    "symbol": "kSave",
+    "second_check": "Paired native SavePlayerToSlot has five argument roles (manager/result/slot/actor/options), formats slot name, serializes owning user and character, walks the pending file records, commits and propagates failure. Target manual-save wrapper 2BCD7E0 invokes it under the same manager busy/lock gate. No delta-only identification.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-wrapper-target.txt; save-write-target.txt",
+    "anchor": null
+  },
+  "D059": {
+    "target": "0x25bb470",
+    "old": "0x2355ec0",
+    "symbol": "kGetOrCreate",
+    "second_check": "Paired three-argument GetOrCreateSlot takes the storage lock, resolves a name map or calls native CreateSlot, then applies the exact slot-prefix/memory-only rule. Target SavePlayerToSlot and component writer independently call this thunk. Denuvo bodies and native constants are reviewed.",
+    "evidence": "port-evidence/r2/save-storage-reference.txt; save-storage-target.txt; save-create-target.txt; save-slot-construct-target.txt; r2-save-constants.json",
+    "anchor": null
+  },
+  "D061": {
+    "target": "0x25c0900",
+    "old": "0x235b100",
+    "symbol": "kAddFile",
+    "second_check": "Paired AddFile allocates 140 bytes, constructs native filename/header at +98, respects slot memory flags, inserts into slot+8 name map and appends entry to +688/+690. Target found by raw allocation-immediate lead, then full native role/ownership review; the lead itself is not adoption evidence.",
+    "evidence": "port-evidence/r2/save-storage-reference.txt; save-addfile-target.txt; save-name-map-reference.txt; save-name-map-target.txt; r2-save-constants.json",
+    "anchor": null
+  },
+  "C097": {
+    "target": "0x22951b0",
+    "old": "0x20688a0",
+    "symbol": "kLoad",
+    "second_check": "Paired LoadComponentsFromFile, reached directly by matched-role LoadSlot, resolves slot name in storage, chooses lobby/save by actor descriptor, loads component data through each component vslot +50, and propagates absent-slot or component-load errors. Target status/lobby loaders supply independent downstream role checks. Instruction body and hook ABI still need their own review.",
+    "evidence": "port-evidence/r2/save-slot-construct-reference.txt; save-write-target.txt; identity-contracts-target.txt",
+    "anchor": null
+  },
+  "D076": {
+    "target": "0x1a15c2a",
+    "old": "0x186e780",
+    "symbol": "kErrSaveFail.site",
+    "second_check": "Paired native failure MOV instruction after empty pending-file vector; explicit branch role, result propagation and file-backed RIP operand verified. Numeric error codes are not presumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-slot-construct-reference.txt; save-write-target.txt",
+    "anchor": [
+      25617488,
+      27351344
+    ]
+  },
+  "D077": {
+    "target": "0x71d0cf8",
+    "old": "0x6cf7ca0",
+    "symbol": "kErrSaveFail.global",
+    "second_check": "Paired native RIP-relative failure result global; explicit branch role, result propagation and file-backed RIP operand verified. Numeric error codes are not presumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-slot-construct-reference.txt; save-write-target.txt",
+    "anchor": [
+      25617488,
+      27351344
+    ]
+  },
+  "D074": {
+    "target": "0x2295fcf",
+    "old": "0x2069615",
+    "symbol": "kErrAbsentSlot.site",
+    "second_check": "Paired native missing slot/name branch error MOV; explicit branch role, result propagation and file-backed RIP operand verified. Numeric error codes are not presumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-slot-construct-reference.txt; save-write-target.txt",
+    "anchor": [
+      33982624,
+      36262320
+    ]
+  },
+  "D075": {
+    "target": "0x71d0848",
+    "old": "0x6cf781c",
+    "symbol": "kErrAbsentSlot.global",
+    "second_check": "Paired native RIP-relative absent-slot result global; explicit branch role, result propagation and file-backed RIP operand verified. Numeric error codes are not presumed unchanged.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-slot-construct-reference.txt; save-write-target.txt",
+    "anchor": [
+      33982624,
+      36262320
+    ]
   }
 }
