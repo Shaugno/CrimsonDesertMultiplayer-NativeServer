@@ -176,6 +176,7 @@ add_library(cdmp_mod SHARED
     src/mod/session2/identity_fix.cpp
     src/mod/session2/identity_probe.cpp
     src/mod/session2/report_guard.cpp
+    src/mod/session2/file_sandbox3663.cpp
     src/mod/session2/save_hooks.cpp
     src/mod/session2/host_save_export.cpp
     src/mod/session2/session2.cpp
@@ -236,7 +237,7 @@ add_library(cdmp_mod SHARED
     src/mod/session2/world_anchor.cpp
 )
 cdmp_strict(cdmp_mod)
-target_link_libraries(cdmp_mod PRIVATE cdmp_common imgui safetyhook::safetyhook)
+target_link_libraries(cdmp_mod PRIVATE bcrypt cdmp_common imgui safetyhook::safetyhook)
 target_include_directories(cdmp_mod PRIVATE ${CMAKE_BINARY_DIR}/generated)
 set_target_properties(cdmp_mod PROPERTIES OUTPUT_NAME "cdmp" PREFIX "" SUFFIX ".asi")
 
@@ -543,6 +544,20 @@ cdmp_strict(cdmp_tests_optd)
 target_link_libraries(cdmp_tests_optd PRIVATE cdmp_common)
 target_compile_definitions(cdmp_tests_optd PRIVATE CDMP_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
 add_test(NAME optd COMMAND cdmp_tests_optd)
+add_executable(cdmp_tests_file_sandbox3663 tests/file_sandbox3663_fixture.cpp
+               src/mod/session2/file_sandbox3663.cpp src/mod/log.cpp)
+cdmp_strict(cdmp_tests_file_sandbox3663)
+target_compile_definitions(cdmp_tests_file_sandbox3663 PRIVATE CDMP_SANDBOX_FIXTURE=1)
+target_link_libraries(cdmp_tests_file_sandbox3663 PRIVATE cdmp_common safetyhook::safetyhook bcrypt)
+add_test(NAME file_sandbox3663 COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+         -File "${CMAKE_SOURCE_DIR}/tests/file_sandbox3663_tests.ps1" -FixtureExe "$<TARGET_FILE:cdmp_tests_file_sandbox3663>")
+set_tests_properties(file_sandbox3663 PROPERTIES TIMEOUT 120)
+add_test(NAME launch_2inst_3663 COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+         -File "${CMAKE_SOURCE_DIR}/tests/launch_2inst_3663_tests.ps1" -Launcher "${CMAKE_SOURCE_DIR}/scripts/launch-2inst-3663.ps1")
+set_tests_properties(launch_2inst_3663 PROPERTIES TIMEOUT 120)
+add_executable(cdmp_fixture_debugger tools/port3663/fixture_debugger.cpp)
+cdmp_strict(cdmp_fixture_debugger)
+target_link_libraries(cdmp_fixture_debugger PRIVATE dbghelp)
 # The save guard's real KernelBase hooks, against a fake save folder in %TEMP%.
 add_executable(cdmp_tests_optd_hooks tests/optd_hook_tests.cpp src/mod/session2/save_hooks.cpp
                src/mod/session2/host_save_export.cpp src/mod/log.cpp)

@@ -65,6 +65,7 @@
 #include "mod/session2/remote_motion.h"
 #include "mod/session2/remote_interp.h"
 #include "mod/session2/save_hooks.h"
+#include "mod/session2/file_sandbox3663.h"
 #include "mod/session2/mount_sync.h"
 #include "mod/session2/ride_filter.h"
 #include "mod/session2/ui_pause.h"
@@ -1009,6 +1010,19 @@ DWORD WINAPI worker(LPVOID) {
             startup, [&] { allow_reads = true; }, [&] { allow_hooks = true; }, [&] { allow_test_overlay = true; });
         // Both permissions come from the same decision. A rejected identity sets neither.
         const bool game_build_ok = allow_reads && allow_hooks;
+        // The target sandbox is separate from the legacy save redirect and
+        // conveys no permission to enter an incomplete gameplay tier. Hosts
+        // opt in only for the two-instance manifest experiment; guests require
+        // it even before the later C/D startup gate can grant permission.
+        const bool sandbox_3663 = in_game && proc.identity.kind == game::build_guard::IdentityKind::Build3663 &&
+            (rs.role == role::Role::Guest ||
+             (rs.role == role::Role::Host && GetEnvironmentVariableW(L"CDMP_SAVE_SANDBOX",nullptr,0)>0));
+        if (sandbox_3663 && !session2::file_sandbox3663::install_from_environment()) {
+            log::error("3663 file sandbox refused: {}; ending before title",session2::file_sandbox3663::failure_reason());
+            log::flush(2000);
+            TerminateProcess(GetCurrentProcess(),0xCD64);
+            return 0;
+        }
         // The guest's saves: before anything else (the game reads its save list early), in every guest-role process
         // (the later ones too). Never on the real folder: a failure ends the game here, before it touched a save.
         // Not in a test host (cdmp_host unloads the mod: KernelBase hooks would be left pointing into it).
@@ -1018,12 +1032,12 @@ DWORD WINAPI worker(LPVOID) {
             log::info("Role guest: not inside the game (test host): the save redirect is not installed");
         } else if (startup.end_guest_process) {
             log::error("{}", game::build_guard::diagnostic(proc.identity));
-            log::error("Role guest: the save redirect is NOT installed; the game is ended now so that it never "
-                       "writes the real save folder");
+            log::error("Role guest: gameplay permission refused (3663 sandbox verified={}); ending before title",
+                       session2::file_sandbox3663::verified());
             log::flush(2000);
             TerminateProcess(GetCurrentProcess(), 0xCD60);
             return 0;
-        } else if (rs.role == role::Role::Guest && !session2::save_hooks_install_guest_role()) {
+        } else if (rs.role == role::Role::Guest && !sandbox_3663 && !session2::save_hooks_install_guest_role()) {
             log::error("Role guest: the save redirect is NOT installed; the game is ended now so that it never "
                        "writes the real save folder");
             log::flush(2000);

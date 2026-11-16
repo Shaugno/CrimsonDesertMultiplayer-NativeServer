@@ -1,8 +1,8 @@
---- a/src/os.windows.cpp	2026-10-05 23:38:11.706646000 -0600
-+++ b/src/os.windows.cpp	2026-10-10 02:48:48.239846800 -0600
-@@ -1,3 +1,23 @@
+--- a/src/os.windows.cpp
++++ b/src/os.windows.cpp
+@@ -0,0 +1,20 @@
 +// cdmp: a copy of safetyhook v0.7.0 src/os.windows.cpp (Boost Software License 1.0,
-+// third_party/safetyhook-patch/LICENSE) with one change in the trap handler, built in place of
++// third_party/safetyhook-patch/LICENSE) with trap-handler and native protection-page fixes, built in place of
 +// the original by the project's CMakeLists.txt (which checks the original's SHA-256 first).
 +// Why (P8 review of 10-10, I4, docs/research/pendientes/p8-revision-noche.md): upstream keeps
 +// every page it ever patched as a "trap page" for good and answers EVERY access violation whose
@@ -21,13 +21,7 @@
 +//   - counters for the mod's diagnostics: cdmp_trap_stats().
 +#include <atomic>
 +#include <cstdint>
- #include <map>
- #include <memory>
- #include <mutex>
-@@ -154,6 +174,22 @@
-     return info;
- }
- 
+@@ -156,0 +177,16 @@
 +// cdmp: patches in progress (trap_threads between its two VirtualProtect calls) and what the
 +// handler did.
 +static std::atomic<int> g_trapping{0};
@@ -44,13 +38,7 @@
 +    return (mbi.Protect & (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)) != 0;
 +}
 +
- struct TrapInfo {
-     uint8_t* from_page_start;
-     uint8_t* from_page_end;
-@@ -234,24 +270,53 @@
-             return EXCEPTION_CONTINUE_SEARCH;
-         }
- 
+@@ -236,0 +273,15 @@
 +        const auto* rec = exp->ExceptionRecord;
 +        if (rec->NumberParameters < 2) {
 +            return EXCEPTION_CONTINUE_SEARCH;
@@ -66,16 +54,13 @@
 +            return EXCEPTION_CONTINUE_SEARCH;
 +        }
 +
-         std::scoped_lock lock{mutex};
+@@ -238 +289,4 @@
 -        auto* faulting_address = reinterpret_cast<uint8_t*>(exp->ExceptionRecord->ExceptionInformation[1]);
 +        if (instance == nullptr) {
 +            return EXCEPTION_CONTINUE_SEARCH;
 +        }
 +        const bool patching = g_trapping.load(std::memory_order_acquire) > 0;
-         auto* trap = instance->find_trap(faulting_address);
- 
-         if (trap == nullptr) {
-             if (instance->find_trap_page(faulting_address) != nullptr) {
+@@ -243 +297,6 @@
 -                return EXCEPTION_CONTINUE_EXECUTION;
 +                if (patching || executable_now(faulting_address)) {
 +                    g_trap_retried.fetch_add(1, std::memory_order_relaxed);
@@ -83,43 +68,35 @@
 +                }
 +                g_trap_passed_exec.fetch_add(1, std::memory_order_relaxed);
 +                return EXCEPTION_CONTINUE_SEARCH;
-             } else {
-                 return EXCEPTION_CONTINUE_SEARCH;
-             }
-         }
- 
-         auto* ctx = exp->ContextRecord;
+@@ -249,0 +309 @@
 +        const auto ip_before = ctx->Rip;
- 
-         for (size_t i = 0; i < trap->len; i++) {
-             fix_ip(ctx, trap->from + i, trap->to + i);
-         }
- 
+@@ -254,0 +315,5 @@
 +        if (ctx->Rip == ip_before && !patching && !executable_now(faulting_address)) {
 +            g_trap_passed_exec.fetch_add(1, std::memory_order_relaxed);
 +            return EXCEPTION_CONTINUE_SEARCH;  // the same address again would fault again: not a patch of ours
 +        }
 +        g_trap_redirected.fetch_add(1, std::memory_order_relaxed);
-         return EXCEPTION_CONTINUE_EXECUTION;
-     }
- };
-@@ -307,6 +372,12 @@
-     // Make sure we aren't working on a different address in the same memory page on a different thread.
-     std::scoped_lock vp_lock{virtual_protect_mutex};
- 
+@@ -296,0 +362,10 @@
++    // VirtualProtect calls NtProtectVirtualMemory. A native file API can share
++    // its page: removing execute permission there faults before VirtualProtect
++    // returns, and the exception dispatcher cannot recover the installing
++    // thread. Apply the same upstream exception as for VirtualProtect itself.
++    const auto* nt_protect = reinterpret_cast<const uint8_t*>(
++        GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtProtectVirtualMemory"));
++    if (nt_protect != nullptr && nt_protect >= from_page_start && nt_protect < from_page_end) {
++        new_protect = PAGE_EXECUTE_READWRITE;
++    }
++
+@@ -309,0 +385,6 @@
 +    // cdmp: a patch is in progress until both protections are back.
 +    struct Trapping {
 +        Trapping() { g_trapping.fetch_add(1, std::memory_order_acq_rel); }
 +        ~Trapping() { g_trapping.fetch_sub(1, std::memory_order_acq_rel); }
 +    } trapping;
 +
-     DWORD from_protect;
-     DWORD to_protect;
- 
-@@ -321,6 +392,19 @@
-     VirtualProtect(from, len, from_protect, &from_protect);
- }
- 
+@@ -321,0 +403,13 @@
++}
++
 +// cdmp: the handler's counters for the mod's diagnostics: out[0] execute faults redirected into a
 +// trampoline (or retried at a patched address), out[1] execute faults retried on a trap page,
 +// out[2] execute faults passed on (page not executable, no patch in progress), out[3] read/write
@@ -131,8 +108,3 @@
 +    out5[2] = g_trap_passed_exec.load(std::memory_order_relaxed);
 +    out5[3] = g_trap_passed_data.load(std::memory_order_relaxed);
 +    out5[4] = static_cast<uint64_t>(g_trapping.load(std::memory_order_relaxed));
-+}
-+
- void fix_ip(ThreadContext thread_ctx, uint8_t* old_ip, uint8_t* new_ip) {
-     auto* ctx = reinterpret_cast<CONTEXT*>(thread_ctx);
- 

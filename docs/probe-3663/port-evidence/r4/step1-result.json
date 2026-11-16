@@ -1,0 +1,90 @@
+{
+  "step": 1,
+  "live_sessions": 0,
+  "join_attempts": 0,
+  "deployed": false,
+  "final_validation": {
+    "suite": "108/108 passed",
+    "seconds": 93.03,
+    "synthetic_smoke": "8 seconds, 78 received states, zero rejects, clean unload",
+    "runtime": "not tested; no game launched/attached",
+    "installation": "cdmp.asi and winmm.dll absent; game closed",
+    "c_d_armed": false
+  },
+  "history": [
+    {
+      "path": "build\\r4\\baseline-suite.txt",
+      "sha256": "88EBBDF9E79C78258A7D7171BE0EEFEA8D87F394BA49F78D6924D3B159F2851F",
+      "bytes": 38882
+    },
+    {
+      "path": "build\\r4\\sandbox-debugger-result.txt",
+      "sha256": "C88458CCF12C968717BD277EDB8C73FBDD7429266F6DDB85B5D16F5BCE7EC7D2",
+      "bytes": 1626
+    },
+    {
+      "path": "build\\r4\\sandbox-attrs-result.txt",
+      "sha256": "DC02B0CFAC2AEE28962F6B20D74B4DB45174250B0A568E5068B57BBA3AB9E5C6",
+      "bytes": 296
+    },
+    {
+      "path": "build\\r4\\step1-suite.txt",
+      "sha256": "B48AEBAE61418CFCAE8352C3969053A23FE603881380F95BE62F6160DC3A912D",
+      "bytes": 42421
+    },
+    {
+      "path": "build\\r4\\step1-final-suite.txt",
+      "sha256": "F18120626B5A21F5E10CF4812A0496E6E2F2B3BCB5DEBCF5B185DA571A616B8B",
+      "bytes": 40558
+    },
+    {
+      "path": "build\\r4\\step1-native-coverage-fixture.txt",
+      "sha256": "0D4737E59AD378B64D2D8CAAB1DB84582904399710988E263F11F0B5D686C32B",
+      "bytes": 296
+    },
+    {
+      "path": "build\\r4\\step1-native-coverage-build.txt",
+      "sha256": "BA68CED7F3E5544BAB99754ECE6C22E8DECCC6BED5A98538A6EF30F6CAA3EA8B",
+      "bytes": 27016
+    },
+    {
+      "path": "build\\r4\\step1-verified-suite.txt",
+      "sha256": "E2483E456DF0B7BDB9CADD2CCD36B4076E082F35677CF530FC14DAAF5AA03C34",
+      "bytes": 12291
+    },
+    {
+      "path": "build\\r4\\step1-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F",
+      "bytes": 153
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r2-build\\e2e\\cdmp.log",
+      "sha256": "D2E2ECA8268DFBFD13C24D8098743A152E9EC1183FD83345010E7EC0557D7EB7",
+      "bytes": 6729
+    }
+  ],
+  "retired_by_scope": [
+    "D020",
+    "D021",
+    "D022",
+    "D023",
+    "D063",
+    "D064",
+    "D065",
+    "D066",
+    "D067",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D130"
+  ],
+  "retirement_reason": "R4 rule 2: 3663 v1 uses the verified process-local file sandbox; legacy per-game-callsite save and title-selection paths remain unreachable. C/D startup stays closed until Step 4.",
+  "source_files": {
+    "src\\mod\\session2\\file_sandbox3663.cpp": "A798B289928B743F0F5EC303C49E3A45792EBBF74D94F5C5604EF8DB7C00E863",
+    "src\\mod\\session2\\file_sandbox3663.h": "35B867D532BFD2C498EA8D20907D2EA8DF877E4562E82FCED9E8863F94A2B5AC",
+    "tests\\file_sandbox3663_fixture.cpp": "D0D8568902E985057849208DA3040380C206AD2E41AE1A6B875B5B000A4F99E4",
+    "scripts\\launch-2inst-3663.ps1": "771C3D8009EFC65BEFF0B989FB982A8CD98C3D78B5BFC1A9EB1E60A72979EC46"
+  }
+}

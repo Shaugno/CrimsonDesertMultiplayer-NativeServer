@@ -1,5 +1,5 @@
 // cdmp: a copy of safetyhook v0.7.0 src/os.windows.cpp (Boost Software License 1.0,
-// third_party/safetyhook-patch/LICENSE) with one change in the trap handler, built in place of
+// third_party/safetyhook-patch/LICENSE) with trap-handler and native protection-page fixes, built in place of
 // the original by the project's CMakeLists.txt (which checks the original's SHA-256 first).
 // Why (P8 review of 10-10, I4, docs/research/pendientes/p8-revision-noche.md): upstream keeps
 // every page it ever patched as a "trap page" for good and answers EVERY access violation whose
@@ -356,6 +356,16 @@ void trap_threads(uint8_t* from, uint8_t* to, size_t len, const std::function<vo
     auto* vp_end = vp_start + 0x20;
 
     if (!(from_page_end < vp_start || vp_end < from_page_start)) {
+        new_protect = PAGE_EXECUTE_READWRITE;
+    }
+
+    // VirtualProtect calls NtProtectVirtualMemory. A native file API can share
+    // its page: removing execute permission there faults before VirtualProtect
+    // returns, and the exception dispatcher cannot recover the installing
+    // thread. Apply the same upstream exception as for VirtualProtect itself.
+    const auto* nt_protect = reinterpret_cast<const uint8_t*>(
+        GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtProtectVirtualMemory"));
+    if (nt_protect != nullptr && nt_protect >= from_page_start && nt_protect < from_page_end) {
         new_protect = PAGE_EXECUTE_READWRITE;
     }
 
