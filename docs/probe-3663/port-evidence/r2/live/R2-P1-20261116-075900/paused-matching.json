@@ -1,0 +1,9 @@
+{
+  "receipt_sha256": "DBB044EAF035FAB6ECB6670D09CB9D8AAF57AB833E14F5F9F36489879919A79A",
+  "session": "R2-MATCH-PAUSE-20261116-075900",
+  "pids": [
+    15928,
+    52832
+  ],
+  "state": "every owned matcher thread verified suspended"
+}

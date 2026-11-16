@@ -153,6 +153,7 @@ if ($Stage -eq 'Deploy') {
     $watchPath=Join-Path $evidence 'watchdog.json'
     if (!(Test-Path -LiteralPath $watchPath)) { throw 'Arm the independent session watchdog first' }
     $watch=Get-Content -Raw -LiteralPath $watchPath | ConvertFrom-Json
+    $watchDeadline = if ($watch.deadline_utc -is [datetime]) { $watch.deadline_utc.ToUniversalTime() } else { [datetime]::Parse($watch.deadline_utc, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime() }
     $game=Get-Process -Id $GamePid
     $controller=Get-Process -Id $watch.controller_pid
     $controllerInfo=Get-CimInstance Win32_Process -Filter "ProcessId=$($watch.controller_pid)"
@@ -162,8 +163,8 @@ if ($Stage -eq 'Deploy') {
         $controllerInfo.CommandLine -notlike '*r2_session_watchdog.ps1*' -or
         $controllerInfo.CommandLine -notlike "*$Session*" -or
         $watch.max_game_age_seconds -ne 840 -or
-        [datetime]::Parse($watch.deadline_utc).ToUniversalTime() -ne $game.StartTime.ToUniversalTime().AddSeconds(840) -or
-        [datetime]::Parse($watch.deadline_utc).ToUniversalTime() -le [DateTime]::UtcNow -or
+        $watchDeadline -ne $game.StartTime.ToUniversalTime().AddSeconds(840) -or
+        $watchDeadline -le [DateTime]::UtcNow -or
         $watch.helper_sha256 -ne (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'r2_session_watchdog.ps1')).Hash) {
         throw 'Session watchdog identity/deadline is not valid'
     }

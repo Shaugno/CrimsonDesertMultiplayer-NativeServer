@@ -2,6 +2,21 @@
 
 Latest continuation:
 
+- Loading P1 R2-P1-20261116-075900 captured guarded position/rotation changes,
+  but no missing-chain, parked or fast-travel transition. It began after save
+  load, so title-to-load was not sampled. This is not L1 and does not resolve
+  A028. User reported done; detailed travel/quit confirmation is pending.
+  The independent watchdog stopped the pinned test process at fourteen minutes
+  from launch. Cleanup verified: all test deployment files absent, 23 save
+  files unchanged, verified backup, both owned matchers resumed. Session hashes
+  and limitations are recorded in its committed result.json.
+- The valid watchdog receipt initially failed because PowerShell JSON converted
+  its ISO timestamp to DateTime and Parse coerced it back through a locale
+  string, losing precision and shifting timezone. Preserve DateTime directly;
+  parse only strings using invariant round-trip rules. Regression tests cover
+  Z/offset strings, UTC/local DateTime, native JSON, fractional precision and
+  malformed input; all passed. No deadline was extended or guard bypassed.
+
 - P1 HP ran with the user present on exact 3663. Both definition registries
   selected key 0; the coherent controlled-actor container had 20 entries and
   exactly one matching HP entry, raw 900000/900000. Inventory visibly showed

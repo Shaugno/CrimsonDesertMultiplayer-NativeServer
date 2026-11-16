@@ -1,0 +1,10 @@
+[08:02:08.805] INF [T19592] === Crimson Desert Multiplayer 0.0.1 (build 718CED6E + local changes, protocol 8) ===
+[08:02:08.805] INF [T19592] Role: none (CDMP_ROLE not set) | ini 'D:\SteamLibrary\steamapps\common\Crimson Desert\bin64\cdmp.ini' | log 'D:\SteamLibrary\steamapps\common\Crimson Desert\bin64\cdmp_20261116-080208.log'
+[08:02:08.805] INF [T19592] Mod file: D:\SteamLibrary\steamapps\common\Crimson Desert\bin64\cdmp.asi
+[08:02:08.805] INF [T19592] Host process: D:\SteamLibrary\steamapps\common\Crimson Desert\bin64\CrimsonDesert.exe (PID 50252)
+[08:02:08.808] INF [T19592] Host version: 1.0.0.3663  image base: 0x140000000  image size: 0x144E9000  PE timestamp: 0x6AF5D198
+[08:02:08.808] INF [T19592] Running inside CrimsonDesert.exe
+[08:02:08.808] INF [T19592] Recognized game build Crimson Desert 1.0.0.3663 (PE timestamp 0x6AF5D198, image base 0x140000000, image size 0x144E9000). The 3663 core port is incomplete and not armed. Game addresses, hooks, and networking stay off.
+[08:02:08.808] INF [T19592] winmm.dll loaded from: D:\SteamLibrary\steamapps\common\Crimson Desert\bin64\WINMM.dll
+[08:02:08.818] INF [T19592] Recognized game build Crimson Desert 1.0.0.3663 (PE timestamp 0x6AF5D198, image base 0x140000000, image size 0x144E9000). The 3663 core port is incomplete and not armed. Game addresses, hooks, and networking stay off.
+[08:02:08.818] INF [T19592] Worker exiting

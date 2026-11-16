@@ -1,0 +1,1 @@
+Session receipt conversion PASS: string Z/offset, UTC/local DateTime, native JSON, precision and invalid-input rejection; no game opened.

@@ -1,0 +1,114 @@
+{
+  "session": "R2-P1-20261116-075900",
+  "profile": "loading",
+  "result": "Walking/turning observed; loading transition unresolved",
+  "l1_passed": false,
+  "production_tiers_armed": [],
+  "trace_header": {
+    "kind": "passive_external_read_only",
+    "mode": "loading",
+    "pid": 50252,
+    "sha256": "8be67178d9b9a149c361a731051665e0ba4d441e250ae1dfe645bd6e524345c8",
+    "base": "0x140000000",
+    "production_tiers": "unarmed",
+    "question": "Does the candidate local-player chain expose a distinct loading/park transition?",
+    "access_mask": "0x410",
+    "hooks": false,
+    "writes": false,
+    "native_calls": false
+  },
+  "trace_end": {
+    "kind": "trace_end",
+    "seconds": 384.984,
+    "alive": false
+  },
+  "samples": 390,
+  "coherent_samples": 390,
+  "reasons": {
+    "observational_only": 390
+  },
+  "park_samples": 0,
+  "actor_identities": [
+    "0x4111ea01b00"
+  ],
+  "position_range": [
+    [
+      -10590.9052734375,
+      -10580.169250488281
+    ],
+    [
+      594.210205078125,
+      597.69580078125
+    ],
+    [
+      -4502.599609375,
+      -4497.971130371094
+    ]
+  ],
+  "largest_step": 1.234513911748449,
+  "title_transition_captured": false,
+  "user_report": "done; detailed travel/quit confirmation pending",
+  "session_cap_overrun": false,
+  "termination": "Independent verified-process watchdog deadline; fourteen minutes from process launch",
+  "backup_verified": true,
+  "live_saves_unchanged": true,
+  "cleanup": "Test ASI/PDB/loader/config absent; prior installation restored; both owned matchers resumed",
+  "limitations": [
+    "Collector began after save loaded because a JSON DateTime receipt conversion rejected the valid watchdog",
+    "No missing-chain, park, or travel transition observed; absence does not prove a safe loading predicate",
+    "Physical Escape triggered Computer Use stop; user clarified it was normal game menu input and directed continuation without UI control"
+  ],
+  "fix": "Preserve DateTime values directly; parse only string receipts with invariant round-trip rules. Exact live deadline and targeted string/DateTime/JSON precision regression passed.",
+  "files": [
+    {
+      "name": "question.md",
+      "bytes": 2074,
+      "sha256": "500B117B7F7B1D0C701A2B170EB61B0097321203C359A4F0B84689DB7C37BD57"
+    },
+    {
+      "name": "trace.log",
+      "bytes": 217336,
+      "sha256": "0C35CCB790186A650B3815FEB680CAF7F051332A49B02C9FECC51627D02B5716"
+    },
+    {
+      "name": "cdmp.log",
+      "bytes": 1407,
+      "sha256": "839BD217646CFE4B3231DF676960E60A2D3536ADCCA61EBB39275873B98B9013"
+    },
+    {
+      "name": "deployed-hashes.json",
+      "bytes": 663,
+      "sha256": "BAD3F4CF9FE08EE134B2DECC49BCC988B2A3A29A00A193E3E46EAF13FD4BC946"
+    },
+    {
+      "name": "installed-receipt.json",
+      "bytes": 478,
+      "sha256": "EC291C1B7CE21C8602EC888258E472DC5B1EF84ADF567CA4E93CC4DE7609F337"
+    },
+    {
+      "name": "paused-matching.json",
+      "bytes": 245,
+      "sha256": "B64061AE272575D541ABE9F26CDB472BDB9B69B0924194EA9C8E2234658D6863"
+    },
+    {
+      "name": "session-profile.json",
+      "bytes": 317,
+      "sha256": "E6633D1381036A9DC34FF667287BE368A7104F24674537ACF58369D4256000CE"
+    },
+    {
+      "name": "save-verification.json",
+      "bytes": 235,
+      "sha256": "E5A986CEC9ED7BA25BFA684D325D3A20FB2363A5D27ADE1B37CB929A28199806"
+    },
+    {
+      "name": "watchdog.json",
+      "bytes": 506,
+      "sha256": "EDA519212A84F99E7BA2209ECDF15DBADFFC4CDB89DE62A23F113BA16A489636"
+    },
+    {
+      "name": "loading-start-inventory.png",
+      "bytes": 244927,
+      "sha256": "59BB362358D18CDEA6299542EB59E23A86C00A199EA2083DC98BEBA94EF1B0FA"
+    }
+  ]
+}
