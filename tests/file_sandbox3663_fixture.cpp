@@ -28,12 +28,31 @@ int fixture(int argc,wchar_t** argv) {
     if(before==INVALID_HANDLE_VALUE)return 2;
     HANDLE old_mapping=CreateFileMappingW(before,nullptr,PAGE_READWRITE,0,0,nullptr);
     if(!old_mapping)return 3;
+    // Steam-style IPC: OpenFileMapping grants MAP_READ/WRITE, not
+    // SECTION_QUERY. Both objects are owned by this fixture; no Steam needed.
+    const std::wstring ipc_name=L"Local\\CDMP-R4-IPC-"+std::to_wstring(GetCurrentProcessId());
+    HANDLE ipc=CreateFileMappingW(INVALID_HANDLE_VALUE,nullptr,PAGE_READWRITE,0,4096,ipc_name.c_str());
+    if(!ipc)return 35;
+    auto ipc_before=static_cast<char*>(MapViewOfFile(ipc,FILE_MAP_WRITE,0,0,4096));
+    if(!ipc_before)return 36;
+    ipc_before[0]='I';UnmapViewOfFile(ipc_before);
     if(mode==L"premapped" && !MapViewOfFile(old_mapping,FILE_MAP_WRITE,0,0,0))return 30;
     std::string ascii;for(wchar_t c:hash)ascii+=static_cast<char>(c);
     bool installed=cdmp::session2::file_sandbox3663::install({root,backup,sandbox,manifest,ascii});
     if(mode==L"refuse" || mode==L"premapped")return installed?4:0;
     if(!installed || !cdmp::session2::file_sandbox3663::verified()){
         std::printf("Install failed: %s\n",cdmp::session2::file_sandbox3663::failure_reason().c_str());return 5;}
+    HANDLE ipc_open=OpenFileMappingW(FILE_MAP_READ|FILE_MAP_WRITE,FALSE,ipc_name.c_str());
+    if(!ipc_open)return 37;
+    auto ipc_after=static_cast<char*>(MapViewOfFile(ipc_open,FILE_MAP_READ|FILE_MAP_WRITE,0,0,4096));
+    if(!ipc_after){std::printf("Named pagefile MAP-only view failed: Win32 %lu\n",GetLastError());return 38;}
+    if(ipc_after[0]!='I')return 39;
+    ipc_after[0]='P';UnmapViewOfFile(ipc_after);CloseHandle(ipc_open);CloseHandle(ipc);
+    // Removing SECTION_QUERY must not turn a protected file section into IPC.
+    HANDLE file_map_only=nullptr;
+    if(!DuplicateHandle(GetCurrentProcess(),old_mapping,GetCurrentProcess(),&file_map_only,FILE_MAP_READ|FILE_MAP_WRITE,FALSE,0))return 40;
+    if(auto p=MapViewOfFile(file_map_only,FILE_MAP_WRITE,0,0,0)){UnmapViewOfFile(p);return 41;}
+    CloseHandle(file_map_only);
     using CopyChunk=NTSTATUS(NTAPI*)(HANDLE,HANDLE,HANDLE,PIO_STATUS_BLOCK,ULONG,PLARGE_INTEGER,PLARGE_INTEGER,PULONG,PULONG,ULONG);
     auto copy_chunk=reinterpret_cast<CopyChunk>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtCopyFileChunk"));
     IO_STATUS_BLOCK io{};LARGE_INTEGER zero{};

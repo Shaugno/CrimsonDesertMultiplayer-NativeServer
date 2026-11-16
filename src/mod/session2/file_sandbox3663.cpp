@@ -342,6 +342,15 @@ NTSTATUS NTAPI section_ex(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,P
 }
 bool mapped_real(HANDLE process,PVOID base,HANDLE section_handle) {
     Audit audit;std::array<wchar_t,32768> name{};
+    // Named IPC is commonly opened with SECTION_MAP_READ/WRITE only.
+    // NtQuerySection then fails for lack of SECTION_QUERY even though the
+    // view is valid. Classify its backing from the mapped region, as the
+    // startup scan already does; only proven pagefile views bypass file
+    // checks. Unknown and file-backed sections remain fail-closed.
+    const auto query_region=reinterpret_cast<decltype(&QueryVirtualMemoryInformation)>(
+        GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"QueryVirtualMemoryInformation"));
+    WIN32_MEMORY_REGION_INFORMATION detail{};
+    if(query_region && query_region(process,base,MemoryRegionInfo,&detail,sizeof(detail),nullptr) && detail.MappedPageFile)return false;
     DWORD n=K32GetMappedFileNameW(process,base,name.data(),static_cast<DWORD>(name.size()));
     if(n && n<name.size()) {auto path=canonical(std::wstring(name.data(),n),false);return path.empty() || under(path,real_root);}
     struct Basic { PVOID base;ULONG attributes;LARGE_INTEGER size; } basic{};

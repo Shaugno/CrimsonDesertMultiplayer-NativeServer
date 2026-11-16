@@ -16,14 +16,19 @@ def write(path, value):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--build-dir', type=Path, required=True)
+parser.add_argument('--suite', type=Path, default=root / 'build/r4/step4-final-suite.txt')
+parser.add_argument('--smoke', type=Path, default=root / 'build/r4/step4-final-smoke.txt')
+parser.add_argument('--smoke-log', type=Path, default=root / 'build/r4/step4-final-smoke-run/e2e/cdmp.log')
+parser.add_argument('--result', type=Path, default=root / 'docs/probe-3663/port-evidence/r4/step4-result.json')
+parser.add_argument('--step', type=int, choices=(4, 5), default=4)
 args = parser.parse_args()
 binary = args.build_dir.resolve() / 'bin/RelWithDebInfo'
-suite = root / 'build/r4/step4-final-suite.txt'
-smoke = root / 'build/r4/step4-final-smoke.txt'
-log = root / 'build/r4/step4-final-smoke-run/e2e/cdmp.log'
+suite = args.suite
+smoke = args.smoke
+log = args.smoke_log
 suite_text = suite.read_text(encoding='utf-8-sig')
 assert '100% tests passed, 0 tests failed out of 114' in suite_text
-seconds, = re.findall(r'Total Test time \(real\) = ([\d.]+) sec', suite_text)
+seconds, = re.findall(r'Total Test time \(real\) =\s*([\d.]+) sec', suite_text)
 smoke_text = smoke.read_text(encoding='utf-8-sig')
 assert '3663 compiled tier mask 0xF (metadata only)' in smoke_text
 assert 'Mod stopped and unloaded cleanly' in smoke_text
@@ -46,7 +51,7 @@ receipt = dict(version=1, compiled_tier_mask=15,
     source_manifest=manifest)
 receipt_path = root / 'build/r4/arming-receipt.json'
 write(receipt_path, receipt)
-result = dict(step=4, result='offline implementation and guarded experimental C/D arming complete; L3/L4 untested',
+result = dict(step=args.step, result='offline implementation and guarded experimental C/D validation complete; L3/L4 acceptance unproven',
     suite='114/114 passed', suite_seconds=float(seconds),
     synthetic_remote_states=int(states), synthetic_rejects=0,
     smoke='eight seconds; compiled tier metadata 0xF; clean stop/unload; synthetic only',
@@ -69,5 +74,5 @@ result = dict(step=4, result='offline implementation and guarded experimental C/
     source_manifest_sha256=hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest().upper(),
     arming_receipt_sha256=sha(receipt_path), asi_sha256=sha(asi),
     evidence=[dict(path=str(p.resolve()), sha256=sha(p)) for p in (suite, smoke, log)])
-write(root / 'docs/probe-3663/port-evidence/r4/step4-result.json', result)
+write(args.result, result)
 print({k: result[k] for k in ('step', 'suite', 'suite_seconds', 'synthetic_remote_states', 'join_attempts')})
