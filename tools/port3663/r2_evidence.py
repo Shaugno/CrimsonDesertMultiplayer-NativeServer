@@ -9,7 +9,6 @@ rows = []
 for destination in sorted(folder.iterdir()):
     if destination.suffix not in ('.txt','.log'): continue
     source = root/'build/r2'/destination.name
-    if destination.name=='checkpoint-loopback.log': source = root/'build/e2e/cdmp.log'
     assert source.exists(),source
     raw = source.read_bytes()
     assert len(raw)<=5*1024*1024,source

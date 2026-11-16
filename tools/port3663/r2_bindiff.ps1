@@ -1,5 +1,5 @@
 param([Parameter(Mandatory=$true)][string]$AnalysisRoot,
-      [ValidateSet('default','correlation','graph')][string]$Profile='default')
+      [ValidateSet('default','correlation','graph','direct','native')][string]$Profile='default')
 $ErrorActionPreference = 'Stop'
 if (Get-Process CrimsonDesert -ErrorAction SilentlyContinue) { throw 'Game must be closed' }
 if ((Get-FileHash -LiteralPath 'D:\SteamLibrary\steamapps\common\Crimson Desert\bin64\CrimsonDesert.exe').Hash -ne '8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8') { throw 'Build drift' }

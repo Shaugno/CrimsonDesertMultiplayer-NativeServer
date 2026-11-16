@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][ValidateSet('old','new')][string]$Image,
     [Parameter(Mandatory=$true)][string]$AnalysisRoot,
     [ValidateSet('analyze','export','vt')][string]$Mode = 'analyze',
-    [ValidateSet('default','correlation','graph')][string]$Profile = 'default'
+    [ValidateSet('default','correlation','graph','direct','native')][string]$Profile = 'default'
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
@@ -30,7 +30,7 @@ $sourceProject = 'R2Match'
 $options = @()
 if ($Profile -ne 'default') {
     if ($Mode -ne 'vt') { $env:GHIDRA_HEADLESS_MAXMEM = '16G' }
-    $prefix = if ($Profile -eq 'graph') { 'R2Graph' } else { 'R2Correlation' }
+    $prefix = switch ($Profile) { 'native' { 'R2Native' }; 'direct' { 'R2Direct' }; 'graph' { 'R2Graph' }; default { 'R2Correlation' } }
     $sourceProject = "${prefix}Source"
     $project = if ($Image -eq 'old') { "${prefix}Source/old" } else { "${prefix}Target/new" }
     $options = @('-preScript', 'R2CorrelationOptions.java', (Join-Path $output "options-$Image.txt"), $Profile)

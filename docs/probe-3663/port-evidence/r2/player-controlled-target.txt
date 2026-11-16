@@ -1,0 +1,88 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=16478064
+Function=FUN_140fb6f70 body=[[140fb6f70, 140fb6fde]]
+140fb6f70 PUSH RBX
+140fb6f72 SUB RSP,0x50
+140fb6f76 MOV dword ptr [RSP + 0x20],0x0
+140fb6f7e LEA RDX,[RSP + 0x28]
+140fb6f83 MOV RCX,qword ptr [0x1472451c0]
+140fb6f8a MOV RCX,qword ptr [RCX + 0x30]
+140fb6f8e CALL 0x1409cdc00
+140fb6f93 MOV EBX,0x1
+140fb6f98 MOV dword ptr [RSP + 0x20],EBX
+140fb6f9c CMP byte ptr [RSP + 0x38],0x0
+140fb6fa1 JZ 0x140fb6fbc
+140fb6fa3 MOV RAX,qword ptr [RSP + 0x30]
+140fb6fa8 MOV RCX,qword ptr [RAX + 0x68]
+140fb6fac MOV RCX,qword ptr [RCX + 0x168]
+140fb6fb3 MOV RCX,qword ptr [RCX + 0x8]
+140fb6fb7 CALL 0x140cd25b0
+140fb6fbc AND EBX,0xfffffffe
+140fb6fbf MOV dword ptr [RSP + 0x20],EBX
+140fb6fc3 LEA RAX,[0x145b40000]
+140fb6fca MOV qword ptr [RSP + 0x28],RAX
+140fb6fcf LEA RCX,[RSP + 0x28]
+140fb6fd4 CALL 0x141659380
+140fb6fd9 ADD RSP,0x50
+140fb6fdd POP RBX
+140fb6fde RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_140fb6f70(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  undefined *puStack_30;
+  longlong lStack_28;
+  char cStack_20;
+
+  FUN_1409cdc00(*(undefined8 *)(_DAT_1472451c0 + 0x30),&puStack_30,param_3,param_4,0);
+  if (cStack_20 != '\0') {
+    FUN_140cd25b0(*(undefined8 *)(*(longlong *)(*(longlong *)(lStack_28 + 0x68) + 0x168) + 8));
+  }
+  puStack_30 = &UNK_145b40000;
+  FUN_141659380(&puStack_30);
+  return;
+}
+
+
+
+RVA=3865104
+Function=FUN_1403afa10 body=[[1403afa10, 1403afa50]]
+1403afa10 SUB RSP,0x38
+1403afa14 MOV RAX,qword ptr [0x1472451c0]
+1403afa1b MOV RCX,qword ptr [RCX + 0x8]
+1403afa1f MOV RDX,qword ptr [RAX + 0x30]
+1403afa23 MOV RAX,qword ptr [RCX + 0xa0]
+1403afa2a CMP qword ptr [RDX + 0x58],RAX
+1403afa2e JNZ 0x1403afa4a
+1403afa30 CMP byte ptr [RCX + 0x94],0x0
+1403afa37 JZ 0x1403afa4a
+1403afa39 LEA RDX,[RSP + 0x20]
+1403afa3e CALL 0x1405e3ec0
+1403afa43 XOR AL,0x1
+1403afa45 ADD RSP,0x38
+1403afa49 RET
+1403afa4a MOV AL,0x1
+1403afa4c ADD RSP,0x38
+1403afa50 RET
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+ulonglong FUN_1403afa10(longlong param_1)
+
+{
+  longlong lVar1;
+  ulonglong uVar2;
+  undefined1 auStack_18 [24];
+
+  lVar1 = *(longlong *)(param_1 + 8);
+  if ((*(longlong *)(*(longlong *)(_DAT_1472451c0 + 0x30) + 0x58) == *(longlong *)(lVar1 + 0xa0)) &&
+     (*(char *)(lVar1 + 0x94) != '\0')) {
+    uVar2 = FUN_1405e3ec0(lVar1,auStack_18);
+    return uVar2 ^ 1;
+  }
+  return CONCAT71((int7)((ulonglong)*(longlong *)(lVar1 + 0xa0) >> 8),1);
+}

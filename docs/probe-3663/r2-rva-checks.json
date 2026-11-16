@@ -1,0 +1,132 @@
+{
+  "A031": {
+    "target": "0x72451c0",
+    "old": "0x6d69190",
+    "symbol": "kWorldSystemSlot",
+    "second_check": "Paired native consumers DD49D0/FB6F70 load this RIP-relative pointer then its +30 manager and call paired +50 actor getters; independent native HP updater and control-owner predicate use the same root.",
+    "evidence": "port-evidence/r2/player-controlled-reference.txt; player-controlled-target.txt; player-health-update-target.txt",
+    "anchor": [
+      14502352,
+      16478064
+    ]
+  },
+  "A001": {
+    "target": "0x7231330",
+    "old": "0x6d56500",
+    "symbol": "kChunkOrigin",
+    "second_check": "Paired native consumers 36A36A0/39F6B20 add the RIP-relative vec3 to physics+90 before subtracting a world-space target. The changed physics pointer is independently 2C0 -> 2D0.",
+    "evidence": "port-evidence/r2/player-inner-reference.txt; player-inner-target.txt",
+    "anchor": [
+      57292448,
+      60779296
+    ]
+  },
+  "A002": {
+    "target": "0x7253e60",
+    "old": "0x6d77858",
+    "symbol": "kStaticPlayerPos",
+    "second_check": "Paired native writers 941E20/A61070 populate the static world-position vector from the same controlled-stage position source and actor fallback, with changed target stage members.",
+    "evidence": "port-evidence/r2/player-physics-reference.txt; player-physics-target.txt",
+    "anchor": [
+      9707040,
+      10883184
+    ]
+  },
+  "A032": {
+    "target": "0x7245558",
+    "old": "0x6d69528",
+    "symbol": "kHpDefinitionsSlot",
+    "second_check": "Paired named native HP updaters 62FA00/71C4E0 select these two definition roots using the TLS mode, dereference +0/+8/+10 and read a u16 key (A0 -> 78). The key is runtime data, not literal zero.",
+    "evidence": "port-evidence/r2/player-health-update-reference.txt; player-health-update-target.txt",
+    "anchor": [
+      6486528,
+      7455968
+    ]
+  },
+  "A033": {
+    "target": "0x7245560",
+    "old": "0x6d69530",
+    "symbol": "kHpDefinitionsAltSlot",
+    "second_check": "Paired named native HP updaters 62FA00/71C4E0 select these two definition roots using the TLS mode, dereference +0/+8/+10 and read a u16 key (A0 -> 78). The key is runtime data, not literal zero.",
+    "evidence": "port-evidence/r2/player-health-update-reference.txt; player-health-update-target.txt",
+    "anchor": [
+      6486528,
+      7455968
+    ]
+  },
+  "C041": {
+    "target": "0x2e08520",
+    "old": "0x2b07790",
+    "symbol": "kAcquireField",
+    "second_check": "Pool/map lookup, two output ownership paths, open/owner assignment, strong-reference transfer; seven mapped caller neighbours.",
+    "evidence": "port-evidence/r2/field-contracts-reference.txt; field-acquire-enter-target.txt; field-mover-target.txt",
+    "anchor": null
+  },
+  "C043": {
+    "target": "0x2ecb130",
+    "old": "0x2bc04f0",
+    "symbol": "kEnterField",
+    "second_check": "Native field admission and failure cleanup. ABI CHANGED: 3663 has three arguments and iterates its character list; matching this RVA does not authorize the legacy four-argument detour.",
+    "evidence": "port-evidence/r2/field-contracts-reference.txt; field-acquire-enter-target.txt",
+    "anchor": null
+  },
+  "C045": {
+    "target": "0x1658e90",
+    "old": "0x14343a0",
+    "symbol": "kTryAddRef",
+    "second_check": "Native open-state/refcount path with field lock +18 and strong refs +10.",
+    "evidence": "port-evidence/r2/field-contracts-reference.txt; field-getter-target.txt",
+    "anchor": null
+  },
+  "C047": {
+    "target": "0x4cae10",
+    "old": "0x40b5b0",
+    "symbol": "kVecPush",
+    "second_check": "Native AddActor callee; 16-byte user entries, vector pointer/count/capacity, growth and element copy verified.",
+    "evidence": "port-evidence/r2/field-contracts-reference.txt; field-getter-target.txt",
+    "anchor": null
+  },
+  "A003": {
+    "target": "0x59c2760",
+    "old": "0x55b62c8",
+    "symbol": "kVtClientActorManager",
+    "second_check": "Exact MSVC RTTI name, self-consistent COL/type/table chain in both images; native construction assigns this primary vtable. RTTI seeds are counted only as standard symbol evidence, not as an additional independent check; native construction supplies the latter.",
+    "evidence": "port-evidence/r2/player-rtti-old.json; player-rtti-new.json; player-contracts-target.txt; player-status-target.txt",
+    "anchor": null
+  },
+  "A004": {
+    "target": "0x5990bf0",
+    "old": "0x5585c40",
+    "symbol": "kVtControlledActor",
+    "second_check": "Exact MSVC RTTI name, self-consistent COL/type/table chain in both images; native construction assigns this primary vtable. RTTI seeds are counted only as standard symbol evidence, not as an additional independent check; native construction supplies the latter.",
+    "evidence": "port-evidence/r2/player-rtti-old.json; player-rtti-new.json; player-contracts-target.txt; player-status-target.txt",
+    "anchor": null
+  },
+  "A005": {
+    "target": "0x59c1660",
+    "old": "0x55b5460",
+    "symbol": "kVtCharacterControl",
+    "second_check": "Exact MSVC RTTI name, self-consistent COL/type/table chain in both images; native construction assigns this primary vtable. RTTI seeds are counted only as standard symbol evidence, not as an additional independent check; native construction supplies the latter.",
+    "evidence": "port-evidence/r2/player-rtti-old.json; player-rtti-new.json; player-contracts-target.txt; player-status-target.txt",
+    "anchor": null
+  },
+  "A006": {
+    "target": "0x5998b60",
+    "old": "0x558d868",
+    "symbol": "kVtStatusComponent",
+    "second_check": "Exact MSVC RTTI name, self-consistent COL/type/table chain in both images; native construction assigns this primary vtable. RTTI seeds are counted only as standard symbol evidence, not as an additional independent check; native construction supplies the latter.",
+    "evidence": "port-evidence/r2/player-rtti-old.json; player-rtti-new.json; player-contracts-target.txt; player-status-target.txt",
+    "anchor": null
+  },
+  "A007": {
+    "target": "0x614a050",
+    "old": "0x5d00f88",
+    "symbol": "kVtPhysicsObject",
+    "second_check": "Native physics constructors 1408ECE0/11B11940 assign these vtables and construct the rotation/position base; mapped constructor/destructor call neighbours, no MSVC COL assumed.",
+    "evidence": "port-evidence/r2/player-physics-reference.txt; player-physics-constructor-target.txt; player-physics-target.txt",
+    "anchor": [
+      336129248,
+      296819008
+    ]
+  }
+}

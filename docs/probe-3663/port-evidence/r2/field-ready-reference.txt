@@ -1,0 +1,88 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x2BBE900
+Function=thunk_FUN_1506d9f50 body=[[142bbe900, 142bbe904]]
+142bbe900 JMP 0x1506d9f50
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int * thunk_FUN_1506d9f50(longlong *param_1,int *param_2,longlong param_3)
+
+{
+  longlong *plVar1;
+  longlong lVar2;
+  int iVar3;
+  int *piVar4;
+  undefined8 *puVar5;
+  undefined8 *puVar6;
+  undefined1 auStackX_8 [8];
+  longlong *plStack_38;
+  char cStack_30;
+
+  lVar2 = *(longlong *)(*param_1 + 8);
+  puVar5 = *(undefined8 **)(lVar2 + 0x78);
+  puVar6 = puVar5 + (ulonglong)*(uint *)(lVar2 + 0x80) * 2;
+  for (; puVar5 != puVar6; puVar5 = puVar5 + 2) {
+    piVar4 = (int *)(**(code **)(*(longlong *)*puVar5 + 0xa0))((longlong *)*puVar5,auStackX_8);
+    iVar3 = *piVar4;
+    if (iVar3 != 0) {
+      FUN_14050d2d0();
+      *param_2 = iVar3;
+      return param_2;
+    }
+  }
+  puVar5 = (undefined8 *)(lVar2 + 8);
+  if (lVar2 == 0) {
+    puVar5 = (undefined8 *)0x0;
+  }
+  FUN_140393650(&plStack_38,*puVar5,1);
+  iVar3 = _DAT_146cf6b40;
+  if ((*(short *)((longlong)param_1 + 0x5a) != 0) || (iVar3 = _DAT_146cf6b54, param_1[2] != 0)) {
+    *param_2 = iVar3;
+    (**(code **)(*plStack_38 + 0x20))(plStack_38,0);
+    if (cStack_30 != '\x01') {
+      return param_2;
+    }
+    LOCK();
+    plVar1 = plStack_38 + 1;
+    lVar2 = *plVar1;
+    *(int *)plVar1 = (int)*plVar1 + -1;
+    UNLOCK();
+    if ((int)lVar2 == 1) {
+      if ((*(uint *)((longlong)plStack_38 + 0xc) & 0x40000000) == 0) {
+        return param_2;
+      }
+      (**(code **)(*plStack_38 + 0x40))(plStack_38);
+    }
+    if ((*(uint *)((longlong)plStack_38 + 0xc) & 0x40000000) == 0) {
+      return param_2;
+    }
+    LOCK();
+    *(int *)((longlong)plStack_38 + 0xc) = *(int *)((longlong)plStack_38 + 0xc) + -1;
+    UNLOCK();
+    return param_2;
+  }
+  *(undefined4 *)(param_1 + 1) = *(undefined4 *)(param_3 + 0x2c8);
+  param_1[2] = param_3;
+  (**(code **)(*plStack_38 + 0x20))(plStack_38,0);
+  if (cStack_30 == '\x01') {
+    LOCK();
+    plVar1 = plStack_38 + 1;
+    lVar2 = *plVar1;
+    *(int *)plVar1 = (int)*plVar1 + -1;
+    UNLOCK();
+    if ((int)lVar2 == 1) {
+      if ((*(uint *)((longlong)plStack_38 + 0xc) & 0x40000000) == 0) goto LAB_1506da0d3;
+      (**(code **)(*plStack_38 + 0x40))(plStack_38);
+    }
+    if ((*(uint *)((longlong)plStack_38 + 0xc) & 0x40000000) != 0) {
+      LOCK();
+      *(int *)((longlong)plStack_38 + 0xc) = *(int *)((longlong)plStack_38 + 0xc) + -1;
+      UNLOCK();
+    }
+  }
+LAB_1506da0d3:
+  *param_2 = 0;
+  return param_2;
+}

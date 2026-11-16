@@ -40,7 +40,19 @@ inline constexpr uint32_t kRq_Frame = 0x30;               // 2976 0x30; N1018, f
 inline constexpr uintptr_t kServerOnRecvPacket = 0x2A0EA70; // 2976 0x2773C20; N0979, server-recv; R2 B021
 inline constexpr uintptr_t kSaveMgrRefreshSlots = 0x1A18320; // 2976 0x1870C20; N1056, save-refresh; R2 D018
 
-
+// Passive external probe only. These RVA candidates are not production
+// adoptions; their standard-correlator checks remain in progress. No ASI
+// installer/reader obtains a table from this namespace.
+namespace diagnostic_candidates {
+inline constexpr uintptr_t kHpDefinitionsSlot = 0x7245558; // 2976 0x6D69528; R2 A032
+inline constexpr uintptr_t kHpDefinitionsAltSlot = 0x7245560; // 2976 0x6D69530; R2 A033
+inline constexpr uintptr_t kWorldSystemSlot = 0x72451C0; // 2976 0x6D69190; R2 A031
+inline constexpr uintptr_t kVtClientActorManager = 0x59C2760; // 2976 0x55B62C8; R2 A003
+inline constexpr uintptr_t kVtControlledActor = 0x5990BF0; // 2976 0x5585C40; R2 A004
+inline constexpr uintptr_t kVtStatusComponent = 0x5998B60; // 2976 0x558D868; R2 A006
+inline constexpr uint32_t kWorldSystem_ActorManager = 0x30; // 2976 0x30; R2 A008
+inline constexpr uint32_t kActorManager_ControlledActor = 0x50; // 2976 0x50; R2 A009
+} // namespace diagnostic_candidates
 
 // R2 reviewed layouts BEGIN
 // Layout proof catalog: docs/probe-3663/r2-reviewed.json. No tier is armed.
@@ -50,6 +62,8 @@ inline constexpr uint32_t kComponents_CharacterControl = 0x40; // 2976 0x40; R2 
 inline constexpr uint32_t kControl_Inner = 0x140; // 2976 0x140; R2 A013
 inline constexpr uint32_t kControlInner_Physics = 0x2D0; // 2976 0x2C0; R2 A014
 inline constexpr uint32_t kPhysics_Position = 0x90; // 2976 0x90; R2 A018
+inline constexpr uint32_t kWorldSystem_ActorManager = 0x30; // 2976 0x30; R2 A008
+inline constexpr uint32_t kActorManager_ControlledActor = 0x50; // 2976 0x50; R2 A009
 inline constexpr uint32_t kPhysics_AxisX = 0x60; // 2976 0x60; R2 A015
 inline constexpr uint32_t kPhysics_AxisY = 0x70; // 2976 0x70; R2 A016
 inline constexpr uint32_t kPhysics_AxisZ = 0x80; // 2976 0x80; R2 A017
@@ -63,7 +77,39 @@ inline constexpr uint32_t kStatEntry_Current = 0x08; // 2976 0x08; R2 A024
 inline constexpr uint32_t kStatEntry_Max = 0x18; // 2976 0x18; R2 A025
 inline constexpr float kNativeStatUnits = 1000.0f; // 2976 1000.0f; R2 A029
 inline constexpr uint32_t kStatIdReadWidth = 2; // 2976 8; R2 A030
+inline constexpr uint32_t kHpDefinitionsRoot = 0x00; // 2976 0x00; R2 A034
+inline constexpr uint32_t kHpDefinitionsTables = 0x08; // 2976 0x08; R2 A035
+inline constexpr uint32_t kHpDefinitionsObject = 0x10; // 2976 0x10; R2 A036
+inline constexpr uint32_t kHpDefinitionId = 0x78; // 2976 0xA0; R2 A037
 } // namespace player_layout
+namespace tunnel_layout {
+inline constexpr uint32_t kServerNet_Session = 0x18; // 2976 0x18; R2 B003
+inline constexpr uint32_t kSession_Name = 0x18; // 2976 0x18; R2 B013
+inline constexpr uint32_t kSession_B0 = 0xB0; // 2976 0xB0; R2 B017
+inline constexpr uint32_t kSession_B8 = 0xB8; // 2976 0xB8; R2 B018
+inline constexpr uint32_t kSession_C0 = 0xC0; // 2976 0xC0; R2 B019
+inline constexpr uint32_t kSession_IdPtr = 0x88; // 2976 0x88; R2 B014
+inline constexpr uint32_t kSession_User = 0x90; // 2976 0x90; R2 B015
+inline constexpr uint32_t kSession_Crypto = 0x98; // 2976 0x98; R2 B016
+inline constexpr uint32_t kPbSize = 0x8030; // 2976 0x8030; R2 B040
+inline constexpr uint32_t kPb_FramePtr = 0x8000; // 2976 0x8000; R2 B041
+inline constexpr uint32_t kPb_Len1 = 0x8008; // 2976 0x8008; R2 B042
+inline constexpr uint32_t kPb_Len2 = 0x800A; // 2976 0x800A; R2 B043
+inline constexpr uint32_t kPb_Cap = 0x800C; // 2976 0x800C; R2 B044
+inline constexpr uint32_t kPb_IsRequest = 0x800E; // 2976 0x800E; R2 B045
+inline constexpr uint32_t kPb_Base = 0x8028; // 2976 0x8028; R2 B048
+inline constexpr uint32_t kFrameOverhead = 0x1F; // 2976 0x1F; R2 B049
+inline constexpr uint32_t kFrameHeader = 3; // 2976 3; R2 B050
+inline constexpr uint64_t kNoEpoch = 0x7FFFFFFFFFFFFFFF; // 2976 0x7FFFFFFFFFFFFFFFull; R2 B072
+inline constexpr uint32_t kHeaderSize = 5; // 2976 5; R2 B074
+inline constexpr uint8_t kServerOnRecvPacketHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}; // 2976 signature: src/mod/session2/offsets_s2.h:52; R2 B022
+inline constexpr uint8_t kSessionSendHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xC8, 0x00, 0x00, 0x00, 0x49, 0x8D, 0x40, 0x30}; // 2976 signature: src/mod/session2/offsets_s2.h:55; R2 B024
+inline constexpr uint8_t kNwSessionCtorHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57}; // 2976 signature: src/mod/session2/offsets_s2.h:58; R2 B026
+inline constexpr uint8_t kQueuePushHead[] = {0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9}; // 2976 signature: src/mod/session2/offsets_s2.h:61; R2 B028
+inline constexpr uint8_t kAllocGlobalHead[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9, 0x48, 0x8B, 0xDA}; // 2976 signature: src/mod/session2/offsets_s2.h:72; R2 B030
+inline constexpr uint8_t kAllocThreadBytes[] = {0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xFA, 0x44, 0x8B, 0x05, 0xEE, 0xDE, 0x5D, 0x02, 0x48, 0x8B, 0xF1, 0x4A, 0x8B, 0x1C, 0xC0, 0xB8, 0x98, 0x00, 0x00, 0x00, 0x80, 0x3C, 0x18, 0x00, 0x75, 0x05, 0xE8, 0xDB, 0x59, 0x0A, 0x00, 0xB9, 0x90, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xD6, 0x48, 0x8B, 0x0C, 0x19, 0x48, 0x8B, 0x5C, 0x24, 0x30, 0x48, 0x8B, 0x74, 0x24, 0x38, 0x48, 0x83, 0xC4, 0x20, 0x5F, 0xE9, 0x3C, 0xFC, 0xFF, 0xFF}; // 2976 signature: src/mod/session2/offsets_s2.h:76; R2 B032
+inline constexpr uint8_t kSyncSessionSendHead[] = {0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xDA}; // 2976 signature: src/mod/session2/offsets_s2.h:141; R2 B064
+} // namespace tunnel_layout
 namespace field_layout {
 inline constexpr uint32_t kRefs = 0x10; // 2976 0x10; R2 C018
 inline constexpr uint32_t kLock1 = 0x18; // 2976 0x18; R2 C019
@@ -77,6 +123,8 @@ inline constexpr uint32_t kLevelEntry = 0x2D8; // 2976 0x2D0; R2 C027
 inline constexpr uint32_t kTsFieldMover = 0x508; // 2976 0x4F0; R2 C028
 inline constexpr uint32_t kFmFieldKey = 0x08; // 2976 0x08; R2 C029
 inline constexpr uint32_t kFmField = 0x10; // 2976 0x10; R2 C030
+inline constexpr uint32_t kKey = 0x2D0; // 2976 0x2C8; R2 C026
+inline constexpr uint32_t kFmBusy = 0x4A; // 2976 0x5A; R2 C031
 inline constexpr uint32_t kOutField = 0x08; // 2976 0x08; R2 C032
 inline constexpr uint32_t kOutValid = 0x10; // 2976 0x10; R2 C033
 inline constexpr uint32_t kOutHolder = 0x18; // 2976 0x18; R2 C034

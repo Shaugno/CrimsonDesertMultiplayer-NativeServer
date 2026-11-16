@@ -9,6 +9,6 @@ public class R2AnalysisSummary extends GhidraScript {
                 currentProgram.getFunctionManager().getFunctionCount() + ",\"instructions\":" +
                 currentProgram.getListing().getNumInstructions() + ",\"adopted\":false}");
         }
-        println("R2 whole-program analysis completed; functions=" + currentProgram.getFunctionManager().getFunctionCount());
+        println("R2 program summary; functions=" + currentProgram.getFunctionManager().getFunctionCount());
     }
 }

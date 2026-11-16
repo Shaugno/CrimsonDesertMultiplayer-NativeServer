@@ -1,0 +1,68 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x9CDC00
+Function=FUN_1409cdc00 body=[[1409cdc00, 1409cdc8a]]
+1409cdc00 MOV qword ptr [RSP + 0x8],RBX
+1409cdc05 MOV qword ptr [RSP + 0x10],RDX
+1409cdc0a PUSH RDI
+1409cdc0b SUB RSP,0x30
+1409cdc0f MOV RBX,RDX
+1409cdc12 MOV dword ptr [RSP + 0x20],0x0
+1409cdc1a MOV RDI,qword ptr [RCX + 0x50]
+1409cdc1e TEST RDI,RDI
+1409cdc21 JZ 0x1409cdc42
+1409cdc23 MOV EDX,0x4
+1409cdc28 MOV R8D,0x10
+1409cdc2e MOV RAX,qword ptr [RDI]
+1409cdc31 MOV RCX,RDI
+1409cdc34 CALL qword ptr [RAX + 0xc0]
+1409cdc3a TEST AL,AL
+1409cdc3c JZ 0x1409cdc42
+1409cdc3e MOV AL,0x1
+1409cdc40 JMP 0x1409cdc44
+1409cdc42 XOR AL,AL
+1409cdc44 LEA RCX,[0x145b40000]
+1409cdc4b MOV qword ptr [RBX],RCX
+1409cdc4e MOV qword ptr [RBX + 0x8],RDI
+1409cdc52 MOV byte ptr [RBX + 0x10],AL
+1409cdc55 MOV byte ptr [RBX + 0x11],0x0
+1409cdc59 MOV qword ptr [RBX + 0x18],0x0
+1409cdc61 LEA RAX,[0x14597c260]
+1409cdc68 MOV qword ptr [RBX],RAX
+1409cdc6b LEA RAX,[0x14597c220]
+1409cdc72 MOV qword ptr [RBX],RAX
+1409cdc75 MOV dword ptr [RSP + 0x20],0x1
+1409cdc7d MOV RAX,RBX
+1409cdc80 MOV RBX,qword ptr [RSP + 0x40]
+1409cdc85 ADD RSP,0x30
+1409cdc89 POP RDI
+1409cdc8a RET
+
+undefined8 *
+FUN_1409cdc00(longlong param_1,undefined8 *param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  longlong *plVar1;
+  char cVar2;
+  undefined1 uVar3;
+
+  plVar1 = *(longlong **)(param_1 + 0x50);
+  if (plVar1 != (longlong *)0x0) {
+    cVar2 = (**(code **)(*plVar1 + 0xc0))(plVar1,4,0x10,param_4,0);
+    if (cVar2 != '\0') {
+      uVar3 = 1;
+      goto LAB_1409cdc44;
+    }
+  }
+  uVar3 = 0;
+LAB_1409cdc44:
+  *param_2 = &UNK_145b40000;
+  param_2[1] = plVar1;
+  *(undefined1 *)(param_2 + 2) = uVar3;
+  *(undefined1 *)((longlong)param_2 + 0x11) = 0;
+  param_2[3] = 0;
+  *param_2 = &UNK_14597c260;
+  *param_2 = &UNK_14597c220;
+  return param_2;
+}

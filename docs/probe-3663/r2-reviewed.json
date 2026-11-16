@@ -95,6 +95,22 @@
     "old": "0x10",
     "symbol": "kFmField"
   },
+  "C026": {
+    "target": "0x2D0",
+    "method": "paired native code consumption",
+    "second_check": "Paired native field assignment 2BBE900/2EC9200 rejects a nonzero u16 busy counter (5A -> 4A) or an existing field at FM+10. On success it copies field key (2C8 -> 2D0) to FM+8 and stores field at FM+10, under the actor lock. Denuvo thunk bodies are included; no obfuscated scalar is needed for these direct accesses.",
+    "evidence": "port-evidence/r2/field-ready-reference.txt; field-assign-target.txt",
+    "old": "0x2C8",
+    "symbol": "kKey"
+  },
+  "C031": {
+    "target": "0x4A",
+    "method": "paired native code consumption",
+    "second_check": "Paired native field assignment 2BBE900/2EC9200 rejects a nonzero u16 busy counter (5A -> 4A) or an existing field at FM+10. On success it copies field key (2C8 -> 2D0) to FM+8 and stores field at FM+10, under the actor lock. Denuvo thunk bodies are included; no obfuscated scalar is needed for these direct accesses.",
+    "evidence": "port-evidence/r2/field-ready-reference.txt; field-assign-target.txt",
+    "old": "0x5A",
+    "symbol": "kFmBusy"
+  },
   "C032": {
     "target": "0x08",
     "method": "paired native code consumption",
@@ -263,6 +279,22 @@
     "old": "0x90",
     "symbol": "kPhysics_Position"
   },
+  "A008": {
+    "target": "0x30",
+    "method": "paired native code consumption",
+    "second_check": "Paired native consumers DD49D0/FB6F70 pass [WorldSystem+30] to actor getters 8B44E0/9CDC00. Each getter reads manager+50, obtains its vslot C0 validity and returns the actor in an owner/validity wrapper. The consumer accesses that actor component table+68. This proves the two field roles, not adoption of the candidate root RVA.",
+    "evidence": "port-evidence/r2/player-controlled-reference.txt; player-controlled-target.txt; player-manager-getter-target.txt",
+    "old": "0x30",
+    "symbol": "kWorldSystem_ActorManager"
+  },
+  "A009": {
+    "target": "0x50",
+    "method": "paired native code consumption",
+    "second_check": "Paired native consumers DD49D0/FB6F70 pass [WorldSystem+30] to actor getters 8B44E0/9CDC00. Each getter reads manager+50, obtains its vslot C0 validity and returns the actor in an owner/validity wrapper. The consumer accesses that actor component table+68. This proves the two field roles, not adoption of the candidate root RVA.",
+    "evidence": "port-evidence/r2/player-controlled-reference.txt; player-controlled-target.txt; player-manager-getter-target.txt",
+    "old": "0x50",
+    "symbol": "kActorManager_ControlledActor"
+  },
   "A015": {
     "target": "0x60",
     "method": "paired native code consumption",
@@ -366,5 +398,245 @@
     "evidence": "port-evidence/r2/player-health-update-target.txt; player-stat-stride-target.txt; player-stat-lookup-target.txt",
     "old": "8",
     "symbol": "StatIdReadWidth"
+  },
+  "A034": {
+    "target": "0x00",
+    "method": "paired native code consumption",
+    "second_check": "Named HP-handler updaters 62FA00/71C4E0 dereference registry root+0 -> +8 -> +10 and read a u16 HP key. Its field changes A0 -> 78; the key value itself is runtime data.",
+    "evidence": "port-evidence/r2/player-health-update-reference.txt; player-health-update-target.txt",
+    "old": "0x00",
+    "symbol": "kHpDefinitionsRoot"
+  },
+  "A035": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Named HP-handler updaters 62FA00/71C4E0 dereference registry root+0 -> +8 -> +10 and read a u16 HP key. Its field changes A0 -> 78; the key value itself is runtime data.",
+    "evidence": "port-evidence/r2/player-health-update-reference.txt; player-health-update-target.txt",
+    "old": "0x08",
+    "symbol": "kHpDefinitionsTables"
+  },
+  "A036": {
+    "target": "0x10",
+    "method": "paired native code consumption",
+    "second_check": "Named HP-handler updaters 62FA00/71C4E0 dereference registry root+0 -> +8 -> +10 and read a u16 HP key. Its field changes A0 -> 78; the key value itself is runtime data.",
+    "evidence": "port-evidence/r2/player-health-update-reference.txt; player-health-update-target.txt",
+    "old": "0x10",
+    "symbol": "kHpDefinitionsObject"
+  },
+  "A037": {
+    "target": "0x78",
+    "method": "paired native code consumption",
+    "second_check": "Named HP-handler updaters 62FA00/71C4E0 dereference registry root+0 -> +8 -> +10 and read a u16 HP key. Its field changes A0 -> 78; the key value itself is runtime data.",
+    "evidence": "port-evidence/r2/player-health-update-reference.txt; player-health-update-target.txt",
+    "old": "0xA0",
+    "symbol": "kHpDefinitionId"
+  },
+  "B003": {
+    "target": "0x18",
+    "method": "paired native code consumption",
+    "second_check": "Native ServerModule initialization E6F8C70 constructs the named NwVirtualAsyncSession, clears qword B0/B8 and word C0, writes UTF16 host name 1 at +18, and stores the session in ServerNet+18. Native PostPacket 3A9960 separately reads B8/B0 as the packet epoch pair. These are member proofs; the initializer RVA is not adopted by this entry.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x18",
+    "symbol": "kServerNet_Session"
+  },
+  "B013": {
+    "target": "0x18",
+    "method": "paired native code consumption",
+    "second_check": "Native ServerModule initialization E6F8C70 constructs the named NwVirtualAsyncSession, clears qword B0/B8 and word C0, writes UTF16 host name 1 at +18, and stores the session in ServerNet+18. Native PostPacket 3A9960 separately reads B8/B0 as the packet epoch pair. These are member proofs; the initializer RVA is not adopted by this entry.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x18",
+    "symbol": "kSession_Name"
+  },
+  "B017": {
+    "target": "0xB0",
+    "method": "paired native code consumption",
+    "second_check": "Native ServerModule initialization E6F8C70 constructs the named NwVirtualAsyncSession, clears qword B0/B8 and word C0, writes UTF16 host name 1 at +18, and stores the session in ServerNet+18. Native PostPacket 3A9960 separately reads B8/B0 as the packet epoch pair. These are member proofs; the initializer RVA is not adopted by this entry.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0xB0",
+    "symbol": "kSession_B0"
+  },
+  "B018": {
+    "target": "0xB8",
+    "method": "paired native code consumption",
+    "second_check": "Native ServerModule initialization E6F8C70 constructs the named NwVirtualAsyncSession, clears qword B0/B8 and word C0, writes UTF16 host name 1 at +18, and stores the session in ServerNet+18. Native PostPacket 3A9960 separately reads B8/B0 as the packet epoch pair. These are member proofs; the initializer RVA is not adopted by this entry.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0xB8",
+    "symbol": "kSession_B8"
+  },
+  "B019": {
+    "target": "0xC0",
+    "method": "paired native code consumption",
+    "second_check": "Native ServerModule initialization E6F8C70 constructs the named NwVirtualAsyncSession, clears qword B0/B8 and word C0, writes UTF16 host name 1 at +18, and stores the session in ServerNet+18. Native PostPacket 3A9960 separately reads B8/B0 as the packet epoch pair. These are member proofs; the initializer RVA is not adopted by this entry.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0xC0",
+    "symbol": "kSession_C0"
+  },
+  "B014": {
+    "target": "0x88",
+    "method": "paired native code consumption",
+    "second_check": "Paired session constructors allocate a u32 key and store its pointer at +88, clear +90 and construct crypto at +98. Native server receive 2A0EA70 consumes [session+88] as the deferred key, [session+90] as the user actor, and [session+98] through enabled/decrypt vslots 10/30; client receive 3A9CF0 independently uses the key and crypto fields.",
+    "evidence": "port-evidence/r2/tunnel-session-target.txt; tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x88",
+    "symbol": "kSession_IdPtr"
+  },
+  "B015": {
+    "target": "0x90",
+    "method": "paired native code consumption",
+    "second_check": "Paired session constructors allocate a u32 key and store its pointer at +88, clear +90 and construct crypto at +98. Native server receive 2A0EA70 consumes [session+88] as the deferred key, [session+90] as the user actor, and [session+98] through enabled/decrypt vslots 10/30; client receive 3A9CF0 independently uses the key and crypto fields.",
+    "evidence": "port-evidence/r2/tunnel-session-target.txt; tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x90",
+    "symbol": "kSession_User"
+  },
+  "B016": {
+    "target": "0x98",
+    "method": "paired native code consumption",
+    "second_check": "Paired session constructors allocate a u32 key and store its pointer at +88, clear +90 and construct crypto at +98. Native server receive 2A0EA70 consumes [session+88] as the deferred key, [session+90] as the user actor, and [session+98] through enabled/decrypt vslots 10/30; client receive 3A9CF0 independently uses the key and crypto fields.",
+    "evidence": "port-evidence/r2/tunnel-session-target.txt; tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x98",
+    "symbol": "kSession_Crypto"
+  },
+  "B040": {
+    "target": "0x8030",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x8030",
+    "symbol": "kPbSize"
+  },
+  "B041": {
+    "target": "0x8000",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x8000",
+    "symbol": "kPb_FramePtr"
+  },
+  "B042": {
+    "target": "0x8008",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x8008",
+    "symbol": "kPb_Len1"
+  },
+  "B043": {
+    "target": "0x800A",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x800A",
+    "symbol": "kPb_Len2"
+  },
+  "B044": {
+    "target": "0x800C",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x800C",
+    "symbol": "kPb_Cap"
+  },
+  "B045": {
+    "target": "0x800E",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x800E",
+    "symbol": "kPb_IsRequest"
+  },
+  "B048": {
+    "target": "0x8028",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x8028",
+    "symbol": "kPb_Base"
+  },
+  "B049": {
+    "target": "0x1F",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x1F",
+    "symbol": "kFrameOverhead"
+  },
+  "B050": {
+    "target": "3",
+    "method": "paired native code consumption",
+    "second_check": "Paired native PostPacket 35C670/3A9960 allocates 8030, initializes packet flag 800E to zero, stores frame pointer 8000 and allocation base 8028, sets capacity 800C, copies packet at frame+3, adds 1F to both u16 lengths 8008/800A and writes u16 frame length plus u8 channel. This does not adopt the tag/magic unused-space claim or the mod maximum packet limit.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "3",
+    "symbol": "kFrameHeader"
+  },
+  "B072": {
+    "target": "0x7FFFFFFFFFFFFFFF",
+    "method": "paired native code consumption",
+    "second_check": "Native PostPacket explicitly substitutes 7FFFFFFFFFFFFFFF for both epoch fields when no per-channel session exists, matching the legacy guest epoch sentinel.",
+    "evidence": "port-evidence/r2/tunnel-layout-target.txt; ../ghidra-2976-expanded.txt",
+    "old": "0x7FFFFFFFFFFFFFFFull",
+    "symbol": "kNoEpoch"
+  },
+  "B074": {
+    "target": "5",
+    "method": "paired native code consumption",
+    "second_check": "Named target LoginCharacter decoder reads u16 payload length at packet+3, requires packet_size-5 equal to it and initializes its decode cursor at packet+5. Native dispatcher reads opcode u16 at packet+0 and handles the slot at +2; internal system messages have separate framing and are not covered by this row.",
+    "evidence": "port-evidence/r2/field-login-target.txt; ../ghidra-3663-core-handlers.txt",
+    "old": "5",
+    "symbol": "kHeaderSize"
+  },
+  "B022": {
+    "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}",
+    "method": "native entry bytes at retained R1 function",
+    "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}",
+    "symbol": "kServerOnRecvPacketHead",
+    "second_check": "R1 PORT-REVIEWED.json kServerOnRecvPacket; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 20 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
+    "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+  },
+  "B024": {
+    "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xC8, 0x00, 0x00, 0x00, 0x49, 0x8D, 0x40, 0x30}",
+    "method": "native entry bytes at retained R1 function",
+    "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xC8, 0x00, 0x00, 0x00, 0x49, 0x8D, 0x40, 0x30}",
+    "symbol": "kSessionSendHead",
+    "second_check": "R1 PORT-REVIEWED.json kSessionSend; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 21 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
+    "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+  },
+  "B026": {
+    "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57}",
+    "method": "native entry bytes at retained R1 function",
+    "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x6C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x56, 0x57, 0x41, 0x54, 0x41, 0x56}",
+    "symbol": "kNwSessionCtorHead",
+    "second_check": "R1 PORT-REVIEWED.json kNwSessionCtor; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 21 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
+    "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+  },
+  "B028": {
+    "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9}",
+    "method": "native entry bytes at retained R1 function",
+    "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9}",
+    "symbol": "kQueuePushHead",
+    "second_check": "R1 PORT-REVIEWED.json kQueuePush; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 21 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
+    "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+  },
+  "B030": {
+    "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9, 0x48, 0x8B, 0xDA}",
+    "method": "native entry bytes at retained R1 function",
+    "old": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9, 0x48, 0x8B, 0xDA}",
+    "symbol": "kAllocGlobalHead",
+    "second_check": "R1 PORT-REVIEWED.json kAllocGlobal; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 16 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
+    "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+  },
+  "B032": {
+    "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xFA, 0x44, 0x8B, 0x05, 0xEE, 0xDE, 0x5D, 0x02, 0x48, 0x8B, 0xF1, 0x4A, 0x8B, 0x1C, 0xC0, 0xB8, 0x98, 0x00, 0x00, 0x00, 0x80, 0x3C, 0x18, 0x00, 0x75, 0x05, 0xE8, 0xDB, 0x59, 0x0A, 0x00, 0xB9, 0x90, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xD6, 0x48, 0x8B, 0x0C, 0x19, 0x48, 0x8B, 0x5C, 0x24, 0x30, 0x48, 0x8B, 0x74, 0x24, 0x38, 0x48, 0x83, 0xC4, 0x20, 0x5F, 0xE9, 0x3C, 0xFC, 0xFF, 0xFF}",
+    "method": "native entry bytes at retained R1 function",
+    "old": "{ 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xFA, 0x44, 0x8B, 0x05, 0x7E, 0x92, 0x49, 0x02, 0x48, 0x8B, 0xF1, 0x4A, 0x8B, 0x1C, 0xC0, 0xB8, 0x98, 0x00, 0x00, 0x00, 0x80, 0x3C, 0x18, 0x00, 0x75, 0x05, 0xE8, 0xDB, 0x59, 0x0A, 0x00, 0xB9, 0x90, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xD6, 0x48, 0x8B, 0x0C, 0x19, 0x48, 0x8B, 0x5C, 0x24, 0x30, 0x48, 0x8B, 0x74, 0x24, 0x38, 0x48, 0x83, 0xC4, 0x20, 0x5F, 0xE9, 0x3C, 0xFC, 0xFF, 0xFF}",
+    "symbol": "kAllocThreadBytes",
+    "second_check": "R1 PORT-REVIEWED.json kAllocThread; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 92 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
+    "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
+  },
+  "B064": {
+    "target": "{0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xDA}",
+    "method": "native entry bytes at retained R1 function",
+    "old": "{0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x89, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xDA}",
+    "symbol": "kSyncSessionSendHead",
+    "second_check": "R1 PORT-REVIEWED.json kSyncSessionSend; paired native disassembly confirms entry and role; old prefix checked against source file; target .pdata entry; 16 bytes. The allocator guard covers its complete entry wrapper through the verified tail JMP; it does not imply equality of the tail callee.",
+    "evidence": "port-evidence/ghidra-2976-expanded.txt; ghidra-3663-expanded.txt; ghidra-3663-core-handlers.txt"
   }
 }

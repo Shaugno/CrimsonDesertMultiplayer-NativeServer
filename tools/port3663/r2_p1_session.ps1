@@ -1,0 +1,138 @@
+# P1 controller. Never launches the game; the assistant requests presence first.
+param(
+    [Parameter(Mandatory=$true)][ValidateSet('Prepare','Deploy','Probe','Finish')][string]$Stage,
+    [Parameter(Mandatory=$true)][ValidatePattern('^R2-P1-[0-9]{8}-[0-9]{6}$')][string]$Session,
+    [int]$GamePid = 0,
+    [switch]$Present
+)
+$ErrorActionPreference='Stop'
+$root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+$gameDir='D:\SteamLibrary\steamapps\common\Crimson Desert\bin64'
+$saveRoot=Join-Path $env:LOCALAPPDATA 'Pearl Abyss\CD\save'
+$backupRoot=Join-Path $root "backups\$Session"
+$evidence=Join-Path $root "build\r2\live\$Session"
+$py='C:\Users\shaug\source\repos\beamng-earth-s3-review\python312\python.exe'
+$expected='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
+if ((Get-FileHash -LiteralPath (Join-Path $gameDir 'CrimsonDesert.exe')).Hash -ne $expected) { throw 'Build drift; rematch first' }
+if ($Stage -ne 'Probe' -and (Get-Process CrimsonDesert -ErrorAction SilentlyContinue)) { throw 'Game must be closed' }
+if ($Stage -in @('Deploy','Probe') -and !$Present) { throw 'The session requires the user at the PC' }
+function Manifest([string]$path) {
+    if (!(Test-Path -LiteralPath $path)) { throw "Missing source $path" }
+    $links=@(Get-ChildItem -LiteralPath $path -Recurse -Force | Where-Object { $_.Attributes -band [IO.FileAttributes]::ReparsePoint })
+    if ($links.Count) { throw 'Reparse points in saves; refuse an ambiguous backup' }
+    $files=@(Get-ChildItem -LiteralPath $path -Recurse -File -Force | Sort-Object FullName)
+    @($files | ForEach-Object { [pscustomobject]@{path=$_.FullName.Substring($path.Length).TrimStart('\');bytes=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash} })
+}
+function Canonical($value) { ConvertTo-Json -InputObject @($value) -Depth 8 -Compress }
+function AssertNoMatching {
+    $jobs=@(Get-CimInstance Win32_Process -Filter "Name='java.exe' OR Name='bindiff.exe'" | Where-Object { $_.CommandLine -match 'R2(Match|Target|Graph|Correlation|Direct|Native)|PortTarget3663|Port3663|r2-(direct|graph|native)' })
+    if ($jobs.Count) { throw 'Offline matching jobs must finish or be stopped before the live session' }
+}
+if ($Stage -eq 'Prepare') {
+    if (Test-Path -LiteralPath $backupRoot) { throw 'Session backup already exists; use a new session ID' }
+    New-Item -ItemType Directory -Force -Path $backupRoot,$evidence | Out-Null
+    $before=@(Manifest $saveRoot)
+    if (!$before.Count) { throw 'No save exists to load for this session' }
+    foreach ($file in $before) {
+        $to=Join-Path $backupRoot ('save\'+$file.path)
+        New-Item -ItemType Directory -Force -Path (Split-Path $to -Parent) | Out-Null
+        Copy-Item -LiteralPath (Join-Path $saveRoot $file.path) -Destination $to
+    }
+    if ((Canonical $before) -ne (Canonical @(Manifest $saveRoot))) { throw 'Saves changed during backup' }
+    if ((Canonical $before) -ne (Canonical @(Manifest (Join-Path $backupRoot 'save')))) { throw 'Backup verification failed' }
+    ConvertTo-Json -InputObject $before -Depth 8 | Set-Content (Join-Path $backupRoot 'save-manifest.json')
+    $installed=@()
+    foreach ($name in @('cdmp.asi','cdmp.pdb','winmm.dll','cdmp.ini')) {
+        $from=Join-Path $gameDir $name
+        if (Test-Path -LiteralPath $from) {
+            New-Item -ItemType Directory -Force -Path (Join-Path $backupRoot 'install') | Out-Null
+            Copy-Item -LiteralPath $from -Destination (Join-Path $backupRoot ('install\'+$name))
+            $installed += [pscustomobject]@{name=$name;sha256=(Get-FileHash -LiteralPath $from).Hash}
+        }
+    }
+    ConvertTo-Json -InputObject $installed -Depth 8 | Set-Content (Join-Path $backupRoot 'install-manifest.json')
+    @"
+# $Session — passive P1, prepared before launch
+
+Question: Which native HP definition key selects the local actor's status entry on the exact 3663 executable?
+
+Expected observation: the native definition key selects one status entry whose current/max integer values, divided by the proved unit scale 1000, agree with the character's HP display. Both definition registries are logged separately; no ID is guessed.
+
+Duration: ten minutes from collector start, at most fifteen minutes for the sitting.
+
+Steps: after Shaugn confirms presence, deploy the closed-guard ASI; launch the game visibly; select Continue and wait for control; show the character/status HP display and note current/max HP; let ordinary regeneration or a healing action change HP if available; quit to desktop at the stop signal.
+
+Stop: any crash, hang, identity drift, user request, or time limit. Never retry a crash blindly. Collect cdmp.log and crash context, fix offline and rerun the suite before another session.
+
+Collector: external PROCESS_VM_READ | PROCESS_QUERY_INFORMATION only. Every copy checks VirtualQueryEx and ReadProcessMemory. No hooks, game writes, native calls, packet replay or network feed. This is not L1 and does not arm Tier A.
+
+Save policy: all saves backed up with a local hash manifest and verified before launch. Afterward verify the backup and compare the live save folder; report normal game changes without overwriting player progress. Never commit saves or the private manifest.
+
+Installed executable SHA256: $expected
+Backup files: $($before.Count)
+Backup manifest SHA256: $((Get-FileHash -LiteralPath (Join-Path $backupRoot 'save-manifest.json')).Hash)
+"@ | Set-Content (Join-Path $evidence 'question.md')
+    Write-Output "Prepared $Session; files=$($before.Count); backup verified; no deployment or game launch."
+    exit
+}
+if (!(Test-Path -LiteralPath (Join-Path $evidence 'question.md'))) { throw 'Prepare this session first' }
+$before=@(Get-Content -Raw -LiteralPath (Join-Path $backupRoot 'save-manifest.json') | ConvertFrom-Json)
+$installed=@(Get-Content -Raw -LiteralPath (Join-Path $backupRoot 'install-manifest.json') | ConvertFrom-Json)
+if ($Stage -eq 'Deploy') {
+    AssertNoMatching
+    $header=Get-Content -Raw -LiteralPath (Join-Path $root 'src\mod\game\build_3663.h')
+    foreach ($tier in 'A','B','C','D') {
+        if ($header -notmatch "kTier${tier}Complete = false;") { throw 'P1 requires every production tier closed' }
+    }
+    foreach ($name in @('cdmp.asi','cdmp.pdb','winmm.dll','cdmp.ini')) {
+        $path=Join-Path $gameDir $name
+        $prior=@($installed | Where-Object name -eq $name)
+        if ($prior.Count) {
+            if (!(Test-Path -LiteralPath $path) -or (Get-FileHash -LiteralPath $path).Hash -ne $prior[0].sha256) { throw 'Installation changed since preparation' }
+        } elseif (Test-Path -LiteralPath $path) { throw 'An installation file appeared after preparation' }
+    }
+    $loader=Join-Path $root 'third_party\ultimate-asi-loader\v9.7.4\dinput8.dll'
+    $existingLoader=Join-Path $gameDir 'winmm.dll'
+    if ((Test-Path -LiteralPath $existingLoader) -and (Get-FileHash -LiteralPath $existingLoader).Hash -ne (Get-FileHash -LiteralPath $loader).Hash) { throw 'Different loader installed; preserve it and block this controlled deployment' }
+    if ((Canonical $before) -ne (Canonical @(Manifest $saveRoot))) { throw 'Saves changed since preparation; prepare a fresh session' }
+    & $py (Join-Path $PSScriptRoot 'reader_probe.py') --self-test
+    if ($LASTEXITCODE) { throw 'Collector logic test failed' }
+    & $py (Join-Path $PSScriptRoot 'reader_probe.py') --api-self-test
+    if ($LASTEXITCODE) { throw 'Collector API test failed' }
+    & (Join-Path $root 'scripts\deploy.ps1')
+    $ini="[general]`nplayer_name=R2PassiveP1`nstartup_delay_ms=0`n[net]`nenabled=0`n[overlay]`nenabled=0`n[sniffer]`nenabled=0`n[coop]`nenabled=0`n[session2]`nenabled=0`n"
+    [IO.File]::WriteAllText((Join-Path $gameDir 'cdmp.ini'),$ini,[Text.UTF8Encoding]::new($false))
+    Get-FileHash -LiteralPath (Join-Path $gameDir 'cdmp.asi'),(Join-Path $PSScriptRoot 'reader_probe.py'),(Join-Path $root 'src\mod\game\build_3663.h') | ConvertTo-Json | Set-Content (Join-Path $evidence 'deployed-hashes.json')
+    $receipt=foreach ($name in @('cdmp.asi','cdmp.pdb','winmm.dll','cdmp.ini')) {
+        $path=Join-Path $gameDir $name
+        if (Test-Path -LiteralPath $path) { [pscustomobject]@{name=$name;sha256=(Get-FileHash -LiteralPath $path).Hash} }
+    }
+    ConvertTo-Json -InputObject @($receipt) | Set-Content (Join-Path $evidence 'installed-receipt.json')
+    Write-Output 'Deployed closed-guard passive configuration. Launch only with user present.'
+} elseif ($Stage -eq 'Probe') {
+    AssertNoMatching
+    if ($GamePid -lt 1) { throw 'An explicit verified game PID is required' }
+    & $py (Join-Path $PSScriptRoot 'reader_probe.py') --pid $GamePid --seconds 600 *> (Join-Path $evidence 'trace.log')
+    if ($LASTEXITCODE) { throw 'Probe failed; inspect trace; do not retry blindly' }
+} else {
+    $receiptPath=Join-Path $evidence 'installed-receipt.json'
+    if (!(Test-Path -LiteralPath $receiptPath)) { throw 'No completed deployment receipt; preserve the installation for inspection' }
+    foreach ($item in @(Get-Content -Raw -LiteralPath $receiptPath | ConvertFrom-Json)) {
+        $path=Join-Path $gameDir $item.name
+        if (!(Test-Path -LiteralPath $path) -or (Get-FileHash -LiteralPath $path).Hash -ne $item.sha256) { throw 'Installed file changed during session; preserve it for inspection' }
+    }
+    if ((Canonical $before) -ne (Canonical @(Manifest (Join-Path $backupRoot 'save')))) { throw 'Backup changed; stop' }
+    $after=@(Manifest $saveRoot)
+    ConvertTo-Json -InputObject $after -Depth 8 | Set-Content (Join-Path $backupRoot 'save-after.json')
+    $summary=[pscustomobject]@{session=$Session;exe_sha256=$expected;backup_verified=$true;live_saves_unchanged=((Canonical $before) -eq (Canonical $after));before_files=$before.Count;after_files=$after.Count}
+    $summary | ConvertTo-Json | Set-Content (Join-Path $evidence 'save-verification.json')
+    if (Test-Path -LiteralPath (Join-Path $gameDir 'cdmp.log')) { Copy-Item -LiteralPath (Join-Path $gameDir 'cdmp.log') -Destination (Join-Path $evidence 'cdmp.log') -Force }
+    & (Join-Path $root 'scripts\deploy.ps1') -Remove
+    foreach ($item in $installed) {
+        Copy-Item -LiteralPath (Join-Path $backupRoot ('install\'+$item.name)) -Destination (Join-Path $gameDir $item.name) -Force
+        if ((Get-FileHash -LiteralPath (Join-Path $gameDir $item.name)).Hash -ne $item.sha256) { throw 'Installation restore verification failed' }
+    }
+    if (!($installed | Where-Object name -eq 'cdmp.ini')) { Remove-Item -LiteralPath (Join-Path $gameDir 'cdmp.ini') -ErrorAction SilentlyContinue }
+    Get-ChildItem -LiteralPath $evidence -File | Get-FileHash | ConvertTo-Json | Set-Content (Join-Path $evidence 'evidence-hashes.json')
+    Write-Output "Finished $Session; backup verified, installation restored; live saves unchanged=$($summary.live_saves_unchanged)"
+}

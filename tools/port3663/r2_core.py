@@ -75,6 +75,15 @@ def raw(tier, file, needle, symbol, value, use):
 
 raw('A', G+'player_layout.h', 'stat_units = 1000.0f', 'NativeStatUnits', '1000.0f', 'native int64 stat conversion scale (not a timeout)')
 raw('A', G+'player_layout.h', 'stat_id_bytes = 8', 'StatIdReadWidth', '8', 'legacy reader width; target native ID width must be confirmed separately from padding')
+# Preserve existing R2 IDs while correcting a root omitted by the first line cut.
+select(G+'offsets.h', 'A', 'PlayerReader root and inherited save-manager root', names='kWorldSystemSlot')
+H = 'docs/probe-3663/port-evidence/r2/player-health-update-reference.txt'
+raw('A', H, 'MOV R10,qword ptr [0x146d69528]', 'kHpDefinitionsSlot', '0x6D69528', 'native HP updater selects game-data definition registry')
+raw('A', H, 'CMOVNZ R10,qword ptr [0x146d69530]', 'kHpDefinitionsAltSlot', '0x6D69530', 'alternate native HP definition registry; no assumed selector ID')
+raw('A', H, 'MOV RAX,qword ptr [R10]', 'kHpDefinitionsRoot', '0x00', 'first native definition pointer hop')
+raw('A', H, 'MOV RDX,qword ptr [RAX + 0x8]', 'kHpDefinitionsTables', '0x08', 'second native definition pointer hop')
+raw('A', H, 'MOV RAX,qword ptr [RDX + 0x10]', 'kHpDefinitionsObject', '0x10', 'third native definition pointer hop')
+raw('A', H, 'MOVZX ECX,word ptr [RAX + 0xa0]', 'kHpDefinitionId', '0xA0', 'native HP key field; target field is different')
 raw('C', S+'field_share.cpp', 'lock_call(field + fld::kLock1, 8)', 'FieldLockAcquireVslot', '8', 'both field lock acquire slots')
 raw('C', S+'field_share.cpp', 'lock_call(second, 0x10)', 'FieldLockReleaseVslot', '0x10', 'both field lock release slots')
 raw('C', S+'field_share.cpp', '!peek(pj + 0x68', 'HostCharacterComponents', '0x68', 'field-share traversal to host components')
@@ -105,6 +114,20 @@ for row in rows:
     counts[row['tier']] += 1
     row['r2'] = f"{row['tier']}{counts[row['tier']]:03}"
     row['adopted_r1'] = row['id'] in adopted.values()
+    # Every retained row is a game contract. Replace R1's unaudited mixed label;
+    # excluded mod limits/protocol fields are explained in the scope below.
+    row['classification'] = 'game'
+    symbol,value = row['symbol'],row['value']
+    if value.startswith('{'): kind='native signature'
+    elif symbol.startswith('kOp') or symbol.startswith('kStatId_') or symbol=='NativeForbiddenRequests': kind='native identifier'
+    elif 'Vtable' in symbol or symbol.startswith('kVt'): kind='vtable RVA'
+    elif symbol=='kNoEpoch': kind='native epoch sentinel'
+    elif symbol=='kLoadingParkHeight': kind='native loading sentinel'
+    elif re.fullmatch(r'0x[0-9A-Fa-f]+',value) and 0x10000<int(value,16)<0x173AB000: kind='function/global RVA'
+    elif 'Layout' in symbol: kind='native layout contract'
+    elif any(s in symbol for s in ('Size','Stride','Count','Entries','Capacity','Width','Units','Overhead','Header')): kind='native member/size contract'
+    else: kind='native member/value contract'
+    row['kind']=kind
 assert len(rows) < 500
 assert sum(r['adopted_r1'] for r in rows) == 17
 (OUT/'R2-CORE-LIST.json').write_text(json.dumps(rows, indent=2)+'\n')
@@ -148,9 +171,9 @@ reader reads it; no unimplemented exclusion is used to make A appear complete.
 
 '''
 intro += 'Counts: '+', '.join(f'{t} {counts[t]}' for t in 'ABCD')+f'; total {len(rows)}; R1 adopted 17.\n\n'
-intro += '| Row | Tier | Symbol | 2976 value | Source | Use | Evidence status |\n|---|---|---|---|---|---|---|\n'
+intro += '| Row | Tier | Game contract | Symbol | 2976 value | Source | Use | Evidence status |\n|---|---|---|---|---|---|---|---|\n'
 for row in rows:
     value = row['value'].replace('|','\\|')
-    intro += f"| {row['r2']} | {row['tier']} | {row['symbol']} | `{value}` | {row['source']} | {row['use']} | {'R1 done' if row['adopted_r1'] else 'needs target evidence'} |\n"
+    intro += f"| {row['r2']} | {row['tier']} | {row['kind']} | {row['symbol']} | `{value}` | {row['source']} | {row['use']} | {'R1 done' if row['adopted_r1'] else 'needs target evidence'} |\n"
 (OUT/'R2-CORE-LIST.md').write_text(intro)
 print(dict(counts), 'total', len(rows), 'R1 done', sum(r['adopted_r1'] for r in rows))

@@ -1,5 +1,55 @@
 # R2 work in progress — 2026-11-16
 
+Current checkpoint (supersedes the historical section below):
+
+- Branch gpt/3663-port; Step 1 and Step 6 pushed. Step 2 remains in progress;
+  this is not the final Step 7 package. No tier armed, game launched, game
+  process opened, deployment made, or live presence requested.
+- Core 387 game contracts: A37/B75/C150/D125. Every retained row now has an
+  explicit game-contract classification; policy exclusions remain documented.
+  Stable IDs A001–A030 were preserved when seven native HP/root rows were added.
+- 17 R1 values retained; 80 additional reviewed native contracts (layouts and
+  seven entry-byte guards), still unused by any target gameplay path. Fourteen
+  independent RVA checks await standard-correlator support in r2-rva-checks.json.
+  Their existence alone never adopts an RVA.
+- Paired native getter 8B44E0/9CDC00 confirms manager+50 controlled actor;
+  WorldSystem+30 role separately verified. Field key 2C8→2D0 and mover busy
+  5A→4A are verified. R2-FIELD-SHARING.md records ownership, locks, rollback
+  and the changed three-argument entry ABI; standard entry support is pending.
+- R2-TUNNEL.md records native packet maximum 7FDA versus mod helper 7FE0,
+  and the still-unproved safe reuse of native packet metadata at 8010/8018.
+  These must be resolved in the per-build path before Tier B can be enabled.
+- Full preflight build/CTest 101/101, 101.61 s. Synthetic smoke: 78 remote
+  states, zero rejected, clean unload. Collector logic and own-process API
+  checks pass. Evidence-join fixtures exercise agreement, single-plus-native,
+  native operand anchors, conflicts, unaccepted VT and an unproved health ID;
+  they write only build/r2/match-fixture and are never port evidence.
+- P1 passive HP collector and Prepare/Deploy/Probe/Finish controller prepared.
+  Session R2-P1-20261116-020700 has 23 save files backed up and hash-verified
+  privately. Only Prepare ran; no deployment. Written question and stop rules
+  precede launch. The collector has a read/query-only process handle, strict
+  file/mapped identity, guarded bounded reads, coherent resampling and no
+  production feed. Live presence must still be acknowledged explicitly.
+- Default and graph runs were stopped incomplete after prolonged constant
+  propagation/decompiler recovery. Their verified process identities and
+  incomplete status are local in build/r2/stopped-default-graph.json. Direct
+  runs remain active in AddressTableAnalyzer. A native profile keeps complete
+  image import/disassembly, explicit references and RTTI, while additionally
+  disabling Address Tables and Function ID (besides direct's speculative
+  propagation/switch passes). Exact options are saved with each run. Its
+  whole-program exports and the standard VT/BinDiff runs are not complete yet.
+- One signature-extractor check initially assumed a terminal RET. Native
+  allocator wrapper ends with a verified tail JMP; corrected to guard the
+  full 92-byte entry wrapper and explicitly avoid claiming tail-callee equality.
+  No game crash occurred.
+
+Next: complete standard matching, generate real R2-MATCHES and push Step 2;
+finish the Step 3 correspondence/adapter assessment; close and validate each
+remaining tier contract; request the prepared passive sitting only after
+offline jobs end. Continue independent work through the Step 7 package.
+
+## Historical checkpoint at 5a72f3b
+
 This is a checkpoint, not Step 7 or a completed Step 2. Branch gpt/3663-port.
 Step 1 pushed as 29bc5df. Independent Step 6 pushed as c5f7074 while analysis ran.
 The Downloads R2 plan is copied verbatim to docs/GPT-3663-PORT-PLAN-R2.md.
