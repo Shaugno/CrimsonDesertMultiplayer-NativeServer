@@ -136,5 +136,14 @@ check('kServerFrameworkMode',0x6A65564,0x6F29B70,
 check('kClientOnRecvPacket',0x35CA00,0x3A9CF0,
     'Paired receive entries bound the u16 size-minus-three by 7FD7, obtain session crypto+98, dispatch through native TrocFind with kind mask 1, enforce descriptor min/max lengths and flag bits, build the request with session/key/handler/frame fields, invoke vslot+8 and enqueue to client+E8 or +F0. Cleanup retains target-specific destructors and TLS+1FE. Native entry boundaries and all argument roles are reviewed; a raw immediate search was discovery only.',
     'port-evidence/r2/tunnel-client-receive-reference.txt; client-receive-verified-target.txt')
+check('kLoading',0x219D7F0,0x23DC630,
+    'Named native LoadingCompleteReq reaches paired server transition 2BCAF00/2ED7960, then the six-argument completion implementation. Both test fifth-byte publication flag, copy component+450 as 32 bytes to mode-selected world clock, unpause field+17C and continue actor loading. The entry ABI and actual branch role are reviewed; no legacy-hook installation is authorized yet.',
+    'port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt')
+check('kLoadingFlagCmp',0x219D82B,0x23DC66B,
+    'Decoded CMP [RBP+50],R12B followed by JZ skips the clock publication block in the paired six-argument completion implementation; the fifth argument and later loading continuation are preserved.',
+    'port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt',[0x219D7F0,0x23DC630])
+check('kWorldTime',0x6A6D238,0x6F31C98,
+    'The actual mode-selected YMM store operand in paired loading completion maps source 6A6D238 to target 6F31C98. The other clock bank is 6A6D218 -> 6F31C78, not substituted for the core bank; both hold 32 bytes.',
+    'port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt',[0x219D7F0,0x23DC630])
 (docs/'r2-rva-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Independent RVA checks awaiting standard support',len(result))

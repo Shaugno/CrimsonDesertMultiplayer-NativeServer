@@ -1,0 +1,134 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x2D73960
+Function=FUN_142d73960 body=[[142d73960, 142d73a58]]
+142d73960 MOV qword ptr [RSP + 0x18],RBX
+142d73965 PUSH RBP
+142d73966 PUSH RSI
+142d73967 PUSH RDI
+142d73968 PUSH R12
+142d7396a PUSH R13
+142d7396c PUSH R14
+142d7396e PUSH R15
+142d73970 SUB RSP,0x20
+142d73974 MOV R12,RCX
+142d73977 CALL 0x142294bf0
+142d7397c MOV RAX,qword ptr [0x1472456e0]
+142d73983 MOV R13,qword ptr [RAX]
+142d73986 LEA RBX,[R13 + 0x68]
+142d7398a MOV qword ptr [RSP + 0x68],RBX
+142d7398f MOV RAX,qword ptr [RBX]
+142d73992 MOV RCX,RBX
+142d73995 CALL qword ptr [RAX + 0x8]
+142d73998 NOP
+142d73999 MOV RAX,qword ptr [R12 + 0x68]
+142d7399e MOV RBP,qword ptr [RAX + 0x18]
+142d739a2 TEST RBP,RBP
+142d739a5 JZ 0x142d73a2f
+142d739ab MOVZX R15D,byte ptr [RBP + 0x20]
+142d739b0 XOR SIL,SIL
+142d739b3 TEST R15B,R15B
+142d739b6 JLE 0x142d73a2f
+142d739b8 XOR EBX,EBX
+142d739ba NOP word ptr [RAX + RAX*0x1]
+142d739c0 MOV RAX,qword ptr [RBP + 0x8]
+142d739c4 LEA RDX,[RAX + 0x8]
+142d739c8 TEST RAX,RAX
+142d739cb CMOVZ RDX,RBX
+142d739cf MOV RDX,qword ptr [RDX]
+142d739d2 LEA RCX,[RSP + 0x60]
+142d739d7 CALL 0x1403e5370
+142d739dc NOP
+142d739dd MOV R14,RBX
+142d739e0 MOVZX EDI,SIL
+142d739e4 CMP EDI,dword ptr [RBP + 0x20]
+142d739e7 JNC 0x142d739f6
+142d739e9 MOV ECX,EDI
+142d739eb ADD RCX,RCX
+142d739ee MOV RAX,qword ptr [RBP + 0x18]
+142d739f2 MOV R14,qword ptr [RAX + RCX*0x8]
+142d739f6 MOV RCX,qword ptr [RSP + 0x60]
+142d739fb MOV RAX,qword ptr [RCX]
+142d739fe MOV DL,0x1
+142d73a00 CALL qword ptr [RAX + 0x20]
+142d73a03 TEST R14,R14
+142d73a06 JZ 0x142d73a23
+142d73a08 ADD RDI,RDI
+142d73a0b MOV RAX,qword ptr [RBP + 0x18]
+142d73a0f MOV byte ptr [RAX + RDI*0x8 + 0x9],0x0
+142d73a14 MOV qword ptr [RAX + RDI*0x8],RBX
+142d73a18 MOV RDX,R14
+142d73a1b MOV RCX,R13
+142d73a1e CALL 0x142d79d00
+142d73a23 INC SIL
+142d73a26 CMP SIL,R15B
+142d73a29 JL 0x142d739c0
+142d73a2b LEA RBX,[R13 + 0x68]
+142d73a2f MOV RDX,R12
+142d73a32 MOV RCX,R13
+142d73a35 CALL 0x142d79d00
+142d73a3a NOP
+142d73a3b MOV RAX,qword ptr [RBX]
+142d73a3e MOV RCX,RBX
+142d73a41 MOV RBX,qword ptr [RSP + 0x70]
+142d73a46 ADD RSP,0x20
+142d73a4a POP R15
+142d73a4c POP R14
+142d73a4e POP R13
+142d73a50 POP R12
+142d73a52 POP RDI
+142d73a53 POP RSI
+142d73a54 POP RBP
+142d73a55 JMP qword ptr [RAX + 0x10]
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_142d73960(longlong param_1)
+
+{
+  char cVar1;
+  longlong lVar2;
+  longlong lVar3;
+  longlong lVar4;
+  undefined8 *puVar5;
+  byte bVar6;
+  longlong *plStackX_8;
+  longlong *plStackX_10;
+
+  func_0x000142294bf0();
+  lVar2 = *_DAT_1472456e0;
+  plStackX_10 = (longlong *)(lVar2 + 0x68);
+  (**(code **)(*plStackX_10 + 8))(plStackX_10);
+  lVar3 = *(longlong *)(*(longlong *)(param_1 + 0x68) + 0x18);
+  if (lVar3 != 0) {
+    cVar1 = *(char *)(lVar3 + 0x20);
+    bVar6 = 0;
+    if ('\0' < cVar1) {
+      do {
+        puVar5 = (undefined8 *)(*(longlong *)(lVar3 + 8) + 8);
+        if (*(longlong *)(lVar3 + 8) == 0) {
+          puVar5 = (undefined8 *)0x0;
+        }
+        FUN_1403e5370(&plStackX_8,*puVar5);
+        puVar5 = (undefined8 *)0x0;
+        if ((uint)bVar6 < *(uint *)(lVar3 + 0x20)) {
+          puVar5 = *(undefined8 **)(*(longlong *)(lVar3 + 0x18) + (ulonglong)(uint)bVar6 * 0x10);
+        }
+        (**(code **)(*plStackX_8 + 0x20))(plStackX_8,1);
+        if (puVar5 != (undefined8 *)0x0) {
+          lVar4 = *(longlong *)(lVar3 + 0x18);
+          *(undefined1 *)(lVar4 + 9 + (ulonglong)bVar6 * 0x10) = 0;
+          *(undefined8 *)(lVar4 + (ulonglong)bVar6 * 0x10) = 0;
+          func_0x000142d79d00(lVar2,puVar5);
+        }
+        bVar6 = bVar6 + 1;
+      } while ((char)bVar6 < cVar1);
+    }
+  }
+  func_0x000142d79d00(lVar2,param_1);
+                    /* WARNING: Could not recover jumptable at 0x000142d73a55. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(longlong *)(lVar2 + 0x68) + 0x10))((longlong *)(lVar2 + 0x68));
+  return;
+}

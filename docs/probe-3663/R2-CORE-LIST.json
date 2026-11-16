@@ -3183,7 +3183,7 @@
     "id": "N0502",
     "source": "src/mod/session2/guest_lifecycle.h:56",
     "symbol": "kSamKeyIndexMask",
-    "kind": "function/global RVA",
+    "kind": "native member/value contract",
     "value": "0xFFFFF",
     "use": "snapshot/remove/barrier: SAM map, user slots, actor and field-move state",
     "tier": "D",

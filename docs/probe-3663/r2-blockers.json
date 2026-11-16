@@ -1,15 +1,15 @@
 {
   "A026": {
-    "missing": "Validate the unpublished definition-derived HP selector against visible HP on exact 3663, then publish it only with adopted definition-slot RVAs. Native code selects a runtime key; literal zero is not proved.",
-    "experiment": "Prepared P1 HP profile: compare both definition registries and one unique native current/max entry with the character HP display and ordinary regeneration."
+    "missing": "P1 HP confirmed both definition registries select key 0 and unique raw 900000/900000 agrees with visible 900/900. Publish the definition-derived selector only with adopted definition-slot RVAs; one full-HP state does not prove literal-ID stability.",
+    "experiment": "Complete standard address validation and publish the existing HP-only target path; verify ordinary HP variation in real L1."
   },
   "A027": {
     "missing": "The legacy reader still consumes stamina key 22. Prove the target stamina key, or publish an actual HP-only 3663 layout and explicitly revise target reachability; the unpublished helper alone does not retire this row.",
     "experiment": "Use native stat-definition consumers to identify stamina, or complete the already prepared HP-only target path after P1 and standard address validation."
   },
   "A028": {
-    "missing": "Target loading readiness and the old parked world position (0,1000,0) are unproved. A native reference-acquisition predicate was rejected because it mutates references.",
-    "experiment": "Prepared loading profile: guarded title/Continue/walk/turn/fast-travel trace, followed by real L1 once the resulting readiness rule is implemented and all A values are adopted."
+    "missing": "P1 loading captured movement/rotation but no missing-chain or parked transition. User reports completed fast travel, which is not reflected in the candidate trace; unsynchronized event timing leaves stale-chain versus out-of-interval travel unresolved. The old park sentinel remains unproved.",
+    "experiment": "Identify a native non-mutating control/loading readiness predicate and its lifetime/generation contract offline. Only then prepare a synchronized title/load/travel trace with explicit event markers; do not infer readiness from a stable pointer chain."
   },
   "B046": {
     "missing": "Native packet-buffer+8010 contains native metadata. Its downstream consumers and buffer lifetime do not yet prove safe reuse for the mod tag.",

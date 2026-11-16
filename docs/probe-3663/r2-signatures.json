@@ -73,6 +73,22 @@
       "symbol": "kFindByNoReadBytes",
       "second_check": "Reviewed native FindByCharacterNo scans manager+B8/count+C0 and reads actor+68/status+20, then the changed number pointer+90. Both instruction windows are decoded boundaries within the paired .pdata functions. These are validation windows, not inline-hook entries; C083/C085 still require standard support separately.",
       "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt"
+    },
+    "C117": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x60, 0x4D, 0x8B, 0xE9, 0x49, 0x8B, 0xF0, 0x4C, 0x8B, 0xF2, 0x48, 0x8B, 0xD9}",
+      "method": "paired native completion entry/branch bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x60, 0x4D, 0x8B, 0xE9, 0x49, 0x8B, 0xF0, 0x4C, 0x8B, 0xF2, 0x48, 0x8B, 0xD9}",
+      "symbol": "kLoadingHead",
+      "second_check": "Named LoadingCompleteReq reaches paired six-argument completion 219D7F0/23DC630. Native disassembly confirms the entry and fifth-argument CMP/JZ publication gate; exact old bytes and both .pdata owner ranges checked. The entry and branch RVAs still require standard support independently.",
+      "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+    },
+    "C119": {
+      "target": "{0x44, 0x38, 0x65, 0x50, 0x0F, 0x84, 0x0C, 0x01, 0x00, 0x00}",
+      "method": "paired native completion entry/branch bytes",
+      "old": "{0x44, 0x38, 0x65, 0x50, 0x0F, 0x84, 0x0C, 0x01, 0x00, 0x00}",
+      "symbol": "kLoadingFlagCmpBytes",
+      "second_check": "Named LoadingCompleteReq reaches paired six-argument completion 219D7F0/23DC630. Native disassembly confirms the entry and fifth-argument CMP/JZ publication gate; exact old bytes and both .pdata owner ranges checked. The entry and branch RVAs still require standard support independently.",
+      "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
     }
   }
 }

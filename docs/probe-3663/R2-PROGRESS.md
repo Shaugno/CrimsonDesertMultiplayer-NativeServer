@@ -2,10 +2,31 @@
 
 Latest continuation:
 
+- Lifecycle contract batch: 101/101 tests in 89.64 s; after the full clock
+  batch, 101/101 in 90.63 s. Final synthetic host/peer smoke: 78 remote
+  states, zero rejected, clean network stop/worker unload. Evidence-join
+  regressions passed, including conflicting standard results and manual-RVA
+  bypass rejection. All production target permissions remain false.
+  Self-review: this batch adds unused target contract data and evidence only;
+  it installs no hook, calls no native function, changes no wire format or
+  legacy table, and does not establish native multiplayer behavior.
+
+- Independent lifecycle/clock review raises the native proof catalog to 222
+  (plus 17 retained R1 values), with 49 RVA candidates awaiting standards.
+  The stable core remains 395. Five changed loading/completion IDs and two
+  existing lifecycle aliases are checked through paired named descriptor
+  initializers and handlers. Server-user child cleanup and key recycling
+  now have complete paired exports. The six-argument native loading-complete
+  clock gate, 32-byte component+450 copy and distinct clock banks are reviewed.
+  The apparent neighbouring travel-hook lead was rejected by its actual
+  roster-position role; R2-CLOCK.md records this unresolved publisher.
+
 - Loading P1 R2-P1-20261116-075900 captured guarded position/rotation changes,
   but no missing-chain, parked or fast-travel transition. It began after save
   load, so title-to-load was not sampled. This is not L1 and does not resolve
-  A028. User reported done; detailed travel/quit confirmation is pending.
+  A028. User later confirmed completed fast travel, walking afterward and game closure.
+  The candidate trace does not reflect that travel; without synchronized event
+  markers, stale-chain versus out-of-interval travel remains unresolved.
   The independent watchdog stopped the pinned test process at fourteen minutes
   from launch. Cleanup verified: all test deployment files absent, 23 save
   files unchanged, verified backup, both owned matchers resumed. Session hashes

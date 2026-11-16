@@ -174,6 +174,38 @@ prove('C','src/mod/session2/session2.cpp',dict(NativeForbiddenRequests='2447,204
 control_row,=[r['r2'] for r in core if r['symbol']=='NativeForbiddenRequests']
 result[control_row]['members']=dict(kForbiddenReserveShutdownOp=2447,kForbiddenShutdownTimerOp=2042,
     kForbiddenPointerRequestOp=2004)
+prove('D','src/mod/session2/guest_lifecycle.h',dict(kSamBucketBytes='0x100',kSamKeyIndexMask='0xFFFFF'),
+    'port-evidence/r2/lifecycle-lookup-reference.txt; field-roster-factory-followup.txt',
+    'Paired native FindActor 2A827B0/2D78E40 masks the requested key with FFFFF, divides by bucket count+98, shifts the remainder left eight bits and adds the bucket base+A8. This proves the low-20-bit key mask and 256-byte bucket stride; the maximum admissible bucket entry count and cleanup lifetime are separate obligations.')
+prove('D','src/mod/session2/guest_lifecycle.h',dict(kSamUserList='0xB8',kSamUserCount='0xC0'),
+    'port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt',
+    'Paired native character-number lookup 2A83F80/2D7A640 walks the same manager actor-pointer vector+B8/count+C0 under the manager+68 read lock. This is the lifecycle probe vector, which contains actors as well as users; it does not prove the removal barrier itself.')
+for source,values in [
+    ('src/mod/session2/offsets_s2.h',dict(kUser_Key='0x60',kServerActor_Key='0x60')),
+    ('src/mod/session2/identity_fix.h',dict(kActorKey='0x60',kActorUser='0xA0')),
+    ('src/mod/session2/clock_gate.h',dict(kActorUser='0xA0',kUserKey='0x60')),
+    ('src/mod/game/offsets.h',dict(kActor_Key='0x60'))]:
+    prove('C',source,values,
+        'port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt',
+        'Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.')
+prove('D','src/mod/session2/guest_lifecycle.h',dict(kActorComponents='0x68',kComponentsTransformSync='0x1A0'),
+    'port-evidence/r2/lifecycle-handlers-old.txt; lifecycle-handlers-new.txt',
+    'Paired named loading-start and loading-complete request handlers obtain actor components+68 then transform-sync+1A0 before invoking the native transition. Acknowledgement handlers independently use the same chain. This proves component fields, not moving offsets or a loading-ready predicate.')
+prove('D','src/mod/session2/guest_lifecycle.h',dict(kUserComponents='0x68',kComponentsSlots='0x18',kSlotsArray='0x18',kSlotsCount='0x20',kSlotStride='0x10'),
+    'port-evidence/r2/lifecycle-lookup-reference.txt; lifecycle-user-release-target.txt; ../rtti-2976.json; ../rtti-3663.json',
+    'ServerUserActor RTTI vslot 2 identifies paired native release walkers 2A7D280/2D73960. Both hold the manager+68 lock, follow user+68/component+18, bound the byte-index loop by slots+20, read the slot array+18 with a 16-byte stride, clear its pointer/validity byte and release each actor before the user. These fields do not establish concurrent snapshot coherence by themselves.')
+prove('C','src/mod/session2/offsets_s2.h',dict(kSam_FreeKeys='0xD0'),
+    'port-evidence/r2/lifecycle-actor-release-old.txt; lifecycle-actor-release-new.txt; lifecycle-user-release-target.txt',
+    'Native user release invokes paired actor release 2A83650/2D79D00. Both swap-remove the actor from manager+B8/count+C0, clear actor key+60, append a recycled key to the ring at +C8/+CC/+D4/+E0 and increment its u32 free-key count+D0. Native release continues through the map removal; no cleanup hook or return-site RVA is adopted here.')
+prove('C','src/mod/session2/clock_gate.h',dict(kTsActor='0x08'),
+    'port-evidence/r2/lifecycle-loading-old.txt; lifecycle-loading-new.txt; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt',
+    'Named loading request handlers pass actor transform-sync component+1A0; paired loading-start and loading-complete implementations immediately obtain that component owner from this+8. This is the same server transform-sync type consumed by clock_gate, not an inferred layout for a client component.')
+prove('D','src/mod/session2/guest_lifecycle.h',dict(kActorState='0x5E'),
+    'port-evidence/r2/lifecycle-loading-old.txt; lifecycle-loading-new.txt',
+    'Paired MoveFieldComplete implementations 2BC6BB0/2ED29D0 obtain the component actor at this+8, inspect its u16 state+5E, preserve prior-state+5C and perform the native state transition under actor+18 lock. Factory rollback independently reads the same field. This proves the state offset, not which values establish the full reconnect barrier.')
+prove('C','src/mod/session2/clock_gate.h',dict(kTsFieldTime='0x450',kFieldTimeSize='32'),
+    'port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt',
+    'Paired six-argument native loading-complete consumers 219D7F0/23DC630 test the fifth-byte flag, store the supplied timestamp at component+468, copy a 32-byte YMM value from component+450 and publish it to the mode-selected global clock before unpausing the field. This proves the field and copy width from actual target instructions, not an assumed structure or the SetFieldTimeReq payload schema.')
 signatures=docs/'r2-signatures.json'
 if signatures.exists():
     result.update(json.loads(signatures.read_text())['rows'])

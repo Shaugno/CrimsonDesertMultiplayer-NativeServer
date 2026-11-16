@@ -305,7 +305,7 @@ Counts: A 37, B 78, C 150, D 130; total 395; R1 adopted 17.
 | D028 | D | native member/value contract | kSamMapHolders | `0xB0` | src/mod/session2/guest_lifecycle.h:53 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |
 | D029 | D | native member/value contract | kSamBucketBytes | `0x100` | src/mod/session2/guest_lifecycle.h:54 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |
 | D030 | D | native member/size contract | kSamBucketMaxEntries | `(kSamBucketBytes - 8) / 8` | src/mod/session2/guest_lifecycle.h:55 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |
-| D031 | D | function/global RVA | kSamKeyIndexMask | `0xFFFFF` | src/mod/session2/guest_lifecycle.h:56 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |
+| D031 | D | native member/value contract | kSamKeyIndexMask | `0xFFFFF` | src/mod/session2/guest_lifecycle.h:56 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |
 | D032 | D | native member/value contract | kSamUserList | `0xB8` | src/mod/session2/guest_lifecycle.h:58 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |
 | D033 | D | native member/size contract | kSamUserCount | `0xC0` | src/mod/session2/guest_lifecycle.h:59 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |
 | D034 | D | native member/value contract | kActorKey | `0x60` | src/mod/session2/guest_lifecycle.h:64 | snapshot/remove/barrier: SAM map, user slots, actor and field-move state | needs target evidence |

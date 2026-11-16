@@ -97,3 +97,37 @@ still in progress. Tier D is not armed; no guest or two-instance test has run.
 Evidence: port-evidence/r2/save-manager-reference.txt and save-manager-target.txt;
 the retained R1 target refresh/handler exports; r2-reviewed.json and
 r2-rva-checks.json. No save files or private backup manifest are committed.
+
+## Loading-message and duplicate-consumer continuation
+
+Paired named descriptors and verified native initializer/handler bodies confirm:
+GameLoadingStartReq 2437 -> 2350, MoveFieldCompleteReq 2549 -> 2723,
+LoadingCompleteReq 2445 -> 2789, MoveFieldCompleteAck 2144 -> 2268, and
+LoadingCompleteAck 2762 -> 2891. Existing verified descriptors also cover the
+lifecycle aliases LoginCharacterReq 3093 -> 3081 and MoveFieldAck 2174 -> 2364.
+The target request handlers consume an ordinary envelope and exact payload
+exhaustion; loading-start requires an empty body, the two completion requests
+decode one byte. This adopts identifiers only, not a reordered state machine.
+
+Following the named requests identifies native server transform-sync transition
+functions: loading-start 2BC9200 -> 2ED5980, move-complete 2BC6BB0 -> 2ED29D0,
+and loading-complete 2BCAF00 -> 2ED7960. They obtain the actor at component+8;
+the handlers reach that component through actor+68/component+1A0. These are
+server transitions, not a proved read-only client loading predicate. Their
+RVAs remain investigation candidates without standard matching support.
+
+The existing FindActor pair is re-exported in full. Its low-20-bit key mask
+is a native scalar, not an RVA; the inventory classification is corrected
+without changing row IDs or values. The shift-by-eight bucket addressing
+proves the 256-byte stride. It does not establish the maximum bucket count
+or cleanup lifetime. The character-number lookup proves the repeated
+manager+B8/count+C0 actor-vector uses. Repeated server user/actor-key and
+owning-user fields now link to their existing native consumers; this does
+not infer the different client owner+90 field. No tier is armed.
+
+The named ServerUserActor vslot-2 cleanup walker confirms user+68/component+18,
+slot array+18/count+20 and 16-byte records. It clears each child pointer and
+validity byte before native actor release, then releases the user. Paired
+release 2A83650/2D79D00 swap-removes from manager+B8/count+C0, clears actor+60
+and increments recycled-key count+D0. Those layout facts are proved; complete
+retirement order, concurrent snapshots and reconnect safety remain unverified.

@@ -91,3 +91,12 @@ the normal presence, backup, deployment and stop conditions are recorded.
 Evidence: `port-evidence/r2/field-*.txt`; canonical and original local hashes
 are in `port-evidence/r2/text-hashes.json`. The `.pdata` candidate scanner is
 not counted as either standard whole-program correlator.
+
+Factory follow-up: the full 2E98B30 body has distinct initialization paths,
+including owner-key propagation to different intermediate fields and a
+post-registration failure loop that requests native retirement for each
+created actor. Lookup 2D78E40 returns a reference/validity wrapper after its
+locked map lookup and vslot+B8 acquisition. It is therefore not a raw pointer
+lookup that a passive collector may call. The factory owner argument alone
+still does not prove every final actor+A0 owner or rollback lifetime. The
+full export is field-roster-factory-followup.txt; no adapter is installed.

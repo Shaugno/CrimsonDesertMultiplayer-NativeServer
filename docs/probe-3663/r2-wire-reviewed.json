@@ -56,6 +56,14 @@
       "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
       "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
     },
+    "D046": {
+      "target": "3081",
+      "old": "3093",
+      "symbol": "kLoginCharacterReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
+    },
     "D112": {
       "target": "3081",
       "old": "3093",
@@ -87,6 +95,54 @@
       "method": "native named descriptor, verified initializer and handler",
       "second_check": ".?AVTrocTrMoveFieldAck@pa@@: source opcode 2174, target 2364; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD4D70 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
       "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
+    },
+    "D050": {
+      "target": "2364",
+      "old": "2174",
+      "symbol": "kMoveFieldAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrMoveFieldAck@pa@@: source opcode 2174, target 2364; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD4D70 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
+    },
+    "D047": {
+      "target": "2350",
+      "old": "2437",
+      "symbol": "kGameLoadingStartReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrGameLoadingStartReq@pa@@: source opcode 2437, target 2350; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CAD9E0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+    },
+    "D048": {
+      "target": "2723",
+      "old": "2549",
+      "symbol": "kMoveFieldCompleteReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrMoveFieldCompleteReq@pa@@: source opcode 2549, target 2723; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CA5B50 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+    },
+    "D049": {
+      "target": "2789",
+      "old": "2445",
+      "symbol": "kLoadingCompleteReq",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoadingCompleteReq@pa@@: source opcode 2445, target 2789; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CAE200 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+    },
+    "D051": {
+      "target": "2268",
+      "old": "2144",
+      "symbol": "kMoveFieldCompleteAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrMoveFieldCompleteAck@pa@@: source opcode 2144, target 2268; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD57C0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+    },
+    "D052": {
+      "target": "2891",
+      "old": "2762",
+      "symbol": "kLoadingCompleteAck",
+      "method": "native named descriptor, verified initializer and handler",
+      "second_check": ".?AVTrocTrLoadingCompleteAck@pa@@: source opcode 2762, target 2891; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD9DF0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+      "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
     },
     "C129": {
       "target": "2046",

@@ -47,7 +47,7 @@
   ],
   "largest_step": 1.234513911748449,
   "title_transition_captured": false,
-  "user_report": "done; detailed travel/quit confirmation pending",
+  "user_report": "Fast travel completed, walked afterward, and closed the game; user later confirmed the newly launched process was also closed.",
   "session_cap_overrun": false,
   "termination": "Independent verified-process watchdog deadline; fourteen minutes from process launch",
   "backup_verified": true,
@@ -56,7 +56,8 @@
   "limitations": [
     "Collector began after save loaded because a JSON DateTime receipt conversion rejected the valid watchdog",
     "No missing-chain, park, or travel transition observed; absence does not prove a safe loading predicate",
-    "Physical Escape triggered Computer Use stop; user clarified it was normal game menu input and directed continuation without UI control"
+    "Physical Escape triggered Computer Use stop; user clarified it was normal game menu input and directed continuation without UI control",
+    "Reported completed fast travel is not reflected by candidate pose/chain samples. Event timestamps were not synchronized, so this does not establish whether the chain was stale or travel happened outside the captured interval."
   ],
   "fix": "Preserve DateTime values directly; parse only string receipts with invariant round-trip rules. Exact live deadline and targeted string/DateTime/JSON precision regression passed.",
   "files": [

@@ -1,0 +1,39 @@
+[08:39:42.515] INF [T45424] === Crimson Desert Multiplayer 0.0.1 (build 8D51290A + local changes, protocol 8) ===
+[08:39:42.515] INF [T45424] Role: none (CDMP_ROLE not set) | ini 'C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\r2-build\e2e\cdmp.ini' | log 'C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\r2-build\e2e\cdmp_20261116-083942.log'
+[08:39:42.515] INF [T45424] Mod file: C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\r2-build\e2e\cdmp.asi
+[08:39:42.515] INF [T45424] Host process: C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\r2-build\e2e\cdmp_host.exe (PID 51712)
+[08:39:42.515] INF [T45424] Host version: unknown  image base: 0x7FF7A33B0000  image size: 0xBB000  PE timestamp: 0x6AFAF01C
+[08:39:42.515] INF [T45424] Not running inside the game (test host); game features stay off
+[08:39:42.525] INF [T45424] Config: player 'PortSmokeSynthetic', peer 127.0.0.1:39763, 20 Hz, net on, co-op off
+[08:39:42.525] INF [T45424] Config: net udp guest | coop delay 300 ms, offset 0.00 m, horse false, equip true, damage mirror true, map pin true, minimap icon 0x124, enemies target copy false, guest hits false, stagger false, player react false lethal false
+[08:39:42.525] INF [T45424] Config: dev clone false combat false minimap cycle false aggro false enemy relay false piece4 false | sniffer false record true | overlay false
+[08:39:42.525] INF [T45424] Config: session2 (option D) off | probe true finder log false save guard block create session false accept tunnel false relay fix false account 1 mirror false (1000 ms) share field false clock gate true identity probe false identity fix false companion probe false child hold false reconnect false | guest (P8) false mode observe slot refresh test false actor diag false layer guard false | S3: observer hold false guest s3 diag false crash dump false update guard false | P8 load diag false s1 diag false ui pause block '0' | S1 scenes: host s1_scene_diag false guest_scene_diag false | P8 gameplay: rank permit '0' quest per user '0' kill loot per user '0' | P8 remote motion: remote_climb '0' wallup_send false dismount_probe false divergence_probe false | P8 movement: remote interp '0' horse follow '0'
+[08:39:42.525] INF [T45424] Config: P8 pets: child_settle_ms 0 remote_interp_owned_cap_ms 0 attach_follow '0'
+[08:39:42.525] INF [T45424] Config: P8 session 9: ride_filter '0' child_reannounce '0' combat_follow '0' guest_horse_probe '0'
+[08:39:42.525] INF [T45424] Config: P8 mount ride: horse_follow_reverse '0' (host) remote_interp_pair 0
+[08:39:42.525] INF [T45424] Config: P8 session 25 combat stream: combat_follow_v2 '0' (host) remote_interp_combat '0' (guest)
+[08:39:42.525] INF [T45424] Config: P8 world around user 2: user2_world_anchor '0' (host)
+[08:39:42.525] INF [T45424] Config: P8 re-entry: rejoin '0' (host and guest; the host needs reconnect=1, now 0)
+[08:39:42.525] INF [T45424] Config: P8 mounts: mount_sync '0' ride_dismount 'rewrite' mount_seat '0' ride_hold_pos '0' mount_relink '0'
+[08:39:42.525] INF [T45424] Config: P8 NPC schedules: guest_schedule_load '0' schedule_load_selfcheck false observer_sched_copy 0
+[08:39:42.525] INF [T45424] Config: P8 X veto: guest_x_stage_veto '0' guest_x_camera_veto 'probe' guest_x_ui_veto '0' guest_x_ui_veto_allow 'SetInteraction' guest_local_after_remote 'allow'
+[08:39:42.525] INF [T45424] Config: S44/S45 foreign scenes (guest): guest_seq_foreign_player '0' guest_seq_foreign_probe 0 guest_seq_foreign_present_probe 0 guest_seq_foreign_present '0' guest_seq_foreign_timeline '0'
+[08:39:42.525] INF [T45424] Config: P8 shopkeepers: guest_x_interaction_stage '0' shop_probe 0 funcnpc_twin '0' | option U: user2_stages '0' user2_timer_route '0' user2_npc_control '0' user2_drain_at_host_prepare '0' user2_fast_rearm '0'
+[08:39:42.525] INF [T45424] Config: S46 shopkeepers (phase 3): shop_trade_probe 0 (host, read only) user2_shop_trade_route '0' (host, U2-c) observer_hold_scene_order '0' (host, T2) user2_shop_trade_list '0' (host, T1) shop_interaction_own_delete '0' (R0, host and guest) | related: user2_shop_route '0' user2_stages_elements 'schedule' observer_hold_acks 0
+[08:39:42.525] INF [T45424] Config S33: npc_activation '0' npc_family_control '0' user2_road_control '0' (cliente sólo observacion) | S34 guest_remote_update_guard 0 (guest)
+[08:39:42.525] INF [T45424] Config: P8 session 10: freeze_watchdog false | log file C:\Users\shaug\.codex\visualizations\2026\11\14\01a1dbbd-2726-7441-9a57-1b454819b3e7\r2-build\e2e\cdmp_20261116-083942.log
+[08:39:42.525] INF [T45424] Config: P8 session 15 fast travel: user2_fast_travel '0' (host) user2_revive_manager '0' (host, F4) guest_fast_travel_veto '0' (guest) guest_reload_wait_fix '0' (guest)
+[08:39:42.525] INF [T45424] Config: P8 session 15 travel (host): user2_loading_owner_alias 1 user2_travel_probe 0
+[08:39:42.525] INF [T45424] Config: P8 S16 reload (host): observer_milestone_reload '0' | P8 S27 observer_milestone_reload_any '0'
+[08:39:42.525] INF [T45424] Config: P8 session 25 hour/weather: user2_clock_push '0' (host) block_guest_weather 0 (host) clock_probe 0 (both)
+[08:39:42.525] INF [T45424] Config: P8 session 25 weather: weather_sync '0' (both) weather_sync_radius_m 2000 (guest)
+[08:39:42.525] INF [T45424] Config: P8 session 25 grabs: catch_seq '0' (host)
+[08:39:42.525] INF [T45424] Config: P8 session 25 rope: remote_rope '0' (both; the server's 2471 on the host) rope_probe 0 (both, log only) tree_bend '0' (both; tunnel control state 15)
+[08:39:42.525] INF [T45424] Config: P8 session 28 docked gimmicks: docked_gimmicks '0' (both; 1 rewrites on the guest only) docked_gimmicks_other '0' (guest; the host ignores it) gimmick_event_dedup '0' (both; 1 withholds on the guest only, the host logs)
+[08:39:42.526] INF [T45424] Network: udp port 60164 (loopback only) as guest; peer udp:127.0.0.1:39763
+[08:39:42.536] INF [T45424] Session: connected to peer 'cdmp_peer (ghost)'
+[08:39:47.532] INF [T45424] Net: connected | sent 85 recv 83 rejected 0 | rtt 0.0 ms | remote states 78 | last remote (0.37, 0.00, 1.16) hp 0.0 | reliable pending 0 refused 0 resent 0 held back 0 | unknown kinds 0 | udp port 60164 (loopback only) | net thread: 403 loops, mean 12.4 ms, max 16.7 ms (receive), longest without a receive 0.5 ms, slow (>250 ms) 0 (0 in all)
+[08:39:47.532] INF [T45424] Local: synthetic
+[08:39:47.532] INF [T45424] Log: lines 36, dropped 0, queued 0 KB (max 5 KB of 4096 KB), writes 3 (slowest 0 ms, >= 250 ms 0), write errors 0
+[08:39:50.524] INF [T45424] Network stopped
+[08:39:50.524] INF [T45424] Worker exiting

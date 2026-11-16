@@ -59,6 +59,19 @@ for symbol,source,target,old_owner,new_owner in [
         method='paired native validation-window bytes',old=row['value'],symbol=symbol,
         second_check='Reviewed native FindByCharacterNo scans manager+B8/count+C0 and reads actor+68/status+20, then the changed number pointer+90. Both instruction windows are decoded boundaries within the paired .pdata functions. These are validation windows, not inline-hook entries; C083/C085 still require standard support separately.',
         evidence='port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt')
+for symbol,source,target in [('kLoadingHead',0x219D7F0,0x23DC630),
+                             ('kLoadingFlagCmpBytes',0x219D82B,0x23DC66B)]:
+    row,=[r for r in core if r['tier']=='C' and r['symbol']==symbol]
+    previous=bytes(int(s,16) for s in re.findall(r'0x([0-9A-Fa-f]{2})(?=\s*[,}])',row['value']))
+    for pe,site,owner in ((old,source,0x219D7F0),(new,target,0x23DC630)):
+        assert any(begin==owner and begin<=site and site+len(previous)<=end for begin,end in pe.ranges)
+    at=old.offset(source,len(previous))
+    assert old.data[at:at+len(previous)]==previous
+    at=new.offset(target,len(previous));data=new.data[at:at+len(previous)]
+    result[row['r2']]=dict(target='{'+', '.join(f'0x{b:02X}' for b in data)+'}',
+        method='paired native completion entry/branch bytes',old=row['value'],symbol=symbol,
+        second_check='Named LoadingCompleteReq reaches paired six-argument completion 219D7F0/23DC630. Native disassembly confirms the entry and fifth-argument CMP/JZ publication gate; exact old bytes and both .pdata owner ranges checked. The entry and branch RVAs still require standard support independently.',
+        evidence='port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt')
 payload=dict(reference_sha256=old.sha256,target_sha256=new.sha256,rows=result)
 (docs/'r2-signatures.json').write_text(json.dumps(payload,indent=2)+'\n')
 print('Reviewed native entry guards/validation windows',len(result),'(no new RVA matching)')

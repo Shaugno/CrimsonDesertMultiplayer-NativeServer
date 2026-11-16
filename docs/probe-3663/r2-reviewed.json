@@ -1227,6 +1227,190 @@
       "kForbiddenPointerRequestOp": 2004
     }
   },
+  "D029": {
+    "target": "0x100",
+    "method": "paired native code consumption",
+    "second_check": "Paired native FindActor 2A827B0/2D78E40 masks the requested key with FFFFF, divides by bucket count+98, shifts the remainder left eight bits and adds the bucket base+A8. This proves the low-20-bit key mask and 256-byte bucket stride; the maximum admissible bucket entry count and cleanup lifetime are separate obligations.",
+    "evidence": "port-evidence/r2/lifecycle-lookup-reference.txt; field-roster-factory-followup.txt",
+    "old": "0x100",
+    "symbol": "kSamBucketBytes"
+  },
+  "D031": {
+    "target": "0xFFFFF",
+    "method": "paired native code consumption",
+    "second_check": "Paired native FindActor 2A827B0/2D78E40 masks the requested key with FFFFF, divides by bucket count+98, shifts the remainder left eight bits and adds the bucket base+A8. This proves the low-20-bit key mask and 256-byte bucket stride; the maximum admissible bucket entry count and cleanup lifetime are separate obligations.",
+    "evidence": "port-evidence/r2/lifecycle-lookup-reference.txt; field-roster-factory-followup.txt",
+    "old": "0xFFFFF",
+    "symbol": "kSamKeyIndexMask"
+  },
+  "D032": {
+    "target": "0xB8",
+    "method": "paired native code consumption",
+    "second_check": "Paired native character-number lookup 2A83F80/2D7A640 walks the same manager actor-pointer vector+B8/count+C0 under the manager+68 read lock. This is the lifecycle probe vector, which contains actors as well as users; it does not prove the removal barrier itself.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt",
+    "old": "0xB8",
+    "symbol": "kSamUserList"
+  },
+  "D033": {
+    "target": "0xC0",
+    "method": "paired native code consumption",
+    "second_check": "Paired native character-number lookup 2A83F80/2D7A640 walks the same manager actor-pointer vector+B8/count+C0 under the manager+68 read lock. This is the lifecycle probe vector, which contains actors as well as users; it does not prove the removal barrier itself.",
+    "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt",
+    "old": "0xC0",
+    "symbol": "kSamUserCount"
+  },
+  "C005": {
+    "target": "0x60",
+    "method": "paired native code consumption",
+    "second_check": "Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt",
+    "old": "0x60",
+    "symbol": "kUser_Key"
+  },
+  "C008": {
+    "target": "0x60",
+    "method": "paired native code consumption",
+    "second_check": "Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt",
+    "old": "0x60",
+    "symbol": "kServerActor_Key"
+  },
+  "C063": {
+    "target": "0x60",
+    "method": "paired native code consumption",
+    "second_check": "Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt",
+    "old": "0x60",
+    "symbol": "kActorKey"
+  },
+  "C064": {
+    "target": "0xA0",
+    "method": "paired native code consumption",
+    "second_check": "Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt",
+    "old": "0xA0",
+    "symbol": "kActorUser"
+  },
+  "C105": {
+    "target": "0xA0",
+    "method": "paired native code consumption",
+    "second_check": "Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt",
+    "old": "0xA0",
+    "symbol": "kActorUser"
+  },
+  "C106": {
+    "target": "0x60",
+    "method": "paired native code consumption",
+    "second_check": "Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt",
+    "old": "0x60",
+    "symbol": "kUserKey"
+  },
+  "C136": {
+    "target": "0x60",
+    "method": "paired native code consumption",
+    "second_check": "Native field admission and save wrappers establish server character+A0 as owning user, user+60 as user key and character+60 as actor key. Paired save/load wrappers verify user+D0 identifies that character before publishing its key. These duplicate core uses refer to those same server object types; the different client actor-owner +90 contract is not inferred from them.",
+    "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; request-handlers-target.txt; field-addactor-target.txt; field-acquire-enter-target.txt",
+    "old": "0x60",
+    "symbol": "kActor_Key"
+  },
+  "D042": {
+    "target": "0x68",
+    "method": "paired native code consumption",
+    "second_check": "Paired named loading-start and loading-complete request handlers obtain actor components+68 then transform-sync+1A0 before invoking the native transition. Acknowledgement handlers independently use the same chain. This proves component fields, not moving offsets or a loading-ready predicate.",
+    "evidence": "port-evidence/r2/lifecycle-handlers-old.txt; lifecycle-handlers-new.txt",
+    "old": "0x68",
+    "symbol": "kActorComponents"
+  },
+  "D043": {
+    "target": "0x1A0",
+    "method": "paired native code consumption",
+    "second_check": "Paired named loading-start and loading-complete request handlers obtain actor components+68 then transform-sync+1A0 before invoking the native transition. Acknowledgement handlers independently use the same chain. This proves component fields, not moving offsets or a loading-ready predicate.",
+    "evidence": "port-evidence/r2/lifecycle-handlers-old.txt; lifecycle-handlers-new.txt",
+    "old": "0x1A0",
+    "symbol": "kComponentsTransformSync"
+  },
+  "D036": {
+    "target": "0x68",
+    "method": "paired native code consumption",
+    "second_check": "ServerUserActor RTTI vslot 2 identifies paired native release walkers 2A7D280/2D73960. Both hold the manager+68 lock, follow user+68/component+18, bound the byte-index loop by slots+20, read the slot array+18 with a 16-byte stride, clear its pointer/validity byte and release each actor before the user. These fields do not establish concurrent snapshot coherence by themselves.",
+    "evidence": "port-evidence/r2/lifecycle-lookup-reference.txt; lifecycle-user-release-target.txt; ../rtti-2976.json; ../rtti-3663.json",
+    "old": "0x68",
+    "symbol": "kUserComponents"
+  },
+  "D037": {
+    "target": "0x18",
+    "method": "paired native code consumption",
+    "second_check": "ServerUserActor RTTI vslot 2 identifies paired native release walkers 2A7D280/2D73960. Both hold the manager+68 lock, follow user+68/component+18, bound the byte-index loop by slots+20, read the slot array+18 with a 16-byte stride, clear its pointer/validity byte and release each actor before the user. These fields do not establish concurrent snapshot coherence by themselves.",
+    "evidence": "port-evidence/r2/lifecycle-lookup-reference.txt; lifecycle-user-release-target.txt; ../rtti-2976.json; ../rtti-3663.json",
+    "old": "0x18",
+    "symbol": "kComponentsSlots"
+  },
+  "D038": {
+    "target": "0x18",
+    "method": "paired native code consumption",
+    "second_check": "ServerUserActor RTTI vslot 2 identifies paired native release walkers 2A7D280/2D73960. Both hold the manager+68 lock, follow user+68/component+18, bound the byte-index loop by slots+20, read the slot array+18 with a 16-byte stride, clear its pointer/validity byte and release each actor before the user. These fields do not establish concurrent snapshot coherence by themselves.",
+    "evidence": "port-evidence/r2/lifecycle-lookup-reference.txt; lifecycle-user-release-target.txt; ../rtti-2976.json; ../rtti-3663.json",
+    "old": "0x18",
+    "symbol": "kSlotsArray"
+  },
+  "D039": {
+    "target": "0x20",
+    "method": "paired native code consumption",
+    "second_check": "ServerUserActor RTTI vslot 2 identifies paired native release walkers 2A7D280/2D73960. Both hold the manager+68 lock, follow user+68/component+18, bound the byte-index loop by slots+20, read the slot array+18 with a 16-byte stride, clear its pointer/validity byte and release each actor before the user. These fields do not establish concurrent snapshot coherence by themselves.",
+    "evidence": "port-evidence/r2/lifecycle-lookup-reference.txt; lifecycle-user-release-target.txt; ../rtti-2976.json; ../rtti-3663.json",
+    "old": "0x20",
+    "symbol": "kSlotsCount"
+  },
+  "D040": {
+    "target": "0x10",
+    "method": "paired native code consumption",
+    "second_check": "ServerUserActor RTTI vslot 2 identifies paired native release walkers 2A7D280/2D73960. Both hold the manager+68 lock, follow user+68/component+18, bound the byte-index loop by slots+20, read the slot array+18 with a 16-byte stride, clear its pointer/validity byte and release each actor before the user. These fields do not establish concurrent snapshot coherence by themselves.",
+    "evidence": "port-evidence/r2/lifecycle-lookup-reference.txt; lifecycle-user-release-target.txt; ../rtti-2976.json; ../rtti-3663.json",
+    "old": "0x10",
+    "symbol": "kSlotStride"
+  },
+  "C002": {
+    "target": "0xD0",
+    "method": "paired native code consumption",
+    "second_check": "Native user release invokes paired actor release 2A83650/2D79D00. Both swap-remove the actor from manager+B8/count+C0, clear actor key+60, append a recycled key to the ring at +C8/+CC/+D4/+E0 and increment its u32 free-key count+D0. Native release continues through the map removal; no cleanup hook or return-site RVA is adopted here.",
+    "evidence": "port-evidence/r2/lifecycle-actor-release-old.txt; lifecycle-actor-release-new.txt; lifecycle-user-release-target.txt",
+    "old": "0xD0",
+    "symbol": "kSam_FreeKeys"
+  },
+  "C104": {
+    "target": "0x08",
+    "method": "paired native code consumption",
+    "second_check": "Named loading request handlers pass actor transform-sync component+1A0; paired loading-start and loading-complete implementations immediately obtain that component owner from this+8. This is the same server transform-sync type consumed by clock_gate, not an inferred layout for a client component.",
+    "evidence": "port-evidence/r2/lifecycle-loading-old.txt; lifecycle-loading-new.txt; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt",
+    "old": "0x08",
+    "symbol": "kTsActor"
+  },
+  "D041": {
+    "target": "0x5E",
+    "method": "paired native code consumption",
+    "second_check": "Paired MoveFieldComplete implementations 2BC6BB0/2ED29D0 obtain the component actor at this+8, inspect its u16 state+5E, preserve prior-state+5C and perform the native state transition under actor+18 lock. Factory rollback independently reads the same field. This proves the state offset, not which values establish the full reconnect barrier.",
+    "evidence": "port-evidence/r2/lifecycle-loading-old.txt; lifecycle-loading-new.txt",
+    "old": "0x5E",
+    "symbol": "kActorState"
+  },
+  "C107": {
+    "target": "0x450",
+    "method": "paired native code consumption",
+    "second_check": "Paired six-argument native loading-complete consumers 219D7F0/23DC630 test the fifth-byte flag, store the supplied timestamp at component+468, copy a 32-byte YMM value from component+450 and publish it to the mode-selected global clock before unpausing the field. This proves the field and copy width from actual target instructions, not an assumed structure or the SetFieldTimeReq payload schema.",
+    "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt",
+    "old": "0x450",
+    "symbol": "kTsFieldTime"
+  },
+  "C108": {
+    "target": "32",
+    "method": "paired native code consumption",
+    "second_check": "Paired six-argument native loading-complete consumers 219D7F0/23DC630 test the fifth-byte flag, store the supplied timestamp at component+468, copy a 32-byte YMM value from component+450 and publish it to the mode-selected global clock before unpausing the field. This proves the field and copy width from actual target instructions, not an assumed structure or the SetFieldTimeReq payload schema.",
+    "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt",
+    "old": "32",
+    "symbol": "kFieldTimeSize"
+  },
   "B022": {
     "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x4C, 0x89, 0x4C, 0x24, 0x20, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54}",
     "method": "native entry bytes at retained R1 function",
@@ -1299,6 +1483,22 @@
     "second_check": "Reviewed native FindByCharacterNo scans manager+B8/count+C0 and reads actor+68/status+20, then the changed number pointer+90. Both instruction windows are decoded boundaries within the paired .pdata functions. These are validation windows, not inline-hook entries; C083/C085 still require standard support separately.",
     "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-find-by-number-target.txt"
   },
+  "C117": {
+    "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x60, 0x4D, 0x8B, 0xE9, 0x49, 0x8B, 0xF0, 0x4C, 0x8B, 0xF2, 0x48, 0x8B, 0xD9}",
+    "method": "paired native completion entry/branch bytes",
+    "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x60, 0x4D, 0x8B, 0xE9, 0x49, 0x8B, 0xF0, 0x4C, 0x8B, 0xF2, 0x48, 0x8B, 0xD9}",
+    "symbol": "kLoadingHead",
+    "second_check": "Named LoadingCompleteReq reaches paired six-argument completion 219D7F0/23DC630. Native disassembly confirms the entry and fifth-argument CMP/JZ publication gate; exact old bytes and both .pdata owner ranges checked. The entry and branch RVAs still require standard support independently.",
+    "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+  },
+  "C119": {
+    "target": "{0x44, 0x38, 0x65, 0x50, 0x0F, 0x84, 0x0C, 0x01, 0x00, 0x00}",
+    "method": "paired native completion entry/branch bytes",
+    "old": "{0x44, 0x38, 0x65, 0x50, 0x0F, 0x84, 0x0C, 0x01, 0x00, 0x00}",
+    "symbol": "kLoadingFlagCmpBytes",
+    "second_check": "Named LoadingCompleteReq reaches paired six-argument completion 219D7F0/23DC630. Native disassembly confirms the entry and fifth-argument CMP/JZ publication gate; exact old bytes and both .pdata owner ranges checked. The entry and branch RVAs still require standard support independently.",
+    "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+  },
   "B071": {
     "target": "2401",
     "old": "2319",
@@ -1355,6 +1555,14 @@
     "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
     "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
   },
+  "D046": {
+    "target": "3081",
+    "old": "3093",
+    "symbol": "kLoginCharacterReq",
+    "method": "native named descriptor, verified initializer and handler",
+    "second_check": ".?AVTrocTrLoginCharacterToFieldServerReq@pa@@: source opcode 3093, target 3081; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2C6AE10 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+    "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
+  },
   "D112": {
     "target": "3081",
     "old": "3093",
@@ -1386,6 +1594,54 @@
     "method": "native named descriptor, verified initializer and handler",
     "second_check": ".?AVTrocTrMoveFieldAck@pa@@: source opcode 2174, target 2364; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD4D70 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
     "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
+  },
+  "D050": {
+    "target": "2364",
+    "old": "2174",
+    "symbol": "kMoveFieldAck",
+    "method": "native named descriptor, verified initializer and handler",
+    "second_check": ".?AVTrocTrMoveFieldAck@pa@@: source opcode 2174, target 2364; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD4D70 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.",
+    "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt"
+  },
+  "D047": {
+    "target": "2350",
+    "old": "2437",
+    "symbol": "kGameLoadingStartReq",
+    "method": "native named descriptor, verified initializer and handler",
+    "second_check": ".?AVTrocTrGameLoadingStartReq@pa@@: source opcode 2437, target 2350; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CAD9E0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+    "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+  },
+  "D048": {
+    "target": "2723",
+    "old": "2549",
+    "symbol": "kMoveFieldCompleteReq",
+    "method": "native named descriptor, verified initializer and handler",
+    "second_check": ".?AVTrocTrMoveFieldCompleteReq@pa@@: source opcode 2549, target 2723; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CA5B50 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+    "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+  },
+  "D049": {
+    "target": "2789",
+    "old": "2445",
+    "symbol": "kLoadingCompleteReq",
+    "method": "native named descriptor, verified initializer and handler",
+    "second_check": ".?AVTrocTrLoadingCompleteReq@pa@@: source opcode 2445, target 2789; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0x2CAE200 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+    "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+  },
+  "D051": {
+    "target": "2268",
+    "old": "2144",
+    "symbol": "kMoveFieldCompleteAck",
+    "method": "native named descriptor, verified initializer and handler",
+    "second_check": ".?AVTrocTrMoveFieldCompleteAck@pa@@: source opcode 2144, target 2268; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD57C0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+    "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+  },
+  "D052": {
+    "target": "2891",
+    "old": "2762",
+    "symbol": "kLoadingCompleteAck",
+    "method": "native named descriptor, verified initializer and handler",
+    "second_check": ".?AVTrocTrLoadingCompleteAck@pa@@: source opcode 2762, target 2891; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler 0xCD9DF0 reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI. Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.",
+    "evidence": "port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
   },
   "C129": {
     "target": "2046",

@@ -141,6 +141,7 @@ for row in rows:
     elif 'Vtable' in symbol or symbol.startswith('kVt'): kind='vtable RVA'
     elif symbol=='kNoEpoch': kind='native epoch sentinel'
     elif symbol=='kLoadingParkHeight': kind='native loading sentinel'
+    elif symbol.endswith('Mask'): kind='native member/value contract'
     elif re.fullmatch(r'0x[0-9A-Fa-f]+',value) and 0x10000<int(value,16)<0x173AB000: kind='function/global RVA'
     elif 'Layout' in symbol: kind='native layout contract'
     elif any(s in symbol for s in ('Size','Stride','Count','Entries','Capacity','Width','Units','Overhead','Header')): kind='native member/size contract'

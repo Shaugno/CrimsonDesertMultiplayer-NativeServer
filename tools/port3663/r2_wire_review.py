@@ -13,6 +13,7 @@ folder=root/'build/r2'
 core=json.loads((docs/'R2-CORE-LIST.json').read_text())
 candidates=json.loads((folder/'request-candidates.json').read_text())
 candidates+=json.loads((folder/'tunnel-control-candidates.json').read_text())
+candidates+=json.loads((folder/'lifecycle-candidates.json').read_text())
 base=0x140000000
 def sections(path):
     text=path.read_text(encoding='utf-8-sig')
@@ -25,6 +26,9 @@ handlers=sections(folder/'request-handlers-target.txt')
 for image,suffix in [('old','reference'),('new','target')]:
     initializers[image].update(sections(folder/f'tunnel-control-native-{suffix}.txt'))
 handlers.update(sections(folder/'tunnel-control-native-target.txt'))
+for image in ('old','new'):
+    initializers[image].update(sections(folder/f'lifecycle-handlers-{image}.txt'))
+handlers.update(sections(folder/'lifecycle-handlers-new.txt'))
 
 # Native registration reads the named descriptor's actual +C opcode. Native
 # lookup uses the registered u16 key and kind mask before selecting its handler.
@@ -41,14 +45,21 @@ for image,expected in [('old','57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5
                        ('new','8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8')]:
     raw=json.loads((folder/f'request-rtti-{image}.json').read_text())
     assert raw['identity']['sha256']==expected
+    lifecycle=json.loads((folder/f'lifecycle-rtti-{image}.json').read_text())
+    assert lifecycle['identity']['sha256']==expected
 
 contracts={
     'ConnectCryptogramToServerReq':(2319,['kOpConnectCryptogramToServerReq']),
     'LoginUserToFieldServerReq':(2490,['kOpLoginUser','kOpLoginUserToFieldServerReq']),
-    'LoginCharacterToFieldServerReq':(3093,['kOpLoginCharacter','kOpLoginCharacterToFieldServerReq','kOpLoginCharacterReq']),
+    'LoginCharacterToFieldServerReq':(3093,['kOpLoginCharacter','kOpLoginCharacterToFieldServerReq','kOpLoginCharacterReq','kLoginCharacterReq']),
     'MainPlayerDataStartAck':(2756,['kOpMainPlayerDataStartAck']),
     'MainUserDataStartAck':(2646,['kOpMainUserDataStartAck']),
-    'MoveFieldAck':(2174,['kOpMoveFieldAck']),
+    'MoveFieldAck':(2174,['kOpMoveFieldAck','kMoveFieldAck']),
+    'GameLoadingStartReq':(2437,['kGameLoadingStartReq']),
+    'MoveFieldCompleteReq':(2549,['kMoveFieldCompleteReq']),
+    'LoadingCompleteReq':(2445,['kLoadingCompleteReq']),
+    'MoveFieldCompleteAck':(2144,['kMoveFieldCompleteAck']),
+    'LoadingCompleteAck':(2762,['kLoadingCompleteAck']),
     'ScopeSenderAck':(2042,['kOpScopeSenderAck']),
     'ActorLoadDataAck':(2005,['kOpActorAppear']),
     'CharacterLobbyDataAck':(2869,['kOpDataAck']),
@@ -82,6 +93,10 @@ for short,(old_id,symbols) in contracts.items():
             method='native named descriptor, verified initializer and handler',
             second_check=f'{name}: source opcode {old_id}, target {new["opcode"]}; paired native initializer stores the RTTI vtable into its exact instance. Target vslot 2 handler {new["handler"]} reviewed. Native registration CB4BE0 reads descriptor+C into the registry key; insertion 165FF90 stores the u16 key, lookup 165FAC0 compares it and checks descriptor kind before dispatch. Native ServerOnRecvPacket selects that descriptor and handler. ID adoption does not adopt payload or hook ABI.',
             evidence='port-evidence/r2/request-rtti-old.json; request-rtti-new.json; request-candidates.json; request-initializers-reference.txt; request-initializers-target.txt; request-handlers-target.txt; tunnel-control-candidates.json; tunnel-control-native-reference.txt; tunnel-control-native-target.txt; troc-register-target.txt; troc-dispatch-lookup-target.txt; troc-dispatch-insert-target.txt')
+        if short in ('GameLoadingStartReq','MoveFieldCompleteReq','LoadingCompleteReq',
+                     'MoveFieldCompleteAck','LoadingCompleteAck'):
+            result[row['r2']]['evidence'] += '; lifecycle-rtti-old.json; lifecycle-rtti-new.json; lifecycle-candidates.json; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt'
+            result[row['r2']]['second_check'] += (' Native request handlers consume the ordinary envelope and exact payload exhaustion before calling the actor transform-sync component at +68/+1A0. GameLoadingStartReq requires an empty body; MoveFieldCompleteReq and LoadingCompleteReq decode one byte. Named acknowledgement handlers resolve the actor and forward decoded completion data to its transform-sync component. No native payload is replayed and no lifecycle state machine is armed.')
 
 def payload(symbol,description,proof,members=None):
     row,=[r for r in core if r['symbol']==symbol]

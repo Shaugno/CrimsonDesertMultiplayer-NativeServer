@@ -450,5 +450,35 @@
     "second_check": "Paired receive entries bound the u16 size-minus-three by 7FD7, obtain session crypto+98, dispatch through native TrocFind with kind mask 1, enforce descriptor min/max lengths and flag bits, build the request with session/key/handler/frame fields, invoke vslot+8 and enqueue to client+E8 or +F0. Cleanup retains target-specific destructors and TLS+1FE. Native entry boundaries and all argument roles are reviewed; a raw immediate search was discovery only.",
     "evidence": "port-evidence/r2/tunnel-client-receive-reference.txt; client-receive-verified-target.txt",
     "anchor": null
+  },
+  "C116": {
+    "target": "0x23dc630",
+    "old": "0x219d7f0",
+    "symbol": "kLoading",
+    "second_check": "Named native LoadingCompleteReq reaches paired server transition 2BCAF00/2ED7960, then the six-argument completion implementation. Both test fifth-byte publication flag, copy component+450 as 32 bytes to mode-selected world clock, unpause field+17C and continue actor loading. The entry ABI and actual branch role are reviewed; no legacy-hook installation is authorized yet.",
+    "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-handlers-old.txt; lifecycle-handlers-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt",
+    "anchor": null
+  },
+  "C118": {
+    "target": "0x23dc66b",
+    "old": "0x219d82b",
+    "symbol": "kLoadingFlagCmp",
+    "second_check": "Decoded CMP [RBP+50],R12B followed by JZ skips the clock publication block in the paired six-argument completion implementation; the fifth argument and later loading continuation are preserved.",
+    "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt",
+    "anchor": [
+      35248112,
+      37602864
+    ]
+  },
+  "C109": {
+    "target": "0x6f31c98",
+    "old": "0x6a6d238",
+    "symbol": "kWorldTime",
+    "second_check": "The actual mode-selected YMM store operand in paired loading completion maps source 6A6D238 to target 6F31C98. The other clock bank is 6A6D218 -> 6F31C78, not substituted for the core bank; both hold 32 bytes.",
+    "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt",
+    "anchor": [
+      35248112,
+      37602864
+    ]
   }
 }
