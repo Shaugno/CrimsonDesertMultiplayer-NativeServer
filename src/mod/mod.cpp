@@ -23,6 +23,7 @@
 #include "mod/game/player_reader.h"
 #include "mod/game/r3_pump_probe.h"
 #include "mod/game/r3_join_probe.h"
+#include "mod/game/r4_core_probe.h"
 #include "mod/game/safe_memory.h"
 #include "mod/bg_speed.h"
 #include "mod/log.h"
@@ -1062,6 +1063,10 @@ DWORD WINAPI worker(LPVOID) {
         // configuration/installer. Config cannot grant a compiled permission.
         // Higher tiers need their own complete per-build tunnel/join route.
         if (game::build_guard::route_3663_reader(startup, [&] {
+                if(cfg.r4_core_probe && (cfg.net_enabled || cfg.s2_enabled)) {
+                    log::error("R4Core: passive profile refuses networking/session2 configuration");
+                    return;
+                }
                 if (cfg.startup_delay_ms > 0 && stop_requested(cfg.startup_delay_ms)) return;
                 if (cfg.r3_pump_probe && !game::r3_pump_probe::install(proc.identity)) {
                     log::error("R3PumpProbe: installation refused; no diagnostic hook active");
@@ -1069,6 +1074,10 @@ DWORD WINAPI worker(LPVOID) {
                 }
                 if (cfg.r3_join_probe && !game::r3_join_probe::install(proc.identity)) {
                     log::error("R3Join: probe preparation refused; no gameplay tier enabled");
+                    return;
+                }
+                if(cfg.r4_core_probe && !game::r4_core_probe::install(proc.identity)) {
+                    log::error("R4Core: passive preparation refused; no gameplay tier enabled");
                     return;
                 }
                 LocalSource local(true);
@@ -1090,7 +1099,7 @@ DWORD WINAPI worker(LPVOID) {
                     return;
                 }
                 log::info("3663 Tier A: local reader; networking off; passive diagnostics {}",
-                    cfg.r3_pump_probe || cfg.r3_join_probe);
+                    cfg.r3_pump_probe || cfg.r3_join_probe || cfg.r4_core_probe);
                 uint32_t last_log = 0;
                 while (!stop_requested(50)) {
                     const uint32_t now = GetTickCount();
@@ -1099,6 +1108,7 @@ DWORD WINAPI worker(LPVOID) {
                         log::info("3663 Tier A: {}", local.describe());
                         if (cfg.r3_pump_probe) game::r3_pump_probe::report();
                         if (cfg.r3_join_probe) game::r3_join_probe::drain();
+                        if (cfg.r4_core_probe) game::r4_core_probe::drain();
                         last_log = now;
                     }
                 }

@@ -140,6 +140,7 @@ add_library(cdmp_mod SHARED
     src/mod/game/player_reader.cpp
     src/mod/game/r3_pump_probe.cpp
     src/mod/game/r3_join_probe.cpp
+    src/mod/game/r4_core_probe.cpp
     src/mod/game/camera_reader.cpp
     src/mod/game/rtti.cpp
     src/mod/net/troc_sniffer.cpp

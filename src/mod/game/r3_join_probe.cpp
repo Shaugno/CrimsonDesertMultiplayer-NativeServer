@@ -19,6 +19,8 @@ struct Event {
     uint64_t sequence{}; uint32_t thread{}, site{};
     Frame frame{}; uintptr_t returned{}, field{}, actor{}, owner{};
     uint32_t result{}, owner_key{}, actor_key{}, field_owner{}, users{}, actors{}, count{};
+    uintptr_t out_vtable{},out_release{},out_holder{};
+    uint32_t field_refs{};uint8_t out_new{};
     bool valid = true;
     std::array<Roster,64> roster{};
 };
@@ -72,6 +74,12 @@ void observe(size_t site, safetyhook::Context& context) noexcept {
         uint8_t valid = 0;
         if (!read(event.frame.args[3]+0x10,valid)) event.valid = false;
         if (valid && !read(event.frame.args[3]+8,event.field)) event.valid = false;
+        // R4 lifetime corroboration; the same guarded passive sample, no call.
+        if (!read(event.frame.args[3],event.out_vtable) || !event.out_vtable ||
+            !read(event.out_vtable+0x10,event.out_release) ||
+            !read(event.frame.args[3]+0x18,event.out_holder) ||
+            !read(event.frame.args[3]+0x20,event.out_new))event.valid=false;
+        if(event.field && !read(event.field+0x10,event.field_refs))event.valid=false;
     } else if (role == 1) {
         event.field = event.frame.args[2];
         const uintptr_t mover = event.frame.args[0];
@@ -133,6 +141,8 @@ void drain() {
             event.actors,event.actor,event.actor_key,event.owner,event.owner_key,event.count);
         for(size_t i=0;i<event.count && i<64;++i)
             log::info("R3Join: seq {} roster {} kind {} key {:X}",event.sequence,i,event.roster[i].kind,event.roster[i].key);
+        if(event.site==1)log::info("R4Refs: seq {} out_vtable {:X} release {:X} holder {:X} new {} field_refs {}",
+            event.sequence,event.out_vtable,event.out_release,event.out_holder,event.out_new,event.field_refs);
     }
     if (stopped.load() && active.exchange(false)) {
         log::warn("R3Join: collection stopped on a guard/depth/drop condition; dropped {} unmatched {}",dropped.load(),unmatched.load());

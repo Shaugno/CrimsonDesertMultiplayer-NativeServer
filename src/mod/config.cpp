@@ -163,6 +163,7 @@ Config load_config(const std::wstring& ini_path) {
     c.coop_map_pin_colour = static_cast<uint8_t>(std::min(read_uint(ini_path, L"coop", L"map_pin_colour", 14), 14u));
     c.r3_pump_probe = read_uint(ini_path, L"probe3663", L"pump", 0) != 0;
     c.r3_join_probe = read_uint(ini_path, L"probe3663", L"join", 0) != 0;
+    c.r4_core_probe = read_uint(ini_path, L"probe3663", L"core", 0) != 0;
     c.r3_tunnel_probe = read_uint(ini_path, L"probe3663", L"tunnel", 0) != 0;
     c.s2_enabled = read_uint(ini_path, L"session2", L"enabled", 0) != 0;
     c.s2_probe = read_uint(ini_path, L"session2", L"probe", 1) != 0;

@@ -1,0 +1,240 @@
+{
+  "identity": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "sites": [
+    {
+      "name": "VecEntry",
+      "rva": "0x4cae10",
+      "relocated": 8,
+      "guard": "405341574883ec28488bd94c8bfa8b49",
+      "instructions": [
+        [
+          5025296,
+          "PUSH RBX"
+        ],
+        [
+          5025298,
+          "PUSH R15"
+        ],
+        [
+          5025300,
+          "SUB RSP,0x28"
+        ]
+      ]
+    },
+    {
+      "name": "VecExit",
+      "rva": "0x4caf2b",
+      "relocated": 6,
+      "guard": "4883c428415f5bc3cccccccccccccccc",
+      "instructions": [
+        [
+          5025579,
+          "ADD RSP,0x28"
+        ],
+        [
+          5025583,
+          "POP R15"
+        ]
+      ]
+    },
+    {
+      "name": "OwnerKey",
+      "rva": "0x2c5300f",
+      "relocated": 7,
+      "guard": "418b8e9000000039080f85de00000048",
+      "instructions": [
+        [
+          46477327,
+          "MOV ECX,dword ptr [R14 + 0x90]"
+        ]
+      ]
+    },
+    {
+      "name": "LoginMgr",
+      "rva": "0x2a12a58",
+      "relocated": 7,
+      "guard": "488b0d812c8304488b09e8d97b360090",
+      "instructions": [
+        [
+          44116568,
+          "MOV RCX,qword ptr [0x1472456e0]"
+        ]
+      ]
+    },
+    {
+      "name": "ClearLobby",
+      "rva": "0x2f4af52",
+      "relocated": 8,
+      "guard": "498b4768488b5810488b7b08488d5708",
+      "instructions": [
+        [
+          49590098,
+          "MOV RAX,qword ptr [R15 + 0x68]"
+        ],
+        [
+          49590102,
+          "MOV RBX,qword ptr [RAX + 0x10]"
+        ]
+      ]
+    },
+    {
+      "name": "ClearList",
+      "rva": "0x2f4af79",
+      "relocated": 9,
+      "guard": "488b4b18e8ceacbcfd90488b5d9f488b",
+      "instructions": [
+        [
+          49590137,
+          "MOV RCX,qword ptr [RBX + 0x18]"
+        ],
+        [
+          49590141,
+          "CALL 0x140b15c50"
+        ]
+      ]
+    },
+    {
+      "name": "LobbyConstant",
+      "rva": "0x2e87db0",
+      "relocated": 10,
+      "guard": "48b8ffffffffffffff7f488945c0c5fb",
+      "instructions": [
+        [
+          48790960,
+          "MOV RAX,0x7fffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "name": "LobbyAdd",
+      "rva": "0x2e87e10",
+      "relocated": 5,
+      "guard": "e84b6c4fff8b44246085c00f84ea0000",
+      "instructions": [
+        [
+          48791056,
+          "CALL 0x14237ea60"
+        ]
+      ]
+    },
+    {
+      "name": "KeyClass",
+      "rva": "0x2d741ea",
+      "relocated": 10,
+      "guard": "4189566081e20000f0ff81c200001000",
+      "instructions": [
+        [
+          47661546,
+          "MOV dword ptr [R14 + 0x60],EDX"
+        ],
+        [
+          47661550,
+          "AND EDX,0xfff00000"
+        ]
+      ]
+    },
+    {
+      "name": "SessionId",
+      "rva": "0x2a0eec0",
+      "relocated": 7,
+      "guard": "498b87880000008b00894354eb058978",
+      "instructions": [
+        [
+          44101312,
+          "MOV RAX,qword ptr [R15 + 0x88]"
+        ]
+      ]
+    },
+    {
+      "name": "MoveFlag",
+      "rva": "0x23e1106",
+      "relocated": 7,
+      "guard": "80b8dc0300000074288b0517f5de0489",
+      "instructions": [
+        [
+          37622022,
+          "CMP byte ptr [RAX + 0x3dc],0x0"
+        ]
+      ]
+    },
+    {
+      "name": "Component",
+      "rva": "0x2295d80",
+      "relocated": 10,
+      "guard": "8b1885db0f859e000000488b9d780200",
+      "instructions": [
+        [
+          36265344,
+          "MOV EBX,dword ptr [RAX]"
+        ],
+        [
+          36265346,
+          "TEST EBX,EBX"
+        ],
+        [
+          36265348,
+          "JNZ 0x142295e28"
+        ]
+      ]
+    },
+    {
+      "name": "FieldLocks",
+      "rva": "0xeb6877e",
+      "relocated": 8,
+      "guard": "ff500890488b7d0848897c2478488b07",
+      "instructions": [
+        [
+          246843262,
+          "CALL qword ptr [RAX + 0x8]"
+        ],
+        [
+          246843265,
+          "NOP"
+        ],
+        [
+          246843266,
+          "MOV RDI,qword ptr [RBP + 0x8]"
+        ]
+      ]
+    },
+    {
+      "name": "Phases",
+      "rva": "0x2c17410",
+      "relocated": 5,
+      "guard": "44894c24204c89442418535556574154",
+      "instructions": [
+        [
+          46232592,
+          "MOV dword ptr [RSP + 0x20],R9D"
+        ]
+      ]
+    }
+  ],
+  "proofs": [
+    {
+      "path": "build/r4/core-context-new.txt",
+      "sha256": "35C748788B750AEB016E626E759D85B423D30328AEF293C1606292995F1CE91E"
+    },
+    {
+      "path": "build/r4/identity-sites-new.txt",
+      "sha256": "FE70952FA2E1D3F12BC38B9810A412625BAF0C43FEC25DAC4F500B6AAEB3F120"
+    },
+    {
+      "path": "build/r4/sam-join-new.txt",
+      "sha256": "7F2E92B9A51B828FA2B451363620EFE62E0466F25F6C74268ED1C194FF7A6F67"
+    },
+    {
+      "path": "build/r4/component-context-new.txt",
+      "sha256": "12BFBF98868D9D430F79CB8EF54E0BADF93962C95F1F51F849A35208B65F155E"
+    },
+    {
+      "path": "build/r2/identity-contracts-target.txt",
+      "sha256": "16A829451FDE273E522F0566BCF6E03C1F1A39F20C47C70EBED0986C3D66529A"
+    },
+    {
+      "path": "build/r3/phase-standard-target.txt",
+      "sha256": "551EDFDFFB02E23506378D938153B1ADE3F5ACE766230B1F2D52371D8DD985BF"
+    }
+  ],
+  "adopted": 0
+}

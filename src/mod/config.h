@@ -18,6 +18,7 @@ struct Config {
     bool background_full_speed = false;
     bool r3_pump_probe = false; // exact-build passive diagnostic
     bool r3_join_probe = false; // passive candidate entry/exit logs
+    bool r4_core_probe = false; // passive identity/join callsite reads; networking forbidden
     bool r3_tunnel_probe = false; // explicit loopback-only B cryptogram echo
 
     std::string peer_host = "127.0.0.1";

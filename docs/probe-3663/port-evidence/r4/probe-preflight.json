@@ -1,0 +1,24 @@
+{
+  "purpose": "R4 Step 3 passive collector checkpoint; native backend still pending",
+  "suite": "108/108 passed",
+  "seconds": 90.41,
+  "session": "R2-P1-20261116-161703",
+  "presence_confirmed": true,
+  "deployment": "passive core profile only; awaiting user launch/title confirmation",
+  "live_complete": false,
+  "join_attempts": 0,
+  "tiers_armed": {
+    "A": true,
+    "B": true,
+    "C": false,
+    "D": false
+  },
+  "networking": false,
+  "question": "Do the verified native vector, identity/lobby/login, character-key and deferred-session contexts agree with native object identities during ordinary load and fast travel?",
+  "limit": "32 records per each of 14 sites; eight-minute requested play sequence; verified fourteen-minute process watchdog",
+  "proof": {
+    "path": "build\\r4\\core-probe-final-suite.txt",
+    "bytes": 39269,
+    "sha256": "FC961A5DCCA792AF6EA4616452F49136BE6045E5449F88D70345C381FA6CBB54"
+  }
+}
