@@ -26,3 +26,5 @@ expected Tier A text. Restored the unarmed expectation; full rerun passed 101/10
 Live L1 and its cleanup will be recorded separately; compilation is not
 runtime acceptance. Session driver l1 requires compiled A=true/B=C=D=false;
 its original hp/loading modes continue to require all tiers false.
+
+L1 completed: production reader captured 43 world samples and 23 rotations; HP changed 900 -> 1.8 -> 5.8. The user confirmed travel and HP change. Normal exit; all 23 saves unchanged, backup verified, installation restored. See port-evidence/r3/l1-result.json for exact identity, guarded-failure reasons, samples and original log hashes.
