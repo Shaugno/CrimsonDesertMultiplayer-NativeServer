@@ -17,6 +17,7 @@ struct Config {
     // so the copy in the background keeps its share of the GPU (bg_speed_logic.h). Without a role: a WRN, ignored.
     bool background_full_speed = false;
     bool r3_pump_probe = false; // exact-build passive diagnostic
+    bool r3_join_probe = false; // passive candidate entry/exit logs
     bool r3_tunnel_probe = false; // explicit loopback-only B cryptogram echo
 
     std::string peer_host = "127.0.0.1";

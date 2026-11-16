@@ -139,6 +139,7 @@ add_library(cdmp_mod SHARED
     src/mod/game/safe_memory.cpp
     src/mod/game/player_reader.cpp
     src/mod/game/r3_pump_probe.cpp
+    src/mod/game/r3_join_probe.cpp
     src/mod/game/camera_reader.cpp
     src/mod/game/rtti.cpp
     src/mod/net/troc_sniffer.cpp
@@ -288,6 +289,10 @@ add_executable(cdmp_tests_r3_tunnel_peer tests/r3_tunnel_peer_tests.cpp)
 cdmp_strict(cdmp_tests_r3_tunnel_peer)
 target_link_libraries(cdmp_tests_r3_tunnel_peer PRIVATE cdmp_common)
 add_test(NAME r3_tunnel_peer COMMAND cdmp_tests_r3_tunnel_peer)
+add_executable(cdmp_tests_r3_trace_stack tests/r3_trace_stack_tests.cpp)
+cdmp_strict(cdmp_tests_r3_trace_stack)
+target_include_directories(cdmp_tests_r3_trace_stack PRIVATE src)
+add_test(NAME r3_trace_stack COMMAND cdmp_tests_r3_trace_stack)
 # 3576 diagnostic sampler. Fake memory only; it does not open the ASI guard.
 add_executable(cdmp_tests_diag3576 tests/diag3576_tests.cpp)
 cdmp_strict(cdmp_tests_diag3576)

@@ -22,6 +22,7 @@
 #include "mod/game/offsets.h"
 #include "mod/game/player_reader.h"
 #include "mod/game/r3_pump_probe.h"
+#include "mod/game/r3_join_probe.h"
 #include "mod/game/safe_memory.h"
 #include "mod/bg_speed.h"
 #include "mod/log.h"
@@ -618,6 +619,7 @@ void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = 
                           ov.last_error.empty() ? "" : " | error: " + ov.last_error);
             }
         }
+        if (core_tunnel_only && cfg.r3_join_probe) game::r3_join_probe::drain();
         health.mark(Phase::Report, now_us());
         if (auto slow = health.end(now_us())) {
             if (slow_lines++ < kSlowLines) {
@@ -1051,6 +1053,10 @@ DWORD WINAPI worker(LPVOID) {
                     log::error("R3PumpProbe: installation refused; no diagnostic hook active");
                     return;
                 }
+                if (cfg.r3_join_probe && !game::r3_join_probe::install(proc.identity)) {
+                    log::error("R3Join: probe preparation refused; no gameplay tier enabled");
+                    return;
+                }
                 LocalSource local(true);
                 if (startup.tier_b_tunnel && cfg.net_enabled && cfg.s2_enabled && cfg.s2_create_session &&
                     cfg.s2_accept_tunnel && !cfg.s2_guest && !cfg.r3_pump_probe) {
@@ -1077,6 +1083,7 @@ DWORD WINAPI worker(LPVOID) {
                     if (now - last_log >= 2000) {
                         log::info("3663 Tier A: {}", local.describe());
                         if (cfg.r3_pump_probe) game::r3_pump_probe::report();
+                        if (cfg.r3_join_probe) game::r3_join_probe::drain();
                         last_log = now;
                     }
                 }

@@ -1,0 +1,108 @@
+{
+  "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "sites": [
+    {
+      "role": "AcquireField",
+      "pdata": [
+        "0x2e08520",
+        "0x2e087de"
+      ],
+      "sites": [
+        {
+          "rva": "0x2e08520",
+          "guard": "48 89 5c 24 10 48 89 74 24 18 48 89 7c 24 20 55",
+          "relocated": 5
+        },
+        {
+          "rva": "0x2e085ac",
+          "guard": "4c 8d 5c 24 70 49 8b 5b 38 49 8b 73 40 49 8b 7b",
+          "relocated": 5
+        }
+      ],
+      "basis": "Paired native body, unique strong candidate and reviewed caller; R3 rule 3",
+      "adopted": false
+    },
+    {
+      "role": "EnterField",
+      "pdata": [
+        "0x2ecb130",
+        "0x2ecb656"
+      ],
+      "sites": [
+        {
+          "rva": "0x2ecb130",
+          "guard": "48 89 5c 24 18 48 89 54 24 10 48 89 4c 24 08 55",
+          "relocated": 5
+        },
+        {
+          "rva": "0x2ecb63b",
+          "guard": "48 8b 9c 24 e0 01 00 00 48 81 c4 90 01 00 00 41",
+          "relocated": 8
+        }
+      ],
+      "basis": "Paired native body, unique strong candidate and reviewed caller; R3 rule 3",
+      "adopted": false
+    },
+    {
+      "role": "TravelTransition",
+      "pdata": [
+        "0x2eca480",
+        "0x2ecb127"
+      ],
+      "sites": [
+        {
+          "rva": "0x2eca480",
+          "guard": "48 89 54 24 10 55 53 56 57 41 54 41 55 41 56 41",
+          "relocated": 5
+        },
+        {
+          "rva": "0x2ecb113",
+          "guard": "48 81 c4 d8 01 00 00 41 5f 41 5e 41 5d 41 5c 5f",
+          "relocated": 7
+        }
+      ],
+      "basis": "Paired native body, unique strong candidate and reviewed caller; R3 rule 3",
+      "adopted": false
+    },
+    {
+      "role": "LobbyLoad",
+      "pdata": [
+        "0x2e879a0",
+        "0x2e87ff9"
+      ],
+      "sites": [
+        {
+          "rva": "0x2e879a0",
+          "guard": "48 89 5c 24 08 48 89 54 24 10 55 56 57 41 54 41",
+          "relocated": 5
+        },
+        {
+          "rva": "0x2e87a45",
+          "guard": "48 8b 9c 24 50 03 00 00 48 81 c4 10 03 00 00 41",
+          "relocated": 8
+        }
+      ],
+      "basis": "Paired native body, unique strong candidate and reviewed caller; R3 rule 3",
+      "adopted": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs\\probe-3663\\port-evidence\\r2\\field-acquire-enter-target.txt",
+      "sha256": "9E97048AE8D23DA65EA6FFD8F40821658DE1C89847208F3807E694E36F95C216"
+    },
+    {
+      "path": "docs\\probe-3663\\port-evidence\\r2\\field-mover-target.txt",
+      "sha256": "F0863475B8E097F5304BF43D189F51516BED2B1549434129679AC30472C6AA88"
+    },
+    {
+      "path": "docs\\probe-3663\\port-evidence\\r2\\identity-contracts-target.txt",
+      "sha256": "49C6F07956513F3CD32DAD9024715426257829183A1B05A24F547EFA9969B0EE"
+    }
+  ],
+  "omissions": [
+    "StatusLoad, LoginMgr and AddActor are jump thunks without .pdata entries; not hooked under candidate-entry rule.",
+    "Signature lead 2C171E0 belongs to 2C16F10, whose two-argument body differs from legacy Phases; not treated as C099.",
+    "No passive native actor lookup, reference call, lock call or factory call; roster-wide ownership may remain unresolved."
+  ]
+}

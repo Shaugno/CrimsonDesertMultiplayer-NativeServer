@@ -1,0 +1,49 @@
+{
+  "step": 3,
+  "status": "passive collector ready; native join adapter not yet implemented/armed",
+  "full_suite": {
+    "passed": 104,
+    "failed": 0,
+    "seconds": 85.69
+  },
+  "loopback": {
+    "remote_states": 78,
+    "clean_shutdown": true,
+    "native_evidence": false
+  },
+  "probe": "Four guarded candidate entry/exit pairs; exact relocated bytes; per-thread stack-address pairing, guarded reads and bounded records. Guard/drop stops collection and leaves native execution alone.",
+  "omitted_sites": "Status, login-manager and AddActor jump thunks lack .pdata entries; signature-only phase lead was a different two-argument function.",
+  "live": "pending",
+  "files": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-probe-suite.txt",
+      "bytes": 38416,
+      "sha256": "E7857ECAAD3DBFE9C658421EBB77E08AD2A1A85B5157051BF8F8271BF5AC671E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-probe-smoke.txt",
+      "bytes": 153,
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-probe-host.log",
+      "bytes": 6729,
+      "sha256": "1F25B764DDB726ADC4D7A43AC3FC5C251E646129DC5DFFAB2D99805584DB6408"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\phase-old.txt",
+      "bytes": 22335,
+      "sha256": "7EC103050F123A7621BF6750BB2474D188F35DDB239C424CED099592FF8BA147"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\phase-new.txt",
+      "bytes": 9586,
+      "sha256": "6E1B66264CC914AD446E766AAE5F807F10FA41334D2B3FC72949BD68ADE10D2C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r3\\join-sites-new.txt",
+      "bytes": 6354,
+      "sha256": "B26B3F7CD2354805BAC5F9C60CA5B98EA2120A9D7D1FF3DAAF60DB245CCD044A"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$true)][ValidateSet('Prepare','Deploy','Probe','Finish')][string]$Stage,
     [Parameter(Mandatory=$true)][ValidatePattern('^R2-P1-[0-9]{8}-[0-9]{6}$')][string]$Session,
     [int]$GamePid = 0,
-    [ValidateSet('hp','loading','l1','pump','l2')][string]$Profile = 'hp',
+    [ValidateSet('hp','loading','l1','pump','l2','join')][string]$Profile = 'hp',
     [switch]$Present,
     [string]$BuildDir = '',
     [ValidatePattern('^$|^R2-MATCH-PAUSE-[0-9]{8}-[0-9]{6}$')][string]$MatchingPauseSession = ''
@@ -15,14 +15,16 @@ $buildRoot = if (!$BuildDir) { Join-Path $root 'build' } elseif ([IO.Path]::IsPa
 } else { [IO.Path]::GetFullPath((Join-Path $root $BuildDir)) }
 $gameDir='D:\SteamLibrary\steamapps\common\Crimson Desert\bin64'
 $saveRoot=Join-Path $env:LOCALAPPDATA 'Pearl Abyss\CD\save'
-$backupRoot=if ($Profile -eq 'l2') { Join-Path $buildRoot "r3-session-backups\$Session" } else { Join-Path $root "backups\$Session" }
+$backupRoot=if ($Profile -in @('l2','join')) { Join-Path $buildRoot "r3-session-backups\$Session" } else { Join-Path $root "backups\$Session" }
 $evidence=Join-Path $root "build\r2\live\$Session"
 $py='C:\Users\shaug\source\repos\beamng-earth-s3-review\python312\python.exe'
 $expected='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
 if ((Get-FileHash -LiteralPath (Join-Path $gameDir 'CrimsonDesert.exe')).Hash -ne $expected) { throw 'Build drift; rematch first' }
 if ($Stage -ne 'Probe' -and (Get-Process CrimsonDesert -ErrorAction SilentlyContinue)) { throw 'Game must be closed' }
 if ($Stage -in @('Deploy','Probe') -and !$Present) { throw 'The session requires the user at the PC' }
-$sessionQuestion = if ($Profile -eq 'l2') {
+$sessionQuestion = if ($Profile -eq 'join') {
+    'What are the native AcquireField, EnterField roster/owner/result and travel/lobby call order during one ordinary local load and fast travel?'
+} elseif ($Profile -eq 'l2') {
     'Does the exact-build native private-session cryptogram handshake cross the loopback tunnel while real movement streams both ways, followed by clean shutdown?'
 } elseif ($Profile -eq 'pump') {
     'Does the candidate pump point execute with R15 equal to ClientNet and readable session and queues?'
@@ -33,7 +35,9 @@ $sessionQuestion = if ($Profile -eq 'l2') {
 } else {
     'Does the candidate local-player chain expose a distinct missing-chain or parked-position transition during loading and fast travel on exact 3663?'
 }
-$expectedObservation = if ($Profile -eq 'l2') {
+$expectedObservation = if ($Profile -eq 'join') {
+    'Guarded candidate entry/exit records pair native arguments/results, primary actor owner and bounded roster keys. Status/login-manager thunks are omitted; no lookup/factory/reference/native lock call, packet replay or argument/data write. C/D stay off.'
+} elseif ($Profile -eq 'l2') {
     'One real game-generated cryptogram request is copied to the explicit loopback peer and echoed once into private session 2 through native Q0; its native acknowledgement crosses the reliable tunnel. Real HP/pose states stream both ways. No login/world/save request, C/D/optional module or reconnect.'
 } elseif ($Profile -eq 'pump') {
     'Read-only diagnostic mid-hook records matching context/root and readable fields, without changing context, calling native functions or replaying packets. B remains off.'
@@ -44,7 +48,9 @@ $expectedObservation = if ($Profile -eq 'l2') {
 } else {
     'The guarded candidate position and rotation follow the controllable character, then loading produces a missing chain or a distinctive park interval before placement. The old (0,1000,0) park is only a logged hypothesis, not an adopted readiness rule.'
 }
-$sessionSteps = if ($Profile -eq 'l2') {
+$sessionSteps = if ($Profile -eq 'join') {
+    'Wait at title for log confirmation, Continue, stand still ten seconds after control, fast travel once, wait ten seconds after arrival, walk/turn, then quit within eight minutes.'
+} elseif ($Profile -eq 'l2') {
     'Wait at title for log confirmation, Continue, walk and turn, fast travel once, walk/turn after arrival, then quit to desktop within eight minutes.'
 } elseif ($Profile -eq 'pump') {
     'Wait at title for confirmation, Continue, walk and turn, fast travel once, walk/turn after arrival, quit within eight minutes. No damage required.'
@@ -112,7 +118,7 @@ Steps: after Shaugn confirms presence, deploy the profile-guarded ASI; launch th
 
 Stop: any crash, hang, identity drift, user request, or time limit. Never retry a crash blindly. Collect cdmp.log and crash context, fix offline and rerun the suite before another session.
 
-Capture profile ${Profile}: hp/loading use an external guarded read/query-only observer with all tiers closed. L1 uses the production HP-only A reader without hooks. Pump adds only an exact-build/exact-byte read-only diagnostic mid-hook, with no context changes, native calls, packet replay or networking. L2 enables only the core B loopback host and its native cryptogram exchange; C/D stay off. Other profiles keep B/C/D off.
+Capture profile ${Profile}: hp/loading use an external guarded read/query-only observer with all tiers closed. L1 uses the production HP-only A reader without hooks. Pump adds only an exact-build/exact-byte read-only diagnostic mid-hook, with no context changes, native calls, packet replay or networking. L2 enables only the core B loopback host and its native cryptogram exchange; C/D stay off. Join logs only the four candidate entry/exit pairs; compiled B is not invoked. Older profiles keep B/C/D off.
 
 Supervisor: before collection, arm r2_session_watchdog.ps1 for the exact game PID. It pins the process handle and closes that test process at fourteen minutes from launch if normal quit has not completed. This separate deadline control does not grant the collector memory-write rights.
 
@@ -139,7 +145,7 @@ if ($Stage -eq 'Deploy') {
     AssertNoMatching
     $header=Get-Content -Raw -LiteralPath (Join-Path $root 'src\mod\game\build_3663.h')
     foreach ($tier in 'A','B','C','D') {
-        $required = if (($Profile -in @('l1','pump','l2') -and $tier -eq 'A') -or ($Profile -eq 'l2' -and $tier -eq 'B')) { 'true' } else { 'false' }
+        $required = if (($Profile -in @('l1','pump','l2','join') -and $tier -eq 'A') -or ($Profile -in @('l2','join') -and $tier -eq 'B')) { 'true' } else { 'false' }
         if ($header -notmatch "kTier${tier}Complete = $required;") { throw 'Profile differs from compiled tier permissions' }
     }
     foreach ($name in @('cdmp.asi','cdmp.pdb','winmm.dll','cdmp.ini')) {
@@ -162,6 +168,7 @@ if ($Stage -eq 'Deploy') {
     if ($Profile -eq 'l2') {
         $ini="[general]`nplayer_name=R3L2Host`nstartup_delay_ms=0`n[net]`nenabled=1`ntransport=udp`nrole=guest`npeer_host=127.0.0.1`npeer_port=37015`n[overlay]`nenabled=0`n[sniffer]`nenabled=0`n[coop]`nenabled=0`n[session2]`nenabled=1`nprobe=0`ncreate_session=1`naccept_tunnel=1`nguest=0`n[probe3663]`ntunnel=1`n"
     }
+    if ($Profile -eq 'join') { $ini += "[probe3663]`njoin=1`n" }
     if ($Profile -eq 'pump') { $ini += "[probe3663]`npump=1`n" }
     [IO.File]::WriteAllText((Join-Path $gameDir 'cdmp.ini'),$ini,[Text.UTF8Encoding]::new($false))
     Get-FileHash -LiteralPath (Join-Path $gameDir 'cdmp.asi'),(Join-Path $PSScriptRoot 'reader_probe.py'),(Join-Path $root 'src\mod\game\build_3663.h') | ConvertTo-Json | Set-Content (Join-Path $evidence 'deployed-hashes.json')
@@ -172,7 +179,7 @@ if ($Stage -eq 'Deploy') {
     ConvertTo-Json -InputObject @($receipt) | Set-Content (Join-Path $evidence 'installed-receipt.json')
     Write-Output 'Deployed profile-guarded configuration. Launch only with user present.'
 } elseif ($Stage -eq 'Probe') {
-    if ($Profile -in @('l1','pump','l2')) { throw 'Use production cdmp.log; no external P1 collector for this profile' }
+    if ($Profile -in @('l1','pump','l2','join')) { throw 'Use production cdmp.log; no external P1 collector for this profile' }
     AssertNoMatching
     if ($GamePid -lt 1) { throw 'An explicit verified game PID is required' }
     $watchPath=Join-Path $evidence 'watchdog.json'
