@@ -2,6 +2,23 @@
 
 Latest continuation:
 
+- P1 HP ran with the user present on exact 3663. Both definition registries
+  selected key 0; the coherent controlled-actor container had 20 entries and
+  exactly one matching HP entry, raw 900000/900000. Inventory visibly showed
+  900/900 Health, confirming the native scale and selector for this full-HP
+  state. Regeneration was not observed. This is passive evidence, not L1 or
+  an armed tier. Full trace, startup log, original screenshots and hashes are
+  in port-evidence/r2/live/R2-P1-20261116-072000/result.json.
+- The collector stopped at 600.125 s. Game closure exceeded the fifteen-minute
+  session cap while automated Escape did not open the quit menu and normal
+  exit did not complete. The verified test PID was force-stopped; backup was
+  verified, installed files restored, and normal changed saves retained. This
+  deviation is recorded, not hidden or labelled an unqualified live pass.
+  Before another launch, an independent watchdog was added: it pins the game
+  process handle and enforces fourteen minutes from launch. P1 now requires
+  its live identity/deadline receipt before collection. Owned hidden-child
+  tests passed for deadline stop, normal exit and creation-identity rejection.
+
 - Current core: 395 (A37/B78/C150/D130), with 190 additional native contracts
   plus 17 retained R1 values and 46 independent RVA checks awaiting standards.
   B078 records the native-instance scan skip that the cut previously missed.

@@ -96,6 +96,8 @@ Stop: any crash, hang, identity drift, user request, or time limit. Never retry 
 
 Collector: external PROCESS_VM_READ | PROCESS_QUERY_INFORMATION only. Every copy checks VirtualQueryEx and ReadProcessMemory. No hooks, game writes, native calls, packet replay or network feed. This is not L1 and does not arm Tier A.
 
+Supervisor: before collection, arm r2_session_watchdog.ps1 for the exact game PID. It pins the process handle and closes that test process at fourteen minutes from launch if normal quit has not completed. This separate deadline control does not grant the collector memory-write rights.
+
 Save policy: all saves backed up with a local hash manifest and verified before launch. Afterward verify the backup and compare the live save folder; report normal game changes without overwriting player progress. Never commit saves or the private manifest.
 
 Installed executable SHA256: $expected
@@ -148,6 +150,23 @@ if ($Stage -eq 'Deploy') {
 } elseif ($Stage -eq 'Probe') {
     AssertNoMatching
     if ($GamePid -lt 1) { throw 'An explicit verified game PID is required' }
+    $watchPath=Join-Path $evidence 'watchdog.json'
+    if (!(Test-Path -LiteralPath $watchPath)) { throw 'Arm the independent session watchdog first' }
+    $watch=Get-Content -Raw -LiteralPath $watchPath | ConvertFrom-Json
+    $game=Get-Process -Id $GamePid
+    $controller=Get-Process -Id $watch.controller_pid
+    $controllerInfo=Get-CimInstance Win32_Process -Filter "ProcessId=$($watch.controller_pid)"
+    if ($watch.state -ne 'watching' -or $watch.game_pid -ne $GamePid -or
+        $watch.game_start_filetime -ne $game.StartTime.ToUniversalTime().ToFileTimeUtc().ToString() -or
+        $watch.controller_start_filetime -ne $controller.StartTime.ToUniversalTime().ToFileTimeUtc().ToString() -or
+        $controllerInfo.CommandLine -notlike '*r2_session_watchdog.ps1*' -or
+        $controllerInfo.CommandLine -notlike "*$Session*" -or
+        $watch.max_game_age_seconds -ne 840 -or
+        [datetime]::Parse($watch.deadline_utc).ToUniversalTime() -ne $game.StartTime.ToUniversalTime().AddSeconds(840) -or
+        [datetime]::Parse($watch.deadline_utc).ToUniversalTime() -le [DateTime]::UtcNow -or
+        $watch.helper_sha256 -ne (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'r2_session_watchdog.ps1')).Hash) {
+        throw 'Session watchdog identity/deadline is not valid'
+    }
     & $py (Join-Path $PSScriptRoot 'reader_probe.py') --pid $GamePid --seconds 600 --mode $Profile *> (Join-Path $evidence 'trace.log')
     if ($LASTEXITCODE) { throw 'Probe failed; inspect trace; do not retry blindly' }
 } else {

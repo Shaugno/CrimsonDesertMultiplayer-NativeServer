@@ -1,0 +1,9 @@
+{
+  "pids": [
+    15928,
+    52832
+  ],
+  "session": "R2-MATCH-PAUSE-20261116-072300",
+  "state": "every owned matcher thread verified suspended",
+  "receipt_sha256": "44E7F0CBB17714F62C07A06A13179C5428B0E58A91551171A5224AFA3FE92D09"
+}
