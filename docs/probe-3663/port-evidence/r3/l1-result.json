@@ -1,0 +1,819 @@
+{
+  "session": "R3-L1-20261116-110000",
+  "controller_session": "R2-P1-20261116-110000",
+  "question": "Does the production R3 HP-only reader track pose and changing HP through loading and fast travel?",
+  "result": "passed",
+  "tier_a_armed": true,
+  "other_tiers_armed": false,
+  "identity": {
+    "timestamp": "0x6AF5D198",
+    "base": "0x140000000",
+    "size": "0x144E9000",
+    "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8"
+  },
+  "user_confirmation": "HP changed; travel completed; game closed",
+  "samples": [
+    {
+      "time": "11:04:32.845",
+      "position": [
+        -10588.41,
+        597.36,
+        -4502.71
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:34.879",
+      "position": [
+        -10588.22,
+        597.33,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:36.930",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:38.985",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:41.025",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:43.057",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:45.057",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:47.089",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:49.105",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:51.109",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:53.120",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:55.118",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:57.184",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:04:59.181",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:01.197",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:03.211",
+      "position": [
+        -10588.22,
+        597.32,
+        -4502.69
+      ],
+      "rotation": [
+        0.0,
+        0.749,
+        0.0,
+        0.663
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:05.288",
+      "position": [
+        -10586.94,
+        597.43,
+        -4502.83
+      ],
+      "rotation": [
+        0.0,
+        -0.11,
+        -0.0,
+        0.994
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.12
+    },
+    {
+      "time": "11:05:07.343",
+      "position": [
+        -10585.0,
+        597.7,
+        -4501.26
+      ],
+      "rotation": [
+        0.0,
+        0.975,
+        0.0,
+        0.221
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:09.344",
+      "position": [
+        -10585.56,
+        597.7,
+        -4503.54
+      ],
+      "rotation": [
+        0.0,
+        -0.636,
+        -0.0,
+        0.772
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.07
+    },
+    {
+      "time": "11:05:11.377",
+      "position": [
+        -10587.41,
+        597.35,
+        -4503.02
+      ],
+      "rotation": [
+        0.0,
+        0.418,
+        0.0,
+        0.909
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:13.433",
+      "position": [
+        -10594.66,
+        591.79,
+        -4509.35
+      ],
+      "rotation": [
+        0.0,
+        0.433,
+        0.0,
+        0.902
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.07
+    },
+    {
+      "time": "11:05:15.490",
+      "position": [
+        -10605.36,
+        589.37,
+        -4515.36
+      ],
+      "rotation": [
+        0.0,
+        0.581,
+        0.0,
+        0.814
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.03
+    },
+    {
+      "time": "11:05:17.482",
+      "position": [
+        -10624.76,
+        585.45,
+        -4516.45
+      ],
+      "rotation": [
+        0.0,
+        0.611,
+        0.0,
+        0.792
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.02
+    },
+    {
+      "time": "11:05:19.523",
+      "position": [
+        -10642.03,
+        583.14,
+        -4526.58
+      ],
+      "rotation": [
+        0.0,
+        0.55,
+        0.0,
+        0.835
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.0
+    },
+    {
+      "time": "11:05:21.574",
+      "position": [
+        -10659.79,
+        579.85,
+        -4535.96
+      ],
+      "rotation": [
+        0.0,
+        0.596,
+        0.0,
+        0.803
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.11
+    },
+    {
+      "time": "11:05:23.628",
+      "position": [
+        -10678.87,
+        580.3,
+        -4542.47
+      ],
+      "rotation": [
+        0.0,
+        0.62,
+        0.0,
+        0.784
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.12
+    },
+    {
+      "time": "11:05:25.670",
+      "position": [
+        -10698.08,
+        579.08,
+        -4544.54
+      ],
+      "rotation": [
+        0.0,
+        0.848,
+        0.0,
+        0.53
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:27.685",
+      "position": [
+        -10702.69,
+        582.36,
+        -4536.32
+      ],
+      "rotation": [
+        0.0,
+        0.991,
+        0.0,
+        0.131
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:29.709",
+      "position": [
+        -10704.45,
+        582.46,
+        -4531.03
+      ],
+      "rotation": [
+        0.0,
+        0.916,
+        0.0,
+        0.401
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.18
+    },
+    {
+      "time": "11:05:31.729",
+      "position": [
+        -10704.4,
+        584.8,
+        -4530.85
+      ],
+      "rotation": [
+        0.0,
+        0.714,
+        0.0,
+        0.7
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:33.754",
+      "position": [
+        -10706.16,
+        593.31,
+        -4530.73
+      ],
+      "rotation": [
+        0.0,
+        0.679,
+        0.0,
+        0.735
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:35.788",
+      "position": [
+        -10712.18,
+        593.28,
+        -4531.22
+      ],
+      "rotation": [
+        0.0,
+        0.67,
+        0.0,
+        0.743
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:37.830",
+      "position": [
+        -10721.07,
+        590.27,
+        -4537.58
+      ],
+      "rotation": [
+        0.0,
+        0.582,
+        0.0,
+        0.813
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.04
+    },
+    {
+      "time": "11:05:39.845",
+      "position": [
+        -10734.08,
+        589.23,
+        -4535.99
+      ],
+      "rotation": [
+        0.0,
+        0.657,
+        0.0,
+        0.754
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.03
+    },
+    {
+      "time": "11:05:41.875",
+      "position": [
+        -10753.92,
+        587.75,
+        -4539.29
+      ],
+      "rotation": [
+        0.0,
+        0.644,
+        0.0,
+        0.765
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.01
+    },
+    {
+      "time": "11:05:43.890",
+      "position": [
+        -10773.69,
+        588.68,
+        -4541.74
+      ],
+      "rotation": [
+        0.0,
+        0.771,
+        0.0,
+        0.637
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.13
+    },
+    {
+      "time": "11:05:45.930",
+      "position": [
+        -10787.51,
+        589.03,
+        -4549.99
+      ],
+      "rotation": [
+        0.0,
+        0.253,
+        0.0,
+        0.968
+      ],
+      "hp": 900.0,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:47.957",
+      "position": [
+        -10791.42,
+        564.17,
+        -4557.14
+      ],
+      "rotation": [
+        0.0,
+        0.278,
+        0.0,
+        0.96
+      ],
+      "hp": 1.8,
+      "hp_max": 900.0,
+      "static_error_m": 0.2
+    },
+    {
+      "time": "11:05:49.954",
+      "position": [
+        -10791.55,
+        564.12,
+        -4557.37
+      ],
+      "rotation": [
+        0.0,
+        0.278,
+        0.0,
+        0.96
+      ],
+      "hp": 1.8,
+      "hp_max": 900.0,
+      "static_error_m": 0.02
+    },
+    {
+      "time": "11:05:52.000",
+      "position": [
+        -10791.55,
+        564.11,
+        -4557.37
+      ],
+      "rotation": [
+        0.0,
+        0.278,
+        0.0,
+        0.96
+      ],
+      "hp": 3.8,
+      "hp_max": 900.0,
+      "static_error_m": 0.04
+    },
+    {
+      "time": "11:05:54.028",
+      "position": [
+        -10791.55,
+        564.11,
+        -4557.37
+      ],
+      "rotation": [
+        0.0,
+        0.278,
+        0.0,
+        0.96
+      ],
+      "hp": 5.8,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:56.021",
+      "position": [
+        -10791.55,
+        564.11,
+        -4557.37
+      ],
+      "rotation": [
+        0.0,
+        0.278,
+        0.0,
+        0.96
+      ],
+      "hp": 5.8,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    },
+    {
+      "time": "11:05:58.084",
+      "position": [
+        -10791.55,
+        564.11,
+        -4557.37
+      ],
+      "rotation": [
+        0.0,
+        0.278,
+        0.0,
+        0.96
+      ],
+      "hp": 5.8,
+      "hp_max": 900.0,
+      "static_error_m": 0.05
+    }
+  ],
+  "observations": {
+    "samples": 43,
+    "hp_min": 1.8,
+    "hp_max": 900.0,
+    "rotations": 23,
+    "not_ready_reasons": [
+      "WorldSystem not created",
+      "control inner missing",
+      "loading (actor parked at 0,1000,0)",
+      "no controlled actor (not in world)",
+      "physics basis not a rotation"
+    ],
+    "stamina": "not read on target; legacy zero output is not stamina evidence"
+  },
+  "termination": "normal exit, watchdog exited before deadline",
+  "save_verification": {
+    "session": "R2-P1-20261116-110000",
+    "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "backup_verified": true,
+    "live_saves_unchanged": true,
+    "before_files": 23,
+    "after_files": 23
+  },
+  "cleanup": "ASI/PDB/loader/config removed; previous installation restored",
+  "runtime_log": {
+    "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\cdmp.log",
+    "bytes": 13868,
+    "sha256": "24B4A1D623E32927B40E00F4AA1AC9F3DE6631CC7F251656FD50169AEAC72D38"
+  },
+  "session_files": [
+    {
+      "name": "cdmp.log",
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\cdmp.log",
+      "sha256": "24B4A1D623E32927B40E00F4AA1AC9F3DE6631CC7F251656FD50169AEAC72D38"
+    },
+    {
+      "name": "deployed-hashes.json",
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\deployed-hashes.json",
+      "sha256": "DB6B71989F84E6FB1A47FB7627B329D2642B7D9D1BD935FDB25C6D1E3E95D4CA"
+    },
+    {
+      "name": "installed-receipt.json",
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\installed-receipt.json",
+      "sha256": "2116E40E5D25458C19C0C263032592263862213960F6DDD75CA81F1D866B1E00"
+    },
+    {
+      "name": "question.md",
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\question.md",
+      "sha256": "D855FE623658E029659B05F35C619A3B611DAF5A7442A7BA372D2303F1E9D930"
+    },
+    {
+      "name": "save-verification.json",
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\save-verification.json",
+      "sha256": "C93D30A9EDEB1ED9E214F5EB2C1E8E95D1A7D76715C0E22306C07083B6AB3A39"
+    },
+    {
+      "name": "session-profile.json",
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\session-profile.json",
+      "sha256": "46B2798AB9B3EC1B51A7B8F6D513F8BB0E8684FE6A80CB4274864373C093E254"
+    },
+    {
+      "name": "watchdog.json",
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-110000\\watchdog.json",
+      "sha256": "34739CA54CD23E23D245B107E38BDBDFFCB5F9FE97A9DE8E6A158EE252F671D8"
+    }
+  ],
+  "limitations": [
+    "R3 coherent fast-travel samples accepted; no claim of an independently proved loading predicate.",
+    "No screen capture used; user confirms travel and HP change, production log retains actual samples.",
+    "L1 only: no native multiplayer or Tier B acceptance."
+  ]
+}
