@@ -1,0 +1,11 @@
+{
+  "row": "B065",
+  "symbol": "kNetLoopPump",
+  "old": "0x35BAD4",
+  "target": "0x3A8D94",
+  "adopted": true,
+  "authority": "User-approved R3 rule 3; strong verified candidate midpoint and successful read-only native context trace",
+  "second_check": "Unique native window in verified pdata parent plus 125528 calls with matching root/readable fields; instruction patch exactly seven bytes",
+  "evidence": "pump-candidate-preflight.json; pump-result.json; R2 native network body reviews",
+  "tier_armed": false
+}

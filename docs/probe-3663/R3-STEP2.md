@@ -22,3 +22,5 @@ and ordinary-payload bounds through the actual per-build path; B078 will
 avoid reliance on descriptor size by advancing eight bytes on the target.
 The legacy host/guest installers are still build-specific and must be
 routed without accidentally enabling join/save stages. No L2 success claimed.
+
+Passive pump trace passed: 125528 observations, all matching ClientNet root and readable fields, no changed root in sampled reads. User confirmed travel, normal exit. B065 adopted under R3 rule 3; B remains false until the actual tunnel route is complete. Cleanup recovered from cloud-placeholder classification without changing saves; exact manifest and every backup file verified, all 23 live saves unchanged. See pump-result.json and r3_verify_backup.ps1.

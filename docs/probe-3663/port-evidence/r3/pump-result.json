@@ -1,0 +1,91 @@
+{
+  "session": "R3-PUMP-20261116-112400",
+  "controller_session": "R2-P1-20261116-112400",
+  "result": "passed",
+  "question": "Does R15 match ClientNet and expose the expected session/queue fields at the candidate pump point?",
+  "candidate": "0x3A8D94",
+  "parent": "0x3A8AC0",
+  "exe_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "counts": {
+    "seen": 125528,
+    "root_match": 125528,
+    "fields_ready": 125528,
+    "changed": 0
+  },
+  "all_logged_samples_match": true,
+  "logged_aggregate_samples": 95,
+  "user_confirmation": "Travel completed; game closed",
+  "game_data_writes": false,
+  "context_changes": false,
+  "native_calls": false,
+  "packet_replay": false,
+  "tier_b_armed": false,
+  "termination": "normal exit",
+  "save_verification": {
+    "session": "R2-P1-20261116-112400",
+    "backup_verified": true,
+    "live_saves_unchanged": true,
+    "before_files": 23,
+    "after_files": 23,
+    "cloud_tags": [
+      "0x9000601A",
+      "0x9000E01A"
+    ],
+    "cloud_reparse_count": 38,
+    "save_writes": false,
+    "verification": "Exact manifest digest and every backup file size/hash; only Windows CLOUD tags accepted; live saves retain the strict no-reparse guard"
+  },
+  "cleanup": "Exact owned installation verified then removed independently after normal exit; previous installation was empty. Backup guard first rejected OneDrive placeholders; read-only CLOUD-tag verifier checked every original hash and confirmed unchanged saves. General session no-link guard preserved.",
+  "limitations": [
+    "Context/field readability confirms this point; native semantics remain grounded in the paired R2 body review.",
+    "Not L2 or proof of a complete native tunnel.",
+    "No new game screenshot or raw decompiler dump committed."
+  ],
+  "runtime_log": {
+    "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\cdmp.log",
+    "bytes": 22586,
+    "sha256": "3AE7D89F56928A85137E9D3E469072CD49F2D0E40FF6983D3C83FF0834E4EC65"
+  },
+  "session_files": [
+    {
+      "name": "cdmp.log",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\cdmp.log",
+      "sha256": "3AE7D89F56928A85137E9D3E469072CD49F2D0E40FF6983D3C83FF0834E4EC65"
+    },
+    {
+      "name": "cleanup-recovery.json",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\cleanup-recovery.json",
+      "sha256": "B1DACE3C5DBB77189D12E826A6993B58FD00F12E060FA06C73BD20160A30188E"
+    },
+    {
+      "name": "deployed-hashes.json",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\deployed-hashes.json",
+      "sha256": "1BEB7A5BCBEE5E1DEB26BC6492B3268B0C80B5DA598097B708399170EA5E5A25"
+    },
+    {
+      "name": "installed-receipt.json",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\installed-receipt.json",
+      "sha256": "7864EAB6B6545710834845A6C2C82BB270F6CFEE348662B2D56E7887F358E142"
+    },
+    {
+      "name": "question.md",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\question.md",
+      "sha256": "7679226E8A9718A3512B76D21D52B064948642C7A7EF7FE17DAF6C1439802FEA"
+    },
+    {
+      "name": "save-verification.json",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\save-verification.json",
+      "sha256": "4AE75EAF55898EC9E6A741C705F7AB3A671F8AB889E957959E66E4A265C021DD"
+    },
+    {
+      "name": "session-profile.json",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\session-profile.json",
+      "sha256": "FAC4D596E379CD2FA8CF9FC8F2F5539C8EFB9DA4BC3A319A46F60575C2F98437"
+    },
+    {
+      "name": "watchdog.json",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-112400\\watchdog.json",
+      "sha256": "87D3BD3AC8F484482C3C3A8BD71A1DE29B92AB782647D3D60B7474D22147B8B9"
+    }
+  ]
+}
