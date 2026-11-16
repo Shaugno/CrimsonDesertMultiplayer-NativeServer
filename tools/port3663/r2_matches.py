@@ -26,6 +26,11 @@ vt = defaultdict(list)
 with args.vt.open(encoding='utf-8-sig') as stream:
     for row in csv.DictReader(stream,delimiter='\t'):
         if row['status'] != 'ACCEPTED': continue
+        # VTAssociationType.toString() exports "Function"/"Data" in Ghidra.
+        # Normalize the documented enum spelling before enforcing typed anchors.
+        row['type']=row['type'].strip().upper()
+        if row['type'] not in ('FUNCTION','DATA'):
+            raise ValueError('Unknown accepted VT association type: '+row['type'])
         source = int(row['source'].split(':')[-1],16)-0x140000000
         destination = int(row['destination'].split(':')[-1],16)-0x140000000
         if source>0 and destination>0: vt[source].append(dict(row, target=destination))
@@ -90,7 +95,7 @@ for row in core:
         anchor=check.get('anchor')
         direct_conflict=standard_conflict(int(value,0),int(check['target'],0))
         if not direct_conflict and not support and anchor:
-            support=[f'Native operand in anchor {hex(anchor[0])} -> {hex(anchor[1])}: '+s
+            support=[f'Native relationship to anchor {hex(anchor[0])} -> {hex(anchor[1])}: '+s
                      for s in standard_support(*anchor,function_only=True)]
         if support:
             result.update(target=check['target'],adopted=True,method='; '.join(support),
@@ -127,5 +132,5 @@ for row in results:
     if row.get('next_experiment'): detail+=' Next: '+row['next_experiment']
     cells = [row['tier'],row['row']+' '+row['symbol'],str(row['target'] or 'unadopted'),row['method'],row['second_check'],detail]
     text += '| '+' | '.join(s.replace('|','\\|').replace('\n',' ') for s in cells)+' |\n'
-(args.output_dir/'R2-MATCHES.md').write_text(text)
+(args.output_dir/'R2-MATCHES.md').write_text(text,encoding='utf-8')
 print(Counter((r['tier'],r['adopted']) for r in results))

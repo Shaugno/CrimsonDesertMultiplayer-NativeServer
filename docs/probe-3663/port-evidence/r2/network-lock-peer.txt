@@ -1,0 +1,10 @@
+cdmp_peer listening on 127.0.0.1:39763, mode ghost (delay 100 ms, offset 2.0 m, loss 0%, jitter 0 ms)
+Hello from 'PortSmokeSynthetic' (build 2431200180) at 127.0.0.1:64805 [1 player(s)]
+recv 24 rejected 0 | sent 23 dropped 0 | 1 player(s)
+  'PortSmokeSynthetic' 127.0.0.1:64805: recv 23, game events 0, reliable fragments 0, pos (-1.93, 0.00, 0.52) hp 0.0/0.0 synthetic
+recv 59 rejected 0 | sent 57 dropped 0 | 1 player(s)
+  'PortSmokeSynthetic' 127.0.0.1:64805: recv 58, game events 0, reliable fragments 0, pos (-0.42, 0.00, -1.95) hp 0.0/0.0 synthetic
+recv 93 rejected 0 | sent 91 dropped 0 | 1 player(s)
+  'PortSmokeSynthetic' 127.0.0.1:64805: recv 92, game events 0, reliable fragments 0, pos (1.95, 0.00, -0.42) hp 0.0/0.0 synthetic
+recv 127 rejected 0 | sent 126 dropped 0 | 1 player(s)
+  'PortSmokeSynthetic' 127.0.0.1:64805: recv 126, game events 0, reliable fragments 0, pos (0.43, 0.00, 1.95) hp 0.0/0.0 synthetic

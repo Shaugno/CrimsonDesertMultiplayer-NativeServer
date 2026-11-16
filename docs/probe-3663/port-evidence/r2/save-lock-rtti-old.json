@@ -1,0 +1,3516 @@
+{
+  "identity": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\reference-bins\\2976\\CrimsonDesert.exe",
+    "sha256": "57DA440D72F4DB974F25FEF047CF84C4DADD999A88CB2A3C5AF4C9BD67FDE1E7",
+    "file_size": 384521624,
+    "timestamp": "0x6AB28F00",
+    "image_base": "0x140000000",
+    "image_size": "0x173AB000",
+    "pdata_entries": 244444,
+    "tls_index_rva": "0x6C88C50",
+    "sections": [
+      {
+        "name": ".rsrc",
+        "rva": 4096,
+        "raw": 1024,
+        "size": 85893120,
+        "virtual_size": 85893120,
+        "flags": 1610612768
+      },
+      {
+        "name": ".xdata",
+        "rva": 85897216,
+        "raw": 85894144,
+        "size": 23756800,
+        "virtual_size": 23756800,
+        "flags": 1073741888
+      },
+      {
+        "name": ".rdata",
+        "rva": 109654016,
+        "raw": 109650944,
+        "size": 3524608,
+        "virtual_size": 8732672,
+        "flags": 3221225536
+      },
+      {
+        "name": ".00cfg",
+        "rva": 118386688,
+        "raw": 113175552,
+        "size": 2936832,
+        "virtual_size": 2936832,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls$",
+        "rva": 121323520,
+        "raw": 116112384,
+        "size": 12288,
+        "virtual_size": 12288,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls",
+        "rva": 121335808,
+        "raw": 116124672,
+        "size": 196608,
+        "virtual_size": 196608,
+        "flags": 1073741888
+      },
+      {
+        "name": ".xtext",
+        "rva": 121532416,
+        "raw": 116321280,
+        "size": 1974272,
+        "virtual_size": 1974272,
+        "flags": 1107296320
+      },
+      {
+        "name": ".xtls",
+        "rva": 123506688,
+        "raw": 118295552,
+        "size": 261384192,
+        "virtual_size": 261383906,
+        "flags": 3758096416
+      },
+      {
+        "name": ".text",
+        "rva": 384892928,
+        "raw": 379679744,
+        "size": 1849856,
+        "virtual_size": 1849734,
+        "flags": 1073741856
+      },
+      {
+        "name": ".shared",
+        "rva": 386744320,
+        "raw": 381529600,
+        "size": 1024,
+        "virtual_size": 584,
+        "flags": 3221225504
+      },
+      {
+        "name": ".impdata",
+        "rva": 386748416,
+        "raw": 381530624,
+        "size": 36352,
+        "virtual_size": 36316,
+        "flags": 1073741888
+      },
+      {
+        "name": ".trace",
+        "rva": 386785280,
+        "raw": 381566976,
+        "size": 2933760,
+        "virtual_size": 2933328,
+        "flags": 1073741888
+      }
+    ]
+  },
+  "adopted": 0,
+  "types": [
+    {
+      "name": ".?AV?$WindowsLock@$02@pa@@",
+      "descriptor": "0x6AA4648",
+      "locators": [
+        {
+          "rva": "0x5DA65C8",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x557C120",
+          "locator": "0x5DA65C8",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x44FAF0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1371340",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0xCE4EF0",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x1371780",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x1371790",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x233F03",
+              "pdata_owner": "0x233EF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x33CE76",
+              "pdata_owner": "0x33CE60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x93D492",
+              "pdata_owner": "0x93D170",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x9A49A7",
+              "pdata_owner": "0x9A4670",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x12B591A",
+              "pdata_owner": "0x12B5810",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13DE4AF",
+              "pdata_owner": "0x13DE400",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1415EA4",
+              "pdata_owner": "0x1415DD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143559E",
+              "pdata_owner": "0x1435570",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1436FA8",
+              "pdata_owner": "0x1436EE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x23551DC",
+              "pdata_owner": "0x2354FA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27BF13E",
+              "pdata_owner": "0x27BEB50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27BF307",
+              "pdata_owner": "0x27BEB50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27BF4A0",
+              "pdata_owner": "0x27BEB50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27BF4C3",
+              "pdata_owner": "0x27BEB50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27BF58E",
+              "pdata_owner": "0x27BEB50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27BF93F",
+              "pdata_owner": "0x27BEB50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2874AED",
+              "pdata_owner": "0x2874AC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x289B5A0",
+              "pdata_owner": "0x289B180",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E26E4D",
+              "pdata_owner": "0x2E26E10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EB1EB1",
+              "pdata_owner": "0x2EB1B90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38D8F01",
+              "pdata_owner": "0x38D8DC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B618A8",
+              "pdata_owner": "0x3B61490",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3BB1BEE",
+              "pdata_owner": "0x3BB0A80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DBB136",
+              "pdata_owner": "0x3DBB060",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DBB6AD",
+              "pdata_owner": "0x3DBB5B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x894A2E7",
+              "pdata_owner": "0x894A230",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x9FD0E91",
+              "pdata_owner": "0x9FD0D20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB62638E",
+              "pdata_owner": "0xB626350",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB6B5104",
+              "pdata_owner": "0xB6B5080",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xCBD2956",
+              "pdata_owner": "0xCBD2920",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xCFE43EC",
+              "pdata_owner": "0xCFE43B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xDC67913",
+              "pdata_owner": "0xDC678E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xF8BC7F8",
+              "pdata_owner": "0xF8BC7D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x10120F19",
+              "pdata_owner": "0x10120D60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13E290AF",
+              "pdata_owner": "0x13E28FC0",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVWindowsLockBase@pa@@",
+      "descriptor": "0x6AA4678",
+      "locators": [
+        {
+          "rva": "0x5E30AA0",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x571A278",
+          "locator": "0x5E30AA0",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x13716B0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1371340",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0xCE4EF0",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x1371780",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x1371790",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x35D04C",
+              "pdata_owner": "0x35CD50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35E6CD",
+              "pdata_owner": "0x35E640",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35ECA6",
+              "pdata_owner": "0x35EC80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x44E47D",
+              "pdata_owner": "0x44E470",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x44FB04",
+              "pdata_owner": "0x44FAF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x6175DC",
+              "pdata_owner": "0x617290",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x61765D",
+              "pdata_owner": "0x617640",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x96FD1F",
+              "pdata_owner": "0x96FCD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x971CB9",
+              "pdata_owner": "0x971C80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x971F1B",
+              "pdata_owner": "0x971EA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x9B39FE",
+              "pdata_owner": "0x9B39D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xA84538",
+              "pdata_owner": "0xA844C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xA906A5",
+              "pdata_owner": "0xA905A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xAA81F0",
+              "pdata_owner": "0xAA81B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xAAAF40",
+              "pdata_owner": "0xAAAE90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xAD472A",
+              "pdata_owner": "0xAD46D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xCAF2EF",
+              "pdata_owner": "0xCAF2A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x135F58E",
+              "pdata_owner": "0x135F4E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1371636",
+              "pdata_owner": "0x1371610",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13716C4",
+              "pdata_owner": "0x13716B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13717BE",
+              "pdata_owner": "0x13717A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1371847",
+              "pdata_owner": "0x1371830",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13DD7D1",
+              "pdata_owner": "0x13DD6C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13DEA13",
+              "pdata_owner": "0x13DE8E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13EF7FA",
+              "pdata_owner": "0x13EF760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13FD00F",
+              "pdata_owner": "0x13FCFD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13FE34F",
+              "pdata_owner": "0x13FE330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13FE7B0",
+              "pdata_owner": "0x13FE330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1409898",
+              "pdata_owner": "0x1409740",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1415F9B",
+              "pdata_owner": "0x1415F20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x141E61A",
+              "pdata_owner": "0x141E570",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14356DC",
+              "pdata_owner": "0x14355E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143AC07",
+              "pdata_owner": "0x143ABD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143B056",
+              "pdata_owner": "0x143B030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1EEF79A",
+              "pdata_owner": "0x1EEF760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FCB927",
+              "pdata_owner": "0x1FCB8F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE126",
+              "pdata_owner": "0x1FDE100",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE223",
+              "pdata_owner": "0x1FDE160",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FE1637",
+              "pdata_owner": "0x1FE1600",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2354A30",
+              "pdata_owner": "0x2354A10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2550418",
+              "pdata_owner": "0x25502F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2775CD4",
+              "pdata_owner": "0x2775C80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27A8808",
+              "pdata_owner": "0x27A8760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27A9D8D",
+              "pdata_owner": "0x27A9D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27C2245",
+              "pdata_owner": "0x27C21D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27C2946",
+              "pdata_owner": "0x27C2900",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x289B6B9",
+              "pdata_owner": "0x289B690",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2AF72DC",
+              "pdata_owner": "0x2AF72C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B093DD",
+              "pdata_owner": "0x2B09350",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0D9FD",
+              "pdata_owner": "0x2B0D970",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0DBED",
+              "pdata_owner": "0x2B0DB60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0DDDD",
+              "pdata_owner": "0x2B0DD50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0DFCD",
+              "pdata_owner": "0x2B0DF40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E1BD",
+              "pdata_owner": "0x2B0E130",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E3AD",
+              "pdata_owner": "0x2B0E320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E59D",
+              "pdata_owner": "0x2B0E510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E78D",
+              "pdata_owner": "0x2B0E700",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E97D",
+              "pdata_owner": "0x2B0E8F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0EB6D",
+              "pdata_owner": "0x2B0EAE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0ED5D",
+              "pdata_owner": "0x2B0ECD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0EF4D",
+              "pdata_owner": "0x2B0EEC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F13D",
+              "pdata_owner": "0x2B0F0B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F32D",
+              "pdata_owner": "0x2B0F2A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F51D",
+              "pdata_owner": "0x2B0F490",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F70D",
+              "pdata_owner": "0x2B0F680",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F8FD",
+              "pdata_owner": "0x2B0F870",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0FAED",
+              "pdata_owner": "0x2B0FA60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0FCDD",
+              "pdata_owner": "0x2B0FC50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0FECD",
+              "pdata_owner": "0x2B0FE40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B100BD",
+              "pdata_owner": "0x2B10030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B102AD",
+              "pdata_owner": "0x2B10220",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1049D",
+              "pdata_owner": "0x2B10410",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1068D",
+              "pdata_owner": "0x2B10600",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1087D",
+              "pdata_owner": "0x2B107F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10A6D",
+              "pdata_owner": "0x2B109E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10C5D",
+              "pdata_owner": "0x2B10BD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10E4D",
+              "pdata_owner": "0x2B10DC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1103D",
+              "pdata_owner": "0x2B10FB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1122D",
+              "pdata_owner": "0x2B111A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1141D",
+              "pdata_owner": "0x2B11390",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1160D",
+              "pdata_owner": "0x2B11580",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B117FD",
+              "pdata_owner": "0x2B11770",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B119ED",
+              "pdata_owner": "0x2B11960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11BDD",
+              "pdata_owner": "0x2B11B50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11DCD",
+              "pdata_owner": "0x2B11D40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11FBD",
+              "pdata_owner": "0x2B11F30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B121AD",
+              "pdata_owner": "0x2B12120",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1239D",
+              "pdata_owner": "0x2B12310",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1258D",
+              "pdata_owner": "0x2B12500",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1277D",
+              "pdata_owner": "0x2B126F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1296D",
+              "pdata_owner": "0x2B128E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12B5D",
+              "pdata_owner": "0x2B12AD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12D4D",
+              "pdata_owner": "0x2B12CC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12F3D",
+              "pdata_owner": "0x2B12EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1312D",
+              "pdata_owner": "0x2B130A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1331D",
+              "pdata_owner": "0x2B13290",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1350D",
+              "pdata_owner": "0x2B13480",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B136FD",
+              "pdata_owner": "0x2B13670",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B138ED",
+              "pdata_owner": "0x2B13860",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B13ADD",
+              "pdata_owner": "0x2B13A50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B3CD21",
+              "pdata_owner": "0x2B3CCE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD6A1D",
+              "pdata_owner": "0x2BD6990",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C1A6BA",
+              "pdata_owner": "0x2C1A680",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C50D67",
+              "pdata_owner": "0x2C50D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C5AFCA",
+              "pdata_owner": "0x2C5AF60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CB9807",
+              "pdata_owner": "0x2CB97D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CC54E2",
+              "pdata_owner": "0x2CC5430",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CCEC73",
+              "pdata_owner": "0x2CCE840",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D6D11E",
+              "pdata_owner": "0x2D6D020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB143A",
+              "pdata_owner": "0x2DB13C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB150A",
+              "pdata_owner": "0x2DB14C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB15B6",
+              "pdata_owner": "0x2DB1580",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DE86C4",
+              "pdata_owner": "0x2DE85C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E27022",
+              "pdata_owner": "0x2E26F90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EBEAE6",
+              "pdata_owner": "0x2EBE7B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2FC1C76",
+              "pdata_owner": "0x2FC1C20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30DEA27",
+              "pdata_owner": "0x30DE9F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30E8757",
+              "pdata_owner": "0x30E8720",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30FE3BC",
+              "pdata_owner": "0x30FE300",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x310238E",
+              "pdata_owner": "0x3102350",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x31026A5",
+              "pdata_owner": "0x3102520",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3102AC8",
+              "pdata_owner": "0x3102A30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3137216",
+              "pdata_owner": "0x31371A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x338265B",
+              "pdata_owner": "0x3382630",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3516C10",
+              "pdata_owner": "0x3516BC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35CBB1F",
+              "pdata_owner": "0x35CBA20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x360EFCD",
+              "pdata_owner": "0x360EFA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x36C1841",
+              "pdata_owner": "0x36C17C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x36F424D",
+              "pdata_owner": "0x36F4200",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3705645",
+              "pdata_owner": "0x3705620",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x372257C",
+              "pdata_owner": "0x3721FD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x377037A",
+              "pdata_owner": "0x37701C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38337E7",
+              "pdata_owner": "0x3833780",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3833BE3",
+              "pdata_owner": "0x3833B40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383D53F",
+              "pdata_owner": "0x383D510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383E964",
+              "pdata_owner": "0x383E930",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383F966",
+              "pdata_owner": "0x383F900",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383FF94",
+              "pdata_owner": "0x383FF60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3843C4D",
+              "pdata_owner": "0x3843BE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3844502",
+              "pdata_owner": "0x3844390",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38482E6",
+              "pdata_owner": "0x38482B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38485A0",
+              "pdata_owner": "0x3848560",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x384921E",
+              "pdata_owner": "0x38491F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x384AAB3",
+              "pdata_owner": "0x384A960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38CE5DB",
+              "pdata_owner": "0x38CE540",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38E0ADF",
+              "pdata_owner": "0x38E0AB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38E1726",
+              "pdata_owner": "0x38E16E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38E2AF1",
+              "pdata_owner": "0x38E2A80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38F9124",
+              "pdata_owner": "0x38F9090",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3918B86",
+              "pdata_owner": "0x3918960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x395CD98",
+              "pdata_owner": "0x395CD00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x39AEE15",
+              "pdata_owner": "0x39AEDF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A56CBC",
+              "pdata_owner": "0x3A56A40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A76534",
+              "pdata_owner": "0x3A764E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B501DB",
+              "pdata_owner": "0x3B50190",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B50659",
+              "pdata_owner": "0x3B505E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B6389E",
+              "pdata_owner": "0x3B637F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3C337EB",
+              "pdata_owner": "0x3C33710",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3C41107",
+              "pdata_owner": "0x3C410A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3C6AAFA",
+              "pdata_owner": "0x3C6AAD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3CFA142",
+              "pdata_owner": "0x3CFA110",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DBB518",
+              "pdata_owner": "0x3DBB3F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DD5F30",
+              "pdata_owner": "0x3DD5D90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DD6082",
+              "pdata_owner": "0x3DD5F90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DEC405",
+              "pdata_owner": "0x3DEC2F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DF84B8",
+              "pdata_owner": "0x3DF8450",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E094CF",
+              "pdata_owner": "0x3E094A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E27F2C",
+              "pdata_owner": "0x3E27EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E41AD9",
+              "pdata_owner": "0x3E41930",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3F005B9",
+              "pdata_owner": "0x3F00490",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5092CC2",
+              "pdata_owner": "0x5092CB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x509386E",
+              "pdata_owner": "0x5093850",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5094F52",
+              "pdata_owner": "0x5094F40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5103CF2",
+              "pdata_owner": "0x5103CE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5105F4B",
+              "pdata_owner": "0x5105F20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x510782B",
+              "pdata_owner": "0x5107800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x510A01B",
+              "pdata_owner": "0x5109FF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51151EE",
+              "pdata_owner": "0x51151D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x511CBCB",
+              "pdata_owner": "0x511CBA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x512785E",
+              "pdata_owner": "0x5127840",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51359EB",
+              "pdata_owner": "0x51359C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5135A5B",
+              "pdata_owner": "0x5135A30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x513792B",
+              "pdata_owner": "0x5137900",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5149A4B",
+              "pdata_owner": "0x5149A20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514A922",
+              "pdata_owner": "0x514A910",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514ABF2",
+              "pdata_owner": "0x514ABE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514AF6B",
+              "pdata_owner": "0x514AF40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514AFDB",
+              "pdata_owner": "0x514AFB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x515C1BB",
+              "pdata_owner": "0x515C190",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x515C3A3",
+              "pdata_owner": "0x515C360",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5165EDB",
+              "pdata_owner": "0x5165EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516684B",
+              "pdata_owner": "0x5166820",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516B87B",
+              "pdata_owner": "0x516B850",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516B8EB",
+              "pdata_owner": "0x516B8C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516C43B",
+              "pdata_owner": "0x516C410",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516CB5B",
+              "pdata_owner": "0x516CB30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516CBCB",
+              "pdata_owner": "0x516CBA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516CC3B",
+              "pdata_owner": "0x516CC10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516D6CB",
+              "pdata_owner": "0x516D6A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x517485B",
+              "pdata_owner": "0x5174830",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5175E8B",
+              "pdata_owner": "0x5175E60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5182EDB",
+              "pdata_owner": "0x5182EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x518E53B",
+              "pdata_owner": "0x518E510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519004B",
+              "pdata_owner": "0x5190020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51941FB",
+              "pdata_owner": "0x51941D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519460B",
+              "pdata_owner": "0x51945E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519467B",
+              "pdata_owner": "0x5194650",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51946EB",
+              "pdata_owner": "0x51946C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519475B",
+              "pdata_owner": "0x5194730",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51947CB",
+              "pdata_owner": "0x51947A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519483B",
+              "pdata_owner": "0x5194810",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A012B",
+              "pdata_owner": "0x51A0100",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A6642",
+              "pdata_owner": "0x51A6630",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A7C9F",
+              "pdata_owner": "0x51A7C40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A8C42",
+              "pdata_owner": "0x51A8C30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51C1F4B",
+              "pdata_owner": "0x51C1F20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D0C52",
+              "pdata_owner": "0x51D0C40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D3AAB",
+              "pdata_owner": "0x51D3A80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D3B1B",
+              "pdata_owner": "0x51D3AF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D733B",
+              "pdata_owner": "0x51D7310",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51E8944",
+              "pdata_owner": "0x51E8940",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x8942163",
+              "pdata_owner": "0x8941FF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB6F6D1D",
+              "pdata_owner": "0xB6F6D10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB8B75A0",
+              "pdata_owner": "0xB8B7540",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEE1968B",
+              "pdata_owner": "0xEE195E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x112CBA62",
+              "pdata_owner": "0x112CB8F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1440DDAD",
+              "pdata_owner": "0x1440DD60",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".?AVWindowsLockForOnlyEngineXXX@pa@@",
+      "descriptor": "0x6AF6598",
+      "locators": [
+        {
+          "rva": "0x5E30A28",
+          "this_offset": 0,
+          "ctor_offset": 0
+        }
+      ],
+      "vtables": [
+        {
+          "rva": "0x571A2A8",
+          "locator": "0x5E30A28",
+          "slots": [
+            {
+              "index": 0,
+              "rva": "0x13717A0",
+              "pdata_entry": true
+            },
+            {
+              "index": 1,
+              "rva": "0x1371340",
+              "pdata_entry": false
+            },
+            {
+              "index": 2,
+              "rva": "0xCE4EF0",
+              "pdata_entry": false
+            },
+            {
+              "index": 3,
+              "rva": "0x1371780",
+              "pdata_entry": false
+            },
+            {
+              "index": 4,
+              "rva": "0x1371790",
+              "pdata_entry": false
+            }
+          ],
+          "code_lea_candidates": [
+            {
+              "rva": "0x183E06",
+              "pdata_owner": "0x183DF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x187656",
+              "pdata_owner": "0x187640",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2145AB",
+              "pdata_owner": "0x214590",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x21629B",
+              "pdata_owner": "0x216280",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x219CFB",
+              "pdata_owner": "0x219CE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x24495B",
+              "pdata_owner": "0x244940",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x264F5B",
+              "pdata_owner": "0x264F40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x264FCB",
+              "pdata_owner": "0x264FB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x26783B",
+              "pdata_owner": "0x267820",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x26D5DB",
+              "pdata_owner": "0x26D5C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x26F51B",
+              "pdata_owner": "0x26F500",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x26F58B",
+              "pdata_owner": "0x26F570",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27E02B",
+              "pdata_owner": "0x27E010",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2870EB",
+              "pdata_owner": "0x2870D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x28739B",
+              "pdata_owner": "0x287380",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x28967B",
+              "pdata_owner": "0x289660",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2896EB",
+              "pdata_owner": "0x2896D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x28996B",
+              "pdata_owner": "0x289950",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x289DFB",
+              "pdata_owner": "0x289DE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x289E6B",
+              "pdata_owner": "0x289E50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x289EDB",
+              "pdata_owner": "0x289EC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x28A80B",
+              "pdata_owner": "0x28A7F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x294D7B",
+              "pdata_owner": "0x294D60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x295BFB",
+              "pdata_owner": "0x295BE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2A9D3B",
+              "pdata_owner": "0x2A9D20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BA57B",
+              "pdata_owner": "0x2BA560",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD36B",
+              "pdata_owner": "0x2BD350",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C526B",
+              "pdata_owner": "0x2C5250",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C55AB",
+              "pdata_owner": "0x2C5590",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C561B",
+              "pdata_owner": "0x2C5600",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C568B",
+              "pdata_owner": "0x2C5670",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C56FB",
+              "pdata_owner": "0x2C56E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C576B",
+              "pdata_owner": "0x2C5750",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C57DB",
+              "pdata_owner": "0x2C57C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CF7AB",
+              "pdata_owner": "0x2CF790",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DD91B",
+              "pdata_owner": "0x2DD900",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30534B",
+              "pdata_owner": "0x305330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3197D6",
+              "pdata_owner": "0x3197C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x31C7AB",
+              "pdata_owner": "0x31C790",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x31C81B",
+              "pdata_owner": "0x31C800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x32081B",
+              "pdata_owner": "0x320800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35D042",
+              "pdata_owner": "0x35CD50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35E518",
+              "pdata_owner": "0x35E4E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35E6C3",
+              "pdata_owner": "0x35E640",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35EC9C",
+              "pdata_owner": "0x35EC80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x617653",
+              "pdata_owner": "0x617640",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x7C397D",
+              "pdata_owner": "0x7C3960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x93E17E",
+              "pdata_owner": "0x93D170",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x96FD15",
+              "pdata_owner": "0x96FCD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xA896F5",
+              "pdata_owner": "0xA89600",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xA9069B",
+              "pdata_owner": "0xA905A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xAA81E6",
+              "pdata_owner": "0xAA81B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xCAF1D2",
+              "pdata_owner": "0xCAF1B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xCAF2E5",
+              "pdata_owner": "0xCAF2A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13717B4",
+              "pdata_owner": "0x13717A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x137183D",
+              "pdata_owner": "0x1371830",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13B27A8",
+              "pdata_owner": "0x13B25E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13D7B6F",
+              "pdata_owner": "0x13D7A40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13DD7C7",
+              "pdata_owner": "0x13DD6C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13EF7F0",
+              "pdata_owner": "0x13EF760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13F02B2",
+              "pdata_owner": "0x13F01F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13FD005",
+              "pdata_owner": "0x13FCFD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13FE348",
+              "pdata_owner": "0x13FE330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13FE7A6",
+              "pdata_owner": "0x13FE330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x140988E",
+              "pdata_owner": "0x1409740",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x141B460",
+              "pdata_owner": "0x141B400",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x141E4FF",
+              "pdata_owner": "0x141E3E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x141E610",
+              "pdata_owner": "0x141E570",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143A189",
+              "pdata_owner": "0x143A0F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143ABFD",
+              "pdata_owner": "0x143ABD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143AF62",
+              "pdata_owner": "0x143AF40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143B04C",
+              "pdata_owner": "0x143B030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FCB91D",
+              "pdata_owner": "0x1FCB8F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE11C",
+              "pdata_owner": "0x1FDE100",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE219",
+              "pdata_owner": "0x1FDE160",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE3AF",
+              "pdata_owner": "0x1FDE320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE4C3",
+              "pdata_owner": "0x1FDE320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE6E4",
+              "pdata_owner": "0x1FDE320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE7D9",
+              "pdata_owner": "0x1FDE320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDE9F7",
+              "pdata_owner": "0x1FDE320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FDEAE5",
+              "pdata_owner": "0x1FDE320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1FE162D",
+              "pdata_owner": "0x1FE1600",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2316E1F",
+              "pdata_owner": "0x2316C50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x277230D",
+              "pdata_owner": "0x2772050",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2775CCA",
+              "pdata_owner": "0x2775C80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27A87FE",
+              "pdata_owner": "0x27A8760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27A9D83",
+              "pdata_owner": "0x27A9D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x27AA368",
+              "pdata_owner": "0x27AA330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B093D3",
+              "pdata_owner": "0x2B09350",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0B178",
+              "pdata_owner": "0x2B0B140",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0D9F3",
+              "pdata_owner": "0x2B0D970",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0DBE3",
+              "pdata_owner": "0x2B0DB60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0DDD3",
+              "pdata_owner": "0x2B0DD50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0DFC3",
+              "pdata_owner": "0x2B0DF40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E1B3",
+              "pdata_owner": "0x2B0E130",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E3A3",
+              "pdata_owner": "0x2B0E320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E593",
+              "pdata_owner": "0x2B0E510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E783",
+              "pdata_owner": "0x2B0E700",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0E973",
+              "pdata_owner": "0x2B0E8F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0EB63",
+              "pdata_owner": "0x2B0EAE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0ED53",
+              "pdata_owner": "0x2B0ECD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0EF43",
+              "pdata_owner": "0x2B0EEC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F133",
+              "pdata_owner": "0x2B0F0B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F323",
+              "pdata_owner": "0x2B0F2A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F513",
+              "pdata_owner": "0x2B0F490",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F703",
+              "pdata_owner": "0x2B0F680",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0F8F3",
+              "pdata_owner": "0x2B0F870",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0FAE3",
+              "pdata_owner": "0x2B0FA60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0FCD3",
+              "pdata_owner": "0x2B0FC50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B0FEC3",
+              "pdata_owner": "0x2B0FE40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B100B3",
+              "pdata_owner": "0x2B10030",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B102A3",
+              "pdata_owner": "0x2B10220",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10493",
+              "pdata_owner": "0x2B10410",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10683",
+              "pdata_owner": "0x2B10600",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10873",
+              "pdata_owner": "0x2B107F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10A63",
+              "pdata_owner": "0x2B109E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10C53",
+              "pdata_owner": "0x2B10BD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B10E43",
+              "pdata_owner": "0x2B10DC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11033",
+              "pdata_owner": "0x2B10FB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11223",
+              "pdata_owner": "0x2B111A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11413",
+              "pdata_owner": "0x2B11390",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11603",
+              "pdata_owner": "0x2B11580",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B117F3",
+              "pdata_owner": "0x2B11770",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B119E3",
+              "pdata_owner": "0x2B11960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11BD3",
+              "pdata_owner": "0x2B11B50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11DC3",
+              "pdata_owner": "0x2B11D40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B11FB3",
+              "pdata_owner": "0x2B11F30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B121A3",
+              "pdata_owner": "0x2B12120",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12393",
+              "pdata_owner": "0x2B12310",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12583",
+              "pdata_owner": "0x2B12500",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12773",
+              "pdata_owner": "0x2B126F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12963",
+              "pdata_owner": "0x2B128E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12B53",
+              "pdata_owner": "0x2B12AD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12D43",
+              "pdata_owner": "0x2B12CC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B12F33",
+              "pdata_owner": "0x2B12EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B13123",
+              "pdata_owner": "0x2B130A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B13313",
+              "pdata_owner": "0x2B13290",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B13503",
+              "pdata_owner": "0x2B13480",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B136F3",
+              "pdata_owner": "0x2B13670",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B138E3",
+              "pdata_owner": "0x2B13860",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B13AD3",
+              "pdata_owner": "0x2B13A50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B16E48",
+              "pdata_owner": "0x2B16E10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B17338",
+              "pdata_owner": "0x2B17300",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B17828",
+              "pdata_owner": "0x2B177F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B17D18",
+              "pdata_owner": "0x2B17CE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B18208",
+              "pdata_owner": "0x2B181D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B186F8",
+              "pdata_owner": "0x2B186C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B18BE8",
+              "pdata_owner": "0x2B18BB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B190D8",
+              "pdata_owner": "0x2B190A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B195C8",
+              "pdata_owner": "0x2B19590",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B19AB8",
+              "pdata_owner": "0x2B19A80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B19FA8",
+              "pdata_owner": "0x2B19F70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1A498",
+              "pdata_owner": "0x2B1A460",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1A988",
+              "pdata_owner": "0x2B1A950",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1AE78",
+              "pdata_owner": "0x2B1AE40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1B368",
+              "pdata_owner": "0x2B1B330",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1B858",
+              "pdata_owner": "0x2B1B820",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1BD48",
+              "pdata_owner": "0x2B1BD10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1C238",
+              "pdata_owner": "0x2B1C200",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1C728",
+              "pdata_owner": "0x2B1C6F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1CC18",
+              "pdata_owner": "0x2B1CBE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1CF08",
+              "pdata_owner": "0x2B1CED0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1D1F8",
+              "pdata_owner": "0x2B1D1C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1D6E8",
+              "pdata_owner": "0x2B1D6B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1DBD8",
+              "pdata_owner": "0x2B1DBA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1E0C8",
+              "pdata_owner": "0x2B1E090",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1E5B8",
+              "pdata_owner": "0x2B1E580",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1EAA8",
+              "pdata_owner": "0x2B1EA70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1ED98",
+              "pdata_owner": "0x2B1ED60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1F288",
+              "pdata_owner": "0x2B1F250",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1F778",
+              "pdata_owner": "0x2B1F740",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B1FC68",
+              "pdata_owner": "0x2B1FC30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B20158",
+              "pdata_owner": "0x2B20120",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B20648",
+              "pdata_owner": "0x2B20610",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B20B38",
+              "pdata_owner": "0x2B20B00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B21028",
+              "pdata_owner": "0x2B20FF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B21518",
+              "pdata_owner": "0x2B214E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B21A08",
+              "pdata_owner": "0x2B219D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B21EF8",
+              "pdata_owner": "0x2B21EC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B221E8",
+              "pdata_owner": "0x2B221B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B224D8",
+              "pdata_owner": "0x2B224A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B227C8",
+              "pdata_owner": "0x2B22790",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B22CB8",
+              "pdata_owner": "0x2B22C80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B22FA8",
+              "pdata_owner": "0x2B22F70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B23498",
+              "pdata_owner": "0x2B23460",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B23788",
+              "pdata_owner": "0x2B23750",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B23C78",
+              "pdata_owner": "0x2B23C40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B23F68",
+              "pdata_owner": "0x2B23F30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B24258",
+              "pdata_owner": "0x2B24220",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B24548",
+              "pdata_owner": "0x2B24510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B24838",
+              "pdata_owner": "0x2B24800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2B24B28",
+              "pdata_owner": "0x2B24AF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD6A13",
+              "pdata_owner": "0x2BD6990",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2BD6DE8",
+              "pdata_owner": "0x2BD6DB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C50D5D",
+              "pdata_owner": "0x2C50D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2C5AFC0",
+              "pdata_owner": "0x2C5AF60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CB97FD",
+              "pdata_owner": "0x2CB97D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CC54D8",
+              "pdata_owner": "0x2CC5430",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CCC407",
+              "pdata_owner": "0x2CCC3C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2CCEC69",
+              "pdata_owner": "0x2CCE840",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D67EF6",
+              "pdata_owner": "0x2D67E70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2D6D114",
+              "pdata_owner": "0x2D6D020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB1430",
+              "pdata_owner": "0x2DB13C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB1500",
+              "pdata_owner": "0x2DB14C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2DB15AC",
+              "pdata_owner": "0x2DB1580",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2E67A9B",
+              "pdata_owner": "0x2E67A40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EBB65D",
+              "pdata_owner": "0x2EBB620",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EBB761",
+              "pdata_owner": "0x2EBB6F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2EBEADC",
+              "pdata_owner": "0x2EBE7B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2FC18EA",
+              "pdata_owner": "0x2FC10E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x2FC1C6C",
+              "pdata_owner": "0x2FC1C20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30CFE29",
+              "pdata_owner": "0x30CF9F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30DEA1D",
+              "pdata_owner": "0x30DE9F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30E874D",
+              "pdata_owner": "0x30E8720",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x30FE3B2",
+              "pdata_owner": "0x30FE300",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3102384",
+              "pdata_owner": "0x3102350",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3102579",
+              "pdata_owner": "0x3102520",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x310269A",
+              "pdata_owner": "0x3102520",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3102759",
+              "pdata_owner": "0x3102520",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3102ABE",
+              "pdata_owner": "0x3102A30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3104633",
+              "pdata_owner": "0x31045C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3108802",
+              "pdata_owner": "0x31086D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x313720C",
+              "pdata_owner": "0x31371A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x326B8DB",
+              "pdata_owner": "0x326B880",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3382654",
+              "pdata_owner": "0x3382630",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35166D6",
+              "pdata_owner": "0x3516630",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3516C06",
+              "pdata_owner": "0x3516BC0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35403A0",
+              "pdata_owner": "0x3540320",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x35CBB15",
+              "pdata_owner": "0x35CBA20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x360EFC3",
+              "pdata_owner": "0x360EFA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3641E38",
+              "pdata_owner": "0x3641DA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x36BC2F2",
+              "pdata_owner": "0x36BC260",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x36C165E",
+              "pdata_owner": "0x36C13F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x36C1837",
+              "pdata_owner": "0x36C17C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x36F3C6A",
+              "pdata_owner": "0x36F3BF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x36F4243",
+              "pdata_owner": "0x36F4200",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x370563B",
+              "pdata_owner": "0x3705620",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3721CCB",
+              "pdata_owner": "0x3721C20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3722572",
+              "pdata_owner": "0x3721FD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3770032",
+              "pdata_owner": "0x376FD30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3770370",
+              "pdata_owner": "0x37701C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38337DD",
+              "pdata_owner": "0x3833780",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3833A62",
+              "pdata_owner": "0x38338F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3833BD9",
+              "pdata_owner": "0x3833B40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3835A89",
+              "pdata_owner": "0x38359E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383D535",
+              "pdata_owner": "0x383D510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383E95A",
+              "pdata_owner": "0x383E930",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383F7EC",
+              "pdata_owner": "0x383F770",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383F95C",
+              "pdata_owner": "0x383F900",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383FEC7",
+              "pdata_owner": "0x383FE90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x383FF8A",
+              "pdata_owner": "0x383FF60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3842FFC",
+              "pdata_owner": "0x3842FA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3843BB1",
+              "pdata_owner": "0x3843B60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3843C43",
+              "pdata_owner": "0x3843BE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38444F8",
+              "pdata_owner": "0x3844390",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3844DBD",
+              "pdata_owner": "0x3844CE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3844DF5",
+              "pdata_owner": "0x3844CE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3847B1F",
+              "pdata_owner": "0x3847A30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3847CDE",
+              "pdata_owner": "0x3847C20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38482DC",
+              "pdata_owner": "0x38482B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3848596",
+              "pdata_owner": "0x3848560",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38491BC",
+              "pdata_owner": "0x3849120",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3849214",
+              "pdata_owner": "0x38491F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3849661",
+              "pdata_owner": "0x3849620",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x384AAA9",
+              "pdata_owner": "0x384A960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x385000B",
+              "pdata_owner": "0x384FF50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38AD2FC",
+              "pdata_owner": "0x38AD290",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38CE40C",
+              "pdata_owner": "0x38CE3D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38CE5D1",
+              "pdata_owner": "0x38CE540",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38D26D9",
+              "pdata_owner": "0x38D1F00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38D3212",
+              "pdata_owner": "0x38D1F00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38E0AD5",
+              "pdata_owner": "0x38E0AB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38E171C",
+              "pdata_owner": "0x38E16E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x38E39BB",
+              "pdata_owner": "0x38E3820",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3918558",
+              "pdata_owner": "0x3918220",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3918B7C",
+              "pdata_owner": "0x3918960",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x395CD8E",
+              "pdata_owner": "0x395CD00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x397AE8A",
+              "pdata_owner": "0x397AE60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x39AEE0B",
+              "pdata_owner": "0x39AEDF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A0551D",
+              "pdata_owner": "0x3A05260",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A05BC8",
+              "pdata_owner": "0x3A05BB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A53F73",
+              "pdata_owner": "0x3A53E80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A56CB2",
+              "pdata_owner": "0x3A56A40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A68A8A",
+              "pdata_owner": "0x3A68A10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3A7652A",
+              "pdata_owner": "0x3A764E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B41501",
+              "pdata_owner": "0x3B40D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B41F50",
+              "pdata_owner": "0x3B40D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B42AC2",
+              "pdata_owner": "0x3B40D00",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B501D1",
+              "pdata_owner": "0x3B50190",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3B5064F",
+              "pdata_owner": "0x3B505E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3C33409",
+              "pdata_owner": "0x3C33390",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3C337E1",
+              "pdata_owner": "0x3C33710",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3C410FD",
+              "pdata_owner": "0x3C410A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3C6AAF0",
+              "pdata_owner": "0x3C6AAD0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3CB40AF",
+              "pdata_owner": "0x3CB3F80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3CF22F2",
+              "pdata_owner": "0x3CF1F50",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3CFA138",
+              "pdata_owner": "0x3CFA110",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3D1F0E9",
+              "pdata_owner": "0x3D1F050",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DD580D",
+              "pdata_owner": "0x3DD56C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DD5F26",
+              "pdata_owner": "0x3DD5D90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DD6078",
+              "pdata_owner": "0x3DD5F90",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DEC3FB",
+              "pdata_owner": "0x3DEC2F0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DF84AE",
+              "pdata_owner": "0x3DF8450",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3DF8A7F",
+              "pdata_owner": "0x3DF8790",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E032EF",
+              "pdata_owner": "0x3E032B0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E094C5",
+              "pdata_owner": "0x3E094A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E1087E",
+              "pdata_owner": "0x3E107A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E16F6C",
+              "pdata_owner": "0x3E16DE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E27F22",
+              "pdata_owner": "0x3E27EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E41851",
+              "pdata_owner": "0x3E417A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3E41ACF",
+              "pdata_owner": "0x3E41930",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3EFFD8C",
+              "pdata_owner": "0x3EFFCF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x3F005AF",
+              "pdata_owner": "0x3F00490",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5092CB4",
+              "pdata_owner": "0x5092CB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5093860",
+              "pdata_owner": "0x5093850",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5094F44",
+              "pdata_owner": "0x5094F40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5103CE4",
+              "pdata_owner": "0x5103CE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5105F3D",
+              "pdata_owner": "0x5105F20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x510781D",
+              "pdata_owner": "0x5107800",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x510A00D",
+              "pdata_owner": "0x5109FF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x511CBBD",
+              "pdata_owner": "0x511CBA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5127850",
+              "pdata_owner": "0x5127840",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51359DD",
+              "pdata_owner": "0x51359C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5135A4D",
+              "pdata_owner": "0x5135A30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x513791D",
+              "pdata_owner": "0x5137900",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5149A3D",
+              "pdata_owner": "0x5149A20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514A914",
+              "pdata_owner": "0x514A910",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514ABE4",
+              "pdata_owner": "0x514ABE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514AF5D",
+              "pdata_owner": "0x514AF40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x514AFCD",
+              "pdata_owner": "0x514AFB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x515C1AD",
+              "pdata_owner": "0x515C190",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5165ECD",
+              "pdata_owner": "0x5165EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516683D",
+              "pdata_owner": "0x5166820",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516B86D",
+              "pdata_owner": "0x516B850",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516B8DD",
+              "pdata_owner": "0x516B8C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516C42D",
+              "pdata_owner": "0x516C410",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516CB4D",
+              "pdata_owner": "0x516CB30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516CBBD",
+              "pdata_owner": "0x516CBA0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516CC2D",
+              "pdata_owner": "0x516CC10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x516D6BD",
+              "pdata_owner": "0x516D6A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x517484D",
+              "pdata_owner": "0x5174830",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5175E7D",
+              "pdata_owner": "0x5175E60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x5182ECD",
+              "pdata_owner": "0x5182EB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x518E52D",
+              "pdata_owner": "0x518E510",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519003D",
+              "pdata_owner": "0x5190020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51941ED",
+              "pdata_owner": "0x51941D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51945FD",
+              "pdata_owner": "0x51945E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519466D",
+              "pdata_owner": "0x5194650",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51946DD",
+              "pdata_owner": "0x51946C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519474D",
+              "pdata_owner": "0x5194730",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51947BD",
+              "pdata_owner": "0x51947A0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x519482D",
+              "pdata_owner": "0x5194810",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A011D",
+              "pdata_owner": "0x51A0100",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A6634",
+              "pdata_owner": "0x51A6630",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A7C91",
+              "pdata_owner": "0x51A7C40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51A8C34",
+              "pdata_owner": "0x51A8C30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51C1F3D",
+              "pdata_owner": "0x51C1F20",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D0C44",
+              "pdata_owner": "0x51D0C40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D3A9D",
+              "pdata_owner": "0x51D3A80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D3B0D",
+              "pdata_owner": "0x51D3AF0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x51D732D",
+              "pdata_owner": "0x51D7310",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB752A77",
+              "pdata_owner": "0xB752A10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB79881E",
+              "pdata_owner": "0xB798760",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB7A0452",
+              "pdata_owner": "0xB7A0370",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB7E9834",
+              "pdata_owner": "0xB7E97E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xB8B7596",
+              "pdata_owner": "0xB8B7540",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xDEE0DA5",
+              "pdata_owner": "0xDEE0D10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xDEE0F34",
+              "pdata_owner": "0xDEE0D10",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xDF28240",
+              "pdata_owner": "0xDF281E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xEE19681",
+              "pdata_owner": "0xEE195E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xFA1E32F",
+              "pdata_owner": "0xFA1E2E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xFDEA8B3",
+              "pdata_owner": "0xFDEA850",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0xFE834F6",
+              "pdata_owner": "0xFE834D0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x108C9C65",
+              "pdata_owner": "0x108C9B30",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x109B8F05",
+              "pdata_owner": "0x109B8DE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x11FEA9CB",
+              "pdata_owner": "0x11FEA710",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1202234B",
+              "pdata_owner": "0x12022310",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x12022CDD",
+              "pdata_owner": "0x12022CB0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x130F8A14",
+              "pdata_owner": "0x130F88C0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1317264E",
+              "pdata_owner": "0x13172610",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x133FFF87",
+              "pdata_owner": "0x133FFEE0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x13CD95D1",
+              "pdata_owner": "0x13CD9560",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x143FCC34",
+              "pdata_owner": "0x143FCB80",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1440DDA3",
+              "pdata_owner": "0x1440DD60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x147D9810",
+              "pdata_owner": "0x147D9770",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x148070BF",
+              "pdata_owner": "0x14806F60",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1491B651",
+              "pdata_owner": "0x1491B4E0",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14929071",
+              "pdata_owner": "0x14929020",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x1492DC06",
+              "pdata_owner": "0x1492DA70",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14AB0A91",
+              "pdata_owner": "0x14AB0A40",
+              "verified_instruction_boundary": false
+            },
+            {
+              "rva": "0x14ADE5E4",
+              "pdata_owner": "0x14ADE520",
+              "verified_instruction_boundary": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

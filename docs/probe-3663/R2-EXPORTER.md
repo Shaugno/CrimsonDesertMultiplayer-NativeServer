@@ -70,3 +70,27 @@ standard exact/symbol/data/reference/implied passes remain enabled, with
 unchanged thresholds. Session `R2AutoCore` is the configured run; the earlier
 incomplete `R2Auto` session is not matcher evidence. The correlation algorithms
 themselves remain stock, and BinDiff inputs were exported before any VT markup.
+
+## Completed standard outputs (2026-11-16)
+
+Stock AutoVT R2AutoCoreRetry0553 completed all enabled required passes and
+exported 229654 records, 194300 accepted records / 138587 unique accepted
+associations. Its markup warning is retained. The audit found no persisted
+error flags, and no failed markup item in 46 core/anchor associations checked.
+The real enum strings are Function/Data; the join now normalizes those typed
+values and tests both native and uppercase forms, still rejecting data-only
+function anchors.
+
+An additional whole-image stock BinDiff conservative profile completed: name
+hash, hash and prime signature passes, with unchanged configured confidences
+and built-in call-reference propagation. It matched 64434 functions. The
+large database/results remain local; exact hashes, actual algorithm counts,
+configuration and warnings are in standard-completion.json. Its missing-block
+diagnostics are preserved; all 32 adopted core/anchor BinDiff graphs inspected
+have nonzero matched blocks/instructions. This is not proof of complete
+whole-body equality or native runtime behavior.
+
+Broad/default and structural supplemental profiles are still running and are
+not represented as completed results. The completed conservative output plus
+stock whole-image VT supplies the current real join. r2_refresh.ps1 reproduces
+the catalog/join/header pipeline and fails on a stage error before proceeding.

@@ -206,6 +206,28 @@ prove('D','src/mod/session2/guest_lifecycle.h',dict(kActorState='0x5E'),
 prove('C','src/mod/session2/clock_gate.h',dict(kTsFieldTime='0x450',kFieldTimeSize='32'),
     'port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt',
     'Paired six-argument native loading-complete consumers 219D7F0/23DC630 test the fifth-byte flag, store the supplied timestamp at component+468, copy a 32-byte YMM value from component+450 and publish it to the mode-selected global clock before unpausing the field. This proves the field and copy width from actual target instructions, not an assumed structure or the SetFieldTimeReq payload schema.')
+prove('D','src/mod/session2/offsets_s2.h',dict(kSaveMgr_LockObj='0x08'),
+    'port-evidence/r2/save-lock-native-new.txt; save-manager-reference.txt; save-manager-target.txt; save-lock-rtti-old.json; save-lock-rtti-new.json',
+    'Target save-manager constructor 1A15340 stores this+8 in its first word, constructs the WindowsLock<3> object there and writes the independently named vtable 59874C8. It initializes the identified slot vector+40/count+48/capacity+4C, pending-slot+5C, busy+60 and native storage+50. The native LoadSlot/refresh lock-pointer use corroborates the same object. This proves the self-relative lock offset, not any new function/vtable RVA by itself.')
+prove('B','src/mod/session2/offsets_s2.h',dict(kClientNet_InQueue='0x18',kClientNet_Session='0x10',kClientNet_FreeC2S='0x28'),
+    'port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt; ../ghidra-2976-expanded.txt; ../ghidra-3663-expanded.txt',
+    'Paired complete client network loops 35B800/3A8AC0 use ClientNet in R15, consume incoming queue+18, flush its buffer queue through synchronous session+10 and drain/free returned C-to-S buffers through queue+28. Session send 14380B0/165CB60 independently queues the buffers; target receive 3A9CF0 is invoked by the same native loop. This proves queue/session fields, not the unresolved target metadata reuse or a live tunnel.')
+prove('B','src/mod/session2/offsets_s2.h',dict(kNetLoopPumpPatch='7'),
+    'port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt',
+    'The paired pre-flush pump sites 35BAD4/3A8D94 decode MOV RAX,[R15+E0] as exactly seven bytes, with ClientNet in R15 and the same native queue-drain ordering. It is a mid-hook site, never an inline function entry; its RVA and full guard bytes have separate obligations.')
+prove('B','src/mod/session2/offsets_s2.h',dict(kServerNet_InQueue='0x20',kServerNet_FreeC2S='0x78'),
+    'port-evidence/r2/server-thread-init-old.txt; server-thread-init-new.txt; server-run-target.txt; tunnel-layout-target.txt',
+    'Paired named ServerRunThread setup identifies run wrappers 2773390/2A0E1A0 and loops 27733F0/2A0E200. Both pop packet buffers from ServerNet+20, dispatch a packet using its frame pointer/length with the native session+18, then push the same buffer to the C-to-S return queue+78. The client thread drains its return queue+28 and frees base+8028. These explicit consumers establish the field roles.')
+prove('B','src/mod/session2/offsets_s2.h',dict(kPb_Tag='0x8010',kPb_Magic='0x8018'),
+    'port-evidence/r2/server-thread-init-old.txt; server-run-target.txt; network-pump-reference.txt; tunnel-layout-target.txt; src/mod/session2/server.cpp',
+    'Storage reuse is proved only for the mod-owned C-to-S injection path: allocate a complete buffer, set request-kind+800E to zero, frame/base pointers to itself and push directly to ServerNet Q0. Paired server loops read +8010 only in the nonzero request-kind branch; the zero packet branch passes frame bytes to native ServerOnRecvPacket and returns the unchanged buffer through +78. Paired client return-queue drains read +8028, clear frame pointer and free that base without reading +8010/+8018/+8020. PostPacket epoch metadata is not a free-space claim for native or request buffers; this route bypasses native PostPacket/forwarder and never alters a native-created buffer. Existing mod epoch accounting remains mandatory before any target injection.')
+prove('B','src/mod/session2/offsets_s2.h',dict(kServerNet_FreeS2C='0x80'),
+    'port-evidence/r2/virtual-queue-bind-reference.txt; virtual-queue-bind-target.txt; virtual-queue-callers-target.txt; virtual-queue-producers-old.txt; virtual-queue-producers-new.txt; virtual-queue-block-producer-target.txt',
+    'Paired framework producers 9E2C260/9BA4680 form the same four-queue descriptor from one framework queue block (root member 140 -> 148). Target client setup loads that framework+148 block and passes B/B+80/B+100/B+180 through 3A7E30/8968C40 to 3A8040. Server startup 2A5E840 -> 2A600C0 -> 2A0CE20 passes the same descriptor. Native binding writes ServerNet+80 and ClientNet+20 from B+100, and ServerNet+78/ClientNet+28 from B+180. B897BA is only a decoded client caller fragment, not an adopted function entry.')
+for symbol in ('kPb_Tag','kPb_Magic'):
+    row,=[r['r2'] for r in core if r['tier']=='B' and r['symbol']==symbol]
+    result[row]['evidence'] += '; virtual-queue-bind-reference.txt; virtual-queue-bind-target.txt; virtual-queue-callers-target.txt; virtual-queue-producers-old.txt; virtual-queue-producers-new.txt; virtual-queue-block-producer-target.txt'
+    result[row]['second_check'] += ' Native framework producers and queue binders independently establish ServerNet+78 == ClientNet+28 == B+180, closing the actual return/free queue identity; the target framework queue-block member is +148, not legacy +140.'
 signatures=docs/'r2-signatures.json'
 if signatures.exists():
     result.update(json.loads(signatures.read_text())['rows'])

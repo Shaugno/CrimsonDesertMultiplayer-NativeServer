@@ -46,8 +46,23 @@ for tier,namespace in [('A','player_layout'),('B','tunnel_layout'),('C','field_l
         kind = 'float' if value.endswith('f') and '.' in value else 'uint64_t' if int(value,0)>0xFFFFFFFF else 'uint32_t'
         section += f"inline constexpr {kind} {symbol} = {value}; // 2976 {row['old']}; R2 {key}\n"
     section += '} // namespace '+namespace+'\n'
+joined=root/'docs/probe-3663/R2-MATCHES.json'
+rva_count=0
+if joined.exists():
+    matches=json.loads(joined.read_text())['rows']
+    assert {r['row'] for r in matches}==set(core),'Regenerate matching results after a core change'
+    section += 'namespace core_rvas {\n// Standard-correlator adoptions only; these constants grant no startup permission.\n'
+    for row in matches:
+        contract=core[row['row']]
+        if not row['adopted'] or contract['kind'] not in ('function/global RVA','vtable RVA'): continue
+        value=row['target']
+        assert isinstance(value,str) and re.fullmatch(r'0x[0-9A-Fa-f]+',value),row['row']
+        symbol=row['row']+'_'+re.sub(r'[^A-Za-z0-9_]', '_',row['symbol'])
+        section += f'inline constexpr uintptr_t {symbol} = {value}; // 2976 {row["old"]}; R2 {row["row"]}, R2-MATCHES.json\n'
+        rva_count+=1
+    section += '} // namespace core_rvas\n'
 section += end+'\n\n'
 text = text.replace('}  // namespace cdmp::game::build_3663',section+'}  // namespace cdmp::game::build_3663')
 text = re.sub(r'\n{3,}', '\n\n', text)
 header.write_text(text)
-print('Wrote',len(proofs),'proved layout contracts; all completeness gates remain false')
+print('Wrote',len(proofs),'proved layout contracts and',rva_count,'adopted RVAs; all completeness gates remain false')

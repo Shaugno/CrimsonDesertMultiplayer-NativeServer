@@ -1,0 +1,16 @@
+{
+  "preset": "conservative",
+  "whole_image": true,
+  "started_utc": "2026-11-16T14:16:38.6035253Z",
+  "config": "547C08945E8F649F411EAC8F8C28D23368B2989CFFA13049E2C7E6F3628D32B2",
+  "inputs": [
+    {
+      "Path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\old.BinExport",
+      "Hash": "227D4D3526163C3FC1B185F282495A28279D696C2A1082496A490EE147C3F47E"
+    },
+    {
+      "Path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\new.BinExport",
+      "Hash": "E97EA10170F8518AC4AF86BEA5E7D9FF4E578095C473B355796EEA58005DF0C0"
+    }
+  ]
+}

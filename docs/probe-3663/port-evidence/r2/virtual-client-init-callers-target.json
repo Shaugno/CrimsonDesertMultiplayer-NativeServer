@@ -1,0 +1,121 @@
+{
+  "identity": {
+    "path": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+    "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "file_size": 335440280,
+    "timestamp": "0x6AF5D198",
+    "image_base": "0x140000000",
+    "image_size": "0x144E9000",
+    "pdata_entries": 249586,
+    "tls_index_rva": "0x715BFD0",
+    "sections": [
+      {
+        "name": ".reloc",
+        "rva": 4096,
+        "raw": 1024,
+        "size": 90251264,
+        "virtual_size": 90251264,
+        "flags": 1610612768
+      },
+      {
+        "name": ".00cfg",
+        "rva": 90255360,
+        "raw": 90252288,
+        "size": 24391680,
+        "virtual_size": 24391680,
+        "flags": 1073741888
+      },
+      {
+        "name": ".sxdata",
+        "rva": 114647040,
+        "raw": 114643968,
+        "size": 3591168,
+        "virtual_size": 8851456,
+        "flags": 3221225536
+      },
+      {
+        "name": ".debug$P",
+        "rva": 123498496,
+        "raw": 118235136,
+        "size": 2998272,
+        "virtual_size": 2998272,
+        "flags": 1073741888
+      },
+      {
+        "name": ".tls$",
+        "rva": 126496768,
+        "raw": 121233408,
+        "size": 12288,
+        "virtual_size": 12288,
+        "flags": 1073741888
+      },
+      {
+        "name": ".srdata",
+        "rva": 126509056,
+        "raw": 121245696,
+        "size": 196608,
+        "virtual_size": 196608,
+        "flags": 1073741888
+      },
+      {
+        "name": ".ecode",
+        "rva": 126705664,
+        "raw": 121442304,
+        "size": 2023424,
+        "virtual_size": 2023424,
+        "flags": 1107296320
+      },
+      {
+        "name": ".data1",
+        "rva": 128729088,
+        "raw": 123465728,
+        "size": 207098368,
+        "virtual_size": 207097956,
+        "flags": 3758096416
+      },
+      {
+        "name": ".sbss",
+        "rva": 335831040,
+        "raw": 330564096,
+        "size": 1822720,
+        "virtual_size": 1822270,
+        "flags": 1073741856
+      },
+      {
+        "name": ".xcode",
+        "rva": 337653760,
+        "raw": 332386816,
+        "size": 1024,
+        "virtual_size": 560,
+        "flags": 3221225504
+      },
+      {
+        "name": ".trace",
+        "rva": 337657856,
+        "raw": 332387840,
+        "size": 36352,
+        "virtual_size": 36316,
+        "flags": 1073741888
+      },
+      {
+        "name": ".rodata",
+        "rva": 337694720,
+        "raw": 332424192,
+        "size": 2995200,
+        "virtual_size": 2995032,
+        "flags": 1073741888
+      }
+    ]
+  },
+  "operation": "call",
+  "leads": [
+    {
+      "rva": "0xb89884",
+      "operand_rva": "0x3a7e30",
+      "pdata_owner": "0xb897ba",
+      "verified_instruction_boundary": false
+    }
+  ],
+  "adopted": false,
+  "warning": "Raw byte-pattern leads only; verify native instruction boundary, entry, operand and role"
+}

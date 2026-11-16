@@ -447,7 +447,7 @@
     "id": "N0963",
     "source": "src/mod/session2/offsets_s2.h:30",
     "symbol": "kSessionVtableEntries",
-    "kind": "vtable RVA",
+    "kind": "native member/size contract",
     "value": "15",
     "use": "server_install/guest_install: session, queue, buffer and descriptor access",
     "tier": "B",

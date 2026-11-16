@@ -9,7 +9,7 @@ from pe_identity import PE
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('image',type=Path)
 p.add_argument('--rvas',nargs='+',required=True,type=lambda v:int(v,0))
-p.add_argument('--operation',choices=('lea','cmp','mov','call'),default='lea')
+p.add_argument('--operation',choices=('lea','cmp','mov','call','jump','simd'),default='lea')
 p.add_argument('--out',type=Path,required=True)
 args=p.parse_args()
 image=PE(args.image)
@@ -23,14 +23,18 @@ rows=[]
 for section in image.sections:
     if not section['flags']&0x20000000: continue
     data=image.data[section['raw']:section['raw']+section['size']]
-    prefixes=(b'\x48\x8d',b'\x4c\x8d') if args.operation=='lea' else ((b'\x3b',) if args.operation=='cmp' else ((b'\xe8',) if args.operation=='call' else (b'\x8b',)))
+    prefixes={'lea':(b'\x48\x8d',b'\x4c\x8d'),'cmp':(b'\x3b',),
+              'call':(b'\xe8',),'jump':(b'\xe9',),'mov':(b'\x8b',),
+              'simd':(b'\x0f\x10',b'\x0f\x11',b'\xc5\xf8\x10',b'\xc5\xf8\x11',
+                      b'\xc5\xfc\x10',b'\xc5\xfc\x11',b'\xc5\xfa\x10',b'\xc5\xfa\x11',
+                      b'\xc5\xfb\x10',b'\xc5\xfb\x11')}[args.operation]
     for prefix in prefixes:
         index=-1
         while True:
             index=data.find(prefix,index+1)
             if index<0: break
             operand=index+len(prefix)
-            if args.operation=='call':
+            if args.operation in ('call','jump'):
                 if operand+4>len(data): continue
                 end=operand+4
                 displacement=operand

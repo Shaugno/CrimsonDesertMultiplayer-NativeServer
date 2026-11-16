@@ -2,6 +2,34 @@
 
 Latest continuation:
 
+- Step 2 now has two completed real whole-image standard outputs: stock
+  AutoVT and an additional stock conservative BinDiff profile. Exact scope,
+  algorithm counts, warnings and output hashes: standard-completion.json.
+  Current join: 310 adopted / 85 blocked; A33/37, B68/78, C105/150, D104/130.
+  R2-MATCHES lists every row and missing check. Catalog: 253 native contracts
+  and 51 adopted RVAs materialized in build_3663.h; every tier flag is false.
+- Final regenerated build passed 101/101 in 90.38 s; smoke logged 78 remote
+  states, zero rejected and clean unload. Earlier 235-contract suite passed
+  101/101 in 89.85 s. A first header materialization rejected B010 because
+  the inventory incorrectly labelled a vtable entry count as an RVA. The
+  classification now distinguishes numeric counts; IDs/values are unchanged.
+  The command chain initially continued onto the old header after that error;
+  its 88.16-s build is retained as pre-final evidence, not used to validate
+  the new table. The fail-fast refresh and final build were then run.
+- Entry-guard extraction initially rejected non-pdata Windows lock thunks.
+  Their actual named RTTI slots and complete seven-byte dispatch bodies
+  (including the REX prefix) are now checked explicitly. Guards never adopt
+  an entry RVA, unchanged ABI or permission to install a legacy detour.
+
+- Network/lock follow-up: 234 reviewed contracts plus 17 R1, 55 independent
+  RVA candidates. Q0/return-queue dispatch and client free paths prove tag
+  storage only for complete mod-owned zero-kind C-to-S buffers handed directly
+  to Q0, never native/request buffers. Full scope is in R2-TUNNEL.md. The
+  seven-byte client pump site and actual network roots have independent
+  candidates; save-manager construction proves lock self-offset+8. Full
+  build/CTest passed 101/101 in 89.13 s, and synthetic smoke unloaded cleanly.
+  No tier or native network path is armed.
+
 - Lifecycle contract batch: 101/101 tests in 89.64 s; after the full clock
   batch, 101/101 in 90.63 s. Final synthetic host/peer smoke: 78 remote
   states, zero rejected, clean network stop/worker unload. Evidence-join

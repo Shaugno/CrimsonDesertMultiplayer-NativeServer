@@ -89,6 +89,206 @@
       "symbol": "kLoadingFlagCmpBytes",
       "second_check": "Named LoadingCompleteReq reaches paired six-argument completion 219D7F0/23DC630. Native disassembly confirms the entry and fifth-argument CMP/JZ publication gate; exact old bytes and both .pdata owner ranges checked. The entry and branch RVAs still require standard support independently.",
       "evidence": "port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt; lifecycle-loading-old.txt; lifecycle-loading-new.txt"
+    },
+    "B066": {
+      "target": "{0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7}",
+      "method": "paired native network entry/midpoint guard bytes",
+      "old": "{0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7}",
+      "symbol": "kNetLoopPumpHead",
+      "second_check": "Paired complete NetworkThread loops and native client receive bodies reviewed. The pump starts at the seven-byte MOV RAX,[R15+E0] with ClientNet in R15 before native queue flush; receive is a verified function entry. Exact source bytes and both .pdata owner ranges checked; guard prefixes are not claims of whole-body equality. Candidate site/entry RVAs require separate standard support.",
+      "evidence": "port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt; tunnel-client-receive-reference.txt; client-receive-verified-target.txt"
+    },
+    "B068": {
+      "target": "{0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x08, 0x90, 0x8B, 0x5F, 0x58, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x10, 0x85, 0xDB, 0x74}",
+      "method": "paired native network entry/midpoint guard bytes",
+      "old": "{ 0x49, 0x8B, 0x87, 0xE0, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x38, 0x48, 0x89, 0x7D, 0xC7, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x08, 0x90, 0x8B, 0x5F, 0x58, 0x48, 0x8B, 0x07, 0x48, 0x8B, 0xCF, 0xFF, 0x50, 0x10, 0x85, 0xDB, 0x74}",
+      "symbol": "kNetLoopPumpAob",
+      "second_check": "Paired complete NetworkThread loops and native client receive bodies reviewed. The pump starts at the seven-byte MOV RAX,[R15+E0] with ClientNet in R15 before native queue flush; receive is a verified function entry. Exact source bytes and both .pdata owner ranges checked; guard prefixes are not claims of whole-body equality. Candidate site/entry RVAs require separate standard support.",
+      "evidence": "port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt; tunnel-client-receive-reference.txt; client-receive-verified-target.txt"
+    },
+    "B070": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24}",
+      "method": "paired native network entry/midpoint guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24}",
+      "symbol": "kClientOnRecvPacketHead",
+      "second_check": "Paired complete NetworkThread loops and native client receive bodies reviewed. The pump starts at the seven-byte MOV RAX,[R15+E0] with ClientNet in R15 before native queue flush; receive is a verified function entry. Exact source bytes and both .pdata owner ranges checked; guard prefixes are not claims of whole-body equality. Candidate site/entry RVAs require separate standard support.",
+      "evidence": "port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt; tunnel-client-receive-reference.txt; client-receive-verified-target.txt"
+    },
+    "C042": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x70}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8B, 0xEC, 0x48, 0x83, 0xEC, 0x70}",
+      "symbol": "kAcquireFieldHead",
+      "second_check": "kAcquireField: reference 0x2b07790, target candidate 0x2e08520, verified .pdata entry; exact reference guard checked, target 31-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C041; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/field-contracts-reference.txt; field-acquire-enter-target.txt; field-mover-target.txt",
+      "entry_rva_row": "C041",
+      "entry_rva_adopted": true
+    },
+    "C044": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x18, 0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x70, 0xFF}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0x6C, 0x24, 0xC9, 0x48, 0x81, 0xEC}",
+      "symbol": "kEnterFieldHead",
+      "second_check": "kEnterField: reference 0x2bc04f0, target candidate 0x2ecb130, verified .pdata entry; exact reference guard checked, target 32-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C043; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/field-contracts-reference.txt; field-acquire-enter-target.txt",
+      "entry_rva_row": "C043",
+      "entry_rva_adopted": false
+    },
+    "C046": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x18, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0xF9}",
+      "symbol": "kTryAddRefHead",
+      "second_check": "kTryAddRef: reference 0x14343a0, target candidate 0x1658e90, verified .pdata entry; exact reference guard checked, target 18-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C045; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/field-contracts-reference.txt; field-getter-target.txt",
+      "entry_rva_row": "C045",
+      "entry_rva_adopted": true
+    },
+    "C048": {
+      "target": "{0x40, 0x53, 0x41, 0x57, 0x48, 0x83, 0xEC, 0x28, 0x48, 0x8B, 0xD9, 0x4C, 0x8B, 0xFA, 0x8B, 0x49, 0x08, 0x8B, 0x43, 0x0C}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x40, 0x53, 0x41, 0x56, 0x48, 0x83, 0xEC, 0x28, 0x48, 0x8B, 0xD9, 0x4C, 0x8B, 0xF2, 0x8B, 0x49, 0x08, 0x8B, 0x43, 0x0C}",
+      "symbol": "kVecPushHead",
+      "second_check": "kVecPush: reference 0x40b5b0, target candidate 0x4cae10, verified .pdata entry; exact reference guard checked, target 20-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C047; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/field-contracts-reference.txt; field-getter-target.txt",
+      "entry_rva_row": "C047",
+      "entry_rva_adopted": true
+    },
+    "C068": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x54, 0x24, 0x10, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0xF0, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x10, 0x03}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x6C, 0x24, 0x10, 0x56, 0x57, 0x41, 0x54, 0x41, 0x56, 0x41, 0x57, 0x48, 0x81, 0xEC, 0xA0, 0x00, 0x00, 0x00, 0x4C, 0x8B, 0xF2, 0x4C, 0x8B, 0xF9, 0x49, 0x8B, 0x39}",
+      "symbol": "kLobbyLoadHead",
+      "second_check": "kLobbyLoad: reference 0x2b7f4d0, target candidate 0x2e879a0, verified .pdata entry; exact reference guard checked, target 34-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C067; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/identity-rtti-3663.json; port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt",
+      "entry_rva_row": "C067",
+      "entry_rva_adopted": false
+    },
+    "C098": {
+      "target": "{0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x68, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x98, 0x03, 0x00, 0x00, 0x49, 0x8B, 0xD9, 0x4D, 0x8B, 0xE8, 0x48, 0x8B, 0xF2, 0x4C, 0x8B, 0xF1}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x68, 0xFD, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x98, 0x03, 0x00, 0x00, 0x49, 0x8B, 0xD9, 0x4D, 0x8B, 0xE8, 0x48, 0x8B, 0xF2, 0x4C, 0x8B, 0xF1}",
+      "symbol": "kLoadHead",
+      "second_check": "kLoad: reference 0x20688a0, target candidate 0x22951b0, verified .pdata entry; exact reference guard checked, target 49-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C097; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-slot-construct-reference.txt; save-write-target.txt; identity-contracts-target.txt",
+      "entry_rva_row": "C097",
+      "entry_rva_adopted": true
+    },
+    "C121": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x60, 0x48, 0x8B, 0x01, 0x48, 0x8B, 0xFA, 0x48, 0x8D, 0x54, 0x24, 0x70, 0x48, 0x8B, 0xD9, 0xFF, 0x50, 0x60}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x57, 0x48, 0x83, 0xEC, 0x60, 0x48, 0x8B, 0x01, 0x48, 0x8B, 0xFA, 0x48, 0x8D, 0x54, 0x24, 0x70, 0x48, 0x8B, 0xD9, 0xFF, 0x50, 0x60}",
+      "symbol": "kGetterHead",
+      "second_check": "kGetter: reference 0x20e55a0, target candidate 0x231a180, verified .pdata entry; exact reference guard checked, target 27-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C120; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "R2-MATCHES.json; PORT-REVIEWED.json; paired whole-image exports",
+      "entry_rva_row": "C120",
+      "entry_rva_adopted": true
+    },
+    "C138": {
+      "target": "{0x48, 0x8B, 0xC4, 0x57, 0x48, 0x81, 0xEC, 0x80, 0x00, 0x00, 0x00, 0xC5, 0xF8, 0x29, 0x78, 0xD8}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x8B, 0xC4, 0x57, 0x48, 0x81, 0xEC, 0x80, 0x00, 0x00, 0x00, 0xC5, 0xF8, 0x29, 0x78, 0xD8}",
+      "symbol": "kActionLayerAdvanceHead",
+      "second_check": "kActionLayerAdvance: reference 0x1f63f70, target candidate 0x21bd690, verified .pdata entry; exact reference guard checked, target 16-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for C137; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "R2-MATCHES.json; PORT-REVIEWED.json; paired whole-image exports",
+      "entry_rva_row": "C137",
+      "entry_rva_adopted": true
+    },
+    "D016": {
+      "target": "{0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x18}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x18}",
+      "symbol": "kWindowsLockVf1Head",
+      "second_check": "kWindowsLockVf1: reference 0x1371340, target candidate 0x1593240, RTTI-slot-verified complete virtual-dispatch thunk; exact reference guard checked, target 7-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D014; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt",
+      "entry_rva_row": "D014",
+      "entry_rva_adopted": false
+    },
+    "D017": {
+      "target": "{0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x20}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x8B, 0x01, 0x48, 0xFF, 0x60, 0x20}",
+      "symbol": "kWindowsLockVf2Head",
+      "second_check": "kWindowsLockVf2: reference 0xce4ef0, target candidate 0xe297f0, RTTI-slot-verified complete virtual-dispatch thunk; exact reference guard checked, target 7-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D015; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt",
+      "entry_rva_row": "D015",
+      "entry_rva_adopted": false
+    },
+    "D019": {
+      "target": "{0xE9, 0x9B, 0x48, 0x0F, 0x0A}",
+      "method": "verified native entry guard bytes",
+      "old": "{0xE9, 0xAB, 0x86, 0x36, 0x0B}",
+      "symbol": "kSaveMgrRefreshSlotsHead",
+      "second_check": "kSaveMgrRefreshSlots: reference 0x1870c20, target candidate 0x1a18320, native direct-jump thunk; exact reference guard checked, target 5-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D018; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "R2-MATCHES.json; PORT-REVIEWED.json; paired whole-image exports",
+      "entry_rva_row": "D018",
+      "entry_rva_adopted": true
+    },
+    "D054": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x44, 0x89, 0x44, 0x24, 0x18, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x50, 0xFF, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xB0, 0x01, 0x00, 0x00, 0x4D, 0x8B, 0xF1}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x08, 0x48, 0x89, 0x74, 0x24, 0x10, 0x48, 0x89, 0x7C, 0x24, 0x20, 0x44, 0x89, 0x44, 0x24, 0x18, 0x55, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x50, 0xFF, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xB0, 0x01, 0x00, 0x00, 0x4D, 0x8B, 0xF9}",
+      "symbol": "kLoadSlotHead",
+      "second_check": "kLoadSlot: reference 0x186f570, target candidate 0x1a16c40, verified .pdata entry; exact reference guard checked, target 47-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D053; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-manager-reference.txt; save-manager-target.txt; field-login-role-target.txt",
+      "entry_rva_row": "D053",
+      "entry_rva_adopted": true
+    },
+    "D056": {
+      "target": "{0x4C, 0x89, 0x4C, 0x24, 0x20, 0x44, 0x89, 0x44, 0x24, 0x18, 0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x38, 0xFC, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xC8, 0x04, 0x00, 0x00}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x4C, 0x89, 0x4C, 0x24, 0x20, 0x44, 0x89, 0x44, 0x24, 0x18, 0x48, 0x89, 0x54, 0x24, 0x10, 0x48, 0x89, 0x4C, 0x24, 0x08, 0x55, 0x53, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x78, 0xFE, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0x88, 0x02, 0x00, 0x00}",
+      "symbol": "kSaveHead",
+      "second_check": "kSave: reference 0x186e450, target candidate 0x1a15930, verified .pdata entry; exact reference guard checked, target 47-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D055; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-manager-reference.txt; save-wrapper-target.txt; save-write-target.txt",
+      "entry_rva_row": "D055",
+      "entry_rva_adopted": true
+    },
+    "D058": {
+      "target": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x55, 0x57, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x40, 0xFF, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xC0, 0x01, 0x00, 0x00, 0x45, 0x0F, 0xB7, 0xF9, 0x4D, 0x8B, 0xE8, 0x48, 0x8B, 0xF2}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x48, 0x89, 0x5C, 0x24, 0x10, 0x48, 0x89, 0x74, 0x24, 0x18, 0x55, 0x57, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x8D, 0xAC, 0x24, 0x40, 0xFF, 0xFF, 0xFF, 0x48, 0x81, 0xEC, 0xC0, 0x01, 0x00, 0x00, 0x45, 0x0F, 0xB7, 0xF9, 0x4D, 0x8B, 0xE8, 0x48, 0x8B, 0xF2}",
+      "symbol": "kFlushHead",
+      "second_check": "kFlush: reference 0x1871930, target candidate 0x1a192d0, verified .pdata entry; exact reference guard checked, target 43-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D057; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-manager-reference.txt; save-flush-target.txt; save-busy-leads-target.json; save-flush-callers-reference.txt; save-flush-callers-target.txt",
+      "entry_rva_row": "D057",
+      "entry_rva_adopted": false
+    },
+    "D060": {
+      "target": "{0xE9, 0x9B, 0x3B, 0x2A, 0x0B}",
+      "method": "verified native entry guard bytes",
+      "old": "{0xE9, 0xDB, 0xD8, 0xBF, 0x0C}",
+      "symbol": "kGetOrCreateHead",
+      "second_check": "kGetOrCreate: reference 0x2355ec0, target candidate 0x25bb470, native direct-jump thunk; exact reference guard checked, target 5-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D059; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-storage-reference.txt; save-storage-target.txt; save-create-target.txt; save-slot-construct-target.txt; r2-save-constants.json",
+      "entry_rva_row": "D059",
+      "entry_rva_adopted": true
+    },
+    "D062": {
+      "target": "{0x40, 0x53, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x81, 0xEC, 0x88, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xEA, 0x4C, 0x8B, 0xF9}",
+      "method": "verified native entry guard bytes",
+      "old": "{0x40, 0x53, 0x55, 0x56, 0x57, 0x41, 0x54, 0x41, 0x55, 0x41, 0x56, 0x41, 0x57, 0x48, 0x81, 0xEC, 0x88, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xEA, 0x4C, 0x8B, 0xF9}",
+      "symbol": "kAddFileHead",
+      "second_check": "kAddFile: reference 0x235b100, target candidate 0x25c0900, verified .pdata entry; exact reference guard checked, target 26-byte prefix extracted within its entry body. A short thunk guard covers that complete wrapper. Native role evidence or dual standard correspondence is recorded separately for D061; guard bytes do not adopt its RVA, unchanged ABI, or authorize a legacy detour.",
+      "evidence": "port-evidence/r2/save-storage-reference.txt; save-addfile-target.txt; save-name-map-reference.txt; save-name-map-target.txt; r2-save-constants.json",
+      "entry_rva_row": "D061",
+      "entry_rva_adopted": true
+    },
+    "C071": {
+      "target": "{0x48, 0xB8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F, 0x48, 0x89, 0x45, 0xC0, 0xC5}",
+      "method": "paired native lobby validation-window bytes",
+      "old": "{0x48, 0xB8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F, 0x48, 0x89, 0x44, 0x24, 0x70}",
+      "symbol": "kLobbyConstantBytes",
+      "second_check": "Paired named lobby loaders construct INT64_MAX and pass its address to the native lobby-entry writer. Decoded MOV/stack-store and E8 call roles are reviewed; exact source bytes and both parent .pdata ranges checked. The corresponding instruction/call RVAs require standard support separately; the changed native entry ABI is not bypassed.",
+      "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt"
+    },
+    "C073": {
+      "target": "{0xE8, 0x4B, 0x6C, 0x4F, 0xFF}",
+      "method": "paired native lobby validation-window bytes",
+      "old": "{0xE8, 0x90, 0x47, 0x5C, 0xFF}",
+      "symbol": "kLobbyAddCallBytes",
+      "second_check": "Paired named lobby loaders construct INT64_MAX and pass its address to the native lobby-entry writer. Decoded MOV/stack-store and E8 call roles are reviewed; exact source bytes and both parent .pdata ranges checked. The corresponding instruction/call RVAs require standard support separately; the changed native entry ABI is not bypassed.",
+      "evidence": "port-evidence/r2/identity-contracts-reference.txt; identity-contracts-target.txt; identity-entry-reference.txt; identity-entry-target.txt"
     }
   }
 }

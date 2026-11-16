@@ -14,7 +14,7 @@ source,target=0x2B07790,0x2E08520
 anchor,anchor_target=0xDD49D0,0xFB6F70
 core=json.loads((root/'docs/probe-3663/R2-CORE-LIST.json').read_text())
 field,=[r['r2'] for r in core if r['symbol']=='kAcquireField']
-def run(name,vt_target,bd_target,accepted=True,root_vt=None,root_bd=None,anchor_type='FUNCTION',anchor_binary=True):
+def run(name,vt_target,bd_target,accepted=True,root_vt=None,root_bd=None,anchor_type='Function',anchor_binary=True):
     folder=fixture/name
     folder.mkdir(exist_ok=True)
     database=folder/'fixture.sqlite'
@@ -33,7 +33,7 @@ def run(name,vt_target,bd_target,accepted=True,root_vt=None,root_bd=None,anchor_
         writer=csv.writer(stream,delimiter='\t')
         writer.writerow(['source','destination','type','status','method','similarity','confidence'])
         if vt_target:
-            writer.writerow([f'{base+source:x}',f'{base+vt_target:x}','FUNCTION',
+            writer.writerow([f'{base+source:x}',f'{base+vt_target:x}','Function',
                 'ACCEPTED' if accepted else 'AVAILABLE','SYNTHETIC FIXTURE',1,1])
         writer.writerow([f'{base+anchor:x}',f'{base+anchor_target:x}',anchor_type,'ACCEPTED','SYNTHETIC FIXTURE',1,1])
         if root_vt:
@@ -53,6 +53,9 @@ assert not run('unaccepted-vt',target,None,False)[field]['adopted']
 assert not run('global-vt-conflict-with-good-anchor',target,target,root_vt=0x72451C8)['A031']['adopted']
 assert not run('global-bd-conflict-with-good-anchor',target,target,root_bd=0x72451C8)['A031']['adopted']
 assert not run('data-association-is-not-function-anchor',target,target,anchor_type='DATA',anchor_binary=False)['A031']['adopted']
+assert run('native-enum-function-anchor',target,target,anchor_type='Function',anchor_binary=False)['A031']['adopted']
+assert run('uppercase-function-anchor',target,target,anchor_type='FUNCTION',anchor_binary=False)['A031']['adopted']
+assert not run('native-enum-data-anchor-denied',target,target,anchor_type='Data',anchor_binary=False)['A031']['adopted']
 manual=fixture/'manual-rva-bypass.json'
 manual.write_text(json.dumps({field:dict(target=hex(target),old=hex(source).upper().replace('X','x'),
     symbol='kAcquireField',method='untrusted manual RVA',second_check='fixture',evidence='fixture')}))

@@ -48,6 +48,16 @@ for symbol,old,target in [('kVtClientActorManager',0x55B62C8,0x59C2760),
     check(symbol,old,target,
         'Exact MSVC RTTI name, self-consistent COL/type/table chain in both images; native construction assigns this primary vtable. RTTI seeds are counted only as standard symbol evidence, not as an additional independent check; native construction supplies the latter.',
         'port-evidence/r2/player-rtti-old.json; player-rtti-new.json; player-contracts-target.txt; player-status-target.txt')
+status_row,=[r['r2'] for r in core if r['symbol']=='kVtStatusComponent']
+for image,table,method in [('old',0x558D868,0x625E00),('new',0x5998B60,0x712190)]:
+    types=json.loads((docs/f'port-evidence/r2/player-rtti-{image}.json').read_text())['types']
+    typ,=[t for t in types if t['name']=='.?AVClientStatusActorComponent@pa@@']
+    vt,=[v for v in typ['vtables'] if int(v['rva'],0)==table]
+    slot,=[s for s in vt['slots'] if s['index']==19]
+    assert int(slot['rva'],0)==method
+result[status_row]['anchor']=[0x625E00,0x712190]
+result[status_row]['second_check'] += ' Paired primary-table slot 19 points to 625E00/712190. Both native virtual bodies obtain actor at component+8, test its key high bits, dispatch the same descriptor-type domain and invoke the status update. This matched virtual-member/slot relationship anchors the table independently of its RTTI label; it is not a claim that the table is a RIP operand inside that method.'
+result[status_row]['evidence'] += '; player-status-virtual-old.txt; player-status-virtual-new.txt'
 check('kVtPhysicsObject',0x5D00F88,0x614A050,
     'Native physics constructors 1408ECE0/11B11940 assign these vtables and construct the rotation/position base; mapped constructor/destructor call neighbours, no MSVC COL assumed.',
     'port-evidence/r2/player-physics-reference.txt; player-physics-constructor-target.txt; player-physics-target.txt',
@@ -145,5 +155,22 @@ check('kLoadingFlagCmp',0x219D82B,0x23DC66B,
 check('kWorldTime',0x6A6D238,0x6F31C98,
     'The actual mode-selected YMM store operand in paired loading completion maps source 6A6D238 to target 6F31C98. The other clock bank is 6A6D218 -> 6F31C78, not substituted for the core bank; both hold 32 bytes.',
     'port-evidence/r2/clock-gate-old.txt; clock-gate-new.txt',[0x219D7F0,0x23DC630])
+check('kNetLoopPump',0x35BAD4,0x3A8D94,
+    'Decoded seven-byte MOV RAX,[R15+E0] at the pre-flush native NetworkThread point; R15 is ClientNet, incoming queue+18 is handled before this point, then synchronous session+10 is flushed and returned queue+28 freed. Both complete parent loops reviewed. This is a safetyhook mid-point, not an inline entry.',
+    'port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt',[0x35B800,0x3A8AC0])
+check('kClientNetSlot',0x6D69170,0x72451A0,
+    'Paired client loops 35B800/3A8AC0 load this RIP-relative ClientNet pointer, test its +112 connection byte and pass it to native PostPacket 35C670/3A9960 with a locally constructed request. Adjacent framework pointer 6D69178 -> 72451A8 is distinct.',
+    'port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt',[0x35B800,0x3A8AC0])
+check('kServerNetSlot',0x6D69680,0x72456B8,
+    'Paired named GameLoadingStartReq handlers load this RIP-relative native ServerNet pointer and pass it to the native error-packet post with opcode 3F5 and length11. Independent completion handlers use the same pointer. No numeric delta or neighbouring global is substituted.',
+    'port-evidence/r2/lifecycle-handlers-old.txt; lifecycle-handlers-new.txt',[0x29C59D0,0x2CAD9E0])
+for symbol,old,target,proof in [
+    ('kWindowsLockVf1',0x1371340,0x1593240,'Named WindowsLock<3> vslot 1 has the paired native thunk that dispatches this through vslot+18.'),
+    ('kWindowsLockVf2',0xCE4EF0,0xE297F0,'Named WindowsLock<3> vslot 2 has the paired native thunk that dispatches this through vslot+20.')]:
+    check(symbol,old,target,proof+' Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role.',
+        'port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt')
+check('kWindowsLock3Vtable',0x557C120,0x59874C8,
+    'Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role.',
+    'port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt',[0x1371340,0x1593240])
 (docs/'r2-rva-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Independent RVA checks awaiting standard support',len(result))

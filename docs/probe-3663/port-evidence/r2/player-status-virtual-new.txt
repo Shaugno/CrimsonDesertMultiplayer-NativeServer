@@ -1,0 +1,65 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x712190
+Function=FUN_140712190 body=[[140712190, 1407121fd]]
+140712190 PUSH RBX
+140712192 SUB RSP,0x20
+140712196 MOV R8,RCX
+140712199 MOV RBX,RDX
+14071219c MOV RCX,qword ptr [RCX + 0x8]
+1407121a0 MOV EAX,dword ptr [RCX + 0x60]
+1407121a3 SHR EAX,0x1e
+1407121a6 TEST AL,0x1
+1407121a8 JZ 0x1407121ef
+1407121aa MOV RAX,qword ptr [RCX + 0x88]
+1407121b1 MOVZX EDX,byte ptr [RAX + 0x1]
+1407121b5 LEA EAX,[RDX + -0x3]
+1407121b8 CMP EAX,0x6
+1407121bb JA 0x1407121d3
+1407121bd LEA R9,[0x140000000]
+1407121c4 CDQE
+1407121c6 MOV ECX,dword ptr [R9 + RAX*0x4 + 0x712200]
+1407121ce ADD RCX,R9
+1407121d1 JMP RCX
+1407121d3 CMP DL,0x1
+1407121d6 JNZ 0x1407121e0
+1407121d8 MOV RCX,R8
+1407121db CALL 0x14071ac70
+1407121e0 MOV dword ptr [RBX],0x0
+1407121e6 MOV RAX,RBX
+1407121e9 ADD RSP,0x20
+1407121ed POP RBX
+1407121ee RET
+1407121ef MOV dword ptr [RDX],0x0
+1407121f5 MOV RAX,RBX
+1407121f8 ADD RSP,0x20
+1407121fc POP RBX
+1407121fd RET
+
+undefined4 * FUN_140712190(longlong param_1,undefined4 *param_2)
+
+{
+  char cVar1;
+
+  if ((*(uint *)(*(longlong *)(param_1 + 8) + 0x60) >> 0x1e & 1) == 0) {
+    *param_2 = 0;
+    return param_2;
+  }
+  cVar1 = *(char *)(*(longlong *)(*(longlong *)(param_1 + 8) + 0x88) + 1);
+  switch(cVar1) {
+  case '\x03':
+  case '\x04':
+  case '\x05':
+  case '\x06':
+  case '\b':
+  case '\t':
+    break;
+  default:
+    if (cVar1 != '\x01') goto LAB_1407121e0;
+  }
+  func_0x00014071ac70(param_1);
+LAB_1407121e0:
+  *param_2 = 0;
+  return param_2;
+}

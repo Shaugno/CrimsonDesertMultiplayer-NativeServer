@@ -131,3 +131,10 @@ validity byte before native actor release, then releases the user. Paired
 release 2A83650/2D79D00 swap-removes from manager+B8/count+C0, clears actor+60
 and increments recycled-key count+D0. Those layout facts are proved; complete
 retirement order, concurrent snapshots and reconnect safety remain unverified.
+
+Target save-manager construction 1A15340 independently proves the first word
+is this+8, where it initializes the named WindowsLock<3> object. Its slot
+vector, capacity, busy/pending fields and storage construction identify the
+manager role. Exact RTTI tables map lock vslots 1/2 to native dispatch thunks
+1593240/E297F0. Those function/vtable RVAs still require standard support;
+the lock self-offset is no longer unproved.

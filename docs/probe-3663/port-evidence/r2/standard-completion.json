@@ -1,0 +1,98 @@
+{
+  "whole_image": true,
+  "ghidra": {
+    "session": "R2AutoCoreRetry0553",
+    "completed": true,
+    "rows": 229654,
+    "accepted_records": 194300,
+    "accepted_unique": 138587,
+    "statuses": {
+      "ACCEPTED": 194300,
+      "AVAILABLE": 33025,
+      "BLOCKED": 2329
+    },
+    "accepted_methods": {
+      "Implied Match": 8152,
+      "Exact Symbol Name Match": 2519,
+      "Exact Data Match": 80198,
+      "Exact Function Bytes Match": 10106,
+      "Exact Function Instructions Match": 38292,
+      "Exact Function Mnemonics Match": 36102,
+      "Combined Function and Data Reference Match": 18931
+    },
+    "stock_apply_markup_warning": true,
+    "persisted_error_flags": 0,
+    "failed_core_markup_items": 0,
+    "core_anchor_associations_audited": 46,
+    "warning_caveat": "Original stock warning retained; no assertion that no transient markup error occurred."
+  },
+  "bindiff": {
+    "preset": "conservative",
+    "completed": true,
+    "stock_algorithms": true,
+    "configured_passes": [
+      "name hash",
+      "hash",
+      "prime signature"
+    ],
+    "builtin_call_reference_propagation": true,
+    "matched_functions": 64434,
+    "algorithm_counts": {
+      "function: name hash matching": 1033,
+      "function: hash matching": 6550,
+      "function: prime signature matching": 35752,
+      "function: call reference matching": 21099
+    },
+    "graphless_total": 1293,
+    "core_anchor_graphs_checked": 32,
+    "core_anchor_graphless": 0,
+    "missing_basic_block_diagnostics_retained": true,
+    "scope_caveat": "Additional conservative stock profile, not the unfinished broad/default profile. Full same-image exports and unchanged configured confidence values; fewer candidates. Native/entry/ABI checks remain separate."
+  },
+  "supplemental_runs": {
+    "broad": "still running; not completion evidence",
+    "structural": "still running; not completion evidence"
+  },
+  "outputs": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\vt-matches.tsv",
+      "bytes": 17133563,
+      "sha256": "6c0ece4b6da6ca6311cc4f7b7033ae049a18d0a3d79cfab2997c1dc265fe347e"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\vt-new.log",
+      "bytes": 7481,
+      "sha256": "969d8a930e680e27caa60e4b66696e674f6da65922466891eab687b153c40bb4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-conservative\\old_vs_new.BinDiff",
+      "bytes": 239259648,
+      "sha256": "90623f14188f40188997a961ef4f5b01ac815776d313a8ceb6a59002237ba381"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-conservative\\old_vs_new.results",
+      "bytes": 369999272,
+      "sha256": "f426b27d57e2a89a700b686419694c001ce2bdfa7c8392bbde7f7523881f3e4a"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-conservative-run.log",
+      "bytes": 48361969,
+      "sha256": "0a90471198b648510e8187b994f1418cb6162259799f28719d461eab04c8a004"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\bindiff-conservative\\stock-conservative-config.json",
+      "bytes": 10905,
+      "sha256": "547c08945e8f649f411eac8f8c28d23368b2989cffa13049e2c7e6f3628d32b2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\vt-markup-errors.tsv",
+      "bytes": 75,
+      "sha256": "5389c9f8a00f050282f87d392ff1e6b314d3bb7e5acc27e5d2785188a88b0bc4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\vt-markup-audit.log",
+      "bytes": 6127,
+      "sha256": "5eef21edce067d2e795edf57b1de6332d5f74f442740afceeff5ff775ac8bbe2"
+    }
+  ]
+}

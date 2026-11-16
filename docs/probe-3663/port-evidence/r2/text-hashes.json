@@ -1127,6 +1127,209 @@
       "raw_bytes": 935,
       "raw_sha256": "39902c6ae348275cb347d3e0fbafa6e856fa8e293ff1be6634c78f87ea80fe22",
       "normalized_sha256": "8c3e75e92aa706ae3d66d9665789ff4cfb8ba092a379c9feec64f10ce1733d35"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\network-pump-reference.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/network-pump-reference.txt",
+      "raw_bytes": 24505,
+      "raw_sha256": "7447a2c4fcdd91be1f5eea1c438919bc273e94269aab39a47f4fb010058d68d1",
+      "normalized_sha256": "4749a427b242826b53f65eb7b9f3db884119e6abefe6cf7d6bd38c2cf9eef022"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\save-lock-native-old.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/save-lock-native-old.txt",
+      "raw_bytes": 2580,
+      "raw_sha256": "adbe80e26b6103c369706b783e806473d691ee76ddca20df2a6b32396038de5c",
+      "normalized_sha256": "53ca2c8f772c0a75f4341ab8122f4bc5e51b1a528aec60a88f56061e76d878e2"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\save-lock-native-new.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/save-lock-native-new.txt",
+      "raw_bytes": 11569,
+      "raw_sha256": "e4c18e335910fe017e50235e51a2693de3bd6eca98b4b48e27732ce33043293e",
+      "normalized_sha256": "d3eb6c86309e013043dbc6b68e6823275d255fb3f5a4fa639e9dab89d87a2be2"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\server-thread-init-old.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/server-thread-init-old.txt",
+      "raw_bytes": 21061,
+      "raw_sha256": "9e37747428d746ac800a1ec389030470432bb9bb8496b30e9836f74ecd56bc1d",
+      "normalized_sha256": "42ed978a8038294e21ae9c4f5785d1a456f597928463f9d092bcef2fd41fbaa2"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\server-thread-init-new.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/server-thread-init-new.txt",
+      "raw_bytes": 9557,
+      "raw_sha256": "1a93c55d12a9be3d44fd1c7dbf9c94d34e097455a0826e65f27f6700478f5fb3",
+      "normalized_sha256": "3c696a4d797e363c2ccf1fdc73d41da8c0e89a51034ae5778ceae6c13c3582ae"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\server-run-target.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/server-run-target.txt",
+      "raw_bytes": 12312,
+      "raw_sha256": "aa98e48a5103ad735b82ffe7c52f73e1f283fd7eabd1e51c5b26b9b134fcefa7",
+      "normalized_sha256": "e186710914bdcb2d4309877a63c8aa5f413eb3f5d22fe18495df152c08cb3d54"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\network-lock-contracts-build.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/network-lock-contracts-build.txt",
+      "raw_bytes": 37228,
+      "raw_sha256": "5a2116ff8dd56367272df2c85bdbeec5eed3cbe4215241d13f6db382e3c7f5f0",
+      "normalized_sha256": "473486890b989349adfb4bd1bcef45045d6df44791007425a9f7d3e489f76c7e"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\network-lock-contracts-smoke.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/network-lock-contracts-smoke.txt",
+      "raw_bytes": 153,
+      "raw_sha256": "7ef759b8b4376c158886256d1aba36257286ae0c9d91954b687e1a0af744743f",
+      "normalized_sha256": "4185e3cab0525f82f98d8f1b4ee1d516b2608ef623025c4dd395b31e84b566e7"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\network-lock-host.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/network-lock-host.txt",
+      "raw_bytes": 6729,
+      "raw_sha256": "4d5a321fcd72f18154bb018b9957d0e369d155d95456513ba07177119d4bf30f",
+      "normalized_sha256": "1ace10b156bfa9f7a948dbb1215252e8184bd867cb2fddb0aac8b876d83de94e"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\network-lock-peer.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/network-lock-peer.txt",
+      "raw_bytes": 935,
+      "raw_sha256": "4b1e104af894b9b60939c6e6d653be304873ce965b0cd8afb43deed0b5f275f6",
+      "normalized_sha256": "648744b71201d6fbe5d0767da1697a762927656734ccf6adb4a26cabd7a88688"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\virtual-queue-bind-reference.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/virtual-queue-bind-reference.txt",
+      "raw_bytes": 20715,
+      "raw_sha256": "6eb337165544fd0828f31406b69c346134b54c2bc0d94b13d8380f4980befed9",
+      "normalized_sha256": "483fe2dbe12aaed7da5bc0c0411e8e6b55e607f6b88617529459587250289868"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\virtual-queue-bind-target.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/virtual-queue-bind-target.txt",
+      "raw_bytes": 20963,
+      "raw_sha256": "83616bd937e397414e4553591a4a1b4c1ee16d5053b2e365d5e08474b4c96e0a",
+      "normalized_sha256": "db900d48386dc562f9555620e97077dba9be988ab08e7c2ae1994dc702e1a74d"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\virtual-queue-block-producer-target.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/virtual-queue-block-producer-target.txt",
+      "raw_bytes": 6664,
+      "raw_sha256": "009cbd185f8c93f135430aba8a19f956da96f30748cb21e19f5ffc02b0c1db47",
+      "normalized_sha256": "39cf938685b9b5b93a16e9bf4803c5dd99cc7fa299c5f5f8f470a07eca847397"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\virtual-queue-callers-target.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/virtual-queue-callers-target.txt",
+      "raw_bytes": 12149,
+      "raw_sha256": "21feffeae4a740d9651b1e9e8d5fe72c72b83a67de990eb21f9c39901af78034",
+      "normalized_sha256": "f733ebf7636eaef9eceb6f54b6aa5765bb6a6f70b000bc58d2a5422d03afdc05"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\virtual-queue-producers-new.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/virtual-queue-producers-new.txt",
+      "raw_bytes": 84831,
+      "raw_sha256": "419fc449070c21296bc00f4c7a8a3fbfe23f13ea63aa90624d5b29cd0dfd8be6",
+      "normalized_sha256": "0dae912fbc95a986c65df58d606ffb0673c5e9e121857adb8d7a2dc13c543db5"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\virtual-queue-producers-old.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/virtual-queue-producers-old.txt",
+      "raw_bytes": 13393,
+      "raw_sha256": "d99490233abc00790fa9c54036eba3ea65c717f048ac6e8a780ff083f408728b",
+      "normalized_sha256": "4d67f9a82d3485dc63a016421a7dfff176575958fd44067b0653a286a906c1e8"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\virtual-server-queue-descriptor-target.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/virtual-server-queue-descriptor-target.txt",
+      "raw_bytes": 26817,
+      "raw_sha256": "258c4278bbbb4ff4bdf7f98912f1c3e20b5c77a815aa7053a9fa2ff849b93169",
+      "normalized_sha256": "ae414f27573bbc9f746a9eda3cf93bb99ba59241aa3b6939818c42a57cae418e"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\player-status-virtual-old.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/player-status-virtual-old.txt",
+      "raw_bytes": 1645,
+      "raw_sha256": "0994b8ab5966fcdf7502042a07bcbd2a01c3c47f61dd262731f5dcb0cd9b4e7a",
+      "normalized_sha256": "c9409cf6775963dc4f43735011c86cb2bae4ec2277f46cd0c9724c710d6888c4"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\player-status-virtual-new.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/player-status-virtual-new.txt",
+      "raw_bytes": 1645,
+      "raw_sha256": "58c8d7361872d6363637c5101edb493506d5616c086ce93aa5b2ffe00fe06b34",
+      "normalized_sha256": "b2d7851c778315d19dd3b801a625a965708a549b7b6b9a197e8cad027ae61e8d"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\queue-identity-final-build.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/queue-identity-final-build.txt",
+      "raw_bytes": 37204,
+      "raw_sha256": "8eb84080a85de3eef3517f72651fdefe7e098aa4b2b02ded30dbb9a4f1635b61",
+      "normalized_sha256": "d0e29b3d237db56b72d675b5bac2cff85bd6801c4349d4fa27add9567c0def74"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\queue-identity-final-smoke.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/queue-identity-final-smoke.txt",
+      "raw_bytes": 153,
+      "raw_sha256": "7ef759b8b4376c158886256d1aba36257286ae0c9d91954b687e1a0af744743f",
+      "normalized_sha256": "4185e3cab0525f82f98d8f1b4ee1d516b2608ef623025c4dd395b31e84b566e7"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\standard-matches-build.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/standard-matches-build.txt",
+      "raw_bytes": 37125,
+      "raw_sha256": "0c8852924f5253803af8d978327f88c786271971c3e88e0a8b6397ab240f5a74",
+      "normalized_sha256": "ba40bb0ad4533401d3a68363bb48525f1433662c81b7891a8b8557f0e6bedab9"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\standard-matches-final-build.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/standard-matches-final-build.txt",
+      "raw_bytes": 37204,
+      "raw_sha256": "0759eb696eb76ec2df3516da675661243c5ed4435f6521275aa296ea5fce446d",
+      "normalized_sha256": "1d5e82fd1cc4d0375413d6082916a5f60b6c848537e39fe24628cf810e2e9991"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\standard-matches-final-smoke.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/standard-matches-final-smoke.txt",
+      "raw_bytes": 153,
+      "raw_sha256": "7ef759b8b4376c158886256d1aba36257286ae0c9d91954b687e1a0af744743f",
+      "normalized_sha256": "4185e3cab0525f82f98d8f1b4ee1d516b2608ef623025c4dd395b31e84b566e7"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\standard-matches-final-host.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/standard-matches-final-host.txt",
+      "raw_bytes": 6730,
+      "raw_sha256": "818597c65307c625c186a07ee3528245fc2cb7a98879868f470191c2ea224513",
+      "normalized_sha256": "a11a7bfbd3a476b67139e0881b22d032dae7cd6ee9e5ce681afba861f263fb6f"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\standard-matches-final-peer.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/standard-matches-final-peer.txt",
+      "raw_bytes": 935,
+      "raw_sha256": "0b55036aaa21f4364591ff66f4c0fca18aecbe93b506e9b669e3210eec7edad5",
+      "normalized_sha256": "fbe00b6c95f3ad8bd3dc27c54723bf6e13862d454f85adeb09e4881ff7ec792f"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\vt-core-addresses.txt",
+      "repository": "docs/probe-3663/port-evidence/r2/vt-core-addresses.txt",
+      "raw_bytes": 1199,
+      "raw_sha256": "87cdf4e063534efe44059f53aff5ca624cfc60810655488cb0222fb04421bdaa",
+      "normalized_sha256": "6aca45452f92fcdff33b83e66ab4da7ce33dea374c5408dfb62c6158728b7f23"
+    },
+    {
+      "local": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\analysis-tools\\r2-nativefix\\vt-new.log",
+      "repository": "docs/probe-3663/port-evidence/r2/vt-complete.txt",
+      "raw_bytes": 7481,
+      "raw_sha256": "969d8a930e680e27caa60e4b66696e674f6da65922466891eab687b153c40bb4",
+      "normalized_sha256": "c92d0a68af37a51856e07b0614d94b204f6ddc82b153c65ae2a9bce85aebb18e"
+    },
+    {
+      "local": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\vt-markup-audit.log",
+      "repository": "docs/probe-3663/port-evidence/r2/vt-markup-audit.txt",
+      "raw_bytes": 6127,
+      "raw_sha256": "5eef21edce067d2e795edf57b1de6332d5f74f442740afceeff5ff775ac8bbe2",
+      "normalized_sha256": "31dc0a8a278ab365afcfc96b164139558730f1a46442c8668e8b85fb8ce2e56c"
     }
   ]
 }

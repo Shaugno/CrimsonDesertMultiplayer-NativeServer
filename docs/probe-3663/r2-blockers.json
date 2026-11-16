@@ -11,14 +11,6 @@
     "missing": "P1 loading captured movement/rotation but no missing-chain or parked transition. User reports completed fast travel, which is not reflected in the candidate trace; unsynchronized event timing leaves stale-chain versus out-of-interval travel unresolved. The old park sentinel remains unproved.",
     "experiment": "Identify a native non-mutating control/loading readiness predicate and its lifetime/generation contract offline. Only then prepare a synchronized title/load/travel trace with explicit event markers; do not infer readiness from a stable pointer chain."
   },
-  "B046": {
-    "missing": "Native packet-buffer+8010 contains native metadata. Its downstream consumers and buffer lifetime do not yet prove safe reuse for the mod tag.",
-    "experiment": "Follow PostPacket, native queue consumers and destruction/free paths in both images before routing any target tag writes."
-  },
-  "B047": {
-    "missing": "Native packet-buffer+8018 receives the session epoch at +B8. Its downstream consumers and lifetime do not yet prove safe reuse for the mod magic.",
-    "experiment": "Trace all native reads of +8018 through dispatch/free queues; require a safe target storage strategy before enabling the tunnel."
-  },
   "B075": {
     "missing": "The legacy shared packet limit 7FE0 differs from the target native PostPacket bound 7FDA and ordinary decoder payload bound 7FC1. A target-specific acceptance bound and complete framing check remain necessary.",
     "experiment": "Review native writer/decoder length arithmetic together, then add per-build boundary regressions without changing legacy limits or assuming a new mod wire format."

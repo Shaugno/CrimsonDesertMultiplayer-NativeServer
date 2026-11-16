@@ -114,9 +114,12 @@
     "target": "0x5998b60",
     "old": "0x558d868",
     "symbol": "kVtStatusComponent",
-    "second_check": "Exact MSVC RTTI name, self-consistent COL/type/table chain in both images; native construction assigns this primary vtable. RTTI seeds are counted only as standard symbol evidence, not as an additional independent check; native construction supplies the latter.",
-    "evidence": "port-evidence/r2/player-rtti-old.json; player-rtti-new.json; player-contracts-target.txt; player-status-target.txt",
-    "anchor": null
+    "second_check": "Exact MSVC RTTI name, self-consistent COL/type/table chain in both images; native construction assigns this primary vtable. RTTI seeds are counted only as standard symbol evidence, not as an additional independent check; native construction supplies the latter. Paired primary-table slot 19 points to 625E00/712190. Both native virtual bodies obtain actor at component+8, test its key high bits, dispatch the same descriptor-type domain and invoke the status update. This matched virtual-member/slot relationship anchors the table independently of its RTTI label; it is not a claim that the table is a RIP operand inside that method.",
+    "evidence": "port-evidence/r2/player-rtti-old.json; player-rtti-new.json; player-contracts-target.txt; player-status-target.txt; player-status-virtual-old.txt; player-status-virtual-new.txt",
+    "anchor": [
+      6446592,
+      7414160
+    ]
   },
   "A007": {
     "target": "0x614a050",
@@ -479,6 +482,66 @@
     "anchor": [
       35248112,
       37602864
+    ]
+  },
+  "B065": {
+    "target": "0x3a8d94",
+    "old": "0x35bad4",
+    "symbol": "kNetLoopPump",
+    "second_check": "Decoded seven-byte MOV RAX,[R15+E0] at the pre-flush native NetworkThread point; R15 is ClientNet, incoming queue+18 is handled before this point, then synchronous session+10 is flushed and returned queue+28 freed. Both complete parent loops reviewed. This is a safetyhook mid-point, not an inline entry.",
+    "evidence": "port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt",
+    "anchor": [
+      3520512,
+      3836608
+    ]
+  },
+  "B002": {
+    "target": "0x72451a0",
+    "old": "0x6d69170",
+    "symbol": "kClientNetSlot",
+    "second_check": "Paired client loops 35B800/3A8AC0 load this RIP-relative ClientNet pointer, test its +112 connection byte and pass it to native PostPacket 35C670/3A9960 with a locally constructed request. Adjacent framework pointer 6D69178 -> 72451A8 is distinct.",
+    "evidence": "port-evidence/r2/network-pump-reference.txt; tunnel-layout-target.txt",
+    "anchor": [
+      3520512,
+      3836608
+    ]
+  },
+  "B001": {
+    "target": "0x72456b8",
+    "old": "0x6d69680",
+    "symbol": "kServerNetSlot",
+    "second_check": "Paired named GameLoadingStartReq handlers load this RIP-relative native ServerNet pointer and pass it to the native error-packet post with opcode 3F5 and length11. Independent completion handlers use the same pointer. No numeric delta or neighbouring global is substituted.",
+    "evidence": "port-evidence/r2/lifecycle-handlers-old.txt; lifecycle-handlers-new.txt",
+    "anchor": [
+      43801040,
+      46848480
+    ]
+  },
+  "D014": {
+    "target": "0x1593240",
+    "old": "0x1371340",
+    "symbol": "kWindowsLockVf1",
+    "second_check": "Named WindowsLock<3> vslot 1 has the paired native thunk that dispatches this through vslot+18. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role.",
+    "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt",
+    "anchor": null
+  },
+  "D015": {
+    "target": "0xe297f0",
+    "old": "0xce4ef0",
+    "symbol": "kWindowsLockVf2",
+    "second_check": "Named WindowsLock<3> vslot 2 has the paired native thunk that dispatches this through vslot+20. Exact body and named RTTI tables are reviewed; shared use by other WindowsLock classes does not create a different native role.",
+    "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt",
+    "anchor": null
+  },
+  "D013": {
+    "target": "0x59874c8",
+    "old": "0x557c120",
+    "symbol": "kWindowsLock3Vtable",
+    "second_check": "Exact mangled WindowsLock<3> name, primary COL and vslots 1/2 identify the table; native target save-manager constructor writes it to this+8 and stores that pointer at this+0. The independently verified virtual dispatch thunks corroborate the role.",
+    "evidence": "port-evidence/r2/save-lock-rtti-old.json; save-lock-rtti-new.json; save-lock-native-old.txt; save-lock-native-new.txt",
+    "anchor": [
+      20386624,
+      22622784
     ]
   }
 }

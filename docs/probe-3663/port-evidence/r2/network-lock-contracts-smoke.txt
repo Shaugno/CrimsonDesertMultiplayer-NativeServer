@@ -1,0 +1,3 @@
+Loaded mod, running for 8 s...
+Mod stopped and unloaded cleanly
+Synthetic loopback complete; inspect cdmp.log for received states and clean shutdown.

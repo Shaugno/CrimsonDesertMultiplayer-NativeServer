@@ -1,4 +1,4 @@
-# R2 core list — reviewed reachability cut
+# R2 core list â€” reviewed reachability cut
 
 Scope baseline: 90c12f5. Reader refactoring adds an explicit native ID-width
 contract; declaration locations follow the working branch. Reproduce with
@@ -77,7 +77,7 @@ Counts: A 37, B 78, C 150, D 130; total 395; R1 adopted 17.
 | B007 | B | native member/value contract | kClientNet_InQueue | `0x18` | src/mod/session2/offsets_s2.h:22 | server_install/guest_install: session, queue, buffer and descriptor access | needs target evidence |
 | B008 | B | vtable RVA | kNwVirtualAsyncSessionVtable | `0x57260C0` | src/mod/session2/offsets_s2.h:28 | server_install/guest_install: session, queue, buffer and descriptor access | R1 done |
 | B009 | B | vtable RVA | kNwAsyncSessionVtable | `0x5726140` | src/mod/session2/offsets_s2.h:29 | server_install/guest_install: session, queue, buffer and descriptor access | R1 done |
-| B010 | B | vtable RVA | kSessionVtableEntries | `15` | src/mod/session2/offsets_s2.h:30 | server_install/guest_install: session, queue, buffer and descriptor access | R1 done |
+| B010 | B | native member/size contract | kSessionVtableEntries | `15` | src/mod/session2/offsets_s2.h:30 | server_install/guest_install: session, queue, buffer and descriptor access | R1 done |
 | B011 | B | native member/value contract | kSessionVfSend | `9` | src/mod/session2/offsets_s2.h:31 | server_install/guest_install: session, queue, buffer and descriptor access | R1 done |
 | B012 | B | native member/size contract | kSessionSize | `0xD0` | src/mod/session2/offsets_s2.h:32 | server_install/guest_install: session, queue, buffer and descriptor access | R1 done |
 | B013 | B | native member/value contract | kSession_Name | `0x18` | src/mod/session2/offsets_s2.h:33 | server_install/guest_install: session, queue, buffer and descriptor access | needs target evidence |

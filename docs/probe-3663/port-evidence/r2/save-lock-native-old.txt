@@ -1,0 +1,95 @@
+Program=CrimsonDesert.exe imageBase=140000000
+Targeted analysis only; no whole-program matching or live evidence; adopted=0
+
+RVA=0x1371340
+Function=FUN_141371340 body=[[141371340, 141371346]]
+141371340 MOV RAX,qword ptr [RCX]
+141371343 JMP qword ptr [RAX + 0x18]
+
+void FUN_141371340(longlong *param_1)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000141371343. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*param_1 + 0x18))();
+  return;
+}
+
+
+
+RVA=0xCE4EF0
+Function=FUN_140ce4ef0 body=[[140ce4ef0, 140ce4ef6]]
+140ce4ef0 MOV RAX,qword ptr [RCX]
+140ce4ef3 JMP qword ptr [RAX + 0x20]
+
+void FUN_140ce4ef0(longlong *param_1)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000140ce4ef3. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*param_1 + 0x20))();
+  return;
+}
+
+
+
+RVA=0x233EF0
+Function=FUN_140233ef0 body=[[140233ef0, 140233f75]]
+140233ef0 MOV qword ptr [RSP + 0x18],RBX
+140233ef5 PUSH RBP
+140233ef6 PUSH RSI
+140233ef7 PUSH RDI
+140233ef8 SUB RSP,0x20
+140233efc LEA RBX,[0x146d09db0]
+140233f03 LEA RSI,[0x14557c120]
+140233f0a XOR EDI,EDI
+140233f0c LEA RBP,[0x146d0a8a0]
+140233f13 NOP dword ptr [RAX]
+140233f17 NOP word ptr [RAX + RAX*0x1]
+140233f20 MOV qword ptr [RSP + 0x40],RBX
+140233f25 VPXOR XMM0,XMM0,XMM0
+140233f29 XOR EAX,EAX
+140233f2b VMOVUPS ymmword ptr [RBX],YMM0
+140233f2f VMOVUPS xmmword ptr [RBX + 0x20],XMM0
+140233f34 MOV qword ptr [RBX + 0x30],RAX
+140233f38 MOV qword ptr [RSP + 0x48],RBX
+140233f3d MOV EDX,0xfa0
+140233f42 MOV RCX,RBX
+140233f45 VZEROUPPER
+140233f48 CALL 0x141371610
+140233f4d NOP
+140233f4e MOV qword ptr [RBX],RSI
+140233f51 MOV qword ptr [RBX + 0x30],RDI
+140233f55 ADD RBX,0x38
+140233f59 CMP RBX,RBP
+140233f5c JNZ 0x140233f20
+140233f5e LEA RCX,[0x1451151d0]
+140233f65 MOV RBX,qword ptr [RSP + 0x50]
+140233f6a ADD RSP,0x20
+140233f6e POP RDI
+140233f6f POP RSI
+140233f70 POP RBP
+140233f71 JMP 0x14489574c
+
+int FUN_140233ef0(void)
+
+{
+  longlong lVar1;
+  undefined8 *puVar2;
+
+  puVar2 = (undefined8 *)0x146d09db0;
+  do {
+    *puVar2 = 0;
+    puVar2[1] = 0;
+    puVar2[2] = 0;
+    puVar2[3] = 0;
+    *(undefined1 (*) [16])(puVar2 + 4) = (undefined1  [16])0x0;
+    puVar2[6] = 0;
+    FUN_141371610(puVar2,4000);
+    *puVar2 = &UNK_14557c120;
+    puVar2[6] = 0;
+    puVar2 = puVar2 + 7;
+  } while (puVar2 != (undefined8 *)0x146d0a8a0);
+  lVar1 = FUN_144895710(FUN_1451151d0);
+  return (lVar1 != 0) - 1;
+}

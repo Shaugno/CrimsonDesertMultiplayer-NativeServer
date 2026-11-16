@@ -138,7 +138,7 @@ for row in rows:
     symbol,value = row['symbol'],row['value']
     if value.startswith('{'): kind='native signature'
     elif symbol.startswith('kOp') or symbol.startswith('kStatId_') or symbol=='NativeForbiddenRequests': kind='native identifier'
-    elif 'Vtable' in symbol or symbol.startswith('kVt'): kind='vtable RVA'
+    elif ('Vtable' in symbol or symbol.startswith('kVt')) and re.fullmatch(r'0x[0-9A-Fa-f]+',value) and int(value,16)>0x10000: kind='vtable RVA'
     elif symbol=='kNoEpoch': kind='native epoch sentinel'
     elif symbol=='kLoadingParkHeight': kind='native loading sentinel'
     elif symbol.endswith('Mask'): kind='native member/value contract'
@@ -199,5 +199,5 @@ intro += '| Row | Tier | Game contract | Symbol | 2976 value | Source | Use | Ev
 for row in rows:
     value = row['value'].replace('|','\\|')
     intro += f"| {row['r2']} | {row['tier']} | {row['kind']} | {row['symbol']} | `{value}` | {row['source']} | {row['use']} | {'R1 done' if row['adopted_r1'] else 'needs target evidence'} |\n"
-(OUT/'R2-CORE-LIST.md').write_text(intro)
+(OUT/'R2-CORE-LIST.md').write_text(intro,encoding='utf-8')
 print(dict(counts), 'total', len(rows), 'R1 done', sum(r['adopted_r1'] for r in rows))
