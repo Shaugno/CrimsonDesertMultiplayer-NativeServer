@@ -1,3 +1,147 @@
+# R5 Step 5 — updated review package (2026-11-17 Eastern)
+
+Branch **gpt/3663-port** is ready for Claude's review with explicit failures.
+**Both actual game windows were visible and arranged left/right before guest
+Play, but L3 failed at character-login identity admission. L4 did not run.
+The two-player goal is not reached.** This section supersedes all older
+status below. No intermediate review approval stopped the work.
+
+Source/validation checkpoint **de2bd84**; live Step 3 results **8c51972**;
+Step 4 prerequisite record **48a14a1**. The following packaging commit is
+branch HEAD. `R5-REVIEW-PACKAGE.json` indexes all seven experiments, own-PID
+role log hashes, process exits, manifests, cleanup, validation and reference
+usage. `port-evidence/r5/desktop-retry-results.json` contains the three new
+experiments and the frozen window/capture records. Earlier raw evidence is
+retained. No binary or media is committed or released.
+
+## Actual runtime result
+
+The desktop-launch fixture reproduced a context mismatch: command-launched
+forms reported visible locally but the user saw neither; desktop-launched
+forms were visible and user-confirmed. The sealed `R5DesktopRunner` then
+launched real host and guest processes on the visible desktop. When Computer
+Use denied the guest app without a visible approval prompt, the final trial
+used an explicit manual user handoff through prepared shortcuts. No denied
+app was automated through another route. The user arranged the actual game
+windows; identity-bound reports verified host left/guest right before the
+guest Play signal. The temporary desktop shortcuts were removed afterward.
+
+In the final trial, host PID **47812** launched at **08:23:09**, guest PID
+**25516** at **08:25:41 Eastern**. Native cryptogram/login and ten-entry title
+refresh passed. Guest shader compilation delayed its usable menu. Both
+views were user-confirmed; final geometry was verified at **08:33:34**.
+After guest Play, the identity refusal counter increased to one at 08:34:07;
+this counter is specific to character-login opcode **3081**. Status/phase
+normalizations and EnterField insertion/commit counts remained zero. No
+native fault was logged. The rejected payload and individual failed predicate
+were not retained; exact length, requested number, slot and binding require
+further evidence. No payload, identity or executable gate was relaxed.
+
+Guest exit was normal, code 0, at **08:36:12**. Host closure was confirmed
+by the user, but its pinned receipt records a **watchdog stop at 08:37:10**,
+not normal quit. The common fourteen-minute deadline was never extended.
+The user did not provide an exact guest loading/menu/error outcome. Mutual
+movement, removal, reconnect and post-session host reload remain unverified.
+
+The real-save manifest taken after guest exit exactly matches the host-only
+pre-guest checkpoint: **zero changed files across 23 files**. Host autosaves
+before that checkpoint changed the original snapshot and were retained.
+This is endpoint equality, not process attribution or proof against transient
+writes. Separate guest-only S2 acceptance remains valid. The ten-second
+recording again contained **zero frames, 232 bytes**, SHA-256
+`C674E1892CDD9CC75B447BED09F9197D1E85F4BE1E6E7ABFDDD4A575A76B8DF5`.
+It was rejected and is not visual proof. Foreground sampling needs an owned
+desktop reproduction; no capture root-cause fix is claimed.
+
+## Complete R5 attempt accounting
+
+| Attempt | Category | Outcome |
+| --- | --- | --- |
+| R5-S1 | Startup | Host loaded; first fixed-deadline stop; retained as incomplete. |
+| R5-S2 | Startup | Isolated guest title and normal exit 0; real manifest unchanged. Passed. |
+| R5-S1B | Startup | Host real-save load, native readiness, one minute in-world, normal exit 0. Passed. |
+| R5-L3-1 | Join | Native guest login/title refresh, but two usable windows and character-load attempt not established; both deadline-stopped. |
+| R5-L3-2 | Startup | Desktop host visible, loaded, normal exit 0; operator delay exhausted guest-start reserve; no guest launched. |
+| R5-L3-2b | Join experiment | Guest app access denied before process launch; host normal exit 0. Conservatively retains already-promoted join count. |
+| R5-L3-3 | Join | Both actual windows visible/arranged; native character-login refused before insertion; guest normal exit, host deadline stop; empty capture rejected. |
+
+The preserved local ledger is **startup 4/5, join 3/3**. It includes the
+startup-only and application-access-blocked trials after the earlier de2bd84
+checkpoint. This accounting was stated at the live-presence touchpoint; the
+resumed prompt's larger remaining estimate was not used to erase attempts.
+There were two actual guest native-login conversations and zero accepted
+joins. No further join launch was made. L4 requires a passed L3, so no second
+PC was requested and no kit was transferred or deployed.
+
+Every role's full log SHA-256 is indexed under `attempts` in
+`R5-REVIEW-PACKAGE.json`; the new final pair is:
+
+- Host: `BA0792C77DF272F5746BC1839CF984BDF8C96CCE9B7FB1225D215E0B9CB5A9AB`
+- Guest: `7538009B1ED24C6D7D3B4A0BFEDC792BD4BE7EE44351136DEFC60DB00A020BCC`
+
+## Implementation, validation and licensing
+
+Host isolation is **none**: fresh backed-up real saves, normal host autosaves
+allowed. Guest isolation uses USERPROFILE before creation and verifies the
+actual native CSIDL_LOCAL_APPDATA save root against its copied profile by
+canonical path/file identity, with **zero file hooks**. The corrected NT
+fallback is separate and fixture-tested. Profile path selection is not an
+OS permission barrier against arbitrary absolute writes. See `R5-ISOLATION.md`.
+
+The unchanged source passed **119/119 tests in 115.14 seconds**, plus an
+eight-second synthetic host/peer smoke with **78 remote states, zero rejects,
+metadata mask 0xF and clean unload**. Current ASI SHA-256:
+`08A8ABEB7431703444AFC09ED44986ED493DECF24D103B8A121C8701309840DD`;
+desktop runner SHA-256:
+`8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09`.
+The ASI's embedded banner is 2709B8DE; the source/hash seal identifies the
+validated work committed as de2bd84. The complete source/binary/runner seal
+was checked again after the sitting. Later edits are documentation/evidence
+only; no native fix or runtime pass follows from the game-free suite.
+
+Samuel Cardillo PR #1 remains pinned at
+`a3904af3e1a32056dcf7a63bc7a469eb4231084b`, reference only, never merged.
+Verified 3576 executable SHA-256:
+`C94AD6C3EA54970A6D2DA7A2719753210A7728A91698ED3405DD9125470ED98F`,
+Steam manifest **5865785040848247748**; the reference was never executed.
+His credited field-leave and achievement rules were adopted in **966cb5f**,
+with independent 3663 entry/vtable/branch/cleanup checks and GPL v3 preserved.
+The upstream four-argument wrapper did not replace our native three-argument
+3663 EnterField adapter. Character signatures were research only; optional
+character, mounts and combat paths remain off. `R5-UPSTREAM-REFERENCE.md`
+records the exact use. No source-build address was copied unchecked.
+
+Commits since 756fcd5, in order:
+
+`31748d3` plan; `5129358` Step 1 isolation; `c933954` Step 2 startup;
+`966cb5f` credited guards; `76ecfa0` first L3/capture validation;
+`b0c1fef` initial L4 blocker; `2709b8d` earlier package;
+`de2bd84` desktop launch correction; `8c51972` visible-pair refusal results;
+`48a14a1` updated L4 prerequisite; following Step 5 packaging commit at HEAD.
+Full hashes, subjects and changed files are in the package JSON.
+
+## Cleanup and next work
+
+The fresh **08:40 Eastern** audit verified no game, owned watchdog or six
+controlled installation files. Every host/guest frozen backup for all seven
+sessions still matches its own manifest. All 23 current real-save files match
+the latest post-session manifest. Historical pre-session real-save manifests
+are snapshots, not a requirement to undo legitimate autosaves. No real save
+was restored over. Source/ASI/runner/executable hashes remain verified.
+Desktop shortcut cleanup is separately sealed. The original sibling checkout
+and parent Start-Grok launcher remain untouched.
+
+Next independent work is bounded reason-specific admission diagnostics and
+an exact-3663 packet reproduction; do not accept a 19-byte legacy variant or
+change the requested identity without target proof. Reproduce foreground and
+birth sampling with an owned visible pair before another recording. A later
+authorized live attempt would repeat visible left/right confirmation before
+character selection, then all L3 acceptance checks within its fixed deadline.
+Only actual L3 acceptance permits the second-PC L4 sitting. The present
+package is ready for review with these remaining limitations.
+
+---
+
 # R5 Step 5 — review package (2026-11-16 Eastern)
 
 Branch `gpt/3663-port`; source/validation checkpoint **76ecfa0**, Step 4
