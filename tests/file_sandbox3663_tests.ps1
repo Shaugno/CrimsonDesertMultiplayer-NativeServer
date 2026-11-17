@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$FixtureExe)
+param([Parameter(Mandatory=$true)][string]$FixtureExe,[string]$SteamDll='')
 $ErrorActionPreference='Stop'
 Import-Module Microsoft.PowerShell.Utility
 $temp=[IO.Path]::GetFullPath([IO.Path]::GetTempPath())
@@ -20,8 +20,21 @@ try {
     $body="CDMP-R4-SAVE-1`n"+$before.Replace('`t',"`t")+"`n"
     [IO.File]::WriteAllText($manifest,$body,[Text.UTF8Encoding]::new($false))
     $hash=(Get-FileHash -LiteralPath $manifest).Hash
+    if($SteamDll){
+        # Optional manual startup diagnostic, never part of CTest. Only the
+        # owned fixture initializes SteamAPI; no real game executable runs.
+        foreach($mode in @('steam-baseline','steam-sandbox')){
+            & $FixtureExe $real $backup $sandbox $manifest $hash $mode $SteamDll
+            $code=$LASTEXITCODE
+            Write-Output "$mode exit $code; real manifest unchanged=$((Manifest $real) -eq $before)"
+            if((Manifest $real) -ne $before){throw 'Steam diagnostic changed fixture real saves'}
+        }
+        return
+    }
     & $FixtureExe $real $backup $sandbox $manifest $hash premapped
     if($LASTEXITCODE){throw 'Pre-existing protected view did not refuse'}
+    & $FixtureExe $real $backup $sandbox $manifest $hash teardown
+    if($LASTEXITCODE){throw "Native file hook CRT teardown failed $LASTEXITCODE"}
     if($env:CDMP_R4_FIXTURE_DEBUGGER) { & $env:CDMP_R4_FIXTURE_DEBUGGER $FixtureExe $real $backup $sandbox $manifest $hash normal }
     else { & $FixtureExe $real $backup $sandbox $manifest $hash normal }
     if($LASTEXITCODE){

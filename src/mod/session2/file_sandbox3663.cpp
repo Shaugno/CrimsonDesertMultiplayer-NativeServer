@@ -12,10 +12,12 @@
 #include <array>
 #include <atomic>
 #include <cstring>
+#include <cstdio>
 #include <filesystem>
 #include <fstream>
 #include <set>
 #include <sstream>
+#include <source_location>
 #include <tuple>
 #include <vector>
 #include "mod/log.h"
@@ -27,6 +29,7 @@ constexpr ULONG dont_reparse=0x1000, open_by_id=0x2000;
 std::wstring real_root,sandbox_root;
 std::atomic<bool> active{},ready{};
 std::atomic<uint64_t> redirected{},refused{};
+std::array<std::atomic<uint64_t>,1024> refusal_sites{};
 std::string failure="not installed";
 thread_local unsigned audit_depth=0;
 struct ErrorState { DWORD value=GetLastError(); ~ErrorState(){SetLastError(value);} };
@@ -164,7 +167,7 @@ std::wstring canonical(std::wstring path,bool mutation) {
 }
 struct Name {
     OBJECT_ATTRIBUTES attributes{};UNICODE_STRING unicode{};std::wstring storage;
-    bool disk=false,hit=false;
+    bool disk=false,hit=false,device=false;
     explicit Name(POBJECT_ATTRIBUTES given,bool mutation=false) {
         if(!given || !checked_copy(given,&attributes,sizeof(attributes)) || attributes.Length!=sizeof(attributes))throw 1;
         UNICODE_STRING name{};
@@ -173,9 +176,28 @@ struct Name {
         storage.resize(name.Length/2);
         if(name.Length && !checked_copy(name.Buffer,storage.data(),name.Length))throw 1;
         if(storage.find(L'\0')!=std::wstring::npos)throw 1;
+        if(attributes.RootDirectory && storage.empty()){
+            Audit audit;
+            // Native reopen of an existing pipe endpoint has no disk name.
+            // Only the kernel's PIPE handle type qualifies; disk/unknown
+            // handles still require normal save-path/identity validation.
+            if(GetFileType(attributes.RootDirectory)==FILE_TYPE_PIPE)return;
+        }
         if(attributes.RootDirectory && (storage.empty() || storage[0]!=L'\\')) {
             auto parent=final_name(attributes.RootDirectory);if(parent.empty())throw 1;
             storage=parent+L"\\"+storage;
+        }
+        constexpr wchar_t pipe_prefix[]=L"\\??\\pipe\\";
+        if(storage.size()>=std::size(pipe_prefix)-1 &&
+            CompareStringOrdinal(storage.data(),std::size(pipe_prefix)-1,pipe_prefix,std::size(pipe_prefix)-1,TRUE)==CSTR_EQUAL){
+            // A DOS pipe name is not a disk path. Bind it to the explicit
+            // native pipe device rather than passing a mutable DOS alias
+            // through or attempting a second client open during validation.
+            storage=L"\\Device\\NamedPipe\\"+storage.substr(std::size(pipe_prefix)-1);
+            if(storage.size()>32766)throw 1;
+            unicode.Length=static_cast<USHORT>(storage.size()*2);unicode.MaximumLength=unicode.Length;unicode.Buffer=storage.data();
+            attributes.RootDirectory=nullptr;attributes.ObjectName=&unicode;attributes.Attributes|=dont_reparse;
+            device=true;return;
         }
         auto resolved=canonical(storage,mutation);
         if(resolved.empty())return;
@@ -186,10 +208,12 @@ struct Name {
         unicode.Length=static_cast<USHORT>(storage.size()*2);unicode.MaximumLength=unicode.Length;unicode.Buffer=storage.data();
         attributes.RootDirectory=nullptr;attributes.ObjectName=&unicode;attributes.Attributes|=dont_reparse;
     }
-    POBJECT_ATTRIBUTES arg(POBJECT_ATTRIBUTES original){return disk?&attributes:original;}
+    POBJECT_ATTRIBUTES arg(POBJECT_ATTRIBUTES original){return disk||device?&attributes:original;}
 };
 bool enabled(){return active.load(std::memory_order_acquire) && !audit_depth;}
-NTSTATUS deny(){++refused;return denied;}
+NTSTATUS deny(std::source_location site=std::source_location::current()){
+    ++refused;if(site.line()<refusal_sites.size())++refusal_sites[site.line()];return denied;
+}
 NTSTATUS NTAPI create_file(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,PIO_STATUS_BLOCK io,
     PLARGE_INTEGER alloc,ULONG attr,ULONG share,ULONG disposition,ULONG options,PVOID ea,ULONG ea_size) {
     ErrorState error_state;
@@ -206,7 +230,18 @@ NTSTATUS NTAPI open_file(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,PI
     if(!enabled())return h_open.unsafe_stdcall<NTSTATUS>(out,access,oa,io,share,options);
     try {if(options&open_by_id)return deny();Name name(oa,(access&(GENERIC_WRITE|GENERIC_ALL|DELETE|FILE_WRITE_DATA|FILE_APPEND_DATA|FILE_WRITE_ATTRIBUTES))!=0);
         return h_open.unsafe_stdcall<NTSTATUS>(out,access|(name.disk?FILE_READ_ATTRIBUTES:0),name.arg(oa),io,share,options);
-    }catch(...){return deny();}
+    }catch(...){
+#ifdef CDMP_SANDBOX_FIXTURE
+        // Owned fixture only: bounded path diagnostic, never a game callback.
+        Audit audit;OBJECT_ATTRIBUTES attrs{};UNICODE_STRING name{};std::array<wchar_t,257> text{};
+        if(checked_copy(oa,&attrs,sizeof(attrs)) && checked_copy(attrs.ObjectName,&name,sizeof(name))){
+            const auto length=std::min<size_t>(name.Length,512);
+            if(!(length%2) && checked_copy(name.Buffer,text.data(),length))
+                std::fwprintf(stderr,L"Fixture NtOpenFile refusal: '%ls' root %p type %lu\n",text.data(),attrs.RootDirectory,GetFileType(attrs.RootDirectory));
+        }
+#endif
+        return deny();
+    }
 }
 NTSTATUS NTAPI delete_file(POBJECT_ATTRIBUTES oa) {
     ErrorState error_state;
@@ -565,7 +600,11 @@ bool install_from_environment() {
     return install({local+L"\\Pearl Abyss\\CD\\save",backup,sandbox,manifest,ascii});
 }
 bool verified(){return ready.load(std::memory_order_acquire);}
-std::string describe(){return "verified="+std::to_string(verified())+" redirected="+std::to_string(redirected.load())+" refused="+std::to_string(refused.load());}
+std::string describe(){
+    std::string result="verified="+std::to_string(verified())+" redirected="+std::to_string(redirected.load())+" refused="+std::to_string(refused.load());
+    for(size_t i=0;i<refusal_sites.size();++i)if(const auto count=refusal_sites[i].load())result+=" line"+std::to_string(i)+"="+std::to_string(count);
+    return result;
+}
 std::string failure_reason(){return failure;}
 #ifdef CDMP_SANDBOX_FIXTURE
 void fixture_abort(){active.store(false);ready.store(false);}

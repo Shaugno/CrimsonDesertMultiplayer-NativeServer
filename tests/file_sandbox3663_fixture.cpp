@@ -9,6 +9,22 @@
 #include <string>
 #include <vector>
 namespace {
+int steam_probe(const std::wstring& dll){
+    const auto slash=dll.find_last_of(L"\\/");
+    if(slash==std::wstring::npos || _wcsicmp(dll.substr(slash+1).c_str(),L"steam_api64.dll"))return 42;
+    SetEnvironmentVariableW(L"SteamAppId",L"3321460");SetEnvironmentVariableW(L"SteamGameId",L"3321460");
+    // No RestartAppIfNecessary, game launch, game native calls or Steam messages.
+    HMODULE module=LoadLibraryW(dll.c_str());
+    if(!module){std::printf("Steam DLL load failed Win32 %lu\n",GetLastError());return 43;}
+    const auto init=reinterpret_cast<int(__cdecl*)(char*)>(GetProcAddress(module,"SteamAPI_InitFlat"));
+    const auto shutdown=reinterpret_cast<void(__cdecl*)()>(GetProcAddress(module,"SteamAPI_Shutdown"));
+    if(!init || !shutdown){std::printf("Steam flat-init exports unavailable\n");return 44;}
+    std::array<char,1024> error{};int result=init(error.data());
+    std::printf("SteamAPI_InitFlat result %d error '%s' Win32 %lu\n",result,error.data(),GetLastError());
+    std::printf("File layer: %s\n",cdmp::session2::file_sandbox3663::describe().c_str());
+    if(!result)shutdown();
+    std::fflush(stdout);return result?45:0;
+}
 bool write(const std::wstring& path,const char* text) {
     HANDLE f=CreateFileW(path.c_str(),GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,CREATE_ALWAYS,0,nullptr);
     if(f==INVALID_HANDLE_VALUE)return false;
@@ -21,8 +37,9 @@ std::string read(const std::wstring& path) {
     char b[128]{};DWORD n=0;bool ok=ReadFile(f,b,sizeof(b),&n,nullptr)!=FALSE;CloseHandle(f);return ok?std::string(b,n):std::string();
 }
 int fixture(int argc,wchar_t** argv) {
-    if(argc!=7)return 1;
+    if(argc!=7 && argc!=8)return 1;
     const std::wstring root=argv[1],backup=argv[2],sandbox=argv[3],manifest=argv[4],hash=argv[5],mode=argv[6];
+    if(mode==L"steam-baseline")return argc==8?steam_probe(argv[7]):1;
     HANDLE before=CreateFileW((root+L"\\source.save").c_str(),GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,0,nullptr);
     if(before==INVALID_HANDLE_VALUE)return 2;
@@ -36,12 +53,42 @@ int fixture(int argc,wchar_t** argv) {
     auto ipc_before=static_cast<char*>(MapViewOfFile(ipc,FILE_MAP_WRITE,0,0,4096));
     if(!ipc_before)return 36;
     ipc_before[0]='I';UnmapViewOfFile(ipc_before);
+    const std::wstring pipe_name=L"\\\\.\\pipe\\CDMP-R4-PIPE-"+std::to_wstring(GetCurrentProcessId());
+    HANDLE pipe=CreateNamedPipeW(pipe_name.c_str(),PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED,
+        PIPE_TYPE_BYTE|PIPE_READMODE_BYTE|PIPE_WAIT,1,64,64,0,nullptr);
+    OVERLAPPED connect{};connect.hEvent=CreateEventW(nullptr,TRUE,FALSE,nullptr);
+    if(pipe==INVALID_HANDLE_VALUE || !connect.hEvent)return 46;
+    if(!ConnectNamedPipe(pipe,&connect) && GetLastError()!=ERROR_IO_PENDING)return 47;
     if(mode==L"premapped" && !MapViewOfFile(old_mapping,FILE_MAP_WRITE,0,0,0))return 30;
     std::string ascii;for(wchar_t c:hash)ascii+=static_cast<char>(c);
     bool installed=cdmp::session2::file_sandbox3663::install({root,backup,sandbox,manifest,ascii});
     if(mode==L"refuse" || mode==L"premapped")return installed?4:0;
     if(!installed || !cdmp::session2::file_sandbox3663::verified()){
         std::printf("Install failed: %s\n",cdmp::session2::file_sandbox3663::failure_reason().c_str());return 5;}
+    HANDLE pipe_client=CreateFileW(pipe_name.c_str(),GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,nullptr,OPEN_EXISTING,0,nullptr);
+    if(pipe_client==INVALID_HANDLE_VALUE){std::printf("Named pipe open failed Win32 %lu\n",GetLastError());return 48;}
+    if(WaitForSingleObject(connect.hEvent,2000)!=WAIT_OBJECT_0)return 49;
+    using NativeOpen=NTSTATUS(NTAPI*)(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,PIO_STATUS_BLOCK,ULONG,ULONG);
+    auto native_open=reinterpret_cast<NativeOpen>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtOpenFile"));
+    UNICODE_STRING empty_name{};OBJECT_ATTRIBUTES pipe_attributes{};pipe_attributes.Length=sizeof(pipe_attributes);
+    pipe_attributes.RootDirectory=pipe_client;pipe_attributes.ObjectName=&empty_name;
+    IO_STATUS_BLOCK pipe_io{};HANDLE pipe_reopen=nullptr;
+    if(!native_open)return 50;
+    const auto reopen_status=native_open(&pipe_reopen,GENERIC_READ|GENERIC_WRITE|SYNCHRONIZE,&pipe_attributes,&pipe_io,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,0x20);
+    // A second connection to our occupied one-instance endpoint may be
+    // refused by the kernel. Preserve PIPE_NOT_AVAILABLE, not ACCESS_DENIED.
+    if(reopen_status!=static_cast<NTSTATUS>(0xC00000ACUL) &&
+        (reopen_status<0 || GetFileType(pipe_reopen)!=FILE_TYPE_PIPE))return 50;
+    if(pipe_reopen)CloseHandle(pipe_reopen);
+    HANDLE pipe_root=CreateFileW(L"\\\\.\\pipe\\",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,nullptr,OPEN_EXISTING,FILE_FLAG_BACKUP_SEMANTICS,nullptr);
+    if(pipe_root==INVALID_HANDLE_VALUE || GetFileType(pipe_root)!=FILE_TYPE_PIPE)return 51;
+    pipe_attributes.RootDirectory=pipe_root;pipe_reopen=nullptr;
+    const auto root_status=native_open(&pipe_reopen,GENERIC_READ|SYNCHRONIZE,&pipe_attributes,&pipe_io,FILE_SHARE_READ|FILE_SHARE_WRITE,0x20);
+    if(root_status<0 || GetFileType(pipe_reopen)!=FILE_TYPE_PIPE){std::printf("Pipe root reopen NT status %08lX\n",static_cast<unsigned long>(root_status));return 52;}
+    CloseHandle(pipe_reopen);CloseHandle(pipe_root);
+    CloseHandle(pipe_client);DisconnectNamedPipe(pipe);CloseHandle(pipe);CloseHandle(connect.hEvent);
+    if(mode==L"steam-sandbox")return argc==8?steam_probe(argv[7]):1;
     HANDLE ipc_open=OpenFileMappingW(FILE_MAP_READ|FILE_MAP_WRITE,FALSE,ipc_name.c_str());
     if(!ipc_open)return 37;
     auto ipc_after=static_cast<char*>(MapViewOfFile(ipc_open,FILE_MAP_READ|FILE_MAP_WRITE,0,0,4096));
@@ -70,6 +117,7 @@ int fixture(int argc,wchar_t** argv) {
     if(SetFileInformationByHandle(before,FileEndOfFileInfo,&end,sizeof(end)))return 7;
     if(auto p=MapViewOfFile(old_mapping,FILE_MAP_WRITE,0,0,0)){UnmapViewOfFile(p);return 8;}
     CloseHandle(old_mapping);CloseHandle(before);
+    if(mode==L"teardown")return 0; // ordinary CRT exit must safely remove native hooks
     if(read(root+L"\\source.save")!="original")return 9;
     if(!write(root+L"\\created.save","guest") || read(root+L"\\created.save")!="guest")return 10;
     HANDLE f=CreateFileW((root+L"\\created.save").c_str(),DELETE|GENERIC_READ|GENERIC_WRITE,
@@ -128,5 +176,7 @@ int wmain(int argc,wchar_t** argv) {
         return EXCEPTION_CONTINUE_SEARCH;
     });
     int code=fixture(argc,argv);if(code)std::printf("R4 sandbox fixture FAILED %d Win32 %lu\n",code,GetLastError());
-    std::fflush(stdout);ExitProcess(static_cast<UINT>(code));
+    std::fflush(stdout);
+    if(argc>=7 && std::wstring(argv[6])==L"teardown")return code;
+    ExitProcess(static_cast<UINT>(code));
 }

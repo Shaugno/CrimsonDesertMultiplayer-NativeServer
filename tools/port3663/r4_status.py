@@ -25,7 +25,7 @@ status['steps'] = {'1': 'complete; file sandbox and offline fixture verified',
                    '2': 'complete; native control filter; travel/time scope retired',
                    '3': 'complete; native adapter, identity and passive sitting; historical Step3 evidence retained',
                    '4': 'complete; explicit guarded v1 route; 114/114 tests and synthetic tier-metadata smoke; see Step4 result',
-                   '5': 'pending L3 then L4; one completed R4 passive sitting; zero join attempts',
+                   '5': 'in progress; two controlled startups failed before guest/join; offline IPC/shutdown fixes; L3 then L4 pending; see R4-LIVE.md',
                    '6': 'pending final review package'}
 for row in status['rows']:
     if row['row'] in save['retired_by_scope']:

@@ -40,7 +40,7 @@ asi = binary / 'cdmp.asi'
 assert sha(asi) == sha(log.parent / 'cdmp.asi')
 paths = subprocess.check_output(['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard'], cwd=root).decode().split('\0')
 sources = sorted(set(p for p in paths if p and (
-    p.startswith(('src/', 'tests/', 'scripts/', 'tools/', 'cmake/', 'patches/'))
+    p.startswith(('src/', 'tests/', 'scripts/', 'tools/', 'cmake/', 'patches/', 'third_party/safetyhook-patch/'))
     or p == 'CMakeLists.txt') and (root / p).is_file()))
 manifest = [dict(path=p, sha256=sha(root / p)) for p in sources]
 receipt = dict(version=1, compiled_tier_mask=15,

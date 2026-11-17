@@ -1,0 +1,153 @@
+{
+  "step": 5,
+  "trials": [
+    {
+      "session": "R4-L3-20261116-184248",
+      "host": {
+        "launched_utc": "2026-11-16T23:42:52.9300148Z",
+        "game_pid": 41380,
+        "game_start_filetime": "134393461728985814",
+        "role": "host",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe"
+      },
+      "watchdog": {
+        "state": "exited",
+        "game_pid": 41380,
+        "game_start_filetime": "134393461728985814",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 35528,
+        "controller_start_filetime": "134393461729389769",
+        "deadline_utc": "2026-11-16T23:56:52.8985814Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "8A56AE12E98E99A834284C328BCD054CB71ACDE7CA3CB10A5D44B2FFE8E81781",
+        "game_exit_code": 4294967295,
+        "ended_utc": "2026-11-16T23:45:29.7815713Z"
+      },
+      "result": "SteamAPI startup failure before native join; no guest launch",
+      "installation_restored": true,
+      "real_saves_unchanged": true,
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\question.md",
+          "sha256": "12B2B6733CE07F36CE5F44A8FB46697E507E17D816B1ED20534AC0945095067C"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\session.json",
+          "sha256": "820031F5A6FB1D41BEDDBC0C93CC86CCF257F6DD046F9B15A6476C30D7CDCD2E"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\launch-host.json",
+          "sha256": "0220090DB83E0DC7354ABE7344AA4A0E599FBAA2FD8CBDD8AF9807EB1CDC2946"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\watchdog-host.json",
+          "sha256": "7E19922B63D6135FC0A83C56C7A25D8C01C51E5B52977BD054EADAEB19BE6318"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\finish.json",
+          "sha256": "93DD04638499D5A47B14A96AC9CC375BECE00830CCF2E7CDC66F787E44BA6FED"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\evidence\\cdmp.host.log",
+          "sha256": "8BC024B5C5E36650A1531053FF1065D90EBF04282467596121E391FDD184E3B1"
+        }
+      ]
+    },
+    {
+      "session": "R4-L3-20261116-184928",
+      "host": {
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "launched_utc": "2026-11-16T23:49:33.2889750Z",
+        "role": "host",
+        "game_pid": 752,
+        "game_start_filetime": "134393465732526762"
+      },
+      "watchdog": {
+        "state": "exited",
+        "game_pid": 752,
+        "game_start_filetime": "134393465732526762",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 14456,
+        "controller_start_filetime": "134393465733081716",
+        "deadline_utc": "2026-11-17T00:03:33.2526762Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "8A56AE12E98E99A834284C328BCD054CB71ACDE7CA3CB10A5D44B2FFE8E81781",
+        "game_exit_code": 3221225477,
+        "ended_utc": "2026-11-16T23:50:34.9306115Z"
+      },
+      "result": "SteamAPI startup failure before native join; no guest launch",
+      "installation_restored": true,
+      "real_saves_unchanged": true,
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\question.md",
+          "sha256": "4A7C0718DEFEF515C70255C17163D464C9C8CA0F104BD0144460F8C6C53926C9"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\session.json",
+          "sha256": "FB1828AF2BBE23C8873E5A48DBFD5EF5AC22995B1A3E85D06175A1072E5F99B3"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\launch-host.json",
+          "sha256": "73AD7B73C749B553A198BA68D0622F1EE6BC4BD5A448794E0F6C63D560796762"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\watchdog-host.json",
+          "sha256": "9092BD1E181BA095CBB8C86E349357DFEC52475A7B329CBA09E98842224241A6"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\finish.json",
+          "sha256": "2E6A75380195D972CE177CED565FD35E9AB1C43BBC46EBD330F6F9B5AA427130"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\evidence\\cdmp.host.log",
+          "sha256": "665B9B6B7C7D7769B458808E57D9ADFF9235AE832F45C75265969D845EA0DD6C"
+        }
+      ]
+    }
+  ],
+  "controlled_startup_trials": 2,
+  "startup_crashes": 1,
+  "native_join_attempts": 0,
+  "failed_native_join_attempts": 0,
+  "guest_launches": 0,
+  "L3": "not established",
+  "L4": "not attempted; requires L3",
+  "fixed_offline": [
+    "MAP-only pagefile shared memory classification",
+    "named pipe device path and typed empty-relative-name pipe reopen",
+    "native hook removal preserves execute permission for both patch ranges"
+  ],
+  "steam_fixture": "after Steam restart and pipe corrections: success with/without hooks; zero sandbox refusals",
+  "caveat": "Game-free corrections do not establish real-game startup or two-player acceptance.",
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\ipc-repro-test.txt",
+      "sha256": "3681A690C21114C0FC689E0BC08623218792AE80EE93E7E0AFA4136C13FB4741"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\teardown-repro-test.txt",
+      "sha256": "A4AAEB4DB8EFF0C3E7B0C439880A0E4C223E5C11C49BC8BF19D653924D3F9883"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\teardown-fixed-suite.txt",
+      "sha256": "0ED3140EC142D0C8C1A98E41EA69431BD0E5B9FECABDB00146875529284D717D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\pipe-repro-test.txt",
+      "sha256": "451D33D961974C7D831ED4C6611E4DAD36964CA780C29E8776C399FA7CD066E9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\pipe-root-test.txt",
+      "sha256": "991CED2F6D30B9CE368F3E86C488247EEEF667F88B18BE1BD4FC884617661528"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\steam-reopen-fixed-results.txt",
+      "sha256": "F908003B3F5276CA2AE8835EE410F2C05B4EEEB9B71EE07BE7469705BC77793D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup2-crash-summary.json",
+      "sha256": "2C463EE4F7521F2AA39BDD2BD6F27072AE9CF65A94055EC19B2A9C9BD53C7B8E"
+    }
+  ]
+}

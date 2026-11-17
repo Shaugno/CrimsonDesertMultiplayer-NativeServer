@@ -1,0 +1,56 @@
+{
+  "step": 5,
+  "result": "offline implementation and guarded experimental C/D validation complete; L3/L4 acceptance unproven",
+  "suite": "114/114 passed",
+  "suite_seconds": 94.22,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight seconds; compiled tier metadata 0xF; clean stop/unload; synthetic only",
+  "compiled_tiers": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "default_route": "Tier A reader",
+  "explicit_route": "session2 core_v1=1; exact build; actual verified file sandbox; role and transport checks",
+  "join_attempts": 0,
+  "live_acceptance": {
+    "L3": "not attempted",
+    "L4": "not attempted"
+  },
+  "safeguards": [
+    "native logout only at title/stable lifecycle; loss during loading quarantines",
+    "new six-argument LoadingComplete hook disables guest world-clock publication",
+    "native faults seal admission and injection, retain uncertain pins, and continue exception search",
+    "typed user/actor generation checks, field lock order and conservative rollback",
+    "bounded queues; native packet work on verified NetworkThread; no legacy optional installers",
+    "launcher fresh backups and sandboxes; verified watchdog; installation restoration even after save drift",
+    "controlled marker refuses lost-role or unsandboxed relaunch; default installed configuration unchanged"
+  ],
+  "limitations": [
+    "No native C/D execution or two-player acceptance is established by these offline checks.",
+    "Reconnect is unsupported: changed guest native conversation exits with guard code 0xCD67.",
+    "Loading disconnect, host field replacement or uncertain insertion requires both processes to restart.",
+    "Only single-primary ordinary-character walking/turning/running is admitted; optional gameplay stays unreachable.",
+    "File sandbox is an API interception layer, not an operating-system security boundary.",
+    "The existing optional S3 publication race is not claimed fixed; this route does not install it."
+  ],
+  "source_manifest_sha256": "A6BBE43EE8C585D795D033D0A7C7D75F66503FCF81E42FA85E69F15ACBD685C6",
+  "arming_receipt_sha256": "913E922B4C2FED1A7D5C2D0925D5A52726D17BB3BFD02FBB2EA31D945D227175",
+  "asi_sha256": "BD1F6E2A217B3E526F7B51C1A68EBE016CB96BF19E03B4251D294B4278D5EA77",
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup-fixed-suite.txt",
+      "sha256": "3941EA941AA955BF25F44D5FCACF27E9E693371CE73E26BC02338162D6816BA4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup-fixed-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup-fixed-smoke-run\\e2e\\cdmp.log",
+      "sha256": "846FB06053E3EA7501AF67573A1DBC52384960D11D680ABC084C7AB2234C4D64"
+    }
+  ]
+}

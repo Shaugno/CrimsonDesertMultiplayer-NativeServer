@@ -352,20 +352,26 @@ void trap_threads(uint8_t* from, uint8_t* to, size_t len, const std::function<vo
     auto si = system_info();
     auto* from_page_start = align_down(from, si.page_size);
     auto* from_page_end = align_up(from + len, si.page_size);
+    auto* to_page_start = align_down(to, si.page_size);
+    auto* to_page_end = align_up(to + len, si.page_size);
     auto* vp_start = reinterpret_cast<uint8_t*>(&VirtualProtect);
     auto* vp_end = vp_start + 0x20;
 
-    if (!(from_page_end < vp_start || vp_end < from_page_start)) {
+    if (!(from_page_end < vp_start || vp_end < from_page_start) ||
+        !(to_page_end < vp_start || vp_end < to_page_start)) {
         new_protect = PAGE_EXECUTE_READWRITE;
     }
 
     // VirtualProtect calls NtProtectVirtualMemory. A native file API can share
     // its page: removing execute permission there faults before VirtualProtect
     // returns, and the exception dispatcher cannot recover the installing
-    // thread. Apply the same upstream exception as for VirtualProtect itself.
+    // thread. Disabling swaps the trampoline/target, so inspect BOTH ranges.
+    // Apply the same upstream exception as for VirtualProtect itself.
     const auto* nt_protect = reinterpret_cast<const uint8_t*>(
         GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtProtectVirtualMemory"));
-    if (nt_protect != nullptr && nt_protect >= from_page_start && nt_protect < from_page_end) {
+    if (nt_protect != nullptr &&
+        ((nt_protect >= from_page_start && nt_protect < from_page_end) ||
+         (nt_protect >= to_page_start && nt_protect < to_page_end))) {
         new_protect = PAGE_EXECUTE_READWRITE;
     }
 
