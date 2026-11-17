@@ -27,7 +27,7 @@ status['steps'] = {'1': 'complete; file sandbox and offline fixture verified',
                    '3': 'complete; native adapter, identity and passive sitting; historical Step3 evidence retained',
                    '4': 'complete; explicit guarded v1 route; 114/114 tests and synthetic tier-metadata smoke; see Step4 result',
                    '5': 'blocked at live attempt cap: three failed L3 startups, zero guest/native joins; final offline fixes validated; L4 prerequisite unmet; see R4-LIVE.md',
-                   '6': 'pending final review package'}
+                   '6': 'complete review package; see R4-REVIEW-PACKAGE.json and HANDOFF-CURRENT.md; L3/L4 unpassed'}
 for row in status['rows']:
     if row['row'] in save['retired_by_scope']:
         row.update(disposition='retired_by_scope', target=None, authority='port-evidence/r4/step1-result.json',

@@ -1,0 +1,1277 @@
+{
+  "round": 4,
+  "step": 6,
+  "branch": "gpt/3663-port",
+  "baseline": "0f11f6e",
+  "source_commit": "cce29cc9db01c38fcd6fa8d1b1c71bfbf951652c",
+  "packaging_commit": "branch HEAD after R4 step 6 commit; excluded from its own content hash",
+  "packaged_utc": "2026-11-17T00:34:54.676020+00:00",
+  "outcome": "review package complete; two-player runtime milestone incomplete",
+  "steps": {
+    "1": "implemented",
+    "2": "implemented",
+    "3": "implemented with passive sitting",
+    "4": "implemented/explicitly armed",
+    "5": "blocked at three failed L3 startup experiments; L3/L4 unpassed",
+    "6": "review package complete"
+  },
+  "tiers": {
+    "A": {
+      "total": 37,
+      "closed": 37,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 34,
+        "approved_policy": 2,
+        "retired_by_scope": 1
+      },
+      "armed": true
+    },
+    "B": {
+      "total": 78,
+      "closed": 78,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 78
+      },
+      "armed": true
+    },
+    "C": {
+      "total": 150,
+      "closed": 150,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 142,
+        "replaced_by_adapter": 2,
+        "retired_by_scope": 6
+      },
+      "armed": true
+    },
+    "D": {
+      "total": 130,
+      "closed": 130,
+      "blocked": 0,
+      "dispositions": {
+        "adopted": 114,
+        "retired_by_scope": 15,
+        "adopted_policy": 1
+      },
+      "armed": true
+    }
+  },
+  "default_behavior": "Tier A reader; C/D requires explicit guarded v1 with verified sandbox",
+  "scope_retirements": {
+    "guest_travel_time": [
+      "C110",
+      "C111",
+      "C112",
+      "C113",
+      "C114",
+      "C115"
+    ],
+    "legacy_save_title_callsites": [
+      "D020",
+      "D021",
+      "D022",
+      "D023",
+      "D063",
+      "D064",
+      "D065",
+      "D066",
+      "D067",
+      "D100",
+      "D101",
+      "D102",
+      "D103",
+      "D104",
+      "D130"
+    ],
+    "reason": "R4 approves guest travel/time refusal and verified file-layer redirection; optional modules remain unreachable"
+  },
+  "final_validation": {
+    "step": 5,
+    "result": "offline implementation and guarded experimental C/D validation complete; L3/L4 acceptance unproven",
+    "suite": "114/114 passed",
+    "suite_seconds": 94.75,
+    "synthetic_remote_states": 78,
+    "synthetic_rejects": 0,
+    "smoke": "eight seconds; compiled tier metadata 0xF; clean stop/unload; synthetic only",
+    "compiled_tiers": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "default_route": "Tier A reader",
+    "explicit_route": "session2 core_v1=1; exact build; actual verified file sandbox; role and transport checks",
+    "join_attempts": 0,
+    "live_acceptance": {
+      "L3": "not established; see startup-trials.json",
+      "L4": "not attempted"
+    },
+    "join_attempt_definition": "native guest joining; controlled startup experiments and live budget are recorded separately in startup-trials.json",
+    "safeguards": [
+      "native logout only at title/stable lifecycle; loss during loading quarantines",
+      "new six-argument LoadingComplete hook disables guest world-clock publication",
+      "native faults seal admission and injection, retain uncertain pins, and continue exception search",
+      "typed user/actor generation checks, field lock order and conservative rollback",
+      "bounded queues; native packet work on verified NetworkThread; no legacy optional installers",
+      "launcher fresh backups and sandboxes; verified watchdog; installation restoration even after save drift",
+      "controlled marker refuses lost-role or unsandboxed relaunch; default installed configuration unchanged"
+    ],
+    "limitations": [
+      "No native C/D execution or two-player acceptance is established by these offline checks.",
+      "Reconnect is unsupported: changed guest native conversation exits with guard code 0xCD67.",
+      "Loading disconnect, host field replacement or uncertain insertion requires both processes to restart.",
+      "Only single-primary ordinary-character walking/turning/running is admitted; optional gameplay stays unreachable.",
+      "File sandbox is an API interception layer, not an operating-system security boundary.",
+      "The existing optional S3 publication race is not claimed fixed; this route does not install it."
+    ],
+    "source_manifest_sha256": "0C967A4B2B112FBD1D6B8991350198619A47D3CC1C009BD7CF59641A49CD4AB0",
+    "arming_receipt_sha256": "34669969F24BD1F28D6A935E12E566CBC69B06ED65B26C21FF730F2ED3064C78",
+    "asi_sha256": "CB158DF484A889B38CD3435445853D1540513897EABDBAE967DECD77ED37A21B",
+    "evidence": [
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-suite.txt",
+        "sha256": "0D0D91953EC91B39BA61B3E60E77D91316D74A8B5EF96C1720E5386738F8647D"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-smoke.txt",
+        "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-smoke-run\\e2e\\cdmp.log",
+        "sha256": "7C77D4FA5F6CBC6D6F405FD838B7A1A430763221FE27B1F992301088E2D04A2E"
+      }
+    ]
+  },
+  "live_attempts": {
+    "step": 5,
+    "trials": [
+      {
+        "session": "R4-L3-20261116-184248",
+        "host": {
+          "launched_utc": "2026-11-16T23:42:52.9300148Z",
+          "game_pid": 41380,
+          "game_start_filetime": "134393461728985814",
+          "role": "host",
+          "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe"
+        },
+        "watchdog": {
+          "state": "exited",
+          "game_pid": 41380,
+          "game_start_filetime": "134393461728985814",
+          "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+          "controller_pid": 35528,
+          "controller_start_filetime": "134393461729389769",
+          "deadline_utc": "2026-11-16T23:56:52.8985814Z",
+          "max_game_age_seconds": 840,
+          "helper_sha256": "8A56AE12E98E99A834284C328BCD054CB71ACDE7CA3CB10A5D44B2FFE8E81781",
+          "game_exit_code": 4294967295,
+          "ended_utc": "2026-11-16T23:45:29.7815713Z"
+        },
+        "result": "SteamAPI startup failure before native join; no guest launch",
+        "installation_restored": true,
+        "real_saves_unchanged": true,
+        "evidence": [
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\question.md",
+            "sha256": "12B2B6733CE07F36CE5F44A8FB46697E507E17D816B1ED20534AC0945095067C"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\session.json",
+            "sha256": "820031F5A6FB1D41BEDDBC0C93CC86CCF257F6DD046F9B15A6476C30D7CDCD2E"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\launch-host.json",
+            "sha256": "0220090DB83E0DC7354ABE7344AA4A0E599FBAA2FD8CBDD8AF9807EB1CDC2946"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\watchdog-host.json",
+            "sha256": "7E19922B63D6135FC0A83C56C7A25D8C01C51E5B52977BD054EADAEB19BE6318"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\finish.json",
+            "sha256": "93DD04638499D5A47B14A96AC9CC375BECE00830CCF2E7CDC66F787E44BA6FED"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\evidence\\cdmp.host.log",
+            "sha256": "8BC024B5C5E36650A1531053FF1065D90EBF04282467596121E391FDD184E3B1"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\manual-stop.json",
+            "sha256": "B4B224A532C0A0ED9F6244B13FDAC98423F96BFB7B1665DD979C692405E5D433"
+          }
+        ],
+        "deployed_files": [
+          {
+            "before_sha256": "",
+            "existed": false,
+            "name": "cdmp.asi",
+            "installed_sha256": "C674EBAB5B24F0165F7B8217B355B776CBCFC28D7794BA378345FB8F3CB52F19"
+          },
+          {
+            "before_sha256": "",
+            "existed": false,
+            "name": "cdmp.pdb",
+            "installed_sha256": "AE10D6612EA26138CD81924A5305EA32DB646DA325DE0D3DEDF336FB1BE11CBC"
+          },
+          {
+            "before_sha256": "",
+            "existed": false,
+            "name": "winmm.dll",
+            "installed_sha256": "031A3E5576D91DCE1E438D36B9A3D462C7334AB4791990A8FF1E3DDC0E132DAF"
+          },
+          {
+            "before_sha256": "",
+            "existed": false,
+            "name": "cdmp.host.ini",
+            "installed_sha256": "2300B0F8C4E0B2265FBCF72A39CE39D8E66CDFA192C15515DFAD5A641871069B"
+          },
+          {
+            "before_sha256": "",
+            "existed": false,
+            "name": "cdmp.guest.ini",
+            "installed_sha256": "6E65934BC2294A32BF825B6A527F6D6D5F92A5DD339E23B863CCD8C1832DE78B"
+          },
+          {
+            "before_sha256": "",
+            "existed": false,
+            "name": "cdmp.r4-test-lock",
+            "installed_sha256": "588F3B4C244006A939FDED656E075A86C081C5C9411F29E498E4BDF523F15B3E"
+          }
+        ],
+        "binary_validation_record": "port-evidence/r4/step4-result.json",
+        "executable_identity": {
+          "version": "1.0.0.3663",
+          "timestamp": "0x6AF5D198",
+          "base": "0x140000000",
+          "image_size": "0x144E9000",
+          "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8"
+        }
+      },
+      {
+        "session": "R4-L3-20261116-184928",
+        "host": {
+          "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+          "launched_utc": "2026-11-16T23:49:33.2889750Z",
+          "role": "host",
+          "game_pid": 752,
+          "game_start_filetime": "134393465732526762"
+        },
+        "watchdog": {
+          "state": "exited",
+          "game_pid": 752,
+          "game_start_filetime": "134393465732526762",
+          "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+          "controller_pid": 14456,
+          "controller_start_filetime": "134393465733081716",
+          "deadline_utc": "2026-11-17T00:03:33.2526762Z",
+          "max_game_age_seconds": 840,
+          "helper_sha256": "8A56AE12E98E99A834284C328BCD054CB71ACDE7CA3CB10A5D44B2FFE8E81781",
+          "game_exit_code": 3221225477,
+          "ended_utc": "2026-11-16T23:50:34.9306115Z"
+        },
+        "result": "SteamAPI startup failure before native join; no guest launch",
+        "installation_restored": true,
+        "real_saves_unchanged": true,
+        "evidence": [
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\question.md",
+            "sha256": "4A7C0718DEFEF515C70255C17163D464C9C8CA0F104BD0144460F8C6C53926C9"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\session.json",
+            "sha256": "FB1828AF2BBE23C8873E5A48DBFD5EF5AC22995B1A3E85D06175A1072E5F99B3"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\launch-host.json",
+            "sha256": "73AD7B73C749B553A198BA68D0622F1EE6BC4BD5A448794E0F6C63D560796762"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\watchdog-host.json",
+            "sha256": "9092BD1E181BA095CBB8C86E349357DFEC52475A7B329CBA09E98842224241A6"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\finish.json",
+            "sha256": "2E6A75380195D972CE177CED565FD35E9AB1C43BBC46EBD330F6F9B5AA427130"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\evidence\\cdmp.host.log",
+            "sha256": "665B9B6B7C7D7769B458808E57D9ADFF9235AE832F45C75265969D845EA0DD6C"
+          }
+        ],
+        "deployed_files": [
+          {
+            "before_sha256": "",
+            "name": "cdmp.asi",
+            "installed_sha256": "9843EB8DC1801AFB985B81F5D3C37C6F21EFEAD110800267CB6A6B01F8D3E374",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.pdb",
+            "installed_sha256": "2CD148BD08050AD1EC88EA0C5A3DD5021FA26603C02285473F665891EBCC0057",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "winmm.dll",
+            "installed_sha256": "031A3E5576D91DCE1E438D36B9A3D462C7334AB4791990A8FF1E3DDC0E132DAF",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.host.ini",
+            "installed_sha256": "2300B0F8C4E0B2265FBCF72A39CE39D8E66CDFA192C15515DFAD5A641871069B",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.guest.ini",
+            "installed_sha256": "6E65934BC2294A32BF825B6A527F6D6D5F92A5DD339E23B863CCD8C1832DE78B",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.r4-test-lock",
+            "installed_sha256": "19C4B56278FBE1A25E41606E938B5D0249966742603736D4173D738A05044670",
+            "existed": false
+          }
+        ],
+        "binary_validation_record": "port-evidence/r4/ipc-fixed-validation.json",
+        "executable_identity": {
+          "version": "1.0.0.3663",
+          "timestamp": "0x6AF5D198",
+          "base": "0x140000000",
+          "image_size": "0x144E9000",
+          "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8"
+        }
+      },
+      {
+        "session": "R4-L3-20261116-191955",
+        "host": {
+          "role": "host",
+          "game_start_filetime": "134393484003477026",
+          "launched_utc": "2026-11-17T00:20:00.3777950Z",
+          "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+          "game_pid": 23184
+        },
+        "watchdog": {
+          "state": "exited",
+          "game_pid": 23184,
+          "game_start_filetime": "134393484003477026",
+          "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+          "controller_pid": 25396,
+          "controller_start_filetime": "134393484003958471",
+          "deadline_utc": "2026-11-17T00:34:00.3477026Z",
+          "max_game_age_seconds": 840,
+          "helper_sha256": "8A56AE12E98E99A834284C328BCD054CB71ACDE7CA3CB10A5D44B2FFE8E81781",
+          "game_exit_code": 3221225477,
+          "ended_utc": "2026-11-17T00:20:37.3810966Z"
+        },
+        "result": "Steam initialized; guarded host active; crash before title/guest",
+        "installation_restored": true,
+        "real_saves_unchanged": true,
+        "evidence": [
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\question.md",
+            "sha256": "5667089DB3FF4244F926466880876C6464C767996A208451267C5B0546BF718B"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\session.json",
+            "sha256": "2A7E074093F0AF9657E5B3D1FA45EA190DCBD6C79C7796B4085A519F3B43C658"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\launch-host.json",
+            "sha256": "3EAB59758AE17AD12A51FDE67E6BEB6EF2771270FBBFA847AAF9FA0EE5236964"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\watchdog-host.json",
+            "sha256": "E001BE114BCC27AE61E579640BE39D78C97A0DF61E976E8887172330084A5BB2"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\finish.json",
+            "sha256": "277DD746671F6D12CD8E6AEF57CE3BE5930809809CECE7A648CD6229AAC19685"
+          },
+          {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\evidence\\cdmp.host.log",
+            "sha256": "F4FB331B482E902F097816A78AAD9309EBF012D1C44BD0BE877E9AD41181486D"
+          }
+        ],
+        "deployed_files": [
+          {
+            "before_sha256": "",
+            "name": "cdmp.asi",
+            "installed_sha256": "BD1F6E2A217B3E526F7B51C1A68EBE016CB96BF19E03B4251D294B4278D5EA77",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.pdb",
+            "installed_sha256": "68524C6A001FF26E02D774A23F75A5C375E5717865D50D6431DB3065885B1B7D",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "winmm.dll",
+            "installed_sha256": "031A3E5576D91DCE1E438D36B9A3D462C7334AB4791990A8FF1E3DDC0E132DAF",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.host.ini",
+            "installed_sha256": "2300B0F8C4E0B2265FBCF72A39CE39D8E66CDFA192C15515DFAD5A641871069B",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.guest.ini",
+            "installed_sha256": "6E65934BC2294A32BF825B6A527F6D6D5F92A5DD339E23B863CCD8C1832DE78B",
+            "existed": false
+          },
+          {
+            "before_sha256": "",
+            "name": "cdmp.r4-test-lock",
+            "installed_sha256": "BB391E66E24C891DA98E2ADF7E4B4BEBA884833F63D0544435521824BE1FE81A",
+            "existed": false
+          }
+        ],
+        "binary_validation_record": "port-evidence/r4/startup-fixed-validation.json",
+        "executable_identity": {
+          "version": "1.0.0.3663",
+          "timestamp": "0x6AF5D198",
+          "base": "0x140000000",
+          "image_size": "0x144E9000",
+          "sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8"
+        }
+      }
+    ],
+    "controlled_startup_trials": 3,
+    "startup_crashes": 2,
+    "failed_L3_experiments": 3,
+    "live_attempt_budget_used": 3,
+    "live_attempt_budget_limit": 3,
+    "budget_policy": "Count all three failed L3 startup experiments, including the first stalled Exit, toward the plan cap; zero native guest joins is not permission for additional launches.",
+    "native_join_attempts": 0,
+    "failed_native_join_attempts": 0,
+    "guest_launches": 0,
+    "L3": "not established; live attempt cap reached",
+    "L4": "not attempted; requires L3",
+    "fixed_offline": [
+      "MAP-only pagefile shared memory classification",
+      "named pipe device path and typed empty-relative-name pipe reopen",
+      "native hook removal preserves execute permission for both patch ranges",
+      "small-stack mapping callback reproduction: move two nested 64 KB name buffers to heap"
+    ],
+    "steam_fixture": "after Steam restart and pipe corrections: success with/without hooks; zero sandbox refusals",
+    "caveat": "The third crash is consistent with reproduced callback stack exhaustion. The correction has not been retried in the real game. Game-free corrections do not establish runtime or two-player acceptance.",
+    "evidence": [
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\ipc-repro-test.txt",
+        "sha256": "3681A690C21114C0FC689E0BC08623218792AE80EE93E7E0AFA4136C13FB4741"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\teardown-repro-test.txt",
+        "sha256": "A4AAEB4DB8EFF0C3E7B0C439880A0E4C223E5C11C49BC8BF19D653924D3F9883"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\teardown-fixed-suite.txt",
+        "sha256": "0ED3140EC142D0C8C1A98E41EA69431BD0E5B9FECABDB00146875529284D717D"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\pipe-repro-test.txt",
+        "sha256": "451D33D961974C7D831ED4C6611E4DAD36964CA780C29E8776C399FA7CD066E9"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\pipe-root-test.txt",
+        "sha256": "991CED2F6D30B9CE368F3E86C488247EEEF667F88B18BE1BD4FC884617661528"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\steam-stack-fixed-results.txt",
+        "sha256": "F908003B3F5276CA2AE8835EE410F2C05B4EEEB9B71EE07BE7469705BC77793D"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup2-crash-summary.json",
+        "sha256": "2C463EE4F7521F2AA39BDD2BD6F27072AE9CF65A94055EC19B2A9C9BD53C7B8E"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup3-crash-summary.json",
+        "sha256": "073F616BFF11A6CB1E96C288DA72F55C022E619C4A12EC7A0963DEF5FCC9770A"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-repro-test.txt",
+        "sha256": "20F6343B097AC8FCE82E4B2614A08E02A43486D6C4C4305BE6D808B81E996ABA"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-suite.txt",
+        "sha256": "0D0D91953EC91B39BA61B3E60E77D91316D74A8B5EF96C1720E5386738F8647D"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-smoke.txt",
+        "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+      }
+    ]
+  },
+  "passive_session": {
+    "events": 161,
+    "counts": {
+      "ClearList": 1,
+      "ClearLobby": 1,
+      "Component": 20,
+      "FieldLocks": 32,
+      "KeyClass": 32,
+      "LobbyAdd": 2,
+      "LobbyConstant": 2,
+      "MoveFlag": 32,
+      "OwnerKey": 32,
+      "Phases": 1,
+      "SessionId": 2,
+      "VecEntry": 2,
+      "VecExit": 2
+    },
+    "invalid_events": 0,
+    "sequence_gaps": 0,
+    "vector_pairs": 2,
+    "vector_field_keys": [
+      "0x81020000",
+      "0x81020001"
+    ],
+    "vector_transition": "count/capacity 0/0 -> 1/1; row actor count 1; native AddActor caller EB6883B",
+    "key_class_pairs": [
+      "definition 2 -> class A",
+      "definition 3 -> class B"
+    ],
+    "load_dispatch_calls": 20,
+    "load_stub_dispatch_calls": 1,
+    "session_ids": [
+      0
+    ],
+    "login_manager_site_hits": 0,
+    "identity_threads": [
+      3516
+    ],
+    "network_threads": [
+      30924
+    ],
+    "roots": "SAM root equals dereferenced login-manager holder; exact named SAM and WindowsLock3 vtables/slots agree",
+    "field_locks": "two distinct WindowsRWLock types, slot 1/2 = 1593320/1593370; NOT WindowsLock3",
+    "session": "R2-P1-20261116-161703",
+    "source_commit": "9cc2c4a",
+    "executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "question": "Do the native vector, lobby/login, key-class and session contexts agree with the expected object identities?",
+    "result": "passive evidence collected; no join attempted",
+    "user_report": "requested sequence done, including fast travel and Quit to Desktop",
+    "exit": "observed natural process exit; no forced termination; no exit code was collected",
+    "requested_quit_local": "2026-11-16 16:38 America/New_York",
+    "observed_exit_utc": "2026-11-16T21:39:42.9008628Z",
+    "deadline_utc": "2026-11-16T21:42:23.4027305Z",
+    "real_saves_unchanged": 23,
+    "join_attempts": 0,
+    "gameplay_networking": false,
+    "cleanup": "Finish controller restored prior installation; elevated host process/file inspection confirmed no game process or deployed ASI/PDB/loader",
+    "limits": [
+      "Bounded samples are ordinary local admissions, not guest join/rollback evidence.",
+      "No LoginMgr site hit; root equality is separate corroboration of static getter/context proof.",
+      "OwnerKey data19 read vtable+20, outside the three-entry ScopeAttacher table: rejected. Correct native Dispose is slot2 (+10), 1659370 -> 1659380.",
+      "Memory-readable validity does not validate a function pointer or permit a call.",
+      "Requested 16:38 quit was exceeded; observed exit remained within fourteen-minute watchdog and fifteen-minute session limit."
+    ],
+    "local_evidence": [
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\cdmp.log",
+        "sha256": "89B074B8DCF28CDD8A4E90627ED5E21F89BB8AFF78226F5DA05AFD8FCBF3B556"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\question.md",
+        "sha256": "B5D18BDF7270B630E15FE8E0A2FFCDCC8D8C8C2447630383F8B3FA08F1E39E23"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\save-verification.json",
+        "sha256": "D4A01495A721D339FBF343AC4D9A3DB4D0D0B33178CBA364D64B6B5508C25693"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\watchdog.json",
+        "sha256": "E5C30D83412D3FD2ABF612D1F1BF0DA6933BC7F34073DB7231CAD3B463BFEDEB"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\deployed-hashes.json",
+        "sha256": "C37133834B4FF6340B630C7B90A5C8521C72A17C0C702285E3861CCA29FBBCBC"
+      },
+      {
+        "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\evidence-hashes.json",
+        "sha256": "94062ECDBBFD80E8C4AA277F2F73FB5B79C7FEEBE0C7C302C67B3BDE28D3F1B9"
+      }
+    ]
+  },
+  "runtime_claims": {
+    "L3_passed": false,
+    "L4_passed": false,
+    "native_guest_join_executed": false,
+    "disconnect_removal_verified_live": false,
+    "reconnect_tested_live": false,
+    "two_window_capture": null,
+    "last_stack_correction_tested_in_game": false
+  },
+  "cleanup": {
+    "save_verification": {
+      "verified_utc": "2026-11-17T00:30:38.9278585Z",
+      "backup_manifests_verified": true,
+      "error": "",
+      "real_manifest_unchanged": true,
+      "manifest_sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+    },
+    "manifest_file_count": 23,
+    "session_root": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955",
+    "executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "game_process_count": 0,
+    "files": [
+      {
+        "name": "cdmp.asi",
+        "exists": false
+      },
+      {
+        "name": "cdmp.pdb",
+        "exists": false
+      },
+      {
+        "name": "winmm.dll",
+        "exists": false
+      },
+      {
+        "name": "cdmp.host.ini",
+        "exists": false
+      },
+      {
+        "name": "cdmp.guest.ini",
+        "exists": false
+      },
+      {
+        "name": "cdmp.r4-test-lock",
+        "exists": false
+      }
+    ],
+    "verified_utc": "2026-11-17T00:30:39.5749727Z"
+  },
+  "cleanup_local_proof": {
+    "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\final-cleanup.json",
+    "sha256": "DF5FCD5991D56E3D4ACC285712FC4F50511C47195F77C2FAE27074620FB097BA"
+  },
+  "remaining_blocked_ledger_rows": [],
+  "blockers_file": "R4-BLOCKERS.md",
+  "limitations": [
+    "Closed rows include approved policies and R4 scope retirements; they are not all native RVA adoptions.",
+    "A/B/C/D compiled and armed for explicit guarded v1; the default target installation remains the Tier A reader.",
+    "Native host/guest route, identity, join and stable disconnect are implemented. L3/L4 execution and acceptance remain separate.",
+    "The file sandbox and controlled launcher are verified offline. The guarded host route activated in the third startup; native guest joining and gameplay C/D have no live validation.",
+    "L3 failed in three controlled startup experiments, counted against the plan live-attempt cap. Latest stack correction is offline-validated only. L4 requires L3 and did not run.",
+    "Reconnect is unsupported. Guest conversation change exits with guard code 0xCD67; loading loss quarantines and requires restart.",
+    "Guest travel/time and legacy per-callsite save/title patches are outside 3663 v1 scope.",
+    "One prior full run exposed the existing optional S3 ring publication race; final Step 1 and Step 2 suites passed. That race is not claimed fixed."
+  ],
+  "attribution": "Original authors/history/GPL v3 retained; original sibling and parent launcher untouched",
+  "commits_since_baseline": [
+    {
+      "commit": "5db33289453f25eb0315516a862df7cbc378f365",
+      "title": "Save the user-approved R4 port plan"
+    },
+    {
+      "commit": "3f11c53abdb7cdd2c0caf39a6aa598260e87cfea",
+      "title": "R4 step 1"
+    },
+    {
+      "commit": "b38e36e363e6749dc3268c3fb356b59c5be1354b",
+      "title": "R4 step 2"
+    },
+    {
+      "commit": "9cc2c4a276b254c9b51a1c065fdd6b646a8280b3",
+      "title": "R4 step 3: prepare passive identity and lifetime trace"
+    },
+    {
+      "commit": "43a49f51bc8b6c37e0bb1167ee51ac4340f8435f",
+      "title": "R4 step 3"
+    },
+    {
+      "commit": "8c541af5ca2549533bc64db8e8489416c49d8323",
+      "title": "R4 step 4"
+    },
+    {
+      "commit": "c0e5984b6055812603890f6f66801293474fa7d4",
+      "title": "R4 step 5: fix MAP-only IPC startup"
+    },
+    {
+      "commit": "ab72135fa135a2f8fd59a65d43f184f66b3a1beb",
+      "title": "R4 step 5: preserve Steam IPC and native hook teardown"
+    },
+    {
+      "commit": "cce29cc9db01c38fcd6fa8d1b1c71bfbf951652c",
+      "title": "R4 step 5"
+    }
+  ],
+  "files_changed_since_baseline": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "A8441FC772D221A88BFA371947F181C5DF58AD7D02F1787126B97A2398A3FDA6"
+    },
+    {
+      "path": "docs/GPT-3663-PORT-PLAN-R4.md",
+      "sha256": "EE4FCFB499FBD3ED838C0CDBC6917319DFE5DCBB9E98A87EE8DF80B9D818983F"
+    },
+    {
+      "path": "docs/probe-3663/HANDOFF-CURRENT.md",
+      "sha256": "5C97FCC1EB30532DF9B3AB583E012573EF6A447FF294C9AF22C26D393D8439CA"
+    },
+    {
+      "path": "docs/probe-3663/R4-BLOCKERS.md",
+      "sha256": "7BEE82B8BD97353299108D6FD6FF5DC5F999F418A2D5CD7B29112877BA57FE0C"
+    },
+    {
+      "path": "docs/probe-3663/R4-LIVE.md",
+      "sha256": "34B2F475086EF9173916C1F620C783BC8DFB4A9F0448E8F2F700A9259E5FA541"
+    },
+    {
+      "path": "docs/probe-3663/R4-STATUS.json",
+      "sha256": "12BB2B67ACFAE7BB6407E7441B8F7D05E978A310957721F9382E6D708A84C03E"
+    },
+    {
+      "path": "docs/probe-3663/R4-STEP1.md",
+      "sha256": "A7AFC0301583F108C119C10CCECD4868D18C7FB403391CE603D2ADB83D69C066"
+    },
+    {
+      "path": "docs/probe-3663/R4-STEP2.md",
+      "sha256": "B0155771BC9F4D042A10F3599E2913CC36F04D2E154F11A3B1D5BD970F7AC5F1"
+    },
+    {
+      "path": "docs/probe-3663/R4-STEP3.md",
+      "sha256": "63E33B831B5179C2BC22C4B984E64B9C85BC12344B9DC27B4E18A392D493BC6F"
+    },
+    {
+      "path": "docs/probe-3663/R4-STEP4.md",
+      "sha256": "0D8B7C899B38608974682E1CF7D440FC514F3E43B3901C4BA5516993182B1078"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/core-adoptions.json",
+      "sha256": "596574CACA07C25E376CD6F733583A0733A0CAB5E64FB3C0F865E7C48496FB72"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/ipc-fixed-validation.json",
+      "sha256": "75C9B2B3D2FBF3A50770B9CBF594287E9662BCE61735DAEC43F8A089445FB3F2"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/native-bindings.json",
+      "sha256": "25682C1069BE1B1F9B43308EEC53FB87C9B14C1FCF4E544C4DAFF48A963633D9"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/passive-result.json",
+      "sha256": "7E9F55473379E70CD6CC48207314822CC54B77AC8D813FA031781F5D6AA2881A"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/probe-preflight.json",
+      "sha256": "1532E8C62FFA1A997F3B7F9E38561E5B94D0F1CBBC52C1F1E3E2F4CF05490459"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/probe-sites.json",
+      "sha256": "3A311CB747669F6397CC78B5A74579AF0AA2A0FBF9E8589DDE10AF5570CF0A73"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/scope-result.json",
+      "sha256": "BE33306C98DA9F636B39AFC8535896BA5CB5464C4FE1875A6E639E9671AF651A"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/stack-fixed-validation.json",
+      "sha256": "680E5BF05B1071BF077CD0176F015BF2EA04D1E46A3B52293C947810CB5A6E15"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/startup-fixed-validation.json",
+      "sha256": "CDE1FAF37C5AC1DB4CAAF89338D59BCE4671A4C56F3E3F278057EC209F6E7470"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/startup-trials.json",
+      "sha256": "23B362553FA5D6CC498B6AC5025F7069DEF30250D26E6C2660A4DEB96860BADA"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/step1-result.json",
+      "sha256": "24AD575A7FEB33174951819E4C3B2B4ED1F78D43A2E43754A2660A074D94BDE1"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/step2-result.json",
+      "sha256": "0172A7AF602DE21C739ED363FC7F2C4A1D336E9250A6592B7AB3AD79AAD62284"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/step3-result.json",
+      "sha256": "0CE11DB5F62BE6776B0140D88E33B66CE80498F1EE604A6E5258CE192C69DA51"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/step4-result.json",
+      "sha256": "E2EF2909FBE8D1BE096559B5230D6D0C3FC6FBA0425F395801B9B1B452C59418"
+    },
+    {
+      "path": "docs/probe-3663/port-evidence/r4/v1-bindings.json",
+      "sha256": "2252BB5901EB8B52D45DDC16939353ED325412E1CFEC0A80836F0C04BDE99E8E"
+    },
+    {
+      "path": "scripts/launch-2inst-3663.ps1",
+      "sha256": "84C63478FDE2FE19EA225EEBA8B8149E230E28836873AA03EED619158B83169A"
+    },
+    {
+      "path": "src/coop3663/identity3663_policy.h",
+      "sha256": "19CD706EE2B955C42E7F2F874FFE7153440D252C617FC040BEF45F11D05984EF"
+    },
+    {
+      "path": "src/coop3663/join3663_transaction.h",
+      "sha256": "D05D1F12C8CB407C9961323C8B76E6DBE5A694D7EE3CF7BFD9ED3A529472911B"
+    },
+    {
+      "path": "src/coop3663/v1_3663_policy.h",
+      "sha256": "4FF1729EDAA8C44A2AA38D324E40124D301D0DF3A0E3FC3E67D79D53972B3E24"
+    },
+    {
+      "path": "src/mod/config.cpp",
+      "sha256": "DBF525983EF1A49BC4B83EE7A04FDD59A6C8F7232989FB9EF089638D447938EC"
+    },
+    {
+      "path": "src/mod/config.h",
+      "sha256": "7D98DBE302F37141E7578087421D4AB814081A61DAB1379DEE7B6C7FFE6A0209"
+    },
+    {
+      "path": "src/mod/dllmain.cpp",
+      "sha256": "B828E3841F542C8AB7BDB8DCC6E4D02B4815B6B8537143A866CA8FAD8D334FE0"
+    },
+    {
+      "path": "src/mod/game/build_3663.h",
+      "sha256": "D601BBB274C71F8197650F0B0D260B2952147F19791DDAD6D1116E77E6E47A22"
+    },
+    {
+      "path": "src/mod/game/build_guard.h",
+      "sha256": "AC5908F3DEE721D0658A91C7274F6E7013E5CEB2FB1FE46E8C522E295D0A6C4D"
+    },
+    {
+      "path": "src/mod/game/native_call_scope.h",
+      "sha256": "E24473209F2197E1DFDCDB322E0E3706E8D66A5DF077028FEF155E6137D3F798"
+    },
+    {
+      "path": "src/mod/game/r3_join_probe.cpp",
+      "sha256": "0D473162EBEF9F077B651FD1871DE4F526B93538337E8E82ED23EF67F2574A78"
+    },
+    {
+      "path": "src/mod/game/r4_core_probe.cpp",
+      "sha256": "F2C9204F099946B69260820EF6A35A7D46443CABCE32B05566D09D19EF66372E"
+    },
+    {
+      "path": "src/mod/game/r4_core_probe.h",
+      "sha256": "A49DE9F3B244D8B2F73BDE51B86F25B78219A4C77574344057185AFB00675430"
+    },
+    {
+      "path": "src/mod/game/r4_probe_sites.h",
+      "sha256": "5A34D681C15B5AB11CEB67D7A9818E9DB130771CD4534E789C36001471EEEE86"
+    },
+    {
+      "path": "src/mod/mod.cpp",
+      "sha256": "95E0A7F05F0A2A2FE07D2D02846D4443C9C6141CD8B35E12EE8050ABA6A50389"
+    },
+    {
+      "path": "src/mod/session2/control_filter.h",
+      "sha256": "53049A77B5DF557B3FF4E9BF811C90E078D128C868F6530899875B485BA5A97E"
+    },
+    {
+      "path": "src/mod/session2/field_share3663.cpp",
+      "sha256": "0AC6849CA5B276908425FC0E63171E260B36B8DA579354665202D4CC71DAD134"
+    },
+    {
+      "path": "src/mod/session2/field_share3663.h",
+      "sha256": "11BC515A1620D33065948A0DF1838D38E5C52D5E4CDC1129607BB77CC53222CF"
+    },
+    {
+      "path": "src/mod/session2/file_sandbox3663.cpp",
+      "sha256": "2043348EF58B8C3AD7A0A6F55749389E0EB81E105A5EF7A7584D9E5544A2BCC2"
+    },
+    {
+      "path": "src/mod/session2/file_sandbox3663.h",
+      "sha256": "35B867D532BFD2C498EA8D20907D2EA8DF877E4562E82FCED9E8863F94A2B5AC"
+    },
+    {
+      "path": "src/mod/session2/guest.cpp",
+      "sha256": "D8FF34AB1E089FA143394E34B1BC1BA75C9473418DB36EC2E459146FAA7B9F07"
+    },
+    {
+      "path": "src/mod/session2/guest3663.cpp",
+      "sha256": "5F676444C2EC788F297A281F4291C7F585694EC713DEB6E72F690E98196095F2"
+    },
+    {
+      "path": "src/mod/session2/guest3663.h",
+      "sha256": "66B8601DEB5AA97120833113A4B76E1AA284CB13666683539F3C08B8D247180E"
+    },
+    {
+      "path": "src/mod/session2/identity3663.cpp",
+      "sha256": "4FE467DA73DAF6DA04C4E39DAC3D5F683C67FCAF653B6C12857892A2C854AE6C"
+    },
+    {
+      "path": "src/mod/session2/identity3663.h",
+      "sha256": "D92BEDC7C7E90B31E0795BA184A4C04AD43C802801D5116DFE508AEBF249F5D8"
+    },
+    {
+      "path": "src/mod/session2/r4_native_bindings.h",
+      "sha256": "EB66812669C41D634FF6603914E1F893BEF37A08A8955E9AE4AB5953A9A192C5"
+    },
+    {
+      "path": "src/mod/session2/r4_v1_bindings.h",
+      "sha256": "1EE8646D82C909287DEDDF41F75025B7F9DFC7BE1E86B6E307DC787BB1DF8311"
+    },
+    {
+      "path": "src/mod/session2/scope3663.h",
+      "sha256": "1678BF6C0D484D27D9FA66AD8A83A0AF3E8C556E91A9343D6AF7E1652D03C7D8"
+    },
+    {
+      "path": "src/mod/session2/server.cpp",
+      "sha256": "2F83400D9B872036361ABE1BAE70A293B0F737055051E4064E642D57B04776CC"
+    },
+    {
+      "path": "src/mod/session2/server.h",
+      "sha256": "7A259E584590F955A242565FEB15C1F01B8B1CA28D8A1A84312C395588E9B7C2"
+    },
+    {
+      "path": "src/mod/session2/tunnel_layout.h",
+      "sha256": "CA6F0926B78FC21170AAD4AA5346F86A9DF70835B6F934C1A25AB3EBD8A722DA"
+    },
+    {
+      "path": "src/mod/session2/v1_3663.cpp",
+      "sha256": "66BA0BD972306A550796F4A7C67720F85332C8A289283C18F2BD3FBDD4090B71"
+    },
+    {
+      "path": "src/mod/session2/v1_3663.h",
+      "sha256": "5587B46A3BFCCA7DE2675645AB743245E8CA0429DE981360D954B57EB9897B65"
+    },
+    {
+      "path": "tests/build_guard_tests.cpp",
+      "sha256": "1A5127257C558C26E823456628F6794174839C7BC26CD2A32E3995530F50F63B"
+    },
+    {
+      "path": "tests/file_sandbox3663_fixture.cpp",
+      "sha256": "394D0B3343273D53F349D0C91AFB21FD059C73D1A51F68A5E792EDA9792C485F"
+    },
+    {
+      "path": "tests/file_sandbox3663_tests.ps1",
+      "sha256": "F5E6699C8AF9BBB1430E128F1B80C83ECD6EE5067B9A60ACEF8EDB4055209856"
+    },
+    {
+      "path": "tests/identity3663_policy_tests.cpp",
+      "sha256": "15778419ADD46A2E538E05A087F29FF69A51AB83D146EAB5613253AAB504CDF8"
+    },
+    {
+      "path": "tests/join3663_transaction_tests.cpp",
+      "sha256": "12A8C301DF705138DE88747E614DD742CCAFF505703DB119EFF4CFC6E0FD3BE0"
+    },
+    {
+      "path": "tests/launch_2inst_3663_tests.ps1",
+      "sha256": "98179FCF9731C98FB033A4CAE64119BE9E3D0E1A9175CB080EA1963C00E4B419"
+    },
+    {
+      "path": "tests/native_call_scope_tests.cpp",
+      "sha256": "9B06EFE649B8421345B4F39368796BC4B882D6ED10E8D3DEAE464B2B6499B204"
+    },
+    {
+      "path": "tests/tunnel_layout_tests.cpp",
+      "sha256": "01D277C1B6BC4E3B66A6525922682D3D022FA6C80725A63D970441A4B9752CE2"
+    },
+    {
+      "path": "tests/v1_3663_policy_tests.cpp",
+      "sha256": "BDED9AD74B423A1CEB06F3F8266983EBB9F7ED646B32DB16C09F101334C61421"
+    },
+    {
+      "path": "third_party/safetyhook-patch/os.windows.cpp",
+      "sha256": "FC01CFB4E4E2EB5ED9364695A0440CF7ECA9CAC082D5F833499A3FA9F03548DB"
+    },
+    {
+      "path": "third_party/safetyhook-patch/os.windows.cpp.patch",
+      "sha256": "A330FED42B1F86D09148387EE75604DE10AFF896B153983D1907963969E35C05"
+    },
+    {
+      "path": "tools/host/main.cpp",
+      "sha256": "DD4E3B76FAFA63DEE5A0CC44F5DA76BAEE32D36DF36D9FA684D8DA61D474D36A"
+    },
+    {
+      "path": "tools/port3663/fixture_debugger.cpp",
+      "sha256": "203F140CC2AE67F9028C1F598502B8343539E5A8652AC8141546287C065C6708"
+    },
+    {
+      "path": "tools/port3663/minidump_summary.py",
+      "sha256": "D552328E549D963D2347AB6A28C9CE35D919198815B463543694D570BD877961"
+    },
+    {
+      "path": "tools/port3663/r2_p1_session.ps1",
+      "sha256": "F077801EE89A843C2B5CE05CA874A211F4EFAB337EFB24736901189275085636"
+    },
+    {
+      "path": "tools/port3663/r4_adoptions.py",
+      "sha256": "0F6B4DF1B6FA588E32A2BA5C4D6237390F2F9EA5DD0EB9D8E7BC07F4C49F4FA8"
+    },
+    {
+      "path": "tools/port3663/r4_capture.ps1",
+      "sha256": "6AA21FD9EAEFA6D77C52AEB9F6180937E071A96FE21965F5EAF81936888BE670"
+    },
+    {
+      "path": "tools/port3663/r4_core_result.py",
+      "sha256": "6097DE1C31854B7A48E6E619AB3004EF0621E3AE3B48C624646E858EC7B7F76C"
+    },
+    {
+      "path": "tools/port3663/r4_native_bindings.py",
+      "sha256": "B3B57F94D5A2B3DF844F5F4EBD1198971A2AB35AA6082A9F942C842261712A07"
+    },
+    {
+      "path": "tools/port3663/r4_probe_sites.py",
+      "sha256": "A68B521B7AB283B341E9BF32109B4CF49E7E8AC7A4153D6B57D1ECDA387BA598"
+    },
+    {
+      "path": "tools/port3663/r4_review_package.py",
+      "sha256": "EAA504ACC977656C8572E57FA56AAA926B2C4C32F1CA8E92EA87B3492ECAF34C"
+    },
+    {
+      "path": "tools/port3663/r4_scope.py",
+      "sha256": "2C1C4A88C89A6F6F2EF6F29E9C72CAB5585E57F1A470ACE422C45813C8ADE131"
+    },
+    {
+      "path": "tools/port3663/r4_session_watchdog.ps1",
+      "sha256": "8A56AE12E98E99A834284C328BCD054CB71ACDE7CA3CB10A5D44B2FFE8E81781"
+    },
+    {
+      "path": "tools/port3663/r4_startup_result.py",
+      "sha256": "AEE3D5FD08756F11F3375B7DFAB0E86F3E6F4F693CA59BE8E70A611C51242D6F"
+    },
+    {
+      "path": "tools/port3663/r4_status.py",
+      "sha256": "D966E7AB007BE3735B88D942AC6930E9463EE13097B3E7B4918F002397E1836D"
+    },
+    {
+      "path": "tools/port3663/r4_step3_result.py",
+      "sha256": "D54D0A0D7C593C8EAA3914CA45755BA725EFA6FFEAA521C6ABF687B7770407B6"
+    },
+    {
+      "path": "tools/port3663/r4_step4_result.py",
+      "sha256": "1CED6A8CB373748328D151906C435710349ABA6C553369CBA18618CE536CE987"
+    },
+    {
+      "path": "tools/port3663/r4_v1_bindings.py",
+      "sha256": "2414F6783025568ED1B38EF7E65CDC0EACD0AFE3DDD46BCAEF7BE202CC813EEA"
+    },
+    {
+      "path": "tools/port3663/smoke.ps1",
+      "sha256": "136E2E4A8C66DB1029F1E8CF5C722FF5239A42651F4D7A86DD6B596D581E387B"
+    }
+  ],
+  "verified_retained_proofs": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-suite.txt",
+      "sha256": "0D0D91953EC91B39BA61B3E60E77D91316D74A8B5EF96C1720E5386738F8647D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-smoke-run\\e2e\\cdmp.log",
+      "sha256": "7C77D4FA5F6CBC6D6F405FD838B7A1A430763221FE27B1F992301088E2D04A2E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\ipc-repro-test.txt",
+      "sha256": "3681A690C21114C0FC689E0BC08623218792AE80EE93E7E0AFA4136C13FB4741"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\teardown-repro-test.txt",
+      "sha256": "A4AAEB4DB8EFF0C3E7B0C439880A0E4C223E5C11C49BC8BF19D653924D3F9883"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\teardown-fixed-suite.txt",
+      "sha256": "0ED3140EC142D0C8C1A98E41EA69431BD0E5B9FECABDB00146875529284D717D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\pipe-repro-test.txt",
+      "sha256": "451D33D961974C7D831ED4C6611E4DAD36964CA780C29E8776C399FA7CD066E9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\pipe-root-test.txt",
+      "sha256": "991CED2F6D30B9CE368F3E86C488247EEEF667F88B18BE1BD4FC884617661528"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\steam-stack-fixed-results.txt",
+      "sha256": "F908003B3F5276CA2AE8835EE410F2C05B4EEEB9B71EE07BE7469705BC77793D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup2-crash-summary.json",
+      "sha256": "2C463EE4F7521F2AA39BDD2BD6F27072AE9CF65A94055EC19B2A9C9BD53C7B8E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup3-crash-summary.json",
+      "sha256": "073F616BFF11A6CB1E96C288DA72F55C022E619C4A12EC7A0963DEF5FCC9770A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-repro-test.txt",
+      "sha256": "20F6343B097AC8FCE82E4B2614A08E02A43486D6C4C4305BE6D808B81E996ABA"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-suite.txt",
+      "sha256": "0D0D91953EC91B39BA61B3E60E77D91316D74A8B5EF96C1720E5386738F8647D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\cdmp.log",
+      "sha256": "89B074B8DCF28CDD8A4E90627ED5E21F89BB8AFF78226F5DA05AFD8FCBF3B556"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\question.md",
+      "sha256": "B5D18BDF7270B630E15FE8E0A2FFCDCC8D8C8C2447630383F8B3FA08F1E39E23"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\save-verification.json",
+      "sha256": "D4A01495A721D339FBF343AC4D9A3DB4D0D0B33178CBA364D64B6B5508C25693"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\watchdog.json",
+      "sha256": "E5C30D83412D3FD2ABF612D1F1BF0DA6933BC7F34073DB7231CAD3B463BFEDEB"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\deployed-hashes.json",
+      "sha256": "C37133834B4FF6340B630C7B90A5C8521C72A17C0C702285E3861CCA29FBBCBC"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r2\\live\\R2-P1-20261116-161703\\evidence-hashes.json",
+      "sha256": "94062ECDBBFD80E8C4AA277F2F73FB5B79C7FEEBE0C7C302C67B3BDE28D3F1B9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\question.md",
+      "sha256": "12B2B6733CE07F36CE5F44A8FB46697E507E17D816B1ED20534AC0945095067C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\session.json",
+      "sha256": "820031F5A6FB1D41BEDDBC0C93CC86CCF257F6DD046F9B15A6476C30D7CDCD2E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\launch-host.json",
+      "sha256": "0220090DB83E0DC7354ABE7344AA4A0E599FBAA2FD8CBDD8AF9807EB1CDC2946"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\watchdog-host.json",
+      "sha256": "7E19922B63D6135FC0A83C56C7A25D8C01C51E5B52977BD054EADAEB19BE6318"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\finish.json",
+      "sha256": "93DD04638499D5A47B14A96AC9CC375BECE00830CCF2E7CDC66F787E44BA6FED"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\evidence\\cdmp.host.log",
+      "sha256": "8BC024B5C5E36650A1531053FF1065D90EBF04282467596121E391FDD184E3B1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\manual-stop.json",
+      "sha256": "B4B224A532C0A0ED9F6244B13FDAC98423F96BFB7B1665DD979C692405E5D433"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\deployment.json",
+      "sha256": "3C6858DBB5B1FDA5FFC31D2D64E9022937874B434CFF0C542DA290E6BD9974FC"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\save-manifest.tsv",
+      "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\verification.json",
+      "sha256": "D0A5E4182F38AFE9E3AD62325A26486554E2A7C9BF5AFC5977E1C461B48DAFCC"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\question.md",
+      "sha256": "4A7C0718DEFEF515C70255C17163D464C9C8CA0F104BD0144460F8C6C53926C9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\session.json",
+      "sha256": "FB1828AF2BBE23C8873E5A48DBFD5EF5AC22995B1A3E85D06175A1072E5F99B3"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\launch-host.json",
+      "sha256": "73AD7B73C749B553A198BA68D0622F1EE6BC4BD5A448794E0F6C63D560796762"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\watchdog-host.json",
+      "sha256": "9092BD1E181BA095CBB8C86E349357DFEC52475A7B329CBA09E98842224241A6"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\finish.json",
+      "sha256": "2E6A75380195D972CE177CED565FD35E9AB1C43BBC46EBD330F6F9B5AA427130"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\evidence\\cdmp.host.log",
+      "sha256": "665B9B6B7C7D7769B458808E57D9ADFF9235AE832F45C75265969D845EA0DD6C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\deployment.json",
+      "sha256": "F4F63467E106D4897C33318A0547BBF7056780774AF766034CEECC736245824A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\save-manifest.tsv",
+      "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184928\\verification.json",
+      "sha256": "2D41928DA9901F706134BB5CE2BC7018EBC7DB5EECFFED33EB0D978F960C19F9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\question.md",
+      "sha256": "5667089DB3FF4244F926466880876C6464C767996A208451267C5B0546BF718B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\session.json",
+      "sha256": "2A7E074093F0AF9657E5B3D1FA45EA190DCBD6C79C7796B4085A519F3B43C658"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\launch-host.json",
+      "sha256": "3EAB59758AE17AD12A51FDE67E6BEB6EF2771270FBBFA847AAF9FA0EE5236964"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\watchdog-host.json",
+      "sha256": "E001BE114BCC27AE61E579640BE39D78C97A0DF61E976E8887172330084A5BB2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\finish.json",
+      "sha256": "277DD746671F6D12CD8E6AEF57CE3BE5930809809CECE7A648CD6229AAC19685"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\evidence\\cdmp.host.log",
+      "sha256": "F4FB331B482E902F097816A78AAD9309EBF012D1C44BD0BE877E9AD41181486D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\deployment.json",
+      "sha256": "20E0A5FA72907AF780CAE5CA1F20C5A8DBDC1485F7C57B2F494F16C659B61ABF"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\save-manifest.tsv",
+      "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\verification.json",
+      "sha256": "FBE2170B8A3ED84933B3233AD52D4EB869973430647581D11525625EA4E521E1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\step3-final-suite.txt",
+      "sha256": "FE29DE1B285ABE1FDDF22E8F2C630089E2C168A8ECF366F3A0AB41B5DD2DF689"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\step3-final-smoke.txt",
+      "sha256": "7EF759B8B4376C158886256D1ABA36257286AE0C9D91954B687E1A0AF744743F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\step3-final-smoke-run\\e2e\\cdmp.log",
+      "sha256": "DA02A634878462F7C772CDD281E02071BA3C6A64D57DC0A0CBA7346B86BC68EE"
+    }
+  ],
+  "packaging_only_changes_after_validation": [
+    {
+      "path": "tools/port3663/r4_status.py",
+      "validated_sha256": "AC7BBE588A4D2797638B3353D8492DAA44B6B966CE7126AFF27694A4B8E25D22",
+      "packaging_sha256": "D966E7AB007BE3735B88D942AC6930E9463EE13097B3E7B4918F002397E1836D",
+      "reason": "report-only Step 6 completion label; not compiled/runtime code"
+    }
+  ],
+  "local_arming_receipt": "Retained for provenance; exhausted live budget forbids further R4 launches; report metadata also changed after sealing.",
+  "evidence_policy": "No new raw game dumps, screenshots, captures or executable binaries committed; existing Windows crash files remain local and are hashed."
+}

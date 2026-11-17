@@ -1,3 +1,128 @@
+# R4 Step 6 — review package (2026-11-16)
+
+Branch: `gpt/3663-port`. Runtime/source checkpoint:
+`cce29cc9db01c38fcd6fa8d1b1c71bfbf951652c`; the following Step 6 packaging
+commit is branch HEAD. This section supersedes the R3/R2 status below.
+**Steps 1–4 are implemented; A/B/C/D are armed for the explicit guarded v1
+route. L3 is unpassed, and L4 did not run. The two-player goal is not reached.**
+
+Step 5 ends at the approved plan's live-attempt cap. Three controlled L3
+startup experiments failed: one stalled SteamAPI error exit and two crashes.
+All three count against the cap, although zero guest processes/native joins
+ran. Earlier checkpoints counted native joins separately as zero; that does
+not permit more startup launches in this round. Offline work continued and
+the last reproduced stack defect was corrected and validated. It has not
+been retried in the game. No intermediate review approval is requested.
+
+`R4-REVIEW-PACKAGE.json` indexes commits, changed files, retained evidence
+hashes, live outcomes, final validation and cleanup. `R4-STATUS.json` is the
+additive row ledger; `R4-BLOCKERS.md` distinguishes implementation closure
+from the missing runtime milestone. `R4-LIVE.md` records the experiments and
+reproductions, including failures.
+
+## Armed tiers, scope and behavior
+
+| Tier | Closed / total | Armed | Evidence and current boundary |
+| --- | ---: | --- | --- |
+| A | 37/37 | Yes | Default HP-only reader; prior R3 L1 passed |
+| B | 78/78 | Yes | Prior R3 L2 native-host loopback passed; distinct v1 transport route implemented |
+| C | 150/150 | Explicit v1 | New three-argument join/reference/rollback and identity adapters; no live guest join |
+| D | 130/130 | Explicit v1 | File sandbox, bounded guest pump, native stable logout and lifecycle guards; no live guest removal |
+
+Closed rows include approved policies and scope retirements, not 395 native
+RVA adoptions or executed runtime contracts. Default 3663 remains Tier A.
+The explicit `[session2] core_v1=1` route requires exact build, A/B/C/D,
+actual verified file redirection, consistent roles and Steam or strict local
+loopback. Both controlled copies use separate sandbox copies. Optional
+modules remain unreachable; 2976 and synthetic test-host routes remain.
+
+R4 C110–C115 are retired because guest travel/fast-travel and time publication
+are refused. The guest LoadingComplete publication flag is also suppressed;
+the host-owned-field native owner check excludes its earlier publication
+path. D020–D023, D063–D067, D100–D104 and D130 use approved file-level
+redirection instead of legacy save/title callsite patches. Source handles,
+unclassified save operations and unsafe aliases remain denied. The earlier
+R3 stamina retirement remains. Mounts, combat and optional gameplay are off.
+
+The native join backend pins typed users/actors/field access, takes field
+locks in native order, inserts one exact row and calls original EnterField
+with locks released. Only its unchanged unused row can roll back; uncertainty
+quarantines pins and seals admission. Identity uses separately adopted target
+entries, generation keys and native host-derived thread affinity. Native
+faults halt new injection and propagate; they do not fabricate success.
+
+Stable/title disconnect requests native LogoutSession first. Loading loss
+quarantines rather than guessing completion payloads. Reconnect is unsupported:
+the guest ends on a changed native conversation with guard code 0xCD67.
+Host field replacement, uncertain rollback or loading loss requires restart.
+Only the measured single-primary roster is admitted. See Steps 3–4 notes.
+
+## Validation and final installation
+
+- Final `scripts/build.ps1 -BuildDir <external r2-build>`: **114/114 passed, 94.75 seconds**.
+- Final unique eight-second synthetic smoke: **78 remote states, zero rejects, metadata tier mask 0xF, clean worker exit/unload**. Synthetic results are not two-player proof.
+- Expanded fixtures reproduce/fix MAP-only pagefile IPC, DOS pipe/device and pipe-directory reopen, native hook CRT teardown, and 128 KB-thread mapping overflow. The small-stack pre-fix fixture exits 0xC00000FD.
+- SteamAPI comparison after Steam restart/fixes succeeds both without and with the sandbox; zero sandbox refusals and unchanged fixture real saves. This initializes Steam in owned fixtures and never launches the game.
+- Every controlled startup verified fresh host/guest backups outside OneDrive, exact executable identity, sandbox startup, pinned fourteen-minute watchdog and installation restoration. All **23 real saves** match the manifests; no real saves were restored over progress.
+- Final elevated inspection at 19:30 Eastern: no Crimson Desert process; ASI/PDB/loader/host and guest INIs/test marker absent; latest backups and real saves verified again. Local `build/r4/final-cleanup.json` is hashed in the package.
+- Source/binary proof is `port-evidence/r4/stack-fixed-validation.json`. Build banner is `ab72135 + local changes`; the tested source is sealed by file hashes and committed as cce29cc. It is not claimed to embed the later commit label.
+- Earlier optional S3 publication-race failure remains recorded and is not claimed fixed; that module is unreachable here. Final full suite passes.
+
+Target executable: 1.0.0.3663, timestamp `0x6AF5D198`, base `0x140000000`,
+image size `0x144E9000`, SHA256
+`8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8`.
+The downloaded 2976 reference was inspected only, never executed.
+
+## R4 live sessions and attempts
+
+All sessions used a written question, user presence, guarded exact build and
+save backups. No UI control was used. Full questions, executable identity,
+watchdog, exit and cleanup records are indexed in the result JSON.
+
+| Session | Question / outcome | Log SHA256 |
+| --- | --- | --- |
+| R2-P1-20261116-161703 | Do vector/identity/lobby/key/session contexts agree? Passive sitting: 161 valid events, two native admission pairs, user-confirmed travel; no guest join. Natural exit before watchdog, later than requested quit. | 89B074B8DCF28CDD8A4E90627ED5E21F89BB8AFF78226F5DA05AFD8FCBF3B556 |
+| R4-L3-20261116-184248 | Can restricted real processes join/show movement/remove guest without real-save changes? Host SteamAPI failed before native hooks. User Exit left Error window; verified process aborted, cleanup passed. | 8BC024B5C5E36650A1531053FF1065D90EBF04282467596121E391FDD184E3B1 |
+| R4-L3-20261116-184928 | Same L3 question after shared-memory fix. SteamAPI failed; host exited 0xC0000005 at NtProtectVirtualMemory+14. Hook-removal defect reproduced/fixed offline. | 665B9B6B7C7D7769B458808E57D9ADFF9235AE832F45C75265969D845EA0DD6C |
+| R4-L3-20261116-191955 | Same L3 question after IPC/teardown fixes. Steam and guarded host route activated, then crashed before title/guest. RSP below 128 KB thread stack; matching small-stack callback defect reproduced/corrected offline, no live retry. | F4FB331B482E902F097816A78AAD9309EBF012D1C44BD0BE877E9AD41181486D |
+
+The last crash is consistent with callback stack exhaustion; the actual game
+resolution is unproven. Existing Windows dumps stay local; only hashes and
+bounded metadata are packaged. No two-window capture was reached, so there
+is no L3 capture hash. User-supplied error screenshots are not committed.
+No L4/second-PC deployment or Steam two-player result is claimed.
+
+## Commits since 0f11f6e and remaining verification
+
+- 5db3328 — save approved R4 plan.
+- 3f11c53 — Step 1 file sandbox/fixtures.
+- b38e36e — Step 2 scope filter.
+- 9cc2c4a — passive collector checkpoint.
+- 43a49f5 — Step 3 native backend and identity.
+- 8c541af — Step 4 explicit v1 route and lifecycle arming.
+- c0e5984 — Step 5 shared-memory startup correction.
+- ab72135 — Step 5 Steam IPC and teardown corrections.
+- cce29cc — Step 5 attempt record and offline stack correction.
+- Branch HEAD — Step 6 review package.
+
+Remaining: real host startup after the final correction; real guest joining;
+mutual walking/turning visibility; guest disconnect removal; reconnect
+outcome; full-session save manifests and local capture; then L4 on two PCs
+over Steam. L4's guest-kit deployment is blocked on L3 acceptance. No further
+game launch belongs to this round's exhausted live budget.
+
+For a later authorized live round, repeat fresh backups/exact hash and the
+controlled host-title/world preflight first, then the guest-title/initial join,
+mutual movement, local capture, stable disconnect, reconnect and cleanup
+sequence. A full suite/compile alone cannot settle those requirements.
+The branch is ready for Claude's final review as an **incomplete runtime
+milestone with a documented blocker package**, not a working two-player port.
+
+Original attribution/history/GPL v3 are preserved. The original sibling
+checkout and parent Start-Grok.ps1 were not changed.
+
+---
+
 # R3 Step 5 — review package (2026-11-16)
 
 Branch: `gpt/3663-port`. Source through `c2d3604c00ff872250cb9be0ef11ff307303b1e4`; the subsequent
