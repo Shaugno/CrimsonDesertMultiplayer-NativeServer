@@ -1,4 +1,29 @@
-# R5 Step 4 — L4 blocked by its L3 prerequisite
+# R5 Step 4 — current L4 prerequisite result (2026-11-17)
+
+**L4 did not run.** The desktop retry in Step 3 (8c51972) established both
+visible controlled windows and the requested left/right arrangement before
+guest Play. Native login/title refresh passed, then character-login opcode
+3081 was refused by identity admission. No guest actor was inserted or
+committed. Mutual movement, removal, reconnect, useful video and post-session
+host reload remain unverified. This is an L3 failure, so the R5 plan's
+mandatory prerequisite prevents the two-PC test.
+
+The preserved ledger is startup **4/5**, join **3/3**, including the
+startup-only and blocked guest-application experiments described in
+`R5-STEP3.md`. No second PC was requested, no guest kit was transferred or
+deployed, and no Steam/friendship/build/isolation check was bypassed.
+Independent investigation localized the current refusal without relaxing
+admission, and the new final audit verified all seven sessions' frozen
+backups, current real saves, ended controllers and installation cleanup.
+The Step 5 package records this actual boundary; it does not claim L4 passed.
+
+The existing guarded L4Host/L4Guest paths and future second-PC checklist
+below remain preparation only. The older budget and visibility description
+below is historical and is superseded by this section.
+
+---
+
+# Historical Step 4 prerequisite record
 
 **No L4 session ran.** R5 requires a passed L3 before the second-PC Steam
 session. R5-L3-1 established native guest login and title refresh, but not
