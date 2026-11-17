@@ -17,6 +17,12 @@ states, zero rejects, clean unload**. Audit: no game process/controlled install.
 **Steps 2–5 are pending the time gate and user-present tests. This is not the
 final Step 5 package.** No R7 game launched or live budget was consumed:
 startup **0/5**, join **0/3**, separate ledger under `port-evidence/r7`.
+Live preflight requested while the user was present: checked **2026-11-17
+10:48–10:49 Eastern**, still before the approved launch time. Both UTC and
+local clocks agree. All 680 source seals, ASI/runner and Step 1 evidence hashes
+reverified; no game process or any of the six controlled installation files
+was present. No deployment, launch plan, timer or attempt was started. This
+is a time-gate hold, not a completed Step 2 or an activation-error recurrence.
 Activation causality/recovery remains unproven; L3/L4 remain unpassed.
 After the deadline, run one guest-only title/quit check. If activation error
 returns, stop live work and package the blocker; otherwise proceed to the

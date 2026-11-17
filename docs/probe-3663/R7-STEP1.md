@@ -79,6 +79,14 @@ Step 1; no fresh live attempt was consumed. Earlier raw evidence is untouched.
 
 ## Next live sitting — after the time gate
 
+Preflight on **2026-11-17 10:48–10:49 Eastern**: user present, but the UTC
+clock and Windows local clock both confirm the gate remains closed until
+the following day. Reverified all 680 source-file seals, ASI/desktop-runner
+hashes, and every indexed Step 1 evidence/arming hash. No game process or
+controlled installation was present. No plan/timer, deployment or launch was
+started; startup remains 0/5, join 0/3. Steps 2–5 stay pending. Computer Use is
+authorized by the user if needed for the later live setup.
+
 Use a fresh R7 session outside OneDrive, fresh verified save backups, the
 sealed R7 receipt and visible desktop runner. Recheck game hash/source seal.
 Ask once for presence and the following batched actions; do not arm a timer
