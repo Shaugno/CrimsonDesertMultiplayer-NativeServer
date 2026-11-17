@@ -3,6 +3,7 @@
 #include "mod/session2/identity3663.h"
 #include "mod/session2/r4_native_bindings.h"
 #include "coop3663/identity3663_policy.h"
+#include "coop3663/identity3663_diagnostic.h"
 #include "mod/game/hook_prepare.h"
 #include "mod/game/safe_memory.h"
 #include "mod/log.h"
@@ -25,6 +26,15 @@ std::atomic<uint32_t> affinity_thread{};
 std::atomic<uint64_t> lobby_edits{},status_edits{},phase_checks{},refusals{};
 std::mutex state_mutex; // leaf lock; never across an original or native call
 p::State state;
+p::RefusalDiagnosticOnce refusal_diagnostic;
+
+void log_refusal(std::span<const uint8_t> payload,const p::State& snapshot,
+    const field_share3663::Context& c,uint32_t user_key,bool active,bool broken,bool context_ok){
+    if(!refusal_diagnostic.claim())return; // one line per process/attempt, no network-driven log flood
+    const auto d=p::diagnose_login(snapshot,c.epoch,c.guest,user_key,payload,active,broken,context_ok,
+        lobby_edits.load(),status_edits.load(),phase_checks.load());
+    log::warn("3663 identity refused 3081: {}",p::format_login_diagnostic(d));
+}
 template<class T>bool read(uintptr_t a,T& v){return a && game::safe_read(a,&v,sizeof v);}
 uintptr_t ptr(uintptr_t a){uintptr_t v=0;return read(a,v)?v:0;}
 uint32_t key(uintptr_t a){uint32_t v=0;return read(a+0x60,v)?v:0;}
@@ -187,12 +197,24 @@ bool ready(uintptr_t user,uintptr_t actor,uint64_t epoch){
     std::lock_guard lock(state_mutex);return p::ready(state,epoch,user,actor,user_key,actor_key);
 }
 bool admit(uint16_t opcode,std::span<const uint8_t> payload){
-    if(!on.load() || broken.load())return false;
+    const bool active=on.load(),failed=broken.load();
+    if(!active || failed){
+        if(opcode==3081){p::State snapshot;{std::lock_guard lock(state_mutex);snapshot=state;}
+            log_refusal(payload,snapshot,{},0,active,failed,false);}
+        return false;
+    }
     if(opcode!=3081)return true;
-    field_share3663::Context c;if(!context(c))return false;
+    field_share3663::Context c;if(!context(c)){
+        p::State snapshot;{std::lock_guard lock(state_mutex);snapshot=state;}
+        log_refusal(payload,snapshot,c,0,active,failed,false);return false;
+    }
     const auto user_key=key(c.guest);
-    std::lock_guard lock(state_mutex);const bool ok=state.user_key==user_key && p::login_character(state,c.epoch,c.guest,payload);
-    if(!ok)++refusals;return ok;
+    bool ok=false;p::State snapshot;
+    {std::lock_guard lock(state_mutex);
+        ok=state.user_key==user_key && p::login_character(state,c.epoch,c.guest,payload);
+        if(!ok){++refusals;snapshot=state;}}
+    if(!ok)log_refusal(payload,snapshot,c,user_key,active,failed,true);
+    return ok;
 }
 std::string describe(){return std::format("3663 identity: lobby {} status {} phases {} refused {} affinity {} failed {}",
     lobby_edits.load(),status_edits.load(),phase_checks.load(),refusals.load(),affinity_thread.load(),broken.load());}

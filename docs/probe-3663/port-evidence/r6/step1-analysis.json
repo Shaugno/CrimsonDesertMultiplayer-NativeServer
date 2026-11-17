@@ -1,0 +1,72 @@
+{
+  "round": 6,
+  "step": 1,
+  "target_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "reader_rva": "0x2C6AE10",
+  "vtable_rva": "0x5F676B8",
+  "vtable_slot": 2,
+  "opcode": 3081,
+  "native_prefix": [
+    1,
+    8,
+    4,
+    4
+  ],
+  "tail": "remaining even byte count as UTF-16",
+  "writer_verified": false,
+  "writer_candidates_rejected": true,
+  "policy_unchanged": true,
+  "game_launched": false,
+  "reference_commit": "a3904af3e1a32056dcf7a63bc7a469eb4231084b",
+  "reference_code_copied": false,
+  "baseline_tests": "119/119 in 112.08 seconds",
+  "final_tests": "119/119 in 111.19 seconds",
+  "smoke": "78 remote states; zero rejects; clean unload",
+  "diagnostic_decision_equivalence_cases": 640,
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\login3663-native.txt",
+      "sha256": "146553DFE7DAE7421CC2EE4D4DB4ECEDBE4741F271511E656F1B145DEA57417C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\login3663-native.run.log",
+      "sha256": "C30ED0A8BF7F63507C04ED4E7DE8779F277D662410A0C90725C92C1DE13AE6CE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\login3663-references.txt",
+      "sha256": "75BC30DB33ABB16963A899F2A3168AF591BB308F8CDA44E03650167A4EEEFD56"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\R6LoginReferences.java",
+      "sha256": "7EF056ACF8A790ACF5EEE833E49AC8ACB115F1C536FD29404C94A82227EEC87F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\login3663-writer-candidates.txt",
+      "sha256": "4BE2C175C14F89AB408EF40DB42414EBF07BC0A50986FC4D3F7F84CA12F06CC2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\login3663-writer-candidates.run.log",
+      "sha256": "10810C7DD48BFE7EFB2A4B3464E060F9D5D0D91634445B0348F36A1BA5EDED65"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-baseline-suite.txt",
+      "sha256": "08B4948803D7324FC4B16CE1ABEF31C53CE4E91B97BF13A6F3DF22DA1B719620"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step1-suite.txt",
+      "sha256": "A30F8EA01CF27C624B563A47C2A954D265CAF3A642DAFC885849606947AD9A2A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step1-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\seal-validation.py",
+      "sha256": "3347BA73E07142225E6343A97AB38E81E6B119094EA37F040976A2D1E5374E13"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\arming-r6-step1.json",
+      "sha256": "A1CC3A0B1BF73BD7C33FAD553EDA38C76B44E3431ADDC3FB28AD0FA12019F80E"
+    }
+  ]
+}
