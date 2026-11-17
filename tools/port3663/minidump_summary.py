@@ -44,6 +44,7 @@ rip,=unpack('<Q',ctx+248)
 result=dict(dump_name=args.dump.name,dump_sha256=hashlib.sha256(data).hexdigest().upper(),
     exception_thread=thread,exception_code=hex(code),exception_address=address(pc),
     rip=address(rip),parameters=[hex(v) for v in parameters],stack_candidates=[],
+    rsp=hex(rsp),
     stack_warning='module-valued stack words only; not unwound or verified call frames')
 if 16 in streams:
     at,_=streams[16];header,stride,total=unpack('<IIQ',at);assert total<=10000000 and stride>=48
@@ -58,6 +59,7 @@ if 3 in streams:
         entry=at+4+48*i;tid,=unpack('<I',entry)
         if tid!=thread:continue
         stack_base,stack_size,stack_rva=unpack('<QII',entry+24)
+        result['thread_stack']=dict(base=hex(stack_base),size=stack_size,rsp_in_range=stack_base<=rsp<stack_base+stack_size)
         if stack_base<=rsp<stack_base+stack_size:
             for delta in range(0,min(1024,stack_base+stack_size-rsp)-7,8):
                 value,=unpack('<Q',stack_rva+rsp-stack_base+delta)

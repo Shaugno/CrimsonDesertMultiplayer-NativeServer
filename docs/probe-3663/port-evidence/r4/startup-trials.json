@@ -50,6 +50,10 @@
         {
           "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\evidence\\cdmp.host.log",
           "sha256": "8BC024B5C5E36650A1531053FF1065D90EBF04282467596121E391FDD184E3B1"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-184248\\manual-stop.json",
+          "sha256": "B4B224A532C0A0ED9F6244B13FDAC98423F96BFB7B1665DD979C692405E5D433"
         }
       ]
     },
@@ -104,22 +108,79 @@
           "sha256": "665B9B6B7C7D7769B458808E57D9ADFF9235AE832F45C75265969D845EA0DD6C"
         }
       ]
+    },
+    {
+      "session": "R4-L3-20261116-191955",
+      "host": {
+        "role": "host",
+        "game_start_filetime": "134393484003477026",
+        "launched_utc": "2026-11-17T00:20:00.3777950Z",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "game_pid": 23184
+      },
+      "watchdog": {
+        "state": "exited",
+        "game_pid": 23184,
+        "game_start_filetime": "134393484003477026",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 25396,
+        "controller_start_filetime": "134393484003958471",
+        "deadline_utc": "2026-11-17T00:34:00.3477026Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "8A56AE12E98E99A834284C328BCD054CB71ACDE7CA3CB10A5D44B2FFE8E81781",
+        "game_exit_code": 3221225477,
+        "ended_utc": "2026-11-17T00:20:37.3810966Z"
+      },
+      "result": "Steam initialized; guarded host active; crash before title/guest",
+      "installation_restored": true,
+      "real_saves_unchanged": true,
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\question.md",
+          "sha256": "5667089DB3FF4244F926466880876C6464C767996A208451267C5B0546BF718B"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\session.json",
+          "sha256": "2A7E074093F0AF9657E5B3D1FA45EA190DCBD6C79C7796B4085A519F3B43C658"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\launch-host.json",
+          "sha256": "3EAB59758AE17AD12A51FDE67E6BEB6EF2771270FBBFA847AAF9FA0EE5236964"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\watchdog-host.json",
+          "sha256": "E001BE114BCC27AE61E579640BE39D78C97A0DF61E976E8887172330084A5BB2"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\finish.json",
+          "sha256": "277DD746671F6D12CD8E6AEF57CE3BE5930809809CECE7A648CD6229AAC19685"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r4-live\\R4-L3-20261116-191955\\evidence\\cdmp.host.log",
+          "sha256": "F4FB331B482E902F097816A78AAD9309EBF012D1C44BD0BE877E9AD41181486D"
+        }
+      ]
     }
   ],
-  "controlled_startup_trials": 2,
-  "startup_crashes": 1,
+  "controlled_startup_trials": 3,
+  "startup_crashes": 2,
+  "failed_L3_experiments": 3,
+  "live_attempt_budget_used": 3,
+  "live_attempt_budget_limit": 3,
+  "budget_policy": "Count all three failed L3 startup experiments, including the first stalled Exit, toward the plan cap; zero native guest joins is not permission for additional launches.",
   "native_join_attempts": 0,
   "failed_native_join_attempts": 0,
   "guest_launches": 0,
-  "L3": "not established",
+  "L3": "not established; live attempt cap reached",
   "L4": "not attempted; requires L3",
   "fixed_offline": [
     "MAP-only pagefile shared memory classification",
     "named pipe device path and typed empty-relative-name pipe reopen",
-    "native hook removal preserves execute permission for both patch ranges"
+    "native hook removal preserves execute permission for both patch ranges",
+    "small-stack mapping callback reproduction: move two nested 64 KB name buffers to heap"
   ],
   "steam_fixture": "after Steam restart and pipe corrections: success with/without hooks; zero sandbox refusals",
-  "caveat": "Game-free corrections do not establish real-game startup or two-player acceptance.",
+  "caveat": "The third crash is consistent with reproduced callback stack exhaustion. The correction has not been retried in the real game. Game-free corrections do not establish runtime or two-player acceptance.",
   "evidence": [
     {
       "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\ipc-repro-test.txt",
@@ -142,12 +203,28 @@
       "sha256": "991CED2F6D30B9CE368F3E86C488247EEEF667F88B18BE1BD4FC884617661528"
     },
     {
-      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\steam-reopen-fixed-results.txt",
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\steam-stack-fixed-results.txt",
       "sha256": "F908003B3F5276CA2AE8835EE410F2C05B4EEEB9B71EE07BE7469705BC77793D"
     },
     {
       "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup2-crash-summary.json",
       "sha256": "2C463EE4F7521F2AA39BDD2BD6F27072AE9CF65A94055EC19B2A9C9BD53C7B8E"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\startup3-crash-summary.json",
+      "sha256": "073F616BFF11A6CB1E96C288DA72F55C022E619C4A12EC7A0963DEF5FCC9770A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-repro-test.txt",
+      "sha256": "20F6343B097AC8FCE82E4B2614A08E02A43486D6C4C4305BE6D808B81E996ABA"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-suite.txt",
+      "sha256": "0D0D91953EC91B39BA61B3E60E77D91316D74A8B5EF96C1720E5386738F8647D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r4\\stack-fixed-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
     }
   ]
 }

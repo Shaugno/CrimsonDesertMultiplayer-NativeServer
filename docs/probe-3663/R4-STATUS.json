@@ -3646,7 +3646,8 @@
     "Closed rows include approved policies and R4 scope retirements; they are not all native RVA adoptions.",
     "A/B/C/D compiled and armed for explicit guarded v1; the default target installation remains the Tier A reader.",
     "Native host/guest route, identity, join and stable disconnect are implemented. L3/L4 execution and acceptance remain separate.",
-    "The file sandbox and controlled launcher are verified offline; gameplay C/D have no in-game validation yet.",
+    "The file sandbox and controlled launcher are verified offline. The guarded host route activated in the third startup; native guest joining and gameplay C/D have no live validation.",
+    "L3 failed in three controlled startup experiments, counted against the plan live-attempt cap. Latest stack correction is offline-validated only. L4 requires L3 and did not run.",
     "Reconnect is unsupported. Guest conversation change exits with guard code 0xCD67; loading loss quarantines and requires restart.",
     "Guest travel/time and legacy per-callsite save/title patches are outside 3663 v1 scope.",
     "One prior full run exposed the existing optional S3 ring publication race; final Step 1 and Step 2 suites passed. That race is not claimed fixed."
@@ -3658,7 +3659,7 @@
     "2": "complete; native control filter; travel/time scope retired",
     "3": "complete; native adapter, identity and passive sitting; historical Step3 evidence retained",
     "4": "complete; explicit guarded v1 route; 114/114 tests and synthetic tier-metadata smoke; see Step4 result",
-    "5": "in progress; two controlled startups failed before guest/join; offline IPC/shutdown fixes; L3 then L4 pending; see R4-LIVE.md",
+    "5": "blocked at live attempt cap: three failed L3 startups, zero guest/native joins; final offline fixes validated; L4 prerequisite unmet; see R4-LIVE.md",
     "6": "pending final review package"
   }
 }

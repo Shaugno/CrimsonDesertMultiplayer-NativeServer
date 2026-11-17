@@ -116,3 +116,43 @@ Final combined validation before the next live experiment: **114/114 passed,
 `port-evidence/r4/startup-fixed-validation.json`. The two failed startup
 trials, cleanup receipts and offline reproductions are sealed in
 `port-evidence/r4/startup-trials.json`. No L3 pass is claimed.
+
+## Startup trial R4-L3-20261116-191955 and live stop
+
+Source ab72135, fresh user-confirmed presence and verified backups. Host
+PID 23184 launched at 19:20:00.3477026 Eastern. Steam initialized and the
+guarded sandboxed host route activated. Optional modules remained off.
+No guest launched and no Continue instruction was issued. The host crashed
+before title confirmation: Windows records an access violation at
+ntdll+55404, and the pinned watchdog records exit 0xC0000005 at
+19:20:37.3810966. No UI control was used.
+
+The existing local dump SHA256 is
+`7D6B7006511E76B38F5A77FF0979EEA04F862C240047CDD26DC0831CC6BC2229`.
+Its exception context has RSP 125320FB0, below the captured thread stack
+beginning at 125321000 with size 126976 bytes. No unwound call frames are
+claimed. Two nested file-layer callbacks each reserved a 64 KB local name
+buffer. An owned 128 KB-stack mapping thread reproduced stack overflow
+(0xC00000FD). Moving the two callback buffers to bounded heap vectors
+removes that failure in the expanded fixture. This is consistent with the
+game crash; resolving the actual runtime crash has not been demonstrated.
+
+Final correction: **114/114 passed, 94.75 seconds**; eight-second synthetic
+smoke receives 78 states, rejects zero packets and unloads cleanly. SteamAPI
+initialization still succeeds in both fixture modes with zero sandbox
+refusals. `port-evidence/r4/stack-fixed-validation.json` seals the final checks and hashes.
+
+Cleanup restored all controlled installation files and verified real saves
+and both backups unchanged. Host log SHA256:
+`F4FB331B482E902F097816A78AAD9309EBF012D1C44BD0BE877E9AD41181486D`.
+Local receipt folder retains the question, exact executable identity,
+manifest, deployment, watchdog, exit and cleanup records.
+
+**Live work ends at the plan's three-experiment cap.** All three failed L3
+startup experiments count toward it, including the first stalled Exit,
+although no guest or native join ran. Earlier progress records tracked
+native joins separately as zero; that does not authorize more startup
+launches. Totals: three failed L3 experiments, two observed startup crashes,
+one aborted stalled startup, zero guest launches/native joins. The final
+small-stack correction is not retried live in R4. L3 is unpassed; L4 and its
+second-PC guest-kit deployment cannot proceed because L3 is required first.

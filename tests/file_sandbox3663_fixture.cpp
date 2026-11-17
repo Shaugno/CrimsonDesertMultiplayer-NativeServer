@@ -36,6 +36,16 @@ std::string read(const std::wstring& path) {
     if(f==INVALID_HANDLE_VALUE)return {};
     char b[128]{};DWORD n=0;bool ok=ReadFile(f,b,sizeof(b),&n,nullptr)!=FALSE;CloseHandle(f);return ok?std::string(b,n):std::string();
 }
+DWORD WINAPI small_stack_mapping(void* value){
+    const auto* path=static_cast<const wchar_t*>(value);
+    HANDLE file=CreateFileW(path,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,nullptr,OPEN_EXISTING,0,nullptr);
+    if(file==INVALID_HANDLE_VALUE)return 53;
+    HANDLE section=CreateFileMappingW(file,nullptr,PAGE_READONLY,0,0,nullptr);
+    if(!section){CloseHandle(file);return 54;}
+    auto view=static_cast<const char*>(MapViewOfFile(section,FILE_MAP_READ,0,0,0));
+    DWORD result=view && view[0]=='o'?0:55;
+    if(view)UnmapViewOfFile(view);CloseHandle(section);CloseHandle(file);return result;
+}
 int fixture(int argc,wchar_t** argv) {
     if(argc!=7 && argc!=8)return 1;
     const std::wstring root=argv[1],backup=argv[2],sandbox=argv[3],manifest=argv[4],hash=argv[5],mode=argv[6];
@@ -117,6 +127,11 @@ int fixture(int argc,wchar_t** argv) {
     if(SetFileInformationByHandle(before,FileEndOfFileInfo,&end,sizeof(end)))return 7;
     if(auto p=MapViewOfFile(old_mapping,FILE_MAP_WRITE,0,0,0)){UnmapViewOfFile(p);return 8;}
     CloseHandle(old_mapping);CloseHandle(before);
+    const auto small_path=root+L"\\source.save";
+    HANDLE small=CreateThread(nullptr,128u*1024,&small_stack_mapping,const_cast<wchar_t*>(small_path.c_str()),STACK_SIZE_PARAM_IS_A_RESERVATION,nullptr);
+    if(!small || WaitForSingleObject(small,10000)!=WAIT_OBJECT_0)return 56;
+    DWORD small_result=~0u;if(!GetExitCodeThread(small,&small_result))return 57;CloseHandle(small);
+    if(small_result)return static_cast<int>(small_result);
     if(mode==L"teardown")return 0; // ordinary CRT exit must safely remove native hooks
     if(read(root+L"\\source.save")!="original")return 9;
     if(!write(root+L"\\created.save","guest") || read(root+L"\\created.save")!="guest")return 10;

@@ -129,8 +129,10 @@ std::wstring canonical(std::wstring path,bool mutation) {
     if(path.rfind(L"\\\\?\\",0)==0)path.erase(0,4);
     if(path.rfind(L"GLOBALROOT\\",0)==0)path=L"\\"+path.substr(11);
     if(path.rfind(L"\\SystemRoot\\",0)==0) {
-        wchar_t windows[32768]{};if(!GetWindowsDirectoryW(windows,32768))throw 1;
-        path=std::wstring(windows)+path.substr(11);
+        std::vector<wchar_t> windows(32768);
+        const auto length=GetWindowsDirectoryW(windows.data(),static_cast<UINT>(windows.size()));
+        if(!length || length>=windows.size())throw 1;
+        path=std::wstring(windows.data(),length)+path.substr(11);
     }
     if(path.rfind(L"\\Device\\",0)==0) {
         bool mapped=false;
@@ -376,7 +378,9 @@ NTSTATUS NTAPI section_ex(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,P
     return h_section_ex.unsafe_stdcall<NTSTATUS>(out,access,oa,size,protect,flags,file,extra,count);
 }
 bool mapped_real(HANDLE process,PVOID base,HANDLE section_handle) {
-    Audit audit;std::array<wchar_t,32768> name{};
+    // Game IO threads can reserve only 128 KB. Nested 64 KB name arrays in
+    // this callback and canonical() exhausted that stack before title.
+    Audit audit;std::vector<wchar_t> name(32768);
     // Named IPC is commonly opened with SECTION_MAP_READ/WRITE only.
     // NtQuerySection then fails for lack of SECTION_QUERY even though the
     // view is valid. Classify its backing from the mapped region, as the
