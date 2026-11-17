@@ -61,7 +61,8 @@ if ($Fixture) {
     if([IO.Path]::GetFileName((Full (Join-Path $GameDir 'CrimsonDesert.exe'))) -ne 'CrimsonDesert.exe'){throw 'Unexpected game executable'}
     # CIM failure is fatal, rather than interpreting denied process access as closed.
     $running=@(Get-CimInstance Win32_Process -Filter "Name='CrimsonDesert.exe'")
-    if ($Stage -eq 'Run' -and $LaunchRole -eq 'guest' -and $SessionKind -eq 'L3') {
+    if (($Stage -eq 'Run' -and $LaunchRole -eq 'guest' -and $SessionKind -eq 'L3') -or
+        ($Stage -eq 'Verify' -and $SessionKind -eq 'L3' -and $running.Count -eq 1)) {
         $hostReceipt=Join-Path $SessionRoot 'launch-host.json'
         if (!(Test-Path -LiteralPath $hostReceipt)) { throw 'Launch and load the controlled host first' }
         $hostRecord=Get-Content -LiteralPath $hostReceipt -Raw | ConvertFrom-Json

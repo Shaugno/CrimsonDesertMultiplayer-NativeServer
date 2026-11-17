@@ -182,6 +182,7 @@ add_library(cdmp_mod SHARED
     src/mod/session2/identity3663.cpp
     src/mod/session2/guest3663.cpp
     src/mod/session2/v1_3663.cpp
+    src/mod/session2/r5_guards3663.cpp
     src/mod/session2/save_hooks.cpp
     src/mod/session2/host_save_export.cpp
     src/mod/session2/session2.cpp
@@ -315,6 +316,10 @@ add_executable(cdmp_tests_v1_3663_policy tests/v1_3663_policy_tests.cpp)
 cdmp_strict(cdmp_tests_v1_3663_policy)
 target_include_directories(cdmp_tests_v1_3663_policy PRIVATE src)
 add_test(NAME v1_3663_policy COMMAND cdmp_tests_v1_3663_policy)
+add_executable(cdmp_tests_r5_guard_policy tests/r5_guard_policy_tests.cpp)
+target_include_directories(cdmp_tests_r5_guard_policy PRIVATE src)
+cdmp_strict(cdmp_tests_r5_guard_policy)
+add_test(NAME r5_guard_policy COMMAND cdmp_tests_r5_guard_policy)
 add_executable(cdmp_tests_native_call_scope tests/native_call_scope_tests.cpp)
 cdmp_strict(cdmp_tests_native_call_scope)
 target_include_directories(cdmp_tests_native_call_scope PRIVATE src)

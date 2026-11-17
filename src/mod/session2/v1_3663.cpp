@@ -4,6 +4,7 @@
 #include "mod/session2/guest3663.h"
 #include "mod/session2/identity3663.h"
 #include "mod/session2/report_guard.h"
+#include "mod/session2/r5_guards3663.h"
 #include "mod/session2/tunnel_layout.h"
 #include "mod/game/hook_prepare.h"
 #include "mod/game/safe_memory.h"
@@ -96,7 +97,7 @@ bool host_install(const game::build_guard::ImageIdentity& id){
     for(const auto& s:{n::kExceptControl,n::kExceptSelf,n::kToNear,n::kLoading,n::kLoadingFlag})if(!matches(s))return false;
     if(ptr(base+0x5F686C0+8)!=base+n::kExceptControl.rva || ptr(base+0x5F686A0+8)!=base+n::kExceptSelf.rva ||
         ptr(base+0x5F68780+8)!=base+n::kToNear.rva)return false;
-    if(!identity3663::install(id,&host_context) || !field_share3663::install(id,&host_context,&identity3663::ready,&server_halt_core_native_fault))return false;
+    if(!r5_guards3663::host_install(id) || !identity3663::install(id,&host_context) || !field_share3663::install(id,&host_context,&identity3663::ready,&server_halt_core_native_fault))return false;
     auto load=game::prepare_inline(base+n::kLoading.rva,reinterpret_cast<void*>(&loading),
         [](const auto& bytes){return bytes.size()==5 && std::equal(bytes.begin(),bytes.end(),n::kLoading.bytes.begin());},
         "3663 v1","six-argument LoadingComplete entry");
@@ -122,7 +123,7 @@ bool stopped(){bool quarantined=false;{std::lock_guard lock(life_mutex);quaranti
     return quarantined || fault.load() || identity3663::failed() || field_share3663::quarantined();}
 std::string describe(){int phase=0;{std::lock_guard lock(life_mutex);phase=static_cast<int>(life.phase);}
     return std::format("v1 phase {} recipients {} refused {} stopped {} | {} | {}",phase,relayed.load(),refused.load(),
-        stopped(),identity3663::describe(),field_share3663::describe());}
+        stopped(),identity3663::describe(),field_share3663::describe())+" | "+r5_guards3663::describe();}
 
 Bridge::Bridge(ClientSession& session,bool host):host_(host),
     link_(session,host?troc::Dir::ToGuestClient:troc::Dir::ToHostServer,

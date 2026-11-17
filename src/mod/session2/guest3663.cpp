@@ -5,6 +5,7 @@
 #include "mod/session2/file_sandbox3663.h"
 #include "mod/session2/r4_v1_bindings.h"
 #include "mod/session2/report_guard.h"
+#include "mod/session2/r5_guards3663.h"
 #include "mod/game/game_fault.h"
 #include "mod/game/hook_prepare.h"
 #include "mod/game/safe_memory.h"
@@ -74,7 +75,7 @@ int* __fastcall send(void* self,int* result,void* buffer){
         else{
             if(!remote.load()){
                 if(view->opcode!=layout.connect_opcode || epoch.load())fail("missed initial cryptogram or attempted reconnect");
-                else{epoch.store(current);remote.store(true);}
+                else{r5_guards3663::mark_remote();epoch.store(current);remote.store(true);}
             }
             if(remote.load() && current!=epoch.load())fail("native connection changed; restart required");
             if(!broken.load()){
@@ -173,6 +174,7 @@ bool install(const game::build_guard::ImageIdentity& id){
         std::pair{layout.kNetLoopPump,layout.kNetLoopPumpAob},std::pair{layout.kClientOnRecvPacket,layout.kClientOnRecvPacketHead},
         std::pair{layout.kQueuePush,layout.kQueuePushHead}})if(!matches(pair.first,pair.second))return false;
     for(const auto& s:{r4_native::kLock3,r4_native::kUnlock3,r4_v1_native::kRefresh})if(!matches(s.rva,s.bytes))return false;
+    if(!r5_guards3663::guest_install(id))return false;
     if(!report_guard_install_at(reinterpret_cast<void*>(base+r4_native::kReporter.rva),
         r4_native::kReporter.bytes.data(),r4_native::kReporter.bytes.size()))return false;
     // Startup must capture the very first cryptogram. An already connected
@@ -205,5 +207,5 @@ void deliver(std::vector<uint8_t>&& bytes){
 }
 std::deque<std::vector<uint8_t>> take_outgoing(){return ready.load() && !broken.load()?outgoing.take_all():std::deque<std::vector<uint8_t>>{};}
 std::string describe(){return std::format("native guest active {} remote {} sent {} delivered {} filtered {} refreshed {} failed {}",
-    on.load(),remote.load(),sent.load(),delivered.load(),filtered.load(),refreshed.load(),broken.load());}
+    on.load(),remote.load(),sent.load(),delivered.load(),filtered.load(),refreshed.load(),broken.load())+" | "+r5_guards3663::describe();}
 }

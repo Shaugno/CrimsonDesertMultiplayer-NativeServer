@@ -1,0 +1,40 @@
+{
+  "round": 5,
+  "step": 3,
+  "suite": "117/117 passed",
+  "seconds": 105.1,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second synthetic host/peer only; tier metadata 0xF; clean unload",
+  "asi_sha256": "603D727CC94EF6DA3C2FF5F620967FC912621F383DD062D92685A8EB6C0D27DF",
+  "default_route": "Tier A reader",
+  "host": "explicit v1; backed-up real saves; zero file sandbox hooks",
+  "guest": "USERPROFILE set before process start; native CSIDL_LOCAL_APPDATA save root must identify verified guest copy; zero file hooks",
+  "fallback": "explicit NT default-deny mode retained and fixture-tested, not installed in the primary profile route",
+  "limits": [
+    "Profile save-path isolation is not an OS permission boundary against arbitrary absolute-path writes.",
+    "Fixtures exercise mutations through the actual native save resolver; the NT fallback separately tests hard-coded real-path refusal/redirection.",
+    "Concurrent real-save host deltas cannot be attributed to one process by a combined manifest alone; guest-only evidence remains required.",
+    "No game runtime acceptance follows from these game-free checks."
+  ],
+  "arming_receipt_sha256": "7AB5D7945820139D905CBE652650C03E6D3103D6257B3B025D312C226E4B6DD6",
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\step3-preflight-suite.txt",
+      "sha256": "97905C6B947DBA7245FD142AD40BFAE00B31A4002F5BCD9CE5DF465C8D2E335D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\step3-preflight-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\step3-preflight-smoke-run\\e2e\\cdmp.log",
+      "sha256": "7C4C40825FFC428AB806C9BCEB7AA82DDCD9B877FDDBC559BF651C2BE57A3D75"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\step1-steam-profile.txt",
+      "sha256": "28BDE7E54316A00773317843A5C33CEDB21EF74E0E6F61C644320D2D287EE82A"
+    }
+  ],
+  "source_manifest_sha256": "D52E5EF51306A4D47BDE515238DD65F0B551486D176DFCABDB0730D03303BB87"
+}

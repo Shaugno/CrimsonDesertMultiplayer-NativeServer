@@ -77,7 +77,37 @@ Local file-only evidence (ignored, retained for review):
 `upstream-guards3663-context.txt`, and `upstream-guard-rtti3663.json`.
 Character contexts are `character3576-native-context.txt`,
 `character3663-native-context.txt`, and `character3663-caller-context.txt`.
-No runtime code has been copied at this checkpoint.
+No runtime code was copied at the Step 2 checkpoint.
+
+## Step 3 guard port (prepared, pending live acceptance)
+
+`r5_guards3663.cpp` and `coop3663/r5_guard_policy.h` now derive the two
+guard rules from Samuel's work, with credit in each derived file and GPL v3
+preserved. The source commit must also name Samuel and the pinned PR.
+`tools/port3663/r5_guards.py` checks the actual source arrays against both
+hashed executables, named vtable slots, the owner-null branch, both argument
+cleanup calls, and the cleanup jump to the original epilogue. The result is
+`port-evidence/r5/guards3663-static.json`.
+
+The host guard only handles the named server sequencer component and a
+guarded user-character/field-owner identity. It skips the owner-manager
+unload for a different user's character and continues at the original own
+manager call. It does not require primary/controller links whose clearing
+order during native destruction has not been established. Unread identities
+stay native. There are no callback allocations, logs, locks or native calls.
+
+The guest guard checks the full 51-byte frame construction, target-specific
+cleanup and epilogue, in addition to the vtable and midpoint. The first
+captured native remote cryptogram makes its achievement block sticky until
+process exit. It preserves native argument destruction and stack cleanup.
+It is mandatory for the restricted guest v1 installer, unreachable in the
+S2 title-only route and default Tier A. The host leave guard is mandatory
+before v1 guest admission. These additions do not port mounts, combat or
+the optional character-guard installers.
+
+Pure context tests cover owner/non-owner, absent identities, same/different
+managers, continuation selection and unchanged stack/argument registers.
+Static checks and tests alone do not establish live guard firing or L3.
 
 Sources: [pinned PR](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/pull/1),
 [field sharing](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/session2/field_share.cpp),
