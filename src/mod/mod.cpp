@@ -1004,14 +1004,15 @@ DWORD WINAPI worker(LPVOID) {
         const ProcessFacts proc = log_process_info();
         const bool in_game = proc.in_game;
         // Controlled two-instance deployment: a Steam bootstrap must not lose
-        // its role/sandbox environment and silently become a real-save game.
+        // its role/environment and silently become an uncontrolled game.
         // The launcher owns and removes this marker; ordinary installs lack it.
         if(coop3663::v1::reject_test_process(
             GetFileAttributesW((dir+L"cdmp.r4-test-lock").c_str())!=INVALID_FILE_ATTRIBUTES,in_game,
             proc.identity.kind==game::build_guard::IdentityKind::Build3663,
-            rs.role==role::Role::Host || rs.role==role::Role::Guest,
-            GetEnvironmentVariableW(L"CDMP_SAVE_SANDBOX",nullptr,0)>0)){
-            log::error("R4 controlled session refused an untagged, unsupported or unsandboxed game process");
+            rs.role==role::Role::Host,rs.role==role::Role::Guest,
+            GetEnvironmentVariableW(L"CDMP_SAVE_SANDBOX",nullptr,0)>0,
+            GetEnvironmentVariableW(L"CDMP_HOST_REAL_SAVES",nullptr,0)>0)){
+            log::error("Controlled session refused an untagged, unsupported or incorrectly isolated game process");
             log::flush(2000);TerminateProcess(GetCurrentProcess(),0xCD66);return 0;
         }
         if (!rs.valid) return 0;
@@ -1030,12 +1031,12 @@ DWORD WINAPI worker(LPVOID) {
         // Both permissions come from the same decision. A rejected identity sets neither.
         const bool game_build_ok = allow_reads && allow_hooks;
         // The target sandbox is separate from the legacy save redirect and
-        // conveys no permission to enter an incomplete gameplay tier. Hosts
-        // opt in only for the two-instance manifest experiment; guests require
-        // it even before the later C/D startup gate can grant permission.
+        // conveys no gameplay permission. R5 never installs it in a host;
+        // the guest still requires it before title or C/D permission.
         const bool sandbox_3663 = in_game && proc.identity.kind == game::build_guard::IdentityKind::Build3663 &&
-            (rs.role == role::Role::Guest ||
-             (rs.role == role::Role::Host && GetEnvironmentVariableW(L"CDMP_SAVE_SANDBOX",nullptr,0)>0));
+            rs.role == role::Role::Guest;
+        if(in_game && proc.identity.kind==game::build_guard::IdentityKind::Build3663 && rs.role==role::Role::Host)
+            log::info("3663 R5 host: real saves; file sandbox not installed (launcher verifies backups)");
         if (sandbox_3663 && !session2::file_sandbox3663::install_from_environment()) {
             log::error("3663 file sandbox refused: {}; ending before title",session2::file_sandbox3663::failure_reason());
             log::flush(2000);
@@ -1103,6 +1104,19 @@ DWORD WINAPI worker(LPVOID) {
                     return;
                 }
                 LocalSource local(true);
+                auto reader_loop=[&]{
+                    uint32_t last_log=0;
+                    while(!stop_requested(50)){
+                        const uint32_t now=GetTickCount();(void)local.sample(now);
+                        if(now-last_log>=2000){
+                            log::info("3663 Tier A: {}",local.describe());
+                            if(cfg.r3_pump_probe)game::r3_pump_probe::report();
+                            if(cfg.r3_join_probe)game::r3_join_probe::drain();
+                            if(cfg.r4_core_probe)game::r4_core_probe::drain();
+                            last_log=now;
+                        }
+                    }
+                };
                 if(cfg.r4_core_v1){
                     const bool guest_role=rs.role==role::Role::Guest;
                     const bool host_role=rs.role==role::Role::Host;
@@ -1111,7 +1125,12 @@ DWORD WINAPI worker(LPVOID) {
                         session2::file_sandbox3663::verified(),cfg.net_enabled,cfg.s2_enabled,
                         host_role,guest_role,cfg.net_role_host,cfg.s2_guest,cfg.s2_create_session,cfg.s2_accept_tunnel,
                         cfg.net_transport_steam,cfg.host_loopback_only,cfg.peer_host=="127.0.0.1",cfg.coop_enabled,
-                        cfg.r3_pump_probe || cfg.r3_join_probe || cfg.r4_core_probe || cfg.r3_tunnel_probe});
+                        cfg.r3_pump_probe || cfg.r3_join_probe || cfg.r4_core_probe || cfg.r3_tunnel_probe,
+                        cfg.r5_guest_startup_only});
+                    if(route==v1::Route::GuestStartup){
+                        log::info("3663 R5 guest startup isolation verified: {}; networking and native guest installers off",session2::file_sandbox3663::describe());
+                        reader_loop();return;
+                    }
                     const bool valid=route!=v1::Route::Refuse;
                     bool installed=false;
                     if(valid && guest_role)installed=session2::guest3663::install(proc.identity);
@@ -1125,7 +1144,8 @@ DWORD WINAPI worker(LPVOID) {
                         if(guest_role){log::flush(2000);TerminateProcess(GetCurrentProcess(),0xCD65);}
                         return;
                     }
-                    log::info("3663 v1 {} active: sandbox verified; optional modules unreachable; no runtime acceptance claimed",guest_role?"guest":"host");
+                    log::info("3663 v1 {} active: {}; optional modules unreachable; no runtime acceptance claimed",guest_role?"guest":"host",
+                        guest_role?"guest isolation verified":"host real saves; no file sandbox");
                     run_network(cfg,local,true,true);return;
                 }
                 if(rs.role==role::Role::Guest){
@@ -1151,18 +1171,7 @@ DWORD WINAPI worker(LPVOID) {
                 }
                 log::info("3663 Tier A: local reader; networking off; passive diagnostics {}",
                     cfg.r3_pump_probe || cfg.r3_join_probe || cfg.r4_core_probe);
-                uint32_t last_log = 0;
-                while (!stop_requested(50)) {
-                    const uint32_t now = GetTickCount();
-                    (void)local.sample(now);
-                    if (now - last_log >= 2000) {
-                        log::info("3663 Tier A: {}", local.describe());
-                        if (cfg.r3_pump_probe) game::r3_pump_probe::report();
-                        if (cfg.r3_join_probe) game::r3_join_probe::drain();
-                        if (cfg.r4_core_probe) game::r4_core_probe::drain();
-                        last_log = now;
-                    }
-                }
+                reader_loop();
             })) {
             if (!startup.tier_a_reads) log::info("{}", game::build_guard::diagnostic(proc.identity));
             log::info("Worker exiting");

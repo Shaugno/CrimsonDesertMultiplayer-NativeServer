@@ -4,15 +4,23 @@
 using namespace cdmp::coop3663::v1;
 static void check(bool value){if(!value)std::abort();}
 int main(){
-    for(unsigned flags=0;flags<32;++flags){
-        const bool marker=(flags&1)!=0,game=(flags&2)!=0,target=(flags&4)!=0,tag=(flags&8)!=0,sandbox=(flags&16)!=0;
-        const bool allowed=!marker || !game || (target && tag && sandbox);
-        check(reject_test_process(marker,game,target,tag,sandbox)==!allowed);
+    for(unsigned flags=0;flags<128;++flags){
+        const bool marker=(flags&1)!=0,game=(flags&2)!=0,target=(flags&4)!=0,host=(flags&8)!=0,
+            guest=(flags&16)!=0,sandbox=(flags&32)!=0,real=(flags&64)!=0;
+        const bool allowed=!marker || !game || (target && host!=guest && (guest?sandbox:real&&!sandbox));
+        check(reject_test_process(marker,game,target,host,guest,sandbox,real)==!allowed);
     }
-    RouteRequest host{true,true,true,true,true,false,true,false,true,true,false,true,true,false,false};
+    RouteRequest host{true,false,true,true,true,false,true,false,true,true,false,true,true,false,false};
     check(route(host)==Route::Host);
-    auto guest=host;guest.host_role=false;guest.guest_role=true;guest.net_host=false;guest.native_guest=true;guest.create=guest.accept=false;
+    auto guest=host;guest.sandbox=true;guest.host_role=false;guest.guest_role=true;guest.net_host=false;guest.native_guest=true;guest.create=guest.accept=false;
     check(route(guest)==Route::Guest);
+    auto illegal_host=host;illegal_host.sandbox=true;check(route(illegal_host)==Route::Refuse);
+    auto isolated=guest;isolated.guest_startup_only=true;isolated.network=isolated.session=false;
+    check(route(isolated)==Route::GuestStartup);
+    auto unisolated=isolated;unisolated.sandbox=false;check(route(unisolated)==Route::Refuse);
+    auto networked=isolated;networked.network=true;check(route(networked)==Route::Refuse);
+    auto sessioned=isolated;sessioned.session=true;check(route(sessioned)==Route::Refuse);
+    auto host_startup=host;host_startup.guest_startup_only=true;check(route(host_startup)==Route::Refuse);
     for(int field=0;field<12;++field){auto bad=guest;
         if(field==0)bad.permissions=false;if(field==1)bad.sandbox=false;if(field==2)bad.network=false;
         if(field==3)bad.session=false;if(field==4)bad.host_role=true;if(field==5)bad.net_host=true;

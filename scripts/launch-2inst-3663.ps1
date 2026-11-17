@@ -1,5 +1,5 @@
-# R4: preparation and manifest verification are game-free. Run is separately
-# gated by presence and a compiled C/D receipt; no legacy launcher behavior changes.
+# R5: host uses backed-up real saves; only guest gets verified profile/NT isolation.
+# Preparation/verification are game-free; Run requires explicit live presence.
 param(
     [Parameter(Mandatory=$true)][ValidateSet('Prepare','Run','Verify','Finish')][string]$Stage,
     [Parameter(Mandatory=$true)][string]$SessionRoot,
@@ -7,6 +7,9 @@ param(
     [string]$GameDir = 'D:\SteamLibrary\steamapps\common\Crimson Desert\bin64',
     [string]$ArmingReceipt = '',
     [ValidateSet('host','guest')][string]$LaunchRole='host',
+    [ValidateSet('HostStartup','GuestStartup','L3','L4Host','L4Guest')][string]$SessionKind='L3',
+    [ValidateSet('profile','nt')][string]$IsolationMethod='profile',
+    [UInt64]$PeerSteamId=0,
     [int]$Port=39766,
     [switch]$Present,
     [switch]$Fixture
@@ -55,10 +58,10 @@ if ($Fixture) {
     if($Stage -eq 'Finish' -and !(Under (Full $GameDir) $temp)){throw 'Fixture cleanup requires a temporary game directory'}
 } else {
     if ($SourceRoot -ne (Full (Join-Path $env:LOCALAPPDATA 'Pearl Abyss\CD\save'))) { throw 'Unexpected production source root' }
-    if ((Full $GameDir) -ne (Full 'D:\SteamLibrary\steamapps\common\Crimson Desert\bin64')) { throw 'Unexpected production game directory' }
+    if([IO.Path]::GetFileName((Full (Join-Path $GameDir 'CrimsonDesert.exe'))) -ne 'CrimsonDesert.exe'){throw 'Unexpected game executable'}
     # CIM failure is fatal, rather than interpreting denied process access as closed.
     $running=@(Get-CimInstance Win32_Process -Filter "Name='CrimsonDesert.exe'")
-    if ($Stage -eq 'Run' -and $LaunchRole -eq 'guest') {
+    if ($Stage -eq 'Run' -and $LaunchRole -eq 'guest' -and $SessionKind -eq 'L3') {
         $hostReceipt=Join-Path $SessionRoot 'launch-host.json'
         if (!(Test-Path -LiteralPath $hostReceipt)) { throw 'Launch and load the controlled host first' }
         $hostRecord=Get-Content -LiteralPath $hostReceipt -Raw | ConvertFrom-Json
@@ -102,26 +105,34 @@ if ($Stage -eq 'Prepare') {
     New-Item -ItemType Directory -Path $SessionRoot | Out-Null
     foreach ($role in 'host','guest') {
         $backup=Join-Path $SessionRoot ($role+'-backup')
-        $sandbox=Join-Path $SessionRoot ($role+'-sandbox')
         Copy-Item -LiteralPath $SourceRoot -Destination $backup -Recurse
         AssertManifest $backup $body
-        Copy-Item -LiteralPath $backup -Destination $sandbox -Recurse
-        AssertManifest $sandbox $body
     }
+    $guestProfile=Join-Path $SessionRoot 'guest-profile'
+    $sandbox=if($IsolationMethod -eq 'profile'){Join-Path $guestProfile 'AppData\Local\Pearl Abyss\CD\save'}else{Join-Path $SessionRoot 'guest-sandbox'}
+    New-Item -ItemType Directory -Force -Path (Split-Path $sandbox -Parent) | Out-Null
+    Copy-Item -LiteralPath (Join-Path $SessionRoot 'guest-backup') -Destination $sandbox -Recurse
+    AssertManifest $sandbox $body
     AssertManifest $SourceRoot $body
     [IO.File]::WriteAllText($manifest,$body,[Text.UTF8Encoding]::new($false))
-    @{version=1;source=$SourceRoot;root=$SessionRoot;manifest_sha256=(Get-FileHash -LiteralPath $manifest).Hash;fixture=[bool]$Fixture} |
+    @{version=2;source=$SourceRoot;root=$SessionRoot;session_kind=$SessionKind;isolation_method=$IsolationMethod;
+      guest_profile=$guestProfile;guest_sandbox=$sandbox;manifest_sha256=(Get-FileHash -LiteralPath $manifest).Hash;fixture=[bool]$Fixture} |
         ConvertTo-Json | Set-Content -LiteralPath $receipt -Encoding UTF8
-    Write-Output "Prepared verified fresh host/guest backups and separate sandbox copies: $SessionRoot"
+    Write-Output "Prepared verified host/guest backups; host uses real saves, guest isolation $IsolationMethod : $SessionRoot"
     return
 }
 $saveVerificationError=''
+$realUnchanged=$false
+$hostMayWrite=$SessionKind -in @('HostStartup','L3','L4Host')
 try{
     $record=Get-Content -LiteralPath $receipt -Raw | ConvertFrom-Json
-    if ($record.version -ne 1 -or $record.source -ne $SourceRoot -or $record.root -ne $SessionRoot -or $record.fixture -ne [bool]$Fixture) { throw 'Preparation receipt mismatch' }
+    if ($record.version -ne 2 -or $record.source -ne $SourceRoot -or $record.root -ne $SessionRoot -or
+        $record.fixture -ne [bool]$Fixture -or $record.session_kind -ne $SessionKind -or $record.isolation_method -ne $IsolationMethod) { throw 'Preparation receipt mismatch' }
     if ((Get-FileHash -LiteralPath $manifest).Hash -ne $record.manifest_sha256) { throw 'Preparation manifest changed' }
     $body=[IO.File]::ReadAllText($manifest,[Text.Encoding]::UTF8)
-    AssertManifest $SourceRoot $body
+    $currentBody=Tree $SourceRoot
+    $realUnchanged=$currentBody -ceq $body
+    if(!$hostMayWrite -and !$realUnchanged){throw 'Guest-only real-save manifest changed'}
     foreach ($role in 'host','guest') { AssertManifest (Join-Path $SessionRoot ($role+'-backup')) $body }
 }catch{
     if($Stage -ne 'Finish'){throw}
@@ -130,10 +141,13 @@ try{
     $saveVerificationError=$_.Exception.Message
 }
 if ($Stage -in @('Verify','Finish')) {
-    @{real_manifest_unchanged=(!$saveVerificationError);backup_manifests_verified=(!$saveVerificationError);
-      error=$saveVerificationError;manifest_sha256=$record.manifest_sha256;verified_utc=[DateTime]::UtcNow.ToString('o')} |
+    if($currentBody){[IO.File]::WriteAllText((Join-Path $SessionRoot 'save-after.tsv'),$currentBody,[Text.UTF8Encoding]::new($false))}
+    @{real_manifest_unchanged=$realUnchanged;host_changes_allowed=$hostMayWrite;backup_manifests_verified=(!$saveVerificationError);
+      error=$saveVerificationError;manifest_sha256=$record.manifest_sha256;
+      after_manifest_sha256=if($currentBody){(Get-FileHash -LiteralPath (Join-Path $SessionRoot 'save-after.tsv')).Hash}else{''};
+      verified_utc=[DateTime]::UtcNow.ToString('o')} |
         ConvertTo-Json | Set-Content -LiteralPath (Join-Path $SessionRoot 'verification.json') -Encoding UTF8
-    if(!$saveVerificationError){Write-Output 'Real saves unchanged by SHA256 manifest; both backups verified. Sandboxes retained.'}
+    if(!$saveVerificationError){Write-Output "Save policy verified: real unchanged=$realUnchanged host changes allowed=$hostMayWrite; frozen backups verified."}
     if($Stage -eq 'Verify'){return}
 }
 if($Stage -eq 'Finish'){
@@ -176,19 +190,21 @@ if($Stage -eq 'Finish'){
         }elseif($targetExists){Remove-Item -LiteralPath $target -Force}
     }
     $files=@(Get-ChildItem -LiteralPath $evidenceDir -File | ForEach-Object {@{name=$_.Name;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}})
-    @{restored=$true;real_saves_unchanged=(!$saveVerificationError);save_verification_error=$saveVerificationError;
+    @{restored=$true;real_saves_unchanged=$realUnchanged;host_changes_allowed=$hostMayWrite;save_verification_error=$saveVerificationError;
       files=$files;finished_utc=[DateTime]::UtcNow.ToString('o')} |
         ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $SessionRoot 'finish.json') -Encoding UTF8
     if($saveVerificationError){throw "Installation restored, but save verification failed: $saveVerificationError"}
-    Write-Output 'Controlled test installation restored; real saves unchanged; local logs and sandboxes retained.'
+    Write-Output 'Controlled installation restored; save policy verified; host changes retained and never restored over.'
     return
 }
 if (!$Present) { throw 'Live presence required before Run' }
+if(($SessionKind -in @('HostStartup','L4Host') -and $LaunchRole -ne 'host') -or
+   ($SessionKind -in @('GuestStartup','L4Guest') -and $LaunchRole -ne 'guest')){throw 'Role does not match session kind'}
 if (!$ArmingReceipt) { throw 'Compiled 3663 C/D arming receipt required; guest startup remains denied' }
 if($Port -lt 1024 -or $Port -gt 65535){throw 'Invalid loopback port'}
 if(!(Get-Process steam -ErrorAction SilentlyContinue)){throw 'Open Steam first'}
 $arming=Get-Content -LiteralPath $ArmingReceipt -Raw | ConvertFrom-Json
-if($arming.version -ne 1 -or $arming.compiled_tier_mask -ne 15 -or $arming.executable_sha256 -ne $expected -or
+if($arming.version -ne 2 -or $arming.round -ne 5 -or $arming.compiled_tier_mask -ne 15 -or $arming.executable_sha256 -ne $expected -or
     !$arming.full_suite_passed -or !$arming.synthetic_v1_metadata_verified){throw 'Incomplete compiled arming receipt'}
 $repo=Split-Path $PSScriptRoot -Parent
 foreach($source in $arming.source_manifest){
@@ -196,31 +212,35 @@ foreach($source in $arming.source_manifest){
     if(!(Under $sourcePath (Full $repo)) -or (Get-FileHash -LiteralPath $sourcePath).Hash -ne $source.sha256){throw 'Source changed after armed validation'}
 }
 if((Get-FileHash -LiteralPath $arming.asi_path).Hash -ne $arming.asi_sha256){throw 'Armed ASI changed'}
-$watchdog=Join-Path $repo 'tools\port3663\r4_session_watchdog.ps1'
+$watchdog=Join-Path $repo 'tools\port3663\r5_session_watchdog.ps1'
 if((Get-FileHash -LiteralPath $watchdog).Hash -ne $arming.watchdog_sha256){throw 'Watchdog changed after validation'}
 $deploymentPath=Join-Path $SessionRoot 'deployment.json'
-if($LaunchRole -eq 'host'){
+if(!(Test-Path -LiteralPath $deploymentPath)){
     if(Test-Path -LiteralPath $deploymentPath){throw 'Session already deployed; do not reuse it'}
     if(Get-NetUDPEndpoint -LocalPort $Port -ErrorAction SilentlyContinue){throw 'Loopback test port is occupied'}
-    foreach($role in 'host','guest'){AssertManifest (Join-Path $SessionRoot ($role+'-sandbox')) $body}
+    AssertManifest $record.guest_sandbox $body
     $priorDir=Join-Path $SessionRoot 'installation-before'
     New-Item -ItemType Directory -Path $priorDir | Out-Null
     $iniDir=Join-Path $SessionRoot 'configuration'
     New-Item -ItemType Directory -Path $iniDir | Out-Null
     foreach($role in 'host','guest'){
         $hostMode=if($role -eq 'host'){1}else{0};$guestMode=1-$hostMode
+        $startupOnly=if($SessionKind -eq 'GuestStartup'){1}else{0};$enabled=1-$startupOnly
+        $transport=if($SessionKind -in @('L4Host','L4Guest')){'steam'}else{'udp'}
         $ini=@"
 [general]
-player_name=R4-$role
+player_name=R5-$role
 startup_delay_ms=0
 [net]
-enabled=1
-transport=udp
+enabled=$enabled
+transport=$transport
 role=$role
 peer_host=127.0.0.1
 peer_port=$Port
 host_loopback_only=1
 send_rate_hz=20
+[steam]
+peer_steamid=$PeerSteamId
 [overlay]
 enabled=0
 [sniffer]
@@ -228,8 +248,9 @@ enabled=0
 [coop]
 enabled=0
 [session2]
-enabled=1
+enabled=$enabled
 core_v1=1
+guest_startup_only=$startupOnly
 probe=0
 guest=$guestMode
 create_session=$hostMode
@@ -240,7 +261,7 @@ accept_tunnel=$hostMode
     $marker=Join-Path $GameDir 'cdmp.r4-test-lock'
     if(Test-Path -LiteralPath $marker){throw 'Another controlled session marker exists'}
     $markerSource=Join-Path $iniDir 'cdmp.r4-test-lock'
-    [IO.File]::WriteAllText($markerSource,"CDMP-R4-L3`n$SessionRoot`n",[Text.UTF8Encoding]::new($false))
+    [IO.File]::WriteAllText($markerSource,"CDMP-R5-$SessionKind`n$SessionRoot`n",[Text.UTF8Encoding]::new($false))
     $loader=Join-Path $repo 'third_party\ultimate-asi-loader\v9.7.4\dinput8.dll'
     $existingLoader=Join-Path $GameDir 'winmm.dll'
     if((Test-Path -LiteralPath $existingLoader) -and (Get-FileHash -LiteralPath $existingLoader).Hash -ne (Get-FileHash -LiteralPath $loader).Hash){throw 'Different installed loader; preserve it'}
@@ -266,7 +287,7 @@ accept_tunnel=$hostMode
     $deployment=Get-Content -LiteralPath $deploymentPath -Raw | ConvertFrom-Json
     if($deployment.port -ne $Port -or $deployment.arming_sha256 -ne (Get-FileHash -LiteralPath $ArmingReceipt).Hash){throw 'Deployment receipt mismatch'}
     foreach($entry in $deployment.files){if((Get-FileHash -LiteralPath (Join-Path $GameDir $entry.name)).Hash -ne $entry.installed_sha256){throw 'Deployed file changed'}}
-    AssertManifest (Join-Path $SessionRoot 'guest-sandbox') $body
+    AssertManifest $record.guest_sandbox $body
     $hostLogPath=Join-Path $GameDir 'cdmp.host.log'
     $stream=New-Object IO.FileStream($hostLogPath,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]'ReadWrite, Delete')
     try{$hostLog=(New-Object IO.StreamReader($stream)).ReadToEnd()}finally{$stream.Dispose()}
@@ -281,18 +302,31 @@ $psi.FileName=Join-Path $GameDir 'CrimsonDesert.exe';$psi.WorkingDirectory=$Game
 $psi.Arguments='PlatformServiceType=Steam';$psi.UseShellExecute=$false
 $psi.EnvironmentVariables['SteamAppId']='3321460';$psi.EnvironmentVariables['SteamGameId']='3321460'
 $psi.EnvironmentVariables['CDMP_ROLE']=$LaunchRole
-$psi.EnvironmentVariables['CDMP_SAVE_SANDBOX']=Join-Path $SessionRoot ($LaunchRole+'-sandbox')
-$psi.EnvironmentVariables['CDMP_SAVE_BACKUP']=Join-Path $SessionRoot ($LaunchRole+'-backup')
-$psi.EnvironmentVariables['CDMP_SAVE_MANIFEST']=$manifest
-$psi.EnvironmentVariables['CDMP_SAVE_MANIFEST_SHA256']=$record.manifest_sha256
+foreach($key in @('CDMP_SAVE_SANDBOX','CDMP_SAVE_BACKUP','CDMP_SAVE_MANIFEST','CDMP_SAVE_MANIFEST_SHA256','CDMP_HOST_REAL_SAVES','CDMP_SAVE_ISOLATION','CDMP_REAL_SAVE_ROOT','CDMP_GUEST_WITH_HOST')){$psi.EnvironmentVariables.Remove($key)}
+if($LaunchRole -eq 'host'){$psi.EnvironmentVariables['CDMP_HOST_REAL_SAVES']='1'}
+else{
+    $psi.EnvironmentVariables['CDMP_SAVE_SANDBOX']=$record.guest_sandbox
+    $psi.EnvironmentVariables['CDMP_SAVE_BACKUP']=Join-Path $SessionRoot 'guest-backup'
+    $psi.EnvironmentVariables['CDMP_SAVE_MANIFEST']=$manifest
+    $psi.EnvironmentVariables['CDMP_SAVE_MANIFEST_SHA256']=$record.manifest_sha256
+    $psi.EnvironmentVariables['CDMP_REAL_SAVE_ROOT']=$SourceRoot
+    $psi.EnvironmentVariables['CDMP_SAVE_ISOLATION']=$IsolationMethod
+    $psi.EnvironmentVariables['CDMP_GUEST_WITH_HOST']=if($SessionKind -eq 'L3'){'1'}else{'0'}
+    if($IsolationMethod -eq 'profile'){
+        $psi.EnvironmentVariables['USERPROFILE']=$record.guest_profile
+        $psi.EnvironmentVariables['LOCALAPPDATA']=Join-Path $record.guest_profile 'AppData\Local'
+    }
+}
+$maxAge=if($SessionKind -in @('HostStartup','GuestStartup')){600}else{840}
 $game=[Diagnostics.Process]::Start($psi)
 function Arm([Diagnostics.Process]$process,[string]$name){
     $birth=$process.StartTime.ToUniversalTime().ToFileTimeUtc().ToString()
     if($process.Path -ne $psi.FileName){throw 'Launched image identity mismatch'}
-    @{role=$LaunchRole;game_pid=$process.Id;game_start_filetime=$birth;game_image=$process.Path;launched_utc=[DateTime]::UtcNow.ToString('o')} |
+    @{role=$LaunchRole;game_pid=$process.Id;game_start_filetime=$birth;game_image=$process.Path;max_age_seconds=$maxAge;
+      isolation=if($LaunchRole -eq 'guest'){$IsolationMethod}else{'none'};session_kind=$SessionKind;launched_utc=[DateTime]::UtcNow.ToString('o')} |
         ConvertTo-Json | Set-Content -LiteralPath (Join-Path $SessionRoot ("launch-$name.json")) -Encoding UTF8
     $arguments=@('-NoProfile','-ExecutionPolicy','Bypass','-File',('"'+$watchdog+'"'),'-GamePid',$process.Id,
-        '-SessionRoot',('"'+$SessionRoot+'"'),'-Role',$LaunchRole,'-RecordName',$name,'-Present')
+        '-SessionRoot',('"'+$SessionRoot+'"'),'-Role',$LaunchRole,'-RecordName',$name,'-MaxAgeSeconds',$maxAge,'-Present')
     $controller=Start-Process powershell.exe -ArgumentList $arguments -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $SessionRoot ("watchdog-$name.stdout.txt")) -RedirectStandardError (Join-Path $SessionRoot ("watchdog-$name.stderr.txt"))
     $deadline=[DateTime]::UtcNow.AddSeconds(12);$watchPath=Join-Path $SessionRoot ("watchdog-$name.json")
     while([DateTime]::UtcNow -lt $deadline){

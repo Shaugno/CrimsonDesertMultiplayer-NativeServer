@@ -3,17 +3,22 @@
 #include <string_view>
 namespace cdmp::coop3663::v1 {
 inline uint8_t loading_flag(bool guest,uint8_t native){return guest?0:native;}
-inline bool reject_test_process(bool marker,bool in_game,bool exact_target,bool tagged_role,bool sandbox_environment){
-    return marker && in_game && (!exact_target || !tagged_role || !sandbox_environment);
+inline bool reject_test_process(bool marker,bool in_game,bool exact_target,bool host,bool guest,bool sandbox_environment,bool host_real_saves){
+    return marker && in_game && (!exact_target || host==guest ||
+        (guest?!sandbox_environment:(!host_real_saves || sandbox_environment)));
 }
-enum class Route { Refuse, Host, Guest };
+enum class Route { Refuse, Host, Guest, GuestStartup };
 struct RouteRequest {
     bool permissions{},sandbox{},network{},session{},host_role{},guest_role{},net_host{},native_guest{},create{},accept{};
     bool steam{},loopback{},local_peer{},coop{},diagnostic{};
+    bool guest_startup_only{};
 };
 inline Route route(const RouteRequest& r){
-    if(!r.permissions || !r.sandbox || !r.network || !r.session || r.coop || r.diagnostic ||
-        (r.host_role==r.guest_role) || (!r.steam && (!r.loopback || !r.local_peer)))return Route::Refuse;
+    if(!r.permissions || r.coop || r.diagnostic || (r.host_role==r.guest_role) ||
+        (r.guest_role && !r.sandbox) || (r.host_role && r.sandbox))return Route::Refuse;
+    if(r.guest_startup_only)return r.guest_role && !r.network && !r.session && !r.net_host &&
+        r.native_guest && !r.create && !r.accept?Route::GuestStartup:Route::Refuse;
+    if(!r.network || !r.session || (!r.steam && (!r.loopback || !r.local_peer)))return Route::Refuse;
     if(r.host_role && r.net_host && !r.native_guest && r.create && r.accept)return Route::Host;
     if(r.guest_role && !r.net_host && r.native_guest && !r.create && !r.accept)return Route::Guest;
     return Route::Refuse;

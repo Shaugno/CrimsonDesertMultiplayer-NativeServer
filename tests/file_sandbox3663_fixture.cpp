@@ -3,6 +3,7 @@
 #include "mod/session2/file_sandbox3663.h"
 #include <windows.h>
 #include <winternl.h>
+#include <shlobj.h>
 #include <array>
 #include <cstdio>
 #include <cstring>
@@ -46,10 +47,38 @@ DWORD WINAPI small_stack_mapping(void* value){
     DWORD result=view && view[0]=='o'?0:55;
     if(view)UnmapViewOfFile(view);CloseHandle(section);CloseHandle(file);return result;
 }
+int profile_fixture(const std::wstring& root,const std::wstring& backup,const std::wstring& sandbox,
+    const std::wstring& manifest,const std::string& hash,const wchar_t* steam_dll){
+    using namespace cdmp::session2::file_sandbox3663;
+    if(!install({root,backup,sandbox,manifest,hash,false,true}) || !verified() || file_hooks_active())return 60;
+    wchar_t local[MAX_PATH]{};
+    if(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,local)!=S_OK)return 61;
+    const auto resolved=std::wstring(local)+L"\\Pearl Abyss\\CD\\save";
+    if(read(resolved+L"\\source.save")!="original")return 62;
+    if(!write(resolved+L"\\profile-created.save","isolated"))return 63;
+    if(!MoveFileExW((resolved+L"\\profile-created.save").c_str(),(resolved+L"\\profile-renamed.save").c_str(),0))return 64;
+    if(!write(resolved+L"\\profile-delete.save","delete") || !DeleteFileW((resolved+L"\\profile-delete.save").c_str()))return 65;
+    const auto path=resolved+L"\\source.save";
+    HANDLE thread=CreateThread(nullptr,128u*1024,&small_stack_mapping,const_cast<wchar_t*>(path.c_str()),STACK_SIZE_PARAM_IS_A_RESERVATION,nullptr);
+    if(!thread || WaitForSingleObject(thread,10000)!=WAIT_OBJECT_0)return 66;
+    DWORD result=~0u;if(!GetExitCodeThread(thread,&result))return 67;CloseHandle(thread);if(result)return 68;
+    HANDLE page=CreateFileMappingW(INVALID_HANDLE_VALUE,nullptr,PAGE_READWRITE,0,4096,nullptr);
+    if(!page)return 69;void* view=MapViewOfFile(page,FILE_MAP_WRITE,0,0,4096);
+    if(!view)return 70;std::memset(view,0x51,4096);UnmapViewOfFile(view);CloseHandle(page);
+    HANDLE pipe=CreateFileW(L"\\\\.\\pipe\\",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,nullptr,OPEN_EXISTING,FILE_FLAG_BACKUP_SEMANTICS,nullptr);
+    if(pipe==INVALID_HANDLE_VALUE || GetFileType(pipe)!=FILE_TYPE_PIPE)return 71;CloseHandle(pipe);
+    if(file_hooks_active())return 72;
+    std::printf("R5 profile fixture PASS: native save-root create/write/rename/delete, IPC, 128 KB thread; %s\n",describe().c_str());
+    return steam_dll?steam_probe(steam_dll):0;
+}
 int fixture(int argc,wchar_t** argv) {
     if(argc!=7 && argc!=8)return 1;
     const std::wstring root=argv[1],backup=argv[2],sandbox=argv[3],manifest=argv[4],hash=argv[5],mode=argv[6];
     if(mode==L"steam-baseline")return argc==8?steam_probe(argv[7]):1;
+    if(mode==L"profile" || mode==L"steam-profile"){
+        std::string digest;for(wchar_t c:hash)digest+=static_cast<char>(c);
+        return profile_fixture(root,backup,sandbox,manifest,digest,mode==L"steam-profile" && argc==8?argv[7]:nullptr);
+    }
     HANDLE before=CreateFileW((root+L"\\source.save").c_str(),GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,0,nullptr);
     if(before==INVALID_HANDLE_VALUE)return 2;
@@ -71,7 +100,7 @@ int fixture(int argc,wchar_t** argv) {
     if(!ConnectNamedPipe(pipe,&connect) && GetLastError()!=ERROR_IO_PENDING)return 47;
     if(mode==L"premapped" && !MapViewOfFile(old_mapping,FILE_MAP_WRITE,0,0,0))return 30;
     std::string ascii;for(wchar_t c:hash)ascii+=static_cast<char>(c);
-    bool installed=cdmp::session2::file_sandbox3663::install({root,backup,sandbox,manifest,ascii});
+    bool installed=cdmp::session2::file_sandbox3663::install({root,backup,sandbox,manifest,ascii,mode==L"host-drift"});
     if(mode==L"refuse" || mode==L"premapped")return installed?4:0;
     if(!installed || !cdmp::session2::file_sandbox3663::verified()){
         std::printf("Install failed: %s\n",cdmp::session2::file_sandbox3663::failure_reason().c_str());return 5;}
@@ -128,9 +157,9 @@ int fixture(int argc,wchar_t** argv) {
     if(auto p=MapViewOfFile(old_mapping,FILE_MAP_WRITE,0,0,0)){UnmapViewOfFile(p);return 8;}
     CloseHandle(old_mapping);CloseHandle(before);
     const auto small_path=root+L"\\source.save";
-    HANDLE small=CreateThread(nullptr,128u*1024,&small_stack_mapping,const_cast<wchar_t*>(small_path.c_str()),STACK_SIZE_PARAM_IS_A_RESERVATION,nullptr);
-    if(!small || WaitForSingleObject(small,10000)!=WAIT_OBJECT_0)return 56;
-    DWORD small_result=~0u;if(!GetExitCodeThread(small,&small_result))return 57;CloseHandle(small);
+    HANDLE small_thread=CreateThread(nullptr,128u*1024,&small_stack_mapping,const_cast<wchar_t*>(small_path.c_str()),STACK_SIZE_PARAM_IS_A_RESERVATION,nullptr);
+    if(!small_thread || WaitForSingleObject(small_thread,10000)!=WAIT_OBJECT_0)return 56;
+    DWORD small_result=~0u;if(!GetExitCodeThread(small_thread,&small_result))return 57;CloseHandle(small_thread);
     if(small_result)return static_cast<int>(small_result);
     if(mode==L"teardown")return 0; // ordinary CRT exit must safely remove native hooks
     if(read(root+L"\\source.save")!="original")return 9;

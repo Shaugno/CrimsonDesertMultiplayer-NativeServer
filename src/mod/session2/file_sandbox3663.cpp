@@ -5,6 +5,7 @@
 #define NTDDI_VERSION 0x0A000002 // QueryVirtualMemoryInformation (Windows 10 RS1)
 #include <windows.h>
 #include <winternl.h>
+#include <shlobj.h>
 #include <psapi.h>
 #include <bcrypt.h>
 #include <safetyhook.hpp>
@@ -28,6 +29,7 @@ constexpr NTSTATUS denied=static_cast<NTSTATUS>(0xC0000022UL);
 constexpr ULONG dont_reparse=0x1000, open_by_id=0x2000;
 std::wstring real_root,sandbox_root;
 std::atomic<bool> active{},ready{};
+bool profile_method=false;
 std::atomic<uint64_t> redirected{},refused{};
 std::array<std::atomic<uint64_t>,1024> refusal_sites{};
 std::string failure="not installed";
@@ -498,6 +500,17 @@ bool verify_tree(const std::wstring& root,const std::vector<Entry>& entries,bool
     }
     return true;
 }
+bool collect_source_ids(const std::wstring& root){
+    Audit audit;if(!plain_tree(root))return false;
+    for(const auto& item:std::filesystem::recursive_directory_iterator(root))if(item.is_regular_file()){
+        HANDLE h=CreateFileW(item.path().c_str(),FILE_READ_ATTRIBUTES,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,
+            nullptr,OPEN_EXISTING,0,nullptr);
+        if(h==INVALID_HANDLE_VALUE)return false;
+        try{real_ids.insert(file_id(h));}catch(...){CloseHandle(h);throw;}
+        CloseHandle(h);
+    }
+    return true;
+}
 std::wstring env(const wchar_t* name) {
     std::vector<wchar_t> data(32768);DWORD n=GetEnvironmentVariableW(name,data.data(),static_cast<DWORD>(data.size()));
     return n && n<data.size()?std::wstring(data.data(),n):std::wstring();
@@ -520,6 +533,15 @@ bool install(const Setup& setup) {
         const auto backup_root=final_name(backup_handle);CloseHandle(backup_handle);
         if(backup_root.empty() || under(backup_root,real_root) || under(real_root,backup_root) ||
             under(backup_root,sandbox_root) || under(sandbox_root,backup_root))return false;
+        if(setup.profile_redirect){
+            std::vector<wchar_t> local(MAX_PATH);
+            if(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,local.data())!=S_OK)return false;
+            const auto resolved=std::wstring(local.data())+L"\\Pearl Abyss\\CD\\save";
+            HANDLE native=pin(resolved);if(native==INVALID_HANDLE_VALUE)return false;
+            bool equal=file_id(native)==file_id(pinned_sandbox) && final_name(native)==sandbox_root;
+            CloseHandle(native);if(!equal){failure="profile resolver does not name the verified sandbox";return false;}
+            profile_method=true;
+        }
         failure="manifest digest";if(sha256(setup.manifest)!=setup.manifest_sha256)return false;
         std::ifstream manifest(std::filesystem::path(setup.manifest),std::ios::binary);std::string line;
         failure="manifest parse";if(!std::getline(manifest,line))return false;
@@ -540,7 +562,8 @@ bool install(const Setup& setup) {
             entries.push_back(std::move(e));
         }
         failure="manifest tree hashes/identities";
-        if(entries.empty() || !verify_tree(real_root,entries,true,true) || !verify_tree(setup.backup,entries) || !verify_tree(sandbox_root,entries))return false;
+        if(entries.empty() || !(setup.source_may_change?collect_source_ids(real_root):verify_tree(real_root,entries,true,true)) ||
+            !verify_tree(setup.backup,entries) || !verify_tree(sandbox_root,entries))return false;
         const auto log_path=log::current_path();
         if(!log_path.empty()) {
             HANDLE file=CreateFileW(log_path.c_str(),FILE_READ_ATTRIBUTES,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,
@@ -575,13 +598,17 @@ bool install(const Setup& setup) {
             }
             cursor=end;
         }
-        failure="hook setup";if(!hooks())return false;
+        failure="hook setup";if(!setup.profile_redirect && !hooks())return false;
         // Leave audit mode before exercising the actual redirection. Internal
         // verification may read the real tree but never writes through bypass.
     }catch(...){return false;}
     try {
         failure="redirected startup self-check";
-        const auto path=real_root+L"\\.cdmp-r4-selfcheck-"+std::to_wstring(GetCurrentProcessId());
+        const auto leaf=L"\\.cdmp-r5-selfcheck-"+std::to_wstring(GetCurrentProcessId());
+        const auto source_path=real_root+leaf;
+        const auto path=(setup.profile_redirect?sandbox_root:real_root)+leaf;
+        auto source_absent=[&]{Audit audit;return GetFileAttributesW(source_path.c_str())==INVALID_FILE_ATTRIBUTES && GetLastError()==ERROR_FILE_NOT_FOUND;};
+        if(!source_absent())return false;
         HANDLE file=CreateFileW(path.c_str(),GENERIC_READ|GENERIC_WRITE,0,nullptr,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,nullptr);
         if(file==INVALID_HANDLE_VALUE)return false;
         const std::array<char,8> expected{'C','D','M','P','R','4','O','K'};std::array<char,8> actual{};DWORD n=0;
@@ -590,22 +617,36 @@ bool install(const Setup& setup) {
         ok=ok && ReadFile(file,actual.data(),static_cast<DWORD>(actual.size()),&n,nullptr) && actual==expected;
         auto where=final_name(file);CloseHandle(file);
         ok=ok && under(where,sandbox_root) && DeleteFileW(path.c_str());
-        if(!ok || !verify_tree(real_root,entries,true))return false;
+        if(!ok || !source_absent() || (!setup.source_may_change && !verify_tree(real_root,entries,true)))return false;
         failure="verified";ready.store(true,std::memory_order_release);
-        log::info("3663 file sandbox verified: path '{}' (native file layer, source handles denied)",std::filesystem::path(sandbox_root).string());
+        log::info("3663 guest isolation verified: path '{}' method {} file hooks {}",std::filesystem::path(sandbox_root).string(),
+            setup.profile_redirect?"USERPROFILE native save-path override":"NT default-deny file layer",active.load());
+        if(setup.source_may_change)log::info("3663 guest isolation: frozen backup/sandbox verified; concurrent host real-save changes allowed");
         return true;
     }catch(...){return false;}
 }
 bool install_from_environment() {
-    const auto local=env(L"LOCALAPPDATA"),sandbox=env(L"CDMP_SAVE_SANDBOX"),backup=env(L"CDMP_SAVE_BACKUP"),
+    const auto sandbox=env(L"CDMP_SAVE_SANDBOX"),backup=env(L"CDMP_SAVE_BACKUP"),
         manifest=env(L"CDMP_SAVE_MANIFEST"),hash=env(L"CDMP_SAVE_MANIFEST_SHA256");
+    // Match the actual target resolver (SHGetFolderPathW, CSIDL_LOCAL_APPDATA),
+    // not an overridable environment spelling that the game does not use.
+    std::vector<wchar_t> native_local(MAX_PATH);
+    if(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,native_local.data())!=S_OK)return false;
+    const auto method=env(L"CDMP_SAVE_ISOLATION");
+    if(method!=L"profile" && method!=L"nt"){failure="explicit profile/nt isolation method required";return false;}
+    const bool profile=method==L"profile";
+    const std::wstring local(native_local.data());
     if(local.empty() || sandbox.empty() || backup.empty() || manifest.empty() || hash.size()!=64)return false;
     std::string ascii;for(wchar_t c:hash){if(!((c>=L'0'&&c<=L'9')||(c>=L'A'&&c<=L'F')))return false;ascii+=static_cast<char>(c);}
-    return install({local+L"\\Pearl Abyss\\CD\\save",backup,sandbox,manifest,ascii});
+    const auto source=profile?env(L"CDMP_REAL_SAVE_ROOT"):local+L"\\Pearl Abyss\\CD\\save";
+    if(source.empty())return false;
+    return install({source,backup,sandbox,manifest,ascii,env(L"CDMP_GUEST_WITH_HOST")==L"1",profile});
 }
 bool verified(){return ready.load(std::memory_order_acquire);}
+bool file_hooks_active(){return active.load(std::memory_order_acquire);}
 std::string describe(){
-    std::string result="verified="+std::to_string(verified())+" redirected="+std::to_string(redirected.load())+" refused="+std::to_string(refused.load());
+    std::string result="verified="+std::to_string(verified())+" method="+(profile_method?"profile":"nt")+" file_hooks="+std::to_string(file_hooks_active())+
+        " redirected="+std::to_string(redirected.load())+" refused="+std::to_string(refused.load());
     for(size_t i=0;i<refusal_sites.size();++i)if(const auto count=refusal_sites[i].load())result+=" line"+std::to_string(i)+"="+std::to_string(count);
     return result;
 }

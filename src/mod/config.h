@@ -20,7 +20,8 @@ struct Config {
     bool r3_join_probe = false; // passive candidate entry/exit logs
     bool r4_core_probe = false; // passive identity/join callsite reads; networking forbidden
     bool r3_tunnel_probe = false; // explicit loopback-only B cryptogram echo
-    bool r4_core_v1 = false; // explicit C/D v1 route, requires compiled gates and verified sandbox
+    bool r4_core_v1 = false; // explicit C/D v1 route; only guest requires verified isolation
+    bool r5_guest_startup_only = false; // isolated title check, no native guest/tunnel installers
 
     std::string peer_host = "127.0.0.1";
     uint16_t peer_port = 37015;
