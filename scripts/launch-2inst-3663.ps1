@@ -12,7 +12,8 @@ param(
     [UInt64]$PeerSteamId=0,
     [int]$Port=39766,
     [switch]$Present,
-    [switch]$Fixture
+    [switch]$Fixture,
+    [switch]$DesktopLaunchPlan
 )
 $ErrorActionPreference='Stop'
 Import-Module Microsoft.PowerShell.Utility
@@ -66,10 +67,19 @@ if ($Fixture) {
         $hostReceipt=Join-Path $SessionRoot 'launch-host.json'
         if (!(Test-Path -LiteralPath $hostReceipt)) { throw 'Launch and load the controlled host first' }
         $hostRecord=Get-Content -LiteralPath $hostReceipt -Raw | ConvertFrom-Json
-        if ($running.Count -ne 1 -or $running[0].ProcessId -ne $hostRecord.game_pid) { throw 'Unexpected game process inventory before guest launch' }
-        $hostProcess=Get-Process -Id $hostRecord.game_pid
-        if ($hostProcess.StartTime.ToUniversalTime().ToFileTimeUtc().ToString() -ne $hostRecord.game_start_filetime -or
-            $hostProcess.Path -ne $hostRecord.game_image) { throw 'Host process identity changed' }
+        if($DesktopLaunchPlan){
+            $hostWatch=Get-Content -LiteralPath (Join-Path $SessionRoot 'watchdog-host.json') -Raw | ConvertFrom-Json
+            if($hostWatch.backend -ne 'desktop-app' -or $hostWatch.state -ne 'watching' -or
+                $hostWatch.game_pid -ne $hostRecord.game_pid -or $hostWatch.game_start_filetime -ne $hostRecord.game_start_filetime){throw 'Desktop host controller identity/state mismatch'}
+            # The desktop runner rechecks the exact live inventory and pinned
+            # host itself before spawning. Do not substitute this command
+            # context's window/process view for the visible desktop's view.
+        }else{
+            if ($running.Count -ne 1 -or $running[0].ProcessId -ne $hostRecord.game_pid) { throw 'Unexpected game process inventory before guest launch' }
+            $hostProcess=Get-Process -Id $hostRecord.game_pid
+            if ($hostProcess.StartTime.ToUniversalTime().ToFileTimeUtc().ToString() -ne $hostRecord.game_start_filetime -or
+                $hostProcess.Path -ne $hostRecord.game_image) { throw 'Host process identity changed' }
+        }
     } elseif ($running.Count) { throw 'Close both games first' }
     $expected='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
     if ((Get-FileHash -LiteralPath (Join-Path $GameDir 'CrimsonDesert.exe')).Hash -ne $expected) { throw 'Executable drift: rematch before launch' }
@@ -152,6 +162,14 @@ if ($Stage -in @('Verify','Finish')) {
     if($Stage -eq 'Verify'){return}
 }
 if($Stage -eq 'Finish'){
+    # Desktop-launched games have a controller on the visible desktop. Never
+    # infer that they are gone solely from another launch context's inventory.
+    foreach($launch in @(Get-ChildItem -LiteralPath $SessionRoot -Filter 'launch-*.json' -File)){
+        $roleName=$launch.BaseName.Substring(7);$watchPath=Join-Path $SessionRoot ("watchdog-$roleName.json")
+        if(!(Test-Path -LiteralPath $watchPath)){throw 'Missing controller exit receipt; do not clean a possibly live game'}
+        $watchRecord=Get-Content -LiteralPath $watchPath -Raw | ConvertFrom-Json
+        if($watchRecord.state -notin @('exited','deadline_stopped')){throw 'Controller still watching; quit the controlled game first'}
+    }
     if(Test-Path -LiteralPath (Join-Path $SessionRoot 'finish.json')){throw 'Session already finished; do not reuse cleanup'}
     $deploymentPath=Join-Path $SessionRoot 'deployment.json'
     if(!(Test-Path -LiteralPath $deploymentPath)){throw 'No controlled deployment receipt to restore'}
@@ -207,6 +225,10 @@ if(!(Get-Process steam -ErrorAction SilentlyContinue)){throw 'Open Steam first'}
 $arming=Get-Content -LiteralPath $ArmingReceipt -Raw | ConvertFrom-Json
 if($arming.version -ne 2 -or $arming.round -ne 5 -or $arming.compiled_tier_mask -ne 15 -or $arming.executable_sha256 -ne $expected -or
     !$arming.full_suite_passed -or !$arming.synthetic_v1_metadata_verified){throw 'Incomplete compiled arming receipt'}
+if($DesktopLaunchPlan){
+    if($IsolationMethod -ne 'profile' -or !$arming.desktop_runner_path -or
+        (Get-FileHash -LiteralPath $arming.desktop_runner_path).Hash -ne $arming.desktop_runner_sha256){throw 'Validated desktop runner required'}
+}
 $repo=Split-Path $PSScriptRoot -Parent
 foreach($source in $arming.source_manifest){
     $sourcePath=Full (Join-Path $repo $source.path)
@@ -319,6 +341,29 @@ else{
     }
 }
 $maxAge=if($SessionKind -in @('HostStartup','GuestStartup')){600}else{840}
+if($DesktopLaunchPlan){
+    # Export only the explicit role/isolation values, never the inherited
+    # environment (which may contain credentials). The desktop app starts the
+    # exact game directly; it never invokes a shell or a terminal.
+    $export=@{}
+    $keys=@('SteamAppId','SteamGameId','CDMP_ROLE')
+    if($LaunchRole -eq 'host'){$keys+='CDMP_HOST_REAL_SAVES'}else{
+        $keys+=@('CDMP_SAVE_SANDBOX','CDMP_SAVE_BACKUP','CDMP_SAVE_MANIFEST','CDMP_SAVE_MANIFEST_SHA256',
+          'CDMP_REAL_SAVE_ROOT','CDMP_SAVE_ISOLATION','CDMP_GUEST_WITH_HOST','USERPROFILE','LOCALAPPDATA')
+    }
+    foreach($key in $keys){$export[$key]=$psi.EnvironmentVariables[$key]}
+    $runner=Join-Path $SessionRoot ("r5_${LaunchRole}_desktop.exe")
+    $planPath=Join-Path $SessionRoot ("r5_${LaunchRole}_desktop.plan.json")
+    if((Test-Path -LiteralPath $runner) -or (Test-Path -LiteralPath $planPath)){throw 'Desktop role plan already exists'}
+    Copy-Item -LiteralPath $arming.desktop_runner_path -Destination $runner
+    if((Get-FileHash -LiteralPath $runner).Hash -ne $arming.desktop_runner_sha256){throw 'Desktop runner copy changed'}
+    $plan=@{version=1;present=$true;role=$LaunchRole;session_root=$SessionRoot;repo_root=$repo;game_image=$psi.FileName;
+      arming_receipt=(Full $ArmingReceipt);arming_sha256=(Get-FileHash -LiteralPath $ArmingReceipt).Hash;
+      session_kind=$SessionKind;max_age_seconds=$maxAge;environment=$export;planned_utc=[DateTime]::UtcNow.ToString('o')}
+    [IO.File]::WriteAllText($planPath,($plan | ConvertTo-Json -Depth 5),[Text.UTF8Encoding]::new($false))
+    Write-Output "Desktop plan prepared; no game launched. Open the validated desktop app: $runner"
+    return
+}
 $game=[Diagnostics.Process]::Start($psi)
 function Arm([Diagnostics.Process]$process,[string]$name){
     $birth=$process.StartTime.ToUniversalTime().ToFileTimeUtc().ToString()

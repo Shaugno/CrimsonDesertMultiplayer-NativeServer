@@ -28,6 +28,9 @@ receipt=dict(version=2,round=5,compiled_tier_mask=15,executable_sha256='8BE67178
     full_suite_passed=True,synthetic_v1_metadata_verified=True,isolation_method='profile',host_isolation='none',
     asi_path=str(asi),asi_sha256=sha(asi),pdb_path=str(binary/'cdmp.pdb'),
     watchdog_sha256=sha(root/'tools/port3663/r5_session_watchdog.ps1'),source_manifest=manifest)
+runner=binary/'r5_desktop_runner.exe'
+if runner.exists():
+    receipt.update(desktop_runner_path=str(runner),desktop_runner_sha256=sha(runner))
 write(root/'build/r5/arming-receipt.json',receipt)
 extra=root/'build/r5/step1-steam-profile.txt';et=extra.read_text(encoding='utf-8-sig')
 assert et.count('SteamAPI_InitFlat result 0')>=3 and 'method=profile file_hooks=0' in et

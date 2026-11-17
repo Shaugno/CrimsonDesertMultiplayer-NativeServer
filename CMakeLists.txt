@@ -322,6 +322,22 @@ cdmp_strict(cdmp_tests_r5_guard_policy)
 add_test(NAME r5_guard_policy COMMAND cdmp_tests_r5_guard_policy)
 add_test(NAME r5_window_report COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
          -File "${CMAKE_SOURCE_DIR}/tools/port3663/r5_window_report.ps1" -SelfTest)
+set(R5_CSC "$ENV{WINDIR}/Microsoft.NET/Framework64/v4.0.30319/csc.exe")
+if(NOT EXISTS "${R5_CSC}")
+    message(FATAL_ERROR "R5 desktop runner needs the installed .NET Framework x64 C# compiler")
+endif()
+file(TO_NATIVE_PATH "${CMAKE_SOURCE_DIR}/tools/port3663/R5DesktopRunner.cs" R5_DESKTOP_SOURCE)
+file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/bin" R5_DESKTOP_BIN)
+set(R5_DESKTOP_EXE "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/r5_desktop_runner.exe")
+add_custom_command(OUTPUT "${R5_DESKTOP_EXE}"
+    COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_BINARY_DIR}/bin/$<CONFIG>"
+    COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}/scripts/build-r5-desktop.ps1" -Output "${R5_DESKTOP_EXE}"
+    DEPENDS "${CMAKE_SOURCE_DIR}/tools/port3663/R5DesktopRunner.cs" "${CMAKE_SOURCE_DIR}/scripts/build-r5-desktop.ps1"
+            "${CMAKE_SOURCE_DIR}/tools/port3663/r4_capture.ps1" "${CMAKE_SOURCE_DIR}/tools/port3663/r5_window_report.ps1" VERBATIM)
+add_custom_target(r5_desktop_runner ALL DEPENDS "${R5_DESKTOP_EXE}")
+add_test(NAME r5_desktop_runner COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+         -File "${CMAKE_SOURCE_DIR}/tests/r5_desktop_runner_tests.ps1" -Runner "${R5_DESKTOP_EXE}")
+set_tests_properties(r5_desktop_runner PROPERTIES TIMEOUT 30)
 add_executable(cdmp_tests_native_call_scope tests/native_call_scope_tests.cpp)
 cdmp_strict(cdmp_tests_native_call_scope)
 target_include_directories(cdmp_tests_native_call_scope PRIVATE src)
