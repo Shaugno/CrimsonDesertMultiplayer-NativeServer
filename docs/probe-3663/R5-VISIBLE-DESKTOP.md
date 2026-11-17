@@ -1,3 +1,16 @@
+# Current desktop result (2026-11-17)
+
+The desktop runner established both actual game windows, confirmed by the
+user and arranged left/right before guest Play. The guest character-login
+request was then refused by identity admission; L3 is still unpassed.
+Startup usage is 4/5 and join usage 3/3 in the preserved ledger. See the
+current top section of `R5-STEP3.md` and `desktop-retry-results.json` for all
+three later experiments, manual app-access handoff, empty capture and cleanup.
+The budget estimate at the end of the historical implementation note below
+preceded these experiments and is no longer current.
+
+---
+
 # R5 visible desktop launch correction (2026-11-17)
 
 The first visible-pair test was launched by the command tool. Its own

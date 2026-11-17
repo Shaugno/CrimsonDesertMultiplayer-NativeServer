@@ -1,0 +1,599 @@
+{
+  "round": 5,
+  "step": 3,
+  "accepted": false,
+  "source_checkpoint": "de2bd84",
+  "supersedes": "Current status in R5-STEP3.md and prior step3-results.json; original historical evidence remains.",
+  "budgets": {
+    "startup_used": 4,
+    "startup_limit": 5,
+    "join_used": 3,
+    "join_limit": 3,
+    "note": "Preserved local ledger including startup-only R5-L3-2 and conservatively counted blocked guest-app experiment R5-L3-2b; no resets or erased attempts."
+  },
+  "attempts": [
+    {
+      "id": "R5-L3-2",
+      "kind": "prejoin",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117",
+      "outcome": "startup_only_visible_host",
+      "started_utc": "2026-11-17T12:33:25.051887+00:00",
+      "note": "Desktop host visible in user desktop inventory and screenshot; user confirms loaded/in-world and normal Quit to Desktop. No guest launched: operator delayed host-load instruction during attempted frame arrangement and exceeded the six-minute guest-start reserve. No runtime fault observed. Counted as startup, not join. Cleanup/backup/save policy verified. Procedure fix: full host-load instruction before launch, defer arrangement until both windows exist.",
+      "finished_utc": "2026-11-17T13:00:51.544429+00:00",
+      "roles": {
+        "host": {
+          "launch": {
+            "role": "host",
+            "game_pid": 34196,
+            "game_start_filetime": "134393924149686152",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "none",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T12:33:34.9783761Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 34196,
+            "game_start_filetime": "134393924149686152",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 41828,
+            "controller_start_filetime": "134393924141932189",
+            "deadline_utc": "2026-11-17T12:47:34.9686152Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 0,
+            "ended_utc": "2026-11-17T12:46:33.0819211Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\evidence\\cdmp.host.log",
+            "sha256": "03D298833286FE1908366BB3F1BE0C6E80D443A4223B3C441C8E02E3D19D928C"
+          },
+          "native_fault_logged": false,
+          "build_banner": "[07:33:35.218] INF [T40368] === Crimson Desert Multiplayer 0.0.1 (build 2709B8DE, protocol 8) ==="
+        }
+      },
+      "cleanup": {
+        "restored": true,
+        "files": [
+          {
+            "sha256": "4789B8BD7D9FA67100D5596F8B68600C20EFE93A859BDE7CF038047F8F67E1DA",
+            "name": "cdmp.guest.log"
+          },
+          {
+            "sha256": "03D298833286FE1908366BB3F1BE0C6E80D443A4223B3C441C8E02E3D19D928C",
+            "name": "cdmp.host.log"
+          }
+        ],
+        "real_saves_unchanged": true,
+        "finished_utc": "2026-11-17T13:00:51.4334552Z",
+        "save_verification_error": "",
+        "host_changes_allowed": true
+      },
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\launch-host.json",
+          "sha256": "F7C8A49D4E81F7BC2FDFD85425534BB766207627AF68702DF52A78257865044B"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\watchdog-host.json",
+          "sha256": "B5D84C41B78DEBBE1DB2D0D76AE071B2E36885C0522295D2C706C4E20B3DC1B1"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\evidence\\cdmp.host.log",
+          "sha256": "03D298833286FE1908366BB3F1BE0C6E80D443A4223B3C441C8E02E3D19D928C"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\session.json",
+          "sha256": "B8246B17AA08D237279639EA02FA440D859A6651372ECD4679B76AFE4DF4F277"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\deployment.json",
+          "sha256": "AABC3E8123AEFAB9B745DE4276193D501114C4E1ED37178B8619BC01E8200BEE"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\save-manifest.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\save-after.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\verification.json",
+          "sha256": "E765C01D71B01864A15174D889E7C4B5BBB801B9A793C53633FE90487FF808BA"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\finish.json",
+          "sha256": "B47D6AC70BAF9F39A57B37D7426DB604EE26B68A02E596BB5B231751BA79B4E7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117\\evidence\\arming-receipt.json",
+          "sha256": "335CB0EE3CC2574EEFB3C187B6C93F4C4237E395E3DCAB3EE7E04CB1D03AB227"
+        }
+      ],
+      "captures": []
+    },
+    {
+      "id": "R5-L3-2b",
+      "kind": "join",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117",
+      "outcome": "blocked_guest_app_access",
+      "started_utc": "2026-11-17T13:01:58.944154+00:00",
+      "note": "Visible host loaded and exited normally code 0 at 13:11:34Z; user confirms closed. Guest was never launched: Computer Use denied r5_guest_desktop application access and user saw no approval prompt. Conservatively retained as join experiment 2 because promotion preceded blocked launch. Finish verified frozen backups and restored installation; host autosave changes retained.",
+      "promoted_utc": "2026-11-17T13:04:27.691801+00:00",
+      "finished_utc": "2026-11-17T13:16:01.313349+00:00",
+      "roles": {
+        "host": {
+          "launch": {
+            "role": "host",
+            "game_pid": 46412,
+            "game_start_filetime": "134393941207638425",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "none",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T13:02:00.7682409Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 46412,
+            "game_start_filetime": "134393941207638425",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 5352,
+            "controller_start_filetime": "134393941200718066",
+            "deadline_utc": "2026-11-17T13:16:00.7638425Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 0,
+            "ended_utc": "2026-11-17T13:11:34.5537529Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\evidence\\cdmp.host.log",
+            "sha256": "969EE04525DCD7F479C558A78DC5D29050D797FFF8826D14605B58DAF48C88E9"
+          },
+          "native_fault_logged": false,
+          "build_banner": "[08:02:00.838] INF [T42828] === Crimson Desert Multiplayer 0.0.1 (build 2709B8DE, protocol 8) ==="
+        }
+      },
+      "cleanup": {
+        "restored": true,
+        "files": [
+          {
+            "sha256": "4789B8BD7D9FA67100D5596F8B68600C20EFE93A859BDE7CF038047F8F67E1DA",
+            "name": "cdmp.guest.log"
+          },
+          {
+            "sha256": "969EE04525DCD7F479C558A78DC5D29050D797FFF8826D14605B58DAF48C88E9",
+            "name": "cdmp.host.log"
+          }
+        ],
+        "real_saves_unchanged": false,
+        "finished_utc": "2026-11-17T13:15:48.3964060Z",
+        "save_verification_error": "",
+        "host_changes_allowed": true
+      },
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\launch-host.json",
+          "sha256": "A08B8838CEC4E8D8B5B3367D399E7AB63DCFA3148F4DC79534F3F8E186E82138"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\watchdog-host.json",
+          "sha256": "F8676BFC905CB16455EB070FE82A27DC8E6C2D490AC269FFECF31B12914D1375"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\evidence\\cdmp.host.log",
+          "sha256": "969EE04525DCD7F479C558A78DC5D29050D797FFF8826D14605B58DAF48C88E9"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\session.json",
+          "sha256": "691F9152186C23BBF0CCB5B3CAAA7A3C008ACD46804E7EDA5B9CBFDE1A1ED697"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\deployment.json",
+          "sha256": "D009E8AF165D319462574C36BECE9DEAD44BF0ADB27B0DC2AECBCBD8D5E07AD0"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\save-manifest.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\save-after.tsv",
+          "sha256": "8A7C7A8E8FCDF3AF3846435A5601C4F5D5FCDB5ED8F212974734A7D55B50BE65"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\verification.json",
+          "sha256": "399B2E40DD6B5EF8168B15AE909F5E373F6467329236FE5F00727B8EA56533D7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\finish.json",
+          "sha256": "BDC0D0E399C191BC67E4177C48034328FCA3CCC092C6ABB1AABBFD83319CEF19"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\evidence\\arming-receipt.json",
+          "sha256": "335CB0EE3CC2574EEFB3C187B6C93F4C4237E395E3DCAB3EE7E04CB1D03AB227"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\save-before-guest.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117\\verification-before-guest.json",
+          "sha256": "2F0768528027ECD982E186AF3F2D953796BF5B042AFF815A24B6934A3425F315"
+        }
+      ],
+      "captures": []
+    },
+    {
+      "id": "R5-L3-3",
+      "kind": "join",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117",
+      "outcome": "native_request_refused",
+      "started_utc": "2026-11-17T13:22:50.677610+00:00",
+      "note": "User confirms both visible side by side before guest selection; actual host/guest HWNDs/PIDs and left/right geometry frozen. Guest native cryptogram/login and 10-entry title refresh passed. After guest Play, native sent count increased 2 to 3; host identity/host refused count increased to 1, no join insertion/commit. No native fault logged. Guest normal exit 0; local 10-second capture rejected (zero frames). Host exit and final cleanup recorded by pinned controller/Finish. Post-session host reload, mutual movement, removal and reconnect remain unverified. No L4 prerequisite pass.",
+      "promoted_utc": "2026-11-17T13:25:04.720423+00:00",
+      "finished_utc": "2026-11-17T13:37:27.325463+00:00",
+      "roles": {
+        "host": {
+          "launch": {
+            "role": "host",
+            "game_pid": 47812,
+            "game_start_filetime": "134393953896950975",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "none",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T13:23:09.7036987Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "deadline_stopped",
+            "game_pid": 47812,
+            "game_start_filetime": "134393953896950975",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 16044,
+            "controller_start_filetime": "134393953890006313",
+            "deadline_utc": "2026-11-17T13:37:09.6950975Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 13923,
+            "ended_utc": "2026-11-17T13:37:10.4571491Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\evidence\\cdmp.host.log",
+            "sha256": "BA0792C77DF272F5746BC1839CF984BDF8C96CCE9B7FB1225D215E0B9CB5A9AB"
+          },
+          "native_fault_logged": false,
+          "build_banner": "[08:23:09.776] INF [T33172] === Crimson Desert Multiplayer 0.0.1 (build 2709B8DE, protocol 8) ==="
+        },
+        "guest": {
+          "launch": {
+            "role": "guest",
+            "game_pid": 25516,
+            "game_start_filetime": "134393955415232492",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "profile",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T13:25:41.5401715Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 25516,
+            "game_start_filetime": "134393955415232492",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 46744,
+            "controller_start_filetime": "134393955402000607",
+            "deadline_utc": "2026-11-17T13:37:09.6950975Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 0,
+            "ended_utc": "2026-11-17T13:36:12.0138212Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\evidence\\cdmp.guest.log",
+            "sha256": "7538009B1ED24C6D7D3B4A0BFEDC792BD4BE7EE44351136DEFC60DB00A020BCC"
+          },
+          "native_fault_logged": false,
+          "build_banner": "[08:25:41.650] INF [T45792] === Crimson Desert Multiplayer 0.0.1 (build 2709B8DE, protocol 8) ==="
+        }
+      },
+      "cleanup": {
+        "restored": true,
+        "files": [
+          {
+            "sha256": "7538009B1ED24C6D7D3B4A0BFEDC792BD4BE7EE44351136DEFC60DB00A020BCC",
+            "name": "cdmp.guest.log"
+          },
+          {
+            "sha256": "BA0792C77DF272F5746BC1839CF984BDF8C96CCE9B7FB1225D215E0B9CB5A9AB",
+            "name": "cdmp.host.log"
+          }
+        ],
+        "real_saves_unchanged": false,
+        "finished_utc": "2026-11-17T13:37:27.2384504Z",
+        "save_verification_error": "",
+        "host_changes_allowed": true
+      },
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\launch-host.json",
+          "sha256": "250B343BFC099FC10225975C943B9AA311EFB986605B1959DE7E0733110F239A"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\watchdog-host.json",
+          "sha256": "010864008867D606110D43988C17AFE6A6F45481FF2B8CF94C71EE47AC897FFC"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\evidence\\cdmp.host.log",
+          "sha256": "BA0792C77DF272F5746BC1839CF984BDF8C96CCE9B7FB1225D215E0B9CB5A9AB"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\launch-guest.json",
+          "sha256": "4AC147885A0DECC0735AC2C86B2B5ABC91FAD93A473ED5CD631C19B59D5C27AA"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\watchdog-guest.json",
+          "sha256": "1F03663A9E428A33EEF3EFC33B393C94772A5F89406B7FFD2C087DC9AF5AF650"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\evidence\\cdmp.guest.log",
+          "sha256": "7538009B1ED24C6D7D3B4A0BFEDC792BD4BE7EE44351136DEFC60DB00A020BCC"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\session.json",
+          "sha256": "7787BA78D758313CC3AA039143FCCB48A5E0D2132E8AF0348A144F35845402E3"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\deployment.json",
+          "sha256": "BD18D6335DE779217DA5E45E159922E8BABF1A8779C588A3ACC53BE846D73052"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\save-manifest.tsv",
+          "sha256": "8A7C7A8E8FCDF3AF3846435A5601C4F5D5FCDB5ED8F212974734A7D55B50BE65"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\save-after.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\verification.json",
+          "sha256": "215CDF3331598C3D82DF9BDB5738A3F88CFD58E8B0C8B07D99932D847FA5D215"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\finish.json",
+          "sha256": "4416925144B1455703AD72D4B9DDF04A4DF884208B05DA70CA5586CB7AE97BDE"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\evidence\\arming-receipt.json",
+          "sha256": "335CB0EE3CC2574EEFB3C187B6C93F4C4237E395E3DCAB3EE7E04CB1D03AB227"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\save-before-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\save-after-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\verification-before-guest.json",
+          "sha256": "5FD506A831E0BA2805D8B157B7D22F1EBFDC8F587E50D2789381947507BDF3D7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\verification-after-guest.json",
+          "sha256": "328F3D42EC4F21B0FC56BAE0F7E4E0E64CE06440D27AF6B28A349318376BEC4F"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\window-host-before-selection.json",
+          "sha256": "91A545FB450CA1589EDD5C560F9A109308D42502C284CCF0233FE87DE7812282"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\window-guest-before-selection.json",
+          "sha256": "B75B57912F00FDAF98973000350DEE90508C31AB2553983F0F2C58F16CAF9BD6"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\window-host-arranged.json",
+          "sha256": "C4F08F2B6DE0E8BED961C55A4E86A8CDEA7D763AEE4C404C10D38534A8D3AAC4"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\window-guest-arranged.json",
+          "sha256": "48C9B011EBC2D6550848F766A909B3ABF7FB77A0055E19185D1BD21904E4E8B7"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\user-window-confirmation.txt",
+          "sha256": "50E31B9817F90D0EA27F018A60AB23A70468B2E9BAF30D4AC6669BE7CFE59447"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\r5_capture_pair.error.json",
+          "sha256": "F04CF42B5FAEA363A13055F14E4F37AA640E095F48DD2A71343500D5BB7FEDF4"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\l3-desktop-capture-20261117-133536.avi.json",
+          "sha256": "2E868977E59BF06635205DE1D7A28116A8F77E806BAF87057E92B690F6A30E09"
+        }
+      ],
+      "captures": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\l3-desktop-capture-20261117-133536.avi",
+          "sha256": "C674E1892CDD9CC75B447BED09F9197D1E85F4BE1E6E7ABFDDD4A575A76B8DF5",
+          "bytes": 232,
+          "frames": 0,
+          "duration_seconds": 10,
+          "fps": 2,
+          "foreground_test_pids": [],
+          "both_test_windows_seen": false,
+          "scope": "local-only foreground controlled games; no UI input or memory access",
+          "captured_utc": "2026-11-17T13:35:47.2903053Z",
+          "accepted": false,
+          "interpretation": "Rejected empty capture; not visual/gameplay evidence."
+        }
+      ],
+      "acceptance": {
+        "passed": false,
+        "both_controlled_windows_user_confirmed": true,
+        "left_right_before_guest_selection": true,
+        "host_hwnd": 5117678,
+        "guest_hwnd": 4526474,
+        "host_bounds": [
+          0,
+          0,
+          1296,
+          839
+        ],
+        "guest_bounds": [
+          1281,
+          0,
+          2577,
+          839
+        ],
+        "geometry_scope": "Adjacent 1280-client windows; outer borders overlap 15 px and guest outer edge extends 17 px past 2560. Both usable views confirmed by user; no claim of pixel-disjoint borders.",
+        "native_login_and_title_refresh": true,
+        "title_entries": 10,
+        "character_request_received": true,
+        "refused_before_insertion": true,
+        "identity_refusals": 1,
+        "insertions": 0,
+        "commits": 0,
+        "request_opcode": 3081,
+        "opcode_basis": "identity3663::admit increments its refusal counter only for opcode 3081; counter changes after user Play.",
+        "payload_retained": false,
+        "precise_rejection_reason": "Unknown: length, number, slot, epoch/user binding and generation subconditions were not logged.",
+        "guest_displayed_result": "User acknowledged Play instruction and later confirmed guest closed; no exact menu/loading/error outcome supplied.",
+        "user_final_report": "both closed",
+        "host_exit_interpretation": "User confirms closed; pinned receipt proves deadline termination, not normal quit.",
+        "concurrent_real_save_delta_files": 0,
+        "guest_only_real_save_unchanged": "Not established by concurrent host manifest; prior S2 guest-only proof retained.",
+        "post_session_host_reload": false,
+        "mutual_movement": false,
+        "removal_unverified": true,
+        "reconnect_unverified": true,
+        "valid_capture": false
+      }
+    }
+  ],
+  "independent_findings": [
+    "Desktop-launched owned fixture visible to user; command-context fixture invisible despite its local visible flags.",
+    "Manual desktop runner launch established actual user-visible controlled host and guest. No denied app was launched through another automation path.",
+    "Identity admission refusal localized to opcode 3081 before native dispatch/actor insertion. Existing strict 13-byte policy and native guest identity binding require packet-specific evidence before repair.",
+    "Capture rejected zero frames correctly. No foreground PID samples/rejection reason retained; cannot distinguish focus sequence from capture-context/identity failure."
+  ],
+  "next_offline_work": [
+    "Add bounded reason-specific admission diagnostics without relaxing any gate; use an owned packet reproduction and independently checked exact-3663 serialization.",
+    "Prove foreground/window/birth sampling with an owned desktop pair before another capture; preserve sampled rejection reasons without recording unrelated desktop content."
+  ],
+  "limitations": [
+    "No L3 pass or L4 run",
+    "No exact rejected payload captured; no native fix claimed",
+    "Host autosave changes retained; combined manifest does not identify a writer",
+    "No post-L3 host reload, mutual movement/removal/reconnect, or useful two-window video"
+  ],
+  "cleanup": {
+    "current_asi_sha256": "08A8ABEB7431703444AFC09ED44986ED493DECF24D103B8A121C8701309840DD",
+    "owned_watchdogs": 0,
+    "source_seal_verified": true,
+    "current_real_save_files": 23,
+    "desktop_runner_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+    "content_sessions": [
+      {
+        "id": "R5-S1",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-S1-20261116"
+      },
+      {
+        "id": "R5-S2",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": false,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-S2-20261116"
+      },
+      {
+        "id": "R5-S1B",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-S1B-20261116"
+      },
+      {
+        "id": "R5-L3-1",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-1-20261116"
+      },
+      {
+        "id": "R5-L3-2",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2-20261117"
+      },
+      {
+        "id": "R5-L3-2b",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": false,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-2b-20261117"
+      },
+      {
+        "id": "R5-L3-3",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": false,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117"
+      }
+    ],
+    "recorded_utc": "2026-11-17T13:40:12.7400184Z",
+    "scope": "All seven sessions frozen backups and ended controller receipts; current real saves match latest post-session manifest. Earlier real-save manifests are historical snapshots; legitimate host autosaves are retained, never restored.",
+    "controlled_files_present": [],
+    "current_real_manifest": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-L3-3-20261117\\save-after.tsv",
+    "executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "game_processes": 0
+  },
+  "validation": "visible-desktop-v2-validation.json",
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\attempts.json",
+      "sha256": "6FD299E9B9EB7B21EDF85F8075AC48A8387DBED5BB65CC38F2A8F153D3FE9521"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\final-audit-v2.ps1",
+      "sha256": "1419CC627938025A3B604E4DEECC78201D3FA5E4F9AD6CB5885C357E4D9D4444"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\final-cleanup-v2.json",
+      "sha256": "52EE08CE9580D61EE026A267B38FE471B2C878AAB84A375A0C36C5804C037AD0"
+    }
+  ]
+}
