@@ -53,7 +53,7 @@
     "log_snapshot_sha256": "8BFDE905121D871FE742F0B4C790C29A46797945A228CBD3158205B6977B8142",
     "scope": "One-shot diagnostic from PID-verified live log; final full-log hash is sealed after cleanup."
   },
-  "host_quit_user_report": "Pending; watchdog stop is authoritative, normal exit not claimed",
+  "host_quit_user_report": "User confirms they had not selected host Quit before watchdog closure; no hang established.",
   "startup_used": 1,
   "startup_limit": 5,
   "join_used": 1,

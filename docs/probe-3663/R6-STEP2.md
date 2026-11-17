@@ -36,8 +36,8 @@ this failed join did not produce a user movement recording.
 The guest exited normally, code 0, at **09:23:13**. A host normal-quit signal
 was given before the common **09:24:33** watchdog, but its pinned receipt
 records deadline termination at **09:24:34**, exit 0x3663. Normal host exit
-is not accepted; whether the user selected Quit and observed a hang remains
-unresolved until their report. The next acceptance must reserve time for
+is not accepted. The user subsequently confirmed they had not selected host
+Quit before the deadline; no exit hang is established. The next acceptance must reserve time for
 normal quit. No timeout was extended.
 
 Cleanup verified all 23 real saves unchanged, both frozen backups, and

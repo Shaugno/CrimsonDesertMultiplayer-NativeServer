@@ -1587,14 +1587,29 @@ inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
         if (!view) return inj::Outcome::Refused;
         if ((!g_opt.core_v1 && !core_tunnel_request_allowed(in, tunnel_offsets())) ||
             g_channel[view->opcode] >= kBlocked || kind != InjectKind::Normal) return inj::Outcome::Blocked;
-        if(g_opt.core_v1 && (!v1_3663::admit_request(view->opcode) ||
-            (view->opcode!=troc::kOpLogoutSessionReq &&
-             (v1_3663::stopped() || !identity3663::admit(view->opcode,view->payload)))))return inj::Outcome::Blocked;
+        std::vector<uint8_t> canonical;
+        std::span<const uint8_t> accepted_packet=in;
+        if(g_opt.core_v1){
+            if(!v1_3663::admit_request(view->opcode) ||
+                (view->opcode!=troc::kOpLogoutSessionReq && v1_3663::stopped()))return inj::Outcome::Blocked;
+            std::span<const uint8_t> accepted_payload=view->payload;
+            if(view->opcode==3081){
+                // R6 measured the native Play sentinel. Port the existing
+                // legacy translation below into this separate target route;
+                // do not alter the caller's bytes or relax strict admission.
+                canonical.assign(in.begin(),in.end());
+                auto payload=std::span<uint8_t>(canonical).subspan(troc::kHeaderSize);
+                (void)identity3663::canonicalize_login(payload);
+                accepted_payload=payload;accepted_packet=canonical;
+            }
+            if(view->opcode!=troc::kOpLogoutSessionReq &&
+                !identity3663::admit(view->opcode,accepted_payload))return inj::Outcome::Blocked;
+        }
         if (g_halted_epoch.load()) return inj::Outcome::Halted;
         const uint32_t epoch = g_want_epoch.load();
         if (!server_accepts_guest() || epoch != 1) return inj::Outcome::NotReady;
         inj::Pending pending;
-        pending.packet.assign(in.begin(), in.end());
+        pending.packet.assign(accepted_packet.begin(), accepted_packet.end());
         if(g_opt.core_v1 && view->opcode==2554){
             if(view->payload.size()<8 || !g_opt.account || g_opt.account==~0ull)return inj::Outcome::Blocked;
             std::memcpy(pending.packet.data()+troc::kHeaderSize,&g_opt.account,8);

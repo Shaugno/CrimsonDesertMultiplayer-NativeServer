@@ -1,0 +1,41 @@
+{
+  "round": 6,
+  "harness_receipt_round": 5,
+  "step": 3,
+  "suite": "119/119 passed",
+  "seconds": 106.3,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second synthetic host/peer only; tier metadata 0xF; clean unload",
+  "asi_sha256": "5C78FD617E961FA6C20775F094918ED3DF7B20037D8CFC283A4CA06F3292C3DF",
+  "default_route": "Tier A reader",
+  "host": "explicit v1; backed-up real saves; zero file sandbox hooks",
+  "guest": "USERPROFILE set before process start; native CSIDL_LOCAL_APPDATA save root must identify verified guest copy; zero file hooks",
+  "fallback": "explicit NT default-deny mode retained and fixture-tested, not installed in the primary profile route",
+  "limits": [
+    "Profile save-path isolation is not an OS permission boundary against arbitrary absolute-path writes.",
+    "Fixtures exercise mutations through the actual native save resolver; the NT fallback separately tests hard-coded real-path refusal/redirection.",
+    "Concurrent real-save host deltas cannot be attributed to one process by a combined manifest alone; guest-only evidence remains required.",
+    "No game runtime acceptance follows from these game-free checks."
+  ],
+  "arming_receipt_sha256": "BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD",
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step3-suite.txt",
+      "sha256": "D54564A5C2F82E5B75E769A5A293F4F9C6C5C1D9E07D56DA7F2625A1471A0376"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step3-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step3-smoke-run\\e2e\\cdmp.log",
+      "sha256": "3EBEB84E3804C50C4632010F03141185605FF2C0FBC03725AE0158BD2849D00C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\step1-steam-profile.txt",
+      "sha256": "28BDE7E54316A00773317843A5C33CEDB21EF74E0E6F61C644320D2D287EE82A"
+    }
+  ],
+  "source_manifest_sha256": "57F5A7A866882013256DE41A4B49BADE16B49B2CD0CFA543989109F1817A9F77"
+}

@@ -21,7 +21,7 @@ int main(){
     check(is_ready(2,100,200) && !is_ready(3,100,200) && !is_ready(2,101,200) && !is_ready(2,100,201));
     check(!ready(s,2,100,200,0x90200002,0xA0100003)); // same pointers, new user generation
     check(!ready(s,2,100,200,0x90100002,0xA0200003)); // same pointers, new actor generation
-    std::array<uint8_t,13> payload{};for(unsigned i=0;i<8;++i)payload[1+i]=static_cast<uint8_t>(kGuest>>(8*i));
+    std::array<uint8_t,17> payload{};for(unsigned i=0;i<8;++i)payload[1+i]=static_cast<uint8_t>(kGuest>>(8*i));
     check(login_character(s,2,100,payload));
     for(size_t n=0;n<payload.size();++n)check(!login_character(s,2,100,{payload.data(),n}));
     payload[9]=3;check(!login_character(s,2,100,payload));payload[9]=206;check(!login_character(s,2,100,payload));
@@ -33,7 +33,7 @@ int main(){
     auto d=diagnose(payload);
     check(d.discriminator==4 && d.number==kGuest && d.slot==0 && d.bound && d.size_ok && d.generation_ok);
     auto line=format_login_diagnostic(d);
-    for(const auto* expected:{"length=13","prefix13=0402F0FFFFFFFFFF7F00000000","discriminator=0x04",
+    for(const auto* expected:{"length=17","prefix13=0402F0FFFFFFFFFF7F00000000","discriminator=0x04",
         "number=0x7FFFFFFFFFFFF002","slot=0","bound=true","lobby_ready=true","size=true",
         "number=true","slot=true","generation=true","lobby_edits=11 status_edits=12 phase_edits=13","state_epoch=2"})
         check(line.find(expected)!=std::string::npos);
@@ -41,6 +41,7 @@ int main(){
         d=diagnose({payload.data(),n});check(!d.size_ok && d.prefix_size==n);
         check(d.discriminator_available==(n>=1) && d.number_available==(n>=9) && !d.slot_available);
     }
+    for(size_t n=13;n<17;++n){d=diagnose({payload.data(),n});check(!d.size_ok && d.slot_available);}
     std::array<uint8_t,19> extended{};std::copy(payload.begin(),payload.end(),extended.begin());
     d=diagnose(extended);check(!d.size_ok && d.number_ok && d.slot_ok && d.prefix_size==13);
     check(!login_character(s,2,100,extended)); // diagnostics do not relax the exact-length gate
@@ -66,5 +67,37 @@ int main(){
             (report.generation_ok && report.bound && report.lobby_ready && report.size_ok && report.number_ok && report.slot_ok));
     }
     RefusalDiagnosticOnce once;check(once.claim());for(unsigned i=0;i<100;++i)check(!once.claim());
+    // R6-D1b actual first 13 bytes and observed total length. The final u32
+    // is an owned-fixture sentinel: its runtime value was not logged. It must
+    // survive the translation byte-for-byte, along with the slot/discriminator.
+    std::array<uint8_t,17> observed{4,255,255,255,255,255,255,255,127,1,0,0,0,0xDE,0xAD,0xCA,0xFE};
+    State valid{1,100,0,7,true,false,false,false};valid.user_key=0x901002FA;
+    const auto original=observed;
+    check(!login_character(valid,1,100,observed)); // native sentinel still fails strict admission
+    check(canonicalize_native_login(valid,1,100,valid.user_key,observed));
+    check(login_character(valid,1,100,observed));
+    for(size_t i=0;i<observed.size();++i)if(i<1 || i>8)check(observed[i]==original[i]);
+    const auto canonical=observed;
+    check(!canonicalize_native_login(valid,1,100,valid.user_key,observed) && observed==canonical);
+    for(unsigned mask=0;mask<32;++mask){
+        auto bytes=original;auto candidate=valid;candidate.failed=(mask&1)!=0;candidate.lobby_ready=(mask&2)!=0;
+        const uint64_t epoch=(mask&4)?1:0;const uintptr_t user=(mask&8)?100:101;
+        const uint32_t current=(mask&16)?candidate.user_key:candidate.user_key+1;
+        const bool allowed=!candidate.failed && candidate.lobby_ready && epoch==1 && user==100 && current==candidate.user_key;
+        check(canonicalize_native_login(candidate,epoch,user,current,bytes)==allowed);
+        check(bytes==(allowed?canonical:original));
+    }
+    for(const auto slot:{3u,206u}){auto bytes=original;bytes[9]=static_cast<uint8_t>(slot);
+        const auto before=bytes;check(!canonicalize_native_login(valid,1,100,valid.user_key,bytes) && bytes==before);
+        check(!login_character(valid,1,100,bytes));}
+    {auto bytes=original;bytes[1]=1;const auto before=bytes;
+        check(!canonicalize_native_login(valid,1,100,valid.user_key,bytes) && bytes==before);
+        check(!login_character(valid,1,100,bytes));}
+    {auto bytes=original;bytes[0]=0;const auto before=bytes;
+        check(!canonicalize_native_login(valid,1,100,valid.user_key,bytes) && bytes==before);}
+    for(size_t n=0;n<=19;++n){std::array<uint8_t,19> bytes{};std::copy(original.begin(),original.end(),bytes.begin());
+        const auto before=bytes;const bool changed=canonicalize_native_login(valid,1,100,valid.user_key,{bytes.data(),n});
+        check(changed==(n==17));if(!changed)check(bytes==before);}
+    std::puts("R6 observed 17-byte native-number regression: guarded canonical copy, strict assigned identity, unchanged opaque field/slot, malformed/stale/forbidden refusal PASS");
     std::puts("3663 identity policy: ambiguous/duplicate identities, phase and epoch gates, affinity, malformed login and forbidden slots PASS");
 }

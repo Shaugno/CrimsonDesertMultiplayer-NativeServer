@@ -24,6 +24,7 @@ SafetyHookInline lobby_hook,load_hook,phases_hook;
 std::atomic<bool> on{},broken{};
 std::atomic<uint32_t> affinity_thread{};
 std::atomic<uint64_t> lobby_edits{},status_edits{},phase_checks{},refusals{};
+std::atomic<uint64_t> login_number_edits{};
 std::mutex state_mutex; // leaf lock; never across an original or native call
 p::State state;
 p::RefusalDiagnosticOnce refusal_diagnostic;
@@ -195,6 +196,17 @@ bool failed(){return broken.load();}
 bool ready(uintptr_t user,uintptr_t actor,uint64_t epoch){
     const auto user_key=key(user),actor_key=key(actor);
     std::lock_guard lock(state_mutex);return p::ready(state,epoch,user,actor,user_key,actor_key);
+}
+bool canonicalize_login(std::span<uint8_t> owned_payload){
+    if(!on.load() || broken.load())return false;
+    field_share3663::Context c;if(!context(c))return false;
+    const auto user_key=key(c.guest);bool changed=false;
+    {std::lock_guard lock(state_mutex);
+        changed=p::canonicalize_native_login(state,c.epoch,c.guest,user_key,owned_payload);}
+    if(changed && ++login_number_edits<=3)
+        log::info("3663 identity canonicalized 3081: native number 0x{:016X} -> assigned guest 0x{:016X}; length {} epoch {}; binding/lobby/generation/slot checked; strict admission follows",
+            p::kNative,p::kGuest,owned_payload.size(),c.epoch);
+    return changed;
 }
 bool admit(uint16_t opcode,std::span<const uint8_t> payload){
     const bool active=on.load(),failed=broken.load();

@@ -29,7 +29,7 @@ inline LoginDiagnostic diagnose_login(const State& s,uint64_t epoch,uintptr_t us
     if(d.number_available)for(unsigned i=0;i<8;++i)d.number|=uint64_t(bytes[1+i])<<(8*i);
     if(d.slot_available)for(unsigned i=0;i<4;++i)d.slot|=uint32_t(bytes[9+i])<<(8*i);
     d.active=active;d.broken=broken;d.context=context;d.bound=identity::bound(s,epoch,user);
-    d.lobby_ready=s.lobby_ready;d.size_ok=bytes.size()==13;
+    d.lobby_ready=s.lobby_ready;d.size_ok=bytes.size()==kLoginPayloadSize;
     d.number_ok=d.number_available && d.number==kGuest;
     d.slot_ok=d.slot_available && d.slot!=3 && d.slot!=206;
     d.generation_ok=s.user_key==user_key;
