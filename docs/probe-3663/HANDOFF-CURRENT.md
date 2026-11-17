@@ -1,3 +1,165 @@
+# R6 Step 6 — review package (2026-11-17 Eastern)
+
+Branch **gpt/3663-port** is ready for Claude's review. **The diagnostic
+identified two concrete refusal causes and the targeted fix passes offline
+validation. Post-fix L3 validation was blocked by anti-tamper purchase
+revalidation before native login. L3/L4 remain unpassed.** This section
+supersedes all prior status below; the two-player goal is not reached.
+
+Fix/source checkpoint **8ff1732**; Step 4 blocker **ea1d4d8**, Step 5
+prerequisite record **963e0f6**. The following packaging commit is branch
+HEAD. `R6-REVIEW-PACKAGE.json` indexes all three setup/live experiments,
+own-PID logs and receipt/manifest/screenshot hashes, exact diagnostic, fix,
+tests, official activation guidance and cleanup. `R6-STEP1.md` through
+`R6-STEP5.md` provide the step records. No review gate stopped the work.
+The JSON also locates the frozen local bundle `R6-20261117-0952`: 60 unique
+evidence files, about 1.26 MB, outside OneDrive, with an archival hash index.
+
+## What the diagnostic established
+
+At **09:21:57 Eastern**, R6-D1b host PID 45568 recorded:
+
+```text
+length=17 prefix13=04FFFFFFFFFFFFFF7F01000000
+discriminator=0x04 number=0x7FFFFFFFFFFFFFFF slot=1
+bound=true lobby_ready=true size=false number=false slot=true generation=true
+state_epoch=1 current_epoch=1 state_user_key=0x901002FA current_user_key=0x901002FA
+```
+
+**Size and number failed.** Active/context/health, all bound subconditions,
+lobby readiness, ordinary slot 1 and generation passed. Lobby edits=1;
+status/phase edits=0. The boolean `broken=false` means healthy, not a third
+failure. The first 13 bytes were captured safely; the extra u32's actual
+value was not logged and is not invented. No actor insertion/commit ran.
+
+The exact 3663 descriptor/vtable reader at **2C6AE10** consumes 1+8+4+4
+bytes, followed by a possible UTF-16 remainder, and calls **2F4AE80**. Its
+disk vtable/read-size checks and read-only extraction are sealed. A 19-byte
+2976 example is not this run's request. The target client writer was not
+independently located; its actual 17-byte emission is measured live.
+
+## Targeted fix and retained checks
+
+The gate now supports **only the observed 17-byte empty-remainder form**.
+Old 13-byte, truncated and extended forms remain refused. The opaque final
+u32 passes through unchanged. Forbidden slots 3/206 remain forbidden.
+
+The existing legacy tunnel already translates a native Play sentinel into
+the second conversation's assigned number; the separate 3663 core route
+skipped that code. Its new target adapter changes only the number's eight
+bytes in an **owned packet copy**, after active/healthy context, bound epoch/
+guest owner, lobby readiness, native generation, exact form, discriminator 4
+and slot checks. Unknown numbers and stale/malformed requests are not repaired.
+The strict host admission check reruns afterward and still requires assigned
+number `0x7FFFFFFFFFFFF002` plus all existing identity predicates. Direct
+strict admission still rejects the native sentinel. Original packet/header,
+slot and opaque u32 remain unchanged. No new native offset, hook, memory
+identity write or protocol-envelope change was introduced.
+
+The regression reproduces the actual prefix/length and verifies the narrow
+translation, unchanged scalar/slot, and negative state/length/identity cases.
+Latest full build/suite: **119/119, 106.30 seconds**. Eight-second synthetic
+smoke: **78 remote states, zero rejects, metadata mask 0xF, clean unload**.
+Baseline and logging-only runs also passed 119/119. These do not prove native
+admission, field insertion or multiplayer behavior after the fix.
+
+Current ASI SHA-256:
+`5C78FD617E961FA6C20775F094918ED3DF7B20037D8CFC283A4CA06F3292C3DF`.
+Desktop runner SHA-256:
+`8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09`.
+The source/ASI/runner/executable seal verifies. R6 uses separate uniquely
+named arming receipts and a fresh ledger; the unchanged validated R5 desktop
+harness retains its compatible version-2/round-5 receipt format. No R5 record
+or budget was reset or reused as an R6 counter.
+
+## Every R6 setup/live experiment
+
+| ID | Budget category | Actual result |
+| --- | --- | --- |
+| R6-D1 | Conservative startup setup | Unused two-minute plan expired; zero host/guest processes. Official reuse refused; cleanup verified, fresh session used. |
+| R6-D1b | Join experiment | Both usable windows confirmed left/right before Play; one native character-login request captured the two failures. Guest normal exit 0; host fixed-deadline stop. User clarified host Quit had not been selected before the deadline; no hang established. |
+| R6-L3-1 | Conservative join experiment | Guest existed but anti-tamper error 88500006 blocked startup before title/native login. No character request or fix-path execution. Guest exited from error, code FFFFFFFF; host normal exit 0. Cleanup verified. |
+
+Fresh R6 usage is **startup 1/5, join 2/3**. One native guest login/character
+request occurred, before the fix; **zero post-fix character requests** and
+zero accepted joins. The third record is not evidence of a second native
+login or a failed EnterField transaction. Remaining budget was not spent on
+retries during an external activation hold. No live deadline was extended.
+Preexisting log aliases copied during the unlaunched setup are excluded from
+own-PID runtime evidence.
+
+Full role log SHA-256 values:
+
+- Diagnostic host: `98F5976FA39B3927B2A7620E8D93D2671A3D528888BEB922869F90F703596144`
+- Diagnostic guest: `93C138A5832FBB7679A5CF6F8791552962FE289BFB90A78033435E10DD7814F4`
+- Post-fix host: `19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D`
+- Post-fix guest: `889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312`
+
+## Current blocker and next runtime boundary
+
+The post-fix host launched **09:41:46**, guest **09:45:22 Eastern**. The user
+supplied the activation error screenshot at 09:45:39 and selected Exit;
+guest exit was **09:45:50**. Native guest sent/delivered stayed zero and
+remote=false. Its mod UDP connection is separate from native login. Host
+quit normally at **09:48:40**, before its **09:55:46** watchdog. No native
+character admission, canonicalization, field insertion or commit ran.
+
+The [official CodeFusion error page](https://support.codefusion.technology/anti-tamper/?e=88500006&l=en-US&p=s&a=Crimson%20Desert)
+uses public application data mapping **88500006 -> 24H**. Its official
+English guidance says purchase revalidation is currently unavailable and
+to wait **24 hours before trying again**. Public mapping/language snapshots
+and hashes are sealed in `step4-results.json`. No cause, device count or
+guaranteed reset time is inferred. No protection change, token copy/deletion,
+executable patch, credential request or additional activation was attempted.
+The official wait puts any later manual test no earlier than approximately
+**November 18, 09:46 AM Eastern**, with recovery still unverified. No retry
+or reminder was scheduled.
+
+L3 still needs actual character admission and shared-world join, mutual
+walking/turning, the user's recording showing both windows (filename and
+duration), guest removal/reconnect result, joined-session real-save manifest
+acceptance and a host save reload followed by normal quit. No recording was
+produced after the startup error; the screenshot proves only that error.
+L4 did not run: the required L3 pass is absent. No second PC was requested
+and no guest kit was transferred, deployed or declared live-ready.
+
+## Cleanup, attribution and package contents
+
+The fresh **09:52 Eastern** audit verified zero game processes, zero owned
+watchdogs and none of the six controlled installation files. Every frozen
+host/guest backup for all three records still matches its manifest. All
+**23 current real-save files** match the latest post-session manifest; all
+three session finishes recorded unchanged real saves. No progress was
+restored over. The two temporary desktop shortcuts and their empty task
+folder were removed after exact target/content checks. Raw evidence stays
+local; no binaries/media were committed or released.
+
+Host uses backed-up real saves with no file sandbox. Guest uses verified
+native USERPROFILE/CSIDL save-root isolation with zero file hooks; the
+explicit NT fallback remains separately fixture-tested. Profile path
+selection is not an OS permission boundary, and endpoint equality alone
+does not exclude transient writes. Default Tier A, explicit guarded v1,
+Steam-friends restriction, executable filtering and synthetic test-host
+paths are preserved. Original sibling checkout/parent launcher stay untouched.
+
+Original project history and GPL v3 are preserved. The R6 mapping continues
+the existing checkout's legacy rule, not a newly invented native identity.
+No new source was copied from Samuel Cardillo's PR. His credited R5
+field-leave/achievement guards remain unchanged, with the pinned reference
+and independent address evidence in `R5-UPSTREAM-REFERENCE.md`.
+
+Commits since a2418f9: **660526d** plan, **8935b14** logging/tests,
+**2460e27** diagnostic, **8ff1732** targeted fix/tests, **ea1d4d8** blocked
+retry, **963e0f6** L4 prerequisite, followed by this Step 6 packaging commit
+at HEAD. The JSON package includes full commit hashes/subjects, changed files,
+all attempts, evidence hashes, the two validation checkpoints, official
+support provenance, cleanup and the next manual test plan. After activation
+recovery, repeat bounded L3 with fresh presence and backups; only a complete
+L3 pass permits the second-PC Steam sitting. The package is ready for review
+with these limitations; the runtime fix remains unverified.
+
+---
+
 # R5 Step 5 — updated review package (2026-11-17 Eastern)
 
 Branch **gpt/3663-port** is ready for Claude's review with explicit failures.

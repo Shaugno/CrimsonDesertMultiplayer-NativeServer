@@ -1,0 +1,1133 @@
+{
+  "round": 6,
+  "baseline": "a2418f9",
+  "branch": "gpt/3663-port",
+  "source_checkpoint": "8ff1732",
+  "packaging_parent": "963e0f6d85f18208498262b91c5a58b52ad61ab1",
+  "packaging_commit": "Branch HEAD containing this package; no circular self-hash.",
+  "status": "Step 6 package ready for review. Logged causes fixed and passed offline; post-fix L3 validation blocked before native login by official 24-hour activation hold. L3/L4 unpassed.",
+  "steps": {
+    "1": "One-shot predicate logging added; no gate relaxed; exact target reader checked; 119/119 and smoke passed",
+    "2": "One actual diagnostic conversation captured size=false and number=false; other admission predicates pass",
+    "3": "Observed exact 17-byte form and guarded owned-copy sentinel mapping; strict host identity checks retained; regression, 119/119 and smoke passed",
+    "4": "Post-fix guest startup hit anti-tamper 88500006 before title/native login; fix path unexercised; normal host exit and cleanup verified",
+    "5": "Not run: L3 prerequisite unpassed; no second-PC request or kit deployment",
+    "6": "Package complete with exact diagnostic, fix boundary, all experiments, immutable evidence, source validation and remaining activation/runtime blockers"
+  },
+  "commits_since_baseline": [
+    {
+      "commit": "660526d2c7896e600efcbf432c87bd8142a5bbb5",
+      "subject": "Save R6 diagnostic character-login plan"
+    },
+    {
+      "commit": "8935b14112673f8271a3856d4063966e0ac2398a",
+      "subject": "R6 step 1: log exact character-login refusal predicates without relaxing admission"
+    },
+    {
+      "commit": "2460e27fe1a0738e7eb0791a4d3f2fd0f8851426",
+      "subject": "R6 step 2: capture actual length and character-number refusal"
+    },
+    {
+      "commit": "8ff17324ebf9dd76e3a4733af384db9b24466c60",
+      "subject": "R6 step 3: correct observed login shape and bind native sentinel to guest identity"
+    },
+    {
+      "commit": "ea1d4d8a40622fd7349163ecde0a30900d1ce0d5",
+      "subject": "R6 step 4: record anti-tamper startup block and normal host cleanup"
+    },
+    {
+      "commit": "963e0f6d85f18208498262b91c5a58b52ad61ab1",
+      "subject": "R6 step 5: document L4 prerequisite blocked by unvalidated L3"
+    }
+  ],
+  "changed_files_through_packaging_parent": [
+    "A\tdocs/GPT-3663-PORT-PLAN-R6.md",
+    "A\tdocs/probe-3663/R6-STEP1.md",
+    "A\tdocs/probe-3663/R6-STEP2.md",
+    "A\tdocs/probe-3663/R6-STEP3.md",
+    "A\tdocs/probe-3663/R6-STEP4.md",
+    "A\tdocs/probe-3663/R6-STEP5.md",
+    "A\tdocs/probe-3663/port-evidence/r6/r6-step1-validation.json",
+    "A\tdocs/probe-3663/port-evidence/r6/r6-step3-validation.json",
+    "A\tdocs/probe-3663/port-evidence/r6/step1-analysis.json",
+    "A\tdocs/probe-3663/port-evidence/r6/step2-results.json",
+    "A\tdocs/probe-3663/port-evidence/r6/step4-results.json",
+    "A\tsrc/coop3663/identity3663_diagnostic.h",
+    "M\tsrc/coop3663/identity3663_policy.h",
+    "M\tsrc/mod/session2/identity3663.cpp",
+    "M\tsrc/mod/session2/identity3663.h",
+    "M\tsrc/mod/session2/server.cpp",
+    "M\ttests/identity3663_policy_tests.cpp"
+  ],
+  "packaging_files": [
+    "docs/probe-3663/HANDOFF-CURRENT.md",
+    "docs/probe-3663/R6-REVIEW-PACKAGE.json"
+  ],
+  "diagnostic": {
+    "failed_conditions": [
+      "size",
+      "number"
+    ],
+    "actual_length": 17,
+    "old_expected_length": 13,
+    "discriminator": 4,
+    "actual_number": "0x7FFFFFFFFFFFFFFF",
+    "required_assigned_number": "0x7FFFFFFFFFFFF002",
+    "slot": 1,
+    "passed": [
+      "active",
+      "healthy (broken=false)",
+      "context",
+      "bound state and components",
+      "lobby readiness",
+      "slot",
+      "native generation"
+    ],
+    "raw": {
+      "line": "[09:21:57.109] WRN [T29588] 3663 identity refused 3081: length=17 prefix13=04FFFFFFFFFFFFFF7F01000000 discriminator=0x04 number=0x7FFFFFFFFFFFFFFF slot=1 | active=true broken=false context=true bound=true lobby_ready=true size=false number=false slot=true generation=true | bound_parts state_ok=true epoch_nonzero=true epoch_match=true guest_nonzero=true user_match=true | lobby_edits=1 status_edits=0 phase_edits=0 state_epoch=1 current_epoch=1 state_user_key=0x901002FA current_user_key=0x901002FA",
+      "decoded": {
+        "length": "17",
+        "prefix13": "04FFFFFFFFFFFFFF7F01000000",
+        "discriminator": "0x04",
+        "number": "0x7FFFFFFFFFFFFFFF",
+        "slot": "1"
+      },
+      "predicates": {
+        "active": "true",
+        "broken": "false",
+        "context": "true",
+        "bound": "true",
+        "lobby_ready": "true",
+        "size": "false",
+        "number": "false",
+        "slot": "true",
+        "generation": "true"
+      },
+      "bound_parts": {
+        "state_ok": "true",
+        "epoch_nonzero": "true",
+        "epoch_match": "true",
+        "guest_nonzero": "true",
+        "user_match": "true"
+      },
+      "state": {
+        "lobby_edits": "1",
+        "status_edits": "0",
+        "phase_edits": "0",
+        "state_epoch": "1",
+        "current_epoch": "1",
+        "state_user_key": "0x901002FA",
+        "current_user_key": "0x901002FA"
+      },
+      "false_predicates": [
+        "broken",
+        "size",
+        "number"
+      ],
+      "host_pid": 45568,
+      "log_snapshot_sha256": "8BFDE905121D871FE742F0B4C790C29A46797945A228CBD3158205B6977B8142",
+      "scope": "One-shot diagnostic from PID-verified live log; final full-log hash is sealed after cleanup."
+    },
+    "interpretation": "The literal false boolean broken=false is healthy; only size and number failed.",
+    "user_host_quit_report": "User confirms they had not selected host Quit before watchdog closure; no hang established."
+  },
+  "fix": {
+    "layout": "Exact observed 17-byte form only: u8,u64,u32 slot,u32 opaque; empty UTF-16 remainder; old 13-byte and extended forms refused",
+    "number": "Existing legacy sentinel rule ported into separate 3663 core route, on owned packet copy behind bound/lobby/generation/slot checks; strict assigned-number admission reruns afterward",
+    "original_packet_unchanged": true,
+    "opaque_u32_and_slot_unchanged": true,
+    "unknown_numbers_refused": true,
+    "host_direct_admission_still_refuses_native_sentinel": true,
+    "new_native_offsets_or_hooks": false,
+    "native_writer_independently_located": false,
+    "emitted_target_form_measured": true,
+    "mod_transport_protocol_format_changed": false,
+    "tests": "Recorded prefix/17-byte length reproduction, unchanged opaque/slot/header scope, malformed/unknown/stale/forbidden refusal, diagnostic equivalence and once-only logging",
+    "runtime_exercised_after_fix": false
+  },
+  "budgets": {
+    "startup_used": 1,
+    "startup_limit": 5,
+    "startup_remaining": 4,
+    "join_used": 2,
+    "join_limit": 3,
+    "join_remaining": 1,
+    "exhausted": false,
+    "actual_native_guest_login_conversations": 1,
+    "actual_diagnostic_character_requests": 1,
+    "post_fix_character_requests": 0,
+    "accepted_joins": 0,
+    "note": "Fresh R6 ledger; unused expired setup conservatively startup; guest-existing anti-tamper startup conservatively join experiment; no reset or further activation attempt."
+  },
+  "attempts": [
+    {
+      "id": "R6-D1",
+      "kind": "prejoin",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117",
+      "outcome": "not_launched_plan_expired",
+      "started_utc": "2026-11-17T14:03:09.001436+00:00",
+      "note": "No host or guest process launched. User readiness reply arrived after two-minute plan expiration. Official Run refused reuse; cleanup verified. Conservatively recorded as startup setup, no diagnostic/native join used.",
+      "finished_utc": "2026-11-17T14:10:03.047372+00:00",
+      "roles": {},
+      "cleanup": {
+        "restored": true,
+        "files": [
+          {
+            "sha256": "7538009B1ED24C6D7D3B4A0BFEDC792BD4BE7EE44351136DEFC60DB00A020BCC",
+            "name": "cdmp.guest.log"
+          },
+          {
+            "sha256": "BA0792C77DF272F5746BC1839CF984BDF8C96CCE9B7FB1225D215E0B9CB5A9AB",
+            "name": "cdmp.host.log"
+          }
+        ],
+        "real_saves_unchanged": true,
+        "finished_utc": "2026-11-17T14:10:02.9219381Z",
+        "save_verification_error": "",
+        "host_changes_allowed": true
+      },
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\DD539AE5AFE29E7F707779EAE99BFBA48E90A2E32B7CF5CF8C7F7C02988784F5_session.json",
+          "sha256": "DD539AE5AFE29E7F707779EAE99BFBA48E90A2E32B7CF5CF8C7F7C02988784F5",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\session.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\3AEFCAD00545FC05515811BFCD5C533D8BD5D4916A04DC6E16B70DF5B329A485_deployment.json",
+          "sha256": "3AEFCAD00545FC05515811BFCD5C533D8BD5D4916A04DC6E16B70DF5B329A485",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\deployment.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-manifest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\save-manifest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-after.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\save-after.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\4A3839486472196666B6C7BF8C33EC720A129D6AE0E25FC306710F421A295CEB_verification.json",
+          "sha256": "4A3839486472196666B6C7BF8C33EC720A129D6AE0E25FC306710F421A295CEB",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\verification.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\7089BCB9B0E1CFDCECE63313B4B498A8F6E2C30AA2ABD6AEE842FAD3300780F2_finish.json",
+          "sha256": "7089BCB9B0E1CFDCECE63313B4B498A8F6E2C30AA2ABD6AEE842FAD3300780F2",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\finish.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\A1CC3A0B1BF73BD7C33FAD553EDA38C76B44E3431ADDC3FB28AD0FA12019F80E_arming-receipt.json",
+          "sha256": "A1CC3A0B1BF73BD7C33FAD553EDA38C76B44E3431ADDC3FB28AD0FA12019F80E",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\evidence\\arming-receipt.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\1C9CC0BA06663FA10256347D837A440B178CE786CD422555DA607779135961E0_expired-unused-host-plan.json",
+          "sha256": "1C9CC0BA06663FA10256347D837A440B178CE786CD422555DA607779135961E0",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117\\expired-unused-host-plan.json"
+        }
+      ],
+      "log_scope": "Only own-PID logs associated with actual launch receipts; preexisting aliases copied by Finish in the unlaunched setup are not runtime evidence."
+    },
+    {
+      "id": "R6-D1b",
+      "kind": "join",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117",
+      "outcome": "diagnostic_captured",
+      "started_utc": "2026-11-17T14:10:10.130444+00:00",
+      "note": "One actual diagnostic conversation. Both windows confirmed and positioned left/right before Play. Refusal at 09:21:57: length 17 vs expected 13; number native 7FFFFFFFFFFFFFFF vs assigned guest; slot1, all bound/lobby/epoch/generation predicates pass. Guest normal exit0; host watchdog stop at fixed deadline, no normal-exit claim. Both closed, backups/save manifests and installation cleanup verified.",
+      "promoted_utc": "2026-11-17T14:14:28.841729+00:00",
+      "finished_utc": "2026-11-17T14:25:09.697676+00:00",
+      "roles": {
+        "host": {
+          "launch": {
+            "role": "host",
+            "game_pid": 45568,
+            "game_start_filetime": "134393982335170665",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "none",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T14:10:33.5267258Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "deadline_stopped",
+            "game_pid": 45568,
+            "game_start_filetime": "134393982335170665",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 48864,
+            "controller_start_filetime": "134393982327696035",
+            "deadline_utc": "2026-11-17T14:24:33.5170665Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 13923,
+            "ended_utc": "2026-11-17T14:24:34.3243960Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\98F5976FA39B3927B2A7620E8D93D2671A3D528888BEB922869F90F703596144_cdmp.host.log",
+            "sha256": "98F5976FA39B3927B2A7620E8D93D2671A3D528888BEB922869F90F703596144",
+            "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\evidence\\cdmp.host.log"
+          }
+        },
+        "guest": {
+          "launch": {
+            "role": "guest",
+            "game_pid": 34412,
+            "game_start_filetime": "134393984341633100",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "profile",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T14:13:54.1778102Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 34412,
+            "game_start_filetime": "134393984341633100",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 40300,
+            "controller_start_filetime": "134393984328560452",
+            "deadline_utc": "2026-11-17T14:24:33.5170665Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 0,
+            "ended_utc": "2026-11-17T14:23:13.8999050Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\93C138A5832FBB7679A5CF6F8791552962FE289BFB90A78033435E10DD7814F4_cdmp.guest.log",
+            "sha256": "93C138A5832FBB7679A5CF6F8791552962FE289BFB90A78033435E10DD7814F4",
+            "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\evidence\\cdmp.guest.log"
+          }
+        }
+      },
+      "cleanup": {
+        "restored": true,
+        "files": [
+          {
+            "sha256": "93C138A5832FBB7679A5CF6F8791552962FE289BFB90A78033435E10DD7814F4",
+            "name": "cdmp.guest.log"
+          },
+          {
+            "sha256": "98F5976FA39B3927B2A7620E8D93D2671A3D528888BEB922869F90F703596144",
+            "name": "cdmp.host.log"
+          }
+        ],
+        "real_saves_unchanged": true,
+        "finished_utc": "2026-11-17T14:25:09.6100437Z",
+        "save_verification_error": "",
+        "host_changes_allowed": true
+      },
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\32C9B65110CFC01F8EB2246F2D09CE5DCB0973EB2B5B4CEAE6CE74F0CAA3A887_launch-host.json",
+          "sha256": "32C9B65110CFC01F8EB2246F2D09CE5DCB0973EB2B5B4CEAE6CE74F0CAA3A887",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\launch-host.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\44530132464940C571B37F4FF92566468E86036F44797E8B2A9BAAD915073740_watchdog-host.json",
+          "sha256": "44530132464940C571B37F4FF92566468E86036F44797E8B2A9BAAD915073740",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\watchdog-host.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\98F5976FA39B3927B2A7620E8D93D2671A3D528888BEB922869F90F703596144_cdmp.host.log",
+          "sha256": "98F5976FA39B3927B2A7620E8D93D2671A3D528888BEB922869F90F703596144",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\evidence\\cdmp.host.log"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\0B8A2C4DFC604C676BEF9BD6F04E1B5B3AC8F2F0C0C4891693584DB8CCD4D166_launch-guest.json",
+          "sha256": "0B8A2C4DFC604C676BEF9BD6F04E1B5B3AC8F2F0C0C4891693584DB8CCD4D166",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\launch-guest.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\E49210CCF3FB5ACB4DB0AF41ACB8BE425ECFD35835E715D781779C9DB9D97E62_watchdog-guest.json",
+          "sha256": "E49210CCF3FB5ACB4DB0AF41ACB8BE425ECFD35835E715D781779C9DB9D97E62",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\watchdog-guest.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\93C138A5832FBB7679A5CF6F8791552962FE289BFB90A78033435E10DD7814F4_cdmp.guest.log",
+          "sha256": "93C138A5832FBB7679A5CF6F8791552962FE289BFB90A78033435E10DD7814F4",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\evidence\\cdmp.guest.log"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\1200C912153C40AD42F43A1F1D3CAA5B0B9D3371EEF504980DDA9A412D78D90C_session.json",
+          "sha256": "1200C912153C40AD42F43A1F1D3CAA5B0B9D3371EEF504980DDA9A412D78D90C",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\session.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\FADB21E75E1549B2B31B0AAE4CAB62E7D9995CF17234969D93873A6379A6F752_deployment.json",
+          "sha256": "FADB21E75E1549B2B31B0AAE4CAB62E7D9995CF17234969D93873A6379A6F752",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\deployment.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-manifest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\save-manifest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-after.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\save-after.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\781211572A1FA6E57117ED2D4208C371AA56653DEA33DC364E9F1A1E7E9140A7_verification.json",
+          "sha256": "781211572A1FA6E57117ED2D4208C371AA56653DEA33DC364E9F1A1E7E9140A7",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\verification.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\AA1CF42EF91DD0E342640A1450691A4E7352E8974B7071508B980D91111DF91F_finish.json",
+          "sha256": "AA1CF42EF91DD0E342640A1450691A4E7352E8974B7071508B980D91111DF91F",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\finish.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\A1CC3A0B1BF73BD7C33FAD553EDA38C76B44E3431ADDC3FB28AD0FA12019F80E_arming-receipt.json",
+          "sha256": "A1CC3A0B1BF73BD7C33FAD553EDA38C76B44E3431ADDC3FB28AD0FA12019F80E",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\evidence\\arming-receipt.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\156EE61E10CA81DC15423A06EBC8DFCCEF90A8FDEFD0C13AA55AF529986ED56A_question.txt",
+          "sha256": "156EE61E10CA81DC15423A06EBC8DFCCEF90A8FDEFD0C13AA55AF529986ED56A",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\question.txt"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\30CF6BFA8413221449A4E66DF27711881365CA3E8BAD11B15746A52F640B1DC4_refusal.json",
+          "sha256": "30CF6BFA8413221449A4E66DF27711881365CA3E8BAD11B15746A52F640B1DC4",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\refusal.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\054B260F80CC51588B21107B5E3762CC74A217865699EBD7F7BA5BFD8EF0D836_user-confirmation.txt",
+          "sha256": "054B260F80CC51588B21107B5E3762CC74A217865699EBD7F7BA5BFD8EF0D836",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\user-confirmation.txt"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\043235BF00185FE5BECFBD4DD7930D453D95CC0C1197532DAB52253C3DF61924_window-host-before-play.json",
+          "sha256": "043235BF00185FE5BECFBD4DD7930D453D95CC0C1197532DAB52253C3DF61924",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\window-host-before-play.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\BAC7E0DB71DCDC1AF162F69C2DAAAB377EA795D75800605172F26CA6AB938272_window-guest-before-play.json",
+          "sha256": "BAC7E0DB71DCDC1AF162F69C2DAAAB377EA795D75800605172F26CA6AB938272",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\window-guest-before-play.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-before-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\save-before-guest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-after-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117\\save-after-guest.tsv"
+        }
+      ],
+      "log_scope": "Only own-PID logs associated with actual launch receipts; preexisting aliases copied by Finish in the unlaunched setup are not runtime evidence."
+    },
+    {
+      "id": "R6-L3-1",
+      "kind": "join",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117",
+      "outcome": "anti_tamper_88500006",
+      "started_utc": "2026-11-17T14:40:30.276624+00:00",
+      "note": "Guest process existed (conservatively join experiment 2), but anti-tamper error88500006 appeared before title/native cryptogram, no Play or character request/canonicalization/native join. User clicked Exit; guest exit FFFFFFFF. Host quit normally exit0 at 14:48:40Z. Both closed; real saves/frozen backups/installation cleanup verified. Stop live launches pending official activation guidance; fix not runtime-tested.",
+      "promoted_utc": "2026-11-17T14:47:08.665162+00:00",
+      "finished_utc": "2026-11-17T14:49:09.829986+00:00",
+      "roles": {
+        "host": {
+          "launch": {
+            "role": "host",
+            "game_pid": 35788,
+            "game_start_filetime": "134394001065679627",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "none",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T14:41:46.5761687Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 35788,
+            "game_start_filetime": "134394001065679627",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 25420,
+            "controller_start_filetime": "134394001058702639",
+            "deadline_utc": "2026-11-17T14:55:46.5679627Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 0,
+            "ended_utc": "2026-11-17T14:48:40.2365239Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D_cdmp.host.log",
+            "sha256": "19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D",
+            "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.host.log"
+          }
+        },
+        "guest": {
+          "launch": {
+            "role": "guest",
+            "game_pid": 51432,
+            "game_start_filetime": "134394003224421265",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "profile",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T14:45:22.4556784Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 51432,
+            "game_start_filetime": "134394003224421265",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 47516,
+            "controller_start_filetime": "134394003212185063",
+            "deadline_utc": "2026-11-17T14:55:46.5679627Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 4294967295,
+            "ended_utc": "2026-11-17T14:45:50.6850469Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312_cdmp.guest.log",
+            "sha256": "889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312",
+            "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.guest.log"
+          }
+        }
+      },
+      "cleanup": {
+        "restored": true,
+        "files": [
+          {
+            "sha256": "AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8",
+            "name": "anti-tamper-88500006.png"
+          },
+          {
+            "sha256": "889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312",
+            "name": "cdmp.guest.log"
+          },
+          {
+            "sha256": "19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D",
+            "name": "cdmp.host.log"
+          }
+        ],
+        "real_saves_unchanged": true,
+        "finished_utc": "2026-11-17T14:49:09.7267811Z",
+        "save_verification_error": "",
+        "host_changes_allowed": true
+      },
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B09751B0E2CBDF36371F2DB8C95A0692E35FB649A748F0AAB50E718253815C37_launch-host.json",
+          "sha256": "B09751B0E2CBDF36371F2DB8C95A0692E35FB649A748F0AAB50E718253815C37",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\launch-host.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\1E967116159C351BEA1FBA08781DAB44302EBC7CECD777ABF819B5BCCB716AE2_watchdog-host.json",
+          "sha256": "1E967116159C351BEA1FBA08781DAB44302EBC7CECD777ABF819B5BCCB716AE2",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\watchdog-host.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D_cdmp.host.log",
+          "sha256": "19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.host.log"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\4AA59852D1249A65071E940A49899D54938B18560E20801E421648B95DB1CCD6_launch-guest.json",
+          "sha256": "4AA59852D1249A65071E940A49899D54938B18560E20801E421648B95DB1CCD6",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\launch-guest.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\DBA46B7CE339011402C245F0337723BEFF3DAE3E79C98D9A3606762E860C5E8A_watchdog-guest.json",
+          "sha256": "DBA46B7CE339011402C245F0337723BEFF3DAE3E79C98D9A3606762E860C5E8A",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\watchdog-guest.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312_cdmp.guest.log",
+          "sha256": "889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.guest.log"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\201165E2F819EBCB7F506AB1DBF958FC0A3C7BD7E70A4E82E60530879EB9C9CC_session.json",
+          "sha256": "201165E2F819EBCB7F506AB1DBF958FC0A3C7BD7E70A4E82E60530879EB9C9CC",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\session.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\EE54B3B385ACE2983E7FC0EF122D74ED30CD4333651D4C49DD59CA22151C92A0_deployment.json",
+          "sha256": "EE54B3B385ACE2983E7FC0EF122D74ED30CD4333651D4C49DD59CA22151C92A0",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\deployment.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-manifest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-manifest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-after.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-after.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\A66AD53F74FAB080F9C4488881E20D6CCD51650733DBA443D2BB5CD50475E9EC_verification.json",
+          "sha256": "A66AD53F74FAB080F9C4488881E20D6CCD51650733DBA443D2BB5CD50475E9EC",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\verification.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\6D9D0C206699F23F90943642076FEF43F5239DF1B3FA1BB57F53B86FD9AB2D36_finish.json",
+          "sha256": "6D9D0C206699F23F90943642076FEF43F5239DF1B3FA1BB57F53B86FD9AB2D36",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\finish.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD_arming-receipt.json",
+          "sha256": "BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\arming-receipt.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\06FFF23BB60A295D5D079FE87EEA13747A513F087C583C55750AB5327985EF07_window-guest-error.json",
+          "sha256": "06FFF23BB60A295D5D079FE87EEA13747A513F087C583C55750AB5327985EF07",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\window-guest-error.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-before-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-before-guest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-after-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-after-guest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8_anti-tamper-88500006.png",
+          "sha256": "AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\anti-tamper-88500006.png"
+        }
+      ],
+      "log_scope": "Only own-PID logs associated with actual launch receipts; preexisting aliases copied by Finish in the unlaunched setup are not runtime evidence."
+    }
+  ],
+  "l3": {
+    "round": 6,
+    "step": 4,
+    "accepted": false,
+    "source_checkpoint": "8ff1732",
+    "status": "Blocked by anti-tamper purchase revalidation before native login; no further retry",
+    "attempt": {
+      "id": "R6-L3-1",
+      "kind": "join",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117",
+      "outcome": "anti_tamper_88500006",
+      "started_utc": "2026-11-17T14:40:30.276624+00:00",
+      "note": "Guest process existed (conservatively join experiment 2), but anti-tamper error88500006 appeared before title/native cryptogram, no Play or character request/canonicalization/native join. User clicked Exit; guest exit FFFFFFFF. Host quit normally exit0 at 14:48:40Z. Both closed; real saves/frozen backups/installation cleanup verified. Stop live launches pending official activation guidance; fix not runtime-tested.",
+      "promoted_utc": "2026-11-17T14:47:08.665162+00:00",
+      "finished_utc": "2026-11-17T14:49:09.829986+00:00",
+      "roles": {
+        "host": {
+          "launch": {
+            "role": "host",
+            "game_pid": 35788,
+            "game_start_filetime": "134394001065679627",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "none",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T14:41:46.5761687Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 35788,
+            "game_start_filetime": "134394001065679627",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 25420,
+            "controller_start_filetime": "134394001058702639",
+            "deadline_utc": "2026-11-17T14:55:46.5679627Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 0,
+            "ended_utc": "2026-11-17T14:48:40.2365239Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D_cdmp.host.log",
+            "sha256": "19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D",
+            "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.host.log"
+          },
+          "logged_errors": []
+        },
+        "guest": {
+          "launch": {
+            "role": "guest",
+            "game_pid": 51432,
+            "game_start_filetime": "134394003224421265",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "max_age_seconds": 840,
+            "isolation": "profile",
+            "session_kind": "L3",
+            "launched_utc": "2026-11-17T14:45:22.4556784Z",
+            "backend": "desktop-app"
+          },
+          "exit": {
+            "state": "exited",
+            "game_pid": 51432,
+            "game_start_filetime": "134394003224421265",
+            "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+            "controller_pid": 47516,
+            "controller_start_filetime": "134394003212185063",
+            "deadline_utc": "2026-11-17T14:55:46.5679627Z",
+            "max_game_age_seconds": 840,
+            "helper_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+            "backend": "desktop-app",
+            "game_exit_code": 4294967295,
+            "ended_utc": "2026-11-17T14:45:50.6850469Z"
+          },
+          "log": {
+            "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312_cdmp.guest.log",
+            "sha256": "889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312",
+            "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.guest.log"
+          },
+          "logged_errors": []
+        }
+      },
+      "cleanup": {
+        "restored": true,
+        "files": [
+          {
+            "sha256": "AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8",
+            "name": "anti-tamper-88500006.png"
+          },
+          {
+            "sha256": "889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312",
+            "name": "cdmp.guest.log"
+          },
+          {
+            "sha256": "19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D",
+            "name": "cdmp.host.log"
+          }
+        ],
+        "real_saves_unchanged": true,
+        "finished_utc": "2026-11-17T14:49:09.7267811Z",
+        "save_verification_error": "",
+        "host_changes_allowed": true
+      },
+      "evidence": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B09751B0E2CBDF36371F2DB8C95A0692E35FB649A748F0AAB50E718253815C37_launch-host.json",
+          "sha256": "B09751B0E2CBDF36371F2DB8C95A0692E35FB649A748F0AAB50E718253815C37",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\launch-host.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\1E967116159C351BEA1FBA08781DAB44302EBC7CECD777ABF819B5BCCB716AE2_watchdog-host.json",
+          "sha256": "1E967116159C351BEA1FBA08781DAB44302EBC7CECD777ABF819B5BCCB716AE2",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\watchdog-host.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D_cdmp.host.log",
+          "sha256": "19E939D5E5632CE6B3121F6589A43DB0BB675C89F22E2D22041761CE3AC2CB3D",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.host.log"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\4AA59852D1249A65071E940A49899D54938B18560E20801E421648B95DB1CCD6_launch-guest.json",
+          "sha256": "4AA59852D1249A65071E940A49899D54938B18560E20801E421648B95DB1CCD6",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\launch-guest.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\DBA46B7CE339011402C245F0337723BEFF3DAE3E79C98D9A3606762E860C5E8A_watchdog-guest.json",
+          "sha256": "DBA46B7CE339011402C245F0337723BEFF3DAE3E79C98D9A3606762E860C5E8A",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\watchdog-guest.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312_cdmp.guest.log",
+          "sha256": "889B6137935F81C4BF0E1EF0A5F73C6323C64DB94F2EABCC564F3BEAB5FCF312",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\cdmp.guest.log"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\201165E2F819EBCB7F506AB1DBF958FC0A3C7BD7E70A4E82E60530879EB9C9CC_session.json",
+          "sha256": "201165E2F819EBCB7F506AB1DBF958FC0A3C7BD7E70A4E82E60530879EB9C9CC",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\session.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\EE54B3B385ACE2983E7FC0EF122D74ED30CD4333651D4C49DD59CA22151C92A0_deployment.json",
+          "sha256": "EE54B3B385ACE2983E7FC0EF122D74ED30CD4333651D4C49DD59CA22151C92A0",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\deployment.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-manifest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-manifest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-after.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-after.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\A66AD53F74FAB080F9C4488881E20D6CCD51650733DBA443D2BB5CD50475E9EC_verification.json",
+          "sha256": "A66AD53F74FAB080F9C4488881E20D6CCD51650733DBA443D2BB5CD50475E9EC",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\verification.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\6D9D0C206699F23F90943642076FEF43F5239DF1B3FA1BB57F53B86FD9AB2D36_finish.json",
+          "sha256": "6D9D0C206699F23F90943642076FEF43F5239DF1B3FA1BB57F53B86FD9AB2D36",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\finish.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD_arming-receipt.json",
+          "sha256": "BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\arming-receipt.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\06FFF23BB60A295D5D079FE87EEA13747A513F087C583C55750AB5327985EF07_window-guest-error.json",
+          "sha256": "06FFF23BB60A295D5D079FE87EEA13747A513F087C583C55750AB5327985EF07",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\window-guest-error.json"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-before-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-before-guest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8_save-after-guest.tsv",
+          "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-after-guest.tsv"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8_anti-tamper-88500006.png",
+          "sha256": "AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8",
+          "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\anti-tamper-88500006.png"
+        }
+      ]
+    },
+    "startup_used": 1,
+    "startup_limit": 5,
+    "join_used": 2,
+    "join_limit": 3,
+    "actual_character_login_requests_after_fix": 0,
+    "fix_runtime_exercised": false,
+    "guest_actor_inserted": false,
+    "l3_accepted": false,
+    "l4_allowed": false,
+    "user_recording": {
+      "produced": false,
+      "reason": "Guest startup error; no mutual actors/movement to record",
+      "screenshot": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8_anti-tamper-88500006.png",
+        "sha256": "AFF875B3FBD5D3F6D07004C78F841B67609D76BBBDF549829F5E4381E820F6C8",
+        "original_path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\evidence\\anti-tamper-88500006.png"
+      }
+    },
+    "official_support": {
+      "error_code": "88500006",
+      "mapped_category": "24H",
+      "guidance": "Purchase revalidation currently unavailable; wait 24 hours before another attempt.",
+      "page": "https://support.codefusion.technology/anti-tamper/?e=88500006&l=en-US&p=s&a=Crimson%20Desert",
+      "mapping": "https://support.codefusion.technology/js/app/v2.6.3/app.js?v=2",
+      "language": "https://support.codefusion.technology/anti-tamper/lang/english.json?v=3",
+      "retrieved_date": "2026-11-17",
+      "root_cause_unknown": true,
+      "device_limit_claim": false,
+      "proof": [
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B9D449DF04D4DA69151D6E3B454B4A85A47A93B18FE784DC801366FA91F15C30_anti-tamper-support.html",
+          "sha256": "B9D449DF04D4DA69151D6E3B454B4A85A47A93B18FE784DC801366FA91F15C30",
+          "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-support.html"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\7FB84F10989037F60AB9F9C7B5376216EA3A0B2059F1E295F9F31DA66EC95739_anti-tamper-app.js",
+          "sha256": "7FB84F10989037F60AB9F9C7B5376216EA3A0B2059F1E295F9F31DA66EC95739",
+          "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-app.js"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\9347F663A60432953134F9E3A6388DF1F869CDC58002B69EEECAA76544C6C2EE_anti-tamper-dc.js",
+          "sha256": "9347F663A60432953134F9E3A6388DF1F869CDC58002B69EEECAA76544C6C2EE",
+          "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-dc.js"
+        },
+        {
+          "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\7583C95E3685D318670906D2B0D0B0BC807D1437491896F4185132FC241F3C35_anti-tamper-english.json",
+          "sha256": "7583C95E3685D318670906D2B0D0B0BC807D1437491896F4185132FC241F3C35",
+          "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-english.json"
+        }
+      ]
+    },
+    "remaining": [
+      "Post-fix native admission/join",
+      "Mutual native movement and user recording",
+      "Guest removal/reconnect",
+      "Guest real-save manifest acceptance in an actual joined session",
+      "Post-session host reload",
+      "L4 after actual L3 pass"
+    ]
+  },
+  "l4": {
+    "attempted": false,
+    "accepted": false,
+    "reason": "Mandatory L3 prerequisite unpassed",
+    "second_pc_requested": false,
+    "guest_kit_deployed": false
+  },
+  "final_validation": {
+    "round": 6,
+    "harness_receipt_round": 5,
+    "step": 3,
+    "suite": "119/119 passed",
+    "seconds": 106.3,
+    "synthetic_remote_states": 78,
+    "synthetic_rejects": 0,
+    "smoke": "eight-second synthetic host/peer only; tier metadata 0xF; clean unload",
+    "asi_sha256": "5C78FD617E961FA6C20775F094918ED3DF7B20037D8CFC283A4CA06F3292C3DF",
+    "default_route": "Tier A reader",
+    "host": "explicit v1; backed-up real saves; zero file sandbox hooks",
+    "guest": "USERPROFILE set before process start; native CSIDL_LOCAL_APPDATA save root must identify verified guest copy; zero file hooks",
+    "fallback": "explicit NT default-deny mode retained and fixture-tested, not installed in the primary profile route",
+    "limits": [
+      "Profile save-path isolation is not an OS permission boundary against arbitrary absolute-path writes.",
+      "Fixtures exercise mutations through the actual native save resolver; the NT fallback separately tests hard-coded real-path refusal/redirection.",
+      "Concurrent real-save host deltas cannot be attributed to one process by a combined manifest alone; guest-only evidence remains required.",
+      "No game runtime acceptance follows from these game-free checks."
+    ],
+    "arming_receipt_sha256": "BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD",
+    "evidence": [
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\D54564A5C2F82E5B75E769A5A293F4F9C6C5C1D9E07D56DA7F2625A1471A0376_r6-step3-suite.txt",
+        "sha256": "D54564A5C2F82E5B75E769A5A293F4F9C6C5C1D9E07D56DA7F2625A1471A0376",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step3-suite.txt"
+      },
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE_r6-step3-smoke.txt",
+        "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step3-smoke.txt"
+      },
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\3EBEB84E3804C50C4632010F03141185605FF2C0FBC03725AE0158BD2849D00C_cdmp.log",
+        "sha256": "3EBEB84E3804C50C4632010F03141185605FF2C0FBC03725AE0158BD2849D00C",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\r6-step3-smoke-run\\e2e\\cdmp.log"
+      },
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\28BDE7E54316A00773317843A5C33CEDB21EF74E0E6F61C644320D2D287EE82A_step1-steam-profile.txt",
+        "sha256": "28BDE7E54316A00773317843A5C33CEDB21EF74E0E6F61C644320D2D287EE82A",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r5\\step1-steam-profile.txt"
+      }
+    ],
+    "source_manifest_sha256": "57F5A7A866882013256DE41A4B49BADE16B49B2CD0CFA543989109F1817A9F77"
+  },
+  "cleanup": {
+    "current_asi_sha256": "5C78FD617E961FA6C20775F094918ED3DF7B20037D8CFC283A4CA06F3292C3DF",
+    "owned_watchdogs": 0,
+    "source_seal_verified": true,
+    "current_real_save_files": 23,
+    "desktop_runner_sha256": "8985660E38F24A8B7256918087A5CBF9829A775DD92DD0FBCE66C4280E80CB09",
+    "content_sessions": [
+      {
+        "id": "R6-D1",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1-20261117"
+      },
+      {
+        "id": "R6-D1b",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-D1b-20261117"
+      },
+      {
+        "id": "R6-L3-1",
+        "guest_backup_files": 23,
+        "frozen_backups_verified": true,
+        "host_backup_files": 23,
+        "installation_restored": true,
+        "host_changes_allowed": true,
+        "historical_real_unchanged": true,
+        "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117"
+      }
+    ],
+    "recorded_utc": "2026-11-17T14:52:48.7562053Z",
+    "scope": "All recorded R6 sessions frozen backups and ended controller receipts; current real saves match latest post-session manifest. Earlier real-save manifests are historical snapshots; legitimate host autosaves are retained, never restored.",
+    "controlled_files_present": [],
+    "current_real_manifest": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-live\\R6-L3-1-20261117\\save-after.tsv",
+    "executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+    "game_processes": 0
+  },
+  "desktop_shortcuts_cleanup": {
+    "removed": true,
+    "files": [
+      {
+        "sha256": "563901193013849C5EFB0F1B5B02946C4672160AE2F8C336B6A3A68BCF75384E",
+        "name": "START-GUEST.lnk"
+      },
+      {
+        "sha256": "2364BE80357B8653F0BA429A2C0043FC20D2A23B3D8357014BD36C00A449AAAE",
+        "name": "START-HOST.lnk"
+      }
+    ],
+    "folder": "C:\\Users\\shaug\\OneDrive\\Desktop\\CDMP R6 LIVE",
+    "recorded_utc": "2026-11-17T14:52:46.5748642Z",
+    "scope": "Only the two verified task shortcuts and empty task folder removed; no recursive deletion."
+  },
+  "activation": {
+    "error_code": "88500006",
+    "mapped_category": "24H",
+    "guidance": "Purchase revalidation currently unavailable; wait 24 hours before another attempt.",
+    "page": "https://support.codefusion.technology/anti-tamper/?e=88500006&l=en-US&p=s&a=Crimson%20Desert",
+    "mapping": "https://support.codefusion.technology/js/app/v2.6.3/app.js?v=2",
+    "language": "https://support.codefusion.technology/anti-tamper/lang/english.json?v=3",
+    "retrieved_date": "2026-11-17",
+    "root_cause_unknown": true,
+    "device_limit_claim": false,
+    "proof": [
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\B9D449DF04D4DA69151D6E3B454B4A85A47A93B18FE784DC801366FA91F15C30_anti-tamper-support.html",
+        "sha256": "B9D449DF04D4DA69151D6E3B454B4A85A47A93B18FE784DC801366FA91F15C30",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-support.html"
+      },
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\7FB84F10989037F60AB9F9C7B5376216EA3A0B2059F1E295F9F31DA66EC95739_anti-tamper-app.js",
+        "sha256": "7FB84F10989037F60AB9F9C7B5376216EA3A0B2059F1E295F9F31DA66EC95739",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-app.js"
+      },
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\9347F663A60432953134F9E3A6388DF1F869CDC58002B69EEECAA76544C6C2EE_anti-tamper-dc.js",
+        "sha256": "9347F663A60432953134F9E3A6388DF1F869CDC58002B69EEECAA76544C6C2EE",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-dc.js"
+      },
+      {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\7583C95E3685D318670906D2B0D0B0BC807D1437491896F4185132FC241F3C35_anti-tamper-english.json",
+        "sha256": "7583C95E3685D318670906D2B0D0B0BC807D1437491896F4185132FC241F3C35",
+        "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\anti-tamper-english.json"
+      }
+    ],
+    "approximate_next_manual_test_not_before": "2026-11-18 09:46 America/New_York",
+    "reset_guaranteed": false,
+    "retry_scheduled": false,
+    "protection_changed": false,
+    "tokens_copied_or_deleted": false,
+    "further_launch_made": false
+  },
+  "preserved": {
+    "default_tier": "A HP reader",
+    "native_v1": "Explicit exact-build guarded C/D only",
+    "host_isolation": "None; verified backed-up real saves",
+    "guest_isolation": "USERPROFILE/native CSIDL save-root identity verified, zero file hooks; explicit NT fallback fixture-tested",
+    "limits": "Profile path selection is not an OS permission boundary; endpoint manifest equality does not exclude transient writes. No progress restored over.",
+    "steam_friends": true,
+    "executable_filter": true,
+    "synthetic_test_host_paths": true,
+    "original_sibling_and_parent_launcher_untouched": true,
+    "attribution": "Original project history/GPL v3 preserved. R6 ports the existing checkout legacy sentinel semantics; no new PR source copied. Samuel Cardillo credited R5 guard files remain unchanged.",
+    "upstream_reference_commit": "a3904af3e1a32056dcf7a63bc7a469eb4231084b"
+  },
+  "remaining": [
+    "Official purchase revalidation recovery; no guaranteed cause/reset instant established",
+    "Post-fix native character admission and actual shared-field insertion/commit",
+    "Mutual native walking/turning, user recording filename/duration and both-window content",
+    "Guest removal/reconnect outcome and post-session host reload",
+    "Actual joined-session real-save manifest acceptance and normal host exit",
+    "Second-PC Steam L4 only after complete L3 acceptance"
+  ],
+  "manual_test_plan": "After official wait/recovery and fresh live presence: exact build, backups, sealed desktop starts; confirm left/right before Play. Observe conversion plus strict admission/native insertion and mutual characters; user records both windows. Guest removal/reconnect, checkpoint, host reload and normal quit within original deadline. Stop on error; no automatic launch.",
+  "commands": [
+    "scripts/build.ps1 baseline and post-logging/post-fix full builds",
+    "PortFunctionEvidence.java read-only exact-target extraction and disk vtable/read-size checks",
+    "tools/port3663/smoke.ps1 -Seconds 8 -RequireV1 in unique roots",
+    "build/r6/seal-validation.py with unique arming names; unchanged R5 desktop receipt compatibility",
+    "scripts/launch-2inst-3663.ps1 Prepare/Run -DesktopLaunchPlan/Verify/Finish",
+    "Manual desktop shortcut launches; user gameplay and arrangement",
+    "build/r6/read-refusal.py",
+    "Read-only official CodeFusion public support page/app/language resource retrieval",
+    "build/r6/final-audit.ps1"
+  ],
+  "local_proofs": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\A57A9152F197288D2CC53B8B114F31EB10170C699CB1E42186A7BAB794E4FAB3_step1-analysis.json",
+      "sha256": "A57A9152F197288D2CC53B8B114F31EB10170C699CB1E42186A7BAB794E4FAB3",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r6\\step1-analysis.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\0A0E9489F081DEEC0AF54A1CDE44E8712213B581EEBDA03030FF5C1DBD6EBE1B_r6-step1-validation.json",
+      "sha256": "0A0E9489F081DEEC0AF54A1CDE44E8712213B581EEBDA03030FF5C1DBD6EBE1B",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r6\\r6-step1-validation.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\347A2339D1E8AAAE46173744EB104FA67208E41DED7FB29CA484090FDD3A21FE_step2-results.json",
+      "sha256": "347A2339D1E8AAAE46173744EB104FA67208E41DED7FB29CA484090FDD3A21FE",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r6\\step2-results.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\884E2A270C290302D1ACC2E5C163BDB15B5FC8445D9A13DA860394FEBC9744A0_r6-step3-validation.json",
+      "sha256": "884E2A270C290302D1ACC2E5C163BDB15B5FC8445D9A13DA860394FEBC9744A0",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r6\\r6-step3-validation.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\4A1688FE0A8FA53FA1B9BD7D91EF94264E68F8A826516488D00E5FABA57C0FF2_step4-results.json",
+      "sha256": "4A1688FE0A8FA53FA1B9BD7D91EF94264E68F8A826516488D00E5FABA57C0FF2",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\docs\\probe-3663\\port-evidence\\r6\\step4-results.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\23D563D018DAD18E373D3EF6783A40EE77340F9523A35FE9EAF7C70BD2CA433F_final-audit.ps1",
+      "sha256": "23D563D018DAD18E373D3EF6783A40EE77340F9523A35FE9EAF7C70BD2CA433F",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\final-audit.ps1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\CDCC3643B4CE42CAA7924F169B36275B38E529760CE75C745ECF27A616A26980_final-cleanup.json",
+      "sha256": "CDCC3643B4CE42CAA7924F169B36275B38E529760CE75C745ECF27A616A26980",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\final-cleanup.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\1DFBC99D37B5F019B2020B0C642F3F3CA9A5A58FFF853F98DC4A1AC39142D776_desktop-shortcuts-cleanup.json",
+      "sha256": "1DFBC99D37B5F019B2020B0C642F3F3CA9A5A58FFF853F98DC4A1AC39142D776",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\desktop-shortcuts-cleanup.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\FAF675D3491BDCCBF74A90A10595D3B1FA76122E7109C0FD7F37C12605439439_attempts.json",
+      "sha256": "FAF675D3491BDCCBF74A90A10595D3B1FA76122E7109C0FD7F37C12605439439",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\attempts.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\A1CC3A0B1BF73BD7C33FAD553EDA38C76B44E3431ADDC3FB28AD0FA12019F80E_arming-r6-step1.json",
+      "sha256": "A1CC3A0B1BF73BD7C33FAD553EDA38C76B44E3431ADDC3FB28AD0FA12019F80E",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\arming-r6-step1.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD_arming-r6-step3.json",
+      "sha256": "BEA58A5035BC3EC6B6FEB36F72196C0349BEBDCAF61D9785054575C1A69DA9AD",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\arming-r6-step3.json"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\E7C67BBDA7710696C2F7ACD6E0915E6E8FDF4DFE1F2AF3734701CEE425801FD0_read-refusal.py",
+      "sha256": "E7C67BBDA7710696C2F7ACD6E0915E6E8FDF4DFE1F2AF3734701CEE425801FD0",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\read-refusal.py"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\3347BA73E07142225E6343A97AB38E81E6B119094EA37F040976A2D1E5374E13_seal-validation.py",
+      "sha256": "3347BA73E07142225E6343A97AB38E81E6B119094EA37F040976A2D1E5374E13",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\seal-validation.py"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\artifacts\\9FB9735BA330117E86120B438A71697536D8FEAC8150D90D7E88ED76E6560C03_attempts.py",
+      "sha256": "9FB9735BA330117E86120B438A71697536D8FEAC8150D90D7E88ED76E6560C03",
+      "original_path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r6\\attempts.py"
+    }
+  ],
+  "artifact_bundle": {
+    "root": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952",
+    "scope": "Frozen local evidence copies, outside OneDrive; no compiled binaries or release. Raw original experiment records remain.",
+    "references_checked": 95,
+    "index": {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r6-packages\\R6-20261117-0952\\archive-index.json",
+      "sha256": "2BD690B87C056082F92963207B62DA04059E2090A37B31D00683B194277CA9D2"
+    }
+  }
+}
