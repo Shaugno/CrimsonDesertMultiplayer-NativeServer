@@ -320,6 +320,8 @@ add_executable(cdmp_tests_r5_guard_policy tests/r5_guard_policy_tests.cpp)
 target_include_directories(cdmp_tests_r5_guard_policy PRIVATE src)
 cdmp_strict(cdmp_tests_r5_guard_policy)
 add_test(NAME r5_guard_policy COMMAND cdmp_tests_r5_guard_policy)
+add_test(NAME r5_window_report COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+         -File "${CMAKE_SOURCE_DIR}/tools/port3663/r5_window_report.ps1" -SelfTest)
 add_executable(cdmp_tests_native_call_scope tests/native_call_scope_tests.cpp)
 cdmp_strict(cdmp_tests_native_call_scope)
 target_include_directories(cdmp_tests_native_call_scope PRIVATE src)

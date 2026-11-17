@@ -81,6 +81,18 @@ public sealed class R4LocalCapture : IDisposable {
   }
   int[] result=new int[seen.Count];seen.CopyTo(result);return result;
  }
+ public static uint ReadFrames(string path){
+  using(var r=new BinaryReader(File.OpenRead(path))){
+   if(r.BaseStream.Length<232 || Encoding.ASCII.GetString(r.ReadBytes(4))!="RIFF" || r.ReadUInt32()!=r.BaseStream.Length-8)throw new Exception("AVI RIFF size");
+   r.BaseStream.Position=48;return r.ReadUInt32();
+  }
+ }
+ public static bool Complete(uint frames,int[] expected,int[] seen){
+  if(frames==0 || expected.Length!=2 || expected[0]==expected[1])return false;
+  foreach(int pid in expected)if(Array.IndexOf(seen,pid)<0)return false;
+  return true;
+ }
+ public static void EmptyFixture(string path){using(var output=new R4LocalCapture(path)){} }
  public static void Fixture(string path){
   using(var output=new R4LocalCapture(path))using(var image=new Bitmap(W,H,PixelFormat.Format24bppRgb)){
    using(Graphics g=Graphics.FromImage(image)){g.Clear(Color.Blue);g.FillRectangle(Brushes.Red,0,0,W,H/2);}
@@ -98,8 +110,17 @@ public sealed class R4LocalCapture : IDisposable {
 }
 if($SelfTest){
     $fixture=Join-Path ([IO.Path]::GetTempPath()) ('cdmp-r4-capture-'+[guid]::NewGuid().ToString('N')+'.avi')
-    try{[R4LocalCapture]::Fixture($fixture);Write-Output 'R4 capture fixture: two owned synthetic frames, AVI sizes/count/index PASS; no desktop read'}
-    finally{if(Test-Path -LiteralPath $fixture){Remove-Item -LiteralPath $fixture -Force}}
+    $empty=$fixture+'.empty.avi'
+    try{
+        [R4LocalCapture]::Fixture($fixture);[R4LocalCapture]::EmptyFixture($empty)
+        if([R4LocalCapture]::ReadFrames($fixture) -ne 2 -or [R4LocalCapture]::ReadFrames($empty) -ne 0){throw 'Owned frame fixtures failed'}
+        if(![R4LocalCapture]::Complete(2,[int[]]@(10,20),[int[]]@(10,20)) -or
+            [R4LocalCapture]::Complete(0,[int[]]@(10,20),[int[]]@()) -or
+            [R4LocalCapture]::Complete(2,[int[]]@(10,20),[int[]]@(10)) -or
+            [R4LocalCapture]::Complete(2,[int[]]@(10,10),[int[]]@(10))){throw 'Capture acceptance regression'}
+        Write-Output 'R5 capture fixture: owned two/zero-frame AVI, missing/duplicate-window rejection PASS; no desktop read'
+    }
+    finally{foreach($path in @($fixture,$empty)){if(Test-Path -LiteralPath $path){Remove-Item -LiteralPath $path -Force}}}
     return
 }
 if(!$Present -or !$SessionRoot){throw 'Explicit live presence and controlled session required'}
@@ -114,8 +135,10 @@ foreach($role in 'host','guest'){
 }
 $path=Join-Path $SessionRoot ('l3-capture-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss')+'.avi')
 $seen=@([R4LocalCapture]::Capture($path,[int[]]$ids,[long[]]$births))
-$result=@{path=$path;sha256=(Get-FileHash -LiteralPath $path).Hash;bytes=(Get-Item -LiteralPath $path).Length;
+$frames=[R4LocalCapture]::ReadFrames($path)
+$result=@{path=$path;sha256=(Get-FileHash -LiteralPath $path).Hash;bytes=(Get-Item -LiteralPath $path).Length;frames=$frames;
     duration_seconds=10;fps=2;foreground_test_pids=$seen;both_test_windows_seen=($ids.Count -eq 2 -and @($ids | Where-Object {$_ -notin $seen}).Count -eq 0);
     scope='local-only foreground game windows; no UI control; no native memory access';captured_utc=[DateTime]::UtcNow.ToString('o')}
 $result | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath ($path+'.json') -Encoding UTF8
 $result | ConvertTo-Json -Depth 4
+if(![R4LocalCapture]::Complete($frames,[int[]]$ids,[int[]]$seen)){throw 'Local capture incomplete: empty clip or missing test window; metadata retained, no visual acceptance'}
