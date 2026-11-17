@@ -1,3 +1,140 @@
+# R5 Step 5 — review package (2026-11-16 Eastern)
+
+Branch `gpt/3663-port`; source/validation checkpoint **76ecfa0**, Step 4
+blocker commit **b0c1fef**; the following packaging commit is branch HEAD.
+This section supersedes R4/R3/R2 status below. **S1/S2 startup acceptance
+passes. L3 and L4 do not pass; the two-player goal is not reached.** No
+review approval is required to continue, and the attempt caps are not
+exhausted. A game-free two-window presence question is pending.
+
+`R5-REVIEW-PACKAGE.json` indexes every commit since 756fcd5, changed files,
+all startup/join outcomes and log/receipt/manifest hashes, final validation,
+upstream reference usage and cleanup. `R5-ISOLATION.md`, `R5-STEP2.md`,
+`R5-STEP3.md`, `R5-STEP4.md` and `R5-UPSTREAM-REFERENCE.md` explain the
+implementation, observations and remaining boundaries.
+
+## What changed and passed
+
+The host uses fresh backed-up real saves and never installs the file
+sandbox. Normal host autosave is allowed. The guest overrides USERPROFILE
+before process creation; the actual native CSIDL_LOCAL_APPDATA save resolver
+must identify the verified guest copy by canonical path and file identity.
+The preferred guest route installs **zero file hooks**. The corrected NT
+fallback remains explicit and fixture-tested. Profile path selection is not
+an OS permission boundary against arbitrary absolute writes; NT refusal
+tests and profile-resolver tests are separate claims. Combined host deltas
+alone cannot identify their writer. No real progress is restored over.
+
+The owned fixtures cover native path resolution, isolated mutations,
+negative profile checks, host source drift, Steam/pagefile IPC, pipes,
+128 KB stacks and teardown. Steam initialization succeeded in baseline,
+NT and profile modes. The supported target remains exact 3663, SHA-256
+`8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8`.
+Default Tier A and the explicit guarded C/D route remain distinct. Steam
+friends restrictions, executable filtering and original attribution remain.
+
+Latest `scripts/build.ps1` validation: **118/118 tests, 106.05 seconds**.
+Latest isolated eight-second synthetic smoke: **78 remote states, zero
+rejects, metadata mask 0xF, clean unload**. Latest ASI SHA-256 is
+`5006DAD5DF5508CBC0CD971944A022150B852E5F3B708AD6DDD75FDACAC6ECAA`,
+embedded banner `966CB5F3`. It was rebuilt alongside the validation-tool
+update and has not been retried in the game. Its source/receipt hashes
+are in `port-evidence/r5/desktop-preflight-validation.json`. Synthetic
+traffic is not two-player proof.
+
+## Every R5 live experiment
+
+| Attempt | Budget category | Actual outcome |
+| --- | --- | --- |
+| R5-S1 | Startup | Host title/save/world readiness and over one minute in-world; fixed ten-minute watchdog stop. Normal quit unestablished; incomplete and retained. |
+| R5-S2 | Startup | Isolated guest title reached, native profile verified, file_hooks=0, networking off; user selected Quit to Desktop; normal exit 0. Passed. |
+| R5-S1B | Startup | Host no sandbox, save loaded, native descriptors/route/world ready, over one minute in-world; user selected Quit to Desktop; normal exit 0. Passed. |
+| R5-L3-1 | Join | Host loaded; remote guest native cryptogram/login and ten-entry title refresh passed. User could not locate two games. Zero character-load requests/EnterField inserts/commits. Both fixed-deadline stops; unpassed. |
+
+Startup usage **3/5**, join usage **1/3**. Earlier-round counts reset under
+the approved R5 rule. L3 reserved a prejoin startup slot, then transferred
+to the join budget before remote guest launch so its native handshake was
+included. No native fault was observed in these trials. The first S1 exit
+timing remains unknown; the successful retry gave the entire action sequence
+before launch and passed the unchanged-binary full suite again (116/116,
+135.49 seconds), including owned normal/deadline watchdog reproductions.
+
+Full log SHA-256 values:
+
+- S1 host: `505F439D6D776719A154082421227CCF8090F46304F3B3D561992ABC539147EA`
+- S2 guest: `4718053076AFA1CE8639854C99885357C5A594194B8693CC7610C1912A349DFA`
+- S1B host: `7E6BB475285D9EDEA6B1E4138462B5A81C954C159FF3307D0AC4AD9493150D0B`
+- L3 host: `01A3F0FBFB89D49356BFE7F0B636377BB618FCF58B9C4A82C215443AC37691B0`
+- L3 guest: `4789B8BD7D9FA67100D5596F8B68600C20EFE93A859BDE7CF038047F8F67E1DA`
+
+## L3/L4 blocker and independent fixes
+
+Two controlled process identities were recorded, but two usable game windows
+were not established. The user described one Steam-started game and could
+not find two. That report does not identify a PID; no hidden-desktop,
+bootstrap, minimization or title-eligibility cause is asserted. The command
+tool, Steam and Explorer were later observed in session 1; the tool reported
+WinSta0/Default. This does not reconstruct the ended game windows.
+
+The local ten-second capture was a **232-byte empty AVI, zero game frames**,
+SHA-256 `C674E1892CDD9CC75B447BED09F9197D1E85F4BE1E6E7ABFDDD4A575A76B8DF5`.
+It is not menu/gameplay evidence. The tool's previous success on an empty
+clip was reproduced with an owned empty AVI and fixed: empty clips, missing
+either controlled window, and duplicate role PIDs now fail while retaining
+metadata. A new PID/birth-bound read-only window reporter checks bounds,
+monitor, minimized/cloaked/visible/owner/style/desktop state without moving,
+activating or changing game windows. Its owned hidden-pair fixture passes;
+the optional 45-second visible-pair test needs the user present and has not
+run. Do that before another game attempt, and establish both controlled
+windows before character-load or visual acceptance. No assistant UI control
+was used.
+
+Mutual native visibility/movement, guest removal, reconnect, a nonempty
+two-window recording, post-L3 host save reload and live firing of the two
+new guards remain unproved. **L4 did not run** because R5 requires L3 first.
+No second PC was requested and no guest kit was deployed or declared ready.
+The L4 launcher modes retain exact-build/profile/Steam guards; portable paths,
+same-binary private kit, friendship/account, backups and common deadline
+still need the later second-PC sitting. No prerequisite was bypassed.
+
+## Samuel Cardillo reference and credit
+
+PR #1 is pinned at `a3904af3e1a32056dcf7a63bc7a469eb4231084b`; it was
+fetched only as a reference and never merged. The file-filtered Steam
+manifest **5865785040848247748** produced verified 1.0.0.3576, SHA-256
+`C94AD6C3EA54970A6D2DA7A2719753210A7728A91698ED3405DD9125470ED98F`.
+The reference was never executed and the installed game was unchanged.
+
+The upstream EnterField wrapper still forwards four arguments; its native
+3576 callee independently confirms the three-argument contract, so our
+typed 3663 adapter remains. Samuel's **field-leave** and **achievement**
+rules were adopted into new credited files and commit **966cb5f**, preserving
+GPL v3. Every target entry, vtable slot, midpoint, branch, full achievement
+frame construction and owned-argument cleanup was independently checked on
+3663 and cross-checked against the verified 3576 reference. No source-build
+address was copied unchecked. Character signatures and paired caller chains
+were used for research only; optional character/mount/combat installers were
+not enabled. See the pinned links and exact proof in `R5-UPSTREAM-REFERENCE.md`.
+
+## Final state and resumption
+
+Fresh final audit at **22:26 Eastern**: no game or owned watchdog processes;
+ASI/PDB/loader/two role INIs/test marker absent; all **23 real-save files**
+and both frozen backups for each of the four sessions match their content
+manifests. Current executable, binary and source seal verify. The complete
+audit hash is in `R5-REVIEW-PACKAGE.json`; session evidence remains local
+outside OneDrive. No real saves were restored, no binaries/media were
+committed, and the original sibling checkout and parent launcher were not
+changed.
+
+Resume with the pending game-free visible-pair touchpoint, then resolve the
+native window boundary with the read-only report before another bounded L3
+attempt. Keep explicit live presence, exact steps, backups and watchdogs.
+Only a passed L3 permits asking for the second PC/L4. Update this package
+after actual new evidence; no intermediate code-review gate applies.
+
+---
+
 # R4 Step 6 — review package (2026-11-16)
 
 Branch: `gpt/3663-port`. Runtime/source checkpoint:
