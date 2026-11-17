@@ -1,0 +1,200 @@
+{
+  "round": 5,
+  "step": 2,
+  "accepted": true,
+  "startup_used": 3,
+  "startup_limit": 5,
+  "join_used": 0,
+  "join_limit": 3,
+  "host_acceptance": "R5-S1B",
+  "guest_acceptance": "R5-S2",
+  "attempts": [
+    {
+      "id": "R5-S1",
+      "kind": "startup",
+      "outcome": "deadline_stopped",
+      "session_kind": "HostStartup",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-S1-20261116",
+      "note": "Reached title and native world-ready/in-world state; no native fault; normal quit not observed before fixed 600-second deadline, watchdog terminated exact owned process. S1 acceptance incomplete. Backups and cleanup verified; host autosave deltas retained.",
+      "pid": 23048,
+      "exit": "deadline_stopped",
+      "exit_code": 13923,
+      "real_saves_unchanged": true,
+      "host_changes_allowed": true,
+      "restored": true,
+      "log_sha256": "505F439D6D776719A154082421227CCF8090F46304F3B3D561992ABC539147EA",
+      "user_report": "in world; closed; quit timing not established",
+      "world_ready": true,
+      "host_no_file_sandbox": true,
+      "profile_isolation": false,
+      "guest_networking_off": false,
+      "proofs": [
+        {
+          "name": "evidence\\cdmp.host.log",
+          "sha256": "505F439D6D776719A154082421227CCF8090F46304F3B3D561992ABC539147EA"
+        },
+        {
+          "name": "launch-host.json",
+          "sha256": "0888BF1C36FBEAA2862E1070C243DC3BEF6A26C58193ABEE09569F150AB77ADC"
+        },
+        {
+          "name": "watchdog-host.json",
+          "sha256": "85A70578114467D9681A52032726D82F1BCBE31224EAEDF86A6E5F0CCC528B85"
+        },
+        {
+          "name": "session.json",
+          "sha256": "6B3CB24CD9258D5B7C8405A680DCBB5310EEDA4CB683D863B9923A74E65A1C34"
+        },
+        {
+          "name": "save-manifest.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "name": "save-after.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "name": "finish.json",
+          "sha256": "01F81CFC8C9A3ECFCAF8D79C9C24EA5E4A3E3AF10F4690D3EBF2EA3A10CB464A"
+        },
+        {
+          "name": "verification.json",
+          "sha256": "6310CF8646443F1A12F85E8D05F7DBABB60CB724443B875950CDE0A0E597EA72"
+        },
+        {
+          "name": "question.txt",
+          "sha256": "766BCE7FE090887B79BC78EBCE2E912C4DFADC0E2FE2BC1BF79EA20E196856DB"
+        }
+      ]
+    },
+    {
+      "id": "R5-S2",
+      "kind": "startup",
+      "outcome": "passed",
+      "session_kind": "GuestStartup",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-S2-20261116",
+      "note": "User confirms title reached, Quit to Desktop selected, closed. Pinned process exited normally code 0 before deadline; guest native save root verified profile with file_hooks=0, networking off; strict original/backup manifests unchanged and installation restored.",
+      "pid": 6800,
+      "exit": "exited",
+      "exit_code": 0,
+      "real_saves_unchanged": true,
+      "host_changes_allowed": false,
+      "restored": true,
+      "log_sha256": "4718053076AFA1CE8639854C99885357C5A594194B8693CC7610C1912A349DFA",
+      "user_report": "title reached; quit selected; closed",
+      "world_ready": false,
+      "host_no_file_sandbox": false,
+      "profile_isolation": true,
+      "guest_networking_off": true,
+      "proofs": [
+        {
+          "name": "evidence\\cdmp.guest.log",
+          "sha256": "4718053076AFA1CE8639854C99885357C5A594194B8693CC7610C1912A349DFA"
+        },
+        {
+          "name": "launch-guest.json",
+          "sha256": "3B18C8FEF6624F90A27FD5AFE7243B21DFA5420CAFAD82476132EFF948EA2193"
+        },
+        {
+          "name": "watchdog-guest.json",
+          "sha256": "22044E4FE7E213E5C20684E3812ABB1E044E49D7EAC2A6EE8486E94842BA4E9B"
+        },
+        {
+          "name": "session.json",
+          "sha256": "EAAD4800C23C6950B240E2EDD11DD5B4FFFEBD6B49B0B23DB15B6D0BBDB13BFE"
+        },
+        {
+          "name": "save-manifest.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "name": "save-after.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "name": "finish.json",
+          "sha256": "643B13AB46B4F8C195EDED69F130EF0496D335F3003AA457117A076F21BA82C4"
+        },
+        {
+          "name": "verification.json",
+          "sha256": "29CC0C2AF21B5E32A9C18FA7F17FAE2841DA0FD20BBDCC7857F9C211A2952AF6"
+        },
+        {
+          "name": "question.txt",
+          "sha256": "BB351D3C5BCB47FD21970BD98F2FEBA399E50D6979B843E9DAAC927B22482ED0"
+        }
+      ]
+    },
+    {
+      "id": "R5-S1B",
+      "kind": "startup",
+      "outcome": "passed",
+      "session_kind": "HostStartup",
+      "session": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r5-live\\R5-S1B-20261116",
+      "note": "User confirms save loaded, Quit to Desktop selected, closed. Native descriptors/host route/world-ready verified; in-world interval over one minute; pinned process normal exit 0 before deadline; no host sandbox; backups and cleanup verified.",
+      "pid": 732,
+      "exit": "exited",
+      "exit_code": 0,
+      "real_saves_unchanged": true,
+      "host_changes_allowed": true,
+      "restored": true,
+      "log_sha256": "7E6BB475285D9EDEA6B1E4138462B5A81C954C159FF3307D0AC4AD9493150D0B",
+      "user_report": "save loaded; quit selected; closed",
+      "world_ready": true,
+      "host_no_file_sandbox": true,
+      "profile_isolation": false,
+      "guest_networking_off": false,
+      "proofs": [
+        {
+          "name": "evidence\\cdmp.host.log",
+          "sha256": "7E6BB475285D9EDEA6B1E4138462B5A81C954C159FF3307D0AC4AD9493150D0B"
+        },
+        {
+          "name": "launch-host.json",
+          "sha256": "A6FB7886894438B871CA98D2C4B7719E960776EBA5046692450C9CC6259D6FC1"
+        },
+        {
+          "name": "watchdog-host.json",
+          "sha256": "F72871D3307E2B7066B33F01A3EA61FA4CDB0D4A39FCC252F84CBE75068C10D1"
+        },
+        {
+          "name": "session.json",
+          "sha256": "2824BFCF292495ACC2E8C5C6DBBE1AD560C262C7D93EB7DCD2DA903FBFEF2A26"
+        },
+        {
+          "name": "save-manifest.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "name": "save-after.tsv",
+          "sha256": "DA50EB8F0220066593A30DD81D51CFE9C484389AAA96A948348C4BB8B45042D7"
+        },
+        {
+          "name": "finish.json",
+          "sha256": "A78C4D63C26F1BF4A5FD53589D9FECC5B9F0EEFBA9ACC0CA69179D9210EC36DB"
+        },
+        {
+          "name": "verification.json",
+          "sha256": "F5907D5DFC8A29A8831F6E082228A157058CCC27BE30EE9BE44ED3BA58DE7699"
+        },
+        {
+          "name": "question.txt",
+          "sha256": "E65C25C8BA54766493EB375B706486B54B15D50BBBCBDECE499198A00896ADCA"
+        }
+      ]
+    }
+  ],
+  "retry": {
+    "procedure": "Full acknowledged action sequence before launch, no second title message wait; prior delayed-exit cause remains unconfirmed.",
+    "source_and_binary_unchanged": true,
+    "suite": "116/116 passed",
+    "seconds": 135.49,
+    "suite_sha256": "9B14BC3B41F4D224D2878B3A1A673A3865B9E00EC504B088F3EA3C917BBFCD5A",
+    "offline_reproductions": "Full suite includes owned normal/deadline/mismatched-identity watchdog fixtures."
+  },
+  "limits": [
+    "No guest join or two-instance test has run in R5.",
+    "The first host trial was deadline-stopped, not a normal exit; it remains in the startup count.",
+    "No native crash observed in these startup logs; the first trial quit timing remains unknown."
+  ]
+}

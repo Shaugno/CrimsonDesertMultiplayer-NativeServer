@@ -1,0 +1,126 @@
+{
+  "pr_commit": "a3904af3e1a32056dcf7a63bc7a469eb4231084b",
+  "reference_sha256": "C94AD6C3EA54970A6D2DA7A2719753210A7728A91698ED3405DD9125470ED98F",
+  "target_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "reference_manifest": "5865785040848247748",
+  "executed_references": false,
+  "checks": [
+    {
+      "name": "field_leave",
+      "reference_entry": "0x23bbd00",
+      "target_entry": "0x242d4e0",
+      "reference_vtable": "0x5ef7040",
+      "target_vtable": "0x5f70cb0",
+      "slot": 34,
+      "verified_slots": true,
+      "target_head": "48 89 5C 24 08 57 48 83 EC 20 48 8B 02 48 8B F9 48 8B CA 48 8B DA FF 50 48 48 85 C0 74 0D 4C 8B 00 48 8B D3 48 8B C8 41"
+    },
+    {
+      "name": "achievement",
+      "reference_entry": "0x1983400",
+      "target_entry": "0x19e9070",
+      "reference_vtable": "0x5b783f8",
+      "target_vtable": "0x5bf4138",
+      "slot": 2,
+      "verified_slots": true,
+      "target_head": "44 89 4C 24 20 4C 89 44 24 18 48 89 54 24 10 55 53 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 58 FF FF FF 48 81 EC A8 01"
+    },
+    {
+      "name": "character_layer",
+      "provenance_build": "3527/3549",
+      "reference3576_hits": [
+        "0x214f8d0"
+      ],
+      "target3663_hits": [
+        "0x21bd690"
+      ],
+      "adopted": false
+    },
+    {
+      "name": "character_layers",
+      "provenance_build": "3527/3549",
+      "reference3576_hits": [
+        "0x251ac20"
+      ],
+      "target3663_hits": [
+        "0x258c5a0"
+      ],
+      "adopted": false
+    },
+    {
+      "name": "character_update",
+      "provenance_build": "3527/3549",
+      "reference3576_hits": [
+        "0x9451e0"
+      ],
+      "target3663_hits": [
+        "0x9729c0"
+      ],
+      "adopted": false
+    },
+    {
+      "name": "character_post",
+      "provenance_build": "3527/3549",
+      "reference3576_hits": [
+        "0x9463d0",
+        "0xe40450"
+      ],
+      "target3663_hits": [
+        "0x973bb0",
+        "0xe79f80"
+      ],
+      "adopted": false
+    },
+    {
+      "name": "character_restore",
+      "provenance_build": "3527/3549",
+      "reference3576_hits": [
+        "0x949eb0"
+      ],
+      "target3663_hits": [
+        "0x9778b0",
+        "0x2bb1070"
+      ],
+      "adopted": false
+    },
+    {
+      "name": "character_pending",
+      "provenance_build": "3527/3549",
+      "reference3576_hits": [
+        "0x251b420"
+      ],
+      "target3663_hits": [
+        "0x258cda0"
+      ],
+      "adopted": false
+    }
+  ],
+  "achievement_target_cleanup": "49 8B CF E8 AA 21 9F FE 90 48 8B CE E8 71 DC 9F FE B0 01",
+  "adopted": false,
+  "evidence": [
+    {
+      "name": "upstream-3576-native-context.txt",
+      "sha256": "CC04622012D8B6870FE4169BD16251CD39704AAEBEF82324FFCD346E7F61C96E"
+    },
+    {
+      "name": "upstream-guards3663-context.txt",
+      "sha256": "8C84517213CE0888F5A5FFAD76CDCA4521F9FBB1B1B1D0ADB57C109AC949D3AE"
+    },
+    {
+      "name": "upstream-guard-rtti3663.json",
+      "sha256": "A7CA1FFAA83E5A08806DBA3136C8FA7D3468D169368AED46772D39922690E9A5"
+    },
+    {
+      "sha256": "75A691A27205C0407244993910CC33994E3F79FF059E28D98558564C1568704C",
+      "name": "character3576-native-context.txt"
+    },
+    {
+      "sha256": "FEA35A8DCDED14512A50BB3A42F242943D2FD34F7615184F595F0FC29505E529",
+      "name": "character3663-native-context.txt"
+    },
+    {
+      "sha256": "2E3FDCB0082C02CD4CA102FA1D6F243D37F04F7D5808F101AA29733AF64C3D57",
+      "name": "character3663-caller-context.txt"
+    }
+  ]
+}
