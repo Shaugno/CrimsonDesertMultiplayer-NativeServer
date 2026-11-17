@@ -1,3 +1,31 @@
+# R7 Step 1 — offline checkpoint (2026-11-17 Eastern)
+
+User-approved R7 supersedes earlier launch/profile rules. Plan saved/pushed
+as **16d271d**. The production 3663 guest now uses **NT save-directory-only
+isolation**, inherits normal USERPROFILE/LOCALAPPDATA, and refuses the profile
+route. The host retains real saves and no sandbox. Both launch paths enforce
+**no game launch before 2026-11-18 10:00 AM Eastern / 15:00 UTC**.
+
+`R7-STEP1.md` records the change, reproducible fixture expectations, retained
+IPC/pipe/small-stack/teardown protections, validation and next live sequence.
+`port-evidence/r7/step1-validation.json` seals the final full-suite/synthetic
+smoke and binary/evidence hashes. The separate R7 arming format rejects old
+profile receipts. The R6 narrow character-login fix is unchanged.
+Final validation: **119/119 in 110.93 seconds**; synthetic smoke **78 remote
+states, zero rejects, clean unload**. Audit: no game process/controlled install.
+
+**Steps 2–5 are pending the time gate and user-present tests. This is not the
+final Step 5 package.** No R7 game launched or live budget was consumed:
+startup **0/5**, join **0/3**, separate ledger under `port-evidence/r7`.
+Activation causality/recovery remains unproven; L3/L4 remain unpassed.
+After the deadline, run one guest-only title/quit check. If activation error
+returns, stop live work and package the blocker; otherwise proceed to the
+batched L3 acceptance with both usable views confirmed side by side and the
+user's recording. Request the second PC only after L3 passes. Preserve all
+earlier evidence and commit/push each remaining step without review gates.
+
+---
+
 # R6 Step 6 — review package (2026-11-17 Eastern)
 
 Branch **gpt/3663-port** is ready for Claude's review. **The diagnostic

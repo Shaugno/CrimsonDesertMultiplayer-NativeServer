@@ -10,6 +10,7 @@ function Manifest([string]$dir) {
     }) -join "`n"
 }
 function ProfileCase([string]$steam=''){
+    # Historical owned fake-profile fixture only; production R7 rejects this route.
     $case=Join-Path $root 'profile-case';$real=Join-Path $case 'real';$backup=Join-Path $case 'backup'
     $profile=Join-Path $case 'profile';$local=Join-Path $profile 'AppData\Local'
     $sandbox=Join-Path $local 'Pearl Abyss\CD\save'
@@ -77,6 +78,8 @@ try {
         throw "Sandbox worker failed $LASTEXITCODE; real manifest unchanged=$((Manifest $real) -eq $before)"
     }
     if((Manifest $real) -ne $before){throw 'Real fixture directory changed'}
+    if((Manifest $backup) -ne $before){throw 'Frozen backup changed'}
+    if([IO.File]::ReadAllText((Join-Path $root 'ordinary-profile-data.bin')) -ne 'normal location'){throw 'Unrelated owned file was redirected'}
     if([IO.File]::ReadAllText((Join-Path $sandbox 'source.save')) -ne 'Griginal'){throw 'Mapped write missed sandbox'}
     foreach($name in @('renamed.save','relative.save','dot.save','extended.save','newdir\nested.save')) {
         if(!(Test-Path -LiteralPath (Join-Path $sandbox $name))){throw "Missing sandbox effect $name"}

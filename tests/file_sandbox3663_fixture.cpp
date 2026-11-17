@@ -10,6 +10,13 @@
 #include <string>
 #include <vector>
 namespace {
+std::wstring environment(const wchar_t* key){
+    const DWORD count=GetEnvironmentVariableW(key,nullptr,0);
+    if(!count)return {};
+    std::vector<wchar_t> value(count);
+    const DWORD size=GetEnvironmentVariableW(key,value.data(),count);
+    return size && size<count?std::wstring(value.data(),size):std::wstring();
+}
 int steam_probe(const std::wstring& dll){
     const auto slash=dll.find_last_of(L"\\/");
     if(slash==std::wstring::npos || _wcsicmp(dll.substr(slash+1).c_str(),L"steam_api64.dll"))return 42;
@@ -79,6 +86,9 @@ int fixture(int argc,wchar_t** argv) {
         std::string digest;for(wchar_t c:hash)digest+=static_cast<char>(c);
         return profile_fixture(root,backup,sandbox,manifest,digest,mode==L"steam-profile" && argc==8?argv[7]:nullptr);
     }
+    const auto normal_profile=environment(L"USERPROFILE"),normal_local=environment(L"LOCALAPPDATA");
+    wchar_t native_before[MAX_PATH]{};
+    if(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,native_before)!=S_OK)return 73;
     HANDLE before=CreateFileW((root+L"\\source.save").c_str(),GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,0,nullptr);
     if(before==INVALID_HANDLE_VALUE)return 2;
@@ -104,6 +114,13 @@ int fixture(int argc,wchar_t** argv) {
     if(mode==L"refuse" || mode==L"premapped")return installed?4:0;
     if(!installed || !cdmp::session2::file_sandbox3663::verified()){
         std::printf("Install failed: %s\n",cdmp::session2::file_sandbox3663::failure_reason().c_str());return 5;}
+    wchar_t native_after[MAX_PATH]{};
+    if(environment(L"USERPROFILE")!=normal_profile || environment(L"LOCALAPPDATA")!=normal_local ||
+        SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,native_after)!=S_OK ||
+        std::wstring(native_before)!=native_after)return 74;
+    // Owned TEMP sibling, outside the save subtree: normal file access stays normal.
+    const auto unrelated=root+L"\\..\\ordinary-profile-data.bin";
+    if(!write(unrelated,"normal location") || read(unrelated)!="normal location")return 75;
     HANDLE pipe_client=CreateFileW(pipe_name.c_str(),GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,nullptr,OPEN_EXISTING,0,nullptr);
     if(pipe_client==INVALID_HANDLE_VALUE){std::printf("Named pipe open failed Win32 %lu\n",GetLastError());return 48;}
     if(WaitForSingleObject(connect.hEvent,2000)!=WAIT_OBJECT_0)return 49;
@@ -200,7 +217,8 @@ int fixture(int argc,wchar_t** argv) {
     auto view=static_cast<char*>(MapViewOfFile(section,FILE_MAP_WRITE,0,0,0));if(!view)return 27;
     view[0]='G';FlushViewOfFile(view,1);UnmapViewOfFile(view);CloseHandle(section);CloseHandle(mapped);
     if(read(root+L"\\source.save")!="Griginal")return 28;
-    std::printf("R4 file sandbox fixture PASS: %s\n",cdmp::session2::file_sandbox3663::describe().c_str());
+    if(environment(L"USERPROFILE")!=normal_profile || environment(L"LOCALAPPDATA")!=normal_local)return 76;
+    std::printf("R7 NT fixture PASS: inherited profile/native resolver unchanged; save-only redirect; %s\n",cdmp::session2::file_sandbox3663::describe().c_str());
     return 0;
 }
 }

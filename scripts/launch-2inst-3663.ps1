@@ -1,4 +1,4 @@
-# R5: host uses backed-up real saves; only guest gets verified profile/NT isolation.
+# R7: host uses backed-up real saves; only guest gets verified NT save isolation.
 # Preparation/verification are game-free; Run requires explicit live presence.
 param(
     [Parameter(Mandatory=$true)][ValidateSet('Prepare','Run','Verify','Finish')][string]$Stage,
@@ -8,7 +8,7 @@ param(
     [string]$ArmingReceipt = '',
     [ValidateSet('host','guest')][string]$LaunchRole='host',
     [ValidateSet('HostStartup','GuestStartup','L3','L4Host','L4Guest')][string]$SessionKind='L3',
-    [ValidateSet('profile','nt')][string]$IsolationMethod='profile',
+    [ValidateSet('profile','nt')][string]$IsolationMethod='nt',
     [UInt64]$PeerSteamId=0,
     [int]$Port=39766,
     [switch]$Present,
@@ -16,6 +16,9 @@ param(
     [switch]$DesktopLaunchPlan
 )
 $ErrorActionPreference='Stop'
+$r7NotBefore=[DateTimeOffset]::Parse('2026-11-18T15:00:00Z').UtcDateTime
+if($Stage -in @('Prepare','Run') -and $IsolationMethod -ne 'nt'){throw 'R7 requires guest-only NT save-directory isolation; profile redirection is forbidden'}
+if($Stage -eq 'Run' -and !$Fixture -and [DateTime]::UtcNow -lt $r7NotBefore){throw 'R7 game launch forbidden before 2026-11-18 10:00 AM Eastern (15:00 UTC)'}
 Import-Module Microsoft.PowerShell.Utility
 if (!('CdmpR4Files' -as [type])) {
     Add-Type -TypeDefinition @'
@@ -119,8 +122,8 @@ if ($Stage -eq 'Prepare') {
         Copy-Item -LiteralPath $SourceRoot -Destination $backup -Recurse
         AssertManifest $backup $body
     }
-    $guestProfile=Join-Path $SessionRoot 'guest-profile'
-    $sandbox=if($IsolationMethod -eq 'profile'){Join-Path $guestProfile 'AppData\Local\Pearl Abyss\CD\save'}else{Join-Path $SessionRoot 'guest-sandbox'}
+    $guestProfile='' # R7 never creates or redirects a user profile.
+    $sandbox=Join-Path $SessionRoot 'guest-sandbox'
     New-Item -ItemType Directory -Force -Path (Split-Path $sandbox -Parent) | Out-Null
     Copy-Item -LiteralPath (Join-Path $SessionRoot 'guest-backup') -Destination $sandbox -Recurse
     AssertManifest $sandbox $body
@@ -223,10 +226,11 @@ if (!$ArmingReceipt) { throw 'Compiled 3663 C/D arming receipt required; guest s
 if($Port -lt 1024 -or $Port -gt 65535){throw 'Invalid loopback port'}
 if(!(Get-Process steam -ErrorAction SilentlyContinue)){throw 'Open Steam first'}
 $arming=Get-Content -LiteralPath $ArmingReceipt -Raw | ConvertFrom-Json
-if($arming.version -ne 2 -or $arming.round -ne 5 -or $arming.compiled_tier_mask -ne 15 -or $arming.executable_sha256 -ne $expected -or
+if($arming.version -ne 3 -or $arming.round -ne 7 -or $arming.isolation_method -ne 'nt' -or $arming.host_isolation -ne 'none' -or
+    $arming.not_before_utc -ne '2026-11-18T15:00:00Z' -or $arming.compiled_tier_mask -ne 15 -or $arming.executable_sha256 -ne $expected -or
     !$arming.full_suite_passed -or !$arming.synthetic_v1_metadata_verified){throw 'Incomplete compiled arming receipt'}
 if($DesktopLaunchPlan){
-    if($IsolationMethod -ne 'profile' -or !$arming.desktop_runner_path -or
+    if($IsolationMethod -ne 'nt' -or !$arming.desktop_runner_path -or
         (Get-FileHash -LiteralPath $arming.desktop_runner_path).Hash -ne $arming.desktop_runner_sha256){throw 'Validated desktop runner required'}
 }
 $repo=Split-Path $PSScriptRoot -Parent
@@ -335,10 +339,7 @@ else{
     $psi.EnvironmentVariables['CDMP_REAL_SAVE_ROOT']=$SourceRoot
     $psi.EnvironmentVariables['CDMP_SAVE_ISOLATION']=$IsolationMethod
     $psi.EnvironmentVariables['CDMP_GUEST_WITH_HOST']=if($SessionKind -eq 'L3'){'1'}else{'0'}
-    if($IsolationMethod -eq 'profile'){
-        $psi.EnvironmentVariables['USERPROFILE']=$record.guest_profile
-        $psi.EnvironmentVariables['LOCALAPPDATA']=Join-Path $record.guest_profile 'AppData\Local'
-    }
+    # USERPROFILE and LOCALAPPDATA are inherited unchanged, for both roles.
 }
 $maxAge=if($SessionKind -in @('HostStartup','GuestStartup')){600}else{840}
 if($DesktopLaunchPlan){
@@ -349,7 +350,7 @@ if($DesktopLaunchPlan){
     $keys=@('SteamAppId','SteamGameId','CDMP_ROLE')
     if($LaunchRole -eq 'host'){$keys+='CDMP_HOST_REAL_SAVES'}else{
         $keys+=@('CDMP_SAVE_SANDBOX','CDMP_SAVE_BACKUP','CDMP_SAVE_MANIFEST','CDMP_SAVE_MANIFEST_SHA256',
-          'CDMP_REAL_SAVE_ROOT','CDMP_SAVE_ISOLATION','CDMP_GUEST_WITH_HOST','USERPROFILE','LOCALAPPDATA')
+          'CDMP_REAL_SAVE_ROOT','CDMP_SAVE_ISOLATION','CDMP_GUEST_WITH_HOST')
     }
     foreach($key in $keys){$export[$key]=$psi.EnvironmentVariables[$key]}
     $runner=Join-Path $SessionRoot ("r5_${LaunchRole}_desktop.exe")
@@ -359,7 +360,8 @@ if($DesktopLaunchPlan){
     if((Get-FileHash -LiteralPath $runner).Hash -ne $arming.desktop_runner_sha256){throw 'Desktop runner copy changed'}
     $plan=@{version=1;present=$true;role=$LaunchRole;session_root=$SessionRoot;repo_root=$repo;game_image=$psi.FileName;
       arming_receipt=(Full $ArmingReceipt);arming_sha256=(Get-FileHash -LiteralPath $ArmingReceipt).Hash;
-      session_kind=$SessionKind;max_age_seconds=$maxAge;environment=$export;planned_utc=[DateTime]::UtcNow.ToString('o')}
+      session_kind=$SessionKind;max_age_seconds=$maxAge;environment=$export;
+      inherited_environment=@{USERPROFILE=$env:USERPROFILE;LOCALAPPDATA=$env:LOCALAPPDATA};planned_utc=[DateTime]::UtcNow.ToString('o')}
     [IO.File]::WriteAllText($planPath,($plan | ConvertTo-Json -Depth 5),[Text.UTF8Encoding]::new($false))
     Write-Output "Desktop plan prepared; no game launched. Open the validated desktop app: $runner"
     return

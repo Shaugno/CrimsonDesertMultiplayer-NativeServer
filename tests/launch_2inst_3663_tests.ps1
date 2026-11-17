@@ -8,6 +8,18 @@ function Launch([string]$stage) {
     $script:code=$LASTEXITCODE
 }
 try {
+    $profileBefore=$env:USERPROFILE;$localBefore=$env:LOCALAPPDATA
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $Launcher -Stage Prepare -SessionRoot $session -SourceRoot $source -IsolationMethod profile -Fixture
+    if(!$LASTEXITCODE -or (Test-Path -LiteralPath $session)){throw 'Profile override accepted or created a session'}
+    if([DateTime]::UtcNow -lt [DateTimeOffset]::Parse('2026-11-18T15:00:00Z').UtcDateTime){
+        # Missing owned fixture paths: refusal must occur before any file/game access.
+        # PS 5 treats merged native stderr as a terminating error under Stop.
+        # Capture the expected refusal, then assert its exit code and message.
+        $ErrorActionPreference='Continue'
+        $refusal=& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $Launcher -Stage Run -SessionRoot $session -SourceRoot $source -Present 2>&1
+        $launchCode=$LASTEXITCODE;$ErrorActionPreference='Stop'
+        if(!$launchCode -or ($refusal -join "`n") -notmatch 'R7 game launch forbidden before'){throw 'R7 time gate failed'}
+    }
     New-Item -ItemType Directory -Path (Join-Path $source 'account\slot108') | Out-Null
     [IO.File]::WriteAllText((Join-Path $source 'account\slot108\fixture.save'),'untouched')
     Launch Prepare
@@ -15,6 +27,8 @@ try {
     Launch Verify
     if($code){throw 'Verify failed'}
     $prepared=Get-Content -LiteralPath (Join-Path $session 'session.json') -Raw | ConvertFrom-Json
+    if($prepared.isolation_method -ne 'nt' -or $prepared.guest_profile -ne '' -or (Test-Path -LiteralPath (Join-Path $session 'guest-profile'))){throw 'R7 must isolate only saves'}
+    if($env:USERPROFILE -ne $profileBefore -or $env:LOCALAPPDATA -ne $localBefore){throw 'Profile environment changed'}
     if(Test-Path -LiteralPath (Join-Path $session 'host-sandbox')){throw 'Host must have no sandbox'}
     [IO.File]::WriteAllText((Join-Path $prepared.guest_sandbox 'account\slot108\fixture.save'),'guest progress')
     Launch Verify

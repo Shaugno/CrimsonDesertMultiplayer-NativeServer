@@ -1,0 +1,66 @@
+{
+  "round": 7,
+  "step": 1,
+  "recorded_utc": "2026-11-17T15:33:14.511229+00:00",
+  "suite": "119/119 passed",
+  "seconds": 110.93,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "1D5CB415768D2018E5A5ADEFB7B2C003FC17EAA3CDBAD1FEA81A263C7259F403",
+  "desktop_runner_sha256": "AF930B2985F67216E651841DDCC26FAF66B3E257BD6930D8961EDBE76A0CA90F",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "unproven hypothesis; no R7 game launch or activation test",
+  "limits": [
+    "Owned TEMP fixture data only; no game runtime acceptance.",
+    "Steam-style named pagefile MAP-only IPC and pipes are tested without SteamAPI or game activation.",
+    "Historical fake-profile fixtures remain game-free; production rejects that route.",
+    "Concurrent host save deltas cannot attribute writes by process; guest-only manifest check remains required.",
+    "L3 and L4 remain unpassed; the R6 character-login fix awaits live execution."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-arming-receipt.json",
+    "sha256": "2D01DE92306D26D81391392E9FBE9D34C4D084A0FE3238583E9D4D6BBE6E3B6F"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-suite.txt",
+      "sha256": "ABCEC383D2C9D9E7B8B870BFA8774DDFC1C15935264D1B17914FD302983CD36C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-ctest.log",
+      "sha256": "BF75495661D15893FE080D610AD0780DC34AF67BBA4019056CC78223EF1A3EE4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-smoke-run\\e2e\\cdmp.log",
+      "sha256": "59B2F63716A643440C036C7ACED8BF3D4A263597D1464EDCA2E01966AC3F31BA"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-boundary.json",
+      "sha256": "6D320A77BB6C30E6984A906288C34DCFE315B63F5E165F46FEA699BF0FB8EC75"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\baseline-suite.txt",
+      "sha256": "CF52650B1B7A25945A7F3F42D588246DD129B1F33FC925AE16D8230D33DDA490"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-first-suite.txt",
+      "sha256": "1E516B4403953BE65F2CFB6D1D0A060AE56398B94DFB71E4EF04A7BB091BA19D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\step1-first-ctest.log",
+      "sha256": "4FF7276590CF750AF8F7CB1C2BED8B3CCBF1DE4C53B85BA461EC5A78F66688D1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\OneDrive\\Documents\\ChatGPT\\Crimson mod\\build\\r7\\launcher-focused.txt",
+      "sha256": "DF8F88690BC27E5DC232003ACA0CCCBD4831849888733FB704753346610A58F6"
+    }
+  ],
+  "source_manifest_sha256": "58D2DD3213AD47E5EBE1FFA34738FADFA2DE1C0E641C81A309FFDA7A6B3679C7"
+}

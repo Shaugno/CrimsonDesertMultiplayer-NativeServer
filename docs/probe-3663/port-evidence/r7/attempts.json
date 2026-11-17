@@ -1,0 +1,9 @@
+{
+  "round": 7,
+  "baseline": "9bbc3df",
+  "startup_limit": 5,
+  "join_limit": 3,
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "accounting": "An attempt ending before native guest login counts as startup, not join. Record actual PID/birth receipts, own-PID native login evidence, outcome and log hashes. Old round ledgers remain unchanged.",
+  "attempts": []
+}

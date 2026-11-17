@@ -626,6 +626,7 @@ bool install(const Setup& setup) {
     }catch(...){return false;}
 }
 bool install_from_environment() {
+    const auto profile_before=env(L"USERPROFILE"),local_before=env(L"LOCALAPPDATA");
     const auto sandbox=env(L"CDMP_SAVE_SANDBOX"),backup=env(L"CDMP_SAVE_BACKUP"),
         manifest=env(L"CDMP_SAVE_MANIFEST"),hash=env(L"CDMP_SAVE_MANIFEST_SHA256");
     // Match the actual target resolver (SHGetFolderPathW, CSIDL_LOCAL_APPDATA),
@@ -633,14 +634,17 @@ bool install_from_environment() {
     std::vector<wchar_t> native_local(MAX_PATH);
     if(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,native_local.data())!=S_OK)return false;
     const auto method=env(L"CDMP_SAVE_ISOLATION");
-    if(method!=L"profile" && method!=L"nt"){failure="explicit profile/nt isolation method required";return false;}
-    const bool profile=method==L"profile";
+    if(method!=L"nt"){failure="R7 requires NT save-directory isolation; profile override forbidden";return false;}
     const std::wstring local(native_local.data());
     if(local.empty() || sandbox.empty() || backup.empty() || manifest.empty() || hash.size()!=64)return false;
     std::string ascii;for(wchar_t c:hash){if(!((c>=L'0'&&c<=L'9')||(c>=L'A'&&c<=L'F')))return false;ascii+=static_cast<char>(c);}
-    const auto source=profile?env(L"CDMP_REAL_SAVE_ROOT"):local+L"\\Pearl Abyss\\CD\\save";
-    if(source.empty())return false;
-    return install({source,backup,sandbox,manifest,ascii,env(L"CDMP_GUEST_WITH_HOST")==L"1",profile});
+    const auto source=local+L"\\Pearl Abyss\\CD\\save",expected=env(L"CDMP_REAL_SAVE_ROOT");
+    if(expected.empty() || CompareStringOrdinal(source.c_str(),-1,expected.c_str(),-1,TRUE)!=CSTR_EQUAL){
+        failure="normal native save root differs from the launcher's verified source";return false;}
+    if(!install({source,backup,sandbox,manifest,ascii,env(L"CDMP_GUEST_WITH_HOST")==L"1",false}))return false;
+    if(env(L"USERPROFILE")!=profile_before || env(L"LOCALAPPDATA")!=local_before){failure="profile environment changed";return false;}
+    log::info("3663 R7 guest: USERPROFILE/LOCALAPPDATA unchanged; only save-directory paths redirected");
+    return true;
 }
 bool verified(){return ready.load(std::memory_order_acquire);}
 bool file_hooks_active(){return active.load(std::memory_order_acquire);}

@@ -11,7 +11,8 @@ try{
     $plan | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $r5Root 'r5_host_desktop.plan.json') -Encoding UTF8
     $process=Start-Process -FilePath $copy -WindowStyle Hidden -PassThru -Wait
     $errorPath=Join-Path $r5Root 'r5_host_desktop.error.json'
-    if($process.ExitCode -ne 1 -or (Get-Content -LiteralPath $errorPath -Raw) -notmatch 'Presence/plan version missing'){throw 'Presence refusal not enforced before any executable access'}
+    $refusal=if([DateTime]::UtcNow -lt [DateTimeOffset]::Parse('2026-11-18T15:00:00Z').UtcDateTime){'R7 game launch forbidden before'}else{'Presence/plan version missing'}
+    if($process.ExitCode -ne 1 -or (Get-Content -LiteralPath $errorPath -Raw) -notmatch $refusal){throw 'Time/presence refusal not enforced before any executable access'}
     $process=Start-Process -FilePath $copy -ArgumentList '--launch','arbitrary.exe' -WindowStyle Hidden -PassThru -Wait
     if($process.ExitCode -ne 1 -or (Get-Content -LiteralPath $errorPath -Raw) -notmatch 'No arbitrary command line accepted'){throw 'Arbitrary command-line refusal failed'}
     Write-Output 'R5 desktop runner: owned normal/deadline/identity/path/save mutation fixtures, absent presence and arbitrary command refusal PASS; no game launch'

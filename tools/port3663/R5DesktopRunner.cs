@@ -21,6 +21,14 @@ static class R5DesktopRunner {
  static readonly JavaScriptSerializer Json=new JavaScriptSerializer{MaxJsonLength=8*1024*1024};
  static readonly string Self=Assembly.GetExecutingAssembly().Location;
  static readonly string Stem=Path.GetFileNameWithoutExtension(Self);
+ static readonly DateTime NotBefore=new DateTime(2026,11,18,15,0,0,DateTimeKind.Utc);
+ static void LaunchDate(DateTime now){Require(now>=NotBefore,"R7 game launch forbidden before 2026-11-18 10:00 AM Eastern (15:00 UTC)");}
+ static void ApplyEnvironment(ProcessStartInfo psi,Dictionary<string,object> env){
+  foreach(string key in env.Keys)Require(!key.Equals("USERPROFILE",StringComparison.OrdinalIgnoreCase)&&!key.Equals("LOCALAPPDATA",StringComparison.OrdinalIgnoreCase),"Profile environment override forbidden");
+  var inherited=new List<string>();foreach(string key in psi.EnvironmentVariables.Keys)if(key.StartsWith("CDMP_",StringComparison.OrdinalIgnoreCase))inherited.Add(key);foreach(string key in inherited)psi.EnvironmentVariables.Remove(key);
+  foreach(var entry in env)psi.EnvironmentVariables[entry.Key]=Convert.ToString(entry.Value,CultureInfo.InvariantCulture);
+  foreach(string key in new[]{"USERPROFILE","LOCALAPPDATA"})Require(psi.EnvironmentVariables[key]==Environment.GetEnvironmentVariable(key),"Profile inheritance changed");
+ }
  [DllImport("kernel32.dll",SetLastError=true)]static extern IntPtr OpenProcess(uint rights,bool inherit,uint pid);
  [DllImport("kernel32.dll",SetLastError=true)]static extern bool GetProcessTimes(IntPtr h,out long birth,out long exit,out long kernel,out long user);
  [DllImport("kernel32.dll",CharSet=CharSet.Unicode,SetLastError=true)]static extern bool QueryFullProcessImageName(IntPtr h,uint flags,StringBuilder name,ref uint size);
@@ -66,6 +74,7 @@ static class R5DesktopRunner {
   }
  }
  static void Run(){
+  LaunchDate(DateTime.UtcNow); // before plan, executable access or process creation
   string ownDir=Path.GetDirectoryName(Self),planPath=Path.Combine(ownDir,Stem+".plan.json");var p=Read(planPath);
   string role=S(p,"role"),root=Path.GetFullPath(S(p,"session_root")),image=Path.GetFullPath(S(p,"game_image")),repo=Path.GetFullPath(S(p,"repo_root"));
   Require((role=="host"||role=="guest")&&Stem=="r5_"+role+"_desktop","Role/filename mismatch");
@@ -75,7 +84,7 @@ static class R5DesktopRunner {
   Require(DateTime.UtcNow>=planned.AddSeconds(-5)&&DateTime.UtcNow<planned.AddMinutes(2),"Expired launch plan");
   Require(Path.GetFileName(image)=="CrimsonDesert.exe"&&Hash(image)==GameHash,"Executable mismatch");
   string arming=Path.GetFullPath(S(p,"arming_receipt"));Require(Hash(arming)==S(p,"arming_sha256"),"Arming receipt changed");var a=Read(arming);
-  Require(N(a,"version")==2&&N(a,"round")==5&&N(a,"compiled_tier_mask")==15&&B(a,"full_suite_passed")&&B(a,"synthetic_v1_metadata_verified")&&S(a,"executable_sha256")==GameHash,"Unarmed build");
+  Require(N(a,"version")==3&&N(a,"round")==7&&S(a,"isolation_method")=="nt"&&S(a,"host_isolation")=="none"&&S(a,"not_before_utc")=="2026-11-18T15:00:00Z"&&N(a,"compiled_tier_mask")==15&&B(a,"full_suite_passed")&&B(a,"synthetic_v1_metadata_verified")&&S(a,"executable_sha256")==GameHash,"Unarmed build");
   Require(Hash(Self)==S(a,"desktop_runner_sha256"),"Desktop runner changed");
   foreach(Dictionary<string,object> f in (IEnumerable)a["source_manifest"])Require(Hash(Under(repo,S(f,"path")))==S(f,"sha256"),"Source seal changed");
   Require(Hash(S(a,"asi_path"))==S(a,"asi_sha256"),"ASI changed");
@@ -83,6 +92,9 @@ static class R5DesktopRunner {
   string gameDir=Path.GetDirectoryName(image);var allowed=new HashSet<string>{"cdmp.asi","cdmp.pdb","winmm.dll","cdmp.host.ini","cdmp.guest.ini","cdmp.r4-test-lock"};
   int installed=0;foreach(Dictionary<string,object> f in (IEnumerable)deployment["files"]){string name=S(f,"name");Require(allowed.Remove(name)&&Hash(Under(gameDir,name))==S(f,"installed_sha256"),"Installed file changed");++installed;}Require(installed==6&&allowed.Count==0,"Deployment file set");
   var session=Read(Path.Combine(root,"session.json"));Require(S(session,"root")==root&&S(session,"session_kind")==S(p,"session_kind"),"Session mismatch");
+  Require(S(session,"isolation_method")=="nt","R7 NT save redirect required");
+  var normal=(Dictionary<string,object>)p["inherited_environment"];
+  foreach(string key in new[]{"USERPROFILE","LOCALAPPDATA"})Require(!String.IsNullOrEmpty(S(normal,key))&&S(normal,key)==Environment.GetEnvironmentVariable(key),"Desktop profile environment differs from prepared normal context");
   string manifest=Path.Combine(root,"save-manifest.tsv");Require(Hash(manifest)==S(session,"manifest_sha256"),"Save manifest changed");
   string realRoot=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Pearl Abyss\\CD\\save");
   Require(String.Equals(realRoot,S(session,"source"),StringComparison.OrdinalIgnoreCase),"Desktop user's real save root differs from prepared source");
@@ -105,19 +117,18 @@ static class R5DesktopRunner {
     common=DateTime.FromFileTimeUtc(N(host,"game_start_filetime")).AddSeconds(N(host,"max_age_seconds"));Require(common>DateTime.UtcNow.AddMinutes(3),"Insufficient L4 common deadline");
    }
   }
-  var env=(Dictionary<string,object>)p["environment"];var names=new HashSet<string>{"SteamAppId","SteamGameId","CDMP_ROLE","CDMP_HOST_REAL_SAVES","CDMP_SAVE_SANDBOX","CDMP_SAVE_BACKUP","CDMP_SAVE_MANIFEST","CDMP_SAVE_MANIFEST_SHA256","CDMP_REAL_SAVE_ROOT","CDMP_SAVE_ISOLATION","CDMP_GUEST_WITH_HOST","USERPROFILE","LOCALAPPDATA"};
+  var env=(Dictionary<string,object>)p["environment"];var names=new HashSet<string>{"SteamAppId","SteamGameId","CDMP_ROLE","CDMP_HOST_REAL_SAVES","CDMP_SAVE_SANDBOX","CDMP_SAVE_BACKUP","CDMP_SAVE_MANIFEST","CDMP_SAVE_MANIFEST_SHA256","CDMP_REAL_SAVE_ROOT","CDMP_SAVE_ISOLATION","CDMP_GUEST_WITH_HOST"};
   foreach(string key in env.Keys)Require(names.Contains(key),"Unexpected environment key");
   Require(S(env,"SteamAppId")=="3321460"&&S(env,"SteamGameId")=="3321460"&&S(env,"CDMP_ROLE")==role,"Role/Steam environment mismatch");
   if(role=="host")Require(S(env,"CDMP_HOST_REAL_SAVES")=="1"&&!env.ContainsKey("CDMP_SAVE_SANDBOX"),"Host isolation forbidden");
-  else Require(!env.ContainsKey("CDMP_HOST_REAL_SAVES")&&S(env,"CDMP_SAVE_SANDBOX")==S(session,"guest_sandbox")&&S(env,"CDMP_SAVE_BACKUP")==Path.Combine(root,"guest-backup")&&S(env,"CDMP_SAVE_MANIFEST")==manifest&&S(env,"CDMP_SAVE_MANIFEST_SHA256")==S(session,"manifest_sha256")&&S(env,"CDMP_SAVE_ISOLATION")=="profile"&&S(env,"USERPROFILE")==S(session,"guest_profile")&&S(env,"LOCALAPPDATA")==Path.Combine(S(session,"guest_profile"),"AppData\\Local")&&S(env,"CDMP_REAL_SAVE_ROOT")==S(session,"source")&&S(env,"CDMP_GUEST_WITH_HOST")==(S(p,"session_kind")=="L3"?"1":"0"),"Guest isolation environment mismatch");
+  else Require(!env.ContainsKey("CDMP_HOST_REAL_SAVES")&&S(env,"CDMP_SAVE_SANDBOX")==S(session,"guest_sandbox")&&S(env,"CDMP_SAVE_BACKUP")==Path.Combine(root,"guest-backup")&&S(env,"CDMP_SAVE_MANIFEST")==manifest&&S(env,"CDMP_SAVE_MANIFEST_SHA256")==S(session,"manifest_sha256")&&S(env,"CDMP_SAVE_ISOLATION")=="nt"&&S(env,"CDMP_REAL_SAVE_ROOT")==S(session,"source")&&S(env,"CDMP_GUEST_WITH_HOST")==(S(p,"session_kind")=="L3"?"1":"0"),"Guest isolation environment mismatch");
   var psi=new ProcessStartInfo(image,"PlatformServiceType=Steam"){WorkingDirectory=gameDir,UseShellExecute=false,WindowStyle=ProcessWindowStyle.Normal};
-  var inherited=new List<string>();foreach(string key in psi.EnvironmentVariables.Keys)if(key.StartsWith("CDMP_",StringComparison.OrdinalIgnoreCase))inherited.Add(key);foreach(string key in inherited)psi.EnvironmentVariables.Remove(key);
-  foreach(var entry in env)psi.EnvironmentVariables[entry.Key]=Convert.ToString(entry.Value,CultureInfo.InvariantCulture);
+  ApplyEnvironment(psi,env);
   Process game=null;IntPtr pinned=IntPtr.Zero;bool completed=false;System.Threading.Timer windows=null;
   try{
-   game=Process.Start(psi);long birth=game.StartTime.ToUniversalTime().ToFileTimeUtc();pinned=Pin((uint)game.Id,birth,image);
+   LaunchDate(DateTime.UtcNow);game=Process.Start(psi);long birth=game.StartTime.ToUniversalTime().ToFileTimeUtc();pinned=Pin((uint)game.Id,birth,image);
    DateTime deadline=DateTime.FromFileTimeUtc(birth).AddSeconds(max);if(common<deadline)deadline=common;
-   Write(launchPath,new{role=role,game_pid=game.Id,game_start_filetime=birth.ToString(CultureInfo.InvariantCulture),game_image=image,max_age_seconds=max,isolation=role=="host"?"none":"profile",session_kind=S(p,"session_kind"),launched_utc=DateTime.UtcNow.ToString("o"),backend="desktop-app"});
+   Write(launchPath,new{role=role,game_pid=game.Id,game_start_filetime=birth.ToString(CultureInfo.InvariantCulture),game_image=image,max_age_seconds=max,isolation=role=="host"?"none":"nt",normal_profile_inherited=true,session_kind=S(p,"session_kind"),launched_utc=DateTime.UtcNow.ToString("o"),backend="desktop-app"});
    var watch=new Dictionary<string,object>{{"state","watching"},{"game_pid",game.Id},{"game_start_filetime",birth.ToString(CultureInfo.InvariantCulture)},{"game_image",image},{"controller_pid",Process.GetCurrentProcess().Id},{"controller_start_filetime",Process.GetCurrentProcess().StartTime.ToUniversalTime().ToFileTimeUtc().ToString(CultureInfo.InvariantCulture)},{"deadline_utc",deadline.ToString("o")},{"max_game_age_seconds",max},{"helper_sha256",Hash(Self)},{"backend","desktop-app"}};
    string watchPath=Path.Combine(root,"watchdog-"+role+".json");Write(watchPath,watch);
    windows=new System.Threading.Timer(delegate(object unused){try{if(WaitForSingleObject(pinned,0)==258)File.WriteAllText(Path.Combine(root,"window-"+role+".json"),Json.Serialize(new{game_pid=game.Id,game_start_filetime=birth.ToString(CultureInfo.InvariantCulture),windows=R5WindowReport.Read(new[]{game.Id}),recorded_utc=DateTime.UtcNow.ToString("o"),scope="read-only controlled process windows; no UI input"}));}catch{}},null,0,1000);
@@ -138,6 +149,11 @@ static class R5DesktopRunner {
   Require(complete,"Capture incomplete; metadata retained");
  }
  static void SelfTest(){
+  bool held=false;try{LaunchDate(NotBefore.AddTicks(-1));}catch(InvalidOperationException){held=true;}Require(held,"Not-before gate bypassed");LaunchDate(NotBefore);LaunchDate(NotBefore.AddHours(1));
+  foreach(string key in new[]{"USERPROFILE","LOCALAPPDATA","userprofile","localappdata"}){bool refused=false;try{ApplyEnvironment(new ProcessStartInfo(),new Dictionary<string,object>{{key,"forbidden"}});}catch(InvalidOperationException){refused=true;}Require(refused,"Profile key accepted");}
+  var childEnvironment=new ProcessStartInfo(Self,"--environment-fixture"){UseShellExecute=false,WindowStyle=ProcessWindowStyle.Hidden,RedirectStandardOutput=true};
+  ApplyEnvironment(childEnvironment,new Dictionary<string,object>{{"CDMP_ROLE","guest"},{"CDMP_SAVE_ISOLATION","nt"}});
+  using(var child=Process.Start(childEnvironment)){string output=child.StandardOutput.ReadToEnd();Require(child.WaitForExit(10000)&&child.ExitCode==0,"Environment fixture failed");var actual=Json.Deserialize<Dictionary<string,object>>(output);foreach(string key in new[]{"USERPROFILE","LOCALAPPDATA"})Require(S(actual,key)==Environment.GetEnvironmentVariable(key),"Child profile inheritance changed");Require(S(actual,"native_local")==Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Child native resolver changed");}
   foreach(string mode in new[]{"normal","deadline","mismatch"}){
    using(var child=Process.Start(new ProcessStartInfo(Self,"--child "+(mode=="normal"?"200":"30000")){UseShellExecute=false,WindowStyle=ProcessWindowStyle.Hidden})){
     IntPtr h=IntPtr.Zero;try{long birth=child.StartTime.ToUniversalTime().ToFileTimeUtc();
@@ -158,7 +174,8 @@ static class R5DesktopRunner {
   }
  }
  [STAThread]public static int Main(string[] args){
-  try{if(args.Length==2&&args[0]=="--child"){int delay=Int32.Parse(args[1],CultureInfo.InvariantCulture);Require(delay>=0&&delay<=30000,"Fixture child duration bound");Thread.Sleep(delay);return 0;}
+  try{if(args.Length==1&&args[0]=="--environment-fixture"){Console.WriteLine(Json.Serialize(new{USERPROFILE=Environment.GetEnvironmentVariable("USERPROFILE"),LOCALAPPDATA=Environment.GetEnvironmentVariable("LOCALAPPDATA"),native_local=Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}));return 0;}
+   if(args.Length==2&&args[0]=="--child"){int delay=Int32.Parse(args[1],CultureInfo.InvariantCulture);Require(delay>=0&&delay<=30000,"Fixture child duration bound");Thread.Sleep(delay);return 0;}
    if(args.Length==1&&args[0]=="--self-test"){SelfTest();return 0;}
    Require(args.Length==0,"No arbitrary command line accepted");
    if(Stem=="r5_visible_pair")VisibleFixture();else if(Stem=="r5_capture_pair")CapturePair();else Run();return 0;
