@@ -1,3 +1,36 @@
+# R7 Step 3 — same-slot diagnostic result (2026-11-18 Eastern)
+
+**The first failed check was `dest_eq_entry`.** The user confirmed
+two usable windows before selection and the same save slot in both
+copies. The exact menu label was not supplied. Native guest login and
+the character request's identity check passed.
+
+At 3:35:03 PM Eastern, the host and guest pins, host field access,
+hash header and bucket, destination lookup and host level entry all
+passed. The resolved guest destination was a different entry from
+the host's. The requested FieldInfoKey was `0x3` and the host runtime
+field key was `0x81020001`. They belong to different key spaces.
+Owner, open state, field-key guard, output Scope, context and final
+field-pin checks were skipped. The trace does not establish why the
+same menu slot led to different entries.
+
+No guest actor was inserted. The guest stayed on the loading
+animation, then both copies exited with code 0 before the watchdog.
+The pre-guest and final manifests matched for all 23 real saves, both
+backups verified, and the test installation was restored. No
+activation error was observed.
+
+Usage is **startup 2/5 and join 2/3**. L3 is unpassed. Acceptance
+recording, movement, removal and reconnect required a successful
+join. L4 and the separate cleanup plan remain on hold.
+
+Host log SHA-256 `195D66F5C785B28B61770FEED0A9D7855515435AF287A3AE37BB09F8FF4BFAA4`.
+Guest log SHA-256 `5E9238543825881023732B56C670D71FB63B64EFCEBEF45D313C2A6ECDBCC888`.
+[Exact trace and receipts](port-evidence/r7/step3-same-slot-result.json).
+[Offline validation](port-evidence/r7/acquire-diagnostic-validation.json).
+
+---
+
 # R7 Step 3 — same-slot Acquire diagnostic brief (2026-11-18 Eastern)
 
 The first desktop plan expired unused at 3:13:07 PM Eastern. There was

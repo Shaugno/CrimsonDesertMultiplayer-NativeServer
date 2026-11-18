@@ -1,0 +1,189 @@
+{
+  "round": 7,
+  "step": 3,
+  "attempt_id": "R7-L3-SAME-SLOT-20261118-B",
+  "category": "join",
+  "result": "blocked at destination versus host level-entry equality",
+  "game_pid": 30608,
+  "game_start_filetime": "134395076093726553",
+  "started_utc": "2026-11-18T20:30:13.9775720Z",
+  "ended_utc": "2026-11-18T20:37:28.5923518Z",
+  "native_guest_login": true,
+  "side_by_side_user_confirmed": true,
+  "same_save_slot_user_confirmed": true,
+  "save_slot_label": null,
+  "roles": {
+    "host": {
+      "launch": {
+        "role": "host",
+        "game_pid": 28388,
+        "game_start_filetime": "134395074139692883",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "none",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T20:30:13.9775720Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 28388,
+        "game_start_filetime": "134395074139692883",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 55004,
+        "controller_start_filetime": "134395074133110974",
+        "deadline_utc": "2026-11-18T20:44:13.9692883Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 0,
+        "ended_utc": "2026-11-18T20:37:28.5923518Z"
+      },
+      "rectangle": {
+        "left": 0,
+        "top": 0,
+        "right": 1296,
+        "bottom": 839
+      }
+    },
+    "guest": {
+      "launch": {
+        "role": "guest",
+        "game_pid": 30608,
+        "game_start_filetime": "134395076093726553",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "nt",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T20:33:29.3889589Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 30608,
+        "game_start_filetime": "134395076093726553",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 53688,
+        "controller_start_filetime": "134395076082544574",
+        "deadline_utc": "2026-11-18T20:44:13.9692883Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 0,
+        "ended_utc": "2026-11-18T20:37:09.6950574Z"
+      },
+      "rectangle": {
+        "left": 1271,
+        "top": 0,
+        "right": 2567,
+        "bottom": 839
+      }
+    }
+  },
+  "field_sharing_result": {
+    "stage": "guest",
+    "shared": "false",
+    "host_pin": "pass",
+    "guest_pin": "pass",
+    "host_primary_pin": "pass",
+    "field_access": "pass",
+    "requested_info_key": "0x3",
+    "requested_key_read": "true",
+    "host_field_key": "0x81020001",
+    "host_key_read": "true",
+    "hash_header": "pass",
+    "hash_bucket": "pass",
+    "destination_found": "pass",
+    "entry_present": "pass",
+    "dest_eq_entry": "fail",
+    "owner_eq_host": "skipped",
+    "field_open": "skipped",
+    "field_key": "skipped",
+    "scope_read": "skipped",
+    "scope_vtable": "skipped",
+    "observed_vtable": "0x0",
+    "scope_slot": "skipped",
+    "observed_slot": "0x0",
+    "context_match": "skipped",
+    "field_pin": "skipped"
+  },
+  "exact_acquire_line": "[15:35:03.814] INF [T32664] 3663 join Acquire predicates: stage=guest shared=false host_pin=pass guest_pin=pass host_primary_pin=pass field_access=pass requested_info_key=0x3 requested_key_read=true host_field_key=0x81020001 host_key_read=true hash_header=pass hash_bucket=pass destination_found=pass entry_present=pass dest_eq_entry=fail owner_eq_host=skipped field_open=skipped field_key=skipped scope_read=skipped scope_vtable=skipped observed_vtable=0x0 scope_slot=skipped observed_slot=0x0 context_match=skipped field_pin=skipped",
+  "activation_error_observed": false,
+  "actors_inserted": 0,
+  "actors_committed": 0,
+  "acceptance": "stopped after refusal; mutual movement, removal and reconnect were not exercised",
+  "save_count": 23,
+  "save_manifest_before_guest_sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+  "save_manifest_after_both_sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+  "real_saves_unchanged": true,
+  "backup_manifests_verified": true,
+  "temporary_installation_restored": true,
+  "host_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\evidence\\cdmp.host.log",
+    "sha256": "195D66F5C785B28B61770FEED0A9D7855515435AF287A3AE37BB09F8FF4BFAA4"
+  },
+  "guest_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\evidence\\cdmp.guest.log",
+    "sha256": "5E9238543825881023732B56C670D71FB63B64EFCEBEF45D313C2A6ECDBCC888"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\launch-host.json",
+      "sha256": "800AF8E0FFCBEDF35F022EEB3A943C831434A2FF43A2E0B54659C53A15EF8A18"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\launch-guest.json",
+      "sha256": "6FE048B96CA25C925EF43252AB8329AACC48939ADEFA801B965A852A28A2329F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\watchdog-host.json",
+      "sha256": "45931DE0221E476CC49481FFDC21D5A6BFE41D917B770527D24E9805DC511F64"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\watchdog-guest.json",
+      "sha256": "5763C4A4170978266C7203D4AACDC30052A089AC9A8826C8C286DFA642F032F9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\window-host-before-selection.json",
+      "sha256": "B03356E84F0A852809F8B8E437BC0F7520E7F2802C17428990C6305B83B03E37"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\window-guest-before-selection.json",
+      "sha256": "ECF8EEF89B8E40060B5B7A64F7A596B905B2EF495B06C85236F74560966C126C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\verification-before-host.json",
+      "sha256": "D659D5B05BA5113FED7B8205EB1F770F5AEB448CE77AB5B0B25827C6DD416A52"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\verification-before-guest.json",
+      "sha256": "B0535C5A2D7663B60A075685ADA51045934F9ECF39C9AF179DD434F02AC97284"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\save-before-guest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\save-after.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\save-manifest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\verification.json",
+      "sha256": "862C67954A272781910208C3B574D46365332BE64207DBA748E36045CB78E8A7"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\finish.json",
+      "sha256": "BCAF1319705DDF471820C5641FC2B9569E110C96DB91B3F467688DBAB36931F2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\deployment.json",
+      "sha256": "D6550543360230E29B79B37AAC98D4A5AFEFA8F95C117B18F21CAF4A44378F64"
+    }
+  ]
+}

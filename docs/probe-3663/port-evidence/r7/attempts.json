@@ -51,6 +51,24 @@
         "sha256": "1B3C12525A6BDB19FD8D1C8636AAE85058F56227BF38DF2CB6568968521349A1"
       },
       "native_guest_login": true
+    },
+    {
+      "attempt_id": "R7-L3-SAME-SLOT-20261118-B",
+      "category": "join",
+      "result": "blocked at destination versus host level-entry equality",
+      "game_pid": 30608,
+      "game_start_filetime": "134395076093726553",
+      "started_utc": "2026-11-18T20:30:13.9775720Z",
+      "ended_utc": "2026-11-18T20:37:28.5923518Z",
+      "native_guest_login": true,
+      "host_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\evidence\\cdmp.host.log",
+        "sha256": "195D66F5C785B28B61770FEED0A9D7855515435AF287A3AE37BB09F8FF4BFAA4"
+      },
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\evidence\\cdmp.guest.log",
+        "sha256": "5E9238543825881023732B56C670D71FB63B64EFCEBEF45D313C2A6ECDBCC888"
+      }
     }
   ]
 }
