@@ -3,5 +3,29 @@
   "baseline": "70eca72",
   "startup_limit": 5,
   "join_limit": 3,
-  "attempts": []
+  "attempts": [
+    {
+      "attempt_id": "R8-L3-20261118-A1",
+      "category": "join",
+      "result": "shared-field owner alias and second move completion verified; guest character-update access violation",
+      "native_guest_login": true,
+      "host_pid": 46872,
+      "guest_pid": 8264,
+      "evidence": "step3-result.json",
+      "host_log_sha256": "683A914C4F1E0AE624B57F3A1B2BE37637C30AF72E8A241DCF43611F17A5EDFC",
+      "guest_log_sha256": "A763772C33BB6863731ACCEF89FD83CE458F240B965C8A151C41C6073AAAF4F0"
+    }
+  ],
+  "unused_host_plans": [
+    {
+      "session": "R8-L3-OWNER-20261118",
+      "reason": "expired with no game launch or launcher error receipt",
+      "finish_sha256": "A377EADF208B2A1D76C002F17CFF7B879251E4A6F1AF1DAEE52CE1A9F5E2D45B"
+    },
+    {
+      "session": "R8-L3-OWNER-20261118-B",
+      "reason": "expired with no game launch or launcher error receipt",
+      "finish_sha256": "CCF7A32B05403180DA25B5D78199374EE3A03FC36E6E87EC3EFCD4569FA10926"
+    }
+  ]
 }

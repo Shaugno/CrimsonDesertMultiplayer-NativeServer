@@ -1,3 +1,63 @@
+# R8 L3 — field loading advanced, guest character-update crash captured
+
+The tested build, 792a323, completed native staging and shared Enter.
+At 4:58:39.553 PM Eastern shared Enter returned zero. The host then
+logged owner_alias=aliased on the verified 73-byte 2364 payload. The
+guest returned from native receive for that frame and issued the second
+MoveFieldCompleteReq. The local reader resolved the guest's character
+at the saved-level coordinates. The host and guest windows were
+confirmed side by side. The exact save label was not recorded.
+
+At 4:59:42.365 PM the guest's character-update worker read address 0x28
+at CrimsonDesert.exe+0x258C8FD and exited with 0xC0000005. The captured
+registers and exact-build disassembly show RDX=0 after 258C8F9 loaded
+the selected layer's +0x18 pointer. The return chain follows 9770C0
+and 9729C0 through the native CharacterControl update family identified
+in R5. This is a different observed site from the legacy field-owner
+crash. The victim actor and reason for the missing layer pointer are
+unverified. No gameplay guard or speculative animation change was
+added for this fault.
+[Prior native character comparison](R5-UPSTREAM-REFERENCE.md#character-guards-and-guest-startup).
+
+The first-chance capture preserved the instruction, accessed address,
+registers and seven stack frames. There was no unhandled-filter
+record or live minidump. The child-process fixture had verified that
+the filter can produce a minidump when entered.
+
+Between shared Enter and the first-chance fault, native receive
+returned for 6,726 host-to-guest frames across 26 opcodes. The guest
+queued 224 outgoing frames. The trace has no pending receive in
+that window. Besides 2364, it recorded the second 2723, 78 copies
+of ActorLoadDataAck (2005), the second MoveFieldCompleteAck (2268),
+ChangeGameLevelStateAck (2669) and MoveFieldCompletePostAck (2792).
+That follows the second-load sequence seen on 2976. 3663 opcodes
+2891 and 2941, the loading completion and preload acknowledgments,
+did not reach native receive in this window. The last inbound frame,
+2849, returned about 152 ms before the worker fault. The trace
+does not associate any particular packet with the failing layer.
+The result records all opcode counts, timestamps and evidence hashes.
+[L3 result and packet list](port-evidence/r8/step3-result.json).
+
+All three real-save checkpoints matched for all 23 files, both
+backups verified, and the guest sandbox still matched its backup.
+The guest audit logged only the eight-byte sandbox startup self-check.
+The prior R7 slot-2 writer remains unattributed. The host exited with
+code 1 before the watchdog, and its exit was not accepted as a
+verified normal quit. The crash stopped recording acceptance,
+mutual movement, removal, reconnect and host reload. Both processes
+are closed and the controlled installation was restored. The 3663
+executable hash remained exact. No activation error was observed.
+
+Budget use is **startup 0/5, join 1/3**. Two desktop shortcuts
+expired without a game process or launcher error receipt. The
+same verified runners, launched from a shorter local path, then
+produced the two controlled process receipts. L3 remains blocked.
+L4 was not started.
+[R8 attempt ledger](port-evidence/r8/attempts.json).
+[Game-free validation](port-evidence/r8/validation.json).
+
+---
+
 # R8 — guest crash capture and the shared-field owner acknowledgment
 
 R8 starts with user-approved fresh budgets of five startup attempts

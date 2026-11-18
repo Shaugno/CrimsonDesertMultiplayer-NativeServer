@@ -1,0 +1,283 @@
+{
+  "round": 8,
+  "test": "L3",
+  "tested_commit": "792a323",
+  "result": "shared-field owner alias and second move completion verified; guest character-update access violation",
+  "l3_passed": false,
+  "l4_started": false,
+  "native_guest_login": true,
+  "side_by_side_user_confirmed": true,
+  "same_save_slot_requested": true,
+  "same_save_slot_independently_verified": false,
+  "save_slot_label": null,
+  "user_confirmed_both_closed": true,
+  "mutual_visibility_and_movement_verified": false,
+  "recording_verified": false,
+  "disconnect_and_reconnect": "stopped after guest crash",
+  "host_reload": "stopped after guest crash",
+  "roles": {
+    "host": {
+      "launch": {
+        "role": "host",
+        "game_pid": 46872,
+        "game_start_filetime": "134395123442087002",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "none",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T21:52:24.2183383Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 46872,
+        "game_start_filetime": "134395123442087002",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 39740,
+        "controller_start_filetime": "134395123435912267",
+        "deadline_utc": "2026-11-18T22:06:24.2087002Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 1,
+        "ended_utc": "2026-11-18T22:00:54.0998863Z"
+      },
+      "mod_log": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\evidence\\cdmp.host.log",
+        "sha256": "683A914C4F1E0AE624B57F3A1B2BE37637C30AF72E8A241DCF43611F17A5EDFC"
+      },
+      "window": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\window-host-before-selection.json",
+        "sha256": "3010EAAE0BD0B40491AC4B4C9DAE57771E8AD72D1E6278BCA904526833C9A08B"
+      },
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "right": 1296,
+        "bottom": 839
+      }
+    },
+    "guest": {
+      "launch": {
+        "role": "guest",
+        "game_pid": 8264,
+        "game_start_filetime": "134395124764489251",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "nt",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T21:54:36.4664106Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 8264,
+        "game_start_filetime": "134395124764489251",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 34084,
+        "controller_start_filetime": "134395124751935177",
+        "deadline_utc": "2026-11-18T22:06:24.2087002Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 3221225477,
+        "ended_utc": "2026-11-18T21:59:45.0581540Z"
+      },
+      "mod_log": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\evidence\\cdmp.guest.log",
+        "sha256": "A763772C33BB6863731ACCEF89FD83CE458F240B965C8A151C41C6073AAAF4F0"
+      },
+      "window": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\window-guest-before-selection.json",
+        "sha256": "963653D684816E8D83ED07035A12DB54B38C5EFCF5E1B0C0EFB30E6A4104795E"
+      },
+      "rect": {
+        "left": 1273,
+        "top": 11,
+        "right": 2569,
+        "bottom": 850
+      }
+    }
+  },
+  "stage_acquire": "[16:56:53.612] INF [T50920] 3663 join Acquire predicates: stage=guest_native_destination shared=false host_pin=pass guest_pin=pass host_primary_pin=pass field_access=pass requested_info_key=0x3 requested_key_read=true host_field_key=0x81020001 host_key_read=true hash_header=pass hash_bucket=pass destination_found=pass entry_present=pass dest_eq_entry=fail owner_eq_host=skipped field_open=skipped field_key=skipped scope_read=skipped scope_vtable=skipped observed_vtable=0x0 scope_slot=skipped observed_slot=0x0 context_match=pass field_pin=skipped",
+  "stage_enter": "[16:56:53.663] INF [T50920] 3663 join Enter native guest-owned field: field key 0x82020000 result 0x0 result_read=true",
+  "shared_acquire": "[16:58:39.542] INF [T50920] 3663 join Acquire predicates: stage=guest shared=true host_pin=pass guest_pin=pass host_primary_pin=pass field_access=pass requested_info_key=0x1 requested_key_read=true host_field_key=0x81020001 host_key_read=true hash_header=pass hash_bucket=pass destination_found=pass entry_present=pass dest_eq_entry=pass owner_eq_host=pass field_open=pass field_key=pass scope_read=pass scope_vtable=pass observed_vtable=0x14597BFE0 scope_slot=pass observed_slot=0x141659370 context_match=pass field_pin=pass",
+  "shared_enter": "[16:58:39.553] INF [T50920] 3663 join Enter: outcome 1 pin stage 3 admission 0 original called true result 0x0 field key 0x81020001",
+  "owner_alias": "[16:58:39.555] INF [T50920] 3663 MoveFieldAck 2364 guest copy: owner_alias=aliased payload_bytes=73 host=0x90100000 guest=0x901001BD guest_actor=0xA01001BE",
+  "guest_crash": {
+    "fault_utc": "2026-11-18T21:59:42.364792+00:00",
+    "exit_code_hex": "0xC0000005",
+    "capture": {
+      "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\evidence\\guest-crash-8264.log",
+      "sha256": "14FA9A2CB9068C91538C78D30E04C31155E54F4066FB07BCD2FB896D5F897B8F"
+    },
+    "first_chance": "first_chance utc_filetime=134395127823647926 tid=25428 code=0xC0000005 at=CrimsonDesert.exe+0x258C8FD access=0 address=0x28",
+    "stack": "stack tid=25428 CrimsonDesert.exe+0x258C8FD <- CrimsonDesert.exe+0x97712D <- CrimsonDesert.exe+0x972B87 <- CrimsonDesert.exe+0x9CEFB3 <- CrimsonDesert.exe+0x162ABEE <- CrimsonDesert.exe+0x161EA60 <- CrimsonDesert.exe+0x163936F",
+    "faulting_instruction": "258C8FD mov rax, qword ptr [rdx + 0x28]",
+    "null_register": "RDX=0, loaded at 258C8F9 from the selected layer+0x18",
+    "native_caller": "9CEFAE -> 9729C0 -> 9770C0 -> 258C8C0",
+    "victim_actor_verified": false,
+    "unhandled_filter_recorded": false,
+    "minidump_written": false
+  },
+  "trace_post_shared_enter_before_fault": {
+    "raw": {
+      "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\evidence\\guest-packets-8264.bin",
+      "sha256": "87FD9912A8B408F0954B8FEA43764C080238328AAB9AB1A9FF05391CDBFFC5FC"
+    },
+    "frame_count": 9468,
+    "truncated": false,
+    "native_receive_returned": 6726,
+    "guest_outbound_queued": 224,
+    "pending_native_receive": 0,
+    "host_to_guest_opcode_counts": {
+      "2005": 78,
+      "2103": 12,
+      "2108": 11,
+      "2148": 124,
+      "2268": 1,
+      "2302": 1,
+      "2364": 1,
+      "2474": 12,
+      "2517": 1,
+      "2531": 4,
+      "2608": 4,
+      "2669": 1,
+      "2712": 2,
+      "2792": 1,
+      "2800": 1,
+      "2812": 5,
+      "2849": 48,
+      "2865": 83,
+      "2899": 19,
+      "2902": 4,
+      "2914": 42,
+      "2968": 11,
+      "3042": 4,
+      "3055": 6245,
+      "3121": 10,
+      "3166": 1
+    },
+    "guest_to_host_opcode_counts": {
+      "2123": 1,
+      "2346": 2,
+      "2431": 1,
+      "2445": 1,
+      "2720": 105,
+      "2723": 1,
+      "2766": 5,
+      "2772": 26,
+      "2876": 1,
+      "2948": 8,
+      "2990": 31,
+      "3000": 19,
+      "3007": 1,
+      "3140": 22
+    },
+    "milestones": [
+      {
+        "index": 2257,
+        "utc": "2026-11-18T21:58:39.586154+00:00",
+        "opcode": 2712,
+        "bytes": 10,
+        "direction": "host_to_guest",
+        "status": "returned"
+      },
+      {
+        "index": 2258,
+        "utc": "2026-11-18T21:58:39.586155+00:00",
+        "opcode": 2364,
+        "bytes": 78,
+        "direction": "host_to_guest",
+        "status": "returned"
+      },
+      {
+        "index": 2342,
+        "utc": "2026-11-18T21:59:39.217009+00:00",
+        "opcode": 2005,
+        "bytes": 14622,
+        "direction": "host_to_guest",
+        "status": "returned"
+      },
+      {
+        "index": 2268,
+        "utc": "2026-11-18T21:58:47.426784+00:00",
+        "opcode": 2723,
+        "bytes": 6,
+        "direction": "guest_to_host",
+        "status": "queued"
+      },
+      {
+        "index": 8660,
+        "utc": "2026-11-18T21:59:39.703663+00:00",
+        "opcode": 2712,
+        "bytes": 10,
+        "direction": "host_to_guest",
+        "status": "returned"
+      },
+      {
+        "index": 8661,
+        "utc": "2026-11-18T21:59:39.704903+00:00",
+        "opcode": 2268,
+        "bytes": 56,
+        "direction": "host_to_guest",
+        "status": "returned"
+      },
+      {
+        "index": 8662,
+        "utc": "2026-11-18T21:59:39.704908+00:00",
+        "opcode": 2669,
+        "bytes": 3318,
+        "direction": "host_to_guest",
+        "status": "returned"
+      },
+      {
+        "index": 8663,
+        "utc": "2026-11-18T21:59:39.704921+00:00",
+        "opcode": 2792,
+        "bytes": 11,
+        "direction": "host_to_guest",
+        "status": "returned"
+      }
+    ],
+    "last_receive_before_fault": {
+      "index": 9174,
+      "utc": "2026-11-18T21:59:42.212777+00:00",
+      "opcode": 2849,
+      "bytes": 123,
+      "direction": "host_to_guest",
+      "status": "returned"
+    },
+    "legacy_comparison": "Second MoveFieldAck, MoveFieldCompleteReq, actor burst, MoveFieldCompleteAck and post/scene state arrived. No second LoadingCompleteAck or PlayAllPreLoadSequencerAck was recorded before the fault."
+  },
+  "saves": {
+    "real_entries": 23,
+    "all_checkpoints_match": true,
+    "frozen_backups_verified": true,
+    "guest_sandbox_files_changed": 0,
+    "guest_ntwrite_audit_count": 1,
+    "guest_ntwrite_audit_sample": "[16:54:36.761] INF [T50572] 3663 guest save audit: pid=8264 NtWriteFile target=sandbox/other bytes=8 status=0x00000000",
+    "manifests": {
+      "pre_guest": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\save-before-guest.tsv",
+        "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+      },
+      "post_guest": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\save-after-guest.tsv",
+        "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+      },
+      "final": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\save-after.tsv",
+        "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+      }
+    }
+  },
+  "installation_restored": true,
+  "finish_receipt": {
+    "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118\\finish.json",
+    "sha256": "ABC3C7C8725C6BD6986170DA20B8AA2D983F377849F588783DFDB8C49514B59D"
+  },
+  "exe_sha256_after": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8"
+}
