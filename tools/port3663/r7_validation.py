@@ -28,9 +28,12 @@ def main():
     parser.add_argument('--prefix', default='step1')
     parser.add_argument('--network-follow-up', action='store_true',
                         help='Seal the R7 Step 2 offline networking fix and its baseline/fixed probes')
+    parser.add_argument('--refusal-log', action='store_true',
+                        help='Also require the production refusal logging regression')
     args = parser.parse_args()
     assert re.fullmatch(r'[a-zA-Z0-9_-]+', args.prefix)
     assert not args.network_follow_up or args.prefix != 'step1'
+    assert not args.refusal_log or args.network_follow_up
     local = ROOT / 'build/r7'
     suite = local / f'{args.prefix}-suite.txt'
     smoke = local / f'{args.prefix}-smoke.txt'
@@ -71,6 +74,8 @@ def main():
     assert 'R7 NT fixture PASS: inherited profile/native resolver unchanged; save-only redirect;' in fixture_text
     if args.network_follow_up:
         assert 'Fixture disk alias denied=1 removed=1' in fixture_text
+    if args.refusal_log:
+        assert 'R7 refusal log fixture PASS: 20 distinct names, 25 named refusals' in fixture_text
     smoke_text = smoke.read_text(encoding='utf-8-sig')
     assert '3663 compiled tier mask 0xF (metadata only)' in smoke_text
     assert 'Mod stopped and unloaded cleanly' in smoke_text
@@ -101,6 +106,8 @@ def main():
     )
     if args.network_follow_up:
         receipt['sandbox_network_verified'] = True
+    if args.refusal_log:
+        receipt['bounded_refusal_log_verified'] = True
     arming_path = local / f'{args.prefix}-arming-receipt.json'
     result_path = ROOT / f'docs/probe-3663/port-evidence/r7/{args.prefix}-validation.json'
     assert not arming_path.exists() and not result_path.exists(), 'Use a fresh evidence prefix'
@@ -133,6 +140,8 @@ def main():
     )
     if args.network_follow_up:
         result['sandbox_network_verified'] = receipt['sandbox_network_verified']
+    if args.refusal_log:
+        result['bounded_refusal_log_verified'] = receipt['bounded_refusal_log_verified']
     write_new(result_path, result)
     print(json.dumps({k: result[k] for k in ('round', 'step', 'suite', 'seconds', 'synthetic_remote_states')}))
 

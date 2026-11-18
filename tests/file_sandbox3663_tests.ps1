@@ -82,6 +82,18 @@ try {
     }
     & $FixtureExe $real $backup $sandbox $manifest $hash network-local
     if($LASTEXITCODE){throw 'Sandboxed adapter enumeration, local lookup or TCP failed'}
+    & $FixtureExe $real $backup $sandbox $manifest $hash refusal-log
+    if($LASTEXITCODE){throw "Production refusal log fixture failed $LASTEXITCODE"}
+    $refusalLog=Get-Content -LiteralPath ($manifest+'.refusals.log') -Raw
+    $names=[regex]::Matches($refusalLog,'(?m)^.*3663 sandbox denied object:.*$')
+    $summaries=[regex]::Matches($refusalLog,'3663 sandbox counters:')
+    if($names.Count -ne 20 -or $summaries.Count -ne 2 -or
+       $refusalLog -notmatch 'named_refusals=25 names_sampled=20/20' -or
+       $refusalLog -notmatch 'SAMPLE-0\?x+'' \[truncated\]' -or
+       $refusalLog -match 'SAMPLE-2[0-3]'){
+        throw 'Production refusal log failed distinct-name cap, sanitization, or counters'
+    }
+    Write-Output 'R7 refusal log fixture PASS: 20 distinct names, 25 named refusals, sanitized bounded messages and two summaries.'
     if((Manifest $real) -ne $before -or (Manifest $backup) -ne $before){throw 'Networking fixture changed a save'}
     & $FixtureExe $real $backup $sandbox $manifest $hash premapped
     if($LASTEXITCODE){throw 'Pre-existing protected view did not refuse'}

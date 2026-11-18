@@ -585,6 +585,7 @@ void run_network(const Config& cfg, LocalSource& local, bool core_tunnel_only = 
         mark_was_down = mark_down;
         if (now - last_report >= 5000) {
             last_report = now;
+            if(core_v1)session2::file_sandbox3663::report_refusals();
             const auto& st = session.stats();
             const char* state =
                 session.state() == ClientSession::State::Connected ? "connected" : "connecting";
@@ -1038,6 +1039,7 @@ DWORD WINAPI worker(LPVOID) {
         if(in_game && proc.identity.kind==game::build_guard::IdentityKind::Build3663 && rs.role==role::Role::Host)
             log::info("3663 R5 host: real saves; file sandbox not installed (launcher verifies backups)");
         if (sandbox_3663 && !session2::file_sandbox3663::install_from_environment()) {
+            session2::file_sandbox3663::report_refusals();
             log::error("3663 file sandbox refused: {}; ending before title",session2::file_sandbox3663::failure_reason());
             log::flush(2000);
             TerminateProcess(GetCurrentProcess(),0xCD64);
@@ -1109,6 +1111,7 @@ DWORD WINAPI worker(LPVOID) {
                     while(!stop_requested(50)){
                         const uint32_t now=GetTickCount();(void)local.sample(now);
                         if(now-last_log>=2000){
+                            if(sandbox_3663)session2::file_sandbox3663::report_refusals();
                             log::info("3663 Tier A: {}",local.describe());
                             if(cfg.r3_pump_probe)game::r3_pump_probe::report();
                             if(cfg.r3_join_probe)game::r3_join_probe::drain();

@@ -33,6 +33,17 @@ std::atomic<bool> active{},ready{};
 bool profile_method=false;
 std::atomic<uint64_t> redirected{},refused{};
 std::array<std::atomic<uint64_t>,1024> refusal_sites{};
+constexpr size_t max_name_samples=20, max_name_chars=256;
+struct RefusedName {
+    std::array<wchar_t,max_name_chars> text{};
+    USHORT original_bytes{};
+    bool relative{};
+    bool operator==(const RefusedName&) const = default;
+};
+SRWLOCK name_sample_lock=SRWLOCK_INIT;
+std::array<RefusedName,max_name_samples> name_samples{};
+std::atomic<size_t> names_sampled{};
+std::atomic<uint64_t> named_refusals{};
 std::string failure="not installed";
 thread_local unsigned audit_depth=0;
 struct ErrorState { DWORD value=GetLastError(); ~ErrorState(){SetLastError(value);} };
@@ -282,10 +293,46 @@ bool enabled(){return active.load(std::memory_order_acquire) && !audit_depth;}
 NTSTATUS deny(std::source_location site=std::source_location::current()){
     ++refused;if(site.line()<refusal_sites.size())++refusal_sites[site.line()];return denied;
 }
-NTSTATUS deny_name(const wchar_t* operation,POBJECT_ATTRIBUTES oa,
+void log_refused_name(const char* operation,POBJECT_ATTRIBUTES oa,std::source_location site) noexcept {
+    ++named_refusals;
+    if(!log::is_open() || names_sampled.load(std::memory_order_relaxed)>=max_name_samples)return;
+    OBJECT_ATTRIBUTES attrs{};
+    UNICODE_STRING name{};
+    if(!checked_copy(oa,&attrs,sizeof(attrs)) || attrs.Length!=sizeof(attrs) ||
+        !checked_copy(attrs.ObjectName,&name,sizeof(name)) || name.Length%sizeof(wchar_t))return;
+    RefusedName sample{};
+    sample.original_bytes=name.Length;
+    sample.relative=attrs.RootDirectory!=nullptr;
+    const auto length=std::min(sample.text.size(),static_cast<size_t>(name.Length)/sizeof(wchar_t));
+    if(length && !checked_copy(name.Buffer,sample.text.data(),length*sizeof(wchar_t)))return;
+    // No blocking lock on a hooked thread. Release it before queuing to the
+    // async logger so nothing that writes a log can hold the sampling lock.
+    if(!TryAcquireSRWLockExclusive(&name_sample_lock))return;
+    const auto used=names_sampled.load(std::memory_order_relaxed);
+    const auto end=name_samples.begin()+used;
+    const bool fresh=used<max_name_samples && std::find(name_samples.begin(),end,sample)==end;
+    if(fresh){
+        name_samples[used]=sample;
+        names_sampled.store(used+1,std::memory_order_relaxed);
+    }
+    ReleaseSRWLockExclusive(&name_sample_lock);
+    if(!fresh)return;
+    for(auto& c:sample.text)if(c<L' ' || (c>=0x7f && c<=0x9f))c=L'?';
+    char utf8[max_name_chars*3]{};
+    const int bytes=length?WideCharToMultiByte(CP_UTF8,0,sample.text.data(),static_cast<int>(length),
+        utf8,sizeof(utf8),nullptr,nullptr):0;
+    const std::string_view display=length==0?"<empty>":bytes>0?std::string_view(utf8,bytes):"<invalid UTF-16>";
+    try {
+        log::warn("3663 sandbox denied object: api={} line={} root_relative={} name='{}'{}",
+            operation,site.line(),sample.relative,display,length*sizeof(wchar_t)<sample.original_bytes?" [truncated]":"");
+    }catch(...){ /* Diagnostics do not change the NT refusal. */ }
+}
+NTSTATUS deny_name(const char* operation,POBJECT_ATTRIBUTES oa,
     std::source_location site=std::source_location::current()){
+    const auto result=deny(site);
+    log_refused_name(operation,oa,site);
 #ifdef CDMP_SANDBOX_FIXTURE
-    // Only the owned fixture emits raw names. Production keeps site counters.
+    // The owned fixture also emits all readable refused names to stderr.
     Audit audit;
     try {
         OBJECT_ATTRIBUTES attrs{};
@@ -294,52 +341,49 @@ NTSTATUS deny_name(const wchar_t* operation,POBJECT_ATTRIBUTES oa,
             checked_copy(attrs.ObjectName,&name,sizeof(name)) && !(name.Length%2)){
             std::wstring text(name.Length/sizeof(wchar_t),L'\0');
             if(text.empty() || checked_copy(name.Buffer,text.data(),name.Length)){
-                std::fwprintf(stderr,L"Fixture refusal %ls line=%u name='%ls' root=%p\n",
+                std::fwprintf(stderr,L"Fixture refusal %hs line=%u name='%ls' root=%p\n",
                     operation,static_cast<unsigned>(site.line()),text.c_str(),attrs.RootDirectory);
-                return deny(site);
+                return result;
             }
         }
     }catch(...){}
-    std::fwprintf(stderr,L"Fixture refusal %ls line=%u: unreadable object name\n",
+    std::fwprintf(stderr,L"Fixture refusal %hs line=%u: unreadable object name\n",
         operation,static_cast<unsigned>(site.line()));
-#else
-    (void)operation;
-    (void)oa;
 #endif
-    return deny(site);
+    return result;
 }
 NTSTATUS NTAPI create_file(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,PIO_STATUS_BLOCK io,
     PLARGE_INTEGER alloc,ULONG attr,ULONG share,ULONG disposition,ULONG options,PVOID ea,ULONG ea_size) {
     ErrorState error_state;
     if(!enabled())return h_create.unsafe_stdcall<NTSTATUS>(out,access,oa,io,alloc,attr,share,disposition,options,ea,ea_size);
     try {
-        if(options&open_by_id)return deny_name(L"NtCreateFile",oa);
+        if(options&open_by_id)return deny_name("NtCreateFile",oa);
         const bool mutation=(access&(GENERIC_WRITE|GENERIC_ALL|MAXIMUM_ALLOWED|DELETE|FILE_WRITE_DATA|FILE_APPEND_DATA|FILE_WRITE_ATTRIBUTES|WRITE_DAC|WRITE_OWNER)) || disposition!=1 || (options&0x1000);
         Name name(oa,mutation);
         return h_create.unsafe_stdcall<NTSTATUS>(out,access|(name.disk?FILE_READ_ATTRIBUTES:0),name.arg(oa),io,alloc,attr,share,disposition,options,ea,ea_size);
-    }catch(...){return deny_name(L"NtCreateFile",oa);}
+    }catch(...){return deny_name("NtCreateFile",oa);}
 }
 NTSTATUS NTAPI open_file(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,PIO_STATUS_BLOCK io,ULONG share,ULONG options) {
     ErrorState error_state;
     if(!enabled())return h_open.unsafe_stdcall<NTSTATUS>(out,access,oa,io,share,options);
-    try {if(options&open_by_id)return deny_name(L"NtOpenFile",oa);Name name(oa,(access&(GENERIC_WRITE|GENERIC_ALL|DELETE|FILE_WRITE_DATA|FILE_APPEND_DATA|FILE_WRITE_ATTRIBUTES))!=0);
+    try {if(options&open_by_id)return deny_name("NtOpenFile",oa);Name name(oa,(access&(GENERIC_WRITE|GENERIC_ALL|DELETE|FILE_WRITE_DATA|FILE_APPEND_DATA|FILE_WRITE_ATTRIBUTES))!=0);
         return h_open.unsafe_stdcall<NTSTATUS>(out,access|(name.disk?FILE_READ_ATTRIBUTES:0),name.arg(oa),io,share,options);
-    }catch(...){return deny_name(L"NtOpenFile",oa);}
+    }catch(...){return deny_name("NtOpenFile",oa);}
 }
 NTSTATUS NTAPI delete_file(POBJECT_ATTRIBUTES oa) {
     ErrorState error_state;
     if(!enabled())return h_delete.unsafe_stdcall<NTSTATUS>(oa);
-    try{Name name(oa,true);return h_delete.unsafe_stdcall<NTSTATUS>(name.arg(oa));}catch(...){return deny_name(L"NtDeleteFile",oa);}
+    try{Name name(oa,true);return h_delete.unsafe_stdcall<NTSTATUS>(name.arg(oa));}catch(...){return deny_name("NtDeleteFile",oa);}
 }
 NTSTATUS NTAPI query_attrs(POBJECT_ATTRIBUTES oa,PVOID info) {
     ErrorState error_state;
     if(!enabled())return h_attrs.unsafe_stdcall<NTSTATUS>(oa,info);
-    try{Name name(oa);return h_attrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny_name(L"NtQueryAttributesFile",oa);}
+    try{Name name(oa);return h_attrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny_name("NtQueryAttributesFile",oa);}
 }
 NTSTATUS NTAPI query_fullattrs(POBJECT_ATTRIBUTES oa,PVOID info) {
     ErrorState error_state;
     if(!enabled())return h_fullattrs.unsafe_stdcall<NTSTATUS>(oa,info);
-    try{Name name(oa);return h_fullattrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny_name(L"NtQueryFullAttributesFile",oa);}
+    try{Name name(oa);return h_fullattrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny_name("NtQueryFullAttributesFile",oa);}
 }
 NTSTATUS NTAPI read_file(HANDLE f,HANDLE e,Apc apc,PVOID ctx,PIO_STATUS_BLOCK io,PVOID buffer,ULONG length,PLARGE_INTEGER offset,PULONG key) {
     ErrorState error_state;
@@ -370,7 +414,7 @@ NTSTATUS NTAPI copy_chunk(HANDLE source,HANDLE destination,HANDLE event,PIO_STAT
 NTSTATUS NTAPI query_byname(POBJECT_ATTRIBUTES oa,PIO_STATUS_BLOCK io,PVOID info,ULONG length,ULONG kind) {
     ErrorState error_state;
     if(!enabled())return h_byname.unsafe_stdcall<NTSTATUS>(oa,io,info,length,kind);
-    try{Name name(oa);return h_byname.unsafe_stdcall<NTSTATUS>(name.arg(oa),io,info,length,kind);}catch(...){return deny_name(L"NtQueryInformationByName",oa);}
+    try{Name name(oa);return h_byname.unsafe_stdcall<NTSTATUS>(name.arg(oa),io,info,length,kind);}catch(...){return deny_name("NtQueryInformationByName",oa);}
 }
 NTSTATUS NTAPI query_info(HANDLE file,PIO_STATUS_BLOCK io,PVOID info,ULONG size,ULONG kind) {
     ErrorState error_state;
@@ -734,6 +778,11 @@ std::string describe(){
     return result;
 }
 std::string failure_reason(){return failure;}
+void report_refusals(){
+    if(!file_hooks_active())return;
+    log::info("3663 sandbox counters: {} named_refusals={} names_sampled={}/{}",
+        describe(),named_refusals.load(),names_sampled.load(),max_name_samples);
+}
 #ifdef CDMP_SANDBOX_FIXTURE
 void fixture_abort(){active.store(false);ready.store(false);}
 #endif

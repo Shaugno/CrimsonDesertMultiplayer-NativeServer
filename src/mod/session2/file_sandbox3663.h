@@ -15,6 +15,8 @@ bool install_from_environment();
 bool verified();
 bool file_hooks_active();
 std::string describe();
+// Periodic worker report. No-op when this process has no NT save hooks.
+void report_refusals();
 std::string failure_reason();
 #ifdef CDMP_SANDBOX_FIXTURE
 void fixture_abort();

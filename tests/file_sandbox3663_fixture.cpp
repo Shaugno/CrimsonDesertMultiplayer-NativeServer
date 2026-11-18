@@ -1,6 +1,7 @@
 // Dedicated child process: hooks live until ExitProcess. The unhooked parent
 // compares SHA256 manifests of the original tree and reads sandbox effects.
 #include "mod/session2/file_sandbox3663.h"
+#include "mod/log.h"
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <windows.h>
@@ -115,6 +116,30 @@ int network_probe(bool external) {
     return adapters || resolved || local || remote ? 81 : 0;
 }
 
+int refusal_log_probe() {
+    using Open=NTSTATUS(NTAPI*)(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,PIO_STATUS_BLOCK,ULONG,ULONG);
+    const auto open=reinterpret_cast<Open>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtOpenFile"));
+    if(!open)return 84;
+    const auto deny_object=[&](unsigned index){
+        auto text=L"\\??\\CDMP-R7-SAMPLE-"+std::to_wstring(index);
+        if(index==0)text+=L"\n"+std::wstring(300,L'x');
+        const auto bytes=static_cast<USHORT>(text.size()*sizeof(wchar_t));
+        UNICODE_STRING name{bytes,bytes,text.data()};
+        OBJECT_ATTRIBUTES attributes{};
+        InitializeObjectAttributes(&attributes,&name,OBJ_CASE_INSENSITIVE,nullptr,nullptr);
+        HANDLE result=nullptr;
+        IO_STATUS_BLOCK io{};
+        const auto status=open(&result,FILE_READ_ATTRIBUTES,&attributes,&io,FILE_SHARE_READ,0);
+        if(result)CloseHandle(result);
+        return status==static_cast<NTSTATUS>(0xC0000022UL);
+    };
+    cdmp::session2::file_sandbox3663::report_refusals();
+    if(!deny_object(0))return 85;
+    for(unsigned i=0;i<24;++i)if(!deny_object(i))return 85;
+    cdmp::session2::file_sandbox3663::report_refusals();
+    return cdmp::log::flush(2000)?0:86;
+}
+
 std::wstring environment(const wchar_t* key){
     const DWORD count=GetEnvironmentVariableW(key,nullptr,0);
     if(!count)return {};
@@ -187,6 +212,14 @@ int fixture(int argc,wchar_t** argv) {
     if(argc!=7 && argc!=8)return 1;
     const std::wstring root=argv[1],backup=argv[2],sandbox=argv[3],manifest=argv[4],hash=argv[5],mode=argv[6];
     if(mode==L"network-baseline")return network_probe(true);
+    if(mode==L"refusal-log"){
+        const std::string digest(hash.begin(),hash.end());
+        if(!cdmp::log::open(manifest+L".refusals.log"))return 87;
+        if(!cdmp::session2::file_sandbox3663::install({root,backup,sandbox,manifest,digest}))return 88;
+        const int result=refusal_log_probe();
+        cdmp::log::close();
+        return result;
+    }
     if(mode==L"network-sandbox" || mode==L"network-local"){
         const std::string digest(hash.begin(),hash.end());
         if(!cdmp::session2::file_sandbox3663::install({root,backup,sandbox,manifest,digest}) ||

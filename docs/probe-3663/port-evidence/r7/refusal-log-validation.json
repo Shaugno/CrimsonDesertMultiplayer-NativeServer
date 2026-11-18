@@ -1,0 +1,60 @@
+{
+  "round": 7,
+  "step": 2,
+  "recorded_utc": "2026-11-18T17:03:40.051668+00:00",
+  "suite": "119/119 passed",
+  "seconds": 108.65,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "C93550F35A363E45007BAD8703A67DC6E0688EB78649E64E23AA96389E8FB443",
+  "desktop_runner_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.",
+  "limits": [
+    "Owned TEMP fixture data only; no game runtime acceptance.",
+    "Steam-style named pagefile MAP-only IPC and pipes are tested without SteamAPI or game activation.",
+    "Historical fake-profile fixtures remain game-free; production rejects that route.",
+    "Concurrent host save deltas cannot attribute writes by process; guest-only manifest check remains required.",
+    "L3 and L4 remain unpassed; the R6 character-login fix awaits live execution."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-arming-receipt.json",
+    "sha256": "9671F941A263FFF1EF5915664EA4AB024E42D124A59D121861341E37E1BFBFEA"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-suite.txt",
+      "sha256": "0D768CED26B839D3D806676D3508C94996DD3CEBE34184BBE49500BAC3C042C6"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-ctest.log",
+      "sha256": "D0F338C424B74E58F8223E51721697DB3C01DC275025C682FC5FC86408513614"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-smoke-run\\e2e\\cdmp.log",
+      "sha256": "FAA0202B414C2051D403B51789A5016F53613A857379CCB2DF66FD8C19FA4FA9"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-boundary.json",
+      "sha256": "9ABE26E9162618F40DB119FA3F7CDFB2DB8B9599FFC12CC538CD8590D801D189"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-before-network.txt",
+      "sha256": "360B5A9ACB511156984B0667AC5AE2FFFBBDD69B073D26D91FA9EC67AB364126"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\refusal-log-after-network.txt",
+      "sha256": "27ABAEEB8B05E52BCA6986EBDE91FD7CA518A0EC53C4A827A75F0B9CB460D3E0"
+    }
+  ],
+  "source_manifest_sha256": "D40EA37ED10A866671FFDD984769C173699F8BA07551E7978945E6D18AECE73D",
+  "sandbox_network_verified": true,
+  "bounded_refusal_log_verified": true
+}

@@ -1,3 +1,39 @@
+# R7 Step 2 retry — prelaunch brief (2026-11-18 Eastern)
+
+**Question.** Can one guest using the offline networking fix reach the 3663
+title screen and quit normally with NT save isolation active?
+
+**Expected observation.** Title is usable and no startup or activation
+dialog appears. The process log verifies save isolation and shows periodic
+refusal totals with per-site counts. Up to 20 distinct readable names are
+queued to the local log, with at most 256 UTF-16 code units per name. Names
+are sanitized and long samples are marked. The unmodified game executable
+matches 3663. The 23 real saves and both frozen backups match the fresh
+outside-OneDrive manifest
+`B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8`
+before and after the guest-only session.
+
+**Time limit and stop condition.** One guest process with a ten-minute
+watchdog. Quit to Desktop promptly at title, before character selection.
+If an error dialog appears, record its exact text and any code, close it,
+and stop live work. A crash, hang, missing isolation receipt, abnormal
+exit or manifest mismatch also blocks L3. Preserve evidence and write
+the Step 5 package. If Step 2 passes, record the result before beginning
+L3 with separate fresh backups.
+
+The logging hook queues samples without file I/O or a blocking sampling
+lock. Refusal counts continue after the sample cap. The owned fixture
+exercises duplicate names, truncation/control-character sanitization,
+and two summary snapshots. Diagnostic logging does not change the
+sandbox decision or the network device allowlist.
+
+Offline validation passed **119/119** in 108.65 seconds. The synthetic
+smoke received 78 remote states with zero rejects and a clean unload.
+Adapter enumeration, DNS and both TCP checks passed with zero refusals
+under the hooks. [Retry validation](port-evidence/r7/refusal-log-validation.json).
+
+---
+
 # R7 Step 5 — offline networking follow-up (2026-11-18 Eastern)
 
 The guest sandbox's networking defect was reproduced and fixed offline.
