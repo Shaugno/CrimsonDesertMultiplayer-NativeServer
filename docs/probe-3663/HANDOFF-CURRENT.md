@@ -1,3 +1,54 @@
+# R7 Step 5 — blocker package (2026-11-18 Eastern)
+
+**Step 2 stopped before title. L3 and L4 remain pending.** The only R7
+launch reached a Crimson Desert dialog saying **“The server is not
+reachable.”** It displayed Retry and Next without a numeric code. This
+confirms a startup blocker. Whether activation error 88500006 recurred
+and why the server was unreachable remain unknown. The dialog was
+closed and live work stopped for the day.
+
+The guest inherited its normal Windows profile and its own log verified
+NT save-directory isolation. The host route has no sandbox. Step 1
+passed 119/119 passed in 110.93 seconds. The synthetic
+smoke received 78 remote states with
+zero rejects and unloaded cleanly. These are game-free checks. The
+repeat executable hash matched 3663 before and after the live session.
+
+| Attempt | Budget | Observation |
+| --- | --- | --- |
+| R7-S2-20261118-1016-ready | Startup 1/5 | Guest PID 51912 started at 10:19:54 AM, verified NT isolation, displayed the server error before title, and exited at 10:21:53 AM when the dialog was closed. Exit code `FFFFFFFF` preceded the watchdog. |
+| L3 | Join 0/3 | Step 2 prerequisite unmet. Character admission, mutual movement, disconnect removal, reconnect, and host reload remain untested in R7. |
+| L4 | Pending | Requires L3 acceptance and the user's go-ahead. The separate cleanup plan is also held. |
+
+The original 23 save files and both backups outside
+OneDrive matched SHA-256 manifest
+`B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8` after the session.
+The six temporary test files were restored to their prior absent state.
+The guest log SHA-256 is
+`8B0B19355DD28C2B2F5CDEDFF2F6CB0AE9AC32363106AC3FB61B07CF1595C037`.
+The exit receipt and the unchanged executable hash are recorded in
+`port-evidence/r7/step2-result.json` (SHA-256 `5528B1BEA3BE83F5061FD69077E3B84C61EBE5F6DC381E58BE2A918B92EF06A7`).
+The evidence index attributes only the guest log to this launch.
+`port-evidence/r7/attempts.json` preserves the separate budgets. The
+preflight that found the missing loader created zero game processes.
+
+The OneDrive Git metadata was incomplete. The live evidence commits
+use a separate checkout of the same branch outside OneDrive. All 680
+source hashes matched the Step 1 seal after aligning checkout line
+endings. The runtime binaries matched the same receipt. No activation
+files were inspected, copied, or edited and the executable was not
+patched.
+
+Commits since `9bbc3df` before this package:
+
+- `16d271d` Save user-approved R7 save-directory isolation plan
+- `d52bd2f` R7 step 1: isolate guest saves without profile overrides
+- `cac3d9d` R7 preflight: record time-gate hold and verified offline seals
+- `1d25995` docs: add L4 Proxmox feasibility plan
+- `4a5f7ed` R7 step 2: record guest startup blocked before title
+
+---
+
 # R7 Step 2 — guest-only startup test brief (2026-11-18 Eastern)
 
 **Question.** Can one 3663 guest reach title and exit normally with the R7
