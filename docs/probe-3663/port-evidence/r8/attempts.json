@@ -14,6 +14,17 @@
       "evidence": "step3-result.json",
       "host_log_sha256": "683A914C4F1E0AE624B57F3A1B2BE37637C30AF72E8A241DCF43611F17A5EDFC",
       "guest_log_sha256": "A763772C33BB6863731ACCEF89FD83CE458F240B965C8A151C41C6073AAAF4F0"
+    },
+    {
+      "attempt_id": "R8-L3-20261118-A2",
+      "category": "join",
+      "result": "shared Enter and guest owner alias passed; host access violation interrupted second loading cycle",
+      "native_guest_login": true,
+      "host_pid": 46672,
+      "guest_pid": 24900,
+      "evidence": "step3-character-guard-result.json",
+      "host_log_sha256": "9D5F091E48143B9BF3CD3F895CD49B40D2124029060C0F0F3DE7DD237D760F2A",
+      "guest_log_sha256": "2E44EFA3B4BADE81885BFB18A01FBEB4D43A5F84DC20B22B581B89D7B3F00094"
     }
   ],
   "unused_host_plans": [

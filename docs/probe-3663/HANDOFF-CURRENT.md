@@ -1,3 +1,36 @@
+# R8 L3 attempt 2 result — host crash interrupted the second load
+
+Build `2507e84` installed the exact guest-only character guard.
+Both windows were verified side by side before the guest loaded.
+Native staging and shared Enter returned zero. The host sent the
+aliased 2364, and the guest returned from native receive and
+queued the second MoveFieldCompleteReq. It received one 2005 in
+this cycle before the host exited. The exact save label was not
+recorded.
+
+The host exited with `0xC0000005` at 5:26:33.831 PM Eastern,
+11.23 seconds after shared Enter. Its last log showed a live
+controlled actor, the tunnel connected and lifecycle Loading.
+No matching Windows event, minidump or native fault site was
+found. The guest disconnected and then quit with code 0. Its
+diagnostic file contained its startup line and **zero null-playback
+samples or skips**. The guest guard was installed, but this trial
+did not establish the earlier faulting actor or exercise the skip.
+
+The crash stopped visual, recording, mutual movement, removal,
+reconnect and reload acceptance. All 23 real saves matched across
+the pre-guest and final checkpoints. The intermediate verification
+was taken after both processes closed. Both backups and the
+unchanged guest sandbox verified. The installation was restored
+and the game executable again matched exact 3663.
+
+R8 usage is **startup 0/5, join 2/3**. L3 remains blocked and L4
+was not started. The earlier host code 1 analysis is below.
+[Attempt 2 receipt and evidence](port-evidence/r8/step3-character-guard-result.json).
+[Attempt ledger](port-evidence/r8/attempts.json).
+
+---
+
 # R8 L3 attempt 2 — exact host-character null-playback guard
 
 Samuel Cardillo’s 3576 character guard covers the update family

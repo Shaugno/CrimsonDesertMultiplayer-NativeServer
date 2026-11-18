@@ -1,0 +1,171 @@
+{
+  "round": 8,
+  "attempt_id": "R8-L3-20261118-A2",
+  "tested_commit": "2507e84",
+  "result": "shared Enter and guest owner alias passed; host access violation interrupted second loading cycle",
+  "side_by_side_user_confirmed": true,
+  "same_save_slot_requested": true,
+  "save_label_verified": false,
+  "native_guest_login": true,
+  "guard_installed": true,
+  "null_playback_samples": 0,
+  "guard_skips": 0,
+  "host_exit_code_hex": "0xC0000005",
+  "host_fault_location_known": false,
+  "host_matching_wer_event_or_dump_found": false,
+  "guest_exit_code": 0,
+  "shared_enter": "[17:26:22.604] INF [T55132] 3663 join Enter: outcome 1 pin stage 3 admission 0 original called true result 0x0 field key 0x81020001",
+  "owner_alias": "[17:26:22.606] INF [T55132] 3663 MoveFieldAck 2364 guest copy: owner_alias=aliased payload_bytes=73 host=0x90100000 guest=0x901001AD guest_actor=0xA01001AE",
+  "private_enter": "[17:25:47.181] INF [T55132] 3663 join Enter native guest-owned field: field key 0x82020000 result 0x0 result_read=true",
+  "roles": {
+    "host": {
+      "launch": {
+        "role": "host",
+        "game_pid": 46672,
+        "game_start_filetime": "134395138494779373",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "none",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T22:17:29.4887739Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 46672,
+        "game_start_filetime": "134395138494779373",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 33320,
+        "controller_start_filetime": "134395138488244738",
+        "deadline_utc": "2026-11-18T22:31:29.4779373Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 3221225477,
+        "ended_utc": "2026-11-18T22:26:33.8309129Z"
+      },
+      "log": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\evidence\\cdmp.host.log",
+        "sha256": "9D5F091E48143B9BF3CD3F895CD49B40D2124029060C0F0F3DE7DD237D760F2A"
+      },
+      "window": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\window-host-before-selection.json",
+        "sha256": "A21763771643EABD29E7CF4ABC7FE248F96C85C1EF1DB3BC7CEE5742046FD7DD"
+      },
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "right": 1296,
+        "bottom": 839
+      }
+    },
+    "guest": {
+      "launch": {
+        "role": "guest",
+        "game_pid": 24900,
+        "game_start_filetime": "134395140607874378",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "nt",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T22:21:00.8035561Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 24900,
+        "game_start_filetime": "134395140607874378",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 53432,
+        "controller_start_filetime": "134395140595770852",
+        "deadline_utc": "2026-11-18T22:31:29.4779373Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 0,
+        "ended_utc": "2026-11-18T22:27:54.8492443Z"
+      },
+      "log": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\evidence\\cdmp.guest.log",
+        "sha256": "2E44EFA3B4BADE81885BFB18A01FBEB4D43A5F84DC20B22B581B89D7B3F00094"
+      },
+      "window": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\window-guest-before-selection.json",
+        "sha256": "92C9001EF1F9A8E90F57E62B6875166C7393BC5A5FB4BCCB823655837EB21A06"
+      },
+      "rect": {
+        "left": 1268,
+        "top": 8,
+        "right": 2564,
+        "bottom": 847
+      }
+    }
+  },
+  "guest_diagnostic": {
+    "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\evidence\\guest-crash-24900.log",
+    "sha256": "A2EF7FC9A576CD152F6EC5AB9A8406369AC833AEEC416A18960CA0F257925AB6"
+  },
+  "trace": {
+    "ref": {
+      "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\evidence\\guest-packets-24900.bin",
+      "sha256": "7C8803E54129EAC9D8E6B12C6EDD308686CAB14E9D79E3389552AD973CD0D720"
+    },
+    "received_after_shared_enter_before_host_exit": {
+      "2005": 1,
+      "2103": 2,
+      "2108": 2,
+      "2148": 2,
+      "2302": 1,
+      "2364": 1,
+      "2448": 1,
+      "2474": 1,
+      "2517": 1,
+      "2712": 1,
+      "2800": 1,
+      "2812": 1,
+      "2849": 28,
+      "2899": 3,
+      "3008": 1
+    },
+    "queued_after_shared_enter_before_host_exit": {
+      "2123": 1,
+      "2672": 1,
+      "2723": 1,
+      "2990": 2,
+      "3000": 2
+    }
+  },
+  "l3_passed": false,
+  "l4_started": false,
+  "user_confirmed_closed": true,
+  "mutual_visibility_and_movement_verified": false,
+  "recording_verified": false,
+  "disconnect_removal_reconnect_and_reload": "stopped after host crash",
+  "saves": {
+    "real_entries": 23,
+    "manifests": {
+      "pre_guest": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\save-before-guest.tsv",
+        "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+      },
+      "after_both_closed": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\save-after-guest.tsv",
+        "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+      },
+      "final": {
+        "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\save-after.tsv",
+        "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+      }
+    },
+    "backup_manifests_verified": true,
+    "guest_sandbox_files_changed": 0,
+    "post_guest_checkpoint_taken_after_both_closed": true
+  },
+  "finish": {
+    "path": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A2\\finish.json",
+    "sha256": "DE389C98FE1E86D2F28EDCAF098648BAF7DA98EC9D7BECDBD2A7560801B2BB67"
+  },
+  "installed_exe_sha256_after": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8"
+}
