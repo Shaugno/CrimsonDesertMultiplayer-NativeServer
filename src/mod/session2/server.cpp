@@ -350,7 +350,7 @@ bool guarded_copy(void* dst, uintptr_t src, size_t n) {
 // The server instance session 2 was built in is still the current one.
 bool same_server() {
     uintptr_t net = 0, s1 = 0;
-    return peek(g_base + tunnel_offsets().kServerNetSlot, net) && net == g_built_net.load() &&
+    return peek(g_base + tunnel_offsets().kServerNetSlot, net) && net && net == g_built_net.load() &&
            peek(net + tunnel_offsets().kServerNet_Session, s1) && s1 == g_built_s1.load();
 }
 
@@ -1406,13 +1406,15 @@ bool server_user2_present() {
 bool server_users(uintptr_t& host, uintptr_t& user2) {
     uintptr_t net = 0, s1 = 0;
     const uintptr_t s2 = live_session2();
-    return s2 && peek(g_base + tunnel_offsets().kServerNetSlot, net) && peek(net + tunnel_offsets().kServerNet_Session, s1) &&
+    return s2 && peek(g_base + tunnel_offsets().kServerNetSlot, net) && net &&
+           peek(net + tunnel_offsets().kServerNet_Session, s1) &&
            session_user(s1, host) && session_user(s2, user2);
 }
 
 bool server_host_user(uintptr_t& host) {
     uintptr_t net = 0, s1 = 0;
-    return peek(g_base + tunnel_offsets().kServerNetSlot, net) && peek(net + tunnel_offsets().kServerNet_Session, s1) &&
+    return peek(g_base + tunnel_offsets().kServerNetSlot, net) && net &&
+           peek(net + tunnel_offsets().kServerNet_Session, s1) &&
            session_user(s1, host);
 }
 
