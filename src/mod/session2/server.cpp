@@ -1590,6 +1590,8 @@ inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
         std::vector<uint8_t> canonical;
         std::span<const uint8_t> accepted_packet=in;
         if(g_opt.core_v1){
+            if(view->opcode==coop3663::v1::kLoginCharacterToGame &&
+                !coop3663::v1::initial_game_login_packet(view->slot,view->payload.size()))return inj::Outcome::Blocked;
             if(!v1_3663::admit_request(view->opcode) ||
                 (view->opcode!=troc::kOpLogoutSessionReq && v1_3663::stopped()))return inj::Outcome::Blocked;
             std::span<const uint8_t> accepted_payload=view->payload;
@@ -1618,6 +1620,8 @@ inj::Outcome inject(std::span<const uint8_t> in, InjectKind kind) {
         pending.epoch = epoch; pending.opcode = view->opcode; pending.queued_ms = now_ms();
         std::lock_guard lock(g_q_mu);
         if (!g_opt.core_v1 && g_core_request_queued) return inj::Outcome::Blocked;
+        if(g_opt.core_v1 && view->opcode==coop3663::v1::kLoginCharacterToGame &&
+            !v1_3663::admit_request(view->opcode))return inj::Outcome::Blocked;
         const auto outcome = g_q.push(std::move(pending), false);
         if (outcome == inj::Outcome::Queued) {
             if(!g_opt.core_v1)g_core_request_queued = true;

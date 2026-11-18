@@ -1,0 +1,61 @@
+{
+  "round": 7,
+  "step": 3,
+  "recorded_utc": "2026-11-18T21:12:45.712552+00:00",
+  "suite": "119/119 passed",
+  "seconds": 106.62,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "9D80B3CFE0E320068ECCDD50F60D7FB9D9BC3B15BCF522C91443D48EFF9665ED",
+  "desktop_runner_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.",
+  "limits": [
+    "Owned TEMP fixture data only; no game runtime acceptance.",
+    "Steam-style named pagefile MAP-only IPC and pipes are tested without SteamAPI or game activation.",
+    "Historical fake-profile fixtures remain game-free; production rejects that route.",
+    "Concurrent host save deltas cannot attribute writes by process; guest-only manifest check remains required.",
+    "L3 and L4 remain unpassed. A second Acquire and shared Enter have yet to be observed on build 3663."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-arming-receipt.json",
+    "sha256": "720F3ACBDADD1F788F7F5D68D88B06E9B804A44ADAF1CA951B2E296287D44295"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-suite.txt",
+      "sha256": "522D7A443AB7E1B314371612EE2914FB496F5849889D740F02DCCB29BC1C5F31"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-ctest.log",
+      "sha256": "C3E5AB955AB9693D58D4918B7119B846482C01FDA21A4F9A4D828DE323BD130D"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-smoke-run\\e2e\\cdmp.log",
+      "sha256": "F405358811FF0F74E2B6E2A2E7A13702F5F0499C0A4DA3E414B4AB6C8C03DA00"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-boundary.json",
+      "sha256": "50F82D4F31F696B62DF61A7C4FDF83164E65C26DB7AB05264504245F20F714D6"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-before-network.txt",
+      "sha256": "360B5A9ACB511156984B0667AC5AE2FFFBBDD69B073D26D91FA9EC67AB364126"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\transitional-field-after-network.txt",
+      "sha256": "27ABAEEB8B05E52BCA6986EBDE91FD7CA518A0EC53C4A827A75F0B9CB460D3E0"
+    }
+  ],
+  "source_manifest_sha256": "7B39FB1669CAF3B022B2303FF2563D3A06CB4A9296211EDFE979CA671F961862",
+  "sandbox_network_verified": true,
+  "bounded_refusal_log_verified": true,
+  "acquire_predicate_trace_compiled": true
+}

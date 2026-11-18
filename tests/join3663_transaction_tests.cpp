@@ -12,9 +12,12 @@ struct Fake {
     Ticket ticket{1,2,3,0x90000002,true}, current=ticket;
     bool pin_ok=true,lock_ok=true,insert_ok=true,enter_ok=true,partial=false;
     bool locked=false,pinned=false,held=false,row=false,entered=false;
+    FieldRoute route=FieldRoute::Share;
     int releases=0,locks=0,fail_lock=0; uint32_t actors=0;
     std::string order;
-    bool pin(){order+='P';pinned=true;return pin_ok;}
+    bool pin(){order+='P';pinned=true;return pin_ok && route!=FieldRoute::Refuse;}
+    FieldRoute field_route()const{return route;}
+    void enter_native(){check(!locked && !pinned && !row);order+='N';entered=true;}
     bool lock(){check(!locked);order+='L';++locks;locked=lock_ok && locks!=fail_lock;return locked;}
     void unlock(){check(locked);order+='U';locked=false;}
     Snapshot snapshot(){check(locked && pinned);order+='S';return s;}
@@ -28,6 +31,24 @@ struct Fake {
     void quarantine(){check(!locked && pinned);order+='Q';held=true;}
 };
 int main(){
+    check(acquire_route(0x100,0x200)==FieldRoute::Native); // staging
+    check(acquire_route(0x100,0x100)==FieldRoute::Share);  // saved level
+    check(acquire_route(0x100,0)==FieldRoute::Refuse);
+    check(acquire_route(0,0x200)==FieldRoute::Refuse);
+    constexpr uint32_t host=0x90000001,guest=0x90000002;
+    {Fake f;f.route=enter_route(0x100,0x200,host,guest,guest,true);
+        check(transact(f)==Result::Native);check(f.order=="PRN" && f.entered && !f.row);}
+    for(const auto denied:{
+        enter_route(0x100,0x200,host,guest,host,true),
+        enter_route(0x100,0x200,host,guest,guest,false),
+        enter_route(0x100,0x200,host,guest,0,true),
+        enter_route(0x100,0x200,guest,guest,guest,true),
+        enter_route(0,0x200,host,guest,guest,true)}){
+        Fake f;f.route=denied;
+        check(transact(f)==Result::Refused);check(f.order=="PR" && !f.entered && !f.row);
+    }
+    {Fake f;f.route=enter_route(0x100,0x100,host,guest,guest,true);f.s.coherent=false;
+        check(transact(f)==Result::Refused);check(f.order=="PLSUR" && !f.entered && !f.row);}
     {Fake f;check(transact(f)==Result::Committed);check(f.order=="PLSIUER" && f.row && f.releases==1);}
     {Fake f;f.pin_ok=false;check(transact(f)==Result::Refused);check(f.order=="PR");}
     {Fake f;f.lock_ok=false;check(transact(f)==Result::Refused);check(f.order=="PLR");}
@@ -45,5 +66,5 @@ int main(){
         check(transact(f)==Result::Quarantined);check(f.row && f.held && !f.locked && f.releases==0);
     }
     {Fake f;f.s.roster={};check(transact(f)==Result::Refused);check(!f.entered && f.releases==1);}
-    std::puts("3663 transaction: reference/lock ordering, successful admission, every refusal, exact rollback, ABA and partial-write quarantine PASS");
+    std::puts("3663 transaction: guest-owned native entry, strict sharing, refused destinations, reference/lock ordering, exact rollback, ABA and partial-write quarantine PASS");
 }

@@ -33,6 +33,8 @@ std::atomic<uintptr_t> known_guest{};
 std::atomic<uint64_t> clock{1}, generations{1}, inserted{}, committed{}, undone{}, refused{};
 std::atomic<uint32_t> diagnostic_lines{};
 std::atomic<uint32_t> acquire_diagnostic_lines{};
+std::atomic<bool> native_acquire_reported{}, native_enter_reported{};
+std::atomic<bool> native_entry_committed{};
 ReadContext read_context{}; IdentityReady identity_ready{};
 NativeFatal native_fatal{};
 SafetyHookInline acquire_hook,enter_hook;
@@ -124,6 +126,7 @@ struct Transaction {
     Context c;uintptr_t fm{},field{},actor{},second{},vector{},initial_vector{};
     uint32_t field_key{},before_count{};uint64_t generation{};
     uint32_t pin_stage{};policy::Admission admission=policy::Admission::Incoherent;
+    policy::FieldRoute route=policy::FieldRoute::Refuse;
     uint32_t* result{};uint32_t* returned{};
     Pins pins;std::array<policy::RosterEntry,1> roster{};
     std::array<Row,64> before{};
@@ -136,11 +139,25 @@ struct Transaction {
         actor=ptr(ptr(fm)+8);
         const uintptr_t host_actor=ptr(c.host+0xD0);
         if(!typed_pin(host_actor,pins.host_actor) || !typed_pin(actor,pins.primary) ||
-            !field_access(host_actor,pins.access) || pins.access.scope.object!=field || !field_pin(field,pins.field))return false;
+            !field_access(host_actor,pins.access) || !field_pin(field,pins.field))return false;
         pin_stage=3;
+        if(pins.access.scope.object!=field){
+            uint32_t owner=0,controller=0;
+            const auto guest_key=key(c.guest);
+            const bool guest_actor_verified=(key(actor)>>28)==0xA && mover(actor)==fm &&
+                ptr(fm-0x508+8)==actor && ptr(actor+0xA0)==c.guest &&
+                read(actor+0x90,controller) && controller==guest_key &&
+                identity_ready && identity_ready(c.guest,actor,c.epoch);
+            if(!read(field+0x180,owner) || !read(field+0x2D0,field_key) ||
+                !field_key || !context_matches(c))return false;
+            route=policy::enter_route(pins.access.scope.object,field,key(c.host),guest_key,owner,guest_actor_verified);
+            return route==policy::FieldRoute::Native;
+        }
+        route=policy::FieldRoute::Share;
         generation=generations.fetch_add(1);
         return read(field+0x2D0,field_key) && context_matches(c);
     }
+    policy::FieldRoute field_route()const{return route;}
     bool lock(){return lock_field(field,second);}
     void unlock(){unlock_field(field,second);second=0;}
     policy::Snapshot snapshot(){
@@ -176,9 +193,12 @@ struct Transaction {
         partial=false;++inserted;return true;
     }
     bool uncertain()const{return partial;}
-    bool enter(){
+    void enter_native(){
         called=true;
         returned=enter_hook.unsafe_call<uint32_t*>(reinterpret_cast<void*>(fm),result,reinterpret_cast<void*>(field));
+    }
+    bool enter(){
+        enter_native();
         uint32_t code=~0u;
         const bool success=returned==result && read(reinterpret_cast<uintptr_t>(returned),code) && !code;
         if(success)++committed;return success;
@@ -225,7 +245,16 @@ uint32_t* __fastcall enter_detour(void* mover_arg,uint32_t* result,void* field_a
     auto operation=[&](){return policy::transact(t);};
     auto fault=[&](EXCEPTION_POINTERS* e){return native_fault(t.pins,e);};
     const auto outcome=game::native_call_scope(operation,fault,policy::Result::Quarantined);
-    if(diagnostic_lines.fetch_add(1)<32)try{
+    if(outcome==policy::Result::Native){
+        uint32_t code=~0u;
+        const bool read_code=t.returned==result && read(reinterpret_cast<uintptr_t>(result),code);
+        if(read_code && !code)native_entry_committed.store(true);
+        if(!native_enter_reported.exchange(true))try{
+            log::info("3663 join Enter native guest-owned field: field key 0x{:X} result 0x{:X} result_read={}",
+                t.field_key,code,read_code);
+        }catch(...){}
+    }
+    if(outcome!=policy::Result::Native && diagnostic_lines.fetch_add(1)<32)try{
         uint32_t code=~0u;(void)read(reinterpret_cast<uintptr_t>(result),code);
         log::info("3663 join Enter: outcome {} pin stage {} admission {} original called {} result 0x{:X} field key 0x{:X}",
             static_cast<int>(outcome),t.pin_stage,static_cast<int>(t.admission),t.called,code,t.field_key);
@@ -282,7 +311,8 @@ uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,
         ++refused;(void)native_refusal(result);return result;
     }
     AcquireTrace trace;
-    Pins p;bool success=false;
+    Pins p;bool success=false,private_destination=false;
+    uint32_t* returned=result;
     auto operation=[&](){
     if(!sealed.load() && checked(trace.host_pin,typed_pin(c.host,p.host_user)) &&
         checked(trace.guest_pin,typed_pin(c.guest,p.guest_user)) &&
@@ -315,7 +345,11 @@ uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,
             trace.host_key_attempted=true;
             return (trace.host_key_read=read(field+0x2D0,trace.host_field_key)) && trace.host_field_key;
         };
-        if(checked(trace.entry_present,entry!=0) && checked(trace.destination_matches,dest==entry) &&
+        const auto route=policy::acquire_route(entry,dest);
+        if(checked(trace.entry_present,entry!=0))checked(trace.destination_matches,route==policy::FieldRoute::Share);
+        if(route==policy::FieldRoute::Native)
+            private_destination=checked(trace.context,context_matches(c));
+        if(route==policy::FieldRoute::Share &&
             checked(trace.owner_matches,read(field+0x180,owner) && owner==key(c.host)) &&
             checked(trace.field_open,read(field+0x4A,open) && open==1) &&
             checked(trace.field_key,read_host_key()) &&
@@ -336,14 +370,20 @@ uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,
         if(report && !trace.host_key_attempted && p.access.scope.valid)
             trace.host_key_read=read(field+0x2D0,trace.host_field_key);
     }
+    release(p);
+    if(private_destination){
+        if(!native_acquire_reported.exchange(true))report_acquire(trace,"guest_native_destination",false);
+        returned=acquire_hook.unsafe_call<uint32_t*>(manager,result,type,out_arg,traveller);
+        return true; // preserve the native return and status, including errors
+    }
     if(report)report_acquire(trace,"guest",success);
-    release(p);return success;
+    return success;
     };
     auto fault=[&](EXCEPTION_POINTERS* e){return native_fault(p,e);};
     success=game::native_call_scope(operation,fault,false);
     busy.store(false);
     if(!success){++refused;(void)native_refusal(result);}
-    return result; // guest refusal must never silently acquire a private field
+    return success?returned:result;
 }
 bool matches(const n::Site& site){std::array<uint8_t,16> bytes{};return game::safe_read(base+site.rva,bytes.data(),bytes.size()) && bytes==site.bytes;}
 template<class Hook,class Fn> bool prepare(const n::Site& s,Fn fn,Hook& out){
@@ -377,6 +417,8 @@ bool install(const game::build_guard::ImageIdentity& id,ReadContext context,Iden
 }
 bool active(){return on.load();}
 bool quarantined(){return sealed.load();}
+bool shared_entry_committed(){return committed.load()!=0;}
+bool private_entry_committed(){return native_entry_committed.load();}
 std::string describe(){return std::format("3663 join: inserted {} committed {} rolled back {} refused {} quarantine {}",
     inserted.load(),committed.load(),undone.load(),refused.load(),sealed.load());}
 }

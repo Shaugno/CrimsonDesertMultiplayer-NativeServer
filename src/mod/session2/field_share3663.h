@@ -13,5 +13,7 @@ using NativeFatal = void(*)() noexcept; // atomic stop only; no lock/allocation/
 bool install(const game::build_guard::ImageIdentity&, ReadContext, IdentityReady, NativeFatal);
 bool active();
 bool quarantined();
+bool shared_entry_committed();
+bool private_entry_committed();
 std::string describe();
 }

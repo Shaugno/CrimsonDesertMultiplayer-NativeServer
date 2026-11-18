@@ -32,19 +32,26 @@ int main(){
     for(unsigned flag=0;flag<=255;++flag){check(loading_flag(true,static_cast<uint8_t>(flag))==0);
         check(loading_flag(false,static_cast<uint8_t>(flag))==flag);}
     for(const auto name:{"ConnectCryptogramToServerReq","LoginUserToFieldServerReq","LoginCharacterToFieldServerReq",
-        "PreLoadSequencerReq","GameLoadingStartReq","MoveFieldCompleteReq","LoadingCompleteReq","MoveActorReq",
+        "LoginCharacterToGameReq","PreLoadSequencerReq","GameLoadingStartReq","MoveFieldCompleteReq","LoadingCompleteReq","MoveActorReq",
         "RotateActorReq","StartActionReq","LogoutSessionToServerReq"})check(request_name(name));
     for(const auto name:{"SaveAutoReq","DeleteSaveReq","ReloadStageStartReq","SetFieldTimeReq","MoveFieldCheatReq",
         "AITeleportReq","AttackByCollisionReq","MountBeginReq","RegisterGlobalStageSequencerReq",
         "LoginCharacterToFieldServerReqForDev","MoveActorReqCheat",""})check(!request_name(name));
-    Lifecycle s;check(s.can_logout() && s.admit(3081));s.request(3081);
-    check(s.phase==Phase::Loading && !s.can_logout() && !s.admit(2001));s.response(2268);check(s.phase==Phase::Loading);
-    s.response(2891);check(s.phase==Phase::Stable && s.can_logout());
+    check(initial_game_login_packet(0,0));
+    check(!initial_game_login_packet(-1,0) && !initial_game_login_packet(1,0) && !initial_game_login_packet(0,1));
+    Lifecycle s;check(s.can_logout() && s.admit(3081) && !s.admit(kLoginCharacterToGame,true));s.request(3081);
+    check(s.phase==Phase::Loading && !s.can_logout() && !s.admit(2001));s.response(2268,false);check(s.phase==Phase::Loading);
+    s.response(2891,false);check(s.phase==Phase::Loading && s.admit(2350) && !s.can_logout());
+    check(!s.admit(kLoginCharacterToGame,false) && s.admit(kLoginCharacterToGame,true));
+    s.request(kLoginCharacterToGame);
+    check(!s.admit(kLoginCharacterToGame,true));
+    s.request(2350);
+    s.response(2891,true);check(s.phase==Phase::Stable && s.can_logout());
     check(!s.admit(3081) && !s.admit(2350) && s.admit(2790) && s.admit(2296));
     s.request(2001);check(s.phase==Phase::Closing && !s.can_logout() && !s.admit(2001) && !s.admit(2790));
-    s.response(2003);check(s.phase==Phase::Closing);s.response(2002);check(s.phase==Phase::Closed && !s.admit(3081));
-    s.response(2891);check(s.phase==Phase::Closed);
+    s.response(2003,true);check(s.phase==Phase::Closing);s.response(2002,true);check(s.phase==Phase::Closed && !s.admit(3081));
+    s.response(2891,true);check(s.phase==Phase::Closed);
     Lifecycle lost;lost.request(3081);lost.lost();check(lost.phase==Phase::Quarantine && !lost.admit(2790));
-    lost.response(2891);check(lost.phase==Phase::Quarantine);
+    lost.response(2891,true);check(lost.phase==Phase::Quarantine);
     std::puts("3663 v1: exact request-name allowlist, initial loading versus travel, stable disconnect, duplicate logout and lost-loading quarantine PASS");
 }

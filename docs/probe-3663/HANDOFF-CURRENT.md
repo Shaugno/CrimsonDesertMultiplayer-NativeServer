@@ -1,3 +1,84 @@
+# R7 Step 3 — private staging field and final join attempt
+
+The 2976 live captures show FieldInfoKey `0x3` entering a private
+staging field at `(0, 1000, 0)`. The first loading completion is
+followed by `LoginCharacterToGameReq` and `GameLoadingStartReq`,
+then by a second field acquisition for the saved level. The legacy
+adapter calls native Acquire on a destination mismatch and applies
+sharing only when the destination matches the host. Samuel Cardillo's
+3576 port at `a3904af` retains that behavior and lets Enter run
+natively for the guest's own field. The 3663 implementation uses its
+verified three-argument Enter ABI and its own guarded transaction.
+[2976 live sequence](../research/opcion-d-accion-usuario2.md#31-secuencia-del-login-real-v).
+[Samuel Cardillo's implementation](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/session2/field_share.cpp).
+
+The 3663 same-slot trace resolved `0x3` to a different level
+entry and the guest showed the staging coordinates. The adapter
+refused before native Enter, so the trace ends before a second
+Acquire. That refusal did not itself quarantine the session. The
+3663 packet and transform-sync evidence supports the two-stage
+interpretation. Its saved-level Acquire still needs live confirmation.
+[3663 request mapping](R2-LIFECYCLE.md#loading-message-and-duplicate-consumer-continuation).
+[Prior same-slot trace](port-evidence/r7/step3-same-slot-result.json).
+
+For a known guest with valid pins and a current session, Acquire
+now calls native code for a resolved, distinct destination and logs
+the routing decision once. Enter delegates only when it verifies
+guest ownership of both the actor and the distinct target field,
+and the existing guest identity binding is ready. Native owns that
+field's entry and return status. The host destination still requires
+the existing owner, Scope, lifetime and roster checks, with its
+original exact rollback or quarantine. Unknown destinations and
+unproved ownership still refuse.
+
+The first loading acknowledgement now keeps the guest in Loading
+until a shared Enter commits, so it cannot prematurely block the
+native loading-start request (`2350`). The exact 3663 image's
+`LoginCharacterToGameReq` RTTI vtable at `0x5F675B8` is stored by
+the native initializer at `0x258B7C` into descriptor `0x6F35E20`.
+The descriptor has request kind 4, opcode `2140` and a five-byte
+minimum frame. The existing 2976 capture shows the empty, slot-0
+form. The tunnel accepts only that form, once, after verified
+private Enter and before shared Enter. The 3663 handler body and
+actual live payload have yet to be observed. Character-number,
+lobby, actor-key, and phase identity checks remain in force.
+
+The full suite passed 119/119 in 106.62 seconds. The transaction
+tests cover distinct-destination native Acquire, guest-owned native
+Enter without roster insertion, and strict host-field admission
+and rollback. The lifecycle tests keep the parking completion in
+Loading and reject duplicate or malformed world-login requests.
+The eight-second synthetic smoke exchanged 78 remote states with
+zero rejects and unloaded cleanly. The NT sandbox's adapter,
+DNS and TCP checks passed with both fixture manifests intact.
+[Validation receipt](port-evidence/r7/transitional-field-validation.json).
+
+**Question.** Does native Acquire and Enter for the private staging
+field let the matching frozen save slot reach a second Acquire and
+commit Enter on the host's field?
+
+**Expected observation.** With the host stationary and the same
+save slot selected in the guest, look for the one-shot
+`guest_native_destination` line, guest-owned Enter result zero,
+then a new Acquire with `dest_eq_entry=pass` and a committed shared
+Enter. Record both usable side-by-side views with Win+Alt+R. Verify
+mutual walking and turning, removal on guest disconnect, the
+reconnect outcome, and host reload followed by normal Quit to
+Desktop. No travel, combat, or mounts.
+
+**Time limit and stop condition.** Startup usage is 2/5 and join
+usage is 2/3. Require the exact 3663 executable hash, fresh verified
+save backups outside OneDrive, and the shared fourteen-minute
+watchdog. Verify both views and identify the same save slot before
+one guest Load. Stop on activation error, crash, hang, refusal,
+loading stall, or the watchdog deadline. Collect exact exits and
+logs, verify both backups and the real-save manifest against the
+pre-guest checkpoint, and restore the test installation. This is
+the final available join attempt. L4 awaits user confirmation of
+L3 acceptance.
+
+---
+
 # R7 Step 3 — same-slot diagnostic result (2026-11-18 Eastern)
 
 **The first failed check was `dest_eq_entry`.** The user confirmed

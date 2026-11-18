@@ -1,11 +1,23 @@
 #pragma once
-// Pure guard/rollback policy for a future 3663 three-argument adapter.
-// Not linked to the ASI. A successful policy check grants no native permission.
+// Route and rollback decisions for the 3663 three-argument adapter.
 #include <cstdint>
 #include <span>
 
 namespace cdmp::coop3663::join {
 using EnterField3663 = int*(__fastcall*)(void* mover, int* result, void* field);
+enum class FieldRoute { Refuse, Native, Share };
+inline FieldRoute acquire_route(uintptr_t host_entry, uintptr_t destination) {
+    if (!host_entry || !destination) return FieldRoute::Refuse;
+    return destination==host_entry ? FieldRoute::Share : FieldRoute::Native;
+}
+inline FieldRoute enter_route(uintptr_t host_field, uintptr_t target_field, uint32_t host_user,
+                              uint32_t guest_user, uint32_t target_owner, bool guest_actor_verified) {
+    if (!host_field || !target_field) return FieldRoute::Refuse;
+    if (target_field==host_field) return FieldRoute::Share; // full transaction preflight follows
+    if (!host_user || !guest_user || host_user==guest_user || target_owner!=guest_user || !guest_actor_verified)
+        return FieldRoute::Refuse;
+    return FieldRoute::Native;
+}
 struct RosterEntry { uint16_t kind{}; uint32_t actor_key{}, owner_key{}; };
 struct Snapshot {
     uint32_t host_owner{}, guest_user{}, primary_key{}, primary_owner{};

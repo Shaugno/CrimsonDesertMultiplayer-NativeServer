@@ -114,8 +114,12 @@ bool host_install(const game::build_guard::ImageIdentity& id){
     installed.store(true,std::memory_order_release);return true;
 }
 void note_request(uint16_t op){std::lock_guard lock(life_mutex);life.request(op);}
-void note_response(uint16_t op){std::lock_guard lock(life_mutex);life.response(op);}
-bool admit_request(uint16_t op){std::lock_guard lock(life_mutex);const bool allowed=life.admit(op);
+void note_response(uint16_t op){
+    std::lock_guard lock(life_mutex);
+    life.response(op,field_share3663::shared_entry_committed());
+}
+bool admit_request(uint16_t op){std::lock_guard lock(life_mutex);
+    const bool allowed=life.admit(op,field_share3663::private_entry_committed() && !field_share3663::shared_entry_committed());
     if(op==2001 && !allowed)life.lost();return allowed;}
 bool allow_disconnect_logout(){std::lock_guard lock(life_mutex);return life.can_logout();}
 void note_lost(){std::lock_guard lock(life_mutex);life.lost();}

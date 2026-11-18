@@ -2,12 +2,17 @@
 #include "coop3663/join3663_policy.h"
 
 namespace cdmp::coop3663::join {
-enum class Result { Refused, Committed, RolledBack, Quarantined };
+enum class Result { Refused, Committed, RolledBack, Quarantined, Native };
 // Backend owns all references and the exact insertion ticket. Its snapshot and
 // rollback methods run under BOTH native field locks. Native Enter runs under
 // neither. No registry mutex may be held across any native call.
 template<class Backend> Result transact(Backend& b) {
     if (!b.pin()) { b.release(); return Result::Refused; }
+    if (b.field_route() == FieldRoute::Native) {
+        b.release();
+        b.enter_native();
+        return Result::Native;
+    }
     if (!b.lock()) { b.release(); return Result::Refused; }
     if (preflight(b.snapshot()) != Admission::Candidate) {
         b.unlock(); b.release(); return Result::Refused;
