@@ -1,5 +1,14 @@
 # R7 Step 3 — same-slot Acquire diagnostic brief (2026-11-18 Eastern)
 
+The first desktop plan expired unused at 3:13:07 PM Eastern. There was
+no launch or launcher error receipt and no game process. The deployment
+was restored after the deadline. The 23 real saves and frozen backups
+still matched. The local finish receipt SHA-256 is
+`81DA48460887E5E6905F351866F8FD403BF01A848274E5713E530C25C6101828`.
+The `R7-L3-SAME-SLOT-20261118-B` backups are prepared and no timer is
+active. This setup consumed zero attempts. Usage is startup 2/5 and
+join 1/3. The diagnostic still awaits the desktop handoff.
+
 **Question.** Does one guest request for the same frozen save slot as
 the host resolve to the host's current level entry, and which sharing
 predicate stops it if sharing fails?
