@@ -1,4 +1,36 @@
-# R7 Step 5 — blocker package (2026-11-18 Eastern)
+# R7 Step 5 — offline networking follow-up (2026-11-18 Eastern)
+
+The guest sandbox's networking defect was reproduced and fixed offline.
+The R7-S2 live log only reports its early isolation snapshot, with two
+redirects, zero refusals and no denied names. In an owned reproduction,
+the same sandbox refused five `NtCreateFile` calls to `\??\Nsi`.
+Adapter enumeration returned access denied and public DNS failed.
+The unhooked control and the final sandbox both resolved
+steamcommunity.com, connected to its port 443 and connected to an owned
+loopback listener. The final sandbox recorded zero network refusals.
+
+The fix resolves bare DOS aliases to approved native network endpoints
+and recognizes the exact NetBT adapter-device format. A DOS alias
+pointing to an owned original save was still refused. The save fixture
+also verified unchanged original and backup manifests and the existing
+redirected operations. [Reproduction and coverage](R7-NETWORK-FOLLOWUP.md).
+
+The full suite passed **119/119** in 173.34 seconds. The eight-second
+synthetic smoke received 78 remote states, rejected zero and unloaded
+cleanly. [Validation and evidence hashes](port-evidence/r7/network-fix-validation.json).
+
+The offline fixture explains a plausible path to the startup dialog.
+Whether that was the live cause or an activation error remains unknown.
+Startup usage is still **1/5** and join usage **0/3**. No game launched or
+test installation was deployed during the follow-up. The next live test
+is one guest-only Step 2 retry in a later session using the new arming
+receipt, fresh verified backups and the existing stop conditions. L3
+requires a clean Step 2. L4 and the separate cleanup plan await the user's
+confirmation that L3 passed.
+
+---
+
+# R7 Step 5 — original blocker package (2026-11-18 Eastern)
 
 **Step 2 stopped before title. L3 and L4 remain pending.** The only R7
 launch reached a Crimson Desert dialog saying **“The server is not

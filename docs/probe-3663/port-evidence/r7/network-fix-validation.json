@@ -1,0 +1,59 @@
+{
+  "round": 7,
+  "step": 2,
+  "recorded_utc": "2026-11-18T16:33:01.306346+00:00",
+  "suite": "119/119 passed",
+  "seconds": 173.34,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "68B431742E5643DF6E0DF1F5B0B080A3F2A2782148B258B97211394AD918DC89",
+  "desktop_runner_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.",
+  "limits": [
+    "Owned TEMP fixture data only; no game runtime acceptance.",
+    "Steam-style named pagefile MAP-only IPC and pipes are tested without SteamAPI or game activation.",
+    "Historical fake-profile fixtures remain game-free; production rejects that route.",
+    "Concurrent host save deltas cannot attribute writes by process; guest-only manifest check remains required.",
+    "L3 and L4 remain unpassed; the R6 character-login fix awaits live execution."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-arming-receipt.json",
+    "sha256": "E9ED8E4C6F10EAB422E8EE57B5C616FD6449CC962472CD8031FC18C3B8977BC2"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-suite.txt",
+      "sha256": "FFCD7F8BB51CA99E9B5BAB7A51B0494C813DE64CE43AA16CDADA970836CE0952"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-ctest.log",
+      "sha256": "327A836D2AB08DDA90305427DA540A11E6D8A63F8AD4591220B384B5D14201B8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-smoke-run\\e2e\\cdmp.log",
+      "sha256": "CE753629A472A02F6C4118C6FACBAD30A8FF273E3C8A703376DD673BFEDF74AE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-boundary.json",
+      "sha256": "93CE41420FFED972955C693DF6B33B2FFAB10465E524DBB2829804BC096B29A6"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-before-network.txt",
+      "sha256": "360B5A9ACB511156984B0667AC5AE2FFFBBDD69B073D26D91FA9EC67AB364126"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\network-fix-after-network.txt",
+      "sha256": "27ABAEEB8B05E52BCA6986EBDE91FD7CA518A0EC53C4A827A75F0B9CB460D3E0"
+    }
+  ],
+  "source_manifest_sha256": "1F81CE7DCBA8643E383C5770792EA70C12A3E3E1C6E58E990D11B6DCF2D33029",
+  "sandbox_network_verified": true
+}

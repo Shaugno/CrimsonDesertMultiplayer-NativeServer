@@ -19,6 +19,7 @@
 #include <set>
 #include <sstream>
 #include <source_location>
+#include <string_view>
 #include <tuple>
 #include <vector>
 #include "mod/log.h"
@@ -122,6 +123,53 @@ bool plain_tree(const std::wstring& root) {
     for(const auto& entry:std::filesystem::recursive_directory_iterator(root))if(!check(entry.path()))return false;
     return true;
 }
+
+bool equal_ordinal(std::wstring_view a,std::wstring_view b) {
+    return a.size()==b.size() && CompareStringOrdinal(a.data(),static_cast<int>(a.size()),
+        b.data(),static_cast<int>(b.size()),TRUE)==CSTR_EQUAL;
+}
+
+bool netbt_endpoint(std::wstring_view path) {
+    // Adapter-specific Windows device name. A full GUID is required and a
+    // suffix (including a path separator or alternate stream) never qualifies.
+    constexpr std::wstring_view prefix=L"\\Device\\NetBT_Tcpip_{";
+    if(path.size()!=prefix.size()+37 || !equal_ordinal(path.substr(0,prefix.size()),prefix) ||
+        path.back()!=L'}')return false;
+    const auto guid=path.substr(prefix.size(),36);
+    for(size_t i=0;i<guid.size();++i){
+        const wchar_t c=guid[i];
+        if(i==8 || i==13 || i==18 || i==23){
+            if(c!=L'-')return false;
+        }else if(!((c>=L'0' && c<=L'9') || (c>=L'a' && c<=L'f') || (c>=L'A' && c<=L'F'))){
+            return false;
+        }
+    }
+    return true;
+}
+
+std::wstring network_device_target(const std::wstring& path) {
+    if(netbt_endpoint(path))return path;
+    constexpr std::wstring_view prefix=L"\\??\\";
+    if(!path.starts_with(prefix))return {};
+    const auto alias=std::wstring_view(path).substr(prefix.size());
+    if(alias.empty() || alias.size()>255 || alias.find_first_of(L"\\/:")!=alias.npos)return {};
+
+    // A DOS device alias can point to a file or volume. Approve the resolved
+    // native network endpoint, then use that endpoint for the actual open.
+    // Never reopen through the mutable alias or trust a broad Device prefix.
+    Audit audit;
+    std::array<wchar_t,1024> mapping{};
+    if(!QueryDosDeviceW(path.c_str()+prefix.size(),mapping.data(),
+        static_cast<DWORD>(mapping.size())))return {};
+    constexpr std::wstring_view endpoints[]{
+        L"\\Device\\Nsi", L"\\Device\\Ndis", L"\\Device\\Afd", L"\\Device\\Tcp", L"\\Device\\Tcp6",
+        L"\\Device\\Udp", L"\\Device\\Udp6", L"\\Device\\Ip", L"\\Device\\Ip6"
+    };
+    const std::wstring_view current(mapping.data());
+    for(const auto endpoint:endpoints)if(equal_ordinal(current,endpoint))return std::wstring(current);
+    return {};
+}
+
 // Resolve an existing ancestor before appending missing leaf components. The
 // actual native call uses that absolute name with OBJ_DONT_REPARSE, so a
 // post-check reparse substitution fails instead of escaping the sandbox.
@@ -172,6 +220,17 @@ std::wstring canonical(std::wstring path,bool mutation) {
 struct Name {
     OBJECT_ATTRIBUTES attributes{};UNICODE_STRING unicode{};std::wstring storage;
     bool disk=false,hit=false,device=false;
+
+    void bind_absolute() {
+        if(storage.size()>32766)throw 1;
+        unicode.Length=static_cast<USHORT>(storage.size()*sizeof(wchar_t));
+        unicode.MaximumLength=unicode.Length;
+        unicode.Buffer=storage.data();
+        attributes.RootDirectory=nullptr;
+        attributes.ObjectName=&unicode;
+        attributes.Attributes|=dont_reparse;
+    }
+
     explicit Name(POBJECT_ATTRIBUTES given,bool mutation=false) {
         if(!given || !checked_copy(given,&attributes,sizeof(attributes)) || attributes.Length!=sizeof(attributes))throw 1;
         UNICODE_STRING name{};
@@ -198,19 +257,24 @@ struct Name {
             // native pipe device rather than passing a mutable DOS alias
             // through or attempting a second client open during validation.
             storage=L"\\Device\\NamedPipe\\"+storage.substr(std::size(pipe_prefix)-1);
-            if(storage.size()>32766)throw 1;
-            unicode.Length=static_cast<USHORT>(storage.size()*2);unicode.MaximumLength=unicode.Length;unicode.Buffer=storage.data();
-            attributes.RootDirectory=nullptr;attributes.ObjectName=&unicode;attributes.Attributes|=dont_reparse;
+            bind_absolute();
             device=true;return;
+        }
+        if(!attributes.RootDirectory){
+            auto target=network_device_target(storage);
+            if(!target.empty()){
+                storage=std::move(target);
+                bind_absolute();
+                device=true;
+                return;
+            }
         }
         auto resolved=canonical(storage,mutation);
         if(resolved.empty())return;
         disk=true;
         if(under(resolved,real_root)){resolved=sandbox_root+resolved.substr(real_root.size());hit=true;++redirected;}
         storage=L"\\??\\"+resolved;
-        if(storage.size()>32766)throw 1;
-        unicode.Length=static_cast<USHORT>(storage.size()*2);unicode.MaximumLength=unicode.Length;unicode.Buffer=storage.data();
-        attributes.RootDirectory=nullptr;attributes.ObjectName=&unicode;attributes.Attributes|=dont_reparse;
+        bind_absolute();
     }
     POBJECT_ATTRIBUTES arg(POBJECT_ATTRIBUTES original){return disk||device?&attributes:original;}
 };
@@ -218,49 +282,64 @@ bool enabled(){return active.load(std::memory_order_acquire) && !audit_depth;}
 NTSTATUS deny(std::source_location site=std::source_location::current()){
     ++refused;if(site.line()<refusal_sites.size())++refusal_sites[site.line()];return denied;
 }
+NTSTATUS deny_name(const wchar_t* operation,POBJECT_ATTRIBUTES oa,
+    std::source_location site=std::source_location::current()){
+#ifdef CDMP_SANDBOX_FIXTURE
+    // Only the owned fixture emits raw names. Production keeps site counters.
+    Audit audit;
+    try {
+        OBJECT_ATTRIBUTES attrs{};
+        UNICODE_STRING name{};
+        if(checked_copy(oa,&attrs,sizeof(attrs)) && attrs.Length==sizeof(attrs) &&
+            checked_copy(attrs.ObjectName,&name,sizeof(name)) && !(name.Length%2)){
+            std::wstring text(name.Length/sizeof(wchar_t),L'\0');
+            if(text.empty() || checked_copy(name.Buffer,text.data(),name.Length)){
+                std::fwprintf(stderr,L"Fixture refusal %ls line=%u name='%ls' root=%p\n",
+                    operation,static_cast<unsigned>(site.line()),text.c_str(),attrs.RootDirectory);
+                return deny(site);
+            }
+        }
+    }catch(...){}
+    std::fwprintf(stderr,L"Fixture refusal %ls line=%u: unreadable object name\n",
+        operation,static_cast<unsigned>(site.line()));
+#else
+    (void)operation;
+    (void)oa;
+#endif
+    return deny(site);
+}
 NTSTATUS NTAPI create_file(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,PIO_STATUS_BLOCK io,
     PLARGE_INTEGER alloc,ULONG attr,ULONG share,ULONG disposition,ULONG options,PVOID ea,ULONG ea_size) {
     ErrorState error_state;
     if(!enabled())return h_create.unsafe_stdcall<NTSTATUS>(out,access,oa,io,alloc,attr,share,disposition,options,ea,ea_size);
     try {
-        if(options&open_by_id)return deny();
+        if(options&open_by_id)return deny_name(L"NtCreateFile",oa);
         const bool mutation=(access&(GENERIC_WRITE|GENERIC_ALL|MAXIMUM_ALLOWED|DELETE|FILE_WRITE_DATA|FILE_APPEND_DATA|FILE_WRITE_ATTRIBUTES|WRITE_DAC|WRITE_OWNER)) || disposition!=1 || (options&0x1000);
         Name name(oa,mutation);
         return h_create.unsafe_stdcall<NTSTATUS>(out,access|(name.disk?FILE_READ_ATTRIBUTES:0),name.arg(oa),io,alloc,attr,share,disposition,options,ea,ea_size);
-    }catch(...){return deny();}
+    }catch(...){return deny_name(L"NtCreateFile",oa);}
 }
 NTSTATUS NTAPI open_file(PHANDLE out,ACCESS_MASK access,POBJECT_ATTRIBUTES oa,PIO_STATUS_BLOCK io,ULONG share,ULONG options) {
     ErrorState error_state;
     if(!enabled())return h_open.unsafe_stdcall<NTSTATUS>(out,access,oa,io,share,options);
-    try {if(options&open_by_id)return deny();Name name(oa,(access&(GENERIC_WRITE|GENERIC_ALL|DELETE|FILE_WRITE_DATA|FILE_APPEND_DATA|FILE_WRITE_ATTRIBUTES))!=0);
+    try {if(options&open_by_id)return deny_name(L"NtOpenFile",oa);Name name(oa,(access&(GENERIC_WRITE|GENERIC_ALL|DELETE|FILE_WRITE_DATA|FILE_APPEND_DATA|FILE_WRITE_ATTRIBUTES))!=0);
         return h_open.unsafe_stdcall<NTSTATUS>(out,access|(name.disk?FILE_READ_ATTRIBUTES:0),name.arg(oa),io,share,options);
-    }catch(...){
-#ifdef CDMP_SANDBOX_FIXTURE
-        // Owned fixture only: bounded path diagnostic, never a game callback.
-        Audit audit;OBJECT_ATTRIBUTES attrs{};UNICODE_STRING name{};std::array<wchar_t,257> text{};
-        if(checked_copy(oa,&attrs,sizeof(attrs)) && checked_copy(attrs.ObjectName,&name,sizeof(name))){
-            const auto length=std::min<size_t>(name.Length,512);
-            if(!(length%2) && checked_copy(name.Buffer,text.data(),length))
-                std::fwprintf(stderr,L"Fixture NtOpenFile refusal: '%ls' root %p type %lu\n",text.data(),attrs.RootDirectory,GetFileType(attrs.RootDirectory));
-        }
-#endif
-        return deny();
-    }
+    }catch(...){return deny_name(L"NtOpenFile",oa);}
 }
 NTSTATUS NTAPI delete_file(POBJECT_ATTRIBUTES oa) {
     ErrorState error_state;
     if(!enabled())return h_delete.unsafe_stdcall<NTSTATUS>(oa);
-    try{Name name(oa,true);return h_delete.unsafe_stdcall<NTSTATUS>(name.arg(oa));}catch(...){return deny();}
+    try{Name name(oa,true);return h_delete.unsafe_stdcall<NTSTATUS>(name.arg(oa));}catch(...){return deny_name(L"NtDeleteFile",oa);}
 }
 NTSTATUS NTAPI query_attrs(POBJECT_ATTRIBUTES oa,PVOID info) {
     ErrorState error_state;
     if(!enabled())return h_attrs.unsafe_stdcall<NTSTATUS>(oa,info);
-    try{Name name(oa);return h_attrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny();}
+    try{Name name(oa);return h_attrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny_name(L"NtQueryAttributesFile",oa);}
 }
 NTSTATUS NTAPI query_fullattrs(POBJECT_ATTRIBUTES oa,PVOID info) {
     ErrorState error_state;
     if(!enabled())return h_fullattrs.unsafe_stdcall<NTSTATUS>(oa,info);
-    try{Name name(oa);return h_fullattrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny();}
+    try{Name name(oa);return h_fullattrs.unsafe_stdcall<NTSTATUS>(name.arg(oa),info);}catch(...){return deny_name(L"NtQueryFullAttributesFile",oa);}
 }
 NTSTATUS NTAPI read_file(HANDLE f,HANDLE e,Apc apc,PVOID ctx,PIO_STATUS_BLOCK io,PVOID buffer,ULONG length,PLARGE_INTEGER offset,PULONG key) {
     ErrorState error_state;
@@ -291,7 +370,7 @@ NTSTATUS NTAPI copy_chunk(HANDLE source,HANDLE destination,HANDLE event,PIO_STAT
 NTSTATUS NTAPI query_byname(POBJECT_ATTRIBUTES oa,PIO_STATUS_BLOCK io,PVOID info,ULONG length,ULONG kind) {
     ErrorState error_state;
     if(!enabled())return h_byname.unsafe_stdcall<NTSTATUS>(oa,io,info,length,kind);
-    try{Name name(oa);return h_byname.unsafe_stdcall<NTSTATUS>(name.arg(oa),io,info,length,kind);}catch(...){return deny();}
+    try{Name name(oa);return h_byname.unsafe_stdcall<NTSTATUS>(name.arg(oa),io,info,length,kind);}catch(...){return deny_name(L"NtQueryInformationByName",oa);}
 }
 NTSTATUS NTAPI query_info(HANDLE file,PIO_STATUS_BLOCK io,PVOID info,ULONG size,ULONG kind) {
     ErrorState error_state;

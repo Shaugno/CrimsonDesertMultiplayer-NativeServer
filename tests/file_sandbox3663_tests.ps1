@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$FixtureExe,[string]$SteamDll='')
+param([Parameter(Mandatory=$true)][string]$FixtureExe,[string]$SteamDll='', [switch]$NetworkingDiagnostic)
 $ErrorActionPreference='Stop'
 Import-Module Microsoft.PowerShell.Utility
 $temp=[IO.Path]::GetFullPath([IO.Path]::GetTempPath())
@@ -67,6 +67,22 @@ try {
         ProfileCase $SteamDll
         return
     }
+    if($NetworkingDiagnostic){
+        $failed=$false
+        foreach($mode in @('network-baseline','network-sandbox')){
+            & $FixtureExe $real $backup $sandbox $manifest $hash $mode
+            $code=$LASTEXITCODE
+            $unchanged=(Manifest $real) -eq $before -and (Manifest $backup) -eq $before
+            Write-Output "$mode exit=$code; real and backup manifest unchanged=$unchanged"
+            if(!$unchanged){throw 'Networking fixture modified original or backup saves'}
+            if($code){$failed=$true}
+        }
+        if($failed){throw 'See the baseline and sandbox networking results above'}
+        return
+    }
+    & $FixtureExe $real $backup $sandbox $manifest $hash network-local
+    if($LASTEXITCODE){throw 'Sandboxed adapter enumeration, local lookup or TCP failed'}
+    if((Manifest $real) -ne $before -or (Manifest $backup) -ne $before){throw 'Networking fixture changed a save'}
     & $FixtureExe $real $backup $sandbox $manifest $hash premapped
     if($LASTEXITCODE){throw 'Pre-existing protected view did not refuse'}
     & $FixtureExe $real $backup $sandbox $manifest $hash teardown

@@ -1,7 +1,10 @@
 // Dedicated child process: hooks live until ExitProcess. The unhooked parent
 // compares SHA256 manifests of the original tree and reads sandbox effects.
 #include "mod/session2/file_sandbox3663.h"
+#include <winsock2.h>
+#include <ws2tcpip.h>
 #include <windows.h>
+#include <iphlpapi.h>
 #include <winternl.h>
 #include <shlobj.h>
 #include <array>
@@ -10,6 +13,108 @@
 #include <string>
 #include <vector>
 namespace {
+using cdmp::session2::file_sandbox3663::describe;
+
+struct Socket {
+    SOCKET value;
+    ~Socket() { if(value!=INVALID_SOCKET)closesocket(value); }
+};
+
+int connect_bounded(SOCKET socket,const sockaddr* address,int length) {
+    if(socket==INVALID_SOCKET)return WSAGetLastError();
+    u_long nonblocking=1;
+    if(ioctlsocket(socket,FIONBIO,&nonblocking)==SOCKET_ERROR)return WSAGetLastError();
+    if(connect(socket,address,length)==0)return 0;
+    const int error=WSAGetLastError();
+    if(error!=WSAEWOULDBLOCK)return error;
+    fd_set write{},except{};
+    FD_SET(socket,&write);FD_SET(socket,&except);
+    timeval timeout{3,0};
+    const int selected=select(0,nullptr,&write,&except,&timeout);
+    if(selected==SOCKET_ERROR)return WSAGetLastError();
+    if(selected==0)return WSAETIMEDOUT;
+    int result=0,size=sizeof(result);
+    if(getsockopt(socket,SOL_SOCKET,SO_ERROR,reinterpret_cast<char*>(&result),&size)==SOCKET_ERROR)
+        return WSAGetLastError();
+    return result;
+}
+
+int loopback_connect() {
+    Socket listener{socket(AF_INET,SOCK_STREAM,IPPROTO_TCP)};
+    if(listener.value==INVALID_SOCKET)return WSAGetLastError();
+    sockaddr_in address{};
+    address.sin_family=AF_INET;
+    address.sin_addr.s_addr=htonl(INADDR_LOOPBACK);
+    auto* endpoint=reinterpret_cast<sockaddr*>(&address);
+    if(bind(listener.value,endpoint,sizeof(address)) || listen(listener.value,1))return WSAGetLastError();
+    int size=sizeof(address);
+    if(getsockname(listener.value,endpoint,&size))return WSAGetLastError();
+    Socket client{socket(AF_INET,SOCK_STREAM,IPPROTO_TCP)};
+    return connect_bounded(client.value,endpoint,size);
+}
+
+bool disk_alias_denied(const std::wstring& root) {
+    const auto alias=L"CDMP-R7-FIXTURE-"+std::to_wstring(GetCurrentProcessId());
+    const auto target=L"\\??\\"+root+L"\\source.save";
+    constexpr DWORD flags=DDD_RAW_TARGET_PATH|DDD_NO_BROADCAST_SYSTEM;
+    if(!DefineDosDeviceW(flags,alias.c_str(),target.c_str())){
+        std::printf("Fixture disk alias setup failed: %lu\n",GetLastError());
+        return false;
+    }
+    const auto path=L"\\\\.\\"+alias;
+    HANDLE file=CreateFileW(path.c_str(),GENERIC_READ,FILE_SHARE_READ,nullptr,OPEN_EXISTING,0,nullptr);
+    const DWORD error=file==INVALID_HANDLE_VALUE?GetLastError():ERROR_SUCCESS;
+    if(file!=INVALID_HANDLE_VALUE)CloseHandle(file);
+    const bool removed=DefineDosDeviceW(flags|DDD_REMOVE_DEFINITION|DDD_EXACT_MATCH_ON_REMOVE,
+        alias.c_str(),target.c_str())!=FALSE;
+    std::printf("Fixture disk alias denied=%d removed=%d\n",error==ERROR_ACCESS_DENIED,removed);
+    return error==ERROR_ACCESS_DENIED && removed;
+}
+
+int network_probe(bool external) {
+    std::printf("Networking fixture entry: %s\n",describe().c_str());
+    ULONG size=15000;
+    std::vector<unsigned char> buffer(size);
+    ULONG adapters=GetAdaptersAddresses(AF_UNSPEC,0,nullptr,
+        reinterpret_cast<PIP_ADAPTER_ADDRESSES>(buffer.data()),&size);
+    if(adapters==ERROR_BUFFER_OVERFLOW && size<=1024*1024){
+        buffer.resize(size);
+        adapters=GetAdaptersAddresses(AF_UNSPEC,0,nullptr,
+            reinterpret_cast<PIP_ADAPTER_ADDRESSES>(buffer.data()),&size);
+    }
+    std::printf("GetAdaptersAddresses=%lu: %s\n",adapters,describe().c_str());
+    WSADATA data{};
+    const int started=WSAStartup(MAKEWORD(2,2),&data);
+    std::printf("WSAStartup=%d: %s\n",started,describe().c_str());
+    if(started)return 80;
+    const char* host=external?"steamcommunity.com":"localhost";
+    addrinfo hints{};
+    hints.ai_family=AF_UNSPEC;
+    hints.ai_socktype=SOCK_STREAM;
+    hints.ai_protocol=IPPROTO_TCP;
+    addrinfo* addresses=nullptr;
+    const int resolved=getaddrinfo(host,external?"443":nullptr,&hints,&addresses);
+    std::printf("getaddrinfo(%s)=%d: %s\n",host,resolved,describe().c_str());
+    const int local=loopback_connect();
+    std::printf("TCP connect(owned loopback)=%d: %s\n",local,describe().c_str());
+    int remote=0;
+    if(external && resolved==0){
+        remote=WSAEHOSTUNREACH;
+        unsigned tried=0;
+        for(auto* address=addresses;address && tried<4;address=address->ai_next,++tried){
+            Socket client{socket(address->ai_family,address->ai_socktype,address->ai_protocol)};
+            remote=connect_bounded(client.value,address->ai_addr,static_cast<int>(address->ai_addrlen));
+            if(!remote)break;
+        }
+        std::printf("TCP connect(%s:443)=%d: %s\n",host,remote,describe().c_str());
+    }else if(external){
+        std::printf("TCP connect(%s:443) skipped because lookup failed\n",host);
+    }
+    if(addresses)freeaddrinfo(addresses);
+    WSACleanup();
+    return adapters || resolved || local || remote ? 81 : 0;
+}
+
 std::wstring environment(const wchar_t* key){
     const DWORD count=GetEnvironmentVariableW(key,nullptr,0);
     if(!count)return {};
@@ -81,6 +186,19 @@ int profile_fixture(const std::wstring& root,const std::wstring& backup,const st
 int fixture(int argc,wchar_t** argv) {
     if(argc!=7 && argc!=8)return 1;
     const std::wstring root=argv[1],backup=argv[2],sandbox=argv[3],manifest=argv[4],hash=argv[5],mode=argv[6];
+    if(mode==L"network-baseline")return network_probe(true);
+    if(mode==L"network-sandbox" || mode==L"network-local"){
+        const std::string digest(hash.begin(),hash.end());
+        if(!cdmp::session2::file_sandbox3663::install({root,backup,sandbox,manifest,digest}) ||
+            !cdmp::session2::file_sandbox3663::file_hooks_active()){
+            std::printf("Networking fixture install failed: %s\n",
+                cdmp::session2::file_sandbox3663::failure_reason().c_str());
+            return 82;
+        }
+        const int result=network_probe(mode==L"network-sandbox");
+        if(result || mode!=L"network-local")return result;
+        return disk_alias_denied(root)?0:83;
+    }
     if(mode==L"steam-baseline")return argc==8?steam_probe(argv[7]):1;
     if(mode==L"profile" || mode==L"steam-profile"){
         std::string digest;for(wchar_t c:hash)digest+=static_cast<char>(c);

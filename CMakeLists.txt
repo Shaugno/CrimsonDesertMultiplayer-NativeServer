@@ -592,7 +592,7 @@ add_executable(cdmp_tests_file_sandbox3663 tests/file_sandbox3663_fixture.cpp
                src/mod/session2/file_sandbox3663.cpp src/mod/log.cpp)
 cdmp_strict(cdmp_tests_file_sandbox3663)
 target_compile_definitions(cdmp_tests_file_sandbox3663 PRIVATE CDMP_SANDBOX_FIXTURE=1)
-target_link_libraries(cdmp_tests_file_sandbox3663 PRIVATE cdmp_common safetyhook::safetyhook bcrypt shell32)
+target_link_libraries(cdmp_tests_file_sandbox3663 PRIVATE cdmp_common safetyhook::safetyhook bcrypt shell32 iphlpapi)
 add_test(NAME file_sandbox3663 COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
          -File "${CMAKE_SOURCE_DIR}/tests/file_sandbox3663_tests.ps1" -FixtureExe "$<TARGET_FILE:cdmp_tests_file_sandbox3663>")
 set_tests_properties(file_sandbox3663 PROPERTIES TIMEOUT 120)

@@ -26,8 +26,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--build-dir', type=Path, required=True)
     parser.add_argument('--prefix', default='step1')
+    parser.add_argument('--network-follow-up', action='store_true',
+                        help='Seal the R7 Step 2 offline networking fix and its baseline/fixed probes')
     args = parser.parse_args()
     assert re.fullmatch(r'[a-zA-Z0-9_-]+', args.prefix)
+    assert not args.network_follow_up or args.prefix != 'step1'
     local = ROOT / 'build/r7'
     suite = local / f'{args.prefix}-suite.txt'
     smoke = local / f'{args.prefix}-smoke.txt'
@@ -35,16 +38,39 @@ def main():
     ctest = local / f'{args.prefix}-ctest.log'
     boundary = local / f'{args.prefix}-boundary.json'
     boundary_data = json.loads(boundary.read_text(encoding='utf-8-sig'))
-    assert boundary_data['round'] == 7 and boundary_data['live_attempts'] == 0
+    assert boundary_data['round'] == 7
+    assert boundary_data['live_attempts'] == (1 if args.network_follow_up else 0)
     assert not boundary_data['game_processes']
     assert not any(f['exists'] for f in boundary_data['installed_controlled_files'])
     assert boundary_data['source_plan_sha256'] == boundary_data['stored_plan_sha256']
+    additional_evidence = (
+        local / 'baseline-suite.txt', local / 'step1-first-suite.txt',
+        local / 'step1-first-ctest.log', local / 'launcher-focused.txt',
+    )
+    if args.network_follow_up:
+        assert boundary_data['offline_launches'] == 0
+        assert boundary_data['game_executable_sha256'] == GAME_SHA
+        before_network = local / f'{args.prefix}-before-network.txt'
+        after_network = local / f'{args.prefix}-after-network.txt'
+        before_text = before_network.read_text(encoding='utf-8-sig')
+        assert "name='\\??\\Nsi'" in before_text and 'GetAdaptersAddresses=5' in before_text
+        assert 'getaddrinfo(steamcommunity.com)=11001' in before_text
+        network_text = after_network.read_text(encoding='utf-8-sig')
+        for line in ('GetAdaptersAddresses=0', 'getaddrinfo(steamcommunity.com)=0',
+                     'TCP connect(owned loopback)=0', 'TCP connect(steamcommunity.com:443)=0'):
+            assert network_text.count(line) == 2, line
+        assert 'network-baseline exit=0; real and backup manifest unchanged=True' in network_text
+        assert 'network-sandbox exit=0; real and backup manifest unchanged=True' in network_text
+        assert 'Fixture refusal' not in network_text
+        additional_evidence = (before_network, after_network)
     suite_text = suite.read_text(encoding='utf-8-sig')
     total, = re.findall(r'100% tests passed, 0 tests failed out of (\d+)', suite_text)
     seconds, = re.findall(r'Total Test time \(real\) =\s*([\d.]+) sec', suite_text)
     assert int(total) >= 119
     fixture_text = ctest.read_text(encoding='utf-8-sig')
     assert 'R7 NT fixture PASS: inherited profile/native resolver unchanged; save-only redirect;' in fixture_text
+    if args.network_follow_up:
+        assert 'Fixture disk alias denied=1 removed=1' in fixture_text
     smoke_text = smoke.read_text(encoding='utf-8-sig')
     assert '3663 compiled tier mask 0xF (metadata only)' in smoke_text
     assert 'Mod stopped and unloaded cleanly' in smoke_text
@@ -73,12 +99,15 @@ def main():
         desktop_runner_path=str(runner), desktop_runner_sha256=sha(runner),
         source_manifest=manifest,
     )
+    if args.network_follow_up:
+        receipt['sandbox_network_verified'] = True
     arming_path = local / f'{args.prefix}-arming-receipt.json'
     result_path = ROOT / f'docs/probe-3663/port-evidence/r7/{args.prefix}-validation.json'
     assert not arming_path.exists() and not result_path.exists(), 'Use a fresh evidence prefix'
     write_new(arming_path, receipt)
     result = dict(
-        round=7, step=1, recorded_utc=datetime.now(timezone.utc).isoformat(),
+        round=7, step=2 if args.network_follow_up else 1,
+        recorded_utc=datetime.now(timezone.utc).isoformat(),
         suite=f'{total}/{total} passed', seconds=float(seconds),
         synthetic_remote_states=int(states), synthetic_rejects=0,
         smoke='eight-second owned host/peer; metadata mask 0xF; clean unload',
@@ -86,7 +115,10 @@ def main():
         guest='NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited',
         host='backed-up real saves; no sandbox',
         not_before_utc=receipt['not_before_utc'],
-        activation_cause='unproven hypothesis; no R7 game launch or activation test',
+        activation_cause=(
+            'Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.'
+            if args.network_follow_up else 'unproven hypothesis; no R7 game launch or activation test'
+        ),
         limits=[
             'Owned TEMP fixture data only; no game runtime acceptance.',
             'Steam-style named pagefile MAP-only IPC and pipes are tested without SteamAPI or game activation.',
@@ -95,13 +127,12 @@ def main():
             'L3 and L4 remain unpassed; the R6 character-login fix awaits live execution.',
         ],
         arming_receipt=dict(path=str(arming_path.resolve()), sha256=sha(arming_path)),
-        evidence=[dict(path=str(f.resolve()), sha256=sha(f)) for f in (
-            suite, ctest, smoke, log, boundary,
-            local / 'baseline-suite.txt', local / 'step1-first-suite.txt',
-            local / 'step1-first-ctest.log', local / 'launcher-focused.txt',
-        )],
+        evidence=[dict(path=str(f.resolve()), sha256=sha(f))
+                  for f in (suite, ctest, smoke, log, boundary, *additional_evidence)],
         source_manifest_sha256=hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest().upper(),
     )
+    if args.network_follow_up:
+        result['sandbox_network_verified'] = receipt['sandbox_network_verified']
     write_new(result_path, result)
     print(json.dumps({k: result[k] for k in ('round', 'step', 'suite', 'seconds', 'synthetic_remote_states')}))
 
