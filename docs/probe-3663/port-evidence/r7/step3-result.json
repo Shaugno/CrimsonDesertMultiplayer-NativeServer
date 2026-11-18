@@ -1,0 +1,136 @@
+{
+  "round": 7,
+  "step": 3,
+  "attempt_id": "R7-L3-20261118-1214",
+  "result": "blocked at field acquisition",
+  "category": "join",
+  "game_pid": 40164,
+  "game_start_filetime": "134394958972007125",
+  "native_guest_login": true,
+  "started_utc": "2026-11-18T17:16:08.3081575Z",
+  "ended_utc": "2026-11-18T17:29:19.5069361Z",
+  "guest_started_utc": "2026-11-18T17:18:17.2145035Z",
+  "guest_ended_utc": "2026-11-18T17:23:47.7152630Z",
+  "activation_error_observed": false,
+  "guest_title_confirmed": true,
+  "positions": {
+    "host": {
+      "pid": 34096,
+      "left": 0,
+      "top": 0,
+      "right": 1296,
+      "bottom": 839
+    },
+    "guest": {
+      "pid": 40164,
+      "left": 1279,
+      "top": 8,
+      "right": 2575,
+      "bottom": 847
+    }
+  },
+  "user_confirmed_side_by_side": true,
+  "identity_3081_normalized": true,
+  "identity_refusals": 0,
+  "identity_gate": "passed through to field acquisition",
+  "field_acquisition": {
+    "observation": "[12:20:10.645] INF [T3092] 3663 join Acquire: shared false host pin 1 guest pin 1 host primary pin 1 field access 1",
+    "shared": false,
+    "host_user_pin": true,
+    "guest_user_pin": true,
+    "host_primary_pin": true,
+    "field_access": true,
+    "failed_predicate": null,
+    "enter_called": false,
+    "actors_inserted": 0,
+    "actors_committed": 0
+  },
+  "guest_display": "Loading animation observed. The user confirmed the window closed. The receipt attributes exit to the identity-pinned stop.",
+  "guest_exit_kind": "identity-pinned early stop after loading stall",
+  "guest_exit_code": 13923,
+  "host_reload_verified": true,
+  "host_exit_kind": "exited",
+  "host_normal_exit": true,
+  "host_exit_code": 0,
+  "recording": "No recording supplied or verified",
+  "mutual_movement_verified": false,
+  "removal_verified": false,
+  "reconnect": "not attempted after failed field acquisition",
+  "real_save_checkpoint_unchanged": true,
+  "checkpoint_manifest_sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+  "final_real_save_manifest_unchanged": true,
+  "backup_manifests_verified": true,
+  "temporary_installation_restored": true,
+  "host_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\evidence\\cdmp.host.log",
+    "sha256": "F439DE5F222C49F41E84B94874E579E07DE652F2ADA35480F2141934122AEA44"
+  },
+  "guest_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\evidence\\cdmp.guest.log",
+    "sha256": "1B3C12525A6BDB19FD8D1C8636AAE85058F56227BF38DF2CB6568968521349A1"
+  },
+  "guest_last_reported_refusals": 71775,
+  "guest_names_sampled": 20,
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\launch-host.json",
+      "sha256": "6CF60A3F4D0832A1DB8A020D77E414583691729E2798764BC7E6BE5842CC39A7"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\launch-guest.json",
+      "sha256": "6F8C809FD645D7AFD246B53DC306C00966EDD12E844C2881AB39ACED79CF301C"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\watchdog-host.json",
+      "sha256": "F988E43BECF94047E7D01FCEAB22F1B0932AB984F060F7B517B49562154A1709"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\watchdog-guest.json",
+      "sha256": "A28863C208921569550BE32A65ACBEA45C8D081B6C814FF211950F07299E19A7"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\window-host-before-play.json",
+      "sha256": "B565C0328DD55FC8753B873FDD296CD021486D777703044B3AEA803490ED9CE1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\window-guest-before-play.json",
+      "sha256": "F4010E94207922DCFA994083DE609329E5FDE290FAB513D25E8FADC4EEAAD53A"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\early-stop-guest.json",
+      "sha256": "0A51B8B87E0411602B9D9E7FABE87EBB6F5D63987A4D62A2BDECE12EEE20F223"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\save-manifest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\save-before-guest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\save-after-guest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\save-after.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\verification-before-guest.json",
+      "sha256": "060941CAC1D211639D276D7B99E221FFB9E57DABD583DBBC47C8E4E15E4C6736"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\verification-after-guest.json",
+      "sha256": "A89D4039302C7876365CF172F59D7E083C7B5F22144CDCB8456D31C5E4D3AEC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\verification.json",
+      "sha256": "0F971E891B98EACDFE7C1D551001EDA6AB9B7514DB7C3ED4E47A82A81914B052"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\finish.json",
+      "sha256": "B0EC4F8A8A5764AEC68E4DAF0C4FD112E79F94A100B28A7CFFA84493B07456D9"
+    }
+  ]
+}

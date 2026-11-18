@@ -1,3 +1,46 @@
+# R7 Step 3 — L3 blocked at field acquisition (2026-11-18 Eastern)
+
+The host (PID 34096) loaded its save. The guest (PID 40164) inherited the
+normal profile with NT save isolation. The user confirmed two usable
+windows side by side before selecting Play once on the guest. Both process
+and window identities were recorded. The native guest login and title-slot
+refresh worked, with no activation error observed.
+
+The host normalized the 17-byte 3081 request and advanced through identity
+processing with zero refusals. At 12:20:10.645 PM Eastern the field Acquire
+hook logged this result:
+
+```text
+3663 join Acquire: shared false host pin 1 guest pin 1 host primary pin 1 field access 1
+```
+
+All four preliminary pins passed. The later sharing check failed, but its
+individual predicate and native refusal code were not logged. Enter did not
+run for this join, and zero guest actors were inserted or committed. The
+guest remained on its loading animation. The identity-pinned guest was
+stopped at 12:23:47 PM after the ordinary window close did not exit it.
+Mutual movement, actor removal and reconnect could not be exercised.
+Recording status: No recording supplied or verified.
+
+The before/after guest checkpoints matched for all 23 real saves. Frozen
+backups verified after exit and the temporary installation was restored.
+Host save reload was verified.
+The host exit receipt recorded `exited`, code
+`0`.
+
+The last guest periodic report counted 71,775 sandbox refusals and 20
+sampled names. The raw names stay in the local role log. This does not
+identify the failed field-sharing predicate.
+
+Host log SHA-256 `F439DE5F222C49F41E84B94874E579E07DE652F2ADA35480F2141934122AEA44`.
+Guest log SHA-256 `1B3C12525A6BDB19FD8D1C8636AAE85058F56227BF38DF2CB6568968521349A1`.
+[Result and receipts](port-evidence/r7/step3-result.json).
+
+Usage is **startup 2/5, join 1/3**. L3 is unpassed. L4 and the separate
+cleanup plan stay on hold.
+
+---
+
 # R7 Step 3 — L3 prelaunch brief (2026-11-18 Eastern)
 
 **Question.** Can the exact 3663 host and guest complete native character

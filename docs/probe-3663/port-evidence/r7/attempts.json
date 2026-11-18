@@ -33,6 +33,24 @@
         "sha256": "1858400A29ABDE464EBB570CC565311B31F8020CFBE5CA40A4D270F7E4B2FC8D"
       },
       "native_guest_login": false
+    },
+    {
+      "attempt_id": "R7-L3-20261118-1214",
+      "category": "join",
+      "result": "blocked at field acquisition",
+      "game_pid": 40164,
+      "game_start_filetime": "134394958972007125",
+      "started_utc": "2026-11-18T17:16:08.3081575Z",
+      "ended_utc": "2026-11-18T17:29:19.5069361Z",
+      "host_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\evidence\\cdmp.host.log",
+        "sha256": "F439DE5F222C49F41E84B94874E579E07DE652F2ADA35480F2141934122AEA44"
+      },
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\evidence\\cdmp.guest.log",
+        "sha256": "1B3C12525A6BDB19FD8D1C8636AAE85058F56227BF38DF2CB6568968521349A1"
+      },
+      "native_guest_login": true
     }
   ]
 }
