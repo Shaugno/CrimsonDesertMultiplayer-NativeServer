@@ -1,3 +1,60 @@
+# R7 Step 3 — same-slot Acquire diagnostic brief (2026-11-18 Eastern)
+
+**Question.** Does one guest request for the same frozen save slot as
+the host resolve to the host's current level entry, and which sharing
+predicate stops it if sharing fails?
+
+**Expected observation.** The host loads a chosen slot and stands
+still. The guest opens the matching slot after native login and both
+usable windows are confirmed side by side. One bounded Acquire log
+line records each predicate as pass, fail, or skipped and includes the
+requested FieldInfoKey and the current host field key. The existing
+level-entry comparison remains the decision. The two logged keys have
+different roles, so numeric equality of those keys is not a premise.
+
+**Time limit and stop condition.** Fresh verified backups outside OneDrive
+and the exact 3663 executable hash are required. Both copies share the
+fourteen-minute watchdog, with a six-minute reserve for guest startup.
+Select the guest slot once. On field refusal, activation error, crash or
+loading stall, stop, preserve the line and verify the saves. On a successful
+join, record both views, verify mutual walking and turning, check actor
+removal, try reconnect once if available, then verify host reload and
+normal quit. No travel, combat or mounts. L4 and the separate cleanup
+plan remain on hold.
+
+## Sandbox sample review
+
+The previous L3 guest log has 20 sampled names and a final periodic
+snapshot with **71,775** refusals. The two sites were `NtCreateFile`
+(line 364, 71,161) and `NtOpenFile` (line 371, 614). The log limits
+names early, so those totals do not identify all later paths.
+
+Seventeen sampled names are HID interfaces, one is the mount manager
+device, one is a named-pipe namespace root, and one is
+`\??\GLOBALROOT\C:\WINDOWS`. No sample identifies a required game
+config, shader cache, crash/telemetry, or Steam disk file. The pipe root
+does not identify an endpoint or its caller. The HID samples can be
+relevant to input enumeration, but ordinary menu input worked in both
+live sessions. The available evidence does not establish a required
+permission change. The guest sandbox and save protections are unchanged.
+The name-by-name report with usernames redacted stays local at
+`build/r7/l3-denied-names-redacted.md` to avoid publishing device IDs.
+
+Offline validation passed **119/119** in 139.90 seconds. The synthetic
+smoke received 78 remote states with zero rejects and a clean unload.
+The sandbox networking fixture passed. The compiled ASI contains the
+new trace and the source seal covers it. The existing Acquire guards,
+native calls and refusal behavior retain their original checks and
+short-circuit order. [Validation and evidence](port-evidence/r7/acquire-diagnostic-validation.json).
+
+References for classification
+[HID interface GUID](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/guid-devinterface-hid),
+[Mount Manager](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/supporting-mount-manager-requests-in-a-storage-class-driver),
+[named-pipe paths](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/fltkernel/nf-fltkernel-fltcreatenamedpipefile),
+and [Windows NT namespaces](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file).
+
+---
+
 # R7 Step 5 — startup passed, L3 blocked (2026-11-18 Eastern)
 
 **The guest-only startup retry passed. L3 reached character identity

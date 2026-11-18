@@ -30,10 +30,13 @@ def main():
                         help='Seal the R7 Step 2 offline networking fix and its baseline/fixed probes')
     parser.add_argument('--refusal-log', action='store_true',
                         help='Also require the production refusal logging regression')
+    parser.add_argument('--acquire-diagnostic', action='store_true',
+                        help='Seal the diagnostics-only R7 L3 build')
     args = parser.parse_args()
     assert re.fullmatch(r'[a-zA-Z0-9_-]+', args.prefix)
     assert not args.network_follow_up or args.prefix != 'step1'
     assert not args.refusal_log or args.network_follow_up
+    assert not args.acquire_diagnostic or args.refusal_log
     local = ROOT / 'build/r7'
     suite = local / f'{args.prefix}-suite.txt'
     smoke = local / f'{args.prefix}-smoke.txt'
@@ -42,7 +45,11 @@ def main():
     boundary = local / f'{args.prefix}-boundary.json'
     boundary_data = json.loads(boundary.read_text(encoding='utf-8-sig'))
     assert boundary_data['round'] == 7
-    assert boundary_data['live_attempts'] == (1 if args.network_follow_up else 0)
+    if args.acquire_diagnostic:
+        ledger = json.loads((ROOT / 'docs/probe-3663/port-evidence/r7/attempts.json').read_text(encoding='utf-8'))
+        assert boundary_data['live_attempts'] == len(ledger['attempts'])
+    else:
+        assert boundary_data['live_attempts'] == (1 if args.network_follow_up else 0)
     assert not boundary_data['game_processes']
     assert not any(f['exists'] for f in boundary_data['installed_controlled_files'])
     assert boundary_data['source_plan_sha256'] == boundary_data['stored_plan_sha256']
@@ -86,6 +93,8 @@ def main():
     binary = args.build_dir.resolve() / 'bin/RelWithDebInfo'
     asi = binary / 'cdmp.asi'
     assert sha(asi) == sha(log.parent / 'cdmp.asi')
+    if args.acquire_diagnostic:
+        assert b'3663 join Acquire predicates:' in asi.read_bytes()
     paths = subprocess.check_output(
         ['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard'], cwd=ROOT
     ).decode().split('\0')
@@ -108,12 +117,14 @@ def main():
         receipt['sandbox_network_verified'] = True
     if args.refusal_log:
         receipt['bounded_refusal_log_verified'] = True
+    if args.acquire_diagnostic:
+        receipt['acquire_predicate_trace_compiled'] = True
     arming_path = local / f'{args.prefix}-arming-receipt.json'
     result_path = ROOT / f'docs/probe-3663/port-evidence/r7/{args.prefix}-validation.json'
     assert not arming_path.exists() and not result_path.exists(), 'Use a fresh evidence prefix'
     write_new(arming_path, receipt)
     result = dict(
-        round=7, step=2 if args.network_follow_up else 1,
+        round=7, step=3 if args.acquire_diagnostic else (2 if args.network_follow_up else 1),
         recorded_utc=datetime.now(timezone.utc).isoformat(),
         suite=f'{total}/{total} passed', seconds=float(seconds),
         synthetic_remote_states=int(states), synthetic_rejects=0,
@@ -142,6 +153,8 @@ def main():
         result['sandbox_network_verified'] = receipt['sandbox_network_verified']
     if args.refusal_log:
         result['bounded_refusal_log_verified'] = receipt['bounded_refusal_log_verified']
+    if args.acquire_diagnostic:
+        result['acquire_predicate_trace_compiled'] = receipt['acquire_predicate_trace_compiled']
     write_new(result_path, result)
     print(json.dumps({k: result[k] for k in ('round', 'step', 'suite', 'seconds', 'synthetic_remote_states')}))
 

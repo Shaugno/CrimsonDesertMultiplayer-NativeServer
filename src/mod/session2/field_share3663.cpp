@@ -32,6 +32,7 @@ std::atomic<bool> on{}, sealed{}, busy{};
 std::atomic<uintptr_t> known_guest{};
 std::atomic<uint64_t> clock{1}, generations{1}, inserted{}, committed{}, undone{}, refused{};
 std::atomic<uint32_t> diagnostic_lines{};
+std::atomic<uint32_t> acquire_diagnostic_lines{};
 ReadContext read_context{}; IdentityReady identity_ready{};
 NativeFatal native_fatal{};
 SafetyHookInline acquire_hook,enter_hook;
@@ -235,42 +236,93 @@ uint32_t* __fastcall enter_detour(void* mover_arg,uint32_t* result,void* field_a
     return t.returned; // preserve the native return pointer, including a null one
 }
 
+struct AcquireTrace {
+    const char *host_pin="skipped", *guest_pin="skipped", *primary_pin="skipped", *access="skipped";
+    const char *hash_header="skipped", *hash_bucket="skipped", *destination_found="skipped";
+    const char *entry_present="skipped", *destination_matches="skipped", *owner_matches="skipped";
+    const char *field_open="skipped", *field_key="skipped", *scope_read="skipped";
+    const char *scope_vtable="skipped", *scope_slot="skipped", *context="skipped", *field_pin="skipped";
+    uint32_t requested_info_key{}, host_field_key{};
+    uintptr_t observed_vtable{}, observed_slot{};
+    bool requested_key_read{}, host_key_attempted{}, host_key_read{};
+};
+// Record the original outcome inline so a failed predicate still short-circuits.
+bool checked(const char*& result,bool value){
+    result=value?"pass":"fail";
+    return value;
+}
+void report_acquire(const AcquireTrace& a,const char* stage,bool shared){
+    try{
+        log::info("3663 join Acquire predicates: stage={} shared={} host_pin={} guest_pin={} host_primary_pin={} "
+            "field_access={} requested_info_key=0x{:X} requested_key_read={} host_field_key=0x{:X} host_key_read={} "
+            "hash_header={} hash_bucket={} destination_found={} entry_present={} dest_eq_entry={} "
+            "owner_eq_host={} field_open={} field_key={} scope_read={} scope_vtable={} observed_vtable=0x{:X} "
+            "scope_slot={} observed_slot=0x{:X} context_match={} field_pin={}",
+            stage,shared,a.host_pin,a.guest_pin,a.primary_pin,a.access,a.requested_info_key,a.requested_key_read,
+            a.host_field_key,a.host_key_read,a.hash_header,a.hash_bucket,a.destination_found,a.entry_present,
+            a.destination_matches,a.owner_matches,a.field_open,a.field_key,a.scope_read,a.scope_vtable,
+            a.observed_vtable,a.scope_slot,a.observed_slot,a.context,a.field_pin);
+    }catch(...){}
+}
+
 uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,void* out_arg,void* traveller){
     Context c;const auto out=reinterpret_cast<uintptr_t>(out_arg);
     bool host_valid=false;const bool have_context=context(c,&host_valid);
     if(on.load() && host_valid && reinterpret_cast<uintptr_t>(traveller)==c.host)
         return acquire_hook.unsafe_call<uint32_t*>(manager,result,type,out_arg,traveller);
     if(on.load() && !have_context && traveller && reinterpret_cast<uintptr_t>(traveller)==known_guest.load()){
+        if(acquire_diagnostic_lines.fetch_add(1)<32)report_acquire({},"missing_context",false);
         ++refused;(void)native_refusal(result);return result;
     }
     if(!on.load() || !have_context || reinterpret_cast<uintptr_t>(traveller)!=c.guest)
         return acquire_hook.unsafe_call<uint32_t*>(manager,result,type,out_arg,traveller);
-    if(sealed.load() || busy.exchange(true)){++refused;(void)native_refusal(result);return result;}
+    const bool report=acquire_diagnostic_lines.fetch_add(1)<32;
+    if(sealed.load() || busy.exchange(true)){
+        if(report)report_acquire({},"sealed_or_busy",false);
+        ++refused;(void)native_refusal(result);return result;
+    }
+    AcquireTrace trace;
     Pins p;bool success=false;
     auto operation=[&](){
-    if(!sealed.load() && typed_pin(c.host,p.host_user) && typed_pin(c.guest,p.guest_user) &&
-        typed_pin(ptr(c.host+0xD0),p.host_actor) && field_access(p.host_actor.object,p.access)){
+    if(!sealed.load() && checked(trace.host_pin,typed_pin(c.host,p.host_user)) &&
+        checked(trace.guest_pin,typed_pin(c.guest,p.guest_user)) &&
+        checked(trace.primary_pin,typed_pin(ptr(c.host+0xD0),p.host_actor)) &&
+        checked(trace.access,field_access(p.host_actor.object,p.access))){
         const auto field=p.access.scope.object;
-        uint32_t info=0,owner=0,fieldkey=0;uint8_t open=0;
+        uint32_t owner=0;uint8_t open=0;
         const auto entry=ptr(field+0x2D8);
         // Match the destination's native FieldInfoKey to its level entry using
         // the manager's proved 256-byte hash buckets, with strict bounds.
         uint32_t buckets=0,entries=0,nrows=0;uintptr_t dest=0;
-        if(read(out+0x24,info) && read(reinterpret_cast<uintptr_t>(manager)+0x48,buckets) && buckets && buckets<=0x100000 &&
-            read(reinterpret_cast<uintptr_t>(manager)+0x4C,entries) && entries && entries<=0x100000){
+        const auto mgr=reinterpret_cast<uintptr_t>(manager);
+        if((trace.requested_key_read=read(out+0x24,trace.requested_info_key)) &&
+            checked(trace.hash_header,read(mgr+0x48,buckets) && buckets && buckets<=0x100000 &&
+                read(mgr+0x4C,entries) && entries && entries<=0x100000)){
+            const uint32_t info=trace.requested_info_key;
             const auto bucket=ptr(reinterpret_cast<uintptr_t>(manager)+0x58)+(info%buckets)*0x100ull;
-            if(read(bucket,nrows) && nrows<=31)for(uint32_t i=0;i<nrows;++i){
-                uint32_t k=0,index=0,hkey=0;
-                if(!read(bucket+8+i*8ull,k) || !read(bucket+12+i*8ull,index) || index>=entries)break;
-                const auto h=ptr(ptr(reinterpret_cast<uintptr_t>(manager)+0x60)+index*8ull);
-                if(k==info && read(h+4,hkey) && hkey==info){dest=ptr(h+8);break;}
+            if(checked(trace.hash_bucket,read(bucket,nrows) && nrows<=31)){
+                for(uint32_t i=0;i<nrows;++i){
+                    uint32_t k=0,index=0,hkey=0;
+                    if(!read(bucket+8+i*8ull,k) || !read(bucket+12+i*8ull,index) || index>=entries)break;
+                    const auto h=ptr(ptr(reinterpret_cast<uintptr_t>(manager)+0x60)+index*8ull);
+                    if(k==info && read(h+4,hkey) && hkey==info){dest=ptr(h+8);break;}
+                }
+                checked(trace.destination_found,dest!=0);
             }
         }
         Scope old;
-        if(entry && dest==entry && read(field+0x180,owner) && owner==key(c.host) &&
-            read(field+0x4A,open) && open==1 && read(field+0x2D0,fieldkey) && fieldkey &&
-            read(out,old) && old.vt==base+0x597BFE0 && ptr(old.vt+0x10)==base+0x1659370 &&
-            context_matches(c) && field_pin(field,p.field)){
+        const auto read_host_key=[&]{
+            trace.host_key_attempted=true;
+            return (trace.host_key_read=read(field+0x2D0,trace.host_field_key)) && trace.host_field_key;
+        };
+        if(checked(trace.entry_present,entry!=0) && checked(trace.destination_matches,dest==entry) &&
+            checked(trace.owner_matches,read(field+0x180,owner) && owner==key(c.host)) &&
+            checked(trace.field_open,read(field+0x4A,open) && open==1) &&
+            checked(trace.field_key,read_host_key()) &&
+            checked(trace.scope_read,read(out,old)) &&
+            checked(trace.scope_vtable,(trace.observed_vtable=old.vt)==base+0x597BFE0) &&
+            checked(trace.scope_slot,(trace.observed_slot=ptr(old.vt+0x10))==base+0x1659370) &&
+            checked(trace.context,context_matches(c)) && checked(trace.field_pin,field_pin(field,p.field))){
             // The caller already owns the existing output. Dispose its native
             // ownership ON THE ORIGINAL OBJECT, then transfer our retained ref.
             reinterpret_cast<Dispose>(base+n::kDispose.rva)(reinterpret_cast<Scope*>(out));
@@ -279,11 +331,12 @@ uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,
             if(success)p.field={};
             else{sealed.store(true);quarantine_pins=p;p={};}
         }
+        // Diagnostic snapshot only, using the still-live field access. Preserve
+        // "skipped" for the guard when an earlier check short-circuited it.
+        if(report && !trace.host_key_attempted && p.access.scope.valid)
+            trace.host_key_read=read(field+0x2D0,trace.host_field_key);
     }
-    if(diagnostic_lines.fetch_add(1)<32)try{
-        log::info("3663 join Acquire: shared {} host pin {} guest pin {} host primary pin {} field access {}",
-            success,p.host_user.valid,p.guest_user.valid,p.host_actor.valid,p.access.scope.valid);
-    }catch(...){}
+    if(report)report_acquire(trace,"guest",success);
     release(p);return success;
     };
     auto fault=[&](EXCEPTION_POINTERS* e){return native_fault(p,e);};
