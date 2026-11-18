@@ -1,3 +1,43 @@
+# R7 Step 3 — L3 prelaunch brief (2026-11-18 Eastern)
+
+**Question.** Can the exact 3663 host and guest complete native character
+admission, see one another move, remove the guest and preserve the host save?
+
+**Expected observation.** Host loads into the world. The two identified
+windowed views are usable side by side before guest character selection.
+One guest request is admitted and spawns an actor. Record mutual walking
+and turning, verify removal on guest Quit to Title, try reconnect once,
+and record that result. Verify the real-save checkpoint across guest
+play. The host then reloads its save and quits from the menu. Fresh
+external backups verified against manifest SHA-256
+`B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8`.
+
+**Time limit and stop condition.** Shared fourteen-minute watchdog from
+host launch. Guest launch needs a ready host and six-minute reserve.
+Stop on crash, hang, activation error, unsafe input, failed identity or
+save verification, or a native admission failure. Collect log evidence
+before diagnosis, with no repeated Play on refusal. The user records
+with Win+Alt+R and reports the filename and duration. No travel, combat
+or mounts.
+
+# R7 Step 2 retry — passed
+
+Guest PID 42092 launched at 12:13:26 PM Eastern. The usable title screen
+was observed and the user confirmed menu quit. The guest exited at
+12:14:17 with code 0 and no activation error. Its own log verifies NT save
+isolation with the normal profile. The 23 real saves and both
+backups matched and the installed test files were restored.
+
+The last periodic snapshot has **8,919 refusals**. The log capped names
+at 20, including 17 HID-interface samples. Device identifiers stay in
+the local log, whose SHA-256 is `1858400A29ABDE464EBB570CC565311B31F8020CFBE5CA40A4D270F7E4B2FC8D`. The title menu accepted
+input. L3 will check both windows again before guest selection.
+[Result and receipts](port-evidence/r7/step2-retry-result.json).
+
+Startup budget **2/5**, join budget **0/3** before L3.
+
+---
+
 # R7 Step 5 — retry readiness and launch hold (2026-11-18 Eastern)
 
 Commit `58cd22a` adds live guest refusal logging and the validated build for

@@ -1,0 +1,71 @@
+{
+  "round": 7,
+  "step": 2,
+  "attempt_id": "R7-S2-RETRY-20261118-B",
+  "category": "startup",
+  "result": "passed",
+  "game_pid": 42092,
+  "game_start_filetime": "134394956060401798",
+  "started_utc": "2026-11-18T17:13:26.0618082Z",
+  "ended_utc": "2026-11-18T17:14:17.0897621Z",
+  "exit_code": 0,
+  "native_guest_login": false,
+  "title_reached": true,
+  "title_confirmation": "Observed game title with Play/Load/Exit controls and confirmed by user",
+  "activation_error_observed": false,
+  "nt_isolation_verified": true,
+  "save_files": 23,
+  "save_manifest_sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+  "real_saves_unchanged": true,
+  "backup_manifests_verified": true,
+  "temporary_installation_restored": true,
+  "guest_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\evidence\\cdmp.guest.log",
+    "sha256": "1858400A29ABDE464EBB570CC565311B31F8020CFBE5CA40A4D270F7E4B2FC8D"
+  },
+  "refusal_samples": 20,
+  "hid_samples": 17,
+  "total_refusals_last_periodic": 8919,
+  "last_periodic_site_counts": {
+    "NtCreateFile:364": 8689,
+    "NtOpenFile:371": 230
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\launch-guest.json",
+      "sha256": "6EB97936FDE9C507EED6FBCD9777A50C61E8A3BDFF15EBAB3B3F8D2477BB98ED"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\watchdog-guest.json",
+      "sha256": "23252EBEEE6DD9CBDE8AF3EF0CB10E1F2B05E8C9183A2691C730F7EFE6E948A1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\window-guest.json",
+      "sha256": "0DAC2153B4CDEF7AF02132E4DDFAD944DA85006E8FF134A1D9A10EC373F881F2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\session.json",
+      "sha256": "7ADA01FFD7EC00903C04E33C92B3D6C285C0EDC0C4DC72B5278645D6D28C4130"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\verification-before.json",
+      "sha256": "219A0334FB5BBADE579533DAADE270F32E229BF8E924F4849C8FB7E3CAF1DC0B"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\verification.json",
+      "sha256": "88CC1BF7C54090A67924F720BE7B513B924E8D42DCF035DF1FE3F862FE9EAA2F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\save-manifest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\save-after.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\finish.json",
+      "sha256": "255BB0EF7E7523499690D97715F32580D9644BC0D6DC7299395C4C6358B3399C"
+    }
+  ]
+}

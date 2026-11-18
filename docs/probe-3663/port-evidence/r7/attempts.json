@@ -19,6 +19,20 @@
         "sha256": "8B0B19355DD28C2B2F5CDEDFF2F6CB0AE9AC32363106AC3FB61B07CF1595C037"
       },
       "native_guest_login": false
+    },
+    {
+      "attempt_id": "R7-S2-RETRY-20261118-B",
+      "category": "startup",
+      "result": "passed",
+      "game_pid": 42092,
+      "game_start_filetime": "134394956060401798",
+      "started_utc": "2026-11-18T17:13:26.0618082Z",
+      "ended_utc": "2026-11-18T17:14:17.0897621Z",
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\evidence\\cdmp.guest.log",
+        "sha256": "1858400A29ABDE464EBB570CC565311B31F8020CFBE5CA40A4D270F7E4B2FC8D"
+      },
+      "native_guest_login": false
     }
   ]
 }
