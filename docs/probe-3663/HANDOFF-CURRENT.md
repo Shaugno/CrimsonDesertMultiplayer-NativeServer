@@ -1,3 +1,125 @@
+# R8 — guest crash capture and the shared-field owner acknowledgment
+
+R8 starts with user-approved fresh budgets of five startup attempts
+and three join attempts. The R7 ledger records its own five attempts.
+
+## R7 save and packet evidence
+
+The real slot-2 lobby and save files changed at 4:18:04 PM Eastern,
+after the host loaded and before the guest character request at
+4:18:41 PM. The guest was at title with NT save-only isolation verified.
+The 23-file guest sandbox is byte-for-byte equal to its frozen
+backup, including both slot-2 files. The timing is consistent with
+a host load or autosave. The host log has no save-write event, and
+the guest's 128 redirects combine queries and opens without a writer
+PID or operation type. The writer and every individual guest save
+operation cannot be established retroactively. The new guest audit
+records the first 24 validated sandbox NtWriteFile calls by PID,
+file class, length and status, plus a cumulative count. The existing
+fixtures cover redirected writes, renames and mappings and reject
+real-save handles and aliases. The audit alone covers NtWriteFile.
+[Prior result and log hashes](port-evidence/r7/step3-transitional-field-result.json).
+
+From the 4:19:18.011 PM shared Enter through the 4:19:25.601 PM
+guest exit, the archived guest log has a cumulative pump line at
+4:19:19.527 PM with delivered=2009. The preceding sample had
+delivered=1998 at 4:19:14.517 PM. The log has no packet opcodes or
+packet-level timestamps, so those counts do not identify the contents
+of the post-Enter window. The last guest state was still loading.
+
+## Comparison and scoped change
+
+The 2976 capture has a type-1 MoveFieldAck (2174) after GameLoadingStart
+and before the second MoveFieldCompleteReq. Only after that request
+does it show the second ActorLoadDataAck burst (including opcode 2005),
+MoveFieldCompleteAck, scene state, and the final LoadingCompleteReq.
+Legacy guest delivery also has a native call fault boundary and
+optional sequencer, scene, and schedule callbacks. The guest_lifecycle
+tracker measures the move windows and disconnects; it does not itself
+repair client field ownership. Samuel Cardillo's 3576 guest path adds
+native opcode translation and a preloader for the distinct situation
+where the client stays at state 0x11 waiting for a sequencer marker.
+The 3663 crash has no evidence of that wait state.
+[2976 sequence](../research/opcion-d-login.md#3-qué-responde-el-servidor-a-cada-req).
+[Samuel's 3576 guest path](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/session2/guest.cpp).
+
+The earlier 2976 crash has a closer match: its dump shows the guest
+dereferencing the missing character of the host user named in
+MoveFieldAck. The legacy and Samuel 3576 hosts alias the owner only
+in the guest's packet copy. The 3663 minimal host exited its frame
+path before any equivalent handling. In the exact 3663 image,
+2ECAF8D obtains ServerField+0x180 and passes it as argument four to
+2C7A2B0. That writer emits 2364 with slot -1. The payload starts
+with a one-byte discriminator, 32-bit actor, 32-bit move type, and
+32-bit owner at payload+9. The writer's
+fixed prefix is 17 bytes, and 26AB510/16446C0 serialize each record
+in 56 bytes. CD4D70 reads the same prefix and passes the owner to
+B370E0 and then 8882E0. This establishes the target wire field.
+The R7 fault address was never recovered, so shared ownership
+remains a diagnosis to verify live.
+[2976 crash and fix](../research/pendientes/p8-cierre-campo.md).
+[Samuel's 3576 host frame path](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/session2/server.cpp).
+
+The 3663 change runs after committed shared Enter, only on the
+outgoing guest copy of a well-formed type-1 move for the verified
+guest primary. It aliases the owner from the verified host key to
+the verified guest key. Private staging, unrelated owners and
+malformed packets keep their original bytes. The server's actual
+field ownership and roster transaction are untouched. The host log
+records the decision. No preloader, save-policy, activation, or
+unrelated packet changes were made.
+
+The guest now records bounded first-chance access violations from
+the character login onward in a session-local file, with code,
+accessed address, module-relative fault and stack addresses and
+x64 registers. The handler uses fixed storage and returns
+EXCEPTION_CONTINUE_SEARCH. The unhandled filter chains the previous
+filter and can request one MiniDumpNormal from a dedicated thread
+with a 1.8-second wait. If the game intercepts the exception before
+the top-level filter, the first-chance evidence may survive without
+a dump. No system-wide dump or reporting settings are used.
+
+The guest packet trace records timestamp, direction, opcode, size
+and whether native receive returned, without payloads. It is
+bounded to 131,072 rows. A pending row identifies a call in progress,
+not necessarily the cause of an exception on a different thread.
+Use tools/port3663/r8_guest_trace.py with the explicit-offset shared
+Enter timestamp to extract the post-Enter rows. Crash text, traces,
+and dumps stay in the session evidence folder outside OneDrive.
+
+All 120 tests passed in 109.79 seconds. The crash fixture verified
+the previous filter, exception stream in the minidump, native exit
+code, stack, and pending receive row. The NT fixture also verified
+the diagnostic mappings with the sandbox active. Synthetic smoke
+exchanged 78 states with zero rejects and unloaded cleanly. Adapter
+enumeration, DNS and TCP passed with both fixture manifests intact.
+[Offline validation](port-evidence/r8/validation.json).
+
+## L3 brief
+
+**Question.** Does the verified 2364 owner alias let the guest finish
+loading into the host field after the two successful Acquire/Enter
+stages? If the guest crashes, which module/offset faulted and which
+opcodes reached native receive between shared Enter and the crash?
+
+**Expected observation.** Both windows are usable side by side.
+The host chooses and identifies a frozen save slot and stands still.
+The guest selects the same slot once. The host reports private
+staging, shared Enter, and owner_alias=aliased. If the guest reaches
+control, the user records both views with Win+Alt+R, confirms mutual
+walking and turning, checks removal on guest exit, tries reconnect
+once within the same process, and verifies the host reload.
+
+**Time limit and stop condition.** Verify the exact 3663 executable
+and fresh external backups before launch. Both copies share the
+fixed fourteen-minute watchdog. Stop on activation error, crash,
+hang, refusal, or deadline. Collect the PID-specific crash, packet,
+and exit evidence; compare pre-guest, post-guest and final manifests;
+restore the test installation. L4 still requires an L3 pass and
+the user's confirmation.
+
+---
+
 # R7 Step 5 — staged join verified, guest loading crash blocks L3
 
 **The final build 3663 trial verified the two-stage field flow.** At

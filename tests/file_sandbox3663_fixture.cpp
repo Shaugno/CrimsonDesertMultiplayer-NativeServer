@@ -1,6 +1,7 @@
 // Dedicated child process: hooks live until ExitProcess. The unhooked parent
 // compares SHA256 manifests of the original tree and reads sandbox effects.
 #include "mod/session2/file_sandbox3663.h"
+#include "mod/session2/guest_crash3663.h"
 #include "mod/log.h"
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -11,6 +12,7 @@
 #include <array>
 #include <cstdio>
 #include <cstring>
+#include <filesystem>
 #include <string>
 #include <vector>
 namespace {
@@ -369,6 +371,14 @@ int fixture(int argc,wchar_t** argv) {
     view[0]='G';FlushViewOfFile(view,1);UnmapViewOfFile(view);CloseHandle(section);CloseHandle(mapped);
     if(read(root+L"\\source.save")!="Griginal")return 28;
     if(environment(L"USERPROFILE")!=normal_profile || environment(L"LOCALAPPDATA")!=normal_local)return 76;
+    const auto evidence=std::filesystem::path(backup).parent_path()/L"guest-diagnostic-fixture";
+    if(!CreateDirectoryW(evidence.c_str(),nullptr) || !cdmp::session2::guest_crash3663::install(evidence.c_str()))return 91;
+    namespace crash=cdmp::session2::guest_crash3663;
+    crash::arm();
+    const auto saved=crash::packet(crash::Direction::ToClient,2364,65);
+    if(!saved)return 92;
+    crash::returned(saved);
+    std::puts("R8 guest diagnostics mapping PASS under NT save sandbox");
     std::printf("R7 NT fixture PASS: inherited profile/native resolver unchanged; save-only redirect; %s\n",cdmp::session2::file_sandbox3663::describe().c_str());
     return 0;
 }

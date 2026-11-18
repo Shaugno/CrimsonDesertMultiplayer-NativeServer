@@ -1,0 +1,64 @@
+{
+  "round": 8,
+  "step": 3,
+  "recorded_utc": "2026-11-18T21:45:30.716949+00:00",
+  "suite": "120/120 passed",
+  "seconds": 109.79,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "1530772705FFFDBCA8392751727A376918F1A6A20F41D15EC76BF6F2A2D43E65",
+  "desktop_runner_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.",
+  "limits": [
+    "Owned game-free fixtures. The in-game owner-alias outcome is unverified until L3.",
+    "One best-effort guest minidump on unhandled-filter entry. First-chance text capture is independent.",
+    "Guest trace captures only frame metadata, with no packet payloads.",
+    "The R7 guest log had aggregate deliveries and no incoming opcode history."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-arming-receipt.json",
+    "sha256": "759BE444AADC462BDA2C807CA4ECD50817D63CE7531DE64C304C54B645C9EAA0"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-suite.txt",
+      "sha256": "7400DD31FFEBC749B8F235491B6589709B14B2204F381FFC8F27F9DF79389406"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-ctest.log",
+      "sha256": "8D5B2B0219D088772066A7311406E3E3AA920CC09A101BC5142B7C6DB2359F33"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-smoke-run\\e2e\\cdmp.log",
+      "sha256": "EF9478F388DF27F0A09524466F656DE28883C940CFA9BB74664D2DBE3AD051C5"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-boundary.json",
+      "sha256": "9EAAED2CD6D4D412B4A3E452BAE0B6C4C80FDEF6DCF6CC2EBBFF225C112F1744"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-before-network.txt",
+      "sha256": "360B5A9ACB511156984B0667AC5AE2FFFBBDD69B073D26D91FA9EC67AB364126"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-owner-alias-after-network.txt",
+      "sha256": "D1B42E86EEEC7C92FF1387381C5AFA16C9B057205F9BC212ED2C83168FD1A6DD"
+    }
+  ],
+  "source_manifest_sha256": "DF7251EC18212BE81729CBC39D70E186975AD9EB157C8C06F09BB000E7D46B9C",
+  "sandbox_network_verified": true,
+  "bounded_refusal_log_verified": true,
+  "acquire_predicate_trace_compiled": true,
+  "launcher_receipt_round": 7,
+  "guest_crash_fixture_verified": true,
+  "guest_trace_mapping_verified_under_sandbox": true,
+  "previous_save_writer": "Unattributed. Guest sandbox matches its backup for all 23 files."
+}

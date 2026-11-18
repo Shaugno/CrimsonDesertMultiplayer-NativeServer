@@ -1,9 +1,39 @@
 #include "coop3663/v1_3663_policy.h"
+#include <array>
 #include <cstdlib>
 #include <cstdio>
 using namespace cdmp::coop3663::v1;
 static void check(bool value){if(!value)std::abort();}
+static void move_owner(){
+    constexpr MoveFieldKeys keys{0x91000001,0x92000002,0xA3000003};
+    std::array<uint8_t,73> original{};
+    original.fill(0xAB);
+    original[0]=4;
+    auto put=[](auto& bytes,std::size_t at,uint32_t value){std::memcpy(bytes.data()+at,&value,sizeof value);};
+    put(original,1,keys.guest_actor);
+    put(original,5,1);
+    put(original,9,keys.host);
+    auto expected=original;
+    put(expected,9,keys.guest);
+    auto packet=original;
+    check(alias_shared_move_owner(packet,-1,keys)==MoveOwner::Aliased && packet==expected);
+    check(alias_shared_move_owner(packet,-1,keys)==MoveOwner::Unchanged && packet==expected);
+    packet=original;
+    check(alias_shared_move_owner(std::span(packet).first(65),-1,keys)==MoveOwner::UnexpectedShape && packet==original);
+    check(alias_shared_move_owner(packet,0,keys)==MoveOwner::UnexpectedShape && packet==original);
+    check(alias_shared_move_owner(packet,-1,{keys.host,keys.host,keys.guest_actor})==MoveOwner::UnverifiedOwner);
+    check(alias_shared_move_owner(packet,-1,{keys.host,keys.guest,0xA3000004})==MoveOwner::UnverifiedOwner);
+    check(packet==original);
+    put(packet,9,0x94000004);
+    const auto unrelated=packet;
+    check(alias_shared_move_owner(packet,-1,keys)==MoveOwner::UnverifiedOwner && packet==unrelated);
+    put(packet,5,3);
+    put(packet,9,keys.guest);
+    const auto staging=packet;
+    check(alias_shared_move_owner(packet,-1,keys)==MoveOwner::Unchanged && packet==staging);
+}
 int main(){
+    move_owner();
     for(unsigned flags=0;flags<128;++flags){
         const bool marker=(flags&1)!=0,game=(flags&2)!=0,target=(flags&4)!=0,host=(flags&8)!=0,
             guest=(flags&16)!=0,sandbox=(flags&32)!=0,real=(flags&64)!=0;

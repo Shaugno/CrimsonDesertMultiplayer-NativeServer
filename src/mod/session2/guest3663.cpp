@@ -1,6 +1,7 @@
 // Minimal 3663 guest. The legacy guest installer and every optional callback
 // remain unreachable. Native delivery/allocation happens on NetworkThread.
 #include "mod/session2/guest3663.h"
+#include "mod/session2/guest_crash3663.h"
 #include "mod/session2/tunnel_layout.h"
 #include "mod/session2/file_sandbox3663.h"
 #include "mod/session2/r4_v1_bindings.h"
@@ -83,6 +84,9 @@ int* __fastcall send(void* self,int* result,void* buffer){
                 else if(!outgoing.push(bytes))fail("outgoing queue full");
                 else{
                     ++sent;
+                    if(view->opcode==3081)guest_crash3663::arm();
+                    guest_crash3663::returned(guest_crash3663::packet(guest_crash3663::Direction::ToHost,
+                        view->opcode,static_cast<uint16_t>(bytes.size())));
                     if(view->opcode==2554){refresh_started.store(GetTickCount64());refresh_pending.store(true);}
                 }
             }
@@ -155,8 +159,12 @@ void pump(safetyhook::Context& c){
     for(size_t i=0;i<count && !broken.load();++i){
         if(batch[i].epoch!=current){fail("stale host packet epoch");break;}
         const auto& bytes=batch[i].packet;
+        const auto size=static_cast<uint16_t>(bytes.size());
+        const auto opcode=static_cast<uint16_t>(bytes[0] | (bytes[1]<<8));
+        const auto ticket=guest_crash3663::packet(guest_crash3663::Direction::ToClient,opcode,size);
         reinterpret_cast<Receive>(base+layout.kClientOnRecvPacket)(reinterpret_cast<void*>(c.r15),
-            reinterpret_cast<void*>(session),0,bytes.data(),static_cast<uint16_t>(bytes.size()));
+            reinterpret_cast<void*>(session),0,bytes.data(),size);
+        guest_crash3663::returned(ticket);
         ++delivered;
     }
 }
@@ -181,6 +189,10 @@ bool install(const game::build_guard::ImageIdentity& id){
     // client cannot be converted halfway through a local conversation.
     const auto net=ptr(base+layout.kClientNetSlot);
     if(net && ptr(net+layout.kClientNet_Slot4))return false;
+    if(!guest_crash3663::install_for_session()){
+        log::error("3663 guest: crash and packet diagnostics could not open their session evidence files");
+        return false;
+    }
     auto send_result=game::prepare_inline(base+layout.kSyncSessionSend,reinterpret_cast<void*>(&send),
         [](const auto& bytes){return bytes.size()==6 && std::equal(bytes.begin(),bytes.end(),layout.kSyncSessionSendHead.begin());},"3663 guest","native Send entry");
     auto pump_result=game::prepare_mid(base+layout.kNetLoopPump,&pump,

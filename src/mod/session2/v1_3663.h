@@ -11,6 +11,7 @@ bool host_context(field_share3663::Context&);
 bool host_ready();
 void note_request(uint16_t);
 void note_response(uint16_t);
+void prepare_shared_move_for_guest(std::span<uint8_t> payload, int8_t slot);
 bool admit_request(uint16_t);
 bool allow_disconnect_logout();
 void note_lost();

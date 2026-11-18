@@ -24,6 +24,7 @@ SafetyHookInline control_hook,self_hook,loading_hook;
 std::atomic<uintptr_t> known_guest{};
 std::atomic<bool> installed{},fault{};
 std::atomic<uint64_t> relayed{},refused{};
+std::atomic<uint32_t> move_owner_reports{};
 std::mutex life_mutex; // leaf lock, no native calls while held
 p::Lifecycle life;
 template<class T>bool read(uintptr_t a,T& v){return a && game::safe_read(a,&v,sizeof v);}
@@ -117,6 +118,21 @@ void note_request(uint16_t op){std::lock_guard lock(life_mutex);life.request(op)
 void note_response(uint16_t op){
     std::lock_guard lock(life_mutex);
     life.response(op,field_share3663::shared_entry_committed());
+}
+void prepare_shared_move_for_guest(std::span<uint8_t> payload, int8_t slot){
+    if(!field_share3663::shared_entry_committed())return;
+    field_share3663::Context c;
+    p::MoveFieldKeys keys;
+    if(host_context(c) && c.guest){
+        const auto actor=ptr(c.guest+0xD0);
+        if(actor && ptr(actor+0xA0)==c.guest)keys={key(c.host),key(c.guest),key(actor)};
+    }
+    const auto result=p::alias_shared_move_owner(payload,slot,keys);
+    if(move_owner_reports.fetch_add(1,std::memory_order_relaxed)<8)try{
+        constexpr std::array labels{"unchanged","unexpected_shape","unverified_owner","aliased"};
+        log::info("3663 MoveFieldAck 2364 guest copy: owner_alias={} payload_bytes={} host=0x{:X} guest=0x{:X} guest_actor=0x{:X}",
+            labels[static_cast<size_t>(result)],payload.size(),keys.host,keys.guest,keys.guest_actor);
+    }catch(...){}
 }
 bool admit_request(uint16_t op){std::lock_guard lock(life_mutex);
     const bool allowed=life.admit(op,field_share3663::private_entry_committed() && !field_share3663::shared_entry_committed());

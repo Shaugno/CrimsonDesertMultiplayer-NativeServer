@@ -181,6 +181,7 @@ add_library(cdmp_mod SHARED
     src/mod/session2/field_share3663.cpp
     src/mod/session2/identity3663.cpp
     src/mod/session2/guest3663.cpp
+    src/mod/session2/guest_crash3663.cpp
     src/mod/session2/v1_3663.cpp
     src/mod/session2/r5_guards3663.cpp
     src/mod/session2/save_hooks.cpp
@@ -589,13 +590,20 @@ target_link_libraries(cdmp_tests_optd PRIVATE cdmp_common)
 target_compile_definitions(cdmp_tests_optd PRIVATE CDMP_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
 add_test(NAME optd COMMAND cdmp_tests_optd)
 add_executable(cdmp_tests_file_sandbox3663 tests/file_sandbox3663_fixture.cpp
-               src/mod/session2/file_sandbox3663.cpp src/mod/log.cpp)
+               src/mod/session2/file_sandbox3663.cpp src/mod/session2/guest_crash3663.cpp src/mod/log.cpp)
 cdmp_strict(cdmp_tests_file_sandbox3663)
 target_compile_definitions(cdmp_tests_file_sandbox3663 PRIVATE CDMP_SANDBOX_FIXTURE=1)
 target_link_libraries(cdmp_tests_file_sandbox3663 PRIVATE cdmp_common safetyhook::safetyhook bcrypt shell32 iphlpapi)
 add_test(NAME file_sandbox3663 COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
          -File "${CMAKE_SOURCE_DIR}/tests/file_sandbox3663_tests.ps1" -FixtureExe "$<TARGET_FILE:cdmp_tests_file_sandbox3663>")
 set_tests_properties(file_sandbox3663 PROPERTIES TIMEOUT 120)
+add_executable(cdmp_tests_guest_crash3663 tests/guest_crash3663_fixture.cpp
+               src/mod/session2/guest_crash3663.cpp)
+cdmp_strict(cdmp_tests_guest_crash3663)
+target_include_directories(cdmp_tests_guest_crash3663 PRIVATE src)
+add_test(NAME guest_crash3663 COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+         -File "${CMAKE_SOURCE_DIR}/tests/guest_crash3663_tests.ps1" -FixtureExe "$<TARGET_FILE:cdmp_tests_guest_crash3663>")
+set_tests_properties(guest_crash3663 PROPERTIES TIMEOUT 30)
 add_executable(cdmp_tests_save_path3663 tests/save_path3663_fixture.cpp)
 cdmp_strict(cdmp_tests_save_path3663)
 target_link_libraries(cdmp_tests_save_path3663 PRIVATE shell32 ole32 uuid)

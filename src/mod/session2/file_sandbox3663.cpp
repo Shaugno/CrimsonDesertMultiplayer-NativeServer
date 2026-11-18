@@ -32,6 +32,7 @@ std::wstring real_root,sandbox_root;
 std::atomic<bool> active{},ready{};
 bool profile_method=false;
 std::atomic<uint64_t> redirected{},refused{};
+std::atomic<uint64_t> sandbox_write_calls{};
 std::array<std::atomic<uint64_t>,1024> refusal_sites{};
 constexpr size_t max_name_samples=20, max_name_chars=256;
 struct RefusedName {
@@ -81,7 +82,7 @@ FileId file_id(HANDLE file) {
     if(!GetFileInformationByHandle(file,&info))throw 1;
     return {info.dwVolumeSerialNumber,info.nFileIndexHigh,info.nFileIndexLow};
 }
-bool bad_handle(HANDLE file,bool mutating=false) {
+bool bad_handle(HANDLE file,bool mutating=false,const char** sandbox_file=nullptr) {
     if(!file || file==INVALID_HANDLE_VALUE)return true;
     Audit audit;
     if(GetFileType(file)!=FILE_TYPE_DISK)return false;
@@ -93,7 +94,15 @@ bool bad_handle(HANDLE file,bool mutating=false) {
     }
     if(real_ids.contains({info.dwVolumeSerialNumber,info.nFileIndexHigh,info.nFileIndexLow}))return true;
     const FileId id{info.dwVolumeSerialNumber,info.nFileIndexHigh,info.nFileIndexLow};
-    return info.nNumberOfLinks>1 && (mutating || under(name,sandbox_root)) && !owned_log_ids.contains(id);
+    const bool sandbox=under(name,sandbox_root);
+    if(info.nNumberOfLinks>1 && (mutating || sandbox) && !owned_log_ids.contains(id))return true;
+    if(sandbox_file && sandbox){
+        const auto leaf=name.find_last_of(L'\\');
+        const auto suffix=name.c_str()+(leaf==std::wstring::npos?0:leaf+1);
+        *sandbox_file=_wcsicmp(suffix,L"lobby.save")==0?"lobby.save":
+            (_wcsicmp(suffix,L"save.save")==0?"save.save":"other");
+    }
+    return false;
 }
 std::wstring widen(const std::string& s) {
     if(s.empty())return {};
@@ -392,8 +401,14 @@ NTSTATUS NTAPI read_file(HANDLE f,HANDLE e,Apc apc,PVOID ctx,PIO_STATUS_BLOCK io
 }
 NTSTATUS NTAPI write_file(HANDLE f,HANDLE e,Apc apc,PVOID ctx,PIO_STATUS_BLOCK io,PVOID buffer,ULONG length,PLARGE_INTEGER offset,PULONG key) {
     ErrorState error_state;
-    try{if(enabled() && bad_handle(f,true))return deny();}catch(...){return deny();}
-    return h_write.unsafe_stdcall<NTSTATUS>(f,e,apc,ctx,io,buffer,length,offset,key);
+    const char* sandbox_file=nullptr;
+    try{if(enabled() && bad_handle(f,true,&sandbox_file))return deny();}catch(...){return deny();}
+    const auto status=h_write.unsafe_stdcall<NTSTATUS>(f,e,apc,ctx,io,buffer,length,offset,key);
+    if(sandbox_file && sandbox_write_calls.fetch_add(1,std::memory_order_relaxed)<24)try{
+        log::info("3663 guest save audit: pid={} NtWriteFile target=sandbox/{} bytes={} status=0x{:08X}",
+            GetCurrentProcessId(),sandbox_file,length,static_cast<uint32_t>(status));
+    }catch(...){}
+    return status;
 }
 // Scatter/gather has the same native call shape; buffers remain opaque.
 NTSTATUS NTAPI scatter(HANDLE f,HANDLE e,Apc apc,PVOID ctx,PIO_STATUS_BLOCK io,PVOID segments,ULONG length,PLARGE_INTEGER offset,PULONG key) {
@@ -773,7 +788,8 @@ bool verified(){return ready.load(std::memory_order_acquire);}
 bool file_hooks_active(){return active.load(std::memory_order_acquire);}
 std::string describe(){
     std::string result="verified="+std::to_string(verified())+" method="+(profile_method?"profile":"nt")+" file_hooks="+std::to_string(file_hooks_active())+
-        " redirected="+std::to_string(redirected.load())+" refused="+std::to_string(refused.load());
+        " redirected="+std::to_string(redirected.load())+" refused="+std::to_string(refused.load())+
+        " sandbox_write_calls="+std::to_string(sandbox_write_calls.load());
     for(size_t i=0;i<refusal_sites.size();++i)if(const auto count=refusal_sites[i].load())result+=" line"+std::to_string(i)+"="+std::to_string(count);
     return result;
 }

@@ -467,7 +467,11 @@ void take_frame(uintptr_t rq, uintptr_t self) noexcept {
             }
             if(g_opt.core_v1){
                 const auto view=parse_tunnel_packet(packet,troc::Dir::ToGuestClient,tunnel_offsets());
-                if(view)v1_3663::note_response(view->opcode);
+                if(view){
+                    if(view->opcode==coop3663::v1::kMoveFieldAck)
+                        v1_3663::prepare_shared_move_for_guest(std::span<uint8_t>(packet).subspan(troc::kHeaderSize),view->slot);
+                    v1_3663::note_response(view->opcode);
+                }
             }
             // No legacy actor, save or optional observer callback in this route.
             if (!g_outgoing.push(packet)) g_outgoing_lost.store(true);

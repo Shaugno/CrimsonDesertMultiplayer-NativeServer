@@ -1,11 +1,35 @@
 #pragma once
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
+#include <span>
 #include <string_view>
 namespace cdmp::coop3663::v1 {
 // Verified in the exact 3663 RTTI descriptor and initializer. The native
 // 2976 request at this point in login had a slot-0 header and empty body.
 inline constexpr uint16_t kLoginCharacterToGame = 2140;
+inline constexpr uint16_t kMoveFieldAck = 2364;
+struct MoveFieldKeys { uint32_t host{}, guest{}, guest_actor{}; };
+enum class MoveOwner { Unchanged, UnexpectedShape, UnverifiedOwner, Aliased };
+// Behavioral reference: the legacy P8 MoveFieldAck owner fix and Samuel
+// Cardillo's 3576 port (ByJunter PR #1, a3904af). The target serializer
+// 2C7A2B0 and 26AB510 independently establish the 17 + 56*n wire layout.
+inline MoveOwner alias_shared_move_owner(std::span<uint8_t> payload, int8_t slot, MoveFieldKeys keys) {
+    constexpr std::size_t header = 17, record = 56, owner_offset = 9;
+    if (slot != -1 || payload.size() < header + record || (payload.size() - header) % record ||
+        payload[0] != 4) return MoveOwner::UnexpectedShape;
+    uint32_t actor{}, move_type{}, owner{};
+    std::memcpy(&actor, payload.data() + 1, sizeof actor);
+    std::memcpy(&move_type, payload.data() + 5, sizeof move_type);
+    std::memcpy(&owner, payload.data() + owner_offset, sizeof owner);
+    if (move_type != 1) return MoveOwner::Unchanged;
+    if ((keys.guest >> 28) != 9 || (keys.host >> 28) != 9 || keys.host == keys.guest ||
+        (keys.guest_actor >> 28) != 0xA || actor != keys.guest_actor) return MoveOwner::UnverifiedOwner;
+    if (owner == keys.guest) return MoveOwner::Unchanged;
+    if (owner != keys.host) return MoveOwner::UnverifiedOwner;
+    std::memcpy(payload.data() + owner_offset, &keys.guest, sizeof keys.guest);
+    return MoveOwner::Aliased;
+}
 inline bool initial_game_login_packet(int8_t slot,std::size_t payload_size){
     return slot==0 && payload_size==0;
 }
