@@ -1,0 +1,60 @@
+{
+  "round": 8,
+  "step": 3,
+  "recorded_utc": "2026-11-18T22:52:54.496792+00:00",
+  "suite": "120/120 passed",
+  "seconds": 109.96,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "1B9829F09F4AD3DB19D49A9937A150E8BF887FFF3F0ACADE8B3CA4FA18D48914",
+  "desktop_runner_sha256": "2E389F80B62EDE3C12BD0E856D4527A3E04243A40B18BBE3BE90106BE810FA50",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.",
+  "limits": [
+    "Game-free suite and smoke. Host-only first launch filled capture capacity; guest was not launched.",
+    "The attempt 2 host fault site is unknown, and the exact remote primary guard awaits live execution."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-arming-receipt.json",
+    "sha256": "104DE94733CBFF9DC594E52E03DB07E30033C49EF0ABC96254C7F620F31EE137"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-suite.txt",
+      "sha256": "376CF1BEC34CD85BA429B9A3A6041678F1F1522889228A7019F09FF11C67F415"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-ctest.log",
+      "sha256": "3885F7CAFB8537568F58FAD711414AFAF074E510D5B0B4399B09F521F2F6B52F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-smoke-run\\e2e\\cdmp.log",
+      "sha256": "3B9ED8955D53D245A5DB91C186DA6C304063F4B0D3E1A007EB71837892AFD258"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-boundary.json",
+      "sha256": "ED33768F3657E35A3D98186AB36BE7C56E2BC247241FFBA117BD1443468F1699"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-before-network.txt",
+      "sha256": "360B5A9ACB511156984B0667AC5AE2FFFBBDD69B073D26D91FA9EC67AB364126"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-final2-after-network.txt",
+      "sha256": "D1B42E86EEEC7C92FF1387381C5AFA16C9B057205F9BC212ED2C83168FD1A6DD"
+    }
+  ],
+  "source_manifest_sha256": "D4585F0A20A91AE1DCF81C11C27D4D312F7516D8F8B01369BB9498F517792098",
+  "sandbox_network_verified": true,
+  "bounded_refusal_log_verified": true,
+  "acquire_predicate_trace_compiled": true,
+  "launcher_receipt_round": 7,
+  "crash_capture": "Host and guest first-chance sites separated by module and deduplicated per instruction; host and guest minidump fixture passed"
+}

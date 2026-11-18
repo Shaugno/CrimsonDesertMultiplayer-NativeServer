@@ -1,3 +1,32 @@
+# R8 host startup capture — no join attempt used
+
+The first host launch for attempt 3 reached the world and exited
+normally, code 0, before any guest launch. Its first-chance log
+filled with a repeatedly handled `cdmp.asi+0x3D0DA0` read of
+`0x18`. The symbol maps to `server.cpp:319` `peek<uint64_t>`,
+called from `server_host_user` through `host_context`,
+`host_ready` and `Bridge::tick`. The repeated fault was caught
+by the existing safe-read machinery. It did not terminate the host.
+All 23 real saves matched the prepared manifest at finish. The
+test installation was restored and the installed executable hash
+still matched 3663. This is an unused host-only start. R8 usage
+remains **startup 0/5, join 2/3**.
+
+The capture now records each distinct exception instruction once,
+with separate fixed capacities for 16 game-image sites and eight
+other-module sites. This keeps a repeated handled exception from
+using the game's capture capacity. The first-chance handler still
+continues the native exception chain. A fixture repeats a handled
+fault 32 times, then raises a different unhandled fault and checks
+both sites and the minidump.
+
+The next L3 launch requires a fresh full suite and smoke, new
+external save backups and a new shared watchdog. The user has
+confirmed presence. A guest native login is the point at which the
+remaining join attempt is counted.
+
+---
+
 # R8 L3 attempt 3 — capture both processes and guard the verified guest actor
 
 The 5:26:33 PM host access violation from attempt 2 has no recorded
@@ -24,8 +53,8 @@ the remote host key through the existing control message.
 
 The host now arms the same bounded first-chance capture from
 startup. The guest arms it at character login as before. Each maps
-a 64 KiB role/PID log and captures up to 24 first-chance access
-violations or in-page errors. The record includes module-relative
+a 64 KiB role/PID log and captures the first exception at up to 16
+game-image sites and eight other-module sites. The record includes module-relative
 fault and stack locations, access type/address and registers.
 The chained unhandled filter requests one best-effort minidump
 through a pre-started worker. A game-owned handler can terminate

@@ -17,6 +17,10 @@ __declspec(noinline) void write_inaccessible(volatile LONG* value) {
     *value = 42;
 }
 
+__declspec(noinline) LONG read_inaccessible(volatile LONG* value) {
+    return *value;
+}
+
 bool handled_write(volatile LONG* value) {
     __try {
         write_inaccessible(value);
@@ -53,8 +57,8 @@ int wmain(int argc, wchar_t** argv) {
         capture::note_null_playback(0xA01001BE,0,0xA0100001,0xA01001BE,1,"guest");
         capture::note_playback_skip(0xA01001BE);
     }
-    if (!handled_write(page)) return 6;
+    for (unsigned repeat = 0; repeat < 32; ++repeat)
+        if (!handled_write(page)) return 6;
     (void)capture::packet(capture::Direction::ToClient, 2005, 100);
-    write_inaccessible(page);
-    return 7;
+    return read_inaccessible(page);
 }

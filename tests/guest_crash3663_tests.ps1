@@ -19,11 +19,13 @@ function Test-CrashCapture([string]$role) {
     if ($process.ExitCode -ne -1073741819) { throw "Expected native access violation, got $($process.ExitCode)" }
     $crash = Join-Path $evidence "$role-crash-$($process.Id)"
     $note = [IO.File]::ReadAllText($crash + '.log').TrimEnd([char]0)
-    if (@([regex]::Matches($note,'(?m)^first_chance ')).Count -ne 2) { throw 'Wrong first-chance count' }
+    if (@([regex]::Matches($note,'(?m)^first_chance ')).Count -ne 2) { throw 'First-chance capture did not deduplicate the 32 handled faults' }
     $peer = if ($role -eq 'host') { 'actor=0xA01001BE class=0xA identity=guest' }
             else { 'actor=0xA0100001 class=0xA identity=host' }
     foreach ($pattern in "3663 $role diagnostics installed", 'unhandled .+code=0xC0000005 at=cdmp_tests_guest_crash3663\.exe\+0x',
-                         'access=1 address=0x','registers .+ rsp=0x','stack .+ <- ','minidump=written',
+                         'first_chance .+access=1 address=0x','first_chance .+access=0 address=0x',
+                         'unhandled .+access=0 address=0x',
+                         'registers .+ rsp=0x','stack .+ <- ','minidump=written',
                          "null_playback .+ $peer",
                          'null_playback_skip .+ continuation=CrimsonDesert.exe\+0x258C99A') {
         if ($note -notmatch $pattern) { throw "Missing crash evidence pattern $pattern" }

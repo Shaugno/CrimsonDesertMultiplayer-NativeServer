@@ -15,7 +15,7 @@ namespace cdmp::session2::crash3663 {
 namespace {
 constexpr uint32_t kPackets = 131072;
 constexpr uint32_t kTextBytes = 65536;
-constexpr uint32_t kFirstChance = 24;
+constexpr size_t kMainImageSites = 16, kOtherSites = 8;
 struct PacketRow {
     uint64_t utc_filetime;
     uint16_t opcode, bytes;
@@ -30,7 +30,8 @@ struct PacketTrace {
 static_assert(sizeof(PacketRow) == 16 && offsetof(PacketTrace, rows) == 24);
 PacketTrace* trace{};
 char* crash_text{};
-std::atomic<uint32_t> text_used{}, first_chance{};
+std::atomic<uint32_t> text_used{};
+std::array<std::atomic<uintptr_t>, kMainImageSites + kOtherSites> first_chance_sites{};
 std::atomic<bool> armed{}, dump_requested{};
 std::atomic<LPTOP_LEVEL_EXCEPTION_FILTER> previous_filter{};
 thread_local bool in_filter{};
@@ -38,6 +39,8 @@ thread_local bool in_filter{};
 struct Module { uintptr_t base{}; DWORD size{}; char name[96]{}; };
 std::array<Module, 256> modules;
 size_t module_count{};
+uintptr_t main_image{};
+DWORD main_image_size{};
 
 decltype(&MiniDumpWriteDump) write_minidump{};
 HANDLE dump_go{}, dump_done{};
@@ -66,6 +69,7 @@ void* create_mapping(const std::wstring& path, DWORD bytes) noexcept {
 }
 
 void snapshot_modules() noexcept {
+    main_image = reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
     const HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, GetCurrentProcessId());
     if (snapshot == INVALID_HANDLE_VALUE) return;
     MODULEENTRY32W entry{};
@@ -75,6 +79,7 @@ void snapshot_modules() noexcept {
             auto& mod = modules[module_count++];
             mod.base = reinterpret_cast<uintptr_t>(entry.modBaseAddr);
             mod.size = entry.modBaseSize;
+            if (mod.base == main_image) main_image_size = mod.size;
             WideCharToMultiByte(CP_UTF8, 0, entry.szModule, -1, mod.name, sizeof mod.name, nullptr, nullptr);
         } while (module_count < modules.size() && Module32NextW(snapshot, &entry));
     }
@@ -199,12 +204,27 @@ bool has_context(EXCEPTION_POINTERS* exception) noexcept {
     return exception && exception->ExceptionRecord && exception->ContextRecord;
 }
 
+bool first_at_site(uintptr_t site) noexcept {
+    if (!site) return false;
+    // Repeated handled faults in the mod or a DLL must not consume the
+    // executable's slots. Keep both budgets fixed and avoid handler locks.
+    const bool in_main = site >= main_image && site - main_image < main_image_size;
+    const size_t end = in_main ? kMainImageSites : first_chance_sites.size();
+    for (size_t i = in_main ? 0 : kMainImageSites; i < end; ++i) {
+        auto& slot = first_chance_sites[i];
+        auto seen = slot.load(std::memory_order_relaxed);
+        if (!seen && slot.compare_exchange_strong(seen, site, std::memory_order_relaxed)) return true;
+        if (seen == site) return false;
+    }
+    return false;
+}
+
 LONG WINAPI vectored(EXCEPTION_POINTERS* exception) noexcept {
     if (!armed.load(std::memory_order_acquire) || in_filter || !has_context(exception))
         return EXCEPTION_CONTINUE_SEARCH;
     const auto code = exception->ExceptionRecord->ExceptionCode;
     if ((code != EXCEPTION_ACCESS_VIOLATION && code != EXCEPTION_IN_PAGE_ERROR) ||
-        first_chance.fetch_add(1, std::memory_order_relaxed) >= kFirstChance)
+        !first_at_site(reinterpret_cast<uintptr_t>(exception->ExceptionRecord->ExceptionAddress)))
         return EXCEPTION_CONTINUE_SEARCH;
     const DWORD error = GetLastError();
     in_filter = true;
