@@ -2,6 +2,8 @@
 #include "mod/session2/r4_v1_bindings.h"
 #include "mod/session2/server.h"
 #include "mod/session2/guest3663.h"
+#include "mod/session2/guest_character3663.h"
+#include "mod/session2/ride_filter_logic.h"
 #include "mod/session2/identity3663.h"
 #include "mod/session2/report_guard.h"
 #include "mod/session2/r5_guards3663.h"
@@ -159,6 +161,10 @@ void Bridge::receive(std::vector<uint8_t>&& packet,uint32_t now){
         if(view->opcode==troc::kControlOpcode){
             if(view->payload.size()==1 && view->payload[0]==troc::kControlHostReady){last_ready_=now;guest3663::set_host_ready(true);}
             else if(view->payload.size()==1 && view->payload[0]==troc::kControlHostDead){failed_=true;guest3663::set_host_ready(false);}
+            else if(view->slot==-1){
+                const auto key=rfl::host_character_from_control(view->payload.data(),view->payload.size());
+                if(key)guest_character3663::note_host_character(key);
+            }
             return;
         }
         guest3663::deliver(std::move(packet));return;
@@ -195,6 +201,17 @@ void Bridge::tick(uint32_t now){
             const uint8_t state=troc::kControlHostReady;
             if(!link_.push(troc::make(troc::kControlOpcode,-1,{&state,1})))failed_=true;
             last_ready_=now;
+            field_share3663::Context c;
+            if(host_context(c)){
+                const auto actor=ptr(c.host+0xD0);
+                const auto primary=actor && ptr(actor+0xA0)==c.host?key(actor):0;
+                if((primary>>28)==0xA && primary!=advertised_host_){
+                    std::array<uint8_t,5> payload{troc::kControlHostCharacter};
+                    std::memcpy(payload.data()+1,&primary,sizeof primary);
+                    if(!link_.push(troc::make(troc::kControlOpcode,-1,payload)))failed_=true;
+                    else advertised_host_=primary;
+                }
+            }
         }
         while(!pending_.empty()){
             const auto outcome=server_inject_ex(pending_.front());

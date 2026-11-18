@@ -1,6 +1,7 @@
 // Minimal 3663 guest. The legacy guest installer and every optional callback
 // remain unreachable. Native delivery/allocation happens on NetworkThread.
 #include "mod/session2/guest3663.h"
+#include "mod/session2/guest_character3663.h"
 #include "mod/session2/guest_crash3663.h"
 #include "mod/session2/tunnel_layout.h"
 #include "mod/session2/file_sandbox3663.h"
@@ -193,6 +194,7 @@ bool install(const game::build_guard::ImageIdentity& id){
         log::error("3663 guest: crash and packet diagnostics could not open their session evidence files");
         return false;
     }
+    if(!guest_character3663::install(id))return false;
     auto send_result=game::prepare_inline(base+layout.kSyncSessionSend,reinterpret_cast<void*>(&send),
         [](const auto& bytes){return bytes.size()==6 && std::equal(bytes.begin(),bytes.end(),layout.kSyncSessionSendHead.begin());},"3663 guest","native Send entry");
     auto pump_result=game::prepare_mid(base+layout.kNetLoopPump,&pump,
@@ -209,7 +211,10 @@ bool install(const game::build_guard::ImageIdentity& id){
 }
 bool active(){return on.load();}
 bool failed(){return broken.load();}
-void set_host_ready(bool value){ready.store(value);}
+void set_host_ready(bool value){
+    guest_character3663::set_link_ready(value);
+    ready.store(value);
+}
 void deliver(std::vector<uint8_t>&& bytes){
     if(!on.load() || broken.load() || !remote.load() || !parse_tunnel_packet(bytes,troc::Dir::ToGuestClient,layout)){
         fail("unexpected/malformed host delivery");return;}
@@ -219,5 +224,6 @@ void deliver(std::vector<uint8_t>&& bytes){
 }
 std::deque<std::vector<uint8_t>> take_outgoing(){return ready.load() && !broken.load()?outgoing.take_all():std::deque<std::vector<uint8_t>>{};}
 std::string describe(){return std::format("native guest active {} remote {} sent {} delivered {} filtered {} refreshed {} failed {}",
-    on.load(),remote.load(),sent.load(),delivered.load(),filtered.load(),refreshed.load(),broken.load())+" | "+r5_guards3663::describe();}
+    on.load(),remote.load(),sent.load(),delivered.load(),filtered.load(),refreshed.load(),broken.load())+
+    std::format(" | character null-playback skips {}",guest_character3663::skips())+" | "+r5_guards3663::describe();}
 }

@@ -330,4 +330,25 @@ uint32_t packet(Direction direction, uint16_t opcode, uint16_t bytes) noexcept {
 void returned(uint32_t ticket) noexcept {
     if (ticket) trace->rows[ticket - 1].returned = 1;
 }
+
+void note_null_playback(uint32_t key, uintptr_t vtable, uint32_t host, uint32_t guest,
+                        uint64_t selector, const char* identity) noexcept {
+    if (!crash_text) return;
+    game::FixedLine line;
+    line.str("null_playback utc_filetime=").dec(utc_filetime()).str(" tid=").dec(GetCurrentThreadId())
+        .str(" site=CrimsonDesert.exe+0x258C8FD actor=").hex32(key)
+        .str(" class=").hex(key >> 28).str(" identity=").str(identity)
+        .str(" host_key=").hex32(host).str(" guest_key=").hex32(guest)
+        .str(" layer=").dec(selector).str(" actor_vtable=");
+    location(line, vtable);
+    append(line);
+}
+
+void note_playback_skip(uint32_t key) noexcept {
+    if (!crash_text) return;
+    game::FixedLine line;
+    line.str("null_playback_skip utc_filetime=").dec(utc_filetime()).str(" actor=").hex32(key)
+        .str(" continuation=CrimsonDesert.exe+0x258C99A");
+    append(line);
+}
 }

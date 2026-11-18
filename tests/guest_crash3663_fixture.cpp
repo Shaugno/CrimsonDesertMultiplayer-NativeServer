@@ -41,6 +41,8 @@ int wmain(int argc, wchar_t** argv) {
     capture::arm();
     capture::returned(capture::packet(capture::Direction::ToHost, 3081, 22));
     capture::returned(capture::packet(capture::Direction::ToClient, 2364, 65));
+    capture::note_null_playback(0xA0100001,0,0xA0100001,0xA01001BE,1,"host");
+    capture::note_playback_skip(0xA0100001);
     if (!handled_write(page)) return 6;
     (void)capture::packet(capture::Direction::ToClient, 2005, 100);
     write_inaccessible(page);

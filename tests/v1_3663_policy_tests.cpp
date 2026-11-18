@@ -1,4 +1,5 @@
 #include "coop3663/v1_3663_policy.h"
+#include "coop3663/character_guard_policy.h"
 #include <array>
 #include <cstdlib>
 #include <cstdio>
@@ -33,6 +34,22 @@ static void move_owner(){
     check(alias_shared_move_owner(packet,-1,keys)==MoveOwner::Unchanged && packet==staging);
 }
 int main(){
+    namespace guard=cdmp::coop3663::character_guard;
+    constexpr uint32_t host_key=0xA0100001, guest_key=0xA01001BE;
+    check(guard::identify(host_key,host_key,guest_key)==guard::Actor::Host);
+    check(guard::identify(guest_key,host_key,guest_key)==guard::Actor::Guest);
+    check(guard::identify(0xB0100003,host_key,guest_key)==guard::Actor::Other);
+    check(guard::identify(0xA0100003,host_key,guest_key)==guard::Actor::Other);
+    check(guard::identify(host_key,host_key,host_key)==guard::Actor::Guest);
+    check(guard::identify(host_key,0,guest_key)==guard::Actor::Unknown);
+    check(guard::identify(0,host_key,guest_key)==guard::Actor::Unknown);
+    check(guard::skip(guard::Actor::Host,guest_key,true,true,true));
+    check(!guard::skip(guard::Actor::Host,0,true,true,true));
+    check(!guard::skip(guard::Actor::Host,guest_key,false,true,true));
+    check(!guard::skip(guard::Actor::Host,guest_key,true,false,true));
+    check(!guard::skip(guard::Actor::Host,guest_key,true,true,false));
+    for (const auto actor : {guard::Actor::Guest,guard::Actor::Other,guard::Actor::Unknown})
+        check(!guard::skip(actor,guest_key,true,true,true));
     move_owner();
     for(unsigned flags=0;flags<128;++flags){
         const bool marker=(flags&1)!=0,game=(flags&2)!=0,target=(flags&4)!=0,host=(flags&8)!=0,

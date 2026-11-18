@@ -1,3 +1,75 @@
+# R8 L3 attempt 2 — exact host-character null-playback guard
+
+Samuel Cardillo’s 3576 character guard covers the update family
+that reached the R8 fault. His signature catalog selects the
+`9451E0` update entry. The remote update guard can return from
+Update or PostUpdate for an eligible remote actor while an action
+or playback is missing. His separate GuestS3 null-action hook at
+`251ED90` checks the action pointer at layer+0x10. This incident is
+the playback pointer at layer+0x18 in another helper.
+[Samuel’s signature catalog](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/game/character_guard_signatures.inc).
+[Samuel’s remote update guard](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/net/horse_diag.cpp).
+
+The independently hashed 3576 reference confirms
+`9451E0 → 9496C0 → 251AF40`. At `251AF79` it loads
+the selected layer's +0x18 playback pointer, then at `251AF7D`
+dereferences it at +0x28. In the exact 3663 image the corresponding
+edges are `972B82 → 9770C0` and `977128 → 258C8C0`.
+The 3663 helper reaches the same loads at `258C8F9` and `258C8FD`.
+The native caller does not consume the helper's return value.
+Before the failing read the helper has saved registers and read
+memory, without publishing character state. The validated epilogue
+at `258C99A` restores that exact frame and returns.
+
+Only the guest module installs the midpoint. It records actor key,
+key class, native actor vtable, layer selector and identity before
+the skip decision. It writes up to eight samples per identity to
+the existing mapped crash log. The host publishes its verified
+primary key through the existing host-character control message.
+The guest independently resolves its own primary from the native
+client actor manager. The helper may skip only the advertised
+host actor, distinct from the guest, on a live link, with the exact
+native frame, control component backlink, selected layer and null
+value. It resumes at the native epilogue. Guest, other and unknown
+actors continue through the original code. The port uses the
+behavioral reference under GPL v3, with no upstream branch merge.
+
+The exact installed image matched both native call sites, the
+helper frame, the eight relocated bytes and the native teardown.
+All 120 tests passed in 117.01 seconds. Synthetic smoke received
+78 states with zero rejects and unloaded cleanly. The guest crash
+fixture retained the actor-identification and skip lines, and the
+sandbox and networking fixtures passed.
+[Offline validation](port-evidence/r8/character-guard-validation.json).
+
+**R8 attempt 1 host exit.** The host log reported phase 5 quarantine
+after the guest disconnected during Loading. The host game still
+reported a live controlled character. Its final line at 5:00:51.957 PM
+Eastern measured an 8.49-second state/HUD loop. There is no explicit
+shutdown, exception or exit-reason line. The receipt records the host
+exiting with code 1 at 5:00:54.100 PM, before the 5:06:24 deadline.
+The runner uses 0x3663 for forced exits. The log supports quarantine
+followed by an exit, with no evidence identifying the native source
+of code 1 or linking it causally to quarantine.
+
+**Question.** Which actor reaches the exact null-playback read, and
+can the guest finish L3 with the host-only containment active?
+
+**Expected observation.** Select the same frozen save once after
+both windows are verified side by side. Capture any null actor
+sample and skip receipt. If the guest reaches player control,
+record with Win+Alt+R and verify mutual walking and turning, guest
+disconnect/removal, one reconnect outcome and host reload.
+
+**Time limit and stop condition.** Exact 3663 and fresh external
+save backups are required. Both windows share a fourteen-minute
+watchdog. Stop on activation error, crash, hang, refused join or
+deadline. Verify the three save checkpoints and restore the
+controlled installation. At start of this trial, R8 usage is
+startup 0/5 and join 1/3. No L4 without user confirmation of an L3 pass.
+
+---
+
 # R8 L3 — field loading advanced, guest character-update crash captured
 
 The tested build, 792a323, completed native staging and shared Enter.

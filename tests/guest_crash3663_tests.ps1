@@ -16,7 +16,9 @@ try {
     $note = [IO.File]::ReadAllText($crash + '.log').TrimEnd([char]0)
     if (@([regex]::Matches($note,'(?m)^first_chance ')).Count -ne 2) { throw 'Wrong first-chance count' }
     foreach ($pattern in 'unhandled .+code=0xC0000005 at=cdmp_tests_guest_crash3663\.exe\+0x',
-                         'access=1 address=0x','registers .+ rsp=0x','stack .+ <- ','minidump=written') {
+                         'access=1 address=0x','registers .+ rsp=0x','stack .+ <- ','minidump=written',
+                         'null_playback .+ actor=0xA0100001 class=0xA identity=host',
+                         'null_playback_skip .+ continuation=CrimsonDesert.exe\+0x258C99A') {
         if ($note -notmatch $pattern) { throw "Missing crash evidence pattern $pattern" }
     }
     if ((Get-Content -Raw -LiteralPath (Join-Path $root 'prior-filter.txt')) -notmatch 'previous filter called') {

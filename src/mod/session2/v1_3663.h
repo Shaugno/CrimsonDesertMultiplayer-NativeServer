@@ -32,6 +32,7 @@ private:
     std::deque<std::vector<uint8_t>> pending_;
     size_t pending_bytes_=0;
     uint32_t epoch_=0,last_ready_=0,first_pending_=0;
+    uint32_t advertised_host_=0;
     uint64_t queued_=0,refused_=0;
 };
 }

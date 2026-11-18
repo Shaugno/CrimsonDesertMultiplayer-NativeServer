@@ -1,0 +1,121 @@
+// Samuel Cardillo's 3576 remote character update guard (ByJunter PR #1,
+// a3904af, GPL v3) establishes the update family. This version independently
+// verifies the 3663 null-read edge and skips only its helper, for the host.
+#include "mod/session2/guest_character3663.h"
+#include "coop3663/character_guard_policy.h"
+#include "mod/game/hook_prepare.h"
+#include "mod/game/player_layout.h"
+#include "mod/game/safe_memory.h"
+#include "mod/log.h"
+#include "mod/session2/guest_crash3663.h"
+
+#include <algorithm>
+#include <array>
+#include <atomic>
+
+namespace cdmp::session2::guest_character3663 {
+namespace {
+namespace policy = coop3663::character_guard;
+constexpr uintptr_t base = game::build_3663::kImageBase;
+constexpr uintptr_t update_call = 0x972B82, helper_call = 0x977128;
+constexpr uintptr_t helper = 0x258C8C0, fault_read = 0x258C8FD, epilogue = 0x258C99A;
+constexpr auto& layout = game::kPlayerLayout3663;
+constexpr std::array<uint8_t, 5> update_edge{0xE8,0x39,0x45,0x00,0x00};
+constexpr std::array<uint8_t, 5> helper_edge{0xE8,0x93,0x57,0xC1,0x01};
+constexpr std::array<uint8_t, 61> frame_and_layer{
+    0x48,0x89,0x5C,0x24,0x08,0x48,0x89,0x6C,0x24,0x10,0x48,0x89,0x74,0x24,0x18,
+    0x48,0x89,0x7C,0x24,0x20,0x41,0x54,0x41,0x56,0x41,0x57,0x48,0x83,0xEC,0x20,
+    0x48,0x8B,0x41,0x30,0x48,0x8D,0xB1,0x88,0x00,0x00,0x00,0x4C,0x8B,0xF1,
+    0x44,0x0F,0xB6,0x60,0x1B,0x4A,0x8B,0x84,0xE1,0x88,0x00,0x00,0x00,0x48,0x8B,0x50,0x18};
+constexpr std::array<uint8_t, 8> read_bytes{0x48,0x8B,0x42,0x28,0x0F,0xB6,0x68,0x7E};
+constexpr std::array<uint8_t, 31> release_bytes{
+    0x48,0x8B,0x5C,0x24,0x40,0x48,0x8B,0x6C,0x24,0x48,0x48,0x8B,0x74,0x24,0x50,
+    0x48,0x8B,0x7C,0x24,0x58,0x48,0x83,0xC4,0x20,0x41,0x5F,0x41,0x5E,0x41,0x5C,0xC3};
+static_assert(helper + frame_and_layer.size() == fault_read);
+SafetyHookMid hook;
+std::atomic<bool> on{}, linked{};
+std::atomic<uint32_t> host_character{}; // 1 seals a conflicting advertisement for this process
+std::atomic<uint64_t> skipped{};
+std::array<std::atomic<uint32_t>, 4> samples{};
+
+template<class T> T read(uintptr_t at) noexcept {
+    T value{};
+    return at && game::safe_read(at, &value, sizeof value) ? value : T{};
+}
+template<size_t N> bool matches(uintptr_t rva, const std::array<uint8_t, N>& wanted) {
+    std::array<uint8_t, N> actual{};
+    return game::safe_read(base + rva, actual.data(), N) && actual == wanted;
+}
+
+uint32_t local_character() noexcept {
+    const auto world = read<uintptr_t>(base + layout.kWorldSystemSlot);
+    const auto manager = world ? read<uintptr_t>(world + layout.kWorldSystem_ActorManager) : 0;
+    if (read<uintptr_t>(manager) != base + layout.kVtClientActorManager) return 0;
+    const auto actor = read<uintptr_t>(manager + layout.kActorManager_ControlledActor);
+    if (read<uintptr_t>(actor) != base + layout.kVtControlledActor) return 0;
+    return read<uint32_t>(actor + 0x60);
+}
+
+void on_null_playback(safetyhook::Context& c) noexcept {
+    if (c.rdx || !on.load(std::memory_order_acquire)) return;
+    const auto cc = c.r14;
+    const auto actor = cc ? read<uintptr_t>(cc + 8) : 0;
+    const auto component_table = actor ? read<uintptr_t>(actor + layout.kActor_ComponentTable) : 0;
+    const bool confirmed_control = cc && c.rcx == cc && actor && component_table &&
+        read<uintptr_t>(component_table + layout.kComponents_CharacterControl) == cc &&
+        read<uintptr_t>(cc) == base + layout.kVtCharacterControl;
+    // The native consumer itself obtains its actor from cc+8. Capture that
+    // key and vtable even if a derived control type fails our guard checks.
+    const auto key = actor ? read<uint32_t>(actor + 0x60) : 0;
+    const auto actor_vtable = read<uintptr_t>(actor);
+    const auto raw_host = host_character.load(std::memory_order_acquire);
+    const uint32_t host = (raw_host >> 28) == 0xA ? raw_host : 0;
+    const uint32_t local = local_character();
+    const auto identity = policy::identify(key, host, local);
+    if (samples[static_cast<size_t>(identity)].fetch_add(1, std::memory_order_relaxed) < 8) {
+        guest_crash3663::note_null_playback(key, actor_vtable, host, local, c.r12, policy::label(identity));
+    }
+
+    // Three pushes and 0x20 bytes of locals put the call's return at rsp+0x38.
+    // No native state was changed before this load. Resume at the original
+    // frame teardown, leaving the remainder of CharacterControl::Update alone.
+    const bool exact = confirmed_control && c.r12 < 2 && c.rax &&
+        read<uintptr_t>(cc + 0x88 + c.r12 * sizeof(uintptr_t)) == c.rax &&
+        read<uintptr_t>(c.rsp + 0x38) == base + helper_call + helper_edge.size();
+    if (policy::skip(identity, local, linked.load(std::memory_order_acquire), exact, c.rdx == 0)) {
+        if (skipped.fetch_add(1, std::memory_order_relaxed) == 0) guest_crash3663::note_playback_skip(key);
+        c.rip = base + epilogue;
+    }
+}
+}
+
+bool install(const game::build_guard::ImageIdentity& identity) {
+    if (on.load()) return true;
+    if (!game::build_guard::select_3663_tiers(identity, {true,true,true,true},
+        {game::build_3663::kTierAComplete, game::build_3663::kTierBComplete,
+         game::build_3663::kTierCComplete, game::build_3663::kTierDComplete}).tier_d_lifecycle ||
+        !matches(update_call, update_edge) || !matches(helper_call, helper_edge) ||
+        !matches(helper, frame_and_layer) || !matches(fault_read, read_bytes) ||
+        !matches(epilogue, release_bytes)) return false;
+    auto prepared = game::prepare_mid(base + fault_read, &on_null_playback, [](const auto& bytes) {
+        return bytes.size() == read_bytes.size() && std::equal(bytes.begin(), bytes.end(), read_bytes.begin());
+    }, "3663 character", "null-playback read and native return");
+    if (!prepared) return false;
+    hook = std::move(*prepared);
+    on.store(true, std::memory_order_release);
+    if (!hook.enable()) {
+        on.store(false, std::memory_order_release);
+        return false;
+    }
+    log::info("3663 character guard active: exact 258C8FD null read, host character only");
+    return true;
+}
+
+void note_host_character(uint32_t key) noexcept {
+    if ((key >> 28) != 0xA) return;
+    uint32_t expected = 0;
+    if (!host_character.compare_exchange_strong(expected, key) && expected != key) host_character.store(1);
+}
+void set_link_ready(bool ready) noexcept { linked.store(ready, std::memory_order_release); }
+uint64_t skips() noexcept { return skipped.load(std::memory_order_relaxed); }
+}

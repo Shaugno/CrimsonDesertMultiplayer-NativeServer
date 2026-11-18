@@ -1,0 +1,68 @@
+{
+  "round": 8,
+  "step": 3,
+  "recorded_utc": "2026-11-18T22:16:47.658072+00:00",
+  "suite": "120/120 passed",
+  "seconds": 117.01,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "8DEFDF05FA9391D4338252CE32D09F1800D3DB4DD16C29CD4C84B7C001B4D295",
+  "desktop_runner_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.",
+  "limits": [
+    "Game-free suite and smoke. Actor classification and guard behavior require an L3 attempt.",
+    "Only the host actor with a null selected playback can take the native epilogue.",
+    "R8 attempt 1 host exit reason is not recorded."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-arming-receipt.json",
+    "sha256": "E1776252EEA92247162351EC7BD678D149BB3E8FD5AE785A72063FDB5E408F5E"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-suite.txt",
+      "sha256": "23B000BF0F68A7B7EBE674AA386B38FCC940B6A5AEA9D3EC8C8686EAFD558A57"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-ctest.log",
+      "sha256": "C362F4BB71733049A59F3AA509AF5CF9D06DF16594318BE993BD9D8C073BB7B4"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-smoke-run\\e2e\\cdmp.log",
+      "sha256": "9B1BAB67BE03CFA8770D0472FB66CCD0D874083A5D54D9BEE4CAC1F3B5C9A5D6"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-boundary.json",
+      "sha256": "E1034CB0EA52D9FCB86BC2136F26F3CDB621AED18A0D932F67DAC48C69A247FB"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-before-network.txt",
+      "sha256": "360B5A9ACB511156984B0667AC5AE2FFFBBDD69B073D26D91FA9EC67AB364126"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r8-character-guard-after-network.txt",
+      "sha256": "D1B42E86EEEC7C92FF1387381C5AFA16C9B057205F9BC212ED2C83168FD1A6DD"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r8\\character-guard-byte-check.txt",
+      "sha256": "E7CCC7440872D5170E8FC42E5052EB59896853752C86E621D739CB26BDEE4303"
+    }
+  ],
+  "source_manifest_sha256": "25554D50DC833372550651DA481D9790F9C78BA3E68A5DC866A3AC200960DD2D",
+  "sandbox_network_verified": true,
+  "bounded_refusal_log_verified": true,
+  "acquire_predicate_trace_compiled": true,
+  "launcher_receipt_round": 7,
+  "runtime_ancestry": "3576 9451E0 \u2192 9496C0 \u2192 251AF40; 3663 9729C0 \u2192 9770C0 \u2192 258C8C0",
+  "guest_only": true,
+  "null_actor_fixture_verified": true,
+  "host_only_policy_tests_passed": true
+}

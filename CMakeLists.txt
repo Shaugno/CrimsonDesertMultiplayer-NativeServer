@@ -182,6 +182,7 @@ add_library(cdmp_mod SHARED
     src/mod/session2/identity3663.cpp
     src/mod/session2/guest3663.cpp
     src/mod/session2/guest_crash3663.cpp
+    src/mod/session2/guest_character3663.cpp
     src/mod/session2/v1_3663.cpp
     src/mod/session2/r5_guards3663.cpp
     src/mod/session2/save_hooks.cpp
