@@ -1,3 +1,64 @@
+# R9 Step 4 — diagnostic L3 handoff
+
+Offline validation completed with 120/120 tests, 78 synthetic
+remote states, zero rejects and a clean unload. The installed
+game hash is exact 3663, no game process is running, and the
+controlled installation files are absent. The user is unavailable
+for a live sitting, so no R9 session was prepared or launched.
+Fresh save backups and a new watchdog are due immediately before
+the live attempt. [Offline validation](port-evidence/r9/step4-offline-validation.json).
+
+Round 9 starts with startup 0/5 and join 0/3. Step 1 compared
+the three R8 post-Enter rings with the 2976 second-load reference.
+In all three, the guest sent `2723` and never sent the subsequent
+`2789` LoadingCompleteReq. Two received the intervening `2268`
+MoveFieldCompleteAck. The guest did not send `2372`
+PreLoadSequencerReq either, and no `2941` or `2891` arrived.
+The second 2976 cycle expects `2789` after `2268`; it does not
+show `2372` or `2941` as a prerequisite. The native guest send
+trace places the missing `2789` before any tunnel or host admission
+decision. The guest-side cause is still unknown. No loading message
+was synthesized. A bounded host tunnel ring is now installed to
+identify host ingress and egress independently of the guest ring.
+[Timeline and per-opcode counts](port-evidence/r9/loading-timeline.json).
+[Analysis](port-evidence/r9/step1-loading-analysis.md).
+
+Step 2 checks the ServerNet pointer before using its `+0x18`
+session field, avoiding the repeated handled startup fault.
+Step 3 documented a delivered-actor guard model and left it
+disabled. Actor `0xB01002C7` has not been proven to belong to
+the host's 2005 delivery set. The existing remote-primary guards
+retain their exact identity and null-read conditions.
+[Containment review](port-evidence/r9/step3-containment-review.md).
+
+**Live question.** After a successful shared Enter, does the host
+emit `2268`, `2941` or `2891`, and which responses reach the
+guest's native receive before the guest either gains control or
+stops? In particular, does the guest send `2789` after `2268`?
+The expected observation is two windowed instances, host left
+and guest right, loading the same save, with native staging and
+shared Enter returning zero. If both reach control, the user
+records both views with Win+Alt+R and checks mutual walking and
+turning, then the R7 removal, reconnect and host reload criteria.
+
+**Setup and limit.** Complete full suite and smoke. Re-hash the
+installed 3663 executable, take fresh external hashed save
+backups and verify them before either launch and after the
+session. Use the verified desktop runner, exact build and save
+isolation guards, and a shared fourteen-minute watchdog from host
+launch. Verify the two process and window identities and ask
+the user to confirm both usable views side by side before guest
+Load. The user chooses the same identifiable slot once in each.
+
+**Stop condition.** On any crash, freeze, activation error,
+wrong executable hash, failed save verification, missing visible
+pair, or inadequate deadline reserve, stop the trial, collect
+both rings/logs, close the remaining copy and restore the test
+installation. Do not relaunch after a crash. L4 remains gated
+on the user's confirmation of L3 acceptance.
+
+---
+
 # R8 L3 attempt 3 result — guest fault on a class-B actor
 
 The first guarded host startup in this round ended normally with

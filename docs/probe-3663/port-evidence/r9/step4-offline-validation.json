@@ -1,0 +1,33 @@
+{
+  "round": 9,
+  "step": 4,
+  "recorded_utc": "2026-11-18T23:15:19.902195+00:00",
+  "suite": "120/120 passed",
+  "suite_seconds": 113.34,
+  "smoke": "78 remote states, zero rejects, tier mask 0xF, clean unload",
+  "game_executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "asi_sha256": "CE89CC7F40013B7369C1B44456709ED20F9A036BD51D131DEF3DB18720982BB6",
+  "controlled_files_absent": true,
+  "game_processes": [],
+  "live": "pending user presence; no R9 game launch",
+  "budgets": {
+    "startup_used": 0,
+    "startup_limit": 5,
+    "join_used": 0,
+    "join_limit": 3
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-step4-suite.txt",
+      "sha256": "4BBADB8634510B84CB2D1FCB88DE54F009CFE910634C94C89BB003A7A9A94527"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-step4-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-step4-smoke-run\\e2e\\cdmp.log",
+      "sha256": "AA86AFACFC216EF2CDB02E3D8CA6F93751DBEC838AA8CF77D36F49D3AABF190D"
+    }
+  ]
+}
