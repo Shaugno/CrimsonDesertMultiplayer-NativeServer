@@ -1,0 +1,74 @@
+{
+  "round": 8,
+  "step": 3,
+  "attempt_id": "R8-L3-20261118-A3",
+  "recorded_utc": "2026-11-18T23:00:35.924199+00:00",
+  "build_commit": "6d47b99",
+  "installed_game_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "host_pid": 55068,
+  "guest_pid": 33240,
+  "host_exit_code": 0,
+  "guest_exit_code": "0xC0000005",
+  "join": {
+    "native_guest_login": true,
+    "staged_enter_result": 0,
+    "shared_enter_result": 0,
+    "owner_alias": "aliased",
+    "guest_primary": "0xA0100178"
+  },
+  "crash": {
+    "sample_site": "CrimsonDesert.exe+0x258C8FD",
+    "first_chance_site": "0x13FFF0032",
+    "code": "0xC0000005",
+    "accessed_address": "0x28",
+    "rdx": "0x0",
+    "sample_actor": "0xB01002C7",
+    "class": "B",
+    "identity": "other",
+    "host_primary": "0xA0100001",
+    "guest_primary": "0xA0100178",
+    "guard_skips": 0,
+    "minidump": "not written; game terminated before chained unhandled filter"
+  },
+  "user_observation": "Both usable windows side by side before guest Load; no other character seen; host closed normally",
+  "save_verification": {
+    "manifest_unchanged": true,
+    "backups_verified": true,
+    "installation_restored": true
+  },
+  "acceptance": {
+    "L3": false,
+    "L4": "not started; user L3-pass gate"
+  },
+  "budgets": {
+    "startup_used": 0,
+    "startup_limit": 5,
+    "join_used": 3,
+    "join_limit": 3
+  },
+  "session_root": "C:\\Users\\shaug\\AppData\\Local\\CDMP-R8-L3-20261118-A3B",
+  "evidence": [
+    {
+      "name": "cdmp.host.log",
+      "sha256": "0B2FE488473B10269EEB7131814A16CD701378B26E4927804E0626E66D3C4C9F"
+    },
+    {
+      "name": "cdmp.guest.log",
+      "sha256": "6DA1CCE0C005BF098255F49C7A5D124EA918B999B635A3209B82F838EC1D4B70"
+    },
+    {
+      "name": "host-crash-55068.log",
+      "sha256": "C3964AED5D7D303EEFA3CBB5C287E87DB08DE6B2BD4CE4BCEA3CBEA59495E9E1"
+    },
+    {
+      "name": "guest-crash-33240.log",
+      "sha256": "1082184B53B3ECD65D0660C767BE133FDC292A8CDB7C4B87245DBDA63BE51E72"
+    },
+    {
+      "name": "guest-packets-33240.bin",
+      "sha256": "D66C479DB41450CD752A42E78A8467B1ECADA088A720A04A3C82E4354C0D59DE"
+    }
+  ],
+  "finish_sha256": "1555B4DE83DCB067DF4905582209EDBA7C4284E35D1D05A957E6CBDD89CEEB0D",
+  "verification_sha256": "CABB08C6F6A8338F1D724EB9F9A19B352C3B84AA0EA7300EC8488175A4AB8C1B"
+}

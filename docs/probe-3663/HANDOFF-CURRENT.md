@@ -1,3 +1,46 @@
+# R8 L3 attempt 3 result — guest fault on a class-B actor
+
+The first guarded host startup in this round ended normally with
+code 0 before a guest launch. Its repeated, handled mod read at
+`cdmp.asi+0x3D0DA0` exposed a limit in the new first-chance
+collector. The deduplicated, module-separated collector then passed
+120/120 tests and synthetic smoke and was pushed as `6d47b99`.
+Fresh external backups and an exact 3663 hash were verified before
+the paired launch.
+
+For the paired launch, the user confirmed both usable windows and
+the window report verified HOST left and GUEST right. The host reached
+native world readiness. The guest's native login and isolated title
+slots succeeded. The staging Enter and shared Enter both returned
+zero. The shared guest primary key was `0xA0100178`, and the host's
+2364 owner alias was recorded.
+
+The guest exited with `0xC0000005` at 5:58:47 PM Eastern, about
+14 seconds after shared Enter. Its crash log sampled the exact
+`CrimsonDesert.exe+0x258C8FD` null-playback read for actor
+`0xB01002C7`, class B, identity `other`. The advertised host
+primary was `0xA0100001`; the local guest primary was
+`0xA0100178`. The first-chance exception appeared in the
+midpoint trampoline at `0x13FFF0032` with accessed address
+`0x28` and `RDX=0`. Its stack could not be unwound from that
+trampoline. The guard made zero skips. The game ended the process
+without invoking the chained unhandled filter, so no minidump was
+written. The exact relationship between the sampled class-B actor
+and the terminating exception needs further offline confirmation.
+
+The host exited normally with code 0 after the user's menu Quit.
+The user saw no other character. The real save manifest and both
+backups verified, the guest save tree stayed isolated, the controlled
+installation was restored, and the installed exe still matched the
+exact 3663 hash. L3 movement, removal, reconnect and host reload
+were not reached. This was the third and final R8 join attempt.
+R8 usage is **startup 0/5, join 3/3**. No further R8 game launch
+is authorized. L4 remains gated on L3 acceptance.
+[Attempt 3 receipt](port-evidence/r8/step3-host-capture-result.json).
+[Attempt ledger](port-evidence/r8/attempts.json).
+
+---
+
 # R8 host startup capture — no join attempt used
 
 The first host launch for attempt 3 reached the world and exited

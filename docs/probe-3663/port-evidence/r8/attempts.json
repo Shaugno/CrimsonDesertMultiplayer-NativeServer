@@ -25,6 +25,17 @@
       "evidence": "step3-character-guard-result.json",
       "host_log_sha256": "9D5F091E48143B9BF3CD3F895CD49B40D2124029060C0F0F3DE7DD237D760F2A",
       "guest_log_sha256": "2E44EFA3B4BADE81885BFB18A01FBEB4D43A5F84DC20B22B581B89D7B3F00094"
+    },
+    {
+      "attempt_id": "R8-L3-20261118-A3",
+      "category": "join",
+      "result": "staged/shared Enter and owner alias passed; guest AV after class-B null playback sample",
+      "native_guest_login": true,
+      "host_pid": 55068,
+      "guest_pid": 33240,
+      "evidence": "step3-host-capture-result.json",
+      "host_log_sha256": "0B2FE488473B10269EEB7131814A16CD701378B26E4927804E0626E66D3C4C9F",
+      "guest_log_sha256": "6DA1CCE0C005BF098255F49C7A5D124EA918B999B635A3209B82F838EC1D4B70"
     }
   ],
   "unused_host_plans": [
@@ -37,6 +48,11 @@
       "session": "R8-L3-OWNER-20261118-B",
       "reason": "expired with no game launch or launcher error receipt",
       "finish_sha256": "CCF7A32B05403180DA25B5D78199374EE3A03FC36E6E87EC3EFCD4569FA10926"
+    },
+    {
+      "session": "CDMP-R8-L3-20261118-A3",
+      "reason": "host-only capture reached world then normal quit before guest launch; no join attempt used",
+      "finish_sha256": "C2AAF0BFB46E1C477C6C37EB6574541F68A283647DBF20F19E3E1AE3CA905A2E"
     }
   ]
 }
