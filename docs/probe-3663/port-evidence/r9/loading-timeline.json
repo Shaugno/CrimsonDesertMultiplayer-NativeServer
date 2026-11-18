@@ -1,0 +1,432 @@
+{
+  "source": "R8 bounded guest packet rings, host shared-Enter logs; 2976 reference docs/research/data/login_e3lc00_112627.troc",
+  "trials": [
+    {
+      "attempt": "A1",
+      "shared_enter_utc": "2026-11-18T21:58:39.553000+00:00",
+      "guest_requests_after_shared": [
+        {
+          "opcode": 2123,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T21:58:39.602901+00:00",
+          "last_utc": "2026-11-18T21:58:39.602901+00:00"
+        },
+        {
+          "opcode": 2990,
+          "name": "unmapped",
+          "count": 36,
+          "first_utc": "2026-11-18T21:58:40.703485+00:00",
+          "last_utc": "2026-11-18T21:59:42.537549+00:00"
+        },
+        {
+          "opcode": 3000,
+          "name": "unmapped",
+          "count": 19,
+          "first_utc": "2026-11-18T21:58:45.210405+00:00",
+          "last_utc": "2026-11-18T21:59:41.937646+00:00"
+        },
+        {
+          "opcode": 2723,
+          "name": "MoveFieldCompleteReq",
+          "count": 1,
+          "first_utc": "2026-11-18T21:58:47.426784+00:00",
+          "last_utc": "2026-11-18T21:58:47.426784+00:00"
+        },
+        {
+          "opcode": 2876,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T21:59:39.237655+00:00",
+          "last_utc": "2026-11-18T21:59:39.237655+00:00"
+        },
+        {
+          "opcode": 3140,
+          "name": "unmapped",
+          "count": 211,
+          "first_utc": "2026-11-18T21:59:39.760200+00:00",
+          "last_utc": "2026-11-18T21:59:42.535722+00:00"
+        },
+        {
+          "opcode": 2720,
+          "name": "unmapped",
+          "count": 105,
+          "first_utc": "2026-11-18T21:59:39.832981+00:00",
+          "last_utc": "2026-11-18T21:59:39.938044+00:00"
+        },
+        {
+          "opcode": 2948,
+          "name": "unmapped",
+          "count": 8,
+          "first_utc": "2026-11-18T21:59:39.931664+00:00",
+          "last_utc": "2026-11-18T21:59:39.932946+00:00"
+        },
+        {
+          "opcode": 2772,
+          "name": "unmapped",
+          "count": 26,
+          "first_utc": "2026-11-18T21:59:39.933170+00:00",
+          "last_utc": "2026-11-18T21:59:40.204925+00:00"
+        },
+        {
+          "opcode": 2445,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T21:59:39.936179+00:00",
+          "last_utc": "2026-11-18T21:59:39.936179+00:00"
+        },
+        {
+          "opcode": 2431,
+          "name": "unmapped",
+          "count": 6,
+          "first_utc": "2026-11-18T21:59:40.732268+00:00",
+          "last_utc": "2026-11-18T21:59:42.537330+00:00"
+        },
+        {
+          "opcode": 2766,
+          "name": "unmapped",
+          "count": 13,
+          "first_utc": "2026-11-18T21:59:42.298937+00:00",
+          "last_utc": "2026-11-18T21:59:42.509887+00:00"
+        },
+        {
+          "opcode": 2346,
+          "name": "unmapped",
+          "count": 4,
+          "first_utc": "2026-11-18T21:59:42.313762+00:00",
+          "last_utc": "2026-11-18T21:59:42.508428+00:00"
+        },
+        {
+          "opcode": 3007,
+          "name": "unmapped",
+          "count": 2,
+          "first_utc": "2026-11-18T21:59:42.330268+00:00",
+          "last_utc": "2026-11-18T21:59:42.509411+00:00"
+        },
+        {
+          "opcode": 2365,
+          "name": "unmapped",
+          "count": 25,
+          "first_utc": "2026-11-18T21:59:42.457269+00:00",
+          "last_utc": "2026-11-18T21:59:42.536623+00:00"
+        },
+        {
+          "opcode": 2918,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T21:59:42.507926+00:00",
+          "last_utc": "2026-11-18T21:59:42.507926+00:00"
+        }
+      ],
+      "key_responses_to_guest": [
+        {
+          "opcode": 2364,
+          "name": "MoveFieldAck",
+          "count": 1,
+          "first_utc": "2026-11-18T21:58:39.586155+00:00",
+          "last_utc": "2026-11-18T21:58:39.586155+00:00",
+          "returned": 1
+        },
+        {
+          "opcode": 2268,
+          "name": "MoveFieldCompleteAck",
+          "count": 1,
+          "first_utc": "2026-11-18T21:59:39.704903+00:00",
+          "last_utc": "2026-11-18T21:59:39.704903+00:00",
+          "returned": 1
+        },
+        {
+          "opcode": 2005,
+          "name": "ActorLoadDataAck",
+          "count": 78,
+          "first_utc": "2026-11-18T21:59:39.217009+00:00",
+          "last_utc": "2026-11-18T21:59:39.721653+00:00",
+          "returned": 78
+        },
+        {
+          "opcode": 2941,
+          "name": "PlayAllPreLoadSequencerAck",
+          "count": 0,
+          "first_utc": null,
+          "last_utc": null,
+          "returned": 0
+        },
+        {
+          "opcode": 2891,
+          "name": "LoadingCompleteAck",
+          "count": 0,
+          "first_utc": null,
+          "last_utc": null,
+          "returned": 0
+        }
+      ],
+      "packet_rows_after_shared": 7218
+    },
+    {
+      "attempt": "A2",
+      "shared_enter_utc": "2026-11-18T22:26:22.604000+00:00",
+      "guest_requests_after_shared": [
+        {
+          "opcode": 2123,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:26:27.921647+00:00",
+          "last_utc": "2026-11-18T22:26:27.921647+00:00"
+        },
+        {
+          "opcode": 3000,
+          "name": "unmapped",
+          "count": 29,
+          "first_utc": "2026-11-18T22:26:28.499717+00:00",
+          "last_utc": "2026-11-18T22:27:52.602647+00:00"
+        },
+        {
+          "opcode": 2672,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:26:31.100129+00:00",
+          "last_utc": "2026-11-18T22:26:31.100129+00:00"
+        },
+        {
+          "opcode": 2990,
+          "name": "unmapped",
+          "count": 42,
+          "first_utc": "2026-11-18T22:26:31.106394+00:00",
+          "last_utc": "2026-11-18T22:27:53.098626+00:00"
+        },
+        {
+          "opcode": 2723,
+          "name": "MoveFieldCompleteReq",
+          "count": 1,
+          "first_utc": "2026-11-18T22:26:31.381722+00:00",
+          "last_utc": "2026-11-18T22:26:31.381722+00:00"
+        }
+      ],
+      "key_responses_to_guest": [
+        {
+          "opcode": 2364,
+          "name": "MoveFieldAck",
+          "count": 1,
+          "first_utc": "2026-11-18T22:26:22.641865+00:00",
+          "last_utc": "2026-11-18T22:26:22.641865+00:00",
+          "returned": 1
+        },
+        {
+          "opcode": 2268,
+          "name": "MoveFieldCompleteAck",
+          "count": 0,
+          "first_utc": null,
+          "last_utc": null,
+          "returned": 0
+        },
+        {
+          "opcode": 2005,
+          "name": "ActorLoadDataAck",
+          "count": 1,
+          "first_utc": "2026-11-18T22:26:31.476888+00:00",
+          "last_utc": "2026-11-18T22:26:31.476888+00:00",
+          "returned": 1
+        },
+        {
+          "opcode": 2941,
+          "name": "PlayAllPreLoadSequencerAck",
+          "count": 0,
+          "first_utc": null,
+          "last_utc": null,
+          "returned": 0
+        },
+        {
+          "opcode": 2891,
+          "name": "LoadingCompleteAck",
+          "count": 0,
+          "first_utc": null,
+          "last_utc": null,
+          "returned": 0
+        }
+      ],
+      "packet_rows_after_shared": 121
+    },
+    {
+      "attempt": "A3",
+      "shared_enter_utc": "2026-11-18T22:58:33.116000+00:00",
+      "guest_requests_after_shared": [
+        {
+          "opcode": 2123,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:38.538249+00:00",
+          "last_utc": "2026-11-18T22:58:38.538249+00:00"
+        },
+        {
+          "opcode": 3000,
+          "name": "unmapped",
+          "count": 3,
+          "first_utc": "2026-11-18T22:58:38.559543+00:00",
+          "last_utc": "2026-11-18T22:58:44.929606+00:00"
+        },
+        {
+          "opcode": 2723,
+          "name": "MoveFieldCompleteReq",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:41.609035+00:00",
+          "last_utc": "2026-11-18T22:58:41.609035+00:00"
+        },
+        {
+          "opcode": 2672,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:41.721622+00:00",
+          "last_utc": "2026-11-18T22:58:41.721622+00:00"
+        },
+        {
+          "opcode": 2990,
+          "name": "unmapped",
+          "count": 9,
+          "first_utc": "2026-11-18T22:58:41.725005+00:00",
+          "last_utc": "2026-11-18T22:58:45.719125+00:00"
+        },
+        {
+          "opcode": 2876,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:41.728011+00:00",
+          "last_utc": "2026-11-18T22:58:41.728011+00:00"
+        },
+        {
+          "opcode": 3140,
+          "name": "unmapped",
+          "count": 308,
+          "first_utc": "2026-11-18T22:58:42.556940+00:00",
+          "last_utc": "2026-11-18T22:58:45.792505+00:00"
+        },
+        {
+          "opcode": 2720,
+          "name": "unmapped",
+          "count": 105,
+          "first_utc": "2026-11-18T22:58:42.569783+00:00",
+          "last_utc": "2026-11-18T22:58:42.877010+00:00"
+        },
+        {
+          "opcode": 2948,
+          "name": "unmapped",
+          "count": 8,
+          "first_utc": "2026-11-18T22:58:42.845675+00:00",
+          "last_utc": "2026-11-18T22:58:42.863289+00:00"
+        },
+        {
+          "opcode": 2445,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:42.865161+00:00",
+          "last_utc": "2026-11-18T22:58:42.865161+00:00"
+        },
+        {
+          "opcode": 2431,
+          "name": "unmapped",
+          "count": 8,
+          "first_utc": "2026-11-18T22:58:43.708105+00:00",
+          "last_utc": "2026-11-18T22:58:45.716452+00:00"
+        },
+        {
+          "opcode": 2766,
+          "name": "unmapped",
+          "count": 14,
+          "first_utc": "2026-11-18T22:58:44.964044+00:00",
+          "last_utc": "2026-11-18T22:58:45.654108+00:00"
+        },
+        {
+          "opcode": 2346,
+          "name": "unmapped",
+          "count": 4,
+          "first_utc": "2026-11-18T22:58:44.966061+00:00",
+          "last_utc": "2026-11-18T22:58:45.604327+00:00"
+        },
+        {
+          "opcode": 3007,
+          "name": "unmapped",
+          "count": 2,
+          "first_utc": "2026-11-18T22:58:44.976261+00:00",
+          "last_utc": "2026-11-18T22:58:45.611004+00:00"
+        },
+        {
+          "opcode": 2365,
+          "name": "unmapped",
+          "count": 32,
+          "first_utc": "2026-11-18T22:58:44.986119+00:00",
+          "last_utc": "2026-11-18T22:58:45.715144+00:00"
+        },
+        {
+          "opcode": 2918,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:45.567133+00:00",
+          "last_utc": "2026-11-18T22:58:45.567133+00:00"
+        },
+        {
+          "opcode": 2460,
+          "name": "unmapped",
+          "count": 3,
+          "first_utc": "2026-11-18T22:58:45.655422+00:00",
+          "last_utc": "2026-11-18T22:58:45.717907+00:00"
+        },
+        {
+          "opcode": 2662,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:45.711803+00:00",
+          "last_utc": "2026-11-18T22:58:45.711803+00:00"
+        },
+        {
+          "opcode": 2754,
+          "name": "unmapped",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:45.720249+00:00",
+          "last_utc": "2026-11-18T22:58:45.720249+00:00"
+        }
+      ],
+      "key_responses_to_guest": [
+        {
+          "opcode": 2364,
+          "name": "MoveFieldAck",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:33.155569+00:00",
+          "last_utc": "2026-11-18T22:58:33.155569+00:00",
+          "returned": 1
+        },
+        {
+          "opcode": 2268,
+          "name": "MoveFieldCompleteAck",
+          "count": 1,
+          "first_utc": "2026-11-18T22:58:42.537730+00:00",
+          "last_utc": "2026-11-18T22:58:42.537730+00:00",
+          "returned": 1
+        },
+        {
+          "opcode": 2005,
+          "name": "ActorLoadDataAck",
+          "count": 77,
+          "first_utc": "2026-11-18T22:58:41.720995+00:00",
+          "last_utc": "2026-11-18T22:58:42.897428+00:00",
+          "returned": 77
+        },
+        {
+          "opcode": 2941,
+          "name": "PlayAllPreLoadSequencerAck",
+          "count": 0,
+          "first_utc": null,
+          "last_utc": null,
+          "returned": 0
+        },
+        {
+          "opcode": 2891,
+          "name": "LoadingCompleteAck",
+          "count": 0,
+          "first_utc": null,
+          "last_utc": null,
+          "returned": 0
+        }
+      ],
+      "packet_rows_after_shared": 11746
+    }
+  ]
+}

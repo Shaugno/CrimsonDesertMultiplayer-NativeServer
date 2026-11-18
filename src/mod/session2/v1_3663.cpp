@@ -179,6 +179,9 @@ void Bridge::receive(std::vector<uint8_t>&& packet,uint32_t now){
         }
         guest3663::deliver(std::move(packet));return;
     }
+    const auto received=crash3663::packet(crash3663::Direction::ToHost,view->opcode,
+                                          static_cast<uint16_t>(packet.size()));
+    crash3663::returned(received);
     if(blocked_guest_control_3663(view->opcode)){++refused_;return;}
     if(pending_.size()>=65536 || packet.size()>(32u<<20)-pending_bytes_){failed_=true;return;}
     if(pending_.empty())first_pending_=now;
@@ -232,7 +235,13 @@ void Bridge::tick(uint32_t now){
             if(disposition==inj::Disposition::Done)++queued_;else ++refused_;
             pending_bytes_-=pending_.front().size();pending_.pop_front();
         }
-        for(auto& packet:server_take_outgoing())if(!link_.push(packet)){failed_=true;break;}
+        for(auto& packet:server_take_outgoing()){
+            const auto view=parse_tunnel_packet(packet,troc::Dir::ToGuestClient,kTunnelLayout3663);
+            const auto sent=view?crash3663::packet(crash3663::Direction::ToClient,view->opcode,
+                                                    static_cast<uint16_t>(packet.size())):0;
+            if(!link_.push(packet)){failed_=true;break;}
+            crash3663::returned(sent);
+        }
     }else{
         if(last_ready_ && now-last_ready_>5000)guest3663::set_host_ready(false);
         for(auto& packet:guest3663::take_outgoing())if(!link_.push(packet)){failed_=true;break;}

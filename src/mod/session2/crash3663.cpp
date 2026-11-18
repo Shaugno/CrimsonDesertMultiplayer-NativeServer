@@ -295,14 +295,13 @@ bool install(const wchar_t* directory, role::Role process_role) noexcept {
         dump_path = (root / (stem + L".dmp")).wstring();
         crash_text = static_cast<char*>(create_mapping((root / (stem + L".log")).wstring(), kTextBytes));
         if (!crash_text) return false;
-        if (guest) {
-            trace = static_cast<PacketTrace*>(create_mapping((root / (L"guest-packets" + suffix + L".bin")).wstring(),
-                                                             sizeof(PacketTrace)));
-            if (!trace) return false;
-            std::memcpy(trace->magic, "CDMPPKT1", sizeof trace->magic);
-            trace->capacity = kPackets;
-            trace->pid = pid;
-        }
+        const auto packet_stem = guest ? L"guest-packets" : L"host-packets";
+        trace = static_cast<PacketTrace*>(create_mapping((root / (packet_stem + suffix + L".bin")).wstring(),
+                                                         sizeof(PacketTrace)));
+        if (!trace) return false;
+        std::memcpy(trace->magic, "CDMPPKT1", sizeof trace->magic);
+        trace->capacity = kPackets;
+        trace->pid = pid;
         snapshot_modules();
         if (!AddVectoredExceptionHandler(1, vectored)) return false;
         prepare_dump();
@@ -343,8 +342,9 @@ void arm() noexcept {
 
 uint32_t packet(Direction direction, uint16_t opcode, uint16_t bytes) noexcept {
     if (!trace || !armed.load(std::memory_order_acquire)) return 0;
-    // The validated native NetworkThread is the only writer. A receive ticket
-    // is published before the call so an exception can leave a pending row.
+    // Each process's validated network loop is the only writer. The guest
+    // publishes a receive ticket before native dispatch; the host records
+    // tunnel ingress and egress around its queue operations.
     const uint32_t index = trace->count;
     if (index == kPackets) {
         trace->truncated = 1;

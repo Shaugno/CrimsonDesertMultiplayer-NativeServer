@@ -53,7 +53,9 @@ int wmain(int argc, wchar_t** argv) {
         capture::note_null_playback(0xA0100001,0,0xA0100001,0xA01001BE,1,"host");
         capture::note_playback_skip(0xA0100001);
     } else {
-        if (packet != 0) return 5;
+        if (!packet) return 5;
+        capture::returned(packet);
+        capture::returned(capture::packet(capture::Direction::ToClient, 2268, 15));
         capture::note_null_playback(0xA01001BE,0,0xA0100001,0xA01001BE,1,"guest");
         capture::note_playback_skip(0xA01001BE);
     }

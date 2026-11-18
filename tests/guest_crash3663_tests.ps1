@@ -44,12 +44,19 @@ function Test-CrashCapture([string]$role) {
         $hasException = [BitConverter]::ToInt32($dump,$start+8) -eq -1073741819
     }
     if (!$hasException) { throw 'Missing access violation exception stream' }
-    $trace = Join-Path $evidence "guest-packets-$($process.Id).bin"
+    $trace = Join-Path $evidence "$role-packets-$($process.Id).bin"
+    $packets = [IO.File]::ReadAllBytes($trace)
     if ($role -eq 'host') {
-        if (Test-Path -LiteralPath $trace) { throw 'Host installed a guest packet trace' }
+        if ([Text.Encoding]::ASCII.GetString($packets,0,8) -ne 'CDMPPKT1' -or
+            [BitConverter]::ToUInt32($packets,12) -ne 3 -or
+            [BitConverter]::ToUInt16($packets,32) -ne 3081 -or
+            [BitConverter]::ToUInt16($packets,48) -ne 2268 -or
+            [BitConverter]::ToUInt16($packets,64) -ne 2005 -or
+            $packets[24+13] -ne 1 -or $packets[40+13] -ne 1 -or $packets[56+13] -ne 0) {
+            throw 'Invalid bounded host tunnel trace'
+        }
         return
     }
-    $packets = [IO.File]::ReadAllBytes($trace)
     if ([Text.Encoding]::ASCII.GetString($packets,0,8) -ne 'CDMPPKT1' -or
         [BitConverter]::ToUInt32($packets,12) -ne 3) { throw 'Invalid packet trace' }
     $expected = @(@(3081,2,1),@(2364,1,1),@(2005,1,0))
@@ -64,7 +71,7 @@ function Test-CrashCapture([string]$role) {
 try {
     Test-CrashCapture 'host'
     Test-CrashCapture 'guest'
-    Write-Output 'Host and guest crash fixtures PASS: armed-only first chance, native exit, prior filter, stack, minidump and guest pending packet'
+    Write-Output 'Host and guest crash fixtures PASS: armed-only first chance, native exit, prior filter, stack, minidump and both packet rings'
 } finally {
     Remove-Item -LiteralPath $root -Recurse -Force
 }
