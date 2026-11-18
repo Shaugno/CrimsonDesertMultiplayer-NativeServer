@@ -1,3 +1,60 @@
+# R9 Step 5 package — live diagnostic pending
+
+The R9 plan is stored on `gpt/3663-port`. Offline Steps 1–3 are
+complete and pushed. Step 4's full suite passed 120/120, and
+synthetic smoke reported 78 remote states, zero rejects and a
+clean unload. The installed executable still hashes to exact
+3663. No R9 game process was launched.
+[R9 plan](../GPT-3663-PORT-PLAN-R9.md).
+[Offline validation](port-evidence/r9/step4-offline-validation.json).
+
+The side-by-side R8 timeline shows the guest sent the second
+MoveFieldCompleteReq `2723` in all three joins. A1 and A3
+received its `2268` acknowledgement and actor 2005 bursts
+before crashing. The guest never sent the second LoadingCompleteReq
+`2789`, so there could be no second `2891` reply. The 2976
+second-load capture places `2789` after `2268`. The failure
+to emit `2789` occurs before v1 admission or the tunnel. No
+second-cycle `2372` or `2941` appeared, but the 2976
+second-load reference does not require either before `2789`.
+The client's reason for withholding `2789` is **unproven**.
+[Timeline and complete request counts](port-evidence/r9/loading-timeline.json).
+[Analysis and Samuel comparison](port-evidence/r9/step1-loading-analysis.md).
+
+Step 1 added a bounded host tunnel opcode ring so the next run
+can show host ingress and egress alongside the guest's native
+send/receive ring. It does not synthesize a loading message.
+Step 2 checks the ServerNet pointer before reading its session
+at `+0x18`, which removes the repeated handled startup fault
+from that lookup. Step 3 documented a possible delivered-actor
+guard and left it disabled because class-B actor provenance
+and the loading cause have not been established.
+[Containment review](port-evidence/r9/step3-containment-review.md).
+
+**Live outcome and blocker.** The user was unavailable for the
+planned L3 sitting. There is no R9 screen recording or window
+observation. L3 acceptance and L4 remain unverified. R9 usage is
+**startup 0/5, join 0/3**. The attempt ledger has no launches.
+[Attempt ledger](port-evidence/r9/attempts.json).
+
+**Resume Step 4.** With the user present, verify the installed
+3663 hash, take fresh hashed save backups outside OneDrive,
+verify the manifest, and arm one shared fourteen-minute
+watchdog. Launch the guarded HOST, have the user Load an
+identifiable save and stand still, then launch the isolated
+GUEST. Verify both process/window identities and obtain the
+user's confirmation that HOST left and GUEST right are usable
+side by side. Ask for the same guest save once. If it reaches
+control, the user records both views with Win+Alt+R and checks
+mutual movement, removal, reconnect and host reload. On a
+crash or freeze, collect both packet rings and crash logs,
+close the other process, verify save manifests and restore
+the test installation. Record the actual result and update
+this package. L4 requires an accepted L3 and the user's
+earlier explicit L3-pass signal.
+
+---
+
 # R9 Step 4 — diagnostic L3 handoff
 
 Offline validation completed with 120/120 tests, 78 synthetic
