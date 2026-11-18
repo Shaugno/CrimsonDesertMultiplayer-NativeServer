@@ -5,5 +5,20 @@
   "join_limit": 3,
   "not_before_utc": "2026-11-18T15:00:00Z",
   "accounting": "An attempt ending before native guest login counts as startup, not join. Record actual PID/birth receipts, own-PID native login evidence, outcome and log hashes. Old round ledgers remain unchanged.",
-  "attempts": []
+  "attempts": [
+    {
+      "attempt_id": "R7-S2-20261118-1016-ready",
+      "category": "startup",
+      "result": "blocked before title",
+      "game_pid": 51912,
+      "game_start_filetime": "134394887940495207",
+      "started_utc": "2026-11-18T15:19:54.0582630Z",
+      "ended_utc": "2026-11-18T15:21:53.1924321Z",
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\evidence\\cdmp.guest.log",
+        "sha256": "8B0B19355DD28C2B2F5CDEDFF2F6CB0AE9AC32363106AC3FB61B07CF1595C037"
+      },
+      "native_guest_login": false
+    }
+  ]
 }

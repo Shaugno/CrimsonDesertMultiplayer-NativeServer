@@ -1,0 +1,87 @@
+{
+  "round": 7,
+  "step": 2,
+  "attempt_id": "R7-S2-20261118-1016-ready",
+  "category": "startup",
+  "result": "blocked before title",
+  "source_commit": "1d25995050518bc63afb4e3d408414135f2a6b09",
+  "game_executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "game_pid": 51912,
+  "game_start_filetime": "134394887940495207",
+  "started_utc": "2026-11-18T15:19:54.0582630Z",
+  "ended_utc": "2026-11-18T15:21:53.1924321Z",
+  "deadline_utc": "2026-11-18T15:29:54.0495207Z",
+  "exit_code_hex": "FFFFFFFF",
+  "exit_kind": "dialog closed using its title-bar Close button",
+  "dialog": {
+    "title": "Crimson Desert",
+    "text": "The server is not reachable. Check your Internet connection and click \u201cRetry\u201d. In case the problem persists, click \u201cNext\u201d to open the support website in the default browser.",
+    "code_displayed": null,
+    "retry_selected": false,
+    "next_selected": false,
+    "observation": "Computer Use screenshot and accessibility text"
+  },
+  "activation_status": "Startup was blocked by a server-reachability dialog. Exact activation code and cause are unconfirmed.",
+  "guest_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\evidence\\cdmp.guest.log",
+    "sha256": "8B0B19355DD28C2B2F5CDEDFF2F6CB0AE9AC32363106AC3FB61B07CF1595C037"
+  },
+  "nt_isolation_verified": true,
+  "normal_profile_inherited": true,
+  "native_guest_login": false,
+  "title_reached": false,
+  "networking_enabled": false,
+  "save_files": 23,
+  "save_manifest_sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8",
+  "real_save_manifest_unchanged": true,
+  "backup_manifests_verified": true,
+  "temporary_installation_restored": true,
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\launch-guest.json",
+      "sha256": "814B250B5EA31ACAB67B7F388E7684FBC0FDD023DED094B8917B8D750C996752"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\watchdog-guest.json",
+      "sha256": "9140544C75C2CE450BBD67DA5AC5E85F141F07057BFC45E2D0697D58CFDDCB15"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\window-guest.json",
+      "sha256": "B928EB7177365B92734888F7580581D26B203572B0D9A9966CA659BCE1E9C1F0"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\session.json",
+      "sha256": "01EFD6324F49C98339CC31F8F461E1BBC5B1888FEE6B81144F8CA1D3BEEF0135"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\save-manifest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\save-after.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\verification-before.json",
+      "sha256": "D9C822B08E9365B17056D74B1D0C58443849CC90D08CBF84D65DB1E4266E51D1"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\verification.json",
+      "sha256": "C852F1B39025480163EC96ECBA38961E18B0EA7D8DDE0F4B2DC33691CF232D5F"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\deployment.json",
+      "sha256": "CC788A4E030EE55A2BCB523423007D4029907BA156053A2192220B6A011A2732"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\finish.json",
+      "sha256": "4B0CF01B5B00A6492AB323F025440C7FA882EDAA3288F90F835AFDCF12A55DD3"
+    }
+  ],
+  "limits": [
+    "The copied host log predates this guest-only run and is excluded from runtime evidence.",
+    "The first preflight stopped at a missing ignored loader. No game process was created in that preflight.",
+    "No character selection, native join, visual multiplayer check, reconnect or host reload was attempted.",
+    "No activation file was accessed for this diagnosis. The game executable hash matched before and after the run."
+  ]
+}

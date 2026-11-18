@@ -1,3 +1,49 @@
+# R7 Step 2 — guest-only startup test brief (2026-11-18 Eastern)
+
+**Question.** Can one 3663 guest reach title and exit normally with the R7
+save-directory redirect and its normal Windows profile?
+
+**Expected observation.** Title appears without an activation error. The
+guest log for this process confirms NT save isolation. The user chooses Quit
+to Desktop from the menu without loading a character. The real save tree and
+both frozen backups match the prelaunch manifest after exit.
+
+**Time limit and stop condition.** Ten-minute process watchdog. Stop at title
+and quit promptly. On error 88500006 or any activation error, exit the dialog,
+stop all live work for today, and package the blocker. On a crash or hang,
+stop and retain the logs before offline diagnosis and the full suite. A
+save-manifest mismatch or missing isolation evidence blocks Step 3.
+
+The time gate passed at 10:00 AM Eastern. The installed executable was
+rehash-verified as 3663
+(8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8).
+The launch uses the validated Step 1 binaries and all 680 sealed source
+files. The fresh, verified backups are outside OneDrive. Their manifest
+SHA-256 is B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8. The prelaunch attempt ledger is startup
+0/5 and join 0/3.
+
+### Result
+
+One guest launched at 10:19:54 AM Eastern (PID 51912) and
+verified NT save isolation in its own log. A startup dialog reported
+“The server is not reachable” with Retry and Next. It displayed no
+numeric code and the guest never reached title. Computer Use closed the
+dialog at 10:21:53 AM. The pinned process exited before its watchdog
+with code `FFFFFFFF`. The reason for the server error is unconfirmed.
+
+The original 23 save files and both frozen backups matched the
+prelaunch manifest. The six temporary installation files were restored
+to their prior absent state and the executable hash still matched 3663.
+The guest log SHA-256 is `8B0B19355DD28C2B2F5CDEDFF2F6CB0AE9AC32363106AC3FB61B07CF1595C037`.
+See `port-evidence/r7/step2-result.json` for the receipts and hashes.
+
+Step 2 is blocked. Startup budget **1/5** and join budget **0/3**.
+The earlier setup stopped at a missing loader before any launch. The
+loader was retrieved from the pinned, checksum-verified release. The
+guest was launched only once. No retry or L3 launch was made.
+
+---
+
 # R7 Step 1 — offline checkpoint (2026-11-17 Eastern)
 
 User-approved R7 supersedes earlier launch/profile rules. Plan saved/pushed
