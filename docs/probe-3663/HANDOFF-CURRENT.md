@@ -1,3 +1,30 @@
+# R7 Step 5 — retry readiness and launch hold (2026-11-18 Eastern)
+
+Commit `58cd22a` adds live guest refusal logging and the validated build for
+the Step 2 retry. The log reports up to 20 distinct readable object names
+and periodic per-site and total counters. The cap, deduplication,
+sanitization and counter continuity passed the owned fixture. The full
+suite and public networking fixture passed. The details and brief follow
+below.
+
+The desktop plan for `R7-S2-RETRY-20261118` was offered at 12:04 PM
+Eastern and expired unused at 12:06:13 PM. There was no launch receipt,
+guest process, or new runtime log. The temporary installation was
+restored, and all 23 real saves and both frozen backups still matched the
+prelaunch manifest. The local restoration receipt SHA-256 is
+`7E73848151A3B23EC72508950A50F1931B819C15D47D7C8797B74BA21468DAAA`.
+The copy of the preceding session's log alias is historical evidence
+already indexed in the original Step 2 result.
+
+The fresh `R7-S2-RETRY-20261118-B` backups are prepared outside OneDrive.
+The next plan is waiting for the user's desktop handoff. No deployment
+or timer is active. Round usage remains **startup 1/5, join 0/3**, with the
+original guest failure still the only live attempt. Step 2 retry, L3,
+recording, removal, reconnect and host reload remain pending. L4 and the
+separate cleanup plan still await the user's confirmation that L3 passed.
+
+---
+
 # R7 Step 2 retry — prelaunch brief (2026-11-18 Eastern)
 
 **Question.** Can one guest using the offline networking fix reach the 3663
