@@ -1,3 +1,62 @@
+# R7 Step 5 — staged join verified, guest loading crash blocks L3
+
+**The final build 3663 trial verified the two-stage field flow.** At
+4:18:42 PM Eastern the guest's `0x3` destination took native Acquire
+and entered its own field `0x82020000` with result zero. The guest then
+reported the parking coordinates `(0, 1000, 0)`. At 4:19:17 PM the
+second Acquire requested `0x1`, matched the host's level entry, and
+passed every sharing predicate. The host inserted one guest row and
+committed native Enter on `0x81020001` with result zero. The exact
+same save label could not be verified in both windows.
+
+The guest exited at 4:19:25 PM with an access violation
+(`0xC0000005`), about 7.6 seconds after shared Enter. Its last
+logged state was loading. The host detected loss during Loading
+and quarantined the session. No usable dump or matching Windows
+Application crash event was found, so the faulting instruction and
+cause remain unknown. The crash stopped the trial before visual
+acceptance, mutual movement, a verified recording, disconnect
+removal, reconnect, or host reload. The host quit normally with
+code zero. No activation error was observed in the startup retry or
+subsequent L3 trials. L3 is unpassed and L4 was not started.
+
+Both backups verified and all three manifests contained 23 real
+save files. Two slot-2 files (`lobby.save` and `save.save`) changed
+between the pre-guest and post-guest checkpoints. Their recorded
+last-write time was 4:18:04 PM, before the guest's character request
+at 4:18:41 PM. The manifest cannot attribute the writes to a
+process. The final manifest matched the post-guest checkpoint.
+The test installation was restored, both games are closed, and
+the installed executable retained the exact 3663 SHA-256.
+
+The final build preserved the R7 guest-only NT save redirect and
+normal Windows profile. All 119 tests passed, including the native
+staging and strict shared routes. The game-free smoke exchanged
+78 remote states with zero rejects and unloaded cleanly. The
+sandbox networking fixture passed adapter enumeration, DNS, and
+both owned-loopback and Steam HTTPS TCP connects.
+[Final offline validation](port-evidence/r7/transitional-field-validation.json).
+
+| Attempt | Category | Outcome |
+| --- | --- | --- |
+| R7-S2-20261118-1016-ready | Startup | Server-unreachable dialog before title, with no numeric code. |
+| R7-S2-RETRY-20261118-B | Startup | Title reached, normal menu exit, guest redirect and unchanged real saves verified. |
+| R7-L3-20261118-1214 | Join | Character identity passed; Acquire refused. Host reloaded and quit. |
+| R7-L3-SAME-SLOT-20261118-B | Join | `0x3` resolved to a different level entry; original Acquire guard refused. |
+| R7-L3-TRANSITIONAL-20261118 | Join | Native staging and shared Enter both returned zero; guest crashed during subsequent loading. |
+
+Usage is **startup 2/5, join 3/3**. The two expired desktop plans
+created no game processes and consumed zero attempts. The join
+budget is exhausted. The packet and field routing fix is `a39f326`.
+The exact live result and exit evidence are in `2dc045f`. The
+package contains the complete commit list since `9bbc3df`, every
+attempt's log hashes, and the evidence checksums.
+[Step 5 package](port-evidence/r7/step5-package.json).
+[Final L3 trace and receipts](port-evidence/r7/step3-transitional-field-result.json).
+[Attempt ledger](port-evidence/r7/attempts.json).
+
+---
+
 # R7 Step 3 — private staging field and final join attempt
 
 The 2976 live captures show FieldInfoKey `0x3` entering a private

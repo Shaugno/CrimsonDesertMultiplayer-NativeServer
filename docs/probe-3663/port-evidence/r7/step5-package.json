@@ -2,10 +2,10 @@
   "round": 7,
   "step": 5,
   "baseline": "9bbc3df",
-  "result": "Step 2 passed. L3 blocked at field acquisition. L4 held.",
+  "result": "Step 2 passed. Final L3 proved staged native entry and host-field sharing, then the guest crashed during loading. L4 held.",
   "attempts_used": {
     "startup": 2,
-    "join": 1
+    "join": 3
   },
   "limits": {
     "startup": 5,
@@ -57,9 +57,45 @@
         "sha256": "1B3C12525A6BDB19FD8D1C8636AAE85058F56227BF38DF2CB6568968521349A1"
       },
       "native_guest_login": true
+    },
+    {
+      "attempt_id": "R7-L3-SAME-SLOT-20261118-B",
+      "category": "join",
+      "result": "blocked at destination versus host level-entry equality",
+      "game_pid": 30608,
+      "game_start_filetime": "134395076093726553",
+      "started_utc": "2026-11-18T20:30:13.9775720Z",
+      "ended_utc": "2026-11-18T20:37:28.5923518Z",
+      "native_guest_login": true,
+      "host_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\evidence\\cdmp.host.log",
+        "sha256": "195D66F5C785B28B61770FEED0A9D7855515435AF287A3AE37BB09F8FF4BFAA4"
+      },
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\evidence\\cdmp.guest.log",
+        "sha256": "5E9238543825881023732B56C670D71FB63B64EFCEBEF45D313C2A6ECDBCC888"
+      }
+    },
+    {
+      "attempt_id": "R7-L3-TRANSITIONAL-20261118",
+      "category": "join",
+      "result": "private staging and host-field Enter succeeded; guest access violation before loading completed",
+      "game_pid": 32520,
+      "game_start_filetime": "134395102190620325",
+      "started_utc": "2026-11-18T21:14:17.9598859Z",
+      "ended_utc": "2026-11-18T21:20:02.9714089Z",
+      "native_guest_login": true,
+      "host_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.host.log",
+        "sha256": "D4FB6E42A9207D566E54A25E3FC8F49CEBA1888CB732FDA47DBE74C4B4BBD64D"
+      },
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.guest.log",
+        "sha256": "A6AE850560EA6925F0AD8A908D4D81C1AB1CCB373768507615FCCA3E2C0C083D"
+      }
     }
   ],
-  "setup_only": "R7-S2-RETRY-20261118 plan expired unused and installation restored. Zero launches.",
+  "setup_only": "Two unused desktop plans expired with no launch: the initial S2 retry plan and the first same-slot diagnostic plan.",
   "no_activation_error_observed_on_retry_or_l3": true,
   "original_error": "Server unreachable without numeric code. Activation status unconfirmed.",
   "source_commits": [
@@ -73,7 +109,13 @@
     "58cd22a R7 step 2: log bounded guest sandbox refusals before retry",
     "23607e4 R7 step 5: record expired retry plan and pending desktop handoff",
     "17bc421 R7 step 2: verify title startup, normal quit and save isolation",
-    "e3c8a17 R7 step 3: record field acquisition refusal and save reload"
+    "e3c8a17 R7 step 3: record field acquisition refusal and save reload",
+    "6b1210a R7 step 5: package startup pass and native field acquisition blocker",
+    "e577f72 R7 step 3: trace field acquisition sharing predicates",
+    "91f9f78 R7 preflight: record unused same-slot desktop plan",
+    "615b8e0 R7 step 3: isolate same-slot refusal to destination entry mismatch",
+    "a39f326 R7 step 3: preserve native guest staging before field sharing",
+    "2dc045f R7 step 3: confirm staged join and record guest loading crash"
   ],
   "evidence": [
     {
@@ -90,7 +132,7 @@
     },
     {
       "name": "attempts.json",
-      "sha256": "BEF75BC566547C7C33EE3DF7EDCD25D77A574D721A2FF32A5071C99D2C5B3892"
+      "sha256": "A086D9BB4A1DB34C02CA6A7C1768616940382E705638088DA963410F8625E427"
     },
     {
       "name": "refusal-log-validation.json",
@@ -99,16 +141,38 @@
     {
       "name": "network-fix-validation.json",
       "sha256": "0923697B1CD758BA75A701C1731F29BAFC4F4FA60BC76D1B12A73AC6792C95AE"
+    },
+    {
+      "name": "acquire-diagnostic-validation.json",
+      "sha256": "E5396DE164D95BAF5DE1D7664FDBBCDE7773293B8C4C0625BF0509241702C697"
+    },
+    {
+      "name": "step3-same-slot-result.json",
+      "sha256": "E7892EA2D3A1724B70F7A90D61AA8EFC8B3A5AA1CD2D53C4EFAFF2BA9012F4F4"
+    },
+    {
+      "name": "transitional-field-validation.json",
+      "sha256": "95D83660773FE3557EDD6BC9EC654C9923413CDA416EF24575283DBAF1A4DA70"
+    },
+    {
+      "name": "step3-transitional-field-result.json",
+      "sha256": "45B063F71D424F5F79A099648A9BFFCDF17AF51FEC3E4DD26DB7A2B402F00DD8"
     }
   ],
-  "real_save_checkpoint_unchanged": true,
-  "host_save_reload_and_normal_quit": true,
+  "real_save_checkpoint_unchanged": false,
+  "host_save_reload_and_normal_quit": null,
   "l4_started": false,
   "temporary_installation_restored": true,
   "limitations": [
-    "The individual failed native field acquisition predicate is unknown.",
-    "No guest actor was inserted. Mutual movement, removal and reconnect were not exercised.",
-    "No qualifying recording was verified. Raw logs and backups remain local.",
-    "L4 and the separate cleanup plan require user confirmation of an L3 pass."
-  ]
+    "Guest exited with 0xC0000005 after host-field Enter committed and before the guest completed loading. No dump or faulting instruction was recovered.",
+    "Mutual movement, actor removal, recording, reconnect and post-join host reload were not verified.",
+    "Two real save files changed before the guest character request; the producing process was not identified. Both backups verified and the post-guest and final manifests match.",
+    "The final attempt used the same-slot instructions. The exact slot label was not supplied or verified in both copies.",
+    "Host and guest logs and manifest data remain local. The join budget is exhausted. L4 and the separate cleanup plan require user confirmation of an L3 pass."
+  ],
+  "latest_l3_save_writer_attributed": false,
+  "latest_l3_backup_manifests_verified": true,
+  "earlier_l3_host_save_reload_verified": true,
+  "latest_l3_host_normal_exit": true,
+  "l3_passed": false
 }
