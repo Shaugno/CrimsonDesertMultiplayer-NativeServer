@@ -1,0 +1,114 @@
+{
+  "round": 7,
+  "step": 5,
+  "baseline": "9bbc3df",
+  "result": "Step 2 passed. L3 blocked at field acquisition. L4 held.",
+  "attempts_used": {
+    "startup": 2,
+    "join": 1
+  },
+  "limits": {
+    "startup": 5,
+    "join": 3
+  },
+  "live_attempts": [
+    {
+      "attempt_id": "R7-S2-20261118-1016-ready",
+      "category": "startup",
+      "result": "blocked before title",
+      "game_pid": 51912,
+      "game_start_filetime": "134394887940495207",
+      "started_utc": "2026-11-18T15:19:54.0582630Z",
+      "ended_utc": "2026-11-18T15:21:53.1924321Z",
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-20261118-1016-ready\\evidence\\cdmp.guest.log",
+        "sha256": "8B0B19355DD28C2B2F5CDEDFF2F6CB0AE9AC32363106AC3FB61B07CF1595C037"
+      },
+      "native_guest_login": false
+    },
+    {
+      "attempt_id": "R7-S2-RETRY-20261118-B",
+      "category": "startup",
+      "result": "passed",
+      "game_pid": 42092,
+      "game_start_filetime": "134394956060401798",
+      "started_utc": "2026-11-18T17:13:26.0618082Z",
+      "ended_utc": "2026-11-18T17:14:17.0897621Z",
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-S2-RETRY-20261118-B\\evidence\\cdmp.guest.log",
+        "sha256": "1858400A29ABDE464EBB570CC565311B31F8020CFBE5CA40A4D270F7E4B2FC8D"
+      },
+      "native_guest_login": false
+    },
+    {
+      "attempt_id": "R7-L3-20261118-1214",
+      "category": "join",
+      "result": "blocked at field acquisition",
+      "game_pid": 40164,
+      "game_start_filetime": "134394958972007125",
+      "started_utc": "2026-11-18T17:16:08.3081575Z",
+      "ended_utc": "2026-11-18T17:29:19.5069361Z",
+      "host_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\evidence\\cdmp.host.log",
+        "sha256": "F439DE5F222C49F41E84B94874E579E07DE652F2ADA35480F2141934122AEA44"
+      },
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-20261118-1214\\evidence\\cdmp.guest.log",
+        "sha256": "1B3C12525A6BDB19FD8D1C8636AAE85058F56227BF38DF2CB6568968521349A1"
+      },
+      "native_guest_login": true
+    }
+  ],
+  "setup_only": "R7-S2-RETRY-20261118 plan expired unused and installation restored. Zero launches.",
+  "no_activation_error_observed_on_retry_or_l3": true,
+  "original_error": "Server unreachable without numeric code. Activation status unconfirmed.",
+  "source_commits": [
+    "16d271d Save user-approved R7 save-directory isolation plan",
+    "d52bd2f R7 step 1: isolate guest saves without profile overrides",
+    "cac3d9d R7 preflight: record time-gate hold and verified offline seals",
+    "1d25995 docs: add L4 Proxmox feasibility plan",
+    "4a5f7ed R7 step 2: record guest startup blocked before title",
+    "f46a056 R7 step 5: package guest startup blocker and evidence",
+    "b9ab0af R7 step 2: preserve Windows networking under guest save isolation",
+    "58cd22a R7 step 2: log bounded guest sandbox refusals before retry",
+    "23607e4 R7 step 5: record expired retry plan and pending desktop handoff",
+    "17bc421 R7 step 2: verify title startup, normal quit and save isolation",
+    "e3c8a17 R7 step 3: record field acquisition refusal and save reload"
+  ],
+  "evidence": [
+    {
+      "name": "step2-result.json",
+      "sha256": "5528B1BEA3BE83F5061FD69077E3B84C61EBE5F6DC381E58BE2A918B92EF06A7"
+    },
+    {
+      "name": "step2-retry-result.json",
+      "sha256": "036D15C6940AA5F084220C7F727A7387269A6177C5376C083263475B4492BAE1"
+    },
+    {
+      "name": "step3-result.json",
+      "sha256": "ECFD10E51A106C7545DC300A94F52EBD413CFC284AA4236A54DF1A2BDF01C049"
+    },
+    {
+      "name": "attempts.json",
+      "sha256": "BEF75BC566547C7C33EE3DF7EDCD25D77A574D721A2FF32A5071C99D2C5B3892"
+    },
+    {
+      "name": "refusal-log-validation.json",
+      "sha256": "81E7123B5FA865402555BB0624A6151D5F8C2E24943070957A98A07E0DEE3827"
+    },
+    {
+      "name": "network-fix-validation.json",
+      "sha256": "0923697B1CD758BA75A701C1731F29BAFC4F4FA60BC76D1B12A73AC6792C95AE"
+    }
+  ],
+  "real_save_checkpoint_unchanged": true,
+  "host_save_reload_and_normal_quit": true,
+  "l4_started": false,
+  "temporary_installation_restored": true,
+  "limitations": [
+    "The individual failed native field acquisition predicate is unknown.",
+    "No guest actor was inserted. Mutual movement, removal and reconnect were not exercised.",
+    "No qualifying recording was verified. Raw logs and backups remain local.",
+    "L4 and the separate cleanup plan require user confirmation of an L3 pass."
+  ]
+}

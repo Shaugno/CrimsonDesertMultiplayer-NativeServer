@@ -1,3 +1,58 @@
+# R7 Step 5 — startup passed, L3 blocked (2026-11-18 Eastern)
+
+**The guest-only startup retry passed. L3 reached character identity
+processing and then failed at field acquisition.** The field Acquire
+guard returned `shared false` after all four preliminary pins passed.
+No guest actor entered the host world. The later failed predicate and
+native refusal code remain unknown. L4 and the separate cleanup plan
+await the user's confirmation of a future L3 pass.
+
+The networking fixture reproduced the original sandbox's NSI denial and
+verified the fix against adapter enumeration, DNS and TCP. Production
+logging now samples up to 20 distinct denied names and continues total
+and per-site counts. The logging build passed **119/119** tests in
+108.65 seconds and the synthetic smoke recorded
+78 remote states, zero rejects and clean
+unload. The later live tests used the matching build 3663 executable and
+guest-only NT save redirect with the normal Windows profile.
+
+| Attempt | Category | Observed outcome |
+| --- | --- | --- |
+| R7-S2-20261118-1016-ready | Startup | Server-unreachable dialog before title, without a numeric code. Activation status unconfirmed. |
+| R7-S2-RETRY-20261118-B | Startup | Title reached and menu quit exited normally. NT isolation and all save manifests verified. No activation error observed. |
+| R7-L3-20261118-1214 | Join | Native guest login and title refresh passed. Both windows were usable side by side. The host normalized 3081 and reached field acquisition with zero identity refusals. Field sharing refused and no actor was inserted. No activation error observed. |
+
+The earlier unused retry plan created no process and consumed no
+attempt. Current usage is **startup 2/5, join 1/3**. All four own-process
+log hashes and the underlying evidence are indexed in
+`port-evidence/r7/step5-package.json` and the step results below.
+
+The guest stayed on the loading animation and the pinned process was
+stopped after its ordinary window close did not exit it. Mutual
+movement, removal and reconnect could not be exercised. No qualifying
+recording was verified. The host reloaded its save at 12:28:42 PM Eastern
+and quit normally at 12:29:19, before the 12:30:08 watchdog. Pre-guest,
+post-guest and final manifests matched for all 23 real saves. Both
+frozen backups verified and the six temporary installation files were
+restored to their prior absent state. The installed executable retained
+the exact 3663 hash and both game processes are closed.
+
+Commits since `9bbc3df` before this package:
+
+- `16d271d` Save user-approved R7 save-directory isolation plan
+- `d52bd2f` R7 step 1: isolate guest saves without profile overrides
+- `cac3d9d` R7 preflight: record time-gate hold and verified offline seals
+- `1d25995` docs: add L4 Proxmox feasibility plan
+- `4a5f7ed` R7 step 2: record guest startup blocked before title
+- `f46a056` R7 step 5: package guest startup blocker and evidence
+- `b9ab0af` R7 step 2: preserve Windows networking under guest save isolation
+- `58cd22a` R7 step 2: log bounded guest sandbox refusals before retry
+- `23607e4` R7 step 5: record expired retry plan and pending desktop handoff
+- `17bc421` R7 step 2: verify title startup, normal quit and save isolation
+- `e3c8a17` R7 step 3: record field acquisition refusal and save reload
+
+---
+
 # R7 Step 3 — L3 blocked at field acquisition (2026-11-18 Eastern)
 
 The host (PID 34096) loaded its save. The guest (PID 40164) inherited the
