@@ -1,8 +1,8 @@
 // Minimal 3663 guest. The legacy guest installer and every optional callback
 // remain unreachable. Native delivery/allocation happens on NetworkThread.
 #include "mod/session2/guest3663.h"
-#include "mod/session2/guest_character3663.h"
-#include "mod/session2/guest_crash3663.h"
+#include "mod/session2/character_guard3663.h"
+#include "mod/session2/crash3663.h"
 #include "mod/session2/tunnel_layout.h"
 #include "mod/session2/file_sandbox3663.h"
 #include "mod/session2/r4_v1_bindings.h"
@@ -85,8 +85,8 @@ int* __fastcall send(void* self,int* result,void* buffer){
                 else if(!outgoing.push(bytes))fail("outgoing queue full");
                 else{
                     ++sent;
-                    if(view->opcode==3081)guest_crash3663::arm();
-                    guest_crash3663::returned(guest_crash3663::packet(guest_crash3663::Direction::ToHost,
+                    if(view->opcode==3081)crash3663::arm();
+                    crash3663::returned(crash3663::packet(crash3663::Direction::ToHost,
                         view->opcode,static_cast<uint16_t>(bytes.size())));
                     if(view->opcode==2554){refresh_started.store(GetTickCount64());refresh_pending.store(true);}
                 }
@@ -162,10 +162,10 @@ void pump(safetyhook::Context& c){
         const auto& bytes=batch[i].packet;
         const auto size=static_cast<uint16_t>(bytes.size());
         const auto opcode=static_cast<uint16_t>(bytes[0] | (bytes[1]<<8));
-        const auto ticket=guest_crash3663::packet(guest_crash3663::Direction::ToClient,opcode,size);
+        const auto ticket=crash3663::packet(crash3663::Direction::ToClient,opcode,size);
         reinterpret_cast<Receive>(base+layout.kClientOnRecvPacket)(reinterpret_cast<void*>(c.r15),
             reinterpret_cast<void*>(session),0,bytes.data(),size);
-        guest_crash3663::returned(ticket);
+        crash3663::returned(ticket);
         ++delivered;
     }
 }
@@ -190,11 +190,11 @@ bool install(const game::build_guard::ImageIdentity& id){
     // client cannot be converted halfway through a local conversation.
     const auto net=ptr(base+layout.kClientNetSlot);
     if(net && ptr(net+layout.kClientNet_Slot4))return false;
-    if(!guest_crash3663::install_for_session()){
+    if(!crash3663::install_for_session(role::Role::Guest)){
         log::error("3663 guest: crash and packet diagnostics could not open their session evidence files");
         return false;
     }
-    if(!guest_character3663::install(id))return false;
+    if(!character_guard3663::install(id,role::Role::Guest))return false;
     auto send_result=game::prepare_inline(base+layout.kSyncSessionSend,reinterpret_cast<void*>(&send),
         [](const auto& bytes){return bytes.size()==6 && std::equal(bytes.begin(),bytes.end(),layout.kSyncSessionSendHead.begin());},"3663 guest","native Send entry");
     auto pump_result=game::prepare_mid(base+layout.kNetLoopPump,&pump,
@@ -212,7 +212,7 @@ bool install(const game::build_guard::ImageIdentity& id){
 bool active(){return on.load();}
 bool failed(){return broken.load();}
 void set_host_ready(bool value){
-    guest_character3663::set_link_ready(value);
+    character_guard3663::set_link_ready(value);
     ready.store(value);
 }
 void deliver(std::vector<uint8_t>&& bytes){
@@ -225,5 +225,5 @@ void deliver(std::vector<uint8_t>&& bytes){
 std::deque<std::vector<uint8_t>> take_outgoing(){return ready.load() && !broken.load()?outgoing.take_all():std::deque<std::vector<uint8_t>>{};}
 std::string describe(){return std::format("native guest active {} remote {} sent {} delivered {} filtered {} refreshed {} failed {}",
     on.load(),remote.load(),sent.load(),delivered.load(),filtered.load(),refreshed.load(),broken.load())+
-    std::format(" | character null-playback skips {}",guest_character3663::skips())+" | "+r5_guards3663::describe();}
+    std::format(" | character null-playback skips {}",character_guard3663::skips())+" | "+r5_guards3663::describe();}
 }

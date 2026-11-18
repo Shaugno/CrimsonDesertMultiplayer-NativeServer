@@ -1,19 +1,20 @@
 // Samuel Cardillo's 3576 remote character update guard (ByJunter PR #1,
-// a3904af, GPL v3) establishes the update family. This version independently
-// verifies the 3663 null-read edge and skips only its helper, for the host.
-#include "mod/session2/guest_character3663.h"
+// a3904af, GPL v3) establishes the update family and host-side peer-key gating.
+// This version independently verifies the 3663 null read and skips only the
+// helper for the verified remote primary, in either process.
+#include "mod/session2/character_guard3663.h"
 #include "coop3663/character_guard_policy.h"
 #include "mod/game/hook_prepare.h"
 #include "mod/game/player_layout.h"
 #include "mod/game/safe_memory.h"
 #include "mod/log.h"
-#include "mod/session2/guest_crash3663.h"
+#include "mod/session2/crash3663.h"
 
 #include <algorithm>
 #include <array>
 #include <atomic>
 
-namespace cdmp::session2::guest_character3663 {
+namespace cdmp::session2::character_guard3663 {
 namespace {
 namespace policy = coop3663::character_guard;
 constexpr uintptr_t base = game::build_3663::kImageBase;
@@ -34,7 +35,8 @@ constexpr std::array<uint8_t, 31> release_bytes{
 static_assert(helper + frame_and_layer.size() == fault_read);
 SafetyHookMid hook;
 std::atomic<bool> on{}, linked{};
-std::atomic<uint32_t> host_character{}; // 1 seals a conflicting advertisement for this process
+role::Role process_role{};
+std::atomic<uint32_t> peer_character{}; // 1 seals a conflicting peer key for this process
 std::atomic<uint64_t> skipped{};
 std::array<std::atomic<uint32_t>, 4> samples{};
 
@@ -68,12 +70,15 @@ void on_null_playback(safetyhook::Context& c) noexcept {
     // key and vtable even if a derived control type fails our guard checks.
     const auto key = actor ? read<uint32_t>(actor + 0x60) : 0;
     const auto actor_vtable = read<uintptr_t>(actor);
-    const auto raw_host = host_character.load(std::memory_order_acquire);
-    const uint32_t host = (raw_host >> 28) == 0xA ? raw_host : 0;
+    const auto raw_peer = peer_character.load(std::memory_order_acquire);
+    const uint32_t peer = (raw_peer >> 28) == 0xA ? raw_peer : 0;
     const uint32_t local = local_character();
-    const auto identity = policy::identify(key, host, local);
+    const bool on_host = process_role == role::Role::Host;
+    const uint32_t host = on_host ? local : peer;
+    const uint32_t guest = on_host ? peer : local;
+    const auto identity = policy::identify(key, host, guest);
     if (samples[static_cast<size_t>(identity)].fetch_add(1, std::memory_order_relaxed) < 8) {
-        guest_crash3663::note_null_playback(key, actor_vtable, host, local, c.r12, policy::label(identity));
+        crash3663::note_null_playback(key, actor_vtable, host, guest, c.r12, policy::label(identity));
     }
 
     // Three pushes and 0x20 bytes of locals put the call's return at rsp+0x38.
@@ -82,15 +87,16 @@ void on_null_playback(safetyhook::Context& c) noexcept {
     const bool exact = confirmed_control && c.r12 < 2 && c.rax &&
         read<uintptr_t>(cc + 0x88 + c.r12 * sizeof(uintptr_t)) == c.rax &&
         read<uintptr_t>(c.rsp + 0x38) == base + helper_call + helper_edge.size();
-    if (policy::skip(identity, local, linked.load(std::memory_order_acquire), exact, c.rdx == 0)) {
-        if (skipped.fetch_add(1, std::memory_order_relaxed) == 0) guest_crash3663::note_playback_skip(key);
+    if (policy::skip(process_role, identity, local, linked.load(std::memory_order_acquire), exact, c.rdx == 0)) {
+        if (skipped.fetch_add(1, std::memory_order_relaxed) == 0) crash3663::note_playback_skip(key);
         c.rip = base + epilogue;
     }
 }
 }
 
-bool install(const game::build_guard::ImageIdentity& identity) {
-    if (on.load()) return true;
+bool install(const game::build_guard::ImageIdentity& identity, role::Role current_role) {
+    if (on.load()) return process_role == current_role;
+    if (current_role != role::Role::Host && current_role != role::Role::Guest) return false;
     if (!game::build_guard::select_3663_tiers(identity, {true,true,true,true},
         {game::build_3663::kTierAComplete, game::build_3663::kTierBComplete,
          game::build_3663::kTierCComplete, game::build_3663::kTierDComplete}).tier_d_lifecycle ||
@@ -102,19 +108,21 @@ bool install(const game::build_guard::ImageIdentity& identity) {
     }, "3663 character", "null-playback read and native return");
     if (!prepared) return false;
     hook = std::move(*prepared);
+    process_role = current_role;
     on.store(true, std::memory_order_release);
     if (!hook.enable()) {
         on.store(false, std::memory_order_release);
         return false;
     }
-    log::info("3663 character guard active: exact 258C8FD null read, host character only");
+    log::info("3663 character guard active: exact 258C8FD null read, verified remote {} character only",
+              current_role == role::Role::Host ? "guest" : "host");
     return true;
 }
 
-void note_host_character(uint32_t key) noexcept {
+void note_peer_character(uint32_t key) noexcept {
     if ((key >> 28) != 0xA) return;
     uint32_t expected = 0;
-    if (!host_character.compare_exchange_strong(expected, key) && expected != key) host_character.store(1);
+    if (!peer_character.compare_exchange_strong(expected, key) && expected != key) peer_character.store(1);
 }
 void set_link_ready(bool ready) noexcept { linked.store(ready, std::memory_order_release); }
 uint64_t skips() noexcept { return skipped.load(std::memory_order_relaxed); }

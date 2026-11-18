@@ -1,6 +1,7 @@
 // Independent 3663 adapter. The original 2976 field_share implementation and
 // its four-argument EnterField detour remain untouched.
 #include "mod/session2/field_share3663.h"
+#include "mod/session2/character_guard3663.h"
 #include "mod/session2/r4_native_bindings.h"
 #include "coop3663/join3663_transaction.h"
 #include "mod/game/hook_prepare.h"
@@ -201,7 +202,13 @@ struct Transaction {
         enter_native();
         uint32_t code=~0u;
         const bool success=returned==result && read(reinterpret_cast<uintptr_t>(returned),code) && !code;
-        if(success)++committed;return success;
+        if(success){
+            // Only the proven, committed shared roster can authorize a peer
+            // actor on the host. The native private entry does not bind it.
+            character_guard3663::note_peer_character(roster[0].actor_key);
+            ++committed;
+        }
+        return success;
     }
     bool rollback(){
         if(!context_matches(c))return false;

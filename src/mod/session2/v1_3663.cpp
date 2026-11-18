@@ -2,7 +2,8 @@
 #include "mod/session2/r4_v1_bindings.h"
 #include "mod/session2/server.h"
 #include "mod/session2/guest3663.h"
-#include "mod/session2/guest_character3663.h"
+#include "mod/session2/character_guard3663.h"
+#include "mod/session2/crash3663.h"
 #include "mod/session2/ride_filter_logic.h"
 #include "mod/session2/identity3663.h"
 #include "mod/session2/report_guard.h"
@@ -100,6 +101,12 @@ bool host_install(const game::build_guard::ImageIdentity& id){
     for(const auto& s:{n::kExceptControl,n::kExceptSelf,n::kToNear,n::kLoading,n::kLoadingFlag})if(!matches(s))return false;
     if(ptr(base+0x5F686C0+8)!=base+n::kExceptControl.rva || ptr(base+0x5F686A0+8)!=base+n::kExceptSelf.rva ||
         ptr(base+0x5F68780+8)!=base+n::kToNear.rva)return false;
+    if(!crash3663::install_for_session(role::Role::Host)){
+        log::error("3663 host crash capture could not be installed in the session evidence directory");
+        return false;
+    }
+    crash3663::arm();
+    if(!character_guard3663::install(id,role::Role::Host))return false;
     if(!r5_guards3663::host_install(id) || !identity3663::install(id,&host_context) || !field_share3663::install(id,&host_context,&identity3663::ready,&server_halt_core_native_fault))return false;
     auto load=game::prepare_inline(base+n::kLoading.rva,reinterpret_cast<void*>(&loading),
         [](const auto& bytes){return bytes.size()==5 && std::equal(bytes.begin(),bytes.end(),n::kLoading.bytes.begin());},
@@ -153,7 +160,10 @@ Bridge::Bridge(ClientSession& session,bool host):host_(host),
         [this](std::vector<uint8_t>&& packet,uint32_t now){receive(std::move(packet),now);}){
     link_.set_compress(true);if(!host_)link_.set_announce_caps(true);
 }
-Bridge::~Bridge(){if(!host_)guest3663::set_host_ready(false);}
+Bridge::~Bridge(){
+    if(host_)character_guard3663::set_link_ready(false);
+    else guest3663::set_host_ready(false);
+}
 void Bridge::receive(std::vector<uint8_t>&& packet,uint32_t now){
     const auto view=parse_tunnel_packet(packet,host_?troc::Dir::ToHostServer:troc::Dir::ToGuestClient,kTunnelLayout3663);
     if(failed_ || !view){failed_=true;return;}
@@ -163,7 +173,7 @@ void Bridge::receive(std::vector<uint8_t>&& packet,uint32_t now){
             else if(view->payload.size()==1 && view->payload[0]==troc::kControlHostDead){failed_=true;guest3663::set_host_ready(false);}
             else if(view->slot==-1){
                 const auto key=rfl::host_character_from_control(view->payload.data(),view->payload.size());
-                if(key)guest_character3663::note_host_character(key);
+                if(key)character_guard3663::note_peer_character(key);
             }
             return;
         }
@@ -189,6 +199,7 @@ void Bridge::tick(uint32_t now){
         note_lost();failed_=true;
     }
     if(!host_ && (lost || guest3663::failed())){failed_=true;guest3663::set_host_ready(false);}
+    if(host_)character_guard3663::set_link_ready(connected && !failed_);
     if(host_ && logout_pending_ && !server_inject_halted()){
         const auto result=server_inject_ex(troc::make_logout_session_req());
         if(inj::disposition(result)!=inj::Disposition::Hold){
@@ -227,6 +238,7 @@ void Bridge::tick(uint32_t now){
         for(auto& packet:guest3663::take_outgoing())if(!link_.push(packet)){failed_=true;break;}
     }
     link_.tick(now);
+    if(host_ && (failed_ || link_.broken() || !link_.connected()))character_guard3663::set_link_ready(false);
 }
 std::string Bridge::describe()const{return std::format("3663 v1 {} queued {} refused {} pending {} failed {} | {} | {}",
     host_?"host":"guest",queued_,refused_,pending_.size(),failed_,host_?v1_3663::describe():guest3663::describe(),link_.describe());}

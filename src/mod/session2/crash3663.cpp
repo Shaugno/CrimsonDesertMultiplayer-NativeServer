@@ -1,4 +1,4 @@
-#include "mod/session2/guest_crash3663.h"
+#include "mod/session2/crash3663.h"
 #include "mod/game/fault_line.h"
 
 #include <windows.h>
@@ -11,7 +11,7 @@
 #include <filesystem>
 #include <string>
 
-namespace cdmp::session2::guest_crash3663 {
+namespace cdmp::session2::crash3663 {
 namespace {
 constexpr uint32_t kPackets = 131072;
 constexpr uint32_t kTextBytes = 65536;
@@ -264,25 +264,31 @@ void prepare_dump() noexcept {
 }
 }
 
-bool install(const wchar_t* directory) noexcept {
+bool install(const wchar_t* directory, role::Role process_role) noexcept {
     try {
-        if (trace || !directory || !*directory) return false;
+        const bool guest = process_role == role::Role::Guest;
+        if (crash_text || !directory || !*directory || (!guest && process_role != role::Role::Host)) return false;
         const auto root = std::filesystem::path(directory);
-        const auto suffix = L"-" + std::to_wstring(GetCurrentProcessId());
-        dump_path = (root / (L"guest-crash" + suffix + L".dmp")).wstring();
-        crash_text = static_cast<char*>(create_mapping((root / (L"guest-crash" + suffix + L".log")).wstring(), kTextBytes));
-        trace = static_cast<PacketTrace*>(create_mapping((root / (L"guest-packets" + suffix + L".bin")).wstring(),
-                                                         sizeof(PacketTrace)));
-        if (!crash_text || !trace) return false;
-        std::memcpy(trace->magic, "CDMPPKT1", sizeof trace->magic);
-        trace->capacity = kPackets;
-        trace->pid = GetCurrentProcessId();
+        const auto pid = GetCurrentProcessId();
+        const auto suffix = L"-" + std::to_wstring(pid);
+        const auto stem = (guest ? L"guest-crash" : L"host-crash") + suffix;
+        dump_path = (root / (stem + L".dmp")).wstring();
+        crash_text = static_cast<char*>(create_mapping((root / (stem + L".log")).wstring(), kTextBytes));
+        if (!crash_text) return false;
+        if (guest) {
+            trace = static_cast<PacketTrace*>(create_mapping((root / (L"guest-packets" + suffix + L".bin")).wstring(),
+                                                             sizeof(PacketTrace)));
+            if (!trace) return false;
+            std::memcpy(trace->magic, "CDMPPKT1", sizeof trace->magic);
+            trace->capacity = kPackets;
+            trace->pid = pid;
+        }
         snapshot_modules();
         if (!AddVectoredExceptionHandler(1, vectored)) return false;
         prepare_dump();
         previous_filter.store(SetUnhandledExceptionFilter(unhandled), std::memory_order_release);
         game::FixedLine note;
-        note.str("3663 guest diagnostics installed pid=").dec(trace->pid)
+        note.str(guest ? "3663 guest diagnostics installed pid=" : "3663 host diagnostics installed pid=").dec(pid)
             .str(" minidump_worker=").str(dump_go ? "ready" : "unavailable");
         append(note);
         return true;
@@ -291,30 +297,32 @@ bool install(const wchar_t* directory) noexcept {
     }
 }
 
-bool install_for_session() {
+bool install_for_session(role::Role process_role) {
     // The NT sandbox already verified the frozen backup supplied by the
-    // launcher. Keep diagnostic files next to it, outside both save trees.
-    const auto capacity = GetEnvironmentVariableW(L"CDMP_SAVE_BACKUP", nullptr, 0);
+    // launcher for the guest. The host receives the evidence directory directly.
+    const bool guest = process_role == role::Role::Guest;
+    const auto variable = guest ? L"CDMP_SAVE_BACKUP" : L"CDMP_HOST_CRASH_DIR";
+    const auto capacity = GetEnvironmentVariableW(variable, nullptr, 0);
     if (!capacity) return false;
     std::wstring path(capacity, L'\0');
-    const auto length = GetEnvironmentVariableW(L"CDMP_SAVE_BACKUP", path.data(), capacity);
+    const auto length = GetEnvironmentVariableW(variable, path.data(), capacity);
     if (!length || length >= capacity) return false;
     path.resize(length);
-    const std::filesystem::path backup(path);
-    if (backup.filename() != L"guest-backup") return false;
-    const auto directory = backup.parent_path() / L"evidence";
+    const std::filesystem::path source(path);
+    if (!source.is_absolute() || source.filename() != (guest ? L"guest-backup" : L"evidence")) return false;
+    const auto directory = guest ? source.parent_path() / L"evidence" : source;
     std::error_code error;
     std::filesystem::create_directory(directory, error);
     if (error || !std::filesystem::is_directory(directory, error)) return false;
-    return install(directory.c_str());
+    return install(directory.c_str(), process_role);
 }
 
 void arm() noexcept {
-    if (trace) armed.store(true, std::memory_order_release);
+    if (crash_text) armed.store(true, std::memory_order_release);
 }
 
 uint32_t packet(Direction direction, uint16_t opcode, uint16_t bytes) noexcept {
-    if (!armed.load(std::memory_order_acquire)) return 0;
+    if (!trace || !armed.load(std::memory_order_acquire)) return 0;
     // The validated native NetworkThread is the only writer. A receive ticket
     // is published before the call so an exception can leave a pending row.
     const uint32_t index = trace->count;

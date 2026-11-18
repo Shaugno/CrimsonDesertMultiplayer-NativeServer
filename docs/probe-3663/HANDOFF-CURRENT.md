@@ -1,3 +1,67 @@
+# R8 L3 attempt 3 — capture both processes and guard the verified guest actor
+
+The 5:26:33 PM host access violation from attempt 2 has no recorded
+instruction address. The exact 3663 image does show that the client
+actor worker at `9CEED0` gets CharacterControl at
+`[actor+0x68]+0x40` from each eligible actor it visits. It calls
+`9729C0 → 9770C0 → 258C8C0` without screening for a local actor.
+The verified 3576 reference reaches equivalent selected-layer loads
+through `9451E0 → 9496C0 → 251AF40`. Samuel Cardillo's host
+publishes the peer primary key to its copy guard. The 3663 adapter
+uses that identity constraint and its independently verified
+instruction boundary. It takes the original helper epilogue only
+for the exact null playback read at `258C8FD`.
+[Samuel's host key publication](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/session2/server.cpp).
+[Samuel's character update guard](https://github.com/ByJunter/CrimsonDesertMultiplayer-NativeServer/blob/a3904af3e1a32056dcf7a63bc7a469eb4231084b/src/mod/net/horse_diag.cpp).
+
+On the host, the successful shared Enter binds the vetted guest
+primary key from the native roster. The private entry cannot bind a
+key. The hook requires a live link, a distinct local primary, the
+exact remote primary, the verified CharacterControl type and actor
+backlink, the selected layer and the exact caller frame. It samples
+the actor before deciding whether to skip. The guest still obtains
+the remote host key through the existing control message.
+
+The host now arms the same bounded first-chance capture from
+startup. The guest arms it at character login as before. Each maps
+a 64 KiB role/PID log and captures up to 24 first-chance access
+violations or in-page errors. The record includes module-relative
+fault and stack locations, access type/address and registers.
+The chained unhandled filter requests one best-effort minidump
+through a pre-started worker. A game-owned handler can terminate
+without invoking that filter. Only the guest writes the packet ring.
+Logs and any dump go under the verified session's external
+`evidence` directory.
+
+Offline validation passed all 120 tests. The owned host and guest
+fixtures each produced a minidump with the expected exception stream.
+The synthetic smoke received 78 states with zero rejects and unloaded
+cleanly. [Validation and hashes](port-evidence/r8/host-capture-validation.json).
+
+**Live question.** Can the same-slot guest reach control and complete
+L3 with both processes instrumented? The expected observation is
+native guest login, staged and shared Enter, then mutual walking and
+turning in both visible windows. If a fault recurs, the expected
+evidence is the role-specific crash record and the last native join
+events.
+
+**Setup and time limit.** Recheck the installed 3663 hash and fresh
+external save manifests. Load a named save on the host and stand
+still. Verify both window identities and the user's side-by-side
+view before the guest loads the same slot once. The user records
+with Win+Alt+R. The shared watchdog runs for fourteen minutes from
+host launch. Leave time for one guest disconnect and reconnect
+check, a real-save checkpoint and a normal host reload and quit.
+
+**Stop condition.** Stop on a crash, freeze, activation error,
+missing window verification or inadequate deadline reserve. Capture
+both roles' evidence, close the remaining copy and verify the
+manifests and restoration. No additional launch follows a crash
+on this attempt. R8 begins the sitting at **startup 0/5, join 2/3**.
+L4 requires the user's confirmation that L3 passed.
+
+---
+
 # R8 L3 attempt 2 result — host crash interrupted the second load
 
 Build `2507e84` installed the exact guest-only character guard.

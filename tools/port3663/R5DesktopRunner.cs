@@ -117,11 +117,11 @@ static class R5DesktopRunner {
     common=DateTime.FromFileTimeUtc(N(host,"game_start_filetime")).AddSeconds(N(host,"max_age_seconds"));Require(common>DateTime.UtcNow.AddMinutes(3),"Insufficient L4 common deadline");
    }
   }
-  var env=(Dictionary<string,object>)p["environment"];var names=new HashSet<string>{"SteamAppId","SteamGameId","CDMP_ROLE","CDMP_HOST_REAL_SAVES","CDMP_SAVE_SANDBOX","CDMP_SAVE_BACKUP","CDMP_SAVE_MANIFEST","CDMP_SAVE_MANIFEST_SHA256","CDMP_REAL_SAVE_ROOT","CDMP_SAVE_ISOLATION","CDMP_GUEST_WITH_HOST"};
+  var env=(Dictionary<string,object>)p["environment"];var names=new HashSet<string>{"SteamAppId","SteamGameId","CDMP_ROLE","CDMP_HOST_REAL_SAVES","CDMP_HOST_CRASH_DIR","CDMP_SAVE_SANDBOX","CDMP_SAVE_BACKUP","CDMP_SAVE_MANIFEST","CDMP_SAVE_MANIFEST_SHA256","CDMP_REAL_SAVE_ROOT","CDMP_SAVE_ISOLATION","CDMP_GUEST_WITH_HOST"};
   foreach(string key in env.Keys)Require(names.Contains(key),"Unexpected environment key");
   Require(S(env,"SteamAppId")=="3321460"&&S(env,"SteamGameId")=="3321460"&&S(env,"CDMP_ROLE")==role,"Role/Steam environment mismatch");
-  if(role=="host")Require(S(env,"CDMP_HOST_REAL_SAVES")=="1"&&!env.ContainsKey("CDMP_SAVE_SANDBOX"),"Host isolation forbidden");
-  else Require(!env.ContainsKey("CDMP_HOST_REAL_SAVES")&&S(env,"CDMP_SAVE_SANDBOX")==S(session,"guest_sandbox")&&S(env,"CDMP_SAVE_BACKUP")==Path.Combine(root,"guest-backup")&&S(env,"CDMP_SAVE_MANIFEST")==manifest&&S(env,"CDMP_SAVE_MANIFEST_SHA256")==S(session,"manifest_sha256")&&S(env,"CDMP_SAVE_ISOLATION")=="nt"&&S(env,"CDMP_REAL_SAVE_ROOT")==S(session,"source")&&S(env,"CDMP_GUEST_WITH_HOST")==(S(p,"session_kind")=="L3"?"1":"0"),"Guest isolation environment mismatch");
+  if(role=="host")Require(S(env,"CDMP_HOST_REAL_SAVES")=="1"&&!env.ContainsKey("CDMP_SAVE_SANDBOX")&&S(env,"CDMP_HOST_CRASH_DIR")==Path.Combine(root,"evidence"),"Host save or diagnostics environment mismatch");
+  else Require(!env.ContainsKey("CDMP_HOST_REAL_SAVES")&&!env.ContainsKey("CDMP_HOST_CRASH_DIR")&&S(env,"CDMP_SAVE_SANDBOX")==S(session,"guest_sandbox")&&S(env,"CDMP_SAVE_BACKUP")==Path.Combine(root,"guest-backup")&&S(env,"CDMP_SAVE_MANIFEST")==manifest&&S(env,"CDMP_SAVE_MANIFEST_SHA256")==S(session,"manifest_sha256")&&S(env,"CDMP_SAVE_ISOLATION")=="nt"&&S(env,"CDMP_REAL_SAVE_ROOT")==S(session,"source")&&S(env,"CDMP_GUEST_WITH_HOST")==(S(p,"session_kind")=="L3"?"1":"0"),"Guest isolation environment mismatch");
   var psi=new ProcessStartInfo(image,"PlatformServiceType=Steam"){WorkingDirectory=gameDir,UseShellExecute=false,WindowStyle=ProcessWindowStyle.Normal};
   ApplyEnvironment(psi,env);
   Process game=null;IntPtr pinned=IntPtr.Zero;bool completed=false;System.Threading.Timer windows=null;

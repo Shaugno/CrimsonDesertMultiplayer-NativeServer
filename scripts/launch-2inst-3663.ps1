@@ -329,8 +329,11 @@ $psi.FileName=Join-Path $GameDir 'CrimsonDesert.exe';$psi.WorkingDirectory=$Game
 $psi.Arguments='PlatformServiceType=Steam';$psi.UseShellExecute=$false
 $psi.EnvironmentVariables['SteamAppId']='3321460';$psi.EnvironmentVariables['SteamGameId']='3321460'
 $psi.EnvironmentVariables['CDMP_ROLE']=$LaunchRole
-foreach($key in @('CDMP_SAVE_SANDBOX','CDMP_SAVE_BACKUP','CDMP_SAVE_MANIFEST','CDMP_SAVE_MANIFEST_SHA256','CDMP_HOST_REAL_SAVES','CDMP_SAVE_ISOLATION','CDMP_REAL_SAVE_ROOT','CDMP_GUEST_WITH_HOST')){$psi.EnvironmentVariables.Remove($key)}
-if($LaunchRole -eq 'host'){$psi.EnvironmentVariables['CDMP_HOST_REAL_SAVES']='1'}
+foreach($key in @('CDMP_SAVE_SANDBOX','CDMP_SAVE_BACKUP','CDMP_SAVE_MANIFEST','CDMP_SAVE_MANIFEST_SHA256','CDMP_HOST_REAL_SAVES','CDMP_HOST_CRASH_DIR','CDMP_SAVE_ISOLATION','CDMP_REAL_SAVE_ROOT','CDMP_GUEST_WITH_HOST')){$psi.EnvironmentVariables.Remove($key)}
+if($LaunchRole -eq 'host'){
+    $psi.EnvironmentVariables['CDMP_HOST_REAL_SAVES']='1'
+    $psi.EnvironmentVariables['CDMP_HOST_CRASH_DIR']=Join-Path $SessionRoot 'evidence'
+}
 else{
     $psi.EnvironmentVariables['CDMP_SAVE_SANDBOX']=$record.guest_sandbox
     $psi.EnvironmentVariables['CDMP_SAVE_BACKUP']=Join-Path $SessionRoot 'guest-backup'
@@ -348,7 +351,7 @@ if($DesktopLaunchPlan){
     # exact game directly; it never invokes a shell or a terminal.
     $export=@{}
     $keys=@('SteamAppId','SteamGameId','CDMP_ROLE')
-    if($LaunchRole -eq 'host'){$keys+='CDMP_HOST_REAL_SAVES'}else{
+    if($LaunchRole -eq 'host'){$keys+=@('CDMP_HOST_REAL_SAVES','CDMP_HOST_CRASH_DIR')}else{
         $keys+=@('CDMP_SAVE_SANDBOX','CDMP_SAVE_BACKUP','CDMP_SAVE_MANIFEST','CDMP_SAVE_MANIFEST_SHA256',
           'CDMP_REAL_SAVE_ROOT','CDMP_SAVE_ISOLATION','CDMP_GUEST_WITH_HOST')
     }
