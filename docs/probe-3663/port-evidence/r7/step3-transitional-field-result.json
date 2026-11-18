@@ -1,0 +1,170 @@
+{
+  "round": 7,
+  "step": 3,
+  "tested_commit": "a39f326",
+  "attempt_id": "R7-L3-TRANSITIONAL-20261118",
+  "category": "join",
+  "result": "private staging and host-field Enter succeeded; guest access violation before loading completed",
+  "game_pid": 32520,
+  "game_start_filetime": "134395102190620325",
+  "started_utc": "2026-11-18T21:14:17.9598859Z",
+  "ended_utc": "2026-11-18T21:20:02.9714089Z",
+  "native_guest_login": true,
+  "host_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.host.log",
+    "sha256": "D4FB6E42A9207D566E54A25E3FC8F49CEBA1888CB732FDA47DBE74C4B4BBD64D"
+  },
+  "guest_log": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.guest.log",
+    "sha256": "A6AE850560EA6925F0AD8A908D4D81C1AB1CCB373768507615FCCA3E2C0C083D"
+  },
+  "side_by_side_user_confirmed": true,
+  "same_save_slot_requested": true,
+  "save_slot_label": null,
+  "same_save_slot_independently_verified": false,
+  "activation_error_observed": false,
+  "roles": {
+    "host": {
+      "launch": {
+        "role": "host",
+        "game_pid": 19324,
+        "game_start_filetime": "134395100579510570",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "none",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T21:14:17.9598859Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 19324,
+        "game_start_filetime": "134395100579510570",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 4280,
+        "controller_start_filetime": "134395100573221344",
+        "deadline_utc": "2026-11-18T21:28:17.9510570Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 0,
+        "ended_utc": "2026-11-18T21:20:02.9714089Z"
+      },
+      "mod_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.host.log",
+        "sha256": "D4FB6E42A9207D566E54A25E3FC8F49CEBA1888CB732FDA47DBE74C4B4BBD64D"
+      },
+      "window_rect": {
+        "left": 0,
+        "top": 0,
+        "right": 1296,
+        "bottom": 839
+      },
+      "window_evidence": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\window-host-before-selection.json",
+        "sha256": "812E3241C60450DCD28F0ABE10B18AC6D25968B7464E1F97E763B70643B14740"
+      }
+    },
+    "guest": {
+      "launch": {
+        "role": "guest",
+        "game_pid": 32520,
+        "game_start_filetime": "134395102190620325",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "max_age_seconds": 840,
+        "isolation": "nt",
+        "normal_profile_inherited": true,
+        "session_kind": "L3",
+        "launched_utc": "2026-11-18T21:16:59.0814260Z",
+        "backend": "desktop-app"
+      },
+      "exit": {
+        "state": "exited",
+        "game_pid": 32520,
+        "game_start_filetime": "134395102190620325",
+        "game_image": "D:\\SteamLibrary\\steamapps\\common\\Crimson Desert\\bin64\\CrimsonDesert.exe",
+        "controller_pid": 39432,
+        "controller_start_filetime": "134395102178245239",
+        "deadline_utc": "2026-11-18T21:28:17.9510570Z",
+        "max_game_age_seconds": 840,
+        "helper_sha256": "2BD32549C30918A7C5444C5E7F303F491105C1AEF894C04AC72B5ECAC0C0F9C3",
+        "backend": "desktop-app",
+        "game_exit_code": 3221225477,
+        "ended_utc": "2026-11-18T21:19:25.6013646Z"
+      },
+      "mod_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.guest.log",
+        "sha256": "A6AE850560EA6925F0AD8A908D4D81C1AB1CCB373768507615FCCA3E2C0C083D"
+      },
+      "window_rect": {
+        "left": 1278,
+        "top": 5,
+        "right": 2574,
+        "bottom": 844
+      },
+      "window_evidence": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\window-guest-before-selection.json",
+        "sha256": "153C82101B3685C59D768B66DF9A508B7EE744329E1E84A354140DC0ECAC96DE"
+      }
+    }
+  },
+  "identity_3081": "[16:18:41.717] INF [T30920] 3663 identity canonicalized 3081: native number 0x7FFFFFFFFFFFFFFF -> assigned guest 0x7FFFFFFFFFFFF002; length 17 epoch 1; binding/lobby/generation/slot checked; strict admission follows",
+  "private_acquire": "[16:18:42.574] INF [T13856] 3663 join Acquire predicates: stage=guest_native_destination shared=false host_pin=pass guest_pin=pass host_primary_pin=pass field_access=pass requested_info_key=0x3 requested_key_read=true host_field_key=0x81020001 host_key_read=true hash_header=pass hash_bucket=pass destination_found=pass entry_present=pass dest_eq_entry=fail owner_eq_host=skipped field_open=skipped field_key=skipped scope_read=skipped scope_vtable=skipped observed_vtable=0x0 scope_slot=skipped observed_slot=0x0 context_match=pass field_pin=skipped",
+  "private_enter": "[16:18:42.609] INF [T13856] 3663 join Enter native guest-owned field: field key 0x82020000 result 0x0 result_read=true",
+  "shared_acquire": "[16:19:17.999] INF [T13856] 3663 join Acquire predicates: stage=guest shared=true host_pin=pass guest_pin=pass host_primary_pin=pass field_access=pass requested_info_key=0x1 requested_key_read=true host_field_key=0x81020001 host_key_read=true hash_header=pass hash_bucket=pass destination_found=pass entry_present=pass dest_eq_entry=pass owner_eq_host=pass field_open=pass field_key=pass scope_read=pass scope_vtable=pass observed_vtable=0x14597BFE0 scope_slot=pass observed_slot=0x141659370 context_match=pass field_pin=pass",
+  "shared_enter": "[16:19:18.011] INF [T13856] 3663 join Enter: outcome 1 pin stage 3 admission 0 original called true result 0x0 field key 0x81020001",
+  "guest_last_reported_state": "loading (actor parked at 0,1000,0)",
+  "guest_exit_code_hex": "0xC0000005",
+  "guest_dump_or_application_crash_event_found": false,
+  "faulting_instruction_known": false,
+  "host_transport_after_guest_exit": "lost while Loading; lifecycle entered Quarantine",
+  "acceptance": {
+    "character_login_admitted": true,
+    "shared_field_enter_committed": true,
+    "guest_visually_seen_on_host": null,
+    "mutual_walk_turn": null,
+    "recording_verified": false,
+    "disconnect_removal": null,
+    "reconnect": "stopped after crash",
+    "host_reload_afterward": null,
+    "host_normal_exit": true,
+    "l3_passed": false,
+    "l4_run": false
+  },
+  "saves": {
+    "entries_each": 23,
+    "files_changed_during_guest_window": 2,
+    "changed_files": [
+      "<account>/slot2/lobby.save",
+      "<account>/slot2/save.save"
+    ],
+    "observed_write_time_eastern": "2026-11-18T16:18:04-05:00",
+    "changed_before_guest_character_request": true,
+    "writer_attributed": false,
+    "post_guest_matches_final": true,
+    "backups_verified": true,
+    "pre_guest_manifest": {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\save-before-guest.tsv",
+      "sha256": "B65BE5AC79EEF990D2AC1E7785ABCCE6C34B63DE2B6754B1E5CDCB149076FFC8"
+    },
+    "post_guest_manifest": {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\save-after-guest.tsv",
+      "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+    },
+    "final_manifest": {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\save-after.tsv",
+      "sha256": "051841A75E5BC94DD118EFBC0552A2629E85BE4000A9DCDD02B6C90E7EFEFAA7"
+    }
+  },
+  "installation_restored": true,
+  "finish_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\finish.json",
+    "sha256": "FA13E61634F94C575EABA22D54D530F452258D8639B0BE2C1842CE63D17DEAA6"
+  },
+  "installed_executable_sha256": "8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8",
+  "budget_used": {
+    "startup": 2,
+    "join": 3
+  }
+}

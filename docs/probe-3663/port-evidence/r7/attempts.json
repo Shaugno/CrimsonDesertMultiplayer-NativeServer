@@ -69,6 +69,24 @@
         "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-SAME-SLOT-20261118-B\\evidence\\cdmp.guest.log",
         "sha256": "5E9238543825881023732B56C670D71FB63B64EFCEBEF45D313C2A6ECDBCC888"
       }
+    },
+    {
+      "attempt_id": "R7-L3-TRANSITIONAL-20261118",
+      "category": "join",
+      "result": "private staging and host-field Enter succeeded; guest access violation before loading completed",
+      "game_pid": 32520,
+      "game_start_filetime": "134395102190620325",
+      "started_utc": "2026-11-18T21:14:17.9598859Z",
+      "ended_utc": "2026-11-18T21:20:02.9714089Z",
+      "native_guest_login": true,
+      "host_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.host.log",
+        "sha256": "D4FB6E42A9207D566E54A25E3FC8F49CEBA1888CB732FDA47DBE74C4B4BBD64D"
+      },
+      "guest_log": {
+        "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-live\\R7-L3-TRANSITIONAL-20261118\\evidence\\cdmp.guest.log",
+        "sha256": "A6AE850560EA6925F0AD8A908D4D81C1AB1CCB373768507615FCCA3E2C0C083D"
+      }
     }
   ]
 }
