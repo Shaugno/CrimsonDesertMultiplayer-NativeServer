@@ -1,0 +1,533 @@
+﻿0x0145c450	0x0145dfd0	sig	46/50 fixed
+0x014a6cf0	0x014a8870	sig	44/52 fixed
+0x014aac70	0x014ac7f0	sig	40/48 fixed
+0x014ad340	0x014aeec0	sig	46/50 fixed
+0x014ad670	0x014af1f0	sig	49/49 fixed
+0x014afda0	0x014b1920	delta	7 sig hits, anchors agree on +0x1b80
+0x014b1a70	0x014b35f0	sig	48/48 fixed
+0x014b3c90	0x014b5810	sig	48/48 fixed
+0x014b3f20	0x014b5aa0	sig	48/48 fixed
+0x0014bca0	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x14bcb0,0x14bc60,0x14bd00
+0x014be100	0x014bfc80	delta	2 sig hits, anchors agree on +0x1b80
+0x014c0fc0	0x014c2b40	sig	44/49 fixed
+0x0014ca60	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x14ca70,0x14ca20,0x14cac0
+0x0014cf60	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x14cf70,0x14cf20,0x14cfc0
+0x014d0c20	0x014d27a0	sig	44/48 fixed
+0x014d0e80	0x014d2a00	func	in function 0x14d0de0 -> 0x14d2960, site bytes verified
+0x014dfc70	0x014e17f0	sig	44/49 fixed
+0x014e3280	0x014e4e00	sig	41/49 fixed
+0x015442e0	0x01545e60	sig	49/49 fixed
+0x01545940	0x015474c0	sig	41/50 fixed
+0x01573250	0x01574dd0	delta	2 sig hits, anchors agree on +0x1b80
+0x015864e0	0x01588060	sig	41/49 fixed
+0x01593240	0x01594dc0	func	in function 0x1593220 -> 0x1594da0, site bytes verified
+0x01593530	0x015950b0	sig	36/48 fixed
+0x01593890	0x01595410	sig	39/51 fixed
+0x01594530	0x015960b0	sig	31/41 fixed
+0x015946c0	0x01596240	sig	38/50 fixed
+0x01595740	0x015972c0	delta	10 sig hits, anchors agree on +0x1b80
+0x015957a0	0x01597320	sig	48/49 fixed
+0x01595880	0x01597400	sig	42/51 fixed
+0x01595aa0	0x01597620	sig	45/50 fixed
+0x0159d390	0x0159ef10	sig	43/51 fixed
+0x016046f0	0x01606270	sig	47/51 fixed
+0x00162960	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x162a60,0x162ab0,0x162b00
+0x001629b0	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x162a60,0x162ab0,0x162b00
+0x0163afa0	0x0163cb20	delta	47 sig hits, anchors agree on +0x1b80
+0x016436f0	0x01645270	sig	44/48 fixed
+0x01643f30	0x01645ab0	sig	52/52 fixed
+0x01644f00	0x01646a80	sig	40/51 fixed
+0x01644fa0	0x01646b20	sig	44/48 fixed
+0x01649360	0x0164aee0	sig	48/48 fixed
+0x016494d0	0x0164b050	sig	45/49 fixed
+0x01649a00	0x0164b580	sig	49/49 fixed
+0x0164c420	0x0164dfa0	delta	5 sig hits, anchors agree on +0x1b80
+0x0164c970	0x0164e4f0	sig	48/49 fixed
+0x01658e90	0x0165aa10	delta	2 sig hits, anchors agree on +0x1b80
+0x01658f60	0x0165aae0	sig	41/49 fixed
+0x01659380	0x0165af00	sig	45/48 fixed
+0x0165b9d0	0x0165d550	sig	47/51 fixed
+0x0165c1f0	0x0165dd70	sig	44/48 fixed
+0x0165ca40	0x0165e5c0	delta	12 sig hits, anchors agree on +0x1b80
+0x0165cb60	0x0165e6e0	sig	42/46 fixed
+0x0165cbd0	0x0165e750	delta	2 sig hits, anchors agree on +0x1b80
+0x0165cc50	0x0165e7d0	sig	46/52 fixed
+0x0165d060	0x0165ebe0	sig	44/48 fixed
+0x0165d220	0x0165eda0	sig	33/49 fixed
+0x0165d9c0	0x0165f540	sig	45/49 fixed
+0x0165df60	0x0165fae0	delta	12 sig hits, anchors agree on +0x1b80
+0x0165e730	0x016602b0	sig	44/48 fixed
+0x0165e910	0x01660490	sig	46/50 fixed
+0x0165eda0	0x01660920	sig	48/49 fixed
+0x0165f330	0x01660eb0	sig	43/48 fixed
+0x0165f3f0	0x01660f70	sig	40/52 fixed
+0x0165fa60	0x016615e0	delta	12 sig hits, anchors agree on +0x1b80
+0x0165fac0	0x01661640	sig	36/49 fixed
+0x0165fc50	0x016617d0	delta	63 sig hits, anchors agree on +0x1b80
+0x0165fe30	0x016619b0	delta	63 sig hits, anchors agree on +0x1b80
+0x0165ff90	0x01661b10	sig	42/51 fixed
+0x01660280	0x01661e00	sig	33/42 fixed
+0x01789360	-	unresolved	151 hits, 41/49 fixed, local delta n/a 0x1788f20,0x1789870,0x1789ae0
+0x01796cf0	-	unresolved	58 hits, 35/36 fixed, local delta n/a 0x1798770,0x1798870,0x1798920
+0x01798d70	-	unresolved	5 hits, 47/48 fixed, local delta n/a 0x17986a0,0x179a7b0,0x179aa50
+0x01799710	-	unresolved	58 hits, 35/36 fixed, local delta n/a 0x1799790,0x1799840,0x17998f0
+0x0179ad50	-	unresolved	21 hits, 47/48 fixed, local delta n/a 0x179bb60,0x179bc10,0x179bd10
+0x017f5810	0x017f7400	sig	49/49 fixed
+0x017f8010	0x017f9c00	sig	52/52 fixed
+0x01876fb0	0x01878b70	sig	36/42 fixed
+0x0192abd0	0x0192ca60	sig	44/48 fixed
+0x0192b040	0x0192ced0	sig	47/51 fixed
+0x0192b2b0	0x0192d140	sig	51/51 fixed
+0x0192bb30	0x0192d9c0	sig	44/49 fixed
+0x0192be70	0x0192dd00	sig	46/50 fixed
+0x0192e170	0x01930000	sig	48/48 fixed
+0x0192ea40	0x019308d0	sig	48/48 fixed
+0x01930050	0x01931ee0	sig	44/48 fixed
+0x01935790	0x01937620	sig	44/52 fixed
+0x0193c8b0	0x0193e740	delta	180 sig hits, anchors agree on +0x1e90
+0x0193c950	0x0193e7e0	delta	180 sig hits, anchors agree on +0x1e90
+0x0193ce50	0x0193ece0	delta	47 sig hits, anchors agree on +0x1e90
+0x0193cec0	0x0193ed50	delta	47 sig hits, anchors agree on +0x1e90
+0x0193cf30	0x0193edc0	delta	2 sig hits, anchors agree on +0x1e90
+0x0193d090	0x0193ef20	delta	2 sig hits, anchors agree on +0x1e90
+0x0193d150	0x0193efe0	delta	5 sig hits, anchors agree on +0x1e90
+0x01940940	0x019427d0	sig	53/53 fixed
+0x019425d0	0x01944460	sig	47/48 fixed
+0x01942be0	0x01944a70	sig	44/48 fixed
+0x01948f60	0x0194adf0	func	in function 0x1948dd9 -> 0x194ac69, site bytes verified
+0x01949820	0x0194b6b0	sig	48/48 fixed
+0x01949bf0	0x0194ba80	sig	53/53 fixed
+0x0194c6f0	0x0194e580	sig	46/50 fixed
+0x0194c880	0x0194e710	delta	2 sig hits, anchors agree on +0x1e90
+0x0194cd30	0x0194ebc0	sig	46/50 fixed
+0x0194d0f0	0x0194ef80	sig	46/50 fixed
+0x0194db00	0x0194f990	sig	49/49 fixed
+0x0194e690	0x01950520	sig	50/50 fixed
+0x0194f650	0x019514e0	sig	40/49 fixed
+0x0194f6e0	0x01951570	sig	40/49 fixed
+0x01951e70	0x01953d00	sig	50/54 fixed
+0x01952210	0x019540a0	sig	48/48 fixed
+0x01952e20	0x01954cb0	sig	48/48 fixed
+0x019534c0	0x01955350	sig	43/48 fixed
+0x019553a0	0x01957230	sig	38/51 fixed
+0x01955650	0x019574e0	sig	44/48 fixed
+0x0198db00	0x0198f990	sig	42/51 fixed
+0x0198f780	0x01991610	sig	46/50 fixed
+0x0199f840	0x019a14b0	sig	50/50 fixed
+0x019a9b80	0x019ab7f0	sig	48/52 fixed
+0x01a15070	0x01a16ce0	sig	44/49 fixed
+0x01a15340	0x01a16fb0	sig	51/51 fixed
+0x01a16c40	0x01a188b0	sig	50/50 fixed
+0x01a17040	0x01a18cb0	sig	49/49 fixed
+0x01a186e0	0x01a1a350	sig	48/48 fixed
+0x01a18780	0x01a1a3f0	sig	48/48 fixed
+0x01a18b00	0x01a1a770	sig	50/50 fixed
+0x01a18f00	0x01a1ab70	sig	54/54 fixed
+0x01a192d0	0x01a1af40	sig	50/50 fixed
+0x01a19720	0x01a1b390	sig	49/49 fixed
+0x01a1a080	0x01a1bcf0	sig	49/49 fixed
+0x01a1a3c0	0x01a1c030	delta	36 sig hits, anchors agree on +0x1c70
+0x01a1b1a0	0x01a1ce10	sig	49/49 fixed
+0x01a1b6d0	0x01a1d340	delta	44 sig hits, anchors agree on +0x1c70
+0x01a1b7e0	0x01a1d450	sig	47/49 fixed
+0x01a1baf0	0x01a1d760	delta	2 sig hits, anchors agree on +0x1c70
+0x01a1c5f0	0x01a1e260	sig	50/50 fixed
+0x01b13b90	-	unresolved	170 hits, 36/53 fixed, local delta n/a 0x1b15750,0x1b15800,0x1b15a20
+0x021958c0	-	unresolved	5 hits, 42/50 fixed, local delta n/a 0x21974e0,0x21975f0,0x21976d0
+0x021959d0	-	unresolved	5 hits, 42/50 fixed, local delta n/a 0x21974e0,0x21975f0,0x21976d0
+0x02195ab0	-	unresolved	5 hits, 42/50 fixed, local delta n/a 0x21974e0,0x21975f0,0x21976d0
+0x02195bc0	-	unresolved	5 hits, 42/50 fixed, local delta n/a 0x21974e0,0x21975f0,0x21976d0
+0x02195cd0	-	unresolved	5 hits, 42/50 fixed, local delta n/a 0x21974e0,0x21975f0,0x21976d0
+0x02195db0	0x021979d0	sig	49/51 fixed
+0x02196a10	0x02198630	sig	44/50 fixed
+0x021bd690	0x021bf2b0	sig	47/51 fixed
+0x0228c410	0x0228e030	delta	2 sig hits, anchors agree on +0x1c20
+0x022951b0	0x02296dd0	sig	49/49 fixed
+0x02295ff0	0x02297c10	sig	49/49 fixed
+0x02297780	0x022993a0	sig	48/49 fixed
+0x02297c20	0x02299840	sig	49/49 fixed
+0x02298a80	0x0229a6a0	sig	35/48 fixed
+0x023066c0	0x02308340	sig	46/48 fixed
+0x0231a180	0x0231be00	sig	44/49 fixed
+0x023626f0	0x023643b0	sig	44/48 fixed
+0x02372ab0	0x023746a0	sig	43/55 fixed
+0x0237e470	0x0237fea0	sig	44/48 fixed
+0x0237ea60	0x02380490	func	in function 0x237e990 -> 0x23803c0, site bytes verified
+0x02380d80	0x023827b0	sig	47/49 fixed
+0x02381410	0x02382e40	sig	45/49 fixed
+0x023866e0	0x023889a0	sig	49/49 fixed
+0x0238e140	0x02390410	sig	49/49 fixed
+0x023932c0	0x02395590	sig	49/49 fixed
+0x023940b0	0x02396380	sig	50/50 fixed
+0x02394e00	0x023970d0	sig	45/49 fixed
+0x023c31a0	0x023c5470	delta	8 sig hits, anchors agree on +0x22d0
+0x023da900	0x023dcbd0	sig	50/54 fixed
+0x023dc630	0x023de900	sig	50/50 fixed
+0x0241e990	0x02420c60	sig	50/50 fixed
+0x02450270	0x02452540	sig	22/50 fixed
+0x0024d5a0	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x24d8c0,0x24d910,0x24d960
+0x0024d5f0	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x24d8c0,0x24d910,0x24d960
+0x0251f7c0	0x02521a90	sig	53/53 fixed
+0x0258c5a0	0x0258ea30	sig	48/48 fixed
+0x00259370	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x259370,0x259320,0x2593c0
+0x00259cd0	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x259cd0,0x259c80,0x259d20
+0x00259e60	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x259e60,0x259e10,0x259eb0
+0x025af530	0x025b19c0	sig	43/48 fixed
+0x025ba4b0	0x025bc940	sig	49/53 fixed
+0x025bac30	0x025bd0c0	func	in function 0x25ba8d0 -> 0x25bcd60, site bytes verified
+0x025baf20	0x025bd3b0	sig	50/50 fixed
+0x025bb150	0x025bd5e0	sig	45/49 fixed
+0x025bb470	0x025bd900	func	in function 0x25bb150 -> 0x25bd5e0, site bytes verified
+0x025bb820	0x025bdcb0	sig	42/50 fixed
+0x025c07e0	0x025c2c70	func	in function 0x25c0040 -> 0x25c24d0, site bytes verified
+0x025c0900	0x025c2d90	sig	45/49 fixed
+0x025c0e40	0x025c32d0	func	in function 0x25c0c60 -> 0x25c30f0, site bytes verified
+0x025c15b0	0x025c3a40	func	in function 0x25c1590 -> 0x25c3a20, site bytes verified
+0x025c1e50	0x025c42e0	sig	49/53 fixed
+0x025c2580	0x025c4a10	sig	46/51 fixed
+0x025c2630	-	unresolved	2 hits, 49/50 fixed, local delta n/a 0x25c4ac0,0x25c4e30
+0x025c29a0	-	unresolved	2 hits, 49/50 fixed, local delta n/a 0x25c4ac0,0x25c4e30
+0x002691e0	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x2691e0,0x269190,0x269230
+0x026ab5d0	-	unresolved	10 hits, 42/50 fixed, local delta n/a 0x26add30,0x26ae250,0x26af2a0
+0x0026b250	-	unresolved	1179 hits, 31/51 fixed, local delta n/a 0x26b240,0x26b290,0x26b1f0
+0x028068a0	0x02809000	sig	50/54 fixed
+0x0281bf80	0x0281e6e0	sig	48/48 fixed
+0x02a0ce20	0x02a0f5a0	sig	54/54 fixed
+0x02a0d1e0	0x02a0f960	sig	48/48 fixed
+0x02a0e1a0	0x02a10920	sig	50/50 fixed
+0x02a0e200	0x02a10980	sig	46/54 fixed
+0x02a0ea70	0x02a111f0	sig	49/49 fixed
+0x02a0f460	0x02a11be0	sig	48/49 fixed
+0x02a0f680	0x02a11e00	sig	51/51 fixed
+0x02a0fa80	0x02a12200	sig	41/42 fixed
+0x02a10180	0x02a12900	sig	51/51 fixed
+0x02a10830	0x02a12fb0	delta	212 sig hits, anchors agree on +0x2780
+0x02a10a00	0x02a13180	sig	46/50 fixed
+0x02a10c30	0x02a133b0	sig	56/58 fixed
+0x02a10cd0	0x02a13450	sig	36/48 fixed
+0x02a11db0	0x02a14530	sig	21/26 fixed
+0x02a2b2e0	0x02a2da60	sig	45/49 fixed
+0x02a2e300	0x02a30a80	sig	44/48 fixed
+0x02a2e570	0x02a30cf0	sig	50/50 fixed
+0x02a34180	0x02a36900	sig	44/48 fixed
+0x02a47830	-	unresolved	2 hits, 50/50 fixed, local delta n/a 0x2a49fb0,0x2e432c0
+0x02a5e840	0x02a60f90	sig	50/50 fixed
+0x02a600c0	0x02a62810	sig	48/48 fixed
+0x02a60290	0x02a629e0	sig	52/52 fixed
+0x02a61500	0x02a63c50	sig	55/55 fixed
+0x02a61ca0	0x02a643f0	sig	48/48 fixed
+0x02a62260	0x02a649b0	delta	15 sig hits, anchors agree on +0x2750
+0x02a622e0	0x02a64a30	sig	40/48 fixed
+0x02a62400	0x02a64b50	sig	41/49 fixed
+0x02a62530	0x02a64c80	sig	47/48 fixed
+0x02a625e0	0x02a64d30	sig	44/48 fixed
+0x02a626c0	0x02a64e10	sig	47/52 fixed
+0x02a62790	0x02a64ee0	sig	44/48 fixed
+0x02a62950	0x02a650a0	sig	47/51 fixed
+0x02a62990	0x02a650e0	sig	39/48 fixed
+0x02a62a10	0x02a65160	delta	4 sig hits, anchors agree on +0x2750
+0x02a62a80	0x02a651d0	sig	42/48 fixed
+0x02a62b20	0x02a65270	sig	40/48 fixed
+0x02a62ef0	0x02a65640	delta	15 sig hits, anchors agree on +0x2750
+0x02a62f60	0x02a656b0	delta	15 sig hits, anchors agree on +0x2750
+0x02a827b0	0x02a84f00	sig	18/19 fixed
+0x02aace50	0x02aaf5a0	sig	44/48 fixed
+0x02ad7d00	0x02ada450	sig	48/52 fixed
+0x02b3f000	0x02b41750	sig	48/48 fixed
+0x02bc2720	0x02bc5140	sig	43/51 fixed
+0x02bc29f0	0x02bc5410	sig	48/48 fixed
+0x02bc8590	0x02bcafb0	sig	49/49 fixed
+0x02bcc3f0	0x02bcee10	sig	47/51 fixed
+0x02bcc490	0x02bceeb0	sig	49/53 fixed
+0x02bcd3e0	0x02bcfe00	func	in function 0x2bcd2a0 -> 0x2bcfcc0, site bytes verified
+0x02bce540	0x02bd0f60	sig	49/49 fixed
+0x02c160b0	0x02c1ab40	func	in function 0x2c15f60 -> 0x2c1a9f0, site bytes verified
+0x02c6ae10	0x02c6f8a0	sig	48/48 fixed
+0x02c7a2b0	0x02c7ed40	delta	2 sig hits, anchors agree on +0x4a90
+0x02c7ada0	0x02c7f830	delta	58 sig hits, anchors agree on +0x4a90
+0x02c7eff0	0x02c83a80	delta	34 sig hits, anchors agree on +0x4a90
+0x02ca5b50	0x02caa5e0	func	in function 0x2ca5860 -> 0x2caa2f0, site bytes verified
+0x02ca68f0	0x02cab380	func	in function 0x2ca66c0 -> 0x2cab150, site bytes verified
+0x02cad9e0	0x02cb2470	delta	3 sig hits, anchors agree on +0x4a90
+0x02cae200	0x02cb2c90	func	in function 0x2caddd0 -> 0x2cb2860, site bytes verified
+0x02d0e0e0	0x02d12b70	delta	3 sig hits, anchors agree on +0x4a90
+0x02d0ee00	0x02d13890	delta	3 sig hits, anchors agree on +0x4a90
+0x02d10ba0	0x02d15630	delta	27 sig hits, anchors agree on +0x4a90
+0x02d11f20	0x02d169b0	delta	3 sig hits, anchors agree on +0x4a90
+0x02d12310	0x02d16da0	sig	50/50 fixed
+0x02d12540	0x02d16fd0	sig	51/51 fixed
+0x02d12ac0	0x02d17550	sig	51/51 fixed
+0x02d12df0	0x02d17880	delta	3 sig hits, anchors agree on +0x4a90
+0x02d6bf10	0x02d709a0	sig	41/49 fixed
+0x02d6c210	0x02d70ca0	sig	16/20 fixed
+0x02d6c230	0x02d70cc0	delta	2 sig hits, anchors agree on +0x4a90
+0x02d6c360	0x02d70df0	delta	2 sig hits, anchors agree on +0x4a90
+0x02d73960	0x02d783f0	sig	42/50 fixed
+0x02d740c0	0x02d78b50	func	in function 0x2d73fb0 -> 0x2d78a40, site bytes verified
+0x02d740d0	0x02d78b60	sig	48/48 fixed
+0x02d787e0	0x02d7d270	delta	5 sig hits, anchors agree on +0x4a90
+0x02d78a00	0x02d7d490	delta	5 sig hits, anchors agree on +0x4a90
+0x02d78e40	0x02d7d8d0	delta	5 sig hits, anchors agree on +0x4a90
+0x02d799b0	0x02d7e440	sig	48/52 fixed
+0x02d79d00	0x02d7e790	func	in function 0x2d799b0 -> 0x2d7e440, site bytes verified
+0x02d79e90	0x02d7e920	sig	50/50 fixed
+0x02d7a640	0x02d7f0d0	sig	46/51 fixed
+0x02d7ae20	0x02d7f8b0	sig	49/54 fixed
+0x02df0b80	0x02df5610	sig	49/49 fixed
+0x02df5650	0x02dfa0e0	sig	47/51 fixed
+0x02dfcf80	0x02e01a10	sig	49/49 fixed
+0x02dfd3a0	0x02e01e30	func	in function 0x2dfd080 -> 0x2e01b10, site bytes verified
+0x02e08520	0x02e0cfb0	sig	48/48 fixed
+0x02e5ce00	0x02e61890	sig	53/53 fixed
+0x02e879a0	0x02e8c100	sig	48/48 fixed
+0x02e893f0	0x02e8db50	sig	49/49 fixed
+0x02e8f150	0x02e938b0	sig	46/50 fixed
+0x02e98b30	0x02e9d290	sig	50/50 fixed
+0x02e9ab10	0x02e9f270	sig	48/48 fixed
+0x02e9d770	0x02ea1ed0	sig	49/49 fixed
+0x02ea4690	0x02ea8df0	sig	53/53 fixed
+0x02ea4860	0x02ea8fc0	sig	50/50 fixed
+0x02ec2fe0	0x02ec7530	sig	42/50 fixed
+0x02ec36a0	0x02ec7bf0	sig	44/48 fixed
+0x02ec9200	0x02ecd750	func	in function 0x2ec8ff0 -> 0x2ecd540, site bytes verified
+0x02ec93b0	0x02ecd900	sig	51/51 fixed
+0x02ec9c70	0x02ece1c0	sig	49/49 fixed
+0x02eca480	0x02ece9d0	sig	49/49 fixed
+0x02ecb130	0x02ecf680	sig	51/51 fixed
+0x02ecb660	0x02ecfbb0	sig	49/49 fixed
+0x02ecc000	0x02ed0550	sig	50/50 fixed
+0x02ecf020	0x02ed3570	sig	48/48 fixed
+0x02ecf850	0x02ed3da0	sig	45/49 fixed
+0x02ed05f0	0x02ed4b40	sig	50/50 fixed
+0x02ed0860	0x02ed4db0	sig	46/50 fixed
+0x02ed09a0	0x02ed4ef0	sig	50/50 fixed
+0x02ed29d0	0x02ed6f20	sig	50/50 fixed
+0x02ed3210	0x02ed7760	sig	49/49 fixed
+0x02ed3360	0x02ed78b0	sig	49/49 fixed
+0x02ed4d20	0x02ed9270	sig	50/50 fixed
+0x02ed5980	0x02ed9ed0	sig	48/48 fixed
+0x02ed5ff0	0x02eda540	sig	45/49 fixed
+0x02ed6dd0	0x02edb320	sig	50/50 fixed
+0x02ed73f0	0x02edb940	sig	47/51 fixed
+0x02ed7960	0x02edbeb0	sig	46/50 fixed
+0x02ed8640	0x02edcb90	sig	47/51 fixed
+0x02ee0af0	0x02ee5040	delta	3 sig hits, anchors agree on +0x4550
+0x02f2a650	0x02f2eba0	sig	46/54 fixed
+0x02f3eb40	0x02f43090	sig	42/48 fixed
+0x02f4ae80	0x02f4f3d0	sig	49/49 fixed
+0x02f55680	0x02f59bd0	func	in function 0x2f554aa -> 0x2f599fa, site bytes verified
+0x02f557b0	0x02f59d00	func	in function 0x2f554aa -> 0x2f599fa, site bytes verified
+0x02f55f80	0x02f5a4d0	sig	51/51 fixed
+0x02f56640	0x02f5ab90	sig	50/50 fixed
+0x039f6b20	0x039fb070	sig	46/50 fixed
+0x039fa9d0	0x039fef20	sig	51/52 fixed
+0x03a019f0	0x03a05f40	sig	45/50 fixed
+0x003a7e30	0x003a8240	func	in function 0x3a7cd0 -> 0x3a80e0, site bytes verified
+0x003a8040	0x003a8450	sig	49/49 fixed
+0x003a8ac0	0x003a8ed0	sig	48/48 fixed
+0x003a9170	0x003a9580	sig	49/49 fixed
+0x003a9960	0x003a9d70	sig	49/53 fixed
+0x003a9b80	0x003a9f90	sig	47/51 fixed
+0x003a9cf0	0x003aa100	sig	49/49 fixed
+0x003aaa60	0x003aae70	sig	48/48 fixed
+0x003aacb0	0x003ab0c0	delta	2 sig hits, anchors agree on +0x410
+0x003aadf0	0x003ab200	delta	8 sig hits, anchors agree on +0x410
+0x003aaf00	0x003ab310	delta	2 sig hits, anchors agree on +0x410
+0x003ab140	0x003ab550	delta	2 sig hits, anchors agree on +0x410
+0x003ab260	0x003ab670	delta	2 sig hits, anchors agree on +0x410
+0x003ab3c0	0x003ab7d0	delta	7 sig hits, anchors agree on +0x410
+0x003ab4c0	0x003ab8d0	sig	43/48 fixed
+0x003ab5a0	0x003ab9b0	sig	46/51 fixed
+0x003ab6e0	0x003abaf0	delta	2 sig hits, anchors agree on +0x410
+0x003ab770	0x003abb80	sig	45/50 fixed
+0x003ab890	0x003abca0	sig	36/49 fixed
+0x003abee0	0x003ac2f0	func	in function 0x3abce0 -> 0x3ac0f0, site bytes verified
+0x003ac5d0	0x003ac9e0	sig	41/43 fixed
+0x003acc80	0x003ad090	sig	49/49 fixed
+0x003acd20	0x003ad130	sig	45/50 fixed
+0x003acfb0	0x003ad3c0	sig	33/34 fixed
+0x003ad0a0	0x003ad4b0	sig	44/49 fixed
+0x003afa10	0x003afe20	sig	41/51 fixed
+0x03bd12d0	0x03bd5820	sig	49/49 fixed
+0x03cebc20	0x03cf0170	sig	51/51 fixed
+0x03d79200	0x03d7d750	sig	44/48 fixed
+0x003daa60	0x003dae70	delta	67 sig hits, anchors agree on +0x410
+0x003dac70	0x003db080	delta	67 sig hits, anchors agree on +0x410
+0x003db010	0x003db420	delta	67 sig hits, anchors agree on +0x410
+0x003db230	0x003db640	delta	67 sig hits, anchors agree on +0x410
+0x003db330	0x003db740	delta	67 sig hits, anchors agree on +0x410
+0x003db480	0x003db890	sig	44/47 fixed
+0x003e2e20	0x003e3230	delta	6 sig hits, anchors agree on +0x410
+0x003e3270	0x003e3680	delta	2 sig hits, anchors agree on +0x410
+0x003e4ba0	0x003e4fb0	sig	48/49 fixed
+0x003e4eb0	0x003e52c0	sig	51/51 fixed
+0x003e4fe0	0x003e53f0	sig	45/49 fixed
+0x003e5160	0x003e5570	sig	46/48 fixed
+0x003e5370	0x003e5780	sig	48/49 fixed
+0x003e5550	0x003e5960	sig	53/53 fixed
+0x003e56d0	0x003e5ae0	delta	2 sig hits, anchors agree on +0x410
+0x003e5e50	0x003e6260	sig	45/50 fixed
+0x003e6f50	0x003e7360	delta	2 sig hits, anchors agree on +0x410
+0x003f2d10	0x003f3120	sig	38/48 fixed
+0x003f3590	0x003f39a0	delta	17 sig hits, anchors agree on +0x410
+0x0040a5e0	0x0040a9f0	sig	46/47 fixed
+0x0041f6e0	0x0041faf0	sig	48/48 fixed
+0x00420370	0x00420780	sig	32/33 fixed
+0x044ad6c0	0x044b1c60	sig	45/49 fixed
+0x044af690	0x044b3c30	sig	47/51 fixed
+0x044afe10	0x044b43b0	sig	39/51 fixed
+0x044b0ff0	0x044b5590	sig	40/47 fixed
+0x044b6600	0x044baba0	sig	47/48 fixed
+0x0458e190	0x04592730	sig	40/50 fixed
+0x04601220	0x046057c0	delta	25 sig hits, anchors agree on +0x45a0
+0x04601320	0x046058c0	sig	47/51 fixed
+0x04602730	0x04606cd0	sig	37/54 fixed
+0x04604b60	0x04609100	delta	2 sig hits, anchors agree on +0x45a0
+0x04604d40	0x046092e0	sig	51/51 fixed
+0x00464550	0x00464960	sig	42/50 fixed
+0x04b7e0c0	0x04b82660	sig	46/50 fixed
+0x04b7e188	0x04b82728	sig	32/53 fixed
+0x04b7e9cc	0x04b82f6c	sig	48/49 fixed
+0x04b7eacc	0x04b8306c	sig	49/50 fixed
+0x04c23b20	0x04c280c0	sig	25/49 fixed
+0x04c23b8c	0x04c2812c	sig	25/35 fixed
+0x04c23e20	0x04c283c0	sig	16/26 fixed
+0x04c23e5c	0x04c283fc	sig	19/23 fixed
+0x04c249d0	0x04c28f70	sig	47/48 fixed
+0x004cae10	0x004cb220	delta	8 sig hits, anchors agree on +0x410
+0x004ce520	0x004ce930	sig	44/50 fixed
+0x004d6c20	0x004d7030	sig	42/48 fixed
+0x004e3f20	0x004e4330	sig	42/49 fixed
+0x004fba60	0x004fbe70	delta	4 sig hits, anchors agree on +0x410
+0x004ffa10	0x004ffe20	delta	69 sig hits, anchors agree on +0x410
+0x00507bf0	0x00508000	sig	40/48 fixed
+0x0050ef30	0x0050f340	delta	3 sig hits, anchors agree on +0x410
+0x0051c740	0x0051cb50	delta	3 sig hits, anchors agree on +0x410
+0x0051e150	0x0051e560	delta	4 sig hits, anchors agree on +0x410
+0x005207b0	0x00520bc0	sig	37/49 fixed
+0x005209b0	0x00520dc0	sig	40/51 fixed
+0x005361f0	-	unresolved	33 hits, 39/48 fixed, local delta n/a 0x536600,0x5485c0,0x508e40
+0x00536e90	-	unresolved	6 hits, 48/49 fixed, local delta n/a 0x5372a0,0x462e60,0x462d00
+0x00547d20	-	unresolved	23 hits, 48/49 fixed, local delta n/a 0x548130,0x531910,0x51c890
+0x054a5cb0	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x054a5f70	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x054a6070	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x054aff90	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x054affa0	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x054c3660	-	unresolved	3 hits, 39/49 fixed, local delta +0x45a0 0x54c8230,0x54ecde0,0x5514830
+0x05528890	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x055288a0	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x055288b0	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x05528920	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x05528930	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x0552ed00	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x0552eee0	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x0552ef30	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x05534710	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x05534f80	-	unresolved	0 hits, 7/15 fixed, local delta +0x45a0 
+0x0055a410	0x0055a750	sig	49/50 fixed
+0x0055bf90	0x0055c2d0	delta	7 sig hits, anchors agree on +0x340
+0x00578630	0x00578970	delta	3 sig hits, anchors agree on +0x340
+0x0057b170	0x0057b4b0	delta	2 sig hits, anchors agree on +0x340
+0x0057b290	0x0057b5d0	delta	69 sig hits, anchors agree on +0x340
+0x059728fc	-	skip	not in an executable section
+0x005b4fd0	0x005b5310	delta	5 sig hits, anchors agree on +0x340
+0x005b5d80	0x005b60c0	sig	48/48 fixed
+0x005d8540	0x005d8880	sig	50/50 fixed
+0x005e3ec0	0x005e4200	sig	49/49 fixed
+0x005ef610	-	unresolved	2 hits, 49/53 fixed, local delta n/a 0x5ef950,0x6a89e0
+0x005fcac0	-	unresolved	2 hits, 41/51 fixed, local delta n/a 0x5fce00,0x520d30
+0x0063ff50	0x006402c0	sig	40/48 fixed
+0x0066d8f0	-	unresolved	41 hits, 39/48 fixed, local delta n/a 0x66dc60,0x66e1f0,0x66e360
+0x006a9cc0	-	unresolved	14 hits, 23/32 fixed, local delta n/a 0x6aa030,0x6bca50,0x66d8d0
+0x0071c4e0	0x0071c870	sig	52/52 fixed
+0x0071ce50	0x0071d1e0	sig	47/51 fixed
+0x00723660	0x007239f0	sig	50/50 fixed
+0x00724c40	0x00724fd0	sig	48/49 fixed
+0x00725390	-	unresolved	78 hits, 24/33 fixed, local delta n/a 0x725380,0x725720,0x76af10
+0x00758ea0	0x007593c0	sig	41/50 fixed
+0x00762e00	0x00763320	sig	44/48 fixed
+0x007b08b0	0x007b0fd0	sig	49/49 fixed
+0x007b0960	0x007b1080	sig	49/49 fixed
+0x007f9480	0x007f9ba0	delta	5 sig hits, anchors agree on +0x720
+0x00829fb0	0x0082a6d0	sig	46/50 fixed
+0x008444f0	0x00844c10	delta	4 sig hits, anchors agree on +0x720
+0x08968c40	0x0883bd20	sig	44/48 fixed
+0x08b6d320	0x089d1a20	sig	41/54 fixed
+0x08c01310	0x08a7d5e0	sig	50/50 fixed
+0x08e78450	0x08c7e360	sig	49/49 fixed
+0x0096c900	0x0096d020	sig	48/48 fixed
+0x09790fd0	0x094cf960	sig	45/49 fixed
+0x09796920	0x094d0830	sig	39/52 fixed
+0x09a21d40	0x09715f40	sig	33/38 fixed
+0x09ba4680	0x098f3f50	sig	49/49 fixed
+0x009be640	-	unresolved	2 hits, 40/44 fixed, local delta n/a 0x9beec0,0xaed990
+0x09bfb030	0x09939d00	sig	41/49 fixed
+0x009c6a20	-	unresolved	9 hits, 45/50 fixed, local delta n/a 0x9c6b00,0x9c6810,0x9c6cf0
+0x009c73f0	-	unresolved	9 hits, 45/50 fixed, local delta n/a 0x9c72a0,0x9c70c0,0x9c6ee0
+0x009ccee0	-	unresolved	9 hits, 45/50 fixed, local delta n/a 0x9cd760,0x9c7c70,0x9c7ad0
+0x009cdc00	0x009ce480	sig	48/49 fixed
+0x009cdc90	0x009ce510	sig	46/51 fixed
+0x009cebc0	0x009cf440	sig	44/50 fixed
+0x009d68e0	0x009d7160	sig	49/49 fixed
+0x009dc650	0x009dced0	sig	45/50 fixed
+0x009e1260	0x009e1ae0	sig	51/51 fixed
+0x009e3490	0x009e3d10	sig	46/50 fixed
+0x009e45b0	0x009e4e30	sig	47/48 fixed
+0x009e4c90	0x009e5510	delta	21 sig hits, anchors agree on +0x880
+0x009e56e0	0x009e5f60	sig	50/51 fixed
+0x00a2cee0	0x00a2d760	sig	46/50 fixed
+0x00a46910	0x00a47190	sig	42/50 fixed
+0x00a71c50	0x00a724d0	sig	45/50 fixed
+0x00ab0040	0x00ab08f0	func	in function 0xaaff40 -> 0xab07f0, site bytes verified
+0x00ab0a00	0x00ab12b0	sig	49/53 fixed
+0x0ae3de00	-	unresolved	9 hits, 34/51 fixed, local delta n/a 0xb0b6ed0,0xb0bcf00,0xb0bd150
+0x0afdbc70	0x0ab24520	sig	48/48 fixed
+0x00b15c50	0x00b16590	sig	43/48 fixed
+0x00b15eb0	0x00b167f0	sig	52/52 fixed
+0x00b16010	0x00b16950	sig	24/33 fixed
+0x00b291b0	0x00b29af0	sig	38/50 fixed
+0x00b370e0	0x00b37a20	sig	46/50 fixed
+0x00b4cdd0	0x00b4d710	delta	5 sig hits, anchors agree on +0x940
+0x00b897ba	0x00b8a0fa	sig	53/54 fixed
+0x00b8d150	0x00b8da90	sig	47/51 fixed
+0x0bb1a850	0x0b6bb7d0	sig	43/48 fixed
+0x0bb1dbe0	0x0b6c0920	sig	47/51 fixed
+0x00bea080	-	unresolved	7 hits, 43/52 fixed, local delta n/a 0xbea910,0xbeaad0,0xbd2a00
+0x00caeb90	-	unresolved	8 hits, 45/49 fixed, local delta n/a 0xcaf5e0,0xcafa00,0xcafc40
+0x00cb4be0	-	unresolved	17 hits, 34/54 fixed, local delta n/a 0xcb5630,0xcacd90,0xcbea50
+0x00cb72e0	-	unresolved	12 hits, 49/49 fixed, local delta n/a 0xcb7d30,0xcd6640,0xcd87f0
+0x00cb7ac0	-	unresolved	88 hits, 52/52 fixed, local delta n/a 0xcb8510,0xcb8db0,0xcb9170
+0x00cc06f0	-	unresolved	4 hits, 49/49 fixed, local delta n/a 0xcc1140,0xcb9eb0,0xcb1560
+0x00cc0c10	-	unresolved	2 hits, 49/49 fixed, local delta n/a 0xcc1660,0xd044e0
+0x00cc10b0	-	unresolved	7 hits, 49/49 fixed, local delta n/a 0xcc1b00,0xcbfd40,0xd0b7e0
+0x0cc82570	0x0c6c5ac0	sig	49/49 fixed
+0x00cd25b0	-	unresolved	13 hits, 45/53 fixed, local delta n/a 0xcd26a0,0xcd2800,0xcd3000
+0x00cd4d70	0x00cd57c0	sig	45/49 fixed
+0x00cd57c0	0x00cd6210	sig	49/49 fixed
+0x00cd9df0	0x00cda840	delta	38 sig hits, anchors agree on +0xa50
+0x0ce02e90	-	unresolved	0 hits, 44/52 fixed, local delta n/a 
+0x00d3eff0	0x00d3fa40	sig	50/50 fixed
+0x00d41ad0	0x00d42520	delta	11 sig hits, anchors agree on +0xa50
+0x00d42840	0x00d43290	delta	12 sig hits, anchors agree on +0xa50
+0x0d85f010	0x0d1fb470	sig	54/54 fixed
+0x00d8c130	0x00d8cb80	sig	36/37 fixed
+0x00d8e820	-	unresolved	3 hits, 47/51 fixed, local delta n/a 0xd8ee40,0xd8f270,0xaaab80
+0x00e21ee0	0x00e22910	func	in function 0xe21d60 -> 0xe22790, site bytes verified
+0x00e21f20	0x00e22950	func	in function 0xe21d60 -> 0xe22790, site bytes verified
+0x00e22070	0x00e22aa0	func	in function 0xe21d60 -> 0xe22790, site bytes verified
+0x00e220d0	0x00e22b00	func	in function 0xe21d60 -> 0xe22790, site bytes verified
+0x00e22330	0x00e22d60	func	in function 0xe21d60 -> 0xe22790, site bytes verified
+0x00e239f0	-	unresolved	17 hits, 34/51 fixed, local delta n/a 0xe24420,0xe1c3e0,0xe1c380
+0x00e23a80	0x00e244b0	sig	49/49 fixed
+0x00e240b0	0x00e24ae0	sig	50/50 fixed
+0x00e24530	0x00e24f60	sig	50/50 fixed
+0x00e297f0	0x00e2a220	func	in function 0xe29490 -> 0xe29ec0, site bytes verified
+0x0e6f4220	0x0df56680	sig	50/50 fixed
+0x0e6f6530	0x0df5ef10	sig	48/52 fixed
+0x0e6f8c70	0x0df5f700	sig	45/49 fixed
+0x0eb6f3d0	0x0e3f5640	sig	43/48 fixed
+0x00ec2e90	-	unresolved	4 hits, 46/56 fixed, local delta n/a 0xec35d0,0xf3bb80,0x11845f0
+0x0ed09970	0x0e584a70	sig	51/51 fixed
+0x00fa35a0	0x00fa3d20	sig	44/48 fixed
+0x00fb6f70	0x00fb76f0	sig	41/49 fixed
