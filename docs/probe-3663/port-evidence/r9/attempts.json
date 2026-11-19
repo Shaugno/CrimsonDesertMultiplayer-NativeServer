@@ -1,38 +1,61 @@
-{
-  "round": 9,
-  "startup_limit": 5,
-  "join_limit": 3,
-  "attempts": [
-    {
-      "id": "R9-A1",
-      "session": "C:/Users/shaug/AppData/Local/CDMP-R9-L3-20261118-A1",
-      "host_pid": 47372,
-      "guest_pid": 29220,
-      "guest_started_local": "2026-11-18 19:20:06 Eastern",
-      "category": "startup",
-      "guest_exit_code": "0xC0000005",
-      "guest_native_login": false,
-      "guest_save_selected": false,
-      "loading_sampler_armed": false,
-      "guest_fault_site": null,
-      "host_exit_code": 0,
-      "save_manifest_verified": true,
-      "controlled_installation_restored": true,
-      "user_observation": "Both windows appeared side by side; guest then closed with no error dialog. Host quit from its menu."
-    },
-    {
-      "id": "R9-A2",
-      "session": "C:/Users/shaug/AppData/Local/CDMP-R9-L3-20261118-A2",
-      "host_pid": 30668,
-      "guest_pid": null,
-      "category": "startup",
-      "guest_launch_refused": "Insufficient host watchdog time: fewer than six minutes remained",
-      "host_world_ready": true,
-      "host_exit_code": 0,
-      "save_manifest_verified": true,
-      "controlled_installation_restored": true,
-      "user_observation": "Host loaded save and quit normally; no guest launched."
-    }
-  ],
-  "status": "R9-A1 pre-login guest access violation; A2 host loaded but guest launch time reserve refused. Startup 2/5, join 0/3."
+﻿{
+    "round":  9,
+    "startup_limit":  5,
+    "join_limit":  3,
+    "attempts":  [
+                     {
+                         "id":  "R9-A1",
+                         "session":  "C:/Users/shaug/AppData/Local/CDMP-R9-L3-20261118-A1",
+                         "host_pid":  47372,
+                         "guest_pid":  29220,
+                         "guest_started_local":  "2026-11-18 19:20:06 Eastern",
+                         "category":  "startup",
+                         "guest_exit_code":  "0xC0000005",
+                         "guest_native_login":  false,
+                         "guest_save_selected":  false,
+                         "loading_sampler_armed":  false,
+                         "guest_fault_site":  null,
+                         "host_exit_code":  0,
+                         "save_manifest_verified":  true,
+                         "controlled_installation_restored":  true,
+                         "user_observation":  "Both windows appeared side by side; guest then closed with no error dialog. Host quit from its menu."
+                     },
+                     {
+                         "id":  "R9-A2",
+                         "session":  "C:/Users/shaug/AppData/Local/CDMP-R9-L3-20261118-A2",
+                         "host_pid":  30668,
+                         "guest_pid":  null,
+                         "category":  "startup",
+                         "guest_launch_refused":  "Insufficient host watchdog time: fewer than six minutes remained",
+                         "host_world_ready":  true,
+                         "host_exit_code":  0,
+                         "save_manifest_verified":  true,
+                         "controlled_installation_restored":  true,
+                         "user_observation":  "Host loaded save and quit normally; no guest launched."
+                     },
+                     {
+                         "id":  "R9-A3",
+                         "session":  "C:/Users/shaug/AppData/Local/CDMP-R9-L3-20261118-A3",
+                         "recorded_by":  "Claude (R10), 2026-11-19, from the session files; GPT did not record or finish this attempt",
+                         "host_pid":  46312,
+                         "guest_pid":  10584,
+                         "host_started_local":  "2026-11-18 19:35:36 Eastern",
+                         "guest_started_local":  "2026-11-18 19:38:05 Eastern",
+                         "category":  "join",
+                         "guest_native_login":  true,
+                         "staging_enter":  "19:40:33 result 0 (field 0x82020000)",
+                         "shared_enter":  "19:41:09.526 result 0 (field 0x81020001), 2364 owner aliased",
+                         "guest_packets_after_shared_enter":  "2364 -\u003e 2723 (00:41:17.292Z) -\u003e 68x 2005 -\u003e 2268 (00:41:18.616Z) -\u003e 2792 (00:41:18.618Z); no 2941, no 2789, no 2891; ring full at 00:47:59Z",
+                         "guest_in_world":  "controlled actor at (-10593.86, 592.44, -4502.00), about 7 m from the host character; loading never completed",
+                         "guest_crash":  false,
+                         "loading_sampler":  "180 samples from 19:41:09: state byte 0x00, candidate marker 94, constant; the 3576 marker reading is not confirmed for 3663",
+                         "host_exit_code":  0,
+                         "host_ended_local":  "19:44:05 Eastern (left world 19:44:02)",
+                         "guest_exit":  "deadline_stopped by the watchdog at 19:49:37 Eastern, code 13923 (0x3663)",
+                         "finish_stage_run":  false,
+                         "controlled_installation_restored":  false,
+                         "save_verification":  "Verified 2026-11-19 by Claude: real saves equal the A3 manifest and the before-guest checkpoint (23/23); host backup and guest sandbox unchanged (23/23)"
+                     }
+                 ],
+    "status":  "R9-A1 pre-login guest access violation; A2 guest launch refused (watchdog reserve); A3 join: staging and shared Enter 0, guest reached the host field without crashing but never received 2941 and never sent 2789; host quit, guest stopped at deadline; Finish never ran. Startup 2/5, join 1/3."
 }
