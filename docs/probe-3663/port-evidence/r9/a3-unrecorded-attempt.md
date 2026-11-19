@@ -45,4 +45,11 @@ The R9 loading sampler logged 180 samples from 19:41:09, all `state byte
 - The controlled installation was never restored. `cdmp.asi`, `cdmp.pdb`,
   `winmm.dll`, both inis and the `cdmp.r4-test-lock` marker naming A3 were
   still in the game folder on 2026-11-19 (none existed before A3's deployment).
+- **Restored 2026-11-19 on Shaugn's approval.** Each of the six files matched
+  its `installed_sha256` in A3's `deployment.json`, and none existed before.
+  All six were removed. A3's four game-folder logs (host and guest session
+  logs and their `cdmp.host.log`/`cdmp.guest.log` copies) were copied into
+  the A3 `evidence` folder with hash checks, then removed from the game
+  folder. Receipt: `finish-r10-manual.json` in the A3 session folder. The
+  game executable remains 1.0.0.3732.
 - No user observation was recorded. What each window showed is unknown.
