@@ -106,7 +106,15 @@ be a startup check before L3, under the usual rules.
 - Note: `docs/CODE-REVIEW-3663-CLEANUP.md` named in the takeover prompt is
   not in the repository.
 
-### Step 1 — Confirm the owner-only 2941 path in 3663 (offline)
+### Step 1 — Confirm the owner-only 2941 path (offline) — DONE on 3732
+
+Confirmed in the 3732 image: MoveFieldCompleteCore `0x2ED78B0` reaches the
+2941 sender `0x2C7F430` only through its owner branch (`jne` at `0x2ED87DE`).
+All 3732 equivalents for the 2976 milestone are in
+[step1-preload-owner-path.md](probe-3663/port-evidence/r10/step1-preload-owner-path.md).
+Hook point `0x2ED8852` (field in r15, traveller in r14); realm flag TLS `+0x1EB`.
+
+Original text:
 
 Locate the 3663 equivalents of MoveFieldCompleteCore, its owner/non-owner
 branch, the 2941 emitter and the `ToTargetSendTargetFinder` constructor (RTTI).
