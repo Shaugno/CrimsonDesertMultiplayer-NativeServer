@@ -38,6 +38,8 @@ std::deque<Item> incoming;size_t incoming_bytes=0;
 // reported as unreadable and never replaced with a 3576 pointer.
 uint32_t field_acks=0,load_samples=0;
 uint64_t next_load_sample=0;
+uint64_t guest_install_tick=0;
+bool startup_capture_armed=false;
 constexpr uint32_t max_load_samples=180;
 constexpr uintptr_t client_sequencer_vt=0x59D57E8;
 template<class T>bool read(uintptr_t a,T& v){return a && game::safe_read(a,&v,sizeof v);}
@@ -181,6 +183,12 @@ void pump(safetyhook::Context& c){
     if(c.r15!=ptr(base+layout.kClientNetSlot)){fail("pump ClientNet mismatch");return;}
     uint32_t empty=0;(void)owner_thread.compare_exchange_strong(empty,GetCurrentThreadId());
     if(owner_thread.load()!=GetCurrentThreadId()){fail("second native NetworkThread");return;}
+    // R9 A1 exited at the title before LoginCharacter, so the prior
+    // after-3081 arm point left no fault site. Arm after startup has settled.
+    if(!startup_capture_armed && GetTickCount64()-guest_install_tick>=25000){
+        crash3663::arm();startup_capture_armed=true;
+        log::info("3663 guest startup crash capture armed before character login");
+    }
     title_refresh();
     if(!remote.load() || broken.load())return;
     const uintptr_t session=ptr(c.r15+layout.kClientNet_Session);uint64_t current=0;
@@ -244,6 +252,7 @@ bool install(const game::build_guard::ImageIdentity& id){
     send_hook=std::move(*send_result);pump_hook=std::move(*pump_result);
     if(!pump_hook.enable() || !send_hook.enable()){
         if(pump_hook)(void)pump_hook.disable();if(send_hook)(void)send_hook.disable();return false;}
+    guest_install_tick=GetTickCount64();
     on.store(true,std::memory_order_release);
     const auto after=ptr(base+layout.kClientNetSlot);
     if(after && ptr(after+layout.kClientNet_Slot4) && !remote.load()){fail("client connected during hook installation");return false;}

@@ -2539,3 +2539,27 @@ before launch. [Sampler evidence](port-evidence/r9/step4-loading-sampler.md).
 
 ---
 
+# R9 Step 4 A1 outcome and A2 preflight
+
+At 7:20 PM Eastern, the controlled HOST reached world readiness and the
+GUEST window appeared beside it. Before guest native login or save selection,
+the GUEST exited `0xC0000005` at 7:20:46 PM with no visible error dialog.
+The old crash capture armed only after LoginCharacter `3081`, so A1 has no
+fault site or minidump. The loading sampler never armed and no inference
+about state `0x11` is possible. The HOST exited normally (code 0), both
+processes are closed, the controlled installation is restored, and the
+real save and frozen backup manifests verified. This counts as **startup
+1/5, join 0/3**. [Attempt ledger](port-evidence/r9/attempts.json).
+
+The offline correction arms the bounded guest crash capture after 25
+seconds of guarded startup, before character login. It changes no game
+state or admission check. The full suite passed 120/120 and synthetic
+smoke had 78 remote states, zero rejects and clean unload. The next
+launch tests whether startup reaches native guest login or records a
+fault site. If it reaches login, proceed with same-slot L3 and the
+loading sampler. Fresh backups, executable hash, session watchdog and
+window verification are required again. Stop on a new crash or hang.
+[Validation](port-evidence/r7/r9-startup-capture-validation.json).
+
+---
+

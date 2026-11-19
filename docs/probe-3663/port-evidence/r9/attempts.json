@@ -2,6 +2,24 @@
   "round": 9,
   "startup_limit": 5,
   "join_limit": 3,
-  "attempts": [],
-  "status": "Step 4 live diagnostic pending user presence; no R9 game launch"
+  "attempts": [
+    {
+      "id": "R9-A1",
+      "session": "C:/Users/shaug/AppData/Local/CDMP-R9-L3-20261118-A1",
+      "host_pid": 47372,
+      "guest_pid": 29220,
+      "guest_started_local": "2026-11-18 19:20:06 Eastern",
+      "category": "startup",
+      "guest_exit_code": "0xC0000005",
+      "guest_native_login": false,
+      "guest_save_selected": false,
+      "loading_sampler_armed": false,
+      "guest_fault_site": null,
+      "host_exit_code": 0,
+      "save_manifest_verified": true,
+      "controlled_installation_restored": true,
+      "user_observation": "Both windows appeared side by side; guest then closed with no error dialog. Host quit from its menu."
+    }
+  ],
+  "status": "R9-A1 stopped on pre-login guest access violation; startup 1/5, join 0/3. Offline crash-capture timing correction and full validation in progress."
 }
