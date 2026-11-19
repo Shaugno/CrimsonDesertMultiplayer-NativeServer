@@ -69,6 +69,7 @@
 #include "mod/session2/file_sandbox3663.h"
 #include "mod/session2/v1_3663.h"
 #include "mod/session2/milestone3663.h"
+#include "mod/session2/character_guard3663.h"
 #include "mod/session2/guest3663.h"
 #include "mod/session2/mount_sync.h"
 #include "mod/session2/ride_filter.h"
@@ -1137,6 +1138,7 @@ DWORD WINAPI worker(LPVOID) {
                     }
                     const bool valid=route!=v1::Route::Refuse;
                     bool installed=false;
+                    if(valid)session2::character_guard3663::set_remote_containment(cfg.r10_remote_actor_guard);
                     if(valid && guest_role)installed=session2::guest3663::install(proc.identity);
                     else if(valid && host_role){
                         session2::ServerOptions options;options.core_v1=true;options.probe=false;

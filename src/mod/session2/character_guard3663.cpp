@@ -49,14 +49,23 @@ template<size_t N> bool matches(uintptr_t rva, const std::array<uint8_t, N>& wan
     return game::safe_read(base + rva, actual.data(), N) && actual == wanted;
 }
 
-uint32_t local_character() noexcept {
+uintptr_t local_actor() noexcept {
     const auto world = read<uintptr_t>(base + layout.kWorldSystemSlot);
     const auto manager = world ? read<uintptr_t>(world + layout.kWorldSystem_ActorManager) : 0;
     if (read<uintptr_t>(manager) != base + layout.kVtClientActorManager) return 0;
     const auto actor = read<uintptr_t>(manager + layout.kActorManager_ControlledActor);
-    if (read<uintptr_t>(actor) != base + layout.kVtControlledActor) return 0;
-    return read<uint32_t>(actor + 0x60);
+    return read<uintptr_t>(actor) == base + layout.kVtControlledActor ? actor : 0;
 }
+uint32_t local_character() noexcept {
+    const auto actor = local_actor();
+    return actor ? read<uint32_t>(actor + 0x60) : 0;
+}
+// R10 Step 3: client actor +0x90 is its controlling user key (2976 research,
+// docs/research/caballo-coop.md §9.1); the local controlled actor carries ours.
+constexpr uint32_t kActorController = 0x90;
+std::atomic<bool> contain_remote{};
+std::atomic<uint64_t> remote_skipped{};
+std::array<std::atomic<uint32_t>, 2> controller_samples{};
 
 void on_null_playback(safetyhook::Context& c) noexcept {
     if (c.rdx || !on.load(std::memory_order_acquire)) return;
@@ -87,8 +96,23 @@ void on_null_playback(safetyhook::Context& c) noexcept {
     const bool exact = confirmed_control && c.r12 < 2 && c.rax &&
         read<uintptr_t>(cc + 0x88 + c.r12 * sizeof(uintptr_t)) == c.rax &&
         read<uintptr_t>(c.rsp + 0x38) == base + helper_call + helper_edge.size();
-    if (policy::skip(process_role, identity, local, linked.load(std::memory_order_acquire), exact, c.rdx == 0)) {
+    const bool link = linked.load(std::memory_order_acquire);
+    if (policy::skip(process_role, identity, local, link, exact, c.rdx == 0)) {
         if (skipped.fetch_add(1, std::memory_order_relaxed) == 0) crash3663::note_playback_skip(key);
+        c.rip = base + epilogue;
+        return;
+    }
+    // R10 Step 3: actors driven by the other player (2976 containment rule).
+    const auto controller = actor ? read<uint32_t>(actor + kActorController) : 0;
+    const auto me = local_actor();
+    const auto local_user = me ? read<uint32_t>(me + kActorController) : 0;
+    const bool remote = policy::remote_controlled(controller, local_user);
+    const bool enabled = contain_remote.load(std::memory_order_acquire);
+    if (controller_samples[remote ? 1 : 0].fetch_add(1, std::memory_order_relaxed) < 8) {
+        crash3663::note_playback_controller(key, controller, local_user, exact, remote, enabled);
+    }
+    if (policy::skip_remote_controlled(enabled, key, local, controller, local_user, link, exact, c.rdx == 0)) {
+        if (remote_skipped.fetch_add(1, std::memory_order_relaxed) == 0) crash3663::note_playback_skip(key);
         c.rip = base + epilogue;
     }
 }
@@ -125,5 +149,10 @@ void note_peer_character(uint32_t key) noexcept {
     if (!peer_character.compare_exchange_strong(expected, key) && expected != key) peer_character.store(1);
 }
 void set_link_ready(bool ready) noexcept { linked.store(ready, std::memory_order_release); }
-uint64_t skips() noexcept { return skipped.load(std::memory_order_relaxed); }
+uint64_t skips() noexcept { return skipped.load(std::memory_order_relaxed) + remote_skipped.load(std::memory_order_relaxed); }
+void set_remote_containment(bool enabled) noexcept {
+    contain_remote.store(enabled, std::memory_order_release);
+    log::info("3663 character guard: remote-controlled actor containment {} (remote_actor_guard={})",
+              enabled ? "ON" : "off", enabled ? 1 : 0);
+}
 }

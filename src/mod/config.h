@@ -24,6 +24,9 @@ struct Config {
     // R10 [session2] core_milestone (host, v1 route): 0 off (default), 1 decide and log,
     // 2 ask the game for the guest's own 2941 once per trip into the host's field.
     unsigned r10_core_milestone = 0;
+    // R10 [session2] remote_actor_guard (both roles, v1 route): 0 off (default), 1 also skip the
+    // CharacterControl helper at the exact null-playback read for actors the other player controls.
+    bool r10_remote_actor_guard = false;
     bool r5_guest_startup_only = false; // isolated title check, no native guest/tunnel installers
 
     std::string peer_host = "127.0.0.1";

@@ -167,6 +167,7 @@ Config load_config(const std::wstring& ini_path) {
     c.r3_tunnel_probe = read_uint(ini_path, L"probe3663", L"tunnel", 0) != 0;
     c.r4_core_v1 = read_uint(ini_path, L"session2", L"core_v1", 0) != 0;
     c.r10_core_milestone = read_uint(ini_path, L"session2", L"core_milestone", 0);
+    c.r10_remote_actor_guard = read_uint(ini_path, L"session2", L"remote_actor_guard", 0) != 0;
     c.r5_guest_startup_only = read_uint(ini_path, L"session2", L"guest_startup_only", 0) != 0;
     c.s2_enabled = read_uint(ini_path, L"session2", L"enabled", 0) != 0;
     c.s2_probe = read_uint(ini_path, L"session2", L"probe", 1) != 0;

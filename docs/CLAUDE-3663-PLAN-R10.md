@@ -161,7 +161,31 @@ The guest loading sampler stays to show `0x11` → `0x12` live.
 Fallback if the host call cannot be verified: Samuel's guest-side preloader,
 adapted to a host-owned field.
 
-### Step 3 — Class-B containment (offline, prepared)
+### Step 3 — Class-B containment (offline, prepared) — DONE, off by default
+
+- `coop3663::character_guard::skip_remote_controlled`, unit-tested in
+  `v1_3663_policy_tests`, applies the 2976 rule. An actor whose `+0x90`
+  controlling-user key is a user key other than the local user's (the
+  local controlled actor's `+0x90`) is skipped, but never the local primary.
+  It applies only at the exact null-playback read `0x258ED8D` (otherwise an
+  access violation), with the existing native frame, CharacterControl type,
+  backlink and layer checks and a live link. It resumes at the verified helper
+  epilogue `0x258EE2A`.
+- The meaning of `+0x90` comes from the 2976 research (written from the
+  ActorLoadDataAck record; observed in game). It is not re-derived in 3732
+  because the unpack is protected code. So every sampled null-playback actor
+  now also writes `null_playback_controller actor=… controller=… local_user=…
+  exact_frame=… remote_controlled=… remote_actor_guard=…` to the crash log,
+  whether or not the guard is on.
+- Switch: `[session2] remote_actor_guard` (0 default). In
+  `launch-2inst-3663.ps1` it is one variable, `$remoteActorGuard=0`, which
+  must be set before the build is armed (the launcher is in the armed source
+  manifest).
+- The R9 rule ("no new per-actor guards until loading is understood") is met:
+  Step 1 explains the loading. Whether to enable it for the next L3 is
+  Shaugn's call.
+
+Original text:
 
 Guard only the 2976 condition: actor `+0x90` is a non-local user and the
 selected layer has a graph with null playback. Log the actor's owner and type

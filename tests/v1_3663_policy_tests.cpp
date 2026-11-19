@@ -58,6 +58,25 @@ int main(){
         for (const auto actor : {local,guard::Actor::Other,guard::Actor::Unknown})
             check(!guard::skip(side,actor,local_key,true,true,true));
     }
+    // R10 Step 3: remote-controlled actors (actor+0x90 = the other user), off unless enabled.
+    {
+        constexpr uint32_t local_user=0x90000178, other_user=0x90000001, npc=0xB01002C7;
+        check(guard::remote_controlled(other_user,local_user));
+        check(!guard::remote_controlled(local_user,local_user));          // our own actors
+        check(!guard::remote_controlled(0,local_user));                   // no controller
+        check(!guard::remote_controlled(0xA0100001,local_user));          // not a user key
+        check(!guard::remote_controlled(other_user,0));                   // local user unknown
+        check(guard::skip_remote_controlled(true,npc,guest_key,other_user,local_user,true,true,true));
+        check(guard::skip_remote_controlled(true,host_key,guest_key,other_user,local_user,true,true,true));
+        check(!guard::skip_remote_controlled(false,npc,guest_key,other_user,local_user,true,true,true));   // off
+        check(!guard::skip_remote_controlled(true,guest_key,guest_key,other_user,local_user,true,true,true)); // local primary
+        check(!guard::skip_remote_controlled(true,npc,guest_key,local_user,local_user,true,true,true));   // local control
+        check(!guard::skip_remote_controlled(true,npc,0,other_user,local_user,true,true,true));           // no local primary
+        check(!guard::skip_remote_controlled(true,0,guest_key,other_user,local_user,true,true,true));     // no key
+        check(!guard::skip_remote_controlled(true,npc,guest_key,other_user,local_user,false,true,true));  // link down
+        check(!guard::skip_remote_controlled(true,npc,guest_key,other_user,local_user,true,false,true));  // frame unverified
+        check(!guard::skip_remote_controlled(true,npc,guest_key,other_user,local_user,true,true,false));  // playback present
+    }
     move_owner();
     for(unsigned flags=0;flags<128;++flags){
         const bool marker=(flags&1)!=0,game=(flags&2)!=0,target=(flags&4)!=0,host=(flags&8)!=0,

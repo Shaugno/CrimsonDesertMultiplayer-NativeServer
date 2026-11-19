@@ -372,6 +372,17 @@ void note_null_playback(uint32_t key, uintptr_t vtable, uint32_t host, uint32_t 
     append(line);
 }
 
+void note_playback_controller(uint32_t key, uint32_t controller, uint32_t local_user, bool exact_frame,
+                              bool remote_controlled, bool contain_enabled) noexcept {
+    if (!crash_text) return;
+    game::FixedLine line;
+    line.str("null_playback_controller utc_filetime=").dec(utc_filetime()).str(" actor=").hex32(key)
+        .str(" controller=").hex32(controller).str(" local_user=").hex32(local_user)
+        .str(" exact_frame=").dec(exact_frame ? 1 : 0).str(" remote_controlled=").dec(remote_controlled ? 1 : 0)
+        .str(" remote_actor_guard=").dec(contain_enabled ? 1 : 0);
+    append(line);
+}
+
 void note_playback_skip(uint32_t key) noexcept {
     if (!crash_text) return;
     game::FixedLine line;
