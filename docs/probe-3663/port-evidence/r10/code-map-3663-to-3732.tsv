@@ -1,42 +1,28 @@
 ﻿0x00001000	0x00001000	sig	47/48 fixed
-0x00002000	-	unresolved	0 hits, 3/3 fixed, local delta +0x0 
 0x00004000	0x00004000	sig	50/50 fixed
-0x00007fc1	0x00007fc1	delta	2 sig hits, anchors agree on +0x0
 0x00007fda	0x00007fda	sig	44/48 fixed
-0x00008000	-	unresolved	0 hits, 1/1 fixed, local delta +0x0 
 0x00008008	0x00008008	sig	49/50 fixed
 0x0000800a	0x0000800a	sig	47/48 fixed
 0x0000800c	0x0000800c	sig	53/53 fixed
-0x0000800e	-	unresolved	0 hits, 0/0 fixed, local delta +0x0 
 0x00008010	0x00008010	sig	49/49 fixed
 0x00008018	0x00008018	sig	46/50 fixed
 0x00008020	0x00008020	sig	43/48 fixed
 0x00008028	0x00008028	sig	41/50 fixed
 0x00008030	0x00008030	sig	41/50 fixed
-0x0000cd64	-	unresolved	0 hits, 2/2 fixed, local delta n/a 
-0x0000cd67	-	unresolved	0 hits, 2/2 fixed, local delta n/a 
-0x00010000	-	unresolved	2 hits, 48/48 fixed, local delta n/a 0x10000,0xff2c
-0x000900a4	-	unresolved	0 hits, 4/4 fixed, local delta n/a 
-0x000900ac	-	unresolved	0 hits, 4/4 fixed, local delta n/a 
-0x00098344	-	unresolved	7269 hits, 40/49 fixed, local delta n/a 0x98344,0x98543,0x98064
-0x000fffff	-	unresolved	7269 hits, 28/49 fixed, local delta n/a 0xfffef,0x1000ef,0xffef0
-0x00100000	-	unresolved	7269 hits, 27/48 fixed, local delta n/a 0xffff0,0x1000f0,0xffef1
 0x003a8d94	0x003a91a4	sig	48/49 fixed
 0x003a9cf0	0x003aa100	sig	49/49 fixed
 0x003ab4c0	0x003ab8d0	sig	43/48 fixed
-0x0040b5b0	0x0040b9c0	sig	42/50 fixed
-0x004cae10	-	unresolved	8 hits, 45/49 fixed, local delta n/a 0x4cb220,0x4cb540,0x4fc790
-0x004caf2b	-	unresolved	0 hits, 8/8 fixed, local delta n/a 
-0x00972b82	-	thunk?	target 0x9770c0 -> 0x9777e0, 2 thunks
+0x004cae10	0x004cb220	manual	VecPush: 35 byte-identical copies; only 0x4CB220 has the same 621 direct callers (first callers at +0x25D..+0x320)
+0x004caf2b	0x004cb33b	manual	VecExit: same +0x11B offset inside VecPush 0x4CB220; epilogue bytes equal
+0x00972b82	0x009732a2	func	in function 0x9729c0 -> 0x9730e0, site bytes verified
 0x00977128	0x00977848	sig	39/49 fixed
-0x00e297f0	-	unresolved	0 hits, 7/7 fixed, local delta n/a 
-0x014343a0	0x01435f20	sig	44/52 fixed
+0x00e297f0	0x00e2a220	func	in function 0xe29490 -> 0xe29ec0, site bytes verified; confirm via vtable slot (P2)
 0x01536d20	0x015388a0	sig	42/50 fixed
-0x01593240	-	unresolved	0 hits, 7/7 fixed, local delta +0x1b80 
+0x01593240	0x01594dc0	func	in function 0x1593220 -> 0x1594da0, site bytes verified; confirm via vtable slot (P2)
 0x01593320	0x01594ea0	sig	52/53 fixed
 0x01593370	0x01594ef0	sig	48/50 fixed
 0x01658e90	0x0165aa10	delta	2 sig hits, anchors agree on +0x1b80
-0x01659370	0x0165aef0	thunk	target 0x1659380 -> 0x165af00
+0x01659370	0x0165aef0	func	in function 0x1659330 -> 0x165aeb0, site bytes verified
 0x01659380	0x0165af00	sig	45/48 fixed
 0x0165b9d0	0x0165d550	sig	47/51 fixed
 0x0165c1f0	0x0165dd70	sig	44/48 fixed
@@ -49,8 +35,8 @@
 0x01a15c2a	0x01a1789a	sig	37/49 fixed
 0x01a16c40	0x01a188b0	sig	50/50 fixed
 0x01a16d1f	0x01a1898f	delta	2 sig hits, anchors agree on +0x1c70
-0x01a16dce	-	unresolved	0 hits, 5/13 fixed, local delta +0x1c70 
-0x01a18320	-	unresolved	0 hits, 1/5 fixed, local delta +0x1c70 
+0x01a16dce	0x01a18a3e	func	in function 0x1a16c40 -> 0x1a188b0, site bytes verified
+0x01a18320	0x01a19f90	func	in function 0x1a18250 -> 0x1a19ec0, site bytes verified
 0x01a192d0	0x01a1af40	sig	50/50 fixed
 0x021bd690	0x021bf2b0	sig	47/51 fixed
 0x022951b0	0x02296dd0	sig	49/49 fixed
@@ -65,19 +51,17 @@
 0x0242d4fe	0x0242f7ce	sig	37/37 fixed
 0x0242d50b	0x0242f7db	sig	24/24 fixed
 0x0258c5a0	0x0258ea30	sig	48/48 fixed
-0x0258c8c0	0x0258ed50	sig	49/49 fixed
+0x0258c8c0	0x0258ed50	sig	49/49 fixed; 3 of 4 callers correspond; 4th caller to check in P5
 0x0258c8fd	0x0258ed8d	sig	47/48 fixed
 0x0258c99a	0x0258ee2a	delta	3 sig hits, anchors agree on +0x2490
-0x025bb470	-	unresolved	0 hits, 1/5 fixed, local delta +0x2490 
+0x025bb470	0x025bd900	func	in function 0x25bb150 -> 0x25bd5e0, site bytes verified
 0x025c0900	0x025c2d90	sig	45/49 fixed
 0x02a0ea70	0x02a111f0	sig	49/49 fixed
 0x02a0eec0	0x02a11640	sig	13/14 fixed
 0x02a12a58	0x02a151d8	sig	35/52 fixed
-0x02b07790	-	unresolved	0 hits, 49/51 fixed, local delta n/a 
-0x02bc04f0	-	unresolved	72 hits, 30/36 fixed, local delta n/a 0x2bc2cb4,0x2bc2d4b,0x2bc2de2
 0x02bc2a6a	0x02bc548a	sig	36/50 fixed
 0x02bc2a6f	0x02bc548f	sig	41/51 fixed
-0x02c160b0	-	unresolved	0 hits, 1/5 fixed, local delta n/a 
+0x02c160b0	0x02c1ab40	func	in function 0x2c15f60 -> 0x2c1a9f0, site bytes verified; confirm via vtable slot (P2)
 0x02c17410	0x02c1bea0	sig	49/49 fixed
 0x02c5300f	0x02c57a9f	sig	44/48 fixed
 0x02d6c210	0x02d70ca0	sig	16/20 fixed
@@ -89,7 +73,7 @@
 0x02d7a726	0x02d7f1b6	sig	44/49 fixed
 0x02d7a750	0x02d7f1e0	sig	19/21 fixed
 0x02e08520	0x02e0cfb0	sig	48/48 fixed
-0x02e085ac	-	unresolved	7 hits, 30/30 fixed, local delta n/a 0x2e0d03c,0x2dc5481,0x2bd6cfa
+0x02e085ac	0x02e0d03c	func	in function 0x2e08520 -> 0x2e0cfb0, site bytes verified
 0x02e879a0	0x02e8c100	sig	48/48 fixed
 0x02e87a45	0x02e8c1a5	delta	2 sig hits, anchors agree on +0x4760
 0x02e87db0	0x02e8c510	sig	42/50 fixed
@@ -103,10 +87,9 @@
 0x02f4af79	0x02f4f4c9	sig	45/51 fixed
 0x04b7e0c0	0x04b82660	sig	46/50 fixed
 0x04b7e188	0x04b82728	sig	32/53 fixed
-0x0a000002	-	unresolved	0 hits, 0/0 fixed, local delta -0x776e40 
 0x0eb68740	0x0e3f1900	sig	47/51 fixed
 0x0eb6877e	0x0e3f193e	sig	46/50 fixed
 0x0eb68840	0x0e3f1a00	sig	50/50 fixed
 0x0eb6c670	0x0e3f2210	sig	48/48 fixed
-0x0ed099c8	-	thunk?	target 0x1a192d0 -> 0x1a1af40, 0 thunks
-0x0ed099cd	-	unresolved	0 hits, 37/54 fixed, local delta -0x77a460 
+0x0ed099c8	0x0e584ac8	thunk	target 0x1a192d0 -> 0x1a1af40
+0x0ed099cd	0x0e584acd	manual	return address after the 5-byte call at 0xED099C8 -> 0xE584AC8; following bytes equal

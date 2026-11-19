@@ -8,7 +8,10 @@ pe = pefile.PE(exe, fast_load=True)
 size = pe.OPTIONAL_HEADER.SizeOfImage
 secs = [(s.VirtualAddress, s.VirtualAddress + s.Misc_VirtualSize, s.Characteristics,
          s.Name.rstrip(b"\0").decode(errors="replace")) for s in pe.sections]
-NAME = re.compile(r"3663|r3_|r4_|r5_|player_layout|health_definition|stat_id|tunnel_layout|field_share")
+NAME = re.compile(r"3663|r3_|r4_|r5_|player_layout|health_definition|stat_id|tunnel_layout")
+# Literals that are not image addresses (NT/IOCTL codes, process exit codes, sizes).
+NOT_RVA = {0x2000, 0x8000, 0x800E, 0x10000, 0xFFFFF, 0x100000, 0x7FC1, 0xCD64, 0xCD67,
+           0x900A4, 0x900AC, 0x98344, 0xA000002}
 HEX = re.compile(r"\b0x([0-9A-Fa-f]{4,8})\b")
 
 
@@ -31,7 +34,7 @@ for path in sorted(root.rglob("*")):
     for lineno, line in enumerate(strip_comments(path.read_text(encoding="utf-8", errors="replace")).splitlines(), 1):
         for m in HEX.finditer(line):
             v = int(m.group(1), 16)
-            if 0x1000 <= v < size:
+            if 0x1000 <= v < size and v not in NOT_RVA:
                 rows.setdefault(v, set()).add(f"{path.relative_to(root).as_posix()}")
 with open(out, "w", encoding="utf-8") as f:
     for v in sorted(rows):

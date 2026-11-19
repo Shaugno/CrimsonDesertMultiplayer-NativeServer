@@ -28,6 +28,25 @@ old_x = exec_secs(old)
 new_secs = [(s.VirtualAddress, s.get_data()) for s in new.sections if s.Characteristics & 0x20000000]
 
 
+def pdata_starts(pe):
+    d = pe.OPTIONAL_HEADER.DATA_DIRECTORY[3]
+    raw = pe.get_data(d.VirtualAddress, d.Size)
+    return sorted({struct.unpack_from("<I", raw, i)[0] for i in range(0, len(raw) - 11, 12)})
+
+
+old_funcs = pdata_starts(old)
+
+
+def enclosing(rva):
+    i = bisect.bisect_right(old_funcs, rva) - 1
+    return old_funcs[i] if i >= 0 else None
+
+
+def masked_equal(pat, new_rva):
+    data = new.get_data(new_rva, len(pat))
+    return len(data) == len(pat) and all(x is None or x == y for x, y in zip(pat, data))
+
+
 def sec_index(rva, secs):
     for i, (lo, hi) in enumerate(secs):
         if lo <= rva < hi:
@@ -97,23 +116,46 @@ def local_delta(rva):
     return ds.pop() if len(ds) == 1 else None
 
 
+def locate_function(f):
+    """New RVA of an old function start, by unique signature or agreed local delta."""
+    if f in results and results[f][1] in ("sig", "delta"):
+        return results[f][0]
+    pat = signature(f)
+    if sum(1 for x in pat if x is not None) < 12:
+        return None
+    hits = search(pat, f, 0x400000) or search(pat, f, 0x2000000)
+    if len(hits) == 1:
+        return hits[0]
+    d = local_delta(f)
+    ok = [h for h in hits if d is not None and h - f == d]
+    return ok[0] if len(ok) == 1 else None
+
+
 for rva, (hits, fixed, total) in pending.items():
     d = local_delta(rva)
     ok = [h for h in hits if d is not None and h - rva == d]
     if len(ok) == 1:
         results[rva] = (ok[0], "delta", f"{len(hits)} sig hits, anchors agree on {d:+#x}")
         continue
+    f = enclosing(rva)
+    if f is not None and f != rva:
+        nf = locate_function(f)
+        if nf is not None:
+            cand = nf + (rva - f)
+            if masked_equal(signature(rva), cand):
+                results[rva] = (cand, "func", f"in function {f:#x} -> {nf:#x}, site bytes verified")
+                continue
     ins = first_ins(old, rva)
     if ins and ins.mnemonic in ("jmp", "call") and ins.operands and ins.operands[0].type == x86.X86_OP_IMM:
         target = ins.operands[0].imm
-        tsig = signature(target)
-        th = search(tsig, target, 0x400000)
+        nt = locate_function(target)
+        th = [nt] if nt is not None else []
         if len(th) == 1:
             nt = th[0]
             op = ins.bytes[0]
             cands = []
             for va, data in new_secs:
-                lo, hi = max(0, rva - va - 0x400000), min(len(data) - 5, rva - va + 0x400000)
+                lo, hi = max(0, rva - va - 0x2000000), min(len(data) - 5, rva - va + 0x2000000)
                 start = lo
                 while True:
                     k = data.find(bytes([op]), start, hi)
