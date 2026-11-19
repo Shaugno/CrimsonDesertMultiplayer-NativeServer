@@ -63,26 +63,26 @@ void release(Pins& p){
     release(p.field);release(p.primary);release(p.host_actor);release(p.guest_user);release(p.host_user);
 }
 bool typed_pin(uintptr_t raw,Scope& out){
-    const uint32_t wanted=key(raw);const uintptr_t manager=ptr(base+0x7283378);
-    if(!raw || !wanted || !manager || ptr(manager)!=base+0x5F69100)return false;
+    const uint32_t wanted=key(raw);const uintptr_t manager=ptr(base+0x72895E8);
+    if(!raw || !wanted || !manager || ptr(manager)!=base+0x5F6E070)return false;
     const bool user=(wanted>>28)==9;
     // FindActor excludes the native user descriptor (type zero). Its sibling
     // FindUser validates that type and returns ScopeAttacher<ServerUserActor>.
     const auto fn=user?n::kFindUser.rva:n::kFindActor.rva;
     const auto result=reinterpret_cast<Scope*(__fastcall*)(uintptr_t,Scope*,uint32_t)>(base+fn)(manager,&out,wanted);
-    return result==&out && out.vt==base+(user?0x59C2580:0x5A54310) && out.object==raw && out.valid==1 && !out.flag && !out.holder && key(raw)==wanted;
+    return result==&out && out.vt==base+(user?0x59C7718:0x5A59390) && out.object==raw && out.valid==1 && !out.flag && !out.holder && key(raw)==wanted;
 }
 uintptr_t mover(uintptr_t actor){return ptr(ptr(actor+0x68)+0x1A0)+0x508;}
 bool field_access(uintptr_t actor,Access& out){
     const uintptr_t fm=mover(actor);
     if(fm==0x508 || ptr(ptr(fm)+8)!=actor)return false;
     const auto result=reinterpret_cast<Access*(__fastcall*)(uintptr_t,Access*)>(base+n::kGetField.rva)(fm,&out);
-    return result==&out && out.scope.vt==base+0x5D45B68 && out.scope.valid==1 &&
+    return result==&out && out.scope.vt==base+0x5D4ADF0 && out.scope.valid==1 &&
         !out.scope.flag && !out.scope.holder && out.scope.object && ptr(out.actor_holder+8)==actor;
 }
 bool field_pin(uintptr_t field,Scope& out){
     if(!field || !reinterpret_cast<bool(__fastcall*)(uintptr_t)>(base+n::kTryAddRef.rva)(field))return false;
-    out={base+0x5B40000,field,1,0,{},0};return true;
+    out={base+0x5B45300,field,1,0,{},0};return true;
 }
 bool context_matches(const Context& c){Context now;return read_context && read_context(now) &&
     now.host==c.host && now.guest==c.guest && now.epoch==c.epoch && c.epoch;}
@@ -95,10 +95,10 @@ void rw(uintptr_t obj,bool unlock){reinterpret_cast<void(__fastcall*)(uintptr_t)
 // No failure after the first lock can skip unlocking it. Pointer/type checks
 // occur before acquisition; native pinned lifetime keeps these objects alive.
 bool lock_field(uintptr_t field,uintptr_t& second){
-    second=0;if(!rw_object(field+0x18,0x5B3FFB0))return false;
+    second=0;if(!rw_object(field+0x18,0x5B45288))return false;
     rw(field+0x18,false);
     const auto candidate=ptr(field+8); // read second object UNDER the first lock, as native AddActor
-    if(!rw_object(candidate,0x5BCEE40)){rw(field+0x18,true);return false;}
+    if(!rw_object(candidate,0x5BD4CD0)){rw(field+0x18,true);return false;}
     second=candidate;rw(second,false);return true;
 }
 void unlock_field(uintptr_t field,uintptr_t second){rw(second,true);rw(field+0x18,true);}
@@ -112,7 +112,7 @@ bool rows(uintptr_t field,std::array<Row,64>& out,uintptr_t& data,uint32_t& coun
 // deliberately refuses some safe rollbacks rather than miss an ABA mutation.
 void mutation(safetyhook::Context&){clock.fetch_add(1,std::memory_order_seq_cst);}
 bool native_refusal(uint32_t* result){
-    uint32_t error=0;return read(base+0x71D0D3C,error) && error && store(reinterpret_cast<uintptr_t>(result),error);
+    uint32_t error=0;return read(base+0x71D6E7C,error) && error && store(reinterpret_cast<uintptr_t>(result),error);
 }
 int native_fault(Pins& pins,EXCEPTION_POINTERS* exception){
     sealed.store(true);busy.store(false);
@@ -361,13 +361,13 @@ uint32_t* __fastcall acquire_detour(void* manager,uint32_t* result,uint8_t type,
             checked(trace.field_open,read(field+0x4A,open) && open==1) &&
             checked(trace.field_key,read_host_key()) &&
             checked(trace.scope_read,read(out,old)) &&
-            checked(trace.scope_vtable,(trace.observed_vtable=old.vt)==base+0x597BFE0) &&
-            checked(trace.scope_slot,(trace.observed_slot=ptr(old.vt+0x10))==base+0x1659370) &&
+            checked(trace.scope_vtable,(trace.observed_vtable=old.vt)==base+0x59810D0) &&
+            checked(trace.scope_slot,(trace.observed_slot=ptr(old.vt+0x10))==base+0x165AEF0) &&
             checked(trace.context,context_matches(c)) && checked(trace.field_pin,field_pin(field,p.field))){
             // The caller already owns the existing output. Dispose its native
             // ownership ON THE ORIGINAL OBJECT, then transfer our retained ref.
             reinterpret_cast<Dispose>(base+n::kDispose.rva)(reinterpret_cast<Scope*>(out));
-            const Scope replacement{base+0x597BFE0,field,1,0,{},0};const uint8_t not_new=0;const uint32_t ok=0;
+            const Scope replacement{base+0x59810D0,field,1,0,{},0};const uint8_t not_new=0;const uint32_t ok=0;
             success=store(out,replacement) && store(out+0x20,not_new) && store(reinterpret_cast<uintptr_t>(result),ok);
             if(success)p.field={};
             else{sealed.store(true);quarantine_pins=p;p={};}

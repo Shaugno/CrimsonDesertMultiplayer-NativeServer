@@ -1,0 +1,61 @@
+﻿0x00001000	0x00001000	no-pdata	not inside an old pdata function
+0x00004000	0x00004000	identical	function 0x3ccd -> 0x3ccd, 1162 instructions
+0x00007fda	0x00007fda	identical	function 0x7f0d -> 0x7f0d, 428 instructions
+0x003a8d94	0x003a91a4	identical	function 0x3a8ac0 -> 0x3a8ed0, 455 instructions
+0x003a9cf0	0x003aa100	identical	function 0x3a9cf0 -> 0x3aa100, 209 instructions
+0x003ab4c0	0x003ab8d0	identical	function 0x3ab4c0 -> 0x3ab8d0, 59 instructions
+0x004cae10	0x004cb220	identical	function 0x4cae10 -> 0x4cb220, 9 instructions
+0x004caf2b	0x004cb33b	identical	function 0x4caf15 -> 0x4cb325, 10 instructions
+0x00972b82	0x009732a2	DIFFERENT	function 0x9729c0 -> 0x9730e0: 6 differing instructions of 390/390; first difference at +0x291: 'mov r12, qword ptr [r13 + 0x250]' vs 'mov r12, qword ptr [r13 + 0x150]'
+0x00977128	0x00977848	DIFFERENT	function 0x9770c0 -> 0x9777e0: 2 differing instructions of 363/363; first difference at +0x343: 'vmovss xmm0, dword ptr [rcx + 0x270]' vs 'vmovss xmm0, dword ptr [rcx + 0x170]'
+0x00e297f0	0x00e2a220	no-pdata	not inside an old pdata function
+0x01536d20	0x015388a0	identical	function 0x1536d20 -> 0x15388a0, 115 instructions
+0x01593240	0x01594dc0	no-pdata	not inside an old pdata function
+0x01593320	0x01594ea0	identical	function 0x1593320 -> 0x1594ea0, 24 instructions
+0x01593370	0x01594ef0	identical	function 0x1593370 -> 0x1594ef0, 21 instructions
+0x01658e90	0x0165aa10	identical	function 0x1658e90 -> 0x165aa10, 59 instructions
+0x01659370	0x0165aef0	no-pdata	not inside an old pdata function
+0x01659380	0x0165af00	identical	function 0x1659380 -> 0x165af00, 49 instructions
+0x0165b9d0	0x0165d550	identical	function 0x165b9d0 -> 0x165d550, 269 instructions
+0x0165c1f0	0x0165dd70	identical	function 0x165c1f0 -> 0x165dd70, 18 instructions
+0x0165cb60	0x0165e6e0	identical	function 0x165cb60 -> 0x165e6e0, 12 instructions
+0x019e9070	0x019eace0	identical	function 0x19e9070 -> 0x19eace0, 180 instructions
+0x01a15930	0x01a175a0	identical	function 0x1a15930 -> 0x1a175a0, 808 instructions
+0x01a16c40	0x01a188b0	identical	function 0x1a16c40 -> 0x1a188b0, 238 instructions
+0x01a18320	0x01a19f90	no-pdata	not inside an old pdata function
+0x01a192d0	0x01a1af40	identical	function 0x1a192d0 -> 0x1a1af40, 278 instructions
+0x021bd690	0x021bf2b0	identical	function 0x21bd690 -> 0x21bf2b0, 14 instructions
+0x022951b0	0x02296dd0	identical	function 0x22951b0 -> 0x2296dd0, 876 instructions
+0x023073e0	0x02309060	identical	function 0x23073e0 -> 0x2309060, 41 instructions
+0x0231a180	0x0231be00	identical	function 0x231a180 -> 0x231be00, 71 instructions
+0x023dc630	0x023de900	identical	function 0x23dc630 -> 0x23de900, 244 instructions
+0x023e1106	0x023e33d6	DIFFERENT	function 0x23e1090 -> 0x23e3360: 8 differing instructions of 130/131; first difference at +0xc3: 'mov ecx, dword ptr [r9 + rax*4 + 0x23e1238]' vs 'mov ecx, dword ptr [r9 + rax*4 + 0x23e3508]'
+0x0242d4e0	0x0242f7b0	identical	function 0x242d4e0 -> 0x242f7b0, 21 instructions
+0x0258c5a0	0x0258ea30	identical	function 0x258c5a0 -> 0x258ea30, 5 instructions
+0x0258c8c0	0x0258ed50	identical	function 0x258c8c0 -> 0x258ed50, 62 instructions
+0x025bb470	0x025bd900	no-pdata	not inside an old pdata function
+0x025c0900	0x025c2d90	identical	function 0x25c0900 -> 0x25c2d90, 209 instructions
+0x02a0ea70	0x02a111f0	identical	function 0x2a0ea70 -> 0x2a111f0, 586 instructions
+0x02a12a58	0x02a151d8	identical	function 0x2a12a30 -> 0x2a151b0, 90 instructions
+0x02bc2a6a	0x02bc548a	identical	function 0x2bc29f0 -> 0x2bc5410, 331 instructions
+0x02c160b0	0x02c1ab40	no-pdata	not inside an old pdata function
+0x02c17410	0x02c1bea0	identical	function 0x2c17410 -> 0x2c1bea0, 325 instructions
+0x02c5300f	0x02c57a9f	identical	function 0x2c52cd0 -> 0x2c57760, 342 instructions
+0x02d6c210	0x02d70ca0	no-pdata	not inside an old pdata function
+0x02d6c230	0x02d70cc0	identical	function 0x2d6c230 -> 0x2d70cc0, 73 instructions
+0x02d6c360	0x02d70df0	identical	function 0x2d6c360 -> 0x2d70df0, 73 instructions
+0x02d741ea	0x02d78c7a	identical	function 0x2d740d0 -> 0x2d78b60, 246 instructions
+0x02d78c20	0x02d7d6b0	identical	function 0x2d78c20 -> 0x2d7d6b0, 156 instructions
+0x02d78e40	0x02d7d8d0	identical	function 0x2d78e40 -> 0x2d7d8d0, 157 instructions
+0x02d7a726	0x02d7f1b6	identical	function 0x2d7a640 -> 0x2d7f0d0, 125 instructions
+0x02e08520	0x02e0cfb0	identical	function 0x2e08520 -> 0x2e0cfb0, 195 instructions
+0x02e879a0	0x02e8c100	identical	function 0x2e879a0 -> 0x2e8c100, 401 instructions
+0x02ec9c70	0x02ece1c0	identical	function 0x2ec9c70 -> 0x2ece1c0, 129 instructions
+0x02eca480	0x02ece9d0	identical	function 0x2eca480 -> 0x2ece9d0, 786 instructions
+0x02ecb130	0x02ecf680	identical	function 0x2ecb130 -> 0x2ecf680, 332 instructions
+0x02f4af52	0x02f4f4a2	DIFFERENT	function 0x2f4ae80 -> 0x2f4f3d0: 1 differing instructions of 457/457; first difference at +0x424: 'mov dword ptr [rbx + 0x154], ecx' vs 'mov dword ptr [rbx + 0x164], ecx'
+0x04b7e0c0	0x04b82660	identical	function 0x4b7e0c0 -> 0x4b82660, 22 instructions
+0x04b7e188	0x04b82728	identical	function 0x4b7e188 -> 0x4b82728, 24 instructions
+0x0eb68740	0x0e3f1900	DIFFERENT	function 0xeb68740 -> 0xe3f1900: 68 differing instructions of 168/168; first difference at +0x177: 'nop ' vs 'mov eax, dword ptr [rip + 0x4ec3d35]'
+0x0eb6c670	0x0e3f2210	DIFFERENT	function 0xeb6c670 -> 0xe3f2210: 96 differing instructions of 171/170; first difference at +0x103: 'lea rcx, [rip + 0x500e6fd]' vs 'nop '
+0x0ed099c8	0x0e584ac8	DIFFERENT	function 0xed09970 -> 0xe584a70: 68 differing instructions of 104/103; first difference at +0x82: 'lea rdx, [rip - 0x6de2856]' vs 'add rdx, qword ptr [rip - 0x6716ff9]'

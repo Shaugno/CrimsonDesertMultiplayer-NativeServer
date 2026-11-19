@@ -46,7 +46,7 @@ bool replace(uintptr_t at,uint64_t expected,uint64_t wanted){
     __except(EXCEPTION_EXECUTE_HANDLER){return false;}
 }
 bool set_error(uint32_t* result){
-    uint32_t error=0;if(!read(base+0x71D0D3C,error) || !error || !result)return false;
+    uint32_t error=0;if(!read(base+0x71D6E7C,error) || !error || !result)return false;
     __try{*result=error;return true;}__except(EXCEPTION_EXECUTE_HANDLER){return false;}
 }
 void fail(const char* reason){
@@ -67,7 +67,7 @@ bool affinity(uintptr_t owner,const field_share3663::Context& c){
 }
 uintptr_t lobby_for(uintptr_t user){
     const uintptr_t component=ptr(ptr(user+0x68)+0x10);
-    return ptr(component)==base+0x5F6F2E8 && ptr(component+8)==user?component:0;
+    return ptr(component)==base+0x5F74678 && ptr(component+8)==user?component:0;
 }
 bool lobby_numbers(uintptr_t component,std::array<uint64_t,64>& values,uintptr_t& data,uint32_t& count){
     const uintptr_t list=ptr(component+0x18);uint32_t capacity=0;
@@ -77,14 +77,14 @@ bool lobby_numbers(uintptr_t component,std::array<uint64_t,64>& values,uintptr_t
 }
 uintptr_t status_number(uintptr_t actor){
     const uintptr_t status=ptr(ptr(actor+0x68)+0x20);
-    return ptr(status)==base+0x5F63430 && ptr(status+8)==actor?ptr(status+0x90):0;
+    return ptr(status)==base+0x5F687B0 && ptr(status+8)==actor?ptr(status+0x90):0;
 }
 // A conservative bounded uniqueness check on the adopted logged-in list.
 // Native identity callbacks serialize its mutation on the learned affinity.
 bool unique(uintptr_t except){
-    const uintptr_t manager=ptr(ptr(base+0x72456E0));
+    const uintptr_t manager=ptr(ptr(base+0x724B870));
     uint32_t count=0;uintptr_t data=0;
-    if(!manager || ptr(manager)!=base+0x5F69100 || !read(manager+0xC0,count) || count>0x4000 ||
+    if(!manager || ptr(manager)!=base+0x5F6E070 || !read(manager+0xC0,count) || count>0x4000 ||
         !read(manager+0xB8,data) || (count && !data))return false;
     for(uint32_t i=0;i<count;++i){
         uintptr_t actor=0;if(!read(data+i*8ull,actor))return false;
@@ -136,7 +136,7 @@ uint32_t* __fastcall lobby_detour(void* component,uint32_t* result,void* unused,
     if(!on.load())return returned;
     field_share3663::Context c;uint32_t code=~0u;
     const auto comp=reinterpret_cast<uintptr_t>(component),owner=ptr(comp+8);
-    if(ptr(comp)!=base+0x5F6F2E8 || !context(c))return returned;
+    if(ptr(comp)!=base+0x5F74678 || !context(c))return returned;
     if(owner==c.host){(void)affinity(owner,c);return returned;}
     if(!c.guest || owner!=c.guest)return returned;
     if(returned!=result || !read(reinterpret_cast<uintptr_t>(returned),code) || code)return returned;
@@ -180,7 +180,7 @@ bool install(const game::build_guard::ImageIdentity& id,field_share3663::ReadCon
         {game::build_3663::kTierAComplete,game::build_3663::kTierBComplete,
          game::build_3663::kTierCComplete,game::build_3663::kTierDComplete}).tier_c_join)return false;
     for(const auto& s:{n::kLobbyLoad,n::kLoadComponents,n::kPhases,n::kClearLobby,n::kClearList,n::kLoginMgr,n::kLobbyConstant,n::kLobbyAdd})if(!matches(s))return false;
-    if(ptr(base+0x5F6F2E8+0x50)!=base+n::kLobbyLoad.rva || ptr(base+0x5F63430+0x50)!=base+0x2C160B0)return false;
+    if(ptr(base+0x5F74678+0x50)!=base+n::kLobbyLoad.rva || ptr(base+0x5F687B0+0x50)!=base+0x2C1AB40)return false;
     context_reader=read_context;
     if(!prepare(n::kLobbyLoad,reinterpret_cast<void*>(&lobby_detour),lobby_hook) ||
         !prepare(n::kLoadComponents,reinterpret_cast<void*>(&load_detour),load_hook) ||

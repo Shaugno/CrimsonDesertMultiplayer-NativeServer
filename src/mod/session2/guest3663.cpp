@@ -41,7 +41,7 @@ uint64_t next_load_sample=0;
 uint64_t guest_install_tick=0;
 bool startup_capture_armed=false;
 constexpr uint32_t max_load_samples=180;
-constexpr uintptr_t client_sequencer_vt=0x59D57E8;
+constexpr uintptr_t client_sequencer_vt=0x59DA8A8;
 template<class T>bool read(uintptr_t a,T& v){return a && game::safe_read(a,&v,sizeof v);}
 uintptr_t ptr(uintptr_t a){uintptr_t v=0;return read(a,v)?v:0;}
 void sample_loading() {
@@ -137,9 +137,9 @@ int* __fastcall send(void* self,int* result,void* buffer){
 }
 bool lock3(uintptr_t manager,bool take){
     const uintptr_t lock=ptr(manager);
-    if(lock!=manager+8 || ptr(lock)!=base+0x59874C8 ||
-        ptr(base+0x59874C8+8)!=base+r4_native::kLock3.rva ||
-        ptr(base+0x59874C8+16)!=base+r4_native::kUnlock3.rva)return false;
+    if(lock!=manager+8 || ptr(lock)!=base+0x598C5A8 ||
+        ptr(base+0x598C5A8+8)!=base+r4_native::kLock3.rva ||
+        ptr(base+0x598C5A8+16)!=base+r4_native::kUnlock3.rva)return false;
     reinterpret_cast<void(__fastcall*)(uintptr_t)>(base+(take?r4_native::kLock3.rva:r4_native::kUnlock3.rva))(lock);return true;
 }
 int busy_byte(uintptr_t manager,bool take){
@@ -166,7 +166,7 @@ void guarded_refresh(uintptr_t manager){
 void title_refresh(){
     if(!refresh_pending.load() || refreshed.load() || broken.load())return;
     if(GetTickCount64()-refresh_started.load()>15000){fail("native title refresh readiness timed out");return;}
-    const auto world=ptr(base+0x72451C0),manager=ptr(world+0x88),lookup=ptr(base+0x72456D0);
+    const auto world=ptr(base+0x724B350),manager=ptr(world+0x88),lookup=ptr(base+0x724B860);
     if(!world || !manager || !ptr(manager+0x50) || !lookup)return;
     if(ptr(lookup+0x48)!=manager){fail("title/server save-manager identity mismatch");return;}
     const int busy=busy_byte(manager,true);if(busy==1)return;if(busy<0){fail("native save-manager lock/busy guard");return;}

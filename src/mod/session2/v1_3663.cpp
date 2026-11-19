@@ -99,8 +99,8 @@ bool host_install(const game::build_guard::ImageIdentity& id){
         {game::build_3663::kTierAComplete,game::build_3663::kTierBComplete,
          game::build_3663::kTierCComplete,game::build_3663::kTierDComplete}).tier_d_lifecycle)return false;
     for(const auto& s:{n::kExceptControl,n::kExceptSelf,n::kToNear,n::kLoading,n::kLoadingFlag})if(!matches(s))return false;
-    if(ptr(base+0x5F686C0+8)!=base+n::kExceptControl.rva || ptr(base+0x5F686A0+8)!=base+n::kExceptSelf.rva ||
-        ptr(base+0x5F68780+8)!=base+n::kToNear.rva)return false;
+    if(ptr(base+0x5F6DAC0+8)!=base+n::kExceptControl.rva || ptr(base+0x5F6DAA0+8)!=base+n::kExceptSelf.rva ||
+        ptr(base+0x5F6DA80+8)!=base+n::kToNear.rva)return false;
     if(!crash3663::install_for_session(role::Role::Host)){
         log::error("3663 host crash capture could not be installed in the session evidence directory");
         return false;

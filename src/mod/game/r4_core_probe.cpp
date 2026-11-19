@@ -73,16 +73,16 @@ void lobby(Event& e,uintptr_t comp) {
 void common(Event& e) {
     // Optional roots can legitimately be absent at title. Every non-null
     // dereference is guarded. These samples make no native lookup/lock call.
-    e.common[0]=pointer(base+0x7283378,e);
+    e.common[0]=pointer(base+0x72895E8,e);
     if(e.common[0]) {
         e.common[1]=pointer(e.common[0],e);
         e.common[2]=get<uint32_t>(e.common[0]+0x9C,e);
         e.common[3]=get<uint32_t>(e.common[0]+0xD0,e);
     }
-    e.common[4]=pointer(base+0x72456E0,e);
+    e.common[4]=pointer(base+0x724B870,e);
     if(e.common[4])e.common[5]=pointer(e.common[4],e);
     if(e.common[5])e.common[6]=pointer(e.common[5],e);
-    e.common[7]=pointer(base+0x72456D0,e);
+    e.common[7]=pointer(base+0x724B860,e);
     if(e.common[7])e.common[8]=pointer(e.common[7]+0x48,e);
     if(e.common[8])e.common[9]=pointer(e.common[8],e);
     if(e.common[9])e.common[10]=pointer(e.common[9],e);
@@ -106,7 +106,7 @@ void observe(size_t point,safetyhook::Context& c) noexcept {
     r3_join_probe::Frame frame;
     if(point==0) {
         const auto caller=get<uintptr_t>(c.rsp,e);
-        if(!e.valid || caller!=base+0xEB68840)return; // exact native AddActor caller only
+        if(!e.valid || caller!=base+0xE3F1A00)return; // exact native AddActor caller only
         if(seen[point].fetch_add(1)>=32)return;
         frame={{c.rcx,get<uint64_t>(c.rdx,e),get<uint32_t>(c.rdx+8,e),caller,0},c.rsp};
         if(!frames.enter(0,frame)){++lost;stopped.store(true);return;}
@@ -126,7 +126,7 @@ void observe(size_t point,safetyhook::Context& c) noexcept {
             e.data[19]=pointer(e.data[18]+0x20,e);e.data[20]=get<uint8_t>(e.data[17]+0x10,e);
             e.data[21]=get<uint8_t>(e.data[17]+0x11,e);e.data[22]=pointer(e.data[17]+0x18,e);break;
         case 3: {
-            e.data[0]=pointer(base+0x72456E0,e);
+            e.data[0]=pointer(base+0x724B870,e);
             if(e.data[0])e.data[1]=pointer(e.data[0],e);
             if(e.data[1]) {
                 e.data[2]=pointer(e.data[1],e);e.data[3]=pointer(e.data[1]+0xB8,e);

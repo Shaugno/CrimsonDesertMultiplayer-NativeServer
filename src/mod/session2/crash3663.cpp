@@ -364,7 +364,7 @@ void note_null_playback(uint32_t key, uintptr_t vtable, uint32_t host, uint32_t 
     if (!crash_text) return;
     game::FixedLine line;
     line.str("null_playback utc_filetime=").dec(utc_filetime()).str(" tid=").dec(GetCurrentThreadId())
-        .str(" site=CrimsonDesert.exe+0x258C8FD actor=").hex32(key)
+        .str(" site=CrimsonDesert.exe+0x258ED8D actor=").hex32(key)
         .str(" class=").hex(key >> 28).str(" identity=").str(identity)
         .str(" host_key=").hex32(host).str(" guest_key=").hex32(guest)
         .str(" layer=").dec(selector).str(" actor_vtable=");
@@ -376,7 +376,7 @@ void note_playback_skip(uint32_t key) noexcept {
     if (!crash_text) return;
     game::FixedLine line;
     line.str("null_playback_skip utc_filetime=").dec(utc_filetime()).str(" actor=").hex32(key)
-        .str(" continuation=CrimsonDesert.exe+0x258C99A");
+        .str(" continuation=CrimsonDesert.exe+0x258EE2A");
     append(line);
 }
 }

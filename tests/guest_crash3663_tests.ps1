@@ -27,7 +27,7 @@ function Test-CrashCapture([string]$role) {
                          'unhandled .+access=0 address=0x',
                          'registers .+ rsp=0x','stack .+ <- ','minidump=written',
                          "null_playback .+ $peer",
-                         'null_playback_skip .+ continuation=CrimsonDesert.exe\+0x258C99A') {
+                         'null_playback_skip .+ continuation=CrimsonDesert.exe\+0x258EE2A') {
         if ($note -notmatch $pattern) { throw "Missing crash evidence pattern $pattern" }
     }
     if ((Get-Content -Raw -LiteralPath (Join-Path $work 'prior-filter.txt')) -notmatch 'previous filter called') {

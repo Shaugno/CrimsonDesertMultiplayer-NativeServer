@@ -12,7 +12,8 @@ int main() {
     check(old.packet_max==troc::kMaxPacketSize,"legacy packet acceptance unchanged");
     check(target.packet_max==0x7FDA && target.ordinary_payload_max==0x7FC1,"native target bounds");
     check(target.descriptor_skip==0 && old.descriptor_skip==0x80,"target scans all aligned slots");
-    check(target.kNetLoopPump==0x3A8D94 && target.kNetLoopPumpPatch==7,"verified target midpoint");
+    // 1.0.0.3732 (R10 port; 3663 was 0x3A8D94).
+    check(target.kNetLoopPump==0x3A91A4 && target.kNetLoopPumpPatch==7,"verified target midpoint");
     auto packet=[&](size_t payload) { return troc::make(2401,-1,std::vector<uint8_t>(payload)); };
     auto p=packet(target.ordinary_payload_max);
     check(parse_tunnel_packet(p,troc::Dir::ToHostServer,target).has_value(),"exact ordinary payload maximum");

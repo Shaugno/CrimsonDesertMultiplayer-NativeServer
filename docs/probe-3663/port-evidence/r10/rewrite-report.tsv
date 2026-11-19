@@ -1,0 +1,302 @@
+﻿src/mod/game/build_3663.h:26	addr 0x165c1f0->0x165dd70
+src/mod/game/build_3663.h:27	addr 0x165cb60->0x165e6e0
+src/mod/game/build_3663.h:28	addr 0x3ab4c0->0x3ab8d0
+src/mod/game/build_3663.h:29	addr 0x4b7e0c0->0x4b82660
+src/mod/game/build_3663.h:30	addr 0x4b7e188->0x4b82728
+src/mod/game/build_3663.h:31	addr 0x165b9d0->0x165d550
+src/mod/game/build_3663.h:32	addr 0x715bfd0->0x7162090
+src/mod/game/build_3663.h:34	addr 0x5b40310->0x5b45590
+src/mod/game/build_3663.h:35	addr 0x5b403a8->0x5b45610
+src/mod/game/build_3663.h:41	addr 0x2a0ea70->0x2a111f0
+src/mod/game/build_3663.h:42	addr 0x1a18320->0x1a19f90
+src/mod/game/build_3663.h:48	addr 0x7231330->0x7237470
+src/mod/game/build_3663.h:49	addr 0x7253e60->0x725a040
+src/mod/game/build_3663.h:50	addr 0x59c1660->0x59c6748
+src/mod/game/build_3663.h:51	addr 0x614a050->0x614f3a8
+src/mod/game/build_3663.h:52	addr 0x7245558->0x724b6e8
+src/mod/game/build_3663.h:53	addr 0x7245560->0x724b6f0
+src/mod/game/build_3663.h:54	addr 0x72451c0->0x724b350
+src/mod/game/build_3663.h:55	addr 0x59c2760->0x59c7a08
+src/mod/game/build_3663.h:56	addr 0x5990bf0->0x59961d0
+src/mod/game/build_3663.h:57	addr 0x5998b60->0x599dc40
+src/mod/game/build_3663.h:104	addr 0x8030->0x8030
+src/mod/game/build_3663.h:106	addr 0x8008->0x8008
+src/mod/game/build_3663.h:107	addr 0x800a->0x800a
+src/mod/game/build_3663.h:108	addr 0x800c->0x800c
+src/mod/game/build_3663.h:110	addr 0x8028->0x8028
+src/mod/game/build_3663.h:116	addr 0x8020->0x8020
+src/mod/game/build_3663.h:130	addr 0x8010->0x8010
+src/mod/game/build_3663.h:131	addr 0x8018->0x8018
+src/mod/game/build_3663.h:133	bytes 0x2a0ea70->0x2a111f0	unchanged
+src/mod/game/build_3663.h:134	bytes 0x165c1f0->0x165dd70	unchanged
+src/mod/game/build_3663.h:135	bytes 0x165b9d0->0x165d550	unchanged
+src/mod/game/build_3663.h:136	bytes 0x3ab4c0->0x3ab8d0	unchanged
+src/mod/game/build_3663.h:137	bytes 0x4b7e188->0x4b82728	unchanged
+src/mod/game/build_3663.h:138	bytes 0x4b7e0c0->0x4b82660 kAllocThreadBytes (mapped)	refreshed
+src/mod/game/build_3663.h:139	bytes 0x165cb60->0x165e6e0	unchanged
+src/mod/game/build_3663.h:140	bytes 0x3a8d94->0x3a91a4	unchanged
+src/mod/game/build_3663.h:141	bytes 0x3a8d94->0x3a91a4 kNetLoopPumpAob (mapped)	unchanged
+src/mod/game/build_3663.h:142	bytes 0x3a9cf0->0x3aa100 kClientOnRecvPacketHead (owner 0x3a9cf0)	unchanged
+src/mod/game/build_3663.h:221	bytes 0x2d7a726->0x2d7f1b6 kFindByNoScanBytes (mapped)	unchanged
+src/mod/game/build_3663.h:222	bytes 0x2d7a750->0x2d7f1e0 kFindByNoReadBytes (mapped)	unchanged
+src/mod/game/build_3663.h:223	bytes 0x23dc630->0x23de900 kLoadingHead (mapped)	unchanged
+src/mod/game/build_3663.h:224	bytes 0x23dc66b->0x23de93b kLoadingFlagCmpBytes (mapped)	unchanged
+src/mod/game/build_3663.h:225	bytes 0x2e08520->0x2e0cfb0 kAcquireFieldHead (owner 0x2e08520)	unchanged
+src/mod/game/build_3663.h:226	bytes 0x2ecb130->0x2ecf680	unchanged
+src/mod/game/build_3663.h:227	bytes 0x1658e90->0x165aa10 kTryAddRefHead (owner 0x1658e90)	unchanged
+src/mod/game/build_3663.h:228	bytes 0x4cae10->0x4cb220 kVecPushHead (owner 0x4cae10)	unchanged
+src/mod/game/build_3663.h:229	bytes 0x2e879a0->0x2e8c100	unchanged
+src/mod/game/build_3663.h:230	bytes 0x22951b0->0x2296dd0 kLoadHead (mapped)	unchanged
+src/mod/game/build_3663.h:231	bytes 0x231a180->0x231be00 kGetterHead (mapped)	unchanged
+src/mod/game/build_3663.h:232	bytes 0x21bd690->0x21bf2b0 kActionLayerAdvanceHead (mapped)	unchanged
+src/mod/game/build_3663.h:233	bytes 0x258c5a0->0x258ea30 kActionLayersAdvanceHead (mapped)	unchanged
+src/mod/game/build_3663.h:234	bytes 0x2e87db0->0x2e8c510 kLobbyConstantBytes (mapped)	unchanged
+src/mod/game/build_3663.h:235	bytes 0x2e87e10->0x2e8c570 kLobbyAddCallBytes (mapped)	refreshed
+src/mod/game/build_3663.h:323	bytes 0x1593240->0x1594dc0 kWindowsLockVf1Head (owner 0x1593240)	unchanged
+src/mod/game/build_3663.h:324	bytes 0xe297f0->0xe2a220 kWindowsLockVf2Head (owner 0xe297f0)	unchanged
+src/mod/game/build_3663.h:325	bytes 0x1a18320->0x1a19f90	refreshed
+src/mod/game/build_3663.h:326	bytes 0x1a16c40->0x1a188b0 kLoadSlotHead (mapped)	unchanged
+src/mod/game/build_3663.h:327	bytes 0x1a15930->0x1a175a0 kSaveHead (mapped)	unchanged
+src/mod/game/build_3663.h:328	bytes 0x1a192d0->0x1a1af40 kFlushHead (mapped)	unchanged
+src/mod/game/build_3663.h:329	bytes 0x25bb470->0x25bd900 kGetOrCreateHead (mapped)	refreshed
+src/mod/game/build_3663.h:330	bytes 0x25c0900->0x25c2d90 kAddFileHead (mapped)	unchanged
+src/mod/game/build_3663.h:368	addr 0x7231330->0x7237470
+src/mod/game/build_3663.h:369	addr 0x7253e60->0x725a040
+src/mod/game/build_3663.h:370	addr 0x59c2760->0x59c7a08
+src/mod/game/build_3663.h:371	addr 0x5990bf0->0x59961d0
+src/mod/game/build_3663.h:372	addr 0x59c1660->0x59c6748
+src/mod/game/build_3663.h:373	addr 0x5998b60->0x599dc40
+src/mod/game/build_3663.h:374	addr 0x614a050->0x614f3a8
+src/mod/game/build_3663.h:375	addr 0x72456b8->0x724b848
+src/mod/game/build_3663.h:376	addr 0x72451a0->0x724b330
+src/mod/game/build_3663.h:377	addr 0x5b40310->0x5b45590
+src/mod/game/build_3663.h:378	addr 0x5b403a8->0x5b45610
+src/mod/game/build_3663.h:379	addr 0x2a0ea70->0x2a111f0
+src/mod/game/build_3663.h:380	addr 0x165c1f0->0x165dd70
+src/mod/game/build_3663.h:381	addr 0x165b9d0->0x165d550
+src/mod/game/build_3663.h:382	addr 0x3ab4c0->0x3ab8d0
+src/mod/game/build_3663.h:383	addr 0x4b7e188->0x4b82728
+src/mod/game/build_3663.h:384	addr 0x4b7e0c0->0x4b82660
+src/mod/game/build_3663.h:385	addr 0x715bfd0->0x7162090
+src/mod/game/build_3663.h:386	addr 0x165cb60->0x165e6e0
+src/mod/game/build_3663.h:387	addr 0x3a9cf0->0x3aa100
+src/mod/game/build_3663.h:388	addr 0x5f68b10->0x5f6de90
+src/mod/game/build_3663.h:389	addr 0x72456d0->0x724b860
+src/mod/game/build_3663.h:390	addr 0x59874c8->0x598c5a8
+src/mod/game/build_3663.h:391	addr 0x1a18320->0x1a19f90
+src/mod/game/build_3663.h:392	addr 0x2e08520->0x2e0cfb0
+src/mod/game/build_3663.h:393	addr 0x1658e90->0x165aa10
+src/mod/game/build_3663.h:394	addr 0x72456e0->0x724b870
+src/mod/game/build_3663.h:395	addr 0x2d7a726->0x2d7f1b6
+src/mod/game/build_3663.h:396	addr 0x2d7a750->0x2d7f1e0
+src/mod/game/build_3663.h:397	addr 0x22951b0->0x2296dd0
+src/mod/game/build_3663.h:398	addr 0x6f31c98->0x6f37c98
+src/mod/game/build_3663.h:399	addr 0x23dc630->0x23de900
+src/mod/game/build_3663.h:400	addr 0x23dc66b->0x23de93b
+src/mod/game/build_3663.h:401	addr 0x231a180->0x231be00
+src/mod/game/build_3663.h:402	addr 0x6f29b70->0x6f2fb70
+src/mod/game/build_3663.h:403	addr 0x1a16c40->0x1a188b0
+src/mod/game/build_3663.h:404	addr 0x1a15930->0x1a175a0
+src/mod/game/build_3663.h:405	addr 0x1a192d0->0x1a1af40
+src/mod/game/build_3663.h:406	addr 0x25bb470->0x25bd900
+src/mod/game/build_3663.h:407	addr 0x25c0900->0x25c2d90
+src/mod/game/build_3663.h:408	addr 0x2bc2a6a->0x2bc548a
+src/mod/game/build_3663.h:409	addr 0xed099c8->0xe584ac8
+src/mod/game/build_3663.h:410	addr 0x1a16dce->0x1a18a3e
+src/mod/game/build_3663.h:411	addr 0x71d0cfc->0x71d6e3c
+src/mod/game/build_3663.h:412	addr 0x1a16d1f->0x1a1898f
+src/mod/game/build_3663.h:413	addr 0x71d092c->0x71d6a6c
+src/mod/game/build_3663.h:414	addr 0x2295fcf->0x2297bef
+src/mod/game/build_3663.h:415	addr 0x71d0848->0x71d6988
+src/mod/game/build_3663.h:416	addr 0x1a15c2a->0x1a1789a
+src/mod/game/build_3663.h:417	addr 0x71d0cf8->0x71d6e38
+src/mod/game/build_3663.h:418	addr 0x2bc2a6f->0x2bc548f
+src/mod/game/build_3663.h:419	addr 0xed099cd->0xe584acd
+src/mod/game/build_3663.h:420	addr 0x1536d20->0x15388a0
+src/mod/game/build_3663.h:421	addr 0x21bd690->0x21bf2b0
+src/mod/game/build_3663.h:422	addr 0x258c5a0->0x258ea30
+src/mod/game/build_3663.h:423	addr 0x72451c0->0x724b350
+src/mod/game/build_3663.h:424	addr 0x7245558->0x724b6e8
+src/mod/game/build_3663.h:425	addr 0x7245560->0x724b6f0
+src/mod/game/build_3663.h:431	addr 0x6f14e10->0x6f1ae10
+src/mod/game/build_3663.h:432	addr 0x6f487b0->0x6f4e7b0
+src/mod/game/build_3663.h:433	addr 0x3a8d94->0x3a91a4
+src/mod/game/build_3663.h:434	addr 0x7fda->0x7fda
+src/mod/game/build_3663.h:444	addr 0x5f6f2e8->0x5f74678
+src/mod/game/build_3663.h:445	addr 0x2e879a0->0x2e8c100
+src/mod/game/build_3663.h:446	addr 0x5f63430->0x5f687b0
+src/mod/game/build_3663.h:447	addr 0x2c160b0->0x2c1ab40
+src/mod/game/build_3663.h:448	addr 0x2ecb130->0x2ecf680
+src/mod/game/build_3663.h:449	addr 0x2c17410->0x2c1bea0
+src/mod/game/build_3663.h:450	bytes 0x2c17410->0x2c1bea0	unchanged
+src/mod/game/r3_join_sites.h:8	bytes 0x2e08520->0x2e0cfb0	unchanged
+src/mod/game/r3_join_sites.h:8	addr 0x2e08520->0x2e0cfb0
+src/mod/game/r3_join_sites.h:9	bytes 0x2e085ac->0x2e0d03c	unchanged
+src/mod/game/r3_join_sites.h:9	addr 0x2e085ac->0x2e0d03c
+src/mod/game/r3_join_sites.h:10	bytes 0x2ecb130->0x2ecf680	unchanged
+src/mod/game/r3_join_sites.h:10	addr 0x2ecb130->0x2ecf680
+src/mod/game/r3_join_sites.h:11	bytes 0x2ecb63b->0x2ecfb8b	unchanged
+src/mod/game/r3_join_sites.h:11	addr 0x2ecb63b->0x2ecfb8b
+src/mod/game/r3_join_sites.h:12	bytes 0x2eca480->0x2ece9d0	unchanged
+src/mod/game/r3_join_sites.h:12	addr 0x2eca480->0x2ece9d0
+src/mod/game/r3_join_sites.h:13	bytes 0x2ecb113->0x2ecf663	unchanged
+src/mod/game/r3_join_sites.h:13	addr 0x2ecb113->0x2ecf663
+src/mod/game/r3_join_sites.h:14	bytes 0x2e879a0->0x2e8c100	unchanged
+src/mod/game/r3_join_sites.h:14	addr 0x2e879a0->0x2e8c100
+src/mod/game/r3_join_sites.h:15	bytes 0x2e87a45->0x2e8c1a5	unchanged
+src/mod/game/r3_join_sites.h:15	addr 0x2e87a45->0x2e8c1a5
+src/mod/game/r3_pump_probe.cpp:14	addr 0x3a8d94->0x3a91a4
+src/mod/game/r4_core_probe.cpp:76	addr 0x7283378->0x72895e8
+src/mod/game/r4_core_probe.cpp:82	addr 0x72456e0->0x724b870
+src/mod/game/r4_core_probe.cpp:85	addr 0x72456d0->0x724b860
+src/mod/game/r4_core_probe.cpp:109	addr 0xeb68840->0xe3f1a00
+src/mod/game/r4_core_probe.cpp:129	addr 0x72456e0->0x724b870
+src/mod/game/r4_core_probe.cpp:134	addr 0x4000->0x4000
+src/mod/game/r4_probe_sites.h:8	bytes 0x4cae10->0x4cb220	unchanged
+src/mod/game/r4_probe_sites.h:8	addr 0x4cae10->0x4cb220
+src/mod/game/r4_probe_sites.h:9	bytes 0x4caf2b->0x4cb33b	unchanged
+src/mod/game/r4_probe_sites.h:9	addr 0x4caf2b->0x4cb33b
+src/mod/game/r4_probe_sites.h:10	bytes 0x2c5300f->0x2c57a9f	unchanged
+src/mod/game/r4_probe_sites.h:10	addr 0x2c5300f->0x2c57a9f
+src/mod/game/r4_probe_sites.h:11	bytes 0x2a12a58->0x2a151d8	refreshed
+src/mod/game/r4_probe_sites.h:11	addr 0x2a12a58->0x2a151d8
+src/mod/game/r4_probe_sites.h:12	bytes 0x2f4af52->0x2f4f4a2	unchanged
+src/mod/game/r4_probe_sites.h:12	addr 0x2f4af52->0x2f4f4a2
+src/mod/game/r4_probe_sites.h:13	bytes 0x2f4af79->0x2f4f4c9	refreshed
+src/mod/game/r4_probe_sites.h:13	addr 0x2f4af79->0x2f4f4c9
+src/mod/game/r4_probe_sites.h:14	bytes 0x2e87db0->0x2e8c510	unchanged
+src/mod/game/r4_probe_sites.h:14	addr 0x2e87db0->0x2e8c510
+src/mod/game/r4_probe_sites.h:15	bytes 0x2e87e10->0x2e8c570	refreshed
+src/mod/game/r4_probe_sites.h:15	addr 0x2e87e10->0x2e8c570
+src/mod/game/r4_probe_sites.h:16	bytes 0x2d741ea->0x2d78c7a	unchanged
+src/mod/game/r4_probe_sites.h:16	addr 0x2d741ea->0x2d78c7a
+src/mod/game/r4_probe_sites.h:17	bytes 0x2a0eec0->0x2a11640	unchanged
+src/mod/game/r4_probe_sites.h:17	addr 0x2a0eec0->0x2a11640
+src/mod/game/r4_probe_sites.h:18	bytes 0x23e1106->0x23e33d6	refreshed
+src/mod/game/r4_probe_sites.h:18	addr 0x23e1106->0x23e33d6
+src/mod/game/r4_probe_sites.h:19	bytes 0x2295d80->0x22979a0	unchanged
+src/mod/game/r4_probe_sites.h:19	addr 0x2295d80->0x22979a0
+src/mod/game/r4_probe_sites.h:20	bytes 0xeb6877e->0xe3f193e	unchanged
+src/mod/game/r4_probe_sites.h:20	addr 0xeb6877e->0xe3f193e
+src/mod/game/r4_probe_sites.h:21	bytes 0x2c17410->0x2c1bea0	unchanged
+src/mod/game/r4_probe_sites.h:21	addr 0x2c17410->0x2c1bea0
+src/mod/session2/character_guard3663.cpp:21	addr 0x972b82->0x9732a2
+src/mod/session2/character_guard3663.cpp:21	addr 0x977128->0x977848
+src/mod/session2/character_guard3663.cpp:22	addr 0x258c8c0->0x258ed50
+src/mod/session2/character_guard3663.cpp:22	addr 0x258c8fd->0x258ed8d
+src/mod/session2/character_guard3663.cpp:22	addr 0x258c99a->0x258ee2a
+src/mod/session2/character_guard3663.cpp:24	bytes 0x972b82->0x9732a2 update_edge (owner 0x972b82)	unchanged
+src/mod/session2/character_guard3663.cpp:25	bytes 0x977128->0x977848 helper_edge (mapped)	refreshed
+src/mod/session2/character_guard3663.cpp:31	bytes 0x258c8fd->0x258ed8d read_bytes (mapped)	unchanged
+src/mod/session2/crash3663.cpp:367	addr 0x258c8fd->0x258ed8d
+src/mod/session2/crash3663.cpp:379	addr 0x258c99a->0x258ee2a
+src/mod/session2/field_share3663.cpp:66	addr 0x7283378->0x72895e8
+src/mod/session2/field_share3663.cpp:67	addr 0x5f69100->0x5f6e070
+src/mod/session2/field_share3663.cpp:73	addr 0x59c2580->0x59c7718
+src/mod/session2/field_share3663.cpp:73	addr 0x5a54310->0x5a59390
+src/mod/session2/field_share3663.cpp:80	addr 0x5d45b68->0x5d4adf0
+src/mod/session2/field_share3663.cpp:85	addr 0x5b40000->0x5b45300
+src/mod/session2/field_share3663.cpp:98	addr 0x5b3ffb0->0x5b45288
+src/mod/session2/field_share3663.cpp:101	addr 0x5bcee40->0x5bd4cd0
+src/mod/session2/field_share3663.cpp:115	addr 0x71d0d3c->0x71d6e7c
+src/mod/session2/field_share3663.cpp:364	addr 0x597bfe0->0x59810d0
+src/mod/session2/field_share3663.cpp:365	addr 0x1659370->0x165aef0
+src/mod/session2/field_share3663.cpp:370	addr 0x597bfe0->0x59810d0
+src/mod/session2/file_sandbox3663.cpp:30	addr 0x1000->0x1000
+src/mod/session2/file_sandbox3663.cpp:370	addr 0x1000->0x1000
+src/mod/session2/guest3663.cpp:44	addr 0x59d57e8->0x59da8a8
+src/mod/session2/guest3663.cpp:140	addr 0x59874c8->0x598c5a8
+src/mod/session2/guest3663.cpp:141	addr 0x59874c8->0x598c5a8
+src/mod/session2/guest3663.cpp:142	addr 0x59874c8->0x598c5a8
+src/mod/session2/guest3663.cpp:169	addr 0x72451c0->0x724b350
+src/mod/session2/guest3663.cpp:169	addr 0x72456d0->0x724b860
+src/mod/session2/identity3663.cpp:49	addr 0x71d0d3c->0x71d6e7c
+src/mod/session2/identity3663.cpp:70	addr 0x5f6f2e8->0x5f74678
+src/mod/session2/identity3663.cpp:80	addr 0x5f63430->0x5f687b0
+src/mod/session2/identity3663.cpp:85	addr 0x72456e0->0x724b870
+src/mod/session2/identity3663.cpp:87	addr 0x5f69100->0x5f6e070
+src/mod/session2/identity3663.cpp:87	addr 0x4000->0x4000
+src/mod/session2/identity3663.cpp:139	addr 0x5f6f2e8->0x5f74678
+src/mod/session2/identity3663.cpp:183	addr 0x5f6f2e8->0x5f74678
+src/mod/session2/identity3663.cpp:183	addr 0x5f63430->0x5f687b0
+src/mod/session2/identity3663.cpp:183	addr 0x2c160b0->0x2c1ab40
+src/mod/session2/r4_native_bindings.h:7	bytes 0x2e08520->0x2e0cfb0	unchanged
+src/mod/session2/r4_native_bindings.h:7	addr 0x2e08520->0x2e0cfb0
+src/mod/session2/r4_native_bindings.h:8	bytes 0x2ecb130->0x2ecf680	unchanged
+src/mod/session2/r4_native_bindings.h:8	addr 0x2ecb130->0x2ecf680
+src/mod/session2/r4_native_bindings.h:9	bytes 0x1658e90->0x165aa10	unchanged
+src/mod/session2/r4_native_bindings.h:9	addr 0x1658e90->0x165aa10
+src/mod/session2/r4_native_bindings.h:10	bytes 0x4cae10->0x4cb220	unchanged
+src/mod/session2/r4_native_bindings.h:10	addr 0x4cae10->0x4cb220
+src/mod/session2/r4_native_bindings.h:11	bytes 0x2d78e40->0x2d7d8d0	unchanged
+src/mod/session2/r4_native_bindings.h:11	addr 0x2d78e40->0x2d7d8d0
+src/mod/session2/r4_native_bindings.h:12	bytes 0x2d78c20->0x2d7d6b0	unchanged
+src/mod/session2/r4_native_bindings.h:12	addr 0x2d78c20->0x2d7d6b0
+src/mod/session2/r4_native_bindings.h:13	bytes 0x1659380->0x165af00	unchanged
+src/mod/session2/r4_native_bindings.h:13	addr 0x1659380->0x165af00
+src/mod/session2/r4_native_bindings.h:14	bytes 0x2ec9c70->0x2ece1c0	unchanged
+src/mod/session2/r4_native_bindings.h:14	addr 0x2ec9c70->0x2ece1c0
+src/mod/session2/r4_native_bindings.h:15	bytes 0x23073e0->0x2309060	unchanged
+src/mod/session2/r4_native_bindings.h:15	addr 0x23073e0->0x2309060
+src/mod/session2/r4_native_bindings.h:16	bytes 0xeb68740->0xe3f1900	unchanged
+src/mod/session2/r4_native_bindings.h:16	addr 0xeb68740->0xe3f1900
+src/mod/session2/r4_native_bindings.h:17	bytes 0xeb6c670->0xe3f2210	unchanged
+src/mod/session2/r4_native_bindings.h:17	addr 0xeb6c670->0xe3f2210
+src/mod/session2/r4_native_bindings.h:18	bytes 0x1593320->0x1594ea0	unchanged
+src/mod/session2/r4_native_bindings.h:18	addr 0x1593320->0x1594ea0
+src/mod/session2/r4_native_bindings.h:19	bytes 0x1593370->0x1594ef0	unchanged
+src/mod/session2/r4_native_bindings.h:19	addr 0x1593370->0x1594ef0
+src/mod/session2/r4_native_bindings.h:20	bytes 0x2e879a0->0x2e8c100	unchanged
+src/mod/session2/r4_native_bindings.h:20	addr 0x2e879a0->0x2e8c100
+src/mod/session2/r4_native_bindings.h:21	bytes 0x22951b0->0x2296dd0	unchanged
+src/mod/session2/r4_native_bindings.h:21	addr 0x22951b0->0x2296dd0
+src/mod/session2/r4_native_bindings.h:22	bytes 0x2c17410->0x2c1bea0	unchanged
+src/mod/session2/r4_native_bindings.h:22	addr 0x2c17410->0x2c1bea0
+src/mod/session2/r4_native_bindings.h:23	bytes 0x2f4af52->0x2f4f4a2	unchanged
+src/mod/session2/r4_native_bindings.h:23	addr 0x2f4af52->0x2f4f4a2
+src/mod/session2/r4_native_bindings.h:24	bytes 0x2f4af79->0x2f4f4c9	refreshed
+src/mod/session2/r4_native_bindings.h:24	addr 0x2f4af79->0x2f4f4c9
+src/mod/session2/r4_native_bindings.h:25	bytes 0x2a12a58->0x2a151d8	refreshed
+src/mod/session2/r4_native_bindings.h:25	addr 0x2a12a58->0x2a151d8
+src/mod/session2/r4_native_bindings.h:26	bytes 0x2e87db0->0x2e8c510	unchanged
+src/mod/session2/r4_native_bindings.h:26	addr 0x2e87db0->0x2e8c510
+src/mod/session2/r4_native_bindings.h:27	bytes 0x2e87e10->0x2e8c570	refreshed
+src/mod/session2/r4_native_bindings.h:27	addr 0x2e87e10->0x2e8c570
+src/mod/session2/r4_native_bindings.h:28	bytes 0x1593240->0x1594dc0	unchanged
+src/mod/session2/r4_native_bindings.h:28	addr 0x1593240->0x1594dc0
+src/mod/session2/r4_native_bindings.h:29	bytes 0xe297f0->0xe2a220	unchanged
+src/mod/session2/r4_native_bindings.h:29	addr 0xe297f0->0xe2a220
+src/mod/session2/r4_native_bindings.h:30	bytes 0x1536d20->0x15388a0	unchanged
+src/mod/session2/r4_native_bindings.h:30	addr 0x1536d20->0x15388a0
+src/mod/session2/r4_v1_bindings.h:5	bytes 0x2d6c360->0x2d70df0	unchanged
+src/mod/session2/r4_v1_bindings.h:5	addr 0x2d6c360->0x2d70df0
+src/mod/session2/r4_v1_bindings.h:6	bytes 0x2d6c230->0x2d70cc0	unchanged
+src/mod/session2/r4_v1_bindings.h:6	addr 0x2d6c230->0x2d70cc0
+src/mod/session2/r4_v1_bindings.h:7	bytes 0x2d6c210->0x2d70ca0	unchanged
+src/mod/session2/r4_v1_bindings.h:7	addr 0x2d6c210->0x2d70ca0
+src/mod/session2/r4_v1_bindings.h:8	bytes 0x1a18320->0x1a19f90	refreshed (thunk: only bytes after its jmp differ)
+src/mod/session2/r4_v1_bindings.h:8	addr 0x1a18320->0x1a19f90
+src/mod/session2/r4_v1_bindings.h:9	bytes 0x23dc630->0x23de900	unchanged
+src/mod/session2/r4_v1_bindings.h:9	addr 0x23dc630->0x23de900
+src/mod/session2/r4_v1_bindings.h:10	bytes 0x23dc66b->0x23de93b	unchanged
+src/mod/session2/r4_v1_bindings.h:10	addr 0x23dc66b->0x23de93b
+src/mod/session2/r5_guards3663.cpp:20	addr 0x242d4e0->0x242f7b0
+src/mod/session2/r5_guards3663.cpp:20	addr 0x242d4fe->0x242f7ce
+src/mod/session2/r5_guards3663.cpp:20	addr 0x242d50b->0x242f7db
+src/mod/session2/r5_guards3663.cpp:21	addr 0x5f70cb0->0x5f76040
+src/mod/session2/r5_guards3663.cpp:21	addr 0x5bf4138->0x5bf94f8
+src/mod/session2/r5_guards3663.cpp:22	addr 0x19e9070->0x19eace0
+src/mod/session2/r5_guards3663.cpp:22	addr 0x19e90a3->0x19ead13
+src/mod/session2/r5_guards3663.cpp:22	addr 0x19e92ce->0x19eaf3e
+src/mod/session2/r5_guards3663.cpp:23	bytes 0x242d4e0->0x242f7b0 leave_head (mapped)	unchanged
+src/mod/session2/r5_guards3663.cpp:24	bytes 0x242d4fe->0x242f7ce leave_bytes (owner 0x242d4fe)	unchanged
+src/mod/session2/r5_guards3663.cpp:25	bytes 0x242d50b->0x242f7db own_bytes (mapped)	unchanged
+src/mod/session2/r5_guards3663.cpp:28	bytes 0x19e9070->0x19eace0 unlock_head (mapped)	unchanged
+src/mod/session2/r5_guards3663.cpp:29	bytes 0x19e90a3->0x19ead13 achievement_bytes (mapped)	unchanged
+src/mod/session2/r5_guards3663.cpp:30	bytes 0x19e92ce->0x19eaf3e cleanup_bytes (mapped)	refreshed
+src/mod/session2/r5_guards3663.cpp:31	bytes 0x19e931d->0x19eaf8d epilogue (owner 0x19e931d)	unchanged
+src/mod/session2/r5_guards3663.cpp:75	addr 0x19e931d->0x19eaf8d
+src/mod/session2/tunnel_layout.h:19	addr 0x8020->0x8020
+src/mod/session2/v1_3663.cpp:102	addr 0x5f686c0->0x5f6dac0
+src/mod/session2/v1_3663.cpp:102	addr 0x5f686a0->0x5f6daa0
+src/mod/session2/v1_3663.cpp:103	addr 0x5f68780->0x5f6da80

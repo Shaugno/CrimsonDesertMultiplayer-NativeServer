@@ -11,7 +11,7 @@
 
 namespace cdmp::game::r3_pump_probe {
 namespace {
-constexpr uintptr_t kCandidatePoint = 0x3A8D94;
+constexpr uintptr_t kCandidatePoint = 0x3A91A4;
 constexpr uintptr_t kClientNetSlot = build_3663::core_rvas::B002_kClientNetSlot;
 uintptr_t base = 0;
 safetyhook::MidHook hook;
