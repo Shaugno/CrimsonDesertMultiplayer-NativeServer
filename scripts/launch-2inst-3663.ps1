@@ -254,6 +254,8 @@ if(!(Test-Path -LiteralPath $deploymentPath)){
         $hostMode=if($role -eq 'host'){1}else{0};$guestMode=1-$hostMode
         $startupOnly=if($SessionKind -eq 'GuestStartup'){1}else{0};$enabled=1-$startupOnly
         $transport=if($SessionKind -in @('L4Host','L4Guest')){'steam'}else{'udp'}
+        # R10 Step 2: the host asks the game for the guest's own 2941 (milestone3663.h); the guest never does.
+        $milestone=if($role -eq 'host'){2}else{0}
         $ini=@"
 [general]
 player_name=R5-$role
@@ -277,6 +279,7 @@ enabled=0
 [session2]
 enabled=$enabled
 core_v1=1
+core_milestone=$milestone
 guest_startup_only=$startupOnly
 probe=0
 guest=$guestMode

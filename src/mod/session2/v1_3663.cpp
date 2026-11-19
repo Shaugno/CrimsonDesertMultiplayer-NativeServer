@@ -9,6 +9,7 @@
 #include "mod/session2/report_guard.h"
 #include "mod/session2/r5_guards3663.h"
 #include "mod/session2/tunnel_layout.h"
+#include "mod/session2/milestone3663.h"
 #include "mod/game/hook_prepare.h"
 #include "mod/game/safe_memory.h"
 #include "mod/log.h"
@@ -152,7 +153,8 @@ bool stopped(){bool quarantined=false;{std::lock_guard lock(life_mutex);quaranti
     return quarantined || fault.load() || identity3663::failed() || field_share3663::quarantined();}
 std::string describe(){int phase=0;{std::lock_guard lock(life_mutex);phase=static_cast<int>(life.phase);}
     return std::format("v1 phase {} recipients {} refused {} stopped {} | {} | {}",phase,relayed.load(),refused.load(),
-        stopped(),identity3663::describe(),field_share3663::describe())+" | "+r5_guards3663::describe();}
+        stopped(),identity3663::describe(),field_share3663::describe())+" | "+r5_guards3663::describe()+
+        " | "+milestone3663::describe();}
 
 Bridge::Bridge(ClientSession& session,bool host):host_(host),
     link_(session,host?troc::Dir::ToGuestClient:troc::Dir::ToHostServer,
@@ -190,6 +192,7 @@ void Bridge::receive(std::vector<uint8_t>&& packet,uint32_t now){
 void Bridge::tick(uint32_t now){
     link_.tick(now);
     if(host_){
+        milestone3663::drain();
         const bool current=host_ready();
         if(current && !world_ready_)log::info("3663 v1 host world ready: native primary/field identity, owner and idle flags agree");
         world_ready_=current;

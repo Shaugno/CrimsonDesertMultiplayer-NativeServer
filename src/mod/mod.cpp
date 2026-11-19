@@ -68,6 +68,7 @@
 #include "mod/session2/save_hooks.h"
 #include "mod/session2/file_sandbox3663.h"
 #include "mod/session2/v1_3663.h"
+#include "mod/session2/milestone3663.h"
 #include "mod/session2/guest3663.h"
 #include "mod/session2/mount_sync.h"
 #include "mod/session2/ride_filter.h"
@@ -1140,7 +1141,8 @@ DWORD WINAPI worker(LPVOID) {
                     else if(valid && host_role){
                         session2::ServerOptions options;options.core_v1=true;options.probe=false;
                         options.create_session=options.accept_tunnel=true;
-                        installed=session2::server_install(options) && session2::v1_3663::host_install(proc.identity);
+                        installed=session2::server_install(options) && session2::v1_3663::host_install(proc.identity) &&
+                            session2::milestone3663::install(proc.identity,coop3663::milestone::mode_from(cfg.r10_core_milestone));
                     }
                     if(!installed){
                         log::error("3663 v1 refused: exact C/D, sandbox, role/configuration or native guards incomplete");

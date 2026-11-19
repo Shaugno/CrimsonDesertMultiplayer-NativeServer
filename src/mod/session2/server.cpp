@@ -44,6 +44,7 @@
 #include "mod/session2/identity_fix.h"
 #include "mod/session2/observer_hold_acks.h"
 #include "mod/session2/observer_milestone.h"
+#include "mod/session2/milestone3663.h"
 #include "mod/session2/observer_scene_copy.h"
 #include "mod/session2/observer_seq_copy.h"
 #include "mod/session2/offsets_s2.h"
@@ -453,6 +454,7 @@ bool push_outgoing_extra(std::span<const uint8_t> packet) {
 // session 2 of an older epoch still writes never reaches the new guest.
 void take_frame(uintptr_t rq, uintptr_t self) noexcept {
     if (core_only()) {
+        const milestone3663::TakeFrameScope in_take_frame;  // R10: never ask the game to send from here
         try {
             if (self != live_session2()) return;
             const uintptr_t frame = rq + tunnel_offsets().kRq_Frame;
@@ -465,17 +467,27 @@ void take_frame(uintptr_t rq, uintptr_t self) noexcept {
                 !parse_tunnel_packet(packet, troc::Dir::ToGuestClient, tunnel_offsets())) {
                 ++g_n.sent_bad; return;
             }
+            uint16_t followed_op = 0;
+            coop3663::milestone::MoveOwner server_owner;
             if(g_opt.core_v1){
                 const auto view=parse_tunnel_packet(packet,troc::Dir::ToGuestClient,tunnel_offsets());
                 if(view){
-                    if(view->opcode==coop3663::v1::kMoveFieldAck)
+                    if (coop3663::milestone::followed(view->opcode)) followed_op = view->opcode;
+                    if(view->opcode==coop3663::v1::kMoveFieldAck){
+                        // R10: the owner the SERVER wrote, before the guest copy is rewritten.
+                        server_owner = coop3663::milestone::move_owner(packet.data() + troc::kHeaderSize,
+                            static_cast<unsigned>(packet.size() - troc::kHeaderSize));
                         v1_3663::prepare_shared_move_for_guest(std::span<uint8_t>(packet).subspan(troc::kHeaderSize),view->slot);
+                    }
                     v1_3663::note_response(view->opcode);
                 }
             }
             // No legacy actor, save or optional observer callback in this route.
-            if (!g_outgoing.push(packet)) g_outgoing_lost.store(true);
+            const bool pushed = g_outgoing.push(packet);
+            if (!pushed) g_outgoing_lost.store(true);
             else ++g_n.sent_out;
+            // R10 (milestone3663.h): bound to the push's real result, on this thread.
+            if (followed_op) milestone3663::on_out(followed_op, self, pushed, server_owner);
         } catch (...) { g_outgoing_lost.store(true); }
         return;
     }

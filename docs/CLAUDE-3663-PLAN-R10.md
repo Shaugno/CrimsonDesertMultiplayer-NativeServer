@@ -121,7 +121,36 @@ branch, the 2941 emitter and the `ToTargetSendTargetFinder` constructor (RTTI).
 Verify that 2941 is emitted only on the owner path. Record the evidence with
 build, hash and addresses.
 
-### Step 2 — Port the observer milestone to the 3663 host (offline)
+### Step 2 — Port the observer milestone to the host (offline) — DONE on 3732
+
+Implemented and tested offline; not yet run in the game.
+
+- `src/coop3663/milestone_policy.h`: the trip ledger and decision, with no game
+  access. `tests/milestone3663_policy_tests.cpp` covers ordering, threads, lost
+  pushes, a native 2941, owner/host/session/field checks, once per trip, and a
+  new session resetting the ledger.
+- `src/mod/session2/milestone3663.cpp`: before hooking, checks the 3732 owner
+  branch, the rejoin and hook point, the ToTarget constructor, the 2941 sender
+  and both finder vtables. It then installs a mid hook at `0x2ED8852`.
+- On an eligible guest entry, the hook calls the game's constructor
+  `0x2D70BE0(finder, traveller)`, confirms the finder targets the live guest
+  session, and calls the sender `0x2C7F430(traveller, finder)`. Faults are
+  caught and switch the module off. Decision notes are written to a fixed
+  buffer in the hook and logged from the host bridge's tick.
+- `take_frame` (core route) feeds the ledger after each real push, with the
+  server's 2364 owner read before the guest copy is aliased.
+- `[session2] core_milestone` = 0 off (default), 1 dry run, 2 send.
+  `launch-2inst-3663.ps1` writes 2 for the host and 0 for the guest. If a
+  requested mode cannot be installed exactly, the host v1 route refuses to
+  start, so no join attempt is spent without the fix.
+- `tools/port3732/check_milestone.py` checks every byte and vtable constant
+  against the 3732 image (all match). 121/121 tests pass.
+
+Expected in the next L3 host log: one `3663 milestone trip N: eligible |
+returned` line after shared Enter. The guest ring should then show 2941, then
+2789, then 2891.
+
+Original text:
 
 Host-side, native emitter, once per load trip, at the non-owner point. Keep
 every 2976 guard: live session 2 of this epoch, this trip's 2268 and 2792

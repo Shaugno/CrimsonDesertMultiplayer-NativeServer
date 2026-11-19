@@ -21,6 +21,9 @@ struct Config {
     bool r4_core_probe = false; // passive identity/join callsite reads; networking forbidden
     bool r3_tunnel_probe = false; // explicit loopback-only B cryptogram echo
     bool r4_core_v1 = false; // explicit C/D v1 route; only guest requires verified isolation
+    // R10 [session2] core_milestone (host, v1 route): 0 off (default), 1 decide and log,
+    // 2 ask the game for the guest's own 2941 once per trip into the host's field.
+    unsigned r10_core_milestone = 0;
     bool r5_guest_startup_only = false; // isolated title check, no native guest/tunnel installers
 
     std::string peer_host = "127.0.0.1";
