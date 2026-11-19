@@ -44,6 +44,35 @@ and no playback, seen on remote actors in mode 2 with no local AI
 ([c1-actor-rechazado.md](research/data/c1-actor-rechazado.md) §3–4). The
 upstream containment covered that whole condition.
 
+## Game update to 1.0.0.3732 (2026-11-19)
+
+Steam updated the game to 1.0.0.3732 at 5:08 AM Eastern on 2026-11-19
+(timestamp `0x6AFDC0CF`, SHA-256 `DFCF5C50…`). Every 3663 address is stale;
+the build guard keeps the mod unarmed on 3732. Shaugn chose to port to 3732.
+A 3663 reference image was downloaded (depot 3321461, manifest
+532620525636668883, hash verified exact) so the port compares 3663 with 3732
+directly. Tools: [tools/port3732](../tools/port3732/README.md).
+
+The builds are close: the main code section grew only `0x5000` bytes and
+functions moved by small, locally constant deltas. First pass over the 158
+unique RVA-like literals in the 3663 sources (112 code, 46 data):
+86 code addresses resolved (73 unique signature, 12 agreed local delta,
+1 thunk); about 12 literals are sizes or flags, not addresses; about 14 real
+code addresses need manual review. MoveFieldCompleteCore is 3663 `0x2ED3360`
+→ 3732 `0x2ED78B0`. [Matches](probe-3663/port-evidence/r10/code-matches-3663-to-3732.tsv).
+
+Port steps, all offline, before Step 1 below:
+
+- P1. Resolve the remaining code addresses by hand (disassembly of both images).
+- P2. Data: vtables by RTTI name, globals through the RIP references of matched
+  code; verify struct offsets used by each matched function.
+- P3. Update every expected-bytes check at hook and call sites.
+- P4. Add 3732 identity to the build guard; retarget the 3663 tables to 3732
+  (names stay until the cleanup plan); full suite and smoke.
+- P5. Re-verify each adoption against the 3732 image (same checks R2–R9 used).
+
+Steps 1–6 below then apply to 3732 addresses.
+
 ## Steps
 
 ### Step 0 — Housekeeping (offline)
