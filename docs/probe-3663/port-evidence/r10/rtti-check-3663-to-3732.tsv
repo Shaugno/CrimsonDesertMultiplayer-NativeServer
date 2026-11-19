@@ -1,0 +1,25 @@
+﻿0x0597bfe0	0x059810d0	SAME	.?AV?$DontUseThisAlwaysAttacherExceptSpecialProgrammerXXXXXX@$0A@@pa@@ +0x0
+0x059874c8	0x0598c5a8	SAME	.?AV?$WindowsLock@$02@pa@@ +0x0
+0x05990bf0	0x059961d0	SAME	.?AVClientChildOnlyInGameActor@pa@@ +0x0
+0x05998b60	0x0599dc40	SAME	.?AVClientStatusActorComponent@pa@@ +0x0
+0x059c1660	0x059c6748	SAME	.?AVClientCharacterControlActorComponent@pa@@ +0x0
+0x059c2580	0x059c7718	SAME	.?AV?$ScopeAttacher@VCommonUserActor@pa@@@pa@@ +0x0
+0x059c2760	0x059c7a08	SAME	.?AVClientActorManager@pa@@ +0x0
+0x059d57e8	0x059da8a8	SAME	.?AVClientSequencerStageManager@pa@@ +0x0
+0x05a54310	0x05a59390	SAME	.?AV?$ScopeAttacher@VServerActor@pa@@@pa@@ +0x0
+0x05b3ffb0	0x05b45288	SAME	.?AV?$WindowsRWLock@$00$00@pa@@ +0x0
+0x05b40000	0x05b45300	SAME	.?AVScopeAttacherBase@pa@@ +0x0
+0x05b40310	0x05b45590	SAME	.?AVNwVirtualAsyncSession@pa@@ +0x0
+0x05b403a8	0x05b45610	SAME	.?AVNwAsyncSession@pa@@ +0x0
+0x05bcee40	0x05bd4cd0	SAME	.?AV?$WindowsRWLock@$03$00@pa@@ +0x0
+0x05bf4138	0x05bf94f8	SAME	.?AVPlatformAchievementManager_Steam@pa@@ +0x0
+0x05d45b68	0x05d4adf0	SAME	.?AVFieldAttacherForActor@pa@@ +0x0
+0x05f63430	0x05f687b0	SAME	.?AVServerStatusActorComponent@pa@@ +0x0
+0x05f686a0	0x05f6daa0	SAME	.?AVToNearExceptOneSelfSendTargetFinder@pa@@ +0x0
+0x05f686c0	0x05f6dac0	SAME	.?AVToNearExceptOneControlSendTargetFinder@pa@@ +0x0
+0x05f68780	0x05f6da80	SAME	.?AVToNearSendTargetFinder@pa@@ +0x0
+0x05f68b10	0x05f6de90	SAME	.?AVServerUserActor@pa@@ +0x0
+0x05f69100	0x05f6e070	SAME	.?AVServerActorManager@pa@@ +0x0
+0x05f6f2e8	0x05f74678	SAME	.?AVServerLobbyActorComponent@pa@@ +0x0
+0x05f70cb0	0x05f76040	SAME	.?AVServerSequencerActorComponent@pa@@ +0x0
+0x0614a050	-	no RTTI locator at vtable[-1]

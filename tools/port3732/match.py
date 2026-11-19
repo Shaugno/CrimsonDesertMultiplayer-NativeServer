@@ -7,12 +7,22 @@ local delta of the nearest unique pass-1 anchors (same section, both sides
 agree). Pass 3: a jmp/call thunk is resolved by matching its target, then
 finding the unique new thunk branching to the new target.
 
-usage: match.py <old.exe> <new.exe> <rva> [<rva> ...]
+usage: match.py [--anchors map.tsv] <old.exe> <new.exe> <rva> [<rva> ...]
+--anchors adds earlier sig/delta/func/manual results (old<TAB>new<TAB>method)
+as local-delta anchors.
 output: old  new  method  detail     (new = '-' when unresolved)"""
 import sys, re, bisect, struct, pefile, capstone
 from capstone import x86
 
-old_path, new_path, rvas = sys.argv[1], sys.argv[2], [int(a, 16) for a in sys.argv[3:]]
+args = sys.argv[1:]
+extra_anchors = []
+if args and args[0] == "--anchors":
+    for line in open(args[1], encoding="utf-8-sig"):
+        c = line.rstrip("\n").split("\t")
+        if len(c) >= 3 and c[1] != "-" and c[2] in ("sig", "delta", "func", "manual"):
+            extra_anchors.append((int(c[0], 16), int(c[1], 16)))
+    args = args[2:]
+old_path, new_path, rvas = args[0], args[1], [int(a, 16) for a in args[2:]]
 old = pefile.PE(old_path, fast_load=True)
 new = pefile.PE(new_path, fast_load=True)
 md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
@@ -103,7 +113,7 @@ for rva in rvas:
     else:
         pending[rva] = (hits, fixed, len(pat))
 
-anchors = sorted((r, n) for r, (n, m, _) in results.items() if m == "sig")
+anchors = sorted(set([(r, n) for r, (n, m, _) in results.items() if m == "sig"] + extra_anchors))
 akeys = [a[0] for a in anchors]
 
 

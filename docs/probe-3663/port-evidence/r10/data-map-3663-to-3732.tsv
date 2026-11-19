@@ -1,0 +1,46 @@
+﻿0x0597bfe0	0x059810d0	dataref	12/4141 refs unanimous delta +0x50f0
+0x059874c8	0x0598c5a8	dataref	12/37 refs unanimous delta +0x50e0
+0x05990bf0	0x059961d0	manual	RTTI: only vtable of .?AVClientChildOnlyInGameActor@pa@@ +0x0 in 3732 (its 2 code refs are in unmapped functions)
+0x05998b60	0x0599dc40	dataref	2/2 refs unanimous delta +0x50e0
+0x059c1660	0x059c6748	dataref	2/2 refs unanimous delta +0x50e8
+0x059c2580	0x059c7718	dataref	9/19 refs unanimous delta +0x5198
+0x059c2760	0x059c7a08	dataref	2/2 refs unanimous delta +0x52a8
+0x059d57e8	0x059da8a8	dataref	2/2 refs unanimous delta +0x50c0
+0x05a54310	0x05a59390	dataref	12/260 refs unanimous delta +0x5080
+0x05b3ffb0	0x05b45288	dataref	2/2 refs unanimous delta +0x52d8
+0x05b40000	0x05b45300	dataref	12/13562 refs unanimous delta +0x5300
+0x05b40310	0x05b45590	dataref	2/2 refs unanimous delta +0x5280
+0x05b403a8	0x05b45610	dataref	4/4 refs unanimous delta +0x5268
+0x05bcee40	0x05bd4cd0	dataref	6/7 refs unanimous delta +0x5e90
+0x05bf4138	0x05bf94f8	dataref	1/1 refs unanimous delta +0x53c0
+0x05d45b68	0x05d4adf0	dataref	12/2673 refs unanimous delta +0x5288
+0x05f63430	0x05f687b0	dataref	1/2 refs unanimous delta +0x5380
+0x05f686a0	0x05f6daa0	dataref	5/6 refs unanimous delta +0x5400
+0x05f686c0	0x05f6dac0	dataref	8/9 refs unanimous delta +0x5400
+0x05f68780	0x05f6da80	dataref	12/161 refs unanimous delta +0x5300
+0x05f68b10	0x05f6de90	dataref	1/2 refs unanimous delta +0x5380
+0x05f69100	0x05f6e070	dataref	3/3 refs unanimous delta +0x4f70
+0x05f6f2e8	0x05f74678	dataref	2/3 refs unanimous delta +0x5390
+0x05f70cb0	0x05f76040	dataref	2/3 refs unanimous delta +0x5390
+0x0614a050	0x0614f3a8	2/2 refs	unanimous	delta +0x5358	no RTTI locator at vtable[-1]; 2/2 references unanimous
+0x06a65564	-	skip	2976 value (tunnel_layout.h default); 3663 uses B073 0x6F29B70
+0x06f14e10	0x06f1ae10	manual	descriptor table start: same qwords at +0x6000 as the end bound 0x6F487B0 -> 0x6F4E7B0 (embedded vtable pointer shifted +0x52D8)
+0x06f29b70	0x06f2fb70	dataref	12/75 refs unanimous delta +0x6000
+0x06f31c98	0x06f37c98	dataref	6/6 refs unanimous delta +0x6000
+0x06f487b0	0x06f4e7b0	dataref	2/4 refs unanimous delta +0x6000
+0x0715bfd0	0x07162090	dataref	12/530 refs unanimous delta +0x60c0
+0x071d0848	0x071d6988	dataref	4/4 refs unanimous delta +0x6140
+0x071d092c	0x071d6a6c	dataref	12/14 refs unanimous delta +0x6140
+0x071d0cf8	0x071d6e38	dataref	12/14 refs unanimous delta +0x6140
+0x071d0cfc	0x071d6e3c	dataref	7/10 refs unanimous delta +0x6140
+0x071d0d3c	0x071d6e7c	dataref	2/3 refs unanimous delta +0x6140
+0x07231330	0x07237470	dataref	12/243 refs unanimous delta +0x6140
+0x072451a0	0x0724b330	dataref	8/416 refs unanimous delta +0x6190
+0x072451c0	0x0724b350	dataref	12/3493 refs unanimous delta +0x6190
+0x07245558	0x0724b6e8	dataref	12/2230 refs unanimous delta +0x6190
+0x07245560	0x0724b6f0	dataref	12/2246 refs unanimous delta +0x6190
+0x072456b8	0x0724b848	dataref	12/1627 refs unanimous delta +0x6190
+0x072456d0	0x0724b860	dataref	12/220 refs unanimous delta +0x6190
+0x072456e0	0x0724b870	dataref	12/22 refs unanimous delta +0x6190
+0x07253e60	0x0725a040	dataref	2/2 refs unanimous delta +0x61e0
+0x07283378	0x072895e8	manual	zero-filled global: two independent sites agree (0x2A1087F -> 0x2A12FFE lea rax; 0x55288C4/0x55288EE -> 0x552D494/0x552D4BE lea rcx pair)
