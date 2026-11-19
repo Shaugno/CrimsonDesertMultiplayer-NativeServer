@@ -73,6 +73,29 @@ Port steps, all offline, before Step 1 below:
 
 Steps 1–6 below then apply to 3732 addresses.
 
+**Port status (2026-11-19).** P1–P4 are done offline and pushed.
+
+- P1: all 95 code addresses mapped.
+- P2: 45 of 46 data addresses mapped (one 2976 default). Every vtable is
+  confirmed by RTTI.
+- P3: every expected-bytes check refreshed. 82 are identical, 13 changed only
+  in branch or RIP fields, and one thunk differs only in its post-jmp filler.
+  Two tests that pinned 3663 addresses were updated.
+- Struct audit: 169 of 177 R2 offset rows match their 3663/3732 evidence
+  functions; the rest and the R9 sampler fields were checked by hand. 3732
+  changed some layouts, none that the mod reads.
+- Packet opcodes are unchanged: the descriptor table is identical except for
+  pointers.
+- P4: the build guard now recognizes 1.0.0.3732 (timestamp `0x6AFDC0CF`,
+  SizeOfImage `0x13C7E000`) and refuses the retired 3663 identity. The live
+  runner, launcher, watchdog and window report pin the 3732 hash.
+- 120/120 tests pass; smoke shows 78 remote states and zero rejects.
+- Evidence: [r10](probe-3663/port-evidence/r10/); see
+  [struct-audit-manual.md](probe-3663/port-evidence/r10/struct-audit-manual.md).
+
+Not yet verified: any 3732 runtime behaviour. The first live launch should
+be a startup check before L3, under the usual rules.
+
 ## Steps
 
 ### Step 0 — Housekeeping (offline)

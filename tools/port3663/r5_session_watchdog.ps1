@@ -78,7 +78,7 @@ $launch=Get-Content -LiteralPath (Join-Path $SessionRoot ("launch-$RecordName.js
 if ($launch.game_pid -ne $GamePid -or $launch.role -ne $Role) { throw 'Launch receipt mismatch' }
 $image=[IO.Path]::GetFullPath($launch.game_image)
 if([IO.Path]::GetFileName($image) -ne 'CrimsonDesert.exe'){throw 'Unexpected launched executable name'}
-if ((Get-FileHash -LiteralPath $image).Hash -ne '8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8') { throw 'Build drift' }
+if ((Get-FileHash -LiteralPath $image).Hash -ne 'DFCF5C507D09AA0E09CF9766DB866FD1E7CF513B9DD7FDC72A8F121BA2D9A9D5') { throw 'Build drift' }  # 1.0.0.3732 (R10)
 $birth=[long]$launch.game_start_filetime
 $deadline=[DateTime]::FromFileTimeUtc($birth).AddSeconds($MaxAgeSeconds)
 $hostReceipt=Join-Path $SessionRoot 'launch-host.json'

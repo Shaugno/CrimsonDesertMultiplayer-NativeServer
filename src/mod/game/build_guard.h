@@ -1,7 +1,7 @@
 #pragma once
 // Central executable-identity gate. Startup may read a 2976 game address or
 // install a 2976 hook only after this classifies the mapped image as Crimson
-// Desert 1.0.0.2976. Builds 1.0.0.3576 and 1.0.0.3663 are recognized from file facts
+// Desert 1.0.0.2976. Builds 1.0.0.3576 and 1.0.0.3732 (the retargeted 3663 tables) are recognized from file facts
 // and do not take that 2976 path. Copying the PE headers to classify the
 // image is not a gameplay RVA read. A test host (anything that is not
 // CrimsonDesert.exe, including cdmp_host with CDMP_TEST_HOST) never takes the
@@ -30,7 +30,7 @@ inline constexpr uint16_t kPe32PlusMagic = 0x020B;
 enum class IdentityKind {
     Supported,    // mapped base and PE timestamp match build 1.0.0.2976
     Build3576,    // 1.0.0.3576 file identity. The 2976 path stays closed.
-    Build3663,    // 1.0.0.3663 file identity; incomplete port remains unarmed.
+    Build3663,    // 1.0.0.3732 file identity since R10 (3663 tables retargeted; name kept until cleanup).
     Unsupported,  // headers are readable, but the image is a different build
     Unreadable,   // headers are missing, truncated, or not a PE32+ image we can trust
 };
@@ -217,10 +217,10 @@ inline std::string diagnostic(const ImageIdentity& id) {
     }
     if (id.kind == IdentityKind::Build3663) {
         return std::format(
-            "Recognized game build Crimson Desert 1.0.0.3663 (PE timestamp 0x{:08X}, image base 0x{:X}, "
+            "Recognized game build Crimson Desert {} (PE timestamp 0x{:08X}, image base 0x{:X}, "
             "image size 0x{:X}). Tier A HP-only reader enabled; guarded C/D v1 requires explicit configuration and verified guest isolation. "
             "Legacy paths remain off; the guarded B loopback host route requires explicit configuration.",
-            build_3663::kPeTimestamp, build_3663::kImageBase, build_3663::kSizeOfImage);
+            build_3663::kVersionText, build_3663::kPeTimestamp, build_3663::kImageBase, build_3663::kSizeOfImage);
     }
     if (id.kind == IdentityKind::Unreadable) {
         return std::format(

@@ -7,10 +7,18 @@
 
 namespace cdmp::game::build_3663 {
 
-// File identity, independently checked by PE parsing and pkt3663_scan.
-inline constexpr uint32_t kPeTimestamp = 0x6AF5D198;
+// File identity. R10 (2026-11-19): Steam updated the game to 1.0.0.3732, and
+// every address, byte check and struct offset in this namespace was moved
+// from 1.0.0.3663 to 1.0.0.3732 by file comparison (tools/port3732,
+// docs/probe-3663/port-evidence/r10). The namespace keeps its 3663 name until
+// the cleanup plan. The old 3663 identity (timestamp 0x6AF5D198, SizeOfImage
+// 0x144E9000) is no longer accepted.
+inline constexpr uint32_t kPeTimestamp = 0x6AFDC0CF;
 inline constexpr uintptr_t kImageBase = 0x140000000;
-inline constexpr uint32_t kSizeOfImage = 0x144E9000;
+inline constexpr uint32_t kSizeOfImage = 0x13C7E000;
+inline constexpr const char* kVersionText = "1.0.0.3732";
+inline constexpr uint32_t kRetiredPeTimestamp3663 = 0x6AF5D198;
+inline constexpr uint32_t kRetiredSizeOfImage3663 = 0x144E9000;
 
 // R3 dependency gates: R2 catalog plus approved R3 scope/adoption records,
 // per-build routing and validation. B currently exposes the guarded native

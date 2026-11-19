@@ -106,7 +106,7 @@ if($VisibleFixture){
         $process=Get-Process -Id $record.game_pid
         if($process.ProcessName -ne 'CrimsonDesert' -or $process.Path -ne $record.game_image -or
             $process.StartTime.ToUniversalTime().ToFileTimeUtc().ToString() -ne $record.game_start_filetime){throw 'Controlled game process identity changed'}
-        if((Get-FileHash -LiteralPath $process.Path).Hash -ne '8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'){throw 'Build drift'}
+        if((Get-FileHash -LiteralPath $process.Path).Hash -ne 'DFCF5C507D09AA0E09CF9766DB866FD1E7CF513B9DD7FDC72A8F121BA2D9A9D5'){throw 'Build drift'}  # 1.0.0.3732 (R10)
         $ids+=[int]$process.Id;$roles+=@{role=$role;pid=$process.Id;session=$process.SessionId;birth=$record.game_start_filetime}
     }
     if($ids[0] -eq $ids[1]){throw 'Roles must be distinct processes'}

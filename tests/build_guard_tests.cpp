@@ -354,7 +354,9 @@ void test_build_3663_hp_only() {
     const auto identity = guard::identify_image(bytes, build::kImageBase);
     CHECK(identity.kind == guard::IdentityKind::Build3663);
     const auto text = guard::diagnostic(identity);
-    CHECK(text.find("1.0.0.3663") != std::string::npos);
+    // R10: the 3663 tables now describe 1.0.0.3732.
+    CHECK(build::kPeTimestamp == 0x6AFDC0CF && build::kSizeOfImage == 0x13C7E000);
+    CHECK(text.find("1.0.0.3732") != std::string::npos);
     CHECK(text.find("Tier A HP-only") != std::string::npos);
     for (const bool guest : {false, true}) {
         const auto decision = guard::decide_startup(request(true, guest, true, identity));
@@ -367,7 +369,10 @@ void test_build_3663_hp_only() {
     for (const auto& rejected : {
             guard::identify_image(make_image(build::kPeTimestamp, 0x80, build::kSizeOfImage - 0x1000), build::kImageBase),
             guard::identify_image(make_image(build::kPeTimestamp + 1, 0x80, build::kSizeOfImage), build::kImageBase),
-            guard::identify_image(bytes, build::kImageBase + 0x1000)}) {
+            guard::identify_image(bytes, build::kImageBase + 0x1000),
+            // A retired 1.0.0.3663 executable must not arm the 3732 addresses.
+            guard::identify_image(make_image(build::kRetiredPeTimestamp3663, 0x80, build::kRetiredSizeOfImage3663),
+                                  build::kImageBase)}) {
         CHECK(rejected.kind == guard::IdentityKind::Unsupported);
         check_blocked(guard::decide_startup(request(true, false, false, rejected)));
     }

@@ -84,7 +84,7 @@ if ($Fixture) {
                 $hostProcess.Path -ne $hostRecord.game_image) { throw 'Host process identity changed' }
         }
     } elseif ($running.Count) { throw 'Close both games first' }
-    $expected='8BE67178D9B9A149C361A731051665E0BA4D441E250AE1DFE645BD6E524345C8'
+    $expected='DFCF5C507D09AA0E09CF9766DB866FD1E7CF513B9DD7FDC72A8F121BA2D9A9D5'  # 1.0.0.3732 (R10; 3663 retired)
     if ((Get-FileHash -LiteralPath (Join-Path $GameDir 'CrimsonDesert.exe')).Hash -ne $expected) { throw 'Executable drift: rematch before launch' }
 }
 function Tree([string]$path) {
