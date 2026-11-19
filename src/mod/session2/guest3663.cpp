@@ -11,6 +11,7 @@
 #include "mod/game/game_fault.h"
 #include "mod/game/hook_prepare.h"
 #include "mod/game/safe_memory.h"
+#include "mod/game/player_layout.h"
 #include "mod/log.h"
 #include <windows.h>
 #include <safetyhook.hpp>
@@ -32,8 +33,42 @@ troc::PacketQueue outgoing(32u<<20);
 struct Item{uint64_t epoch;std::vector<uint8_t> packet;};
 std::mutex incoming_mutex;
 std::deque<Item> incoming;size_t incoming_bytes=0;
+// R9: NetworkThread-only, read-only sampling after the second native field ack.
+// The class vtable is independently identified by 3663 RTTI; a failed hop is
+// reported as unreadable and never replaced with a 3576 pointer.
+uint32_t field_acks=0,load_samples=0;
+uint64_t next_load_sample=0;
+constexpr uint32_t max_load_samples=180;
+constexpr uintptr_t client_sequencer_vt=0x59D57E8;
 template<class T>bool read(uintptr_t a,T& v){return a && game::safe_read(a,&v,sizeof v);}
 uintptr_t ptr(uintptr_t a){uintptr_t v=0;return read(a,v)?v:0;}
+void sample_loading() {
+    if(field_acks<2 || load_samples>=max_load_samples)return;
+    const auto now=GetTickCount64();
+    if(now<next_load_sample)return;
+    next_load_sample=now+1000;
+    ++load_samples;
+    const auto world=ptr(base+game::kPlayerLayout3663.kWorldSystemSlot);
+    const auto controller=ptr(world+0x60);
+    uint8_t state=0,marker=0;
+    const bool state_ok=controller && read(controller+0x15C,state);
+    const auto manager=ptr(world+game::kPlayerLayout3663.kWorldSystem_ActorManager);
+    const bool manager_ok=ptr(manager)==base+game::kPlayerLayout3663.kVtClientActorManager;
+    const auto actor=manager_ok?ptr(manager+game::kPlayerLayout3663.kActorManager_ControlledActor):0;
+    const bool actor_ok=ptr(actor)==base+game::kPlayerLayout3663.kVtControlledActor;
+    const auto components=actor_ok?ptr(actor+game::kPlayerLayout3663.kActor_ComponentTable):0;
+    const auto component=ptr(components+0xA8);
+    const auto sequencer=ptr(component+0x18);
+    const bool sequencer_ok=ptr(sequencer)==base+client_sequencer_vt;
+    const bool marker_ok=sequencer_ok && read(sequencer+0x259,marker);
+    uint32_t own_key=0,local_user=0,field_owner=0;
+    if(actor_ok){(void)read(actor+0x60,own_key);(void)read(actor+0x90,local_user);}
+    const auto holder=ptr(controller+0xC0),field=ptr(holder);
+    if(field)(void)read(field+0x180,field_owner);
+    log::info("3663 guest load sample {}/{}: state={} 0x{:02X} marker={} {} own_key=0x{:X} local_user=0x{:X} field_owner=0x{:X} field_is_own={} chain world={} controller={} actor={} sequencer_vt={}",
+        load_samples,max_load_samples,state_ok,state,marker_ok,marker,own_key,local_user,field_owner,
+        field_owner!=0 && field_owner==local_user,world!=0,controller!=0,actor_ok,sequencer_ok);
+}
 bool result_code(int* p,int value){if(!p)return false;
     __try{*p=value;return true;}__except(EXCEPTION_EXECUTE_HANDLER){return false;}}
 void fail(const char* reason){if(!broken.exchange(true))log::error("3663 guest stopped: {}; no local fallback/reconnect",reason);}
@@ -167,7 +202,12 @@ void pump(safetyhook::Context& c){
             reinterpret_cast<void*>(session),0,bytes.data(),size);
         crash3663::returned(ticket);
         ++delivered;
+        if(opcode==game::build_3663::field_layout::kOpMoveFieldAck && field_acks<2) {
+            ++field_acks;
+            if(field_acks==2) {next_load_sample=0;log::info("3663 guest load sampler armed after second native MoveFieldAck");}
+        }
     }
+    sample_loading();
 }
 bool matches(uintptr_t rva,std::span<const uint8_t> expected){
     std::vector<uint8_t> bytes(expected.size());return game::safe_read(base+rva,bytes.data(),bytes.size()) &&

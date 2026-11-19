@@ -2515,3 +2515,27 @@ world-coordinate operation, or show that those slots are not coordinates.
 Do not deploy a decoder and do not repeat the empty post-ready capture
 for this question. A second installation cannot show the other player
 until that fact exists.
+# R9 Step 4 live diagnostic — prepared, launch pending
+
+**Question.** After the shared Enter and second native MoveFieldAck,
+does the guest's loading state remain `0x11` while its verified
+ClientSequencerStageManager marker remains below two, or does it advance
+before the second LoadingCompleteReq? What do both packet rings show?
+
+**Expected observation.** The bounded guest sampler records one guarded
+read per second for at most 180 seconds, including state, candidate marker,
+object identity and field owner. The host and guest packet rings record
+the post-Enter exchange. If the guest reaches control, the user records
+both visible windows and checks mutual walking and turning, disconnect,
+reconnect and host save reload. No packet is synthesized by the sampler.
+
+**Time limit and stop condition.** One shared fourteen-minute watchdog
+from host launch. Finish both copies normally before its deadline. Stop
+on an activation error, crash, hang, guard failure or mismatched game
+hash; close the surviving copy, collect logs, and verify save backups.
+No exploratory relaunch. R9 budget before this sitting: startup 0/5,
+join 0/3. Fresh backup and executable hash checks are due immediately
+before launch. [Sampler evidence](port-evidence/r9/step4-loading-sampler.md).
+
+---
+

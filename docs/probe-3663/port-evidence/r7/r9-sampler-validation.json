@@ -1,0 +1,61 @@
+{
+  "round": 7,
+  "step": 3,
+  "recorded_utc": "2026-11-19T00:14:44.238256+00:00",
+  "suite": "120/120 passed",
+  "seconds": 107.92,
+  "synthetic_remote_states": 78,
+  "synthetic_rejects": 0,
+  "smoke": "eight-second owned host/peer; metadata mask 0xF; clean unload",
+  "asi_sha256": "6E7F16FC1BD4B242F2A4A58A094496C3D28D62B4D5879144EDE7D633A9E5C686",
+  "desktop_runner_sha256": "2E389F80B62EDE3C12BD0E856D4527A3E04243A40B18BBE3BE90106BE810FA50",
+  "guest": "NT save-directory hooks only; normal USERPROFILE/LOCALAPPDATA inherited",
+  "host": "backed-up real saves; no sandbox",
+  "not_before_utc": "2026-11-18T15:00:00Z",
+  "activation_cause": "Sandbox DNS failure reproduced and corrected in fixtures; R7-S2 live causality is unconfirmed.",
+  "limits": [
+    "Owned TEMP fixture data only; no game runtime acceptance.",
+    "Steam-style named pagefile MAP-only IPC and pipes are tested without SteamAPI or game activation.",
+    "Historical fake-profile fixtures remain game-free; production rejects that route.",
+    "Concurrent host save deltas cannot attribute writes by process; guest-only manifest check remains required.",
+    "L3 and L4 remain unpassed; the R6 character-login fix awaits live execution."
+  ],
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-arming-receipt.json",
+    "sha256": "098DCBC6441991C151610761F674D7B503E36AA0C8178458C36898EBF621E406"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-suite.txt",
+      "sha256": "8098DB0C4EAAA0ECD944F45524AD2F56BA7AAE4B39B36CECF17E915B5C167747"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-ctest.log",
+      "sha256": "C679F1AD9911F4118D471305D33C42D5B9A2C96C74B1EE83CEFEE3CEA056D5E2"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-smoke.txt",
+      "sha256": "66D36EE36B357E24FED91517FD8119443482D3E38F51C56D5CD6A6F53EDFCEAE"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-smoke-run\\e2e\\cdmp.log",
+      "sha256": "BD15893BF011C14D24E1DFAFEEE0A897CF8279F59555CD43C3508F7997D1EC24"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-boundary.json",
+      "sha256": "20E413EADC286C83CCD3B662E561D4940622DB340F18415D3E61EDA21BC2BFC7"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-before-network.txt",
+      "sha256": "360B5A9ACB511156984B0667AC5AE2FFFBBDD69B073D26D91FA9EC67AB364126"
+    },
+    {
+      "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r7\\r9-sampler-after-network.txt",
+      "sha256": "D1B42E86EEEC7C92FF1387381C5AFA16C9B057205F9BC212ED2C83168FD1A6DD"
+    }
+  ],
+  "source_manifest_sha256": "B039F725CD55FFE42E6D7C7D048B714D79DC8D063A3325654C0526233C582706",
+  "sandbox_network_verified": true,
+  "bounded_refusal_log_verified": true,
+  "acquire_predicate_trace_compiled": true
+}
