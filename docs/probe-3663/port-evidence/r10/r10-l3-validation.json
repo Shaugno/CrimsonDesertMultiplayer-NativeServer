@@ -1,0 +1,24 @@
+{
+  "round": 10,
+  "recorded_utc": "2026-11-19T21:28:56.117717+00:00",
+  "game": "1.0.0.3732",
+  "game_executable_sha256": "DFCF5C507D09AA0E09CF9766DB866FD1E7CF513B9DD7FDC72A8F121BA2D9A9D5",
+  "suite": "121/121 passed",
+  "suite_seconds": 146.78,
+  "smoke": "v1 metadata mask 0xF; 78 remote states, 0 rejects, clean unload",
+  "asi_sha256": "B507B79D0A9BD7C0F531160FACD3F06D7256EBB83E58D266DF3B67A2FC9DABEC",
+  "desktop_runner_sha256": "A2F205ACA96A00FD62C51338D702281CF33D4E986CB6CE0680C5B11137A5040A",
+  "watchdog_sha256": "565E0125181887D4D7931AA283786DF28251E326CCA1879353D5E3D88F67AE57",
+  "host_core_milestone": 2,
+  "remote_actor_guard": 1,
+  "controlled_files_installed": false,
+  "arming_receipt": {
+    "path": "C:\\Users\\shaug\\.codex\\visualizations\\2026\\11\\14\\01a1dbbd-2726-7441-9a57-1b454819b3e7\\r7-source-20261118-101623\\build\\r10\\r10-l3-arming-receipt.json",
+    "sha256": "5349486148E9AEB2B825BF495E4AA586E4A4E946D3665108B78029FEB3577FCC"
+  },
+  "source_manifest_sha256": "E67BEADD6E81535084D10E2C0438811DE4367A4E09500B5825244BCA41DEA17F",
+  "limits": [
+    "Game-free validation only; no 3732 runtime behaviour has been observed.",
+    "The arming receipt is valid only while every manifest source, the ASI, runner and watchdog are unchanged."
+  ]
+}
