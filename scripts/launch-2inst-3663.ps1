@@ -258,7 +258,8 @@ if(!(Test-Path -LiteralPath $deploymentPath)){
         $milestone=if($role -eq 'host'){2}else{0}
         # R10 Step 3: remote-controlled actor containment (character_guard3663). Decided before
         # arming (this file is in the armed source manifest): 0 = record controller evidence only.
-        $remoteActorGuard=0
+        # 1 = Shaugn's decision for the next L3 (2026-11-19).
+        $remoteActorGuard=1
         $ini=@"
 [general]
 player_name=R5-$role

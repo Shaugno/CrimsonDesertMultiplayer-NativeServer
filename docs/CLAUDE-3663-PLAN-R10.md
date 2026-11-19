@@ -182,8 +182,9 @@ adapted to a host-owned field.
   must be set before the build is armed (the launcher is in the armed source
   manifest).
 - The R9 rule ("no new per-actor guards until loading is understood") is met:
-  Step 1 explains the loading. Whether to enable it for the next L3 is
-  Shaugn's call.
+  Step 1 explains the loading. **Shaugn decided on 2026-11-19 to enable it
+  for the next L3**, so the launcher now writes `remote_actor_guard=1` for
+  both roles.
 
 Original text:
 
