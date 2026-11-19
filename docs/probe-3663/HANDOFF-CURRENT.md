@@ -2563,3 +2563,24 @@ window verification are required again. Stop on a new crash or hang.
 
 ---
 
+# R9 Step 4 A2 outcome and A3 question
+
+The A2 HOST loaded a save and reached native world readiness. The
+guest-launch script refused to make a plan when fewer than six minutes
+remained on the host's fixed fourteen-minute watchdog. No GUEST process
+was launched. The HOST exited normally (code 0) at 7:34 PM Eastern;
+both processes are closed, the installation is restored, the exact
+3663 executable hash matches, and real saves and backups verified.
+This is a startup-only trial. R9 usage is **startup 2/5, join 0/3**.
+
+**A3 question.** Can the guest now reach native login without a startup
+fault, and does the post-Enter sampler show a state `0x11` / low marker
+stall? The host user should Load immediately after launch; do not hold
+its timer at title. Once the host's native world readiness is logged,
+launch the guest with more than six minutes of shared watchdog time
+remaining. Verify both windows and the guest menu before same-slot
+selection. Stop on a crash/hang or activation error. No game state or
+loading packets are changed by the sampler.
+
+---
+
