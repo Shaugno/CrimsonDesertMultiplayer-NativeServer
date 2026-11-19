@@ -194,7 +194,14 @@ so the class-B actor is identified. Whether it is enabled for the first L3 is
 Shaugn's decision (recommended: enabled, since Step 1 settles the loading
 cause that R9's rule was waiting for).
 
-### Step 4 — Review the R9 A1 guest startup crash (offline)
+### Step 4 — Review the R9 A1 guest startup crash (offline) — DONE
+
+No mod cause found. R9 added nothing that runs in the guest before login.
+The sandbox's HID refusals match R8's surviving guests. There was no WER
+event and no armed capture. Capture now arms 25 s into startup (`33dae67`).
+See [step4-r9-startup-review.md](probe-3663/port-evidence/r10/step4-r9-startup-review.md).
+
+Original text:
 
 R8's paired launches had no startup crash. Check that no R9 guest change
 (`guest3663.cpp`, `v1_3663.cpp`, `crash3663.cpp`) runs before login, before
